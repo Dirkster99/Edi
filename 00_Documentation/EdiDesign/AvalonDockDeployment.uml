@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document
+  Size="1793.79,1793.79" xmlns="MiniUml">
+  <Boundary
+    Name="AvalonDock"
+    ID=""
+    Position="202.482546120287,13,639.697674418604,420" />
+  <Component
+    Name="AvalonDock.Themes.ExpressionDark"
+    ID="auto_4"
+    Position="237,63,229.06976744186,75"
+    Stereotype="" />
+  <Component
+    Name="AvalonDock"
+    ID="auto_0"
+    Position="241,184,125,75"
+    Stereotype="" />
+  <Component
+    Name="AvalonDock.Themes.Metro"
+    ID="auto_5"
+    Position="244,333,223.255813953488,75"
+    Stereotype="" />
+  <Component
+    Name="AvalonDock.Themes.VS2010"
+    ID="auto_1"
+    Position="576.744186046512,114.511627906977,223.837209302326,75"
+    Stereotype="" />
+  <Component
+    Name="AvalonDock.Themes.Expression"
+    ID="auto_2"
+    Position="577.325581395349,197.348837209302,224.418604651163,75"
+    Stereotype="" />
+  <Component
+    Name="AvalonDock.Themes.Aero"
+    ID="auto_3"
+    Position="574.418604651163,282.604651162791,226.162790697674,75"
+    Stereotype="" />
+  <Association
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_0"
+    FromArrow=""
+    To="auto_1"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="366,220.16" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="576.744186046512,157.671627906977" />
+  </Association>
+  <Association
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_0"
+    FromArrow=""
+    To="auto_2"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="366,227.16" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="577.325581395349,227.304878048781" />
+  </Association>
+  <Association
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_0"
+    FromArrow=""
+    To="auto_3"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="366,248.136744186046" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="574.418604651163,320.764651162791" />
+  </Association>
+  <Association
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_0"
+    FromArrow=""
+    To="auto_4"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="299.335644502462,184" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="299.335644502462,138" />
+  </Association>
+  <Association
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_0"
+    FromArrow=""
+    To="auto_5"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="299.335644502462,259" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="299.314857362773,333" />
+  </Association>
+</Document>

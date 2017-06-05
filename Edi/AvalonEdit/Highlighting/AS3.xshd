@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<!-- Source: http://sindney.com/blog/posts/as3-syntax-in-avalonedit/ -->
+<SyntaxDefinition name="ActionScript3" extensions=".as" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+    <!-- The named colors 'Comment' and 'String' are used in SharpDevelop to detect if a line is inside a multiline string/comment -->
+    <Color name="Comment" foreground="Green" exampleText="// comment" />
+    <Color name="String" foreground="Brown" exampleText="'str'"/>
+    <Color name="MethodCall" foreground="DarkBlue" exampleText="o.ToString();"/>
+    <Color name="Digits" foreground="DarkBlue" exampleText="3.1415"/>
+
+    <Color name="Keyword" foreground="DarkBlue" />
+    <Color name="Keyword1" foreground="Blue" />
+
+    <Color name="CommentMarkerSet"           foreground="Red"     fontWeight="bold"  />
+    <Color name="CommentMarkerSetHackUndone" foreground="#E0E000" fontWeight="bold" />
+
+    <RuleSet name="CommentMarkerSet">
+      <Keywords color="CommentMarkerSet">
+        <Word>TODO</Word>
+        <Word>FIXME</Word>
+      </Keywords>
+      <Keywords color="CommentMarkerSetHackUndone">
+        <Word>HACK</Word>
+        <Word>UNDONE</Word>
+      </Keywords>
+    </RuleSet>
+ 
+    <!-- This is the main ruleset. -->
+    <RuleSet>
+        <Span color="Comment">
+            <Begin color="XmlDoc/DocComment">///</Begin>
+            <RuleSet>
+                <Import ruleSet="XmlDoc/DocCommentSet"/>
+                <Import ruleSet="CommentMarkerSet"/>
+            </RuleSet>
+        </Span>
+ 
+        <Span color="Comment" ruleSet="CommentMarkerSet">
+            <Begin>//</Begin>
+        </Span>
+ 
+        <Span color="Comment" ruleSet="CommentMarkerSet" multiline="true">
+            <Begin>/\*</Begin>
+            <End>\*/</End>
+        </Span>
+ 
+        <Span color="String">
+            <Begin>"</Begin>
+            <End>"</End>
+            <RuleSet>
+                <!-- span for escape sequences -->
+                <Span begin="\\" end="."/>
+            </RuleSet>
+        </Span>
+ 
+        <Keywords color="Keyword">
+            <Word>null</Word>
+            <Word>Infinity</Word>
+            <Word>NaN</Word>
+            <Word>undefined</Word>
+            <Word>true</Word>
+            <Word>false</Word>
+            <Word>dynamic</Word>
+            <Word>private</Word>
+            <Word>public</Word>
+            <Word>static</Word>
+            <Word>intrinsic</Word>
+            <Word>internal</Word>
+            <Word>native</Word>
+            <Word>override</Word>
+            <Word>protected</Word>
+            <Word>AS3</Word>
+            <Word>final</Word>
+            <Word>void</Word>
+            <Word>arguments</Word>
+            <Word>Array</Word>
+            <Word>Boolean</Word>
+            <Word>Class</Word>
+            <Word>int</Word>
+            <Word>Math</Word>
+            <Word>Namespace</Word>
+            <Word>Number</Word>
+            <Word>Object</Word>
+            <Word>RegExp</Word>
+            <Word>uint</Word>
+            <Word>XML</Word>
+            <Word>Bitmap</Word>
+            <Word>BitmapData</Word>
+            <Word>DisplayObject</Word>
+            <Word>DisplayObjectContainer</Word>
+            <Word>MovieClip</Word>
+            <Word>Shape</Word>
+            <Word>Sprite</Word>
+            <Word>Stage</Word>
+            <Word>ColorTransform</Word>
+            <Word>Matrix</Word>
+            <Word>Point</Word>
+            <Word>Rectangle</Word>
+            <Word>Transform</Word>
+            <Word>Sound</Word>
+            <Word>Video</Word>
+            <Word>TextField</Word>
+            <Word>ContextMenu</Word>
+            <Word>Keyboard</Word>
+            <Word>Mouse</Word>
+            <Word>ByteArray</Word>
+            <Word>Dictionary</Word>
+            <Word>Endian</Word>
+            <Word>Proxy</Word>
+            <Word>Timer</Word>
+        </Keywords>
+ 
+        <Keywords color="Keyword1">
+            <Word>class</Word>
+            <Word>extends</Word>
+            <Word>implements</Word>
+            <Word>import</Word>
+            <Word>interface</Word>
+            <Word>new</Word>
+            <Word>case</Word>
+            <Word>do</Word>
+            <Word>while</Word>
+            <Word>else</Word>
+            <Word>if</Word>
+            <Word>for</Word>
+            <Word>in</Word>
+            <Word>switch</Word>
+            <Word>throw</Word>
+            <Word>get</Word>
+            <Word>set</Word>
+            <Word>function</Word>
+            <Word>var</Word>
+            <Word>try</Word>
+            <Word>catch</Word>
+            <Word>finally</Word>
+            <Word>while</Word>
+            <Word>with</Word>
+            <Word>default</Word>
+            <Word>break</Word>
+            <Word>continue</Word>
+            <Word>delete</Word>
+            <Word>return</Word>
+            <Word>each</Word>
+            <Word>const</Word>
+            <Word>namespace</Word>
+            <Word>package</Word>
+            <Word>include</Word>
+            <Word>use</Word>
+            <Word>is</Word>
+            <Word>as</Word>
+            <Word>instanceof</Word>
+            <Word>typeof</Word>
+            <Word>void</Word>
+        </Keywords>
+ 
+        <!-- Mark previous rule-->
+        <Rule color="MethodCall">
+        \b
+        [\d\w_]+  # an identifier
+        (?=\s*\() # followed by (
+        </Rule>
+ 
+        <!-- Digits -->
+        <Rule color="Digits">
+            \b0[xX][0-9a-fA-F]+  # hex number
+        |   \b
+            (   \d+(\.[0-9]+)?   #number with optional floating point
+            |   \.[0-9]+         #or just starting with floating point
+            )
+            ([eE][+-]?[0-9]+)? # optional exponent
+        </Rule>
+    </RuleSet>
+</SyntaxDefinition>

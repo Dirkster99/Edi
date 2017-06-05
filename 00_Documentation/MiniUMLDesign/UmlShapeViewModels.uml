@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document
+  Size="1793.79,1793.79" xmlns="MiniUml">
+  <Boundary
+    Name="MiniUML.Model.ViewModels.Shapes"
+    ID=""
+    Position="661,18,225,500" />
+  <Class
+    Name="ShapeViewModelBase"
+    ID="auto_3"
+    Position="681,97,182,75"
+    Stereotype="" />
+  <Class
+    Name="ShapeSizeViewModelBase"
+    ID="auto_4"
+    Position="683,196,182,75"
+    Stereotype="" />
+  <Class
+    Name="AnchorBaseViewModel"
+    ID="auto_1"
+    Position="686,330,182,75"
+    Stereotype="" />
+  <Boundary
+    Name="MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Connect"
+    ID=""
+    Position="897,18,361,500" />
+  <Class
+    Name="AnchorViewModel"
+    ID="auto_0"
+    Position="946,330,257,75"
+    Stereotype="" />
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_0"
+    FromArrow=""
+    To="auto_1"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="946,370.16" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="868,370.16" />
+  </Inheritance>
+  <Class
+    Name="UmlAssociationShapeViewModel"
+    ID="auto_2"
+    Position="946,97,257,75"
+    Stereotype="" />
+  <Aggregation
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_2"
+    FromArrow="Uml.Diamonds.White"
+    To="auto_0"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="1084,172" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="1084,330" />
+  </Aggregation>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_2"
+    FromArrow=""
+    To="auto_3"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="946,137.16" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="863,137.16" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_4"
+    FromArrow=""
+    To="auto_3"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="773,196" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="774,172" />
+  </Inheritance>
+  <Boundary
+    Name="MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape"
+    ID=""
+    Position="123,18,531,714.684210526316" />
+  <Class
+    Name="Base.UmlShapeBaseViewModel"
+    ID="auto_5"
+    Position="399.272727272727,187,188,75"
+    Stereotype="" />
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_5"
+    FromArrow=""
+    To="auto_4"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="587.272727272727,229.16" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="683,229.16" />
+  </Inheritance>
+  <Class
+    Name="Base.CommentViewModel"
+    ID="auto_6"
+    Position="401,50,188,75"
+    Stereotype="" />
+  <Aggregation
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_5"
+    FromArrow="Uml.Diamonds.White"
+    To="auto_6"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="500.272727272727,187" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="500.373134328358,125" />
+  </Aggregation>
+  <Class
+    Name="UmlNodeShapeViewModel"
+    ID="auto_7"
+    Position="133.354838709677,339.640762463343,188,75"
+    Stereotype="" />
+  <Class
+    Name="UmlDecisionShapeViewModel"
+    ID="auto_8"
+    Position="133.354838709677,249.965786901271,188,75"
+    Stereotype="" />
+  <Class
+    Name="UmlCanvasShapeViewModel"
+    ID="auto_9"
+    Position="132.548387096774,156.258553274683,188,75"
+    Stereotype="" />
+  <Class
+    Name="UmlBoundaryShapeViewModel"
+    ID="auto_A"
+    Position="135.774193548387,52.0674486803525,188,75"
+    Stereotype="" />
+  <Class
+    Name="UmlPackageShapeViewModel"
+    ID="auto_B"
+    Position="133.354838709677,426.896383186706,188,75"
+    Stereotype="" />
+  <Class
+    Name="UmlNoteShapeViewModel"
+    ID="auto_C"
+    Position="133.354838709677,514.649560117301,188,75"
+    Stereotype="" />
+  <Class
+    Name="UmlUseCaseShapeViewModel"
+    ID="auto_D"
+    Position="132.615835777127,599.794721407624,188,75"
+    Stereotype="" />
+  <Class
+    Name="UmlSquareShapeViewModel"
+    ID="auto_E"
+    Position="447.202346041055,619.568914956012,188,75"
+    Stereotype="" />
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_A"
+    FromArrow=""
+    To="auto_5"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="323.774193548387,88.7729032258065" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="399.272727272727,191.676129032258" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_9"
+    FromArrow=""
+    To="auto_5"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="320.548387096774,214.298697125643" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="399.272727272727,214.41935483871" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_8"
+    FromArrow=""
+    To="auto_5"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="321.354838709677,287.095483870968" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="425,262" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_7"
+    FromArrow=""
+    To="auto_5"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="321.354838709677,385.482580645161" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="452,262" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_B"
+    FromArrow=""
+    To="auto_5"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="321.354838709677,473.450322580645" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="467,262" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_C"
+    FromArrow=""
+    To="auto_5"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="321.354838709677,554.915620723362" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="485,262" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_D"
+    FromArrow=""
+    To="auto_5"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="320.615835777127,602.772903225806" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="518,262" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_E"
+    FromArrow=""
+    To="auto_5"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="552.838709677419,619.568914956012" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="551,262" />
+  </Inheritance>
+  <Note
+    Name=""
+    ID=""
+    Position="653,518,621,218">
+    <Text>This diagram gives a summary on all viewmodels that can be used to control view shapes that are displayed
+on the canvas.
+
+The right side of the diagram shows the connector item viewmodels which include an AnchorViewModel
+to anchor connection into shapes.
+
+The left side shows the viewmodels that control all sizable shapes displayed on the canvas.
+
+By default every shape viewmodel supports a collection of additional comments (which are not yet displayed
+on the canvas but can be stored with a "&lt;Comment&gt;this is a comment&lt;/Comment&gt;" Xml tag.
+
+TODO: Enable comments to be visible on canvas (e.g. shape and/or ToolTip) and support comments on
+connector shapes as well.</Text>
+  </Note>
+</Document>

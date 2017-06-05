@@ -1,0 +1,3 @@
+This directory should contain a collection of binaries to build a setup for Edi.
+
+You can literally copy the files from Edi/Bin/Release into this directory before running the WiX setup build scripts.

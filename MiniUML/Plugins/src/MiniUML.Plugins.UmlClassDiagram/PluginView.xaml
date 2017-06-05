@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="MiniUML.Plugins.UmlClassDiagram.PluginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:MiniUML.View.Controls;assembly=MiniUML.View"
+             xmlns:framework="clr-namespace:MiniUML.Framework;assembly=MiniUML.Framework"
+             
+             xmlns:cmdLabel="clr-namespace:MiniUML.Framework.Local;assembly=MiniUML.Framework"
+
+             xmlns:toolb="clr-namespace:MiniUML.Plugins.UmlClassDiagram.ToolBox.View"
+             >
+
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="Auto" />
+    </Grid.ColumnDefinitions>
+
+    <TabControl Grid.Column="0"
+                ScrollViewer.CanContentScroll="True"
+                ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                Margin="3">
+
+      <TabItem Header="Class">
+        <!-- Toolboxes with class shapes -->
+        <toolb:ToolBoxControl DataContext="{Binding ClassShapeBox}"
+                              HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3,0" />
+      </TabItem>
+
+      <TabItem Header="Deployment">
+          <!-- Toolboxes with deployment shapes -->
+          <toolb:ToolBoxControl DataContext="{Binding DeploymentShapeBox}"
+                              HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3,0" />
+      </TabItem>
+
+      <TabItem Header="Use Case">
+        <!-- Toolboxes with deployment shapes -->
+        <toolb:ToolBoxControl DataContext="{Binding UseCaseShapeBox}"
+                              HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3,0" />
+      </TabItem>
+
+      <TabItem Header="Activity">
+        <!-- Toolboxes with deployment shapes -->
+        <toolb:ToolBoxControl DataContext="{Binding ActivityShapeBox}"
+                              HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3,0" />
+      </TabItem>
+    </TabControl>
+
+    <toolb:ToolBoxControl DataContext="{Binding ConnectBox}"
+                          Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="3,0,0,3" />
+
+    <Button Grid.Column="3"
+            HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="3,0,0,3"
+            Command="{Binding mWindowViewModel.vm_DocumentViewModel.vm_CanvasViewModel.SelectCommand}">
+      <Button.ToolTip>
+        <StackPanel Orientation="Vertical">
+          <TextBlock  Text="{x:Static cmdLabel:Strings.STR_Select}"/>
+          <Separator />
+          <TextBlock  Text="{x:Static cmdLabel:Strings.STR_Select_Description}"/>
+        </StackPanel>
+      </Button.ToolTip>
+      <Image Source="/MiniUML.Plugins.UmlClassDiagram;component/Images/Command.Select.png" Width="30" />
+    </Button>
+
+  </Grid>
+
+</UserControl>

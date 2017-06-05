@@ -1,0 +1,903 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CMD_APP_About_Description" xml:space="preserve">
+    <value>显示有关电子数据交换的信息</value>
+  </data>
+  <data name="CMD_APP_CloseDoc_Description" xml:space="preserve">
+    <value>关闭文档</value>
+  </data>
+  <data name="CMD_App_Exit_Describtion" xml:space="preserve">
+    <value>退出应用程序</value>
+  </data>
+  <data name="CMD_APP_OpenURL_Description" xml:space="preserve">
+    <value>打开 URL......</value>
+  </data>
+  <data name="CMD_APP_Open_Description" xml:space="preserve">
+    <value>打开文件...</value>
+  </data>
+  <data name="CMD_APP_SaveAll_Description" xml:space="preserve">
+    <value>保存所有......</value>
+  </data>
+  <data name="CMD_APP_ShowStartPage_Description" xml:space="preserve">
+    <value>显示起始页</value>
+  </data>
+  <data name="CMD_APP_ViewTheme_Description" xml:space="preserve">
+    <value>更改主题</value>
+  </data>
+  <data name="CMD_MRU_AddEntry_Description" xml:space="preserve">
+    <value>添加 MRU 条目</value>
+  </data>
+  <data name="CMD_MRU_Pin_Description" xml:space="preserve">
+    <value>锁定或解锁 MRU 条目</value>
+  </data>
+  <data name="CMD_MRU_RemoveEntry_Description" xml:space="preserve">
+    <value>删除 MRU 条目</value>
+  </data>
+  <data name="CMD_TXT_DisableHighlighting_Description" xml:space="preserve">
+    <value>关掉语法突出显示当前文件</value>
+  </data>
+  <data name="CMD_TXT_FindNextText_Description" xml:space="preserve">
+    <value>查找文档中的特定文本的下一个匹配项</value>
+  </data>
+  <data name="CMD_TXT_FindNext_Description" xml:space="preserve">
+    <value>查找文档中的特定文本</value>
+  </data>
+  <data name="CMD_TXT_FindPreviousText_Description" xml:space="preserve">
+    <value>查找文档中的特定文本的上一个匹配项</value>
+  </data>
+  <data name="CMD_TXT_FindReplaceText_Description" xml:space="preserve">
+    <value>查找和替换文档中的特定文本</value>
+  </data>
+  <data name="CMD_TXT_GotoLine_Description" xml:space="preserve">
+    <value>转到文档中的特定行</value>
+  </data>
+  <data name="STR_Category_Error" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="STR_Category_Information" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="STR_Category_InternalError" xml:space="preserve">
+    <value>内部错误</value>
+  </data>
+  <data name="STR_Category_UnknownError" xml:space="preserve">
+    <value>未知的错误</value>
+  </data>
+  <data name="STR_Category_Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="STR_Category_Unknown_Internal_Error" xml:space="preserve">
+    <value>未知的内部错误</value>
+  </data>
+  <data name="STR_CmdName_File" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="STR_CmdName_New" xml:space="preserve">
+    <value>新增功能</value>
+  </data>
+  <data name="STR_CmdName_New_Text" xml:space="preserve">
+    <value>文本文档</value>
+  </data>
+  <data name="STR_CmdName_New_UML" xml:space="preserve">
+    <value>UML 文档</value>
+  </data>
+  <data name="STR_CmdName_Open" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="STR_CmdName_Open_Log4Net" xml:space="preserve">
+    <value>Log4Net 文档</value>
+  </data>
+  <data name="STR_CmdName_Open_Text" xml:space="preserve">
+    <value>文本文档</value>
+  </data>
+  <data name="STR_CmdName_Open_UML" xml:space="preserve">
+    <value>UML 文档</value>
+  </data>
+  <data name="STR_CmdName_RecentFiles" xml:space="preserve">
+    <value>最近使用的文档</value>
+  </data>
+  <data name="STR_CmdName_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="STR_CmdName_SaveAs" xml:space="preserve">
+    <value>另存为...</value>
+  </data>
+  <data name="STR_CmdName_Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="STR_CmdName_Copy" xml:space="preserve">
+    <value>副本</value>
+  </data>
+  <data name="STR_CmdName_Copy_TT" xml:space="preserve">
+    <value>复制所选的项目</value>
+  </data>
+  <data name="STR_CmdName_Cut" xml:space="preserve">
+    <value>切</value>
+  </data>
+  <data name="STR_CmdName_Cut_TT" xml:space="preserve">
+    <value>剪切所选的项目</value>
+  </data>
+  <data name="STR_CmdName_Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="STR_CmdName_Delete_TT" xml:space="preserve">
+    <value>删除所选的项目</value>
+  </data>
+  <data name="STR_CmdName_Edit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="STR_CmdName_Exit" xml:space="preserve">
+    <value>退出</value>
+  </data>
+  <data name="STR_CmdName_Find" xml:space="preserve">
+    <value>找到</value>
+  </data>
+  <data name="STR_CmdName_GotoLine" xml:space="preserve">
+    <value>转到行......</value>
+  </data>
+  <data name="STR_CmdName_Help" xml:space="preserve">
+    <value>帮助</value>
+  </data>
+  <data name="STR_CmdName_Help_About" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="STR_CmdName_Log4Net_Message_TW" xml:space="preserve">
+    <value>Log4Net 消息工具窗口</value>
+  </data>
+  <data name="STR_CmdName_Log4Net_TW" xml:space="preserve">
+    <value>Log4Net 工具窗口</value>
+  </data>
+  <data name="STR_CmdName_New_Text_TT" xml:space="preserve">
+    <value>创建一个文本文件</value>
+  </data>
+  <data name="STR_CmdName_New_UML_TT" xml:space="preserve">
+    <value>创建一个 uml 文件</value>
+  </data>
+  <data name="STR_CmdName_Open_Log4Net_TT" xml:space="preserve">
+    <value>打开一个 Log4Net 文件</value>
+  </data>
+  <data name="STR_CmdName_Open_Text_TT" xml:space="preserve">
+    <value>打开一个文本文件</value>
+  </data>
+  <data name="STR_CmdName_Open_UML_TT" xml:space="preserve">
+    <value>打开 UML 文件</value>
+  </data>
+  <data name="STR_CmdName_Paste" xml:space="preserve">
+    <value>粘贴</value>
+  </data>
+  <data name="STR_CmdName_Paste_TT" xml:space="preserve">
+    <value>Windows 剪贴板中粘贴的项目</value>
+  </data>
+  <data name="STR_CmdName_Properties_TW" xml:space="preserve">
+    <value>工具属性窗口</value>
+  </data>
+  <data name="STR_CmdName_RecentFiles_TW" xml:space="preserve">
+    <value>最近使用的文件的工具窗口</value>
+  </data>
+  <data name="STR_CmdName_Redo" xml:space="preserve">
+    <value>重做</value>
+  </data>
+  <data name="STR_CmdName_Redo_TT" xml:space="preserve">
+    <value>重做上次撤消</value>
+  </data>
+  <data name="STR_CmdName_Replace" xml:space="preserve">
+    <value>替换</value>
+  </data>
+  <data name="STR_CmdName_SaveAs_TT" xml:space="preserve">
+    <value>作为某些类型和某些位置保存文件</value>
+  </data>
+  <data name="STR_CmdName_Save_TT" xml:space="preserve">
+    <value>保存当前文件</value>
+  </data>
+  <data name="STR_CmdName_SelectAll" xml:space="preserve">
+    <value>选择所有</value>
+  </data>
+  <data name="STR_CmdName_SelectAll_TT" xml:space="preserve">
+    <value>选择所有项目</value>
+  </data>
+  <data name="STR_CmdName_Themes" xml:space="preserve">
+    <value>主题</value>
+  </data>
+  <data name="STR_CmdName_Tools" xml:space="preserve">
+    <value>工具</value>
+  </data>
+  <data name="STR_CmdName_Undo" xml:space="preserve">
+    <value>撤消</value>
+  </data>
+  <data name="STR_CmdName_Undo_TT" xml:space="preserve">
+    <value>撤消上一个编辑位置</value>
+  </data>
+  <data name="STR_CmdName_View" xml:space="preserve">
+    <value>_View</value>
+  </data>
+  <data name="STR_CmdName_View_Start_Page" xml:space="preserve">
+    <value>起始页</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_HighlightingDefinition_TT" xml:space="preserve">
+    <value>选择文本突出显示模式</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowEndOfLine" xml:space="preserve">
+    <value>显示行的结尾</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowEndOfLine_TT" xml:space="preserve">
+    <value>显示行的结尾</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowLineNumbers" xml:space="preserve">
+    <value>显示行号</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowLineNumbers_TT" xml:space="preserve">
+    <value>显示行号</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowSpaces" xml:space="preserve">
+    <value>显示空格</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowSpaces_TT" xml:space="preserve">
+    <value>显示空格字符</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowTabs" xml:space="preserve">
+    <value>显示选项卡</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowTabs_TT" xml:space="preserve">
+    <value>显示制表字符</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_WordWrap" xml:space="preserve">
+    <value>自动换行</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_WordWrap_TT" xml:space="preserve">
+    <value>在文档视图周围环绕文字</value>
+  </data>
+  <data name="STR_Insert_Overtype_Mode_TT" xml:space="preserve">
+    <value>插入或改写文本模式 （开关的使用 insert 键)</value>
+  </data>
+  <data name="STR_StatusBar_Ready" xml:space="preserve">
+    <value>准备好了。</value>
+  </data>
+  <data name="STR_StatusBar_Textencoding_TT" xml:space="preserve">
+    <value>当前文档中的文本的编码</value>
+  </data>
+  <data name="STR_StatusBar_X_Coord_Label" xml:space="preserve">
+    <value>X:</value>
+  </data>
+  <data name="STR_StatusBar_X_Coord_Label_TT" xml:space="preserve">
+    <value>在当前文档中光标的列</value>
+  </data>
+  <data name="STR_StatusBar_Y_Coord_Label" xml:space="preserve">
+    <value>Y：</value>
+  </data>
+  <data name="STR_StatusBar_Y_Coord_Label_TT" xml:space="preserve">
+    <value>在当前文档中游标的行</value>
+  </data>
+  <data name="STR_MSG_IssueTrackerText" xml:space="preserve">
+    <value>请点击下面的链接来检查是否这是一个已知的问题。请报告这个问题如果它还不知道。问题报告应包含下面的错误消息 （您可以使用复制按钮）和一个声明关于您在使用工作流功能。如果适用，将附加截图或示例文件。</value>
+  </data>
+  <data name="STR_MSG_IssueTrackerTitle" xml:space="preserve">
+    <value>未处理的错误</value>
+  </data>
+  <data name="STR_Msg_UnknownError" xml:space="preserve">
+    <value>出现未知的错误。</value>
+  </data>
+  <data name="STR_MSG_UnknownError_Caption" xml:space="preserve">
+    <value>未处理的错误</value>
+  </data>
+  <data name="STR_MSG_UnknownError_InErrorDispatcher" xml:space="preserve">
+    <value>调度未处理的异常时出错</value>
+  </data>
+  <data name="STR_MSG_UnknownError_InShutDownProcess" xml:space="preserve">
+    <value>在关闭过程中的错误。</value>
+  </data>
+  <data name="STR_AppCommand_CopyFileURLToClipboard" xml:space="preserve">
+    <value>复制路径到剪贴板</value>
+  </data>
+  <data name="STR_AppCommand_CopyFileURLToClipboard_TT" xml:space="preserve">
+    <value>将此文档的路径复制到 Windows 剪贴板中</value>
+  </data>
+  <data name="STR_AppCommand_OpenContainingFolder" xml:space="preserve">
+    <value>打开包含文件夹...</value>
+  </data>
+  <data name="STR_AppCommand_OpenContainingFolder_TT" xml:space="preserve">
+    <value>打开包含此文档在 Windows 资源管理器中的文件夹</value>
+  </data>
+  <data name="STR_MSG_ErrorLoadingPlugin" xml:space="preserve">
+    <value>初始化在大会 '{0}' 中找到一个插件时出现错误。</value>
+  </data>
+  <data name="STR_MSG_ErrorRegisteringHighlighting" xml:space="preserve">
+    <value>注册突出显示错误： '{0}'</value>
+  </data>
+  <data name="STR_MSG_ErrorSavingFile" xml:space="preserve">
+    <value>保存文件时发生了一个意想不到的问题。</value>
+  </data>
+  <data name="STR_MSG_ErrorWhileLoadingPlugin" xml:space="preserve">
+    <value>加载插件程序集 '{0}' 时出错。</value>
+  </data>
+  <data name="STR_MSG_ErrorWhileSavingAFile" xml:space="preserve">
+    <value>错误 '{0}'在保存文件时出现。</value>
+  </data>
+  <data name="STR_MSG_ErrorWhileSavingFileX" xml:space="preserve">
+    <value>错误 '{0}'已保存文件时出现：'{1}'</value>
+  </data>
+  <data name="STR_MSG_PluginNotLoaded" xml:space="preserve">
+    <value>不加载的插件。</value>
+  </data>
+  <data name="STR_MSG_SaveChangesForFile" xml:space="preserve">
+    <value>保存为文件"{0}"的更改吗？</value>
+  </data>
+  <data name="STR_MSG_Unexpected_Error" xml:space="preserve">
+    <value>意外的错误</value>
+  </data>
+  <data name="STR_MSG_UnknownDocumentType" xml:space="preserve">
+    <value>未知的文件类型</value>
+  </data>
+  <data name="STR_CmdName_DeleteLine" xml:space="preserve">
+    <value>删除线</value>
+  </data>
+  <data name="STR_CmdName_DeleteLine_TT" xml:space="preserve">
+    <value>删除当前行中的文本</value>
+  </data>
+  <data name="STR_Cmd_CollapseTextFoldings" xml:space="preserve">
+    <value>折叠文本可折叠</value>
+  </data>
+  <data name="STR_Cmd_ConvertLeadingSpaces" xml:space="preserve">
+    <value>转换到制表符前导空格</value>
+  </data>
+  <data name="STR_Cmd_ConvertLeadingTabsToSpaces" xml:space="preserve">
+    <value>转换为空格领先的选项卡</value>
+  </data>
+  <data name="STR_CMD_ConvertSpacesToTabs" xml:space="preserve">
+    <value>将空格转换为制表符</value>
+  </data>
+  <data name="STR_CMD_ConvertTabsToSpaces" xml:space="preserve">
+    <value>将制表符转换为空格</value>
+  </data>
+  <data name="STR_Cmd_ConvertTextToUpperCase" xml:space="preserve">
+    <value>将文本转换为大写</value>
+  </data>
+  <data name="STR_Cmd_ExpandTextFoldings" xml:space="preserve">
+    <value>展开文本可折叠</value>
+  </data>
+  <data name="STR_CMD_RemoveLeadingWhiteSpace" xml:space="preserve">
+    <value>删除开头的空格</value>
+  </data>
+  <data name="STR_CMD_RemoveTrailingWhiteSpace" xml:space="preserve">
+    <value>删除尾随空格</value>
+  </data>
+  <data name="STR_Cmd__ApplyTextIndentationStrategy" xml:space="preserve">
+    <value>应用缩进战略</value>
+  </data>
+  <data name="STR_Cmd__ConvertTextToLowerCase" xml:space="preserve">
+    <value>将文本转换为小写</value>
+  </data>
+  <data name="STR_Cmd__ConvertTextToTitleCase" xml:space="preserve">
+    <value>转换为词首字母大写</value>
+  </data>
+  <data name="STR_Cmd__InvertTextCase" xml:space="preserve">
+    <value>反转案例</value>
+  </data>
+  <data name="STR_Label_TextCase" xml:space="preserve">
+    <value>文本大小写</value>
+  </data>
+  <data name="STR_Label_WhiteSpaces" xml:space="preserve">
+    <value>空格</value>
+  </data>
+  <data name="STR_FileType_FileFilter_Log4j" xml:space="preserve">
+    <value>"log4net XML 输出 （*.log4j，*.xml） | *.log4j ； *。 xml|所有文件 (*.*) | *.*"</value>
+  </data>
+  <data name="STR_FileType_FileFilter_UML" xml:space="preserve">
+    <value>统一建模语言 (*.uml，*.xml) | *.uml ； *。 xml|所有文件 (*.*) | *.*"</value>
+  </data>
+  <data name="STR_FileType_FileFilter_AllFiles" xml:space="preserve">
+    <value>所有文件 (*.*) | *.*</value>
+  </data>
+  <data name="STR_FileType_FileFilter_TextFiles" xml:space="preserve">
+    <value>文本文件 (*.txt) | *.txt</value>
+  </data>
+  <data name="STR_FileType_FileFilter_CSharp" xml:space="preserve">
+    <value>C# 文件 (*.cs) | *.cs</value>
+  </data>
+  <data name="STR_FileType_FileFilter_HTML" xml:space="preserve">
+    <value>(*.Htm、 *.html、 *.css、 *.js） 的 HTML 文件 | *.htm; *.html; *.css *.js</value>
+  </data>
+  <data name="STR_FileType_FileFilter_SQL" xml:space="preserve">
+    <value>结构化查询语言 (*.sql) | *.sql</value>
+  </data>
+  <data name="STR_FileType_FileFilter_Log4NetPlusText" xml:space="preserve">
+    <value>log4net XML 输出 （*.log4j、 *.log、 *.txt，*.xml） | *.log4j; *.log; *.txt; *.xml</value>
+  </data>
+  <data name="STR_MSG_FIND_NO_MORE_ITEMS_FOUND" xml:space="preserve">
+    <value>没有要显示的更多搜索结果。</value>
+  </data>
+  <data name="STR_MSG_FIND_NO_MORE_ITEMS_FOUND2" xml:space="preserve">
+    <value>发现没有进一步发生。</value>
+  </data>
+  <data name="STR_MSG_FIND_Caption" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="STR_MSG_FIND_UNEXPECTED_ERROR" xml:space="preserve">
+    <value>出现意外的错误。</value>
+  </data>
+  <data name="STR_THEMING_MSG_CANNOT_FIND_PATH" xml:space="preserve">
+    <value>找不到路径：'{0}'请确保此模块是可访问的。</value>
+  </data>
+  <data name="STR_THEMING_CAPTION" xml:space="preserve">
+    <value>主题错误</value>
+  </data>
+  <data name="STR_MSG_DIRCREATED_NO_PLuginLoaded" xml:space="preserve">
+    <value>插件目录创建 ；无插件加载。</value>
+  </data>
+  <data name="STR_MSG_DIRCREATED_NO_PLuginLoaded_Caption" xml:space="preserve">
+    <value>找不到插件目录。</value>
+  </data>
+  <data name="STR_MSG_ACCESS_PLuginDir" xml:space="preserve">
+    <value>访问插件目录时出现错误。</value>
+  </data>
+  <data name="STR_MSG_ACCESS_PLuginDir_Caption" xml:space="preserve">
+    <value>加载 UML 插件时出现错误</value>
+  </data>
+  <data name="STR_MSG_UML_PLugin_NOTALL_Loaded" xml:space="preserve">
+    <value>不是所有的 MiniUml 插件加载确定。</value>
+  </data>
+  <data name="STR_MSG_UML_PLugin_NOTALL_Loaded_Caption" xml:space="preserve">
+    <value>UML 的插件加载时出错</value>
+  </data>
+  <data name="STR_MSG_UML_PLugin_Duplicate" xml:space="preserve">
+    <value>在已加载一个具有指定名称的插件。</value>
+  </data>
+  <data name="STR_ABOUT_MSG" xml:space="preserve">
+    <value>文本和 UML 编辑器。</value>
+  </data>
+  <data name="STR_ABOUT_Version" xml:space="preserve">
+    <value>版本</value>
+  </data>
+  <data name="STR_ABOUT_DOCKING_LAYOUT" xml:space="preserve">
+    <value>对接布局系统：</value>
+  </data>
+  <data name="STR_ABOUT_TextEditor" xml:space="preserve">
+    <value>文本编辑器：</value>
+  </data>
+  <data name="STR_ABOUT_Log4NetViewer" xml:space="preserve">
+    <value>Log4Net 查看器：</value>
+  </data>
+  <data name="STR_ABOUT_CODE_COMPLETION" xml:space="preserve">
+    <value>代码完成功能：</value>
+  </data>
+  <data name="STR_ABOUT_OK_BUTTON" xml:space="preserve">
+    <value>_OK</value>
+  </data>
+  <data name="STR_EDIT_MODE_INSERT" xml:space="preserve">
+    <value>外接程序</value>
+  </data>
+  <data name="STR_EDIT_MODE_TYPEOVER" xml:space="preserve">
+    <value>LV1</value>
+  </data>
+  <data name="STR_FILESTATES_FileName" xml:space="preserve">
+    <value>文件名称</value>
+  </data>
+  <data name="STR_FILESTATES_FilePath" xml:space="preserve">
+    <value>文件路径</value>
+  </data>
+  <data name="STR_FILESTATES_FileSize" xml:space="preserve">
+    <value>文件大小</value>
+  </data>
+  <data name="STR_FILESTATES_LASTMODIFICATION" xml:space="preserve">
+    <value>日期和时间的最后一次修改。</value>
+  </data>
+  <data name="STR_FINDREPLACE_FINDLABEL" xml:space="preserve">
+    <value>查找到的文本：</value>
+  </data>
+  <data name="STR_FINDREPLACE_SearchInLABEL" xml:space="preserve">
+    <value>在中搜索：</value>
+  </data>
+  <data name="STR_FINDREPLACE_CURRENTDOC" xml:space="preserve">
+    <value>当前文档</value>
+  </data>
+  <data name="STR_FINDREPLACE_OPENDOCS" xml:space="preserve">
+    <value>所有打开的文档</value>
+  </data>
+  <data name="STR_FINDREPLACE_Options" xml:space="preserve">
+    <value>选项</value>
+  </data>
+  <data name="STR_FINDREPLACE_CaseSensitive" xml:space="preserve">
+    <value>区分大小写</value>
+  </data>
+  <data name="STR_FINDREPLACE_SearchBackWard" xml:space="preserve">
+    <value>向上搜索</value>
+  </data>
+  <data name="STR_FINDREPLACE_MatchWholeWord" xml:space="preserve">
+    <value>全字匹配</value>
+  </data>
+  <data name="STR_FINDREPLACE_RegularExpression" xml:space="preserve">
+    <value>正则表达式</value>
+  </data>
+  <data name="STR_FINDREPLACE_Wildcards" xml:space="preserve">
+    <value>使用通配符</value>
+  </data>
+  <data name="STR_FINDREPLACE_ReplaceWith" xml:space="preserve">
+    <value>替换为：</value>
+  </data>
+  <data name="STR_FINDREPLACE_FINDNEXT" xml:space="preserve">
+    <value>更换下一步</value>
+  </data>
+  <data name="STR_FINDREPLACE_Replace" xml:space="preserve">
+    <value>替换</value>
+  </data>
+  <data name="STR_FINDREPLACE_ReplaceAll" xml:space="preserve">
+    <value>替换 _All</value>
+  </data>
+  <data name="STR_FINDREPLACE_ASK_REALLY_REPLACEEVERYTHING" xml:space="preserve">
+    <value>你真的想要替换所有出现的 '{0}' 与 '{1}' 吗？</value>
+  </data>
+  <data name="STR_FINDREPLACE_ReplaceAll_Caption" xml:space="preserve">
+    <value>全部替换</value>
+  </data>
+  <data name="STR_GOTOLINE_OK_BUTTON" xml:space="preserve">
+    <value>还行</value>
+  </data>
+  <data name="STR_GOTOLINE_CANCEL_BUTTON" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="STR_GOTOLINE_LINE_RANGE_LABEL" xml:space="preserve">
+    <value>线</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_TOOLTIP" xml:space="preserve">
+    <value>键入筛选条件并激活要自定义显示的筛选器。</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_ALL" xml:space="preserve">
+    <value>所有</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_DEBUG" xml:space="preserve">
+    <value>调试</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_INFO" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_WARN" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_ERROR" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_FATAL" xml:space="preserve">
+    <value>致命</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_DEBUG_TT" xml:space="preserve">
+    <value>调试</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_INFO_TT" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_WARN_TT" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_ERROR_TT" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_FATAL_TT" xml:space="preserve">
+    <value>致命错误</value>
+  </data>
+  <data name="STR_LOG4NET_DELTATIME" xml:space="preserve">
+    <value>三角洲 t:</value>
+  </data>
+  <data name="STR_LOG4NET_FILTERRESULT_TT" xml:space="preserve">
+    <value>其实显示的项 （后应用筛选器） 的总和。</value>
+  </data>
+  <data name="STR_LOG4NET_ENTERLOGID_TT" xml:space="preserve">
+    <value>输入一个日志项 Id，则将文档视图滚动到其项。</value>
+  </data>
+  <data name="STR_LOG4NET_DOCUMENTTAB_TT" xml:space="preserve">
+    <value>Log4net 的文档可以用于查看 XML 输出从 log4net 记录器会话。</value>
+  </data>
+  <data name="STR_LOG4NET_READONY_REASON" xml:space="preserve">
+    <value>Log4net 的文档不能编辑。这是一个只读查看文档。</value>
+  </data>
+  <data name="STR_MRU_MENUITEM_COPYURL" xml:space="preserve">
+    <value>将路径复制到剪贴板</value>
+  </data>
+  <data name="STR_MRU_MENUITEM_OpenWithWindowsApp" xml:space="preserve">
+    <value>使用 Windows 应用程序中打开......</value>
+  </data>
+  <data name="STR_MRU_MENUITEM_OpenInContainingFolder" xml:space="preserve">
+    <value>在包含文件夹中打开</value>
+  </data>
+  <data name="STR_MRU_MENUITEM_Remove" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="STR_STARTPAGE_TITLE" xml:space="preserve">
+    <value>起始页</value>
+  </data>
+  <data name="STR_STARTPAGE_WELCOME_TT" xml:space="preserve">
+    <value>欢迎使用电子数据交换。查看此页后，可以开始使用此编辑器应用程序。</value>
+  </data>
+  <data name="STR_STARTPAGE_VISITPROJECTHOMEPAGE_TT" xml:space="preserve">
+    <value>请访问此应用程序的互联网主页</value>
+  </data>
+  <data name="STR_STARTPAGE_FILEOPEN_TT" xml:space="preserve">
+    <value>打开文件...</value>
+  </data>
+  <data name="STR_DIALOG_INPUT_PROBLEM_CAPTION" xml:space="preserve">
+    <value>您的输入是不够的。更正了以下问题，或单击取消。</value>
+  </data>
+  <data name="STR_ACCESS_DIRECTORY_ERROR" xml:space="preserve">
+    <value>目录"{0}"不存在或无法访问。</value>
+  </data>
+  <data name="STR_FILE_FINDING_CAPTION" xml:space="preserve">
+    <value>查找文件时出错</value>
+  </data>
+  <data name="STR_FILE_DEFAULTNAME" xml:space="preserve">
+    <value>无题</value>
+  </data>
+  <data name="STR_FILE_READONLY_REASON_NO_WRITE_PERMISSION" xml:space="preserve">
+    <value>不能编辑此文件，因为您没有写访问权限。更改文件的访问权限，或者将文件保存在不同的位置，如果你想要对其进行编辑。</value>
+  </data>
+  <data name="STR_FILE_READONLY_REASON_USED_BY_OTHER_PROCESS" xml:space="preserve">
+    <value>不能编辑此文件，因为另一个进程正在写入，那么。结束其他进程和重新打开该文件或将文件保存在不同的位置，如果你想要对其进行编辑。</value>
+  </data>
+  <data name="STR_FILE_OPEN_ERROR_MSG_CAPTION" xml:space="preserve">
+    <value>发生了一个错误</value>
+  </data>
+  <data name="STR_SCALE_VIEW_PERCENT" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="STR_SCALE_VIEW_PERCENT_SHORT" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="STR_SCALE_VIEW_POINT" xml:space="preserve">
+    <value>字体大小</value>
+  </data>
+  <data name="STR_SCALE_VIEW_POINT_SHORT" xml:space="preserve">
+    <value>pt</value>
+  </data>
+  <data name="CMD_APP_ExportUMLToImage_Description" xml:space="preserve">
+    <value>UML 到图像</value>
+  </data>
+  <data name="STR_ERROR_LOADING_FILE_MSG" xml:space="preserve">
+    <value>该文件：'{0}'不存在或无法加载。你想要从最近使用的文件列表中删除此文件吗？</value>
+  </data>
+  <data name="STR_ERROR_LOADING_FILE_CAPTION" xml:space="preserve">
+    <value>加载文件时出错</value>
+  </data>
+  <data name="STR_FIND_BUTTON_CAPTION" xml:space="preserve">
+    <value>找到</value>
+  </data>
+  <data name="STR_FIND_REPLACE_CAPTION" xml:space="preserve">
+    <value>查找和替换......</value>
+  </data>
+  <data name="STR_GOTO_LINE_CAPTION" xml:space="preserve">
+    <value>转到行......</value>
+  </data>
+  <data name="STR_REPLACE_BUTTON_CAPTION" xml:space="preserve">
+    <value>替换</value>
+  </data>
+  <data name="STR_ProgramSettings_ApplicationBehaviour_Header" xml:space="preserve">
+    <value>应用程序的行为</value>
+  </data>
+  <data name="STR_ProgramSettings_Caption" xml:space="preserve">
+    <value>抓好设置...</value>
+  </data>
+  <data name="STR_Settings_RestoreUserSession" xml:space="preserve">
+    <value>还原应用程序启动时的最后一个用户会话</value>
+  </data>
+  <data name="STR_Settings_RunEdiOnlyOnce" xml:space="preserve">
+    <value>Edi 只运行一次</value>
+  </data>
+  <data name="STR_Settings_ApplicationLanguage" xml:space="preserve">
+    <value>语言：</value>
+  </data>
+  <data name="STR_Settings_ApplicationLanguage_TT" xml:space="preserve">
+    <value>重新启动应用程序以查看此设置的效果。</value>
+  </data>
+  <data name="STR_Settings_MRU_Section_Label" xml:space="preserve">
+    <value>大多数最近文件 (MRU) 模式</value>
+  </data>
+  <data name="STR_Settings_MRU_Pin_At_StartOption" xml:space="preserve">
+    <value>Pin 条目在列表的开头</value>
+  </data>
+  <data name="STR_Settings_MRU_Pin_At_Current_Position" xml:space="preserve">
+    <value>收藏 (不排序)</value>
+  </data>
+  <data name="STR_Settings_Editor_Section_Label" xml:space="preserve">
+    <value>文本编辑器选项</value>
+  </data>
+  <data name="STR_Settings_Editor_WordWrap" xml:space="preserve">
+    <value>文字换行</value>
+  </data>
+  <data name="STR_Settings_Editor_ShowSpaces" xml:space="preserve">
+    <value>显示空格</value>
+  </data>
+  <data name="STR_Settings_Editor_ShowTabs" xml:space="preserve">
+    <value>显示选项卡</value>
+  </data>
+  <data name="STR_Settings_Editor_ShowEndOfLine" xml:space="preserve">
+    <value>显示行的结尾</value>
+  </data>
+  <data name="STR_Settings_Editor_ConvertTabToSpace" xml:space="preserve">
+    <value>将制表字符转换成空格字符</value>
+  </data>
+  <data name="STR_Settings_Editor_ShowBoxForControlChar" xml:space="preserve">
+    <value>控制字符显示框</value>
+  </data>
+  <data name="STR_Settings_Editor_CutCopyWholeLine" xml:space="preserve">
+    <value>剪切和复制的文本的当前行</value>
+  </data>
+  <data name="STR_Settings_Editor_AllowScrollBelowDocument" xml:space="preserve">
+    <value>以下文档滚动</value>
+  </data>
+  <data name="STR_Settings_Editor_InheritWordWrapIndentation" xml:space="preserve">
+    <value>继承单词换行缩进</value>
+  </data>
+  <data name="STR_Settings_Editor_EnableRectangularSelection" xml:space="preserve">
+    <value>矩形选择 (ALT + Shift 或 ALT + 鼠标选择)</value>
+  </data>
+  <data name="STR_Settings_Editor_EnableTextDragDrop" xml:space="preserve">
+    <value>文本拖 &amp; 滴</value>
+  </data>
+  <data name="STR_Settings_Editor_EnableVirtualSpace" xml:space="preserve">
+    <value>虚拟空间</value>
+  </data>
+  <data name="STR_Settings_Editor_EnableImeSupport" xml:space="preserve">
+    <value>IME 支持</value>
+  </data>
+  <data name="STR_Settings_Editor_CharacterSizeSectionLabel" xml:space="preserve">
+    <value>调整文本编辑器字符大小</value>
+  </data>
+  <data name="STR_Settings_Editor_CharacterSizeInPercent" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="STR_Settings_Editor_CharacterSizeInPoints" xml:space="preserve">
+    <value>点</value>
+  </data>
+  <data name="STR_Settings_Editor_ColumnRulerSectionLabel" xml:space="preserve">
+    <value>列标尺</value>
+  </data>
+  <data name="STR_Settings_Editor_ShowColumnRulerOption" xml:space="preserve">
+    <value>显示列标尺</value>
+  </data>
+  <data name="STR_Settings_Editor_ShowHyperlinks" xml:space="preserve">
+    <value>显示 WWW 超链接</value>
+  </data>
+  <data name="STR_Settings_Editor_EnableFileHyperlinks" xml:space="preserve">
+    <value>显示文件的超链接</value>
+  </data>
+  <data name="STR_Settings_Editor_EnableEmailHyperlinks" xml:space="preserve">
+    <value>显示电子邮件超链接</value>
+  </data>
+  <data name="STR_Settings_Editor_RequireControlModifierForHyperlinkClick" xml:space="preserve">
+    <value>超链接，请点击需要控制密钥</value>
+  </data>
+  <data name="STR_CmdName_Export" xml:space="preserve">
+    <value>出口</value>
+  </data>
+  <data name="STR_CmdName_Export_TT" xml:space="preserve">
+    <value>将数据转换为适合于其他应用程序的文件格式。</value>
+  </data>
+  <data name="STR_CmdName_Settings" xml:space="preserve">
+    <value>设置。。。</value>
+  </data>
+  <data name="STR_ABOUT_VERSION_INFO_LABEL" xml:space="preserve">
+    <value>版本信息</value>
+  </data>
+  <data name="STR_Contributors_Label" xml:space="preserve">
+    <value>派遣国</value>
+  </data>
+  <data name="STR_Settings_Editor_Hyperlink_Section" xml:space="preserve">
+    <value>超链接</value>
+  </data>
+  <data name="STR_YALVLIb_Columns_MenuLabel" xml:space="preserve">
+    <value>列</value>
+  </data>
+</root>

@@ -1,0 +1,198 @@
+﻿<?xml version="1.0"?>
+<SyntaxDefinition name="BAT" extensions=".bat;.dos"
+                  xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+
+  <Color name="String"  foreground="Red" exampleText="string text = &quot;Hello, World!&quot;"/>
+  <Color name="String2" foreground="Red" background="#22DDDDDD" exampleText="string text = &quot;Hello, World!&quot;"/>
+  <Color name="Comment" foreground="Green" exampleText="string text = &quot;Hello, World!&quot;"/>
+
+  <Color name="Digits"      foreground="Blue" fontStyle="italic" fontWeight="normal" />
+  <Color name="Punctuation" foreground="Red"  exampleText="string text = &quot;Hello, World!&quot;"/>
+
+  <Color name="PARAMETER"   foreground="Brown" exampleText="%1"/>
+  <Color name="VARIABLE"    foreground="Orange" exampleText="%MYVAR%"/>
+
+  <Color name="GOTO"        foreground="#0000FF" background="#40AAAAAA"/>
+  <Color name="GOTO_TARGET" foreground="#0000FF" background="#80AAAAAA"/>
+
+  <Color name="AtCommand" foreground="Blue" fontWeight="normal" />
+
+  <Color name="Command"  foreground="Blue"      fontWeight="normal" />
+  <Color name="Command1" foreground="#FF8000FF" fontWeight="normal" />
+  <Color name="Command2" foreground="#FF5000FF" fontWeight="normal" />
+  <Color name="Command3" foreground="#FFFF6000" fontWeight="normal" />
+
+  <RuleSet ignoreCase="true">
+
+    <Span color="String2" multiline="false" begin="&quot;" end="&quot;" >
+      <RuleSet>
+        <Rule color="PARAMETER">%[0-9]</Rule>
+        <Rule color="VARIABLE">%[A-Z]+%</Rule>
+      </RuleSet>
+    </Span>
+
+    <Rule color="PARAMETER">[-/][A-Z]+</Rule>
+
+    <Span color="String2" multiline="false" begin="\(" end="\)" >
+      <RuleSet>
+        <Rule color="PARAMETER">%[0-9]</Rule>
+        <Rule color="VARIABLE">%[A-Z]+%</Rule>
+      </RuleSet>
+    </Span>
+
+    <!-- span for escape sequences -->
+    <Span  color="Comment" begin="^[R][E][M]" end="\n"/>
+
+    <Rule color="Punctuation">
+      [?,;()\[\]{}+\-/%*&lt;&gt;^+~!|&amp;]+
+    </Rule>
+
+    <Rule color="GOTO">[G][O][T][O]+[ ]+[A-Z]+</Rule>
+
+    <Rule color="GOTO_TARGET">^:[A-Z]+</Rule>
+
+    <Span color="VARIABLE"  multiline="false">
+      <Begin>%</Begin>
+      <End>%</End>
+    </Span>
+
+    <Rule color="Digits">
+      [ ?,.;()\[\]{}+\-/%*&lt;&gt;^+~!|&amp;]+[0-9]+[ ?,.;()\[\]{}+\-/%*&lt;&gt;^+~!|&amp;]+\n
+    </Rule>
+
+    <!-- Highlight commands that start start with an at sign -->
+    <Rule color="AtCommand">
+      ^@[A-Z]+
+    </Rule>
+
+    <Rule color="Command">(ECHO\.)</Rule>
+
+    <Keywords color="Command"><!-- http://technet.microsoft.com/en-us/library/bb490890.aspx -->
+      <Word>ASSOC</Word>
+      <Word>AT</Word>
+      <Word>ATTRIB</Word>
+      <Word>BREAK</Word>
+      <Word>CACLS</Word>
+      <Word>CALL</Word>
+      <Word>CD</Word>
+      <Word>CHCP</Word>
+      <Word>CHDIR</Word>
+      <Word>CHKDSK</Word>
+      <Word>CLS</Word>
+      <Word>CMD</Word>
+      <Word>COLOR</Word>
+      <Word>COMP</Word>
+      <Word>COMPACT</Word>
+      <Word>CONVERT</Word>
+      <Word>COPY</Word>
+      <Word>DATE</Word>
+      <Word>DEL</Word>
+      <Word>DIR</Word>
+      <Word>DISKCOMP</Word>
+      <Word>DISKCOPY</Word>
+      <Word>DOSKEY</Word>
+      <Word>ECHO</Word>
+      <!--Word>ECHO.</Word -->
+      <Word>ENABLEEXTENSIONS</Word>
+      <Word>ENDLOCAL</Word>
+      <Word>ERASE</Word>
+      <Word>EXIT</Word>
+      <Word>FC</Word>
+      <Word>FIND</Word>
+      <Word>FINDSTR</Word>
+      <Word>FOR</Word>
+      <Word>FORMAT</Word>
+      <Word>FTYPE</Word>
+      <!-- Word>GOTO</Word -->
+      <Word>GRAFTABL</Word>
+      <Word>HELP</Word>
+      <Word>IF</Word>
+      <Word>KEYB</Word>
+      <Word>LABEL</Word>
+      <Word>MD</Word>
+      <Word>MKDIR</Word>
+      <Word>MODE</Word>
+      <Word>MORE</Word>
+      <Word>MOVE</Word>
+      <Word>NET</Word>
+      <Word>PATH</Word>
+      <Word>PAUSE</Word>
+      <Word>POPD</Word>
+      <Word>PRINT</Word>
+      <Word>PROMPT</Word>
+      <Word>PUSHD</Word>
+      <Word>RD</Word>
+      <Word>RECOVER</Word>
+      <!-- Word>REM</Word -->
+      <Word>REN</Word>
+      <Word>RENAME</Word>
+      <Word>REPLACE</Word>
+      <Word>RESTORE</Word>
+      <Word>RMDIR</Word>
+      <Word>SET</Word>
+      <Word>SETLOCAL</Word>
+      <Word>SHIFT</Word>
+      <Word>SORT</Word>
+      <Word>START</Word>
+      <Word>SUBST</Word>
+      <Word>TIME</Word>
+      <Word>TITLE</Word>
+      <Word>TREE</Word>
+      <Word>TYPE</Word>
+      <Word>VER</Word>
+      <Word>VERIFY</Word>
+      <Word>VOL</Word>
+      <Word>XCOPY</Word>
+    </Keywords>
+
+    <Keywords color="Command1"><!-- Parts of commands -->
+      <Word>DO</Word><!-- for -->
+      <Word>IN</Word>
+      <Word>NOT</Word><!-- if -->
+      <Word>ERRORLEVEL</Word>
+      <Word>EXIST</Word>
+      <Word>EQU</Word>
+      <Word>NEQ</Word>
+      <Word>LSS</Word>
+      <Word>LEQ</Word>
+      <Word>GTR</Word>
+      <Word>GEQ</Word>
+      <Word>CMDEXTVERSION</Word>
+      <Word>DEFINED</Word>
+      <Word>CON</Word><!-- mode -->
+      <Word>COM</Word>
+      <Word>MIN</Word>
+      <Word>MAX</Word>
+      <Word>SEPARATE</Word>
+      <Word>SHARED</Word>
+      <Word>LOW</Word>
+      <Word>NORMAL</Word>
+      <Word>HIGH</Word>
+      <Word>REALTIME</Word>
+      <Word>WAIT</Word>
+      <Word>OTHER</Word><!-- verify -->
+      <Word>nul</Word><!-- miscellaneous -->
+    </Keywords>
+
+    <Keywords color="Command2"><!-- Command modifiers and operators -->
+      <Word>EOL</Word>
+      <Word>SKIP</Word>
+      <Word>DELIMS</Word>
+      <Word>TOKENS</Word>
+      <Word>ON</Word>
+      <Word>OFF</Word>
+      <Word>USE</Word>
+    </Keywords>
+
+    <Keywords color="Command3"><!-- comparison operators -->
+      <Word>==</Word>
+      <Word>EQU</Word>
+      <Word>NEQ</Word>
+      <Word>LSS</Word>
+      <Word>LEQ</Word>
+      <Word>GTR</Word>
+      <Word>GEQ</Word>
+    </Keywords>
+
+  </RuleSet>
+</SyntaxDefinition>

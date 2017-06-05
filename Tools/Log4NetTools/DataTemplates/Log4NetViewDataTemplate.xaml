@@ -1,0 +1,34 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    
+                    xmlns:behav="clr-namespace:Edi.Core.Behaviour;assembly=Edi.Core"
+                    xmlns:yalvView="clr-namespace:YalvLib.View;assembly=YalvLib"
+                    xmlns:busi="clr-namespace:YalvLib.Behaviour.BusyIndicatorBehavior;assembly=YalvLib"
+
+                    xmlns:local="clr-namespace:Log4NetTools.Views"
+                    >
+
+  <!-- Log4Net document data template -->
+  <DataTemplate x:Key="Log4NetDocViewDataTemplate">
+    <Grid busi:BusyIndicatorBehavior.BusyState="{Binding Yalv.LogItems.LogFile.IsLoading}">
+      <yalvView:YalvView DataContext="{Binding Yalv}"
+                                   Margin="0,3,0,0"
+                                   Columns="{Binding LogItems.DataGridColumns}"
+                                   Focusable="True"
+                                   KeyboardNavigation.IsTabStop="True"
+                                   Name="ValvView"
+                                   behav:KeyboardFocus.On="{Binding ElementName=ValvView}"
+              />
+    </Grid>
+  </DataTemplate>
+
+  <!-- Tool Window Data Templates -->
+  <DataTemplate x:Key="Log4NetToolViewDataTemplate">
+    <local:Log4NetToolView />
+  </DataTemplate>
+
+  <DataTemplate x:Key="Log4NetMessageViewDataTemplate">
+    <local:Log4NetMessageView />
+  </DataTemplate>
+
+</ResourceDictionary>

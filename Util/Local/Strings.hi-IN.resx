@@ -1,0 +1,920 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CMD_APP_About_Description" xml:space="preserve">
+    <value>Edi के बारे में जानकारी दिखाएँ</value>
+  </data>
+  <data name="CMD_APP_CloseDoc_Description" xml:space="preserve">
+    <value>बंद करें दस्तावेज़</value>
+  </data>
+  <data name="CMD_App_Exit_Describtion" xml:space="preserve">
+    <value>अनुप्रयोग से बाहर निकलें</value>
+  </data>
+  <data name="CMD_APP_OpenURL_Description" xml:space="preserve">
+    <value>URL को खोलें...</value>
+  </data>
+  <data name="CMD_APP_Open_Description" xml:space="preserve">
+    <value>फ़ाइल खोलें...</value>
+  </data>
+  <data name="CMD_APP_SaveAll_Description" xml:space="preserve">
+    <value>सभी सहेजें...</value>
+  </data>
+  <data name="CMD_APP_ShowStartPage_Description" xml:space="preserve">
+    <value>प्रारंभ पृष्ठ दिखाएँ</value>
+  </data>
+  <data name="CMD_APP_ViewTheme_Description" xml:space="preserve">
+    <value>बदलें थीम</value>
+  </data>
+  <data name="CMD_MRU_AddEntry_Description" xml:space="preserve">
+    <value>MRU प्रविष्टि जोड़ें</value>
+  </data>
+  <data name="CMD_MRU_Pin_Description" xml:space="preserve">
+    <value>पिन या किसी MRU प्रविष्टि को अनपिन करें</value>
+  </data>
+  <data name="CMD_MRU_RemoveEntry_Description" xml:space="preserve">
+    <value>MRU प्रविष्टि को निकालें</value>
+  </data>
+  <data name="CMD_TXT_DisableHighlighting_Description" xml:space="preserve">
+    <value>वर्तमान फ़ाइल के लिए उजागर वाक्यविन्यास बंद स्विच</value>
+  </data>
+  <data name="CMD_TXT_FindNextText_Description" xml:space="preserve">
+    <value>किसी दस्तावेज़ में विशिष्ट पाठ की अगली आवृत्ति खोजने</value>
+  </data>
+  <data name="CMD_TXT_FindNext_Description" xml:space="preserve">
+    <value>किसी दस्तावेज़ में विशिष्ट पाठ खोजें</value>
+  </data>
+  <data name="CMD_TXT_FindPreviousText_Description" xml:space="preserve">
+    <value>किसी दस्तावेज़ में विशिष्ट पाठ की पिछली पुनरावृत्ति ढूँढने</value>
+  </data>
+  <data name="CMD_TXT_FindReplaceText_Description" xml:space="preserve">
+    <value>किसी दस्तावेज़ में किसी विशिष्ट पाठ ढूँढना और बदलना</value>
+  </data>
+  <data name="CMD_TXT_GotoLine_Description" xml:space="preserve">
+    <value>किसी दस्तावेज़ में किसी विशिष्ट पंक्ति के लिए जाओ</value>
+  </data>
+  <data name="STR_Category_Error" xml:space="preserve">
+    <value>त्रुटि</value>
+  </data>
+  <data name="STR_Category_Information" xml:space="preserve">
+    <value>जानकारी</value>
+  </data>
+  <data name="STR_Category_InternalError" xml:space="preserve">
+    <value>आंतरिक त्रुटि</value>
+  </data>
+  <data name="STR_Category_UnknownError" xml:space="preserve">
+    <value>अज्ञात त्रुटि</value>
+  </data>
+  <data name="STR_Category_Warning" xml:space="preserve">
+    <value>चेतावनी</value>
+  </data>
+  <data name="STR_Category_Unknown_Internal_Error" xml:space="preserve">
+    <value>अज्ञात आंतरिक त्रुटि</value>
+  </data>
+  <data name="STR_CmdName_File" xml:space="preserve">
+    <value>फ़ाइल</value>
+  </data>
+  <data name="STR_CmdName_New" xml:space="preserve">
+    <value>नई</value>
+  </data>
+  <data name="STR_CmdName_New_Text" xml:space="preserve">
+    <value>पाठ दस्तावेज़</value>
+  </data>
+  <data name="STR_CmdName_New_UML" xml:space="preserve">
+    <value>यूएमएल दस्तावेज़</value>
+  </data>
+  <data name="STR_CmdName_Open" xml:space="preserve">
+    <value>खुला</value>
+  </data>
+  <data name="STR_CmdName_Open_Log4Net" xml:space="preserve">
+    <value>Log4Net दस्तावेज़</value>
+  </data>
+  <data name="STR_CmdName_Open_Text" xml:space="preserve">
+    <value>पाठ दस्तावेज़</value>
+  </data>
+  <data name="STR_CmdName_Open_UML" xml:space="preserve">
+    <value>यूएमएल दस्तावेज़</value>
+  </data>
+  <data name="STR_CmdName_RecentFiles" xml:space="preserve">
+    <value>हाल के दस्तावेज़</value>
+  </data>
+  <data name="STR_CmdName_Save" xml:space="preserve">
+    <value>सहेजें</value>
+  </data>
+  <data name="STR_CmdName_SaveAs" xml:space="preserve">
+    <value>के रूप में सहेजें...</value>
+  </data>
+  <data name="STR_CmdName_Close" xml:space="preserve">
+    <value>बंद करें</value>
+  </data>
+  <data name="STR_CmdName_Copy" xml:space="preserve">
+    <value>प्रतिलिपि बनाएँ</value>
+  </data>
+  <data name="STR_CmdName_Copy_TT" xml:space="preserve">
+    <value>चयनित आइटम की प्रतिलिपि बनाएँ</value>
+  </data>
+  <data name="STR_CmdName_Cut" xml:space="preserve">
+    <value>कट</value>
+  </data>
+  <data name="STR_CmdName_Cut_TT" xml:space="preserve">
+    <value>चयनित आइटम को काटना</value>
+  </data>
+  <data name="STR_CmdName_Delete" xml:space="preserve">
+    <value>हटाएँ</value>
+  </data>
+  <data name="STR_CmdName_Delete_TT" xml:space="preserve">
+    <value>चयनित आइटम हटाएँ</value>
+  </data>
+  <data name="STR_CmdName_Edit" xml:space="preserve">
+    <value>संपादित करें</value>
+  </data>
+  <data name="STR_CmdName_Exit" xml:space="preserve">
+    <value>बाहर निकलें</value>
+  </data>
+  <data name="STR_CmdName_Find" xml:space="preserve">
+    <value>खोजें</value>
+  </data>
+  <data name="STR_CmdName_GotoLine" xml:space="preserve">
+    <value>लाइन के लिए जाना...</value>
+  </data>
+  <data name="STR_CmdName_Help" xml:space="preserve">
+    <value>मदद</value>
+  </data>
+  <data name="STR_CmdName_Help_About" xml:space="preserve">
+    <value>के बारे में</value>
+  </data>
+  <data name="STR_CmdName_Log4Net_Message_TW" xml:space="preserve">
+    <value>Log4Net संदेश उपकरण विंडो</value>
+  </data>
+  <data name="STR_CmdName_Log4Net_TW" xml:space="preserve">
+    <value>Log4Net उपकरण विंडो</value>
+  </data>
+  <data name="STR_CmdName_New_Text_TT" xml:space="preserve">
+    <value>एक पाठ फ़ाइल बनाएँ</value>
+  </data>
+  <data name="STR_CmdName_New_UML_TT" xml:space="preserve">
+    <value>यूएमएल फ़ाइल बनाएँ</value>
+  </data>
+  <data name="STR_CmdName_Open_Log4Net_TT" xml:space="preserve">
+    <value>एक Log4Net फ़ाइल खोलें</value>
+  </data>
+  <data name="STR_CmdName_Open_Text_TT" xml:space="preserve">
+    <value>एक पाठ फ़ाइल खोलें</value>
+  </data>
+  <data name="STR_CmdName_Open_UML_TT" xml:space="preserve">
+    <value>एक यूएमएल फ़ाइल खोलें</value>
+  </data>
+  <data name="STR_CmdName_Paste" xml:space="preserve">
+    <value>चिपकाएँ</value>
+  </data>
+  <data name="STR_CmdName_Paste_TT" xml:space="preserve">
+    <value>Windows क्लिपबोर्ड से चिपकाएँ आइटम</value>
+  </data>
+  <data name="STR_CmdName_Properties_TW" xml:space="preserve">
+    <value>गुण उपकरण विंडो</value>
+  </data>
+  <data name="STR_CmdName_RecentFiles_TW" xml:space="preserve">
+    <value>हाल ही में फ़ाइलें उपकरण विंडो</value>
+  </data>
+  <data name="STR_CmdName_Redo" xml:space="preserve">
+    <value>फिर से करें</value>
+  </data>
+  <data name="STR_CmdName_Redo_TT" xml:space="preserve">
+    <value>पिछली पूर्ववत् करें फिर से करें</value>
+  </data>
+  <data name="STR_CmdName_Replace" xml:space="preserve">
+    <value>की जगह</value>
+  </data>
+  <data name="STR_CmdName_SaveAs_TT" xml:space="preserve">
+    <value>निश्चित प्रकार के रूप में और निश्चित स्थान में फ़ाइल सहेजना</value>
+  </data>
+  <data name="STR_CmdName_Save_TT" xml:space="preserve">
+    <value>वर्तमान फ़ाइल सहेजें</value>
+  </data>
+  <data name="STR_CmdName_SelectAll" xml:space="preserve">
+    <value>सभी का चयन करें</value>
+  </data>
+  <data name="STR_CmdName_SelectAll_TT" xml:space="preserve">
+    <value>सभी आइटम्स का चयन करें</value>
+  </data>
+  <data name="STR_CmdName_Themes" xml:space="preserve">
+    <value>थीम</value>
+  </data>
+  <data name="STR_CmdName_Tools" xml:space="preserve">
+    <value>उपकरण</value>
+  </data>
+  <data name="STR_CmdName_Undo" xml:space="preserve">
+    <value>पूर्ववत् करें</value>
+  </data>
+  <data name="STR_CmdName_Undo_TT" xml:space="preserve">
+    <value>अंतिम संपादन पूर्ववत् करें</value>
+  </data>
+  <data name="STR_CmdName_View" xml:space="preserve">
+    <value>देखें</value>
+  </data>
+  <data name="STR_CmdName_View_Start_Page" xml:space="preserve">
+    <value>पृष्ठ प्रारंभ करें</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_HighlightingDefinition_TT" xml:space="preserve">
+    <value>पैटर्न पर प्रकाश डाला एक पाठ का चयन करें</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowEndOfLine" xml:space="preserve">
+    <value>रेखा के अंत शो</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowEndOfLine_TT" xml:space="preserve">
+    <value>रेखा के अंत शो</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowLineNumbers" xml:space="preserve">
+    <value>पंक्ति क्रमांक दिखाएँ</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowLineNumbers_TT" xml:space="preserve">
+    <value>पंक्ति क्रमांक दिखाएँ</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowSpaces" xml:space="preserve">
+    <value>रिक्त स्थान दिखाएँ</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowSpaces_TT" xml:space="preserve">
+    <value>रिक्ति वर्ण दिखाएँ</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowTabs" xml:space="preserve">
+    <value>टैब दिखाएँ</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowTabs_TT" xml:space="preserve">
+    <value>Tabulator वर्ण दिखाना</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_WordWrap" xml:space="preserve">
+    <value>शब्द लपेटें</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_WordWrap_TT" xml:space="preserve">
+    <value>दस्तावेज़ दृश्य के आसपास पाठ लपेट</value>
+  </data>
+  <data name="STR_Insert_Overtype_Mode_TT" xml:space="preserve">
+    <value>सम्मिलित करें या ओवरटाइप पाठ मोड (पर/के साथ स्विच सम्मिलित करें कुंजी)</value>
+  </data>
+  <data name="STR_StatusBar_Ready" xml:space="preserve">
+    <value>तैयार।</value>
+  </data>
+  <data name="STR_StatusBar_Textencoding_TT" xml:space="preserve">
+    <value>वर्तमान दस्तावेज़ में पाठ के एन्कोडिंग</value>
+  </data>
+  <data name="STR_StatusBar_X_Coord_Label" xml:space="preserve">
+    <value>एक्स:</value>
+  </data>
+  <data name="STR_StatusBar_X_Coord_Label_TT" xml:space="preserve">
+    <value>वर्तमान दस्तावेज़ में कर्सर के स्तंभ</value>
+  </data>
+  <data name="STR_StatusBar_Y_Coord_Label" xml:space="preserve">
+    <value>Y:</value>
+  </data>
+  <data name="STR_StatusBar_Y_Coord_Label_TT" xml:space="preserve">
+    <value>वर्तमान दस्तावेज़ में कर्सर की पंक्ति</value>
+  </data>
+  <data name="STR_MSG_IssueTrackerText" xml:space="preserve">
+    <value>यदि यह एक ज्ञात समस्या है की जाँच करने के लिए नीचे दिए गए लिंक पर क्लिक करें कृपया।
+
+कृपया यह समस्या रिपोर्ट अगर यह, अभी तक ज्ञात नहीं है।
+
+समस्या रिपोर्ट नीचे त्रुटि संदेश शामिल करना चाहिए (आप प्रतिलिपि बनाएँ बटन का उपयोग कर सकते हैं)
+और समारोह/वर्कफ़्लो के बारे में एक बयान आप उपयोग कर रहे थे। स्क्रीनशॉट या नमूना फ़ाइलें यदि लागू हो तो देते हैं।</value>
+  </data>
+  <data name="STR_MSG_IssueTrackerTitle" xml:space="preserve">
+    <value>मैनेज्ड त्रुटि</value>
+  </data>
+  <data name="STR_Msg_UnknownError" xml:space="preserve">
+    <value>कोई अज्ञात त्रुटि उत्पन्न हुई।</value>
+  </data>
+  <data name="STR_MSG_UnknownError_Caption" xml:space="preserve">
+    <value>मैनेज्ड त्रुटि</value>
+  </data>
+  <data name="STR_MSG_UnknownError_InErrorDispatcher" xml:space="preserve">
+    <value>मैनेज्ड अपवाद भेजने करते समय एक त्रुटि उत्पन्न हुई</value>
+  </data>
+  <data name="STR_MSG_UnknownError_InShutDownProcess" xml:space="preserve">
+    <value>शट डाउन प्रक्रिया में त्रुटि।</value>
+  </data>
+  <data name="STR_AppCommand_CopyFileURLToClipboard" xml:space="preserve">
+    <value>प्रतिलिपि क्लिपबोर्ड के लिए पथ</value>
+  </data>
+  <data name="STR_AppCommand_CopyFileURLToClipboard_TT" xml:space="preserve">
+    <value>इस दस्तावेज़ का पथ Windows क्लिपबोर्ड में प्रतिलिपि बनाएँ</value>
+  </data>
+  <data name="STR_AppCommand_OpenContainingFolder" xml:space="preserve">
+    <value>युक्त फ़ोल्डर खोलें...</value>
+  </data>
+  <data name="STR_AppCommand_OpenContainingFolder_TT" xml:space="preserve">
+    <value>Windows Explorer में इस दस्तावेज़ वाले फ़ोल्डर खोलें</value>
+  </data>
+  <data name="STR_MSG_ErrorLoadingPlugin" xml:space="preserve">
+    <value>एक प्लगइन असेंबली में '{0}' पाया इनिशियलाइज़ कर रहा करते समय एक त्रुटि उत्पन्न हुई।</value>
+  </data>
+  <data name="STR_MSG_ErrorRegisteringHighlighting" xml:space="preserve">
+    <value>हाइलाइटिंग पंजीकरण करने में त्रुटि: '{0}'</value>
+  </data>
+  <data name="STR_MSG_ErrorSavingFile" xml:space="preserve">
+    <value>फ़ाइल को सहेजते समय कोई अनपेक्षित समस्या उत्पन्न हुई।</value>
+  </data>
+  <data name="STR_MSG_ErrorWhileLoadingPlugin" xml:space="preserve">
+    <value>प्लगइन असेंबली '{0}' लोड करते समय एक त्रुटि हुई।</value>
+  </data>
+  <data name="STR_MSG_ErrorWhileSavingAFile" xml:space="preserve">
+    <value>त्रुटि '{0}'
+किसी फ़ाइल को सहेजते समय उत्पन्न हुई है।</value>
+  </data>
+  <data name="STR_MSG_ErrorWhileSavingFileX" xml:space="preserve">
+    <value>त्रुटि '{0}'
+फ़ाइल को सहेजते समय उत्पन्न हुई है:
+'{1}'</value>
+  </data>
+  <data name="STR_MSG_PluginNotLoaded" xml:space="preserve">
+    <value>प्लगइन लोड नहीं किए गए।</value>
+  </data>
+  <data name="STR_MSG_SaveChangesForFile" xml:space="preserve">
+    <value>फ़ाइल '{0}' के लिए परिवर्तन सहेजें?</value>
+  </data>
+  <data name="STR_MSG_Unexpected_Error" xml:space="preserve">
+    <value>अनपेक्षित त्रुटि</value>
+  </data>
+  <data name="STR_MSG_UnknownDocumentType" xml:space="preserve">
+    <value>अज्ञात दस्तावेज़ प्रकार</value>
+  </data>
+  <data name="STR_CmdName_DeleteLine" xml:space="preserve">
+    <value>पंक्ति हटाएँ</value>
+  </data>
+  <data name="STR_CmdName_DeleteLine_TT" xml:space="preserve">
+    <value>पाठ की वर्तमान पंक्ति को हटाता है</value>
+  </data>
+  <data name="STR_Cmd_CollapseTextFoldings" xml:space="preserve">
+    <value>Foldings पाठ संक्षिप्त करें</value>
+  </data>
+  <data name="STR_Cmd_ConvertLeadingSpaces" xml:space="preserve">
+    <value>अग्रणी रिक्तियाँ करने के लिए टैब्स में कनवर्ट</value>
+  </data>
+  <data name="STR_Cmd_ConvertLeadingTabsToSpaces" xml:space="preserve">
+    <value>टैब अग्रणी करने के लिए रिक्त स्थान में कनवर्ट</value>
+  </data>
+  <data name="STR_CMD_ConvertSpacesToTabs" xml:space="preserve">
+    <value>रिक्त स्थान के लिए टैब्स कनवर्ट करें</value>
+  </data>
+  <data name="STR_CMD_ConvertTabsToSpaces" xml:space="preserve">
+    <value>टैब्स में कनवर्ट करने के लिए रिक्त स्थान</value>
+  </data>
+  <data name="STR_Cmd_ConvertTextToUpperCase" xml:space="preserve">
+    <value>पाठ कनवर्ट करने के लिए ऊपरी मामला</value>
+  </data>
+  <data name="STR_Cmd_ExpandTextFoldings" xml:space="preserve">
+    <value>पाठ foldings का विस्तार</value>
+  </data>
+  <data name="STR_CMD_RemoveLeadingWhiteSpace" xml:space="preserve">
+    <value>लीडिंग सफेद रिक्तियाँ निकालें</value>
+  </data>
+  <data name="STR_CMD_RemoveTrailingWhiteSpace" xml:space="preserve">
+    <value>पीछे सफेद रिक्ति निकालें</value>
+  </data>
+  <data name="STR_Cmd__ApplyTextIndentationStrategy" xml:space="preserve">
+    <value>इंडेंटेशन रणनीति लागू करें</value>
+  </data>
+  <data name="STR_Cmd__ConvertTextToLowerCase" xml:space="preserve">
+    <value>पाठ को लोअर केस में कनवर्ट करें</value>
+  </data>
+  <data name="STR_Cmd__ConvertTextToTitleCase" xml:space="preserve">
+    <value>शीर्षक केस में कनवर्ट करें</value>
+  </data>
+  <data name="STR_Cmd__InvertTextCase" xml:space="preserve">
+    <value>मामला पलटना</value>
+  </data>
+  <data name="STR_Label_TextCase" xml:space="preserve">
+    <value>पाठ के मामले</value>
+  </data>
+  <data name="STR_Label_WhiteSpaces" xml:space="preserve">
+    <value>सफेद रिक्त स्थान</value>
+  </data>
+  <data name="STR_FileType_FileFilter_Log4j" xml:space="preserve">
+    <value>"log4net XML आउटपुट (*.log4j, स्प्रडशीट) | * .log4j; *. xml|सभी फ़ाइलें (*. *) | *. * "</value>
+  </data>
+  <data name="STR_FileType_FileFilter_UML" xml:space="preserve">
+    <value>एकीकृत मॉडलिंग भाषा (*.uml, स्प्रडशीट) | * .uml; *. xml|सभी फ़ाइलें (*. *) | *. * "</value>
+  </data>
+  <data name="STR_FileType_FileFilter_AllFiles" xml:space="preserve">
+    <value>सभी फ़ाइलें (*. *) | *. *</value>
+  </data>
+  <data name="STR_FileType_FileFilter_TextFiles" xml:space="preserve">
+    <value>पाठ फ़ाइलें (*. txt) | *. txt</value>
+  </data>
+  <data name="STR_FileType_FileFilter_CSharp" xml:space="preserve">
+    <value>सी # (*.cs) फ़ाइलें | * .cs</value>
+  </data>
+  <data name="STR_FileType_FileFilter_HTML" xml:space="preserve">
+    <value>HTML फ़ाइलों (*.htm, *.html, *.css, *.js) | *. htm; *.html; *.css; *.js</value>
+  </data>
+  <data name="STR_FileType_FileFilter_SQL" xml:space="preserve">
+    <value>संरचित क्वेरी भाषा (*.sql) | *. sql</value>
+  </data>
+  <data name="STR_FileType_FileFilter_Log4NetPlusText" xml:space="preserve">
+    <value>log4net XML आउटपुट (*.log4j, *. log, *. txt, स्प्रडशीट) | * .log4j, *. log, *. txt; स्प्रडशीट</value>
+  </data>
+  <data name="STR_MSG_FIND_NO_MORE_ITEMS_FOUND" xml:space="preserve">
+    <value>वहाँ कोई और अधिक खोज परिणाम प्रदर्शित करने के लिए कर रहे हैं।</value>
+  </data>
+  <data name="STR_MSG_FIND_NO_MORE_ITEMS_FOUND2" xml:space="preserve">
+    <value>कोई आगे घटना नहीं पाया।</value>
+  </data>
+  <data name="STR_MSG_FIND_Caption" xml:space="preserve">
+    <value>खोज</value>
+  </data>
+  <data name="STR_MSG_FIND_UNEXPECTED_ERROR" xml:space="preserve">
+    <value>कोई अनपेक्षित त्रुटि उत्पन्न हुई।</value>
+  </data>
+  <data name="STR_THEMING_MSG_CANNOT_FIND_PATH" xml:space="preserve">
+    <value>करने के लिए पथ नहीं ढूँढ सकता:
+'{0}'
+
+कृपया सुनिश्चित करें कि इस मॉड्यूल सुलभ है।</value>
+  </data>
+  <data name="STR_THEMING_CAPTION" xml:space="preserve">
+    <value>प्रसंगयुक्तप्रस्तुतिकरण त्रुटि</value>
+  </data>
+  <data name="STR_MSG_DIRCREATED_NO_PLuginLoaded" xml:space="preserve">
+    <value>प्लगइन निर्देशिका बनाया; कोई plugins लोड नहीं।</value>
+  </data>
+  <data name="STR_MSG_DIRCREATED_NO_PLuginLoaded_Caption" xml:space="preserve">
+    <value>प्लगइन निर्देशिका नहीं मिली।</value>
+  </data>
+  <data name="STR_MSG_ACCESS_PLuginDir" xml:space="preserve">
+    <value>प्लगइन निर्देशिका तक पहुँचते समय कोई त्रुटि उत्पन्न हुई।</value>
+  </data>
+  <data name="STR_MSG_ACCESS_PLuginDir_Caption" xml:space="preserve">
+    <value>यूएमएल प्लग-इन लोड करते समय त्रुटि</value>
+  </data>
+  <data name="STR_MSG_UML_PLugin_NOTALL_Loaded" xml:space="preserve">
+    <value>नहीं सभी MiniUml प्लगइन्स लोड नहीं ठीक।</value>
+  </data>
+  <data name="STR_MSG_UML_PLugin_NOTALL_Loaded_Caption" xml:space="preserve">
+    <value>यूएमएल प्लग-इन लोड करने में त्रुटि</value>
+  </data>
+  <data name="STR_MSG_UML_PLugin_Duplicate" xml:space="preserve">
+    <value>निर्दिष्ट नाम के साथ एक प्लगइन पहले से ही लोड किया गया है।</value>
+  </data>
+  <data name="STR_ABOUT_MSG" xml:space="preserve">
+    <value>एक पाठ और यूएमएल संपादक।</value>
+  </data>
+  <data name="STR_ABOUT_Version" xml:space="preserve">
+    <value>संस्करण</value>
+  </data>
+  <data name="STR_ABOUT_DOCKING_LAYOUT" xml:space="preserve">
+    <value>डॉकिंग लेआउट प्रणाली:</value>
+  </data>
+  <data name="STR_ABOUT_TextEditor" xml:space="preserve">
+    <value>पाठ संपादक:</value>
+  </data>
+  <data name="STR_ABOUT_Log4NetViewer" xml:space="preserve">
+    <value>Log4Net व्यूअर:</value>
+  </data>
+  <data name="STR_ABOUT_CODE_COMPLETION" xml:space="preserve">
+    <value>कोड को पूरा:</value>
+  </data>
+  <data name="STR_ABOUT_OK_BUTTON" xml:space="preserve">
+    <value>ठीक</value>
+  </data>
+  <data name="STR_EDIT_MODE_INSERT" xml:space="preserve">
+    <value>भारतीय नौसेना पोत</value>
+  </data>
+  <data name="STR_EDIT_MODE_TYPEOVER" xml:space="preserve">
+    <value>ओवरटाइप करें</value>
+  </data>
+  <data name="STR_FILESTATES_FileName" xml:space="preserve">
+    <value>फ़ाइल का नाम</value>
+  </data>
+  <data name="STR_FILESTATES_FilePath" xml:space="preserve">
+    <value>फ़ाइल पथ</value>
+  </data>
+  <data name="STR_FILESTATES_FileSize" xml:space="preserve">
+    <value>फ़ाइल का आकार</value>
+  </data>
+  <data name="STR_FILESTATES_LASTMODIFICATION" xml:space="preserve">
+    <value>दिनांक और समय के अंतिम संशोधन का।</value>
+  </data>
+  <data name="STR_FINDREPLACE_FINDLABEL" xml:space="preserve">
+    <value>पाठ खोजें:</value>
+  </data>
+  <data name="STR_FINDREPLACE_SearchInLABEL" xml:space="preserve">
+    <value>में खोजें:</value>
+  </data>
+  <data name="STR_FINDREPLACE_CURRENTDOC" xml:space="preserve">
+    <value>वर्तमान दस्तावेज़</value>
+  </data>
+  <data name="STR_FINDREPLACE_OPENDOCS" xml:space="preserve">
+    <value>सभी खुले दस्तावेज़</value>
+  </data>
+  <data name="STR_FINDREPLACE_Options" xml:space="preserve">
+    <value>विकल्प</value>
+  </data>
+  <data name="STR_FINDREPLACE_CaseSensitive" xml:space="preserve">
+    <value>केस संवेदी</value>
+  </data>
+  <data name="STR_FINDREPLACE_SearchBackWard" xml:space="preserve">
+    <value>ऊपर खोजें</value>
+  </data>
+  <data name="STR_FINDREPLACE_MatchWholeWord" xml:space="preserve">
+    <value>पूरे शब्द मिलाएँ</value>
+  </data>
+  <data name="STR_FINDREPLACE_RegularExpression" xml:space="preserve">
+    <value>नियमित व्यंजक</value>
+  </data>
+  <data name="STR_FINDREPLACE_Wildcards" xml:space="preserve">
+    <value>वाइल्डकार्ड</value>
+  </data>
+  <data name="STR_FINDREPLACE_ReplaceWith" xml:space="preserve">
+    <value>साथ बदलें:</value>
+  </data>
+  <data name="STR_FINDREPLACE_FINDNEXT" xml:space="preserve">
+    <value>_Next पा</value>
+  </data>
+  <data name="STR_FINDREPLACE_Replace" xml:space="preserve">
+    <value>बदलें</value>
+  </data>
+  <data name="STR_FINDREPLACE_ReplaceAll" xml:space="preserve">
+    <value>अदा की जगह</value>
+  </data>
+  <data name="STR_FINDREPLACE_ASK_REALLY_REPLACEEVERYTHING" xml:space="preserve">
+    <value>क्या आप वास्तव में '{1} के साथ' '{0}' की सभी पुनरावृत्तियों को बदलने के लिए चाहते हैं?</value>
+  </data>
+  <data name="STR_FINDREPLACE_ReplaceAll_Caption" xml:space="preserve">
+    <value>सभी बदलें</value>
+  </data>
+  <data name="STR_GOTOLINE_OK_BUTTON" xml:space="preserve">
+    <value>ठीक</value>
+  </data>
+  <data name="STR_GOTOLINE_CANCEL_BUTTON" xml:space="preserve">
+    <value>रद्द करें</value>
+  </data>
+  <data name="STR_GOTOLINE_LINE_RANGE_LABEL" xml:space="preserve">
+    <value>रेखा</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_TOOLTIP" xml:space="preserve">
+    <value>कोई फ़िल्टर मापदंड टाइप करें और प्रदर्शन को अनुकूलित करने के लिए फ़िल्टर को सक्रिय करें।</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_ALL" xml:space="preserve">
+    <value>सभी</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_DEBUG" xml:space="preserve">
+    <value>डीबग करें</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_INFO" xml:space="preserve">
+    <value>जानकारी</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_WARN" xml:space="preserve">
+    <value>चेतावनी दें</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_ERROR" xml:space="preserve">
+    <value>त्रुटि</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_FATAL" xml:space="preserve">
+    <value>घातक</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_DEBUG_TT" xml:space="preserve">
+    <value>डीबग करें</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_INFO_TT" xml:space="preserve">
+    <value>जानकारी</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_WARN_TT" xml:space="preserve">
+    <value>चेतावनी</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_ERROR_TT" xml:space="preserve">
+    <value>त्रुटि</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_FATAL_TT" xml:space="preserve">
+    <value>घातक त्रुटि</value>
+  </data>
+  <data name="STR_LOG4NET_DELTATIME" xml:space="preserve">
+    <value>डेल्टा टी:</value>
+  </data>
+  <data name="STR_LOG4NET_FILTERRESULT_TT" xml:space="preserve">
+    <value>(फ़िल्टर लागू करने) के बाद वास्तव में प्रदर्शित आइटम्स का योग।</value>
+  </data>
+  <data name="STR_LOG4NET_ENTERLOGID_TT" xml:space="preserve">
+    <value>एक लॉग आइटम Id दस्तावेज़ दृश्य अपने आइटम के लिए स्क्रॉल करने के लिए दर्ज करें।</value>
+  </data>
+  <data name="STR_LOG4NET_DOCUMENTTAB_TT" xml:space="preserve">
+    <value>एक log4net दस्तावेज़ एक log4net लकड़हारा सत्र से XML आउटपुट को देखने के लिए इस्तेमाल किया जा सकता।</value>
+  </data>
+  <data name="STR_LOG4NET_READONY_REASON" xml:space="preserve">
+    <value>एक Log4net दस्तावेज़ संपादित किया जा सकता। यह एक केवल-पठन व्यूअर दस्तावेज़ है।</value>
+  </data>
+  <data name="STR_MRU_MENUITEM_COPYURL" xml:space="preserve">
+    <value>पथ क्लिपबोर्ड पर प्रतिलिपि बनाएँ</value>
+  </data>
+  <data name="STR_MRU_MENUITEM_OpenWithWindowsApp" xml:space="preserve">
+    <value>Windows अनुप्रयोग में खोलें...</value>
+  </data>
+  <data name="STR_MRU_MENUITEM_OpenInContainingFolder" xml:space="preserve">
+    <value>समाहित फ़ोल्डर में खोलें</value>
+  </data>
+  <data name="STR_MRU_MENUITEM_Remove" xml:space="preserve">
+    <value>निकालें</value>
+  </data>
+  <data name="STR_STARTPAGE_TITLE" xml:space="preserve">
+    <value>पृष्ठ प्रारंभ करें</value>
+  </data>
+  <data name="STR_STARTPAGE_WELCOME_TT" xml:space="preserve">
+    <value>Edi में आपका स्वागत है। इस संपादक आवेदन के साथ शुरू करने के लिए इस पेज की समीक्षा करें।</value>
+  </data>
+  <data name="STR_STARTPAGE_VISITPROJECTHOMEPAGE_TT" xml:space="preserve">
+    <value>इस अनुप्रयोग के इंटरनेट मुख पृष्ठ पर जाएँ</value>
+  </data>
+  <data name="STR_STARTPAGE_FILEOPEN_TT" xml:space="preserve">
+    <value>फ़ाइल खोलें...</value>
+  </data>
+  <data name="STR_DIALOG_INPUT_PROBLEM_CAPTION" xml:space="preserve">
+    <value>आपके इनपुट के पर्याप्त नहीं है। निम्न समस्याओं को ठीक करें या रद्द करें क्लिक करें।</value>
+  </data>
+  <data name="STR_ACCESS_DIRECTORY_ERROR" xml:space="preserve">
+    <value>निर्देशिका '{0}' मौजूद नहीं है या तक पहुँचा नहीं जा सकता।</value>
+  </data>
+  <data name="STR_FILE_FINDING_CAPTION" xml:space="preserve">
+    <value>फ़ाइल में त्रुटि ढूँढना</value>
+  </data>
+  <data name="STR_FILE_DEFAULTNAME" xml:space="preserve">
+    <value>शीर्षकहीन</value>
+  </data>
+  <data name="STR_FILE_READONLY_REASON_NO_WRITE_PERMISSION" xml:space="preserve">
+    <value>इस फ़ाइल संपादित नहीं किया जा सकता क्योंकि आपको लिखने की पहुँच नहीं है।
+फ़ाइल पहुँच अनुमतियाँ परिवर्तित करें या यदि आप इसे संपादित करना चाहते हैं एक अलग अलग स्थान में फ़ाइल को सहेजें।</value>
+  </data>
+  <data name="STR_FILE_READONLY_REASON_USED_BY_OTHER_PROCESS" xml:space="preserve">
+    <value>इस फ़ाइल संपादित नहीं किया जा सकता क्योंकि अन्य प्रक्रिया वर्तमान में यह करने के लिए लेखन है।
+अन्य प्रक्रिया समाप्त और फ़ाइल पुनः खोलने या फ़ाइल एक अलग अलग स्थान में बचाने के लिए यदि आप इसे संपादित करना चाहते हैं।</value>
+  </data>
+  <data name="STR_FILE_OPEN_ERROR_MSG_CAPTION" xml:space="preserve">
+    <value>कोई त्रुटि उत्पन्न हुई</value>
+  </data>
+  <data name="STR_SCALE_VIEW_PERCENT" xml:space="preserve">
+    <value>प्रतिशत</value>
+  </data>
+  <data name="STR_SCALE_VIEW_PERCENT_SHORT" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="STR_SCALE_VIEW_POINT" xml:space="preserve">
+    <value>फ़ॉन्ट का आकार</value>
+  </data>
+  <data name="STR_SCALE_VIEW_POINT_SHORT" xml:space="preserve">
+    <value>पीटी</value>
+  </data>
+  <data name="CMD_APP_ExportUMLToImage_Description" xml:space="preserve">
+    <value>छवि के लिए यूएमएल</value>
+  </data>
+  <data name="STR_ERROR_LOADING_FILE_MSG" xml:space="preserve">
+    <value>फ़ाइल:
+'{0}'
+
+मौजूद नहीं है या लोड नहीं किया जा सकता।
+क्या आप इस फ़ाइल को हाल ही में फ़ाइलों की सूची से निकालना चाहते हैं?</value>
+  </data>
+  <data name="STR_ERROR_LOADING_FILE_CAPTION" xml:space="preserve">
+    <value>फ़ाइल को लोड करने में त्रुटि</value>
+  </data>
+  <data name="STR_FIND_BUTTON_CAPTION" xml:space="preserve">
+    <value>खोजें</value>
+  </data>
+  <data name="STR_FIND_REPLACE_CAPTION" xml:space="preserve">
+    <value>ढूँढें और बदलें...</value>
+  </data>
+  <data name="STR_GOTO_LINE_CAPTION" xml:space="preserve">
+    <value>लाइन के लिए जाना...</value>
+  </data>
+  <data name="STR_REPLACE_BUTTON_CAPTION" xml:space="preserve">
+    <value>की जगह</value>
+  </data>
+  <data name="STR_ProgramSettings_ApplicationBehaviour_Header" xml:space="preserve">
+    <value>अनुप्रयोग व्यवहार</value>
+  </data>
+  <data name="STR_ProgramSettings_Caption" xml:space="preserve">
+    <value>सेटिंग...</value>
+  </data>
+  <data name="STR_Settings_RestoreUserSession" xml:space="preserve">
+    <value>जब अनुप्रयोग प्रारंभ करता है पिछले उपयोगकर्ता सत्र पुनर्स्थापित करें</value>
+  </data>
+  <data name="STR_Settings_RunEdiOnlyOnce" xml:space="preserve">
+    <value>Edi केवल एक बार चलाएँ</value>
+  </data>
+  <data name="STR_Settings_ApplicationLanguage" xml:space="preserve">
+    <value>भाषा:</value>
+  </data>
+  <data name="STR_Settings_ApplicationLanguage_TT" xml:space="preserve">
+    <value>इस सेटिंग का प्रभाव देखने के लिए अनुप्रयोग पुनरारंभ करें।</value>
+  </data>
+  <data name="STR_Settings_MRU_Section_Label" xml:space="preserve">
+    <value>सबसे हाल ही में फ़ाइलें (MRU) मोड</value>
+  </data>
+  <data name="STR_Settings_MRU_Pin_At_StartOption" xml:space="preserve">
+    <value>Pin प्रविष्टियाँ सूची की शुरुआत</value>
+  </data>
+  <data name="STR_Settings_MRU_Pin_At_Current_Position" xml:space="preserve">
+    <value>प्रिय (नहीं हल)</value>
+  </data>
+  <data name="STR_Settings_Editor_Section_Label" xml:space="preserve">
+    <value>पाठ संपादक विकल्प</value>
+  </data>
+  <data name="STR_Settings_Editor_WordWrap" xml:space="preserve">
+    <value>शब्द लपेटें पाठ</value>
+  </data>
+  <data name="STR_Settings_Editor_ShowSpaces" xml:space="preserve">
+    <value>रिक्त स्थान दिखाएँ</value>
+  </data>
+  <data name="STR_Settings_Editor_ShowTabs" xml:space="preserve">
+    <value>टैब दिखाएँ</value>
+  </data>
+  <data name="STR_Settings_Editor_ShowEndOfLine" xml:space="preserve">
+    <value>रेखा के अंत शो</value>
+  </data>
+  <data name="STR_Settings_Editor_ConvertTabToSpace" xml:space="preserve">
+    <value>Tabulator वर्ण रिक्ति वर्ण में कनवर्ट करें</value>
+  </data>
+  <data name="STR_Settings_Editor_ShowBoxForControlChar" xml:space="preserve">
+    <value>नियंत्रण वर्णों के लिए बॉक्स दिखाएँ</value>
+  </data>
+  <data name="STR_Settings_Editor_CutCopyWholeLine" xml:space="preserve">
+    <value>कट और वर्तमान पंक्ति के पाठ की प्रतिलिपि बनाएँ</value>
+  </data>
+  <data name="STR_Settings_Editor_AllowScrollBelowDocument" xml:space="preserve">
+    <value>दस्तावेज़ के नीचे स्क्रॉल करें</value>
+  </data>
+  <data name="STR_Settings_Editor_InheritWordWrapIndentation" xml:space="preserve">
+    <value>शब्द लपेटें इंडेंटेशन के वारिस</value>
+  </data>
+  <data name="STR_Settings_Editor_EnableRectangularSelection" xml:space="preserve">
+    <value>आयताकार चयन (ALT + Shift ALT + माउस या चयन)</value>
+  </data>
+  <data name="STR_Settings_Editor_EnableTextDragDrop" xml:space="preserve">
+    <value>पाठ खींचें &amp; ड्रॉप</value>
+  </data>
+  <data name="STR_Settings_Editor_EnableVirtualSpace" xml:space="preserve">
+    <value>वर्चुअल स्पेस</value>
+  </data>
+  <data name="STR_Settings_Editor_EnableImeSupport" xml:space="preserve">
+    <value>IME समर्थन</value>
+  </data>
+  <data name="STR_Settings_Editor_CharacterSizeSectionLabel" xml:space="preserve">
+    <value>पाठ संपादक चरित्र आकार समायोजित करें</value>
+  </data>
+  <data name="STR_Settings_Editor_CharacterSizeInPercent" xml:space="preserve">
+    <value>प्रतिशत</value>
+  </data>
+  <data name="STR_Settings_Editor_CharacterSizeInPoints" xml:space="preserve">
+    <value>अंक</value>
+  </data>
+  <data name="STR_Settings_Editor_ColumnRulerSectionLabel" xml:space="preserve">
+    <value>स्तंभ शासक</value>
+  </data>
+  <data name="STR_Settings_Editor_ShowColumnRulerOption" xml:space="preserve">
+    <value>स्तंभ मापनी दिखाएँ</value>
+  </data>
+  <data name="STR_Settings_Editor_ShowHyperlinks" xml:space="preserve">
+    <value>WWW हाइपरलिंक दिखाएँ</value>
+  </data>
+  <data name="STR_Settings_Editor_EnableFileHyperlinks" xml:space="preserve">
+    <value>फ़ाइल हाइपरलिंक दिखाएँ</value>
+  </data>
+  <data name="STR_Settings_Editor_EnableEmailHyperlinks" xml:space="preserve">
+    <value>ईमेल हाइपरलिंक दिखाएँ</value>
+  </data>
+  <data name="STR_Settings_Editor_RequireControlModifierForHyperlinkClick" xml:space="preserve">
+    <value>के लिए हाइपरलिंक क्लिक करें नियंत्रण कुंजी की आवश्यकता</value>
+  </data>
+  <data name="STR_CmdName_Export" xml:space="preserve">
+    <value>निर्यात करें</value>
+  </data>
+  <data name="STR_CmdName_Export_TT" xml:space="preserve">
+    <value>डेटा है कि अन्य अनुप्रयोगों के लिए उपयुक्त है एक फ़ाइल स्वरूप में कनवर्ट करें।</value>
+  </data>
+  <data name="STR_CmdName_Settings" xml:space="preserve">
+    <value>सेटिंग्स...</value>
+  </data>
+  <data name="STR_ABOUT_VERSION_INFO_LABEL" xml:space="preserve">
+    <value>संस्करण जानकारी</value>
+  </data>
+  <data name="STR_Contributors_Label" xml:space="preserve">
+    <value>योगदानकर्ताओं</value>
+  </data>
+  <data name="STR_Settings_Editor_Hyperlink_Section" xml:space="preserve">
+    <value>हाइपरलिंक्स</value>
+  </data>
+  <data name="STR_YALVLIb_Columns_MenuLabel" xml:space="preserve">
+    <value>कॉलम</value>
+  </data>
+</root>

@@ -1,0 +1,43 @@
+﻿<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  >
+
+  <!-- Fill Brush for path items -->
+  <LinearGradientBrush x:Key="ItemBrush" StartPoint="0,0" EndPoint="0,1">
+    <LinearGradientBrush.GradientStops>
+      <GradientStop Color="#FFFFFF" Offset="0.0" />
+      <GradientStop Color="#FFFFFF" Offset="1.0" />
+      <!--
+      <GradientStop Color="#ECECEC" Offset="0.0" />
+      <GradientStop Color="#AAAAAA" Offset="1.0" />
+      -->
+    </LinearGradientBrush.GradientStops>
+  </LinearGradientBrush>
+
+  <!-- Path item stroke definition -->
+  <Style x:Key="PathItemStyle" TargetType="Path">
+    <Setter Property="Fill" Value="{StaticResource ItemBrush}" />
+    <Setter Property="Stroke" Value="#666666" />
+    <Setter Property="StrokeThickness" Value="1.5" />
+    <Setter Property="StrokeLineJoin" Value="Round" />
+    <Setter Property="Stretch" Value="Fill" />
+    <Setter Property="Margin" Value="1" />
+    <Setter Property="MinWidth" Value="35" />
+    <Setter Property="MinHeight" Value="20" />
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="SnapsToDevicePixels" Value="True" />
+    <!--<Setter
+            Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect
+                    Color="#AADDDDDD"
+                    Direction="305"
+                    ShadowDepth="7"
+                    BlurRadius="3"                    
+                    />
+            </Setter.Value>
+        </Setter>-->
+  </Style>
+
+</ResourceDictionary>

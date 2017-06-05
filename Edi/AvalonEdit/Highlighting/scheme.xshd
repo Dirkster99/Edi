@@ -1,0 +1,84 @@
+<!-- http://stackoverflow.com/questions/7278940/lisp-syntax-highlighting-for-icsharpcode-texteditor -->
+<SyntaxDefinition name="Scheme" extensions=".sls;.sps;.ss;.scm" 
+     xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  
+  <!-- Lisp syntax definition -->
+  <Color name="Digits"              foreground="DarkBlue"    exampleText="3.1415f"/>
+  <Color name="Comment"             foreground="Green"       />
+  <Color name="Punctuation"         foreground="Red"         exampleText="a(b.c);" />
+
+  <Color name="Syntax"              foreground="Blue"        />
+  <Color name="Library Syntax"      foreground="Blue"        />
+  <Color name="Auxilliary Syntax"   foreground="Blue"        />
+  <Color name="MethodCall"          foreground="DarkMagenta" />
+  <Color name="NullOrValueKeywords" fontWeight="bold" exampleText="if (value == null)"/>
+
+  <RuleSet>
+    <Import ruleSet="Expression"/>
+  </RuleSet>
+
+    <RuleSet name="Expression">
+      <Span color="Comment" multiline="false">
+        <Begin>;</Begin>
+      </Span>
+    <Span color="Comment" multiline="true" >
+      <Begin>\#\|</Begin>
+      <End>\|\#</End>
+    </Span>
+      <!-- Span ruleSet="Expression" multiline="true" color="Expression" >
+      <Begin fontWeight="bold">\(</Begin>
+      <End fontWeight="bold">\)</End>
+    </Span>
+    <Span  ruleSet="Expression" multiline="true">
+      <Begin fontWeight="bold">\#\(</Begin>
+      <End fontWeight="bold">\)</End>
+    </Span -->
+
+    <Keywords color="Library Syntax">
+      <Word>import</Word>
+      <Word>export</Word>
+      <Word>library</Word>
+    </Keywords>
+
+    <Keywords color="Syntax">
+      <Word>define</Word>
+      <Word>set!</Word>
+      <Word>lambda</Word>
+      <Word>begin</Word>
+      <Word>if</Word>
+      <Word>cond</Word>
+      <Word>let</Word>
+      <Word>letrec</Word>
+    </Keywords>
+
+    <Keywords color="Auxilliary Syntax">
+      <Word>else</Word>
+    </Keywords>
+
+    <Keywords color="MethodCall">
+      <Word>map</Word>
+      <Word>cons</Word>
+      <Word>car</Word>
+    </Keywords>
+
+      <Keywords color="NullOrValueKeywords">
+        <Word>null</Word>
+        <Word>value</Word>
+      </Keywords>
+
+      <!-- Digits -->
+      <Rule color="Digits">
+        \b0[xX][0-9a-fA-F]+  # hex number
+        |
+        (	\b\d+(\.[0-9]+)?   #number with optional floating point
+        |	\.[0-9]+           #or just starting with floating point
+        )
+        ([eE][+-]?[0-9]+)? # optional exponent
+      </Rule>
+
+      <Rule color="Punctuation">
+        [?,.;()\[\]{}+\-/%*&lt;&gt;^+~!|&amp;]+
+      </Rule>
+    </RuleSet>
+
+</SyntaxDefinition>

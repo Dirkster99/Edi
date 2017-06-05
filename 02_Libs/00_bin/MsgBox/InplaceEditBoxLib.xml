@@ -1,0 +1,623 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>InplaceEditBoxLib</name>
+    </assembly>
+    <members>
+        <member name="T:InplaceEditBoxLib.Events.RequestEditEvent">
+            <summary>
+            Determine the type of edit event that can be reuqested from the view.
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Events.RequestEditEvent.StartEditMode">
+            <summary>
+            Start the editing mode for renaming the item represented by the viewmodel
+            that send this message to its view.
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Events.RequestEditEvent.Unknown">
+            <summary>
+            Unknown type of event should never occur if this enum is used correctly.
+            </summary>
+        </member>
+        <member name="T:InplaceEditBoxLib.Events.RequestEditEventHandler">
+            <summary>
+            Event handler delegation method to be used when handling <seealso cref="T:InplaceEditBoxLib.Events.RequestEdit"/> events.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:InplaceEditBoxLib.Events.RequestEdit">
+            <summary>
+            Implements an event that can be send from viewmodel to view
+            to request certain edit modes.
+            </summary>
+        </member>
+        <member name="M:InplaceEditBoxLib.Events.RequestEdit.#ctor(InplaceEditBoxLib.Events.RequestEditEvent)">
+            <summary>
+            Parameterized class constructor
+            </summary>
+            <param name="eventRequest"></param>
+        </member>
+        <member name="M:InplaceEditBoxLib.Events.RequestEdit.#ctor">
+            <summary>
+            Class Constructor
+            </summary>
+        </member>
+        <member name="P:InplaceEditBoxLib.Events.RequestEdit.Request">
+            <summary>
+            Gets the type of editing event that was requested by the viewmodel.
+            </summary>
+        </member>
+        <member name="T:InplaceEditBoxLib.Interfaces.IEditBox">
+            <summary>
+            Implement an interface that enables a viewmodel to interact
+            with the <seealso cref="T:InplaceEditBoxLib.Views.EditBox"/> control.
+            </summary>
+        </member>
+        <member name="E:InplaceEditBoxLib.Interfaces.IEditBox.RequestEdit">
+            <summary>
+            The viewmodel can fire this event to request editing of its item
+            name in order to start the rename process via the <seealso cref="T:InplaceEditBoxLib.Views.EditBox"/> control.
+            
+            The control will fire the command that is bound to the Command dependency
+            property (if any) with the new name as parameter (if editing was not cancelled
+            (through escape) in the meantime.
+            </summary>
+        </member>
+        <member name="T:InplaceEditBoxLib.Local.Strings">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:InplaceEditBoxLib.Local.Strings.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:InplaceEditBoxLib.Local.Strings.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:InplaceEditBoxLib.Local.Strings.STR_MSG_InvalidChar_TITLE">
+            <summary>
+              Looks up a localized string similar to Input Error.
+            </summary>
+        </member>
+        <member name="P:InplaceEditBoxLib.Local.Strings.STR_MSG_UnknownError">
+            <summary>
+              Looks up a localized string similar to An error occured..
+            </summary>
+        </member>
+        <member name="T:InplaceEditBoxLib.ViewModels.Base.ViewModelBase">
+            <summary>
+            Base of Viewmodel classes implemented in this assembly.
+            </summary>
+        </member>
+        <member name="M:InplaceEditBoxLib.ViewModels.Base.ViewModelBase.#ctor">
+            <summary>
+            Standard <seealso cref="T:InplaceEditBoxLib.ViewModels.Base.ViewModelBase"/> class constructor
+            </summary>
+        </member>
+        <member name="M:InplaceEditBoxLib.ViewModels.Base.ViewModelBase.RaisePropertyChanged(System.String)">
+            <summary>
+            Tell bound controls (via WPF binding) to refresh their display
+            for the viewmodel property indicated as string.
+            </summary>
+            <param name="propName"></param>
+        </member>
+        <member name="M:InplaceEditBoxLib.ViewModels.Base.ViewModelBase.RaisePropertyChanged``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Tell bound controls (via WPF binding) to refresh their display.
+            
+            Sample call: this.OnPropertyChanged(() =&gt; this.IsSelected);
+            where 'this' is derived from <seealso cref="T:InplaceEditBoxLib.ViewModels.Base.ViewModelBase"/>
+            and IsSelected is a property.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="propertyExpression"></param>
+        </member>
+        <member name="E:InplaceEditBoxLib.ViewModels.Base.ViewModelBase.PropertyChanged">
+            <summary>
+            Standard event of the <seealso cref="T:System.ComponentModel.INotifyPropertyChanged"/> interface.
+            </summary>
+        </member>
+        <member name="T:InplaceEditBoxLib.ViewModels.EditInPlaceViewModel">
+            <summary>
+            Implements a viewmodel class that can be used as base of a viewmodel
+            that drives the <seealso cref="T:InplaceEditBoxLib.Views.EditBox"/> view.
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.ViewModels.EditInPlaceViewModel.Logger">
+            <summary>
+            Log4net logger facility for this class.
+            </summary>
+        </member>
+        <member name="M:InplaceEditBoxLib.ViewModels.EditInPlaceViewModel.#ctor">
+            <summary>
+            Class constructor
+            </summary>
+        </member>
+        <member name="M:InplaceEditBoxLib.ViewModels.EditInPlaceViewModel.RequestEditMode(InplaceEditBoxLib.Events.RequestEditEvent)">
+            <summary>
+            Call this method to request of start editing mode for renaming this item.
+            </summary>
+            <param name="request"></param>
+            <returns>Returns true if event was successfully send (listener is attached), otherwise false</returns>
+        </member>
+        <member name="M:InplaceEditBoxLib.ViewModels.EditInPlaceViewModel.ShowNotification(System.String,System.String,System.Windows.Media.Imaging.BitmapImage)">
+            <summary>
+            Shows a pop-notification message with the given title and text.
+            </summary>
+            <param name="title"></param>
+            <param name="message"></param>
+            <param name="imageIcon"></param>
+            <returns>true if the event was succesfully fired.</returns>
+        </member>
+        <member name="E:InplaceEditBoxLib.ViewModels.EditInPlaceViewModel.ShowNotificationMessage">
+            <summary>
+            Expose an event that is triggered when the viewmodel tells its view:
+            Here is another notification message please show it to the user.
+            </summary>
+        </member>
+        <member name="E:InplaceEditBoxLib.ViewModels.EditInPlaceViewModel.RequestEdit">
+            <summary>
+            Expose an event that is triggered when the viewmodel requests its view to
+            start the editing mode for rename this item.
+            </summary>
+        </member>
+        <member name="P:InplaceEditBoxLib.ViewModels.EditInPlaceViewModel.IsReadOnly">
+            <summary>
+            Gets/sets whether this folder is readonly (can be renamed) or not.
+            A drive can, for example, not be renamed and is therefore, readonly
+            on this context.
+            </summary>
+        </member>
+        <member name="T:InplaceEditBoxLib.Views.EditBox">
+            <summary>
+            EditBox is a custom cotrol that can switch between two modes: 
+            editing and normal. When it is in editing mode, the content is
+            displayed in a TextBox that provides editing capbabilities. When 
+            the EditBox is in normal, its content is displayed in a TextBlock
+            that is not editable.
+            
+            This control is designed to be used in an item that is part of a
+            ItemsControl collection (ListView, GridView, ListBox, TreeView).
+            
+            This code used part of ATC Avalon Team's work
+            (http://blogs.msdn.com/atc_avalon_team/archive/2006/03/14/550934.aspx)
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBox.TextProperty">
+            <summary>
+            TextProperty DependencyProperty should be used to indicate
+            the string that should be edit in the <seealso cref="T:InplaceEditBoxLib.Views.EditBox"/> control.
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBox.DisplayTextProperty">
+            <summary>
+            Backing storage of DisplayText dependency property should be used to indicate
+            the string that should displayed when <seealso cref="T:InplaceEditBoxLib.Views.EditBox"/>
+            control is not in edit mode.
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBox.IsEditingProperty">
+            <summary>
+            IsEditingProperty DependencyProperty
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBox.mIsReadOnlyProperty">
+            <summary>
+            Implement dependency property to determine whether editing data is allowed or not
+            (control never enters editing mode if IsReadOnly is set to true [default is false])
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBox.RenameCommandProperty">
+            <summary>
+            Send a Rename command request to the ViewModel if renaming has been executed
+            
+            1> Control entered Edit mode
+            2> String changed
+            3> Control left Edit Mode (with Enter or F2)
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBox.InvalidInputCharactersProperty">
+            <summary>
+            Backing store of dependency property
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBox.InvalidInputCharactersErrorMessageProperty">
+            <summary>
+            Backing store of dependency property
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBox.InvalidInputCharactersErrorMessageTitleProperty">
+            <summary>
+            Backing store of dependency property
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBox.IsEditableOnDoubleClickProperty">
+            <summary>
+            This property can be used to enable/disable maouse "double click"
+            gesture to start the edit mode (edit mode may also be started via
+            context menu or F2 key only).
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBox.MaximumClickTimeProperty">
+            <summary>
+            The maximum time between the last click and the current one that will allow the user to edit the text block.
+            This will allow the user to still be able to "double click to close" the TreeViewItem.
+            Default is 700 ms.
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBox.MinimumClickTimeProperty">
+            <summary>
+            The minimum time between the last click and the current one that will allow the user to edit the text block.
+            This will help prevent against accidental edits when they are double clicking.
+            Default is 300 ms.
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBox.mlockObject">
+            <summary>
+            This object is used to secure thread safe methods by using the lock statement
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBox.mAdorner">
+            <summary>
+            This is the adorner that is visible when the
+            <seealso cref="T:InplaceEditBoxLib.Views.EditBox"/> is in editing mode.
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBox.mTextBox">
+            <summary>
+            A TextBox in the visual tree
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBox.mParentItemsControl">
+            <summary>
+            This refers to the <seealso cref="T:System.Windows.Controls.ItemsControl"/> (TreeView/listView/ListBox)
+            control that contains the EditBox
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBox.mViewModel">
+            <summary>
+            This field points to a viewmodel that keeps the command binding and event triggering
+            to base the notifications on. This enables the viewmodel to send events (notifications)
+            for processing to the view.
+            </summary>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBox.#cctor">
+            <summary>
+            Static constructor
+            </summary>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBox.#ctor">
+            <summary>
+            Class constructor
+            </summary>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBox.OnApplyTemplate">
+            <summary>
+            Called when the tree for the EditBox has been generated.
+            </summary>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBox.OnEditBox_Unloaded(System.Object,System.EventArgs)">
+            <summary>
+            Free notification resources when parent window is being closed.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBox.OnDataContextChanged(System.Object,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Method is invoked when the datacontext is changed.
+            This requires changing event hook-up on attached viewmodel to enable
+            notification event conversion from viewmodel into view.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBox.TextBlock_LeftMouseDown(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Source: http://www.codeproject.com/Articles/31592/Editable-TextBlock-in-WPF-for-In-place-Editing
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBox.ViewModel_RequestEdit(System.Object,InplaceEditBoxLib.Events.RequestEdit)">
+            <summary>
+            Method is invoked when the viewmodel tells the view: Start to edit the name of the item we represent.
+            (eg: Start to rename a folder).
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBox.ViewModel_ShowNotificationMessage(System.Object,UserNotification.Events.ShowNotificationEvent)">
+            <summary>
+            Method is invoked when the viewmodel tells the view: Show another notification to the user.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBox.ShowNotification(System.String,System.String,System.Boolean)">
+            <summary>
+            Shows a notification warning to the user to clarify the current application behavior.
+            </summary>
+            <param name="title"></param>
+            <param name="message"></param>
+            <param name="notifiedFromViewmodel"></param>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBox.OnPreviewTextInput(System.Object,System.Windows.Input.TextCompositionEventArgs)">
+            <summary>
+            Previews input from TextBox and cancels those characters (with pop-up error message)
+            that do not appear to be valid (based on given array of invalid characters and error message.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBox.OnTextChangedCallback(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            This handler method is called when the dependency property <seealso cref="F:InplaceEditBoxLib.Views.EditBox.TextProperty"/>
+            is changed in the data source (the ViewModel). The event is raised to tell the view to update its display.
+            </summary>
+            <param name="d"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBox.OnTextBoxKeyDown(System.Object,System.Windows.Input.KeyEventArgs)">
+            <summary>
+            When an EditBox is in editing mode, pressing the ENTER or F2
+            keys switches the EditBox to normal mode.
+            </summary>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBox.OnTextBoxLostKeyboardFocus(System.Object,System.Windows.Input.KeyboardFocusChangedEventArgs)">
+            <summary>
+            If an EditBox loses focus while it is in editing mode, 
+            the EditBox mode switches to normal mode.
+            </summary>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBox.OnLostFocus(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Ends the editing mode if textbox loses the focus
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBox.OnScrollViewerChanged(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            If an EditBox is in editing mode and the content of a ListView is
+            scrolled, then the EditBox switches to normal mode.
+            </summary>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBox.OnSwitchToNormalMode(System.Boolean)">
+            <summary>
+            Sets IsEditing to false when the ViewItem that contains an EditBox changes its size
+            </summary>
+            <param name="bCancelEdit"></param>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBox.OnSwitchToEditingMode">
+            <summary>
+            Displays the adorner textbox to let the user edit the text string.
+            </summary>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBox.HookItemsControlEvents">
+            <summary>
+            Walk the visual tree to find the ItemsControl and 
+            hook into some of its events. This is done to make
+            sure that editing is cancelled whenever
+            
+              1> The parent control is scrolling its content
+            1.1> The MouseWheel is used
+              2> A user clicks outside the adorner control
+              3> The parent control changes its size
+            
+            </summary>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBox.GetDpObjectFromVisualTree(System.Windows.DependencyObject,System.Type)">
+            <summary>
+            Walk visual tree to find the first DependencyObject of a specific type.
+            (This method works for finding a ScrollViewer within a TreeView).
+            </summary>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBox.FindVisualChild``1(System.Windows.DependencyObject)">
+            <summary>
+            Walk visual tree to find the first DependencyObject of a specific type.
+            (This method works for finding a ScrollViewer within a TreeView).
+            Source: http://stackoverflow.com/questions/3963341/get-reference-to-my-wpf-listboxs-scrollviewer-in-c
+            </summary>
+            <typeparam name="childItem"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBox.DestroyTip">
+            <summary>
+            Destroys the notification object to ensure the window is closed when control exits.
+            </summary>
+        </member>
+        <member name="P:InplaceEditBoxLib.Views.EditBox.Text">
+            <summary>
+            Gets the text value for editing in the
+            text portion of the EditBox.
+            </summary>
+        </member>
+        <member name="P:InplaceEditBoxLib.Views.EditBox.DisplayText">
+            <summary>
+            Gets the text to display.
+            
+            The DisplayText dependency property should be used to indicate
+            the string that should displayed when <seealso cref="T:InplaceEditBoxLib.Views.EditBox"/>
+            control is not in edit mode.
+            </summary>
+        </member>
+        <member name="P:InplaceEditBoxLib.Views.EditBox.IsReadOnly">
+            <summary>
+            Implement dependency property to determine whether editing data is allowed or not
+            (control never enters efiting mode if IsReadOnly is set to true [default is false])
+            </summary>
+        </member>
+        <member name="P:InplaceEditBoxLib.Views.EditBox.ParentScrollViewer">
+            <summary>
+            Gets the scrollviewer in which this control is embeded.
+            </summary>
+        </member>
+        <member name="P:InplaceEditBoxLib.Views.EditBox.IsEditing">
+            <summary>
+            Gets Editing mode which is true if the EditBox control
+            is in editing mode, otherwise false.
+            </summary>
+        </member>
+        <member name="P:InplaceEditBoxLib.Views.EditBox.RenameCommand">
+            <summary>
+            Gets the command that is executed (if any is bound)
+            to reqzest a rename process via viemodel delegation.
+            
+            The command parameter is a tuple containing the new name
+            (as string) and the bound viewmodel on the datacontext
+            of this control (as object). The CommandParameter is
+            created by the control itself an needs no extra binding statement.
+            </summary>
+        </member>
+        <member name="P:InplaceEditBoxLib.Views.EditBox.IsEditableOnDoubleClick">
+            <summary>
+            This property can be used to enable/disable maouse "double click"
+            gesture to start the edit mode (edit mode may also be started via
+            context menu or F2 key only).
+            </summary>
+        </member>
+        <member name="P:InplaceEditBoxLib.Views.EditBox.InvalidInputCharacters">
+            <summary>
+            Gets/sets the string dependency property that contains the characters
+            that are considered to be invalid in the textbox input overlay element.
+            </summary>
+        </member>
+        <member name="P:InplaceEditBoxLib.Views.EditBox.InvalidInputCharactersErrorMessage">
+            <summary>
+            Gets/sets the string dependency property that contains the error message
+            that is shown when the user enters an invalid key.
+            </summary>
+        </member>
+        <member name="P:InplaceEditBoxLib.Views.EditBox.InvalidInputCharactersErrorMessageTitle">
+            <summary>
+            Gets/sets the string dependency property that contains
+            the title of the error message that is shown when the user
+            enters an invalid key. This title is similar to a window
+            caption but it is not a window caption since the error message
+            is shown in a custom pop-up element.
+            </summary>
+        </member>
+        <member name="P:InplaceEditBoxLib.Views.EditBox.MinimumClickTime">
+            <summary>
+            The minimum time between the last click and the current one that will allow the user to edit the text block.
+            This will help prevent against accidental edits when they are double clicking.
+            </summary>
+        </member>
+        <member name="P:InplaceEditBoxLib.Views.EditBox.MaximumClickTime">
+            <summary>
+            The maximum time between the last click and the current one that will allow the user to edit the text block.
+            This will allow the user to still be able to "double click to close" the TreeViewItem.
+            </summary>
+        </member>
+        <member name="T:InplaceEditBoxLib.Views.EditBoxAdorner">
+            <summary>
+            An adorner class that contains a TextBox to provide editing capability 
+            for an EditBox control. The editable TextBox resides in the 
+            AdornerLayer. When the EditBox is in editing mode, the TextBox is given a size 
+            it with desired size; otherwise, arrange it with size(0,0,0,0).
+            
+            This code used part of ATC Avalon Team's work
+            (http://blogs.msdn.com/atc_avalon_team/archive/2006/03/14/550934.aspx)
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBoxAdorner.ExtraWidth">
+            <summary>
+            Extra padding for the content when it is displayed in the TextBox
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBoxAdorner.mVisualChildren">
+            <summary>
+            Visual children
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBoxAdorner.mEditBox">
+            <summary>
+            Control that contains both Adorned control and Adorner.
+            This reference is required to compute the width of the
+            surrounding scrollviewer.
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBoxAdorner.mTextBox">
+            <summary>
+            The TextBox that this adorner covers.
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBoxAdorner.mIsVisible">
+            <summary>
+            Whether the EditBox is in editing mode which means the Adorner is visible.
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBoxAdorner.mCanvas">
+            <summary>
+            Canvas that contains the TextBox that provides the ability for it to 
+            display larger than the current size of the cell so that the entire
+            contents of the cell can be edited
+            </summary>
+        </member>
+        <member name="F:InplaceEditBoxLib.Views.EditBoxAdorner.mTextBoxMaxWidth">
+            <summary>
+            Maximum size of the textbox in dependents of the surrounding scrollviewer
+            is computed o demand in measure method and invalidated when visibility of Adorner changes.
+            </summary>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBoxAdorner.#ctor(System.Windows.UIElement,System.Windows.Controls.TextBox,InplaceEditBoxLib.Views.EditBox)">
+            <summary>
+            Inialize the EditBoxAdorner.
+            
+              +---> adorningElement (TextBox)
+              |
+            adornedElement (TextBlock)
+            </summary>
+            <param name="adornedElement"></param>
+            <param name="adorningElement"></param>
+            <param name="editBox"></param>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBoxAdorner.UpdateVisibilty(System.Boolean)">
+            <summary>
+            Specifies whether a TextBox is visible 
+            when the IsEditing property changes.
+            </summary>
+            <param name="isVisible"></param>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBoxAdorner.GetVisualChild(System.Int32)">
+            <summary>
+            override function to return infomation about visual tree.
+            </summary>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBoxAdorner.ArrangeOverride(System.Windows.Size)">
+            <summary>
+            override function to arrange elements.
+            </summary>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBoxAdorner.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Override to measure elements.
+            </summary>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBoxAdorner.BuildTextBox(InplaceEditBoxLib.Views.EditBox)">
+            <summary>
+            Inialize necessary properties and hook necessary events on TextBox, 
+            then add it into tree.
+            </summary>
+        </member>
+        <member name="M:InplaceEditBoxLib.Views.EditBoxAdorner.OnTextBoxLayoutUpdated(System.Object,System.EventArgs)">
+            <summary>
+            When Layout finish, if in editable mode, update focus status on TextBox.
+            </summary>
+        </member>
+        <member name="P:InplaceEditBoxLib.Views.EditBoxAdorner.VisualChildrenCount">
+            <summary>
+            override property to return infomation about visual tree.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,60 @@
+<!-- http://stackoverflow.com/questions/7278940/lisp-syntax-highlighting-for-icsharpcode-texteditor -->
+<SyntaxDefinition name="Scheme" extensions=".sls;.sps;.ss;.scm"  xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+
+  <Color name="Comment"           foreground="Green"        />
+  <Color name="Syntax"            foreground="Blue"         />
+  <Color name="Library Syntax"    foreground="Blue"         />
+  <Color name="Auxilliary Syntax" foreground="Blue"         />
+  <Color name="MethodCall"        foreground="DarkMagenta"  />
+
+  <RuleSet>
+    <Import ruleSet="Expression"/>
+  </RuleSet>
+
+    <RuleSet name="Expression">
+        <Span color="Comment" multiline="false">
+            <Begin>;</Begin>
+        </Span>
+    <Span color="Comment" multiline="true" >
+      <Begin>\#\|</Begin>
+      <End>\|\#</End>
+    </Span>
+    <Span ruleSet="Expression" multiline="true" >
+      <Begin fontWeight="bold">\(</Begin>
+      <End fontWeight="bold">\)</End>
+    </Span>
+    <Span  ruleSet="Expression" multiline="true">
+      <Begin fontWeight="bold">\#\(</Begin>
+      <End fontWeight="bold">\)</End>
+    </Span>
+
+    <Keywords color="Library Syntax">
+      <Word>import</Word>
+      <Word>export</Word>
+      <Word>library</Word>
+    </Keywords>
+
+    <Keywords color="Syntax">
+      <Word>define</Word>
+      <Word>set!</Word>
+      <Word>lambda</Word>
+      <Word>begin</Word>
+      <Word>if</Word>
+      <Word>cond</Word>
+      <Word>let</Word>
+      <Word>letrec</Word>
+    </Keywords>
+
+    <Keywords color="Auxilliary Syntax">
+      <Word>else</Word>
+    </Keywords>
+
+    <Keywords color="MethodCall">
+      <Word>map</Word>
+      <Word>cons</Word>
+      <Word>car</Word>
+    </Keywords>
+
+  </RuleSet>
+
+</SyntaxDefinition>

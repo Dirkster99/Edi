@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<!-- Original Source: http://www.assembla.com/code/PPJCompiler/subversion/nodes/PPJCompiler/bin/Release/Pascal.xshd -->
+<SyntaxDefinition name = "Pascal" extensions = ".pas" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <!-- Shades of Red-Brown: #a31515, #cf4315, #ffb96e, #ffdc95 -->
+  <Color name="Digits" foreground="Red" exampleText="3.1415f"/>
+
+  <Color name="Punctuation"       foreground="#2B877E" exampleText="a(b.c);" />
+
+  <Color name="Comment"           foreground="Green" exampleText="// comment" />
+
+  <Color name="Char"              foreground="Magenta" exampleText="char linefeed = '\n';"/>
+  <Color name="String"            foreground="Blue" exampleText="string text = &quot;Hello, World!&quot;"/>
+
+  <Color name ="DataTypes"        foreground="#3E4F4F"      fontWeight="normal" fontStyle="normal"/>
+  <Color name ="Operators"        foreground="#4416A1"      fontWeight="normal" fontStyle="normal"/>
+  <Color name ="Statements"       foreground="#0A55A3"      fontWeight="normal" fontStyle="normal"/>
+  <Color name="MethodCall"        foreground="MidnightBlue" fontWeight="bold" />
+  <Color name ="FunctionKeywords" foreground="#193D55"      fontWeight="normal" fontStyle="normal"/>
+
+  <Color name = "Documenation"    foreground="#FF707070" fontWeight="normal" fontStyle="normal" />
+
+  <Color name="CommentMarkerSetTodo"       foreground="Red" fontWeight="bold" />
+  <Color name="CommentMarkerSetHackUndone" foreground="#E0E000" fontWeight="bold"/>
+
+  <RuleSet name="CommentMarkerSet" ignoreCase="true">
+		<Keywords color="CommentMarkerSetTodo">
+			<Word>TODO</Word>
+			<Word>FIXME</Word>
+		</Keywords>
+		<Keywords color="CommentMarkerSetHackUndone">
+			<Word>HACK</Word>
+			<Word>UNDONE</Word>
+		</Keywords>
+    <Keywords color="Documenation">
+      <Word>@param</Word>
+      <Word>@returns</Word>
+    </Keywords>
+  </RuleSet>
+	
+	<!-- This is the main ruleset. -->
+  <RuleSet ignoreCase="true">
+    <Rule color="Punctuation">
+      [?,.;()\[\]{}+\-/%*&lt;&gt;^+~!|&amp;\#]+
+    </Rule>
+
+    <Span color="Comment" ruleSet="CommentMarkerSet">
+			<Begin>//</Begin>
+		</Span>
+		
+		<Span color="Comment" ruleSet="CommentMarkerSet" multiline="true">
+			<Begin>{</Begin>
+			<End>}</End>
+		</Span>
+		
+		<Span color="String">
+			<Begin>"</Begin>
+			<End>"</End>
+			<RuleSet>
+				<!-- span for escape sequences -->
+        <!-- Span begin="&quot;" end="&quot;"/ -->
+			</RuleSet>
+		</Span>
+		
+		<Span color="Char">
+			<Begin>'</Begin>
+			<End>'</End>
+			<RuleSet>
+				<!-- span for escape sequences -->
+        <!-- Span begin="'" end="'"/ -->
+			</RuleSet>
+		</Span>
+
+    <Keywords color = "DataTypes">
+      <Word>integer</Word>
+      <Word>byte</Word>
+      <Word>real</Word>
+      <Word>boolean</Word>
+      <Word>char</Word>
+      <Word>shortint</Word>
+      <Word>word</Word>
+      <Word>longint</Word>
+      <Word>string</Word>
+    </Keywords>
+
+    <Keywords color = "Operators">
+      <Word>and</Word>
+      <Word>not</Word>
+      <Word>or</Word>
+      <Word>in</Word>
+      <Word>div</Word>
+      <Word>mod</Word>
+    </Keywords>
+
+    <Keywords color = "Statements">
+      <Word>array</Word>
+      <Word>const</Word>
+      <Word>downto</Word>
+      <Word>file</Word>
+      <Word>forward</Word>
+      <Word>label</Word>
+      <Word>main</Word>
+      <Word>nil</Word>
+      <Word>packed</Word>
+      <Word>record</Word>
+      <Word>repeat</Word>
+      <Word>set</Word>
+      <Word>to</Word>
+      <Word>type</Word>
+      <Word>until</Word>
+      <Word>var</Word>
+      <Word>begin</Word>
+      <Word>case</Word>
+      <Word>do</Word>
+      <Word>else</Word>
+      <Word>for</Word>
+      <Word>function</Word>
+      <Word>goto</Word>
+      <Word>if</Word>
+      <Word>procedure</Word>
+      <Word>program</Word>
+      <Word>then</Word>
+      <Word>of</Word>
+      <Word>end</Word>
+      <Word>while</Word>
+      <Word>with</Word>
+    </Keywords>
+
+    <Keywords color = "FunctionKeywords">
+      <Word>abs</Word>
+      <Word>arctan</Word>
+      <Word>chr</Word>
+      <Word>cos</Word>
+      <Word>dispose</Word>
+      <Word>eof</Word>
+      <Word>eoln</Word>
+      <Word>exp</Word>
+      <Word>false</Word>
+      <Word>get</Word>
+      <Word>input</Word>
+      <Word>ln</Word>
+      <Word>maxint</Word>
+      <Word>new</Word>
+      <Word>odd</Word>
+      <Word>ord</Word>
+      <Word>output</Word>
+      <Word>page</Word>
+      <Word>pred</Word>
+      <Word>put</Word>
+      <Word>read</Word>
+      <Word>readln</Word>
+      <Word>reset</Word>
+      <Word>rewrite</Word>
+      <Word>round</Word>
+      <Word>sin</Word>
+      <Word>sqr</Word>
+      <Word>sqrt</Word>
+      <Word>succ</Word>
+      <Word>text</Word>
+      <Word>true</Word>
+      <Word>trunc</Word>
+      <Word>write</Word>
+      <Word>writeln</Word>
+    </Keywords>
+
+    <Rule color="MethodCall">[\d\w_]+(?=(\s*\())</Rule>
+    <Rule color="Digits">\b0[xX][0-9a-fA-F]+|(\b\d+(\.[0-9]+)?|\.[0-9]+)([eE][+-]?[0-9]+)?</Rule>
+  </RuleSet>
+</SyntaxDefinition>

@@ -1,0 +1,463 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="STR_FileType_FileFilter_Log4j" xml:space="preserve">
+    <value>"log4net berkas XML(*.log4j,*.xml)|*.log4j;*.xml|All Files (*.*)|*.*"</value>
+  </data>
+  <data name="STR_SCALE_VIEW_PERCENT_SHORT" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="STR_GOTOLINE_CANCEL_BUTTON" xml:space="preserve">
+    <value>_Batal</value>
+  </data>
+  <data name="STR_CmdName_Edit" xml:space="preserve">
+    <value>_Sunting</value>
+  </data>
+  <data name="STR_CmdName_File" xml:space="preserve">
+    <value>_Berkas</value>
+  </data>
+  <data name="STR_CmdName_Help" xml:space="preserve">
+    <value>_Bantuan</value>
+  </data>
+  <data name="STR_ABOUT_OK_BUTTON" xml:space="preserve">
+    <value>_OK</value>
+  </data>
+  <data name="STR_GOTOLINE_OK_BUTTON" xml:space="preserve">
+    <value>_OK</value>
+  </data>
+  <data name="STR_FINDREPLACE_Replace" xml:space="preserve">
+    <value>_Gantikan</value>
+  </data>
+  <data name="STR_CmdName_Themes" xml:space="preserve">
+    <value>_Tema</value>
+  </data>
+  <data name="STR_CmdName_Tools" xml:space="preserve">
+    <value>_Alat</value>
+  </data>
+  <data name="STR_CmdName_View" xml:space="preserve">
+    <value>_Tampilan</value>
+  </data>
+  <data name="STR_CmdName_New_Text_TT" xml:space="preserve">
+    <value>Buat berkas teks</value>
+  </data>
+  <data name="STR_CmdName_New_UML_TT" xml:space="preserve">
+    <value>Buat berkas UML</value>
+  </data>
+  <data name="STR_FINDREPLACE_CURRENTDOC" xml:space="preserve">
+    <value>Dokumen terkini</value>
+  </data>
+  <data name="STR_CmdName_Cut" xml:space="preserve">
+    <value>Potong</value>
+  </data>
+  <data name="STR_Settings_Editor_CutCopyWholeLine" xml:space="preserve">
+    <value>Potong dan salin baris pada teks</value>
+  </data>
+  <data name="STR_CmdName_Cut_TT" xml:space="preserve">
+    <value>Potong item terpilih</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_DEBUG_TT" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_DEBUG" xml:space="preserve">
+    <value>DEBUG</value>
+  </data>
+  <data name="STR_CmdName_Delete" xml:space="preserve">
+    <value>Hapus</value>
+  </data>
+  <data name="STR_CmdName_DeleteLine" xml:space="preserve">
+    <value>Hapus baris</value>
+  </data>
+  <data name="STR_CmdName_Delete_TT" xml:space="preserve">
+    <value>Hapus item terpilih</value>
+  </data>
+  <data name="STR_CmdName_DeleteLine_TT" xml:space="preserve">
+    <value>Hapus baris terkini</value>
+  </data>
+  <data name="STR_LOG4NET_DELTATIME" xml:space="preserve">
+    <value>Delta t;</value>
+  </data>
+  <data name="STR_AppCommand_SyncPathToExplorerCommand_TT" xml:space="preserve">
+    <value>Tampilkan dokumen di jendela telusur</value>
+  </data>
+  <data name="STR_StatusBar_X_Coord_Label" xml:space="preserve">
+    <value>X:</value>
+  </data>
+  <data name="STR_StatusBar_Y_Coord_Label" xml:space="preserve">
+    <value>Y:</value>
+  </data>
+  <data name="STR_Category_Warning" xml:space="preserve">
+    <value>Peringatan</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_WARN_TT" xml:space="preserve">
+    <value>Peringatan</value>
+  </data>
+  <data name="STR_STARTPAGE_WELCOME_TT" xml:space="preserve">
+    <value>Selamat datang di Edi. lihat halaman ini untuk memulai menjalankan editor</value>
+  </data>
+  <data name="STR_Label_WhiteSpaces" xml:space="preserve">
+    <value>Spasi Putih</value>
+  </data>
+  <data name="STR_FINDREPLACE_Wildcards" xml:space="preserve">
+    <value>Wildcards</value>
+  </data>
+  <data name="STR_REPLACE_BUTTON_CAPTION" xml:space="preserve">
+    <value>Gantikan</value>
+  </data>
+  <data name="STR_CmdName_Replace" xml:space="preserve">
+    <value>Gantikan</value>
+  </data>
+  <data name="STR_FINDREPLACE_ReplaceAll" xml:space="preserve">
+    <value>Gantikan _Semua</value>
+  </data>
+  <data name="STR_FINDREPLACE_ReplaceAll_Caption" xml:space="preserve">
+    <value>Gantikan Semua</value>
+  </data>
+  <data name="STR_FINDREPLACE_ReplaceWith" xml:space="preserve">
+    <value>Gantikan dengan:</value>
+  </data>
+  <data name="STR_CmdName_Save" xml:space="preserve">
+    <value>Simpan</value>
+  </data>
+  <data name="CMD_APP_SaveAll_Description" xml:space="preserve">
+    <value>Simpan Semua</value>
+  </data>
+  <data name="STR_CmdName_SaveAs" xml:space="preserve">
+    <value>Simpan Sebagai</value>
+  </data>
+  <data name="STR_MSG_SaveChangesForFile" xml:space="preserve">
+    <value>Simpan perubahan untuk '{0}' ?</value>
+  </data>
+  <data name="STR_CmdName_Save_TT" xml:space="preserve">
+    <value>Simpan berkas terkini</value>
+  </data>
+  <data name="STR_MSG_FIND_Caption" xml:space="preserve">
+    <value>Cari</value>
+  </data>
+  <data name="STR_FINDREPLACE_SearchInLABEL" xml:space="preserve">
+    <value>Cari di:</value>
+  </data>
+  <data name="STR_CmdName_SelectAll" xml:space="preserve">
+    <value>Pilih Semua</value>
+  </data>
+  <data name="STR_CmdName_Settings" xml:space="preserve">
+    <value>Pengaturan</value>
+  </data>
+  <data name="STR_CmdName_Redo" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="STR_MRU_MENUITEM_Remove" xml:space="preserve">
+    <value>Hapus</value>
+  </data>
+  <data name="STR_StatusBar_Ready" xml:space="preserve">
+    <value>Siap</value>
+  </data>
+  <data name="STR_SCALE_VIEW_POINT_SHORT" xml:space="preserve">
+    <value>pt</value>
+  </data>
+  <data name="STR_CmdName_Paste" xml:space="preserve">
+    <value>Timpa</value>
+  </data>
+  <data name="STR_SCALE_VIEW_PERCENT" xml:space="preserve">
+    <value>persen</value>
+  </data>
+  <data name="STR_Settings_Editor_CharacterSizeInPercent" xml:space="preserve">
+    <value>Persen</value>
+  </data>
+  <data name="CMD_APP_OpenURL_Description" xml:space="preserve">
+    <value>Buka URL ...</value>
+  </data>
+  <data name="STR_MRU_MENUITEM_OpenWithWindowsApp" xml:space="preserve">
+    <value>Buka dengan Aplikasi Windows</value>
+  </data>
+  <data name="STR_CmdName_View_OptimizedWorkSpace" xml:space="preserve">
+    <value>Optimalkan Ruang Kerja</value>
+  </data>
+  <data name="STR_FINDREPLACE_Options" xml:space="preserve">
+    <value>Opsi</value>
+  </data>
+  <data name="STR_EDIT_MODE_TYPEOVER" xml:space="preserve">
+    <value>OVR</value>
+  </data>
+  <data name="STR_CmdName_New" xml:space="preserve">
+    <value>Baru</value>
+  </data>
+  <data name="STR_CmdName_Open" xml:space="preserve">
+    <value>Buka</value>
+  </data>
+  <data name="CMD_APP_Open_Description" xml:space="preserve">
+    <value>Buka berkas...</value>
+  </data>
+  <data name="STR_STARTPAGE_FILEOPEN_TT" xml:space="preserve">
+    <value>Buka berkas...</value>
+  </data>
+  <data name="STR_ExportHTMLFileFilter" xml:space="preserve">
+    <value>Berkas HTML(*.html, *.htm)|*.html;*.htm|
+Semua berkas (*.*)|*.*</value>
+  </data>
+  <data name="STR_FileType_FileFilter_HTML" xml:space="preserve">
+    <value>Berkas HTML(*.html, *.htm)|*.html;*.htm</value>
+  </data>
+  <data name="STR_CmdName_Close" xml:space="preserve">
+    <value>Tutup</value>
+  </data>
+  <data name="STR_CmdName_Copy" xml:space="preserve">
+    <value>Salin</value>
+  </data>
+  <data name="STR_CmdName_Copy_TT" xml:space="preserve">
+    <value>Salin item terpilih</value>
+  </data>
+  <data name="STR_CmdName_Exit" xml:space="preserve">
+    <value>Keluar</value>
+  </data>
+  <data name="STR_CmdName_Export" xml:space="preserve">
+    <value>Ekspor</value>
+  </data>
+  <data name="STR_CmdName_Export_TT" xml:space="preserve">
+    <value>Konversikan data ke format berkas yang mendukung aplikasi lain</value>
+  </data>
+  <data name="STR_CmdName_FileExplorer_TW" xml:space="preserve">
+    <value>Jendela Telusur</value>
+  </data>
+  <data name="STR_CmdName_Find" xml:space="preserve">
+    <value>Cari</value>
+  </data>
+  <data name="STR_CmdName_GotoLine" xml:space="preserve">
+    <value>Pergi ke baris...</value>
+  </data>
+  <data name="STR_CmdName_Help_About" xml:space="preserve">
+    <value>Tentang</value>
+  </data>
+  <data name="STR_CmdName_New_Text" xml:space="preserve">
+    <value>Dokumen Teks</value>
+  </data>
+  <data name="STR_CmdName_New_UML" xml:space="preserve">
+    <value>Dokumen UML</value>
+  </data>
+  <data name="STR_CmdName_Open_Log4Net" xml:space="preserve">
+    <value>Dokumen Log4Net</value>
+  </data>
+  <data name="STR_CmdName_Open_Log4Net_TT" xml:space="preserve">
+    <value>Buka berkas Log4Net</value>
+  </data>
+  <data name="STR_CmdName_Open_Text" xml:space="preserve">
+    <value>Dokumen Teks</value>
+  </data>
+  <data name="STR_CmdName_Open_Text_TT" xml:space="preserve">
+    <value>Buka berkas Teks</value>
+  </data>
+  <data name="STR_CmdName_Open_UML" xml:space="preserve">
+    <value>Dokumen UML</value>
+  </data>
+  <data name="STR_CmdName_Open_UML_TT" xml:space="preserve">
+    <value>Buka berkas UML</value>
+  </data>
+  <data name="STR_CmdName_Paste_TT" xml:space="preserve">
+    <value>Timpa item dari papan klip Windows</value>
+  </data>
+  <data name="STR_CmdName_Properties_TW" xml:space="preserve">
+    <value>Jendela Properti</value>
+  </data>
+  <data name="STR_CmdName_RecentFiles" xml:space="preserve">
+    <value>Dokumen Terbaru</value>
+  </data>
+  <data name="STR_CmdName_RecentFiles_TW" xml:space="preserve">
+    <value>Jendela Dokumen Terakhir</value>
+  </data>
+  <data name="STR_CmdName_Redo_TT" xml:space="preserve">
+    <value>Batalkan Undo</value>
+  </data>
+  <data name="STR_CmdName_SaveAs_TT" xml:space="preserve">
+    <value>Simpan berkas dengan tipe lain dan lokasi lain</value>
+  </data>
+  <data name="STR_CmdName_SelectAll_TT" xml:space="preserve">
+    <value>Pilih semua item</value>
+  </data>
+  <data name="STR_CmdName_Undo" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="STR_CmdName_Undo_TT" xml:space="preserve">
+    <value>Batalkan perubahan</value>
+  </data>
+  <data name="STR_CmdName_View_Start_Page" xml:space="preserve">
+    <value>Halaman Awal</value>
+  </data>
+  <data name="STR_Contributors_Label" xml:space="preserve">
+    <value>Kontributor</value>
+  </data>
+  <data name="STR_DIALOG_INPUT_PROBLEM_CAPTION" xml:space="preserve">
+    <value>Masukan anda tidak benar. perbaiki kesalahan berikut atau batalkan.</value>
+  </data>
+  <data name="STR_EDIT_MODE_INSERT" xml:space="preserve">
+    <value>INS</value>
+  </data>
+  <data name="STR_ERROR_LOADING_FILE_CAPTION" xml:space="preserve">
+    <value>Gagal Membuka berkas</value>
+  </data>
+  <data name="STR_FILESTATES_FileName" xml:space="preserve">
+    <value>Nama berkas</value>
+  </data>
+  <data name="STR_FILESTATES_FilePath" xml:space="preserve">
+    <value>Path berkas</value>
+  </data>
+  <data name="STR_FILESTATES_FileSize" xml:space="preserve">
+    <value>Ukuran berkas</value>
+  </data>
+  <data name="STR_FileType_FileFilter_AllFiles" xml:space="preserve">
+    <value>Semua Berkas (*.*)|*.*</value>
+  </data>
+  <data name="STR_FileType_FileFilter_CSharp" xml:space="preserve">
+    <value>Berkas C# (*.cs)|*.cs</value>
+  </data>
+  <data name="STR_FileType_FileFilter_Log4NetPlusText" xml:space="preserve">
+    <value>log4net keluaran XML (*.log4j,*.log,*.txt,*.xml)|*.log4j;*.log;*.txt;*.xml</value>
+  </data>
+  <data name="STR_FileType_FileFilter_SQL" xml:space="preserve">
+    <value>Structured Query Language (*.sql) |*.sql</value>
+  </data>
+  <data name="STR_FileType_FileFilter_TextFiles" xml:space="preserve">
+    <value>Berkas Text(*.txt)|*.txt</value>
+  </data>
+  <data name="STR_FileType_FileFilter_UML" xml:space="preserve">
+    <value>Unified Modeling Language (*.uml,*.xml)|*.uml;*.xml|All Files (*.*)|*.*"</value>
+  </data>
+  <data name="STR_FIND_BUTTON_CAPTION" xml:space="preserve">
+    <value>Cari</value>
+  </data>
+  <data name="STR_FIND_REPLACE_CAPTION" xml:space="preserve">
+    <value>Cari dan Ganti</value>
+  </data>
+  <data name="STR_FINDREPLACE_CaseSensitive" xml:space="preserve">
+    <value>Kapitalisasi Sensitif</value>
+  </data>
+  <data name="STR_FINDREPLACE_FINDLABEL" xml:space="preserve">
+    <value>Teks yang Dicari:</value>
+  </data>
+  <data name="STR_FINDREPLACE_FINDNEXT" xml:space="preserve">
+    <value>Cari Berikutnya</value>
+  </data>
+  <data name="STR_SCALE_VIEW_POINT" xml:space="preserve">
+    <value>ukuran font</value>
+  </data>
+  <data name="STR_Settings_ApplicationLanguage" xml:space="preserve">
+    <value>Bahasa:</value>
+  </data>
+  <data name="STR_Settings_Editor_CharacterSizeInPoints" xml:space="preserve">
+    <value>Point</value>
+  </data>
+</root>

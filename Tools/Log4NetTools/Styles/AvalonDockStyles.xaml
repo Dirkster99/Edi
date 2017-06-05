@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    
+                    xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
+                    >
+
+  <!-- Style for tool windows displayed in AvalonDock -->
+  <!--
+    Check whether this style is applied correctly:
+    1) If Tool Window icon does not show or
+    2) if Tool Window visibility is not as expected
+  -->
+  <Style TargetType="{x:Type avalonDock:LayoutItem}" x:Key="Log4NetStyle">
+    <Setter Property="Title" Value="{Binding Model.Title}"/>
+    <Setter Property="ToolTip" Value="{Binding Model.ScreenTip}"/>
+    <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}"/>
+    <Setter Property="IconSource" Value="{Binding Model.IconSource}"/>
+    <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
+  </Style>
+
+</ResourceDictionary>

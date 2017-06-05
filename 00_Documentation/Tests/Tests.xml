@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="Tests.xsl"?>
+<!-- XSLT Sample Source: http://www.w3schools.com/xsl/xsl_value_of.asp -->
+<catalog>
+  <test><id>001</id><topic>File Open</topic><title>Basic File Open test</title>
+    <tests>
+      <test>Perform File>Open in Application</test>
+    </tests>
+    <expectations id="1">
+      <expectation>Text content is visible in editor</expectation>
+      <expectation>Files with Read Only property set in the Windows Explorer property section cannot be edited. The document tab displays a lock symbol.</expectation>
+  	</expectations>
+  </test>
+
+  <test><id>002</id><topic>File Open</topic><title>File "Open with" support in Windows Explorer</title>
+    <tests>
+      <test>Perform "Open with" in Windows Explorer with text file and Edi.exe</test>
+    </tests>
+    <expectations id="1" comment="Pre-condition: Edi not started yet">
+      <expectation>Editor loads</expectation>
+      <expectation>File selected in Windows Explorer is the selected document tab in Edi
+                   <bug>Application selects the last active document tab and not the file selected in Windows Explorer).</bug>
+      </expectation>
+  	</expectations>
+
+    <expectations id="2" comment="Pre-condition: Edi already started">
+      <expectation>Editor switches into foreground</expectation>
+      <expectation>File selected in Windows Explorer is the selected document tab in Edi</expectation>
+  	</expectations>
+  </test>
+
+  <test><id>003</id><topic>File New, File Save As...</topic><title>Create a new file and store it</title>
+    <tests>
+      <test>Perform File>New and File>Save As... in a location with free space and write access</test>
+    </tests>
+    <expectations id="1">
+      <expectation>The editor saves a new file with text content and updates the path displayed in the document tab.</expectation>
+  	</expectations>
+  </test>
+  
+  <test><id>004</id><topic>File New, File Save As...</topic><title>Create a new file and store its content</title>
+    <tests>
+      <test>Perform File>New and File>Save As... in a location with free space and write access</test>
+      <test>Type some content and click File>Save</test>
+    </tests>
+    <expectations id="1">
+      <expectation>The editor displays a dirty flag: '*' when the content is changed (through typing text).</expectation>
+      <expectation>Changed content is saved when clicking File>Save.</expectation>
+  	</expectations>
+  </test>
+  
+  <test><id>005</id><topic>File Open</topic><title>File Drag &amp; Drop support in Windows</title>
+    <tests>
+      <test>Drag &amp; Drop file from Windows Explorer into Editor area</test>
+    </tests>
+    <expectations id="1">
+      <expectation>Editor opens the file in the same way as using File>Open.</expectation>
+  	</expectations>
+  </test>
+  
+  <test><id>006</id><topic>File Open, Recent Files (TW)</topic><title>File Drag &amp; Drop support in Windows</title>
+    <tests>
+      <test>Make the Recent Files (TW) visible with View>Tool Windows>Recent Files and click on an entry in the tool window</test>
+    </tests>
+    <expectations id="1" comment="Pre-condition: The file reference points to a location where the file is present and accessible.">
+      <expectation>Editor opens the file in the same way as using File>Open.</expectation>
+  	</expectations>
+
+    <expectations id="2" comment="Pre-condition: The file reference points to a location where the file is not present.">
+      <expectation>Editor displays a message that file is not present and asks the user whether the corresponded reference in Recent Files (TW) should remain or not.</expectation>
+      <expectation>Reference in Recent Files (TW) is removed when user clicks Yes. The reference remains otherwise.</expectation>
+  	</expectations>
+  </test>
+  
+  <test><id>007</id><topic>File Open, Explorer (TW)</topic><title>File Open with Explorer (TW)</title>
+    <tests>
+      <test>Double click the text file or use the context menu 'Open...' to open the text file
+            (double click should be fast enough to not start the rename function)</test>
+    </tests>
+    <expectations id="1">
+      <expectation>Editor opens the file in the same way as using File>Open.</expectation>
+  	</expectations>
+  </test>
+  
+  <test><id>008</id><topic>File Open, Start Application</topic><title>Re-open previously shown files</title>
+    <tests>
+      <test>Start Editor</test>
+      <test>File>Open on any text file</test>
+      <test>File>Exit to close application and re-start editor</test>
+    </tests>
+    <expectations id="1">
+      <expectation>The previous set of document(s) is re-loaded</expectation>
+      <expectation>The previously active document is active again</expectation>
+      <expectation>The Recent Files (TW) contains a link to the active document</expectation>
+      <expectation>The user can close the active document and re-load it via click on entry in Recent Files (TW)</expectation>
+  	</expectations>
+  </test>
+  
+  <test><id>009</id><topic>File Open, Start Application</topic><title>Re-open previously shown files</title>
+    <tests>
+      <test>Start Editor</test>
+      <test>File>Open on any text file</test>
+      <test>File>Exit to close application</test>
+      <test>Delete, move, or rename previously opened text file</test>
+      <test>Start editor</test>
+    </tests>
+    <expectations id="1">
+      <expectation>The previous set of document(S) is re-loaded</expectation>
+      <expectation>The previously active document is not re-loaded (since its path has changed)</expectation>
+      <expectation>The editor does not show an error message about a file not being available
+        <bug>The editor shows an error message</bug></expectation>
+  	</expectations>
+  </test>
+
+</catalog>

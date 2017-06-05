@@ -1,0 +1,65 @@
+<!--
+  See also: http://en.wikipedia.org/wiki/INI_file
+
+  The INI file format is an informal standard for configuration files for some platforms or software.
+  INI files are simple text files with a basic structure composed of "sections" and "properties".
+
+  They are a deprecated standard on the Windows operating system. The use of the "INI file" has been
+  changed in Windows in favor of the registry, and deprecated in .NET in favor of XML .config files.
+  The name "INI file" comes from the filename extension usually used, ".INI", that stands for "initialization".
+  Sometimes a different file extension will be used instead of .ini, such as ".CFG", ".conf", or ".TXT".
+-->
+<SyntaxDefinition name="INI" extensions=".cfg;.conf;.ini;.iss;"
+     xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+
+  <Color name="Digits"       foreground="Blue" fontStyle="italic" fontWeight="normal" />
+  <Color name="Comment"      foreground="Green"/>
+  <Color name="Punctuation"  foreground="Red"/>
+  <Color name="String"       foreground="Olive"/>
+  <Color name="String2"      foreground="Red"/>
+
+  <Color name="Section"      foreground="Purple"/>
+
+  <Color name="PropertyName" foreground="Blue"/>
+
+  <RuleSet ignoreCase="true">
+
+    <Span color="String" multiline="false" >
+      <Begin>'</Begin>
+      <End>'</End>
+    </Span>
+
+    <Span color="String2" multiline="false"  >
+      <Begin>"</Begin>
+      <End>"</End>
+    </Span>
+
+    <!-- span for escape sequences -->
+    <Span  color="Comment" multiline="false">
+	  <Begin>;</Begin>
+	</Span>
+    <Span  color="Comment" multiline="false">
+	  <Begin>\#</Begin>
+	</Span>
+
+   <Span  color="Section" multiline="false">
+    <Begin>\[</Begin>
+    <End>\]</End>
+   </Span>
+
+   <Span  color="PropertyName" multiline="false">
+    <Begin>^[0-9A-Z\-]+</Begin>
+    <End>=</End>
+   </Span>
+
+    <Rule color="Punctuation">
+      [?,.;()\[\]{}+\-/%*&lt;&gt;^+~!|&amp;]+
+    </Rule>
+
+    <Rule color="Digits">
+      [?,.;()\[\]{}+\-/%*&lt;&gt;^+~!|&amp;]+[0-9]+[ ?,.;()\[\]{}+\-/%*&lt;&gt;^+~!|&amp;]+\n
+    </Rule>
+
+  </RuleSet>
+
+</SyntaxDefinition>

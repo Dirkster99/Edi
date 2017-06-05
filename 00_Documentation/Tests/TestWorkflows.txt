@@ -1,0 +1,107 @@
+
+001 Test
+> Perform File>Open in Application
+
+> Expectation
+  Text content is visible in editor
+  Files with Read Only property set in the Windows Explorer property section cannot be edited. The document tab displays a lock symbol.
+--------------------------------------
+
+002 Test
+> Perform "Open with" in Windows Explorer with text file
+
+> Expectation
+  002:1 Edi not started yet:
+  -> Editor loads
+  -> File selected in Windows Explorer is the selected document tab in Edi
+  (Known Bug: Application selects the last active document tab and not the file selected in Windows Explorer)
+  
+  002:2 Edi start already:
+  -> Editor switches into foreground
+  -> File selected in Windows Explorer is the selected document tab in Edi
+--------------------------------------
+
+003 Test
+> Perform File>New and File>Save As...
+  in a location with free space and write access
+
+> Expectation
+  The editor saves a new file with text content and updates the path displayed in the document tab.
+--------------------------------------
+
+004 Test
+> Perform File>New and File>Save As...
+  in a location with free space and write access
+
+> Type some content and click File>Save
+
+> Expectation
+  > The editor displays a dirty flag: '*'
+    when the content is changed (through typing text).
+   
+  > Changed content is saved when clicking File>Save.
+--------------------------------------
+
+005 Test
+> Drag & Drop file from Windows Explorer into Editor area
+
+> Expectation
+  Editor opens the file in the same way as using File>Open.
+--------------------------------------
+
+006 Test
+> Make the Recent Files (TW) visible with View>Tool Windows>Recent Files
+  and click on an entry in the tool window
+
+> Expectation
+  006:1 The file reference points to a location where the file is present and accessible.
+  -> Editor opens the file in the same way as using File>Open.
+  
+  006:2 The file reference points to a location where the file is not present.
+  -> Editor displays a message that file is not present and asks the user whether the corresponded reference in Recent Files (TW) should remain or not.
+  
+  -> Reference in Recent Files (TW) is removed when user clicks Yes. The reference remains otherwise.
+--------------------------------------
+
+007 Test
+> Make the Explorer (TW) visible with View>Tool Windows>Explorer
+  and browse to a location with a text file
+
+> Double click the text file or
+  use the context menu 'Open...' to open the text file
+  (double click should be fast enough to not start the rename function)
+
+> Expectation
+  -> Editor opens the file in the same way as using File>Open.
+
+--------------------------------------
+
+008 Test
+> Start Editor
+  File>Open on any text file
+  File>Exit to close application and re-start editor
+  
+Expectation:
+
+> Expectation
+  -> The previous set of document(S) is re-loaded
+  -> The previously active document is active again
+  -> The Recent Files (TW) contains a link to the active document
+     The user can close the active document and re-load via click on entry in Recent Files (TW)
+
+--------------------------------------
+
+009 Test
+> Start Editor
+  File>Open on any text file
+  File>Exit to close application
+  Delete, move, or rename previously opened text file 
+  Start editor
+  
+> Expectation:
+  -> The previous set of document(S) is re-loaded
+  -> The previously active document is not re-loaded (since its path has changed)
+  -> The editor does not show an error message about a file not being available
+     Known Bug: The editor shows an error message
+
+--------------------------------------

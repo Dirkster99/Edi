@@ -1,0 +1,113 @@
+﻿<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+  xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+  >
+
+  <!-- LEVEL COLORS -->
+  <SolidColorBrush x:Key="DebugLevelColor" Color="LightBlue" PresentationOptions:Freeze="True" />
+  <SolidColorBrush x:Key="InfoLevelColor" Color="LightGreen" PresentationOptions:Freeze="True" />
+  <SolidColorBrush x:Key="WarnLevelColor" Color="Moccasin" PresentationOptions:Freeze="True" />
+  <SolidColorBrush x:Key="ErrorLevelColor" Color="Salmon" PresentationOptions:Freeze="True" />
+  <SolidColorBrush x:Key="FatalLevelColor" Color="Crimson" PresentationOptions:Freeze="True" />
+
+  <!-- Brushes -->
+  <LinearGradientBrush x:Key="StartPageBorderForegroundColor"
+                         StartPoint="0,0" EndPoint="0,1">
+    <GradientStop Color="#30000000" Offset="0" />
+    <GradientStop Color="#FF000000" Offset="1" />
+  </LinearGradientBrush>
+
+  <SolidColorBrush x:Key="ToolWindowBackground" Color="Black" />
+
+  <SolidColorBrush x:Key="StatusBarForegroundColor" Color="Black"/>
+
+  <LinearGradientBrush x:Key="StatusBarBackgroundColor"
+                         StartPoint="0,0"
+                         EndPoint="0,1">
+    <LinearGradientBrush.GradientStops>
+      <GradientStop Color="#D2E6FA" Offset="0" />
+      <GradientStop Color="#FCFDFE" Offset="1" />
+    </LinearGradientBrush.GradientStops>
+  </LinearGradientBrush>
+
+  <LinearGradientBrush x:Key="ListViewItemMouseOverGradient" StartPoint="0,0" EndPoint="0,1">
+    <GradientStop Color="#FFFCF2" Offset="0" />
+    <GradientStop Color="#FFEDBA" Offset="0.5" />
+    <GradientStop Color="#FFE8A6" Offset="0.5" />
+    <GradientStop Color="#FFE8A6" Offset="1" />
+  </LinearGradientBrush>
+
+  <SolidColorBrush x:Key="ListViewItemMouseOverBorder" Color="#FFC886"/>
+
+  <SolidColorBrush x:Key="SeperatorForeground" Color="#FF808080"/>
+  <SolidColorBrush x:Key="SeperatorBorderBrush" Color="#8591a2"/>
+
+  <!-- AvalonDock_ThemeAero_BaseColor6 -->
+  <LinearGradientBrush x:Key="ContextMenuBackground"
+                         StartPoint="0,0"
+                         EndPoint="0,1">
+      <LinearGradientBrush.GradientStops>
+        <GradientStop Color="#FCFDFE" Offset="0" />
+        <GradientStop Color="#D2E6FA" Offset="1" />
+      </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="ContextMenuBorderBrush" Color="#FF9ba7b7"/>
+
+  <!-- AvalonDock_ThemeAero_BaseColor16 -->
+  <LinearGradientBrush x:Key="ToolBarTrayBackground"
+                         StartPoint="0,0"
+                         EndPoint="0,1">
+    <GradientStop Color="#B7CAE0" Offset="0" />
+    <GradientStop Color="#E8F0FF" Offset="1" />
+  </LinearGradientBrush>
+
+  <!-- Based on AvalonDock_ThemeAero_BaseColor8 -->
+  <SolidColorBrush x:Key="ToolBarBackground" Color="#D2E6FA"/>
+
+  <!-- Based on AvalonDock_ThemeAero_BaseColor6 -->
+  <LinearGradientBrush x:Key="MenuBackground"
+                         StartPoint="0,0"
+                         EndPoint="0,1">
+    <LinearGradientBrush.GradientStops>
+      <GradientStop Color="#FCFDFE" Offset="0" />
+      <GradientStop Color="#D2E6FA" Offset="1" />
+    </LinearGradientBrush.GradientStops>
+  </LinearGradientBrush>
+
+  <SolidColorBrush x:Key="MenuItemForegroundEnabled" Color="#FF000000"/>
+  <SolidColorBrush x:Key="MenuItemForegroundDisabled" Color="#888888"/>
+  <SolidColorBrush x:Key="SubMenuBorderBrush" Color="#888888"/>
+
+  <LinearGradientBrush x:Key="HighlightMenuItemGradient" StartPoint="0,0" EndPoint="0,1">
+    <GradientStop Color="#FFFCF2" Offset="0" />
+    <GradientStop Color="#FFEDBA" Offset="0.5" />
+    <GradientStop Color="#FFE8A6" Offset="0.5" />
+    <GradientStop Color="#FFE8A6" Offset="1" />
+  </LinearGradientBrush>
+
+  <SolidColorBrush x:Key="HyperlinkForegroundDisabled" Color="#88888888"/>
+  <SolidColorBrush x:Key="HyperlinkForeground" Color="Blue"/>
+
+  <SolidColorBrush x:Key="PinableListViewForegroundDisabled" Color="#88888888"/>
+  <SolidColorBrush x:Key="ToolViewBackground" Color="White"/>
+
+  <SolidColorBrush x:Key="WindowBackgroundBrush" Color="White" />
+
+  <!-- Brushes -->
+
+
+  <!-- Text Editor Brushes GENERIC does not support advanced styling - just default styles and nothing else!
+  <SolidColorBrush x:Key="EditorCurrentLineBackgroundColor" Color="#2FCCCDCE"/>
+  <SolidColorBrush x:Key="EditorBackground"                 Color="#FFFFFFFF" />
+  <SolidColorBrush x:Key="EditorForeground"                 Color="#FF000000" />
+  <SolidColorBrush x:Key="EditorLineNumbersForeground"      Color="#FFa0a0f0" />
+
+  <SolidColorBrush x:Key="EditorSelectionBrush"  Color="#40ffc41c"/>
+  <SolidColorBrush x:Key="EditorSelectionBorder" Color="#A0ffc41c"/>
+  <SolidColorBrush x:Key="EditorSelectionForeground" Color="#FF000000"/>
+   -->
+
+</ResourceDictionary>

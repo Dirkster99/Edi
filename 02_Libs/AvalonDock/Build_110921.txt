@@ -1,0 +1,3 @@
+Source: https://wpftoolkit.codeplex.com/SourceControl/changeset/106497
+
+Copied Metro and AvalonDock project and copied *.snk file to Expression project

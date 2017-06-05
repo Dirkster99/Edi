@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9584C00E-7FE9-428A-9770-0A8AF6969B68}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MiniUML.Plugins.UmlClassDiagram</RootNamespace>
+    <AssemblyName>MiniUML.Plugins.UmlClassDiagram</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationFramework.Aero">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\Templates\ShapeTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Brushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Common\UmlPackageShape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Common\UmlCommentShape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Common\UmlBoundaryShape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\GenericUmlAssociation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\UmlNodeShape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\UmlDecisionShape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\UmlSquareShape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\UmlTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Templates\AssociationShapeTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PluginView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SharedResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\UmlCanvasShape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\UseCase\UmlUseCaseShape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ToolBox\View\ToolBoxControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\ViewModel\ConnectorKeys.cs" />
+    <Compile Include="Controls\ViewModel\PageViewModel.cs" />
+    <Compile Include="Controls\ViewModel\ShapeCreate\CreateShapeCommandModel.cs" />
+    <Compile Include="Controls\ViewModel\Shape\Base\CommentViewModel.cs" />
+    <Compile Include="Controls\View\Connect\ConnectorViewBase.cs" />
+    <Compile Include="Controls\View\Connect\GenericUmlAssociation.cs" />
+    <Compile Include="Controls\View\Connect\ThreePieceLine.cs" />
+    <Compile Include="Controls\ViewModel\ShapeViewModelKey.cs" />
+    <Compile Include="Controls\View\Shapes\Base\IconImageFactory.cs" />
+    <Compile Include="Controls\View\Shapes\Base\ShapeViewBase.cs" />
+    <Compile Include="Controls\View\Shapes\UmlCanvasShapeSelector.cs" />
+    <Compile Include="Controls\View\Shapes\UmlCanvasShape.cs" />
+    <Compile Include="Controls\View\Shapes\UmlUseCaseShape.cs" />
+    <Compile Include="Controls\View\Shapes\UmlNodeShape.cs" />
+    <Compile Include="Controls\View\Shapes\UmlBoundaryShape.cs" />
+    <Compile Include="Controls\View\Shapes\UmlPackageShape.cs" />
+    <Compile Include="Controls\View\Shapes\UmlDecisionShape.cs" />
+    <Compile Include="Controls\ViewModel\UmlType.cs" />
+    <Compile Include="Controls\View\Shapes\UmlSquareShape.cs" />
+    <Compile Include="Controls\View\Shapes\UmlCommentShape.cs" />
+    <Compile Include="Controls\ViewModel\ConnectCreate\AbstractCreateAssociationMouseHandler.cs" />
+    <Compile Include="Controls\ViewModel\ConnectCreate\CreateAssociationCommandModel.cs" />
+    <Compile Include="Controls\ViewModel\Connect\AnchorViewModel.cs" />
+    <Compile Include="Controls\ViewModel\Connect\UmlAssociationShapeViewModel.cs" />
+    <Compile Include="Controls\ViewModel\UmlElements\UmlDiagramsDataDef.cs" />
+    <Compile Include="Controls\ViewModel\UmlElements\UmlElementDataDef.cs" />
+    <Compile Include="Controls\ViewModel\Shape\Base\UmlShapeBaseViewModel.cs" />
+    <Compile Include="Controls\ViewModel\Shape\UmlUseCaseShapeViewModel.cs" />
+    <Compile Include="Controls\ViewModel\Shape\UmlSquareShapeViewModel.cs" />
+    <Compile Include="Controls\ViewModel\Shape\UmlPackageShapeViewModel.cs" />
+    <Compile Include="Controls\ViewModel\Shape\UmlNodeShapeViewModel.cs" />
+    <Compile Include="Controls\ViewModel\Shape\UmlDecisionShapeViewModel.cs" />
+    <Compile Include="Controls\ViewModel\Shape\UmlNoteShapeViewModel.cs" />
+    <Compile Include="Controls\ViewModel\Shape\UmlCanvasShapeViewModel.cs" />
+    <Compile Include="Controls\ViewModel\Shape\UmlBoundaryShapeViewModel.cs" />
+    <Compile Include="Controls\ViewModel\UmlElements\UmlElementsManager.cs" />
+    <Compile Include="Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converter\ExptyStringToVisibilityConverter.cs" />
+    <Compile Include="Converter\ExptyStringToNullConverter.cs" />
+    <Compile Include="Converter\ImageUrlConverter.cs" />
+    <Compile Include="Converter\PointCollectionConverter .cs" />
+    <Compile Include="Converter\UmlTypeToStringConverter.cs" />
+    <Compile Include="PluginModel.cs" />
+    <Compile Include="PluginView.xaml.cs">
+      <DependentUpon>PluginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PluginViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="TemplateSelector\ArrowTemplateSelector.cs" />
+    <Compile Include="ToolBox\ViewModel\ToolBoxControlViewModel.cs" />
+    <Compile Include="ToolBox\ViewModel\IShapBox.cs" />
+    <Compile Include="ToolBox\View\ToolBoxControl.xaml.cs">
+      <DependentUpon>ToolBoxControl.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Connect\Command.CreateAssociationShape.png" />
+    <Resource Include="Images\Connect\Command.CreateInheritanceShape.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\MiniUML.Framework\MiniUML.Framework.csproj">
+      <Project>{99941efe-69b0-4618-b130-6d6fc1b43eb3}</Project>
+      <Name>MiniUML.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MiniUML.Model\MiniUML.Model.csproj">
+      <Project>{4654F58A-400C-4D47-9DC9-9FCA153554D3}</Project>
+      <Name>MiniUML.Model</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MiniUML.View\MiniUML.View.csproj">
+      <Project>{AAD6B1D6-F529-40F8-9786-DC8E2FDF0AD6}</Project>
+      <Name>MiniUML.View</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Connect\Command.CreateAggregationShape.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Connect\Command.CreateCompositionShape.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Command.Select.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Shapes\Deployment\ComponentToolBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Shapes\Deployment\Component.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Shapes\Common\Note.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Shapes\Class\Association.png" />
+    <Resource Include="Images\Shapes\Class\Class.png" />
+    <Resource Include="Images\Shapes\Class\DataType.png" />
+    <Resource Include="Images\Shapes\Class\Enumeration.png" />
+    <Resource Include="Images\Shapes\Class\Interface.png" />
+    <Resource Include="Images\Shapes\Common\Package.png" />
+    <Resource Include="Images\Shapes\Class\Primitive.png" />
+    <Resource Include="Images\Shapes\Class\Signal.png" />
+    <Resource Include="Images\Shapes\Class\Table.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Shapes\Class\TableToolBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Shapes\Common\Boundary.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Shapes\Deployment\NodeToolBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Shapes\Deployment\DeploymentSpecificationToolBox.png" />
+    <Resource Include="Images\Shapes\Deployment\DeviceToolBox.png" />
+    <Resource Include="Images\Shapes\Deployment\ExecutionEnvironmentToolBox.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Shapes\UseCase\ActorSquareToolbox.png" />
+    <Resource Include="Images\Shapes\UseCase\ActorToolbox.png" />
+    <Resource Include="Images\Shapes\UseCase\CollaborationToolBox.png" />
+    <Resource Include="Images\Shapes\UseCase\UseCaseToolBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Shapes\Activity\ActivityFinalToolbox.png" />
+    <Resource Include="Images\Shapes\Activity\ActivityFlowFinalToolbox.png" />
+    <Resource Include="Images\Shapes\Activity\ActivityInitialToolbox.png" />
+    <Resource Include="Images\Shapes\Activity\ActivitySyncToolbox.png" />
+    <Resource Include="Images\Shapes\Activity\Event1Toolbox.png" />
+    <Resource Include="Images\Shapes\Activity\EventToolbox.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- Import Project="$(ProgramFiles)\MSBuild\StyleCop\v4.7\StyleCop.Targets" / -->
+  <PropertyGroup>
+    <PostBuildEvent>Copy /Y "$(TargetPath)" "$(SolutionDir)Edi\Plugins\UML"
+</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+
+  </Target> -->
+</Project>

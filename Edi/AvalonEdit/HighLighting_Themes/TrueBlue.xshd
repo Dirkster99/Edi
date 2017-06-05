@@ -1,0 +1,671 @@
+<?xml version="1.0"?>
+<!--
+Edi enables the styling of syntax highlighting definitions
+via color definitions that can be applied on named colors.
+This is known as themeable highlighting in Edi.
+
+Edi's implementation is based on Notepad++'s Settings>Style Configurator mechanism.
+Review Notepad++'s lexer styles as this might be a good and simple source for more
+highlighting themes in Edi.
+
+WPF Color Scheme Overview
+http://wpfknowledge.blogspot.de/2012/05/note-this-is-not-original-work.html
+-->
+<HlThemes name="True Blue" xmlns="http://edi.codeplex.com/highlightingtheme/syntaxdefinition/2013">
+  <LexerStyles>
+    <!-- HOWTO convert a theme from Notepad++ to Edi:
+
+     Remove styleID, fontSize and fontName attributes
+     convert fontStyle="0" into fontStyle="normal"
+     convert fontStyle="1" into fontStyle="normal" fontWeight="bold"
+     convert fontStyle="2" into fontStyle="italic"
+     convert color values to .Net conform colors by adding '#FF' in background and foreground colors
+    -->
+
+    <!-- ActionScript3 -->
+    <LexerType name="ActionScript3">
+      <WordsStyle name="Digits"  fgColor="#FF00BFFF" fontStyle="normal" fontWeight="normal"/>
+      <WordsStyle name="Comment" fgColor="#FF00FF00" />
+
+      <WordsStyle name="String"     fgColor="#FFFF9800" />
+      <WordsStyle name="MethodCall" fgColor="#FFDFDF00" fontWeight="normal" />
+
+      <WordsStyle name="Keyword"  fgColor="#FFFFFF00" fontWeight="normal" />
+      <WordsStyle name="Keyword1" fgColor="#FFCFCF00" fontWeight="normal" />
+
+      <WordsStyle name="CommentMarkerSet"           fgColor="#FFFF0000" fontWeight="bold" />
+      <WordsStyle name="CommentMarkerSetHackUndone" fgColor="#FF8B008B" fontWeight="bold" />
+    </LexerType>
+
+    <!-- ASP/XHTML     -->
+    <LexerType name="ASP/XHTML" desc="Color definitions for ASP (Active Server Page) highlighting pattern">
+      <WordsStyle name="ASPSectionStartEndTags" fgColor="Black" bgColor="Yellow" /> 
+      <WordsStyle name="ASPSection"             fgColor="Black" bgColor="#FFF7F2E3" />
+    </LexerType>
+
+    <!-- BAT           -->
+    <LexerType name="BAT" desc="Color definitions for MS-DOS batch file highlighting pattern">
+      <WordsStyle name="Digits"      fgColor="#FF00BFFF" fontStyle="normal" fontWeight="normal"/>
+	    <WordsStyle name="Comment"     fgColor="#FF00FF00" />
+	    <WordsStyle name="Punctuation" fgColor="#FFA0A0F0" />
+
+      <WordsStyle name="String"  fgColor="#FFFF9800" />
+      <WordsStyle name="String2" fgColor="#FFFF5840" />
+
+      <WordsStyle name="PARAMETER" fgColor="#FFC0C0C0" />
+      <WordsStyle name="VARIABLE"  fgColor="#FFC0C0C0" />
+
+      <WordsStyle name="GOTO"        fgColor="#FFFFFF00" fontWeight="normal" />
+      <WordsStyle name="GOTO_TARGET" fgColor="#FFDFDF00" fontWeight="normal" />
+      <WordsStyle name="AtCommand"   fgColor="#FFCFCF00" fontWeight="normal" />
+      <WordsStyle name="Command"     fgColor="#FFAFAF00" fontWeight="normal" />
+      <WordsStyle name="Command1"    fgColor="#FF8F8F00" fontWeight="normal" />
+      <WordsStyle name="Command2"    fgColor="#FF6F6F00" fontWeight="normal" />
+      <WordsStyle name="Command3"    fgColor="#FFFFFF00" fontWeight="normal" />
+    </LexerType>
+    
+    <LexerType name="Boo" desc="Color definitions for BOO highlighting pattern">
+      <WordsStyle name="Comment"         fgColor="#FF00FF00" />
+      <WordsStyle name="Comment1"        fgColor="#FF009F00" />
+      <WordsStyle name="Comment2"        fgColor="#FF007F00" />
+      <WordsStyle name="NestedComments"  fgColor="#FF005F00" />
+
+      <WordsStyle name="String"           fgColor="#FFFF9800" />
+      <WordsStyle name="CodeInsideString" fgColor="#FFFF5840" />
+
+      <WordsStyle name="Keywords"   fgColor="#FFFFFF00" fontWeight="normal" />
+      <WordsStyle name="Keywords1"  fgColor="#FFDFDF00" fontWeight="normal" />
+      <WordsStyle name="Keywords2"  fgColor="#FFCFCF00" fontWeight="normal" />
+      <WordsStyle name="Keywords3"  fgColor="#FFAFAF00" fontWeight="normal" />
+      <WordsStyle name="Keywords4"  fgColor="#FF8F8F00" fontWeight="normal" />
+      <WordsStyle name="Keywords5"  fgColor="#FF6F6F00" fontWeight="normal" />
+      <WordsStyle name="Keywords6"  fgColor="#FFFFFF00" fontWeight="normal" />
+      <WordsStyle name="Keywords7"  fgColor="#FFDFDF00" fontWeight="normal" />
+      <WordsStyle name="Keywords8"  fgColor="#FFFFFF40" fontWeight="normal" />
+      <WordsStyle name="Keywords9"  fgColor="#FFDFDF40" fontWeight="normal" />
+      <WordsStyle name="Keywords10" fgColor="#FFCFCF40" fontWeight="normal" />
+      <WordsStyle name="Keywords11" fgColor="#FFAFAF40" fontWeight="normal" />
+      <WordsStyle name="Keywords12" fgColor="#FF8F8F40" fontWeight="normal" />
+      <WordsStyle name="Keywords13" fgColor="#FF6F6F40" fontWeight="normal" />
+      <WordsStyle name="Keywords14" fgColor="#FF4F4F40" fontWeight="normal" />
+      <WordsStyle name="Keywords15" fgColor="#FF2F2F40" fontWeight="normal" />
+      <WordsStyle name="Keywords16" fgColor="#FFFFFF8D" fontWeight="normal" />
+      <WordsStyle name="Keywords17" fgColor="#FFFFFFAD" fontWeight="normal" />
+      <WordsStyle name="Keywords18" fgColor="#FFFFFF6D" fontWeight="normal" />
+      <WordsStyle name="Keywords19" fgColor="#FFFFFF00" fontWeight="normal" />
+      <WordsStyle name="Keywords20" fgColor="#FFDFDF00" fontWeight="normal" />
+
+      <WordsStyle name="Regex" fgColor="#FFC0C0C0" />
+
+      <WordsStyle name="CommentMarkerSet"           fgColor="#FFFF0000" fontWeight="bold" />
+      <WordsStyle name="CommentMarkerSetHackUndone" fgColor="#FF8B008B" fontWeight="bold" />
+    </LexerType>
+
+    <LexerType name="C++" desc="Color definitions for C++ highlighting pattern">
+	    <WordsStyle name="Digits"      fgColor="#FF00BFFF" fontStyle="normal" fontWeight="normal"/>
+	    <WordsStyle name="Comment"     fgColor="#FF00FF00" />
+	    <WordsStyle name="Punctuation" fgColor="#FFA0A0F0" />
+
+	    <WordsStyle name="String"      fgColor="#FFFF9800" />
+      <WordsStyle name="Character"   fgColor="#FFFF5840" />
+
+      <WordsStyle name="Preprocessor"      fgColor="#FF8080FF" />
+
+      <WordsStyle name="MethodCall"        fgColor="#FFFFFF00" fontWeight="normal" />
+	    <WordsStyle name="CompoundKeywords"  fgColor="#FFDFDF00" fontWeight="normal" />
+	    <WordsStyle name="This"              fgColor="#FFCFCF00" fontWeight="normal" />
+	    <WordsStyle name="Operators"         fgColor="#FFAFAF00" fontWeight="normal" />
+	    <WordsStyle name="Namespace"         fgColor="#FF8F8F00" fontWeight="normal" />
+	    <WordsStyle name="Friend"            fgColor="#FF6F6F00" fontWeight="normal" />
+	    <WordsStyle name="Modifiers"         fgColor="#FFFFFF00" fontWeight="normal" />
+	    <WordsStyle name="TypeKeywords"      fgColor="#FFDFDF00" fontWeight="normal" />
+	    <WordsStyle name="BooleanConstants"  fgColor="#FFFFFF40" fontWeight="normal" />
+	    <WordsStyle name="Keywords"          fgColor="#FFDFDF40" fontWeight="normal" />
+	    <WordsStyle name="LoopKeywords"      fgColor="#FFCFCF40" fontWeight="normal" />
+	    <WordsStyle name="JumpKeywords"      fgColor="#FFAFAF40" fontWeight="normal" />
+	    <WordsStyle name="ExceptionHandling" fgColor="#FF8F8F40" fontWeight="normal" />
+	    <WordsStyle name="ControlFlow"       fgColor="#FF6F6F40" fontWeight="normal" />
+      </LexerType>
+
+    <LexerType name="C#" desc="Color definitions for C# .Net highlighting pattern">
+      <WordsStyle name="Digits"      fgColor="#FF00BFFF" fontStyle="normal" fontWeight="normal"/>
+      <WordsStyle name="Comment"     fgColor="#FF00FF00" />
+      <WordsStyle name="Punctuation" fgColor="#FFA0A0F0" />
+
+      <WordsStyle name="String"      fgColor="#FFFF9800" />
+      <WordsStyle name="Char"        fgColor="#FFFF5840" />
+
+      <WordsStyle name="Preprocessor"        fgColor="#FF8080FF" fontWeight="normal" />
+
+      <WordsStyle name="ReferenceTypes"      fgColor="#FFFFFF00" fontWeight="normal" />
+      <WordsStyle name="MethodCall"          fgColor="#FFDFDF00" fontWeight="normal" />
+      <WordsStyle name="NullOrValueKeywords" fgColor="#FFCFCF00" fontWeight="normal" />
+      <WordsStyle name="Modifiers"           fgColor="#FFAFAF00" fontWeight="normal" />
+      <WordsStyle name="NamespaceKeywords"   fgColor="#FF8F8F00" fontWeight="normal" />
+      <WordsStyle name="GetSetAddRemove"     fgColor="#FF6F6F00" fontWeight="normal" />
+      <WordsStyle name="Keywords"            fgColor="#FFFFFF00" fontWeight="normal" />
+      <WordsStyle name="ValueTypes"          fgColor="#FFDFDF00" fontWeight="normal" />
+      
+      <WordsStyle name="ThisOrBaseReference" fgColor="#FFFFFF40" fontWeight="normal" />
+      <WordsStyle name="GotoKeywords"        fgColor="#FFDFDF40" fontWeight="normal" />
+      <WordsStyle name="ContextKeywords"     fgColor="#FFCFCF40" fontWeight="normal" />
+      <WordsStyle name="ExceptionKeywords"   fgColor="#FFAFAF40" fontWeight="normal" />
+      <WordsStyle name="CheckedKeyword"      fgColor="#FF8F8F40" fontWeight="normal" />
+      <WordsStyle name="UnsafeKeywords"      fgColor="#FF6F6F40" fontWeight="normal" />
+      <WordsStyle name="OperatorKeywords"    fgColor="#FF4F4F40" fontWeight="normal" />
+      <WordsStyle name="ParameterModifiers"  fgColor="#FF2F2F40" fontWeight="normal" />
+
+      <WordsStyle name="Visibility"          fgColor="#FFFFFF8D" fontWeight="normal" />
+      <WordsStyle name="TrueFalse"           fgColor="#FFFFFFAD" fontWeight="normal" />
+      <WordsStyle name="TypeKeywords"        fgColor="#FFFFFF6D" fontWeight="normal" />
+
+      <WordsStyle name="CommentMarkerSetTodo"       fgColor="#FFFF0000" fontWeight="bold" />
+      <WordsStyle name="CommentMarkerSetHackUndone" fgColor="#FF8B008B" fontWeight="bold" />
+    </LexerType>
+
+    <LexerType name="Coco" desc="Syntax highlighting colors for the Coco language">
+      <WordsStyle name="Comment"       fgColor="#FF00FF00" fontStyle="normal" fontWeight="normal" />
+      <WordsStyle name="Punctuation"   fgColor="#FFA0A0F0" fontStyle="normal" fontWeight="normal" />
+
+      <WordsStyle name="String"        fgColor="#FFFF9800" />
+
+      <WordsStyle name="Keywords"      fgColor="#FFFFFF00" fontWeight="normal" />
+      <WordsStyle name="COMPILER"      fgColor="#FFDFDF00" fontWeight="normal" />
+      <WordsStyle name="Lt_Gt_Color"   fgColor="#FFCFCF00" fontWeight="normal" />
+      <WordsStyle name="Bracket_Color" fgColor="#FFAFAF00" fontWeight="normal" />
+      <WordsStyle name="CSharp_Color"  fgColor="#FF8F8F00" fontWeight="normal" />
+      <WordsStyle name="CSharp1_Color" fgColor="#FF6F6F00" fontWeight="normal" />
+    </LexerType>
+    
+    <LexerType name="CSS" desc="Syntax highlighting colors for CSS (Cascading Style Sheet) markup language">
+      <WordsStyle name="Comment"     fgColor="#FF00FF00" />
+      <WordsStyle name="String"      fgColor="#FFFF9800" />
+
+      <WordsStyle name="Selector"    fgColor="#FFFFFF00" fontWeight="normal" />
+      <WordsStyle name="Class"       fgColor="#FFDFDF00" fontWeight="normal" />
+      <WordsStyle name="Property"    fgColor="#FFCFCF00" fontWeight="normal" />
+      <WordsStyle name="Value"       fgColor="#FFAFAF00" fontWeight="normal" /> 
+
+      <WordsStyle name="Default"     fgColor="#FF8F8F00" />
+      <WordsStyle name="Colon"       fgColor="#FF6F6F00" />
+      <WordsStyle name="CurlyBraces" fgColor="#FFFFFF00" />
+    </LexerType>
+      
+    <LexerType name="F#" desc="Syntax highlighting colors for F# programming language">
+      <WordsStyle name="Digits"      fgColor="#FF00BFFF" fontStyle="normal" fontWeight="normal"/>
+      <WordsStyle name="Comment"     fgColor="#FF00FF00"/>
+      <WordsStyle name="Punctuation" fgColor="#FFA0A0F0"/>
+
+      <WordsStyle name="String"      fgColor="#FFFF9800"/>
+      <WordsStyle name="Char"        fgColor="#FFFF5840"/>
+
+      <WordsStyle name="Preprocessor"         fgColor="#FF8080FF" fontWeight="normal"/>
+
+      <WordsStyle name="ReferenceTypes"       fgColor="#FFFFFF00" fontWeight="normal"/>
+      <WordsStyle name="Visibility"           fgColor="#FF8F8F00" fontWeight="normal"/>
+      <WordsStyle name="NullOrValueKeywords"  fgColor="#FFCFCF00" fontWeight="normal"/>
+      <WordsStyle name="Modifiers"            fgColor="#FFAFAF00" fontWeight="normal"/>
+      <WordsStyle name="GetSetAddRemove"      fgColor="#FFFFFF00" fontWeight="normal"/>
+
+      <WordsStyle name="ReservedKeywords"     fgColor="#FFFFFF40"/>
+      <WordsStyle name="CurrentKeywords"      fgColor="#FFDFDF40"/>
+
+      <WordsStyle name="MethodCall"           fgColor="#FFDFDF00" fontWeight="normal"/>
+
+      <WordsStyle name="NamespaceKeywords"    fgColor="#FF6F6F00" fontWeight="normal"/>
+
+      <WordsStyle name="CommentMarkerSetTodo"       fgColor="#FFFF0000" fontWeight="bold"/>
+      <WordsStyle name="CommentMarkerSetHackUndone" fgColor="#FF8B008B" fontWeight="bold"/>
+    </LexerType>
+
+    <LexerType name="HTML" desc="WordsStyle definitions for HTML highlighting pattern">
+      <WordsStyle name="Digits"     fgColor="#FF00BFFF" fontStyle="normal" fontWeight="normal"/>
+      <WordsStyle name="Comment"    fgColor="#FF00FF00" bgColor="#22AAAAAA" fontStyle="italic" />
+      
+      <WordsStyle name="String"     fgColor="#FFFF9800" fontStyle="normal" />
+      <WordsStyle name="Attributes" fgColor="#FFFFCF00" fontStyle="normal" />
+      <WordsStyle name="HtmlTag"    fgColor="#FFFFFF00" fontStyle="normal" />
+
+      <WordsStyle name="Tags"       fgColor="#FFDFDF00" fontStyle="normal" />
+      <WordsStyle name="Slash"      fgColor="#FFCFCF00" fontStyle="normal" />
+
+      <WordsStyle name="UnknownAttribute" fgColor="#FFFF5800" fontStyle="normal" />
+      <WordsStyle name="EntityReference"  fgColor="#FFC0C0FF" fontStyle="italic" />
+      <WordsStyle name="Entities"         fgColor="#FFA0A0F0" fontStyle="italic" />
+
+      <WordsStyle name="ScriptTag"        fgColor="#FFC0B180" />
+      <WordsStyle name="JavaScriptTag"    fgColor="#FFA09160" />
+      <WordsStyle name="JScriptTag"       fgColor="#FFC0B180" />
+      <WordsStyle name="VBScriptTag"      fgColor="#FFA09160" />
+      <WordsStyle name="UnknownScriptTag" fgColor="#FFC0B180" />
+
+      <WordsStyle name="Assignment"       fgColor="#FFFFFF40" />
+
+      <WordsStyle name="CommentMarkerSetTodo"       fgColor="#FFFF0000" fontWeight="bold"/>
+      <WordsStyle name="CommentMarkerSetHackUndone" fgColor="#FF8B008B" fontWeight="bold"/>
+    </LexerType>
+
+    <LexerType name = "HLSL" desc="Syntax highlighting colors for HLSL language">
+      <WordsStyle name="Digits"      fgColor="#FF00BFFF" fontStyle="normal" fontWeight="normal"/>
+      <WordsStyle name="Comments"    fgColor="#FF00FF00" />
+      <WordsStyle name="Punctuation" fgColor="#FFA0A0F0" />
+
+      <WordsStyle name="Keywords"    fgColor="#FFFFFF00" />
+      <WordsStyle name="DataTypes"   fgColor="#FFE0E000" />
+      <WordsStyle name="States"      fgColor="#FFCFCF00" fontStyle="italic" />
+      <WordsStyle name="Constants"   fgColor="#FFAFAF00" />
+      <WordsStyle name="Semantics"   fgColor="#FF8F8F00" />
+      
+      <WordsStyle name="Functions"   fgColor="#FFDFDF00" />
+      <WordsStyle name="MethodCall"  fgColor="#FFDFDF00" />
+    </LexerType>
+    
+    <LexerType name="INI" desc="Syntax highlighting for the INI markup file type">
+      <WordsStyle name="Digits"       fgColor="#FF00BFFF" fontStyle="normal" fontWeight="normal"/>
+      <WordsStyle name="Comment"      fgColor="#FF00FF00"/>
+      <WordsStyle name="Punctuation"  fgColor="#FFA0A0F0"/>
+
+      <WordsStyle name="String"       fgColor="#FFFF9800"/>
+      <WordsStyle name="String2"      fgColor="#FFFF5840"/>
+
+      <WordsStyle name="Section"      fgColor="#FFffcf00"/>
+
+      <WordsStyle name="PropertyName" fgColor="#FFff9800"/>
+    </LexerType>
+
+    <LexerType  name="Java" desc="Syntax highlighting color definitions for the Java programming language">
+      <WordsStyle name="Digits"      fgColor="#FF00BFFF" fontStyle="normal" fontWeight="normal"/>
+      <WordsStyle name="Literals"    fgColor="#FFff7860" />
+      <WordsStyle name="Comment"     fgColor="#FF00FF00" />
+      <WordsStyle name="JavaDocTags" fgColor="#FFAAAAAA" fontWeight="bold" fontStyle="italic" />
+      <WordsStyle name="Punctuation" fgColor="#FFA0A0F0" />
+
+      <WordsStyle name="String"      fgColor="#FFFF9800" />
+      <WordsStyle name="Character"   fgColor="#FFFF5840" />
+
+      <WordsStyle name="ReferenceTypes"              fgColor="#FFFFFF00" />
+      <WordsStyle name="AccessModifiers"             fgColor="#FFFFFF8D" />
+      <WordsStyle name="Modifiers"                   fgColor="#FFAFAF00" />
+
+      <WordsStyle name="AccessKeywords"              fgColor="#FFCFCF00" />
+      <WordsStyle name="OperatorKeywords"            fgColor="#FFAFAF00" />
+      <WordsStyle name="SelectionStatements"         fgColor="#FFFFFF00" />
+      <WordsStyle name="IterationStatements"         fgColor="#FFAFAF00" />
+      <WordsStyle name="ExceptionHandlingStatements" fgColor="#FF8F8F00" />
+      <WordsStyle name="ValueTypes"                  fgColor="#FF6F6F00" />
+      <WordsStyle name="Void"                        fgColor="#FFcfcf40" />      
+      <WordsStyle name="JumpStatements"              fgColor="#FFafaf40" />
+
+      <WordsStyle name="MethodCall"                  fgColor="#FFDFDF00" />
+
+      <WordsStyle name="Package"                     fgColor="#FF6F6F00" fontWeight="bold" />
+
+      <WordsStyle name="CommentTODO"                 fgColor="#FFFF0000" fontWeight="bold"/>
+    </LexerType>
+
+    <LexerType name="JavaScript" desc="Syntax highlighting color definitions for the JavaScript language" >
+      <WordsStyle name="Digits"                    fgColor="#FF00BFFF" fontStyle="normal" fontWeight="normal"/>
+      <WordsStyle name="JavaScriptLiterals"        fgColor="#FFff7860" />
+      <WordsStyle name="Comment"                   fgColor="#FF00FF00" />
+
+      <WordsStyle name="String"                    fgColor="#FFFF9800" />
+      <WordsStyle name="Character"                 fgColor="#FFFF5840" />
+
+      <WordsStyle name="Regex"                     fgColor="#FFFFFF00" />
+      <WordsStyle name="JavaScriptKeyWords"        fgColor="#FFFFFF8D" />
+      <WordsStyle name="JavaScriptIntrinsics"      fgColor="#FFAFAF00" />
+      <WordsStyle name="JavaScriptGlobalFunctions" fgColor="#FFCFCF00" />    
+    </LexerType>
+    
+     <LexerType name="LOG" desc="Syntax highlighting color definitions for improved display of log files">
+      <WordsStyle name="Digits"       fgColor="#FF00BFFF" fontStyle="normal" fontWeight="normal" />
+      <WordsStyle name="Comment"      fgColor="#FF00FF00"/>
+      <WordsStyle name="Punctuation"  fgColor="#FFA0A0F0"/>
+      <WordsStyle name="String"       fgColor="#FFFF9800"/>
+      <WordsStyle name="String2"      fgColor="#FFFF5840"/>
+
+      <WordsStyle name="Section"      fgColor="#FFffcf00"/>
+
+      <WordsStyle name="AmericanDate" fgColor="#FFFFFF00"/>
+      <WordsStyle name="TimeStamp"    fgColor="#FFFFFF8D"/>
+
+      <WordsStyle name="ImportantKeywords" fgColor="#FFFF0000" fontWeight="bold" />
+      <WordsStyle name="InfoKeywords"      fgColor="#FF8B008B" fontWeight="bold" />
+    </LexerType>
+
+    <LexerType name="MarkDown" desc="Color definitions for XML file highlighting pattern">
+
+      <WordsStyle name="Heading"        fgColor="#FFFFFF00" />
+      <!-- WordsStyle name="Emphasis"   />
+      <WordsStyle name="StrongEmphasis" />
+      <WordsStyle name="Code"           /-->
+      <WordsStyle name="BlockQuote"     fgColor="#FF00FF00" />
+      <WordsStyle name="Link"           fgColor="#FF40BFFF" />
+      <WordsStyle name="Image"          fgColor="#FF40BFFF" />
+      <!-- WordsStyle name="LineBreak"      fgColor="#FF222222" /-->
+    </LexerType>
+
+    <LexerType name = "Pascal" desc="Syntax highlighting color definitions for the Pascal programming language">
+      <WordsStyle name="Digits"            fgColor="#FF00BFFF" fontStyle="normal" fontWeight="normal"/>
+      <WordsStyle name="Comment"           fgColor="#FF00FF00" />
+      <WordsStyle name="Documenation"      fgColor="#FF20FF20" />
+      <WordsStyle name="Punctuation"       fgColor="#FFA0A0F0" />
+
+      <WordsStyle name="String"            fgColor="#FFFF9800" />
+      <WordsStyle name="Char"              fgColor="#FFFF5840" />
+
+      <WordsStyle name="DataTypes"        fgColor="#FFFFFF00" />
+      <WordsStyle name="Operators"        fgColor="#FFFFFF8D" />
+      <WordsStyle name="Statements"       fgColor="#FFAFAF00" />
+      <WordsStyle name="MethodCall"       fgColor="#FFDFDF00" />
+      <WordsStyle name="FunctionKeywords" fgColor="#FFCFCF00" />
+
+      <WordsStyle name="CommentMarkerSetTodo"       fgColor="#FFFF0000" fontWeight="bold"/>
+      <WordsStyle name="CommentMarkerSetHackUndone" fgColor="#FF8B008B" fontWeight="bold"/>
+    </LexerType>
+
+    <LexerType name="Patch" desc="Syntax highlighting colors for Patch/diff markup language">
+      <WordsStyle name="AddedText"     fgColor="#FFFFFF00" />
+      <WordsStyle name="RemovedText"   fgColor="#FFFF6060" />
+      <WordsStyle name="UnchangedText"                     />
+      <WordsStyle name="Position"      fgColor="#FF00C0FF" />
+      <WordsStyle name="Header"        fgColor="#FF00FF00"                   />
+      <WordsStyle name="FileName"      fgColor="#FF00DF00" fontWeight="bold" />
+      <WordsStyle name="AtAtColor"     fgColor="#FFFF8080"                   />
+    </LexerType>
+
+    <LexerType name ="PHP" desc="Syntax highlighting colors for PHP scripting language">
+      <WordsStyle name="Digits"       fgColor="#FF00BFFF" fontStyle="normal" fontWeight="normal"/>
+      <WordsStyle name="Comment"      fgColor="#FF00FF00" />
+      <WordsStyle name="Punctuation"  fgColor="#FFA0A0F0" />
+
+      <WordsStyle name="String"       fgColor="#FFFF9800" />
+
+      <WordsStyle name="FunctionCall" fgColor="#FFDFDF00" />
+
+      <WordsStyle name="AccessKeywords"      fgColor="#FFFFFF8D" />
+      <WordsStyle name="OperatorKeywords"    fgColor="#FF4F4F40" />
+      <WordsStyle name="JumpStatements"      fgColor="#FFDFDF40" />
+      <WordsStyle name="ValueTypes"          fgColor="#FFCFCF00" />
+      <WordsStyle name="AccessModifiers"     fgColor="#FFAFAF00" />
+      <WordsStyle name="SelectionStatements" fgColor="#FFFFFF40" />
+      <WordsStyle name="IterationStatements" fgColor="#FFDFDF40" />
+      <WordsStyle name="ControlStatements"   fgColor="#FFCFCF40" />
+      <WordsStyle name="OtherTypes"          fgColor="#FFAFAF40" />
+    </LexerType>
+    
+    <LexerType name ="PLSQL" desc="Syntax highlighting colors for Oracle's PLSQL query language">
+      <WordsStyle name="Comment"       fgColor="#FF00FF00" />
+      <WordsStyle name="String"        fgColor="#FFFF9800" /> 
+      <WordsStyle name="Keywords"      fgColor="#FFFFFF00" />
+      <WordsStyle name="ReservedWords" fgColor="#FFAFAF00" />
+      <WordsStyle name="Functions"     fgColor="#FFDFDF00" />
+    </LexerType>
+    
+    <LexerType name="PowerShell" desc="Syntax highlighting color definitions for the PowerShell scripting language">
+
+      <WordsStyle name="Digits"       fgColor="#FF00BFFF" fontStyle="normal" fontWeight="normal"/>
+      <WordsStyle name="Comment"      fgColor="#FF00FF00" />
+      <WordsStyle name="Punctuation"  fgColor="#FFA0A0F0" />
+
+      <WordsStyle name="Variable"     fgColor="#FFC0C0C0" />
+
+      <WordsStyle name="String"            fgColor="#FFFF9800" />
+      <WordsStyle name="Char"              fgColor="#FFFF5840" />
+
+      <WordsStyle name="MethodCall1"       fgColor="#FFDFDF00" />
+      <WordsStyle name="MethodCall"        fgColor="#FFDFDF00" />
+      <WordsStyle name="ReferenceTypes"    fgColor="#FFFFFF00" />
+      <WordsStyle name="Keywords"          fgColor="#FFFFFF00" />
+      <WordsStyle name="ExceptionKeywords" fgColor="#FFAFAF40" />
+      <WordsStyle name="GotoKeywords"      fgColor="#FFDFDF40" />
+      <WordsStyle name="Operators"         fgColor="#FF4F4F40" />
+      <WordsStyle name="DataTypeCast"      fgColor="#FFFFFF6D" bgColor="#33AAAAAA" fontWeight="bold" />
+
+      <WordsStyle name="Command"           fgColor="#FFA09160" />
+
+      <WordsStyle name="InnerDataTypeCast" fgColor="#FF6A5ACD"/>
+    </LexerType>
+
+    <LexerType name="Python" desc="Syntax highlighting for the Python programming language">
+      <WordsStyle name="Digits"      fgColor="#FF00BFFF" fontStyle="normal" fontWeight="normal"/>
+      <WordsStyle name="LineComment" fgColor="#FF00FF00" />
+      <WordsStyle name="DocComment"  fgColor="#FF00FF00" />
+      <WordsStyle name="Punctuation" fgColor="#FFA0A0F0" />
+
+      <WordsStyle name="String"      fgColor="#FFFF9800" />
+      <WordsStyle name="Char"        fgColor="#FFFF5840" />
+
+      <WordsStyle name="FunctionDefinition"          fgColor="#FFCFCF00" fontWeight="bold"/>
+
+      <WordsStyle name="BuiltInStatements"           fgColor="#FFFFFF00" />
+      <WordsStyle name="ClassStatement"              fgColor="#FFDFDF00" />
+      <WordsStyle name="ExceptionHandlingStatements" fgColor="#FFCFCF00" />
+      <WordsStyle name="IterationStatements"         fgColor="#FFAFAF00" />
+      <WordsStyle name="JumpStatements"              fgColor="#FF8F8F00" />
+      <WordsStyle name="OperatorStatements"          fgColor="#FF6F6F00" />
+      <WordsStyle name="SelectionStatements"         fgColor="#FFFFFF00" />
+      <WordsStyle name="PassStatement"               fgColor="#FFDFDF00" />
+      <WordsStyle name="WithStatement"               fgColor="#FFE0D1A0" />
+
+      <WordsStyle name="Imports"                     fgColor="#FF8FAF00" fontWeight="bold" />
+
+      <WordsStyle name="CommentMarkerSetTodo"        fgColor="#FFFF0000" fontWeight="bold"/>
+      <WordsStyle name="CommentMarkerSetHackUndone"  fgColor="#FF8B008B" fontWeight="bold"/>
+    </LexerType>
+
+    <LexerType name="Ruby" desc="Color definitions for Ruby file highlighting pattern">
+      <WordsStyle name="Digits"           fgColor="#FF00BFFF" fontStyle="normal" fontWeight="normal"/>
+      <WordsStyle name="Comment"          fgColor="#FF00FF00" />
+      <WordsStyle name="LineComment"      fgColor="#FF00A000" />
+      <WordsStyle name="DocComment"       fgColor="#FF00A000" />
+      <WordsStyle name="NestedComments"   fgColor="#FF00C000" />
+      <WordsStyle name="MultiLineComment" fgColor="#FF00FF00" />
+      <WordsStyle name="Punctuation"      fgColor="#FFA0A0F0" />
+
+      <WordsStyle name="Variable"         fgColor="#FFC0C0C0" />
+
+      <WordsStyle name="String" fgColor="#FFFF9800" />
+      <WordsStyle name="Char"   fgColor="#FFFF5840" />
+
+      <WordsStyle name="MethodCall"         fgColor="#FFDFDF00" fontWeight="bold" />
+      <WordsStyle name="FunctionDefinition" fgColor="#FFCFCF00" fontWeight="bold" />
+
+      <WordsStyle name="BuiltInStatements"           fgColor="#FFFFFF00" />
+      <WordsStyle name="ClassStatement"              fgColor="#FFDFDF00" />
+      <WordsStyle name="ExceptionHandlingStatements" fgColor="#FFCFCF00" />
+      <WordsStyle name="IterationStatements"         fgColor="#FFAFAF00" />
+      <WordsStyle name="JumpStatements"              fgColor="#FF8F8F00" />
+      <WordsStyle name="OperatorStatements"          fgColor="#FF6F6F00" />
+      <WordsStyle name="NullStatement"               fgColor="#FFFFFF00" />
+      <WordsStyle name="SelectionStatements"         fgColor="#FFDFDF00" />
+      <WordsStyle name="BooleanStatements"           fgColor="#FFE0D1A0" />
+      <WordsStyle name="DefinedStatement"            fgColor="#FFC0B180" />
+      <WordsStyle name="ClassSelfStatement"          fgColor="#FFA09160" />
+      <WordsStyle name="ClassInheritanceStatement"   fgColor="#FF807140" />
+
+      <WordsStyle name="ImportStatement"             fgColor="#FF8F8F00"/>
+      <WordsStyle name="Imports"                     fgColor="#FF8FAF00" fontWeight="bold" />
+
+      <WordsStyle name="CommentMarkerSetTodo"        fgColor="#FFFF0000" fontWeight="bold"/>
+      <WordsStyle name="CommentMarkerSetHackUndone"  fgColor="#FF8B008B" fontWeight="bold"/>
+    </LexerType>
+
+    <LexerType name="Scheme" desc="Color definitions for Scheme (Lisp) file highlighting pattern">
+      <WordsStyle name="Digits"            fgColor="#FF00BFFF" fontStyle="normal" fontWeight="normal"/>
+      <WordsStyle name="Comment"           fgColor="#FF00FF00" />
+      <WordsStyle name="Punctuation"       fgColor="#FFA0A0F0" />
+
+      <WordsStyle name="MethodCall"          fgColor="#FFDFDF00" fontWeight="bold" />
+      <WordsStyle name="NullOrValueKeywords" fgColor="#FFCFCF00" fontWeight="bold"/>
+
+      <WordsStyle name="Syntax"              fgColor="#FFFFFF00"/>
+      <WordsStyle name="Library Syntax"      fgColor="#FFAFAF40"/>
+      <WordsStyle name="Auxilliary Syntax"   fgColor="#FFDFDF40"/>
+    </LexerType>
+
+    <LexerType name="SQL" desc="Color definitions for SQL (Structured Query Language) file highlighting pattern">
+      <WordsStyle name="Digits"      fgColor="#FF00BFFF" fontStyle="normal" fontWeight="normal"/>
+      <WordsStyle name="Comment"     fgColor="#FF00FF00" />
+      <WordsStyle name="Punctuation" fgColor="#FFA0A0F0" />
+
+      <WordsStyle name="String"      fgColor="#FFFF9800" />
+      <WordsStyle name="String2"     fgColor="#FFFF5840" />
+
+      <WordsStyle name="Keyword"     fgColor="#FFFFFF00" fontWeight="normal" />
+      <WordsStyle name="Keyword1"    fgColor="#FFDFDF00" fontWeight="normal" />
+      <WordsStyle name="GoKeyword"   fgColor="#FFF25B00" fontWeight="bold" />
+
+      <WordsStyle name="MethodCall"  fgColor="#FFCFCF00" fontWeight="bold" />
+
+      <WordsStyle name="Variable"    fgColor="#FFC0C0C0" />
+      <WordsStyle name="Variable1"   fgColor="#FFC0C0C0" />
+
+      <WordsStyle name="ObjectReference"  fgColor="#FFE0D1A0" />
+      <WordsStyle name="ObjectReference1" fgColor="#FFA09160" />
+
+      <WordsStyle name="ObjectReferenceInBrackets"  fgColor="#FFA0A0A0" />
+      <WordsStyle name="ObjectReferenceInBrackets1" fgColor="#FFC0C0C0" />
+
+      <WordsStyle name="CommentMarkerSetTodo"        fgColor="#FFFF0000" fontWeight="bold"/>
+      <WordsStyle name="CommentMarkerSetHackUndone"  fgColor="#FFE0E000" fontWeight="bold"/>
+    </LexerType>
+
+    <LexerType name="Squirrel" desc="Color definitions for Squirrel scripting highlighting pattern">
+      <!-- Reference: http://www.squirrel-lang.org/
+       Reference Manual: http://www.squirrel-lang.org/doc/squirrel2.html -->
+      <WordsStyle name="Digits"       fgColor="#FF00BFFF" fontStyle="normal" fontWeight="normal"/>
+      <WordsStyle name="Comment"      fgColor="#FF00FF00" />
+      <WordsStyle name="Punctuation"  fgColor="#FFA0A0F0" />
+
+      <WordsStyle name="String"       fgColor="#FFFF9800" />
+
+      <WordsStyle name="MethodCall"   fgColor="#FFDFDF00" fontStyle="normal" fontWeight="normal" />
+      <WordsStyle name="Keywords"     fgColor="#FFFFFF00" fontStyle="normal" fontWeight="normal"/>
+      <WordsStyle name="GGenObject"   fgColor="#FFCFCF00" fontStyle="normal" fontWeight="normal" />
+
+      <WordsStyle name="PreprocessorLine"            fgColor="#FF8080FF" />
+
+      <WordsStyle name="CommentMarkerSetTodo"        fgColor="#FFFF0000" fontWeight="bold"/>
+      <WordsStyle name="CommentMarkerSetHackUndone"  fgColor="#FF8B008B" fontWeight="bold"/>
+    </LexerType>
+
+    <LexerType name="Tex" desc="Color definitions for Latex (Tex) file highlighting pattern">
+      <WordsStyle name="Digits"        fgColor="#FF00BFFF" fontStyle="normal" fontWeight="normal"/>
+      <WordsStyle name="LineComment"   fgColor="#FF00FF00" />
+
+      <WordsStyle name="Keywords"      fgColor="#FFFFFF00" />
+      <WordsStyle name="ShortKeywords" fgColor="#FFDFDF00" bgColor="#30AAAAAA" fontWeight="normal" />
+
+      <WordsStyle name="CurlyBrackets" fgColor="#FFE0D1A0" fontWeight="normal" />
+
+      <WordsStyle name="SquareBrackets"            fgColor="#FFC0B180"                        />
+      <WordsStyle name="ParameterInSquareBrackets" fgColor="#FFA09160" bgColor="#11808080" />
+
+      <WordsStyle name="MathMode"  fgColor="#FF00AFDF" />
+      <WordsStyle name="MathMode1" fgColor="#FF00CFFF" bgColor="#33AAAAAA" />
+
+      <WordsStyle name="Todo" fgColor="#FFFF0000" fontWeight="bold"/>
+      <WordsStyle name="HACK" fgColor="#FF8B008B" fontWeight="bold"/>
+    </LexerType>
+    
+    <LexerType name="TXT" desc="Color definitions for text file highlighting pattern">
+      <WordsStyle name="Digits"      fgColor="#FF4B0082" fontStyle="normal" fontWeight="normal"/>
+      <WordsStyle name="Comment"     fgColor="#FF00FF00" />
+      <WordsStyle name="Punctuation" fgColor="#FFA0A0F0" />
+
+      <WordsStyle name="String"  fgColor="#FFFF9800" />
+      <WordsStyle name="String2" fgColor="#FFFF5840" />
+
+      <WordsStyle name="BulletNumbers" fgColor="#FF00AFDF" fontWeight="normal"/>
+
+      <WordsStyle name="Heading1" fgColor="#FFFFFF00" />
+      <WordsStyle name="Heading2" fgColor="#FFDFDF00" fontStyle="italic"   />
+      <WordsStyle name="Heading3" fgColor="#FFCFCF00" fontWeight="normal" fontStyle="italic" />
+      <WordsStyle name="Heading4" fgColor="#FFAFAF00" fontWeight="normal" />
+
+      <WordsStyle name="Important"    fgColor="#FFF25D20" fontWeight="bold" />
+      <WordsStyle name="BoldFormat"   fontWeight="bold"   />
+      <WordsStyle name="ItalicFormat" fontStyle="italic" />
+
+      <WordsStyle name="Problem"  fgColor="#FFFF0000" />
+      <WordsStyle name="Complete" fgColor="#FF00FF00" />
+
+      <!-- Highlight Time information at begining of line: eg.: "2:04:45 PM" or "12:04:45 AM" -->
+      <WordsStyle name="HighlightTime" fontStyle="italic" fgColor="#FFFFFF00" />
+    </LexerType>
+
+    <LexerType name="VBNET" desc="Color definitions for Visual Basic .Net highlighting pattern">
+	    <WordsStyle name="Comment"          fgColor="#FF00FF00" />
+
+      <WordsStyle name="String"           fgColor="#FFFF9800" />	
+	    <WordsStyle name="DateLiteral"      fgColor="#FFff7860" />
+	    <WordsStyle name="Preprocessor"     fgColor="#FF8080FF" />
+
+      <WordsStyle name="DataTypes"        fgColor="#FFFFFF00" />
+	    <WordsStyle name="Operators"        fgColor="#FFDFDF00" />
+	    <WordsStyle name="Constants"        fgColor="#FFCFCF00" />
+	    <WordsStyle name="Keywords"         fgColor="#FFAFAF00" />
+	    <WordsStyle name="FunctionKeywords" fgColor="#FF8F8F00" />
+	    <WordsStyle name="ContextKeywords"  fgColor="#FF6F6F00" />
+    </LexerType>
+
+    <!-- Reference: http://velocity.apache.org/engine/devel/vtl-reference-guide.html -->
+    <LexerType name="VTL" desc="Color definitions for VTL (Velocity Template Language) file highlighting pattern">
+	    <WordsStyle name="Digits"          fgColor="#FF00BFFF" fontStyle="normal" fontWeight="normal"/>
+      <WordsStyle name="Comment"         fgColor="#FF00FF00" />
+      <WordsStyle name="Punctuation"     fgColor="#FFA0A0F0" />
+
+      <WordsStyle name="String"          fgColor="#FFFF9800" />
+	    <WordsStyle name="String2"         fgColor="#FFFF5840" />
+
+      <WordsStyle name="Keywords"        fgColor="#FFFFFF00" />
+	    <WordsStyle name="ObjectReference" fgColor="#FFDFDF00" />
+    </LexerType>
+    
+    <LexerType name="XML" desc="Color definitions for XML file highlighting pattern">
+      <WordsStyle name="Comment"        fgColor="#FF00ff00" />
+      <WordsStyle name="CData"          fgColor="#FFc0b180" />
+      <WordsStyle name="DocType"        fgColor="#FFdfdf00" />
+      <WordsStyle name="XmlDeclaration" fgColor="#FFdfdf20" />
+      <WordsStyle name="XmlTag"         fgColor="#FFffff00" />
+      <WordsStyle name="AttributeName"  fgColor="#FFffcf00" />
+      <WordsStyle name="AttributeValue" fgColor="#FFff9800" />
+      <WordsStyle name="Entity"         fgColor="#FFa0a0f0" />
+      <WordsStyle name="BrokenEntity"   fgColor="#FFff5800" />
+
+      <WordsStyle name="CommentMarkerSetTodo"       fgColor="#FFFF0000" fontWeight="bold"/>
+      <WordsStyle name="CommentMarkerSetHackUndone" fgColor="#FF8B008B" fontWeight="bold"/>
+    </LexerType>
+
+    <LexerType name="XmlDoc" desc="Color definitions for XML documentation highlighting patterns used, for example, in .Net (C#, F#, Visual Basic)">
+      <WordsStyle name="DocComment"     fgColor="#FFAAAAAA" />
+      <WordsStyle name="XmlPunctuation" fgColor="#FF999999" fontWeight="normal" />
+
+      <WordsStyle name="XmlString"      fgColor="#FF666666" fontWeight="normal" />
+      <WordsStyle name="KnownDocTags"   fgColor="#FF7979B9" fontWeight="normal" />
+    </LexerType>
+  </LexerStyles>
+
+  <GlobalStyles>
+    <!-- Background and foreground color of the default text (without highlighting) in the text editor -->
+    <DefaultStyle fgColor="#FFFFFFFF" bgColor="#FF000080" />
+
+    <!-- Background color of the currently highlighted line -->
+    <CurrentLineBackground bgColor="#7F4A11AE"/>
+
+    <!-- Foreground color of the line number display in the editor -->
+    <LineNumbersForeground fgColor="#FFC0C0FF"/>
+
+    <!-- background, border, and Foreground color of a text selection (eg.: CTRL+A or "Select All") -->
+    <Selection bgColor ="#3FFFFFFF" borderColor="#9FFFFFFF" fgColor="Yellow" />
+
+    <!-- Foreground and background color of a hyperlink in the text -->
+    <Hyperlink bgColor="#08FFFFFF" fgColor="#FF00BFFF"/>
+
+    <!-- Foreground color of a non-printable character (enter, tab, or space)
+         in the text if their display is explicitely enabled -->
+    <NonPrintableCharacter fgColor="#5FFF8080"/>
+  </GlobalStyles>
+
+</HlThemes>

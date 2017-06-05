@@ -1,0 +1,256 @@
+﻿<SyntaxDefinition name="Boo" extensions=".boo" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+	<Color name="Comment"         foreground="Green" />
+  <Color name="Comment1"        foreground="Gray" />
+  <Color name="Comment2"        foreground="#FF999999" />
+  <Color name="NestedComments"  foreground="Teal" />
+
+  <Color name="String"           foreground="Blue"      />
+  <Color name="CodeInsideString" foreground="#FF993366" />
+
+  <Color name="Keywords"  foreground="Black"        fontWeight="bold"    />
+  <Color name="Keywords1" foreground="DarkCyan"     fontWeight="bold" />
+  <Color name="Keywords2" foreground="Blue"         fontWeight="bold"     />
+  <Color name="Keywords3" foreground="Navy"                               />
+  <Color name="Keywords4" foreground="Teal"         fontWeight="bold"     />
+  <Color name="Keywords5" foreground="Olive"                              />
+  <Color name="Keywords6" foreground="Purple"        fontWeight="bold"    />
+  <Color name="Keywords7" foreground="Red"                                />
+  <Color name="Keywords8" foreground="Blue"          fontWeight="bold"    />
+  <Color name="Keywords9" foreground="Brown"                              />
+  <Color name="Keywords10" foreground="Blue"         fontWeight="bold"    />
+  <Color name="Keywords11" foreground="Green"        fontWeight="bold"    />
+  <Color name="Keywords12" foreground="SaddleBrown"                       />
+  <Color name="Keywords13" foreground="Black"        fontWeight="bold"    />
+  <Color name="Keywords14" foreground="Maroon"                            />
+  <Color name="Keywords15" foreground="Purple"                            />
+  <Color name="Keywords16" foreground="Blue"         fontWeight="bold"    />
+  <Color name="Keywords17" foreground="Gray"                              />
+  <Color name="Keywords18" foreground="Blue"         fontWeight="bold"    />
+  <Color name="Keywords19" foreground="MidnightBlue"                      />
+  <Color name="Keywords20" foreground="DarkBlue"                          />
+
+  <Color name="Regex" foreground="#FFFF6600" />
+
+  <Color name="CommentMarkerSet"           foreground="Red"     fontWeight="bold" />
+  <Color name="CommentMarkerSetHackUndone" foreground="#E0E000" fontWeight="bold" />
+
+  <RuleSet name="CommentMarkerSet">
+    <Keywords color="CommentMarkerSet">
+      <Word>TODO</Word>
+      <Word>FIXME</Word>
+    </Keywords>
+    <Keywords color="CommentMarkerSetHackUndone">
+      <Word>HACK</Word>
+      <Word>UNDONE</Word>
+    </Keywords>
+  </RuleSet>
+
+  <RuleSet>
+		<Span color="Comment" ruleSet="CommentMarkerSet" multiline="true">
+			<Begin>"""</Begin>
+			<End>"""</End>
+		</Span>
+    <Span color="Comment1" ruleSet="CommentMarkerSet">
+			<Begin>\#</Begin>
+		</Span>
+    <Span color="Comment2" ruleSet="CommentMarkerSet">
+			<Begin>//</Begin>
+		</Span>
+		<Span color="Comment" ruleSet="comments set" multiline="true">
+			<Begin>/\*</Begin>
+			<End>\*/</End>
+		</Span>
+
+		<Span color="String">
+			<Begin>"</Begin>
+			<End>"</End>
+			<RuleSet>
+				<Span begin="\\" end="." />
+				<Span color="CodeInsideString" ruleSet="">
+					<!-- ruleSet="" reference this file's main ruleset, allowing normal boo code inside ${} -->
+					<Begin>\$\{</Begin>
+					<End>}</End>
+				</Span>
+			</RuleSet>
+		</Span>
+		<Span color="String">
+			<Begin>'</Begin>
+			<End>'</End>
+			<RuleSet>
+				<Span begin="\\" end="." />
+			</RuleSet>
+		</Span>
+		<Span color="Regex" multiline="true">
+			<Begin>@/</Begin>
+			<End>/</End>
+		</Span>
+		<Span color="Regex">
+			<!-- this is a span (not a rule) because " within a regex doesn't start a string literal -->
+			<Begin>/\S+/</Begin>
+			<End></End> <!-- end immediately after Begin -->
+		</Span>
+		<Keywords color="Keywords">
+			<Word>self</Word>
+			<Word>super</Word>
+		</Keywords>
+    <Keywords color="Keywords1">
+			<Word>is</Word>
+			<Word>isa</Word>
+			<Word>and</Word>
+			<Word>or</Word>
+			<Word>not</Word>
+		</Keywords>
+		<Keywords color="Keywords2">
+			<Word>else</Word>
+			<Word>elif</Word>
+			<Word>if</Word>
+			<Word>match</Word>
+			<Word>case</Word>
+			<Word>unless</Word>
+			<Word>otherwise</Word>
+			<Word>for</Word>
+			<Word>in</Word>
+			<Word>while</Word>
+		</Keywords>
+		<Keywords color="Keywords3">
+			<Word>break</Word>
+			<Word>continue</Word>
+			<Word>return</Word>
+			<Word>yield</Word>
+			<Word>goto</Word>
+		</Keywords>
+		<Keywords color="Keywords4">
+			<Word>try</Word>
+			<Word>raise</Word>
+			<Word>ensure</Word>
+			<Word>except</Word>
+			<Word>retry</Word>
+			<Word>success</Word>
+		</Keywords>
+		<Keywords color="Keywords5">
+			<Word>fixed</Word>
+			<Word>unsafe</Word>
+		</Keywords>
+    <Keywords color="Keywords6">
+			<Word>bool</Word>
+			<Word>double</Word>
+			<Word>single</Word>
+			<Word>byte</Word>
+			<Word>sbyte</Word>
+			<Word>short</Word>
+			<Word>ushort</Word>
+			<Word>int</Word>
+			<Word>uint</Word>
+			<Word>long</Word>
+			<Word>ulong</Word>
+			<Word>date</Word>
+			<Word>timespan</Word>
+			<Word>decimal</Word>
+			<Word>char</Word>
+			<Word>object</Word>
+			<Word>duck</Word>
+			<Word>string</Word>
+			<Word>regex</Word>
+		</Keywords>
+		<Keywords color="Keywords7">
+			<Word>void</Word>
+		</Keywords>
+		<Keywords color="Keywords8">
+			<Word>cast</Word>
+			<Word>as</Word>
+		</Keywords>
+		<Keywords color="Keywords9">
+			<Word>override</Word>
+			<Word>static</Word>
+			<Word>virtual</Word>
+			<Word>abstract</Word>
+			<Word>final</Word>
+			<Word>transient</Word>
+			<Word>partial</Word>
+		</Keywords>
+		<Keywords color="Keywords10">
+			<Word>public</Word>
+			<Word>protected</Word>
+			<Word>private</Word>
+			<Word>internal</Word>
+		</Keywords>
+		<Keywords color="Keywords11">
+			<Word>namespace</Word>
+			<Word>import</Word>
+			<Word>from</Word>
+		</Keywords>
+		<Keywords color="Keywords12">
+			<Word>get</Word>
+			<Word>set</Word>
+		</Keywords>
+		<Keywords color="Keywords13">
+			<Word>null</Word>
+			<Word>value</Word>
+			<Word>true</Word>
+			<Word>false</Word>
+			<Word>ast</Word>
+		</Keywords>
+		<Keywords color="Keywords14">
+			<Word>using</Word>
+			<Word>unchecked</Word>
+			<Word>checked</Word>
+			<Word>lock</Word>
+			<Word>getter</Word>
+			<Word>required</Word>
+			<Word>rawArrayIndexing</Word>
+			<Word>normalArrayIndexing</Word>
+			<Word>yieldAll</Word>
+		</Keywords>
+		<Keywords color="Keywords15">
+			<Word>assert</Word>
+			<Word>array</Word>
+			<Word>matrix</Word>
+			<Word>print</Word>
+			<Word>gets</Word>
+			<Word>prompt</Word>
+			<Word>enumerate</Word>
+			<Word>zip</Word>
+			<Word>filter</Word>
+			<Word>map</Word>
+			<Word>cat</Word>
+			<Word>__eval__</Word>
+			<Word>__switch__</Word>
+		</Keywords>
+		<Keywords color="Keywords16">
+			<Word>constructor</Word>
+			<Word>destructor</Word>
+			<Word>def</Word>
+			<Word>include</Word>
+			<Word>event</Word>
+			<Word>ref</Word>
+		</Keywords>
+		<Keywords color="Keywords17">
+			<Word>pass</Word>
+		</Keywords>
+		<Keywords color="Keywords18">
+			<Word>enum</Word>
+			<Word>class</Word>
+			<Word>struct</Word>
+			<Word>interface</Word>
+			<Word>mixin</Word>
+			<Word>callable</Word>
+			<Word>do</Word>
+			<Word>of</Word>
+		</Keywords>
+		<Rule color="Keywords19">[\d\w_]+(?=(\s*\())</Rule>
+		<Rule color="Keywords20">\b0[xX][0-9a-fA-F]+|(\b\d+(\.[0-9]+)?|\.[0-9]+)([eE][+-]?[0-9]+)?</Rule>
+	</RuleSet>
+	<RuleSet name="comments set">
+		<!-- allows nested /**/ comments, coloring them Green/Teal alternately -->
+		<Span color="NestedComments" multiline="true">
+			<Begin>/\*</Begin>
+			<End>\*/</End>
+			<RuleSet>
+				<Span color="Comment" ruleSet="comments set" multiline="true">
+					<Begin>/\*</Begin>
+					<End>\*/</End>
+				</Span>
+			</RuleSet>
+		</Span>
+	</RuleSet>
+</SyntaxDefinition>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfKeywordsFileOption xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<KeywordsFileOption HighlightingName="SQL" Filename="keywords_sql.txt" />
+	<KeywordsFileOption HighlightingName="C#" Filename="keywords_csharp.txt" />
+</ArrayOfKeywordsFileOption>

@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document
+  Size="1793.79,1793.79" xmlns="MiniUml">
+  <Class
+    Name="IsNotPresent"
+    ID="auto_0"
+    Position="92,124,95,75"
+    Stereotype="" />
+  <Class
+    Name="IsLoading"
+    ID="auto_1"
+    Position="301,119,95,75"
+    Stereotype="" />
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_0"
+    FromArrow=""
+    To="auto_1"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="187,168" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="301,168" />
+  </Inheritance>
+  <Class
+    Name="IsPresent"
+    ID="auto_2"
+    Position="426,224,95,75"
+    Stereotype="" />
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_1"
+    FromArrow=""
+    To="auto_2"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="396,164" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="446,224" />
+  </Inheritance>
+  <Note
+    Name=""
+    ID=""
+    Position="81,27,608,75">
+    <Text>See also DocumentState in
+http://edi.codeplex.com/SourceControl/latest#EdiDocuments/ViewModels/EdiDoc/EdiViewModel.cs</Text>
+  </Note>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_2"
+    FromArrow=""
+    To="auto_1"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="468,224" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="396,132" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_2"
+    FromArrow=""
+    To="auto_0"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="426,287" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="118,199" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_1"
+    FromArrow=""
+    To="auto_0"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="301,155" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="187,155" />
+  </Inheritance>
+</Document>

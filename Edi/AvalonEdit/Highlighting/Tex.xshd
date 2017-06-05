@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<SyntaxDefinition name="Tex" extensions=".tex" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+
+	<Color name="Digits"        foreground="#FF9f4545" fontWeight="normal"   exampleText="100" />
+	<Color name="LineComment"   foreground="Green" exampleText="// comment" />
+
+	<Color name="Keywords"      foreground="Blue"      fontWeight="normal"    exampleText="\author"/>
+	<Color name="ShortKeywords" foreground="#FF60604F" background="#30AAAAAA" fontWeight="normal" exampleText="\\"/>
+
+	<Color name="Todo" foreground="Red"  fontWeight="bold" exampleText="Todo"/>
+	<Color name="HACK" foreground="Blue" fontWeight="bold" exampleText="?,.;{}"/>
+
+  <Color name="CurlyBrackets"             foreground="Red" fontWeight="normal"    exampleText="{comment}"/>
+
+  <Color name="SquareBrackets"            foreground="#FF333333"                        exampleText="[comment]"/>
+  <Color name="ParameterInSquareBrackets" foreground="#FF333333" background="#33808080" exampleText="comment" />
+
+  <Color name="MathMode" foreground="Green" />
+  <Color name="MathMode1" fontWeight="bold" background="#33AAAAAA" />
+
+  <RuleSet name = "MathMode" ignoreCase="false">
+    <!-- Delimiters>&amp;~!@%^*()-+=|\#/{}[]:;"'&lt;&gt; , .?</Delimiters -->
+
+    <!-- \... commands -->
+    <!--MarkFollowing markmarker ="true" bold = "true" italic = "false" color = "MidnightBlue">\</MarkFollowing -->
+    <Keywords color="MathMode">
+      <Word>)</Word>
+      <Word>)</Word>
+      <Word>{</Word>
+      <Word>}</Word>
+      <Word>[</Word>
+      <Word>]</Word>
+      <Word>=</Word>
+      <Word>!</Word>
+      <Word>+</Word>
+      <Word>-</Word>
+      <Word>/</Word>
+      <Word>*</Word>
+      <Word>&gt;</Word>
+      <Word>&lt;</Word>
+      <!-- Word>&amp;</Word -->
+      <Word>|</Word>
+      <Word>^</Word>
+      <Word>~</Word>
+      <Word>.</Word>
+      <Word>,</Word>
+      <Word>;</Word>
+      <Word>?</Word>
+      <Word>:</Word>
+      <Word>'</Word>
+      <!--			    <Word>"</Word>-->
+      <Word>`</Word>
+    </Keywords>
+  </RuleSet>
+
+  <!-- This RuleSet can be re-used below with the Main (nameless) RuleSet -->
+	<RuleSet name="CommentMarkerSet">
+		<Keywords color="Todo">
+			<Word>TODO</Word>
+			<Word>FIXME</Word>
+		</Keywords>
+		<Keywords color="HACK">
+			<Word>HACK</Word>
+			<Word>UNDONE</Word>
+			<Word>Bug</Word>
+			<Word>Problem</Word>
+		</Keywords>
+	</RuleSet>
+
+	<!-- This is the main ruleset. -->
+	<RuleSet>
+		<Rule color="Digits">\d</Rule>
+
+    <!-- MathMode $ ... $ -->
+    <Span color="MathMode1" ruleSet="MathMode">
+      <Begin>\$</Begin>
+      <End>\$</End>
+    </Span>
+
+    <!-- MathMode \( ... \) -->
+    <Span color="MathMode1" ruleSet="MathMode">
+      <Begin>\\\(</Begin>
+      <End>\\\)</End>
+    </Span>
+
+    <!-- MathMode \[ ... \] -->
+    <Span color="MathMode1" ruleSet="MathMode">
+      <Begin>\\\[</Begin>
+      <End>\\\]</End>
+    </Span>
+
+    <!-- MathMode [ ... ] -->
+    <Span color="SquareBrackets" multiline="false">
+      <Begin>\[</Begin>
+      <End>\]</End>
+      <RuleSet>
+        <Rule color="ParameterInSquareBrackets">[^\\]</Rule>
+      </RuleSet>
+    </Span>
+
+    <!-- Mark '&','\\ ','\\', '\@', '\$', '\&', '\%', '\#', '\{', '\}', and '\/' etc as keyword -->
+    <Rule color="ShortKeywords">(&amp;)|(\\\ )|(\\\\)|(\\@)|(\\\$)|(\\&amp;)|(\\%)|(\\\#)|(\\{)|(\\})|(\\/)</Rule>
+
+    <Rule color="Keywords">(\\[\w]+)</Rule>
+
+
+    <Rule color="CurlyBrackets">({[\w]+.*})</Rule>
+
+    <Rule color="LineComment">(%)$</Rule>
+
+    <!-- This overwirtes the rule for \% but it is still better than having '% \document' not being marked as comment
+         What is missing is a span rule that says something like match this only if it does not start with '\%' ???
+     -->
+    <Span color="LineComment" ruleSet="CommentMarkerSet">
+      <Begin>%</Begin>
+    </Span>
+
+    <Rule color="CurlyBrackets">({)|(})</Rule>
+
+    <!-- Rule foreground="Red">\\\%</Rule -->
+    </RuleSet>
+
+  <!-- Command Overview: http://www.math.sunysb.edu/~sorin/online-docs/latexhelp/ -->
+	
+</SyntaxDefinition>

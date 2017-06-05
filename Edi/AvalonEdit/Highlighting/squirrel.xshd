@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<!-- Source: http://geogen.googlecode.com/svn/trunk/config/squirrel.xshd -->
+<SyntaxDefinition name="Squirrel" extensions=".nut" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <!-- Reference: http://www.squirrel-lang.org/
+       Reference Manual: http://www.squirrel-lang.org/doc/squirrel2.html -->
+	<Color name="Comment" foreground="Green" exampleText="// comment" />
+	<Color name="String" foreground="DarkRed" exampleText="string text = &quot;Hello, World!&quot;"/>
+	<Color name="Punctuation" foreground="DarkGreen" exampleText="a(b.c);" />
+	<Color name="MethodCall" foreground="MidnightBlue" fontWeight="bold" exampleText="o.ToString();"/>
+	<Color name="Digits" foreground="DarkBlue" exampleText="3.1415f"/>
+	<Color name="GGenObject" foreground="Teal" exampleText="local base = GGen_Data_2D(200, 200, 0)"/>
+	<Color name="Keywords" fontWeight="bold" foreground="Black" exampleText="if (a) {} else {}"/>
+
+  <Color name="CommentMarkerSetTodo"       foreground="Red"     fontWeight="bold" />
+  <Color name="CommentMarkerSetHackUndone" foreground="#E0E000" fontWeight="bold" />
+
+  <Color name="PreprocessorLine"           foreground="#FF6666FF" fontWeight="bold" />
+
+  <RuleSet name="CommentMarkerSet">
+		<Keywords color="CommentMarkerSetTodo">
+			<Word>TODO</Word>
+			<Word>FIXME</Word>
+		</Keywords>
+		<Keywords color="CommentMarkerSetHackUndone">
+			<Word>HACK</Word>
+			<Word>UNDONE</Word>
+		</Keywords>
+	</RuleSet>
+	
+	<RuleSet>
+
+    <Span  color="PreprocessorLine" multiline="false">
+      <Begin>\#</Begin>
+    </Span>
+
+    <Span color="Comment">
+			<Begin color="XmlDoc/DocComment">///</Begin>
+			<RuleSet>
+				<Import ruleSet="XmlDoc/DocCommentSet"/>
+				<Import ruleSet="CommentMarkerSet"/>
+			</RuleSet>
+		</Span>
+		
+		<Span color="Comment" ruleSet="CommentMarkerSet">
+			<Begin>//</Begin>
+		</Span>
+		
+		<Span color="Comment" ruleSet="CommentMarkerSet" multiline="true">
+			<Begin>/\*</Begin>
+			<End>\*/</End>
+		</Span>
+		
+		<Span color="String">
+			<Begin>"</Begin>
+			<End>"</End>
+			<RuleSet>
+				<!-- span for escape sequences -->
+				<Span begin="\\" end="."/>
+			</RuleSet>
+		</Span>
+		
+		<Span color="String" multiline="true">
+			<Begin color="String">@"</Begin>
+			<End>"</End>
+			<RuleSet>
+				<!-- span for escape sequences -->
+				<Span begin='""' end=""/>
+			</RuleSet>
+		</Span>
+		
+		<Rule color="Punctuation">
+			[?,.;()\[\]{}+\-/%*&lt;&gt;^+~!|&amp;]+
+		</Rule>
+		
+		<Keywords color="GGenObject">
+			<Word>GGen_Point</Word>
+			<Word>GGen_Path</Word>
+			<Word>GGen_Amplitudes</Word>
+			<Word>GGen_Data_2D</Word>
+			<Word>GGen_Data_1D</Word>
+		</Keywords>
+		
+		<Keywords color="Keywords">
+			<Word>else</Word>
+			<Word>if</Word>
+			<Word>switch</Word>
+			<Word>case</Word>
+			<Word>default</Word>
+			<Word>for</Word>
+			<Word>while</Word>
+			<Word>break</Word>
+			<Word>local</Word>
+			<Word>catch</Word>
+			<Word>clone</Word>
+			<Word>continue</Word>
+			<Word>const</Word>
+			<Word>delegate</Word>
+			<Word>delete</Word>
+			<Word>else</Word>
+			<Word>enum</Word>
+			<Word>extends</Word>
+			<Word>for</Word>
+			<Word>function</Word>
+			<Word>null</Word>
+			<Word>resume</Word>
+			<Word>return</Word>
+			<Word>switch</Word>
+			<Word>this</Word>
+			<Word>throw</Word>
+			<Word>typeof</Word>
+			<Word>parent</Word>
+			<Word>yield</Word>
+			<Word>constructor</Word>
+			<Word>vargc</Word>
+			<Word>vargv</Word>
+			<Word>instanceof</Word>
+			<Word>true</Word>
+			<Word>false</Word>
+			<Word>static</Word>
+		</Keywords>
+		
+		<!-- Mark previous rule-->
+		<Rule color="MethodCall">
+		\b
+		[\d\w_]+  # an identifier
+		(?=\s*\() # followed by (
+		</Rule>
+		
+		<!-- Digits -->
+		<Rule color="Digits">
+			\b0[xX][0-9a-fA-F]+  # hex number
+		|	\b
+			(	\d+(\.[0-9]+)?   #number with optional floating point
+			|	\.[0-9]+         #or just starting with floating point
+			)
+			([eE][+-]?[0-9]+)? # optional exponent
+		</Rule>
+	</RuleSet>
+</SyntaxDefinition>

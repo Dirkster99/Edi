@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document
+  Size="1793.79,1793.79" xmlns="MiniUml">
+  <Component
+    Name="EdiViews"
+    ID="auto_1"
+    Position="451,87,174,75"
+    Stereotype="" />
+  <Component
+    Name="Util"
+    ID="auto_5"
+    Position="707,469,125,75"
+    Stereotype="" />
+  <Component
+    Name="UnitCombobox"
+    ID="auto_7"
+    Position="844,191,125,75"
+    Stereotype="" />
+  <Component
+    Name="ICSharpCode.AvalonEdit"
+    ID="auto_3"
+    Position="700,85,182,75"
+    Stereotype="" />
+  <Component
+    Name="MsgBox"
+    ID="auto_4"
+    Position="844,278,125,75"
+    Stereotype="" />
+  <Component
+    Name="Themes"
+    ID="auto_6"
+    Position="845,361,125,75"
+    Stereotype="" />
+  <Component
+    Name="SimpleControls"
+    ID="auto_2"
+    Position="508,466,125,75"
+    Stereotype="" />
+  <Component
+    Name="Edi"
+    ID="auto_0"
+    Position="506,276,125,75"
+    Stereotype="" />
+  <Association
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_0"
+    FromArrow=""
+    To="auto_1"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="594,276" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="594,162" />
+  </Association>
+  <Association
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_2"
+    FromArrow=""
+    To="auto_0"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="590,466" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="591,351" />
+  </Association>
+  <Association
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_0"
+    FromArrow=""
+    To="auto_3"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="612,276" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="714,160" />
+  </Association>
+  <Association
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_0"
+    FromArrow=""
+    To="auto_4"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="631,311.16" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="844,311.16" />
+  </Association>
+  <Association
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_0"
+    FromArrow=""
+    To="auto_5"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="610,351" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="725,469" />
+  </Association>
+  <Association
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_0"
+    FromArrow=""
+    To="auto_6"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="631,330.16" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="845,396.16" />
+  </Association>
+  <Association
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_0"
+    FromArrow=""
+    To="auto_7"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="631,289.16" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="844,230.16" />
+  </Association>
+</Document>

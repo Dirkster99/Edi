@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://edi.codeplex.com/highlightingtheme/syntaxdefinition/2013"
+                      xmlns="http://edi.codeplex.com/highlightingtheme/syntaxdefinition/2013"
+                      xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <xsd:simpleType name="ColorDefinition">
+    <xsd:union>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="\#[0-9a-fA-F]+"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Black"/> <!-- #000000 -->
+          <xsd:enumeration value="Navy"/>  <!-- #000080 -->
+          <xsd:enumeration value="DarkBlue"/> <!-- #00008B -->
+          <xsd:enumeration value="MediumBlue"/> <!-- #0000CD -->
+          <xsd:enumeration value="Blue"/> <!-- #0000FF -->
+          <xsd:enumeration value="DarkGreen"/> <!-- #006400 -->
+          <xsd:enumeration value="Green"/> <!-- #008000 -->
+          <xsd:enumeration value="Teal"/> <!-- #008080 -->
+          <xsd:enumeration value="DarkCyan"/> <!-- #008B8B -->
+          <xsd:enumeration value="DeepSkyBlue"/> <!-- #00BFFF -->
+          <xsd:enumeration value="DarkTurquoise"/> <!-- #00CED1 -->
+          <xsd:enumeration value="MediumSpringGreen"/> <!-- #00FA9A -->
+          <xsd:enumeration value="Lime"/> <!-- #00FF00 -->
+          <xsd:enumeration value="SpringGreen"/> <!-- #00FF7F -->
+          <xsd:enumeration value="Aqua"/> <!-- #00FFFF -->
+          <xsd:enumeration value="Cyan"/> <!-- #00FFFF -->
+          <xsd:enumeration value="MidnightBlue"/> <!-- #191970 -->
+          <xsd:enumeration value="DodgerBlue"/> <!-- #1E90FF -->
+          <xsd:enumeration value="LightSeaGreen"/> <!-- #20B2AA -->
+          <xsd:enumeration value="ForestGreen"/> <!-- #228B22 -->
+          <xsd:enumeration value="SeaGreen"/> <!-- #2E8B57 -->
+          <xsd:enumeration value="DarkSlateGray"/> <!-- #2F4F4F -->
+          <xsd:enumeration value="LimeGreen"/> <!-- #32CD32 -->
+          <xsd:enumeration value="MediumSeaGreen"/> <!-- #3CB371 -->
+          <xsd:enumeration value="Turquoise"/> <!-- #40E0D0 -->
+          <xsd:enumeration value="RoyalBlue"/> <!-- #4169E1 -->
+          <xsd:enumeration value="SteelBlue"/> <!-- #4682B4 -->
+          <xsd:enumeration value="DarkSlateBlue"/> <!-- #483D8B -->
+          <xsd:enumeration value="MediumTurquoise"/> <!-- #48D1CC -->
+          <xsd:enumeration value="Indigo"/> <!-- #4B0082 -->
+          <xsd:enumeration value="DarkOliveGreen"/> <!--  #556B2F -->
+          <xsd:enumeration value="CadetBlue"/> <!-- #5F9EA0 -->
+          <xsd:enumeration value="CornflowerBlue"/> <!-- #6495ED -->
+          <xsd:enumeration value="MediumAquaMarine"/> <!-- #66CDAA -->
+          <xsd:enumeration value="DimGray"/> <!-- #696969 -->
+          <xsd:enumeration value="SlateBlue"/> <!-- #6A5ACD -->
+          <xsd:enumeration value="OliveDrab"/> <!-- #6B8E23 -->
+          <xsd:enumeration value="SlateGray"/> <!-- #708090 -->
+          <xsd:enumeration value="LightSlateGray"/> <!-- #778899 -->
+          <xsd:enumeration value="MediumSlateBlue"/> <!-- #7B68EE -->
+          <xsd:enumeration value="LawnGreen"/> <!-- #7CFC00 -->
+          <xsd:enumeration value="Chartreuse"/> <!-- #7FFF00 -->
+          <xsd:enumeration value="Aquamarine"/> <!-- #7FFFD4 -->
+          <xsd:enumeration value="Maroon"/> <!-- #800000 -->
+          <xsd:enumeration value="Purple"/> <!-- #800080 -->
+          <xsd:enumeration value="Olive"/> <!-- #808000 -->
+          <xsd:enumeration value="Gray"/> <!-- #808080 -->
+          <xsd:enumeration value="SkyBlue"/> <!-- #87CEEB -->
+          <xsd:enumeration value="LightSkyBlue"/> <!-- #87CEFA -->
+          <xsd:enumeration value="BlueViolet"/> <!-- #8A2BE2 -->
+          <xsd:enumeration value="DarkRed"/> <!-- #8B0000 -->
+          <xsd:enumeration value="DarkMagenta"/> <!-- #8B008B -->
+          <xsd:enumeration value="SaddleBrown"/> <!-- #8B4513 -->
+          <xsd:enumeration value="DarkSeaGreen"/> <!-- #8FBC8F -->
+          <xsd:enumeration value="LightGreen"/> <!-- #90EE90 -->
+          <xsd:enumeration value="MediumPurple"/> <!-- #9370D8 -->
+          <xsd:enumeration value="DarkViolet"/> <!-- #9400D3 -->
+          <xsd:enumeration value="PaleGreen"/> <!-- #98FB98 -->
+          <xsd:enumeration value="DarkOrchid"/> <!-- #9932CC -->
+          <xsd:enumeration value="YellowGreen"/> <!-- #9ACD32 -->
+          <xsd:enumeration value="Sienna"/> <!-- #A0522D -->
+          <xsd:enumeration value="Brown"/> <!-- #A52A2A -->
+          <xsd:enumeration value="DarkGray"/> <!-- #A9A9A9 -->
+          <xsd:enumeration value="LightBlue"/> <!-- #ADD8E6 -->
+          <xsd:enumeration value="GreenYellow"/> <!-- #ADFF2F -->
+          <xsd:enumeration value="PaleTurquoise"/> <!-- #AFEEEE -->
+          <xsd:enumeration value="LightSteelBlue"/> <!-- #B0C4DE -->
+          <xsd:enumeration value="PowderBlue"/> <!-- #B0E0E6 -->
+          <xsd:enumeration value="FireBrick"/> <!-- #B22222 -->
+          <xsd:enumeration value="DarkGoldenRod"/> <!-- #B8860B -->
+          <xsd:enumeration value="MediumOrchid"/> <!-- #BA55D3 -->
+          <xsd:enumeration value="RosyBrown"/> <!-- #BC8F8F -->
+          <xsd:enumeration value="DarkKhaki"/> <!-- #BDB76B -->
+          <xsd:enumeration value="Silver"/> <!-- #C0C0C0 -->
+          <xsd:enumeration value="MediumVioletRed"/> <!-- #C71585 -->
+          <xsd:enumeration value="IndianRed"/> <!-- #CD5C5C -->
+          <xsd:enumeration value="Peru"/> <!-- #CD853F -->
+          <xsd:enumeration value="Chocolate"/> <!-- #D2691E -->
+          <xsd:enumeration value="Tan"/> <!-- #D2B48C -->
+          <xsd:enumeration value="LightGrey"/> <!-- #D3D3D3 -->
+          <xsd:enumeration value="PaleVioletRed"/> <!-- #D87093 -->
+          <xsd:enumeration value="Thistle"/> <!-- #D8BFD8 -->
+          <xsd:enumeration value="Orchid"/> <!-- #DA70D6 -->
+          <xsd:enumeration value="GoldenRod"/> <!-- #DAA520 -->
+          <xsd:enumeration value="Crimson"/> <!-- #DC143C -->
+          <xsd:enumeration value="Gainsboro"/> <!-- #DCDCDC -->
+          <xsd:enumeration value="Plum"/> <!-- #DDA0DD -->
+          <xsd:enumeration value="BurlyWood"/> <!-- #DEB887 -->
+          <xsd:enumeration value="LightCyan"/> <!-- #E0FFFF -->
+          <xsd:enumeration value="Lavender"/> <!-- #E6E6FA -->
+          <xsd:enumeration value="DarkSalmon"/> <!-- #E9967A -->
+          <xsd:enumeration value="Violet"/> <!-- #EE82EE -->
+          <xsd:enumeration value="PaleGoldenRod"/> <!-- #EEE8AA -->
+          <xsd:enumeration value="LightCoral"/> <!-- #F08080 -->
+          <xsd:enumeration value="Khaki"/> <!-- #F0E68C -->
+          <xsd:enumeration value="AliceBlue"/> <!-- #F0F8FF -->
+          <xsd:enumeration value="HoneyDew"/> <!-- #F0FFF0 -->
+          <xsd:enumeration value="Azure"/> <!-- #F0FFFF -->
+          <xsd:enumeration value="SandyBrown"/> <!-- #F4A460 -->
+          <xsd:enumeration value="Wheat"/> <!-- #F5DEB3 -->
+          <xsd:enumeration value="Beige"/> <!-- #F5F5DC -->
+          <xsd:enumeration value="WhiteSmoke"/> <!-- #F5F5F5 -->
+          <xsd:enumeration value="MintCream"/> <!-- #F5FFFA -->
+          <xsd:enumeration value="GhostWhite"/> <!-- #F8F8FF -->
+          <xsd:enumeration value="Salmon"/> <!-- #FA8072 -->
+          <xsd:enumeration value="AntiqueWhite"/> <!-- #FAEBD7 -->
+          <xsd:enumeration value="Linen"/> <!-- #FAF0E6 -->
+          <xsd:enumeration value="LightGoldenRodYellow"/> <!-- #FAFAD2 -->
+          <xsd:enumeration value="OldLace"/> <!-- #FDF5E6 -->
+          <xsd:enumeration value="Red"/> <!-- #FF0000 -->
+          <xsd:enumeration value="Fuchsia"/> <!-- #FF00FF -->
+          <xsd:enumeration value="Magenta"/> <!-- #FF00FF -->
+          <xsd:enumeration value="DeepPink"/> <!-- #FF1493 -->
+          <xsd:enumeration value="OrangeRed"/> <!-- #FF4500 -->
+          <xsd:enumeration value="Tomato"/> <!-- #FF6347 -->
+          <xsd:enumeration value="HotPink"/> <!-- #FF69B4 -->
+          <xsd:enumeration value="Coral"/> <!-- #FF7F50 -->
+          <xsd:enumeration value="Darkorange"/> <!-- #FF8C00 -->
+          <xsd:enumeration value="LightSalmon"/> <!-- #FFA07A -->
+          <xsd:enumeration value="Orange"/> <!-- #FFA500 -->
+          <xsd:enumeration value="LightPink"/> <!-- #FFB6C1 -->
+          <xsd:enumeration value="Pink"/> <!-- #FFC0CB -->
+          <xsd:enumeration value="Gold"/> <!-- #FFD700 -->
+          <xsd:enumeration value="PeachPuff"/> <!-- #FFDAB9 -->
+          <xsd:enumeration value="NavajoWhite"/> <!-- #FFDEAD -->
+          <xsd:enumeration value="Moccasin"/> <!-- #FFE4B5 -->
+          <xsd:enumeration value="Bisque"/> <!-- #FFE4C4 -->
+          <xsd:enumeration value="MistyRose"/> <!-- #FFE4E1 -->
+          <xsd:enumeration value="BlanchedAlmond"/> <!-- #FFEBCD -->
+          <xsd:enumeration value="PapayaWhip"/> <!-- #FFEFD5 -->
+          <xsd:enumeration value="LavenderBlush"/> <!-- #FFF0F5 -->
+          <xsd:enumeration value="SeaShell"/> <!-- #FFF5EE -->
+          <xsd:enumeration value="Cornsilk"/> <!-- #FFF8DC -->
+          <xsd:enumeration value="LemonChiffon"/> <!-- #FFFACD -->
+          <xsd:enumeration value="FloralWhite"/> <!-- #FFFAF0 -->
+          <xsd:enumeration value="Snow"/> <!-- #FFFAFA -->
+          <xsd:enumeration value="Yellow"/> <!-- #FFFF00 -->
+          <xsd:enumeration value="LightYellow"/> <!-- #FFFFE0 -->
+          <xsd:enumeration value="Ivory"/> <!-- #FFFFF0 -->
+          <xsd:enumeration value="White"/> <!-- #FFFFFF -->
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:union>
+  </xsd:simpleType>
+  
+  <!-- Font Weight -->
+  <xsd:simpleType name="FontWeight">
+    <xsd:union>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:integer">
+          <xsd:minInclusive value="1"/>
+          <xsd:maxInclusive value="999"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="bold"/>
+          <xsd:enumeration value="normal"/>
+          <xsd:enumeration value="regular"/><!-- should we support other font weigth names? -->
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:union>
+  </xsd:simpleType>
+
+  <!-- Font Style -->
+  <xsd:simpleType name="FontStyle">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="italic"/>
+      <xsd:enumeration value="normal"/>
+      <xsd:enumeration value="oblique"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <!-- WordsStyle XML Tag Defintion -->
+  <xsd:element name="WordsStyle">
+    <xsd:complexType>
+      <xsd:attribute name="name" type="xsd:string" use="required" />
+      <xsd:attribute name="fgColor" type="ColorDefinition" use="optional" />
+      <xsd:attribute name="bgColor" type="ColorDefinition" use="optional" />
+
+      <!-- XXX xsd:attribute name="fontName" type="xsd:string" use="optional" / -->
+      <xsd:attribute name="fontWeight" type="FontWeight" use="optional" />
+      <xsd:attribute name="fontStyle" type="FontStyle" use="optional" />
+    </xsd:complexType>
+  </xsd:element>
+
+  <!-- LexerType XML Tag Defintion -->
+  <xsd:element name="LexerType">
+    <xsd:complexType>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="WordsStyle"/>
+      </xsd:choice>
+      <xsd:attribute name="name" type="xsd:string" use="required" />
+      <xsd:attribute name="desc" type="xsd:string" use="optional" />
+    </xsd:complexType>
+  </xsd:element>
+
+  <!-- LexerStyles XML Tag Defintion -->
+  <xsd:element name="LexerStyles">
+    <xsd:complexType>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="LexerType"/>
+      </xsd:choice>
+    </xsd:complexType>
+  </xsd:element>
+
+  <!-- Default editor foreground and background color -->
+  <xsd:element name="DefaultStyle">
+    <xsd:complexType>
+      <xsd:attribute name="fgColor" type="ColorDefinition" use="required" />
+      <xsd:attribute name="bgColor" type="ColorDefinition" use="required" />
+    </xsd:complexType>
+  </xsd:element>
+
+  <!-- Highlighting color for the current line in the editor -->
+  <xsd:element name="CurrentLineBackground">
+    <xsd:complexType>
+      <xsd:attribute name="bgColor" type="ColorDefinition" use="required" />
+    </xsd:complexType>
+  </xsd:element>
+
+  <!-- Foreground Color of the Line numbers display in the editor-->
+  <xsd:element name="LineNumbersForeground">
+    <xsd:complexType>
+      <xsd:attribute name="fgColor" type="ColorDefinition" use="required" />
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="Selection">
+    <xsd:complexType>
+      <xsd:attribute name="fgColor"     type="ColorDefinition" use="required" />
+      <xsd:attribute name="bgColor"     type="ColorDefinition" use="required" />
+      <xsd:attribute name="borderColor" type="ColorDefinition" use="required" />
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="NonPrintableCharacter">
+    <xsd:complexType>
+      <xsd:attribute name="fgColor" type="ColorDefinition" use="required" />
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="Hyperlink">
+    <xsd:complexType>
+      <xsd:attribute name="fgColor" type="ColorDefinition" use="required" />
+      <xsd:attribute name="bgColor" type="ColorDefinition" use="required" />
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="GlobalStyles">
+    <xsd:complexType>
+      <xsd:all>
+        <xsd:element ref="DefaultStyle"          minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="CurrentLineBackground" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="LineNumbersForeground" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="Selection"             minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="NonPrintableCharacter" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="Hyperlink"             minOccurs="0" maxOccurs="1"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+
+  <!-- Main syntax definition -->
+  <xsd:element name="HlThemes">
+    
+    <xsd:complexType>
+      <xsd:all minOccurs="0" maxOccurs="1">
+        <xsd:element ref="LexerStyles" minOccurs="0" maxOccurs="1" />
+        <xsd:element ref="GlobalStyles" minOccurs="0" maxOccurs="1" />
+      </xsd:all>
+      <xsd:attribute name="name" type="xsd:string" use="required" />
+    </xsd:complexType>
+    
+  </xsd:element>
+</xsd:schema>

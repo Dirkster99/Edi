@@ -1,0 +1,43 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:deco="clr-namespace:MiniUML.View.Views.ResizeAdorner.Decorators"
+                    xmlns:thumbs="clr-namespace:MiniUML.View.Views.ResizeAdorner.Thumbs"
+                    xmlns:items="clr-namespace:MiniUML.View.Views.ResizeAdorner">
+
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="/MiniUML.View;component/Themes/ResizeAdorner/ResizeChrome.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+
+  <ControlTemplate x:Key="MoveThumbTemplate" TargetType="{x:Type thumbs:MoveThumb}">
+    <Rectangle Fill="Transparent" />
+  </ControlTemplate>
+
+  <Style TargetType="{x:Type items:DesignerItem}">
+    <Setter Property="MinHeight" Value="10" />
+    <Setter Property="MinWidth" Value="10" />
+    <Setter Property="SnapsToDevicePixels" Value="true" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type items:DesignerItem}">
+          <Grid DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=.}">
+
+            <!-- thumbs:MoveThumb x:Name="PART_MoveThumb" Cursor="SizeAll"
+                                  Template="{StaticResource MoveThumbTemplate}" / -->
+
+            <ContentPresenter x:Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding ContentControl.Content}"
+                                      Margin="{TemplateBinding Padding}" />
+
+            <deco:ResizeDecorator x:Name="PART_DesignerItemDecorator" />
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+              <Setter TargetName="PART_DesignerItemDecorator" Property="ShowDecorator" Value="True" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+</ResourceDictionary>

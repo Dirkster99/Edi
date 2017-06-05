@@ -1,0 +1,21 @@
+1 Knowledge Base
+
+001 Issue Error when starting application via 'Open with...' parameter file in Windows Explorer
+
+Failed to load type for module MEFLoadLog4NetTools. 
+Error was: Could not load file or assembly 'Log4NetTools.dll' or one of its dependencies. The system cannot find the path specified..
++->Could not load file or assembly 'Log4NetTools.dll' or one of its dependencies. The system cannot find the path specified.
+  +->The system cannot find the path specified. (Exception from HRESULT: 0x80070003)
+
+Known resolutions
+--------------------------
+
+The file: "C:\Program Files\Edi\Edi.exe.config" contains references to modules that are loaded at run-time. MEF requires that these references
+point to the actual installation folder (in particular when the application is started from a different folder than the setup folder).
+
+Setup should normally take care of this but you can also use the following steps to solve this issue if you moved files manually.
+
+Replace a file reference in 'Edi.exe.config': assemblyFile="Files.dll"
+                   with a complete path reference: assemblyFile="C:\Program Files\Edi\Files.dll"
+
+to resolve this problem.

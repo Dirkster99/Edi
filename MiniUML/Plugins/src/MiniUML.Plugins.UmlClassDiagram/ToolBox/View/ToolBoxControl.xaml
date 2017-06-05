@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="MiniUML.Plugins.UmlClassDiagram.ToolBox.View.ToolBoxControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+
+             xmlns:behav="clr-namespace:MiniUML.Model.behaviour;assembly=MiniUML.Model"
+             xmlns:convert="clr-namespace:MiniUML.Plugins.UmlClassDiagram.Converter"
+
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+  <Border ><!-- BorderBrush="LightGray" BorderThickness="1"-->
+    <StackPanel>
+        <ItemsControl ItemsSource="{Binding ToolBoxItems}">
+          <ItemsControl.Template>
+            <ControlTemplate TargetType="{x:Type ItemsControl}">
+              <Border BorderThickness="{TemplateBinding Border.BorderThickness}"
+                      Padding="{TemplateBinding Control.Padding}"
+                      BorderBrush="{TemplateBinding Border.BorderBrush}"
+                      Background="{TemplateBinding Panel.Background}"
+                      SnapsToDevicePixels="True">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                  <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                </ScrollViewer>
+              </Border>
+            </ControlTemplate>
+          </ItemsControl.Template>
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+            <WrapPanel Margin="0"  /><!-- ItemHeight="32" ItemWidth="32" -->
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemContainerStyle>
+            <Style TargetType="{x:Type ContentPresenter}">
+              <Setter Property="Control.Padding" Value="0" />
+              <Setter Property="ContentControl.HorizontalContentAlignment" Value="Stretch" />
+              <Setter Property="ContentControl.VerticalContentAlignment" Value="Center" />
+              <Setter Property="ToolTip">
+                <Setter.Value>
+                  <Grid>
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding Path=CreateShapeCommand.Title, Mode=OneWay}" HorizontalAlignment="Left" Grid.Row="0" />
+                    <Separator Margin="3" Grid.Row="1" />
+                    <TextBlock Text="{Binding Path=CreateShapeCommand.ToolTip, Mode=OneWay}" HorizontalAlignment="Left" Grid.Row="2"/>
+                  </Grid>
+                </Setter.Value>
+              </Setter>
+              
+              <Setter Property="behav:DragAndDropProps.EnabledForDrag" Value="True" />
+            </Style>
+          </ItemsControl.ItemContainerStyle>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Image IsHitTestVisible="True"
+                     Width="32" Height="32"
+                      Grid.Row="0"
+                      Margin="1,0,1,0"
+                      Stretch="Fill"
+                      Source="{Binding ImageUrl, Converter={x:Static convert:ImageUrlConverter.Instance}}" />
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
+  </Border>
+</UserControl>

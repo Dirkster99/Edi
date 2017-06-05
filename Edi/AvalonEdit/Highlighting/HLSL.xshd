@@ -1,0 +1,270 @@
+<SyntaxDefinition name = "HLSL" extensions = ".fx"
+                  xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <!-- Source: http://www.codeproject.com/Articles/42490/Using-AvalonEdit-WPF-Text-Editor?msg=3866004#xx3866004xx -->
+  <!--Colors-->
+  <Color name="Digits" foreground="DarkBlue" fontStyle="italic" />
+  <Color name="Comments"  foreground="Green" />
+  <Color name="Punctuation" foreground="DarkGreen" />
+  <Color name="Keywords"  foreground="Blue" />
+  <Color name="DataTypes" foreground="#00A2E8" />
+  <Color name="States"    foreground="Red" />
+  <Color name="Constants" foreground="Violet" />
+  <Color name="Semantics" foreground="#C9BD16" />
+  <Color name="Functions" foreground="#0B136B" />
+  <Color name="MethodCall" foreground="DarkBlue" />
+
+  <!--Casesensitive-->
+  <RuleSet>
+    <Rule color="Punctuation">
+      [?,.;:()\[\]{}+\-/%*&lt;&gt;^!|]+
+    </Rule>
+    <!--Comments-->
+    <Span color="Comments" begin="//" />
+    <Span color="Keywords" begin="#" />
+    <Span color="DataTypes" begin="&lt;" end="&gt;" />
+    <Span color="Comments" multiline="true"
+       begin="/\*" end="\*/" />
+    <!--Keywords-->
+    <Rule color="Keywords">
+      (if
+      |else
+      |break
+      |continue
+      |do
+      |for
+      |switch
+      |while
+      |return
+      |technique
+      |pass
+      |compile
+      |sampler
+      |register
+      |typedef
+      |struct
+      |auto|catch|char|class|const_cast
+      |default|delete|dynamic_cast
+      |enum|explicit|friend|goto
+      |long|mutable|new|operator
+      |private|protected|public
+      |reinterpret_cast|short|sizeof|static_cast
+      |template|this|throw|try|typename|union
+      |using|virtual|void|extern)(\s|[;{(])
+    </Rule>
+    <!--Scalar data types with vector and matrix-->   
+    <Rule color="DataTypes">
+      (Buffer|bool|int|uint|half|float|double)([1-4]?)(x[1-4])? (?=[(]|\s|\r|\n)
+    </Rule>
+    <!--Other data types-->
+    <Rule color="DataTypes">
+      (Texture) (?=[(]|\s|\r|\n)
+    </Rule>
+    <!--Sampler types-->
+    <Rule color="DataTypes">
+      (sampler1D|sampler2D|sampler3D|samplerCUBE|sampler_state|SamplerState)
+    </Rule>  
+    <!--States-->
+    <Rule color="States">
+      (?i)(?&lt;=\W)(VertexShader|PixelShader|GeometryShader|
+      AddressU|AddressV|AddressW|BorderColor|Filter|MaxAnisotropy|
+      MaxLOD|MinLOD|MipLODBias|ComparisonFunc|ComparisonFilter|
+      MipFilter|MinFilter|MagFilter|Texture|MaxLOD|MinLOD
+ 
+      |AlphaBlendEnable|AlphaFunc|AlphaRef|AlphaTestEnable|BlendOp
+      |ColorWriteEnable|DepthBias|DestBlend|DitherEnable|FillMode
+      |LastPixel|ShadeMode|SlopeScaleDepthBias|SrcBlend
+      |StencilEnable|StencilFail|StencilFunc|StencilMask
+      |StencilPass|StencilRef|StencilWriteMask|StencilZFail
+      |TextureFactor|ZEnable|ZFunc
+      |Ambient|AmbientMaterialSource|Clipping|ClipPlaneEnable
+      |ColorVertex|CullMode|DiffuseMaterialSource|EmissiveMaterialSource
+      |FogColor|FogDensity|FogEnable|FogEnd|FogStart|FogTableMode|FogVertexMode
+      |IndexedVertexBlendEnable|Lighting|LocalViewer|MultiSampleAntialias|MultiSampleMask
+      |NormalizeNormals|PatchSegments|PointScale_A|PointScale_B|PointScale_C
+      |PointScaleEnable|PointSize|PointSize_Min|PointSize_Max|PointSpriteEnable
+      |RangeFogEnable|SpecularEnable|SpecularMaterialSource|TweenFactor|VertexBlend)(?=\s*[=])
+    </Rule>
+    <Rule color="States">
+      (?i)(?&lt;=\W)(Wrap\d(\d)?)
+    </Rule>
+    <!--Constants-->
+    <Rule color="Constants" >
+      (?i)(?&lt;=([=]\s*))(true|false|wrap|mirror|clamp|border|mirroronce
+      |none|point|linear|anisotropic|pyramidalquad|gaussianquad|convolutionmono
+      |zero|one|srccolor|invsrccolor|srcalpha|invsrcalpha|destalpha|invdestalpha
+      |destcolor|invdestcolor|srcalphasat|bothsrcalpha|bothinvsrcalpha
+      |blendfactor|invblendfactor|srccolor2|invsrccolor2
+      |never|less|equal|lessequal|greater|notequal|greaterequal|always|wireframe|solid
+      |flat|gouraud|phong
+      |keep|replace|incrsat|decrsat|invert|decr|twosided|cw|ccw|exp|exp2|linear
+      |disable|1weights|2weights|3weights|tweening|0weights)(?=\s|[;{(])
+    </Rule>
+    <Rule color="Constants">
+      (ps|vs)_\d_\d(?=\s|[;{(])
+    </Rule>
+    <!--Semantics: Index-->
+    <Rule color="Semantics">
+      (?&lt;=([:]\s*))
+      (BINORMAL|BLENDINDICES|BLENDWEIGHT|COLOR|NORMAL|POSITION|
+      PSIZE|TANGENT|TEXCOORD|TESSFACTOR|DEPTH|SV_ClipDistance|
+      SV_CullDistance|SV_Target)
+      (\d?)
+    </Rule>
+    <!--Semantics: No Index-->
+    <Rule color="Semantics">
+      ([:]\s*)(POSITIONT
+      |FOG
+      |PSIZE
+      |VFACE
+      |VPOS
+      |SV_Coverage
+      |SV_Depth
+      |SV_DispatchThreadID
+      |SV_GroupID
+      |SV_GroupIndex
+      |SV_GroupThreadID
+      |SV_InsideTessFactor
+      |SV_IsFrontFace
+      |SV_OutputControlPointID
+      |SV_Position
+      |SV_RenderTargetArrayIndex
+      |SV_SampleIndex
+      |SV_TessFactor
+      |SV_ViewportArrayIndex
+      |SV_InstanceID
+      |SV_PrimitiveID
+      |SV_VertexID)
+    </Rule>
+    <!--Functions-->
+    <Rule color="Functions">
+      (abs
+      |acos
+      |all
+      |AllMemoryBarrier
+      |AllMemoryBarrierWithGroupSync
+      |any
+      |asdouble
+      |asfloat
+      |asin
+      |asint
+      |asuint
+      |atan
+      |atan2
+      |ceil
+      |clamp
+      |clip
+      |cos
+      |cosh
+      |countbits
+      |cross
+      |D3DCOLORtoUBYTE4
+      |ddx
+      |ddx_coarse
+      |ddx_fine
+      |ddy
+      |ddy_coarse
+      |ddy_fine
+      |degrees
+      |determinant
+      |DeviceMemoryBarrier
+      |DeviceMemoryBarrierWithGroupSync
+      |distance
+      |dot
+      |dst
+      |EvaluateAttributeAtCentroid
+      |EvaluateAttributeAtSample
+      |EvaluateAttributeSnapped
+      |exp
+      |exp2
+      |f16tof32
+      |f32tof16
+      |facetoforward
+      |firstbithigh
+      |firstbitlow
+      |floor
+      |fmod
+      |frac
+      |frexp
+      |fwidth
+      |GetRenderTargetSampleCount
+      |GetRenderTargetSamplePosition
+      |GroupMamoryBarrier
+      |GroupMamoryBarrierWithGroupSync
+      |InterlockedAdd
+      |InterlockedCompareExchange
+      |InterlockedCompareStore
+      |InterlockedExchange
+      |InterlockedMax
+      |InterlockedMin
+      |InterlockedOr
+      |InterlockedXor
+      |isfinite
+      |isinf
+      |isnan
+      |ldexp
+      |lerp
+      |lit
+      |log
+      |log10
+      |log2
+      |mad
+      |max
+      |min
+      |modf
+      |mul
+      |noise
+      |normalize
+      |pow
+      |Process2DQuadTessFactorsAvg
+      |Process2DQuadTessFactorsMax
+      |Process2DQuadTessFactorsMin
+      |ProcessIsolineTessFactors
+      |ProcessQuadTessFactorsAvg
+      |ProcessQuadTessFactorsMax
+      |ProcessQuadTessFactorsMin
+      |ProcessTriTessFactorsAvg
+      |ProcessTriTessFactorsMax
+      |ProcessTriTessFactorsMin
+      |radians
+      |rcp
+      |reflect
+      |refract
+      |reversebits
+      |round
+      |rsqrt
+      |saturate
+      |sign
+      |sin
+      |sincos
+      |sinh
+      |smoothstep
+      |sqrt
+      |step
+      |tan
+      |tanh
+      |tex1D
+      |tex1Dbias
+      |tex1Dgrad
+      |tex1Dlod
+      |tex1Dproj
+      |tex2D
+      |tex2Dbias
+      |tex2Dgrad
+      |tex2Dlod
+      |tex3D
+      |tex3Dbias
+      |tex3Dgrad
+      |tex3Dlod
+      |tex3Dproj
+      |texCUBE
+      |texCUBEbias
+      |texCUBEgrad
+      |texCUBElod
+      |texCUBEproj
+      |transpose
+      |trunc)(\s*[(])
+    </Rule>
+    <Rule color="MethodCall">[\d\w_]+(?=(\s*\())</Rule>
+    <Rule color="Digits">\b0[xX][0-9a-fA-F]+|(\b\d+(\.[0-9]+)?|\.[0-9]+)([eE][+-]?[0-9]+)?</Rule>
+  </RuleSet>
+</SyntaxDefinition>

@@ -1,0 +1,965 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CMD_APP_About_Description" xml:space="preserve">
+    <value>Informationen über EDI anzeigen</value>
+  </data>
+  <data name="CMD_APP_CloseDoc_Description" xml:space="preserve">
+    <value>Dokument schließen</value>
+  </data>
+  <data name="CMD_App_Exit_Describtion" xml:space="preserve">
+    <value>Anwendung beenden</value>
+  </data>
+  <data name="CMD_APP_OpenURL_Description" xml:space="preserve">
+    <value>URL öffnen ...</value>
+  </data>
+  <data name="CMD_APP_Open_Description" xml:space="preserve">
+    <value>Datei öffnen ...</value>
+  </data>
+  <data name="CMD_APP_SaveAll_Description" xml:space="preserve">
+    <value>Alles speichern ...</value>
+  </data>
+  <data name="CMD_APP_ShowStartPage_Description" xml:space="preserve">
+    <value>Startseite anzeigen</value>
+  </data>
+  <data name="CMD_APP_ViewTheme_Description" xml:space="preserve">
+    <value>Design der Anwendung anzeigen</value>
+  </data>
+  <data name="CMD_MRU_AddEntry_Description" xml:space="preserve">
+    <value>MRU Eintrag hinzufügen</value>
+  </data>
+  <data name="CMD_MRU_Pin_Description" xml:space="preserve">
+    <value>MRU pin setzen oder lösen</value>
+  </data>
+  <data name="CMD_MRU_RemoveEntry_Description" xml:space="preserve">
+    <value>MRU Eintrag entfernen</value>
+  </data>
+  <data name="CMD_TXT_DisableHighlighting_Description" xml:space="preserve">
+    <value>Syntaxhervorhebung ausschalten</value>
+  </data>
+  <data name="CMD_TXT_FindNextText_Description" xml:space="preserve">
+    <value>Nächste Textstelle suchen</value>
+  </data>
+  <data name="CMD_TXT_FindNext_Description" xml:space="preserve">
+    <value>Text in Dokument suchen</value>
+  </data>
+  <data name="CMD_TXT_FindPreviousText_Description" xml:space="preserve">
+    <value>Vorherige Textstelle suchen</value>
+  </data>
+  <data name="CMD_TXT_FindReplaceText_Description" xml:space="preserve">
+    <value>Textstelle suchen und ersetzen</value>
+  </data>
+  <data name="CMD_TXT_GotoLine_Description" xml:space="preserve">
+    <value>Gehe zu einer Zeile im Dokument</value>
+  </data>
+  <data name="STR_Category_Error" xml:space="preserve">
+    <value>Fehler</value>
+    <comment>Textual message level classification</comment>
+  </data>
+  <data name="STR_Category_Information" xml:space="preserve">
+    <value>Information</value>
+    <comment>Textual message level classification</comment>
+  </data>
+  <data name="STR_Category_InternalError" xml:space="preserve">
+    <value>Interner Fehler</value>
+    <comment>Textual message level classification</comment>
+  </data>
+  <data name="STR_Category_UnknownError" xml:space="preserve">
+    <value>Unbekannter Fehler</value>
+    <comment>Textual message level classification</comment>
+  </data>
+  <data name="STR_Category_Warning" xml:space="preserve">
+    <value>Warnung</value>
+    <comment>Textual message level classification</comment>
+  </data>
+  <data name="STR_Category_Unknown_Internal_Error" xml:space="preserve">
+    <value>Unbekannter Interner Fehler</value>
+    <comment>Textual message level classification</comment>
+  </data>
+  <data name="STR_CmdName_File" xml:space="preserve">
+    <value>_Datei</value>
+    <comment>Sub-Menu Label</comment>
+  </data>
+  <data name="STR_CmdName_New" xml:space="preserve">
+    <value>Neu</value>
+    <comment>Sub-Menu Label</comment>
+  </data>
+  <data name="STR_CmdName_New_Text" xml:space="preserve">
+    <value>Text Dokument</value>
+    <comment>Application Command Label</comment>
+  </data>
+  <data name="STR_CmdName_New_UML" xml:space="preserve">
+    <value>UML Dokument</value>
+    <comment>Application Command Label</comment>
+  </data>
+  <data name="STR_CmdName_Open" xml:space="preserve">
+    <value>Öffnen</value>
+    <comment>Sub-Menu Label</comment>
+  </data>
+  <data name="STR_CmdName_Open_Log4Net" xml:space="preserve">
+    <value>Log4Net Dokument</value>
+    <comment>Application Command Label</comment>
+  </data>
+  <data name="STR_CmdName_Open_Text" xml:space="preserve">
+    <value>Text Dokument</value>
+    <comment>Application Command Label</comment>
+  </data>
+  <data name="STR_CmdName_Open_UML" xml:space="preserve">
+    <value>UML Dokument</value>
+    <comment>Application Command Label</comment>
+  </data>
+  <data name="STR_CmdName_RecentFiles" xml:space="preserve">
+    <value>Zuletzt verwendete Dokumente</value>
+    <comment>Application Command Label</comment>
+  </data>
+  <data name="STR_CmdName_Save" xml:space="preserve">
+    <value>Speichern</value>
+    <comment>Application Command Label</comment>
+  </data>
+  <data name="STR_CmdName_SaveAs" xml:space="preserve">
+    <value>Speichern als ...</value>
+    <comment>Application Command Label</comment>
+  </data>
+  <data name="STR_CmdName_Close" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="STR_CmdName_Copy" xml:space="preserve">
+    <value>Kopieren</value>
+  </data>
+  <data name="STR_CmdName_Copy_TT" xml:space="preserve">
+    <value>Selektierte Elemente kopieren</value>
+  </data>
+  <data name="STR_CmdName_Cut" xml:space="preserve">
+    <value>Ausschneiden</value>
+  </data>
+  <data name="STR_CmdName_Cut_TT" xml:space="preserve">
+    <value>Selektiertes Element ausschneiden</value>
+  </data>
+  <data name="STR_CmdName_Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="STR_CmdName_Delete_TT" xml:space="preserve">
+    <value>Selektiertes Element löschen</value>
+  </data>
+  <data name="STR_CmdName_Edit" xml:space="preserve">
+    <value>_Bearbeiten</value>
+    <comment>Sub-Menu Label</comment>
+  </data>
+  <data name="STR_CmdName_Exit" xml:space="preserve">
+    <value>Programm beenden</value>
+  </data>
+  <data name="STR_CmdName_Find" xml:space="preserve">
+    <value>Suchen</value>
+  </data>
+  <data name="STR_CmdName_GotoLine" xml:space="preserve">
+    <value>Gehe zu Zeile...</value>
+  </data>
+  <data name="STR_CmdName_Help" xml:space="preserve">
+    <value>_Hilfe</value>
+    <comment>Sub-Menu Label</comment>
+  </data>
+  <data name="STR_CmdName_Help_About" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="STR_CmdName_Log4Net_Message_TW" xml:space="preserve">
+    <value>Log4Net Message Tool Window</value>
+  </data>
+  <data name="STR_CmdName_Log4Net_TW" xml:space="preserve">
+    <value>Log4Net Tool Window</value>
+  </data>
+  <data name="STR_CmdName_New_Text_TT" xml:space="preserve">
+    <value>Text Datei anlegen</value>
+  </data>
+  <data name="STR_CmdName_New_UML_TT" xml:space="preserve">
+    <value>UML Datei anlegen</value>
+  </data>
+  <data name="STR_CmdName_Open_Log4Net_TT" xml:space="preserve">
+    <value>Log4Net Datei öffnen</value>
+  </data>
+  <data name="STR_CmdName_Open_Text_TT" xml:space="preserve">
+    <value>Text Datei öffnen</value>
+  </data>
+  <data name="STR_CmdName_Open_UML_TT" xml:space="preserve">
+    <value>UML Datei öffnen</value>
+  </data>
+  <data name="STR_CmdName_Paste" xml:space="preserve">
+    <value>Einfügen</value>
+  </data>
+  <data name="STR_CmdName_Paste_TT" xml:space="preserve">
+    <value>Element aus der Windows Zwischenablage einfügen</value>
+  </data>
+  <data name="STR_CmdName_Properties_TW" xml:space="preserve">
+    <value>Properties Tool Window</value>
+  </data>
+  <data name="STR_CmdName_RecentFiles_TW" xml:space="preserve">
+    <value>Recent Files Tool Window</value>
+  </data>
+  <data name="STR_CmdName_Redo" xml:space="preserve">
+    <value>Wiederholen</value>
+  </data>
+  <data name="STR_CmdName_Redo_TT" xml:space="preserve">
+    <value>Letztes rückgängig machen wieder anwenden</value>
+  </data>
+  <data name="STR_CmdName_Replace" xml:space="preserve">
+    <value>Ersetzen</value>
+  </data>
+  <data name="STR_CmdName_SaveAs_TT" xml:space="preserve">
+    <value>Datei unter einem bestimmten Typ und Ort speichern</value>
+  </data>
+  <data name="STR_CmdName_Save_TT" xml:space="preserve">
+    <value>Datei speichern</value>
+  </data>
+  <data name="STR_CmdName_SelectAll" xml:space="preserve">
+    <value>Alles Selektieren</value>
+  </data>
+  <data name="STR_CmdName_SelectAll_TT" xml:space="preserve">
+    <value>Alle Elemente selektieren</value>
+  </data>
+  <data name="STR_CmdName_Themes" xml:space="preserve">
+    <value>_Designs</value>
+  </data>
+  <data name="STR_CmdName_Tools" xml:space="preserve">
+    <value>_Werkzeuge</value>
+  </data>
+  <data name="STR_CmdName_Undo" xml:space="preserve">
+    <value>Rückgängig</value>
+  </data>
+  <data name="STR_CmdName_Undo_TT" xml:space="preserve">
+    <value>Letzte Änderung rückgängig machen</value>
+  </data>
+  <data name="STR_CmdName_View" xml:space="preserve">
+    <value>_Ansicht</value>
+    <comment>Sub-Menu Label</comment>
+  </data>
+  <data name="STR_CmdName_View_Start_Page" xml:space="preserve">
+    <value>Startseite</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_HighlightingDefinition_TT" xml:space="preserve">
+    <value>Art der Syntaxhervorhebung auswählen</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowEndOfLine" xml:space="preserve">
+    <value>Zeilenende anzeigen</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowEndOfLine_TT" xml:space="preserve">
+    <value>Zeilenende anzeigen/verbergen</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowLineNumbers" xml:space="preserve">
+    <value>Zeilennummer anzeigen</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowLineNumbers_TT" xml:space="preserve">
+    <value>Zeilennummer anzeigen/verbergen</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowSpaces" xml:space="preserve">
+    <value>Leerzeichen anzeigen</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowSpaces_TT" xml:space="preserve">
+    <value>Leerzeichen anzeigen/verbergen</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowTabs" xml:space="preserve">
+    <value>Tabstoppzeichen anzeigen</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_ShowTabs_TT" xml:space="preserve">
+    <value>Tabstoppzeichen anzeigen/verbergen</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_WordWrap" xml:space="preserve">
+    <value>Text umbrechen</value>
+  </data>
+  <data name="STR_ToggleEditorOptionCmd_WordWrap_TT" xml:space="preserve">
+    <value>Text in Ansicht umbrechen</value>
+  </data>
+  <data name="STR_Insert_Overtype_Mode_TT" xml:space="preserve">
+    <value>Einfüge- oder Überschreibmodus (ein/aus mit Einfg Taste)</value>
+  </data>
+  <data name="STR_StatusBar_Ready" xml:space="preserve">
+    <value>Bereit.</value>
+  </data>
+  <data name="STR_StatusBar_Textencoding_TT" xml:space="preserve">
+    <value>Codierung des Texts im aktuellen Dokument</value>
+  </data>
+  <data name="STR_StatusBar_X_Coord_Label" xml:space="preserve">
+    <value>X:</value>
+  </data>
+  <data name="STR_StatusBar_X_Coord_Label_TT" xml:space="preserve">
+    <value>Aktuelle Spalte des Cursors im aktuellen Dokument</value>
+  </data>
+  <data name="STR_StatusBar_Y_Coord_Label" xml:space="preserve">
+    <value>Y:</value>
+  </data>
+  <data name="STR_StatusBar_Y_Coord_Label_TT" xml:space="preserve">
+    <value>Aktuelle Zeile des Cursors im aktuellen Dokument</value>
+  </data>
+  <data name="STR_MSG_IssueTrackerText" xml:space="preserve">
+    <value>Bitte klicken Sie auf den unteren Link um festzustellen ob der aufgetretene Fehler schon bekannt. 
+
+Bitte berichten Sie den Fehler wenn es noch keinen Eintrag dazu gibt.
+
+Der Problembericht sollte aus der Fehlermeldung (nutzen Sie die "Kopieren" Schaltfläche) und einer Beschreibung des Ablaufs oder der Funktion zum reproduzieren des Problems bestehen.
+Bitte fügen Sie Screenshots hinzu wenn das hilfreich ist.</value>
+    <comment>Issue tracker multi-line message asking user to report unknown problems</comment>
+  </data>
+  <data name="STR_MSG_IssueTrackerTitle" xml:space="preserve">
+    <value>Ausnahmefehler</value>
+  </data>
+  <data name="STR_Msg_UnknownError" xml:space="preserve">
+    <value>Ein unbekannter Fehler ist aufgetreten.</value>
+  </data>
+  <data name="STR_MSG_UnknownError_Caption" xml:space="preserve">
+    <value>Unbekannter Fehler</value>
+  </data>
+  <data name="STR_MSG_UnknownError_InErrorDispatcher" xml:space="preserve">
+    <value>Ein Fehler ist bei der Behandlung eines unbekannten Fehlers aufgetreten.</value>
+  </data>
+  <data name="STR_MSG_UnknownError_InShutDownProcess" xml:space="preserve">
+    <value>Fehler in der Prozedur zu Beendigung des Programms.</value>
+  </data>
+  <data name="STR_AppCommand_CopyFileURLToClipboard" xml:space="preserve">
+    <value>Pfad in Windows Zwischenablage kopieren</value>
+  </data>
+  <data name="STR_AppCommand_CopyFileURLToClipboard_TT" xml:space="preserve">
+    <value>Kopiert den Pfad des aktuellen Dokuments in die Windows Zwischenablage</value>
+  </data>
+  <data name="STR_AppCommand_OpenContainingFolder" xml:space="preserve">
+    <value>Order öffnen...</value>
+  </data>
+  <data name="STR_AppCommand_OpenContainingFolder_TT" xml:space="preserve">
+    <value>Öffnet den Order der dieses Dokument enthält in Windows Explorer</value>
+  </data>
+  <data name="STR_MSG_ErrorLoadingPlugin" xml:space="preserve">
+    <value>Ein Fehler ist während der Initialisierung eines Plugins aufgetreten '{0}'.</value>
+  </data>
+  <data name="STR_MSG_ErrorRegisteringHighlighting" xml:space="preserve">
+    <value>Fehler bei der Registrierung der Syntaxhervorhebung: '{0}'</value>
+  </data>
+  <data name="STR_MSG_ErrorSavingFile" xml:space="preserve">
+    <value>Ein Ausnahmefehler ist beim speichern des Dokuments aufgetreten.</value>
+  </data>
+  <data name="STR_MSG_ErrorWhileLoadingPlugin" xml:space="preserve">
+    <value>Ein Fehler ist beim laden eines Plugins '{0} aufgetreten'.</value>
+  </data>
+  <data name="STR_MSG_ErrorWhileSavingAFile" xml:space="preserve">
+    <value>Der Fehler '{0}'
+ist beim speichern einer Datei aufgetreten.</value>
+  </data>
+  <data name="STR_MSG_ErrorWhileSavingFileX" xml:space="preserve">
+    <value>Der Fehler:'{0}'
+ist beim speichern der Datei:
+'{1}'
+aufgetreten</value>
+  </data>
+  <data name="STR_MSG_PluginNotLoaded" xml:space="preserve">
+    <value>Ein Plugin konnte nicht geladen werden.</value>
+  </data>
+  <data name="STR_MSG_SaveChangesForFile" xml:space="preserve">
+    <value>Sollen die Änderungen für das Dokument '{0}' gespeichert werden?</value>
+  </data>
+  <data name="STR_MSG_Unexpected_Error" xml:space="preserve">
+    <value>Ausnahmefehler</value>
+  </data>
+  <data name="STR_MSG_UnknownDocumentType" xml:space="preserve">
+    <value>Unbekannter Typ eines Dokuments.</value>
+  </data>
+  <data name="STR_CmdName_DeleteLine" xml:space="preserve">
+    <value>Zeile Löschen</value>
+  </data>
+  <data name="STR_CmdName_DeleteLine_TT" xml:space="preserve">
+    <value>Löscht die aktuelle Textzeile</value>
+  </data>
+  <data name="STR_Cmd_CollapseTextFoldings" xml:space="preserve">
+    <value>Textfalten kollabieren</value>
+  </data>
+  <data name="STR_Cmd_ConvertLeadingSpaces" xml:space="preserve">
+    <value>Einleitende Leerzeichen in Tabs konvertieren</value>
+  </data>
+  <data name="STR_Cmd_ConvertLeadingTabsToSpaces" xml:space="preserve">
+    <value>Einleitende Tabs in Leerzeichen konvertieren</value>
+  </data>
+  <data name="STR_CMD_ConvertSpacesToTabs" xml:space="preserve">
+    <value>Leerzeichen in Tabs konvertieren</value>
+  </data>
+  <data name="STR_CMD_ConvertTabsToSpaces" xml:space="preserve">
+    <value>Tabs in Leerzeichen konvertieren</value>
+  </data>
+  <data name="STR_Cmd_ConvertTextToUpperCase" xml:space="preserve">
+    <value>Text in Großschreibung konvertieren</value>
+  </data>
+  <data name="STR_Cmd_ExpandTextFoldings" xml:space="preserve">
+    <value>Textfalten expandieren</value>
+  </data>
+  <data name="STR_CMD_RemoveLeadingWhiteSpace" xml:space="preserve">
+    <value>Einleitende White Spaces löschen</value>
+  </data>
+  <data name="STR_CMD_RemoveTrailingWhiteSpace" xml:space="preserve">
+    <value>Ausleitende White Spaces löschen</value>
+  </data>
+  <data name="STR_Cmd__ApplyTextIndentationStrategy" xml:space="preserve">
+    <value>Texteinrückung anwenden</value>
+  </data>
+  <data name="STR_Cmd__ConvertTextToLowerCase" xml:space="preserve">
+    <value>Text in Kleinschreibung konvertieren</value>
+  </data>
+  <data name="STR_Cmd__ConvertTextToTitleCase" xml:space="preserve">
+    <value>Text in Titel Groß-/Kleinschreibung konvertieren</value>
+  </data>
+  <data name="STR_Cmd__InvertTextCase" xml:space="preserve">
+    <value>Groß-/Kleinschreibung umkehren</value>
+  </data>
+  <data name="STR_Label_TextCase" xml:space="preserve">
+    <value>Groß-/Kleinschreibung</value>
+  </data>
+  <data name="STR_Label_WhiteSpaces" xml:space="preserve">
+    <value>White Spaces</value>
+  </data>
+  <data name="STR_FileType_FileFilter_Log4j" xml:space="preserve">
+    <value>"log4net XML Ausgabeformat (*.log4j,*.xml)|*.log4j;*.xml|All Files (*.*)|*.*"</value>
+    <comment>FileFilter</comment>
+  </data>
+  <data name="STR_FileType_FileFilter_UML" xml:space="preserve">
+    <value>Unified Modeling Language (*.uml,*.xml)|*.uml;*.xml|All Files (*.*)|*.*"</value>
+    <comment>FileFilter</comment>
+  </data>
+  <data name="STR_FileType_FileFilter_AllFiles" xml:space="preserve">
+    <value>Alle Dateien (*.*)|*.*</value>
+    <comment>FileFilter</comment>
+  </data>
+  <data name="STR_FileType_FileFilter_TextFiles" xml:space="preserve">
+    <value>Text Dateien (*.txt)|*.txt</value>
+    <comment>FileFilter</comment>
+  </data>
+  <data name="STR_FileType_FileFilter_CSharp" xml:space="preserve">
+    <value>C# Dateien (*.cs)|*.cs</value>
+    <comment>FileFilter</comment>
+  </data>
+  <data name="STR_FileType_FileFilter_HTML" xml:space="preserve">
+    <value>HTML Dateien (*.htm,*.html,*.css,*.js)|*.htm;*.html;*.css;*.js</value>
+    <comment>FileFilter</comment>
+  </data>
+  <data name="STR_FileType_FileFilter_SQL" xml:space="preserve">
+    <value>Structured Query Language (*.sql) |*.sql</value>
+    <comment>FileFilter</comment>
+  </data>
+  <data name="STR_FileType_FileFilter_Log4NetPlusText" xml:space="preserve">
+    <value>log4net XML und Textformat (*.log4j,*.log,*.txt,*.xml)|*.log4j;*.log;*.txt;*.xml</value>
+    <comment>FileFilter</comment>
+  </data>
+  <data name="STR_MSG_FIND_NO_MORE_ITEMS_FOUND" xml:space="preserve">
+    <value>Es gibt keine weiteren Suchergebnisse.</value>
+  </data>
+  <data name="STR_MSG_FIND_NO_MORE_ITEMS_FOUND2" xml:space="preserve">
+    <value>"Es wurden keine weiteren Vorkommnisse gefunden.</value>
+  </data>
+  <data name="STR_MSG_FIND_Caption" xml:space="preserve">
+    <value>Suchen</value>
+  </data>
+  <data name="STR_MSG_FIND_UNEXPECTED_ERROR" xml:space="preserve">
+    <value>Ein Ausnahmefehler ist aufgetreten.</value>
+  </data>
+  <data name="STR_THEMING_MSG_CANNOT_FIND_PATH" xml:space="preserve">
+    <value>Der Pfad zu der Datei: '{0}' kann nicht gefunden werden.
+Bitte stellen sie sicher das der Zugriff möglich ist.</value>
+  </data>
+  <data name="STR_THEMING_CAPTION" xml:space="preserve">
+    <value>Design Fehler</value>
+  </data>
+  <data name="STR_MSG_DIRCREATED_NO_PLuginLoaded" xml:space="preserve">
+    <value>Das Plugin Verzeichnis wurde angelegt aber kein Plugin geladen.</value>
+  </data>
+  <data name="STR_MSG_DIRCREATED_NO_PLuginLoaded_Caption" xml:space="preserve">
+    <value>Das Plugin Verzeichnis wurde nicht gefunden.</value>
+  </data>
+  <data name="STR_MSG_ACCESS_PLuginDir" xml:space="preserve">
+    <value>Ein Fehler ist beim Zugriff auf das Plugin Verzeichnis aufgetreten.</value>
+  </data>
+  <data name="STR_MSG_ACCESS_PLuginDir_Caption" xml:space="preserve">
+    <value>Fehler beim Laden eines UML Plug-ins</value>
+  </data>
+  <data name="STR_MSG_UML_PLugin_NOTALL_Loaded" xml:space="preserve">
+    <value>Nicht alle UML Plugins konnten fehlerlos geladen werden.</value>
+  </data>
+  <data name="STR_MSG_UML_PLugin_NOTALL_Loaded_Caption" xml:space="preserve">
+    <value>Fehler beim laden von UML Plug-ins</value>
+  </data>
+  <data name="STR_MSG_UML_PLugin_Duplicate" xml:space="preserve">
+    <value>Ein Plug-in mit dem gleichen Namen wurde bereits geladen.</value>
+  </data>
+  <data name="STR_ABOUT_MSG" xml:space="preserve">
+    <value>Ein Text und UML Editor.</value>
+  </data>
+  <data name="STR_ABOUT_Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="STR_ABOUT_DOCKING_LAYOUT" xml:space="preserve">
+    <value>Docking Layout System:</value>
+  </data>
+  <data name="STR_ABOUT_TextEditor" xml:space="preserve">
+    <value>Text Editor:</value>
+  </data>
+  <data name="STR_ABOUT_Log4NetViewer" xml:space="preserve">
+    <value>Log4Net Viewer:</value>
+  </data>
+  <data name="STR_ABOUT_CODE_COMPLETION" xml:space="preserve">
+    <value>Code Komplettierung:</value>
+  </data>
+  <data name="STR_ABOUT_OK_BUTTON" xml:space="preserve">
+    <value>_OK</value>
+  </data>
+  <data name="STR_EDIT_MODE_INSERT" xml:space="preserve">
+    <value>Einfg</value>
+  </data>
+  <data name="STR_EDIT_MODE_TYPEOVER" xml:space="preserve">
+    <value>Übers</value>
+  </data>
+  <data name="STR_FILESTATES_FileName" xml:space="preserve">
+    <value>Dateiname</value>
+    <comment>File Statistics Tool Window</comment>
+  </data>
+  <data name="STR_FILESTATES_FilePath" xml:space="preserve">
+    <value>Pfad</value>
+    <comment>File Statistics Tool Window</comment>
+  </data>
+  <data name="STR_FILESTATES_FileSize" xml:space="preserve">
+    <value>Dateigröße</value>
+    <comment>File Statistics Tool Window</comment>
+  </data>
+  <data name="STR_FILESTATES_LASTMODIFICATION" xml:space="preserve">
+    <value>Datum und Uhrzeit der letzten Änderung.</value>
+    <comment>File Statistics Tool Window</comment>
+  </data>
+  <data name="STR_FINDREPLACE_FINDLABEL" xml:space="preserve">
+    <value>Suchen nach:</value>
+  </data>
+  <data name="STR_FINDREPLACE_SearchInLABEL" xml:space="preserve">
+    <value>Suche in:</value>
+  </data>
+  <data name="STR_FINDREPLACE_CURRENTDOC" xml:space="preserve">
+    <value>Aktuelles Dokument</value>
+  </data>
+  <data name="STR_FINDREPLACE_OPENDOCS" xml:space="preserve">
+    <value>Alle Offenen Dokumente</value>
+  </data>
+  <data name="STR_FINDREPLACE_Options" xml:space="preserve">
+    <value>Optionen</value>
+  </data>
+  <data name="STR_FINDREPLACE_CaseSensitive" xml:space="preserve">
+    <value>Groß-/Kleinschreibung</value>
+  </data>
+  <data name="STR_FINDREPLACE_SearchBackWard" xml:space="preserve">
+    <value>Rückwärts suchen</value>
+  </data>
+  <data name="STR_FINDREPLACE_MatchWholeWord" xml:space="preserve">
+    <value>Ganzes Wort vergleichen</value>
+  </data>
+  <data name="STR_FINDREPLACE_RegularExpression" xml:space="preserve">
+    <value>Regulärer Ausdruck</value>
+  </data>
+  <data name="STR_FINDREPLACE_Wildcards" xml:space="preserve">
+    <value>Platzhalter</value>
+  </data>
+  <data name="STR_FINDREPLACE_ReplaceWith" xml:space="preserve">
+    <value>Ersetzen durch:</value>
+  </data>
+  <data name="STR_FINDREPLACE_FINDNEXT" xml:space="preserve">
+    <value>_Weitersuchen</value>
+  </data>
+  <data name="STR_FINDREPLACE_Replace" xml:space="preserve">
+    <value>_Ersetzen</value>
+  </data>
+  <data name="STR_FINDREPLACE_ReplaceAll" xml:space="preserve">
+    <value>_Alles Ersetzen</value>
+  </data>
+  <data name="STR_FINDREPLACE_ASK_REALLY_REPLACEEVERYTHING" xml:space="preserve">
+    <value>Wollen Sie wirklich alle Vorkommnisse von '{0}' mit '{1}' ersetzen?</value>
+  </data>
+  <data name="STR_FINDREPLACE_ReplaceAll_Caption" xml:space="preserve">
+    <value>Alles Ersetzen</value>
+  </data>
+  <data name="STR_GOTOLINE_OK_BUTTON" xml:space="preserve">
+    <value>_OK</value>
+  </data>
+  <data name="STR_GOTOLINE_CANCEL_BUTTON" xml:space="preserve">
+    <value>_Abbrechen</value>
+  </data>
+  <data name="STR_GOTOLINE_LINE_RANGE_LABEL" xml:space="preserve">
+    <value>Zeile</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_TOOLTIP" xml:space="preserve">
+    <value>Passen Sie die Anzeige an indem Sie ein Filterkriterium eingeben und den Filter dann aktivieren.</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_ALL" xml:space="preserve">
+    <value>ALLE</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_DEBUG" xml:space="preserve">
+    <value>DEBUG</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_INFO" xml:space="preserve">
+    <value>INFO</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_WARN" xml:space="preserve">
+    <value>WARN</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_ERROR" xml:space="preserve">
+    <value>SCHWER</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_FATAL" xml:space="preserve">
+    <value>AUSNAHME</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_DEBUG_TT" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_INFO_TT" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_WARN_TT" xml:space="preserve">
+    <value>Warnung</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_ERROR_TT" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="STR_LOG4NET_FILTER_FATAL_TT" xml:space="preserve">
+    <value>Schwerwiegender Fehler</value>
+  </data>
+  <data name="STR_LOG4NET_DELTATIME" xml:space="preserve">
+    <value>Delta t:</value>
+  </data>
+  <data name="STR_LOG4NET_FILTERRESULT_TT" xml:space="preserve">
+    <value>Summe der tatsächlich angezeigten Element (nach Anwendung der Filter).</value>
+  </data>
+  <data name="STR_LOG4NET_ENTERLOGID_TT" xml:space="preserve">
+    <value>Geben Sie eine log Element Id ein um das Element im Dokument zur Anzeige zu bringen.</value>
+  </data>
+  <data name="STR_LOG4NET_DOCUMENTTAB_TT" xml:space="preserve">
+    <value>Ein log4net Dokument zeigt das Ergebnis einer XML log4net logger Sitzung an.</value>
+  </data>
+  <data name="STR_LOG4NET_READONY_REASON" xml:space="preserve">
+    <value>Ein Log4net Dokument kann nicht editiert werden. Diese Anzeige ist nur im Lesemodus verfügbar.</value>
+  </data>
+  <data name="STR_MRU_MENUITEM_COPYURL" xml:space="preserve">
+    <value>Pfad in Windows Zwischenablage kopieren</value>
+  </data>
+  <data name="STR_MRU_MENUITEM_OpenWithWindowsApp" xml:space="preserve">
+    <value>Mit Windows Anwendung öffnen...</value>
+  </data>
+  <data name="STR_MRU_MENUITEM_OpenInContainingFolder" xml:space="preserve">
+    <value>Übergeordnetes Verzeichnis in Windows Explorer öffnen...</value>
+  </data>
+  <data name="STR_MRU_MENUITEM_Remove" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="STR_STARTPAGE_TITLE" xml:space="preserve">
+    <value>Startseite</value>
+  </data>
+  <data name="STR_STARTPAGE_WELCOME_TT" xml:space="preserve">
+    <value>Willkommen bei EDI. Benutzen Sie diese Seite um einen schnellen Einstieg in die Anwendung zu finden.</value>
+  </data>
+  <data name="STR_STARTPAGE_VISITPROJECTHOMEPAGE_TT" xml:space="preserve">
+    <value>Besuchen Sie die Internet Seite dieser Anwendung</value>
+  </data>
+  <data name="STR_STARTPAGE_FILEOPEN_TT" xml:space="preserve">
+    <value>Datei öffnen...</value>
+  </data>
+  <data name="STR_DIALOG_INPUT_PROBLEM_CAPTION" xml:space="preserve">
+    <value>Die Eingabe kann nicht verarbeitet werden. Korregieren Sie das Problem oder klicken Sie Cancel.</value>
+  </data>
+  <data name="STR_ACCESS_DIRECTORY_ERROR" xml:space="preserve">
+    <value>Das Verzeichnis '{0}' existiert nicht oder liegt nicht im Zugriff.</value>
+  </data>
+  <data name="STR_FILE_FINDING_CAPTION" xml:space="preserve">
+    <value>Fehler beim auffinden einer Datei</value>
+  </data>
+  <data name="STR_FILE_DEFAULTNAME" xml:space="preserve">
+    <value>Unbenannt</value>
+  </data>
+  <data name="STR_FILE_READONLY_REASON_NO_WRITE_PERMISSION" xml:space="preserve">
+    <value>Diese Datei kann nicht editiert werden weil Sie keine Schreibzugriffsrechte haben.
+Ändern Sie die Zugriffsrechte auf diese Datei oder speichern Sie die Datei an einem anderen Ort.</value>
+  </data>
+  <data name="STR_FILE_READONLY_REASON_USED_BY_OTHER_PROCESS" xml:space="preserve">
+    <value>Diese Datei kann nicht editiert werden weil Sie durch einen anderen Prozess blockiert wird.
+Beenden Sie den anderen Prozess und laden Sie die Datei nochmal oder speichern Sie die Datei an einem anderen Ort.</value>
+  </data>
+  <data name="STR_FILE_OPEN_ERROR_MSG_CAPTION" xml:space="preserve">
+    <value>Ein Fehler ist aufgetreten</value>
+  </data>
+  <data name="STR_SCALE_VIEW_PERCENT" xml:space="preserve">
+    <value>prozent</value>
+  </data>
+  <data name="STR_SCALE_VIEW_PERCENT_SHORT" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="STR_SCALE_VIEW_POINT" xml:space="preserve">
+    <value>Schriftgrad</value>
+    <comment>describes the unit 'point'</comment>
+  </data>
+  <data name="STR_SCALE_VIEW_POINT_SHORT" xml:space="preserve">
+    <value>pt</value>
+    <comment>Is the short notation for the unit 'point'</comment>
+  </data>
+  <data name="CMD_APP_ExportUMLToImage_Description" xml:space="preserve">
+    <value>UML nach Image</value>
+  </data>
+  <data name="STR_ERROR_LOADING_FILE_MSG" xml:space="preserve">
+    <value>Die Datei
+'{0}'
+
+existiert nicht oder kann nicht geladen werden.
+Soll dieses Dokument von der Liste der zuletzt verwendeten Dokumente gelöscht werden?</value>
+    <comment>The file:
+'{0}'
+does not exist or cannot be loaded.
+Do you want to remove this file from the list of recent files?</comment>
+  </data>
+  <data name="STR_ERROR_LOADING_FILE_CAPTION" xml:space="preserve">
+    <value>Fehler beim öffnen eines Dokuments</value>
+    <comment>Error Loading file</comment>
+  </data>
+  <data name="STR_FIND_BUTTON_CAPTION" xml:space="preserve">
+    <value>Suchen</value>
+    <comment>Find</comment>
+  </data>
+  <data name="STR_FIND_REPLACE_CAPTION" xml:space="preserve">
+    <value>Suchen und Ersetzen...</value>
+    <comment>Find and Replace...</comment>
+  </data>
+  <data name="STR_GOTO_LINE_CAPTION" xml:space="preserve">
+    <value>Gehe zu ...</value>
+    <comment>Goto Line...</comment>
+  </data>
+  <data name="STR_REPLACE_BUTTON_CAPTION" xml:space="preserve">
+    <value>Ersetzen</value>
+    <comment>Replace</comment>
+  </data>
+  <data name="STR_ProgramSettings_ApplicationBehaviour_Header" xml:space="preserve">
+    <value>Anwendungseinstellungen</value>
+    <comment>Application Settings</comment>
+  </data>
+  <data name="STR_ProgramSettings_Caption" xml:space="preserve">
+    <value>Programmeinstellungen</value>
+    <comment>Progam Settings...</comment>
+  </data>
+  <data name="STR_Settings_RestoreUserSession" xml:space="preserve">
+    <value>Letzte Sitzung wiederherstellen wenn Anwendung gestartet wird</value>
+  </data>
+  <data name="STR_Settings_RunEdiOnlyOnce" xml:space="preserve">
+    <value>Edi nur einmal ausführen</value>
+  </data>
+  <data name="STR_Settings_ApplicationLanguage" xml:space="preserve">
+    <value>Sprache:</value>
+  </data>
+  <data name="STR_Settings_ApplicationLanguage_TT" xml:space="preserve">
+    <value>Ein Neustart der Anwendung ist notwendig um den Effekt dieser Einstellung zu sehen.</value>
+  </data>
+  <data name="STR_Settings_MRU_Section_Label" xml:space="preserve">
+    <value>Zuletzt verwendeten Dokumente (MRU) Modus</value>
+  </data>
+  <data name="STR_Settings_MRU_Pin_At_StartOption" xml:space="preserve">
+    <value>PIN-Einträge am Anfang der Liste</value>
+  </data>
+  <data name="STR_Settings_MRU_Pin_At_Current_Position" xml:space="preserve">
+    <value>Favoriten (nicht sortiert)</value>
+  </data>
+  <data name="STR_Settings_Editor_Section_Label" xml:space="preserve">
+    <value>Text-Editor-Optionen</value>
+  </data>
+  <data name="STR_Settings_Editor_WordWrap" xml:space="preserve">
+    <value>Word-Wrap-Texte</value>
+  </data>
+  <data name="STR_Settings_Editor_ShowSpaces" xml:space="preserve">
+    <value>Leerstellen anzeigen</value>
+  </data>
+  <data name="STR_Settings_Editor_ShowTabs" xml:space="preserve">
+    <value>Tabulator anzeigen</value>
+  </data>
+  <data name="STR_Settings_Editor_ShowEndOfLine" xml:space="preserve">
+    <value>Ende der Zeile anzeigen</value>
+  </data>
+  <data name="STR_Settings_Editor_ConvertTabToSpace" xml:space="preserve">
+    <value>Tabulator-Zeichen in Leerzeichen umwandeln</value>
+  </data>
+  <data name="STR_Settings_Editor_ShowBoxForControlChar" xml:space="preserve">
+    <value>Viereck für Steuerzeichen anzeigen</value>
+  </data>
+  <data name="STR_Settings_Editor_CutCopyWholeLine" xml:space="preserve">
+    <value>Aktuellen Textzeile ausschneiden und kopieren</value>
+  </data>
+  <data name="STR_Settings_Editor_AllowScrollBelowDocument" xml:space="preserve">
+    <value>Am Dokumentende weiterblättern</value>
+  </data>
+  <data name="STR_Settings_Editor_InheritWordWrapIndentation" xml:space="preserve">
+    <value>Word Wrap Einzug vererben</value>
+  </data>
+  <data name="STR_Settings_Editor_EnableRectangularSelection" xml:space="preserve">
+    <value>Rechteckige Auswahl (ALT + Shift oder ALT + Mausselektion)</value>
+  </data>
+  <data name="STR_Settings_Editor_EnableTextDragDrop" xml:space="preserve">
+    <value>Text Drag &amp; Drop</value>
+  </data>
+  <data name="STR_Settings_Editor_EnableVirtualSpace" xml:space="preserve">
+    <value>virtueller Raum</value>
+  </data>
+  <data name="STR_Settings_Editor_EnableImeSupport" xml:space="preserve">
+    <value>IME-Unterstützung</value>
+  </data>
+  <data name="STR_Settings_Editor_CharacterSizeSectionLabel" xml:space="preserve">
+    <value>Text-Editor-Schriftgröße anpassen</value>
+  </data>
+  <data name="STR_Settings_Editor_CharacterSizeInPercent" xml:space="preserve">
+    <value>Prozent</value>
+  </data>
+  <data name="STR_Settings_Editor_CharacterSizeInPoints" xml:space="preserve">
+    <value>Punkte</value>
+  </data>
+  <data name="STR_Settings_Editor_ColumnRulerSectionLabel" xml:space="preserve">
+    <value>Lineal</value>
+  </data>
+  <data name="STR_Settings_Editor_ShowColumnRulerOption" xml:space="preserve">
+    <value>Lineal anzeigen</value>
+  </data>
+  <data name="STR_Settings_Editor_ShowHyperlinks" xml:space="preserve">
+    <value>WWW-Links anzeigen</value>
+  </data>
+  <data name="STR_Settings_Editor_EnableFileHyperlinks" xml:space="preserve">
+    <value>Datei-Links anzeigen</value>
+  </data>
+  <data name="STR_Settings_Editor_EnableEmailHyperlinks" xml:space="preserve">
+    <value>E-Mail-hyperlinks anzeigen</value>
+  </data>
+  <data name="STR_Settings_Editor_RequireControlModifierForHyperlinkClick" xml:space="preserve">
+    <value>Hyperlink klick mit STRG-Taste</value>
+  </data>
+  <data name="STR_CmdName_Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="STR_CmdName_Export_TT" xml:space="preserve">
+    <value>Wandeln Sie Daten in ein Dateiformat, das für andere Anwendungen geeignet ist.</value>
+  </data>
+  <data name="STR_CmdName_Settings" xml:space="preserve">
+    <value>Einstellungen...</value>
+  </data>
+  <data name="STR_ABOUT_VERSION_INFO_LABEL" xml:space="preserve">
+    <value>Versionsinfo</value>
+  </data>
+  <data name="STR_Contributors_Label" xml:space="preserve">
+    <value>Mitwirkende</value>
+  </data>
+  <data name="STR_Settings_Editor_Hyperlink_Section" xml:space="preserve">
+    <value>Hyperlinks</value>
+  </data>
+  <data name="STR_YALVLIb_Columns_MenuLabel" xml:space="preserve">
+    <value>Spalten</value>
+  </data>
+</root>

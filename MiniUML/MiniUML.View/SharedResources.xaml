@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib"
+                    xmlns:windows="clr-namespace:MiniUML.View.Windows">
+
+    <ResourceDictionary.MergedDictionaries>
+        
+        <!-- Control styles -->
+        <ResourceDictionary Source="/MiniUML.View;component/Resources/Styles/Controls/RibbonGroup.xaml"/>
+        <ResourceDictionary Source="/MiniUML.View;component/Resources/Styles/Controls/RibbonGallery.xaml"/>
+               
+    </ResourceDictionary.MergedDictionaries>
+    
+    <!-- Window factories -->
+    <windows:NewDocumentWindowFactory x:Key="NewDocumentWindowFactory"/>
+    <windows:ExportDocumentWindowFactory x:Key="ExportDocumentWindowFactory"/>
+    
+</ResourceDictionary>

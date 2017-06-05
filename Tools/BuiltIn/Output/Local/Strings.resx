@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="STR_CMD_Aggregation" xml:space="preserve">
+    <value>Aggregation</value>
+  </data>
+  <data name="STR_CMD_Aggregation_description" xml:space="preserve">
+    <value>Create a new aggregation</value>
+  </data>
+  <data name="STR_CMD_Association" xml:space="preserve">
+    <value>Association</value>
+  </data>
+  <data name="STR_CMD_Association_description" xml:space="preserve">
+    <value>Create a new association</value>
+  </data>
+  <data name="STR_CMD_CHANGETheme" xml:space="preserve">
+    <value>Change Theme</value>
+    <comment>Change Theme Command</comment>
+  </data>
+  <data name="STR_CMD_ChangeTheme_DESCRIPTION" xml:space="preserve">
+    <value>Change the color theme of the application.</value>
+  </data>
+  <data name="STR_CMD_Class" xml:space="preserve">
+    <value>Class</value>
+  </data>
+  <data name="STR_CMD_Class_description" xml:space="preserve">
+    <value>Create a new Class shape</value>
+  </data>
+  <data name="STR_CMD_Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="STR_CMD_Comment_description" xml:space="preserve">
+    <value>Create a new Comment shape</value>
+  </data>
+  <data name="STR_CMD_Composition" xml:space="preserve">
+    <value>Composition</value>
+  </data>
+  <data name="STR_CMD_Composition_description" xml:space="preserve">
+    <value>Create a new composition</value>
+  </data>
+  <data name="STR_CMD_CreateNew" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="STR_CMD_CreateNewDocument" xml:space="preserve">
+    <value>Create new document.</value>
+  </data>
+  <data name="STR_CMD_Enum" xml:space="preserve">
+    <value>Enum</value>
+  </data>
+  <data name="STR_CMD_Enum_description" xml:space="preserve">
+    <value>Create a new Enum shape</value>
+  </data>
+  <data name="STR_CMD_Export_Command" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="STR_CMD_Export_Command_DESCR" xml:space="preserve">
+    <value>Save the current document as image bitmap.</value>
+  </data>
+  <data name="STR_CMD_InheritanceAssociation" xml:space="preserve">
+    <value>Inheritance association</value>
+  </data>
+  <data name="STR_CMD_InheritanceAssociation_description" xml:space="preserve">
+    <value>Create a new inheritance association</value>
+  </data>
+  <data name="STR_CMD_Interface" xml:space="preserve">
+    <value>Interface</value>
+  </data>
+  <data name="STR_CMD_Interface_description" xml:space="preserve">
+    <value>Create a new Interface shape</value>
+  </data>
+  <data name="STR_CMD_OpenDocument" xml:space="preserve">
+    <value>Open an existing document.</value>
+  </data>
+  <data name="STR_CMD_PRINT_DESCRIPTION" xml:space="preserve">
+    <value>Print the current document.</value>
+  </data>
+  <data name="STR_CMD_REDO_DESCRIPTION" xml:space="preserve">
+    <value>Redo last undo</value>
+  </data>
+  <data name="STR_CMD_SAVEAS_DOCUMENT" xml:space="preserve">
+    <value>Save the current document to a new file</value>
+  </data>
+  <data name="STR_CMD_SAVE_DOCUMENT" xml:space="preserve">
+    <value>Save the current document.</value>
+  </data>
+  <data name="STR_CMD_Struct" xml:space="preserve">
+    <value>Struct</value>
+  </data>
+  <data name="STR_CMD_Struct_description" xml:space="preserve">
+    <value>Create a new Struct shape</value>
+  </data>
+  <data name="STR_CMD_UNDO_DESCRIPTION" xml:space="preserve">
+    <value>Undo last edit</value>
+  </data>
+  <data name="STR_CMD_UPDATE" xml:space="preserve">
+    <value>Update Designer</value>
+  </data>
+  <data name="STR_CMD_UPDATE_DESCRIPTION" xml:space="preserve">
+    <value>Update the design surface to reflect changes made to the underlying XML document.</value>
+  </data>
+  <data name="STR_CMD_AbstractClass" xml:space="preserve">
+    <value>Abstract Class</value>
+    <comment>Add Abstract Class Command</comment>
+  </data>
+  <data name="STR_CMD_AbstractClass_DESCRIPTION" xml:space="preserve">
+    <value>Create a new Abstract Class shape</value>
+  </data>
+  <data name="STR_COPY_Description" xml:space="preserve">
+    <value>Copy the selected shapes to the clipboard.</value>
+  </data>
+  <data name="STR_CUT_Description" xml:space="preserve">
+    <value>Cut the selected shapes to the clipboard.</value>
+  </data>
+  <data name="STR_FILETYPE_FILTER" xml:space="preserve">
+    <value>XML Files (*.xml)|*.xml|All files (*.*)|*.*</value>
+  </data>
+  <data name="STR_FILETYPE_FILTER_EXPORT" xml:space="preserve">
+    <value>PNG Image Files (*.png)|*.png|
+JPEG Image Files (*.jpg;*.jpeg)|*.jpg;*.jpeg|
+Windows Bitmap Image Files (*.bmp)|*.bmp|
+XPS Document Files (*.xps)|*.xps</value>
+  </data>
+  <data name="STR_FILETYPE_FILTER_PLUGINS" xml:space="preserve">
+    <value>Plugin Files (MiniUML.Themes.*.dll)|MiniUML.Themes.*.dll</value>
+  </data>
+  <data name="STR_FILETYPE_FILTER_SAVE" xml:space="preserve">
+    <value>XML Files (*.xml)|*.xml</value>
+  </data>
+  <data name="STR_MSG_NoShapeInClipboard" xml:space="preserve">
+    <value>The clipboard does not contain any shapes!</value>
+  </data>
+  <data name="STR_OpenFILE_MSG" xml:space="preserve">
+    <value>An error occured while opening the file '{0}'.</value>
+  </data>
+  <data name="STR_OpenFILE_MSG_CAPTION" xml:space="preserve">
+    <value>Operation aborted</value>
+  </data>
+  <data name="STR_PASTE_Description" xml:space="preserve">
+    <value>Paste the contents of the clipboard into the document.</value>
+  </data>
+  <data name="STR_QUERY_SAVE_CHANGES" xml:space="preserve">
+    <value>Do you want to save changes to {0}?</value>
+  </data>
+  <data name="STR_QUERY_SAVE_CHANGES_CAPTION" xml:space="preserve">
+    <value>Save changes?</value>
+  </data>
+  <data name="STR_SaveFILE_MSG" xml:space="preserve">
+    <value>An error occured while saving the file '{0}'.</value>
+  </data>
+  <data name="STR_SaveFILE_MSG_CAPTION" xml:space="preserve">
+    <value>Operation aborted.</value>
+  </data>
+  <data name="STR_Select_Description" xml:space="preserve">
+    <value>Switch to select mode.</value>
+  </data>
+  <data name="STR_Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="STR_UnexpectedErrorCaption" xml:space="preserve">
+    <value>Unexpected Error</value>
+  </data>
+  <data name="STR_CMD_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="STR_CMD_Delete_description" xml:space="preserve">
+    <value>Delete the selected shapes.</value>
+  </data>
+  <data name="STR_Default_FileName" xml:space="preserve">
+    <value>Untitled</value>
+  </data>
+  <data name="STR_ZOOMSlider_PercentCharacter" xml:space="preserve">
+    <value>%</value>
+    <comment>Percentage character in Zoom Slider Display</comment>
+  </data>
+  <data name="STR_TITLE_XML_Editor" xml:space="preserve">
+    <value>XML Editor</value>
+  </data>
+  <data name="STR_MSG_Warning_Caption" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="STR_MSG_PAGE_HEIGHT_WIDTH_NEGATIVE" xml:space="preserve">
+    <value>Page dimensions (Height: {0}, Width: {1}) cannot be negative.</value>
+  </data>
+  <data name="STR_MSG_PAGE_MARGINS_NEGATIVE" xml:space="preserve">
+    <value>Page margins cannot be negative.</value>
+  </data>
+  <data name="STR_MSG_PAGE_MARGIN_LARGER_THAN_PAGESIZE" xml:space="preserve">
+    <value>Page margins are larger than page size.</value>
+  </data>
+  <data name="STR_MSG_PAGE_DEFINITION_FIELD_INVALID" xml:space="preserve">
+    <value>One or more page definition fields are not valid.</value>
+  </data>
+  <data name="STR_MSG_INVALID_RESOLUTION" xml:space="preserve">
+    <value>Invalid resolution.</value>
+  </data>
+  <data name="STR_MENUITEM_ADD_METHOD" xml:space="preserve">
+    <value>Add _Method</value>
+  </data>
+  <data name="STR_MENUITEM_ADD_PROPERTY" xml:space="preserve">
+    <value>Add _Property</value>
+  </data>
+  <data name="STR_MENUITEM_ADD_FIELD" xml:space="preserve">
+    <value>Add _Field</value>
+  </data>
+  <data name="STR_MENUITEM_ADD_EVENT" xml:space="preserve">
+    <value>Add _Event</value>
+  </data>
+  <data name="STR_MENUITEM_ADD_CLASS" xml:space="preserve">
+    <value>Add _Class</value>
+  </data>
+  <data name="STR_MENUITEM_ADD_ENUM_MEMBER" xml:space="preserve">
+    <value>Add _Member</value>
+  </data>
+  <data name="STR_MENUITEM_DELETE" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="STR_MENUITEM_BringToFront" xml:space="preserve">
+    <value>Bring to Front</value>
+  </data>
+  <data name="STR_MENUITEM_SendToBack" xml:space="preserve">
+    <value>Send to Back</value>
+  </data>
+  <data name="STR_UML_CLASS_DIAGRAM_TT" xml:space="preserve">
+    <value>UML Class Diagram</value>
+  </data>
+  <data name="STR_CMD_Deployment" xml:space="preserve">
+    <value>Deployment</value>
+  </data>
+  <data name="STR_CMD_Deployment_description" xml:space="preserve">
+    <value>Create a new deployment element</value>
+  </data>
+  <data name="STR_CMD_Delegate" xml:space="preserve">
+    <value>Delegate</value>
+  </data>
+  <data name="STR_CMD_Delegate_description" xml:space="preserve">
+    <value>Create a new delegate element</value>
+  </data>
+  <data name="STR_CmdName_Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="STR_CmdName_Copy_TT" xml:space="preserve">
+    <value>Copy selected item</value>
+  </data>
+  <data name="STR_CmdName_Cut" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="STR_CmdName_Cut_TT" xml:space="preserve">
+    <value>Cut selected item</value>
+  </data>
+  <data name="STR_CmdName_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="STR_CmdName_DeleteLine" xml:space="preserve">
+    <value>Delete Line</value>
+  </data>
+  <data name="STR_CmdName_DeleteLine_TT" xml:space="preserve">
+    <value>Deletes the current line of text</value>
+  </data>
+  <data name="STR_CmdName_Delete_TT" xml:space="preserve">
+    <value>Delete selected item</value>
+  </data>
+  <data name="STR_CmdName_Paste" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="STR_CmdName_Paste_TT" xml:space="preserve">
+    <value>Paste item from Windows clipboard</value>
+  </data>
+  <data name="STR_CmdName_Redo" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="STR_CmdName_Redo_TT" xml:space="preserve">
+    <value>Redo last undo</value>
+  </data>
+  <data name="STR_CmdName_SelectAll" xml:space="preserve">
+    <value>Select All</value>
+  </data>
+  <data name="STR_CmdName_SelectAll_TT" xml:space="preserve">
+    <value>Select all items</value>
+  </data>
+  <data name="STR_CmdName_Undo" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="STR_CmdName_Undo_TT" xml:space="preserve">
+    <value>Undo last edit</value>
+  </data>
+  <data name="STR_Cmd_CollapseTextFoldings" xml:space="preserve">
+    <value>Collapse text foldings</value>
+  </data>
+  <data name="STR_Cmd_ConvertLeadingSpaces" xml:space="preserve">
+    <value>Convert Leading Spaces to Tabs</value>
+  </data>
+  <data name="STR_Cmd_ConvertLeadingTabsToSpaces" xml:space="preserve">
+    <value>Convert Leading Tabs to Spaces</value>
+  </data>
+  <data name="STR_CMD_ConvertSpacesToTabs" xml:space="preserve">
+    <value>Convert Spaces to Tabs</value>
+  </data>
+  <data name="STR_CMD_ConvertTabsToSpaces" xml:space="preserve">
+    <value>Convert Tabs to Spaces</value>
+  </data>
+  <data name="STR_Cmd_ConvertTextToUpperCase" xml:space="preserve">
+    <value>Convert text to upper case</value>
+  </data>
+  <data name="STR_Cmd_ExpandTextFoldings" xml:space="preserve">
+    <value>Expand text foldings</value>
+  </data>
+  <data name="STR_CMD_RemoveLeadingWhiteSpace" xml:space="preserve">
+    <value>Remove Leading White Spaces</value>
+  </data>
+  <data name="STR_CMD_RemoveTrailingWhiteSpace" xml:space="preserve">
+    <value>Remove Trailing White Space</value>
+  </data>
+  <data name="STR_Cmd__ApplyTextIndentationStrategy" xml:space="preserve">
+    <value>Apply Indentation Strategy</value>
+  </data>
+  <data name="STR_Cmd__ConvertTextToLowerCase" xml:space="preserve">
+    <value>Convert text to lower case</value>
+  </data>
+  <data name="STR_Cmd__ConvertTextToTitleCase" xml:space="preserve">
+    <value>Convert to Title Case</value>
+  </data>
+  <data name="STR_Cmd__InvertTextCase" xml:space="preserve">
+    <value>Invert Case</value>
+  </data>
+  <data name="STR_Label_TextCase" xml:space="preserve">
+    <value>Text Case</value>
+  </data>
+  <data name="STR_Label_WhiteSpaces" xml:space="preserve">
+    <value>White Spaces</value>
+  </data>
+</root>

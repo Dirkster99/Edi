@@ -1,0 +1,81 @@
+<?xml version="1.0" ?>
+<!-- syntaxdefinition for Coco/R 2003 by Mike Krueger -->
+<!-- converted to AvalonEdit format by Siegfried Pammer in 2010 -->
+<SyntaxDefinition name="Coco" extensions=".atg" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+	<Color name="Comment"       foreground="#FF808080" fontStyle="italic" />
+	<Color name="Punctuation"   foreground="#FF000000" fontWeight="bold" />
+	<Color name="String"        foreground="#FF006400" />
+
+  <Color name="Keywords"      foreground="#FF0000FF" fontWeight="bold" />
+  <Color name="COMPILER"      foreground="Black" />
+
+  <Color name="Lt_Gt_Color"   foreground="#FF000000" />
+  <Color name="Bracket_Color" foreground="#FF008000" fontWeight="bold" fontStyle="italic"/>
+  <Color name="CSharp_Color"  foreground="#FF2F4F4F" fontWeight="normal" fontStyle="normal" />
+
+  <Color name="CSharp1_Color" foreground="#FF00008B" fontWeight="normal" fontStyle="normal" />
+
+  <RuleSet ignoreCase="false">
+		<Rule color="Punctuation">[{}\(\)\[\]|+\-=\.]+</Rule>
+		<Keywords color="Keywords">
+			<Word>ANY</Word>
+			<Word>CHARACTERS</Word>
+			<Word>COMMENTS</Word>
+			<Word>COMPILER</Word>
+			<Word>CONTEXT</Word>
+			<Word>END</Word>
+			<Word>FROM</Word>
+			<Word>IF</Word>
+			<Word>IGNORE</Word>
+			<Word>NAMESPACE</Word>
+			<Word>NESTED</Word>
+			<Word>PRAGMAS</Word>
+			<Word>PRODUCTIONS</Word>
+			<Word>SYNC</Word>
+			<Word>TO</Word>
+			<Word>TOKENS</Word>
+			<Word>TOKENNAMES</Word>
+			<Word>WEAK</Word>
+			<Word>using</Word>
+		</Keywords>
+		<Span color="Comment">
+			<Begin>//</Begin>
+		</Span>
+		<Span color="Comment" multiline="true">
+			<Begin>/\*</Begin>
+			<End>\*/</End>
+		</Span>
+		<Span color="COMPILER" ruleSet="CSharp" multiline="true">
+			<Begin color="Keywords">COMPILER</Begin>
+			<End color="Keywords">TOKENNAMES</End>
+		</Span>
+		<Span color="String">
+			<Begin>"</Begin>
+			<End>"</End>
+		</Span>
+		<Span color="String">
+			<Begin>'</Begin>
+			<End>'</End>
+		</Span>
+		<Span color="Lt_Gt_Color" ruleSet="ParamList">
+			<Begin color="Lt_Gt_Color" fontWeight="bold">&lt;</Begin>
+			<End color="Lt_Gt_Color" fontWeight="bold">&gt;</End>
+		</Span>
+		<Span color="CSharp_Color" ruleSet="CSharp" multiline="true">
+			<Begin color="Bracket_Color">\(\.</Begin>
+			<End color="Bracket_Color">\.\)</End>
+		</Span>
+		<Rule color="CSharp1_Color">\b0[xX][0-9a-fA-F]+|(\b\d+(\.[0-9]+)?|\.[0-9]+)([eE][+-]?[0-9]+)?</Rule>
+	</RuleSet>
+	<RuleSet name="CSharp" ignoreCase="false">
+		<Import ruleSet="C#/" />
+		<Rule color="CSharp1_Color">\b0[xX][0-9a-fA-F]+|(\b\d+(\.[0-9]+)?|\.[0-9]+)([eE][+-]?[0-9]+)?</Rule>
+	</RuleSet>
+	<RuleSet name="ParamList" ignoreCase="false">
+		<Import ruleSet="C#/" />
+    <Rule color="CSharp1_Color">\b0[xX][0-9a-fA-F]+|(\b\d+(\.[0-9]+)?|\.[0-9]+)([eE][+-]?[0-9]+)?</Rule>
+	</RuleSet>
+	<RuleSet name="RuleDefinition" ignoreCase="false">
+		<Rule color="CSharp1_Color">\b0[xX][0-9a-fA-F]+|(\b\d+(\.[0-9]+)?|\.[0-9]+)([eE][+-]?[0-9]+)?</Rule>
+	</RuleSet>
+</SyntaxDefinition>

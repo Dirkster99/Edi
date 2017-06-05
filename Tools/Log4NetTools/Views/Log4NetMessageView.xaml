@@ -1,0 +1,79 @@
+<UserControl x:Class="Log4NetTools.Views.Log4NetMessageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+             xmlns:behav="clr-namespace:Edi.Core.Behaviour;assembly=Edi.Core"
+             xmlns:cult="clr-namespace:YalvLib.ViewModel;assembly=YALVLib"
+             xmlns:Properties="clr-namespace:YalvLib.Strings;assembly=YALVLib"
+
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+  <Grid Background="{DynamicResource ToolViewBackground}"
+        behav:OffLineIndicator.IsOnline="{Binding IsOnline}"
+        IsEnabled="{Binding IsOnline}">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="5" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+
+    <Grid Grid.Column="0"
+          DataContext="{Binding Log4NetVM}"
+          HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch">
+      <!-- Message -->
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+
+      <Label Margin="3"
+             FontWeight="DemiBold"
+             Content="{x:Static Properties:Resources.MainWindow_DetailsBox_Message_Text}" Grid.Row="0" />
+
+      <TextBox Grid.Row="1" BorderBrush="Silver"
+               DataContext="{Binding Yalv.LogItems}"
+               Text="{Binding Path=SelectedLogItem.Message, Mode=OneWay}"
+               AcceptsReturn="True"
+               ScrollViewer.CanContentScroll="True"
+               ScrollViewer.VerticalScrollBarVisibility="Auto"
+               ScrollViewer.HorizontalScrollBarVisibility="Auto"
+               Margin="3"
+               IsReadOnly="True"
+               HorizontalContentAlignment="Stretch"
+               VerticalContentAlignment="Stretch"
+               VerticalAlignment="Stretch"
+               HorizontalAlignment="Stretch"
+               TextWrapping="NoWrap" />
+    </Grid>
+
+    <!-- Splitter between Message and Throwable -->
+    <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="Transparent" Background="Transparent" />
+
+    <Grid DataContext="{Binding Log4NetVM}"
+          Grid.Column="2"
+          HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch">
+      <!-- Throwable -->
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+
+      <Label Margin="3" FontWeight="DemiBold"
+             Content="{x:Static Properties:Resources.MainWindow_DetailsBox_Throwable_Text}" Grid.Row="0" />
+
+      <TextBox Grid.Row="1" BorderBrush="Silver"
+               Text="{Binding Path=SelectedLogItem.Throwable, Mode=OneWay}" DataContext="{Binding Yalv.LogItems}"
+               Margin="3"
+               IsReadOnly="True"
+               AcceptsReturn="True"
+               ScrollViewer.CanContentScroll="True"
+               ScrollViewer.VerticalScrollBarVisibility="Auto"
+               ScrollViewer.HorizontalScrollBarVisibility="Auto"
+               TextWrapping="NoWrap"/>
+    </Grid>
+  </Grid>
+</UserControl>

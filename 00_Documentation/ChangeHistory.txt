@@ -1,0 +1,422 @@
+
+1 Major Changes in Edi
+
+- This version is a branch from the 2014, Nov 13 commit
+  It fixes some small issues + the deadlock race condition that appeared when
+  installing/enabling file watchers via constructor
+  (FIX: file watcher is now enabled ONLY if file is loaded succesfully)
+  
+  Todo
+  Reloading file on change should be based on high level File>Close and File>Open
+  since low level exceptions are otherwise thrown
+  (for example from AvalonEdi>Folding Manager, Highlighting Manager etc)
+
+- ToDo
+  Write currently configured highlighting theme as HTML output into a new file tab (configured with HTML Highlighting)
+  YalvLib supports customizable column display (via context menu on columns -> make this configurable in program settings)
+
+- ToDo Improve Startup performance by:
+  - loading everything but default fallback theme (Aero) on demand
+  - loading highlighting patterns on demand
+
+- ToDo
+ - Query user whether files should be searched/browsed
+ - or add lost & and found view that offers a hyperlink that performs a file open on the last known location
+
+---
+
+* Updated .Net frame version of most assemblies to .Net 4.5
+  Minor improvements:
+  - Fixed color of focus rectangle of textbox with accent color
+  - Fixed background color of unfocused treeview item
+
+* Added Markdown highlighting pattern with .md file extension
+
+* Updated MsgBox sub-system to incorporate bug fix for showing dialogs without MainWindow
+  which has previously killed error messages in very first start-up of application
+
+* Adjusted Chinese translation per proof reader review
+
+* Added first version of BlockSurround support
+  select a block of text and press Ctrl+1 on the keyboard to see in action
+  ToDo Extend this to make it customizable per file/Highlighting type?
+
+* Added bracket highlighting to improve read-ability of code when using bracket characters, such as:
+  "<[({})]>"
+
+* Introduced first version of Printing function in the text control (Context Menu>Print Preview)
+
+* Fixed minor bug with zooing in UnitComboLib
+
+* Fixed minor bug with Load/Unload and Mousewheel zoom in EdiTextEditor control
+
+* Introduced option to enable/disable code completion in Tools>Settings
+
+* Loading text files is now performed with asynchronous tasks to improve start-up performance.
+
+* Added an AvalonEdit Option to Copy Text with (HTML coded) or without highlighting (default)
+
+---- Release: Edi is MUI
+
+* Added #region and #endregion folding support for cs files and started CSharpBraceFolding class
+
+* Major Improvements in MiniUML
+  - MiniUml Refactorings:
+    - This is the end of XElement as datamodel for shapes (see ShapeViewModelBase instead)
+    - PluginModel and PluginManager are setup to support more than one MiniUml plusing at a time.
+  
+  - Added new Align, Same Size, and Distribute functions based on Sukram's article series:
+    http://www.codeproject.com/Articles/24681/WPF-Diagram-Designer-Part-4
+
+  - Added RubberBand selection and ResizeAdorner based on:
+    http://www.codeproject.com/Articles/22952/WPF-Diagram-Designer-Part-1
+    http://www.codeproject.com/Articles/23265/WPF-Diagram-Designer-Part-2
+
+  - Selecting a ContainerShape lets it acquire focus to support WPFs ApplicationCommands
+  - Comment item is now multiline (added AcceptReturn=True)
+  - Extended ContextMenus on various shapes by Cut, Copy, Paste, Undo, Redo (not all supported yet)
+  - Assigned ContextMenus to CanvasView with Cut, Copy, Paste, Undo, Redo
+  - Added Export UML to Image Command in editor
+  - Refactored Save and Export commands into AbstractDocumentViewModel
+
+* Added UNC and Drive path links
+  in ICSharpCode.AvalonEdit.Rendering.LinkElementGenerator
+  (only absolute paths are supported since using relative paths
+   requires knowing the actual path of the document [if any] and re-computing URI when the user hits Save As...)
+  § 3.3.0.0
+
+* Finished Localization in German and English
+  Localized MiniUML and SimpleControls and Added .StyleCop as recognized XML File Style
+
+* Added More localization and *.resx files are now recognized XML files (with corresponding highlighting)
+  -> Localized alpha version of EDI now supports English and German by setting the culture in App.Application_Startup(...)
+ 
+* Enabled AvalonEdit text editing commands (see contextmenu) and
+  added function for folding and expanding text for viewing text with folds (XML, XHTML, CSharp, VisualBasic etc)
+
+* Adjusted Msg Box service to cover almost all calling conventions from System.MessageBox.Show
+  (This should be a piece of cake in terms of usage now)
+
+* Implemented first version of mousewheel-zoom in texteditor (which also works with zoom gesture)
+  See § 3.3.3.0 
+  -> The zoom with the mouse wheel is reflected in the zoom combobox (small extension in UnitComboBox).
+
+Known issues:
+  The zoom does not work after changing the theme
+
+* Implemented first version of MiniUML editor (http://MiniUML.codeplex.com/)
+
+  - Implemented AbstractDocumentViewModel class and IMiniUMLDocument interface
+    to re-structure dependencies between MiniUml and surrounding application
+    
+  - Added local MiniUML styles in MiniUML.Plugins.UmlClassDiagram to make UML document ignorant of theming
+    (ExpressionDark would render UML documents with theming problems otherwise)
+
+  - Added UML elements into MiniUML.Plugins.UmlClassDiagram
+  - Moved default image for select command (Command.Select.png) into MiniUML.Plugins.UmlClassDiagram
+
+  -> ToDo: Lots of bugs to fix
+     done -> CTRL+ALT TAB support - Away from UML document and To UML document
+          -> Dirty flag when editing UML document
+          -> File Close on dirty UML document raises message
+          -> Save All includes dirty UML documents
+          -> Exit application dirty UML document raises message
+          -> Copy/Cut/Paste is now implemented as WPF Application command
+              and works if the mouse selects an UML control or the canvas
+
+          -> Undo/Redo commands are implemented as WPF Application command
+          -> Export function is not integrated into EDI
+
+      TODO Print function is not integrated into EDI
+
+* Refactored:
+  Views for more modularity into EdiViews
+  Split MainWindow.xaml into several parts
+  Adjusted YalvLib ExpressionDark theme
+  Updated Log4Net Viewer library to include recent bug fixes (known problem: Colors are not adjusted when changing themes on the fly)
+  Changed log4net viewer extension to log4j
+
+* Version 1.0.3
+  Refactored Edi TextEditor control into a loockless control EdiTextEditor that inherites from AvalonEdit
+
+* Set tab size 2 as default and replace tabs with spaces
+  Implemented UTF8 as default encoding (this should later be configurable)
+
+* Integrated Log4Net document type based YalvLib control refactored out of the Yalv Viewer from here:
+  http://yalv.codeplex.com/
+
+* Updated AvalonDock to latest Build 98289 (Last Version from Dec 13 2012)
+  Added ExpressionDark2, ExpressionLight2, and Metro thenes
+
+* Implemented first version of StartPage
+  -> See CodeProject Article on AvalonDock Tutorial about Start Page
+     |
+     +-> private List<EdiViewModel> Documents property in Workspace
+     +-> StartPageViewModel, EdiViewModel, FileBaseViewModel
+     +-> AppCommand.ViewStartPage
+     +-> ActiveDocumentConverter (extended for StartPageViewModel)
+     +-> Introduced type safe ActiveEdiDocument property to avoid binding errors
+     +-> Avoid binding error when binding to Content of AvalonDockManager control via PriorityBinding and FallbackValue:
+          <Image Source="{StaticResource Image_DocTabReadOnly}"
+                  Margin="3,0,0,0"
+                  VerticalAlignment="Center"
+          >
+            <Image.Visibility>
+              <PriorityBinding FallbackValue="Collapsed">
+                <Binding Path="Content.IsReadOnly" Mode="OneWay" Converter="{StaticResource BoolToVisibilityConverter}" />
+              </PriorityBinding>
+            </Image.Visibility>
+            <Image.ToolTip>
+              <PriorityBinding FallbackValue="">
+                <Binding Path="Content.IsReadOnlyReason" Mode="OneWay" />
+              </PriorityBinding>
+            </Image.ToolTip>
+          </Image>
+
+      +> Added KeyboardFocus attached property to StartPage control to support CTRL-TAB in AvalonDock
+      +> Extended App.LoadSession to re-create StartPage if it was open in the previous session
+      
+      +> Added statement to not re-create tabs for files that could not be found
+         ToDo
+         - Query user whether files should be searched/browsed
+         - or add lost & and found view that offers a hyperlink that performs a file open on the last known location
+
+* Extended hyperlink evalaution in ICSharpCode.AvalonEdit.Rendering.LinkElementGenerator class with "file://" links
+  § 3.3.0.0
+
+* Implemented Global Styles in Highlighting Themes (See TrueBlue.xshd)
+  to let the user define all editor relevant colors (even background and hyperlink) at runtime
+  § 3.2.1.6
+
+* Improved start-up time substentially by not loading any resources in App.xaml
+
+* Solved problem of re-activating a window when second instance opens a window in first instance
+  Solution: All projects use either ".Net 4" or ".Net 4.5" or ".Net 4 Client Profile"
+
+* Added encoding detection code plus TextEncoding dependency property in AvalonEdit TextEditor class
+  § 3.2.1.20
+
+* Changed to Log4Net XML based logging
+  § 3.4.10
+
+* Added PLSQL and HLSL highlighting patterns and extended some other patterns (SQL, Ruby, Python etc)
+
+* Added simple folding strategy for VBNET via VBNetFoldingStrategy class
+  Todo: Code Review
+
+* Implemented themable syntax highlighting (started with HTML in DarkExpression - DeepBlack.xshd)
+  Added BrightStandard.xshd to consolidate highlighings across different languages
+  Errors from parsing are output log
+  § 3.2.1.6
+
+* Implemented Disable Highlighting button
+  § 3.2.1.7
+
+* Implemented App_Shutdown code to make it work correctly when Windows shuts down
+  App.OnSessionEnding
+  § 3.2.3
+
+* Implemented application branding and display of version number
+  § 3.0.2
+
+* Implemented option to support single instance editor application
+  § 3.0.1
+  SingletonApplicationEnforcer.cs from http://danielvaughan.orpius.com/post/Enforcing-Single-Instance-WPF-Applications.aspx
+  
+* ExpressionDark theme contains tooltips even when controls are disabled
+  § 3.3.0
+
+* Included more/better exception handling at the
+  App class method level and the command method level
+  There are now error message boxes that display exceptions with a nice view and point users to the codeplex issue tracker
+
+* Every aspect of the application (including dialogs) can now be themed.
+  This means the application is completely skinable except for the Window Chrome.
+  § 3.0.1
+
+* MsgBox Background Color is now themed in ExpressionDark
+  Pressing Esc on MsgBox will message Cancel if available (bugfix)
+  Improved ExpressionDark theme towards better MouseOver, IsEnabled, and Keyboard focus visibility for buttons
+
+* Added ExpressionDark Theme and made some icons theme-able for ExpressionDark
+
+  Added bugfix suggested in http://www.codeproject.com/Articles/42490/Using-AvalonEdit-WPF-Text-Editor?msg=4388281#xx4388281xx
+  Updated selection colors for text selection in VS2010 and Aero
+
+* Included link to codeplex in critical error messages
+  Correct Selection colors to be more appropriate for each theme
+
+* Adjusted MRU Tool Windoe RecentFileList Hyperlinks
+  View to display path with ellipsis at the center of the string
+
+* Integrated custom MsgBox service to service messages with hyperlinks
+  to project home page and online help
+
+* Integrated CTRL+F and CTRL+H Find/Replace text for current document
+
+  Support       F3 (Find Next)
+  Support Shift+F3 (Find Previous)
+  FindReplace Integration for all currently open documents
+
+* Integrated Read-Only file open function
+  § 3.2.8 File>Open (Read-Only files)
+
+* Integrated open text file command via command line
+  § 3.1.2
+  (Currently there are no other command line parameters implemented)
+
+* Integrated theming which can be changed at run-time (§ 3.0.1)
+
+* Implemented line/column cursor indicator in lower right corner of MainWindow
+  § 3.2.1.4
+  Added dependency properties in FileDocument (TextEditor Wrapper) class
+  (these properties are changed via textEditor.TextArea.Caret.PositionChanged event)
+  
+  --> Added OnWayToSource binding in ViewModel and
+  --> OneWay binding to ViewModel in MainWindow
+
+* Implement Overtype/Insert mode via toggled Insert key in View
+  § 3.2.1.4
+  --> ICSharpCode.AvalonEdit.Editing.EmptySelection.ReplaceSelectionWithText
+  --> ICSharpCode.AvalonEdit.Editing.TextArea.OnKeyUp
+  --> Options.ICSharpCode.AvalonEdit.TextEditorOptions.IsInsertMode
+  
+  ViewModel
+  --> Bind to ActiveDocument.Options.IsInsertMode
+  --> Converter: AvalonDock.MVVMTestApp.Converter.BooleanToTypeModeStringConverter
+
+
+* Almost completted save/restore function of editor state when user CTRL+Tabs between documents
+  § 3.1.5
+  
+- Added attached property with ITextBoxControl interface for communication between
+  AvalonEdit and FileDocumentViewModel
+
+  http://stackoverflow.com/questions/2596757/mvvm-how-can-i-select-text-in-a-textbox
+
+  This is an event based mechanism which works great wherever simple binding is inappropriate.
+
+* Add Save All (button) to save all edited (and new documents and program settings with MRU)
+  § 3.1.1
+
+* Added and Save of AvalonDock layout on startup/shutdown of application
+  
+* Added option in Config to decide whether last session of open files
+  should be recovered or not
+  Done
+ 
+* Implemented XML Serialization for program settings and session data
+
+* Bug Fix
+  Position Window on second monitor does not work
+  Problem:
+  Window is displayed in default size on first monitor if application is restarted
+  Done
+
+* Updated TXT Highlighting
+  Now includes *Bold* and ~Italic~ formattings
+  Done
+
+* Bug Fix with File>New
+  Document View was not initialized correctly (View size was 100% instead of 150% as in program settings)
+  Documents that were created with File>New and saved via File>SaveAs or File>Save were not added into MRU
+  Done
+
+TODO Update requirements up to this point
+
+- Added Find Replace/Function for current document and fixed bug in FileDocument.xaml
+  Problem. FocusManager.IsFocusScope="True" caused bound commands to work no longer in ToolBar and MainMenu
+  Done
+
+- Added folders: Behaviour, Converter, Images/Application, Themes, Util, ViewModel
+  with corresponding content
+  Done
+
+- Replaced New, Open, Save, Save As, Close commands in MainWindow with WPFs ApplicationCommands.<...>
+  standard commands and bindings in Workspace.InitCommandBinding method
+  Done
+   
+- Changed FileViewModel to override inherited Title property and changed FileName property
+  Done
+
+- Replaced all Commands (except for close) with Standard WPF ApplicationCommand RoutedUICommand bindings
+  Done
+
+- Fixed bug in Close Command
+  Issue 1: Close Command is not disabled if there is no document to close
+  Isuue 2: The ActiveDocument is not reset to null (or another document)
+           if the ActiveDocument is closed
+
+  - Implemented ApplicationCommands.Close to envoke close command from mainWindow (menu and toolbar items)
+  - Adjusted Workspace.Close method to handle ActiveDocument correctly
+
+- Removed x:Name="mainWindow" and moved Layout Save/Load command into Workspace ViewModel
+  (this way replacing the current MainWindow with a different Window class is more simplified
+   because there are fewer dependencies between View and ViewModel)
+
+- Added toolbar to expose functionality for AvalonEdit (Change Highlighting, Undo, Redo etc...)
+
+- Issue: Canceling saving edits when shuting down the editor does not result in canceling the shutdown process
+
+  Changed signature in Workspace.Close to call this method on Application Shutdown
+  
+- Added Ctrl-F4 KeyBindings to all CloseCommand command bindings throughout the application
+
+---------------------- ---------------------------------------------------------------------------------------------
+- Added App.RegisterCustomHighlightingPatterns() for adding non-standard highlighing patterns
+  
+  - AvalonEdit Issue:
+    App.RegisterCustomHighlightingPatterns works for some reason only if called from the mainWindow Constructor(?).
+
+- Added HighlightingDefinitionsSortedByName property in HighlightManager.cs
+  
+    /// <summary>
+    /// Gets a - sorted by name - copy of all highlightings.
+    /// </summary>
+    public ReadOnlyCollection<IHighlightingDefinition> HighlightingDefinitionsSortedByName
+    {
+      get
+      {
+        lock (lockObj)
+        {
+          System.Collections.Generic.SortedDictionary<string, IHighlightingDefinition> sort = new SortedDictionary<string,IHighlightingDefinition>();
+
+          if (allHighlightings != null)
+          {
+            foreach(IHighlightingDefinition h in allHighlightings)
+            {
+              sort.Add(h.Name, h);
+            }
+          }
+
+          IHighlightingDefinition[] a = new IHighlightingDefinition[sort.Count];
+
+          int i = 0;
+          foreach (IHighlightingDefinition h in sort.Values)
+          {
+            a[i++] = h;
+          }
+
+          return Array.AsReadOnly(a);
+        }
+      }
+    }
+
+    - AvalonEdit Issue:
+      Is this the best way for sorted output (is there already a sort function)?
+      Is there a sorted insert function?
+      Can Highlightings be initialized without the AvalonEdit build in patterns?
+---------------------- ---------------------------------------------------------------------------------------------
+  Added about 10 Highlighting patterns found on the Internet and a few own patterns:
+  - TXT
+  - VTL
+  - INI
+
+---------------------- ---------------------------------------------------------------------------------------------
+  - Added scale of font control setting at the foot of the ScrollViewer of the
+    TextEditor view.
+---------------------- ---------------------------------------------------------------------------------------------
+
+  Updated AvalonEdit to version the SharpDevelop_4.3.0.8857_Source version from
+  http://build.sharpdevelop.net/BuildArtefacts/
+  

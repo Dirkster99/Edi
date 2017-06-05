@@ -1,0 +1,255 @@
+<?xml version="1.0"?>
+<SyntaxDefinition name="F#" extensions=".fs" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <!-- Shades of Red-Brown: #a31515, #cf4315, #ffb96e, #ffdc95 -->
+  <Color name="Digits"        foreground="DarkBlue" exampleText="3.1415f"/>
+  <Color name="Comment"       foreground="Green"    exampleText="// comment" />
+  <Color name="Punctuation"   foreground="Blue"     exampleText="a(b.c);" />
+
+  <Color name="String"        foreground="#ffa31515" exampleText="string text = &quot;Hello, World!&quot;"/>
+	<Color name="Char"          foreground="Magenta"   exampleText="char linefeed = '\n';"/>
+
+  <Color name="Preprocessor"         foreground="Green"        exampleText="#region Title" />
+	<Color name="ReferenceTypes"       foreground="Red"          exampleText="object o;" />
+	<Color name="MethodCall"           foreground="MidnightBlue" fontWeight="bold" exampleText="o.ToString();"/>
+	<Color name="NullOrValueKeywords"  fontWeight="bold" exampleText="if (value == null)"/>
+	<Color name="Modifiers"            foreground="Brown" exampleText="static readonly int a;"/>
+	<Color name="Visibility"           foreground="Blue"  fontWeight="bold" exampleText="public override void ToString();"/>
+  <Color name="NamespaceKeywords"    foreground="Green" fontWeight="bold" exampleText="namespace A.B { using System; }"/>
+	<Color name="GetSetAddRemove"      foreground="SaddleBrown" exampleText="int Prop { get; set; }"/>
+  <Color name="ReservedKeywords"     foreground="Red"  fontWeight="normal" fontStyle="italic" />
+  <Color name="CurrentKeywords"      foreground="Blue" fontWeight="normal" fontStyle="italic" />
+
+  <Color name="CommentMarkerSetTodo"       foreground="Red" fontWeight="bold" />
+  <Color name="CommentMarkerSetHackUndone" foreground="#E0E000" fontWeight="bold"/>
+
+  <RuleSet name="CommentMarkerSet">
+		<Keywords color="CommentMarkerSetTodo">
+			<Word>TODO</Word>
+			<Word>FIXME</Word>
+		</Keywords>
+		<Keywords color="CommentMarkerSetHackUndone">
+			<Word>HACK</Word>
+			<Word>UNDONE</Word>
+		</Keywords>
+	</RuleSet>
+	
+	<!-- This is the main ruleset. -->
+	<RuleSet>
+		<Span color="Preprocessor">
+			<Begin>\#</Begin>
+			<RuleSet name="PreprocessorSet">
+				<Span> <!-- preprocessor directives that allows comments -->
+					<Begin fontWeight="bold">
+            (define|undef|if|elif|else|endif|line)\b
+          </Begin>
+					<RuleSet>
+						<Span color="Comment" ruleSet="CommentMarkerSet">
+							<Begin>//</Begin>
+						</Span>
+					</RuleSet>
+				</Span>
+				<Span> <!-- preprocessor directives that don't allow comments -->
+					<Begin fontWeight="bold">
+						(region|endregion|error|warning|pragma)\b
+					</Begin>
+				</Span>
+			</RuleSet>
+		</Span>
+
+    <Span color="Comment"><!-- XML Documentation -->
+			<Begin color="XmlDoc/DocComment">///</Begin>
+			<RuleSet>
+				<Import ruleSet="XmlDoc/DocCommentSet"/>
+				<Import ruleSet="CommentMarkerSet"/>
+			</RuleSet>
+		</Span>
+
+    <!-- One Line Documentation -->
+    <Span color="Comment" ruleSet="CommentMarkerSet">
+			<Begin>//</Begin>
+		</Span>
+
+    <!-- Multi Line Comment -->
+    <Span color="Comment" ruleSet="CommentMarkerSet" multiline="true">
+			<Begin>\(\*</Begin>
+			<End>\*\)</End>
+		</Span>
+
+    <!-- String -->		
+		<Span color="String">
+			<Begin>"</Begin>
+			<End>"</End>
+			<RuleSet>
+				<!-- span for escape sequences -->
+				<Span begin="\\" end="."/>
+			</RuleSet>
+		</Span>
+		
+		<Span color="Char">
+			<Begin>'</Begin>
+			<End>'</End>
+			<RuleSet>
+				<!-- span for escape sequences -->
+				<Span begin="\\" end="."/>
+			</RuleSet>
+		</Span>
+		
+    <!-- Verbatim interpreted string -->
+		<Span color="String" multiline="true">
+			<Begin>@"</Begin>
+			<End>"</End>
+			<RuleSet>
+				<!-- span for escape sequences -->
+				<Span begin='""' end=""/>
+			</RuleSet>
+		</Span>
+		
+		<!-- don't highlight "@int" as keyword -->
+		<Rule>
+			@[\w\d_]+
+		</Rule>
+
+    <Keywords color="CurrentKeywords">
+      <Word>and</Word>
+      <Word>as</Word>
+      <Word>assert</Word>
+      <Word>begin</Word>
+      <Word>default</Word>
+      <Word>do</Word>
+      <Word>done</Word>
+      <Word>downcast</Word>
+      <Word>downto</Word>
+      <Word>else</Word>
+      <Word>enum</Word>
+      <Word>exception</Word>
+      <Word>extern</Word>
+      <Word>false</Word>
+      <Word>finally</Word>
+      <Word>for</Word>
+      <Word>fun</Word>
+      <Word>function</Word>
+      <Word>if</Word>
+      <Word>in</Word>
+      <Word>inherit</Word>
+      <Word>land</Word>
+      <Word>lazy</Word>
+      <Word>let</Word>
+      <Word>match</Word>
+      <Word>module</Word>
+      <Word>mutable</Word>
+      <Word>new</Word>
+      <Word>of</Word>
+      <Word>open</Word>
+      <Word>or</Word>
+      <Word>rec</Word>
+      <Word>sig</Word>
+      <Word>struct</Word>
+      <Word>then</Word>
+      <Word>to</Word>
+      <Word>true</Word>
+      <Word>try</Word>
+      <Word>type</Word>
+      <Word>val</Word>
+      <Word>when</Word>
+      <Word>inline</Word>
+      <Word>upcast</Word>
+      <Word>while</Word>
+    </Keywords>
+    <Keywords color="ReservedKeywords">
+      <Word>atomic</Word>
+      <Word>break</Word>
+      <Word>checked</Word>
+      <Word>component</Word>
+      <Word>const</Word>
+      <Word>constraint</Word>
+      <Word>constructor</Word>
+      <Word>continue</Word>
+      <Word>decimal</Word>
+      <Word>eager</Word>
+      <Word>event</Word>
+      <Word>external</Word>
+      <Word>fixed</Word>
+      <Word>functor</Word>
+      <Word>include</Word>
+      <Word>method</Word>
+      <Word>mixin</Word>
+      <Word>process</Word>
+      <Word>property</Word>
+      <Word>pure</Word>
+      <Word>readonly</Word>
+      <Word>return</Word>
+      <Word>sealed</Word>
+    </Keywords>
+
+    <Keywords color="ReferenceTypes">
+			<Word>class</Word>
+      <Word>end</Word>
+      <Word>interface</Word>
+			<Word>delegate</Word>
+			<Word>object</Word>
+			<Word>string</Word>
+    </Keywords>
+
+		<Keywords color="Modifiers">
+			<Word>abstract</Word>
+      <Word>member</Word>
+      <Word>with</Word>
+      <!--Word>const</Word -->
+      <!--Word>event</Word -->
+			<!--Word>extern</Word -->
+			<Word>override</Word>
+      <!-- Word>readonly</Word -->
+			<!-- Word>sealed</Word -->
+			<Word>static</Word>
+			<Word>virtual</Word>
+			<Word>volatile</Word>
+			<Word>async</Word>
+		</Keywords>
+
+		<Keywords color="Visibility">
+			<Word>public</Word>
+			<Word>protected</Word>
+			<Word>private</Word>
+			<Word>internal</Word>
+		</Keywords>
+
+
+    <Keywords color="NamespaceKeywords">
+			<Word>namespace</Word>
+			<Word>using</Word>
+		</Keywords>
+
+    <Keywords color="GetSetAddRemove">
+			<Word>get</Word>
+			<Word>set</Word>
+			<Word>add</Word>
+			<Word>remove</Word>
+		</Keywords>
+
+    <Keywords color="NullOrValueKeywords">
+			<Word>null</Word>
+      <!-- Word>value</Word -->
+		</Keywords>
+
+		<!-- Mark previous rule -->
+		<Rule color="MethodCall">
+		\b
+		[\d\w_]+  # an identifier
+		(?=\s*\() # followed by (
+		</Rule>
+
+		<!-- Digits -->
+		<Rule color="Digits">
+			\b0[xX][0-9a-fA-F]+  # hex number
+		|	
+			(	\b\d+(\.[0-9]+)?   #number with optional floating point
+			|	\.[0-9]+           #or just starting with floating point
+			)
+			([eE][+-]?[0-9]+)? # optional exponent
+		</Rule>
+		
+		<Rule color="Punctuation">
+			[?,.;()\[\]{}+\-/%*&lt;&gt;^+~!|&amp;]+
+		</Rule>
+	</RuleSet>
+</SyntaxDefinition>

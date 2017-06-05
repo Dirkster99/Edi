@@ -1,0 +1,62 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:NumericUpDownLib">
+
+  <Path x:Key="ArrowUp"
+        Width="10"
+        Data="M 337.57757568359375,322 C337.57757568359375,322 334,326 334,326 334,326 341,326 341,326 341,326 337.57757568359375,322 337.57757568359375,322 z"
+        Stretch="Uniform"
+        >
+    <Path.Fill>
+      <SolidColorBrush Color="#FF000000" />
+    </Path.Fill>
+  </Path>
+
+  <Path x:Key="ArrowDown"
+        Width="10"
+        Data="M 0,1 C0,1 0,0 0,0 0,0 3,0 3,0 3,0 3,1 3,1 3,1 4,1 4,1 4,1 4,0 4,0 4,0 7,0 7,0 7,0 7,1 7,1 7,1 6,1 6,1 6,1 6,2 6,2 6,2 5,2 5,2 5,2 5,3 5,3 5,3 4,3 4,3 4,3 4,4 4,4 4,4 3,4 3,4 3,4 3,3 3,3 3,3 2,3 2,3 2,3 2,2 2,2 2,2 1,2 1,2 1,2 1,1 1,1 1,1 0,1 0,1 z"
+        Stretch="Uniform">
+    <Path.Fill>
+      <SolidColorBrush Color="#FF000000" />
+    </Path.Fill>
+  </Path>
+
+  <Style TargetType="{x:Type local:NumericUpDown}">
+    <Setter Property="HorizontalAlignment" Value="Center"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type local:NumericUpDown}">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Value}" 
+                      Grid.RowSpan="2" Margin="0,0,1,0"
+                      TextAlignment="Right"
+                      IsReadOnly="True" />
+
+            <!-- Increase value button -->
+            <RepeatButton Command="{x:Static local:NumericUpDown.IncreaseCommand}"  
+                          Grid.Column="1" Grid.Row="0"
+                          Content="{StaticResource ArrowUp}"/>
+
+            <!-- Decrease value button -->
+            <RepeatButton Command="{x:Static local:NumericUpDown.DecreaseCommand}"  
+                          Grid.Column="1" Grid.Row="1"
+                          Content="{StaticResource ArrowDown}"/>
+          </Grid>
+
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+</ResourceDictionary>

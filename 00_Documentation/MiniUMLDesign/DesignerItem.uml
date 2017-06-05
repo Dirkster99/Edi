@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document
+  Size="1793.79,1793.79" xmlns="MiniUml">
+  <Class
+    Name="ResizeChrome"
+    ID="auto_0"
+    Position="529,167,95,75"
+    Stereotype="" />
+  <Class
+    Name="ResizeThumb"
+    ID="auto_1"
+    Position="672,167,95,75"
+    Stereotype="" />
+  <Aggregation
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_0"
+    FromArrow="Uml.Diamonds.White"
+    To="auto_1"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="624,205.16" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="672,205.16" />
+  </Aggregation>
+  <Class
+    Name="ResizeAdorner"
+    ID="auto_2"
+    Position="386,167,95,75"
+    Stereotype="" />
+  <Aggregation
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_2"
+    FromArrow="Uml.Diamonds.White"
+    To="auto_0"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="481,205.16" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="529,205.16" />
+  </Aggregation>
+  <Class
+    Name="ResizeDecorator"
+    ID="auto_3"
+    Position="243,167,95,75"
+    Stereotype="" />
+  <Aggregation
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_3"
+    FromArrow="Uml.Diamonds.White"
+    To="auto_2"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="338,207.16" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="386,207.16" />
+  </Aggregation>
+  <Class
+    Name="DesignerItem"
+    ID="auto_4"
+    Position="100,167,95,75"
+    Stereotype="" />
+  <Aggregation
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_4"
+    FromArrow="Uml.Diamonds.White"
+    To="auto_3"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="195,205.16" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="243,205.16" />
+  </Aggregation>
+  <Note
+    Name=""
+    ID=""
+    Position="86,18,405,129">
+    <Text>This diagram shows the DesignerItem class components
+that are used to implement the resize decorator in
+Edi's UML editor.
+
+The components are located at:
+MiniUML.View.Views.ResizeAdorner</Text>
+  </Note>
+  <Note
+    Name=""
+    ID=""
+    Position="377,253,222,203">
+    <Text>The ResizeAdorner
+is constructed on
+demand in
+ResizeDecorator.ShowAdorner()
+
+The ResizeAdorner constructor
+constructs the ResizeChrome
+
+The ResizeChrome class is a
+look-less control that requires
+ResizeThumb parts.</Text>
+  </Note>
+</Document>

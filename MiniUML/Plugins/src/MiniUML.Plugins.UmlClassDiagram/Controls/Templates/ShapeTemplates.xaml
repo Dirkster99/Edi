@@ -1,0 +1,118 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shapes="clr-namespace:MiniUML.Plugins.UmlClassDiagram.Controls.View.Shapes"
+                    xmlns:keys="clr-namespace:MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel"
+                    >
+
+  <!-- Begin Common Shapes -->
+  <DataTemplate x:Key="{x:Static keys:ShapeViewModelKeyStrings.ShapeNote}">
+    <shapes:UmlCommentShape>
+      <shapes:UmlCommentShape.Style>
+        <Style TargetType="shapes:UmlCommentShape">
+          <Setter Property="BorderThickness" Value="1"/>
+          <Setter Property="BorderBrush" Value="Transparent"/>
+          <Setter Property="Background" Value="Transparent"/>
+        </Style>
+      </shapes:UmlCommentShape.Style>
+    </shapes:UmlCommentShape>
+  </DataTemplate>
+
+  <DataTemplate x:Key="{x:Static keys:ShapeViewModelKeyStrings.ShapePackage}">
+    <shapes:UmlPackageShape>
+      <shapes:UmlPackageShape.Style>
+        <Style TargetType="shapes:UmlPackageShape">
+          <Setter Property="BorderThickness" Value="1"/>
+          <Setter Property="BorderBrush" Value="Transparent"/>
+          <Setter Property="Background" Value="Transparent"/>
+        </Style>
+      </shapes:UmlPackageShape.Style>
+    </shapes:UmlPackageShape>
+  </DataTemplate>
+
+  <DataTemplate x:Key="{x:Static keys:ShapeViewModelKeyStrings.ShapeBoundary}">
+    <shapes:UmlBoundaryShape>
+      <shapes:UmlBoundaryShape.Style>
+        <Style TargetType="shapes:UmlBoundaryShape">
+          <Setter Property="BorderThickness" Value="1"/>
+          <Setter Property="BorderBrush" Value="Transparent"/>
+          <Setter Property="Background" Value="Transparent"/>
+        </Style>
+      </shapes:UmlBoundaryShape.Style>
+    </shapes:UmlBoundaryShape>
+  </DataTemplate>
+  <!-- End Common Shapes -->
+
+  <!-- Begin Class Shapes -->
+  <!-- Square shapes without horizontal line -->
+  <DataTemplate x:Key="{x:Static keys:ShapeViewModelKeyStrings.ShapeSquare}">
+    <shapes:UmlSquareShape>
+      <shapes:UmlSquareShape.Style>
+        <Style TargetType="shapes:UmlSquareShape">
+          <Setter Property="MinHeight" Value="50" />
+          <Setter Property="BorderThickness" Value="1"/>
+          <Setter Property="BorderBrush" Value="Gray"/>
+          <Setter Property="Background" Value="#FFFFFFFF"/>
+        </Style>
+      </shapes:UmlSquareShape.Style>
+    </shapes:UmlSquareShape>
+  </DataTemplate>
+
+  <DataTemplate x:Key="{x:Static keys:ShapeViewModelKeyStrings.ShapeDecision}">
+    <shapes:UmlDecisionShape>
+      <shapes:UmlDecisionShape.Style>
+        <Style TargetType="shapes:UmlDecisionShape">
+          <Setter Property="MinHeight" Value="50" />
+          <Setter Property="BorderThickness" Value="0"/>
+          <Setter Property="BorderBrush" Value="Transparent"/>
+          <Setter Property="Background" Value="Transparent"/>
+        </Style>
+      </shapes:UmlDecisionShape.Style>
+    </shapes:UmlDecisionShape>
+  </DataTemplate>
+  <!-- End Commen Shapes -->
+
+
+  <!-- Begin Deployment Shapes -->
+  <DataTemplate x:Key="{x:Static keys:ShapeViewModelKeyStrings.ShapeNode}">
+    <shapes:UmlNodeShape>
+      <shapes:UmlNodeShape.Style>
+        <Style TargetType="shapes:UmlNodeShape">
+          <Setter Property="MinHeight" Value="75" />
+          <Setter Property="BorderThickness" Value="1"/>
+          <Setter Property="BorderBrush" Value="Gray"/>
+          <Setter Property="Background" Value="#FFFFFFFF"/>
+        </Style>
+      </shapes:UmlNodeShape.Style>
+    </shapes:UmlNodeShape>
+  </DataTemplate>
+  <!-- End Deployment Shapes -->
+
+  <!-- Start Uml Use Case Shapes -->
+  <DataTemplate x:Key="{x:Static keys:ShapeViewModelKeyStrings.ShapeUseCase}">
+    <shapes:UmlUseCaseShape>
+      <shapes:UmlUseCaseShape.Style>
+        <Style TargetType="shapes:UmlUseCaseShape">
+          <Setter Property="MinHeight" Value="75" />
+          <Setter Property="BorderThickness" Value="1"/>
+          <Setter Property="BorderBrush" Value="Gray"/>
+          <Setter Property="Background" Value="#FFFFFFFF"/>
+        </Style>
+      </shapes:UmlUseCaseShape.Style>
+    </shapes:UmlUseCaseShape>
+  </DataTemplate>
+  <!-- End of Uml Use Case Shapes -->
+
+  <DataTemplate x:Key="{x:Static keys:ShapeViewModelKeyStrings.ShapeCanvas}">
+    <shapes:UmlCanvasShape>
+      <shapes:UmlCanvasShape.Style>
+        <Style TargetType="shapes:UmlCanvasShape">
+          <Setter Property="MinHeight" Value="75" />
+          <Setter Property="BorderThickness" Value="1"/>
+          <Setter Property="BorderBrush" Value="Gray"/>
+          <Setter Property="Background" Value="#FFFFFFFF"/>
+        </Style>
+      </shapes:UmlCanvasShape.Style>
+    </shapes:UmlCanvasShape>
+  </DataTemplate>
+
+</ResourceDictionary>

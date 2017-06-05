@@ -1,0 +1,259 @@
+﻿<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+  xmlns:d="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
+  xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+
+  xmlns:controls="clr-namespace:MiniUML.View.Controls;assembly=MiniUML.View"
+  xmlns:shapes="clr-namespace:MiniUML.Plugins.UmlClassDiagram.Controls.View.Shapes"
+  xmlns:designItem="clr-namespace:MiniUML.View.Views.ResizeAdorner;assembly=MiniUML.View"
+
+  xmlns:connect="clr-namespace:MiniUML.Plugins.UmlClassDiagram.Controls.View.Connect"
+
+  xmlns:conv="clr-namespace:MiniUML.Plugins.UmlClassDiagram.Converter"
+  xmlns:viewconv="clr-namespace:MiniUML.View.Converter;assembly=MiniUML.View"
+  >
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="/MiniUML.Plugins.UmlClassDiagram;component/Themes/Brushes.xaml"  />
+
+    <ResourceDictionary Source="/MiniUML.Plugins.UmlClassDiagram;component/Themes/UmlTextBox.xaml"  />
+  </ResourceDictionary.MergedDictionaries>
+
+  <Style TargetType="{x:Type shapes:UmlCanvasShape}">
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <Setter Property="Height" Value="{Binding Height}" />
+    <Setter Property="Width" Value="{Binding Width}" />
+    <Setter Property="Background" Value="Black" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type shapes:UmlCanvasShape}">
+          <ControlTemplate.Resources>
+            <DataTemplate x:Key="CanvasUmlMan">
+              <!-- Uml Actor Man Sketch -->
+              <Canvas HorizontalAlignment="Center"
+                      VerticalAlignment="Bottom"
+                      Background="Transparent" Width="60" Height="85">
+                <!-- Rectangle Width="{Binding Width}"
+                       Height="{Binding Height}"
+                       Stroke="Gray" Opacity="0.75" StrokeDashArray="4,2" / -->
+
+                <!-- Vertical line for throat and back of use case man -->
+                <Line X1="30" Y1="15" X2="30" Y2="60" Stroke="{DynamicResource ForegroundDiagram}" />
+
+                <!-- Left leg of use case man -->
+                <Line X1="30" Y1="60" X2="12.5" Y2="80" Stroke="{DynamicResource ForegroundDiagram}" />
+
+                <!-- Right leg of use case man -->
+                <Line X1="30" Y1="60" X2="47.5" Y2="80" Stroke="{DynamicResource ForegroundDiagram}" />
+
+                <!-- Horizontal line for left and right arm -->
+                <Line X1="12.5" Y1="40" X2="47.5" Y2="40" Stroke="{DynamicResource ForegroundDiagram}" />
+
+                <!-- Head of use case man -->
+                <Ellipse Height="25" Width="25" Canvas.Left="17.5" Canvas.Top="5"
+                       Stroke="{DynamicResource ForegroundDiagram}"
+                       Fill="{DynamicResource BackgroundDiagram}" />
+              </Canvas>
+            </DataTemplate>
+
+            <DataTemplate x:Key="CanvasErrorShape">
+              <Canvas HorizontalAlignment="Center"
+                      VerticalAlignment="Bottom"
+                      Background="Red" Width="60" Height="85">
+              </Canvas>
+            </DataTemplate>
+
+            <DataTemplate x:Key="ActivityInitial">
+              <Canvas Width="40" Height="40" Grid.Row="0" >
+                <!-- Rectangle Width="40" Height="40" Stroke="Gray" Opacity="0.75" StrokeDashArray="4,2" / -->
+
+                <!-- Head of use case man -->
+                <Ellipse Height="30" Width="30" Canvas.Left="5" Canvas.Top="5"
+               Stroke="{DynamicResource ForegroundDiagram}"
+               Fill="{DynamicResource ForegroundDiagram}" />
+              </Canvas>
+            </DataTemplate>
+
+            <DataTemplate x:Key="ActivityFinal">
+              <Canvas Width="40" Height="40" Grid.Row="1">
+                <!-- Rectangle Width="40" Height="40" Stroke="Gray" Opacity="0.75" StrokeDashArray="4,2" / -->
+
+                <!-- Head of use case man -->
+                <Ellipse Height="30" Width="30" Canvas.Left="5" Canvas.Top="5"
+               Stroke="{DynamicResource ForegroundDiagram}"
+               Fill="{DynamicResource BackgroundDiagram}" />
+
+                <Ellipse Height="15" Width="15" Canvas.Left="12.5" Canvas.Top="12.5"
+               Stroke="{DynamicResource ForegroundDiagram}"
+               Fill="{DynamicResource ForegroundDiagram}" />
+              </Canvas>
+            </DataTemplate>
+
+            <DataTemplate x:Key="ActivityFlowFinal">
+              <Canvas Width="40" Height="40" Grid.Row="2">
+                <!-- Rectangle Width="40" Height="40" Stroke="Gray" Opacity="0.75" StrokeDashArray="4,2" / -->
+
+                <!-- Head of use case man -->
+                <Ellipse Height="30" Width="30" Canvas.Left="5" Canvas.Top="5"
+                         Stroke="{DynamicResource ForegroundDiagram}"
+                         Fill="{DynamicResource BackgroundDiagram}" />
+
+                <Line X1="10" Y1="10" X2="30" Y2="30"
+                      Stroke="{DynamicResource ForegroundDiagram}" StrokeThickness="1" />
+
+                <Line X1="10" Y1="30" X2="30" Y2="10"
+                      Stroke="{DynamicResource ForegroundDiagram}" StrokeThickness="1" />
+
+              </Canvas>
+            </DataTemplate>
+
+            <DataTemplate x:Key="ActivitySync">
+              <Canvas Width="40" Height="40" Grid.Row="3">
+                <!-- Rectangle Width="40" Height="40" Stroke="Gray" Opacity="0.75" StrokeDashArray="4,2" / -->
+
+                <!-- Head of use case man -->
+                <Ellipse Height="30" Width="30" Canvas.Left="5" Canvas.Top="5"
+                         Stroke="{DynamicResource ForegroundDiagram}"
+                         Fill="{DynamicResource BackgroundDiagram}" />
+
+                <Line X1="15" Y1="15" X2="25" Y2="25"
+                      Stroke="{DynamicResource ForegroundDiagram}" StrokeThickness="1" />
+
+                <Line X1="15" Y1="25" X2="25" Y2="15"
+                      Stroke="{DynamicResource ForegroundDiagram}" StrokeThickness="1" />
+
+                <!-- Horizontal Line -->
+                <Line X1="12.5" Y1="20" X2="27.5" Y2="20"
+                      Stroke="{DynamicResource ForegroundDiagram}" StrokeThickness="1" />
+
+                <!-- Vertical Line -->
+                <Line X1="20" Y1="12.5" X2="20" Y2="27.5"
+                      Stroke="{DynamicResource ForegroundDiagram}" StrokeThickness="1" />
+
+              </Canvas>
+            </DataTemplate>
+
+            <DataTemplate x:Key="Event1">
+              <Canvas Width="101" Height="40" Grid.Row="4">
+                <!-- Rectangle Width="120" Height="42" Stroke="Gray" Opacity="0.75" StrokeDashArray="4,2" / -->
+
+                <Path Fill="White" Stroke="Black" Margin="0" HorizontalAlignment="Right" VerticalAlignment="Top">
+                  <Path.Data>
+                    <PathGeometry>
+                      <PathGeometry.Figures>
+                        <PathFigureCollection>
+                          <PathFigure IsClosed="True" StartPoint="0,1">
+                            <PathFigure.Segments>
+                              <PathSegmentCollection>
+                                <LineSegment Point="80,1" />
+                                <LineSegment Point="100,21" />
+                                <LineSegment Point="80,39" />
+                                <LineSegment Point="1,39" />
+                              </PathSegmentCollection>
+                            </PathFigure.Segments>
+                          </PathFigure>
+                        </PathFigureCollection>
+                      </PathGeometry.Figures>
+                    </PathGeometry>
+                  </Path.Data>
+                </Path>
+              </Canvas>
+            </DataTemplate>
+
+            <DataTemplate x:Key="Event2">
+              <Canvas Width="101" Height="40" Grid.Row="5">
+                <!-- Rectangle Width="120" Height="42" Stroke="Gray" Opacity="0.75" StrokeDashArray="4,2" / -->
+
+                <Path Fill="White" Stroke="Black" Margin="0" HorizontalAlignment="Right" VerticalAlignment="Top">
+                  <Path.Data>
+                    <PathGeometry>
+                      <PathGeometry.Figures>
+                        <PathFigureCollection>
+                          <PathFigure IsClosed="True" StartPoint="0,1">
+                            <PathFigure.Segments>
+                              <PathSegmentCollection>
+                                <LineSegment Point="100,1" />
+                                <LineSegment Point="100,39" />
+                                <LineSegment Point="1,39" />
+                                <LineSegment Point="21,21" />
+                              </PathSegmentCollection>
+                            </PathFigure.Segments>
+                          </PathFigure>
+                        </PathFigureCollection>
+                      </PathGeometry.Figures>
+                    </PathGeometry>
+                  </Path.Data>
+                </Path>
+              </Canvas>
+            </DataTemplate>
+
+            <shapes:UmlCanvasShapeSelector x:Key="CanvasShapeSelector"
+                                           UmlManPathShape="{StaticResource CanvasUmlMan}"
+                                           ErrorPathShape="{StaticResource CanvasErrorShape}"
+                                           ActivityInitial="{StaticResource ActivityInitial}"
+                                           ActivityFinal="{StaticResource ActivityFinal}"
+                                           ActivityFlowFinal="{StaticResource ActivityFlowFinal}"
+                                           ActivitySync="{StaticResource ActivitySync}"
+                                           Event1="{StaticResource Event1}"
+                                           Event2="{StaticResource Event2}"
+                                         />
+          </ControlTemplate.Resources>
+
+
+          <designItem:DesignerItem IsSelected="{Binding Path=IsSelected}"
+                                   ResizeSelectedShapes="{Binding ResizeSelectedShapesCommand}"
+                                   Background="{x:Null}" ><!-- Background=null makes inner part hittest invisible -->
+            <designItem:DesignerItem.Content>
+
+              <Grid>
+              <Grid.Resources>
+                <SolidColorBrush Color="Black" x:Key="ForegroundDiagram" />
+                <SolidColorBrush Color="White" x:Key="BackgroundDiagram" />
+              </Grid.Resources>
+
+              <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+              </Grid.RowDefinitions>
+
+              <ContentControl Grid.Row="0"
+                              HorizontalContentAlignment="Center"
+                              VerticalContentAlignment="Bottom"
+                              HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                              Background="White"
+                              Content="{Binding CanvasShape}"
+                              ContentTemplateSelector="{StaticResource CanvasShapeSelector}"
+                              /> <!-- UmlShapeKey -->
+
+              <Grid VerticalAlignment="Top" HorizontalAlignment="Center"
+                    Grid.Row="1">
+                  <TextBox BorderThickness="0"
+                           FontFamily="Consola"
+                           Margin="3,0"
+                           Background="Transparent"
+                           Foreground="Black"
+                           IsTabStop="False"
+                           Style="{StaticResource UmlTextBox}"
+                           Text="{Binding Path=Name}"
+                           AcceptsReturn="False"
+                           HorizontalContentAlignment="Center" VerticalContentAlignment="Top"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                         />
+                </Grid>
+              </Grid>
+
+            </designItem:DesignerItem.Content>
+          </designItem:DesignerItem>
+
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,25 @@
+﻿<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  >
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="/MiniUML.Plugins.UmlClassDiagram;component/Themes/Brushes.xaml"  />
+
+    <ResourceDictionary Source="/MiniUML.Plugins.UmlClassDiagram;component/Themes/Common/UmlBoundaryShape.xaml"  />
+    <ResourceDictionary Source="/MiniUML.Plugins.UmlClassDiagram;component/Themes/Common/UmlPackageShape.xaml"  />
+    <ResourceDictionary Source="/MiniUML.Plugins.UmlClassDiagram;component/Themes/Common/UmlCommentShape.xaml"  />
+
+    <ResourceDictionary Source="/MiniUML.Plugins.UmlClassDiagram;component/Themes/UmlSquareShape.xaml"  />
+    <ResourceDictionary Source="/MiniUML.Plugins.UmlClassDiagram;component/Themes/UmlDecisionShape.xaml"  />
+    <ResourceDictionary Source="/MiniUML.Plugins.UmlClassDiagram;component/Themes/UmlNodeShape.xaml"  />
+
+    <ResourceDictionary Source="/MiniUML.Plugins.UmlClassDiagram;component/Themes/UseCase/UmlUseCaseShape.xaml"  />
+    <ResourceDictionary Source="/MiniUML.Plugins.UmlClassDiagram;component/Themes/UmlCanvasShape.xaml"  />
+
+    <ResourceDictionary Source="/MiniUML.Plugins.UmlClassDiagram;component/Themes/UmlTextBox.xaml"  />
+    <ResourceDictionary Source="/MiniUML.Plugins.UmlClassDiagram;component/Themes/GenericUmlAssociation.xaml"  />
+
+  </ResourceDictionary.MergedDictionaries>
+
+
+</ResourceDictionary>

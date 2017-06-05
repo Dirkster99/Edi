@@ -1,0 +1,248 @@
+<UserControl x:Class="MiniUML.View.Views.DocumentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             
+             xmlns:local="clr-namespace:MiniUML.View.Views"
+             xmlns:cmdLabel="clr-namespace:MiniUML.Framework.Local;assembly=MiniUML.Framework"
+             
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="700">
+  <UserControl.Resources>
+
+    <!-- ScrollViewerTemplate -->
+    <ControlTemplate x:Key="ScrollViewerTemplate" TargetType="{x:Type ScrollViewer}">
+      <Grid>
+        <!-- Background="{DynamicResource Style.Brushes.DocumentView.Background}" -->
+
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="0" ClipToBounds="True" BorderBrush="Black">
+          <Grid>
+
+            <!-- ScrollContentPresenter -->
+            <ScrollContentPresenter x:Name="_scrollContentPresenter"/>
+
+            <!-- Busy overlay -->
+            <Grid x:Name="_busyOverlay" Visibility="Hidden">
+              <Rectangle Fill="White" Opacity="0.8"/>
+
+              <Border Padding="20"
+                      MaxWidth="300"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      BorderThickness="2"
+                      CornerRadius="3"
+                      BorderBrush="#F0F5F5F5"
+                      Background="#F0FAFAFA"
+                      ><!-- BitmapEffect="{StaticResource SubtleShadow}" -->
+                <StackPanel>
+                  <TextBlock x:Name="_busyOverlayStatusText"
+                                               Foreground="Gray"
+                                               
+                                               FontSize="30"
+                                               TextWrapping="Wrap"/><!-- BitmapEffect="{StaticResource SubtleShadow}" -->
+
+                  <TextBlock x:Name="_busyOverlayHelpText"
+                                               Foreground="Gray"
+                                               
+                                               FontSize="15"
+                                               TextWrapping="Wrap"
+                                               Text="Please wait..."/><!-- BitmapEffect="{StaticResource SubtleShadow}" -->
+                </StackPanel>
+              </Border>
+            </Grid>
+          </Grid>
+        </Border>
+
+        <!-- Background="#20FFFFFF" Opacity="0.6" -->
+        <ScrollBar Name="PART_VerticalScrollBar"
+                    Grid.Row="0" Grid.Column="1"
+                    Margin="2" 
+                    Value="{TemplateBinding VerticalOffset}"
+                    Maximum="{TemplateBinding ScrollableHeight}"
+                    ViewportSize="{TemplateBinding ViewportHeight}"
+                    Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
+
+        <!-- Bottom Line in Grid -->
+        <ScrollBar Name="PART_HorizontalScrollBar"
+                    Grid.Column="0" Grid.Row="1"
+                    Margin="2"
+                    Orientation="Horizontal"
+                    Value="{TemplateBinding HorizontalOffset}"
+                    Maximum="{TemplateBinding ScrollableWidth}"
+                    ViewportSize="{TemplateBinding ViewportWidth}"
+                    Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
+          <!-- Background="#20FFFFFF" Opacity="0.6" -->
+      </Grid>
+
+      <!-- Enable overlay when the DocumentDataModel is not ready. -->
+      <ControlTemplate.Triggers>
+        <DataTrigger Binding="{Binding Path='dm_DocumentDataModel.State'}" Value="Loading">
+          <Setter TargetName="_scrollContentPresenter" Property="IsHitTestVisible" Value="False"/>
+          <Setter TargetName="_busyOverlay" Property="Visibility" Value="Visible"/>
+          <Setter TargetName="_busyOverlayStatusText" Property="Text" Value="Loading document"/>
+          <Setter TargetName="_busyOverlayHelpText" Property="Text" Value="Please wait..."/>
+        </DataTrigger>
+        <DataTrigger Binding="{Binding Path='dm_DocumentDataModel.State'}" Value="Saving">
+          <Setter TargetName="_scrollContentPresenter" Property="IsHitTestVisible" Value="False"/>
+          <Setter TargetName="_busyOverlay" Property="Visibility" Value="Visible"/>
+          <Setter TargetName="_busyOverlayStatusText" Property="Text" Value="Saving document"/>
+          <Setter TargetName="_busyOverlayHelpText" Property="Text" Value="Please wait..."/>
+        </DataTrigger>
+        <DataTrigger Binding="{Binding Path='dm_DocumentDataModel.State'}" Value="Invalid">
+          <Setter TargetName="_scrollContentPresenter" Property="IsHitTestVisible" Value="False"/>
+          <Setter TargetName="_busyOverlay" Property="Visibility" Value="Visible"/>
+          <Setter TargetName="_busyOverlayStatusText" Property="Text"  Value="Error in document"/>
+          <Setter TargetName="_busyOverlayStatusText" Property="Foreground" Value="#FFFF8080"/>
+          <Setter TargetName="_busyOverlayHelpText" Property="Text" Value="{Binding Path=vm_XmlViewModel.XmlStatusMessage}"/>
+          <!-- The document is in an invalid state.-->
+        </DataTrigger>
+      </ControlTemplate.Triggers>
+
+    </ControlTemplate>
+
+  </UserControl.Resources>
+
+  <Grid>
+    <Grid.Resources>
+      <BooleanToVisibilityConverter x:Key="boolToVis" />
+    </Grid.Resources>
+
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <!-- ScollViewer -->
+    <ScrollViewer x:Name="_scrollViewer" Margin="3,0,0,0" 
+                  Grid.Row="0" Grid.Column="0"
+                  HorizontalScrollBarVisibility="Auto"
+                  VerticalScrollBarVisibility="Auto"
+                  Visibility="{Binding Path=vm_XmlViewModel.IsCanvasExpanded, Converter={StaticResource boolToVis}}"
+                  Template="{StaticResource ScrollViewerTemplate}">
+
+      <!-- ViewBox -->
+      <Viewbox Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+        <Viewbox.LayoutTransform>
+          <ScaleTransform ScaleX="{Binding ElementName=_zoomSlider, Path=Value}"
+                          ScaleY="{Binding ElementName=_zoomSlider, Path=Value}"/>
+        </Viewbox.LayoutTransform>
+
+        <Grid>
+
+          <!-- Page border and shadow -->
+          <!-- Background="#FFF5F5F5" -->
+          <Border Width="{Binding Path=dm_DocumentDataModel.PageSize.Width}"
+                  Height="{Binding Path=dm_DocumentDataModel.PageSize.Height}"
+                  SnapsToDevicePixels="True"
+                  BorderThickness="0"
+                  CornerRadius="0"
+                  BorderBrush="#50000000"
+                  >
+
+            <Grid>
+
+              <!-- CanvasView border and background -->
+              <Border x:Name="_marginBorder"
+                      Margin="{Binding Path=dm_DocumentDataModel.PageMargins}"
+                      SnapsToDevicePixels="True"
+                      CornerRadius="3"
+                      BorderThickness="1"
+                      BorderBrush="#FFF0F0F0"
+                      Background="White"/>
+
+              <!-- CanvasView -->
+              <local:CanvasView x:Name="_documentVisual"
+                                Padding="{Binding Path=DocumentViewModel.dm_DocumentDataModel.PageMargins}"
+                                Background="Transparent"
+                                DataContext="{Binding Path=vm_CanvasViewModel}"/>
+            </Grid>
+
+          </Border>
+
+        </Grid>
+
+      </Viewbox>
+
+    </ScrollViewer>
+
+    <!-- Zoom Slider -->
+    <Border Margin="25,25,0,0"
+            Padding="5,2,5,2"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            SnapsToDevicePixels="True"
+            BorderThickness="1"
+            CornerRadius="2"
+            BorderBrush="#80707070"
+            ><!-- Background="{DynamicResource Style.Brushes.DocumentView.ZoomSliderBackground}" -->
+
+      <Border.BitmapEffect>
+        <DropShadowBitmapEffect Color="Black" Opacity="0.5" ShadowDepth="2"/>
+      </Border.BitmapEffect>
+
+      <StackPanel>
+
+        <TextBlock x:Name="_zoomTextBlock" HorizontalAlignment="Center" Foreground="Black" FontSize="9" Text="100%"/>
+
+        <Slider x:Name="_zoomSlider" Height="120" Orientation="Vertical" Opacity="0.7"
+                        Minimum="0.25" Maximum="4.0" Value="1" TickFrequency="0.25" TickPlacement="BottomRight"
+                        ValueChanged="_zoomSlider_ValueChanged"/>
+
+      </StackPanel>
+
+    </Border>
+
+    <Grid Grid.Row="1" DataContext="{Binding Path=vm_XmlViewModel}">
+      <Grid.Resources>
+        <BooleanToVisibilityConverter x:Key="boolToVis" />
+      </Grid.Resources>
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+
+      <Button Content="{x:Static cmdLabel:Strings.STR_TITLE_XML_Editor}"
+              Command="{Binding ExpandCollapseEditorCommand}"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Center"
+              Grid.Column="0" Grid.Row="0" Margin="3,0"/>
+
+      <Button Content="{x:Static cmdLabel:Strings.STR_CMD_UPDATE}"
+              Command="{Binding UpdateDesignerCommand}"
+              Visibility="{Binding Path=IsExpanded,Converter={StaticResource boolToVis}}"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Center"
+              Grid.Column="1" Grid.Row="0" Margin="3,0" />
+
+      <GridSplitter Height="5" VerticalAlignment="Center"
+                    HorizontalAlignment="Stretch"
+                    Grid.Column="2" Grid.Row="0" Margin="0"
+                    DragDelta="GridSplitter_DragDelta"
+                    />
+      <!-- Background="{DynamicResource Style.Brushes.RibbonView.PanelBackground}" -->
+    </Grid>
+
+    <!-- XML View -->
+    <local:XmlView Grid.Row="2" Grid.Column="0" DataContext="{Binding Path=vm_XmlViewModel}"/>
+  </Grid>
+
+</UserControl>

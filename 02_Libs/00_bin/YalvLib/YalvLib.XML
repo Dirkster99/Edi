@@ -1,0 +1,2153 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>YalvLib</name>
+    </assembly>
+    <members>
+        <member name="T:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior">
+            <summary>
+            Refs: http://gallery.expression.microsoft.com/en-us/BusyIndicator
+            </summary>
+        </member>
+        <member name="F:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.AddMarginsProperty">
+            <summary>
+            AddMargins attachable property
+            </summary>
+        </member>
+        <member name="F:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.BusyStateProperty">
+            <summary>
+            BusyState attachable property
+            </summary>
+        </member>
+        <member name="F:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.DimBackgroundProperty">
+            <summary>
+            DimBackground attachable property
+            </summary>
+        </member>
+        <member name="F:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.DimmerBrushProperty">
+            <summary>
+            DimmerBrush attachable property
+            </summary>
+        </member>
+        <member name="F:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.DimmerOpacityProperty">
+            <summary>
+            DimmerOpacity attachable property
+            </summary>
+        </member>
+        <member name="F:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.DimTransitionDurationProperty">
+            <summary>
+            DimTransitionDuration attachable property
+            </summary>
+        </member>
+        <member name="F:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.TargetVisualProperty">
+            <summary>
+            TargetVisual attachable property
+            </summary>
+        </member>
+        <member name="F:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.mFRAMERATE">
+            <summary>
+            Default animation framerate
+            </summary>
+        </member>
+        <member name="M:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.GetDimmerOpacity(System.Windows.DependencyObject)">
+            <summary>
+            Get method of DimmerOpacity dependency property
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.SetDimmerOpacity(System.Windows.DependencyObject,System.Double)">
+            <summary>
+            Set method of DimmerOpacity dependency property
+            </summary>
+            <param name="obj"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.GetAddMargins(System.Windows.DependencyObject)">
+            <summary>
+            Get method of AddMargín dependency property
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.SetAddMargins(System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            Set method of AddMargín dependency property
+            </summary>
+            <param name="obj"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.GetDimTransitionDuration(System.Windows.DependencyObject)">
+            <summary>
+            Get method of DimTransitionDuration dependency property
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.SetDimTransitionDuration(System.Windows.DependencyObject,System.Windows.Duration)">
+            <summary>
+            Set method of DimTransitionDuration dependency property
+            </summary>
+            <param name="obj"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.GetDimmerBrush(System.Windows.DependencyObject)">
+            <summary>
+            Get method of DimmmerBrush dependency property
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.SetDimmerBrush(System.Windows.DependencyObject,System.Windows.Media.Brush)">
+            <summary>
+            Set method of DimmmerBrush dependency property
+            </summary>
+            <param name="obj"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.GetDimBackground(System.Windows.DependencyObject)">
+            <summary>
+            Get method of DimBackground dependency property
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.SetDimBackground(System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            Set method of DimBackground dependency property
+            </summary>
+            <param name="obj"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.GetTargetVisual(System.Windows.DependencyObject)">
+            <summary>
+            Get method of GetTargetVisual dependency property
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.SetTargetVisual(System.Windows.DependencyObject,System.Windows.UIElement)">
+            <summary>
+            Set method of SetTargetVisual dependency property
+            </summary>
+            <param name="obj"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.GetBusyState(System.Windows.DependencyObject)">
+            <summary>
+            Get method of GetBusyState dependency property
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.SetBusyState(System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            Set method of GetBusyState dependency property
+            </summary>
+            <param name="obj"></param>
+            <param name="value"></param>
+        </member>
+        <member name="P:YalvLib.Behaviour.BusyIndicatorBehavior.BusyIndicatorBehavior.FRAMERATE">
+            <summary>
+            Default animation framerate
+            </summary>
+        </member>
+        <member name="T:YalvLib.Behaviour.BusyIndicatorBehavior.CircularProgressBar">
+            <summary>
+            Provides a circular progress bar
+            </summary>
+            <summary>
+            CircularProgressBar
+            </summary>
+        </member>
+        <member name="M:YalvLib.Behaviour.BusyIndicatorBehavior.CircularProgressBar.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:YalvLib.Behaviour.ScrollSynchronizer">
+            <summary>
+            Refs: http://www.codeproject.com/Articles/39244/Scroll-Synchronization
+            </summary>
+        </member>
+        <member name="F:YalvLib.Behaviour.ScrollSynchronizer.ScrollGroupProperty">
+            <summary>
+            Identifies the attached property ScrollGroup
+            </summary>
+        </member>
+        <member name="F:YalvLib.Behaviour.ScrollSynchronizer.scrollViewers">
+            <summary>
+            List of all registered scroll viewers.
+            </summary>
+        </member>
+        <member name="F:YalvLib.Behaviour.ScrollSynchronizer.horizontalScrollOffsets">
+            <summary>
+            Contains the latest horizontal scroll offset for each scroll group.
+            </summary>
+        </member>
+        <member name="F:YalvLib.Behaviour.ScrollSynchronizer.verticalScrollOffsets">
+            <summary>
+            Contains the latest vertical scroll offset for each scroll group.
+            </summary>
+        </member>
+        <member name="M:YalvLib.Behaviour.ScrollSynchronizer.SetScrollGroup(System.Windows.DependencyObject,System.String)">
+            <summary>
+            Sets the value of the attached property ScrollGroup.
+            </summary>
+            <param name="obj">Object on which the property should be applied.</param>
+            <param name="scrollGroup">Value of the property.</param>
+        </member>
+        <member name="M:YalvLib.Behaviour.ScrollSynchronizer.GetScrollGroup(System.Windows.DependencyObject)">
+            <summary>
+            Gets the value of the attached property ScrollGroup.
+            </summary>
+            <param name="obj">Object for which the property should be read.</param>
+            <returns>Value of the property StartTime</returns>
+        </member>
+        <member name="M:YalvLib.Behaviour.ScrollSynchronizer.OnScrollGroupChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Occurs, when the ScrollGroupProperty has changed.
+            </summary>
+            <param name="d">The DependencyObject on which the property has changed value.</param>
+            <param name="e">Event data that is issued by any event that tracks changes to the effective value of this property.</param>
+        </member>
+        <member name="M:YalvLib.Behaviour.ScrollSynchronizer.ScrollViewer_ScrollChanged(System.Object,System.Windows.Controls.ScrollChangedEventArgs)">
+            <summary>
+            Occurs, when the scroll offset of one scrollviewer has changed.
+            </summary>
+            <param name="sender">The sender of the event.</param>
+            <param name="e">EventArgs of the event.</param>
+        </member>
+        <member name="M:YalvLib.Behaviour.ScrollSynchronizer.Scroll(System.Windows.Controls.ScrollViewer,System.Boolean,System.Boolean)">
+            <summary>
+            Scrolls all scroll viewers of a group to the position of the selected scroll viewer.
+            </summary>
+            <param name="changedScrollViewer">Sroll viewer, that specifies the current position of the group.</param>
+        </member>
+        <member name="T:YalvLib.Behaviour.SelectedItem">
+            <summary>
+            DataGrid Behavior class
+            This class implements an attached behaviour to scroll to an
+            item that can programatically be selected via ViewModel binding
+            </summary>
+        </member>
+        <member name="F:YalvLib.Behaviour.SelectedItem.IsBroughtIntoViewWhenSelectedProperty">
+            <summary>
+            Determins if the DatGridItem is to be brought into view when enabled
+            </summary>
+        </member>
+        <member name="M:YalvLib.Behaviour.SelectedItem.GetIsBroughtIntoViewWhenSelected(System.Windows.Controls.DataGrid)">
+            <summary>
+            Gets the IsBroughtIntoViewWhenSelected value
+            </summary>
+            <param name="listBoxItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.Behaviour.SelectedItem.SetIsBroughtIntoViewWhenSelected(System.Windows.Controls.DataGrid,System.Boolean)">
+            <summary>
+            Sets the IsBroughtIntoViewWhenSelected value
+            </summary>
+            <param name="listBoxItem"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:YalvLib.Behaviour.SelectedItem.OnIsBroughtIntoViewWhenSelectedChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Action to take when item is brought into view
+            </summary>
+            <param name="depObj"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:YalvLib.Common.BindableObject">
+            <summary>
+            INotifyPropertyChange Implementation
+            Implements the INotifyPropertyChanged interface and 
+            exposes a RaisePropertyChanged method for derived 
+            classes to raise the PropertyChange event. The event 
+            arguments created by this class are cached to prevent 
+            managed heap fragmentation.
+            Refs: http://www.codeproject.com/KB/WPF/WPF_NHibernate_Validator.aspx
+            </summary>
+        </member>
+        <member name="T:YalvLib.Common.DisposableObject">
+            <summary>
+            "Implementing a Dispose method"
+            http://msdn.microsoft.com/en-us/library/fs2xkftw.aspx
+            </summary>
+        </member>
+        <member name="M:YalvLib.Common.BindableObject.GetPropertyChangedEventArgs(System.String)">
+            <summary>
+            Returns an instance of PropertyChangedEventArgs for 
+            the specified property name.
+            </summary>
+            <param name="propertyName">
+            The name of the property to create event args for.
+            </param>
+        </member>
+        <member name="M:YalvLib.Common.BindableObject.RaisePropertyChanged(System.String)">
+            <summary>
+            Attempts to raise the PropertyChanged event, and 
+            invokes the virtual AfterPropertyChanged method, 
+            regardless of whether the event was raised or not.
+            </summary>
+            <param name="propertyName">
+            The property which was changed.
+            </param>
+        </member>
+        <member name="M:YalvLib.Common.BindableObject.OnAfterPropertyChanged(System.String)">
+            <summary>
+            Derived classes can override this method to
+            execute logic after a property is set. The 
+            base implementation does nothing.
+            </summary>
+            <param name="propertyName">
+            The property which was changed.
+            </param>
+        </member>
+        <member name="E:YalvLib.Common.BindableObject.PropertyChanged">
+            <summary>
+            Raised when a public property of this object is set.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Common.BindableObject.IsPropertyChangedEventEnabled">
+            <summary>
+            Indica se è abilitata la notifica del cambiamento di proprietà
+            </summary>
+        </member>
+        <member name="T:YalvLib.Common.CommandRelay">
+            <summary>
+            Class to support command binding between view and viewmodels
+            </summary>
+        </member>
+        <member name="F:YalvLib.Common.CommandRelay.ExecuteCommand">
+            <summary>
+            Method to call when the command is invoked.
+            </summary>
+        </member>
+        <member name="F:YalvLib.Common.CommandRelay.CanCommandExecute">
+            <summary>
+            Indicates whether command can execute or not.
+            </summary>
+        </member>
+        <member name="M:YalvLib.Common.CommandRelay.#ctor(System.Func{System.Object,System.Object},System.Predicate{System.Object})">
+            <summary>
+            Class constructor
+            </summary>
+            <param name="execute"></param>
+            <param name="canExecute"></param>
+        </member>
+        <member name="M:YalvLib.Common.CommandRelay.CanExecute(System.Object)">
+            <summary>
+            Indicate whether command can execute or not.
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.Common.CommandRelay.Execute(System.Object)">
+            <summary>
+            Execute the command.
+            </summary>
+            <param name="parameter"></param>
+        </member>
+        <member name="M:YalvLib.Common.CommandRelay.OnCanExecuteChanged">
+            <summary>
+            Re-compute whether a command can be executed or not.
+            </summary>
+        </member>
+        <member name="E:YalvLib.Common.CommandRelay.CanExecuteChanged">
+            <summary>
+            This event is fired when the state of whether a command can execute or not changes.
+            </summary>
+        </member>
+        <member name="T:YalvLib.Common.GlobalHelper">
+            <summary>
+            Class to supply global utility properties and methods
+            </summary>
+        </member>
+        <member name="F:YalvLib.Common.GlobalHelper.LAYOUT_LOG4J">
+            <summary>
+            XML namespace for log4net logger XML format
+            </summary>
+        </member>
+        <member name="M:YalvLib.Common.GlobalHelper.GetTimeDelta(System.DateTime,System.DateTime)">
+            <summary>
+            Helper method to return a delta data item between two <seealso cref="T:System.DateTime"/> parameters.
+            </summary>
+            <param name="prevDate"></param>
+            <param name="currentDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.Common.GlobalHelper.ParseLogFile(System.String)">
+            <summary>
+            Parse a log4net log file via abstract parser Provider class for SQL, Sqlite, XML file etc...
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="P:YalvLib.Common.GlobalHelper.DisplayDateTimeFormat">
+            <summary>
+            Determine the correct date time format for the currently used local
+            </summary>
+        </member>
+        <member name="T:YalvLib.Common.Converters.BoolToOppositeVisibilityConverter">
+            <summary>
+            Convert bool to visibility
+            false -> Visibility.Visible
+            true or null -> Visibility.Collapsed
+            </summary>
+        </member>
+        <member name="T:YalvLib.Common.Converters.BoolToVisibilityConverter">
+            <summary>
+            Convert bool to visibility
+            true -> Visibility.Visible
+            false or null -> Visibility.Collapsed
+            </summary>
+        </member>
+        <member name="T:YalvLib.Common.Converters.LevelToSolidColorConverter">
+            <summary>
+            Convert a log4net message level (Info, Warn, Debug) into a color code.
+            </summary>
+        </member>
+        <member name="T:YalvLib.Common.Converters.StringEmptyToVisibilityConverter">
+            <summary>
+            If empty string then collapsed
+            </summary>
+        </member>
+        <member name="T:YavLib.Converter.ZeroToBoolConverter">
+            <summary>
+            XAML mark up extension to convert a zero count value into a boolean value.
+            </summary>
+        </member>
+        <member name="M:YavLib.Converter.ZeroToBoolConverter.#ctor">
+            <summary>
+            Standard Constructor
+            </summary>
+        </member>
+        <member name="M:YavLib.Converter.ZeroToBoolConverter.ProvideValue(System.IServiceProvider)">
+            <summary>
+            When implemented in a derived class, returns an object that is provided
+            as the value of the target property for this markup extension.
+            
+            When a XAML processor processes a type node and member value that is a markup extension,
+            it invokes the ProvideValue method of that markup extension and writes the result into the
+            object graph or serialization stream. The XAML object writer passes service context to each
+            such implementation through the serviceProvider parameter.
+            </summary>
+            <param name="serviceProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YavLib.Converter.ZeroToBoolConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Zero to visibility conversion method
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YavLib.Converter.ZeroToBoolConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Visibility to Zero conversion method (is disabled and will throw an exception when invoked)
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:YalvLib.Converter.ZeroToVisibilityConverter">
+            <summary>
+            XAML mark up extension to convert a 0 or null value into a visibility value.
+            </summary>
+        </member>
+        <member name="M:YalvLib.Converter.ZeroToVisibilityConverter.#ctor">
+            <summary>
+            Standard Constructor
+            </summary>
+        </member>
+        <member name="M:YalvLib.Converter.ZeroToVisibilityConverter.ProvideValue(System.IServiceProvider)">
+            <summary>
+            When implemented in a derived class, returns an object that is provided
+            as the value of the target property for this markup extension.
+            
+            When a XAML processor processes a type node and member value that is a markup extension,
+            it invokes the ProvideValue method of that markup extension and writes the result into the
+            object graph or serialization stream. The XAML object writer passes service context to each
+            such implementation through the serviceProvider parameter.
+            </summary>
+            <param name="serviceProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.Converter.ZeroToVisibilityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Zero to visibility conversion method
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.Converter.ZeroToVisibilityConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Visibility to Zero conversion method (is disabled and will throw an exception when invoked)
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:YalvLib.ViewModel.Common.BindSupport">
+            <summary>
+            The dependency property in this class can be bound to a readonly dependency property, such as, ActualWidth.
+            (normal viewmodel properties cannot be used in this case)
+            </summary>
+        </member>
+        <member name="F:YalvLib.ViewModel.Common.BindSupport.WidthProperty">
+            <summary>
+            Width dependency property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.Common.BindSupport.Width">
+            <summary>
+            Get/set width dependency property
+            </summary>
+        </member>
+        <member name="T:YalvLib.ViewModel.CellAlignment">
+            <summary>
+            Indicate whether cells in a column are to be arranged by their default or center.
+            </summary>
+        </member>
+        <member name="F:YalvLib.ViewModel.CellAlignment.DEFAULT">
+            <summary>
+            Apply default alignment in column.
+            </summary>
+        </member>
+        <member name="F:YalvLib.ViewModel.CellAlignment.CENTER">
+            <summary>
+            Center cell contents in a datagrid column.
+            </summary>
+        </member>
+        <member name="T:YalvLib.ViewModel.ColumnItem">
+            <summary>
+            Objects of this class store layout data about a column in a data grid
+            </summary>
+        </member>
+        <member name="M:YalvLib.ViewModel.ColumnItem.#ctor">
+            <summary>
+            Standard constructor
+            </summary>
+        </member>
+        <member name="M:YalvLib.ViewModel.ColumnItem.#ctor(System.String,System.Double,System.Double)">
+            <summary>
+            Parameterized standard constructor
+            </summary>
+            <param name="field"></param>
+            <param name="minWidth"></param>
+            <param name="width"></param>
+        </member>
+        <member name="M:YalvLib.ViewModel.ColumnItem.#ctor(System.String,System.Double,System.Double,YalvLib.ViewModel.CellAlignment)">
+            <summary>
+            Parameterized standard constructor
+            </summary>
+            <param name="field"></param>
+            <param name="minWidth"></param>
+            <param name="width"></param>
+            <param name="align"></param>
+        </member>
+        <member name="M:YalvLib.ViewModel.ColumnItem.#ctor(System.String,System.Double,System.Double,YalvLib.ViewModel.CellAlignment,System.String)">
+            <summary>
+            Parameterized standard constructor
+            </summary>
+            <param name="field"></param>
+            <param name="minWidth"></param>
+            <param name="width"></param>
+            <param name="align"></param>
+            <param name="stringFormat"></param>
+        </member>
+        <member name="M:YalvLib.ViewModel.ColumnItem.#ctor(System.String,System.Double,System.Double,YalvLib.ViewModel.CellAlignment,System.String,System.String)">
+            <summary>
+            Parameterized standard constructor
+            </summary>
+            <param name="field"></param>
+            <param name="minWidth"></param>
+            <param name="width"></param>
+            <param name="align"></param>
+            <param name="stringFormat"></param>
+            <param name="header"></param>
+        </member>
+        <member name="E:YalvLib.ViewModel.ColumnItem.UpdateColumnFilter">
+            <summary>
+            This event is raised when a text character is keyed into a filter textbox
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.ColumnItem.Header">
+            <summary>
+            Column header label string
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.ColumnItem.Field">
+            <summary>
+            Field name of data source
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.ColumnItem.FilterControlName">
+            <summary>
+            Name of textbox that is used to filter this column.
+            This field is used to update the column filter when the user
+            types/edits the textbox content.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.ColumnItem.ColumnFilterValue">
+            <summary>
+            Get/set string that can be used to filter the view by the contents of this column
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.ColumnItem.StringFormat">
+            <summary>
+            Get/set string format for dates (and such data types) in localized context. 
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.ColumnItem.MinWidth">
+            <summary>
+            Get/set minimum width of this column.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.ColumnItem.Width">
+            <summary>
+            Get/set actual width of this column.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.ColumnItem.ActualWidth">
+            <summary>
+            Get property to bind the actual width of a column to
+            (this readonly dp requires a dependency property which in turn
+            requires an inheritance from DependencyObject)
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.ColumnItem.Alignment">
+            <summary>
+            Get/set cell alignment for cells displayed in this column.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.ColumnItem.IsColumnVisible">
+            <summary>
+            Get/set whether column is visible or not.
+            </summary>
+        </member>
+        <member name="T:YalvLib.Domain.EntriesProviderType">
+            <summary>
+            Enumeration to determine type of data import provider for log file
+            </summary>
+        </member>
+        <member name="F:YalvLib.Domain.EntriesProviderType.Xml">
+            <summary>
+            Provide log file via XML persistence
+            </summary>
+        </member>
+        <member name="F:YalvLib.Domain.EntriesProviderType.MsSqlServer">
+            <summary>
+            Provide log file via SQL Server persistence
+            </summary>
+        </member>
+        <member name="T:YalvLib.ViewModel.LevelIndex">
+            <summary>
+            Level index enumeration indicates the type of log file entry (warning, error, fatal error etc)
+            </summary>
+        </member>
+        <member name="F:YalvLib.ViewModel.LevelIndex.NONE">
+            <summary>
+            Indicates an unknown type of log file entry
+            </summary>
+        </member>
+        <member name="F:YalvLib.ViewModel.LevelIndex.DEBUG">
+            <summary>
+            Indicates a debug type of log file entry
+            </summary>
+        </member>
+        <member name="F:YalvLib.ViewModel.LevelIndex.INFO">
+            <summary>
+            Indicates an info type of log file entry
+            </summary>
+        </member>
+        <member name="F:YalvLib.ViewModel.LevelIndex.WARN">
+            <summary>
+            Indicates a warning type of log file entry
+            </summary>
+        </member>
+        <member name="F:YalvLib.ViewModel.LevelIndex.ERROR">
+            <summary>
+            Indicates an error type of log file entry
+            </summary>
+        </member>
+        <member name="F:YalvLib.ViewModel.LevelIndex.FATAL">
+            <summary>
+            Indicates a fatal error type of log file entry
+            </summary>
+        </member>
+        <member name="T:YalvLib.ViewModel.LogItem">
+            <summary>
+            Model an entry of a log file such that it can be consumed by a collection
+            (to model all entries in a log file)
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogItem.Id">
+            <summary>
+            Get/set Id of the log item
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogItem.Path">
+            <summary>
+            Get/set Path of the file containing this log item
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogItem.TimeStamp">
+            <summary>
+            Get/set Date and time of the moment in time when this log item was logged
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogItem.Delta">
+            <summary>
+            Get/set Time delta for this entry in comparison to the previous entry
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogItem.Logger">
+            <summary>
+            Get/set logger name of log file
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogItem.Thread">
+            <summary>
+            Get/set thread id that generated this log item.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogItem.Message">
+            <summary>
+            Get/set message contained in this log item.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogItem.MachineName">
+            <summary>
+            Get/set name of machine on which this log item was created.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogItem.UserName">
+            <summary>
+            Get/set user name that was used to generate this log item.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogItem.HostName">
+            <summary>
+            Get/set hostname of computer on which log item was logged.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogItem.App">
+            <summary>
+            Get/set name of application that logged this item.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogItem.Throwable">
+            <summary>
+            Get/set string representation of logged exception.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogItem.Class">
+            <summary>
+            Get/set class that logged this item.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogItem.Method">
+            <summary>
+            Get/set method that logged this item.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogItem.File">
+            <summary>
+            Get/set file name that generated this entry
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogItem.Line">
+            <summary>
+            Get/set line of code that logged this item.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogItem.Uncategorized">
+            <summary>
+            Get/set data from uncategorized column.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogItem.LevelIndex">
+            <summary>
+            Indicate kind of log4net message (Info, Warn, Debug, Error etc)
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogItem.Level">
+            <summary>
+            Get/set kind of log4net message (Info, Warn, Debug, Error etc) as string
+            </summary>
+        </member>
+        <member name="T:YalvLib.Providers.AbstractEntriesProvider">
+            <summary>
+            Base class for file based log file providers
+            </summary>
+        </member>
+        <member name="F:YalvLib.Providers.AbstractEntriesProvider.MinDateTime">
+            <summary>
+            Minimum date available for this class and its inherating classes
+            </summary>
+        </member>
+        <member name="M:YalvLib.Providers.AbstractEntriesProvider.GetEntries(System.String)">
+            <summary>
+            Get collection of logitems representing a log file from this data source
+            </summary>
+            <param name="dataSource"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.Providers.AbstractEntriesProvider.GetEntries(System.String,YalvLib.Domain.FilterParams)">
+            <summary>
+            Get collection of logitems filtered by <paramref name="filter"/>
+            representing a log file from this data source
+            </summary>
+            <param name="dataSource"></param>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="T:YalvLib.Providers.AbstractEntriesProviderBase">
+            <summary>
+            Base class for database data providers.
+            </summary>
+        </member>
+        <member name="M:YalvLib.Providers.AbstractEntriesProviderBase.GetEntries(System.String,YalvLib.Domain.FilterParams)">
+            <summary>
+            Get log file entries from a datasource with an applied filter in <paramref name="filter"/>.
+            </summary>
+            <param name="dataSource"></param>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.Providers.AbstractEntriesProviderBase.CreateConnection(System.String)">
+            <summary>
+            Create a database connection based on a string connection descriptor.
+            </summary>
+            <param name="dataSource"></param>
+            <returns></returns>
+        </member>
+        <member name="T:YalvLib.Strings.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.About_AboutGroupBox_Header">
+            <summary>
+              Looks up a localized string similar to About.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.About_CreditsGroupBox_Header">
+            <summary>
+              Looks up a localized string similar to Credits.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.About_Description">
+             <summary>
+               Looks up a localized string similar to YALV! is a log viewer for Log4Net that allow to compare multiple logs file simultaneously.
+            
+            MAIN FEATURES:
+            - Log files merging
+            - Dynamic filtering
+            - Dynamic show/hide log levels
+            - Save favorite log folders
+            - Open most recently used files
+            - Column sorting
+            
+            Log4Net config file must be setup with XmlLayoutSchemaLog4j layout; just need a few lines in your application config file to configure it to use this format (see examples on right).
+            
+            It is a WPF Application based on .NET Framework 4.0 and writt [rest of string was truncated]&quot;;.
+             </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.About_Header_Text">
+            <summary>
+              Looks up a localized string similar to YALV! - Yet Another Log4Net Viewer.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.About_Log4NetConfigurationGroupbox_Header">
+            <summary>
+              Looks up a localized string similar to Log4Net Configuration.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.About_Log4NetConfigurationGroupbox_Sample1_Title">
+            <summary>
+              Looks up a localized string similar to Sample 1:.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.About_Log4NetConfigurationGroupbox_Sample2_Title">
+            <summary>
+              Looks up a localized string similar to Sample 2:.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.About_Title">
+            <summary>
+              Looks up a localized string similar to YALV! - About.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.About_Version_Text">
+            <summary>
+              Looks up a localized string similar to Version {0}.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.AddFolderPath_Grid_NameColumn_Name">
+            <summary>
+              Looks up a localized string similar to Name.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.AddFolderPath_Grid_PathColumn_Name">
+            <summary>
+              Looks up a localized string similar to Path.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.AddFolderPathVM_commandSaveExecute_SuccessMessage">
+            <summary>
+              Looks up a localized string similar to Folders list saved!.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.AddFolderPathVM_commandSaveExecute_SuccessTitle">
+            <summary>
+              Looks up a localized string similar to Success.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.CircularProgressBar_CircularProgressBar_BusyText">
+            <summary>
+              Looks up a localized string similar to Loading....
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_AddRemoveMenu_FileMenu_AddNewItem_Header">
+            <summary>
+              Looks up a localized string similar to Add New Item.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_AddRemoveMenu_FileMenu_Exit_Header">
+            <summary>
+              Looks up a localized string similar to Exit.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_AddRemoveMenu_FileMenu_Header">
+            <summary>
+              Looks up a localized string similar to File.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_AddRemoveMenu_FileMenu_RemoveSelectedItem_Header">
+            <summary>
+              Looks up a localized string similar to Remove Folder from Favorites.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_AddRemoveMenu_FileMenu_SaveList_Header">
+            <summary>
+              Looks up a localized string similar to Save List.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_AddRemoveToolbar_AddNewItem_Text">
+            <summary>
+              Looks up a localized string similar to ADD.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_AddRemoveToolbar_AddNewItem_Tooltip">
+            <summary>
+              Looks up a localized string similar to Add Folder to Favorites.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_AddRemoveToolbar_RemoveSelectedItem_Text">
+            <summary>
+              Looks up a localized string similar to REMOVE.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_AddRemoveToolbar_RemoveSelectedItem_Tooltip">
+            <summary>
+              Looks up a localized string similar to Remove Selected Folder from Favorites.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_AddRemoveToolbar_SaveList_Text">
+            <summary>
+              Looks up a localized string similar to SAVE.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_AddRemoveToolbar_SaveList_Tooltip">
+            <summary>
+              Looks up a localized string similar to Save Favorites.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainMenu_AboutMenu_Header">
+            <summary>
+              Looks up a localized string similar to _About.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainMenu_FileMenu_AddFile_Header">
+            <summary>
+              Looks up a localized string similar to Add File....
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainMenu_FileMenu_AddFolderPath_Header">
+            <summary>
+              Looks up a localized string similar to Add Folder to Favorites....
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainMenu_FileMenu_Exit_Header">
+            <summary>
+              Looks up a localized string similar to Exit.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainMenu_FileMenu_Header">
+            <summary>
+              Looks up a localized string similar to _File.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainMenu_FileMenu_OpenFile_Header">
+            <summary>
+              Looks up a localized string similar to Open File....
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainMenu_FileMenu_RecentFiles_Header">
+            <summary>
+              Looks up a localized string similar to Recent Files.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainMenu_FileMenu_SelectFolder_Header">
+            <summary>
+              Looks up a localized string similar to Select Folder....
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainMenu_ViewMenu_ClearFilters_Header">
+            <summary>
+              Looks up a localized string similar to Clear Filters.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainMenu_ViewMenu_DeleteFile_Header">
+            <summary>
+              Looks up a localized string similar to Delete File.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainMenu_ViewMenu_Header">
+            <summary>
+              Looks up a localized string similar to _View.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainMenu_ViewMenu_OpenSelectedFolder_Header">
+            <summary>
+              Looks up a localized string similar to Open Selected Folder in Explorer.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainMenu_ViewMenu_RefreshFileList_Header">
+            <summary>
+              Looks up a localized string similar to Refresh File List.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainMenu_ViewMenu_RefreshLog_Header">
+            <summary>
+              Looks up a localized string similar to Refresh Log.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainToolbar_AddFile_Text">
+            <summary>
+              Looks up a localized string similar to ADD FILE.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainToolbar_AddFile_Tooltip">
+            <summary>
+              Looks up a localized string similar to Add File....
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainToolbar_AddFolderPath_Text">
+            <summary>
+              Looks up a localized string similar to ADD PATH.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainToolbar_AddFolderPath_Tooltip">
+            <summary>
+              Looks up a localized string similar to Add Folder to Favorites....
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainToolbar_ClearFilters_Text">
+            <summary>
+              Looks up a localized string similar to CLEAR FILTERS.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainToolbar_ClearFilters_Tooltip">
+            <summary>
+              Looks up a localized string similar to Clear Filters.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainToolbar_DeleteSelectedFile_Text">
+            <summary>
+              Looks up a localized string similar to DELETE FILE.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainToolbar_DeleteSelectedFile_Tooltip">
+            <summary>
+              Looks up a localized string similar to Delete selected file.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainToolbar_OpenFile_Text">
+            <summary>
+              Looks up a localized string similar to OPEN FILE.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainToolbar_OpenFile_ToolTip">
+            <summary>
+              Looks up a localized string similar to Open File....
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainToolbar_RefreshLog_Text">
+            <summary>
+              Looks up a localized string similar to REFRESH.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainToolbar_RefreshLog_Tooltip">
+            <summary>
+              Looks up a localized string similar to Refresh Log.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainToolbar_SelectFolder_Text">
+            <summary>
+              Looks up a localized string similar to FOLDER.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.Common_Components_MainToolbar_SelectFolder_Tooltip">
+            <summary>
+              Looks up a localized string similar to Select Folder....
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.CultureName">
+            <summary>
+              Looks up a localized string similar to en-US.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.FilteredGridManager_BuildDataGrid_FilterTextBox_Tooltip">
+            <summary>
+              Looks up a localized string similar to Filter {0}.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.GlobalHelper_DISPLAY_DATETIME_FORMAT">
+            <summary>
+              Looks up a localized string similar to MMM d, HH:mm:ss.fff.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.GlobalHelper_getTimeDelta_Negative_Text">
+            <summary>
+              Looks up a localized string similar to -{0} s.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.GlobalHelper_getTimeDelta_Positive_Text">
+            <summary>
+              Looks up a localized string similar to +{0} s.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.GlobalHelper_ParseFolderFile_Error_Text">
+             <summary>
+               Looks up a localized string similar to Error reading Favorites file!
+            [{0}]
+            
+            {1}.
+             </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.GlobalHelper_ParseFolderFile_Error_Title">
+            <summary>
+              Looks up a localized string similar to Error.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.GlobalHelper_ParseLogFile_Error_Text">
+             <summary>
+               Looks up a localized string similar to Error reading log file!
+            [{0}]
+            
+            {1}.
+             </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.GlobalHelper_ParseLogFile_Error_Title">
+            <summary>
+              Looks up a localized string similar to Error.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.GlobalHelper_SaveFolderFile_Error_Text">
+             <summary>
+               Looks up a localized string similar to Error saving Favorites file!
+            [{0}]
+            
+            {1}.
+             </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.GlobalHelper_SaveFolderFile_Error_Title">
+            <summary>
+              Looks up a localized string similar to Error.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_AutoRefresh_Checkbox_Text">
+            <summary>
+              Looks up a localized string similar to Auto Refresh.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_AutoRefresh_DecreaseInterval_Tooltip">
+            <summary>
+              Looks up a localized string similar to Decrease Interval.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_AutoRefresh_IncreaseInterval_Tooltip">
+            <summary>
+              Looks up a localized string similar to Increase Interval.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_AutoRefresh_RefreshInterval_Tooltip">
+            <summary>
+              Looks up a localized string similar to Refresh Interval.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_DetailsBox_Application_Text">
+            <summary>
+              Looks up a localized string similar to App:.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_DetailsBox_Class_Text">
+            <summary>
+              Looks up a localized string similar to Class:.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_DetailsBox_File_Text">
+            <summary>
+              Looks up a localized string similar to File:.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_DetailsBox_HostName_Text">
+            <summary>
+              Looks up a localized string similar to Host Name:.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_DetailsBox_ItemId_Text">
+            <summary>
+              Looks up a localized string similar to Item Id:.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_DetailsBox_Level_Text">
+            <summary>
+              Looks up a localized string similar to Level:.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_DetailsBox_Line_Text">
+            <summary>
+              Looks up a localized string similar to Line:.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_DetailsBox_Logger_Text">
+            <summary>
+              Looks up a localized string similar to Logger:.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_DetailsBox_MachineName_Text">
+            <summary>
+              Looks up a localized string similar to Machine Name:.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_DetailsBox_Message_Text">
+            <summary>
+              Looks up a localized string similar to Message:.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_DetailsBox_Method_Text">
+            <summary>
+              Looks up a localized string similar to Method:.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_DetailsBox_Thread_Text">
+            <summary>
+              Looks up a localized string similar to Thread:.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_DetailsBox_Throwable_Text">
+            <summary>
+              Looks up a localized string similar to Throwable:.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_DetailsBox_TimeDiff_Text">
+            <summary>
+              Looks up a localized string similar to Δ [time diff with previous log entry]:.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_DetailsBox_TimeStamp_Text">
+            <summary>
+              Looks up a localized string similar to Time Stamp:.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_DetailsBox_UserName_Text">
+            <summary>
+              Looks up a localized string similar to User Name:.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_FilesListBoxContextMenu_DeleteFile_Header">
+            <summary>
+              Looks up a localized string similar to Delete File.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_FilesListBoxContextMenu_OpenSelectedFolder_Header">
+            <summary>
+              Looks up a localized string similar to Open Selected Folder.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_FilesListBoxContextMenu_RefreshFileList_Header">
+            <summary>
+              Looks up a localized string similar to Refresh File List.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_FullDateTimeFormatWithMilliseconds">
+            <summary>
+              Looks up a localized string similar to dddd, MMMM d, yyyy h:mm:ss.fff tt.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_GridContextMenu_CopyToClipboard">
+            <summary>
+              Looks up a localized string similar to Copy To Clipboard.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_MergeFile_Tooltip">
+            <summary>
+              Looks up a localized string similar to Select File To Merge.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_SelectionGroupBox_Header">
+            <summary>
+              Looks up a localized string similar to SELECTION.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_SelectionTooltip">
+            <summary>
+              Looks up a localized string similar to filtered items count / full items count.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_ShowHideGroupBox_Header">
+            <summary>
+              Looks up a localized string similar to SHOW/HIDE.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindow_Title">
+            <summary>
+              Looks up a localized string similar to YALV! - Yet Another Log4Net Viewer.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_AutoRefreshIntervalLocalized_Format">
+            <summary>
+              Looks up a localized string similar to {0} s.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_bkLoaderCompleted_UnreadableFile_Text">
+             <summary>
+               Looks up a localized string similar to Unreadable File!
+            
+            {0}.
+             </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_bkLoaderCompleted_UnreadableFile_Title">
+            <summary>
+              Looks up a localized string similar to Warning.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_commandDeleteExecute_DeleteCheckedFiles_ConfirmText">
+            <summary>
+              Looks up a localized string similar to Are you sure you want to delete all checked files?.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_commandDeleteExecute_DeleteCheckedFiles_ConfirmTitle">
+            <summary>
+              Looks up a localized string similar to Confirm Delete.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_commandDeleteExecute_DeleteSelectedFile_ConfirmText">
+            <summary>
+              Looks up a localized string similar to Are you sure you want to delete all selected files?.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_commandDeleteExecute_DeleteSelectedFile_ConfirmTitle">
+            <summary>
+              Looks up a localized string similar to Confirm Delete.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_commandOpenFileExecute_Add_Log_File">
+            <summary>
+              Looks up a localized string similar to Add Log File.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_commandOpenFileExecute_AllFilesCaption">
+            <summary>
+              Looks up a localized string similar to All files.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_commandOpenFileExecute_Open_Log_File">
+            <summary>
+              Looks up a localized string similar to Open Log File.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_commandOpenFileExecute_XmlFilesCaption">
+            <summary>
+              Looks up a localized string similar to Xml files.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_commandSelectFolderExecute_Description">
+            <summary>
+              Looks up a localized string similar to Select Log Folder.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_deleteFile_ErrorMessage_Text">
+             <summary>
+               Looks up a localized string similar to Error deleting file!
+            [{0}]
+            
+            {1}.
+             </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_deleteFile_ErrorMessage_Title">
+            <summary>
+              Looks up a localized string similar to Error.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_InitDataGrid_AppColumn_Header">
+            <summary>
+              Looks up a localized string similar to App.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_InitDataGrid_ClassColumn_Header">
+            <summary>
+              Looks up a localized string similar to Class.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_InitDataGrid_HostNameColumn_Header">
+            <summary>
+              Looks up a localized string similar to HostName.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_InitDataGrid_IdColumn_Header">
+            <summary>
+              Looks up a localized string similar to Id.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_InitDataGrid_LevelColumn_Header">
+            <summary>
+              Looks up a localized string similar to Level.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_InitDataGrid_LoggerColumn_Header">
+            <summary>
+              Looks up a localized string similar to Logger.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_InitDataGrid_MachineNameColumn_Header">
+            <summary>
+              Looks up a localized string similar to MachineName.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_InitDataGrid_MessageColumn_Header">
+            <summary>
+              Looks up a localized string similar to Message.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_InitDataGrid_MethodColumn_Header">
+            <summary>
+              Looks up a localized string similar to Method.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_InitDataGrid_ThreadColumn_Header">
+            <summary>
+              Looks up a localized string similar to Thread.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_InitDataGrid_TimeStampColumn_Header">
+            <summary>
+              Looks up a localized string similar to TimeStamp.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_InitDataGrid_UserNameColumn_Header">
+            <summary>
+              Looks up a localized string similar to UserName.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_loadFolderFiles_ErrorMessage_Text">
+             <summary>
+               Looks up a localized string similar to Directory not found!
+            [{0}].
+             </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_loadFolderFiles_ErrorMessageText_Title">
+            <summary>
+              Looks up a localized string similar to Error.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.MainWindowVM_updateJumpList_CustomCategoryName">
+            <summary>
+              Looks up a localized string similar to Recent.
+            </summary>
+        </member>
+        <member name="P:YalvLib.Strings.Resources.SaveFolderPath_Title">
+            <summary>
+              Looks up a localized string similar to YALV! - Save Folder Path.
+            </summary>
+        </member>
+        <member name="T:YalvLib.ViewModel.ColumnsVM">
+            <summary>
+            ViewModel class to organize all items that apply on a column of the log4net (YalvView) column.
+            These items are the actual column layouts (number and columns and their names) and contents
+            of the filter search boxes.
+            </summary>
+        </member>
+        <member name="M:YalvLib.ViewModel.ColumnsVM.#ctor">
+            <summary>
+            Standard constructor
+            </summary>
+        </member>
+        <member name="M:YalvLib.ViewModel.ColumnsVM.#ctor(System.EventHandler)">
+            <summary>
+            Clear all data row values displayed in the view.
+            </summary>
+            <param name="columnFilterUpdate"></param>
+        </member>
+        <member name="M:YalvLib.ViewModel.ColumnsVM.ResetSearchTextBox">
+            <summary>
+            Reset all filter values to empty strings
+            </summary>
+        </member>
+        <member name="M:YalvLib.ViewModel.ColumnsVM.SaveColumnsLayout(System.String)">
+            <summary>
+            Save layout of data columns for re-load at a later time
+            </summary>
+            <param name="pathFileName"></param>
+        </member>
+        <member name="M:YalvLib.ViewModel.ColumnsVM.SetColumnsLayout(System.Collections.Generic.List{YalvLib.ViewModel.ColumnItem},System.EventHandler)">
+            <summary>
+            Set the column layout indicated by the <paramref name="columnCollection"/> parameter
+            </summary>
+            <param name="columnFilterUpdate"></param>
+            <param name="columnCollection"></param>
+        </member>
+        <member name="M:YalvLib.ViewModel.ColumnsVM.LoadColumnsLayout(System.String,System.EventHandler)">
+            <summary>
+            Load data of column layouts to re-create column visibility and other layout details
+            </summary>
+            <param name="pathFileName"></param>
+            <param name="columnFilterUpdate"></param>
+        </member>
+        <member name="M:YalvLib.ViewModel.ColumnsVM.BuidColumns(System.EventHandler)">
+            <summary>
+            Build an intial layout of GridView columns and their text filter textboxes.
+            </summary>
+            <param name="columnFilterUpdate"></param>
+        </member>
+        <member name="M:YalvLib.ViewModel.ColumnsVM.ResetColumnProperties(System.EventHandler)">
+            <summary>
+            Re-compute column properties each time when columns are reset (eg.: Layout is reloaded).
+            </summary>
+            <param name="columnFilterUpdate"></param>
+        </member>
+        <member name="P:YalvLib.ViewModel.ColumnsVM.DataGridColumns">
+            <summary>
+            Return a list of columns to be displayed in a DataGrid view display
+            </summary>
+        </member>
+        <member name="T:YalvLib.ViewModel.DisplayLogVM">
+            <summary>
+            ViewModel class to organize all items relevant to a loaded logfile display
+            (columns displayed, file name etc).
+            </summary>
+        </member>
+        <member name="M:YalvLib.ViewModel.DisplayLogVM.#ctor">
+            <summary>
+            Class constructor
+            </summary>
+        </member>
+        <member name="M:YalvLib.ViewModel.DisplayLogVM.MatchTextFilterColumn(YalvLib.ViewModel.ColumnsVM,YalvLib.ViewModel.LogItem)">
+            <summary>
+            Match View Column filter Value (if any) with item property value
+            and determine if this item should be displayed or not
+            </summary>
+            <param name="col"></param>
+            <param name="logitem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.ViewModel.DisplayLogVM.SetColumnsLayout(System.Collections.Generic.List{YalvLib.ViewModel.ColumnItem})">
+            <summary>
+            Set the column layout indicated by the <paramref name="columnCollection"/> parameter
+            </summary>
+            <param name="columnCollection"></param>
+        </member>
+        <member name="M:YalvLib.ViewModel.DisplayLogVM.LoadColumnsLayout(System.String)">
+            <summary>
+            Load data of column layouts to re-create column visibility and other layout details
+            </summary>
+            <param name="pathFileName"></param>
+        </member>
+        <member name="M:YalvLib.ViewModel.DisplayLogVM.SaveColumnsLayout(System.String)">
+            <summary>
+            Save data of column layouts to re-create column visibility and other layout details
+            </summary>
+            <param name="pathFileName"></param>
+        </member>
+        <member name="M:YalvLib.ViewModel.DisplayLogVM.ApplyFilter">
+            <summary>
+            Turn filter on or off and refresh the corresponding <see cref="T:YalvLib.ViewModel.LogItem"/> collection view.
+            </summary>
+        </member>
+        <member name="M:YalvLib.ViewModel.DisplayLogVM.commandRefreshExecute(YalvLib.ViewModel.DisplayLogVM.EvaluateLoadResult)">
+            <summary>
+            Implementation of the Refresh command
+            </summary>
+            <param name="callbackOnFinishedparameter"></param>
+        </member>
+        <member name="M:YalvLib.ViewModel.DisplayLogVM.LoadFile(System.String,YalvLib.ViewModel.DisplayLogVM.EvaluateLoadResult)">
+            <summary>
+            This function is calles to initiate a load file process.
+            </summary>
+            <param name="path"></param>
+            <param name="callbackOnFinished"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.ViewModel.DisplayLogVM.getItemValue(System.Object,System.String)">
+            <summary>
+            Get the value of a named property and return it,
+            or null if property name could not be matched.
+            </summary>
+            <param name="item"></param>
+            <param name="prop"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.ViewModel.DisplayLogVM.refreshCheckBoxBinding">
+            <summary>
+            Refresh bindings for all log level filter (Debug, Info, Warn ...) elements
+            </summary>
+        </member>
+        <member name="M:YalvLib.ViewModel.DisplayLogVM.resetLevelSelection">
+            <summary>
+            Reset the filter selection of all log4net levels (SelectAll, Debug, Info, Warn ...) to false.
+            </summary>
+        </member>
+        <member name="M:YalvLib.ViewModel.DisplayLogVM.levelCheckFilter(System.Object)">
+            <summary>
+            Return true if the supplied item should be filtered 
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.ViewModel.DisplayLogVM.OnFilterLogItems(System.Object)">
+            <summary>
+            Determine if an item in the observable collection is to be filtered or not.
+            </summary>
+            <param name="item"></param>
+            <returns>Returns true if item is not filtered and false otherwise</returns>
+        </member>
+        <member name="M:YalvLib.ViewModel.DisplayLogVM.RebuildLogView(System.Collections.ObjectModel.ObservableCollection{YalvLib.ViewModel.LogItem})">
+            <summary>
+            Build a CollectionView on top of an observable collection.
+            This is required to implemented Filter and Group Features
+            for a DataGrid in an MVVM fashion.
+            </summary>
+            <param name="items"></param>
+        </member>
+        <member name="M:YalvLib.ViewModel.DisplayLogVM.ColumnsVM_UpdateColumnFilter(System.Object,System.EventArgs)">
+            <summary>
+            Update the contents of the displayed columns if we received a (key) update event
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:YalvLib.ViewModel.DisplayLogVM.GetExceptionTreeAsString(System.Exception)">
+            <summary>
+            Analyse an exception and return a human read-able string containing messages from the stacktrace
+            
+            Exception Message 1
+             +- Exception Message 2
+               +- Exception Message 3
+            </summary>
+            <param name="exp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.ViewModel.DisplayLogVM.fileFoader_ResultEvent(System.Object,YalvLib.ViewModel.LogFileLoader.ResultEvent)">
+            <summary>
+            This function is called as soon as the load log file parser finishes.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.CommandClearFilters">
+            <summary>
+            Clear Command
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.DataGridColumns">
+            <summary>
+            Get a list of columns to be displayed in a DataGrid view display
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.LogFile">
+            <summary>
+            Get a list of files and/or directories that can act as a data source.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.LogView">
+            <summary>
+            This property represents the datagrid viewmodel part and enables sorting and filtering
+            being implemented in the viewmodel class.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.SelectedLogItem">
+            <summary>
+            SelectedLogItem Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.GoToLogItemId">
+            <summary>
+            GoToLogItemId Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.IsFiltered">
+            <summary>
+            Get/set property to determine whether CollectionView is
+            is filtered by a column's content or not.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.ShowLevelDebug">
+            <summary>
+            ShowLevelDebug Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.ShowLevelInfo">
+            <summary>
+            ShowLevelInfo Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.ShowLevelWarn">
+            <summary>
+            ShowLevelWarn Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.ShowLevelError">
+            <summary>
+            ShowLevelError Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.ShowLevelFatal">
+            <summary>
+            ShowLevelFatal Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.SelectAll">
+            <summary>
+            SelectAll Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.SelectDebug">
+            <summary>
+            SelectDebug Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.SelectInfo">
+            <summary>
+            SelectInfo Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.SelectWarn">
+            <summary>
+            SelectWarn Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.SelectError">
+            <summary>
+            SelectError Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.SelectFatal">
+            <summary>
+            SelectFatal Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.ItemsDebugCount">
+            <summary>
+            ItemsDebugCount Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.ItemsInfoCount">
+            <summary>
+            ItemsInfoCount Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.ItemsWarnCount">
+            <summary>
+            ItemsWarnCount Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.ItemsErrorCount">
+            <summary>
+            ItemsErrorCount Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.ItemsFatalCount">
+            <summary>
+            ItemsFatalCount Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.ItemsDebugFilterCount">
+            <summary>
+            ItemsDebugFilterCount Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.ItemsInfoFilterCount">
+            <summary>
+            ItemsInfoFilterCount Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.ItemsWarnFilterCount">
+            <summary>
+            ItemsWarnFilterCount Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.ItemsErrorFilterCount">
+            <summary>
+            ItemsErrorFilterCount Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.ItemsFatalFilterCount">
+            <summary>
+            ItemsFatalFilterCount Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.ItemsFilterCount">
+            <summary>
+            ItemsFilterCount Property
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.HasData">
+            <summary>
+            Get fewer there are data items in the collection or not
+            (there may be no items to display if filter is applied but thats a different issue)
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.DisplayLogVM.Items">
+            <summary>
+            LogItems property which is the main list of logitems
+            (this property is bound to a view via CollectionView property)
+            </summary>
+        </member>
+        <member name="T:YalvLib.ViewModel.DisplayLogVM.EvaluateLoadResult">
+            <summary>
+            Declare a type of method to be called upon succesful load of log file.
+            </summary>
+            <param name="LoadWasSuccessful"></param>
+        </member>
+        <member name="T:YalvLib.ViewModel.LogFileLoader">
+            <summary>
+            This class implements a task based log4net loader
+            that can run in an async task and generate an event
+            when loading is done.
+            </summary>
+        </member>
+        <member name="F:YalvLib.ViewModel.LogFileLoader.mRequestingContext">
+            <summary>
+            This property is used to tell the context of the thread that started this thread
+            originally. We use this to generate callbacks in the correct context when the long
+            running task is done
+            
+            Quote:
+            One of the most important parts of this pattern is calling the MethodNameCompleted
+            method on the same thread that called the MethodNameAsync method to begin with. You
+            could do this using WPF fairly easily, by storing CurrentDispatcher—but then the
+            nongraphical component could only be used in WPF applications, not in Windows Forms
+            or ASP.NET programs. 
+            
+            The DispatcherSynchronizationContext class addresses this need—think of it as a
+            simplified version of Dispatcher that works with other UI frameworks as well.
+            
+            http://msdn.microsoft.com/en-us/library/ms741870.aspx
+            </summary>
+        </member>
+        <member name="M:YalvLib.ViewModel.LogFileLoader.ParseLogFile(System.String)">
+            <summary>
+            Parse a log4net log file via abstract parser provider class for SQL, Sqlite, XML file etc...
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.ViewModel.LogFileLoader.LoadFile(System.String,System.Boolean)">
+            <summary>
+            load the contents of a log file in an async task and return
+            the result through an event object (event is setup prior to this call).
+            </summary>
+            <param name="path"></param>
+            <param name="async"></param>
+        </member>
+        <member name="M:YalvLib.ViewModel.LogFileLoader.PrintException(System.Threading.Tasks.Task,System.AggregateException,System.String)">
+            <summary>
+            Analyze AggregateException (typically returned from Task class) and return human-readable
+            string for display in GUI.
+            </summary>
+            <param name="task"></param>
+            <param name="agg"></param>
+            <param name="taskName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.ViewModel.LogFileLoader.ReportBatchResultEvent(System.Boolean)">
+            <summary>
+            Report a result to the attached eventhalders (if any) on whether execution succeded or not.
+            </summary>
+        </member>
+        <member name="M:YalvLib.ViewModel.LogFileLoader.SaveThreadContext(System.Boolean)">
+            <summary>
+            Save the threading context of a calling thread to enable event completion handling
+            in original context when async task has finished (WPF, Winforms and co require this)
+            </summary>
+            <param name="bAsnc"></param>
+        </member>
+        <member name="M:YalvLib.ViewModel.LogFileLoader.ReportTaskCompletedEvent(System.Object)">
+            <summary>
+            Report the asynchronous task as having completed
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:YalvLib.ViewModel.LogFileLoader.ResultEvent">
+            <summary>
+            Stores information about the result of a batch run.
+            If an error occurs, Error is set to true and an exception may be stored in InnerException.
+            </summary>
+        </member>
+        <member name="M:YalvLib.ViewModel.LogFileLoader.ResultEvent.#ctor(System.String,System.Boolean,System.Boolean,System.Collections.Generic.Dictionary{System.String,System.Object},System.Exception)">
+            <summary>
+            Convinience constructor to produce simple message for communicating when
+            batch run was abborted incompletely (bCancel can be set to true or bError
+            can be set to true).
+            </summary>
+            <param name="sMessage"></param>
+            <param name="bError"></param>
+            <param name="bCancel"></param>
+            <param name="objColl"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:YalvLib.ViewModel.LogFileLoader.ResultEvent.#ctor(System.String)">
+            <summary>
+            Convinience constructor to produce simple message at the end of a batch run
+            (Cancel not clicked and no error to be reported).
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogFileLoader.ResultEvent.Error">
+            <summary>
+            Get an error message if processing task aborted with errors
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogFileLoader.ResultEvent.Cancel">
+            <summary>
+            Get property to determine whether processing was cancelled or not.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogFileLoader.ResultEvent.InnerException">
+            <summary>
+            Get property to determine whether there is an innerException to
+            document an abortion with errors.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogFileLoader.ResultEvent.Message">
+            <summary>
+            Get current message describing the current step being proceesed
+            in the <see cref="!:ExecViewModel"/>
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogFileLoader.ResultEvent.ResultObjects">
+            <summary>
+            Dictionary of result objects from executing process in <see cref="!:ExecViewModel"/>
+            </summary>
+        </member>
+        <member name="T:YalvLib.ViewModel.LogFileVM">
+            <summary>
+            Class to manage data for a logfile
+            </summary>
+        </member>
+        <member name="M:YalvLib.ViewModel.LogFileVM.#ctor">
+            <Summary>
+            Standard constructor of the <seealso cref="T:YalvLib.ViewModel.LogFileVM"/> class
+            </Summary>
+        </member>
+        <member name="M:YalvLib.ViewModel.LogFileVM.deleteFile(System.String)">
+            <summary>
+            Physically delete a file in the file system.
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogFileVM.IsLoading">
+            <summary>
+            Get/set property to indicate whether a logfile is currently being parsed and loaded or not.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogFileVM.IsFileLoaded">
+            <summary>
+            Get whether a log file has been loaded or not
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.LogFileVM.FilePath">
+            <summary>
+            Get a the file system path of the log file
+            </summary>
+        </member>
+        <member name="T:YalvLib.ViewModel.YalvViewModel">
+            <summary>
+            Main ViewModel of Valv Lib control
+            </summary>
+        </member>
+        <member name="M:YalvLib.ViewModel.YalvViewModel.#ctor">
+            <summary>
+            Standard constructor
+            </summary>
+        </member>
+        <member name="M:YalvLib.ViewModel.YalvViewModel.LoadFile(System.String)">
+            <summary>
+            Load a log4nez log file to display its content through this ViewModel.
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="M:YalvLib.ViewModel.YalvViewModel.commandRefreshExecute(System.Object)">
+            <summary>
+            Implementation of the Refresh command (reload data and apply filters)
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.ViewModel.YalvViewModel.commandFilterYalvView(System.Object)">
+            <summary>
+            Default command method for applying column filters.
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YalvLib.ViewModel.YalvViewModel.loadFinishedEvent(System.Boolean)">
+            <summary>
+            This is a callback method that is always called when
+            the internal load process is finished
+            (even when it failed to finish after initialization).
+            </summary>
+            <param name="loadWasSuccessful"></param>
+        </member>
+        <member name="P:YalvLib.ViewModel.YalvViewModel.FilePath">
+            <summary>
+            Get property to determine the name of
+            the currently viewed log4net file or
+            empty string if there is no file being viewed at present.
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.YalvViewModel.LogItems">
+            <summary>
+            Get a list of filter columns and data items (for display in a DataGridView)
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.YalvViewModel.HasData">
+            <summary>
+            Get whether there are data items in the collection or not
+            (there may be no items to display if filter is applied but thats a different issue)
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.YalvViewModel.FilterYalvView">
+            <summary>
+            FilterYalvView command to switches a filtered view on or off
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.YalvViewModel.CommandRefresh">
+            <summary>
+            Refresh Command
+            </summary>
+        </member>
+        <member name="P:YalvLib.ViewModel.YalvViewModel.CommandDelete">
+            <summary>
+            Delete Command
+            </summary>
+        </member>
+        <member name="M:YalvLib.View.GridManager.BuildDataGrid(System.Windows.Controls.DataGrid,YalvLib.ViewModel.ColumnsVM,System.Windows.Style,System.Windows.Style,System.Windows.Input.KeyEventHandler,System.Windows.Controls.Panel)">
+            <summary>
+            This code builds a list of columns and their corresponding filter textboxes
+            </summary>
+            <param name="dataGrid"></param>
+            <param name="centerCellStyle"></param>
+            <param name="keyUpEvent"></param>
+            <param name="txtSearchPanel"></param>
+            <param name="colVM"></param>
+            <param name="watermarkTextbox"></param>
+        </member>
+        <member name="T:YalvLib.View.YalvView">
+            <summary>
+            ValvView is a look-less WPF control that displays log4net log data entries (by default) in a gridview.
+            </summary>
+        </member>
+        <member name="F:YalvLib.View.YalvView.ColumnsProperty">
+            <summary>
+            Dependency property to bind column meta data definitions to the view
+            </summary>
+        </member>
+        <member name="F:YalvLib.View.YalvView.CenterCellStyleProperty">
+            <summary>
+            Dependency property to bind grid cell default style to the view
+            </summary>
+        </member>
+        <member name="F:YalvLib.View.YalvView.WaterMarkTextBoxProperty">
+            <summary>
+            Dependency property to bind WaterMark textbox style to the view
+            </summary>
+        </member>
+        <member name="M:YalvLib.View.YalvView.#cctor">
+            <summary>
+            Static class constructor
+            </summary>
+        </member>
+        <member name="M:YalvLib.View.YalvView.#ctor">
+            <summary>
+            Standard constructor
+            </summary>
+        </member>
+        <member name="M:YalvLib.View.YalvView.OnApplyTemplate">
+            <summary>
+            Standard method which is invoked when the style for this control is applied
+            </summary>
+        </member>
+        <member name="M:YalvLib.View.YalvView.HandleRefreshOnInputKeyInFilter(System.Object,System.Windows.Input.KeyEventArgs)">
+            <summary>
+            Handle the case in which the user has entered a character into any of the filter columns -
+            update the corresponding filter column string in the viewmodel.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:YalvLib.View.YalvView.OnDataGridChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Build all column headers and corresponding filter textboxes for the datagrid control
+            </summary>
+            <param name="depObj"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:YalvLib.View.YalvView.RebuildGrid">
+            <summary>
+            Create columns and other items (text filter textbox headers) that bring the DataGrid to live.
+            </summary>
+        </member>
+        <member name="P:YalvLib.View.YalvView.Columns">
+            <summary>
+            Class constructor
+            </summary>
+        </member>
+        <member name="P:YalvLib.View.YalvView.CenterCellStyle">
+            <summary>
+            Data grid column cell style dependency property
+            </summary>
+        </member>
+        <member name="P:YalvLib.View.YalvView.WaterMarkTextBox">
+            <summary>
+            WatermarkTextBox style dependency property
+            </summary>
+        </member>
+    </members>
+</doc>

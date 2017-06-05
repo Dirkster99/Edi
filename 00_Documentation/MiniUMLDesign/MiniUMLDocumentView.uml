@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document
+  Size="1793.79,1793.79" xmlns="MiniUml">
+  <Boundary
+    Name="MiniUML.View"
+    ID=""
+    Position="85,58,200,593.818181818182" />
+  <Class
+    Name="DocumentView"
+    ID="auto_1"
+    Position="138,225,95,75"
+    Stereotype="" />
+  <Class
+    Name="XmlView"
+    ID="auto_0"
+    Position="137,93,95,75"
+    Stereotype="">
+    <Comment>
+    This class is used to display the XML editor as split view inside of the document.
+    </Comment>
+  </Class>
+  <Aggregation
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_0"
+    FromArrow=""
+    To="auto_1"
+    ToArrow="Uml.Diamonds.White">
+    <Anchor
+      Name=""
+      ID=""
+      Position="183,168" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="183,225" />
+  </Aggregation>
+  <Class
+    Name="CanvasView"
+    ID="auto_2"
+    Position="141,363,95,75"
+    Stereotype="" />
+  <Aggregation
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_2"
+    FromArrow=""
+    To="auto_1"
+    ToArrow="Uml.Diamonds.White">
+    <Anchor
+      Name=""
+      ID=""
+      Position="189,363" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="189,300" />
+  </Aggregation>
+  <Boundary
+    Name="MiniUML.Model"
+    ID=""
+    Position="373,58,700,593.818181818182" />
+  <Class
+    Name="XmlViewModel"
+    ID="auto_3"
+    Position="423,91,150,75"
+    Stereotype="">
+    <Comment>
+    This class is used to implement the viewmodel
+    for the XmlView class that used to display the
+    XML editor as split view inside of the document.
+    </Comment>
+  </Class>
+  <Class
+    Name="DocumentViewModel"
+    ID="auto_4"
+    Position="419,225,150,75"
+    Stereotype="" />
+  <Class
+    Name="DocumentDataModel"
+    ID="auto_44"
+    Position="600,225,150,75"
+    Stereotype="" />
+  <Class
+    Name="CanvasViewModel"
+    ID="auto_5"
+    Position="422,354,150,75"
+    Stereotype="" />
+  <Association
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_0"
+    FromArrow=""
+    To="auto_3"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="232,130.16" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="423,130.16" />
+  </Association>
+  <Association
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_1"
+    FromArrow=""
+    To="auto_4"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="233,259.16" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="419,259.16" />
+  </Association>
+  <Association
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_2"
+    FromArrow=""
+    To="auto_5"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="236,396.16" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="422,396.16" />
+  </Association>
+  <Aggregation
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_4"
+    FromArrow="Uml.Diamonds.White"
+    To="auto_3"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="493,225" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="492.961538461538,166" />
+  </Aggregation>
+  <Aggregation
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_4"
+    FromArrow="Uml.Diamonds.White"
+    To="auto_5"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="492,300" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="491.923076923077,354" />
+  </Aggregation>
+  <Aggregation
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_4"
+    FromArrow="Uml.Diamonds.White"
+    To="auto_44"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="569,259.567567567567" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="600,259.567567567567" />
+  </Aggregation>
+  <Aggregation
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_5"
+    FromArrow="Uml.Diamonds.White"
+    To="auto_4"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="528,354" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="528,300" />
+  </Aggregation>
+  <Interface
+    Name="IParent"
+    ID="auto_45"
+    Position="480,446,95,75"
+    Stereotype="«interface»" />
+  <Association
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_5"
+    FromArrow=""
+    To="auto_45"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="525,429" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="525,446" />
+  </Association>
+  <Class
+    Name="AbstractDocumentViewModel"
+    ID="auto_46"
+    Position="848.318181818182,175.681818181818,195,75"
+    Stereotype="" />
+  <Aggregation
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_46"
+    FromArrow="Uml.Diamonds.White"
+    To="auto_5"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="861.318181818182,250.681818181818" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="572,376.16" />
+  </Aggregation>
+  <Aggregation
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_46"
+    FromArrow="Uml.Diamonds.White"
+    To="auto_44"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="848.318181818182,217.227272727273" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="750,264.954545454545" />
+  </Aggregation>
+  <Interface
+    Name="IMiniUMLDocument"
+    ID="auto_47"
+    Position="890.090909090909,302.5,150,75"
+    Stereotype="«interface»" />
+  <Aggregation
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_47"
+    FromArrow="Uml.Diamonds.White"
+    To="auto_46"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="942.045454545455,302.5" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="942.045454545455,250.681818181818" />
+  </Aggregation>
+  <Class
+    Name="PluginModelBase"
+    ID="auto_48"
+    Position="860,415,195,75"
+    Stereotype="" />
+  <Boundary
+    Name="MiniUML.Plugins.UmlClassDiagram"
+    ID=""
+    Position="1111.36363636364,58,252,593.818181818182" />
+  <Class
+    Name="PluginModel"
+    ID="auto_49"
+    Position="1150,415,195,75"
+    Stereotype="" />
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_48"
+    FromArrow=""
+    To="auto_49"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="1055,457" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="1150,457" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_4"
+    FromArrow=""
+    To="auto_46"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="559.090909090909,225" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="848.318181818182,193.363636363636" />
+  </Inheritance>
+  <Aggregation
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_49"
+    FromArrow="Uml.Diamonds.White"
+    To="auto_47"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="1170.53571428571,415" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="1040.09090909091,334.964285714286" />
+  </Aggregation>
+  <Class
+    Name="PluginManager"
+    ID="auto_4A"
+    Position="860,530.909090909091,195,75"
+    Stereotype="" />
+  <Aggregation
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_4A"
+    FromArrow="Uml.Diamonds.White"
+    To="auto_48"
+    ToArrow="">
+    <Anchor
+      Name=""
+      ID=""
+      Position="953.409090909091,530.909090909091" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="953.493635659097,490" />
+  </Aggregation>
+  <Note
+    Name=""
+    ID=""
+    Position="584,520,268,105">
+    <Text>Each MiniUml plugin has a name
+which can be used to retrieve the
+model and its associated properties
+for executing a plugin specific function
+(eg.: Load/Save) in the context of that plugin.</Text>
+  </Note>
+</Document>

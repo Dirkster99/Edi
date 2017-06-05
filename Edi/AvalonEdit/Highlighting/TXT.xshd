@@ -1,0 +1,100 @@
+﻿<?xml version="1.0"?>
+<SyntaxDefinition name="TXT" extensions=".txt"
+                  xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+
+  <Color name="Digits" fontStyle="italic" fontWeight="normal" foreground="Blue" />
+  <Color name="String" foreground="Olive" exampleText="string text = &quot;Hello, World!&quot;"/>
+  <Color name="String2" foreground="#993" exampleText="string text = &quot;Hello, World!&quot;"/>
+  <Color name="Comment" foreground="Green" exampleText="string text = &quot;Hello, World!&quot;"/>
+
+  <Color name="BulletNumbers" foreground="#0000ff" fontWeight="normal" exampleText="string text = &quot;Hello, World!&quot;"/>
+
+  <Color name="Heading1" foreground="#0000ff" fontWeight="bold" exampleText="string text = &quot;Hello, World!&quot;"/>
+  <Color name="Heading2" foreground="#0000ff" fontWeight="bold" fontStyle="italic" exampleText="string text = &quot;Hello, World!&quot;"/>
+  <Color name="Heading3" foreground="#6666ff" fontWeight="normal" fontStyle="italic" exampleText="string text = &quot;Hello, World!&quot;"/>
+  <Color name="Heading4" foreground="#6666ff" fontWeight="normal" exampleText="string text = &quot;Hello, World!&quot;"/>
+
+  <Color name="Important" foreground="#ff0000" fontWeight="normal" exampleText="string text = &quot;Hello, World!&quot;"/>
+
+  <Color name="Punctuation" foreground="Red" exampleText="string text = &quot;Hello, World!&quot;"/>
+
+  <Color name="BoldFormat" fontWeight="bold" exampleText="string text = &quot;Hello, World!&quot;"/>
+  <Color name="ItalicFormat" fontStyle="italic" exampleText="string text = &quot;Hello, World!&quot;"/>
+
+  <Color name="Problem" fontWeight="bold" foreground="Blue" exampleText="string text = &quot;TODO&quot;" />
+  <Color name="Complete" fontWeight="bold" foreground="Green" exampleText="string text = &quot;DONE&quot;" />
+
+  <Color name="HighlightTime" fontStyle="italic" foreground="Red" exampleText="string text = &quot;Hello, World!&quot;"/>
+
+  <RuleSet ignoreCase="true">
+    <!--
+    Highlight Time information at begining of line:
+2:04:45 PM xxx
+12:04:45 AM xxx
+12:04:45 AM: xxx
+12:04:45 PM: xxx
+
+    Highlights everything except for xxx in above sample lines -->
+    <Span  color="HighlightTime" begin="^[0-9]?[0-9]:[0-9][0-9]:[0-9][0-9][ ]((AM)|(PM))" end=" " />
+
+    <Span  color="BoldFormat" begin="\*" end="\*"/>
+    <Span  color="ItalicFormat" begin="~" end="~"/>
+
+    <Span  color="BulletNumbers" begin="^[0-9]+\. " end="\n"/>
+
+    <!-- Match Start of line [Any Number of digits] with space and something else as Heading1-->
+    <Span  color="Heading1" begin="^[0-9]+ " end="\n"/>
+
+    <Span  color="Heading2" begin="^[0-9]+.[0-9]+ " end="\n"/>
+    <Span  color="Heading3" begin="^[0-9]+.[0-9]+.[0-9]+ " end="\n"/>
+    <Span  color="Heading4" begin="^[0-9]+.[0-9]+.[0-9]+.[0-9]+ " end="\n"/>
+
+    <Span  color="Important" begin="^§ [0-9]+.[0-9]+.[0-9]+" end=" "/>
+
+    <!-- Span color="String" multiline="true">
+      <Begin>"</Begin>
+      <End>"</End>
+    </Span -->
+
+    <!-- Span color="String" multiline="true">
+      <Begin>\(</Begin>
+      <End>\)</End>
+    </Span -->
+
+    <!-- Span color="String2" multiline="false">
+      <Begin>'</Begin>
+      <End>'</End>
+    </Span -->
+
+    <!-- span for escape sequences -->
+    <Span  color="Comment" begin="--" end="\n"/>
+    <Span color="Comment"  multiline="true">
+      <Begin>/\*</Begin>
+      <End>\*/</End>
+    </Span>
+
+    <Keywords color="Problem">
+      <Word>BUG FIX</Word>
+      <Word>BUG</Word>
+      <Word>BUGS</Word>
+      <Word>HACK</Word>
+      <Word>TODO</Word>
+      <Word>TODOS</Word>
+    </Keywords>
+
+    <Keywords color="Complete">
+      <Word>DONE</Word>
+      <Word>TICK</Word>
+    </Keywords>
+
+    <Rule color="Punctuation">
+      [?,.;()\[\]{}+\-/%*&lt;&gt;^+~!|&amp;]+
+    </Rule>
+
+    <Rule color="Digits">
+      [ ?,.;()\[\]{}+\-/%*&lt;&gt;^+~!|&amp;]+[0-9]+[ ?,.;()\[\]{}+\-/%*&lt;&gt;^+~!|&amp;]+\n
+    </Rule>
+
+  </RuleSet>
+
+</SyntaxDefinition>

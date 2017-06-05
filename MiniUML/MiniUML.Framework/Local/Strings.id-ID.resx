@@ -1,0 +1,447 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="STR_CMD_Aggregation" xml:space="preserve">
+    <value>Agregasi</value>
+  </data>
+  <data name="STR_CMD_Aggregation_description" xml:space="preserve">
+    <value>Membuat agregasi baru</value>
+  </data>
+  <data name="STR_CMD_Association" xml:space="preserve">
+    <value>Asosiasi</value>
+  </data>
+  <data name="STR_CMD_Association_description" xml:space="preserve">
+    <value>Membuat asosiasi baru</value>
+  </data>
+  <data name="STR_CMD_CHANGETheme" xml:space="preserve">
+    <value>Ganti Theme</value>
+    <comment>Change Theme Command</comment>
+  </data>
+  <data name="STR_CMD_ChangeTheme_DESCRIPTION" xml:space="preserve">
+    <value>Mengubah tema warna dari aplikasi.</value>
+  </data>
+  <data name="STR_CMD_Class" xml:space="preserve">
+    <value>Kelas</value>
+  </data>
+  <data name="STR_CMD_Class_description" xml:space="preserve">
+    <value>Membuat bentuk kelas baru</value>
+  </data>
+  <data name="STR_CMD_Comment" xml:space="preserve">
+    <value>Komentar</value>
+  </data>
+  <data name="STR_CMD_Comment_description" xml:space="preserve">
+    <value>Membuat bentuk komentar baru</value>
+  </data>
+  <data name="STR_CMD_Composition" xml:space="preserve">
+    <value>Komposisi</value>
+  </data>
+  <data name="STR_CMD_Composition_description" xml:space="preserve">
+    <value>Membuat sebuah komposisi baru</value>
+  </data>
+  <data name="STR_CMD_CreateNew" xml:space="preserve">
+    <value>Baru</value>
+  </data>
+  <data name="STR_CMD_CreateNewDocument" xml:space="preserve">
+    <value>Buat dokumen baru.</value>
+  </data>
+  <data name="STR_CMD_Enum" xml:space="preserve">
+    <value>ENUM</value>
+  </data>
+  <data name="STR_CMD_Enum_description" xml:space="preserve">
+    <value>Membuat bentuk Enum baru</value>
+  </data>
+  <data name="STR_CMD_Export_Command" xml:space="preserve">
+    <value>Ekspor</value>
+  </data>
+  <data name="STR_CMD_Export_Command_DESCR" xml:space="preserve">
+    <value>Simpan dokumen saat ini sebagai gambar bitmap.</value>
+  </data>
+  <data name="STR_CMD_InheritanceAssociation" xml:space="preserve">
+    <value>Warisan Asosiasi</value>
+  </data>
+  <data name="STR_CMD_InheritanceAssociation_description" xml:space="preserve">
+    <value>Membuat Asosiasi warisan baru</value>
+  </data>
+  <data name="STR_CMD_Interface" xml:space="preserve">
+    <value>Antarmuka</value>
+  </data>
+  <data name="STR_CMD_Interface_description" xml:space="preserve">
+    <value>Membuat bentuk antarmuka baru</value>
+  </data>
+  <data name="STR_CMD_OpenDocument" xml:space="preserve">
+    <value>Membuka dokumen yang ada.</value>
+  </data>
+  <data name="STR_CMD_PRINT_DESCRIPTION" xml:space="preserve">
+    <value>Mencetak dokumen saat ini.</value>
+  </data>
+  <data name="STR_CMD_REDO_DESCRIPTION" xml:space="preserve">
+    <value>Mengulang terakhir undo</value>
+  </data>
+  <data name="STR_CMD_SAVEAS_DOCUMENT" xml:space="preserve">
+    <value>Simpan dokumen saat ini ke file baru</value>
+  </data>
+  <data name="STR_CMD_SAVE_DOCUMENT" xml:space="preserve">
+    <value>Simpan dokumen saat ini.</value>
+  </data>
+  <data name="STR_CMD_Struct" xml:space="preserve">
+    <value>Struct</value>
+  </data>
+  <data name="STR_CMD_Struct_description" xml:space="preserve">
+    <value>Membuat bentuk Struct baru</value>
+  </data>
+  <data name="STR_CMD_UNDO_DESCRIPTION" xml:space="preserve">
+    <value>Undo suntingan terakhir</value>
+  </data>
+  <data name="STR_CMD_UPDATE" xml:space="preserve">
+    <value>Memperbarui desain</value>
+  </data>
+  <data name="STR_CMD_UPDATE_DESCRIPTION" xml:space="preserve">
+    <value>Memperbarui permukaan desain untuk mencerminkan perubahan dibuat untuk dokumen XML mendasari.</value>
+  </data>
+  <data name="STR_CMD_AbstractClass" xml:space="preserve">
+    <value>Kelas abstrak</value>
+    <comment>Add Abstract Class Command</comment>
+  </data>
+  <data name="STR_CMD_AbstractClass_DESCRIPTION" xml:space="preserve">
+    <value>Membuat bentuk abstrak kelas baru</value>
+  </data>
+  <data name="STR_COPY_Description" xml:space="preserve">
+    <value>Menyalin bentuk yang dipilih ke clipboard.</value>
+  </data>
+  <data name="STR_CUT_Description" xml:space="preserve">
+    <value>Memotong bentuk yang dipilih ke clipboard.</value>
+  </data>
+  <data name="STR_FILETYPE_FILTER" xml:space="preserve">
+    <value>File XML (*.xml) | *. xml| Semua file (*. *) | *. *</value>
+  </data>
+  <data name="STR_FILETYPE_FILTER_EXPORT" xml:space="preserve">
+    <value>PNG file gambar (*.png) | *. png|
+File gambar JPEG (*.jpg; *.jpeg) | * .jpg; *. jpeg|
+Windows Bitmap file gambar (*.bmp) | *. bmp|
+XPS dokumen file (*.xps) | * .xps</value>
+  </data>
+  <data name="STR_FILETYPE_FILTER_PLUGINS" xml:space="preserve">
+    <value>Berkas plugin (MiniUML.Themes.*.dll)| MiniUML.Themes.*.dll</value>
+  </data>
+  <data name="STR_FILETYPE_FILTER_SAVE" xml:space="preserve">
+    <value>File XML (*.xml) | * .xml</value>
+  </data>
+  <data name="STR_MSG_NoShapeInClipboard" xml:space="preserve">
+    <value>Clipboard tidak mengandung bentuk apapun!</value>
+  </data>
+  <data name="STR_OpenFILE_MSG" xml:space="preserve">
+    <value>Terjadi kesalahan saat membuka file '{0}'.</value>
+  </data>
+  <data name="STR_OpenFILE_MSG_CAPTION" xml:space="preserve">
+    <value>Operasi dibatalkan</value>
+  </data>
+  <data name="STR_PASTE_Description" xml:space="preserve">
+    <value>Menyisipkan konten clipboard ke dalam dokumen.</value>
+  </data>
+  <data name="STR_QUERY_SAVE_CHANGES" xml:space="preserve">
+    <value>Apakah Anda ingin menyimpan perubahan {0}?</value>
+  </data>
+  <data name="STR_QUERY_SAVE_CHANGES_CAPTION" xml:space="preserve">
+    <value>Menyimpan perubahan?</value>
+  </data>
+  <data name="STR_SaveFILE_MSG" xml:space="preserve">
+    <value>Terjadi kesalahan sementara menyimpan file '{0}'.</value>
+  </data>
+  <data name="STR_SaveFILE_MSG_CAPTION" xml:space="preserve">
+    <value>Operasi dibatalkan.</value>
+  </data>
+  <data name="STR_Select_Description" xml:space="preserve">
+    <value>Saklar untuk memilih mode.</value>
+  </data>
+  <data name="STR_Select" xml:space="preserve">
+    <value>Pilih</value>
+  </data>
+  <data name="STR_UnexpectedErrorCaption" xml:space="preserve">
+    <value>Kesalahan yang tidak terduga</value>
+  </data>
+  <data name="STR_CMD_Delete" xml:space="preserve">
+    <value>Hapus</value>
+  </data>
+  <data name="STR_CMD_Delete_description" xml:space="preserve">
+    <value>Menghapus bentuk yang dipilih.</value>
+  </data>
+  <data name="STR_Default_FileName" xml:space="preserve">
+    <value>Untitled</value>
+  </data>
+  <data name="STR_ZOOMSlider_PercentCharacter" xml:space="preserve">
+    <value>%</value>
+    <comment>Percentage character in Zoom Slider Display</comment>
+  </data>
+  <data name="STR_TITLE_XML_Editor" xml:space="preserve">
+    <value>XML Editor</value>
+  </data>
+  <data name="STR_MSG_Warning_Caption" xml:space="preserve">
+    <value>Peringatan</value>
+  </data>
+  <data name="STR_MSG_PAGE_HEIGHT_WIDTH_NEGATIVE" xml:space="preserve">
+    <value>Halaman dimensi (tinggi: {0}, lebar: {1}) tidak bisa negatif.</value>
+  </data>
+  <data name="STR_MSG_PAGE_MARGINS_NEGATIVE" xml:space="preserve">
+    <value>Halaman margin tidak bisa negatif.</value>
+  </data>
+  <data name="STR_MSG_PAGE_MARGIN_LARGER_THAN_PAGESIZE" xml:space="preserve">
+    <value>Halaman margin lebih besar dari ukuran halaman.</value>
+  </data>
+  <data name="STR_MSG_PAGE_DEFINITION_FIELD_INVALID" xml:space="preserve">
+    <value>Satu atau lebih halaman definisi bidang tidak sah.</value>
+  </data>
+  <data name="STR_MSG_INVALID_RESOLUTION" xml:space="preserve">
+    <value>Resolusi tidak valid.</value>
+  </data>
+  <data name="STR_MENUITEM_ADD_METHOD" xml:space="preserve">
+    <value>Tambahkan _Method</value>
+  </data>
+  <data name="STR_MENUITEM_ADD_PROPERTY" xml:space="preserve">
+    <value>Tambahkan _Property</value>
+  </data>
+  <data name="STR_MENUITEM_ADD_FIELD" xml:space="preserve">
+    <value>Tambahkan _Field</value>
+  </data>
+  <data name="STR_MENUITEM_ADD_EVENT" xml:space="preserve">
+    <value>Tambahkan _Event</value>
+  </data>
+  <data name="STR_MENUITEM_ADD_CLASS" xml:space="preserve">
+    <value>Tambahkan _Class</value>
+  </data>
+  <data name="STR_MENUITEM_ADD_ENUM_MEMBER" xml:space="preserve">
+    <value>Tambahkan _Member</value>
+  </data>
+  <data name="STR_MENUITEM_DELETE" xml:space="preserve">
+    <value>Hapus</value>
+  </data>
+  <data name="STR_MENUITEM_BringToFront" xml:space="preserve">
+    <value>Membawa ke depan</value>
+  </data>
+  <data name="STR_MENUITEM_SendToBack" xml:space="preserve">
+    <value>Kirim kembali</value>
+  </data>
+  <data name="STR_UML_CLASS_DIAGRAM_TT" xml:space="preserve">
+    <value>UML Diagram kelas</value>
+  </data>
+  <data name="STR_CMD_Deployment" xml:space="preserve">
+    <value>Penggunaan</value>
+  </data>
+  <data name="STR_CMD_Deployment_description" xml:space="preserve">
+    <value>Membuat penggunaan elemen baru</value>
+  </data>
+  <data name="STR_CMD_Delegate" xml:space="preserve">
+    <value>Delegasi</value>
+  </data>
+  <data name="STR_CMD_Delegate_description" xml:space="preserve">
+    <value>Membuat elemen delegasi baru</value>
+  </data>
+  <data name="STR_CmdName_Copy" xml:space="preserve">
+    <value>Salinan</value>
+  </data>
+  <data name="STR_CmdName_Copy_TT" xml:space="preserve">
+    <value>Menyalin item yang dipilih</value>
+  </data>
+  <data name="STR_CmdName_Cut" xml:space="preserve">
+    <value>Memotong</value>
+  </data>
+  <data name="STR_CmdName_Cut_TT" xml:space="preserve">
+    <value>Memotong item yang dipilih</value>
+  </data>
+  <data name="STR_CmdName_Delete" xml:space="preserve">
+    <value>Hapus</value>
+  </data>
+  <data name="STR_CmdName_DeleteLine" xml:space="preserve">
+    <value>Menghapus baris</value>
+  </data>
+  <data name="STR_CmdName_DeleteLine_TT" xml:space="preserve">
+    <value>Menghapus baris dari teks</value>
+  </data>
+  <data name="STR_CmdName_Delete_TT" xml:space="preserve">
+    <value>Hapus item yang dipilih</value>
+  </data>
+  <data name="STR_CmdName_Paste" xml:space="preserve">
+    <value>Pasta</value>
+  </data>
+  <data name="STR_CmdName_Paste_TT" xml:space="preserve">
+    <value>Pasta item dari jendela clipboard</value>
+  </data>
+  <data name="STR_CmdName_Redo" xml:space="preserve">
+    <value>Mengulang</value>
+  </data>
+  <data name="STR_CmdName_Redo_TT" xml:space="preserve">
+    <value>Mengulang terakhir undo</value>
+  </data>
+  <data name="STR_CmdName_SelectAll" xml:space="preserve">
+    <value>Pilih Semua</value>
+  </data>
+  <data name="STR_CmdName_SelectAll_TT" xml:space="preserve">
+    <value>Pilih Semua item</value>
+  </data>
+  <data name="STR_CmdName_Undo" xml:space="preserve">
+    <value>Membatalkan</value>
+  </data>
+  <data name="STR_CmdName_Undo_TT" xml:space="preserve">
+    <value>Undo suntingan terakhir</value>
+  </data>
+  <data name="STR_Cmd_CollapseTextFoldings" xml:space="preserve">
+    <value>Runtuhnya teks foldings</value>
+  </data>
+  <data name="STR_Cmd_ConvertLeadingSpaces" xml:space="preserve">
+    <value>Mengkonversi menuju ruang tab</value>
+  </data>
+  <data name="STR_Cmd_ConvertLeadingTabsToSpaces" xml:space="preserve">
+    <value>Mengkonversi tab menuju ruang</value>
+  </data>
+  <data name="STR_CMD_ConvertSpacesToTabs" xml:space="preserve">
+    <value>Mengkonversi ruang ke tab</value>
+  </data>
+  <data name="STR_CMD_ConvertTabsToSpaces" xml:space="preserve">
+    <value>Mengkonversi tab ke ruang</value>
+  </data>
+  <data name="STR_Cmd_ConvertTextToUpperCase" xml:space="preserve">
+    <value>Mengkonversi teks ke huruf</value>
+  </data>
+  <data name="STR_Cmd_ExpandTextFoldings" xml:space="preserve">
+    <value>Memperluas foldings teks</value>
+  </data>
+  <data name="STR_CMD_RemoveLeadingWhiteSpace" xml:space="preserve">
+    <value>Menghapus terkemuka ruang putih</value>
+  </data>
+  <data name="STR_CMD_RemoveTrailingWhiteSpace" xml:space="preserve">
+    <value>Menghapus Trailing spasi</value>
+  </data>
+  <data name="STR_Cmd__ApplyTextIndentationStrategy" xml:space="preserve">
+    <value>Menerapkan strategi indentasi</value>
+  </data>
+  <data name="STR_Cmd__ConvertTextToLowerCase" xml:space="preserve">
+    <value>Mengkonversi teks ke huruf</value>
+  </data>
+  <data name="STR_Cmd__ConvertTextToTitleCase" xml:space="preserve">
+    <value>Mengkonversi ke kasus judul</value>
+  </data>
+  <data name="STR_Cmd__InvertTextCase" xml:space="preserve">
+    <value>Balikkan kasus</value>
+  </data>
+  <data name="STR_Label_TextCase" xml:space="preserve">
+    <value>Teks kasus</value>
+  </data>
+  <data name="STR_Label_WhiteSpaces" xml:space="preserve">
+    <value>Ruang putih</value>
+  </data>
+</root>

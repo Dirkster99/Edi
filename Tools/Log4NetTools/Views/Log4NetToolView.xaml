@@ -1,0 +1,431 @@
+<UserControl x:Class="Log4NetTools.Views.Log4NetToolView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+
+             xmlns:behav="clr-namespace:Edi.Core.Behaviour;assembly=Edi.Core"
+             xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+             xmlns:converters="clr-namespace:YalvLib.Common.Converters;assembly=YalvLib"
+             xmlns:Properties="clr-namespace:YalvLib.Strings;assembly=YALVLib"
+             xmlns:cult="clr-namespace:YalvLib.ViewModel;assembly=YALVLib"
+
+             xmlns:cmdLabel="clr-namespace:Util.Local;assembly=Util"
+
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="300">
+  <UserControl.Resources>
+    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    <converters:LevelToSolidColorConverter x:Key="LevelToSolidColorConverter" />
+    <converters:StringEmptyToVisibilityConverter x:Key="StringEmptyToVisibilityConverter" />
+    <converters:BoolToOppositeVisibilityConverter x:Key="BoolToOppositeVisibilityConverter" />
+  </UserControl.Resources>
+  <Grid Background="{DynamicResource ToolViewBackground}"
+        behav:OffLineIndicator.IsOnline="{Binding IsOnline}"
+        IsEnabled="{Binding IsOnline}">
+
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <ToolBarTray Grid.Row="0" DataContext="{Binding Log4NetVM}">
+      <ToolBar ToolBarTray.IsLocked="True" behav:HideToolbarOverflowButton.HideGrip="True">
+        <Button Command="{Binding Yalv.CommandRefresh}"
+                Grid.Column="0"
+                ToolTipService.ShowOnDisabled="True"
+                Margin="3"
+                HorizontalAlignment="Left" VerticalAlignment="Center">
+          <Image Width="32" Height="32"
+               Source="{StaticResource Image_Log4NetRefreshView}"/>
+        </Button>
+
+        <Button ToolTip="{x:Static Properties:Resources.Common_Components_MainToolbar_ClearFilters_Tooltip}"
+              Command="{Binding Path=Yalv.LogItems.CommandClearFilters}"
+              Grid.Column="1"
+              ToolTipService.ShowOnDisabled="True"
+              Margin="3"
+              HorizontalAlignment="Left" VerticalAlignment="Center">
+          <Image Width="32" Height="32"
+                 Source="{StaticResource Image_Log4NetClearFilters}" />
+        </Button>
+
+        <ToggleButton DataContext="{Binding Yalv}"
+                      Command="{Binding FilterYalvView}"
+                      IsChecked="{Binding LogItems.IsFiltered, Mode=OneWay}"
+                      Grid.Column="2"
+                      Margin="3"
+                      HorizontalAlignment="Left" VerticalAlignment="Center"
+                      ToolTip="{x:Static cmdLabel:Strings.STR_LOG4NET_FILTER_TOOLTIP}"
+                      ToolTipService.ShowOnDisabled="True"
+                  >
+          <ToggleButton.Style>
+            <Style TargetType="{x:Type ToggleButton}">
+              <Setter Property="Content">
+                <Setter.Value>
+                  <Image Source="{StaticResource Image_Log4NetTextColumnFilterNoApplied}"
+                       Width="32" Height="32" />
+                </Setter.Value>
+              </Setter>
+
+              <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                  <Setter Property="Content">
+                    <Setter.Value>
+                      <Image Source="{StaticResource Image_Log4NetApplyTextColumnFilter}"
+                           Width="32" Height="32" />
+                    </Setter.Value>
+                  </Setter>
+                </Trigger>
+              </Style.Triggers>
+            </Style>
+          </ToggleButton.Style>
+        </ToggleButton>
+      </ToolBar>
+    </ToolBarTray>
+
+    <!-- Begin FilterPanel -->
+    <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch" Grid.Row="1" Margin="3" DataContext="{Binding Log4NetVM}">
+      <Grid.Resources>
+        <!-- Style x:Key="tbCountStyle" TargetType="TextBlock">
+          <Setter Property="Margin" Value="0,3,0,0" />
+          <Setter Property="FontSize" Value="11" />
+          <Setter Property="TextAlignment" Value="Center" />
+          <Setter Property="ToolTip" Value="{x:Static Properties:Resources.MainWindow_SelectionTooltip}" />
+          <Setter Property="VerticalAlignment" Value="Center" />
+        </Style -->
+      </Grid.Resources>
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <!-- ALL -->
+      <RadioButton IsChecked="{Binding Path=Yalv.LogItems.SelectAll}"
+                   VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="0" Margin="3"/>
+      <TextBlock Text="{x:Static cmdLabel:Strings.STR_LOG4NET_FILTER_ALL}" Grid.Column="2" Margin="3" HorizontalAlignment="Right" />
+      <!-- Style="{StaticResource tbRbStyle}"-->
+      <!-- Style="{StaticResource tbCountStyle}" -->
+      <TextBlock Grid.Column="3" Grid.Row="0" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Right">
+          <TextBlock.Text>
+            <MultiBinding StringFormat="{}{0,10}">
+              <Binding Mode="OneWay" Path="Yalv.LogItems.LogView.Count" FallbackValue="0"/>
+            </MultiBinding>
+          </TextBlock.Text>
+      </TextBlock>
+
+      <!-- DEBUG -->
+      <Border Background="{StaticResource DebugLevelColor}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Padding="3" />
+
+      <CheckBox IsChecked="{Binding Path=Yalv.LogItems.ShowLevelDebug}"
+                Name="chkShowDebug"
+                ToolTip="{x:Static cmdLabel:Strings.STR_LOG4NET_FILTER_DEBUG_TT}"
+                Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,3,3,3" />
+
+      <RadioButton IsChecked="{Binding Path=Yalv.LogItems.SelectDebug}"
+                   HorizontalAlignment="Stretch"  Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="3"/>
+      <TextBlock Text="{x:Static cmdLabel:Strings.STR_LOG4NET_FILTER_DEBUG}" Grid.Column="2"  Grid.Row="1" Margin="3" HorizontalAlignment="Right" />
+      <!-- Style="{StaticResource tbRbStyle}" -->
+
+      <!-- Style="{StaticResource tbCountStyle}" -->
+      <TextBlock Grid.Column="3" Grid.Row="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Right">
+          <TextBlock.Text>
+              <MultiBinding StringFormat="{}{0,10}">
+                  <Binding Mode="OneWay" Path="Yalv.LogItems.ItemsDebugCount" FallbackValue="0" />
+              </MultiBinding>
+          </TextBlock.Text>
+      </TextBlock>
+
+      <!-- INFO -->
+      <Border Background="{StaticResource InfoLevelColor}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Padding="3" />
+
+      <CheckBox IsChecked="{Binding Path=Yalv.LogItems.ShowLevelInfo}"
+                  Name="chkShowInfo" ToolTip="{x:Static cmdLabel:Strings.STR_LOG4NET_FILTER_INFO_TT}"
+                  Grid.Column="0" Grid.Row="2"
+                  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,3,3,3"/>
+
+      <RadioButton IsChecked="{Binding Path=Yalv.LogItems.SelectInfo}"
+                   VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2" Margin="3"/>
+
+      <TextBlock Text="{x:Static cmdLabel:Strings.STR_LOG4NET_FILTER_INFO}" Grid.Column="2" Grid.Row="2" Margin="3" HorizontalAlignment="Right" />
+      <!-- Style="{StaticResource tbRbStyle}" -->
+
+      <!-- Style="{StaticResource tbCountStyle}" -->
+      <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="3" Grid.Row="2" Margin="3">
+                  <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0,10}">
+                      <Binding Mode="OneWay" Path="Yalv.LogItems.ItemsInfoCount" FallbackValue="0" />
+                    </MultiBinding>
+                  </TextBlock.Text>
+      </TextBlock>
+
+      <!-- WARN -->
+      <Border Background="{StaticResource WarnLevelColor}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Padding="3" />
+
+      <CheckBox IsChecked="{Binding Path=Yalv.LogItems.ShowLevelWarn}"
+                  Name="chkShowWarn"
+                  ToolTip="{x:Static cmdLabel:Strings.STR_LOG4NET_FILTER_WARN_TT}"
+                  Grid.Column="0" Grid.Row="3"
+                  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" />
+
+      <RadioButton IsChecked="{Binding Path=Yalv.LogItems.SelectWarn}"
+                   VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="3"  Margin="3"/>
+
+      <TextBlock Text="{x:Static cmdLabel:Strings.STR_LOG4NET_FILTER_WARN}" Grid.Column="2" Grid.Row="3" Margin="3" HorizontalAlignment="Right"/>
+      <!-- Style="{StaticResource tbRbStyle}" -->
+
+      <!-- Style="{StaticResource tbCountStyle}" -->
+      <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="3" Grid.Row="3" Margin="3">
+          <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0,10}">
+                  <Binding Mode="OneWay" Path="Yalv.LogItems.ItemsWarnCount" FallbackValue="0" />
+              </MultiBinding>
+          </TextBlock.Text>
+      </TextBlock>
+
+      <!-- ERROR -->
+      <Border Background="{StaticResource ErrorLevelColor}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Padding="3" />
+
+      <CheckBox IsChecked="{Binding Path=Yalv.LogItems.ShowLevelError}"
+                Name="chkShowError"
+                ToolTip="{x:Static cmdLabel:Strings.STR_LOG4NET_FILTER_ERROR_TT}"
+                Grid.Column="0" Grid.Row="4"
+                HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3"/>
+
+      <RadioButton IsChecked="{Binding Path=Yalv.LogItems.SelectError}"
+                     VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="4" Margin="3"/>
+
+      <TextBlock Text="{x:Static cmdLabel:Strings.STR_LOG4NET_FILTER_ERROR}" Grid.Column="2" Grid.Row="4" Margin="3" HorizontalAlignment="Right"/>
+      <!-- Style="{StaticResource tbRbStyle}" -->
+
+      <!-- Style="{StaticResource tbCountStyle}" -->
+      <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="3" Grid.Row="4" Margin="3">
+          <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0,10}">
+                  <Binding Mode="OneWay" Path="Yalv.LogItems.ItemsErrorCount" FallbackValue="0" />
+              </MultiBinding>
+          </TextBlock.Text>
+      </TextBlock>
+
+      <!-- FATAL -->
+      <Border Background="{StaticResource FatalLevelColor}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Padding="3" />
+
+      <CheckBox IsChecked="{Binding Path=Yalv.LogItems.ShowLevelFatal}"
+                  Name="chkShowFatal"
+                  ToolTip="{x:Static cmdLabel:Strings.STR_LOG4NET_FILTER_FATAL_TT}"
+                  Grid.Column="0" Grid.Row="5"
+                  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3"/>
+      <RadioButton IsChecked="{Binding Path=Yalv.LogItems.SelectFatal}"
+                     VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="5" Margin="3"/>
+
+      <TextBlock Text="{x:Static cmdLabel:Strings.STR_LOG4NET_FILTER_FATAL}" Grid.Column="2" Grid.Row="5" Margin="3" HorizontalAlignment="Right"/>
+      <!-- Style="{StaticResource tbRbStyle}" -->
+
+      <!-- Style="{StaticResource tbCountStyle}" -->
+      <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="3" Grid.Row="5" Margin="3">
+          <TextBlock.Text>
+              <MultiBinding StringFormat="{}{0,10}">
+                  <Binding Mode="OneWay" Path="Yalv.LogItems.ItemsFatalCount" FallbackValue="0" />
+              </MultiBinding>
+          </TextBlock.Text>
+      </TextBlock>
+
+      <Label ToolTip="{x:Static cmdLabel:Strings.STR_LOG4NET_FILTERRESULT_TT}"
+             Content="&#931;" FontFamily="Times New Roman"
+             HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Grid.Row="6"/>
+      <!-- Style="{StaticResource tbCountStyle}" -->
+      <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="3" Grid.Row="6" Margin="3">
+          <TextBlock.Text>
+              <MultiBinding StringFormat="{}{0,10}">
+                  <Binding Mode="OneWay" Path="Yalv.LogItems.LogView.Count" FallbackValue="0" />
+              </MultiBinding>
+          </TextBlock.Text>
+      </TextBlock>
+
+    </Grid>
+    <!-- End FilterPanel -->
+
+    <!-- LogItem properties -->
+    <ScrollViewer DataContext="{Binding Log4NetVM.Yalv}"
+                  Grid.Row="2" HorizontalScrollBarVisibility="Auto"
+                  VerticalScrollBarVisibility="Auto" Margin="3">
+      <Grid>
+        <Grid.Resources>
+          <Style x:Key="TextBoxLabelStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{x:Null}" />
+            <Setter Property="Margin" Value="3" />
+            <Setter Property="Template">
+              <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                  <Border Name="Bd" BorderThickness="{TemplateBinding BorderThickness}" 
+                                    BorderBrush="{TemplateBinding BorderBrush}" 
+                                    Background="{TemplateBinding Background}" 
+                                    SnapsToDevicePixels="true">
+                    <ScrollViewer Name="PART_ContentHost" Background="{TemplateBinding Background}" 
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                  </Border>
+                  <ControlTemplate.Triggers>
+                    <Trigger Property="IsEnabled" Value="False">
+                      <Setter Value="Transparent" Property="Background" />
+                      <!-- Setter Value="{StaticResource DisabledForegroundBrush}" Property="Foreground" / -->
+                      <Setter TargetName="PART_ContentHost" Property="Background" Value="Transparent"/>
+                    </Trigger>
+                  </ControlTemplate.Triggers>
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+
+            <!-- http://social.msdn.microsoft.com/Forums/en-US/wpf/thread/63696841-0358-4f7a-abe1-e6062518e3d6 -->
+            <Setter Property="behav:MergeStyleBehaviour.AutoMergeStyle" Value="True"/>
+          </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Column="0"
+               Content="{x:Static Properties:Resources.MainWindow_DetailsBox_ItemId_Text}"
+               VerticalAlignment="Center" HorizontalAlignment="Right"/>
+
+        <Grid HorizontalAlignment="Stretch" Grid.Column="2">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+          </Grid.ColumnDefinitions>
+
+          <TextBox HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                   Text="{Binding Path=LogItems.GoToLogItemId, UpdateSourceTrigger=PropertyChanged}"
+                   ToolTip="{x:Static cmdLabel:Strings.STR_LOG4NET_ENTERLOGID_TT}"
+                   Width="75"
+                   Grid.Column="0" Margin="3" />
+
+          <Label Content="{Binding Path=LogItems.SelectedLogItem.Level, Mode=OneWay}"
+                 ToolTip="{x:Static Properties:Resources.MainWindow_DetailsBox_Level_Text}"
+                 Grid.Column="1" Margin="3"
+                 VerticalAlignment="Center" HorizontalAlignment="Left" />
+
+          <!-- BorderBrush="{StaticResource BorderColor}" -->
+          <Border Height="11" Grid.Column="2"
+                  Margin="2,0,0,0"
+                  Width="11"
+                  Background="{Binding Path=LogItems.SelectedLogItem.LevelIndex, Mode=OneWay, Converter={StaticResource LevelToSolidColorConverter}}"
+                  BorderThickness="1"
+                  CornerRadius="6"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Left"
+                  Visibility="{Binding Path=LogItems.SelectedLogItem.Level, Mode=OneWay, Converter={StaticResource StringEmptyToVisibilityConverter}, FallbackValue=Collapsed}" />
+        </Grid>
+
+        <Label Grid.Column="0" Grid.Row="1"
+               Content="{x:Static Properties:Resources.MainWindow_DetailsBox_Logger_Text}"
+               VerticalAlignment="Center" HorizontalAlignment="Right"/>
+
+        <TextBox Text="{Binding Path=LogItems.SelectedLogItem.Logger, Mode=OneWay}"
+                 Grid.Column="2" Grid.Row="1" Style="{StaticResource TextBoxLabelStyle}"/>
+
+        <Label Content="{x:Static Properties:Resources.MainWindow_DetailsBox_TimeStamp_Text}"
+               VerticalAlignment="Center" HorizontalAlignment="Right"
+               Grid.Column="0" Grid.Row="2" />
+        <TextBox  Style="{StaticResource TextBoxLabelStyle}"
+                  Grid.Column="2" Grid.Row="2">
+          <TextBox.Text>
+            <Binding Mode="OneWay"
+                     StringFormat="{x:Static Properties:Resources.MainWindow_FullDateTimeFormatWithMilliseconds}"
+                     ConverterCulture="{x:Static cult:ResolveCultures.ResolvedCulture}"
+                     Path="LogItems.SelectedLogItem.TimeStamp" />
+          </TextBox.Text>
+        </TextBox>
+
+
+        <Label Grid.Column="0" Grid.Row="3"
+               Content="{x:Static cmdLabel:Strings.STR_LOG4NET_DELTATIME}"
+               ToolTip="{x:Static Properties:Resources.MainWindow_DetailsBox_TimeDiff_Text}"
+               VerticalAlignment="Center" HorizontalAlignment="Right"/>
+
+        <TextBox Text="{Binding Path=LogItems.SelectedLogItem.Delta, Mode=OneWay}"
+                 ToolTip="{x:Static Properties:Resources.MainWindow_DetailsBox_TimeDiff_Text}"
+                 Style="{StaticResource TextBoxLabelStyle}"
+                 Grid.Column="2" Grid.Row="3" />
+
+        <Label Grid.Column="0" Grid.Row="4"
+      	       Content="{x:Static Properties:Resources.MainWindow_DetailsBox_MachineName_Text}"
+      	       VerticalAlignment="Center"
+      	       HorizontalAlignment="Right"/>
+
+        <TextBox Text="{Binding Path=LogItems.SelectedLogItem.MachineName, Mode=OneWay}"
+      	         Style="{StaticResource TextBoxLabelStyle}"
+      	         Grid.Column="2" Grid.Row="4" />
+
+
+        <Label Grid.Column="0" Grid.Row="5"
+      	       Content="{x:Static Properties:Resources.MainWindow_DetailsBox_HostName_Text}"
+      	       VerticalAlignment="Center" HorizontalAlignment="Right"/>
+
+        <TextBox Text="{Binding Path=LogItems.SelectedLogItem.HostName, Mode=OneWay}"
+      	         Style="{StaticResource TextBoxLabelStyle}"
+      	         Grid.Column="2" Grid.Row="5" />
+
+
+        <Label Grid.Column="0" Grid.Row="6"
+      	       Content="{x:Static Properties:Resources.MainWindow_DetailsBox_UserName_Text}"
+      	       VerticalAlignment="Center" HorizontalAlignment="Right"/>
+
+        <TextBox Text="{Binding Path=LogItems.SelectedLogItem.UserName, Mode=OneWay}"
+      	         Style="{StaticResource TextBoxLabelStyle}"
+      	         Grid.Column="2" Grid.Row="6" />
+
+        <Label Grid.Column="0" Grid.Row="7"
+      	       Content="{x:Static Properties:Resources.MainWindow_DetailsBox_Application_Text}"
+      	       VerticalAlignment="Center" HorizontalAlignment="Right"/>
+
+        <TextBox Text="{Binding Path=LogItems.SelectedLogItem.App, Mode=OneWay}"
+      	         Style="{StaticResource TextBoxLabelStyle}"
+      	         Grid.Column="2" Grid.Row="7" />
+
+        <Label Grid.Column="0" Grid.Row="8"
+      	       Content="{x:Static Properties:Resources.MainWindow_DetailsBox_Thread_Text}"
+      	       VerticalAlignment="Center" HorizontalAlignment="Right"/>
+
+        <TextBox Text="{Binding Path=LogItems.SelectedLogItem.Thread, Mode=OneWay}"
+      	         Style="{StaticResource TextBoxLabelStyle}"
+      	         Grid.Column="2" Grid.Row="8" />
+      </Grid>
+    </ScrollViewer>
+
+  </Grid>
+</UserControl>
