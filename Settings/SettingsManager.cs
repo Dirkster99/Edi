@@ -205,12 +205,11 @@
 
 					serializerObj.Serialize(xw, optionsModel);
 
-					xw.Close(); // Cleanup
-
 					optionsModel.SetDirtyFlag(false);
 
-					return true;
+
 				}
+					return true;
 			}
 			catch
 			{

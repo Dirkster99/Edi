@@ -165,7 +165,7 @@
       // make newly added association view hit test visible (enables user interaction)
       ((CanvasView)this.mViewModel.v_CanvasView).PresenterFromElement(this.mAssociation).IsHitTestVisible = true;
 
-      this.cleanUp();                                                    // indicate end of this mouse handler command
+      this.CleanUp();                                                    // indicate end of this mouse handler command
       this.mViewModel.vm_CanvasViewModel.FinishCanvasViewMouseHandler();
     }
 
@@ -179,7 +179,7 @@
       if (this.mHasBeenAdded == true)
         this.mAssociation.Remove();
 
-      this.cleanUp();
+      this.CleanUp();
     }
     #endregion ICanvasViewMouseHandler
 
@@ -203,7 +203,7 @@
     /// Reset all variables to indicate that this operation is finished
     /// (successfully or cancelled).
     /// </summary>
-    private void cleanUp()
+    private void CleanUp()
     {
       this.mViewModel.v_CanvasView.ForceCursor = true;
       this.mViewModel.v_CanvasView.Cursor = null;

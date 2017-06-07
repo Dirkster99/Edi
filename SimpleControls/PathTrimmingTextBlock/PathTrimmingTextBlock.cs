@@ -62,9 +62,10 @@ namespace SimpleControls.PathTrimmingTextBlock
     /// <param name="e"></param>
     private void PathTrimmingTextBlock_Loaded(object sender, RoutedEventArgs e)
     {
-
-            if (this.Parent is FrameworkElement p)
+            FrameworkElement p = null;
+            if (this.Parent is FrameworkElement)
             {
+                p = (FrameworkElement) this.Parent;
                 this.mContainer = p;
             }
             else

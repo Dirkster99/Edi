@@ -82,7 +82,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		
 		public void Draw(TextView textView, DrawingContext drawingContext)
 		{
-			if(!this.textView.Options.HighlightCurrentLine)
+			if(this.textView.Options != null && !this.textView.Options.HighlightCurrentLine)
 				return;
 			
 			BackgroundGeometryBuilder builder = new BackgroundGeometryBuilder();

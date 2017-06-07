@@ -135,12 +135,11 @@
       if ((value is UmlTypes) == false)
         return null;
 
-      string str;
-      
-      if (this.mMapUmlTypeToString.TryGetValue((UmlTypes)value, out str) == false)
-        this.mMapUmlTypeToString.TryGetValue(UmlTypes.Undefined, out str);
 
-      return str;
+            if (this.mMapUmlTypeToString.TryGetValue((UmlTypes)value, out string str) == false)
+                this.mMapUmlTypeToString.TryGetValue(UmlTypes.Undefined, out str);
+
+            return str;
     }
 
     /// <summary>
@@ -160,12 +159,11 @@
       if ((value is string) == false)
         return null;
 
-      UmlTypes umlTypes;
-      
-      if (this.mMapStringToUmlType.TryGetValue(value as string, out umlTypes) == false)
-        return UmlTypes.Undefined;
 
-      return umlTypes;
+            if (this.mMapStringToUmlType.TryGetValue(value as string, out UmlTypes umlTypes) == false)
+                return UmlTypes.Undefined;
+
+            return umlTypes;
     }
 
     public override PageViewModelBase ReadDocument(string xml,

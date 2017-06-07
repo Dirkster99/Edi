@@ -74,8 +74,9 @@ namespace ICSharpCode.AvalonEdit.Utils
             }
             else
             {
-                if (input is string text)
+                if (input is string )
                 {
+                    var text = input.ToString();
                     // if a string is IEnumerable<T>, then T must be char
                     ((Rope<char>)(object)this).root = CharRope.InitFromString(text);
                 }
@@ -602,9 +603,11 @@ namespace ICSharpCode.AvalonEdit.Utils
 		/// </remarks>
 		public override string ToString()
 		{
-            if (this is Rope<char> charRope)
+            if (this is Rope<char> )
             {
-                return charRope.ToString(0, this.Length);
+                //Rope<char> charRope; 
+                //return charRope.ToString(0, this.Length);
+                return this.ToString();
             }
             else
             {

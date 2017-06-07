@@ -45,7 +45,7 @@
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <IntermediateOutputPath>C:\Users\Rasyid\AppData\Local\Temp\vs73F5.tmp\x86\Debug\</IntermediateOutputPath>
   </PropertyGroup>
