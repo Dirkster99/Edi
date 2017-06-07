@@ -123,18 +123,17 @@
     /// <param name="e"></param>
     private static void OnChangeEndPoint(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-      RubberbandAdorner rba = d as RubberbandAdorner;
 
-      if (rba != null && e.NewValue != null)
-      {
-        if (e.NewValue is Point?)
-        {
-          Point? db = e.NewValue as Point?;
+            if (d is RubberbandAdorner rba && e.NewValue != null)
+            {
+                if (e.NewValue is Point?)
+                {
+                    Point? db = e.NewValue as Point?;
 
-          rba.UpdateOnMouseMove(db);
+                    rba.UpdateOnMouseMove(db);
+                }
+            }
         }
-      }
-    }
 
     /// <summary>
     /// Method updates the EndPoint dependency property.

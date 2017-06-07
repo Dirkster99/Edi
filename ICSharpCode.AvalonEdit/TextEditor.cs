@@ -410,19 +410,19 @@ namespace ICSharpCode.AvalonEdit
 		
 		static void OnIsReadOnlyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-			TextEditor editor = d as TextEditor;
-			if (editor != null) {
-				if ((bool)e.NewValue)
-					editor.TextArea.ReadOnlySectionProvider = ReadOnlySectionDocument.Instance;
-				else
-					editor.TextArea.ReadOnlySectionProvider = NoReadOnlySections.Instance;
-				
-				TextEditorAutomationPeer peer = TextEditorAutomationPeer.FromElement(editor) as TextEditorAutomationPeer;
-				if (peer != null) {
-					peer.RaiseIsReadOnlyChanged((bool)e.OldValue, (bool)e.NewValue);
-				}
-			}
-		}
+            if (d is TextEditor editor)
+            {
+                if ((bool)e.NewValue)
+                    editor.TextArea.ReadOnlySectionProvider = ReadOnlySectionDocument.Instance;
+                else
+                    editor.TextArea.ReadOnlySectionProvider = NoReadOnlySections.Instance;
+
+                if (TextEditorAutomationPeer.FromElement(editor) is TextEditorAutomationPeer peer)
+                {
+                    peer.RaiseIsReadOnlyChanged((bool)e.OldValue, (bool)e.NewValue);
+                }
+            }
+        }
 		#endregion
 		
 		#region IsModified
@@ -443,20 +443,24 @@ namespace ICSharpCode.AvalonEdit
 		
 		static void OnIsModifiedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-			TextEditor editor = d as TextEditor;
-			if (editor != null) {
-				TextDocument document = editor.Document;
-				if (document != null) {
-					UndoStack undoStack = document.UndoStack;
-					if ((bool)e.NewValue) {
-						if (undoStack.IsOriginalFile)
-							undoStack.DiscardOriginalFileMarker();
-					} else {
-						undoStack.MarkAsOriginalFile();
-					}
-				}
-			}
-		}
+            if (d is TextEditor editor)
+            {
+                TextDocument document = editor.Document;
+                if (document != null)
+                {
+                    UndoStack undoStack = document.UndoStack;
+                    if ((bool)e.NewValue)
+                    {
+                        if (undoStack.IsOriginalFile)
+                            undoStack.DiscardOriginalFileMarker();
+                    }
+                    else
+                    {
+                        undoStack.MarkAsOriginalFile();
+                    }
+                }
+            }
+        }
 		
 		bool HandleIsOriginalChanged(PropertyChangedEventArgs e)
 		{

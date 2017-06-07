@@ -97,14 +97,13 @@
 
       if (dragStartPoint != null)
       {
-        ToolBoxData d = ((FrameworkElement)sender).DataContext as ToolBoxData;
 
-        if (d != null)
-        {
-          if (d.CreateShapeCommand.CreateShape.CanExecute(null))
-            d.CreateShapeCommand.CreateShape.Execute(null);
-        }
-      }
+                if (((FrameworkElement)sender).DataContext is ToolBoxData d)
+                {
+                    if (d.CreateShapeCommand.CreateShape.CanExecute(null))
+                        d.CreateShapeCommand.CreateShape.Execute(null);
+                }
+            }
     }
     #endregion
 
@@ -120,18 +119,17 @@
       if (dragStartPoint.HasValue)
       {
         DragObject dataObject = new DragObject();
-        
-        ToolBoxData d = ((FrameworkElement)sender).DataContext as ToolBoxData;
 
-        if (d != null)
-        {
-          dataObject.ObjectInstance = (object)d.CreateShapeCommand;
 
-          DragDrop.DoDragDrop((DependencyObject)sender, dataObject, DragDropEffects.Copy);
+                if (((FrameworkElement)sender).DataContext is ToolBoxData d)
+                {
+                    dataObject.ObjectInstance = (object)d.CreateShapeCommand;
 
-          e.Handled = true;
-        }
-      }
+                    DragDrop.DoDragDrop((DependencyObject)sender, dataObject, DragDropEffects.Copy);
+
+                    e.Handled = true;
+                }
+            }
     }
 
     private static void Fe_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

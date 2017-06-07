@@ -60,17 +60,17 @@ namespace EdiApp.ViewModels
 					else
 						i = (i >= l.Count - 1 ? 0 : i + 1);
 
-					//// i = (i + (previous ? l.Count - 1 : +1)) % l.Count;
+                    //// i = (i + (previous ? l.Count - 1 : +1)) % l.Count;
 
-					var fTmp = l[i] as EdiViewModel; // Search text in document
-					if (fTmp != null)
-					{
-						Regex r;
-						m = this.FindNextMatchInText(0, 0, false, fTmp.Text, ref f, out r);
+                    // Search text in document
+                    if (l[i] is EdiViewModel fTmp)
+                    {
+                        Regex r;
+                        m = this.FindNextMatchInText(0, 0, false, fTmp.Text, ref f, out r);
 
-						textSearchSuccess = m.Success;
-					}
-				}
+                        textSearchSuccess = m.Success;
+                    }
+                }
 				while (i != idxStart && textSearchSuccess != true);
 
 				// Found a match so activate the corresponding document and select the text with scroll into view
@@ -230,100 +230,98 @@ namespace EdiApp.ViewModels
 
 		private void ShowGotoLineDialog()
 		{
-			var f = this.ActiveDocument as EdiViewModel;
 
-			if (f != null)
-			{
-				Window dlg = null;
-				EdiDialogs.GotoLine.GotoLineViewModel dlgVM = null;
+            if (this.ActiveDocument is EdiViewModel f)
+            {
+                Window dlg = null;
+                EdiDialogs.GotoLine.GotoLineViewModel dlgVM = null;
 
-				try
-				{
-					int iCurrLine = ApplicationViewModel.GetCurrentEditorLine(f);
+                try
+                {
+                    int iCurrLine = ApplicationViewModel.GetCurrentEditorLine(f);
 
-					dlgVM = new EdiDialogs.GotoLine.GotoLineViewModel(1, f.Document.LineCount, iCurrLine);
-					dlg = ViewSelector.GetDialogView((object)dlgVM, Application.Current.MainWindow);
+                    dlgVM = new EdiDialogs.GotoLine.GotoLineViewModel(1, f.Document.LineCount, iCurrLine);
+                    dlg = ViewSelector.GetDialogView((object)dlgVM, Application.Current.MainWindow);
 
-					dlg.Closing += dlgVM.OnClosing;
+                    dlg.Closing += dlgVM.OnClosing;
 
-					dlg.ShowDialog();
+                    dlg.ShowDialog();
 
-					// Copy input if user OK'ed it. This could also be done by a method, equality operator, or copy constructor
-					if (dlgVM.WindowCloseResult == true)
-					{
-						DocumentLine line = f.Document.GetLineByNumber(dlgVM.LineNumber);
+                    // Copy input if user OK'ed it. This could also be done by a method, equality operator, or copy constructor
+                    if (dlgVM.WindowCloseResult == true)
+                    {
+                        DocumentLine line = f.Document.GetLineByNumber(dlgVM.LineNumber);
 
-						f.TxtControl.SelectText(line.Offset, 0);      // Select text with length 0 and scroll to where
-						f.TxtControl.ScrollToLine(dlgVM.LineNumber); // we are supposed to be at
-					}
-				}
-				catch (Exception exc)
-				{
-					MsgBox.Msg.Show(exc, Util.Local.Strings.STR_MSG_FIND_UNEXPECTED_ERROR,
-													MsgBoxButtons.OK, MsgBoxImage.Error);
-				}
-				finally
-				{
-					if (dlg != null)
-					{
-						dlg.Closing -= dlgVM.OnClosing;
-						dlg.Close();
-					}
-				}
-			}
-		}
+                        f.TxtControl.SelectText(line.Offset, 0);      // Select text with length 0 and scroll to where
+                        f.TxtControl.ScrollToLine(dlgVM.LineNumber); // we are supposed to be at
+                    }
+                }
+                catch (Exception exc)
+                {
+                    MsgBox.Msg.Show(exc, Util.Local.Strings.STR_MSG_FIND_UNEXPECTED_ERROR,
+                                                    MsgBoxButtons.OK, MsgBoxImage.Error);
+                }
+                finally
+                {
+                    if (dlg != null)
+                    {
+                        dlg.Closing -= dlgVM.OnClosing;
+                        dlg.Close();
+                    }
+                }
+            }
+        }
 
 		private void ShowFindReplaceDialog(bool ShowFind = true)
 		{
-			var f = this.ActiveDocument as EdiViewModel;
 
-			if (f != null)
-			{
-				Window dlg = null;
+            if (this.ActiveDocument is EdiViewModel f)
+            {
+                Window dlg = null;
 
-				try
-				{
-					if (this.FindReplaceVM == null)
-					{
-						this.FindReplaceVM = new EdiDialogs.FindReplace.ViewModel.FindReplaceViewModel(this.mSettingsManager);
-					}
+                try
+                {
+                    if (this.FindReplaceVM == null)
+                    {
+                        this.FindReplaceVM = new EdiDialogs.FindReplace.ViewModel.FindReplaceViewModel(this.mSettingsManager);
+                    }
 
-					this.FindReplaceVM.FindNext = this.FindNext;
+                    this.FindReplaceVM.FindNext = this.FindNext;
 
-					// determine whether Find or Find/Replace is to be executed
-					this.FindReplaceVM.ShowAsFind = ShowFind;
+                    // determine whether Find or Find/Replace is to be executed
+                    this.FindReplaceVM.ShowAsFind = ShowFind;
 
-					if (f.TxtControl != null)      // Search by default for currently selected text (if any)
-					{
-						string textToFind;
-						f.TxtControl.GetSelectedText(out textToFind);
+                    if (f.TxtControl != null)      // Search by default for currently selected text (if any)
+                    {
+                        string textToFind;
+                        f.TxtControl.GetSelectedText(out textToFind);
 
-						if (textToFind.Length > 0)
-							this.FindReplaceVM.TextToFind = textToFind;
-					}
+                        if (textToFind.Length > 0)
+                            this.FindReplaceVM.TextToFind = textToFind;
+                    }
 
-					this.FindReplaceVM.CurrentEditor = f;
+                    this.FindReplaceVM.CurrentEditor = f;
 
-					dlg = ViewSelector.GetDialogView((object)this.FindReplaceVM, Application.Current.MainWindow);
+                    dlg = ViewSelector.GetDialogView((object)this.FindReplaceVM, Application.Current.MainWindow);
 
-					dlg.Closing += this.FindReplaceVM.OnClosing;
+                    dlg.Closing += this.FindReplaceVM.OnClosing;
 
-					dlg.ShowDialog();
-				}
-				catch (Exception exc)
-				{
-					MsgBox.Msg.Show(exc, Util.Local.Strings.STR_MSG_FIND_UNEXPECTED_ERROR,
-													MsgBoxButtons.OK, MsgBoxImage.Error);
-				}
-				finally
-				{
-					if (dlg != null)
-					{
-						dlg.Closing -= this.FindReplaceVM.OnClosing;
-						dlg.Close();
-					}
-				}
-			}
-		}
+                    dlg.ShowDialog();
+                }
+                catch (Exception exc)
+                {
+                    MsgBox.Msg.Show(exc, Util.Local.Strings.STR_MSG_FIND_UNEXPECTED_ERROR,
+                                                    MsgBoxButtons.OK, MsgBoxImage.Error);
+                }
+                finally
+                {
+                    if (dlg != null)
+                    {
+                        dlg.Closing -= this.FindReplaceVM.OnClosing;
+                        dlg.Close();
+                    }
+                }
+            }
+        }
 	}
 }

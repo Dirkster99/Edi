@@ -39,13 +39,12 @@
 			FrameworkElement frameworkElement = d as FrameworkElement;	  // Remove the handler if it exist to avoid memory leaks
 			frameworkElement.Loaded -= frameworkElement_Loaded;
 
-			var command = e.NewValue as ICommand;
-			if (command != null)
-			{
-				// the property is attached so we attach the Loaded event handler
-				frameworkElement.Loaded += frameworkElement_Loaded;
-			}
-		}
+            if (e.NewValue is ICommand command)
+            {
+                // the property is attached so we attach the Loaded event handler
+                frameworkElement.Loaded += frameworkElement_Loaded;
+            }
+        }
 
 		/// <summary>
 		/// Executes a bound command when the subscribed event occurs.

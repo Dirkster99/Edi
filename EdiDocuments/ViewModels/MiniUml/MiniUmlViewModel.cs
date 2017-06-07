@@ -95,7 +95,7 @@ namespace EdiDocuments.ViewModels.MiniUml
 		#endregion MiniUML Document ViewModel
 
 		#region MiniUML RibbonViewModel
-		public MiniUML.Model.ViewModels.Document.RibbonViewModel vm_RibbonViewModel
+		public RibbonViewModel vm_RibbonViewModel
 		{
 			get
 			{

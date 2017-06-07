@@ -52,11 +52,10 @@ namespace Edi.Core.Utillities
 
 			DependencyObject foundChild = null;
 
-			FrameworkElement frameworkElement = parent as FrameworkElement;
-			if (frameworkElement != null)
-				frameworkElement.ApplyTemplate();
+            if (parent is FrameworkElement frameworkElement)
+                frameworkElement.ApplyTemplate();
 
-			int childrenCount = VisualTreeHelper.GetChildrenCount(parent);
+            int childrenCount = VisualTreeHelper.GetChildrenCount(parent);
 			for (int i = 0; i < childrenCount; i++)
 			{
 				var child = VisualTreeHelper.GetChild(parent, i);

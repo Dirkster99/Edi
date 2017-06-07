@@ -71,14 +71,13 @@
 				if (toolwindowviewmodel == null)
 					return;
 
-				var registerTW = toolwindowviewmodel as IRegisterableToolWindow;
 
-				if (registerTW != null)
-					registerTW.SetToolWindowVisibility(this, !toolwindowviewmodel.IsVisible);
-				else
-					toolwindowviewmodel.SetToolWindowVisibility(!toolwindowviewmodel.IsVisible);
+                if (toolwindowviewmodel is IRegisterableToolWindow registerTW)
+                    registerTW.SetToolWindowVisibility(this, !toolwindowviewmodel.IsVisible);
+                else
+                    toolwindowviewmodel.SetToolWindowVisibility(!toolwindowviewmodel.IsVisible);
 
-				e.Handled = true;
+                e.Handled = true;
 			}));
 
 			// Standard File New command binding via ApplicationCommands enumeration
@@ -561,11 +560,10 @@
 			{
 				try
 				{
-					EdiViewModel f = this.ActiveDocument as EdiViewModel;
 
-					if (f != null)
-						f.DisableHighlighting();
-				}
+                    if (this.ActiveDocument is EdiViewModel f)
+                        f.DisableHighlighting();
+                }
 				catch (Exception exp)
 				{
 					logger.Error(exp.Message, exp);
@@ -577,18 +575,17 @@
 			},
 			(s, e) =>
 			{
-				EdiViewModel f = this.ActiveDocument as EdiViewModel;
 
-				if (f != null)
-				{
-					if (f.HighlightingDefinition != null)
-					{
-						e.CanExecute = true;
-						return;
-					}
-				}
+                if (this.ActiveDocument is EdiViewModel f)
+                {
+                    if (f.HighlightingDefinition != null)
+                    {
+                        e.CanExecute = true;
+                        return;
+                    }
+                }
 
-				e.CanExecute = false;
+                e.CanExecute = false;
 			}));
 
 			#region GotoLine FindReplace
@@ -639,20 +636,19 @@
 				{
 					e.Handled = true;
 
-					EdiViewModel f = this.ActiveDocument as EdiViewModel;
 
-					if (f != null)
-					{
-						if (this.FindReplaceVM != null)
-						{
-							this.FindReplaceVM.FindNext(this.FindReplaceVM, true);
-						}
-						else
-						{
-							this.ShowFindReplaceDialog();
-						}
-					}
-				}
+                    if (this.ActiveDocument is EdiViewModel f)
+                    {
+                        if (this.FindReplaceVM != null)
+                        {
+                            this.FindReplaceVM.FindNext(this.FindReplaceVM, true);
+                        }
+                        else
+                        {
+                            this.ShowFindReplaceDialog();
+                        }
+                    }
+                }
 				catch (Exception exp)
 				{
 					logger.Error(exp.Message, exp);
@@ -671,20 +667,19 @@
 				{
 					e.Handled = true;
 
-					EdiViewModel f = this.ActiveDocument as EdiViewModel;
 
-					if (f != null)
-					{
-						if (this.FindReplaceVM != null)
-						{
-							this.FindReplaceVM.FindNext(this.FindReplaceVM, false);
-						}
-						else
-						{
-							this.ShowFindReplaceDialog();
-						}
-					}
-				}
+                    if (this.ActiveDocument is EdiViewModel f)
+                    {
+                        if (this.FindReplaceVM != null)
+                        {
+                            this.FindReplaceVM.FindNext(this.FindReplaceVM, false);
+                        }
+                        else
+                        {
+                            this.ShowFindReplaceDialog();
+                        }
+                    }
+                }
 				catch (Exception exp)
 				{
 					logger.Error(exp.Message, exp);
@@ -783,12 +778,11 @@
 
 		private bool CanExecuteIfActiveDocumentIsEdiViewModel()
 		{
-			EdiViewModel f = this.ActiveDocument as EdiViewModel;
 
-			if (f != null)
-				return true;
+            if (this.ActiveDocument is EdiViewModel f)
+                return true;
 
-			return false;
+            return false;
 		}
 		#endregion EditorCommands
 	}

@@ -34,12 +34,11 @@
 
     private static void IsMouseOverListViewItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-      PinableListViewItem item = d as PinableListViewItem;
 
-      if (item != null)
-      {
-        item.IsMouseOverListViewItem = (bool)e.NewValue;
-      }
-    }
+            if (d is PinableListViewItem item)
+            {
+                item.IsMouseOverListViewItem = (bool)e.NewValue;
+            }
+        }
   }
 }

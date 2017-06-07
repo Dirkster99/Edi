@@ -66,22 +66,26 @@ namespace ICSharpCode.AvalonEdit.Utils
 		{
 			if (input == null)
 				throw new ArgumentNullException("input");
-			Rope<T> inputRope = input as Rope<T>;
-			if (inputRope != null) {
-				// clone ropes instead of copying them
-				inputRope.root.Publish();
-				this.root = inputRope.root;
-			} else {
-				string text = input as string;
-				if (text != null) {
-					// if a string is IEnumerable<T>, then T must be char
-					((Rope<char>)(object)this).root = CharRope.InitFromString(text);
-				} else {
-					T[] arr = ToArray(input);
-					this.root = RopeNode<T>.CreateFromArray(arr, 0, arr.Length);
-				}
-			}
-			this.root.CheckInvariants();
+            if (input is Rope<T> inputRope)
+            {
+                // clone ropes instead of copying them
+                inputRope.root.Publish();
+                this.root = inputRope.root;
+            }
+            else
+            {
+                if (input is string text)
+                {
+                    // if a string is IEnumerable<T>, then T must be char
+                    ((Rope<char>)(object)this).root = CharRope.InitFromString(text);
+                }
+                else
+                {
+                    T[] arr = ToArray(input);
+                    this.root = RopeNode<T>.CreateFromArray(arr, 0, arr.Length);
+                }
+            }
+            this.root.CheckInvariants();
 		}
 		
 		/// <summary>
@@ -218,14 +222,16 @@ namespace ICSharpCode.AvalonEdit.Utils
 		{
 			if (newElements == null)
 				throw new ArgumentNullException("newElements");
-			Rope<T> newElementsRope = newElements as Rope<T>;
-			if (newElementsRope != null) {
-				InsertRange(index, newElementsRope);
-			} else {
-				T[] arr = ToArray(newElements);
-				InsertRange(index, arr, 0, arr.Length);
-			}
-		}
+            if (newElements is Rope<T> newElementsRope)
+            {
+                InsertRange(index, newElementsRope);
+            }
+            else
+            {
+                T[] arr = ToArray(newElements);
+                InsertRange(index, arr, 0, arr.Length);
+            }
+        }
 		
 		/// <summary>
 		/// Inserts new elements into this rope.
@@ -596,22 +602,25 @@ namespace ICSharpCode.AvalonEdit.Utils
 		/// </remarks>
 		public override string ToString()
 		{
-			Rope<char> charRope = this as Rope<char>;
-			if (charRope != null) {
-				return charRope.ToString(0, this.Length);
-			} else {
-				StringBuilder b = new StringBuilder();
-				foreach (T element in this) {
-					if (b.Length == 0)
-						b.Append('{');
-					else
-						b.Append(", ");
-					b.Append(element.ToString());
-				}
-				b.Append('}');
-				return b.ToString();
-			}
-		}
+            if (this is Rope<char> charRope)
+            {
+                return charRope.ToString(0, this.Length);
+            }
+            else
+            {
+                StringBuilder b = new StringBuilder();
+                foreach (T element in this)
+                {
+                    if (b.Length == 0)
+                        b.Append('{');
+                    else
+                        b.Append(", ");
+                    b.Append(element.ToString());
+                }
+                b.Append('}');
+                return b.ToString();
+            }
+        }
 		
 		internal string GetTreeAsString()
 		{

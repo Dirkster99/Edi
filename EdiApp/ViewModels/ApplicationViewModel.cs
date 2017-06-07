@@ -292,14 +292,13 @@ namespace EdiApp.ViewModels
 		{
 			get
 			{
-				MiniUmlViewModel vm = this.mActiveDocument as MiniUmlViewModel;
 
-				if (vm != null)
-				{
-					return vm.DocumentMiniUML as MiniUML.Model.ViewModels.Document.AbstractDocumentViewModel;
-				}
+                if (this.mActiveDocument is MiniUmlViewModel vm)
+                {
+                    return vm.DocumentMiniUML as MiniUML.Model.ViewModels.Document.AbstractDocumentViewModel;
+                }
 
-				return null;
+                return null;
 			}
 		}
 		#endregion
@@ -516,19 +515,18 @@ namespace EdiApp.ViewModels
 			fileViewModel.ProcessingResultEvent += this.vm_ProcessingResultEvent;
 			this.mFiles.Add(fileViewModel);
 
-			// reset viewmodel options in accordance to current program settings
-			var ediVM = fileViewModel as IDocumentEdi;
+            // reset viewmodel options in accordance to current program settings
 
-			if (ediVM != null)
-			{
-				this.SetActiveDocumentOnNewFileOrOpenFile(ediVM);
-			}
-			else
-			{
-				this.SetActiveFileBaseDocument(fileViewModel);
-			}
+            if (fileViewModel is IDocumentEdi ediVM)
+            {
+                this.SetActiveDocumentOnNewFileOrOpenFile(ediVM);
+            }
+            else
+            {
+                this.SetActiveFileBaseDocument(fileViewModel);
+            }
 
-			if (AddIntoMRU == true)
+            if (AddIntoMRU == true)
 				this.GetToolWindowVM<RecentFilesViewModel>().AddNewEntryIntoMRU(filePath);
 
 			return fileViewModel;
@@ -545,12 +543,11 @@ namespace EdiApp.ViewModels
 			// Query for a tool window and return it
 			var anchorable_vm = this.Tools.FirstOrDefault(d => d.ContentId == content_id);
 
-			var registerTW = anchorable_vm as IRegisterableToolWindow;
 
-			if (registerTW != null)
-				registerTW.SetDocumentParent(this);
+            if (anchorable_vm is IRegisterableToolWindow registerTW)
+                registerTW.SetDocumentParent(this);
 
-			if (anchorable_vm != null)
+            if (anchorable_vm != null)
 				return anchorable_vm;
 
 			// Query for a matching document and return it
@@ -1399,12 +1396,11 @@ namespace EdiApp.ViewModels
 		{
 			if (f != null)
 			{
-				// Detach EdiViewModel specific events
-				var eVM = f as EdiViewModel;
-				if (eVM != null)
-					eVM.ProcessingResultEvent -= vm_ProcessingResultEvent;
+                // Detach EdiViewModel specific events
+                if (f is EdiViewModel eVM)
+                    eVM.ProcessingResultEvent -= vm_ProcessingResultEvent;
 
-				this.Close(f);
+                this.Close(f);
 			}
 		}
 
@@ -1416,73 +1412,72 @@ namespace EdiApp.ViewModels
 		/// <param name="e"></param>
 		private void vm_ProcessingResultEvent(object sender, ProcessResultEvent e)
 		{
-			var watcher = sender as IDocumentFileWatcher;
 
-			if (watcher != null)
-			{
-				try
-				{
-					// Activate file watcher for this document
-					watcher.EnableDocumentFileWatcher(true);
-				}
-				catch (Exception ex)
-				{
-					MsgBox.Msg.Show(ex, "An unexpected error occured", MsgBoxButtons.OK, MsgBoxImage.Alert);
-				}
+            if (sender is IDocumentFileWatcher watcher)
+            {
+                try
+                {
+                    // Activate file watcher for this document
+                    watcher.EnableDocumentFileWatcher(true);
+                }
+                catch (Exception ex)
+                {
+                    MsgBox.Msg.Show(ex, "An unexpected error occured", MsgBoxButtons.OK, MsgBoxImage.Alert);
+                }
 
-				var vm = sender as EdiViewModel;
+                var vm = sender as EdiViewModel;
 
-				try
-				{
-					switch (e.TypeOfResult)
-					{
-						case TypeOfResult.FileLoad:      // Process an EdiViewModel file load event mResult
-							if (e.InnerException != null)
-							{
-								Exception error = vm.GetInnerMostException(e.InnerException);
+                try
+                {
+                    switch (e.TypeOfResult)
+                    {
+                        case TypeOfResult.FileLoad:      // Process an EdiViewModel file load event mResult
+                            if (e.InnerException != null)
+                            {
+                                Exception error = vm.GetInnerMostException(e.InnerException);
 
-								string filePath = vm.FilePath;
-								this.CloseDocument(vm);
-								vm = null;
+                                string filePath = vm.FilePath;
+                                this.CloseDocument(vm);
+                                vm = null;
 
-								if (error != null && filePath != null)
-								{
-									if (error is FileNotFoundException)
-									{
-										if (this.mSettingsManager.SessionData.MruList.FindMRUEntry(filePath) != null)
-										{
-											if (MsgBox.Msg.Show(string.Format(Util.Local.Strings.STR_ERROR_LOADING_FILE_MSG, filePath),
-																												Util.Local.Strings.STR_ERROR_LOADING_FILE_CAPTION, MsgBoxButtons.YesNo) == MsgBoxResult.Yes)
-											{
-												this.mSettingsManager.SessionData.MruList.RemoveEntry(filePath);
-											}
-										}
+                                if (error != null && filePath != null)
+                                {
+                                    if (error is FileNotFoundException)
+                                    {
+                                        if (this.mSettingsManager.SessionData.MruList.FindMRUEntry(filePath) != null)
+                                        {
+                                            if (MsgBox.Msg.Show(string.Format(Util.Local.Strings.STR_ERROR_LOADING_FILE_MSG, filePath),
+                                                                                                                Util.Local.Strings.STR_ERROR_LOADING_FILE_CAPTION, MsgBoxButtons.YesNo) == MsgBoxResult.Yes)
+                                            {
+                                                this.mSettingsManager.SessionData.MruList.RemoveEntry(filePath);
+                                            }
+                                        }
 
-										return;
-									}
-								}
+                                        return;
+                                    }
+                                }
 
-								MsgBox.Msg.Show(e.InnerException, "An unexpected error occured",
-																 MsgBoxButtons.OK, MsgBoxImage.Alert);
-							}
-							break;
+                                MsgBox.Msg.Show(e.InnerException, "An unexpected error occured",
+                                                                 MsgBoxButtons.OK, MsgBoxImage.Alert);
+                            }
+                            break;
 
-						default:
-							throw new NotImplementedException(e.TypeOfResult.ToString());
-					}
-				}
-				catch (Exception exp)
-				{
-					logger.Error(exp);
+                        default:
+                            throw new NotImplementedException(e.TypeOfResult.ToString());
+                    }
+                }
+                catch (Exception exp)
+                {
+                    logger.Error(exp);
 
-					MsgBox.Msg.Show(exp, "An unexpected error occured", MsgBoxButtons.OK, MsgBoxImage.Alert);
-				}
-				finally
-				{
+                    MsgBox.Msg.Show(exp, "An unexpected error occured", MsgBoxButtons.OK, MsgBoxImage.Alert);
+                }
+                finally
+                {
 
-				}
-			}
-		}
+                }
+            }
+        }
 
 		/// <summary>
 		/// Helper method for viewmodel resolution for avalondock contentids

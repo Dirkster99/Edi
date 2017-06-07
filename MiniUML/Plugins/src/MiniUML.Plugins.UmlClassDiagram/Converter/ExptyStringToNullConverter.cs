@@ -15,15 +15,14 @@
       if (value == null)
         return null;
 
-      string s = value as string;
 
-      if (s != null)
-      {
-        if (s == string.Empty)
-          return null;
-      }
+            if (value is string s)
+            {
+                if (s == string.Empty)
+                    return null;
+            }
 
-      return value;
+            return value;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -95,14 +95,14 @@ namespace ICSharpCode.AvalonEdit.Editing
 					caretBrush = (Brush)textView.GetValue(TextBlock.ForegroundProperty);
 				
 				if (this.textArea.OverstrikeMode) {
-					SolidColorBrush scBrush = caretBrush as SolidColorBrush;
-					if (scBrush != null) {
-						Color brushColor = scBrush.Color;
-						Color newColor = Color.FromArgb(100, brushColor.R, brushColor.G, brushColor.B);
-						caretBrush = new SolidColorBrush(newColor);
-						caretBrush.Freeze();
-					}
-				}
+                    if (caretBrush is SolidColorBrush scBrush)
+                    {
+                        Color brushColor = scBrush.Color;
+                        Color newColor = Color.FromArgb(100, brushColor.R, brushColor.G, brushColor.B);
+                        caretBrush = new SolidColorBrush(newColor);
+                        caretBrush.Freeze();
+                    }
+                }
 				
 				Rect r = new Rect(caretRectangle.X - textView.HorizontalOffset,
 				                  caretRectangle.Y - textView.VerticalOffset,

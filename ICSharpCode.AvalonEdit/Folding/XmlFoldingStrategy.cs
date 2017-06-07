@@ -116,13 +116,15 @@ namespace ICSharpCode.AvalonEdit.Folding
 		
 		static int GetOffset(TextDocument document, XmlReader reader)
 		{
-			IXmlLineInfo info = reader as IXmlLineInfo;
-			if (info != null && info.HasLineInfo()) {
-				return document.GetOffset(info.LineNumber, info.LinePosition);
-			} else {
-				throw new ArgumentException("XmlReader does not have positioning information.");
-			}
-		}
+            if (reader is IXmlLineInfo info && info.HasLineInfo())
+            {
+                return document.GetOffset(info.LineNumber, info.LinePosition);
+            }
+            else
+            {
+                throw new ArgumentException("XmlReader does not have positioning information.");
+            }
+        }
 		
 		/// <summary>
 		/// Creates a comment fold if the comment spans more than one line.

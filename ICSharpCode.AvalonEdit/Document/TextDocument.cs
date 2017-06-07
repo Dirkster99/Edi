@@ -135,17 +135,15 @@ namespace ICSharpCode.AvalonEdit.Document
 			#if NREFACTORY
 			if (textSource is ReadOnlyDocument)
 				textSource = textSource.CreateSnapshot(); // retrieve underlying text source, which might be a RopeTextSource
-			#endif
-			
-			RopeTextSource rts = textSource as RopeTextSource;
-			if (rts != null)
-				return rts.GetRope();
-			
-			TextDocument doc = textSource as TextDocument;
-			if (doc != null)
-				return doc.rope;
-			
-			return textSource.Text;
+#endif
+
+            if (textSource is RopeTextSource rts)
+                return rts.GetRope();
+
+            if (textSource is TextDocument doc)
+                return doc.rope;
+
+            return textSource.Text;
 		}
 		#endregion
 		
@@ -854,24 +852,22 @@ namespace ICSharpCode.AvalonEdit.Document
 				if (offset == 0 && length == rope.Length) {
 					// optimize replacing the whole document
 					rope.Clear();
-					var newRopeTextSource = newText as RopeTextSource;
-					if (newRopeTextSource != null)
-						rope.InsertRange(0, newRopeTextSource.GetRope());
-					else
-						rope.InsertText(0, newText.Text);
-					lineManager.Rebuild();
+                    if (newText is RopeTextSource newRopeTextSource)
+                        rope.InsertRange(0, newRopeTextSource.GetRope());
+                    else
+                        rope.InsertText(0, newText.Text);
+                    lineManager.Rebuild();
 				} else {
 					rope.RemoveRange(offset, length);
 					lineManager.Remove(offset, length);
-					#if DEBUG
+#if DEBUG
 					lineTree.CheckProperties();
-					#endif
-					var newRopeTextSource = newText as RopeTextSource;
-					if (newRopeTextSource != null)
-						rope.InsertRange(offset, newRopeTextSource.GetRope());
-					else
-						rope.InsertText(offset, newText.Text);
-					lineManager.Insert(offset, newText);
+#endif
+                    if (newText is RopeTextSource newRopeTextSource)
+                        rope.InsertRange(offset, newRopeTextSource.GetRope());
+                    else
+                        rope.InsertText(offset, newText.Text);
+                    lineManager.Insert(offset, newText);
 					#if DEBUG
 					lineTree.CheckProperties();
 					#endif

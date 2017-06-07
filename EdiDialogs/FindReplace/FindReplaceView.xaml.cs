@@ -51,13 +51,12 @@
 			{
 				ediableComboBox.GotKeyboardFocus += (s, e) =>
 				{
-					// focus the TextBox inside the ComboBox
-					var textBox = ediableComboBox.FindChild("PART_EditableTextBox") as TextBox;
-					if (textBox != null)
-					{
-						textBox.Focus();
-					}
-				};
+                    // focus the TextBox inside the ComboBox
+                    if (ediableComboBox.FindChild("PART_EditableTextBox") is TextBox textBox)
+                    {
+                        textBox.Focus();
+                    }
+                };
 			}
 		}
 	}

@@ -1216,13 +1216,13 @@ namespace ICSharpCode.AvalonEdit.Rendering
 					int offset = 0;
 					foreach (TextLine textLine in visualLine.TextLines) {
 						foreach (var span in textLine.GetTextRunSpans()) {
-							InlineObjectRun inline = span.Value as InlineObjectRun;
-							if (inline != null && inline.VisualLine != null) {
-								Debug.Assert(inlineObjects.Contains(inline));
-								double distance = textLine.GetDistanceFromCharacterHit(new CharacterHit(offset, 0));
-								inline.Element.Arrange(new Rect(new Point(pos.X + distance, pos.Y), inline.Element.DesiredSize));
-							}
-							offset += span.Length;
+                            if (span.Value is InlineObjectRun inline && inline.VisualLine != null)
+                            {
+                                Debug.Assert(inlineObjects.Contains(inline));
+                                double distance = textLine.GetDistanceFromCharacterHit(new CharacterHit(offset, 0));
+                                inline.Element.Arrange(new Rect(new Point(pos.X + distance, pos.Y), inline.Element.DesiredSize));
+                            }
+                            offset += span.Length;
 						}
 						pos.Y += textLine.Height;
 					}
@@ -1882,17 +1882,15 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		
 		void ConnectToTextView(object obj)
 		{
-			ITextViewConnect c = obj as ITextViewConnect;
-			if (c != null)
-				c.AddToTextView(this);
-		}
+            if (obj is ITextViewConnect c)
+                c.AddToTextView(this);
+        }
 		
 		void DisconnectFromTextView(object obj)
 		{
-			ITextViewConnect c = obj as ITextViewConnect;
-			if (c != null)
-				c.RemoveFromTextView(this);
-		}
+            if (obj is ITextViewConnect c)
+                c.RemoveFromTextView(this);
+        }
 		#endregion
 		
 		#region MouseHover

@@ -58,7 +58,7 @@
 		{
 			get
 			{
-				return (this.mLineNumberInput == null ? string.Empty : this.mLineNumberInput);
+				return (mLineNumberInput ?? string.Empty);
 			}
 
 			set

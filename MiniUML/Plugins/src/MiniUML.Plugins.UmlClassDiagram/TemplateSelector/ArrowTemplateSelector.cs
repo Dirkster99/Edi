@@ -13,12 +13,11 @@
 
       DataTemplate d = null;
 
-      PluginModel m = PluginManager.GetPluginModel(PluginModel.ModelName) as PluginModel;
-      
-      if (m != null)
-        d = m.Resources[item.ToString()] as DataTemplate;
 
-      return d;
+            if (PluginManager.GetPluginModel(PluginModel.ModelName) is PluginModel m)
+                d = m.Resources[item.ToString()] as DataTemplate;
+
+            return d;
       ////return PluginManager.PluginResources[item.ToString()] as DataTemplate;
     }
   }

@@ -60,50 +60,48 @@
 
       var txtBox = fileDoc as EdiTextEditor;
 
-      // Remove event handler from old if OldValue is available
-      var oldController = e.OldValue as ITextBoxController;
-      if (oldController != null)
-      {
-        elements.Remove(oldController);
-        oldController.SelectAll -= SelectAll;
-        oldController.Select -= Select;
-        oldController.ScrollToLineEvent -= ScrollToLine;
-        oldController.CurrentSelectionEvent -= CurrentSelection;
-        oldController.BeginChangeEvent -= EdiTextEditor.BeginChange;
-        oldController.EndChangeEvent -= EdiTextEditor.EndChange;
-        oldController.GetSelectedTextEvent -= EdiTextEditor.GetSelectedText;
-      }        
+            // Remove event handler from old if OldValue is available
+            if (e.OldValue is ITextBoxController oldController)
+            {
+                elements.Remove(oldController);
+                oldController.SelectAll -= SelectAll;
+                oldController.Select -= Select;
+                oldController.ScrollToLineEvent -= ScrollToLine;
+                oldController.CurrentSelectionEvent -= CurrentSelection;
+                oldController.BeginChangeEvent -= EdiTextEditor.BeginChange;
+                oldController.EndChangeEvent -= EdiTextEditor.EndChange;
+                oldController.GetSelectedTextEvent -= EdiTextEditor.GetSelectedText;
+            }
 
-      // Add new eventhandler for each event declared in the interface declaration
-      var newController = e.NewValue as ITextBoxController;
-      if (newController != null)
-      {
-        // Sometime the newController is already there but the event handling is not working
-        // Remove controller and event handling and install a new one instead.
-        TextEditor test;
-        if (elements.TryGetValue(newController, out test) == true)
-        {
-          elements.Remove(newController);
+            // Add new eventhandler for each event declared in the interface declaration
+            if (e.NewValue is ITextBoxController newController)
+            {
+                // Sometime the newController is already there but the event handling is not working
+                // Remove controller and event handling and install a new one instead.
+                TextEditor test;
+                if (elements.TryGetValue(newController, out test) == true)
+                {
+                    elements.Remove(newController);
 
-          newController.SelectAll -= EdiTextEditor.SelectAll;
-          newController.Select -= EdiTextEditor.Select;
-          newController.ScrollToLineEvent -= EdiTextEditor.ScrollToLine;
-          newController.CurrentSelectionEvent -= EdiTextEditor.CurrentSelection;
-          newController.BeginChangeEvent -= EdiTextEditor.BeginChange;
-          newController.EndChangeEvent -= EdiTextEditor.EndChange;
-          newController.GetSelectedTextEvent -= EdiTextEditor.GetSelectedText;
+                    newController.SelectAll -= EdiTextEditor.SelectAll;
+                    newController.Select -= EdiTextEditor.Select;
+                    newController.ScrollToLineEvent -= EdiTextEditor.ScrollToLine;
+                    newController.CurrentSelectionEvent -= EdiTextEditor.CurrentSelection;
+                    newController.BeginChangeEvent -= EdiTextEditor.BeginChange;
+                    newController.EndChangeEvent -= EdiTextEditor.EndChange;
+                    newController.GetSelectedTextEvent -= EdiTextEditor.GetSelectedText;
+                }
+
+                elements.Add(newController, txtBox);
+                newController.SelectAll += SelectAll;
+                newController.Select += Select;
+                newController.ScrollToLineEvent += ScrollToLine;
+                newController.CurrentSelectionEvent += CurrentSelection;
+                newController.BeginChangeEvent += EdiTextEditor.BeginChange;
+                newController.EndChangeEvent += EdiTextEditor.EndChange;
+                newController.GetSelectedTextEvent += EdiTextEditor.GetSelectedText;
+            }
         }
-
-        elements.Add(newController, txtBox);
-        newController.SelectAll += SelectAll;
-        newController.Select += Select;
-        newController.ScrollToLineEvent += ScrollToLine;
-        newController.CurrentSelectionEvent += CurrentSelection;
-        newController.BeginChangeEvent += EdiTextEditor.BeginChange;
-        newController.EndChangeEvent += EdiTextEditor.EndChange;
-        newController.GetSelectedTextEvent += EdiTextEditor.GetSelectedText;
-      }        
-    }
 
     /// <summary>
     /// Select all text in the editor

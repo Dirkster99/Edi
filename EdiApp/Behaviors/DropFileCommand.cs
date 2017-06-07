@@ -51,13 +51,12 @@
 			UIElement uiElement = d as UIElement;	  // Remove the handler if it exist to avoid memory leaks
 			uiElement.Drop -= UIElement_Drop;
 
-			var command = e.NewValue as ICommand;
-			if (command != null)
-			{
-				// the property is attached so we attach the Drop event handler
-				uiElement.Drop += UIElement_Drop;
-			}
-		}
+            if (e.NewValue is ICommand command)
+            {
+                // the property is attached so we attach the Drop event handler
+                uiElement.Drop += UIElement_Drop;
+            }
+        }
 
 		/// <summary>
 		/// This method is called when the Drop event occurs. The sender should be the control

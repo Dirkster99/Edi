@@ -91,18 +91,17 @@ namespace EdiDocuments.ViewModels.EdiDoc
 
 		string GetClass(string style)
 		{
-			string className;
-			if (!stylesheetCache.TryGetValue(style, out className))
-			{
-				className = StyleClassPrefix + stylesheetCache.Count;
-				stylesheet.Append('.');
-				stylesheet.Append(className);
-				stylesheet.Append(" { ");
-				stylesheet.Append(style);
-				stylesheet.AppendLine(" }");
-				stylesheetCache[style] = className;
-			}
-			return className;
+            if (!stylesheetCache.TryGetValue(style, out string className))
+            {
+                className = StyleClassPrefix + stylesheetCache.Count;
+                stylesheet.Append('.');
+                stylesheet.Append(className);
+                stylesheet.Append(" { ");
+                stylesheet.Append(style);
+                stylesheet.AppendLine(" }");
+                stylesheetCache[style] = className;
+            }
+            return className;
 		}
 		#endregion Stylesheet cache
 

@@ -124,13 +124,12 @@ namespace Log4NetTools.ViewModels
 			{
 				if (e.ActiveDocument != null)
 				{
-					Log4NetViewModel log4NetVM = e.ActiveDocument as Log4NetViewModel;
 
-					if (log4NetVM != null)
-						this.Log4NetVM = log4NetVM;  // There is an active Log4Net document -> display corresponding content
-					else
-						this.Log4NetVM = null;
-				}
+                    if (e.ActiveDocument is Log4NetViewModel log4NetVM)
+                        this.Log4NetVM = log4NetVM;  // There is an active Log4Net document -> display corresponding content
+                    else
+                        this.Log4NetVM = null;
+                }
 			}
 			else // There is no active document hence we do not have corresponding content to display
 			{

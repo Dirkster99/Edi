@@ -44,14 +44,16 @@ namespace ICSharpCode.AvalonEdit.Utils
 		{
 			if (owner == null)
 				throw new ArgumentNullException("owner");
-			HwndSource source = PresentationSource.FromVisual(owner) as HwndSource;
-			if (source != null) {
-				Vector r = owner.PointToScreen(new Point(size.Width, size.Height)) - owner.PointToScreen(new Point(0, 0));
-				return SafeNativeMethods.CreateCaret(source.Handle, IntPtr.Zero, (int)Math.Ceiling(r.X), (int)Math.Ceiling(r.Y));
-			} else {
-				return false;
-			}
-		}
+            if (PresentationSource.FromVisual(owner) is HwndSource source)
+            {
+                Vector r = owner.PointToScreen(new Point(size.Width, size.Height)) - owner.PointToScreen(new Point(0, 0));
+                return SafeNativeMethods.CreateCaret(source.Handle, IntPtr.Zero, (int)Math.Ceiling(r.X), (int)Math.Ceiling(r.Y));
+            }
+            else
+            {
+                return false;
+            }
+        }
 		
 		/// <summary>
 		/// Sets the position of the caret previously created using <see cref="CreateCaret"/>. position is relative to the owner visual.
@@ -60,15 +62,17 @@ namespace ICSharpCode.AvalonEdit.Utils
 		{
 			if (owner == null)
 				throw new ArgumentNullException("owner");
-			HwndSource source = PresentationSource.FromVisual(owner) as HwndSource;
-			if (source != null) {
-				Point pointOnRootVisual = owner.TransformToAncestor(source.RootVisual).Transform(position);
-				Point pointOnHwnd = pointOnRootVisual.TransformToDevice(source.RootVisual);
-				return SafeNativeMethods.SetCaretPos((int)pointOnHwnd.X, (int)pointOnHwnd.Y);
-			} else {
-				return false;
-			}
-		}
+            if (PresentationSource.FromVisual(owner) is HwndSource source)
+            {
+                Point pointOnRootVisual = owner.TransformToAncestor(source.RootVisual).Transform(position);
+                Point pointOnHwnd = pointOnRootVisual.TransformToDevice(source.RootVisual);
+                return SafeNativeMethods.SetCaretPos((int)pointOnHwnd.X, (int)pointOnHwnd.Y);
+            }
+            else
+            {
+                return false;
+            }
+        }
 		
 		/// <summary>
 		/// Destroys the caret previously created using <see cref="CreateCaret"/>.

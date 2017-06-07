@@ -40,14 +40,14 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 			xshd.AcceptElements(rnev);
 			// Assign MainRuleSet so that references can be resolved
 			foreach (XshdElement element in xshd.Elements) {
-				XshdRuleSet xrs = element as XshdRuleSet;
-				if (xrs != null && xrs.Name == null) {
-					if (MainRuleSet != null)
-						throw Error(element, "Duplicate main RuleSet. There must be only one nameless RuleSet!");
-					else
-						MainRuleSet = rnev.ruleSets[xrs];
-				}
-			}
+                if (element is XshdRuleSet xrs && xrs.Name == null)
+                {
+                    if (MainRuleSet != null)
+                        throw Error(element, "Duplicate main RuleSet. There must be only one nameless RuleSet!");
+                    else
+                        MainRuleSet = rnev.ruleSets[xrs];
+                }
+            }
 			if (MainRuleSet == null)
 				throw new HighlightingDefinitionInvalidException("Could not find main RuleSet.");
 			// Translate elements within the rulesets (resolving references and processing imports)
@@ -163,21 +163,25 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 				
 				foreach (XshdElement element in ruleSet.Elements) {
 					object o = element.AcceptVisitor(this);
-					HighlightingRuleSet elementRuleSet = o as HighlightingRuleSet;
-					if (elementRuleSet != null) {
-						Merge(rs, elementRuleSet);
-					} else {
-						HighlightingSpan span = o as HighlightingSpan;
-						if (span != null) {
-							rs.Spans.Add(span);
-						} else {
-							HighlightingRule elementRule = o as HighlightingRule;
-							if (elementRule != null) {
-								rs.Rules.Add(elementRule);
-							}
-						}
-					}
-				}
+                    if (o is HighlightingRuleSet elementRuleSet)
+                    {
+                        Merge(rs, elementRuleSet);
+                    }
+                    else
+                    {
+                        if (o is HighlightingSpan span)
+                        {
+                            rs.Spans.Add(span);
+                        }
+                        else
+                        {
+                            if (o is HighlightingRule elementRule)
+                            {
+                                rs.Rules.Add(elementRule);
+                            }
+                        }
+                    }
+                }
 				
 				ignoreCase = oldIgnoreCase;
 				processedRuleSets.Add(ruleSet);

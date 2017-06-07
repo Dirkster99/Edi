@@ -27,41 +27,40 @@
 		/// <returns></returns>
 		public bool BeforeInsertAnchorable(LayoutRoot layout, LayoutAnchorable anchorableToShow, ILayoutContainer destinationContainer)
 		{
-			var tool = anchorableToShow.Content as IToolWindow;
-			if (tool != null)
-			{
-				var preferredLocation = tool.PreferredLocation;
+            if (anchorableToShow.Content is IToolWindow tool)
+            {
+                var preferredLocation = tool.PreferredLocation;
 
-				LayoutAnchorGroup layoutGroup = null;
+                LayoutAnchorGroup layoutGroup = null;
 
-				switch (preferredLocation)
-				{
-					case PaneLocation.Left:
-						layoutGroup = FindAnchorableGroup(layout, preferredLocation);
-						break;
+                switch (preferredLocation)
+                {
+                    case PaneLocation.Left:
+                        layoutGroup = FindAnchorableGroup(layout, preferredLocation);
+                        break;
 
-					case PaneLocation.Right:
-						layoutGroup = FindAnchorableGroup(layout, preferredLocation);
-						break;
+                    case PaneLocation.Right:
+                        layoutGroup = FindAnchorableGroup(layout, preferredLocation);
+                        break;
 
-					case PaneLocation.Bottom:
-						layoutGroup = FindAnchorableGroup(layout, preferredLocation);
-						break;
+                    case PaneLocation.Bottom:
+                        layoutGroup = FindAnchorableGroup(layout, preferredLocation);
+                        break;
 
-					default:
-						throw new ArgumentOutOfRangeException();
-				}
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
 
-				if (layoutGroup != null)
-				{
-					////group.InsertChildAt(0, anchorableToShow);
-					layoutGroup.Children.Add(anchorableToShow);
-				}
+                if (layoutGroup != null)
+                {
+                    ////group.InsertChildAt(0, anchorableToShow);
+                    layoutGroup.Children.Add(anchorableToShow);
+                }
 
-				return true;
-			}
+                return true;
+            }
 
-			return false;
+            return false;
 		}
 
 		private static LayoutAnchorGroup FindAnchorableGroup(LayoutRoot layout,
@@ -113,28 +112,26 @@
 
 		public void AfterInsertAnchorable(LayoutRoot layout, LayoutAnchorable anchorableShown)
 		{
-			// If this is the first anchorable added to this pane, then use the preferred size.
-			var tool = anchorableShown.Content as IToolWindow;
-			if (tool != null)
-			{
-				var anchorablePane = anchorableShown.Parent as LayoutAnchorablePane;
-				if (anchorablePane != null && anchorablePane.ChildrenCount == 1)
-				{
-					switch (tool.PreferredLocation)
-					{
-						case PaneLocation.Left:
-						case PaneLocation.Right:
-							anchorablePane.DockWidth = new GridLength(tool.PreferredWidth, GridUnitType.Pixel);
-							break;
-						case PaneLocation.Bottom:
-							anchorablePane.DockHeight = new GridLength(tool.PreferredHeight, GridUnitType.Pixel);
-							break;
-						default:
-							throw new ArgumentOutOfRangeException();
-					}
-				}
-			}
-		}
+            // If this is the first anchorable added to this pane, then use the preferred size.
+            if (anchorableShown.Content is IToolWindow tool)
+            {
+                if (anchorableShown.Parent is LayoutAnchorablePane anchorablePane && anchorablePane.ChildrenCount == 1)
+                {
+                    switch (tool.PreferredLocation)
+                    {
+                        case PaneLocation.Left:
+                        case PaneLocation.Right:
+                            anchorablePane.DockWidth = new GridLength(tool.PreferredWidth, GridUnitType.Pixel);
+                            break;
+                        case PaneLocation.Bottom:
+                            anchorablePane.DockHeight = new GridLength(tool.PreferredHeight, GridUnitType.Pixel);
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                }
+            }
+        }
 
 		public bool BeforeInsertDocument(LayoutRoot layout, LayoutDocument anchorableToShow, ILayoutContainer destinationContainer)
 		{

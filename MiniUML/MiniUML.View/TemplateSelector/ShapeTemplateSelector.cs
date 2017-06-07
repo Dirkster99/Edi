@@ -13,17 +13,15 @@
   {
     public override DataTemplate SelectTemplate(object item, DependencyObject container)
     {
-      ShapeViewModelBase el = item as ShapeViewModelBase;
 
-      if (el != null)
-      {
-        DataTemplate template = PluginManager.PluginResources[el.TypeKey] as DataTemplate;
+            if (item is ShapeViewModelBase el)
+            {
 
-        if (template != null)
-          return template;
-      }
+                if (PluginManager.PluginResources[el.TypeKey] is DataTemplate template)
+                    return template;
+            }
 
-      return PluginManager.PluginResources["MiniUML.UnknownShape"] as DataTemplate;
+            return PluginManager.PluginResources["MiniUML.UnknownShape"] as DataTemplate;
     }
   }
 }

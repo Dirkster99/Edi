@@ -83,7 +83,7 @@ namespace EdiDocuments.ViewModels.StartPage
 			}
 			catch (System.Exception ex)
 			{
-				MsgBox.Msg.Show(string.Format(CultureInfo.CurrentCulture, "{0}\n'{1}'.", ex.Message, (this.FilePath == null ? string.Empty : this.FilePath)),
+				MsgBox.Msg.Show(string.Format(CultureInfo.CurrentCulture, "{0}\n'{1}'.", ex.Message, (FilePath == null ? string.Empty : this.FilePath)),
 												Util.Local.Strings.STR_FILE_FINDING_CAPTION,
 												MsgBoxButtons.OK, MsgBoxImage.Error);
 			}

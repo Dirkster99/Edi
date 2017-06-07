@@ -276,16 +276,15 @@ namespace Edi
 							});
 						}
 
-						var appVM = mainWindow.DataContext as ApplicationViewModel;
 
-						// Filter name of executeable if present in command line args
-						if (appVM != null)
-						{
-							if (args != null)
-								ProcessCmdLine(App.FilterAssemblyName(args), appVM);
-						}
+                        // Filter name of executeable if present in command line args
+                        if (mainWindow.DataContext is ApplicationViewModel appVM)
+                        {
+                            if (args != null)
+                                ProcessCmdLine(App.FilterAssemblyName(args), appVM);
+                        }
 
-					}));
+                    }));
 			}
 		}
 
@@ -322,12 +321,11 @@ namespace Edi
 
 		private static ApplicationViewModel GetWorkSpace()
 		{
-			var mainWindow = Application.Current.MainWindow as MainWindow;
 
-			if (mainWindow != null)
-				return mainWindow.DataContext as ApplicationViewModel;
+            if (Application.Current.MainWindow is MainWindow mainWindow)
+                return mainWindow.DataContext as ApplicationViewModel;
 
-			return null;
+            return null;
 		}
 		#endregion methods
 	}

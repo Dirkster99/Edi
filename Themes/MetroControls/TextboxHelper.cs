@@ -172,15 +172,13 @@ namespace MahApps.Metro.Controls
 
         private static void ButtonCommandOrClearTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var textbox = d as TextBox;
-            if (textbox != null)
+            if (d is TextBox textbox)
             {
                 // only one loaded event
                 textbox.Loaded -= TextBoxLoaded;
                 textbox.Loaded += TextBoxLoaded;
             }
-            var passbox = d as PasswordBox;
-            if (passbox != null)
+            if (d is PasswordBox passbox)
             {
                 // only one loaded event
                 passbox.Loaded -= PassBoxLoaded;

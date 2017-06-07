@@ -78,13 +78,12 @@ namespace Edi.Core.Behaviour
 			if (fwElement != null)
 				fwElement.MouseDown -= FrameworkElement_MouseClick;
 
-			var command = e.NewValue as ICommand;
-			if (command != null)
-			{
-				// the property is attached so we attach the Drop event handler
-				fwElement.MouseDown += FrameworkElement_MouseClick;
-			}
-		}
+            if (e.NewValue is ICommand command)
+            {
+                // the property is attached so we attach the Drop event handler
+                fwElement.MouseDown += FrameworkElement_MouseClick;
+            }
+        }
 
 		private static void FrameworkElement_MouseClick(object sender, MouseButtonEventArgs e)
 		{

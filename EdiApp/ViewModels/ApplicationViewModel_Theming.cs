@@ -216,11 +216,10 @@ namespace EdiApp.ViewModels
 						{
 							var Res = new Uri(item, UriKind.Relative);
 
-							var dictionary = Application.LoadComponent(Res) as ResourceDictionary;
 
-							if (dictionary != null)
-								Application.Current.Resources.MergedDictionaries.Add(dictionary);
-						}
+                            if (Application.LoadComponent(Res) is ResourceDictionary dictionary)
+                                Application.Current.Resources.MergedDictionaries.Add(dictionary);
+                        }
 						catch (Exception Exp)
 						{
 							MsgBox.Msg.Show(Exp, string.Format(CultureInfo.CurrentCulture, "'{0}'", item), MsgBoxButtons.OK, MsgBoxImage.Error);

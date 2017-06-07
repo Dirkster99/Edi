@@ -189,14 +189,16 @@
 		{
 			try
 			{
-				XmlWriterSettings xws = new XmlWriterSettings();
-				xws.NewLineOnAttributes = true;
-				xws.Indent = true;
-				xws.IndentChars = "  ";
-				xws.Encoding = System.Text.Encoding.UTF8;
+                XmlWriterSettings xws = new XmlWriterSettings()
+                {
+                    NewLineOnAttributes = true,
+                    Indent = true,
+                    IndentChars = "  ",
+                    Encoding = System.Text.Encoding.UTF8
+                };
 
-				// Create a new file stream to write the serialized object to a file
-				using (XmlWriter xw = XmlWriter.Create(settingsFileName, xws))
+                // Create a new file stream to write the serialized object to a file
+                using (XmlWriter xw = XmlWriter.Create(settingsFileName, xws))
 				{
 					// Create a new XmlSerializer instance with the type of the test class
 					XmlSerializer serializerObj = new XmlSerializer(typeof(Options));
@@ -277,14 +279,16 @@
 		{
 			try
 			{
-				XmlWriterSettings xws = new XmlWriterSettings();
-				xws.NewLineOnAttributes = true;
-				xws.Indent = true;
-				xws.IndentChars = "  ";
-				xws.Encoding = System.Text.Encoding.UTF8;
+                XmlWriterSettings xws = new XmlWriterSettings()
+                {
+                    NewLineOnAttributes = true,
+                    Indent = true,
+                    IndentChars = "  ",
+                    Encoding = System.Text.Encoding.UTF8
+                };
 
-				// Create a new file stream to write the serialized object to a file
-				using (XmlWriter xw = XmlWriter.Create(sessionDataFileName, xws))
+                // Create a new file stream to write the serialized object to a file
+                using (XmlWriter xw = XmlWriter.Create(sessionDataFileName, xws))
 				{
 					// Create a new XmlSerializer instance with the type of the test class
 					XmlSerializer serializerObj = new XmlSerializer(typeof(Profile));

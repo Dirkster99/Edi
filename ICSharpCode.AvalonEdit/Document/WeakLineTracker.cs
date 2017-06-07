@@ -63,47 +63,42 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		void ILineTracker.BeforeRemoveLine(DocumentLine line)
 		{
-			ILineTracker targetTracker = targetObject.Target as ILineTracker;
-			if (targetTracker != null)
-				targetTracker.BeforeRemoveLine(line);
-			else
-				Deregister();
-		}
+            if (targetObject.Target is ILineTracker targetTracker)
+                targetTracker.BeforeRemoveLine(line);
+            else
+                Deregister();
+        }
 		
 		void ILineTracker.SetLineLength(DocumentLine line, int newTotalLength)
 		{
-			ILineTracker targetTracker = targetObject.Target as ILineTracker;
-			if (targetTracker != null)
-				targetTracker.SetLineLength(line, newTotalLength);
-			else
-				Deregister();
-		}
+            if (targetObject.Target is ILineTracker targetTracker)
+                targetTracker.SetLineLength(line, newTotalLength);
+            else
+                Deregister();
+        }
 		
 		void ILineTracker.LineInserted(DocumentLine insertionPos, DocumentLine newLine)
 		{
-			ILineTracker targetTracker = targetObject.Target as ILineTracker;
-			if (targetTracker != null)
-				targetTracker.LineInserted(insertionPos, newLine);
-			else
-				Deregister();
-		}
+            if (targetObject.Target is ILineTracker targetTracker)
+                targetTracker.LineInserted(insertionPos, newLine);
+            else
+                Deregister();
+        }
 		
 		void ILineTracker.RebuildDocument()
 		{
-			ILineTracker targetTracker = targetObject.Target as ILineTracker;
-			if (targetTracker != null)
-				targetTracker.RebuildDocument();
-			else
-				Deregister();
-		}
+            if (targetObject.Target is ILineTracker targetTracker)
+                targetTracker.RebuildDocument();
+            else
+                Deregister();
+        }
 		
 		void ILineTracker.ChangeComplete(DocumentChangeEventArgs e)
 		{
-			ILineTracker targetTracker = targetObject.Target as ILineTracker;
-			if (targetTracker != null)
-				targetTracker.ChangeComplete(e);
-			else
-				Deregister();
-		}
+            if (targetObject.Target is ILineTracker targetTracker)
+                targetTracker.ChangeComplete(e);
+            else
+                Deregister();
+        }
 	}
 }
