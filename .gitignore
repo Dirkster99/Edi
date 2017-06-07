@@ -13,4 +13,6 @@ tmp/
 *.swp
 *.out
 *.sou
+*.suo
+*.sqlite
 Edi/MiniUML.Plugins/MiniUML.Plugins.UmlClassDiagram.dll
