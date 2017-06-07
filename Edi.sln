@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binaries", "Binaries", "{E3D8DFD4-4299-4FE0-9BE8-0CB41F189489}"
 	ProjectSection(SolutionItems) = preProject
@@ -45,13 +45,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edi.Core", "Edi.Core\Edi.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdiApp", "EdiApp\EdiApp.csproj", "{712120B2-6021-48F9-9548-20CB8A3D2429}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{561C049C-B2A4-4820-A352-20DC78835C21}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdiDialogs", "EdiDialogs\EdiDialogs.csproj", "{3B4C1D92-08D4-4D52-AE20-23A0BF882FCD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettingsView", "SettingsView\SettingsView.csproj", "{972E4948-C781-4CF9-A13E-AC3146AB0AD1}"
@@ -67,8 +60,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Output", "Tools\BuiltIn\Output\Output.csproj", "{D14D8609-693C-475D-A4A4-5A7F6188D633}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Files", "Tools\BuiltIn\Files\Files.csproj", "{EF9B7E8D-B722-48E0-A941-E21F4F7CC2DF}"
-EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Setup Edi", "Setup Edi\Setup Edi.wixproj", "{28838F0A-0C31-404B-A080-E00A033D310F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -415,20 +406,6 @@ Global
 		{EF9B7E8D-B722-48E0-A941-E21F4F7CC2DF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{EF9B7E8D-B722-48E0-A941-E21F4F7CC2DF}.Release|x64.ActiveCfg = Release|Any CPU
 		{EF9B7E8D-B722-48E0-A941-E21F4F7CC2DF}.Release|x86.ActiveCfg = Release|Any CPU
-		{28838F0A-0C31-404B-A080-E00A033D310F}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{28838F0A-0C31-404B-A080-E00A033D310F}.Debug|Mixed.ActiveCfg = Debug|x86
-		{28838F0A-0C31-404B-A080-E00A033D310F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{28838F0A-0C31-404B-A080-E00A033D310F}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{28838F0A-0C31-404B-A080-E00A033D310F}.Debug|x64.ActiveCfg = Debug|x86
-		{28838F0A-0C31-404B-A080-E00A033D310F}.Debug|x86.ActiveCfg = Debug|x86
-		{28838F0A-0C31-404B-A080-E00A033D310F}.Debug|x86.Build.0 = Debug|x86
-		{28838F0A-0C31-404B-A080-E00A033D310F}.Release|Any CPU.ActiveCfg = Release|x86
-		{28838F0A-0C31-404B-A080-E00A033D310F}.Release|Mixed.ActiveCfg = Release|x86
-		{28838F0A-0C31-404B-A080-E00A033D310F}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{28838F0A-0C31-404B-A080-E00A033D310F}.Release|Mixed Platforms.Build.0 = Release|x86
-		{28838F0A-0C31-404B-A080-E00A033D310F}.Release|x64.ActiveCfg = Release|x86
-		{28838F0A-0C31-404B-A080-E00A033D310F}.Release|x86.ActiveCfg = Release|x86
-		{28838F0A-0C31-404B-A080-E00A033D310F}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -446,7 +423,6 @@ Global
 		{2807B493-CC2E-402E-901A-EB138698FEDC} = {39FEC70F-8F35-4A04-B770-59F12A0CE83F}
 		{F17E5E06-F28C-4E91-964F-CDB9F8589BB7} = {39FEC70F-8F35-4A04-B770-59F12A0CE83F}
 		{712120B2-6021-48F9-9548-20CB8A3D2429} = {39FEC70F-8F35-4A04-B770-59F12A0CE83F}
-		{561C049C-B2A4-4820-A352-20DC78835C21} = {E3D8DFD4-4299-4FE0-9BE8-0CB41F189489}
 		{3B4C1D92-08D4-4D52-AE20-23A0BF882FCD} = {39FEC70F-8F35-4A04-B770-59F12A0CE83F}
 		{972E4948-C781-4CF9-A13E-AC3146AB0AD1} = {39FEC70F-8F35-4A04-B770-59F12A0CE83F}
 		{253EDD78-BB04-4916-AD09-90F10FBB9803} = {39FEC70F-8F35-4A04-B770-59F12A0CE83F}
