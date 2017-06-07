@@ -314,12 +314,11 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		internal void RunUndo(IUndoableOperation op)
 		{
-			IUndoableOperationWithContext opWithCtx = op as IUndoableOperationWithContext;
-			if (opWithCtx != null)
-				opWithCtx.Undo(this);
-			else
-				op.Undo();
-		}
+            if (op is IUndoableOperationWithContext opWithCtx)
+                opWithCtx.Undo(this);
+            else
+                op.Undo();
+        }
 		
 		/// <summary>
 		/// Call this method to redo the last undone operation
@@ -349,12 +348,11 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		internal void RunRedo(IUndoableOperation op)
 		{
-			IUndoableOperationWithContext opWithCtx = op as IUndoableOperationWithContext;
-			if (opWithCtx != null)
-				opWithCtx.Redo(this);
-			else
-				op.Redo();
-		}
+            if (op is IUndoableOperationWithContext opWithCtx)
+                opWithCtx.Redo(this);
+            else
+                op.Redo();
+        }
 		
 		/// <summary>
 		/// Call this method to push an UndoableOperation on the undostack.

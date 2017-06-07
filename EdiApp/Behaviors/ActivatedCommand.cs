@@ -84,15 +84,14 @@
 		private static void OnCommandChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
 			var uiElement = d as Window;	  // Remove the handler if it exist to avoid memory leaks
-			uiElement.Activated -= uiElement_Activated;
+			uiElement.Activated -= UiElement_Activated;
 
-			var command = e.NewValue as ICommand;
-			if (command != null)
-			{
-				// the property is attached so we attach the Drop event handler
-				uiElement.Activated += uiElement_Activated;
-			}
-		}
+            if (e.NewValue is ICommand command)
+            {
+                // the property is attached so we attach the Drop event handler
+                uiElement.Activated += UiElement_Activated;
+            }
+        }
 
 		/// <summary>
 		/// This method is called when the Activated event occurs. The sender should be the control
@@ -106,7 +105,7 @@
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private static void uiElement_Activated(object sender, System.EventArgs e)
+		private static void UiElement_Activated(object sender, System.EventArgs e)
 		{
 			var uiElement = sender as Window;
 

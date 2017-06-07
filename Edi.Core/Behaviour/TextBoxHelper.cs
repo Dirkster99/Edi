@@ -24,38 +24,35 @@
 
 		private static void SelectedTextChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
 		{
-			TextBox tb = obj as TextBox;
-			if (tb != null)
-			{
-				if (e.OldValue == null && e.NewValue != null)
-				{
-					tb.SelectionChanged += tb_SelectionChanged;
-				}
-				else if (e.OldValue != null && e.NewValue == null)
-				{
-					tb.SelectionChanged -= tb_SelectionChanged;
-				}
+            if (obj is TextBox tb)
+            {
+                if (e.OldValue == null && e.NewValue != null)
+                {
+                    tb.SelectionChanged += tb_SelectionChanged;
+                }
+                else if (e.OldValue != null && e.NewValue == null)
+                {
+                    tb.SelectionChanged -= tb_SelectionChanged;
+                }
 
-				string newValue = e.NewValue as string;
 
-				if (newValue != null && newValue != tb.SelectedText)
-				{
-					if (newValue == tb.Text) // Just select the complete text if new values and text content is equal
-						tb.SelectAll();
-					else
-						tb.SelectedText = newValue as string;
-				}
-			}
-		}
+                if (e.NewValue is string newValue && newValue != tb.SelectedText)
+                {
+                    if (newValue == tb.Text) // Just select the complete text if new values and text content is equal
+                        tb.SelectAll();
+                    else
+                        tb.SelectedText = newValue as string;
+                }
+            }
+        }
 
 		static void tb_SelectionChanged(object sender, RoutedEventArgs e)
 		{
-			TextBox tb = sender as TextBox;
-			if (tb != null)
-			{
-				SetSelectedText(tb, tb.SelectedText);
-			}
-		}
+            if (sender is TextBox tb)
+            {
+                SetSelectedText(tb, tb.SelectedText);
+            }
+        }
 
 	}
 }

@@ -142,11 +142,11 @@ namespace ICSharpCode.AvalonEdit.Search
 		
 		static void MarkerBrushChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-			SearchPanel panel = d as SearchPanel;
-			if (panel != null) {
-				panel.renderer.MarkerBrush = (Brush)e.NewValue;
-			}
-		}
+            if (d is SearchPanel panel)
+            {
+                panel.renderer.MarkerBrush = (Brush)e.NewValue;
+            }
+        }
 		
 		static SearchPanel()
 		{
@@ -157,12 +157,12 @@ namespace ICSharpCode.AvalonEdit.Search
 		
 		static void SearchPatternChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-			SearchPanel panel = d as SearchPanel;
-			if (panel != null) {
-				panel.ValidateSearchText();
-				panel.UpdateSearch();
-			}
-		}
+            if (d is SearchPanel panel)
+            {
+                panel.ValidateSearchText();
+                panel.UpdateSearch();
+            }
+        }
 
 		void UpdateSearch()
 		{

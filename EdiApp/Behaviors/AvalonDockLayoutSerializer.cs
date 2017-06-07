@@ -78,13 +78,12 @@
 			FrameworkElement framworkElement = d as FrameworkElement; // Remove the handler if it exist to avoid memory leaks
 			framworkElement.Loaded -= OnFrameworkElement_Loaded;
 
-			var command = e.NewValue as ICommand;
-			if (command != null)
-			{
-				// the property is attached so we attach the Drop event handler
-				framworkElement.Loaded += OnFrameworkElement_Loaded;
-			}
-		}
+            if (e.NewValue is ICommand command)
+            {
+                // the property is attached so we attach the Drop event handler
+                framworkElement.Loaded += OnFrameworkElement_Loaded;
+            }
+        }
 
 		/// <summary>
 		/// This method is executed when a AvalonDock <seealso cref="DockingManager"/> instance fires the

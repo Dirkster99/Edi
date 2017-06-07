@@ -61,14 +61,13 @@ namespace MiniUML.View.Views
     /// <param name="e"></param>
     private void GridSplitter_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
     {
-      DocumentViewModel d = this.DataContext as DocumentViewModel;
 
-      if (d != null)
-      {
-        d.GridSplitter_DragDelta(e.VerticalChange, this._scrollViewer.ActualHeight);
-        e.Handled = true;
-      }
-    }
+            if (this.DataContext is DocumentViewModel d)
+            {
+                d.GridSplitter_DragDelta(e.VerticalChange, this._scrollViewer.ActualHeight);
+                e.Handled = true;
+            }
+        }
     #endregion methods
   }
 }

@@ -276,18 +276,16 @@
     /// <param name="e"></param>
     private static void OnCurrentLineBackgroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-      EdiTextEditor view = d as EdiTextEditor;
 
-      if (view != null && e != null)
-      {
-        SolidColorBrush newValue = e.NewValue as SolidColorBrush;
+            if (d is EdiTextEditor view && e != null)
+            {
 
-        if (newValue != null)
-        {
-          view.AdjustCurrentLineBackground(newValue);
+                if (e.NewValue is SolidColorBrush newValue)
+                {
+                    view.AdjustCurrentLineBackground(newValue);
+                }
+            }
         }
-      }
-    }
     #endregion methods
   }
 }

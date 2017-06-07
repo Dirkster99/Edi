@@ -46,12 +46,11 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// <param name="context">The construction context. context can be null!</param>
 		public virtual Color? GetColor(ITextRunConstructionContext context)
 		{
-			SolidColorBrush scb = GetBrush(context) as SolidColorBrush;
-			if (scb != null)
-				return scb.Color;
-			else
-				return null;
-		}
+            if (GetBrush(context) is SolidColorBrush scb)
+                return scb.Color;
+            else
+                return null;
+        }
 	}
 
     /// <summary>

@@ -42,12 +42,11 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 	{
 		static HighlightingBrush MakeBrush(Brush b)
 		{
-			SolidColorBrush scb = b as SolidColorBrush;
-			if (scb != null)
-				return new SimpleHighlightingBrush(scb);
-			else
-				return null;
-		}
+            if (b is SolidColorBrush scb)
+                return new SimpleHighlightingBrush(scb);
+            else
+                return null;
+        }
 		
 		readonly string text;
 		List<int> stateChangeOffsets = new List<int>();

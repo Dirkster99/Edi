@@ -329,13 +329,15 @@ namespace ICSharpCode.AvalonEdit.Folding
 		{
 			if (manager == null)
 				throw new ArgumentNullException("manager");
-			FoldingManagerInstallation installation = manager as FoldingManagerInstallation;
-			if (installation != null) {
-				installation.Uninstall();
-			} else {
-				throw new ArgumentException("FoldingManager was not created using FoldingManager.Install");
-			}
-		}
+            if (manager is FoldingManagerInstallation installation)
+            {
+                installation.Uninstall();
+            }
+            else
+            {
+                throw new ArgumentException("FoldingManager was not created using FoldingManager.Install");
+            }
+        }
 		
 		sealed class FoldingManagerInstallation : FoldingManager
 		{

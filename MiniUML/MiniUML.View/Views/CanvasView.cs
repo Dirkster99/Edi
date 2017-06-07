@@ -148,11 +148,10 @@
     {
       while (obj != null)
       {
-        CanvasView cv = obj as CanvasView;
-        if (cv != null)
-          return cv;
+                if (obj is CanvasView cv)
+                    return cv;
 
-        obj = VisualTreeHelper.GetParent(obj);
+                obj = VisualTreeHelper.GetParent(obj);
       }
 
       return null;
@@ -231,12 +230,11 @@
 
     private void handler_RubberBandSelection(object sender, RubberBandSelectionEventArgs e)
     {
-      CreateRubberBandMouseHandler handler = this.mCurrentMouseHandler as CreateRubberBandMouseHandler;
 
-      if (handler != null)
-        handler.RubberBandSelection -= this.handler_RubberBandSelection;
+            if (this.mCurrentMouseHandler is CreateRubberBandMouseHandler handler)
+                handler.RubberBandSelection -= this.handler_RubberBandSelection;
 
-      this.CanvasViewModel.Handle_RubberBandSelection(e);
+            this.CanvasViewModel.Handle_RubberBandSelection(e);
 
       this.EndMouseOperation();
       this.DestroyRubberband();
@@ -285,11 +283,10 @@
         // Set shape to new position
         shape.Position = p;
 
-        // Invoke snap event if possible to let lines adjust correctly
-        ISnapTarget ist = control as ISnapTarget;
-        if (ist != null)
-          ist.NotifySnapTargetUpdate(new SnapTargetUpdateEventArgs(p - origin));
-      }
+                // Invoke snap event if possible to let lines adjust correctly
+                if (control is ISnapTarget ist)
+                    ist.NotifySnapTargetUpdate(new SnapTargetUpdateEventArgs(p - origin));
+            }
     }
 
     void ICanvasViewMouseHandler.OnShapeDragEnd(Point position, ShapeViewModelBase element)
@@ -409,12 +406,11 @@
 
       while (shape != null)
       {
-        ShapeViewModelBase item = this.mPart_ItemsControl.ItemContainerGenerator.ItemFromContainer(shape) as ShapeViewModelBase;
 
-        if (item != null)
-          return item;
+                if (this.mPart_ItemsControl.ItemContainerGenerator.ItemFromContainer(shape) is ShapeViewModelBase item)
+                    return item;
 
-        shape = VisualTreeHelper.GetParent(shape);
+                shape = VisualTreeHelper.GetParent(shape);
       }
 
       return null;

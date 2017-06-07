@@ -71,6 +71,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|WithNRefactory'">
     <Prefer32Bit>false</Prefer32Bit>
     <DefineConstants>DOTNET4;NREFACTORY</DefineConstants>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Net35'">
     <Prefer32Bit>false</Prefer32Bit>

@@ -95,7 +95,7 @@ namespace EdiDocuments.ViewModels.MiniUml
 		#endregion MiniUML Document ViewModel
 
 		#region MiniUML RibbonViewModel
-		public MiniUML.Model.ViewModels.Document.RibbonViewModel vm_RibbonViewModel
+		public RibbonViewModel Vm_RibbonViewModel
 		{
 			get
 			{
@@ -108,7 +108,7 @@ namespace EdiDocuments.ViewModels.MiniUml
 				{
 					this.mRibbonViewModel = value;
 
-					this.RaisePropertyChanged(() => this.vm_RibbonViewModel);
+					this.RaisePropertyChanged(() => this.Vm_RibbonViewModel);
 				}
 			}
 		}

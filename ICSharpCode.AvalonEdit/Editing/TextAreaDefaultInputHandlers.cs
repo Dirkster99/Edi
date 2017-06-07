@@ -61,12 +61,11 @@ namespace ICSharpCode.AvalonEdit.Editing
 		internal static KeyBinding CreateFrozenKeyBinding(ICommand command, ModifierKeys modifiers, Key key)
 		{
 			KeyBinding kb = new KeyBinding(command, key, modifiers);
-			// Mark KeyBindings as frozen because they're shared between multiple editor instances.
-			// KeyBinding derives from Freezable only in .NET 4, so we have to use this little trick:
-			Freezable f = ((object)kb) as Freezable;
-			if (f != null)
-				f.Freeze();
-			return kb;
+            // Mark KeyBindings as frozen because they're shared between multiple editor instances.
+            // KeyBinding derives from Freezable only in .NET 4, so we have to use this little trick:
+            if (((object)kb) is Freezable f)
+                f.Freeze();
+            return kb;
 		}
 		
 		internal static void WorkaroundWPFMemoryLeak(List<InputBinding> inputBindings)

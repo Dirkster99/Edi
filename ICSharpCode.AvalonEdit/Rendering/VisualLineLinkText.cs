@@ -101,12 +101,12 @@ namespace ICSharpCode.AvalonEdit.Rendering
 			if (e.ChangedButton == MouseButton.Left && !e.Handled && LinkIsClickable()) {
 				RequestNavigateEventArgs args = new RequestNavigateEventArgs(this.NavigateUri, this.TargetName);
 				args.RoutedEvent = Hyperlink.RequestNavigateEvent;
-				FrameworkElement element = e.Source as FrameworkElement;
-				if (element != null) {
-					// allow user code to handle the navigation request
-					element.RaiseEvent(args);
-				}
-				if (!args.Handled) {
+                if (e.Source is FrameworkElement element)
+                {
+                    // allow user code to handle the navigation request
+                    element.RaiseEvent(args);
+                }
+                if (!args.Handled) {
 					try {
 						Process.Start(this.NavigateUri.ToString());
 					} catch {

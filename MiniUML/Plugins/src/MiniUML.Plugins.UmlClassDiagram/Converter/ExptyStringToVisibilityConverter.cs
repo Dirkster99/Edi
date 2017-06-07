@@ -15,15 +15,14 @@
       if (value == null)
         return null;
 
-      string s = value as string;
 
-      if (s != null)
-      {
-        if (s == string.Empty)
-          return Visibility.Collapsed;
-      }
+            if (value is string s)
+            {
+                if (s == string.Empty)
+                    return Visibility.Collapsed;
+            }
 
-      return Visibility.Visible;
+            return Visibility.Visible;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

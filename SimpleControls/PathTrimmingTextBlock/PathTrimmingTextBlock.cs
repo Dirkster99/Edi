@@ -62,33 +62,32 @@ namespace SimpleControls.PathTrimmingTextBlock
     /// <param name="e"></param>
     private void PathTrimmingTextBlock_Loaded(object sender, RoutedEventArgs e)
     {
-      FrameworkElement p = this.Parent as FrameworkElement;
+            FrameworkElement p = null;
+            if (this.Parent is FrameworkElement)
+            {
+                p = (FrameworkElement) this.Parent;
+                this.mContainer = p;
+            }
+            else
+            {
 
-      if (p != null)
-      {
-        this.mContainer = p;
-      }
-      else
-      {
-        DependencyObject dp = this.Parent as DependencyObject;
+                if (this.Parent is DependencyObject dp)
+                {
+                    for (DependencyObject parent = LogicalTreeHelper.GetParent(dp as DependencyObject);
+                         parent != null;
+                         parent = LogicalTreeHelper.GetParent(parent as DependencyObject))
+                    {
+                        p = parent as FrameworkElement;
 
-        if (dp != null)
-        {
-          for (DependencyObject parent = LogicalTreeHelper.GetParent(dp as DependencyObject);
-               parent != null;
-               parent = LogicalTreeHelper.GetParent(parent as DependencyObject))
-          {
-            p = parent as FrameworkElement;
+                        if (p != null)
+                            break;
+                    }
 
-            if (p != null)
-              break;
-          }
+                    this.mContainer = p;
+                }
+            }
 
-          this.mContainer = p;
-        }
-      }
-
-      if (this.mContainer != null)
+            if (this.mContainer != null)
       {
         this.mContainer.SizeChanged += new SizeChangedEventHandler(this.container_SizeChanged);
 

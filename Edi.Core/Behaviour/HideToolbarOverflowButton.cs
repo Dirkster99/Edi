@@ -94,19 +94,18 @@
 			if (mainToolBar == null)
 				return;
 
-			////      // mainToolBar – instance of toolbar defined in XAML view
-			////      foreach (FrameworkElement a in mainToolBar.Items)
-			////      {
-			////        ToolBar.SetOverflowMode(a, OverflowMode.Never);
-			////      }
-			////
-			var overflowGrid = mainToolBar.Template.FindName("OverflowGrid", mainToolBar) as FrameworkElement;
+            ////      // mainToolBar – instance of toolbar defined in XAML view
+            ////      foreach (FrameworkElement a in mainToolBar.Items)
+            ////      {
+            ////        ToolBar.SetOverflowMode(a, OverflowMode.Never);
+            ////      }
+            ////
 
-			if (overflowGrid != null)
-			{
-				overflowGrid.Visibility = Visibility.Collapsed;
-			}
-		}
+            if (mainToolBar.Template.FindName("OverflowGrid", mainToolBar) is FrameworkElement overflowGrid)
+            {
+                overflowGrid.Visibility = Visibility.Collapsed;
+            }
+        }
 		#endregion methods
 	}
 }

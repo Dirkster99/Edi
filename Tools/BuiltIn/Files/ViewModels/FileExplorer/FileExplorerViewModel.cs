@@ -279,21 +279,20 @@ namespace Files.ViewModels.FileExplorer
 			{
 				if (e.ActiveDocument != null)
 				{
-					FileBaseViewModel f = e.ActiveDocument as FileBaseViewModel;
 
-					if (f != null)
-					{
-						if (File.Exists(f.FilePath) == true)
-						{
-							var fi = new FileInfo(f.FilePath);
+                    if (e.ActiveDocument is FileBaseViewModel f)
+                    {
+                        if (File.Exists(f.FilePath) == true)
+                        {
+                            var fi = new FileInfo(f.FilePath);
 
-							this.mFilePathName = f.FilePath;
+                            this.mFilePathName = f.FilePath;
 
-							this.RaisePropertyChanged(() => this.FileName);
-							this.RaisePropertyChanged(() => this.FilePath);
-						}
-					}
-				}
+                            this.RaisePropertyChanged(() => this.FileName);
+                            this.RaisePropertyChanged(() => this.FilePath);
+                        }
+                    }
+                }
 			}
 		}
 

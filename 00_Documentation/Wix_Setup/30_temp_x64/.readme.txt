@@ -1,1 +1,0 @@
-This directory is used as temporary memory for building setup via WiX batch scripting.
