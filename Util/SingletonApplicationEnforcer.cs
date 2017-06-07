@@ -90,12 +90,8 @@
 				throw new ArgumentNullException("processArgsFunc");
 			}
 
-			if (processArgsFunc == null)
-			{
-				throw new ArgumentNullException("processArgsFunc1");
-			}
+            this.processArgsFunc = processArgsFunc ?? throw new ArgumentNullException("processArgsFunc1");
 
-			this.processArgsFunc = processArgsFunc;
 			this.processActivateFunc = processArgsFunc1;
 			this.applicationId = applicationId;
 		}
@@ -110,60 +106,59 @@
 		/// otherwise <c>false</c>.</returns>
 		public bool ShouldApplicationExit()
 		{
-			bool createdNew;
-			string argsWaitHandleName = "ArgsWaitHandle_" + applicationId;
-			string memoryFileName = "ArgFile_" + applicationId;
+            string argsWaitHandleName = "ArgsWaitHandle_" + applicationId;
+            string memoryFileName = "ArgFile_" + applicationId;
 
 			EventWaitHandle argsWaitHandle = new EventWaitHandle(
-				false, EventResetMode.AutoReset, argsWaitHandleName, out createdNew);
+				false, EventResetMode.AutoReset, argsWaitHandleName, out bool createdNew);
 
 			GC.KeepAlive(argsWaitHandle);
-
-
+             
 			if (createdNew)
 			{
-				/* This is the main, or singleton application. 
+                /* This is the main, or singleton application. 
 				 * A thread is created to service the MemoryMappedFile. 
 				 * We repeatedly examine this file each time the argsWaitHandle 
 				 * is Set by a non-singleton application instance. */
-				thread = new Thread(() =>
-				{
-					try
-					{
-						using (MemoryMappedFile file = MemoryMappedFile.CreateOrOpen(memoryFileName, 10000))
-						{
-							while (true)
-							{
-								argsWaitHandle.WaitOne();
-								using (MemoryMappedViewStream stream = file.CreateViewStream())
-								{
-									var reader = new BinaryReader(stream);
-									string args;
-									try
-									{
-										args = reader.ReadString();
-									}
-									catch (Exception ex)
-									{
-										logger.Error("Unable to retrieve string. ", ex);
-										continue;
-									}
-									string[] argsSplit = args.Split(new string[] { argDelimiter },
-																									StringSplitOptions.RemoveEmptyEntries);
-									processArgsFunc(argsSplit);
-								}
+                thread = new Thread(() =>
+                {
+                    try
+                    {
+                        using (MemoryMappedFile file = MemoryMappedFile.CreateOrOpen(memoryFileName, 10000))
+                        {
+                            while (true)
+                            {
+                                argsWaitHandle.WaitOne();
+                                using (MemoryMappedViewStream stream = file.CreateViewStream())
+                                {
+                                    var reader = new BinaryReader(stream);
+                                    string args;
+                                    try
+                                    {
+                                        args = reader.ReadString();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        logger.Error("Unable to retrieve string. ", ex);
+                                        continue;
+                                    }
+                                    string[] argsSplit = args.Split(new string[] { argDelimiter },
+                                                                                                    StringSplitOptions.RemoveEmptyEntries);
+                                    processArgsFunc(argsSplit);
+                                }
 
-							}
-						}
-					}
-					catch (Exception ex)
-					{
-						logger.Error("Unable to monitor memory file. ", ex);
-					}
-				});
-
-				thread.IsBackground = true;
-				thread.Start();
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error("Unable to monitor memory file. ", ex);
+                    }
+                })
+                {
+                    IsBackground = true
+                };
+                thread.Start();
 			}
 			else
 			{
