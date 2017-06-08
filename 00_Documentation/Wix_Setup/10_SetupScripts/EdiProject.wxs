@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <Product Name='!(wix.Product)' Id='4f533d35-a5ae-4978-aa83-6cfce20e1f71' UpgradeCode='1fd9dc9e-7bd5-4e56-978b-98632214a90e'
+    Language='1033' Codepage='1252' Version='1.0.5.5' Manufacturer='!(wix.Manufacturer)'>
+
+    <Package Id='*' Keywords='Text Editor, UML' Comments="text editor, uml, log4net"
+             Manufacturer="!(wix.Manufacturer)" Description="!(wix.ProductDesc)"
+             Platform='x64'
+             InstallerVersion='201' Languages='1033' Compressed='yes' SummaryCodepage='1252' />
+
+    <Media Id='1' Cabinet='Sample.cab' EmbedCab='yes' DiskPrompt="CD-ROM #1" />
+
+    <!-- WixVariable Id="UpgradeCode" Value="XXX"/ -->
+    <WixVariable Id="Manufacturer" Value="www.edi.codeplex.com"/>
+    <WixVariable Id="Product" Value="Edi 1.0.5.6"/>
+    <WixVariable Id="ProductDesc" Value="Open source text editor build on C#/WPF"/>
+    <WixVariable Id="ProductIcon" Value="Setup_EdiLogo.ico"/>
+    <WixVariable Id="WixSubFiles" Value=".\01_SetupResources"/>
+
+    <Icon Id="Setup_EdiLogo.ico" SourceFile="!(wix.WixSubFiles)\!(wix.ProductIcon)"/>
+
+    <!-- Property Id="ARPNOMODIFY" Value="0" / -->
+    <Property Id="ARPPRODUCTICON" Value="!(wix.ProductIcon)" />
+    <Property Id='DiskPrompt' Value="Edi Installation [1]" />
+
+    <!-- Property Id="INSTALLDIR">
+     <RegistrySearch Id="WixSubFeaturesSearch" Type="raw" Root="HKCU"
+                     Key="!(wix.Manufacturer)\!(wix.Product)" Name="InstallDir" />
+   </Property -->
+
+    <Feature Id='Complete' Title='Edi Application' Description='The Editor (Complete Package)'>
+      <Feature Id='Application' Title='Edi' Description='The Editor (Core Files)' Level='1'>
+        <ComponentGroupRef Id='EdiCore' />
+        <ComponentRef Id='ProgramMenuDir' />
+        <ComponentRef Id='EdiConfig' />
+      </Feature>
+    </Feature>
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramMenuFolder" Name="Programs">
+        <Directory Id="ProgramMenuDir" Name="Edi">
+          <Component Id="ProgramMenuDir" Guid="c9c8ad84-b643-4968-a644-2d445e92a7cf">
+            <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
+            <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
+          </Component>
+        </Directory>
+      </Directory>
+
+      <Directory Id="DesktopFolder" Name="Desktop" />
+
+      <Directory Id='ProgramFiles64Folder' Name='PFiles'>
+        <!-- ProgramFilesFolder x86 folder -->
+        <!-- Directory Id="Edi" Name="Edi" -->
+        <!-- Directory Id="INSTALLDIR" Name="Edi" -->
+
+        <Directory Id="INSTALLDIR" Name="Edi">
+
+          <Component Id="EdiConfig" Guid="19685467-f935-4210-a585-a51f9beda693" KeyPath="yes" Win64="yes">
+            <!-- Insert files, registry keys, and other resources here. -->
+
+            <!-- Adjust module path for standard PRISM/MEF modules with XmlFile utility
+						     Set assemblyFile="...new value ..." for <configuration><modules><module moduleTyp="Files.Module" ... />
+							 Requires -ext WixUtilExtension parameter on light.exe and candle.exe command line
+							 http://wixtoolset.org/documentation/manual/v3/xsd/util/
+						-->
+            <util:XmlFile Id='UpdateBase_Files.dll'
+									  Action='setValue'
+									  File='[INSTALLDIR]Edi.exe.config'
+									  ElementPath='//configuration/modules/module[\[]@moduleType="Files.Module"[\]]/@assemblyFile'
+									  Value='[INSTALLDIR]Files.dll' />
+
+            <!-- Adjust module path for standard PRISM/MEF modules with XmlFile utility
+						     Set assemblyFile="...new value ..." for <configuration><modules><module moduleTyp="EdiDocuments.Module" ... />
+							 Requires -ext WixUtilExtension parameter on light.exe and candle.exe command line
+							 http://wixtoolset.org/documentation/manual/v3/xsd/util/
+						-->
+            <util:XmlFile Id='UpdateBase_EdiDocuments.dll'
+									  Action='setValue'
+									  File='[INSTALLDIR]Edi.exe.config'
+									  ElementPath='//configuration/modules/module[\[]@moduleType="EdiDocuments.Module"[\]]/@assemblyFile'
+									  Value='[INSTALLDIR]EdiDocuments.dll' />
+
+            <!-- Adjust module path for standard PRISM/MEF modules with XmlFile utility
+						     Set assemblyFile="...new value ..." for <configuration><modules><module moduleTyp="Log4NetTools.Module" ... />
+							 Requires -ext WixUtilExtension parameter on light.exe and candle.exe command line
+							 http://wixtoolset.org/documentation/manual/v3/xsd/util/
+						-->
+            <util:XmlFile Id='UpdateBase_Log4NetTools.dll'
+									  Action='setValue'
+									  File='[INSTALLDIR]Edi.exe.config'
+									  ElementPath='//configuration/modules/module[\[]@moduleType="Log4NetTools.Module"[\]]/@assemblyFile'
+									  Value='[INSTALLDIR]Plugins\Log4NetTools.dll' />
+          </Component>
+
+        </Directory>
+        <!-- /Directory -->
+      </Directory>
+
+    </Directory>
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+    <UIRef Id="WixUI_InstallDir" />
+  </Fragment>
+
+</Wix>
