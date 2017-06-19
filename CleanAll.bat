@@ -8,7 +8,7 @@ ECHO corresponding BIN and OBJ Folder contained in the following projects
 ECHO.
 ECHO Edi
 ECHO Edi.Core
-ECHO EdiApp
+ECHO Edi.App
 ECHO EdiDialogs
 ECHO EdiDocuments
 ECHO EdiViews
@@ -111,10 +111,10 @@ ECHO.
 RMDIR /S /Q SimpleControls\bin
 RMDIR /S /Q SimpleControls\obj
 
-ECHO Deleting BIN and OBJ Folders in EdiApp
+ECHO Deleting BIN and OBJ Folders in Edi.App
 ECHO.
-RMDIR /S /Q EdiApp\bin
-RMDIR /S /Q EdiApp\obj
+RMDIR /S /Q Edi.App\bin
+RMDIR /S /Q Edi.App\obj
 
 ECHO Deleting BIN and OBJ Folders in Edi.Core
 ECHO.

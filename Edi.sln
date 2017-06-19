@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binaries", "Binaries", "{E3D8DFD4-4299-4FE0-9BE8-0CB41F189489}"
 	ProjectSection(SolutionItems) = preProject
@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UML Plugins", "UML Plugins"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Edi", "Edi", "{39FEC70F-8F35-4A04-B770-59F12A0CE83F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edi", "Edi\Edi.csproj", "{A02BE1B0-4071-4FCE-AF68-EA3A0A679DA1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edi", "Edi\Edi\Edi.csproj", "{A02BE1B0-4071-4FCE-AF68-EA3A0A679DA1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.AvalonEdit", "ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj", "{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}"
 EndProject
@@ -60,6 +60,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Output", "Tools\BuiltIn\Output\Output.csproj", "{D14D8609-693C-475D-A4A4-5A7F6188D633}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Files", "Tools\BuiltIn\Files\Files.csproj", "{EF9B7E8D-B722-48E0-A941-E21F4F7CC2DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edi.Apps", "Edi\Edi.App\Edi.Apps.csproj", "{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -409,6 +411,26 @@ Global
 		{EF9B7E8D-B722-48E0-A941-E21F4F7CC2DF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{EF9B7E8D-B722-48E0-A941-E21F4F7CC2DF}.Release|x64.ActiveCfg = Release|Any CPU
 		{EF9B7E8D-B722-48E0-A941-E21F4F7CC2DF}.Release|x86.ActiveCfg = Release|Any CPU
+		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Debug|Mixed.ActiveCfg = Debug|Any CPU
+		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Debug|Mixed.Build.0 = Debug|Any CPU
+		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Debug|x64.Build.0 = Debug|Any CPU
+		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Debug|x86.Build.0 = Debug|Any CPU
+		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Release|Mixed.ActiveCfg = Release|Any CPU
+		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Release|Mixed.Build.0 = Release|Any CPU
+		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Release|x64.ActiveCfg = Release|Any CPU
+		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Release|x64.Build.0 = Release|Any CPU
+		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Release|x86.ActiveCfg = Release|Any CPU
+		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -433,6 +455,7 @@ Global
 		{4530577A-5458-4B84-A65D-71BC145624A4} = {934FDC62-E522-4B23-A328-E774C550FF3B}
 		{D14D8609-693C-475D-A4A4-5A7F6188D633} = {4530577A-5458-4B84-A65D-71BC145624A4}
 		{EF9B7E8D-B722-48E0-A941-E21F4F7CC2DF} = {4530577A-5458-4B84-A65D-71BC145624A4}
+		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D} = {39FEC70F-8F35-4A04-B770-59F12A0CE83F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		RESX_NeutralResourcesLanguage = en-US

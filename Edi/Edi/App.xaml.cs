@@ -7,8 +7,8 @@ namespace Edi
 	using System.Windows;
 	using System.Windows.Threading;
 	using Edi.Core.Models;
-	using EdiApp.ViewModels;
-	using EdiApp.Views.Shell;
+	using Edi.Apps.ViewModels;
+	using Edi.Apps.Views.Shell;
 	using log4net;
 	using log4net.Config;
 	using MsgBox;

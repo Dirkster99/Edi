@@ -88,7 +88,7 @@
 		{
 			return
 				ResourceLocator.GetResource<DataTemplate>(
-					"EdiApp",
+					"Edi.Apps",
 					"Resources/DocumentHeaderDataTemplate.xaml",
 					"AvalonDock_DocumentHeader") as DataTemplate;
 		}
@@ -100,14 +100,14 @@
 		private PanesStyleSelector LoadPanesStyleSelector(PanesStyleSelector panesStyleSelector)
 		{
 			var newStyle = ResourceLocator.GetResource<Style>(
-										 "EdiApp",
+										 "Edi.Apps",
 										 "Resources/Styles/AvalonDockStyles.xaml",
 										 "FileStyle") as Style;
 
 			panesStyleSelector.RegisterStyle(typeof(FileBaseViewModel), newStyle);
 
 			newStyle = ResourceLocator.GetResource<Style>(
-									"EdiApp",
+									"Edi.Apps",
 									"Resources/Styles/AvalonDockStyles.xaml",
 									"ToolStyle") as Style;
 

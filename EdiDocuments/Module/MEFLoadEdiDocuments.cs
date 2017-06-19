@@ -160,7 +160,7 @@
 		private PanesStyleSelector RegisterStyles(PanesStyleSelector selectPanesStyle)
 		{
 			var newStyle = ResourceLocator.GetResource<Style>(
-									"EdiApp",
+									"Edi.Apps",
 									"Resources/Styles/AvalonDockStyles.xaml",
 									"StartPageStyle") as Style;
 

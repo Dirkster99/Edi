@@ -7,9 +7,9 @@ namespace Edi
 	using System.Windows;
 	using Edi.Core;
 	using Edi.Core.Interfaces;
-	using EdiApp.Interfaces.ViewModel;
-	using EdiApp.ViewModels;
-	using EdiApp.Views.Shell;
+	using Edi.Apps.Interfaces.ViewModel;
+	using Edi.Apps.ViewModels;
+	using Edi.Apps.Views.Shell;
 	using Microsoft.Practices.Prism.MefExtensions;
 	using Microsoft.Practices.Prism.Modularity;
 	using MsgBox;
@@ -38,9 +38,9 @@ namespace Edi
 
 		#region constructors
 		public Bootstapper(App app,
-											 StartupEventArgs eventArgs,
-											 Options programSettings,
-											 IThemesManager themesManager)
+							StartupEventArgs eventArgs,
+							Options programSettings,
+							IThemesManager themesManager)
 		{
 			this.mThemes = themesManager;
 			this.mProgramSettingsManager = new SettingsManager(this.mThemes);
