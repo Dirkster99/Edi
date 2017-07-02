@@ -335,7 +335,7 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Edi.App\Edi.Apps.csproj">
+    <ProjectReference Include="..\Edi.Apps\Edi.Apps.csproj">
       <Project>{4df91f4b-878a-4ab3-a5ec-16bce3d6e99d}</Project>
       <Name>Edi.Apps</Name>
     </ProjectReference>
