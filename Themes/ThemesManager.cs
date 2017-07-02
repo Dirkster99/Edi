@@ -58,7 +58,7 @@ namespace Themes
       "/Themes;component/FileListView/Combobox.xaml",
       "/Themes;component/MetroDark/Theme.xaml",
       "/Xceed.Wpf.AvalonDock.Themes.Expression;component/DarkTheme.xaml",
-      "/EdiApp;component/Themes/MetroDark.xaml",
+      "/Edi.Apps;component/Themes/MetroDark.xaml",
       "/FileListView;component/Images/MetroDarkIcons.xaml"
     };
 		#endregion Expression Dark theme resources
@@ -71,7 +71,7 @@ namespace Themes
       "/EdiDialogs;component/Themes/ModernDialogEx.xaml",
 
       "/Themes;component/Generic/Theme.xaml",
-      "/EdiApp;component/Themes/MetroLight.xaml",
+      "/Edi.Apps;component/Themes/MetroLight.xaml",
       "/FileListView;component/Images/GenericIcons.xaml"
     };
 		#endregion Generic theme resources
@@ -114,7 +114,7 @@ namespace Themes
       "/Themes;component/FileListView/Combobox.xaml",
       "/Themes;component/MetroLight/Theme.xaml",
       "/Xceed.Wpf.AvalonDock.Themes.Metro;component/Theme.xaml",
-      "/EdiApp;component/Themes/MetroLight.xaml",
+      "/Edi.Apps;component/Themes/MetroLight.xaml",
       "/FileListView;component/Images/MetroLightIcons.xaml"
     };
 		#endregion Light Metro theme resources

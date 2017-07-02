@@ -335,59 +335,59 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EdiDialogs\EdiDialogs.csproj">
+    <ProjectReference Include="..\Edi.App\Edi.Apps.csproj">
+      <Project>{4df91f4b-878a-4ab3-a5ec-16bce3d6e99d}</Project>
+      <Name>Edi.Apps</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EdiDialogs\EdiDialogs.csproj">
       <Project>{3b4c1d92-08d4-4d52-ae20-23a0bf882fcd}</Project>
       <Name>EdiDialogs</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EdiApp\EdiApp.csproj">
-      <Project>{712120b2-6021-48f9-9548-20cb8a3d2429}</Project>
-      <Name>EdiApp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Edi.Core\Edi.Core.csproj">
+    <ProjectReference Include="..\..\Edi.Core\Edi.Core.csproj">
       <Project>{f17e5e06-f28c-4e91-964f-cdb9f8589bb7}</Project>
       <Name>Edi.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EdiDocuments\EdiDocuments.csproj">
+    <ProjectReference Include="..\..\EdiDocuments\EdiDocuments.csproj">
       <Project>{253edd78-bb04-4916-ad09-90f10fbb9803}</Project>
       <Name>EdiDocuments</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
+    <ProjectReference Include="..\..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
       <Project>{6c55b776-26d4-4db3-a6ab-87e783b2f3d1}</Project>
       <Name>ICSharpCode.AvalonEdit</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MiniUML\MiniUML.Framework\MiniUML.Framework.csproj">
+    <ProjectReference Include="..\..\MiniUML\MiniUML.Framework\MiniUML.Framework.csproj">
       <Project>{99941efe-69b0-4618-b130-6d6fc1b43eb3}</Project>
       <Name>MiniUML.Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MiniUML\MiniUML.Model\MiniUML.Model.csproj">
+    <ProjectReference Include="..\..\MiniUML\MiniUML.Model\MiniUML.Model.csproj">
       <Project>{4654f58a-400c-4d47-9dc9-9fca153554d3}</Project>
       <Name>MiniUML.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MiniUML\MiniUML.View\MiniUML.View.csproj">
+    <ProjectReference Include="..\..\MiniUML\MiniUML.View\MiniUML.View.csproj">
       <Project>{aad6b1d6-f529-40f8-9786-dc8e2fdf0ad6}</Project>
       <Name>MiniUML.View</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SettingsView\SettingsView.csproj">
+    <ProjectReference Include="..\..\SettingsView\SettingsView.csproj">
       <Project>{972e4948-c781-4cf9-a13e-ac3146ab0ad1}</Project>
       <Name>SettingsView</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Settings\Settings.csproj">
+    <ProjectReference Include="..\..\Settings\Settings.csproj">
       <Project>{2807b493-cc2e-402e-901a-eb138698fedc}</Project>
       <Name>Settings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SimpleControls\SimpleControls.csproj">
+    <ProjectReference Include="..\..\SimpleControls\SimpleControls.csproj">
       <Project>{0E69BE38-78C0-4662-A0E1-56C5913B5C3A}</Project>
       <Name>SimpleControls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Themes\Themes.csproj">
+    <ProjectReference Include="..\..\Themes\Themes.csproj">
       <Project>{957A91E6-91DD-4C13-B1D1-F06D66EC6D55}</Project>
       <Name>Themes</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tools\BuiltIn\Output\Output.csproj">
+    <ProjectReference Include="..\..\Tools\BuiltIn\Output\Output.csproj">
       <Project>{d14d8609-693c-475d-a4a4-5a7f6188d633}</Project>
       <Name>Output</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Util\Util.csproj">
+    <ProjectReference Include="..\..\Util\Util.csproj">
       <Project>{D96F59C4-A727-47D9-84AD-508B04DF2714}</Project>
       <Name>Util</Name>
     </ProjectReference>
@@ -425,7 +425,7 @@ Copy /Y "$(SolutionDir)02_Libs\00_bin\InplaceEditBoxLib.dlll" "$(TargetDir)"
 Copy /Y "$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Expression.dll" "$(TargetDir)"
 Copy /Y "$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Metro.dll" "$(TargetDir)"
 </PostBuildEvent>
-  </PropertyGroup> 
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
