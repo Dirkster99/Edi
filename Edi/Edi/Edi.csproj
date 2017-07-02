@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -343,7 +343,7 @@
       <Project>{3b4c1d92-08d4-4d52-ae20-23a0bf882fcd}</Project>
       <Name>EdiDialogs</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Edi.Core\Edi.Core.csproj">
+    <ProjectReference Include="..\Edi.Core\Edi.Core.csproj">
       <Project>{f17e5e06-f28c-4e91-964f-cdb9f8589bb7}</Project>
       <Name>Edi.Core</Name>
     </ProjectReference>

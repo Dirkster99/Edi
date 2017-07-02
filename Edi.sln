@@ -41,7 +41,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniUML.Framework", "MiniUM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Settings", "Settings\Settings.csproj", "{2807B493-CC2E-402E-901A-EB138698FEDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edi.Core", "Edi.Core\Edi.Core.csproj", "{F17E5E06-F28C-4E91-964F-CDB9F8589BB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edi.Core", "Edi\Edi.Core\Edi.Core.csproj", "{F17E5E06-F28C-4E91-964F-CDB9F8589BB7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdiDialogs", "EdiDialogs\EdiDialogs.csproj", "{3B4C1D92-08D4-4D52-AE20-23A0BF882FCD}"
 EndProject

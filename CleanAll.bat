@@ -118,8 +118,8 @@ RMDIR /S /Q Edi\Edi.Apps\obj
 
 ECHO Deleting BIN and OBJ Folders in Edi.Core
 ECHO.
-RMDIR /S /Q Edi.Core\bin
-RMDIR /S /Q Edi.Core\obj
+RMDIR /S /Q Edi\Edi.Core\bin
+RMDIR /S /Q Edi\Edi.Core\obj
 
 PAUSE
 
