@@ -9,7 +9,7 @@ ECHO.
 ECHO Edi
 ECHO Edi.Apps
 ECHO Edi.Core
-ECHO EdiDialogs
+ECHO Edi.Dialogs
 ECHO EdiDocuments
 ECHO EdiViews
 ECHO Themes
@@ -48,8 +48,8 @@ ECHO.
 RMDIR /S /Q Edi\bin
 RMDIR /S /Q Edi\obj
 
-RMDIR /S /Q EdiDialogs\bin
-RMDIR /S /Q EdiDialogs\obj
+RMDIR /S /Q Edi\Edi.Dialogs\bin
+RMDIR /S /Q Edi\Edi.Dialogs\obj
 
 RMDIR /S /Q EdiDocuments\bin
 RMDIR /S /Q EdiDocuments\obj

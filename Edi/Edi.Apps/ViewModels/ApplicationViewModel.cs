@@ -18,7 +18,7 @@ namespace Edi.Apps.ViewModels
     using Edi.Apps.Enums;
     using EdiApp.Events;   // XXX TODO Implementation in Edi.Core shouold have a different namespace
     using Edi.Apps.Interfaces.ViewModel;
-    using EdiDialogs.About;
+    using Edi.Dialogs.About;
     using EdiDocuments.Process;
     using EdiDocuments.ViewModels.EdiDoc;
     using EdiDocuments.ViewModels.MiniUml;

@@ -61,6 +61,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Files", "Tools\BuiltIn\File
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edi.Apps", "Edi\Edi.Apps\Edi.Apps.csproj", "{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edi.Dialogs", "Edi\Edi.Dialogs\Edi.Dialogs.csproj", "{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -411,6 +413,26 @@ Global
 		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Release|x64.Build.0 = Release|Any CPU
 		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Release|x86.ActiveCfg = Release|Any CPU
 		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}.Release|x86.Build.0 = Release|Any CPU
+		{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}.Debug|Mixed.ActiveCfg = Debug|Any CPU
+		{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}.Debug|Mixed.Build.0 = Debug|Any CPU
+		{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}.Debug|x64.ActiveCfg = Debug|x64
+		{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}.Debug|x64.Build.0 = Debug|x64
+		{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}.Debug|x86.ActiveCfg = Debug|x86
+		{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}.Debug|x86.Build.0 = Debug|x86
+		{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}.Release|Mixed.ActiveCfg = Release|Any CPU
+		{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}.Release|Mixed.Build.0 = Release|Any CPU
+		{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}.Release|Mixed Platforms.Build.0 = Release|x86
+		{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}.Release|x64.ActiveCfg = Release|x64
+		{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}.Release|x64.Build.0 = Release|x64
+		{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}.Release|x86.ActiveCfg = Release|x86
+		{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -435,6 +457,7 @@ Global
 		{D14D8609-693C-475D-A4A4-5A7F6188D633} = {4530577A-5458-4B84-A65D-71BC145624A4}
 		{EF9B7E8D-B722-48E0-A941-E21F4F7CC2DF} = {4530577A-5458-4B84-A65D-71BC145624A4}
 		{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D} = {39FEC70F-8F35-4A04-B770-59F12A0CE83F}
+		{C4BBC94F-ACA4-4B4A-8558-248E2E684B05} = {39FEC70F-8F35-4A04-B770-59F12A0CE83F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		RESX_NeutralResourcesLanguage = en-US
