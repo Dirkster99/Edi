@@ -603,11 +603,10 @@ namespace ICSharpCode.AvalonEdit.Utils
 		/// </remarks>
 		public override string ToString()
 		{
-            if (this is Rope<char> )
+            Rope<char> charRope = this as Rope<char>;
+            if (charRope != null)
             {
-                //Rope<char> charRope; 
-                //return charRope.ToString(0, this.Length);
-                return this.ToString();
+                return charRope.ToString(0, this.Length);
             }
             else
             {
