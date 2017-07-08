@@ -16,7 +16,7 @@
 	using Edi.Documents.ViewModels.StartPage;
 	using MiniUML.Framework;
 	using MsgBox;
-	using Themes;
+	using Edi.Themes;
 
 	public partial class ApplicationViewModel
 	{

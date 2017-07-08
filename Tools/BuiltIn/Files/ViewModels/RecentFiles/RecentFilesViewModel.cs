@@ -36,7 +36,7 @@ namespace Files.ViewModels.RecentFiles
 		{
 			get
 			{
-				return new Uri("pack://application:,,,/Themes;component/Images/App/PinableListView/NoPin16.png", UriKind.RelativeOrAbsolute);
+				return new Uri("pack://application:,,,/Edi.Themes;component/Images/App/PinableListView/NoPin16.png", UriKind.RelativeOrAbsolute);
 			}
 		}
 

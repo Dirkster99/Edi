@@ -11,7 +11,7 @@ ECHO Edi.Apps
 ECHO Edi.Core
 ECHO Edi.Dialogs
 ECHO Edi.Documents
-ECHO Themes
+ECHO Edi.Themes
 ECHO ICSharpCode.AvalonEdit
 ECHO.
 ECHO Log4NetTools
@@ -53,8 +53,8 @@ RMDIR /S /Q Edi\Edi.Dialogs\obj
 RMDIR /S /Q Edi\Edi.Documents\bin
 RMDIR /S /Q Edi\Edi.Documents\obj
 
-RMDIR /S /Q Themes\bin
-RMDIR /S /Q Themes\obj
+RMDIR /S /Q Edi.Themes\bin
+RMDIR /S /Q Edi.Themes\obj
 
 RMDIR /S /Q ICSharpCode.AvalonEdit\bin
 RMDIR /S /Q ICSharpCode.AvalonEdit\obj

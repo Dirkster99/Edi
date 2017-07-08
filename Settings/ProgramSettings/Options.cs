@@ -9,8 +9,8 @@
     using ICSharpCode.AvalonEdit.Highlighting.Themes;
     using Settings.Interfaces;
     using SimpleControls.MRU.ViewModel;
-    using Themes;
-    using Themes.Interfaces;
+    using Edi.Themes;
+    using Edi.Themes.Interfaces;
     using UnitComboLib.Unit;
     using UnitComboLib.ViewModel;
 

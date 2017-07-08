@@ -125,7 +125,7 @@ namespace Edi.Documents.ViewModels.StartPage
 			get
 			{
 				// This icon is visible in AvalonDock's Document Navigator window
-				return new Uri("pack://application:,,,/Themes;component/Images/Documents/document.png", UriKind.RelativeOrAbsolute);
+				return new Uri("pack://application:,,,/Edi.Themes;component/Images/Documents/document.png", UriKind.RelativeOrAbsolute);
 			}
 		}
 

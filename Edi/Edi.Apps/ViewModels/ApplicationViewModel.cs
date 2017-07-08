@@ -31,7 +31,7 @@ namespace Edi.Apps.ViewModels
     using Settings.Interfaces;
     using SettingsView.Config.ViewModels;
     using SimpleControls.MRU.ViewModel;
-    using Themes.Interfaces;
+    using Edi.Themes.Interfaces;
     using Edi.Core.Interfaces.Documents;
     using Edi.Core.Models.Documents;
     using Edi.Core.ViewModels.Command;

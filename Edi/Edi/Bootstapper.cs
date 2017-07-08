@@ -18,7 +18,7 @@ namespace Edi
 	using Settings.Interfaces;
 	using Settings.ProgramSettings;
 	using SimpleControls.Local;
-	using Themes.Interfaces;
+	using Edi.Themes.Interfaces;
 
 	public class Bootstapper : MefBootstrapper
 	{

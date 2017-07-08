@@ -15,8 +15,8 @@ namespace Edi
 	using Settings;
 	using Settings.ProgramSettings;
 	using SimpleControls.Local;
-	using Themes;
-	using Themes.Interfaces;
+	using Edi.Themes;
+	using Edi.Themes.Interfaces;
 	using Edi.Util;
 	using Edi.Util.ActivateWindow;
 

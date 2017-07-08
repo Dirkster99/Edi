@@ -2,7 +2,7 @@
 {
 	using Settings.ProgramSettings;
 	using Settings.UserProfile;
-	using Themes.Interfaces;
+	using Edi.Themes.Interfaces;
 
 	public interface ISettingsManager
 	{

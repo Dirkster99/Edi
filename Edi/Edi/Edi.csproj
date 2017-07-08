@@ -371,10 +371,6 @@
       <Project>{0E69BE38-78C0-4662-A0E1-56C5913B5C3A}</Project>
       <Name>SimpleControls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Themes\Themes.csproj">
-      <Project>{957A91E6-91DD-4C13-B1D1-F06D66EC6D55}</Project>
-      <Name>Themes</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Tools\BuiltIn\Output\Output.csproj">
       <Project>{d14d8609-693c-475d-a4a4-5a7f6188d633}</Project>
       <Name>Output</Name>
@@ -386,6 +382,10 @@
     <ProjectReference Include="..\Edi.Documents\Edi.Documents.csproj">
       <Project>{1fb5ac73-b203-4d42-b22a-af2690de3709}</Project>
       <Name>Edi.Documents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Edi.Themes\Edi.Themes.csproj">
+      <Project>{69bc833c-0fe1-4288-bb80-bb457d07e638}</Project>
+      <Name>Edi.Themes</Name>
     </ProjectReference>
     <ProjectReference Include="..\Edi.Util\Edi.Util.csproj">
       <Project>{8dea0927-9bd3-442f-ad3b-5f0c9e3186f6}</Project>

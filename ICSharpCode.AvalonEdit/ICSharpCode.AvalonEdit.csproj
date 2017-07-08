@@ -466,7 +466,7 @@
     <Compile Include="Utils\ThrowUtil.cs" />
     <Compile Include="Utils\Win32.cs" />
     <CodeAnalysisDictionary Include="Properties\CodeAnalysisDictionary.xml" />
-    <Resource Include="themes\RightArrow.cur" />
+    <Resource Include="Themes\RightArrow.cur" />
     <EmbeddedResource Include="Highlighting\Resources\ASPX.xshd" />
     <EmbeddedResource Include="Highlighting\Resources\Boo.xshd" />
     <EmbeddedResource Include="Highlighting\Resources\Coco-Mode.xshd" />
@@ -510,7 +510,9 @@
       <DependentUpon>DropDownButton.cs</DependentUpon>
     </Page>
     <Page Include="TextEditor.xaml" />
-    <Page Include="themes\generic.xaml" />
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Highlighting\Resources\CSS-Mode.xshd" />

@@ -46,7 +46,7 @@
           <ctrls:SplitItemsButton.Content>
             <Grid>
               <Image Source="{DynamicResource Image_Open}" Height="32" Margin="0"/>
-              <!-- Image Source="pack://application:,,,/Themes;component/Images/Documents/document.png" Height="16" Margin="0"/ -->
+              <!-- Image Source="pack://application:,,,/Edi.Themes;component/Images/Documents/document.png" Height="16" Margin="0"/ -->
             </Grid>
           </ctrls:SplitItemsButton.Content>
           <ctrls:DropDownItemsButton.ItemTemplate>

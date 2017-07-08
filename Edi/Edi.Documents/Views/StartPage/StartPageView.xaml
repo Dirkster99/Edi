@@ -21,9 +21,9 @@
              behav:KeyboardFocus.On="{Binding ElementName=StartPageViewObject}"
              ><!-- The KeyboardFocus attached property is necessary to support CTRL+TAB in AvalonDock -->
   <UserControl.Resources>
-    <BitmapImage UriSource="pack://application:,,,/Themes;component/Images/App/StartPage/Edi100.png" x:Key="Logo" />
-    <BitmapImage UriSource="pack://application:,,,/Themes;component/Images/App/StartPage/File_Open64.png" x:Key="FileOpenImage" />
-    <BitmapImage UriSource="pack://application:,,,/Themes;component/Images/App/StartPage/File_New64.png" x:Key="NewFileImage" />
+    <BitmapImage UriSource="pack://application:,,,/Edi.Themes;component/Images/App/StartPage/Edi100.png" x:Key="Logo" />
+    <BitmapImage UriSource="pack://application:,,,/Edi.Themes;component/Images/App/StartPage/File_Open64.png" x:Key="FileOpenImage" />
+    <BitmapImage UriSource="pack://application:,,,/Edi.Themes;component/Images/App/StartPage/File_New64.png" x:Key="NewFileImage" />
   </UserControl.Resources>
   <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="12" >
     <Grid.RowDefinitions>

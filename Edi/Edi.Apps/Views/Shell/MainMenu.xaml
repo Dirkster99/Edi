@@ -9,7 +9,7 @@
             xmlns:EdiViewsConv="clr-namespace:Edi.Core.Converters;assembly=Edi.Core"
             xmlns:cmd="clr-namespace:Edi.Core;assembly=Edi.Core"
             xmlns:cmdLabel="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
-						xmlns:ThemeBehav="clr-namespace:Themes.Behaviour;assembly=Themes"
+						xmlns:ThemeBehav="clr-namespace:Edi.Themes.Behaviour;assembly=Edi.Themes"
             xmlns:vm="clr-namespace:Edi.Apps.Enums"
              >
     <Grid>

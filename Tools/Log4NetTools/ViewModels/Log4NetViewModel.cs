@@ -118,7 +118,7 @@ namespace Log4NetTools.ViewModels
 			get
 			{
 				// This icon is visible in AvalonDock's Document Navigator window
-				return new Uri("pack://application:,,,/Themes;component/Images/Documents/Log4net.png", UriKind.RelativeOrAbsolute);
+				return new Uri("pack://application:,,,/Edi.Themes;component/Images/Documents/Log4net.png", UriKind.RelativeOrAbsolute);
 			}
 		}
 		#endregion FileName
