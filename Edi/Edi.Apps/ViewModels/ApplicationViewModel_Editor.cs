@@ -9,7 +9,7 @@ namespace Edi.Apps.ViewModels
 	using Edi.Dialogs.FindReplace.ViewModel;
 	using ICSharpCode.AvalonEdit.Document;
 	using MsgBox;
-	using EdiDocuments.ViewModels.EdiDoc;
+	using Edi.Documents.ViewModels.EdiDoc;
 
 	public partial class ApplicationViewModel
 	{

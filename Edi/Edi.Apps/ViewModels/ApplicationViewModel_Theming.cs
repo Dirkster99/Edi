@@ -6,7 +6,7 @@ namespace Edi.Apps.ViewModels
 	using System.Reflection;
 	using System.Windows;
 	using System.Windows.Media;
-	using EdiDocuments.ViewModels.EdiDoc;
+	using Edi.Documents.ViewModels.EdiDoc;
 	using ICSharpCode.AvalonEdit.Edi;
 	using ICSharpCode.AvalonEdit.Highlighting;
 	using ICSharpCode.AvalonEdit.Highlighting.Themes;

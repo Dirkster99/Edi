@@ -19,11 +19,11 @@ namespace Edi.Apps.ViewModels
     using EdiApp.Events;   // XXX TODO Implementation in Edi.Core shouold have a different namespace
     using Edi.Apps.Interfaces.ViewModel;
     using Edi.Dialogs.About;
-    using EdiDocuments.Process;
-    using EdiDocuments.ViewModels.EdiDoc;
-    using EdiDocuments.ViewModels.MiniUml;
+    using Edi.Documents.Process;
+    using Edi.Documents.ViewModels.EdiDoc;
+    using Edi.Documents.ViewModels.MiniUml;
     using Files.ViewModels.RecentFiles;
-    using EdiDocuments.ViewModels.StartPage;
+    using Edi.Documents.ViewModels.StartPage;
     using Microsoft.Practices.Prism.Modularity;
     using Microsoft.Practices.Prism.PubSubEvents;
     using Microsoft.Win32;
@@ -35,7 +35,7 @@ namespace Edi.Apps.ViewModels
     using Edi.Core.Interfaces.Documents;
     using Edi.Core.Models.Documents;
     using Edi.Core.ViewModels.Command;
-    using EdiDocuments.ViewModels;
+    using Edi.Documents.ViewModels;
 
     /// <summary>
     /// This class manages the complete application life cyle from start to end.

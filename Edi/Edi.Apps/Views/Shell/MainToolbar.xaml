@@ -8,7 +8,7 @@
     xmlns:vm="clr-namespace:Edi.Apps.Enums"
 
     xmlns:conv="clr-namespace:Edi.Core.Converters;assembly=Edi.Core"
-    xmlns:adconv="clr-namespace:EdiDocuments.Converter;assembly=EdiDocuments"
+    xmlns:adconv="clr-namespace:Edi.Documents.Converter;assembly=Edi.Documents"
     xmlns:avalonEdit="clr-namespace:ICSharpCode.AvalonEdit.Highlighting;assembly=ICSharpCode.AvalonEdit"
     xmlns:cmd="clr-namespace:Edi.Core;assembly=Edi.Core"
     xmlns:cmdLabel="clr-namespace:Util.Local;assembly=Util"
