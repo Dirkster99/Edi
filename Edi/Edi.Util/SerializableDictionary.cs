@@ -1,4 +1,4 @@
-﻿namespace Util
+﻿namespace Edi.Util
 {
 	using System;
 	using System.Collections.Generic;

@@ -1,7 +1,7 @@
 ﻿namespace Edi.Core
 {
 	using System.Windows.Input;
-	using Util.Local;
+	using Edi.Util.Local;
 
 	public class AppCommand
 	{

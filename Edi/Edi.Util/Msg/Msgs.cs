@@ -1,4 +1,4 @@
-﻿namespace Util.Msg
+﻿namespace Edi.Util.Msg
 {
 	using System.Collections.Generic;
 

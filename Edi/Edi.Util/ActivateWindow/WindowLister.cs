@@ -1,4 +1,4 @@
-﻿namespace Util.ActivateWindow
+﻿namespace Edi.Util.ActivateWindow
 {
 	using System;
 	using System.Collections.Generic;

@@ -10,8 +10,7 @@ ECHO Edi
 ECHO Edi.Apps
 ECHO Edi.Core
 ECHO Edi.Dialogs
-ECHO EdiDocuments
-ECHO EdiViews
+ECHO Edi.Documents
 ECHO Themes
 ECHO ICSharpCode.AvalonEdit
 ECHO.
@@ -28,7 +27,7 @@ ECHO.
 ECHO Settings
 ECHO SettingsView
 ECHO SimpleControls
-ECHO Util
+ECHO Edi.Util
 ECHO.
 REM Ask the user if hes really sure to continue beyond this point XXXXXXXX
 set /p choice=Are you sure to continue (Y/N)?
@@ -51,8 +50,8 @@ RMDIR /S /Q Edi\obj
 RMDIR /S /Q Edi\Edi.Dialogs\bin
 RMDIR /S /Q Edi\Edi.Dialogs\obj
 
-RMDIR /S /Q EdiDocuments\bin
-RMDIR /S /Q EdiDocuments\obj
+RMDIR /S /Q Edi\Edi.Documents\bin
+RMDIR /S /Q Edi\Edi.Documents\obj
 
 RMDIR /S /Q Themes\bin
 RMDIR /S /Q Themes\obj
@@ -93,8 +92,8 @@ RMDIR /S /Q .\MiniUML\Plugins\src\MiniUML.Plugins.UmlClassDiagram\obj
 
 ECHO Deleting BIN and OBJ Folders in Util
 ECHO.
-RMDIR /S /Q Util\bin
-RMDIR /S /Q Util\obj
+RMDIR /S /Q Edi.Util\bin
+RMDIR /S /Q Edi.Util\obj
 
 ECHO Deleting BIN and OBJ Folders in Settings
 ECHO.

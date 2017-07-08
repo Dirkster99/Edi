@@ -258,7 +258,7 @@ namespace Edi.Apps.ViewModels
                 }
                 catch (Exception exc)
                 {
-                    MsgBox.Msg.Show(exc, Util.Local.Strings.STR_MSG_FIND_UNEXPECTED_ERROR,
+                    MsgBox.Msg.Show(exc, Edi.Util.Local.Strings.STR_MSG_FIND_UNEXPECTED_ERROR,
                                                     MsgBoxButtons.OK, MsgBoxImage.Error);
                 }
                 finally
@@ -310,7 +310,7 @@ namespace Edi.Apps.ViewModels
                 }
                 catch (Exception exc)
                 {
-                    MsgBox.Msg.Show(exc, Util.Local.Strings.STR_MSG_FIND_UNEXPECTED_ERROR,
+                    MsgBox.Msg.Show(exc, Edi.Util.Local.Strings.STR_MSG_FIND_UNEXPECTED_ERROR,
                                                     MsgBoxButtons.OK, MsgBoxImage.Error);
                 }
                 finally

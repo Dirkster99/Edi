@@ -25,7 +25,7 @@
 		private bool mTextToHTML_TextToHTML_AlternateLineBackground = true;
 
 		private bool mHighlightOnFileNew = true;
-		private string mFileNewDefaultFileName = Util.Local.Strings.STR_FILE_DEFAULTNAME;
+		private string mFileNewDefaultFileName = Edi.Util.Local.Strings.STR_FILE_DEFAULTNAME;
 		private string mFileNewDefaultFileExtension = ".txt";
 		#endregion fields
 
@@ -194,7 +194,7 @@
 		{
 			get
 			{
-				return Util.Local.Strings.STR_ProgramSettings_Caption;
+				return Edi.Util.Local.Strings.STR_ProgramSettings_Caption;
 			}
 		}
 		#endregion ScaleView

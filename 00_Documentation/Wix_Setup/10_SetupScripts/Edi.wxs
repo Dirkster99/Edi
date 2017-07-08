@@ -186,7 +186,7 @@
         <File Id="fil40626E710EBF90BD4C24D6BF5F5999B7" KeyPath="yes" Source="00_Edi\UserNotification.xml" />
       </Component>
       <Component Win64="yes" Id="cmpC43EAC81B77B99C399BF44209B3DE1D9" Directory="INSTALLDIR" Guid="{0E4E6913-0C52-4BC5-9D48-D31C32EC3759}">
-        <File Id="filDEC8A182B6B6AA50B056296F8F226DCC" KeyPath="yes" Source="00_Edi\Util.dll" >
+        <File Id="filDEC8A182B6B6AA50B056296F8F226DCC" KeyPath="yes" Source="00_Edi\Edi.Util.dll" >
         </File>
       </Component>
       <Component Win64="yes" Id="cmpF8A56BFABA1424EA4226ABBF24F46BAF" Directory="INSTALLDIR" Guid="{BF126558-1C13-4867-8E06-9D04F45C50AB}">

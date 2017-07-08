@@ -152,13 +152,13 @@
     <Compile Include="ViewModels\Document\XmlViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Edi\Edi.Util\Edi.Util.csproj">
+      <Project>{8dea0927-9bd3-442f-ad3b-5f0c9e3186f6}</Project>
+      <Name>Edi.Util</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
       <Project>{6c55b776-26d4-4db3-a6ab-87e783b2f3d1}</Project>
       <Name>ICSharpCode.AvalonEdit</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Util\Util.csproj">
-      <Project>{d96f59c4-a727-47d9-84ad-508b04df2714}</Project>
-      <Name>Util</Name>
     </ProjectReference>
     <ProjectReference Include="..\MiniUML.Framework\MiniUML.Framework.csproj">
       <Project>{99941efe-69b0-4618-b130-6d6fc1b43eb3}</Project>

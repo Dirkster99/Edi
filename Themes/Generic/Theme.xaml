@@ -21,7 +21,7 @@
     <!-- ResourceDictionary Source="/AvalonDock.Themes.Aero;component/Theme.xaml" / -->
   </ResourceDictionary.MergedDictionaries>
 
-  <!--     xmlns:cmd="clr-namespace:Util.Command;assembly=Util"
+  <!--     xmlns:cmd="clr-namespace:Edi.Util.Command;assembly=Edi.Util"
   <Style x:Key="FileHyperlinkDefault"
          TargetType="{x:Type hyperl:FileHyperlink}"
          BasedOn="{StaticResource {x:Type hyperl:FileHyperlink}}" />

@@ -278,7 +278,7 @@
         <File Id="fil40626E710EBF90BD4C24D6BF5F5999B7" KeyPath="yes" Source="$(var.Edi.TargetDir)" Name="UserNotification.xml" />
       </Component>
       <Component Win64="yes" Id="cmpC43EAC81B77B99C399BF44209B3DE1D9" Directory="INSTALLDIR" Guid="{0E4E6913-0C52-4BC5-9D48-D31C32EC3759}">
-        <File Id="filDEC8A182B6B6AA50B056296F8F226DCC" KeyPath="yes" Source="$(var.Edi.TargetDir)" Name="Util.dll" >
+        <File Id="filDEC8A182B6B6AA50B056296F8F226DCC" KeyPath="yes" Source="$(var.Edi.TargetDir)" Name="Edi.Util.dll" >
         </File>
       </Component>
       <Component Win64="yes" Id="cmpF8A56BFABA1424EA4226ABBF24F46BAF" Directory="INSTALLDIR" Guid="{BF126558-1C13-4867-8E06-9D04F45C50AB}">
@@ -466,7 +466,7 @@
         <File Id="fil9A37D63DAF6E8A4A4E0F087142AE1669" KeyPath="yes" Source="$(var.Edi.TargetDir)\de-DE\" Name="UserNotification.resources.dll" />
       </Component>
       <Component Win64="yes" Id="cmp3AFD169044A47C133F317D0E41861D88" Directory="dirB2058C73527E2CACE19AAE501FAFED6C" Guid="{4055A5B2-F57C-41C6-B049-73403EC7839E}">
-        <File Id="fil8D3DDD8795FAA35144D5ABA43788CD5D" KeyPath="yes" Source="$(var.Edi.TargetDir)\de-DE\" Name="Util.resources.dll" />
+        <File Id="fil8D3DDD8795FAA35144D5ABA43788CD5D" KeyPath="yes" Source="$(var.Edi.TargetDir)\de-DE\" Name="Edi.Util.resources.dll" />
       </Component>
       <Component Win64="yes" Id="cmp3FB2EA667448960B7D3F4FF03FDAB5FD" Directory="dirBCEA558910470A615A32F59177491DD9" Guid="{32DCE644-D1DE-4122-BB34-6507BEF3D9B3}">
         <File Id="fil2011B979AC644D9203A839C89F7959D8" KeyPath="yes" Source="$(var.Edi.TargetDir)\es\" Name="Xceed.Wpf.AvalonDock.resources.dll" />
@@ -484,7 +484,7 @@
         <File Id="filAC48B4A5E40E846B39FA21F7FDD27B2D" KeyPath="yes" Source="$(var.Edi.TargetDir)\es-ES\" Name="UserNotification.resources.dll" />
       </Component>
       <Component Win64="yes" Id="cmp0A779401E762A4B05386C02117F28C22" Directory="dir2BFF99396F55A3B1A2D6B5973B246087" Guid="{AA12637B-0E74-4046-8B6B-8D3393CD4CCC}">
-        <File Id="fil98C49273B51715CD0423953ED3CF643D" KeyPath="yes" Source="$(var.Edi.TargetDir)\es-ES\" Name="Util.resources.dll" />
+        <File Id="fil98C49273B51715CD0423953ED3CF643D" KeyPath="yes" Source="$(var.Edi.TargetDir)\es-ES\" Name="Edi.Util.resources.dll" />
       </Component>
       <Component Win64="yes" Id="cmp0A779401E762A4B05386C02117F28C23" Directory="dir2BFF99396F55A3B1A2D6B5973B246087" Guid="{AA12637B-0E74-4046-8B6B-8D3393CD4CCD}">
         <File Id="fil98C49273B51715CD0423953ED3CF643E" KeyPath="yes" Source="$(var.Edi.TargetDir)\es-ES\" Name="FileSystemModels.resources.dll" />
@@ -505,7 +505,7 @@
         <File Id="fil1A704744030F8BFB11841105E44CBF19" KeyPath="yes" Source="$(var.Edi.TargetDir)\fr-FR\" Name="UserNotification.resources.dll" />
       </Component>
       <Component Win64="yes" Id="cmpEAEB20BA3EDE6E628982508E8137EFDB" Directory="dir8D0F7B87E5D2576DB3BBDD939E2D9388" Guid="{2D5B8FFE-356D-4037-8B30-4136FC8CD0B9}">
-        <File Id="fil242C1C6F5804B802F6FF64E89A219AED" KeyPath="yes" Source="$(var.Edi.TargetDir)\fr-FR\" Name="Util.resources.dll" />
+        <File Id="fil242C1C6F5804B802F6FF64E89A219AED" KeyPath="yes" Source="$(var.Edi.TargetDir)\fr-FR\" Name="Edi.Util.resources.dll" />
       </Component>
       <Component Win64="yes" Id="cmpDE327C9ECFF61449263FBBDF365B26E7" Directory="dirCB76E016F2958C81788C5725064D5BC8" Guid="{3CB6F0C5-F554-485A-ADCB-0E9DF480988D}">
         <File Id="fil12CA170380F3F7011AAFD884FC4AE869" KeyPath="yes" Source="$(var.Edi.TargetDir)\hi\" Name="MsgBox.resources.dll" />
@@ -520,7 +520,7 @@
         <File Id="filC88E5F37B7F4ADC91AF04E184036B5F4" KeyPath="yes" Source="$(var.Edi.TargetDir)\hi-IN\" Name="UnitComboLib.resources.dll" />
       </Component>
       <Component Win64="yes" Id="cmp91EA953407340DCA1BE0E4C2596EFB41" Directory="dir89B9F40494FC662E4645FE284F8CC556" Guid="{7994B7E0-63AF-4E50-8168-3811AD9623D4}">
-        <File Id="fil975D0FD268586B6FBD83F5FD0AB4079A" KeyPath="yes" Source="$(var.Edi.TargetDir)\hi-IN\" Name="Util.resources.dll" />
+        <File Id="fil975D0FD268586B6FBD83F5FD0AB4079A" KeyPath="yes" Source="$(var.Edi.TargetDir)\hi-IN\" Name="Edi.Util.resources.dll" />
       </Component>
       <Component Win64="yes" Id="cmp91EA953407340DCA1BE0E4C2596EFB42" Directory="dir89B9F40494FC662E4645FE284F8CC556" Guid="{7994B7E0-63AF-4E50-8168-3811AD9623D5}">
         <File Id="fil975D0FD268586B6FBD83F5FD0AB4079B" KeyPath="yes" Source="$(var.Edi.TargetDir)\hi-IN\" Name="FileSystemModels.resources.dll" />
@@ -548,7 +548,7 @@
         <File Id="fil7F6C53459C0E6560B66FC406330A677D" KeyPath="yes" Source="$(var.Edi.TargetDir)\it-IT\" Name="UserNotification.resources.dll" />
       </Component>
       <Component Win64="yes" Id="cmp495F5EAF2023CD55CD196F87DAD1FAF8" Directory="dir112C0715EC48040018BC9E97400AF952" Guid="{F0B92C1D-8867-4579-88F1-EF5057717C42}">
-        <File Id="fil071FC2CB199C8A2AB21B58F061C7BFE2" KeyPath="yes" Source="$(var.Edi.TargetDir)\it-IT\" Name="Util.resources.dll" />
+        <File Id="fil071FC2CB199C8A2AB21B58F061C7BFE2" KeyPath="yes" Source="$(var.Edi.TargetDir)\it-IT\" Name="Edi.Util.resources.dll" />
       </Component>
       <Component Win64="yes" Id="cmpFC669569A40CF00C9044F6A50BF31C3A" Directory="dirD93ADBD9A0F95EB27B55B7DFC95FD976" Guid="{F32B916F-A296-47AE-B52B-1B5F96A29FE0}">
         <File Id="fil6F82A1408EF077B307871CECC9A5CCFA" KeyPath="yes" Source="$(var.Edi.TargetDir)\ja\" Name="YalvLib.resources.dll" />
@@ -560,7 +560,7 @@
         <File Id="fil3E341852696A6771279C345EC06E6656" KeyPath="yes" Source="$(var.Edi.TargetDir)\ja-JP\" Name="UnitComboLib.resources.dll" />
       </Component>
       <Component Win64="yes" Id="cmp9193D96312624DD384E32A2096ADFEC8" Directory="dir387A71CBF1800118442E9F820EF0ADA1" Guid="{ABCC632C-6073-42D6-A140-425A4BA39A49}">
-        <File Id="fil41B67D99D7FFEA25280C6CB151CAD48C" KeyPath="yes" Source="$(var.Edi.TargetDir)\ja-JP\" Name="Util.resources.dll" />
+        <File Id="fil41B67D99D7FFEA25280C6CB151CAD48C" KeyPath="yes" Source="$(var.Edi.TargetDir)\ja-JP\" Name="Edi.Util.resources.dll" />
       </Component>
       <Component Win64="yes" Id="cmp9193D96312624DD384E32A2096ADFEC9" Directory="dir387A71CBF1800118442E9F820EF0ADA1" Guid="{ABCC632C-6073-42D6-A140-425A4BA39A4A}">
         <File Id="fil41B67D99D7FFEA25280C6CB151CAD48D" KeyPath="yes" Source="$(var.Edi.TargetDir)\ja-JP\" Name="FileSystemModels.resources.dll" />
@@ -587,7 +587,7 @@
         <File Id="filB9B86E122AD88D4CEE016535D86BA97F" KeyPath="yes" Source="$(var.Edi.TargetDir)\pt-PT\" Name="UnitComboLib.resources.dll" />
       </Component>
       <Component Win64="yes" Id="cmp19D76EAB551C18191F39D0E52953661C" Directory="dirCEF14A83D4FBC3AB9134BF3D6BA492F1" Guid="{BC3ABDB6-000A-4EE8-BBB1-2E6B87632F69}">
-        <File Id="filCB52787E99EDEC3118BEFE3F8168D0F0" KeyPath="yes" Source="$(var.Edi.TargetDir)\pt-PT\" Name="Util.resources.dll" />
+        <File Id="filCB52787E99EDEC3118BEFE3F8168D0F0" KeyPath="yes" Source="$(var.Edi.TargetDir)\pt-PT\" Name="Edi.Util.resources.dll" />
       </Component>
       <Component Win64="yes" Id="cmpB7FC6BB7BF90A65F763A06E817B4DD45" Directory="dir4BAD11EFB922D07571894FBE6E1B7DB7" Guid="{D4508351-764A-4232-86B0-A6A8DA3DA467}">
         <File Id="fil5CD83F2F562F9A93C7694A965633E691" KeyPath="yes" Source="$(var.Edi.TargetDir)ro\\" Name="Xceed.Wpf.AvalonDock.resources.dll" />
@@ -605,7 +605,7 @@
         <File Id="fil929CF2162EC27883545EE8DA6150B598" KeyPath="yes" Source="$(var.Edi.TargetDir)\ru-RU\" Name="UnitComboLib.resources.dll" />
       </Component>
       <Component Win64="yes" Id="cmp7EAE61DF7E70A6454C9B4775DA9A1ED2" Directory="dir9602DB2954B8218EB403F0364D8346D3" Guid="{0E64C51E-0D03-4F81-A626-BEB3CD1C9EC7}">
-        <File Id="fil5AB35B2A8CE58185837F3944020BA8F2" KeyPath="yes" Source="$(var.Edi.TargetDir)\ru-RU\" Name="Util.resources.dll" />
+        <File Id="fil5AB35B2A8CE58185837F3944020BA8F2" KeyPath="yes" Source="$(var.Edi.TargetDir)\ru-RU\" Name="Edi.Util.resources.dll" />
       </Component>
       <Component Win64="yes" Id="cmp7EAE61DF7E70A6454C9B4775DA9A1ED3" Directory="dir9602DB2954B8218EB403F0364D8346D3" Guid="{0E64C51E-0D03-4F81-A626-BEB3CD1C9EC8}">
         <File Id="fil5AB35B2A8CE58185837F3944020BA8F3" KeyPath="yes" Source="$(var.Edi.TargetDir)\ru-RU\" Name="FileSystemModels.resources.dll" />
@@ -620,7 +620,7 @@
         <File Id="fil2E55D1F5CB5211718658E682A869C1C2" KeyPath="yes" Source="$(var.Edi.TargetDir)\zh-Hans\" Name="UnitComboLib.resources.dll" />
       </Component>
       <Component Win64="yes" Id="cmp89C63783E0364BB8F57A7E27701474DD" Directory="dir2B056FE6351C074C9055B2D4C7512281" Guid="{6AF031D7-0AF0-42BB-BF5B-1A9C2C81A07A}">
-        <File Id="fil9803917CC6FD8609516178D67C98ADC4" KeyPath="yes" Source="$(var.Edi.TargetDir)\zh-Hans\" Name="Util.resources.dll" />
+        <File Id="fil9803917CC6FD8609516178D67C98ADC4" KeyPath="yes" Source="$(var.Edi.TargetDir)\zh-Hans\" Name="Edi.Util.resources.dll" />
       </Component>
       <Component Win64="yes" Id="cmp89C63783E0364BB8F57A7E27701474DE" Directory="dir2B056FE6351C074C9055B2D4C7512281" Guid="{6AF031D7-0AF0-42BB-BF5B-1A9C2C81A07B}">
         <File Id="fil9803917CC6FD8609516178D67C98ADC5" KeyPath="yes" Source="$(var.Edi.TargetDir)\zh-CHS\" Name="FileSystemModels.resources.dll" />

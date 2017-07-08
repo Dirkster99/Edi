@@ -9,7 +9,7 @@
     xmlns:conv="clr-namespace:YavLib.Converter;assembly=YalvLib"
     xmlns:Properties="clr-namespace:YalvLib.Strings;assembly=YalvLib"
 
-    xmlns:localiz="clr-namespace:Util.Local;assembly=Util"
+    xmlns:localiz="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
     >
   <ResourceDictionary.MergedDictionaries>
     <ResourceDictionary Source="../../Brushes.xaml" />

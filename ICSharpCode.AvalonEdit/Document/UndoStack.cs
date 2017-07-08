@@ -197,18 +197,18 @@ namespace ICSharpCode.AvalonEdit.Document
 				lastGroupDescriptor = groupDescriptor;
 			}
 			undoGroupDepth++;
-			//Util.LoggingService.Debug("Open undo group (new depth=" + undoGroupDepth + ")");
-		}
-		
-		/// <summary>
-		/// Starts grouping changes, continuing with the previously closed undo group if possible.
-		/// Maintains a counter so that nested calls are possible.
-		/// If the call to StartContinuedUndoGroup is a nested call, it behaves exactly
-		/// as <see cref="StartUndoGroup()"/>, only top-level calls can continue existing undo groups.
-		/// </summary>
-		/// <param name="groupDescriptor">An object that is stored with the undo group.
-		/// If this is not a top-level undo group, the parameter is ignored.</param>
-		public void StartContinuedUndoGroup(object groupDescriptor = null)
+            //Edi.Util.LoggingService.Debug("Open undo group (new depth=" + undoGroupDepth + ")");
+        }
+
+        /// <summary>
+        /// Starts grouping changes, continuing with the previously closed undo group if possible.
+        /// Maintains a counter so that nested calls are possible.
+        /// If the call to StartContinuedUndoGroup is a nested call, it behaves exactly
+        /// as <see cref="StartUndoGroup()"/>, only top-level calls can continue existing undo groups.
+        /// </summary>
+        /// <param name="groupDescriptor">An object that is stored with the undo group.
+        /// If this is not a top-level undo group, the parameter is ignored.</param>
+        public void StartContinuedUndoGroup(object groupDescriptor = null)
 		{
 			if (undoGroupDepth == 0) {
 				actionCountInUndoGroup = (allowContinue && undostack.Count > 0) ? 1 : 0;
@@ -216,18 +216,18 @@ namespace ICSharpCode.AvalonEdit.Document
 				lastGroupDescriptor = groupDescriptor;
 			}
 			undoGroupDepth++;
-			//Util.LoggingService.Debug("Continue undo group (new depth=" + undoGroupDepth + ")");
-		}
-		
-		/// <summary>
-		/// Stops grouping changes.
-		/// </summary>
-		public void EndUndoGroup()
+            //Edi.Util.LoggingService.Debug("Continue undo group (new depth=" + undoGroupDepth + ")");
+        }
+
+        /// <summary>
+        /// Stops grouping changes.
+        /// </summary>
+        public void EndUndoGroup()
 		{
 			if (undoGroupDepth == 0) throw new InvalidOperationException("There are no open undo groups");
 			undoGroupDepth--;
-			//Util.LoggingService.Debug("Close undo group (new depth=" + undoGroupDepth + ")");
-			if (undoGroupDepth == 0) {
+            //Edi.Util.LoggingService.Debug("Close undo group (new depth=" + undoGroupDepth + ")");
+            if (undoGroupDepth == 0) {
 				Debug.Assert(state == StateListen || actionCountInUndoGroup == 0);
 				allowContinue = true;
 				if (actionCountInUndoGroup == optionalActionCount) {

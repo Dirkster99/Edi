@@ -73,7 +73,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         public const string DefaultFilter = "*";
 
         private static int iNewFileCounter = 0;
-        private string mDefaultFileName = Util.Local.Strings.STR_FILE_DEFAULTNAME;
+        private string mDefaultFileName = Edi.Util.Local.Strings.STR_FILE_DEFAULTNAME;
         private string mDefaultFileType = ".txt";
 
         private TextDocument mDocument;
@@ -942,7 +942,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
                     if ((System.IO.File.GetAttributes(filePath) & FileAttributes.ReadOnly) != 0)
                     {
                         this.IsReadOnly = true;
-                        this.IsReadOnlyReason = Util.Local.Strings.STR_FILE_READONLY_REASON_NO_WRITE_PERMISSION;
+                        this.IsReadOnlyReason = Edi.Util.Local.Strings.STR_FILE_READONLY_REASON_NO_WRITE_PERMISSION;
                     }
 
                     try
@@ -975,7 +975,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
                         try
                         {
                             this.IsReadOnly = true;  // Open file in readonly mode
-                            this.IsReadOnlyReason = Util.Local.Strings.STR_FILE_READONLY_REASON_USED_BY_OTHER_PROCESS;
+                            this.IsReadOnlyReason = Edi.Util.Local.Strings.STR_FILE_READONLY_REASON_USED_BY_OTHER_PROCESS;
 
                             using (FileStream fs = new FileStream(this.mFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                             {
@@ -1069,7 +1069,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
                                                          bool showLineNumbers = true,
                                                          bool alternateLineBackground = true)
         {
-            string ExportHTMLFileFilter = Util.Local.Strings.STR_ExportHTMLFileFilter;
+            string ExportHTMLFileFilter = Edi.Util.Local.Strings.STR_ExportHTMLFileFilter;
 
             // Create and configure SaveFileDialog.
             FileDialog dlg = new SaveFileDialog()

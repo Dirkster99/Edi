@@ -11,7 +11,7 @@
              xmlns:aedit_cmd="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit"
              xmlns:edi_cmd="clr-namespace:ICSharpCode.AvalonEdit.Edi;assembly=ICSharpCode.AvalonEdit"
 
-             xmlns:cmdLabel="clr-namespace:Util.Local;assembly=Util"
+             xmlns:cmdLabel="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
 
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="300"

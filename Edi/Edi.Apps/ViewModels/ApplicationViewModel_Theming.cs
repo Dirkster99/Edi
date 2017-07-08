@@ -229,7 +229,7 @@ namespace Edi.Apps.ViewModels
 			}
 			catch (Exception exp)
 			{
-				MsgBox.Msg.Show(exp, Util.Local.Strings.STR_THEMING_CAPTION,
+				MsgBox.Msg.Show(exp, Edi.Util.Local.Strings.STR_THEMING_CAPTION,
 												MsgBoxButtons.OK, MsgBoxImage.Error);
 
 				return false;

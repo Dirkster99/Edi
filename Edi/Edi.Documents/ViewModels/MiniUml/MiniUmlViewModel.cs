@@ -25,7 +25,7 @@ namespace Edi.Documents.ViewModels.MiniUml
 
 		private static int iNewFileCounter = 1;
 		private string defaultFileType = "uml";
-		private readonly static string defaultFileName = Util.Local.Strings.STR_FILE_DEFAULTNAME;
+		private readonly static string defaultFileName = Edi.Util.Local.Strings.STR_FILE_DEFAULTNAME;
 
 		private object lockThis = new object();
 		#endregion Fields

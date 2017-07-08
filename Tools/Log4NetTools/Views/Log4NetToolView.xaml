@@ -10,7 +10,7 @@
              xmlns:Properties="clr-namespace:YalvLib.Strings;assembly=YALVLib"
              xmlns:cult="clr-namespace:YalvLib.ViewModel;assembly=YALVLib"
 
-             xmlns:cmdLabel="clr-namespace:Util.Local;assembly=Util"
+             xmlns:cmdLabel="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
 
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="300">

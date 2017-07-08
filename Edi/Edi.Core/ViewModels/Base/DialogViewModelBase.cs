@@ -205,7 +205,7 @@ namespace Edi.Core.ViewModels.Base
 		/// </summary>
 		public void InitializeDialogState()
 		{
-			this.ProblemCaption = Util.Local.Strings.STR_DIALOG_INPUT_PROBLEM_CAPTION;
+			this.ProblemCaption = Edi.Util.Local.Strings.STR_DIALOG_INPUT_PROBLEM_CAPTION;
 
 			this.EvaluateInputData = null;
 

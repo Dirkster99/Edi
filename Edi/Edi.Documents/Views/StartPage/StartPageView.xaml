@@ -10,7 +10,7 @@
              
              xmlns:behav="clr-namespace:Edi.Core.Behaviour;assembly=Edi.Core"
              xmlns:view="clr-namespace:Files.Views.RecentFiles;assembly=Files"
-             xmlns:cmdLabel="clr-namespace:Util.Local;assembly=Util"
+             xmlns:cmdLabel="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="600" Background="{DynamicResource ToolViewBackground}"

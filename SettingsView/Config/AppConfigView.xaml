@@ -5,7 +5,7 @@
 					xmlns:local="clr-namespace:SettingsView.Config"
           xmlns:conv="clr-namespace:Edi.Core.Converters;assembly=Edi.Core"
           xmlns:numUpDown="clr-namespace:NumericUpDownLib;assembly=NumericUpDownLib"
-          xmlns:cmdLabel="clr-namespace:Util.Local;assembly=Util"
+          xmlns:cmdLabel="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
           >
 	<Style TargetType="{x:Type local:AppConfigView}">
     <Setter Property="SnapsToDevicePixels" Value="True" />

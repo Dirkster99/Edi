@@ -48,7 +48,7 @@ namespace Edi.Dialogs.About
 		{
 			get
 			{
-				return Util.Local.Strings.STR_ABOUT_MSG;
+				return Edi.Util.Local.Strings.STR_ABOUT_MSG;
 			}
 		}
 
@@ -134,8 +134,8 @@ namespace Edi.Dialogs.About
 
                         if (l.TryGetValue(assembly.Name, out string val) == false)
                             l.Add(assembly.Name, string.Format("{0}, {1}={2}", assembly.Name,
-                                                                                                                                 Util.Local.Strings.STR_ABOUT_Version,
-                                                                                                                                 assembly.Version));
+                                                        Edi.Util.Local.Strings.STR_ABOUT_Version,
+                                                        assembly.Version));
                     }
 					catch (System.Exception)
 					{

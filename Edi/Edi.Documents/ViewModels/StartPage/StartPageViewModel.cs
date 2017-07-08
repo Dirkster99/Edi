@@ -22,8 +22,8 @@ namespace Edi.Documents.ViewModels.StartPage
 		/// </summary>
 		public StartPageViewModel()
 		{
-			this.Title = Util.Local.Strings.STR_STARTPAGE_TITLE;
-			this.StartPageTip = Util.Local.Strings.STR_STARTPAGE_WELCOME_TT;
+			this.Title = Edi.Util.Local.Strings.STR_STARTPAGE_TITLE;
+			this.StartPageTip = Edi.Util.Local.Strings.STR_STARTPAGE_WELCOME_TT;
 			this.ContentId = StartPageViewModel.StartPageContentId;
 		}
 

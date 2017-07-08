@@ -9,8 +9,8 @@ namespace Edi.Core.Converters
 	[ValueConversion(typeof(bool), typeof(string))]
 	public class BooleanToTypeModeStringConverter : IValueConverter
 	{
-		public readonly static string TypeOver = Util.Local.Strings.STR_EDIT_MODE_TYPEOVER;
-		public readonly static string TypeToInsert = Util.Local.Strings.STR_EDIT_MODE_INSERT;
+		public readonly static string TypeOver = Edi.Util.Local.Strings.STR_EDIT_MODE_TYPEOVER;
+		public readonly static string TypeToInsert = Edi.Util.Local.Strings.STR_EDIT_MODE_INSERT;
 
 		/// <summary>
 		/// Enum to Boolean Converter method

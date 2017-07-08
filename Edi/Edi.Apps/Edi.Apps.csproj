@@ -188,10 +188,6 @@
       <Project>{ef9b7e8d-b722-48e0-a941-e21f4f7cc2df}</Project>
       <Name>Files</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Util\Util.csproj">
-      <Project>{d96f59c4-a727-47d9-84ad-508b04df2714}</Project>
-      <Name>Util</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Edi.Dialogs\Edi.Dialogs.csproj">
       <Project>{c4bbc94f-aca4-4b4a-8558-248e2e684b05}</Project>
       <Name>Edi.Dialogs</Name>
@@ -199,6 +195,10 @@
     <ProjectReference Include="..\Edi.Documents\Edi.Documents.csproj">
       <Project>{1fb5ac73-b203-4d42-b22a-af2690de3709}</Project>
       <Name>Edi.Documents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Edi.Util\Edi.Util.csproj">
+      <Project>{8dea0927-9bd3-442f-ad3b-5f0c9e3186f6}</Project>
+      <Name>Edi.Util</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

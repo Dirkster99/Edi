@@ -1,6 +1,6 @@
-﻿namespace Util.Msg
+﻿namespace Edi.Util.Msg
 {
-	using Util.Local;
+	using Edi.Util.Local;
 
 	/// <summary>
 	/// This class is used to display categorized (Information, Error etc.) messages to the user.

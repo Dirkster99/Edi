@@ -11,7 +11,7 @@
     xmlns:adconv="clr-namespace:Edi.Documents.Converter;assembly=Edi.Documents"
     xmlns:avalonEdit="clr-namespace:ICSharpCode.AvalonEdit.Highlighting;assembly=ICSharpCode.AvalonEdit"
     xmlns:cmd="clr-namespace:Edi.Core;assembly=Edi.Core"
-    xmlns:cmdLabel="clr-namespace:Util.Local;assembly=Util"
+    xmlns:cmdLabel="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
     xmlns:behav="clr-namespace:Edi.Core.Behaviour;assembly=Edi.Core"
 
     xmlns:ctrls="clr-namespace:DropDownButtonLib.Controls;assembly=DropDownButtonLib"

@@ -175,6 +175,10 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Edi\Edi.Util\Edi.Util.csproj">
+      <Project>{8dea0927-9bd3-442f-ad3b-5f0c9e3186f6}</Project>
+      <Name>Edi.Util</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
       <Project>{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}</Project>
       <Name>ICSharpCode.AvalonEdit</Name>
@@ -186,10 +190,6 @@
     <ProjectReference Include="..\SimpleControls\SimpleControls.csproj">
       <Project>{0E69BE38-78C0-4662-A0E1-56C5913B5C3A}</Project>
       <Name>SimpleControls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Util\Util.csproj">
-      <Project>{D96F59C4-A727-47D9-84AD-508B04DF2714}</Project>
-      <Name>Util</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

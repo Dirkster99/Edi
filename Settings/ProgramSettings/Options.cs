@@ -90,7 +90,7 @@
             this.mLanguageSelected = Options.DefaultLocal;
 
             this.HighlightOnFileNew = true;
-            this.FileNewDefaultFileName = Util.Local.Strings.STR_FILE_DEFAULTNAME;
+            this.FileNewDefaultFileName = Edi.Util.Local.Strings.STR_FILE_DEFAULTNAME;
             this.FileNewDefaultFileExtension = ".txt";
 
             this.ExplorerSettings = new ExplorerSettingsModel(true);
@@ -413,8 +413,8 @@
             var percentDefaults = new ObservableCollection<string>() { "25", "50", "75", "100", "125", "150", "175", "200", "300", "400", "500" };
             var pointsDefaults = new ObservableCollection<string>() { "3", "6", "8", "9", "10", "12", "14", "16", "18", "20", "24", "26", "32", "48", "60" };
 
-            unitList.Add(new ListItem(Itemkey.ScreenPercent, Util.Local.Strings.STR_SCALE_VIEW_PERCENT, Util.Local.Strings.STR_SCALE_VIEW_PERCENT_SHORT, percentDefaults));
-            unitList.Add(new ListItem(Itemkey.ScreenFontPoints, Util.Local.Strings.STR_SCALE_VIEW_POINT, Util.Local.Strings.STR_SCALE_VIEW_POINT_SHORT, pointsDefaults));
+            unitList.Add(new ListItem(Itemkey.ScreenPercent, Edi.Util.Local.Strings.STR_SCALE_VIEW_PERCENT, Edi.Util.Local.Strings.STR_SCALE_VIEW_PERCENT_SHORT, percentDefaults));
+            unitList.Add(new ListItem(Itemkey.ScreenFontPoints, Edi.Util.Local.Strings.STR_SCALE_VIEW_POINT, Edi.Util.Local.Strings.STR_SCALE_VIEW_POINT_SHORT, pointsDefaults));
 
             return unitList;
         }

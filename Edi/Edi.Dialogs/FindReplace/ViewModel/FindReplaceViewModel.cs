@@ -78,7 +78,7 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 		{
 			get
 			{
-				return Util.Local.Strings.STR_FIND_REPLACE_CAPTION;
+				return Edi.Util.Local.Strings.STR_FIND_REPLACE_CAPTION;
 			}
 		}
 

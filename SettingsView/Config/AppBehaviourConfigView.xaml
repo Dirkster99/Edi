@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
 
-             xmlns:cmdLabel="clr-namespace:Util.Local;assembly=Util"
+             xmlns:cmdLabel="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
              >
     <Grid>
     <GroupBox Header="{x:Static cmdLabel:Strings.STR_ProgramSettings_ApplicationBehaviour_Header}" Grid.Row="0" Margin="9" Padding="9">
