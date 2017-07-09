@@ -156,7 +156,7 @@
       <Project>{8dea0927-9bd3-442f-ad3b-5f0c9e3186f6}</Project>
       <Name>Edi.Util</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
+    <ProjectReference Include="..\..\Edi\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
       <Project>{6c55b776-26d4-4db3-a6ab-87e783b2f3d1}</Project>
       <Name>ICSharpCode.AvalonEdit</Name>
     </ProjectReference>

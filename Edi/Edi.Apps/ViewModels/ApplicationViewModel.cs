@@ -1,5 +1,29 @@
 namespace Edi.Apps.ViewModels
 {
+    using Edi.Apps.Enums;
+    using Edi.Apps.Interfaces.ViewModel;
+    using Edi.Core.Interfaces;
+    using Edi.Core.Interfaces.Documents;
+    using Edi.Core.Interfaces.DocumentTypes;
+    using Edi.Core.Models.Documents;
+    using Edi.Core.ViewModels;
+    using Edi.Core.ViewModels.Base;
+    using Edi.Core.ViewModels.Command;
+    using Edi.Core.ViewModels.Events;
+    using Edi.Dialogs.About;
+    using Edi.Documents.ViewModels.EdiDoc;
+    using Edi.Documents.ViewModels.MiniUml;
+    using Edi.Documents.ViewModels.StartPage;
+    using Edi.Settings.Interfaces;
+    using Edi.SettingsView.Config.ViewModels;
+    using Edi.Themes.Interfaces;
+    using EdiApp.Events;   // XXX TODO Implementation in Edi.Core shouold have a different namespace
+    using Files.ViewModels.RecentFiles;
+    using Microsoft.Practices.Prism.Modularity;
+    using Microsoft.Practices.Prism.PubSubEvents;
+    using Microsoft.Win32;
+    using MsgBox;
+    using SimpleControls.MRU.ViewModel;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -10,32 +34,6 @@ namespace Edi.Apps.ViewModels
     using System.Windows;
     using System.Windows.Input;
     using System.Windows.Threading;
-    using Edi.Core.Interfaces;
-    using Edi.Core.Interfaces.DocumentTypes;
-    using Edi.Core.ViewModels;
-    using Edi.Core.ViewModels.Base;
-    using Edi.Core.ViewModels.Events;
-    using Edi.Apps.Enums;
-    using EdiApp.Events;   // XXX TODO Implementation in Edi.Core shouold have a different namespace
-    using Edi.Apps.Interfaces.ViewModel;
-    using Edi.Dialogs.About;
-    using Edi.Documents.Process;
-    using Edi.Documents.ViewModels.EdiDoc;
-    using Edi.Documents.ViewModels.MiniUml;
-    using Files.ViewModels.RecentFiles;
-    using Edi.Documents.ViewModels.StartPage;
-    using Microsoft.Practices.Prism.Modularity;
-    using Microsoft.Practices.Prism.PubSubEvents;
-    using Microsoft.Win32;
-    using MsgBox;
-    using Settings.Interfaces;
-    using SettingsView.Config.ViewModels;
-    using SimpleControls.MRU.ViewModel;
-    using Edi.Themes.Interfaces;
-    using Edi.Core.Interfaces.Documents;
-    using Edi.Core.Models.Documents;
-    using Edi.Core.ViewModels.Command;
-    using Edi.Documents.ViewModels;
 
     /// <summary>
     /// This class manages the complete application life cyle from start to end.

@@ -145,9 +145,9 @@
       <Project>{8dea0927-9bd3-442f-ad3b-5f0c9e3186f6}</Project>
       <Name>Edi.Util</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Settings\Settings.csproj">
+    <ProjectReference Include="..\..\Edi\Settings\Edi.Settings\Edi.Settings.csproj">
       <Project>{2807b493-cc2e-402e-901a-eb138698fedc}</Project>
-      <Name>Settings</Name>
+      <Name>Edi.Settings</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

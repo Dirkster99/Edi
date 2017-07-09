@@ -5,9 +5,9 @@
 	using Edi.Core.Interfaces;
 	using Files.ViewModels.FileExplorer;
 	using MsgBox;
-	using Settings.Interfaces;
-	using Settings.ProgramSettings;
-	using Settings.UserProfile;
+	using Edi.Settings.Interfaces;
+	using Edi.Settings.ProgramSettings;
+	using Edi.Settings.UserProfile;
 	using Edi.Themes.Interfaces;
 
 	public partial class ApplicationViewModel

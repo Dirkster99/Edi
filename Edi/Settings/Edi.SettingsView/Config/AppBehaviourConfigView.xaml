@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="Edi.SettingsView.Config.AppBehaviourConfigView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+
+             xmlns:cmdLabel="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
+             >
+    <Grid>
+    <GroupBox Header="{x:Static cmdLabel:Strings.STR_ProgramSettings_ApplicationBehaviour_Header}" Grid.Row="0" Margin="9" Padding="9">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <CheckBox Content="{x:Static cmdLabel:Strings.STR_Settings_RestoreUserSession}"
+                              IsChecked="{Binding ReloadOpenFilesOnAppStart}"
+                              Grid.Row="0"
+                            />
+
+        <CheckBox Content="{x:Static cmdLabel:Strings.STR_Settings_RunEdiOnlyOnce}"
+                              IsChecked="{Binding RunSingleInstance}"
+                              Grid.Row="1"
+                            />
+
+        <StackPanel Margin="0,12" Grid.Row="2">
+          <Label Content="{x:Static cmdLabel:Strings.STR_Settings_ApplicationLanguage}" />
+          <ComboBox ItemsSource="{Binding Languages}"
+                                SelectedItem="{Binding LanguageSelected}"
+                                SelectedValuePath="BCP47"
+                                DisplayMemberPath="DisplayName"
+                                HorizontalAlignment="Left" VerticalAlignment="Top"
+                                MinWidth="150" Margin="0,3"
+                                ToolTip="{x:Static cmdLabel:Strings.STR_Settings_ApplicationLanguage_TT}"
+                                />
+        </StackPanel>
+
+      </Grid>
+    </GroupBox>
+
+  </Grid>
+</UserControl>

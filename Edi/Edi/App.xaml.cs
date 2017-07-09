@@ -12,8 +12,8 @@ namespace Edi
 	using log4net;
 	using log4net.Config;
 	using MsgBox;
-	using Settings;
-	using Settings.ProgramSettings;
+	using Edi.Settings;
+	using Edi.Settings.ProgramSettings;
 	using SimpleControls.Local;
 	using Edi.Themes;
 	using Edi.Themes.Interfaces;

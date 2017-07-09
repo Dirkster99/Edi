@@ -146,7 +146,7 @@
       <Project>{c4bbc94f-aca4-4b4a-8558-248e2e684b05}</Project>
       <Name>Edi.Dialogs</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
+    <ProjectReference Include="..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
       <Project>{6c55b776-26d4-4db3-a6ab-87e783b2f3d1}</Project>
       <Name>ICSharpCode.AvalonEdit</Name>
     </ProjectReference>
@@ -162,15 +162,15 @@
       <Project>{aad6b1d6-f529-40f8-9786-dc8e2fdf0ad6}</Project>
       <Name>MiniUML.View</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\SettingsView\SettingsView.csproj">
+    <ProjectReference Include="..\Settings\Edi.SettingsView\Edi.SettingsView.csproj">
       <Project>{972e4948-c781-4cf9-a13e-ac3146ab0ad1}</Project>
       <Name>SettingsView</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Settings\Settings.csproj">
+    <ProjectReference Include="..\Settings\Edi.Settings\Edi.Settings.csproj">
       <Project>{2807b493-cc2e-402e-901a-eb138698fedc}</Project>
-      <Name>Settings</Name>
+      <Name>Edi.Settings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\SimpleControls\SimpleControls.csproj">
+    <ProjectReference Include="..\SimpleControls\SimpleControls.csproj">
       <Project>{0e69be38-78c0-4662-a0e1-56c5913b5c3a}</Project>
       <Name>SimpleControls</Name>
     </ProjectReference>

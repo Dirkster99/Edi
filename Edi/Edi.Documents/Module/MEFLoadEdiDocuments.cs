@@ -13,7 +13,7 @@
 	using Edi.Documents.ViewModels.StartPage;
 	using Microsoft.Practices.Prism.MefExtensions.Modularity;
 	using Microsoft.Practices.Prism.Modularity;
-	using Settings.Interfaces;
+	using Edi.Settings.Interfaces;
 
 	/// <summary>
 	/// PRISM MEF Loader/Initializer class

@@ -14,9 +14,9 @@ namespace Edi
 	using Microsoft.Practices.Prism.Modularity;
 	using MsgBox;
 	using Output.Views;
-	using Settings;
-	using Settings.Interfaces;
-	using Settings.ProgramSettings;
+	using Edi.Settings;
+	using Edi.Settings.Interfaces;
+	using Edi.Settings.ProgramSettings;
 	using SimpleControls.Local;
 	using Edi.Themes.Interfaces;
 

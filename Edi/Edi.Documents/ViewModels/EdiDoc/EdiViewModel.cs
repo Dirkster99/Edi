@@ -21,8 +21,8 @@ namespace Edi.Documents.ViewModels.EdiDoc
     using ICSharpCode.AvalonEdit.Utils;
     using Microsoft.Win32;
     using MsgBox;
-    using Settings.Interfaces;
-    using Settings.ProgramSettings;
+    using Edi.Settings.Interfaces;
+    using Edi.Settings.ProgramSettings;
     using UnitComboLib.Unit.Screen;
     using UnitComboLib.ViewModel;
 

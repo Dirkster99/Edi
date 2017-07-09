@@ -2,7 +2,7 @@ namespace Files.ViewModels.RecentFiles
 {
 	using System;
 	using Edi.Core.Interfaces.Enums;
-	using Settings.Interfaces;
+	using Edi.Settings.Interfaces;
 	using SimpleControls.MRU.ViewModel;
 
 	public class RecentFilesViewModel : Edi.Core.ViewModels.ToolViewModel

@@ -7,7 +7,7 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 	using Edi.Core.ViewModels.Base;
 	using Edi.Core.ViewModels.Command;
 	using MsgBox;
-	using Settings;
+	using Edi.Settings;
 
 	public class FindReplaceViewModel : DialogViewModelBase
 	{

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}</ProjectGuid>
+    <ProjectGuid>{972E4948-C781-4CF9-A13E-AC3146AB0AD1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Edi.Dialogs</RootNamespace>
-    <AssemblyName>Edi.Dialogs</AssemblyName>
+    <RootNamespace>Edi.SettingsView</RootNamespace>
+    <AssemblyName>Edi.SettingsView</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -68,13 +68,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FirstFloor.ModernUI">
-      <HintPath>..\..\02_Libs\00_bin\Mui\FirstFloor.ModernUI.dll</HintPath>
+      <HintPath>..\..\..\02_Libs\00_bin\Mui\FirstFloor.ModernUI.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Windows.Shell">
-      <HintPath>..\..\02_Libs\00_bin\Mui\Microsoft.Windows.Shell.dll</HintPath>
-    </Reference>
-    <Reference Include="MsgBox">
-      <HintPath>..\..\02_Libs\00_bin\MsgBox\MsgBox.dll</HintPath>
+    <Reference Include="NumericUpDownLib">
+      <HintPath>..\..\..\02_Libs\00_bin\NumericUpDownLib.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -86,59 +83,34 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnitComboLib">
+      <HintPath>..\..\..\02_Libs\00_bin\UnitComboLib\UnitComboLib.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="About\AboutDlg.xaml.cs">
-      <DependentUpon>AboutDlg.xaml</DependentUpon>
+    <Compile Include="Config\AppBehaviourConfigView.xaml.cs">
+      <DependentUpon>AppBehaviourConfigView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="About\AboutView.xaml.cs">
-      <DependentUpon>AboutView.xaml</DependentUpon>
+    <Compile Include="Config\AppConfigView.xaml.cs">
+      <DependentUpon>AppConfigView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="About\AboutViewModel.cs" />
-    <Compile Include="FindReplace\Converter\BoolToInt.cs" />
-    <Compile Include="FindReplace\Converter\InverseBooleanConverter.cs" />
-    <Compile Include="FindReplace\Converter\SearchScopeToInt.cs" />
-    <Compile Include="FindReplace\FindReplaceDialog.xaml.cs">
-      <DependentUpon>FindReplaceDialog.xaml</DependentUpon>
+    <Compile Include="Config\ConfigDlg.xaml.cs">
+      <DependentUpon>ConfigDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FindReplace\FindReplaceView.xaml.cs">
-      <DependentUpon>FindReplaceView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="FindReplace\SearchScope.cs" />
-    <Compile Include="FindReplace\ViewModel\FindReplaceViewModel.cs" />
-    <Compile Include="FindReplace\ViewModel\IEditor.cs" />
-    <Compile Include="GotoLine\GotoLineDlg.xaml.cs">
-      <DependentUpon>GotoLineDlg.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GotoLine\GotoLineView.xaml.cs">
-      <DependentUpon>GotoLineView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GotoLine\GotoLineViewModel.cs" />
+    <Compile Include="Config\ViewModels\ConfigViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="About\AboutDlg.xaml">
+    <Page Include="Config\AppBehaviourConfigView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="About\AboutView.xaml">
+    <Page Include="Config\AppConfigView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="FindReplace\FindReplaceDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="FindReplace\FindReplaceView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="GotoLine\GotoLineDlg.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="GotoLine\GotoLineView.xaml">
+    <Page Include="Config\ConfigDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -146,27 +118,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\ModernDialogEx.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Edi.Core\Edi.Core.csproj">
+    <ProjectReference Include="..\..\Edi.Core\Edi.Core.csproj">
       <Project>{f17e5e06-f28c-4e91-964f-cdb9f8589bb7}</Project>
       <Name>Edi.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Settings\Edi.Settings\Edi.Settings.csproj">
+    <ProjectReference Include="..\..\Edi.Util\Edi.Util.csproj">
+      <Project>{8dea0927-9bd3-442f-ad3b-5f0c9e3186f6}</Project>
+      <Name>Edi.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
+      <Project>{6c55b776-26d4-4db3-a6ab-87e783b2f3d1}</Project>
+      <Name>ICSharpCode.AvalonEdit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Edi.Settings\Edi.Settings.csproj">
       <Project>{2807b493-cc2e-402e-901a-eb138698fedc}</Project>
       <Name>Edi.Settings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SimpleControls\SimpleControls.csproj">
+    <ProjectReference Include="..\..\SimpleControls\SimpleControls.csproj">
       <Project>{0e69be38-78c0-4662-a0e1-56c5913b5c3a}</Project>
       <Name>SimpleControls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Edi.Util\Edi.Util.csproj">
-      <Project>{8dea0927-9bd3-442f-ad3b-5f0c9e3186f6}</Project>
-      <Name>Edi.Util</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
