@@ -1,0 +1,147 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:local="clr-namespace:Edi.Dialogs.About"
+          
+          xmlns:hyp="clr-namespace:SimpleControls.Hyperlink;assembly=SimpleControls"
+          xmlns:cmdLabel="clr-namespace:Util.Local;assembly=Util"
+          >
+  <!-- This view displays information about an application -->
+	<Style TargetType="{x:Type local:AboutView}">
+    <Setter Property="SnapsToDevicePixels" Value="True" />
+    <Setter Property="Focusable" Value="False"/>
+    <Setter Property="KeyboardNavigation.IsTabStop" Value="False" />
+    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type local:AboutView}">
+            <Border Background="{TemplateBinding Background}"
+							      BorderBrush="{TemplateBinding BorderBrush}"
+							      BorderThickness="{TemplateBinding BorderThickness}">
+
+            <Grid Margin="10">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="250" />
+                <RowDefinition />
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+
+              <Image Grid.Row="0" Grid.Column="0"
+                     Focusable="False"
+                     Source="{DynamicResource Image_About}" Width="128" />
+
+              <StackPanel Grid.Column="1" Grid.Row="0" Margin="18,3,3,3">
+                <!-- TextBlock Grid.Column="1" FontSize="25" Margin="3" Height="41" VerticalAlignment="Top" Text="{Binding AppTitle, Mode=OneTime}" / -->
+                <TextBlock Margin="3" Text="{Binding SubTitle, Mode=OneTime}" />
+                <hyp:WebHyperlink Margin="3"  VerticalAlignment="Bottom" NavigateUri="{Binding AppUrl,Mode=OneTime}" Text="{Binding AppUrlDisplayString,Mode=OneTime}" />
+              </StackPanel>
+
+              <TabControl Grid.Row="2" Grid.ColumnSpan="2"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          MinWidth="450"
+                          >
+                <TabItem Header="{x:Static cmdLabel:Strings.STR_ABOUT_VERSION_INFO_LABEL}" Name="InfoTab">
+                  <Grid Margin="3">
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto" MinWidth="127.5" />
+                      <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Content="Version" HorizontalAlignment="Right" Margin="3" />
+                    <Label Grid.Column="1" Grid.Row="0" Content="{Binding AppVersion,Mode=OneTime}" Margin="3" />
+
+                    <Label Grid.Row="1" HorizontalAlignment="Right" Content="Copyright" Margin="3" />
+                    <Label Grid.Column="1" Grid.Row="1" Content="{Binding AssemblyCopyright, Mode=OneTime}" Margin="3" />
+
+                    <Label Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Right" Content="Modules" Margin="3" />
+                    <ListBox Grid.Column="1" Grid.Row="2" Margin="3"
+                             ItemsSource="{Binding Modules,Mode=OneTime}"
+                             DisplayMemberPath="Value" />
+                  </Grid>
+                </TabItem>
+
+                <TabItem Header="{x:Static cmdLabel:Strings.STR_Contributors_Label}" Margin="3,0">
+                  <Grid Margin="3">
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto" />
+                      <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="{x:Static cmdLabel:Strings.STR_ABOUT_DOCKING_LAYOUT}"
+                           Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" />
+                    <hyp:WebHyperlink Grid.Column="1" Grid.Row="0" Margin="3"
+                                      HorizontalAlignment="Left" VerticalAlignment="Center" NavigateUri="https://avalondock.codeplex.com/" Text="AvalonDock" />
+
+                    <Label Content="{x:Static cmdLabel:Strings.STR_ABOUT_TextEditor}"
+                           Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" />
+                    <hyp:WebHyperlink Grid.Column="1" Grid.Row="1" Margin="3"
+                                      HorizontalAlignment="Left" VerticalAlignment="Center" NavigateUri="https://github.com/icsharpcode/SharpDevelop/wiki/AvalonEdit" Text="AvalonEdit" />
+
+                    <Label Content="{x:Static cmdLabel:Strings.STR_ABOUT_Log4NetViewer}"
+                           Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" />
+                    <hyp:WebHyperlink Grid.Column="2" Grid.Row="2" Margin="3"
+                                      HorizontalAlignment="Left" VerticalAlignment="Center" NavigateUri="https://yalv.codeplex.com/" Text="Yalv! Yet Another Log4Net Viewer" />
+
+                    <hyp:WebHyperlink Grid.Column="2" Grid.Row="3" Margin="3"
+                                      HorizontalAlignment="Left" VerticalAlignment="Center" NavigateUri="https://yalvlib.codeplex.com/" Text="YalvLib" />
+
+                    <Label Content="{x:Static cmdLabel:Strings.STR_ABOUT_CODE_COMPLETION}"
+                           Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" />
+                    <hyp:WebHyperlink Grid.Column="2" Grid.Row="4" Margin="3"
+                                      HorizontalAlignment="Left" VerticalAlignment="Center" NavigateUri="https://dotnetnotepad.codeplex.com/" Text=".Net Notepad" />
+
+                    <Label Content="MiniUml:"
+                           Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" />
+                    <hyp:WebHyperlink Grid.Column="2" Grid.Row="5" Margin="3"
+                                      HorizontalAlignment="Left" VerticalAlignment="Center" NavigateUri="https://miniuml.codeplex.com/" Text="Unified Modeling language (Uml)" />
+
+                    <Label Content="Modern UI (mui):"
+                           Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" />
+                    <hyp:WebHyperlink Grid.Column="2" Grid.Row="6" Margin="3"
+                                      HorizontalAlignment="Left" VerticalAlignment="Center" NavigateUri="http://mui.codeplex.com/" Text="Modern UI (mui)" />
+
+                    <Label Content="MsgBox:"
+                           Grid.Column="0" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" />
+                    <hyp:WebHyperlink Grid.Column="2" Grid.Row="7" Margin="3"
+                                      HorizontalAlignment="Left" VerticalAlignment="Center" NavigateUri="http://msgbox.codeplex.com/" Text="WPF message box service" />
+
+                    <Label Content="Drop Down Buttons:"
+                           Grid.Column="0" Grid.Row="8" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" />
+                    <hyp:WebHyperlink Grid.Column="2" Grid.Row="8" Margin="3"
+                                      HorizontalAlignment="Left" VerticalAlignment="Center" NavigateUri="https://dropdownbuttonlib.codeplex.com/" Text="WPF button drop down library" />
+                    
+
+                  </Grid>
+                </TabItem>
+              </TabControl>
+            </Grid>
+          </Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+</ResourceDictionary>

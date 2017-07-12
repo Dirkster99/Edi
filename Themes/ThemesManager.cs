@@ -24,7 +24,7 @@ namespace Themes
 		const string MetroDarkThemeName = "Metro Dark";
 		static readonly string[] MetroDarkResources = 
     {
-      "/EdiDialogs;component/Themes/ModernDialogEx.xaml",
+      "/Edi.Dialogs;component/Themes/ModernDialogEx.xaml",
 
       // "/FirstFloor.ModernUI;component/Assets/Button.xaml",
 
@@ -68,7 +68,7 @@ namespace Themes
 		static readonly string[] GenericResources = 
     {
       "/FirstFloor.ModernUI;component/Assets/ModernUI.Light.xaml",
-      "/EdiDialogs;component/Themes/ModernDialogEx.xaml",
+      "/Edi.Dialogs;component/Themes/ModernDialogEx.xaml",
 
       "/Themes;component/Generic/Theme.xaml",
       "/Edi.Apps;component/Themes/MetroLight.xaml",
@@ -80,7 +80,7 @@ namespace Themes
 		const string MetroLightThemeName = "Metro Light";
 		static readonly string[] MetroResources = 
     {
-      "/EdiDialogs;component/Themes/ModernDialogEx.xaml",
+      "/Edi.Dialogs;component/Themes/ModernDialogEx.xaml",
 
       // "/FirstFloor.ModernUI;component/Assets/Button.xaml",
 

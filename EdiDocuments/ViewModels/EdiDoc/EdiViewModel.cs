@@ -62,7 +62,7 @@ namespace EdiDocuments.ViewModels.EdiDoc
     /// Each text editor document instance is associated with a <seealso cref="EdiViewModel"/> instance.
     /// </summary>
     public class EdiViewModel : Edi.Core.ViewModels.FileBaseViewModel,
-                              EdiDialogs.FindReplace.ViewModel.IEditor,
+                              Edi.Dialogs.FindReplace.ViewModel.IEditor,
                                                             IDocumentEdi,
                                                             IDocumentFileWatcher
     {

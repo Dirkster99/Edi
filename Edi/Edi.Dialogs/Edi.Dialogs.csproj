@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3B4C1D92-08D4-4D52-AE20-23A0BF882FCD}</ProjectGuid>
+    <ProjectGuid>{C4BBC94F-ACA4-4B4A-8558-248E2E684B05}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EdiDialogs</RootNamespace>
-    <AssemblyName>EdiDialogs</AssemblyName>
+    <RootNamespace>Edi.Dialogs</RootNamespace>
+    <AssemblyName>Edi.Dialogs</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -68,13 +68,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FirstFloor.ModernUI">
-      <HintPath>..\02_Libs\00_bin\Mui\FirstFloor.ModernUI.dll</HintPath>
+      <HintPath>..\..\02_Libs\00_bin\Mui\FirstFloor.ModernUI.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Windows.Shell">
-      <HintPath>..\02_Libs\00_bin\Mui\Microsoft.Windows.Shell.dll</HintPath>
+      <HintPath>..\..\02_Libs\00_bin\Mui\Microsoft.Windows.Shell.dll</HintPath>
     </Reference>
     <Reference Include="MsgBox">
-      <HintPath>..\02_Libs\00_bin\MsgBox\MsgBox.dll</HintPath>
+      <HintPath>..\..\02_Libs\00_bin\MsgBox\MsgBox.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -152,19 +152,19 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Edi\Edi.Core\Edi.Core.csproj">
+    <ProjectReference Include="..\Edi.Core\Edi.Core.csproj">
       <Project>{f17e5e06-f28c-4e91-964f-cdb9f8589bb7}</Project>
       <Name>Edi.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Settings\Settings.csproj">
+    <ProjectReference Include="..\..\Settings\Settings.csproj">
       <Project>{2807b493-cc2e-402e-901a-eb138698fedc}</Project>
       <Name>Settings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SimpleControls\SimpleControls.csproj">
+    <ProjectReference Include="..\..\SimpleControls\SimpleControls.csproj">
       <Project>{0e69be38-78c0-4662-a0e1-56c5913b5c3a}</Project>
       <Name>SimpleControls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Util\Util.csproj">
+    <ProjectReference Include="..\..\Util\Util.csproj">
       <Project>{d96f59c4-a727-47d9-84ad-508b04df2714}</Project>
       <Name>Util</Name>
     </ProjectReference>

@@ -27,7 +27,7 @@
         </File>
       </Component>
       <Component Id="cmpE41B814FDEA2478D66810EECB9004217" Directory="INSTALLDIR" Guid="{19BD61B8-A64A-4CAB-983B-7A84CCF26CA0}">
-        <File Id="filCDE4F68603F7CE489E6ADED950F58CAC" KeyPath="yes" Source="00_Edi\EdiDialogs.dll" >
+        <File Id="filCDE4F68603F7CE489E6ADED950F58CAC" KeyPath="yes" Source="00_Edi\Edi.Dialogs.dll" >
         </File>
       </Component>
       <Component Id="cmpE41B814FDEA2478D66810EECB9004218" Directory="INSTALLDIR" Guid="{19BD61B8-A64A-4CAB-983B-7A84CCF26CA1}">
