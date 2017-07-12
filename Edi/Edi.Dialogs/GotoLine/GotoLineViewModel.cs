@@ -47,7 +47,7 @@ namespace Edi.Dialogs.GotoLine
 		{
 			get
 			{
-				return Util.Local.Strings.STR_GOTO_LINE_CAPTION;
+				return Edi.Util.Local.Strings.STR_GOTO_LINE_CAPTION;
 			}
 		}
 

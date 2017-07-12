@@ -5,10 +5,10 @@
 	using Edi.Core.Interfaces;
 	using Files.ViewModels.FileExplorer;
 	using MsgBox;
-	using Settings.Interfaces;
-	using Settings.ProgramSettings;
-	using Settings.UserProfile;
-	using Themes.Interfaces;
+	using Edi.Settings.Interfaces;
+	using Edi.Settings.ProgramSettings;
+	using Edi.Settings.UserProfile;
+	using Edi.Themes.Interfaces;
 
 	public partial class ApplicationViewModel
 	{
@@ -52,8 +52,8 @@
 		/// <param name="settings"></param>
 		/// <param name="themes"></param>
 		public void LoadConfigOnAppStartup(Options programSettings,
-																			 ISettingsManager settings,
-																			 IThemesManager themes)
+                                            ISettingsManager settings,
+                                            IThemesManager themes)
 		{
 			// Re/Load program options and user profile session data to control global behaviour of program
 			settings.LoadOptions(this.mAppCore.DirFileAppSettingsData, themes, programSettings);

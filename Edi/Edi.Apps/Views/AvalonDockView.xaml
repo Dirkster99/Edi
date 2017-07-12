@@ -7,7 +7,7 @@
                     xmlns:conv="clr-namespace:Edi.Apps.Converters"
 
                     xmlns:avalonDockProperties="clr-namespace:Xceed.Wpf.AvalonDock.Properties;assembly=Xceed.Wpf.AvalonDock"
-                    xmlns:cmdLabel="clr-namespace:Util.Local;assembly=Util"
+                    xmlns:cmdLabel="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
 										xmlns:cmd="clr-namespace:Edi.Core;assembly=Edi.Core"
                    >
 

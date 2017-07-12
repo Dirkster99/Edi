@@ -30,16 +30,16 @@ namespace MiniUML.Model
           // Plugin directory not was not found; create it.
           Directory.CreateDirectory(pluginDirectory);
 
-          MsgBox.Msg.Show(ex, Util.Local.Strings.STR_MSG_DIRCREATED_NO_PLuginLoaded,
-                              Util.Local.Strings.STR_MSG_DIRCREATED_NO_PLuginLoaded_Caption);
+          MsgBox.Msg.Show(ex, Edi.Util.Local.Strings.STR_MSG_DIRCREATED_NO_PLuginLoaded,
+                              Edi.Util.Local.Strings.STR_MSG_DIRCREATED_NO_PLuginLoaded_Caption);
 
           return;
         }
       }
       catch (Exception ex)
       {
-        MsgBox.Msg.Show(ex, Util.Local.Strings.STR_MSG_ACCESS_PLuginDir_Caption,
-                            Util.Local.Strings.STR_MSG_ACCESS_PLuginDir_Caption);
+        MsgBox.Msg.Show(ex, Edi.Util.Local.Strings.STR_MSG_ACCESS_PLuginDir_Caption,
+                            Edi.Util.Local.Strings.STR_MSG_ACCESS_PLuginDir_Caption);
 
         return;
       }
@@ -49,8 +49,8 @@ namespace MiniUML.Model
         loadPluginAssembly(assemblyFile, windowViewModel);
 
       if (PluginManager.PluginModels.Count != assemblyFiles.Length)
-        MsgBox.Msg.Show(Util.Local.Strings.STR_MSG_UML_PLugin_NOTALL_Loaded,
-                        Util.Local.Strings.STR_MSG_UML_PLugin_NOTALL_Loaded_Caption,
+        MsgBox.Msg.Show(Edi.Util.Local.Strings.STR_MSG_UML_PLugin_NOTALL_Loaded,
+                        Edi.Util.Local.Strings.STR_MSG_UML_PLugin_NOTALL_Loaded_Caption,
                         MsgBoxButtons.OK, MsgBoxImage.Error);
     }
 
@@ -78,7 +78,7 @@ namespace MiniUML.Model
               foreach (PluginModelBase p in PluginManager.PluginModels)
               {
                 if (p.Name == pluginModel.Name)
-                  throw new Exception(Util.Local.Strings.STR_MSG_UML_PLugin_Duplicate);
+                  throw new Exception(Edi.Util.Local.Strings.STR_MSG_UML_PLugin_Duplicate);
               }
 
               // Get the shared resources from the plugin.
@@ -95,8 +95,8 @@ namespace MiniUML.Model
             catch (Exception ex)
             {
               MsgBox.Msg.Show(ex,
-                              string.Format(Util.Local.Strings.STR_MSG_ErrorLoadingPlugin, assemblyFile),
-                              Util.Local.Strings.STR_MSG_PluginNotLoaded,
+                              string.Format(Edi.Util.Local.Strings.STR_MSG_ErrorLoadingPlugin, assemblyFile),
+                              Edi.Util.Local.Strings.STR_MSG_PluginNotLoaded,
                               MsgBoxButtons.OK, MsgBoxImage.Error);
 
               ////ExceptionManager.Register(ex,
@@ -109,8 +109,8 @@ namespace MiniUML.Model
       catch (Exception ex)
       {
         MsgBox.Msg.Show(ex,
-                        string.Format(Util.Local.Strings.STR_MSG_ErrorWhileLoadingPlugin, assemblyFile),
-                        Util.Local.Strings.STR_MSG_PluginNotLoaded,
+                        string.Format(Edi.Util.Local.Strings.STR_MSG_ErrorWhileLoadingPlugin, assemblyFile),
+                        Edi.Util.Local.Strings.STR_MSG_PluginNotLoaded,
                         MsgBoxButtons.OK, MsgBoxImage.Error);
 
         return;

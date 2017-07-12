@@ -2,7 +2,7 @@ namespace Files.ViewModels.RecentFiles
 {
 	using System;
 	using Edi.Core.Interfaces.Enums;
-	using Settings.Interfaces;
+	using Edi.Settings.Interfaces;
 	using SimpleControls.MRU.ViewModel;
 
 	public class RecentFilesViewModel : Edi.Core.ViewModels.ToolViewModel
@@ -36,7 +36,7 @@ namespace Files.ViewModels.RecentFiles
 		{
 			get
 			{
-				return new Uri("pack://application:,,,/Themes;component/Images/App/PinableListView/NoPin16.png", UriKind.RelativeOrAbsolute);
+				return new Uri("pack://application:,,,/Edi.Themes;component/Images/App/PinableListView/NoPin16.png", UriKind.RelativeOrAbsolute);
 			}
 		}
 

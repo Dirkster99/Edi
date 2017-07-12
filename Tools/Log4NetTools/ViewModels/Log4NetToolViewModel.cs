@@ -37,7 +37,7 @@ namespace Log4NetTools.ViewModels
 		{
 			get
 			{
-				return new Uri("pack://application:,,,/Themes;component/Images/Documents/Log4net.png", UriKind.RelativeOrAbsolute);
+				return new Uri("pack://application:,,,/Edi.Themes;component/Images/Documents/Log4net.png", UriKind.RelativeOrAbsolute);
 			}
 		}
 

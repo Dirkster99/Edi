@@ -356,8 +356,8 @@ namespace Edi.Core.ViewModels
                     string parentDir = System.IO.Directory.GetParent(this.FilePath).FullName;
 
                     if (System.IO.Directory.Exists(parentDir) == false)
-                        MsgBox.Msg.Show(string.Format(CultureInfo.CurrentCulture, Util.Local.Strings.STR_ACCESS_DIRECTORY_ERROR, parentDir),
-                                                        Util.Local.Strings.STR_FILE_FINDING_CAPTION,
+                        MsgBox.Msg.Show(string.Format(CultureInfo.CurrentCulture, Edi.Util.Local.Strings.STR_ACCESS_DIRECTORY_ERROR, parentDir),
+                                                        Edi.Util.Local.Strings.STR_FILE_FINDING_CAPTION,
                                                         MsgBoxButtons.OK, MsgBoxImage.Error);
                     else
                     {
@@ -370,7 +370,7 @@ namespace Edi.Core.ViewModels
             catch (System.Exception ex)
             {
                 Msg.Show(string.Format(CultureInfo.CurrentCulture, "{0}\n'{1}'.", ex.Message, (this.FilePath ?? string.Empty)),
-                                                Util.Local.Strings.STR_FILE_FINDING_CAPTION,
+                                                Edi.Util.Local.Strings.STR_FILE_FINDING_CAPTION,
                                                 MsgBoxButtons.OK, MsgBoxImage.Error);
             }
         }

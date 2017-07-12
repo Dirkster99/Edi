@@ -5,7 +5,7 @@
 
         xmlns:behav="clr-namespace:Edi.Core.Behaviour;assembly=Edi.Core"
         xmlns:views="clr-namespace:Edi.Dialogs.GotoLine"
-        xmlns:cmdLabel="clr-namespace:Util.Local;assembly=Util"
+        xmlns:cmdLabel="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
 
         ResizeMode="NoResize"
         SizeToContent="WidthAndHeight"

@@ -12,13 +12,13 @@ namespace Edi
 	using log4net;
 	using log4net.Config;
 	using MsgBox;
-	using Settings;
-	using Settings.ProgramSettings;
+	using Edi.Settings;
+	using Edi.Settings.ProgramSettings;
 	using SimpleControls.Local;
-	using Themes;
-	using Themes.Interfaces;
-	using Util;
-	using Util.ActivateWindow;
+	using Edi.Themes;
+	using Edi.Themes.Interfaces;
+	using Edi.Util;
+	using Edi.Util.ActivateWindow;
 
 	/// <summary>
 	/// Interaction logic for App.xaml
@@ -195,21 +195,21 @@ namespace Edi
 					message = string.Format(CultureInfo.CurrentCulture, "{0}\n\n{1}", e.Exception.Message, e.Exception.ToString());
 				}
 				else
-					message = Util.Local.Strings.STR_Msg_UnknownError;
+					message = Edi.Util.Local.Strings.STR_Msg_UnknownError;
 
 				Logger.Error(message);
 
-				Msg.Show(e.Exception, Util.Local.Strings.STR_MSG_UnknownError_Caption,
+				Msg.Show(e.Exception, Edi.Util.Local.Strings.STR_MSG_UnknownError_Caption,
 									MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
 									AppHelpers.IssueTrackerLink,
 									AppHelpers.IssueTrackerLink,
-									Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                                    Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
 
 				e.Handled = true;
 			}
 			catch (Exception exp)
 			{
-				Logger.Error(Util.Local.Strings.STR_MSG_UnknownError_InErrorDispatcher, exp);
+				Logger.Error(Edi.Util.Local.Strings.STR_MSG_UnknownError_InErrorDispatcher, exp);
 			}
 		}
 

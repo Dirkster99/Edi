@@ -19,7 +19,7 @@ namespace Log4NetTools.ViewModels
 
 		private static int iNewFileCounter = 1;
 		private string defaultFileType = "log4j";
-		private readonly static string defaultFileName = Util.Local.Strings.STR_FILE_DEFAULTNAME;
+		private readonly static string defaultFileName = Edi.Util.Local.Strings.STR_FILE_DEFAULTNAME;
 
 		private YalvLib.ViewModel.YalvViewModel mYalvVM = null;
 		#endregion fields
@@ -28,9 +28,9 @@ namespace Log4NetTools.ViewModels
 		public Log4NetViewModel()
 			: base(Log4NetViewModel.DocumentKey)
 		{
-			this.ScreenTip = Util.Local.Strings.STR_LOG4NET_DOCUMENTTAB_TT;
+			this.ScreenTip = Edi.Util.Local.Strings.STR_LOG4NET_DOCUMENTTAB_TT;
 			this.ContentId = string.Empty;
-			this.IsReadOnlyReason = Util.Local.Strings.STR_LOG4NET_READONY_REASON;
+			this.IsReadOnlyReason = Edi.Util.Local.Strings.STR_LOG4NET_READONY_REASON;
 
 			this.FilePath = string.Format(CultureInfo.InvariantCulture, "{0} {1}.{2}",
 																		Log4NetViewModel.defaultFileName,
@@ -118,7 +118,7 @@ namespace Log4NetTools.ViewModels
 			get
 			{
 				// This icon is visible in AvalonDock's Document Navigator window
-				return new Uri("pack://application:,,,/Themes;component/Images/Documents/Log4net.png", UriKind.RelativeOrAbsolute);
+				return new Uri("pack://application:,,,/Edi.Themes;component/Images/Documents/Log4net.png", UriKind.RelativeOrAbsolute);
 			}
 		}
 		#endregion FileName
@@ -270,7 +270,7 @@ namespace Log4NetTools.ViewModels
 					}
 					catch (Exception ex)
 					{
-						MsgBox.Msg.Show(ex.Message, Util.Local.Strings.STR_FILE_OPEN_ERROR_MSG_CAPTION, MsgBoxButtons.OK);
+						MsgBox.Msg.Show(ex.Message, Edi.Util.Local.Strings.STR_FILE_OPEN_ERROR_MSG_CAPTION, MsgBoxButtons.OK);
 
 						return false;
 					}
@@ -280,7 +280,7 @@ namespace Log4NetTools.ViewModels
 			}
 			catch (Exception exp)
 			{
-				MsgBox.Msg.Show(exp.Message, Util.Local.Strings.STR_FILE_OPEN_ERROR_MSG_CAPTION, MsgBoxButtons.OK);
+				MsgBox.Msg.Show(exp.Message, Edi.Util.Local.Strings.STR_FILE_OPEN_ERROR_MSG_CAPTION, MsgBoxButtons.OK);
 
 				return false;
 			}
@@ -302,7 +302,7 @@ namespace Log4NetTools.ViewModels
 			}
 			catch (Exception exp)
 			{
-				MsgBox.Msg.Show(exp.Message, Util.Local.Strings.STR_FILE_OPEN_ERROR_MSG_CAPTION, MsgBoxButtons.OK);
+				MsgBox.Msg.Show(exp.Message, Edi.Util.Local.Strings.STR_FILE_OPEN_ERROR_MSG_CAPTION, MsgBoxButtons.OK);
 			}
 		}
 		#endregion

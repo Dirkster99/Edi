@@ -11,7 +11,7 @@ namespace Edi.Apps.ViewModels
 	using Edi.Core.ViewModels;
 	using Edi.Core.ViewModels.Command;
 	using Edi.Apps.Events;
-	using Settings.Interfaces;
+	using Edi.Settings.Interfaces;
 	using Xceed.Wpf.AvalonDock;
 
 	/// <summary>

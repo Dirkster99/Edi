@@ -343,11 +343,7 @@
       <Project>{f17e5e06-f28c-4e91-964f-cdb9f8589bb7}</Project>
       <Name>Edi.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\EdiDocuments\EdiDocuments.csproj">
-      <Project>{253edd78-bb04-4916-ad09-90f10fbb9803}</Project>
-      <Name>EdiDocuments</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
+    <ProjectReference Include="..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
       <Project>{6c55b776-26d4-4db3-a6ab-87e783b2f3d1}</Project>
       <Name>ICSharpCode.AvalonEdit</Name>
     </ProjectReference>
@@ -363,33 +359,37 @@
       <Project>{aad6b1d6-f529-40f8-9786-dc8e2fdf0ad6}</Project>
       <Name>MiniUML.View</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\SettingsView\SettingsView.csproj">
+    <ProjectReference Include="..\Settings\Edi.SettingsView\Edi.SettingsView.csproj">
       <Project>{972e4948-c781-4cf9-a13e-ac3146ab0ad1}</Project>
       <Name>SettingsView</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Settings\Settings.csproj">
+    <ProjectReference Include="..\Settings\Edi.Settings\Edi.Settings.csproj">
       <Project>{2807b493-cc2e-402e-901a-eb138698fedc}</Project>
-      <Name>Settings</Name>
+      <Name>Edi.Settings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\SimpleControls\SimpleControls.csproj">
+    <ProjectReference Include="..\SimpleControls\SimpleControls.csproj">
       <Project>{0E69BE38-78C0-4662-A0E1-56C5913B5C3A}</Project>
       <Name>SimpleControls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Themes\Themes.csproj">
-      <Project>{957A91E6-91DD-4C13-B1D1-F06D66EC6D55}</Project>
-      <Name>Themes</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Tools\BuiltIn\Output\Output.csproj">
       <Project>{d14d8609-693c-475d-a4a4-5a7f6188d633}</Project>
       <Name>Output</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Util\Util.csproj">
-      <Project>{D96F59C4-A727-47D9-84AD-508B04DF2714}</Project>
-      <Name>Util</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Edi.Dialogs\Edi.Dialogs.csproj">
       <Project>{c4bbc94f-aca4-4b4a-8558-248e2e684b05}</Project>
       <Name>Edi.Dialogs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Edi.Documents\Edi.Documents.csproj">
+      <Project>{1fb5ac73-b203-4d42-b22a-af2690de3709}</Project>
+      <Name>Edi.Documents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Edi.Themes\Edi.Themes.csproj">
+      <Project>{69bc833c-0fe1-4288-bb80-bb457d07e638}</Project>
+      <Name>Edi.Themes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Edi.Util\Edi.Util.csproj">
+      <Project>{8dea0927-9bd3-442f-ad3b-5f0c9e3186f6}</Project>
+      <Name>Edi.Util</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

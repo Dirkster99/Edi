@@ -6,12 +6,12 @@ namespace Edi.Apps.ViewModels
 	using System.Reflection;
 	using System.Windows;
 	using System.Windows.Media;
-	using EdiDocuments.ViewModels.EdiDoc;
+	using Edi.Documents.ViewModels.EdiDoc;
 	using ICSharpCode.AvalonEdit.Edi;
 	using ICSharpCode.AvalonEdit.Highlighting;
 	using ICSharpCode.AvalonEdit.Highlighting.Themes;
 	using MsgBox;
-	using Themes.Definition;
+	using Edi.Themes.Definition;
 
 	public partial class ApplicationViewModel
 	{
@@ -175,12 +175,12 @@ namespace Edi.Apps.ViewModels
 
 		/// <summary>
 		/// Attempt to switch to the theme stated in <paramref name="nextThemeToSwitchTo"/>.
-		/// The given name must map into the <seealso cref="Themes.ThemesVM.EnTheme"/> enumeration.
+		/// The given name must map into the <seealso cref="Edi.Themes.ThemesVM.EnTheme"/> enumeration.
 		/// </summary>
 		/// <param name="nextThemeToSwitchTo"></param>
 		private bool SwitchToSelectedTheme(ThemeBase nextThemeToSwitchTo)
 		{
-			const string themesModul = "Themes.dll";
+			const string themesModul = "Edi.Themes.dll";
 
 			try
 			{
@@ -229,7 +229,7 @@ namespace Edi.Apps.ViewModels
 			}
 			catch (Exception exp)
 			{
-				MsgBox.Msg.Show(exp, Util.Local.Strings.STR_THEMING_CAPTION,
+				MsgBox.Msg.Show(exp, Edi.Util.Local.Strings.STR_THEMING_CAPTION,
 												MsgBoxButtons.OK, MsgBoxImage.Error);
 
 				return false;

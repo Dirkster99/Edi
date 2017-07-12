@@ -113,7 +113,7 @@ namespace Files.ViewModels.FileStats
 		{
 			get
 			{
-				return new Uri("pack://application:,,,/Themes;component/Images/property-blue.png", UriKind.RelativeOrAbsolute);
+				return new Uri("pack://application:,,,/Edi.Themes;component/Images/property-blue.png", UriKind.RelativeOrAbsolute);
 			}
 		}
 		#endregion ToolWindow Icon

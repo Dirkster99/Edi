@@ -10,10 +10,14 @@ ECHO Edi
 ECHO Edi.Apps
 ECHO Edi.Core
 ECHO Edi.Dialogs
-ECHO EdiDocuments
-ECHO EdiViews
-ECHO Themes
+ECHO Edi.Documents
+ECHO Edi.Themes
+ECHO Edi.Settings
+ECHO Edi.SettingsView
+ECHO Edi.Util
+ECHO.
 ECHO ICSharpCode.AvalonEdit
+ECHO SimpleControls
 ECHO.
 ECHO Log4NetTools
 ECHO Tools-BuiltIn-Output
@@ -25,10 +29,6 @@ ECHO MiniUML.Model
 ECHO MiniUML.View
 ECHO MiniUML.Plugins.UmlClassDiagram
 ECHO.
-ECHO Settings
-ECHO SettingsView
-ECHO SimpleControls
-ECHO Util
 ECHO.
 REM Ask the user if hes really sure to continue beyond this point XXXXXXXX
 set /p choice=Are you sure to continue (Y/N)?
@@ -48,17 +48,47 @@ ECHO.
 RMDIR /S /Q Edi\bin
 RMDIR /S /Q Edi\obj
 
+ECHO Deleting BIN and OBJ Folders in Edi.Apps
+ECHO.
+RMDIR /S /Q Edi\Edi.Apps\bin
+RMDIR /S /Q Edi\Edi.Apps\obj
+
+ECHO Deleting BIN and OBJ Folders in Edi.Core
+ECHO.
+RMDIR /S /Q Edi\Edi.Core\bin
+RMDIR /S /Q Edi\Edi.Core\obj
+
 RMDIR /S /Q Edi\Edi.Dialogs\bin
 RMDIR /S /Q Edi\Edi.Dialogs\obj
 
-RMDIR /S /Q EdiDocuments\bin
-RMDIR /S /Q EdiDocuments\obj
+RMDIR /S /Q Edi\Edi.Documents\bin
+RMDIR /S /Q Edi\Edi.Documents\obj
 
-RMDIR /S /Q Themes\bin
-RMDIR /S /Q Themes\obj
+RMDIR /S /Q Edi.Themes\bin
+RMDIR /S /Q Edi.Themes\obj
 
-RMDIR /S /Q ICSharpCode.AvalonEdit\bin
-RMDIR /S /Q ICSharpCode.AvalonEdit\obj
+ECHO Deleting BIN and OBJ Folders in Settings
+ECHO.
+RMDIR /S /Q Edi\Settings\Edi.Settings\bin
+RMDIR /S /Q Edi\Settings\Edi.Settings\obj
+
+ECHO Deleting BIN and OBJ Folders in SettingsView
+ECHO.
+RMDIR /S /Q Edi\Settings\Edi.SettingsView\bin
+RMDIR /S /Q Edi\Settings\Edi.SettingsView\obj
+
+ECHO Deleting BIN and OBJ Folders in Util
+ECHO.
+RMDIR /S /Q Edi.Util\bin
+RMDIR /S /Q Edi.Util\obj
+
+RMDIR /S /Q Edi\ICSharpCode.AvalonEdit\bin
+RMDIR /S /Q Edi\ICSharpCode.AvalonEdit\obj
+
+ECHO Deleting BIN and OBJ Folders in SimpleControls
+ECHO.
+RMDIR /S /Q Edi\SimpleControls\bin
+RMDIR /S /Q Edi\SimpleControls\obj
 
 ECHO Deleting BIN and OBJ Folders in Log4NetTools folders
 ECHO.
@@ -90,36 +120,6 @@ RMDIR /S /Q .\MiniUML\MiniUML.View\obj
 
 RMDIR /S /Q .\MiniUML\Plugins\src\MiniUML.Plugins.UmlClassDiagram\bin
 RMDIR /S /Q .\MiniUML\Plugins\src\MiniUML.Plugins.UmlClassDiagram\obj
-
-ECHO Deleting BIN and OBJ Folders in Util
-ECHO.
-RMDIR /S /Q Util\bin
-RMDIR /S /Q Util\obj
-
-ECHO Deleting BIN and OBJ Folders in Settings
-ECHO.
-RMDIR /S /Q Settings\bin
-RMDIR /S /Q Settings\obj
-
-ECHO Deleting BIN and OBJ Folders in SettingsView
-ECHO.
-RMDIR /S /Q SettingsView\bin
-RMDIR /S /Q SettingsView\obj
-
-ECHO Deleting BIN and OBJ Folders in SimpleControls
-ECHO.
-RMDIR /S /Q SimpleControls\bin
-RMDIR /S /Q SimpleControls\obj
-
-ECHO Deleting BIN and OBJ Folders in Edi.Apps
-ECHO.
-RMDIR /S /Q Edi\Edi.Apps\bin
-RMDIR /S /Q Edi\Edi.Apps\obj
-
-ECHO Deleting BIN and OBJ Folders in Edi.Core
-ECHO.
-RMDIR /S /Q Edi\Edi.Core\bin
-RMDIR /S /Q Edi\Edi.Core\obj
 
 PAUSE
 

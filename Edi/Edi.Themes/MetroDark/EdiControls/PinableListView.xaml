@@ -1,0 +1,228 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    
+	  xmlns:AvalonEdit="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit"
+    xmlns:editing="clr-namespace:ICSharpCode.AvalonEdit.Editing;assembly=ICSharpCode.AvalonEdit"
+    
+    xmlns:pinlvw="clr-namespace:SimpleControls.MRU.View;assembly=SimpleControls"
+    xmlns:hyperl="clr-namespace:SimpleControls.Hyperlink;assembly=SimpleControls"
+    >
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="/Edi.Themes;component/MetroDark/Brushes.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+
+  <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        Checkbox style for pin visual
+        Original source of animation (is replaced with own XAML image)
+        http://stackoverflow.com/questions/7459642/how-do-i-create-a-wpf-checkbox-control-template-in-xaml-with-the-following-requi
+      -->
+  <Style TargetType="{x:Type pinlvw:PinnableCheckbox}">
+    <Setter Property="SnapsToDevicePixels" Value="true" />
+    <!-- Setter Property="OverridesDefaultStyle" Value="true" -->
+    <Setter Property="FocusVisualStyle" Value="{DynamicResource CheckBoxFocusVisual}" />
+    <Setter Property="LayoutTransform">
+      <Setter.Value>
+        <ScaleTransform CenterX="50"  CenterY="50" ScaleX=".15" ScaleY=".15"/>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type CheckBox}">
+          <BulletDecorator Background="Transparent">
+            <BulletDecorator.Bullet>
+
+              <Grid>
+                <Canvas Width="100" Height="100" x:Name="NoCheckMark" Opacity="0" Visibility="Visible">
+                  <!-- Needle Pin in unpined mode (Opacity is set to different value on MouseOver) -->
+                  <Path VerticalAlignment="Center" Fill="White">
+                    <Path.Data>
+                      <PathGeometry>
+                        <PathGeometry.Figures>
+                          <PathFigureCollection>
+                            <PathFigure IsClosed="True" StartPoint="0,0">
+                              <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                  <LineSegment Point="75,65" />
+                                  <LineSegment Point="75,85" />
+                                </PathSegmentCollection>
+                              </PathFigure.Segments>
+                            </PathFigure>
+                          </PathFigureCollection>
+                        </PathGeometry.Figures>
+                      </PathGeometry>
+                    </Path.Data>
+                  </Path>
+
+                  <Line X1="0" Y1="0" X2="75" Y2="65" Stroke="White" />
+                  <Line X1="0" Y1="0" X2="75" Y2="85" Stroke="#FFCCCCCC" />
+
+                  <Ellipse Canvas.Left="50" Canvas.Top="50" Width="50" Height="50" Fill="#FFCCCCCC" />
+                  <Ellipse Canvas.Left="50" Canvas.Top="50" Width="50" Height="50">
+                    <Ellipse.Fill>
+                      <RadialGradientBrush GradientOrigin="0.15,0">
+                        <!-- Source: http://www.codeproject.com/Articles/32257/A-Style-for-Round-Glassy-WPF-Buttons -->
+                        <RadialGradientBrush.RelativeTransform>
+                          <TransformGroup>
+                            <RotateTransform Angle="0.45" CenterX="50" CenterY="20"/>
+                            <ScaleTransform CenterX="0.5" 
+		                                                            CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                            <TranslateTransform X="0.02" Y="0.3"/>
+                          </TransformGroup>
+                        </RadialGradientBrush.RelativeTransform>
+                        <GradientStop Offset="1" Color="#FFFFFFFF"/>
+                        <GradientStop Offset="0.4" Color="#00000000"/>
+                      </RadialGradientBrush>
+                    </Ellipse.Fill>
+                  </Ellipse>
+                </Canvas>
+
+                <Canvas Width="100" Height="100" x:Name="CheckMark">
+                  <!-- Needle Pin in pined mode XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+                  <!-- Canvas.LayoutTransform>
+  		                                      <ScaleTransform CenterX="50" CenterY="50" ScaleX=".15" ScaleY=".15" />
+  	                                          </Canvas.LayoutTransform -->
+                  <!-- Border BorderBrush="Black" BorderThickness="1" Width ="100" Height="100" / -->
+
+                  <Path VerticalAlignment="Center" Fill="White">
+                    <Path.Data>
+                      <PathGeometry>
+                        <PathGeometry.Figures>
+                          <PathFigureCollection>
+                            <PathFigure IsClosed="True" StartPoint="50,90">
+                              <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                  <LineSegment Point="40,25" />
+                                  <LineSegment Point="60,25" />
+                                </PathSegmentCollection>
+                              </PathFigure.Segments>
+                            </PathFigure>
+                          </PathFigureCollection>
+                        </PathGeometry.Figures>
+                      </PathGeometry>
+                    </Path.Data>
+                  </Path>
+
+                  <Line X1="50" Y1="90" X2="40" Y2="25" Stroke="White" />
+                  <Line X1="50" Y1="90" X2="60" Y2="25" Stroke="#FFCCCCCC" />
+
+                  <Ellipse Canvas.Left="25" Canvas.Top="5" Width="50" Height="50" Fill="#FFCCCCCC" />
+                  <Ellipse Canvas.Left="25" Canvas.Top="5" Width="50" Height="50">
+                    <Ellipse.Fill>
+                      <RadialGradientBrush GradientOrigin="0.15,0">
+                        <!-- Source: http://www.codeproject.com/Articles/32257/A-Style-for-Round-Glassy-WPF-Buttons -->
+                        <RadialGradientBrush.RelativeTransform>
+                          <TransformGroup>
+                            <RotateTransform Angle="0.45" CenterX="50" CenterY="20"/>
+                            <ScaleTransform CenterX="0.5" 
+		                                                            CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                            <TranslateTransform X="0.02" Y="0.3"/>
+                          </TransformGroup>
+                        </RadialGradientBrush.RelativeTransform>
+                        <GradientStop Offset="1" Color="#FFFFFFFF"/>
+                        <GradientStop Offset="0.4" Color="#00000000"/>
+                      </RadialGradientBrush>
+                    </Ellipse.Fill>
+                  </Ellipse>
+                </Canvas>
+              </Grid>
+
+            </BulletDecorator.Bullet>
+          </BulletDecorator>
+
+          <ControlTemplate.Triggers>
+            <MultiTrigger>
+              <MultiTrigger.Conditions>
+                <!-- Condition Property="IsMouseOver" Value="True"/ -->
+                <Condition Property="IsChecked" Value="False"/>
+              </MultiTrigger.Conditions>
+
+              <MultiTrigger.EnterActions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="NoCheckMark" To="0.3" Duration="0:0:0.1"/>
+                  </Storyboard>
+                </BeginStoryboard>
+              </MultiTrigger.EnterActions>
+              <MultiTrigger.ExitActions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="NoCheckMark" To="0" Duration="0:0:0.1"/>
+                  </Storyboard>
+                </BeginStoryboard>
+              </MultiTrigger.ExitActions>
+
+            </MultiTrigger>
+
+            <Trigger Property="IsChecked" Value="True">
+              <!-- Setter TargetName="CheckBorder" Property="Opacity" Value="1"/ -->
+              <Setter TargetName="CheckMark" Property="Opacity" Value="1"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="False">
+              <!-- Setter TargetName="CheckBorder" Property="Opacity" Value="0"/ -->
+              <Setter TargetName="CheckMark" Property="Opacity" Value="0"/>
+            </Trigger>
+
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+  <Style TargetType="{x:Type pinlvw:PinableListViewItem}">
+    <Setter Property="SnapsToDevicePixels" Value="true"/>
+    <Setter Property="Padding" Value="1" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+    <!-- This is required for the PathTrimmingTextBlock -->
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ListViewItem">
+          <Border Name="ListemBackgroundBorder"
+                  Padding="3"
+                  BorderBrush="Transparent"
+                  BorderThickness="1"
+                  CornerRadius="3"
+                  SnapsToDevicePixels="true"
+                  Background="Transparent">
+            <GridViewRowPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+              <Setter TargetName="ListemBackgroundBorder" Property="Background" Value="{StaticResource ListViewItemMouseOverGradient}"/>
+              <Setter TargetName="ListemBackgroundBorder" Property="BorderBrush" Value="{StaticResource ListViewItemMouseOverBorder}" />
+              <Setter TargetName="ListemBackgroundBorder" Property="BorderThickness" Value="1" />
+            </Trigger>
+            <!-- Trigger Property="IsSelected" Value="true">
+              <Setter TargetName="Border" Property="Background" Value="Black"/>
+            </Trigger -->
+            <Trigger Property="IsEnabled" Value="false">
+              <Setter Property="Foreground" Value="{StaticResource PinableListViewForegroundDisabled}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style TargetType="{x:Type pinlvw:PinableListView}">
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type pinlvw:PinableListView}">
+          <Border Padding="0"
+                  BorderThickness="0"
+                  BorderBrush="Transparent"
+                  Background="{StaticResource ToolViewBackground}"
+                  Name="Bd"
+                  SnapsToDevicePixels="True">
+            <ScrollViewer Padding="0" Focusable="False">
+              <ItemsPresenter SnapsToDevicePixels="True" />
+            </ScrollViewer>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+</ResourceDictionary>

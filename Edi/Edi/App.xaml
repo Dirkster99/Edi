@@ -6,7 +6,7 @@
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Themes;component/Generic/Theme.xaml" />
+        <ResourceDictionary Source="/Edi.Themes;component/Generic/Theme.xaml" />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>    
   </Application.Resources>

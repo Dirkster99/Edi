@@ -5,7 +5,7 @@
           xmlns:conv="clr-namespace:Edi.Core.Converters.MessageType;assembly=Edi.Core"
           xmlns:FRconv="clr-namespace:Edi.Dialogs.FindReplace.Converter"
           xmlns:behav="clr-namespace:Edi.Core.Behaviour;assembly=Edi.Core"
-          xmlns:cmdLabel="clr-namespace:Util.Local;assembly=Util"
+          xmlns:cmdLabel="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
 >
 	<Style TargetType="{x:Type local:FindReplaceView}">
     <Setter Property="SnapsToDevicePixels" Value="True" />

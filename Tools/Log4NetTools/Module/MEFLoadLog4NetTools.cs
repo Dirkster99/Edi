@@ -1,33 +1,33 @@
 ﻿namespace Log4NetTools.Module
 {
-	using System.Collections.Generic;
-	using System.ComponentModel.Composition;
-	using System.Reflection;
-	using System.Windows;
-	using Edi.Core.Interfaces;
-	using Edi.Core.Interfaces.DocumentTypes;
-	using Edi.Core.Resources;
-	using Edi.Core.View.Pane;
-	using Log4NetTools.ViewModels;
-	using Microsoft.Practices.Prism.MefExtensions.Modularity;
-	using Microsoft.Practices.Prism.Modularity;
-	using Settings.Interfaces;
+    using Edi.Core.Interfaces;
+    using Edi.Core.Interfaces.DocumentTypes;
+    using Edi.Core.Resources;
+    using Edi.Core.View.Pane;
+    using Edi.Settings.Interfaces;
+    using Log4NetTools.ViewModels;
+    using Microsoft.Practices.Prism.MefExtensions.Modularity;
+    using Microsoft.Practices.Prism.Modularity;
+    using System.Collections.Generic;
+    using System.ComponentModel.Composition;
+    using System.Reflection;
+    using System.Windows;
 
-	/// <summary>
-	/// PRISM MEF Loader/Initializer class
-	/// Relevante services are injected in constructor.
-	/// 
-	/// Requires the following XML in App.config to enable PRISM MEF to pick-up contained definitions.
-	/// 
-	/// &lt;modules>
-	/// &lt;!-- Edi.Tools assembly from plugins folder and initialize it if it was present -->
-	/// &lt;module assemblyFile="EdiTools.dll"
-	/// 				moduleType="EdiTools.Module.Loader, EdiTools.Module.Loader, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-	/// 				moduleName="Loader"
-	/// 				startupLoaded="true" />
-	/// &lt;/modules>
-	/// </summary>
-	[ModuleExport(typeof(MEFLoadLog4NetTools))]
+    /// <summary>
+    /// PRISM MEF Loader/Initializer class
+    /// Relevante services are injected in constructor.
+    /// 
+    /// Requires the following XML in App.config to enable PRISM MEF to pick-up contained definitions.
+    /// 
+    /// &lt;modules>
+    /// &lt;!-- Edi.Tools assembly from plugins folder and initialize it if it was present -->
+    /// &lt;module assemblyFile="EdiTools.dll"
+    /// 				moduleType="EdiTools.Module.Loader, EdiTools.Module.Loader, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+    /// 				moduleName="Loader"
+    /// 				startupLoaded="true" />
+    /// &lt;/modules>
+    /// </summary>
+    [ModuleExport(typeof(MEFLoadLog4NetTools))]
 	public class MEFLoadLog4NetTools : IModule
 	{
 		#region fields

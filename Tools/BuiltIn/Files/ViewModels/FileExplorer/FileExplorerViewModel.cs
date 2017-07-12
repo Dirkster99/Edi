@@ -15,7 +15,7 @@ namespace Files.ViewModels.FileExplorer
 	using FileSystemModels.Models;
 	using FolderBrowser.ViewModels;
 	using FolderBrowser.ViewModels.Interfaces;
-	using Settings.Interfaces;
+	using Edi.Settings.Interfaces;
 
 	/// <summary>
 	/// This class can be used to present file based information, such as,
