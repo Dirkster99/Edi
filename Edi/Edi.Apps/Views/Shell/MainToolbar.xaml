@@ -15,9 +15,8 @@
     xmlns:behav="clr-namespace:Edi.Core.Behaviour;assembly=Edi.Core"
 
     xmlns:ctrls="clr-namespace:DropDownButtonLib.Controls;assembly=DropDownButtonLib"
-    xmlns:themes="clr-namespace:DropDownButtonLib.Core.Themes;assembly=DropDownButtonLib"
   
-		Visibility="{Binding IsWorkspaceAreaOptimized, Converter={conv:BoolToVisibilityConverter}, ConverterParameter=true}">
+	Visibility="{Binding IsWorkspaceAreaOptimized, Converter={conv:BoolToVisibilityConverter}, ConverterParameter=true}">
   <!--d:DesignHeight="300" d:DesignWidth="300"-->
   <UserControl.Resources>
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />

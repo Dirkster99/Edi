@@ -4,58 +4,58 @@
         <name>DropDownButtonLib</name>
     </assembly>
     <members>
-        <member name="T:DropDownButtonLib.Chromes.ButtonChrome">
+        <member name="T:DropDownButtonLib.Controls.Chromes.ButtonChrome">
             <summary>
             Implements a ButtonChrome which is a kind of frame that
             determines the look and feel of a button.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Chromes.ButtonChrome.CornerRadiusProperty">
+        <member name="F:DropDownButtonLib.Controls.Chromes.ButtonChrome.CornerRadiusProperty">
             <summary>
             Backing store for corner radius dependency property of button chrome.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Chromes.ButtonChrome.InnerCornerRadiusProperty">
+        <member name="F:DropDownButtonLib.Controls.Chromes.ButtonChrome.InnerCornerRadiusProperty">
             <summary>
             Backing store for inner corner radius dependency property of button chrome.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Chromes.ButtonChrome.RenderCheckedProperty">
+        <member name="F:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderCheckedProperty">
             <summary>
             Backing store for render checked dependency property of button chrome.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Chromes.ButtonChrome.RenderEnabledProperty">
+        <member name="F:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderEnabledProperty">
             <summary>
             Backing store for render enabled dependency property of button chrome.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Chromes.ButtonChrome.RenderFocusedProperty">
+        <member name="F:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderFocusedProperty">
             <summary>
             Backing store for render focused dependency property of button chrome.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Chromes.ButtonChrome.RenderMouseOverProperty">
+        <member name="F:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderMouseOverProperty">
             <summary>
             Backing store for render mouse over dependency property of button chrome.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Chromes.ButtonChrome.RenderNormalProperty">
+        <member name="F:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderNormalProperty">
             <summary>
             Backing store for render normal dependency property of button chrome.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Chromes.ButtonChrome.RenderPressedProperty">
+        <member name="F:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderPressedProperty">
             <summary>
             Backing store for render pressed dependency property of button chrome.
             </summary>
         </member>
-        <member name="M:DropDownButtonLib.Chromes.ButtonChrome.#cctor">
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.#cctor">
             <summary>
             Static class constructor
             </summary>
         </member>
-        <member name="M:DropDownButtonLib.Chromes.ButtonChrome.OnCornerRadiusChanged(System.Windows.CornerRadius,System.Windows.CornerRadius)">
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnCornerRadiusChanged(System.Windows.CornerRadius,System.Windows.CornerRadius)">
             <summary>
             Method executes when the corner radius dependency property is changed.
             It re-computes the inner corner radius since it always needs to be 1
@@ -64,7 +64,7 @@
             <param name="oldValue"></param>
             <param name="newValue"></param>
         </member>
-        <member name="M:DropDownButtonLib.Chromes.ButtonChrome.OnInnerCornerRadiusChanged(System.Windows.CornerRadius,System.Windows.CornerRadius)">
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnInnerCornerRadiusChanged(System.Windows.CornerRadius,System.Windows.CornerRadius)">
             <summary>
             Method executes when the inner corner radius dependency property is changed.
             
@@ -73,7 +73,7 @@
             <param name="oldValue"></param>
             <param name="newValue"></param>
         </member>
-        <member name="M:DropDownButtonLib.Chromes.ButtonChrome.OnRenderCheckedChanged(System.Boolean,System.Boolean)">
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderCheckedChanged(System.Boolean,System.Boolean)">
             <summary>
             Method executes when the render checked dependency property is changed.
             
@@ -82,7 +82,7 @@
             <param name="oldValue"></param>
             <param name="newValue"></param>
         </member>
-        <member name="M:DropDownButtonLib.Chromes.ButtonChrome.OnRenderEnabledChanged(System.Boolean,System.Boolean)">
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderEnabledChanged(System.Boolean,System.Boolean)">
             <summary>
             Method executes when the render enabled dependency property is changed.
             
@@ -91,7 +91,7 @@
             <param name="oldValue"></param>
             <param name="newValue"></param>
         </member>
-        <member name="M:DropDownButtonLib.Chromes.ButtonChrome.OnRenderFocusedChanged(System.Boolean,System.Boolean)">
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderFocusedChanged(System.Boolean,System.Boolean)">
             <summary>
             Method executes when the render focused dependency property is changed.
             
@@ -100,7 +100,7 @@
             <param name="oldValue"></param>
             <param name="newValue"></param>
         </member>
-        <member name="M:DropDownButtonLib.Chromes.ButtonChrome.OnRenderMouseOverChanged(System.Boolean,System.Boolean)">
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderMouseOverChanged(System.Boolean,System.Boolean)">
             <summary>
             Method executes when the render mouseover dependency property is changed.
             
@@ -109,7 +109,7 @@
             <param name="oldValue"></param>
             <param name="newValue"></param>
         </member>
-        <member name="M:DropDownButtonLib.Chromes.ButtonChrome.OnRenderNormalChanged(System.Boolean,System.Boolean)">
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderNormalChanged(System.Boolean,System.Boolean)">
             <summary>
             Method executes when the render normal dependency property is changed.
             
@@ -118,7 +118,7 @@
             <param name="oldValue"></param>
             <param name="newValue"></param>
         </member>
-        <member name="M:DropDownButtonLib.Chromes.ButtonChrome.OnRenderPressedChanged(System.Boolean,System.Boolean)">
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderPressedChanged(System.Boolean,System.Boolean)">
             <summary>
             Method executes when the render pressed dependency property is changed.
             
@@ -127,98 +127,98 @@
             <param name="oldValue"></param>
             <param name="newValue"></param>
         </member>
-        <member name="M:DropDownButtonLib.Chromes.ButtonChrome.OnCornerRadiusChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnCornerRadiusChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
             <summary>
             Method executes when the corner radius dependency property is changed.
             </summary>
             <param name="o"></param>
             <param name="e"></param>
         </member>
-        <member name="M:DropDownButtonLib.Chromes.ButtonChrome.OnInnerCornerRadiusChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnInnerCornerRadiusChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
             <summary>
             Method executes when the inner corner radius dependency property is changed.
             </summary>
             <param name="o"></param>
             <param name="e"></param>
         </member>
-        <member name="M:DropDownButtonLib.Chromes.ButtonChrome.OnRenderCheckedChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderCheckedChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
             <summary>
             Method executes when the render checked dependency property is changed.
             </summary>
             <param name="o"></param>
             <param name="e"></param>
         </member>
-        <member name="M:DropDownButtonLib.Chromes.ButtonChrome.OnRenderEnabledChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderEnabledChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
             <summary>
             Method executes when the render enabled dependency property is changed.
             </summary>
             <param name="o"></param>
             <param name="e"></param>
         </member>
-        <member name="M:DropDownButtonLib.Chromes.ButtonChrome.OnRenderFocusedChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderFocusedChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
             <summary>
             Method executes when the render focused dependency property is changed.
             </summary>
             <param name="o"></param>
             <param name="e"></param>
         </member>
-        <member name="M:DropDownButtonLib.Chromes.ButtonChrome.OnRenderMouseOverChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderMouseOverChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
             <summary>
             Method executes when the render mouseover dependency property is changed.
             </summary>
             <param name="o"></param>
             <param name="e"></param>
         </member>
-        <member name="M:DropDownButtonLib.Chromes.ButtonChrome.OnRenderNormalChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderNormalChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
             <summary>
             Method executes when the render normal dependency property is changed.
             </summary>
             <param name="o"></param>
             <param name="e"></param>
         </member>
-        <member name="M:DropDownButtonLib.Chromes.ButtonChrome.OnRenderPressedChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderPressedChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
             <summary>
             Method executes when the render pressed dependency property is changed.
             </summary>
             <param name="o"></param>
             <param name="e"></param>
         </member>
-        <member name="P:DropDownButtonLib.Chromes.ButtonChrome.CornerRadius">
+        <member name="P:DropDownButtonLib.Controls.Chromes.ButtonChrome.CornerRadius">
             <summary>
             Gets/sets corner radius dependency property of button chrome.
             </summary>
         </member>
-        <member name="P:DropDownButtonLib.Chromes.ButtonChrome.InnerCornerRadius">
+        <member name="P:DropDownButtonLib.Controls.Chromes.ButtonChrome.InnerCornerRadius">
             <summary>
             Gets/sets inner corner radius dependency property of button chrome.
             </summary>
         </member>
-        <member name="P:DropDownButtonLib.Chromes.ButtonChrome.RenderChecked">
+        <member name="P:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderChecked">
             <summary>
             Gets/sets render checked dependency property of button chrome.
             </summary>
         </member>
-        <member name="P:DropDownButtonLib.Chromes.ButtonChrome.RenderEnabled">
+        <member name="P:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderEnabled">
             <summary>
             Gets/sets render enabled dependency property of button chrome.
             </summary>
         </member>
-        <member name="P:DropDownButtonLib.Chromes.ButtonChrome.RenderFocused">
+        <member name="P:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderFocused">
             <summary>
             Gets/sets render focused dependency property of button chrome.
             </summary>
         </member>
-        <member name="P:DropDownButtonLib.Chromes.ButtonChrome.RenderMouseOver">
+        <member name="P:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderMouseOver">
             <summary>
             Gets/sets render mouseover dependency property of button chrome.
             </summary>
         </member>
-        <member name="P:DropDownButtonLib.Chromes.ButtonChrome.RenderNormal">
+        <member name="P:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderNormal">
             <summary>
             Gets/sets render normal dependency property of button chrome.
             </summary>
         </member>
-        <member name="P:DropDownButtonLib.Chromes.ButtonChrome.RenderPressed">
+        <member name="P:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderPressed">
             <summary>
             Gets/sets render pressed dependency property of button chrome.
             </summary>
@@ -657,13 +657,13 @@
             <inheritedoc/>
             </summary>
         </member>
-        <member name="T:DropDownButtonLib.Core.Converters.InverseBoolConverter">
+        <member name="T:DropDownButtonLib.Converters.InverseBoolConverter">
             <summary>
             Implements a WPF <seealso cref="T:System.Windows.Data.IValueConverter"/> that converts an input
             boolean value into an inverted boolean value (true to false, and vice versa).
             </summary>
         </member>
-        <member name="M:DropDownButtonLib.Core.Converters.InverseBoolConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+        <member name="M:DropDownButtonLib.Converters.InverseBoolConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
             <summary>
             Standard Convert method of the <seealso cref="T:System.Windows.Data.IValueConverter"/> interface.
             </summary>
@@ -673,7 +673,7 @@
             <param name="culture"></param>
             <returns></returns>
         </member>
-        <member name="M:DropDownButtonLib.Core.Converters.InverseBoolConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+        <member name="M:DropDownButtonLib.Converters.InverseBoolConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
             <summary>
             Standard ConvertBack method of the <seealso cref="T:System.Windows.Data.IValueConverter"/> interface.
             </summary>
@@ -683,181 +683,165 @@
             <param name="culture"></param>
             <returns></returns>
         </member>
-        <member name="T:DropDownButtonLib.Core.Themes.ResourceKeys">
+        <member name="T:DropDownButtonLib.Themes.ResourceKeys">
             <summary>
             Resource key management class to keep track of all resources
             that can be re-styled in applications that make use of the implemented controls.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.ControlNormalBackgroundKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ControlAccentColorKey">
+            <summary>
+            Accent Color Key - This Color key is used to accent elements in the UI
+            (e.g.: Color of Activated Normal Window Frame, ResizeGrip, Focus or MouseOver input elements)
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ControlAccentBrushKey">
+            <summary>
+            Accent Brush Key - This Brush key is used to accent elements in the UI
+            (e.g.: Color of Activated Normal Window Frame, ResizeGrip, Focus or MouseOver input elements)
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ControlNormalBackgroundKey">
             <summary>
             Resource key of the controls normal background brush key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.ControlDisabledBackgroundKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ControlDisabledBackgroundKey">
             <summary>
             Resource key of the controls disabled background brush key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.ControlNormalBorderKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ControlNormalBorderKey">
             <summary>
             Resource key of the controls normal background brush key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.ControlMouseOverBorderKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ControlMouseOverBorderKey">
             <summary>
             Resource key of the controls mouse over border brush key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.ControlSelectedBorderKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ControlSelectedBorderKey">
             <summary>
             Resource key of the controls selected border brush key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.ControlFocusedBorderKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ControlFocusedBorderKey">
             <summary>
             Resource key of the controls focused border brush key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.ButtonNormalOuterBorderKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonNormalOuterBorderKey">
             <summary>
             Resource key of the button's normal outer border brush key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.ButtonNormalInnerBorderKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonNormalInnerBorderKey">
             <summary>
             Resource key of the button's normal inner border brush key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.ButtonNormalBackgroundKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonNormalBackgroundKey">
             <summary>
             Resource key of the button's normal background brush key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.ButtonMouseOverBackgroundKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonMouseOverBackgroundKey">
             <summary>
             Resource key of the button's mouse over background brush key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.ButtonMouseOverOuterBorderKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonMouseOverOuterBorderKey">
             <summary>
             Resource key of the button's mouse over outer border brush key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.ButtonMouseOverInnerBorderKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonMouseOverInnerBorderKey">
             <summary>
             Resource key of the button's mouse over inner border brush key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.ButtonPressedOuterBorderKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonPressedOuterBorderKey">
             <summary>
             Resource key of the button's pressed outer border brush key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.ButtonPressedInnerBorderKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonPressedInnerBorderKey">
             <summary>
             Resource key of the button's pressed inner border brush key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.ButtonPressedBackgroundKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonPressedBackgroundKey">
             <summary>
             Resource key of the button's pressed background brush key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.ButtonFocusedOuterBorderKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonFocusedOuterBorderKey">
             <summary>
             Resource key of the button's focused outer border brush key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.ButtonFocusedInnerBorderKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonFocusedInnerBorderKey">
             <summary>
             Resource key of the button's focused inner border brush key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.ButtonFocusedBackgroundKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonFocusedBackgroundKey">
             <summary>
             Resource key of the button's focused background brush key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.ButtonDisabledOuterBorderKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonDisabledOuterBorderKey">
             <summary>
             Resource key of the button's disbled outer border brush key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.ButtonInnerBorderDisabledKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonInnerBorderDisabledKey">
             <summary>
             Resource key of the button's disabled inner border brush key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.DropDownList_MouseOverBackgroundKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.DropDownList_MouseOverBackgroundKey">
             <summary>
             Resource key of the drop down list item background key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.DropDownList_BackgroundKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.DropDownList_BackgroundKey">
             <summary>
             Resource key of the drop down background key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.DropDownList_BorderForegroundKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.DropDownList_BorderForegroundKey">
             <summary>
             Resource key of the drop down border key.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.GlyphNormalForegroundKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.GlyphNormalForegroundKey">
             <summary>
             Resource key object of the normal glyph color.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.GlyphMouseOverForegroundKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.GlyphMouseOverForegroundKey">
             <summary>
             Resource key object of the mouseover foreground glyph color.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.GlyphDisabledForegroundKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.GlyphDisabledForegroundKey">
             <summary>
             Resource key object of the disabled foreground glyph color.
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.SpinButtonCornerRadiusKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.SpinButtonCornerRadiusKey">
             <summary>
             Resource key object of the corner radius property assigned in different UI elements (not just SpinButton).
             </summary>
         </member>
-        <member name="F:DropDownButtonLib.Core.Themes.ResourceKeys.SpinnerButtonStyleKey">
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.SpinnerButtonStyleKey">
             <summary>
             Resource style key of the repeat button.
             </summary>
         </member>
-        <member name="T:DropDownButtonLib.Core.Themes.StaticResourceKey">
-            <summary>
-            Implements a static resource key object that can be used to manage resource key
-            references (for theming of UI elements) in WPF.
-            </summary>
-        </member>
-        <member name="M:DropDownButtonLib.Core.Themes.StaticResourceKey.#ctor(System.Type,System.String)">
-            <summary>
-            Class constructor
-            </summary>
-            <param name="type"></param>
-            <param name="key"></param>
-        </member>
-        <member name="P:DropDownButtonLib.Core.Themes.StaticResourceKey.Key">
-            <summary>
-            Gets the key value displayed in the slider control.
-            </summary>
-        </member>
-        <member name="P:DropDownButtonLib.Core.Themes.StaticResourceKey.Type">
-            <summary>
-            Gets the type of ResourceKey managed in this object.
-            </summary>
-        </member>
-        <member name="P:DropDownButtonLib.Core.Themes.StaticResourceKey.Assembly">
-            <summary>
-            Gets the assembly that implements the type of resource key managed in this object.
-            </summary>
-        </member>
-        <member name="M:DropDownButtonLib.Core.Utilities.KeyboardUtilities.IsKeyModifyingPopupState(System.Windows.Input.KeyEventArgs)">
+        <member name="M:DropDownButtonLib.Utilities.KeyboardUtilities.IsKeyModifyingPopupState(System.Windows.Input.KeyEventArgs)">
             <summary>
             Determine whether the <paramref name="e"/> parameter represents a keyboard short-cut
             that should modify the pop-up state of the drop-down button and return

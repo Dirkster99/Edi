@@ -67,8 +67,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DropDownButtonLib">
-      <HintPath>..\..\02_Libs\00_bin\MsgBox\DropDownButtonLib.dll</HintPath>
+    <Reference Include="DropDownButtonLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.DropDownButtonLib.1.0.1-rc\lib\net4\DropDownButtonLib.dll</HintPath>
     </Reference>
     <Reference Include="FirstFloor.ModernUI">
       <HintPath>..\..\02_Libs\00_bin\Mui\FirstFloor.ModernUI.dll</HintPath>

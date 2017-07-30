@@ -14,7 +14,7 @@
              xmlns:conv="clr-namespace:FolderBrowser.Converters;assembly=FolderBrowser"
              xmlns:bindLocal="clr-namespace:FolderBrowser.Views;assembly=FolderBrowser"
              xmlns:ctrls="clr-namespace:DropDownButtonLib.Controls;assembly=DropDownButtonLib"
-             xmlns:dbthemes="clr-namespace:DropDownButtonLib.Core.Themes;assembly=DropDownButtonLib"
+             xmlns:dbthemes="clr-namespace:DropDownButtonLib.Themes;assembly=DropDownButtonLib"
 
              xmlns:EditInPlace="clr-namespace:InplaceEditBoxLib.Views;assembly=InplaceEditBoxLib"
              xmlns:view="clr-namespace:UserNotification.View;assembly=UserNotification"
