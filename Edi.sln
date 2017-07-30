@@ -1,18 +1,15 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binaries", "Binaries", "{E3D8DFD4-4299-4FE0-9BE8-0CB41F189489}"
 	ProjectSection(SolutionItems) = preProject
 		02_Libs\00_bin\log4net.dll = 02_Libs\00_bin\log4net.dll
 		02_Libs\00_bin\log4net.xml = 02_Libs\00_bin\log4net.xml
-		02_Libs\00_bin\MsgBox\MsgBox.dll = 02_Libs\00_bin\MsgBox\MsgBox.dll
 		02_Libs\00_bin\NumericUpDownLib.dll = 02_Libs\00_bin\NumericUpDownLib.dll
 		02_Libs\00_bin\NumericUpDownLib.xml = 02_Libs\00_bin\NumericUpDownLib.xml
 		02_Libs\00_bin\UnitComboLib.dll = 02_Libs\00_bin\UnitComboLib.dll
 		02_Libs\00_bin\UnitComboLib.xml = 02_Libs\00_bin\UnitComboLib.xml
-		02_Libs\00_bin\MsgBox\UserNotification.dll = 02_Libs\00_bin\MsgBox\UserNotification.dll
-		02_Libs\00_bin\MsgBox\UserNotification.xml = 02_Libs\00_bin\MsgBox\UserNotification.xml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UML Application", "UML Application", "{C7A9E1F8-38FD-4268-BFC5-473CF16471D8}"

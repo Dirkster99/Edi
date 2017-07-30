@@ -126,12 +126,12 @@
                     <Label Content="MsgBox:"
                            Grid.Column="0" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" />
                     <hyp:WebHyperlink Grid.Column="2" Grid.Row="7" Margin="3"
-                                      HorizontalAlignment="Left" VerticalAlignment="Center" NavigateUri="http://msgbox.codeplex.com/" Text="WPF message box service" />
+                                      HorizontalAlignment="Left" VerticalAlignment="Center" NavigateUri="https://github.com/Dirkster99/MsgBox" Text="WPF message box service" />
 
                     <Label Content="Drop Down Buttons:"
                            Grid.Column="0" Grid.Row="8" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" />
                     <hyp:WebHyperlink Grid.Column="2" Grid.Row="8" Margin="3"
-                                      HorizontalAlignment="Left" VerticalAlignment="Center" NavigateUri="https://dropdownbuttonlib.codeplex.com/" Text="WPF button drop down library" />
+                                      HorizontalAlignment="Left" VerticalAlignment="Center" NavigateUri="https://github.com/Dirkster99/DropDownButtonLib" Text="WPF button drop down library" />
                     
 
                   </Grid>

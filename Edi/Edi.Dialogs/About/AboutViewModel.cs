@@ -79,7 +79,7 @@ namespace Edi.Dialogs.About
 		{
 			get
 			{
-				return "http://edi.codeplex.com/";
+				return "https://github.com/Dirkster99/Edi";
 			}
 		}
 
@@ -90,7 +90,7 @@ namespace Edi.Dialogs.About
 		{
 			get
 			{
-				return "http://edi.codeplex.com/";
+				return "https://github.com/Dirkster99/Edi";
 			}
 		}
 

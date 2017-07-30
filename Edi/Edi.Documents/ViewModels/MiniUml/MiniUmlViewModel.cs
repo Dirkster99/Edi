@@ -11,8 +11,9 @@ namespace Edi.Documents.ViewModels.MiniUml
 	using Edi.Core.ViewModels.Command;
 	using MiniUML.Model.ViewModels.Document;
 	using MsgBox;
+    using Microsoft.Practices.ServiceLocation;
 
-	public class MiniUmlViewModel : Edi.Core.ViewModels.FileBaseViewModel
+    public class MiniUmlViewModel : Edi.Core.ViewModels.FileBaseViewModel
 	{
 		#region Fields
 		public const string DocumentKey = "UMLEditor";
@@ -405,7 +406,8 @@ namespace Edi.Documents.ViewModels.MiniUml
 					}
 					catch (Exception ex)
 					{
-						MsgBox.Msg.Show(ex, ex.Message, "An error has occurred", MsgBoxButtons.OK);
+                        var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
+                        msgBox.Show(ex, ex.Message, "An error has occurred", MsgBoxButtons.OK);
 
 						return false;
 					}
@@ -415,7 +417,8 @@ namespace Edi.Documents.ViewModels.MiniUml
 			}
 			catch (Exception exp)
 			{
-				MsgBox.Msg.Show(exp, exp.Message, "An error has occurred", MsgBoxButtons.OK);
+                var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
+                msgBox.Show(exp, exp.Message, "An error has occurred", MsgBoxButtons.OK);
 
 				return false;
 			}

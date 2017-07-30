@@ -19,7 +19,7 @@
 		/// <summary>
 		/// Link to public site where issues can be reported.
 		/// </summary>
-		public const string IssueTrackerLink = "https://edi.codeplex.com/workitem/list/basic";
+		public const string IssueTrackerLink = "https://github.com/Dirkster99/Edi/issues";
 
 		protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 

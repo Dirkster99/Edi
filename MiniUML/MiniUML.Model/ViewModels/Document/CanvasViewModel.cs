@@ -12,6 +12,7 @@ namespace MiniUML.Model.ViewModels.Document
     using MiniUML.Model.ViewModels.Shapes;
     using MiniUML.View.Views.RubberBand;
     using MsgBox;
+    using Microsoft.Practices.ServiceLocation;
 
     /// <summary>
     /// Interface to define interaction for drag and drop
@@ -666,9 +667,11 @@ namespace MiniUML.Model.ViewModels.Document
             }
             catch
             {
-                Msg.Show(MiniUML.Framework.Local.Strings.STR_MSG_NoShapeInClipboard,
-                         MiniUML.Framework.Local.Strings.STR_UnexpectedErrorCaption,
-                         MsgBoxButtons.OK, MsgBoxImage.Warning);
+                var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
+
+                msgBox.Show(MiniUML.Framework.Local.Strings.STR_MSG_NoShapeInClipboard,
+                            MiniUML.Framework.Local.Strings.STR_UnexpectedErrorCaption,
+                            MsgBoxButtons.OK, MsgBoxImage.Warning);
             }
         }
         #endregion delete command
