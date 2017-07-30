@@ -138,8 +138,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="UnitComboLib">
-      <HintPath>..\..\02_Libs\00_bin\UnitComboLib\UnitComboLib.dll</HintPath>
+    <Reference Include="UnitComboLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.UnitComboLib.1.0.1\lib\net4\UnitComboLib.dll</HintPath>
     </Reference>
     <Reference Include="UserNotification, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.MsgBox.1.4.1\lib\net451\MsgBoxSamples_Demo_Version_1_4_0\UserNotification.dll</HintPath>
@@ -259,10 +259,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MetroDark\EdiControls\YalvLib\YalvLib.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\EdiControls\UnitCombobox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -387,10 +383,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MetroLight\Styles\TextBlock.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroLight\UnitCombobox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

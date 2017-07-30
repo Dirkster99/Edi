@@ -173,7 +173,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Settings\Edi.SettingsView\Edi.SettingsView.csproj">
       <Project>{972e4948-c781-4cf9-a13e-ac3146ab0ad1}</Project>
-      <Name>SettingsView</Name>
+      <Name>Edi.SettingsView</Name>
     </ProjectReference>
     <ProjectReference Include="..\Settings\Edi.Settings\Edi.Settings.csproj">
       <Project>{2807b493-cc2e-402e-901a-eb138698fedc}</Project>

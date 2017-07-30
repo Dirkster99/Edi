@@ -23,8 +23,8 @@ namespace Edi.Documents.ViewModels.EdiDoc
     using MsgBox;
     using Edi.Settings.Interfaces;
     using Edi.Settings.ProgramSettings;
-    using UnitComboLib.Unit.Screen;
-    using UnitComboLib.ViewModel;
+    using UnitComboLib.Models.Unit.Screen;
+    using UnitComboLib.ViewModels;
     using Microsoft.Practices.ServiceLocation;
 
     public interface IDocumentEdi : IFileBaseViewModel
@@ -135,8 +135,11 @@ namespace Edi.Documents.ViewModels.EdiDoc
             this.TextOptions = new ICSharpCode.AvalonEdit.TextEditorOptions();
             this.WordWrap = false;
 
-            var items = new ObservableCollection<ListItem>(Options.GenerateScreenUnitList());
-            this.SizeUnitLabel = new UnitViewModel(items, new ScreenConverter(), 0);
+            var items = new ObservableCollection<UnitComboLib.Models.ListItem>(Options.GenerateScreenUnitList());
+            this.SizeUnitLabel =
+                UnitComboLib.UnitViewModeService.CreateInstance(items,
+                                                                new ScreenConverter(),
+                                                                0);
 
             this.TxtControl = new TextBoxController();
 
@@ -612,7 +615,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// <summary>
         /// Scale view of text in percentage of font size
         /// </summary>
-        public UnitViewModel SizeUnitLabel { get; set; }
+        public IUnitViewModel SizeUnitLabel { get; set; }
         #endregion ScaleView
 
         #region CaretPosition
@@ -1155,9 +1158,12 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// <param name="defaultValue"></param>
         public void InitScaleView(ZoomUnit unit, double defaultValue)
         {
-            var unitList = new ObservableCollection<ListItem>(Options.GenerateScreenUnitList());
+            var unitList = new ObservableCollection<UnitComboLib.Models.ListItem>(Options.GenerateScreenUnitList());
 
-            this.SizeUnitLabel = new UnitViewModel(unitList, new ScreenConverter(), (int)unit, defaultValue);
+            this.SizeUnitLabel =
+                UnitComboLib.UnitViewModeService.CreateInstance(unitList,
+                                                                new ScreenConverter(),
+                                                                (int)unit, defaultValue);
         }
         #endregion ScaleView methods
 

@@ -150,6 +150,11 @@ namespace Edi
             catch (Exception exp)
             {
                 Logger.Error(exp);
+                Console.WriteLine("");
+                Console.WriteLine("Unexpected Error 1 in App.Application_Startup()");
+                Console.WriteLine("   Message:{0}", exp.Message);
+                Console.WriteLine("StackTrace:{0}", exp.StackTrace);
+                Console.WriteLine("");
             }
 
             try
@@ -160,6 +165,11 @@ namespace Edi
             catch (Exception exp)
             {
                 Logger.Error(exp);
+                Console.WriteLine("");
+                Console.WriteLine("Unexpected Error 2 in App.Application_Startup()");
+                Console.WriteLine("   Message:{0}", exp.Message);
+                Console.WriteLine("StackTrace:{0}", exp.StackTrace);
+                Console.WriteLine("");
 
                 // Cannot set shutdown mode when application is already shuttong down
                 if (this.AppIsShuttingDown == false)
@@ -175,8 +185,8 @@ namespace Edi
                         Application.Current.MainWindow = null;
                 }
 
-                var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                msgBox.Show(exp, Strings.STR_MSG_ERROR_FINDING_RESOURCE, MsgBoxButtons.OKCopy, MsgBoxImage.Error);
+//                var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
+//                msgBox.Show(exp, Strings.STR_MSG_ERROR_FINDING_RESOURCE, MsgBoxButtons.OKCopy, MsgBoxImage.Error);
 
                 if (this.AppIsShuttingDown == false)
                     this.Shutdown();

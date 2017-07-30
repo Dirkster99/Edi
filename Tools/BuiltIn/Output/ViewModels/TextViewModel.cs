@@ -13,9 +13,9 @@
 	using ICSharpCode.AvalonEdit.Document;
 	using ICSharpCode.AvalonEdit.Edi.TextBoxControl;
 	using ICSharpCode.AvalonEdit.Highlighting;
-	using UnitComboLib.Unit;
-	using UnitComboLib.Unit.Screen;
-	using UnitComboLib.ViewModel;
+	using UnitComboLib.Models.Unit;
+	using UnitComboLib.Models.Unit.Screen;
+	using UnitComboLib.ViewModels;
 
 	public class TextViewModel : BaseViewModel
 	{
@@ -55,7 +55,9 @@
 		/// <param name="documentViewModel"></param>
 		public TextViewModel()
 		{
-			this.SizeUnitLabel = new UnitViewModel(this.GenerateScreenUnitList(), new ScreenConverter(), 0);
+			this.SizeUnitLabel = UnitComboLib.UnitViewModeService.CreateInstance(
+                this.GenerateScreenUnitList(),
+                new ScreenConverter(), 0);
 
 			this.TxtControl = new TextBoxController();
 
@@ -121,7 +123,7 @@
 		/// <summary>
 		/// Scale view of text in percentage of font size
 		/// </summary>
-		public UnitViewModel SizeUnitLabel { get; set; }
+		public IUnitViewModel SizeUnitLabel { get; set; }
 		#endregion ScaleView
 
 		#region CaretPosition
@@ -506,22 +508,24 @@
 		/// <param name="defaultValue"></param>
 		public void InitScaleView(int unit, double defaultValue)
 		{
-			this.SizeUnitLabel = new UnitViewModel(this.GenerateScreenUnitList(), new ScreenConverter(), unit, defaultValue);
+			this.SizeUnitLabel = UnitComboLib.UnitViewModeService.CreateInstance(
+                this.GenerateScreenUnitList(),
+                new ScreenConverter(), unit, defaultValue);
 		}
 
 		/// <summary>
 		/// Initialize Scale View with useful units in percent and font point size
 		/// </summary>
 		/// <returns></returns>
-		private ObservableCollection<ListItem> GenerateScreenUnitList()
+		private ObservableCollection<UnitComboLib.Models.ListItem> GenerateScreenUnitList()
 		{
-			ObservableCollection<ListItem> unitList = new ObservableCollection<ListItem>();
+			ObservableCollection<UnitComboLib.Models.ListItem> unitList = new ObservableCollection<UnitComboLib.Models.ListItem>();
 
 			var percentDefaults = new ObservableCollection<string>() { "25", "50", "75", "100", "125", "150", "175", "200", "300", "400", "500" };
 			var pointsDefaults = new ObservableCollection<string>() { "3", "6", "8", "9", "10", "12", "14", "16", "18", "20", "24", "26", "32", "48", "60" };
 
-			unitList.Add(new ListItem(Itemkey.ScreenPercent, "percent", "%", percentDefaults));
-			unitList.Add(new ListItem(Itemkey.ScreenFontPoints, "point", "pt", pointsDefaults));
+			unitList.Add(new UnitComboLib.Models.ListItem(Itemkey.ScreenPercent, "percent", "%", percentDefaults));
+			unitList.Add(new UnitComboLib.Models.ListItem(Itemkey.ScreenFontPoints, "point", "pt", pointsDefaults));
 
 			return unitList;
 		}
