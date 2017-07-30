@@ -103,8 +103,10 @@
     <Compile Include="UnitCombobox.xaml.cs">
       <DependentUpon>UnitCombobox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UnitViewModeService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="Models\ListItem.cs" />
+    <Compile Include="ViewModels\IUnitViewModel.cs" />
     <Compile Include="ViewModels\UnitViewModel.cs" />
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>

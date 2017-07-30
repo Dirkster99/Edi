@@ -73,7 +73,10 @@
       // Store a reference to the parent view model.
       this.DocumentViewModel = documentViewModel;
 
-      this.SizeUnitLabel = new UnitViewModel(this.GenerateScreenUnitList(), new ScreenConverter(), 0);
+      this.SizeUnitLabel = UnitComboLib.UnitViewModeService.CreateInstance(
+        this.GenerateScreenUnitList(),
+        new ScreenConverter(),
+        0);
 
       this.TxtControl = new TextBoxController();
 
@@ -139,7 +142,7 @@
     /// <summary>
     /// Scale view of text in percentage of font size
     /// </summary>
-    public UnitViewModel SizeUnitLabel { get; set; }
+    public IUnitViewModel SizeUnitLabel { get; set; }
     #endregion ScaleView
 
     #region CaretPosition
@@ -605,7 +608,11 @@
     /// <param name="defaultValue"></param>
     public void InitScaleView(int unit, double defaultValue)
     {
-      this.SizeUnitLabel = new UnitViewModel(this.GenerateScreenUnitList(), new ScreenConverter(), unit, defaultValue);
+      this.SizeUnitLabel = UnitComboLib.UnitViewModeService.CreateInstance(
+                this.GenerateScreenUnitList(),
+                new ScreenConverter(),
+                unit,
+                defaultValue);
     }
     #endregion ScaleView methods
     

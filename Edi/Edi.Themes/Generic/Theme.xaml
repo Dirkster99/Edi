@@ -1,12 +1,8 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    
-	  xmlns:AvalonEdit="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit"
-    xmlns:editing="clr-namespace:ICSharpCode.AvalonEdit.Editing;assembly=ICSharpCode.AvalonEdit"
     
     xmlns:pinlvw="clr-namespace:SimpleControls.MRU.View;assembly=SimpleControls"
-    xmlns:hyperl="clr-namespace:SimpleControls.Hyperlink;assembly=SimpleControls"
     >
   <ResourceDictionary.MergedDictionaries>
        <ResourceDictionary Source="/Edi.Themes;component/IconsLight.xaml" />

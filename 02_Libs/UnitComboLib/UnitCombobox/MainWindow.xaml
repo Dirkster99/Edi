@@ -4,7 +4,7 @@
 
         xmlns:unit="clr-namespace:UnitComboLib;assembly=UnitComboLib"
 
-        Title="MainWindow" Height="150" Width="225"
+        Title="MainWindow" Height="250" Width="325"
         
         xmlns:vm="clr-namespace:UnitCombobox.ViewModels"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -13,7 +13,7 @@
         mc:Ignorable="d" 
         d:DesignHeight="200" d:DesignWidth="300"
         d:DataContext="{d:DesignInstance Type=vm:AppViewModel, IsDesignTimeCreatable=True}">
-    <Grid Margin="3" Background="Black">
+    <Grid Margin="3">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="30" />
@@ -29,6 +29,7 @@
 
     <unit:UnitCombobox DataContext="{Binding SizeUnitLabel}"
                        Margin="3"
+                       HorizontalAlignment="Right"
                        ItemsSource="{Binding SelectedItem.DefaultValues}"
                        ToolTip="{Binding ValueTip}"
                        IsEditable="True"

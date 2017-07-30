@@ -47,7 +47,11 @@
 
 			// Get default list of units from settings manager
 			var unitList = new ObservableCollection<UnitComboLib.Models.ListItem>(Options.GenerateScreenUnitList());
-			this.SizeUnitLabel = new UnitViewModel(unitList, new ScreenConverter(), (int)ZoomUnit.Percentage, 100);
+			this.SizeUnitLabel =
+                UnitComboLib.UnitViewModeService.CreateInstance(
+                    unitList,
+                    new ScreenConverter(),
+                    (int)ZoomUnit.Percentage, 100);
 
 			this.EditorTextOptions = new TextEditorOptions();
 
@@ -158,7 +162,7 @@
 		/// <summary>
 		/// Scale view of text in percentage of font size
 		/// </summary>
-		public UnitViewModel SizeUnitLabel { get; set; }
+		public IUnitViewModel SizeUnitLabel { get; set; }
 
 		/// <summary>
 		/// Get/set unit of document zoom unit.
@@ -396,7 +400,7 @@
 			this.WordWrapText = settingData.WordWarpText;
 
 			this.EditorTextOptions = new TextEditorOptions(settingData.EditorTextOptions);
-			this.SizeUnitLabel = new UnitViewModel(
+			this.SizeUnitLabel = UnitComboLib.UnitViewModeService.CreateInstance(
                 new ObservableCollection<UnitComboLib.Models.ListItem>(
                     Options.GenerateScreenUnitList()),
 						new ScreenConverter(),

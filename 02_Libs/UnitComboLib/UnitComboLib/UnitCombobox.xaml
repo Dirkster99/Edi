@@ -79,26 +79,35 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <!-- Margin="3,3,23,3" -->
-                            <ContentPresenter Name="ContentSite"
+                            <!-- This Textbox is never visible but measures a minimum size according
+                                 to a given string
+                                 Text="{Binding MaxStringLengthValue,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                            -->
+                            <TextBox x:Name="PART_MeasureTextBox" Grid.Column="0" Margin="3,0,1,0"
+                                     Text="{Binding MaxStringLengthValue,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                                     Template="{StaticResource ComboBoxTextBox}"
+                                     HorizontalAlignment="Stretch" HorizontalContentAlignment="Right"
+                                     VerticalAlignment="Center" VerticalContentAlignment="Stretch"
+                                     Focusable="False"
+                                     Visibility="Hidden"
+                                     IsReadOnly="{TemplateBinding IsReadOnly}" />
+
+                            <ContentPresenter Name="ContentSite" Grid.Column="0" Margin="1,0,0,0"
                                               IsHitTestVisible="False" 
                                               Content="{TemplateBinding SelectionBoxItem}"
                                               ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
                                               ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                                  
                                               HorizontalAlignment="Left"
-                                              VerticalAlignment="Center"
-                                              Margin="1,0,0,0"
-                                              Grid.Column="0" />
+                                              VerticalAlignment="Center"  />
 
-                            <TextBox x:Name="PART_EditableTextBox"
+                            <TextBox x:Name="PART_EditableTextBox" Grid.Column="0" Margin="3,0,1,0"
+                                     Width="{Binding ElementName=PART_MeasureTextBox, Path=Width}"
                                      Template="{StaticResource ComboBoxTextBox}"
                                      HorizontalAlignment="Stretch" HorizontalContentAlignment="Right"
                                      VerticalAlignment="Center" VerticalContentAlignment="Stretch"
-                                     Margin="3,0,1,0"
                                      Focusable="True"
                                      Visibility="Hidden"
-                                     IsReadOnly="{TemplateBinding IsReadOnly}" Grid.Column="0" />
+                                     IsReadOnly="{TemplateBinding IsReadOnly}" />
 
                             <Grid Grid.Column="1">
                                 <Grid.ColumnDefinitions>
@@ -140,7 +149,6 @@
                                             </Style>
                                         </TextBlock.Style>
                                     </TextBlock>
-
                                 </Label>
 
                                 <ToggleButton Name="ToggleButton"

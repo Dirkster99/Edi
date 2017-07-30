@@ -1,5 +1,6 @@
 ﻿namespace UnitComboLib.ViewModels
 {
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
@@ -12,20 +13,22 @@
     /// <summary>
     /// Viewmodel class to manage unit conversion based on default values and typed values.
     /// </summary>
-    public class UnitViewModel : BaseViewModel, IDataErrorInfo
+    internal class UnitViewModel : BaseViewModel, IDataErrorInfo, IUnitViewModel
     {
         #region fields
-        private ListItem mSelectedItem = null;
+        private ListItem _SelectedItem = null;
 
-        private ObservableCollection<ListItem> mUnitList = null;
+        private ObservableCollection<ListItem> _UnitList = null;
 
-        private string mValueTip = string.Empty;
-        private double mValue = 0;
-        private string mstrValue = "0.0";
+        private string _ValueTip = string.Empty;
+        private double _Value = 0;
+        private string _StrValue = "0.0";
 
-        private Converter mUnitConverter = null;
+        private Converter _UnitConverter = null;
 
-        private RelayCommand<Itemkey> mSetSelectedItemCommand = null;
+        private RelayCommand<Itemkey> _SetSelectedItemCommand = null;
+
+        private string _MaxStringLengthValue = "#####";
 
         /// <summary>
         /// Minimum value to be converted for both percentage and pixels
@@ -56,18 +59,18 @@
         /// <param name="unitConverter"></param>
         /// <param name="defaultIndex"></param>
         /// <param name="defaultValue"></param>
-        public UnitViewModel(ObservableCollection<ListItem> list,
+        public UnitViewModel(IList<ListItem> list,
                              Converter unitConverter,
                              int defaultIndex = 0,
                              double defaultValue = 100)
         {
-            this.mUnitList = new ObservableCollection<ListItem>(list);
-            this.mSelectedItem = this.mUnitList[defaultIndex];
+            this._UnitList = new ObservableCollection<ListItem>(list);
+            this._SelectedItem = this._UnitList[defaultIndex];
 
-            this.mUnitConverter = unitConverter;
+            this._UnitConverter = unitConverter;
 
-            this.mValue = defaultValue;
-            this.mstrValue = string.Format("{0:0}", this.mValue);
+            this._Value = defaultValue;
+            this._StrValue = string.Format("{0:0}", this._Value);
         }
 
         /// <summary>
@@ -89,7 +92,7 @@
             get
             {
                 if (this.SelectedItem != null)
-                    return (int)this.mUnitConverter.Convert(this.SelectedItem.Key, this.mValue, Itemkey.ScreenFontPoints);
+                    return (int)this._UnitConverter.Convert(this.SelectedItem.Key, this._Value, Itemkey.ScreenFontPoints);
 
                 // Fallback to default if all else fails
                 return (int)Models.Unit.Screen.ScreenConverter.OneHundretPercentFont;
@@ -106,8 +109,8 @@
                     }
                     else
                     {
-                        if (value != (int)this.mUnitConverter.Convert(this.SelectedItem.Key, this.mValue, Itemkey.ScreenFontPoints))
-                            this.Value = (int)this.mUnitConverter.Convert(Itemkey.ScreenFontPoints, value, this.SelectedItem.Key);
+                        if (value != (int)this._UnitConverter.Convert(this.SelectedItem.Key, this._Value, Itemkey.ScreenFontPoints))
+                            this.Value = (int)this._UnitConverter.Convert(Itemkey.ScreenFontPoints, value, this.SelectedItem.Key);
                     }
                 }
             }
@@ -120,7 +123,7 @@
         {
             get
             {
-                return this.mUnitList;
+                return this._UnitList;
             }
         }
 
@@ -131,14 +134,14 @@
         {
             get
             {
-                return this.mSelectedItem;
+                return this._SelectedItem;
             }
 
             set
             {
-                if (this.mSelectedItem != value)
+                if (this._SelectedItem != value)
                 {
-                    this.mSelectedItem = value;
+                    this._SelectedItem = value;
 
                     this.RaisePropertyChanged(() => this.SelectedItem);
                     this.RaisePropertyChanged(() => this.ScreenPoints);
@@ -176,11 +179,11 @@
             {
                 if (propertyName == "StringValue")
                 {
-                    if (string.IsNullOrEmpty(this.mstrValue))
+                    if (string.IsNullOrEmpty(this._StrValue))
                         return SetToolTip(Strings.Integer_Contain_ErrorMessage);
 
                     double dValue;
-                    if (double.TryParse(this.mstrValue, out dValue) == true)
+                    if (double.TryParse(this._StrValue, out dValue) == true)
                     {
                         string message;
 
@@ -209,15 +212,36 @@
         {
             get
             {
-                return this.mValueTip;
+                return this._ValueTip;
             }
 
             protected set
             {
-                if (this.mValueTip != value)
+                if (this._ValueTip != value)
                 {
-                    this.mValueTip = value;
+                    this._ValueTip = value;
                     this.RaisePropertyChanged(() => this.ValueTip);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get/sets a string that represents a convinient maximum length in
+        /// characters to measure the width for the displaying control.
+        /// </summary>
+        public string MaxStringLengthValue
+        {
+            get
+            {
+                return _MaxStringLengthValue;
+            }
+
+            set
+            {
+                if (this._MaxStringLengthValue != value)
+                {
+                    this._MaxStringLengthValue = value;
+                    this.RaisePropertyChanged(() => this.MaxStringLengthValue);
                 }
             }
         }
@@ -230,14 +254,14 @@
         {
             get
             {
-                return this.mstrValue;
+                return this._StrValue;
             }
 
             set
             {
-                if (this.mstrValue != value)
+                if (this._StrValue != value)
                 {
-                    this.mstrValue = value;
+                    this._StrValue = value;
                     this.RaisePropertyChanged(() => this.StringValue);
                 }
             }
@@ -250,15 +274,15 @@
         {
             get
             {
-                return this.mValue;
+                return this._Value;
             }
 
             set
             {
-                if (this.mValue != value)
+                if (this._Value != value)
                 {
-                    this.mValue = value;
-                    this.mstrValue = string.Format("{0:0}", this.mValue);
+                    this._Value = value;
+                    this._StrValue = string.Format("{0:0}", this._Value);
 
                     this.RaisePropertyChanged(() => this.Value);
                     this.RaisePropertyChanged(() => this.StringValue);
@@ -297,11 +321,11 @@
         {
             get
             {
-                if (this.mSetSelectedItemCommand == null)
-                    this.mSetSelectedItemCommand = new RelayCommand<Itemkey>(p => this.SetSelectedItemExecuted(p),
+                if (this._SetSelectedItemCommand == null)
+                    this._SetSelectedItemCommand = new RelayCommand<Itemkey>(p => this.SetSelectedItemExecuted(p),
                                                                              p => true);
 
-                return this.mSetSelectedItemCommand;
+                return this._SetSelectedItemCommand;
             }
         }
         #endregion properties
@@ -317,15 +341,15 @@
         private object SetSelectedItemExecuted(Itemkey unitKey)
         {
             // Find the next selected item
-            ListItem li = this.mUnitList.SingleOrDefault(i => i.Key == unitKey);
+            ListItem li = this._UnitList.SingleOrDefault(i => i.Key == unitKey);
 
             // Convert from current item to find the next selected item
             if (li != null)
             {
                 double dValue;
-                if (double.TryParse(this.mstrValue, out dValue) == true)
+                if (double.TryParse(this._StrValue, out dValue) == true)
                 {
-                    double tempValue = this.mUnitConverter.Convert(this.SelectedItem.Key, dValue, li.Key);
+                    double tempValue = this._UnitConverter.Convert(this.SelectedItem.Key, dValue, li.Key);
 
                     if (tempValue < this.GetMinValue(unitKey))
                         tempValue = this.GetMinValue(unitKey);
@@ -334,7 +358,7 @@
                         tempValue = this.GetMaxValue(unitKey);
 
                     this.Value = tempValue;
-                    this.mstrValue = string.Format("{0:0}", this.mValue);
+                    this._StrValue = string.Format("{0:0}", this._Value);
 
                     this.SelectedItem = li;
                     this.ValueTip = this.SetUnitRangeMessage(unitKey);  // Set standard tool tip about valid range
@@ -487,7 +511,6 @@
 
             return UnitViewModel.MaxPercentageSizeValue;
         }
-
         #endregion methods
     }
 }

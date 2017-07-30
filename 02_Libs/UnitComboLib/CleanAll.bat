@@ -18,13 +18,13 @@ ECHO XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ECHO.
 ECHO XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ECHO.
-ECHO Deleting BIN and OBJ Folders in FileListView
+ECHO Deleting BIN and OBJ Folders in UnitCombobox
 ECHO.
 RMDIR /S /Q .\.vs
 RMDIR /S /Q .\UnitCombobox\bin
 RMDIR /S /Q .\UnitCombobox\obj
 ECHO.
-ECHO Deleting BIN and OBJ Folders in FileListViewTest
+ECHO Deleting BIN and OBJ Folders in UnitComboLib
 ECHO.
 RMDIR /S /Q .\UnitComboLib\bin
 RMDIR /S /Q .\UnitComboLib\obj

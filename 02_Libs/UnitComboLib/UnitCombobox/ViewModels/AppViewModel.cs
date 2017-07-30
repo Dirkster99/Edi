@@ -1,6 +1,8 @@
 ﻿namespace UnitCombobox.ViewModels
 {
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using UnitComboLib;
     using UnitComboLib.Models;
     using UnitComboLib.Models.Unit;
     using UnitComboLib.Models.Unit.Screen;
@@ -9,23 +11,32 @@
     public class AppViewModel : BaseViewModel
     {
         #region constructor
+        /// <summary>
+        /// Class constructor
+        /// </summary>
         public AppViewModel()
         {
-            this.SizeUnitLabel = new UnitViewModel(this.GenerateScreenUnitList(), new ScreenConverter(),
-                                                   1,    // Default Unit 0 Percent, 1 ScreeFontPoints
-                                                   12   // Default Value
-                                                   );
+            this.SizeUnitLabel = UnitViewModeService.CreateInstance(
+                this.GenerateScreenUnitList(), new ScreenConverter(),
+                1,       // Default Unit 0 Percent, 1 ScreeFontPoints
+                12      // Default Value
+                ,"###" // Placeholder to measure for maximum expected string len in textbox
+            );
         }
         #endregion constructor
 
         #region properties
-        public UnitViewModel SizeUnitLabel { get; private set; }
+        /// <summary>
+        /// Gets the Unit ViewModel that drives
+        /// the <seealso cref="UnitComboBox"/> control.
+        /// </summary>
+        public IUnitViewModel SizeUnitLabel { get; private set; }
         #endregion properties
 
         #region methods
-        private ObservableCollection<ListItem> GenerateScreenUnitList()
+        private IList<ListItem> GenerateScreenUnitList()
         {
-            ObservableCollection<ListItem> unitList = new ObservableCollection<ListItem>();
+            IList<ListItem> unitList = new List<ListItem>();
 
             var percentDefaults = new ObservableCollection<string>() { "25", "50", "75", "100", "125", "150", "175", "200", "300", "400", "500" };
             var pointsDefaults = new ObservableCollection<string>() { "3", "6", "8", "9", "10", "12", "14", "16", "18", "20", "24", "26", "32", "48", "60" };

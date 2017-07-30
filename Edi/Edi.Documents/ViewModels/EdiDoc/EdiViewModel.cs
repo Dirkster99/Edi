@@ -136,7 +136,10 @@ namespace Edi.Documents.ViewModels.EdiDoc
             this.WordWrap = false;
 
             var items = new ObservableCollection<UnitComboLib.Models.ListItem>(Options.GenerateScreenUnitList());
-            this.SizeUnitLabel = new UnitViewModel(items, new ScreenConverter(), 0);
+            this.SizeUnitLabel =
+                UnitComboLib.UnitViewModeService.CreateInstance(items,
+                                                                new ScreenConverter(),
+                                                                0);
 
             this.TxtControl = new TextBoxController();
 
@@ -612,7 +615,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// <summary>
         /// Scale view of text in percentage of font size
         /// </summary>
-        public UnitViewModel SizeUnitLabel { get; set; }
+        public IUnitViewModel SizeUnitLabel { get; set; }
         #endregion ScaleView
 
         #region CaretPosition
@@ -1157,7 +1160,10 @@ namespace Edi.Documents.ViewModels.EdiDoc
         {
             var unitList = new ObservableCollection<UnitComboLib.Models.ListItem>(Options.GenerateScreenUnitList());
 
-            this.SizeUnitLabel = new UnitViewModel(unitList, new ScreenConverter(), (int)unit, defaultValue);
+            this.SizeUnitLabel =
+                UnitComboLib.UnitViewModeService.CreateInstance(unitList,
+                                                                new ScreenConverter(),
+                                                                (int)unit, defaultValue);
         }
         #endregion ScaleView methods
 

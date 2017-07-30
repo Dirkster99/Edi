@@ -33,8 +33,6 @@
 
         <ResourceDictionary Source="/Edi.Themes;component/MetroLight/EdiAvalonEdit.xaml" />
 
-        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/UnitCombobox.xaml" />
-
         <ResourceDictionary Source="/MiniUML.View;component/SharedResources.xaml"/>
 
         <!-- This is required to style the dropdown button and frame of the control
