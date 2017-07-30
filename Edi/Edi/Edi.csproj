@@ -163,9 +163,6 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="UnitComboLib">
-      <HintPath>..\..\02_Libs\00_bin\UnitComboLib\UnitComboLib.dll</HintPath>
-    </Reference>
     <Reference Include="UserNotification, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.MsgBox.1.4.1\lib\net451\MsgBoxSamples_Demo_Version_1_4_0\UserNotification.dll</HintPath>
     </Reference>
@@ -335,6 +332,10 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\02_Libs\UnitComboLib\UnitComboLib\UnitComboLib.csproj">
+      <Project>{04375abe-ec47-4432-981e-d57cc7119f1f}</Project>
+      <Name>UnitComboLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Edi.Apps\Edi.Apps.csproj">
       <Project>{4df91f4b-878a-4ab3-a5ec-16bce3d6e99d}</Project>
       <Name>Edi.Apps</Name>
@@ -361,7 +362,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Settings\Edi.SettingsView\Edi.SettingsView.csproj">
       <Project>{972e4948-c781-4cf9-a13e-ac3146ab0ad1}</Project>
-      <Name>SettingsView</Name>
+      <Name>Edi.SettingsView</Name>
     </ProjectReference>
     <ProjectReference Include="..\Settings\Edi.Settings\Edi.Settings.csproj">
       <Project>{2807b493-cc2e-402e-901a-eb138698fedc}</Project>

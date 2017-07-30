@@ -8,107 +8,112 @@
     xmlns:pinlvw="clr-namespace:SimpleControls.MRU.View;assembly=SimpleControls"
     xmlns:hyperl="clr-namespace:SimpleControls.Hyperlink;assembly=SimpleControls"
     >
-  <ResourceDictionary.MergedDictionaries>
-    <ResourceDictionary Source="/Edi.Themes;component/IconsLight.xaml" />
-    <!-- ResourceDictionary Source="/Edi.Themes;component/Metro/Brushes.xaml" / -->
-    <!-- ResourceDictionary Source="/Edi.Themes;component/Metro/StatusBar.xaml" / -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Edi.Themes;component/IconsLight.xaml" />
+        <!-- ResourceDictionary Source="/Edi.Themes;component/Metro/Brushes.xaml" / -->
+        <!-- ResourceDictionary Source="/Edi.Themes;component/Metro/StatusBar.xaml" / -->
 
-    <ResourceDictionary Source="/Edi.Themes;component/MetroLight/ModernUI.Light.xaml" />
+        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/ModernUI.Light.xaml" />
 
-    <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Controls.TabControl.xaml" />
-    <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Controls.Toolbar.xaml" />
+        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Controls.TabControl.xaml" />
+        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Controls.Toolbar.xaml" />
 
-    <!-- This type of combobox is used in the toolbar of the MainWindow -->
-    <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Combobox.xaml" />
+        <!-- This type of combobox is used in the toolbar of the MainWindow -->
+        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Combobox.xaml" />
 
-    <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/GridSplitter.xaml" />
-    <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Hyperlink.xaml" />
-    <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Label.xaml" />
-    <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/MenuStyles.xaml" />
-    <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Slider.xaml" />
-    <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Textblock.xaml" />
+        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/GridSplitter.xaml" />
+        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Hyperlink.xaml" />
+        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Label.xaml" />
+        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/MenuStyles.xaml" />
+        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Slider.xaml" />
+        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Textblock.xaml" />
 
-    <ResourceDictionary Source="/Edi.Themes;component/MetroLight/EdiAvalonEdit.xaml" />
-    <ResourceDictionary Source="/Edi.Themes;component/MetroLight/UnitCombobox.xaml" />
+        <ResourceDictionary Source="/UnitComboLib;component/Themes/LightBrushs.xaml" />
+        <!-- ResourceDictionary Source="/Edi.Themes;component/MetroDark/EdiControls/UnitCombobox.xaml" / -->
 
-    <ResourceDictionary Source="/MiniUML.View;component/SharedResources.xaml"/>
-    
-    <!-- This is required to style the dropdown button and frame of the control
+        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/EdiAvalonEdit.xaml" />
+
+        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/UnitCombobox.xaml" />
+
+        <ResourceDictionary Source="/MiniUML.View;component/SharedResources.xaml"/>
+
+        <!-- This is required to style the dropdown button and frame of the control
     ResourceDictionary Source="/Edi.Themes;component/FileListView/Combobox.xaml" / -->
 
-    <!-- MsgBox brush definitions -->
-    <ResourceDictionary Source="/MsgBox;component/Themes/LightBrushes.xaml" />
-    <ResourceDictionary Source="/MsgBox;component/Themes/LightIcons.xaml" />
+        <!-- MsgBox brush definitions -->
+        <ResourceDictionary Source="/MsgBox;component/Themes/LightBrushes.xaml" />
+        <ResourceDictionary Source="/MsgBox;component/Themes/LightIcons.xaml" />
 
-    <!-- ResourceDictionary Source="/AvalonDock.Themes.Metro;component/Theme.xaml" / -->
-  </ResourceDictionary.MergedDictionaries>
+        <!-- ResourceDictionary Source="/AvalonDock.Themes.Metro;component/Theme.xaml" / -->
+    </ResourceDictionary.MergedDictionaries>
 
-  <Style x:Key="FileHyperlinkDefault"
+    <Style x:Key="FileHyperlinkDefault"
          TargetType="{x:Type hyperl:FileHyperlink}"
          BasedOn="{StaticResource {x:Type hyperl:FileHyperlink}}" />
 
-  <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
-  <Style TargetType="{x:Type pinlvw:PinableListViewItem}">
-    <Setter Property="SnapsToDevicePixels" Value="true"/>
-    <Setter Property="Padding" Value="1" />
-    <Setter Property="HorizontalContentAlignment" Value="Stretch"/><!-- This is required for the PathTrimmingTextBlock -->
-    <Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="ListViewItem">
-          <Border Name="ListemBackgroundBorder"
+    <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+    <Style TargetType="{x:Type pinlvw:PinableListViewItem}">
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <!-- This is required for the PathTrimmingTextBlock -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <Border Name="ListemBackgroundBorder"
                   Padding="3"
                   BorderBrush="Transparent"
                   BorderThickness="1"
                   CornerRadius="3"
                   SnapsToDevicePixels="true"
                   Background="Transparent">
-            <GridViewRowPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-          </Border>
-          <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="true">
-              <Setter TargetName="ListemBackgroundBorder" Property="Background" Value="{StaticResource ListViewItemMouseOverGradient}"/>
-              <Setter TargetName="ListemBackgroundBorder" Property="BorderBrush" Value="{StaticResource ListViewItemMouseOverBorder}" />
-              <Setter TargetName="ListemBackgroundBorder" Property="BorderThickness" Value="1" />
-            </Trigger>
-            <!-- Trigger Property="IsSelected" Value="true">
+                        <GridViewRowPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="ListemBackgroundBorder" Property="Background" Value="{StaticResource ListViewItemMouseOverGradient}"/>
+                            <Setter TargetName="ListemBackgroundBorder" Property="BorderBrush" Value="{StaticResource ListViewItemMouseOverBorder}" />
+                            <Setter TargetName="ListemBackgroundBorder" Property="BorderThickness" Value="1" />
+                        </Trigger>
+                        <!-- Trigger Property="IsSelected" Value="true">
               <Setter TargetName="Border" Property="Background" Value="Black"/>
             </Trigger -->
-            <Trigger Property="IsEnabled" Value="false">
-              <Setter Property="Foreground" Value="{StaticResource PinableListViewForegroundDisabled}"/>
-            </Trigger>
-          </ControlTemplate.Triggers>
-        </ControlTemplate>
-      </Setter.Value>
-    </Setter>
-  </Style>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{StaticResource PinableListViewForegroundDisabled}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
-  <Style TargetType="{x:Type pinlvw:PinableListView}">
-    <Setter Property="SnapsToDevicePixels" Value="True"/>
-    <Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="{x:Type pinlvw:PinableListView}">
-          <Border Padding="0"
+    <Style TargetType="{x:Type pinlvw:PinableListView}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type pinlvw:PinableListView}">
+                    <Border Padding="0"
                   BorderThickness="0"
                   BorderBrush="Transparent"
                   Background="{StaticResource ToolViewBackground}"
                   Name="Bd"
                   SnapsToDevicePixels="True">
-            <ScrollViewer Padding="0" Focusable="False">
-              <ItemsPresenter SnapsToDevicePixels="True" />
-            </ScrollViewer>
-          </Border>
-        </ControlTemplate>
-      </Setter.Value>
-    </Setter>
-  </Style>
+                        <ScrollViewer Padding="0" Focusable="False">
+                            <ItemsPresenter SnapsToDevicePixels="True" />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
-  <!-- Style TargetType="{x:Type ContextMenu}" BasedOn="{StaticResource {x:Type ContextMenu}}">
+    <!-- Style TargetType="{x:Type ContextMenu}" BasedOn="{StaticResource {x:Type ContextMenu}}">
     <Setter Property="Background" Value="{StaticResource ContextMenuBackground}" />
     <Setter Property="BorderBrush" Value="{StaticResource ContextMenuBorderBrush}" />
     <Setter Property="BorderThickness" Value="1" />
   </Style -->
 
-  <!-- Style TargetType="{x:Type ToolBar}" BasedOn="{StaticResource {x:Type ToolBar}}">
+    <!-- Style TargetType="{x:Type ToolBar}" BasedOn="{StaticResource {x:Type ToolBar}}">
     <Setter Property="Background" Value="{StaticResource ToolBarBackground}" />
   </Style>
 
@@ -132,12 +137,12 @@
     </Setter>
   </Style -->
 
-  <!-- Style x:Key="{x:Type StatusBarItem}" BasedOn="{StaticResource {x:Type StatusBarItem}}">
+    <!-- Style x:Key="{x:Type StatusBarItem}" BasedOn="{StaticResource {x:Type StatusBarItem}}">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="Foreground" Value="Black" />
   </Style -->
 
-  <!-- ControlTemplate x:Key="{x:Static MenuItem.TopLevelHeaderTemplateKey}" TargetType="{x:Type MenuItem}">
+    <!-- ControlTemplate x:Key="{x:Static MenuItem.TopLevelHeaderTemplateKey}" TargetType="{x:Type MenuItem}">
     <Border Name="Border" >
       <Grid>
         <ContentPresenter Margin="6,3,6,3"

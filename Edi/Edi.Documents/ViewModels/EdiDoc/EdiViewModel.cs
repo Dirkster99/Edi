@@ -23,8 +23,8 @@ namespace Edi.Documents.ViewModels.EdiDoc
     using MsgBox;
     using Edi.Settings.Interfaces;
     using Edi.Settings.ProgramSettings;
-    using UnitComboLib.Unit.Screen;
-    using UnitComboLib.ViewModel;
+    using UnitComboLib.Models.Unit.Screen;
+    using UnitComboLib.ViewModels;
     using Microsoft.Practices.ServiceLocation;
 
     public interface IDocumentEdi : IFileBaseViewModel
@@ -135,7 +135,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
             this.TextOptions = new ICSharpCode.AvalonEdit.TextEditorOptions();
             this.WordWrap = false;
 
-            var items = new ObservableCollection<ListItem>(Options.GenerateScreenUnitList());
+            var items = new ObservableCollection<UnitComboLib.Models.ListItem>(Options.GenerateScreenUnitList());
             this.SizeUnitLabel = new UnitViewModel(items, new ScreenConverter(), 0);
 
             this.TxtControl = new TextBoxController();
@@ -1155,7 +1155,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// <param name="defaultValue"></param>
         public void InitScaleView(ZoomUnit unit, double defaultValue)
         {
-            var unitList = new ObservableCollection<ListItem>(Options.GenerateScreenUnitList());
+            var unitList = new ObservableCollection<UnitComboLib.Models.ListItem>(Options.GenerateScreenUnitList());
 
             this.SizeUnitLabel = new UnitViewModel(unitList, new ScreenConverter(), (int)unit, defaultValue);
         }

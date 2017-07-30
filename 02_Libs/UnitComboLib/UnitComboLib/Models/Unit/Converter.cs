@@ -1,4 +1,4 @@
-﻿namespace UnitComboLib.Unit
+﻿namespace UnitComboLib.Models.Unit
 {
   /// <summary>
   /// Enumeration keys for each unit

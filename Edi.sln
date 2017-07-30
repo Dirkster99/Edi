@@ -8,8 +8,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binaries", "Binaries", "{E3
 		02_Libs\00_bin\log4net.xml = 02_Libs\00_bin\log4net.xml
 		02_Libs\00_bin\NumericUpDownLib.dll = 02_Libs\00_bin\NumericUpDownLib.dll
 		02_Libs\00_bin\NumericUpDownLib.xml = 02_Libs\00_bin\NumericUpDownLib.xml
-		02_Libs\00_bin\UnitComboLib.dll = 02_Libs\00_bin\UnitComboLib.dll
-		02_Libs\00_bin\UnitComboLib.xml = 02_Libs\00_bin\UnitComboLib.xml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UML Application", "UML Application", "{C7A9E1F8-38FD-4268-BFC5-473CF16471D8}"
@@ -59,6 +57,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edi.Themes", "Edi\Edi.Themes\Edi.Themes.csproj", "{69BC833C-0FE1-4288-BB80-BB457D07E638}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Settings", "Settings", "{31B14E7F-36E2-464A-A90A-64A07DEB02EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitComoLib", "UnitComoLib", "{4EE47FE8-6832-4ECB-8BE2-2FB214968A9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitComboLib", "02_Libs\UnitComboLib\UnitComboLib\UnitComboLib.csproj", "{04375ABE-EC47-4432-981E-D57CC7119F1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -271,6 +273,18 @@ Global
 		{69BC833C-0FE1-4288-BB80-BB457D07E638}.Release|x64.Build.0 = Release|x64
 		{69BC833C-0FE1-4288-BB80-BB457D07E638}.Release|x86.ActiveCfg = Release|x86
 		{69BC833C-0FE1-4288-BB80-BB457D07E638}.Release|x86.Build.0 = Release|x86
+		{04375ABE-EC47-4432-981E-D57CC7119F1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04375ABE-EC47-4432-981E-D57CC7119F1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04375ABE-EC47-4432-981E-D57CC7119F1F}.Debug|x64.ActiveCfg = Debug|x64
+		{04375ABE-EC47-4432-981E-D57CC7119F1F}.Debug|x64.Build.0 = Debug|x64
+		{04375ABE-EC47-4432-981E-D57CC7119F1F}.Debug|x86.ActiveCfg = Debug|x86
+		{04375ABE-EC47-4432-981E-D57CC7119F1F}.Debug|x86.Build.0 = Debug|x86
+		{04375ABE-EC47-4432-981E-D57CC7119F1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04375ABE-EC47-4432-981E-D57CC7119F1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04375ABE-EC47-4432-981E-D57CC7119F1F}.Release|x64.ActiveCfg = Release|x64
+		{04375ABE-EC47-4432-981E-D57CC7119F1F}.Release|x64.Build.0 = Release|x64
+		{04375ABE-EC47-4432-981E-D57CC7119F1F}.Release|x86.ActiveCfg = Release|x86
+		{04375ABE-EC47-4432-981E-D57CC7119F1F}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -296,6 +310,7 @@ Global
 		{8DEA0927-9BD3-442F-AD3B-5F0C9E3186F6} = {39FEC70F-8F35-4A04-B770-59F12A0CE83F}
 		{69BC833C-0FE1-4288-BB80-BB457D07E638} = {39FEC70F-8F35-4A04-B770-59F12A0CE83F}
 		{31B14E7F-36E2-464A-A90A-64A07DEB02EB} = {39FEC70F-8F35-4A04-B770-59F12A0CE83F}
+		{04375ABE-EC47-4432-981E-D57CC7119F1F} = {4EE47FE8-6832-4ECB-8BE2-2FB214968A9E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		RESX_NeutralResourcesLanguage = en-US

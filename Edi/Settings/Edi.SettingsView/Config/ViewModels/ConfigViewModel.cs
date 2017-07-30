@@ -8,10 +8,11 @@
 	using ICSharpCode.AvalonEdit.Edi.BlockSurround;
 	using Edi.Settings.ProgramSettings;
 	using SimpleControls.MRU.ViewModel;
-	using UnitComboLib.Unit.Screen;
-	using UnitComboLib.ViewModel;
+	using UnitComboLib.Models.Unit.Screen;
+	using UnitComboLib.ViewModels;
+    using UnitComboLib.Models.Unit;
 
-	public class ConfigViewModel : DialogViewModelBase
+    public class ConfigViewModel : DialogViewModelBase
 	{
 		#region fields
 		private bool mWordWrapText;
@@ -45,7 +46,7 @@
 			this.WordWrapText = false;
 
 			// Get default list of units from settings manager
-			var unitList = new ObservableCollection<ListItem>(Options.GenerateScreenUnitList());
+			var unitList = new ObservableCollection<UnitComboLib.Models.ListItem>(Options.GenerateScreenUnitList());
 			this.SizeUnitLabel = new UnitViewModel(unitList, new ScreenConverter(), (int)ZoomUnit.Percentage, 100);
 
 			this.EditorTextOptions = new TextEditorOptions();
@@ -166,7 +167,7 @@
 		{
 			get
 			{
-				if (this.SizeUnitLabel.SelectedItem.Key == UnitComboLib.Unit.Itemkey.ScreenFontPoints)
+				if (this.SizeUnitLabel.SelectedItem.Key == Itemkey.ScreenFontPoints)
 					return ZoomUnit.Points;
 
 				return ZoomUnit.Percentage;
@@ -177,9 +178,9 @@
 				if (ConvertZoomUnit(value) != this.SizeUnitLabel.SelectedItem.Key)
 				{
 					if (value == ZoomUnit.Points)
-						this.SizeUnitLabel.SetSelectedItemCommand.Execute(UnitComboLib.Unit.Itemkey.ScreenFontPoints);
+						this.SizeUnitLabel.SetSelectedItemCommand.Execute(Itemkey.ScreenFontPoints);
 					else
-						this.SizeUnitLabel.SetSelectedItemCommand.Execute(UnitComboLib.Unit.Itemkey.ScreenPercent);
+						this.SizeUnitLabel.SetSelectedItemCommand.Execute(Itemkey.ScreenPercent);
 
 					this.RaisePropertyChanged(() => this.DocumentZoomUnit);
 				}
@@ -395,9 +396,11 @@
 			this.WordWrapText = settingData.WordWarpText;
 
 			this.EditorTextOptions = new TextEditorOptions(settingData.EditorTextOptions);
-			this.SizeUnitLabel = new UnitViewModel(new ObservableCollection<ListItem>(Options.GenerateScreenUnitList()),
-																						 new ScreenConverter(),
-																						(int)settingData.DocumentZoomUnit, settingData.DocumentZoomView);
+			this.SizeUnitLabel = new UnitViewModel(
+                new ObservableCollection<UnitComboLib.Models.ListItem>(
+                    Options.GenerateScreenUnitList()),
+						new ScreenConverter(),
+					(int)settingData.DocumentZoomUnit, settingData.DocumentZoomView);
 
 			try
 			{
@@ -429,7 +432,7 @@
 			settingData.WordWarpText = this.WordWrapText;
 
 			settingData.EditorTextOptions = new TextEditorOptions(this.EditorTextOptions);
-			if (this.SizeUnitLabel.SelectedItem.Key == UnitComboLib.Unit.Itemkey.ScreenFontPoints)
+			if (this.SizeUnitLabel.SelectedItem.Key == UnitComboLib.Models.Unit.Itemkey.ScreenFontPoints)
 				settingData.DocumentZoomUnit = ZoomUnit.Points;
 			else
 				settingData.DocumentZoomUnit = ZoomUnit.Percentage;
@@ -453,15 +456,15 @@
 		/// </summary>
 		/// <param name="unit"></param>
 		/// <returns></returns>
-		private UnitComboLib.Unit.Itemkey ConvertZoomUnit(ZoomUnit unit)
+		private UnitComboLib.Models.Unit.Itemkey ConvertZoomUnit(ZoomUnit unit)
 		{
 			switch (unit)
 			{
 				case ZoomUnit.Percentage:
-					return UnitComboLib.Unit.Itemkey.ScreenPercent;
+					return UnitComboLib.Models.Unit.Itemkey.ScreenPercent;
 
 				case ZoomUnit.Points:
-					return UnitComboLib.Unit.Itemkey.ScreenFontPoints;
+					return UnitComboLib.Models.Unit.Itemkey.ScreenFontPoints;
 
 				default:
 					throw new System.NotImplementedException(unit.ToString());

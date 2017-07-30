@@ -109,9 +109,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="UnitComboLib">
-      <HintPath>..\..\..\02_Libs\00_bin\UnitComboLib\UnitComboLib.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +144,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\02_Libs\UnitComboLib\UnitComboLib\UnitComboLib.csproj">
+      <Project>{04375abe-ec47-4432-981e-d57cc7119f1f}</Project>
+      <Name>UnitComboLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Edi\Edi.Core\Edi.Core.csproj">
       <Project>{f17e5e06-f28c-4e91-964f-cdb9f8589bb7}</Project>
       <Name>Edi.Core</Name>

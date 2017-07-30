@@ -11,8 +11,7 @@
     using SimpleControls.MRU.ViewModel;
     using Edi.Themes;
     using Edi.Themes.Interfaces;
-    using UnitComboLib.Unit;
-    using UnitComboLib.ViewModel;
+    using UnitComboLib.Models.Unit;
 
     /// <summary>
     /// Determine whether Zoom units of the text editor
@@ -406,15 +405,15 @@
         /// Initialize Scale View with useful units in percent and font point size
         /// </summary>
         /// <returns></returns>
-        public static IEnumerable<ListItem> GenerateScreenUnitList()
+        public static IEnumerable<UnitComboLib.Models.ListItem> GenerateScreenUnitList()
         {
-            List<ListItem> unitList = new List<ListItem>();
+            List<UnitComboLib.Models.ListItem> unitList = new List<UnitComboLib.Models.ListItem>();
 
             var percentDefaults = new ObservableCollection<string>() { "25", "50", "75", "100", "125", "150", "175", "200", "300", "400", "500" };
             var pointsDefaults = new ObservableCollection<string>() { "3", "6", "8", "9", "10", "12", "14", "16", "18", "20", "24", "26", "32", "48", "60" };
 
-            unitList.Add(new ListItem(Itemkey.ScreenPercent, Edi.Util.Local.Strings.STR_SCALE_VIEW_PERCENT, Edi.Util.Local.Strings.STR_SCALE_VIEW_PERCENT_SHORT, percentDefaults));
-            unitList.Add(new ListItem(Itemkey.ScreenFontPoints, Edi.Util.Local.Strings.STR_SCALE_VIEW_POINT, Edi.Util.Local.Strings.STR_SCALE_VIEW_POINT_SHORT, pointsDefaults));
+            unitList.Add(new UnitComboLib.Models.ListItem(Itemkey.ScreenPercent, Edi.Util.Local.Strings.STR_SCALE_VIEW_PERCENT, Edi.Util.Local.Strings.STR_SCALE_VIEW_PERCENT_SHORT, percentDefaults));
+            unitList.Add(new UnitComboLib.Models.ListItem(Itemkey.ScreenFontPoints, Edi.Util.Local.Strings.STR_SCALE_VIEW_POINT, Edi.Util.Local.Strings.STR_SCALE_VIEW_POINT_SHORT, pointsDefaults));
 
             return unitList;
         }

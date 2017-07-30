@@ -1,4 +1,4 @@
-﻿namespace UnitComboLib.Unit.Screen
+﻿namespace UnitComboLib.Models.Unit.Screen
 {
   using System;
 
