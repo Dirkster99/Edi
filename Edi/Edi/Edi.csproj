@@ -332,10 +332,6 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\02_Libs\UnitComboLib\UnitComboLib\UnitComboLib.csproj">
-      <Project>{04375abe-ec47-4432-981e-d57cc7119f1f}</Project>
-      <Name>UnitComboLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Edi.Apps\Edi.Apps.csproj">
       <Project>{4df91f4b-878a-4ab3-a5ec-16bce3d6e99d}</Project>
       <Name>Edi.Apps</Name>
