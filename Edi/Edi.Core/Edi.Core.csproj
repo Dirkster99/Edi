@@ -105,8 +105,8 @@
       <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MsgBox">
-      <HintPath>..\..\02_Libs\00_bin\MsgBox\MsgBox.dll</HintPath>
+    <Reference Include="MsgBox, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.MsgBox.1.4.1\lib\net451\MsgBoxSamples_Demo_Version_1_4_0\MsgBox.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -119,6 +119,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UserNotification, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.MsgBox.1.4.1\lib\net451\MsgBoxSamples_Demo_Version_1_4_0\UserNotification.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="Xceed.Wpf.AvalonDock">
       <HintPath>..\..\02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.dll</HintPath>

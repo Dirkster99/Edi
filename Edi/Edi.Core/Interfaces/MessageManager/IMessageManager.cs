@@ -1,17 +1,37 @@
 ﻿namespace Edi.Core.Interfaces
 {
-	public interface IMessageManager
-	{
-		#region properties
-		MsgBox.IMessage MessageBox { get; }
+    /// <summary>
+    /// Defines an interface to register and manage output stream channels:
+    /// - MessageBox Service
+    /// - Ouptput text service
+    /// </summary>
+    public interface IMessageManager
+    {
+        #region properties
+        /// <summary>
+        /// Gets a reference to a message box service implementation.
+        /// This service should be used if user interaction is required
+        /// (e.g. user is requested to click ok or yes, no etc...).
+        /// </summary>
+        MsgBox.IMessageBoxService MessageBox { get; }
 
-		IOutput Output { get; }
-		#endregion properties
+        /// <summary>
+        /// Gets a reference to the output message servive implementation.
+        /// This service can be used to output warnings or imformation
+        /// that does not require user interaction.
+        /// </summary>
+        IOutput Output { get; }
+        #endregion properties
 
-		#region methods
-		void RegisterOutputStream(IOutput output);
+        #region methods
+        /// <summary>
+        /// This method can be used to register an instance that can act as an
+        /// <seealso cref="IOutput"/> service.
+        /// </summary>
+        /// <param name="output"></param>
+        void RegisterOutputStream(IOutput output);
 
-		void RegisterMessagebox(MsgBox.IMessage message);
-		#endregion methods
-	}
+////    void RegisterMessagebox(MsgBox.IMessageBoxService message);
+        #endregion methods
+    }
 }

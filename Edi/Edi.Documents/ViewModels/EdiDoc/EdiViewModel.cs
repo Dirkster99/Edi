@@ -25,6 +25,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
     using Edi.Settings.ProgramSettings;
     using UnitComboLib.Unit.Screen;
     using UnitComboLib.ViewModel;
+    using Microsoft.Practices.ServiceLocation;
 
     public interface IDocumentEdi : IFileBaseViewModel
     {
@@ -1182,10 +1183,10 @@ namespace Edi.Documents.ViewModels.EdiDoc
         {
             if (this.mAsyncProcessor != null)
             {
-                if (Msg.Show(
-                        "An operation is currently in progress. Would you like to cancel the current process?",
-                        "Processing...",
-                        MsgBoxButtons.YesNo, MsgBoxImage.Question, MsgBoxResult.No) == MsgBoxResult.Yes)
+                var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
+                if (msgBox.Show("An operation is currently in progress. Would you like to cancel the current process?",
+                                "Processing...",
+                                MsgBoxButtons.YesNo, MsgBoxImage.Question, MsgBoxResult.No) == MsgBoxResult.Yes)
                 {
                     this.mAsyncProcessor.Cancel();
                 }

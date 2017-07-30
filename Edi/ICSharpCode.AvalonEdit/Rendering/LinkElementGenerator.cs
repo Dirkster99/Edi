@@ -176,7 +176,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
         private const string DriveLink = @"([""][A-Z]:[\\]?[ a-zA-Z0-9\\\.~_\-~%@()+:?&=#!]*)[""]";
         private const string UNCLink = @"([""][\\\\][ a-zA-Z0-9\\\.~_\-~%@()+:?&=#!]*[\\]?[ a-zA-Z0-9\\\.~_\-~%@()+:?&=#!]*)[""]";
 
-        private readonly static Regex defaultLinkRegex = new Regex(
+        internal readonly new static Regex defaultLinkRegex = new Regex(
                   FileLinkElementGenerator.UNCLink
           + "|" + FileLinkElementGenerator.FileLink
           + "|" + FileLinkElementGenerator.DriveLink

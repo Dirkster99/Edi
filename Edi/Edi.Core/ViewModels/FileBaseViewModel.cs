@@ -10,6 +10,7 @@ namespace Edi.Core.ViewModels
     using Edi.Core.ViewModels.Command;
     using Edi.Core.ViewModels.Events;
     using MsgBox;
+    using Microsoft.Practices.ServiceLocation;
 
     /// <summary>
     /// Base class that shares common properties, methods, and intefaces
@@ -342,6 +343,8 @@ namespace Edi.Core.ViewModels
         /// </summary>
         private void OnOpenContainingFolderCommand()
         {
+            var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
+
             try
             {
                 if (System.IO.File.Exists(this.FilePath) == true)
@@ -356,9 +359,9 @@ namespace Edi.Core.ViewModels
                     string parentDir = System.IO.Directory.GetParent(this.FilePath).FullName;
 
                     if (System.IO.Directory.Exists(parentDir) == false)
-                        MsgBox.Msg.Show(string.Format(CultureInfo.CurrentCulture, Edi.Util.Local.Strings.STR_ACCESS_DIRECTORY_ERROR, parentDir),
-                                                        Edi.Util.Local.Strings.STR_FILE_FINDING_CAPTION,
-                                                        MsgBoxButtons.OK, MsgBoxImage.Error);
+                        msgBox.Show(string.Format(CultureInfo.CurrentCulture, Edi.Util.Local.Strings.STR_ACCESS_DIRECTORY_ERROR, parentDir),
+                                    Edi.Util.Local.Strings.STR_FILE_FINDING_CAPTION,
+                                    MsgBoxButtons.OK, MsgBoxImage.Error);
                     else
                     {
                         string argument = @"/select, " + parentDir;
@@ -369,9 +372,9 @@ namespace Edi.Core.ViewModels
             }
             catch (System.Exception ex)
             {
-                Msg.Show(string.Format(CultureInfo.CurrentCulture, "{0}\n'{1}'.", ex.Message, (this.FilePath ?? string.Empty)),
-                                                Edi.Util.Local.Strings.STR_FILE_FINDING_CAPTION,
-                                                MsgBoxButtons.OK, MsgBoxImage.Error);
+                msgBox.Show(string.Format(CultureInfo.CurrentCulture, "{0}\n'{1}'.", ex.Message, (this.FilePath ?? string.Empty)),
+                            Edi.Util.Local.Strings.STR_FILE_FINDING_CAPTION,
+                            MsgBoxButtons.OK, MsgBoxImage.Error);
             }
         }
 

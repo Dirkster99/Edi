@@ -13,7 +13,7 @@
 	public class MessageManager : IMessageManager
 	{
 		#region fields
-		MsgBox.IMessage mMessageBox = null;
+		MsgBox.IMessageBoxService _MessageBox = null;
 		IOutput mOutput = null;
 		#endregion fields
 
@@ -23,16 +23,26 @@
 		/// </summary>
 		public MessageManager()
 		{
-			this.mMessageBox = new MsgBox.Message();
+            this._MessageBox = new MsgBox.MessageBoxService();
 		}
 		#endregion constructors
 
 		#region properties
-		public MsgBox.IMessage MessageBox
-		{
-			get { return this.MessageBox; }
+        /// <summary>
+        /// Gets a reference to a message box service implementation.
+        /// This service should be used if user interaction is required
+        /// (e.g. user is requested to click ok or yes, no etc...).
+        /// </summary>
+		public MsgBox.IMessageBoxService MessageBox
+        {
+			get { return this._MessageBox; }
 		}
 
+        /// <summary>
+        /// Gets a reference to the output message servive implementation.
+        /// This service can be used to output warnings or imformation
+        /// that does not require user interaction.
+        /// </summary>
 		public IOutput Output
 		{
 			get { return this.mOutput; }
@@ -40,14 +50,14 @@
 		#endregion properties
 
 		#region Methods
+        /// <summary>
+        /// This method can be used to register an instance that can act as an
+        /// <seealso cref="IOutput"/> service.
+        /// </summary>
+        /// <param name="output"></param>
 		public void RegisterOutputStream(IOutput output)
 		{
 			this.mOutput = output;
-		}
-
-		public void RegisterMessagebox(MsgBox.IMessage message)
-		{
-			this.mMessageBox = message;
 		}
 		#endregion Methods
 	}

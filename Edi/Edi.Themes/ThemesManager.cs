@@ -313,8 +313,8 @@ namespace Edi.Themes
             catch (System.Exception exp)
             {
                 string msg = string.Format("Error registering application theme '{0}' -> '{1}'",
-                                                                        themeName == null ? "(null)" : themeName,
-                                                                        t == null ? "(null)" : t.HlThemeName);
+                                           themeName == null ? "(null)" : themeName,
+                                           t == null ? "(null)" : t.HlThemeName);
 
                 // Log an error message and let the system boot up with default theme instead of re-throwing this
                 logger.Fatal(new System.Exception(msg, exp));

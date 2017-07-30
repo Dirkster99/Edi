@@ -1,62 +1,64 @@
 namespace MiniUML.View.Windows
 {
-  using System;
-  using System.Globalization;
-  using System.Windows;
-  using System.Windows.Markup;
-  using MiniUML.Framework;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Document;
-  using MsgBox;
+    using System;
+    using System.Globalization;
+    using System.Windows;
+    using System.Windows.Markup;
+    using MiniUML.Framework;
+    using MiniUML.Model.ViewModels.Document;
+    using MsgBox;
+    using Microsoft.Practices.ServiceLocation;
 
-  /// <summary>
-  /// Interaction logic for ExportDocumentWindow.xaml
-  /// </summary>
-  public partial class ExportDocumentWindow : Window
-  {
-    public ExportDocumentWindow()
+    /// <summary>
+    /// Interaction logic for ExportDocumentWindow.xaml
+    /// </summary>
+    public partial class ExportDocumentWindow : Window
     {
-      this.InitializeComponent();
-      this.Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag);
-      this.Title = (string)Application.Current.Resources["ApplicationName"];
-    }
-
-    private void okButton_Click(object sender, RoutedEventArgs e)
-    {
-      try
-      {
-        double resolution = double.Parse(this._dpiTextBox.Text,
-            NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite | NumberStyles.AllowDecimalPoint,
-            CultureInfo.CurrentCulture);
-
-        if (resolution <= 0)
+        public ExportDocumentWindow()
         {
-          Msg.Show(MiniUML.Framework.Local.Strings.STR_MSG_INVALID_RESOLUTION,
-                   MiniUML.Framework.Local.Strings.STR_MSG_Warning_Caption,
-                   MsgBoxButtons.OK, MsgBoxImage.Warning);
-          return;
+            this.InitializeComponent();
+            this.Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag);
+            this.Title = (string)Application.Current.Resources["ApplicationName"];
         }
 
-        ExportDocumentWindowViewModel viewModel = DataContext as ExportDocumentWindowViewModel;
-        viewModel.prop_Resolution = resolution;
+        private void okButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                double resolution = double.Parse(this._dpiTextBox.Text,
+                       NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite | NumberStyles.AllowDecimalPoint,
+                       CultureInfo.CurrentCulture);
 
-        this.DialogResult = true;
-        this.Close();
-      }
-      catch (SystemException)
-      {
-        Msg.Show(MiniUML.Framework.Local.Strings.STR_MSG_PAGE_DEFINITION_FIELD_INVALID,
-                 MiniUML.Framework.Local.Strings.STR_MSG_Warning_Caption,
-                 MsgBoxButtons.OK, MsgBoxImage.Warning);
-      }
+                if (resolution <= 0)
+                {
+                    var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
+                    msgBox.Show(MiniUML.Framework.Local.Strings.STR_MSG_INVALID_RESOLUTION,
+                                MiniUML.Framework.Local.Strings.STR_MSG_Warning_Caption,
+                                MsgBoxButtons.OK, MsgBoxImage.Warning);
+                    return;
+                }
+
+                ExportDocumentWindowViewModel viewModel = DataContext as ExportDocumentWindowViewModel;
+                viewModel.prop_Resolution = resolution;
+
+                this.DialogResult = true;
+                this.Close();
+            }
+            catch (SystemException)
+            {
+                var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
+                msgBox.Show(MiniUML.Framework.Local.Strings.STR_MSG_PAGE_DEFINITION_FIELD_INVALID,
+                            MiniUML.Framework.Local.Strings.STR_MSG_Warning_Caption,
+                            MsgBoxButtons.OK, MsgBoxImage.Warning);
+            }
+        }
     }
-  }
 
-  public class ExportDocumentWindowFactory : IFactory
-  {
-    public object CreateObject()
+    public class ExportDocumentWindowFactory : IFactory
     {
-      return new ExportDocumentWindow();
+        public object CreateObject()
+        {
+            return new ExportDocumentWindow();
+        }
     }
-  }
 }
