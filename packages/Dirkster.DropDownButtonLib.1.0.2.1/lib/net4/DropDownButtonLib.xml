@@ -1,0 +1,1389 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DropDownButtonLib</name>
+    </assembly>
+    <members>
+        <member name="T:DropDownButtonLib.Controls.Chromes.ButtonChrome">
+            <summary>
+            Implements a ButtonChrome which is a kind of frame that
+            determines the look and feel of a button.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.Chromes.ButtonChrome.CornerRadiusProperty">
+            <summary>
+            Backing store for corner radius dependency property of button chrome.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.Chromes.ButtonChrome.InnerCornerRadiusProperty">
+            <summary>
+            Backing store for inner corner radius dependency property of button chrome.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderCheckedProperty">
+            <summary>
+            Backing store for render checked dependency property of button chrome.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderEnabledProperty">
+            <summary>
+            Backing store for render enabled dependency property of button chrome.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderFocusedProperty">
+            <summary>
+            Backing store for render focused dependency property of button chrome.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderMouseOverProperty">
+            <summary>
+            Backing store for render mouse over dependency property of button chrome.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderNormalProperty">
+            <summary>
+            Backing store for render normal dependency property of button chrome.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderPressedProperty">
+            <summary>
+            Backing store for render pressed dependency property of button chrome.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.#cctor">
+            <summary>
+            Static class constructor
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.Chromes.ButtonChrome.CornerRadius">
+            <summary>
+            Gets/sets corner radius dependency property of button chrome.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.Chromes.ButtonChrome.InnerCornerRadius">
+            <summary>
+            Gets/sets inner corner radius dependency property of button chrome.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderChecked">
+            <summary>
+            Gets/sets render checked dependency property of button chrome.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderEnabled">
+            <summary>
+            Gets/sets render enabled dependency property of button chrome.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderFocused">
+            <summary>
+            Gets/sets render focused dependency property of button chrome.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderMouseOver">
+            <summary>
+            Gets/sets render mouseover dependency property of button chrome.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderNormal">
+            <summary>
+            Gets/sets render normal dependency property of button chrome.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.Chromes.ButtonChrome.RenderPressed">
+            <summary>
+            Gets/sets render pressed dependency property of button chrome.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnCornerRadiusChanged(System.Windows.CornerRadius,System.Windows.CornerRadius)">
+            <summary>
+            Method executes when the corner radius dependency property is changed.
+            It re-computes the inner corner radius since it always needs to be 1
+            less than the outer radius.
+            </summary>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnInnerCornerRadiusChanged(System.Windows.CornerRadius,System.Windows.CornerRadius)">
+            <summary>
+            Method executes when the inner corner radius dependency property is changed.
+            
+            TODO: Add your property changed side-effects. Descendants can override as well.
+            </summary>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderCheckedChanged(System.Boolean,System.Boolean)">
+            <summary>
+            Method executes when the render checked dependency property is changed.
+            
+            TODO: Add your property changed side-effects. Descendants can override as well.
+            </summary>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderEnabledChanged(System.Boolean,System.Boolean)">
+            <summary>
+            Method executes when the render enabled dependency property is changed.
+            
+            TODO: Add your property changed side-effects. Descendants can override as well.
+            </summary>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderFocusedChanged(System.Boolean,System.Boolean)">
+            <summary>
+            Method executes when the render focused dependency property is changed.
+            
+            TODO: Add your property changed side-effects. Descendants can override as well.
+            </summary>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderMouseOverChanged(System.Boolean,System.Boolean)">
+            <summary>
+            Method executes when the render mouseover dependency property is changed.
+            
+            TODO: Add your property changed side-effects. Descendants can override as well.
+            </summary>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderNormalChanged(System.Boolean,System.Boolean)">
+            <summary>
+            Method executes when the render normal dependency property is changed.
+            
+            TODO: Add your property changed side-effects. Descendants can override as well.
+            </summary>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderPressedChanged(System.Boolean,System.Boolean)">
+            <summary>
+            Method executes when the render pressed dependency property is changed.
+            
+            TODO: Add your property changed side-effects. Descendants can override as well.
+            </summary>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnCornerRadiusChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Method executes when the corner radius dependency property is changed.
+            </summary>
+            <param name="o"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnInnerCornerRadiusChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Method executes when the inner corner radius dependency property is changed.
+            </summary>
+            <param name="o"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderCheckedChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Method executes when the render checked dependency property is changed.
+            </summary>
+            <param name="o"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderEnabledChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Method executes when the render enabled dependency property is changed.
+            </summary>
+            <param name="o"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderFocusedChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Method executes when the render focused dependency property is changed.
+            </summary>
+            <param name="o"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderMouseOverChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Method executes when the render mouseover dependency property is changed.
+            </summary>
+            <param name="o"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderNormalChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Method executes when the render normal dependency property is changed.
+            </summary>
+            <param name="o"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.Chromes.ButtonChrome.OnRenderPressedChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Method executes when the render pressed dependency property is changed.
+            </summary>
+            <param name="o"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:DropDownButtonLib.Controls.SplitItemsButton">
+            <summary>
+            Implements a look-less WPF SplitItemsButton control.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.SplitItemsButton.PART_ActionButton">
+            <summary>
+            Const string of the required additional button element in the <see cref="T:DropDownButtonLib.Controls.SplitItemsButton"/> control.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.SplitItemsButton.#cctor">
+            <summary>
+            Static class constructor
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.SplitItemsButton.OnApplyTemplate">
+            <summary>
+            <inheritedoc/>
+            </summary>
+        </member>
+        <member name="T:DropDownButtonLib.Controls.DropDownItemsButton">
+            <summary>
+            Implements a look-less WPF DropDownItemsButton control.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownItemsButton.PART_DropDownButton">
+            <summary>
+            Const string for required template element of this control.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownItemsButton.PART_ItemsControl">
+            <summary>
+            Const string for required template element of this control.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownItemsButton.PART_Popup">
+            <summary>
+            Const string for required template element of this control.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownItemsButton.IsOpenProperty">
+            <summary>
+            Backing store of IsOpen dependency property.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownItemsButton.CommandProperty">
+            <summary>
+            Backing store of Command dependency property.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownItemsButton.CommandParameterProperty">
+            <summary>
+            Backing store of Command Parameter dependency property.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownItemsButton.CommandTargetProperty">
+            <summary>
+            Backing store of Command Target dependency property.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownItemsButton.ItemTemplateProperty">
+            <summary>
+            Backing store of dependency property implmentation
+            - see corresponding property implementation for more details.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownItemsButton.ItemsSourceProperty">
+            <summary>
+            Backing store of dependency property implmentation
+            - see corresponding property implementation for more details.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownItemsButton.ItemContainerStyleProperty">
+            <summary>
+            Backing store of dependency property implmentation
+            - see corresponding property implementation for more details.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownItemsButton.ItemContainerStyleSelectorProperty">
+            <summary>
+            Backing store of dependency property implmentation
+            - see corresponding property implementation for more details.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownItemsButton.ItemsPanelProperty">
+            <summary>
+            Backing store of dependency property implmentation
+            - see corresponding property implementation for more details.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownItemsButton.TemplateOfItemControlProperty">
+            <summary>
+            Backing store of dependency property implmentation
+            - see corresponding property implementation for more details.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownItemsButton.DropDownMaxHeightProperty">
+            <summary>
+            Backing store of dependency property implmentation
+            - see corresponding property implementation for more details.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownItemsButton.DropDownMaxWidthProperty">
+            <summary>
+            Backing store of dependency property implmentation
+            - see corresponding property implementation for more details.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownItemsButton.ClickEvent">
+            <summary>
+            Backing store of Click Event dependency property.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownItemsButton.OpenedEvent">
+            <summary>
+            Backing store of Opened Event dependency property.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownItemsButton.ClosedEvent">
+            <summary>
+            Backing store of Closed Event dependency property.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownItemsButton.mCanExecuteChangedHandler">
+            <summary>
+            Keeps a copy of the CanExecuteChanged handler so it doesn't get garbage collected.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownItemsButton.#cctor">
+            <summary>
+            Static class constructor
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownItemsButton.#ctor">
+            <summary>
+            Default class constructor
+            </summary>
+        </member>
+        <member name="E:DropDownButtonLib.Controls.DropDownItemsButton.Click">
+            <summary>
+            Backing store of Click Event dependency property.
+            </summary>
+        </member>
+        <member name="E:DropDownButtonLib.Controls.DropDownItemsButton.Opened">
+            <summary>
+            Backing store of Opened Event dependency property.
+            </summary>
+        </member>
+        <member name="E:DropDownButtonLib.Controls.DropDownItemsButton.Closed">
+            <summary>
+            Backing store of Closed Event dependency property.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.DropDownItemsButton.IsOpen">
+            <summary>
+            Gets/sets whether the DwropDownContent is currently open or not.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.DropDownItemsButton.ItemTemplate">
+            <summary>
+            Gets/sets the ItemTemplate dependency property that
+            represents the ItemTemplate property of the ItemsControl inside the
+            Pop-up/DropDown element of the button.
+            
+            See XAML for binding statement in PopUp.ItemsControl part of ControlTemplate.
+            http://msdn.microsoft.com/en-us/library/system.windows.controls.itemscontrol.itemcontainerstyle%28v=vs.110%29.aspx
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.DropDownItemsButton.ItemsSource">
+            <summary>
+            Gets/sets the ItemsSource dependency property that
+            represents the ItemsSource property of the ItemsControl inside the
+            Pop-up/DropDown element of the button.
+            
+            See XAML for binding statement in PopUp.ItemsControl part of ControlTemplate.
+            http://msdn.microsoft.com/en-us/library/system.windows.controls.itemscontrol.itemcontainerstyle%28v=vs.110%29.aspx
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.DropDownItemsButton.ItemContainerStyle">
+            <summary>
+            Gets/sets the ItemContainerStyle dependency property that
+            represents the ItemContainerStyle property 
+            of the ItemsControl inside the Pop-up/DropDown element of the button.
+            
+            See XAML for binding statement in PopUp.ItemsControl part of ControlTemplate.
+            http://msdn.microsoft.com/en-us/library/system.windows.controls.itemscontrol.itemcontainerstyle%28v=vs.110%29.aspx
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.DropDownItemsButton.ItemContainerStyleSelector">
+            <summary>
+            Gets/sets the ItemContainerStyleSelector dependency property that
+            represents the ItemContainerStyleSelector property 
+            of the ItemsControl inside the Pop-up/DropDown element of the button.
+            
+            See XAML for binding statement in PopUp.ItemsControl part of ControlTemplate.
+            http://msdn.microsoft.com/en-us/library/system.windows.controls.itemscontrol.itemcontainerstyle%28v=vs.110%29.aspx
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.DropDownItemsButton.ItemsPanel">
+            <summary>
+            Gets/sets the ItemsPanel dependency property that represents the ItemsPanel property 
+            of the ItemsControl inside the Pop-up/DropDown element of the button.
+            
+            See XAML for binding statement in PopUp.ItemsControl part of ControlTemplate.
+            http://msdn.microsoft.com/en-us/library/system.windows.controls.itemscontrol.itemcontainerstyle%28v=vs.110%29.aspx
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.DropDownItemsButton.TemplateOfItemControl">
+            <summary>
+            Gets/sets the property value of the dependency property that represents the Template property 
+            of the ItemsControl inside the Pop-up/DropDown element of the button. A default template is
+            already setup with the default template of the <seealso cref="T:DropDownButtonLib.Controls.DropDownItemsButton"/> template
+            but you can use this property to override it.
+            
+            See XAML for binding statement in PopUp.ItemsControl part of ControlTemplate.
+            http://msdn.microsoft.com/en-us/library/system.windows.controls.itemscontrol.itemcontainerstyle%28v=vs.110%29.aspx
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.DropDownItemsButton.DropDownMaxHeight">
+            <summary>
+            Gets/sets the maximum heigt of the Pop-up/DropDown element of the button.
+            The default value is positive infiinity which means that the drop down will
+            occupy the complite available vertical space if it is not restricted.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.DropDownItemsButton.DropDownMaxWidth">
+            <summary>
+            Gets/sets the maximum width of the Pop-up/DropDown element of the button.
+            The default value is positive infiinity which means that the drop down will
+            occupy the complite available horizontal space if it is not restricted.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.DropDownItemsButton.Command">
+            <summary>
+            Part of the Command dependency property.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.DropDownItemsButton.CommandParameter">
+            <summary>
+            Part of the Command Parameter dependency property.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.DropDownItemsButton.CommandTarget">
+            <summary>
+            Part of the Command Target dependency property.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.DropDownItemsButton.Button">
+            <summary>
+            Gets/sets the templated PART_DropDownButton instance.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownItemsButton.OnApplyTemplate">
+            <summary>
+            <InheriteDoc/>
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownItemsButton.OnIsOpenChanged(System.Boolean,System.Boolean)">
+            <summary>
+            Method is invoked when the IsOpen dependency property is changed.
+            </summary>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownItemsButton.OnCommandChanged(System.Windows.Input.ICommand,System.Windows.Input.ICommand)">
+            <summary>
+            Method is invoked when the Command dependency property is changed.
+            </summary>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownItemsButton.OnClick">
+            <summary>
+            Method executes when the drop down button is clicked.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownItemsButton.OnIsOpenChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Method is invoked when the IsOpen dependency property is changed.
+            </summary>
+            <param name="o"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownItemsButton.OnCommandChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Method is invoked when the Command dependency property is changed.
+            </summary>
+            <param name="d"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownItemsButton.OnKeyDown(System.Object,System.Windows.Input.KeyEventArgs)">
+            <summary>
+            Implements a keyboard event handler for the
+            System.Windows.Input.Keyboard.KeyDown attached event.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownItemsButton.OnMouseDownOutsideCapturedElement(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Closes the drop-down content element when user clicks
+            the mouse outside of the pop-up/drop down element.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownItemsButton.DropDownButton_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Executes when the user clicks on the drop-down button.
+            System opens the drop-down/pop-up element.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownItemsButton.CloseDropDown(System.Boolean)">
+            <summary>
+            Closes the drop down.
+            Is executed when the user closes the drop down via keyboard (ESC or ALT-Cursor Up).
+            Is executed when the user clicks outside of the open drop down element.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownItemsButton.RaiseRoutedEvent(System.Windows.RoutedEvent)">
+            <summary>
+            Raises routed events.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownItemsButton.RaiseCommand">
+            <summary>
+            Raises the command's Execute event.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownItemsButton.UnhookCommand(System.Windows.Input.ICommand,System.Windows.Input.ICommand)">
+            <summary>
+            Unhooks a command from the Command property.
+            </summary>
+            <param name="oldCommand">The old command.</param>
+            <param name="newCommand">The new command.</param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownItemsButton.HookUpCommand(System.Windows.Input.ICommand,System.Windows.Input.ICommand)">
+            <summary>
+            Hooks up a command to the CanExecuteChnaged event handler.
+            </summary>
+            <param name="oldCommand">The old command.</param>
+            <param name="newCommand">The new command.</param>
+        </member>
+        <member name="T:DropDownButtonLib.Controls.DropDownButton">
+            <summary>
+            Implements a look-less WPF DropDownButton control.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownButton.PART_DropDownButton">
+            <summary>
+            Const string name of the required drop down button element in the <see cref="T:DropDownButtonLib.Controls.DropDownButton"/> control.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownButton.PART_ContentPresenter">
+            <summary>
+            Const string name of the required ContentPresenter element in the <see cref="T:DropDownButtonLib.Controls.DropDownButton"/> control.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownButton.PART_Popup">
+            <summary>
+            Const string name of the required PopUp element in the <see cref="T:DropDownButtonLib.Controls.DropDownButton"/> control.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownButton.DropDownContentProperty">
+            <summary>
+            Backing store of the DropDownContent dependency property.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownButton.IsOpenProperty">
+            <summary>
+            Backing store of the IsOpen dependency property.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownButton.CommandProperty">
+            <summary>
+            Backing store of the Command dependency property.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownButton.CommandParameterProperty">
+            <summary>
+            Backing store of the CommandParameter dependency property.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownButton.CommandTargetProperty">
+            <summary>
+            Backing store of the CommandTarget dependency property.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownButton.ClickEvent">
+            <summary>
+            Backing store of the Click Event dependency property.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownButton.OpenedEvent">
+            <summary>
+            Backing store of the Opened Event dependency property.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownButton.ClosedEvent">
+            <summary>
+            Backing store of the Closed Event dependency property.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.DropDownButton.mCanExecuteChangedHandler">
+            <summary>
+            Keeps a copy of the CanExecuteChanged handler so it doesn't get garbage collected.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownButton.#cctor">
+            <summary>
+            Static class constructor
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownButton.#ctor">
+            <summary>
+            Default class constructor
+            </summary>
+        </member>
+        <member name="E:DropDownButtonLib.Controls.DropDownButton.Click">
+            <summary>
+            Adds/removes a reference to a click event handler.
+            </summary>
+        </member>
+        <member name="E:DropDownButtonLib.Controls.DropDownButton.Opened">
+            <summary>
+            Adds/removes a reference to a Opened event handler.
+            </summary>
+        </member>
+        <member name="E:DropDownButtonLib.Controls.DropDownButton.Closed">
+            <summary>
+            Adds/removes a reference to a Closed event handler.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.DropDownButton.DropDownContent">
+            <summary>
+            Gets/sets part of the DropDownContent dependency property of this class.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.DropDownButton.IsOpen">
+            <summary>
+            Gets/sets whether the DwropDownContent is currently open or not.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.DropDownButton.Command">
+            <summary>
+            Part of the Command dependency property.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.DropDownButton.CommandParameter">
+            <summary>
+            Gets/sets CommandParameter dependency property.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.DropDownButton.CommandTarget">
+            <summary>
+            Gets/sets CommandTarget dependency property.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.Controls.DropDownButton.Button">
+            <summary>
+            Gets/sets the templated PART_DropDownButton instance.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownButton.OnApplyTemplate">
+            <summary>
+            <InheriteDoc/>
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownButton.OnDropDownContentChanged(System.Object,System.Object)">
+            <summary>
+            Method is invoked when the DropDownContent dependency property is changed.
+            </summary>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownButton.OnIsOpenChanged(System.Boolean,System.Boolean)">
+            <summary>
+            Method is invoked when the IsOpen dependency property is changed.
+            </summary>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownButton.OnCommandChanged(System.Windows.Input.ICommand,System.Windows.Input.ICommand)">
+            <summary>
+            Method is invoked when the Command dependency property is changed.
+            </summary>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownButton.OnClick">
+            <summary>
+            Method executes when the drop down button is clicked.
+            The method opens the drop-down/pop-up element.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownButton.OnDropDownContentChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Method is invoked when the DropDownContent dependency property is changed.
+            </summary>
+            <param name="o"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownButton.OnIsOpenChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Method is invoked when the IsOpen dependency property is changed.
+            </summary>
+            <param name="o"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownButton.OnCommandChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Method is invoked when the Command dependency property is changed.
+            </summary>
+            <param name="d"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownButton.OnKeyDown(System.Object,System.Windows.Input.KeyEventArgs)">
+            <summary>
+            Implements a keyboard event handler for the
+            System.Windows.Input.Keyboard.KeyDown attached event.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownButton.OnMouseDownOutsideCapturedElement(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Closes the drop-down content element when user clicks
+            the mouse outside of the pop-up/drop down element.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownButton.DropDownButton_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Executes when the user clicks on the drop-down button.
+            System opens the drop-down/pop-up element.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownButton.CloseDropDown(System.Boolean)">
+            <summary>
+            Closes the drop down.
+            Is executed when the user closes the drop down via keyboard (ESC or ALT-Cursor Up).
+            Is executed when the user clicks outside of the open drop down element.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownButton.RaiseRoutedEvent(System.Windows.RoutedEvent)">
+            <summary>
+            Raises routed events.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownButton.RaiseCommand">
+            <summary>
+            Raises the command's Execute event.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownButton.UnhookCommand(System.Windows.Input.ICommand,System.Windows.Input.ICommand)">
+            <summary>
+            Unhooks a command from the Command property.
+            </summary>
+            <param name="oldCommand">The old command.</param>
+            <param name="newCommand">The new command.</param>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.DropDownButton.HookUpCommand(System.Windows.Input.ICommand,System.Windows.Input.ICommand)">
+            <summary>
+            Hooks up a command to the CanExecuteChnaged event handler.
+            </summary>
+            <param name="oldCommand">The old command.</param>
+            <param name="newCommand">The new command.</param>
+        </member>
+        <member name="T:DropDownButtonLib.Controls.SplitButton">
+            <summary>
+            Implements a look-less WPF SplitButton control.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Controls.SplitButton.PART_ActionButton">
+            <summary>
+            Const string of the required additional button element in the <see cref="T:DropDownButtonLib.Controls.SplitButton"/> control.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.SplitButton.#cctor">
+            <summary>
+            Static class constructor
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Controls.SplitButton.OnApplyTemplate">
+            <summary>
+            <inheritedoc/>
+            </summary>
+        </member>
+        <member name="T:DropDownButtonLib.Command.RelayCommand`1">
+            <summary>
+            A command whose sole purpose is to 
+            relay its functionality to other
+            objects by invoking delegates. The
+            default return value for the CanExecute
+            method is 'true'.
+            
+            Source: http://www.codeproject.com/Articles/31837/Creating-an-Internationalized-Wizard-in-WPF
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Command.RelayCommand`1.#ctor(System.Action{`0})">
+            <summary>
+            Class constructor
+            </summary>
+            <param name="execute"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Command.RelayCommand`1.#ctor(System.Action{`0},System.Predicate{`0})">
+            <summary>
+            Creates a new command.
+            </summary>
+            <param name="execute">The execution logic.</param>
+            <param name="canExecute">The execution status logic.</param>
+        </member>
+        <member name="E:DropDownButtonLib.Command.RelayCommand`1.CanExecuteChanged">
+            <summary>
+            Eventhandler to re-evaluate whether this command can execute or not
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Command.RelayCommand`1.CanExecute(System.Object)">
+            <summary>
+            Determine whether this pre-requisites to execute this command are given or not.
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DropDownButtonLib.Command.RelayCommand`1.Execute(System.Object)">
+            <summary>
+            Execute the command method managed in this class.
+            </summary>
+            <param name="parameter"></param>
+        </member>
+        <member name="T:DropDownButtonLib.Command.RelayCommand">
+            <summary>
+            A command whose sole purpose is to 
+            relay its functionality to other
+            objects by invoking delegates. The
+            default return value for the CanExecute
+            method is 'true'.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Command.RelayCommand.#ctor(System.Action)">
+            <summary>
+            Creates a new command that can always execute.
+            </summary>
+            <param name="execute">The execution logic.</param>
+        </member>
+        <member name="M:DropDownButtonLib.Command.RelayCommand.#ctor(DropDownButtonLib.Command.RelayCommand)">
+            <summary>
+            Copy constructor
+            </summary>
+            <param name="inputRC"></param>
+        </member>
+        <member name="M:DropDownButtonLib.Command.RelayCommand.#ctor(System.Action,System.Func{System.Boolean})">
+            <summary>
+            Creates a new command.
+            </summary>
+            <param name="execute">The execution logic.</param>
+            <param name="canExecute">The execution status logic.</param>
+        </member>
+        <member name="E:DropDownButtonLib.Command.RelayCommand.CanExecuteChanged">
+            <summary>
+            Eventhandler to re-evaluate whether this command can execute or not
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Command.RelayCommand.CanExecute(System.Object)">
+            <summary>
+            Execute the attached CanExecute methode delegate (or always return true)
+            to determine whether the command managed in this object can execute or not.
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DropDownButtonLib.Command.RelayCommand.Execute(System.Object)">
+            <summary>
+            Return the attached delegate method.
+            </summary>
+            <param name="parameter"></param>
+        </member>
+        <member name="T:DropDownButtonLib.Converters.InverseBoolConverter">
+            <summary>
+            Implements a WPF <seealso cref="T:System.Windows.Data.IValueConverter"/> that converts an input
+            boolean value into an inverted boolean value (true to false, and vice versa).
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Converters.InverseBoolConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Standard Convert method of the <seealso cref="T:System.Windows.Data.IValueConverter"/> interface.
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DropDownButtonLib.Converters.InverseBoolConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Standard ConvertBack method of the <seealso cref="T:System.Windows.Data.IValueConverter"/> interface.
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DropDownButtonLib.Themes.ResourceKeys">
+            <summary>
+            Resource key management class to keep track of all resources
+            that can be re-styled in applications that make use of the implemented controls.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ControlAccentColorKey">
+            <summary>
+            Accent Color Key - This Color key is used to accent elements in the UI
+            (e.g.: Color of Activated Normal Window Frame, ResizeGrip, Focus or MouseOver input elements)
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ControlAccentBrushKey">
+            <summary>
+            Accent Brush Key - This Brush key is used to accent elements in the UI
+            (e.g.: Color of Activated Normal Window Frame, ResizeGrip, Focus or MouseOver input elements)
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ControlNormalBackgroundKey">
+            <summary>
+            Resource key of the controls normal background brush key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ControlDisabledBackgroundKey">
+            <summary>
+            Resource key of the controls disabled background brush key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ControlNormalBorderKey">
+            <summary>
+            Resource key of the controls normal background brush key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ControlMouseOverBorderKey">
+            <summary>
+            Resource key of the controls mouse over border brush key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ControlSelectedBorderKey">
+            <summary>
+            Resource key of the controls selected border brush key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ControlFocusedBorderKey">
+            <summary>
+            Resource key of the controls focused border brush key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonNormalOuterBorderKey">
+            <summary>
+            Resource key of the button's normal outer border brush key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonNormalInnerBorderKey">
+            <summary>
+            Resource key of the button's normal inner border brush key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonNormalBackgroundKey">
+            <summary>
+            Resource key of the button's normal background brush key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonMouseOverBackgroundKey">
+            <summary>
+            Resource key of the button's mouse over background brush key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonMouseOverOuterBorderKey">
+            <summary>
+            Resource key of the button's mouse over outer border brush key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonMouseOverInnerBorderKey">
+            <summary>
+            Resource key of the button's mouse over inner border brush key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonPressedOuterBorderKey">
+            <summary>
+            Resource key of the button's pressed outer border brush key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonPressedInnerBorderKey">
+            <summary>
+            Resource key of the button's pressed inner border brush key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonPressedBackgroundKey">
+            <summary>
+            Resource key of the button's pressed background brush key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonFocusedOuterBorderKey">
+            <summary>
+            Resource key of the button's focused outer border brush key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonFocusedInnerBorderKey">
+            <summary>
+            Resource key of the button's focused inner border brush key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonFocusedBackgroundKey">
+            <summary>
+            Resource key of the button's focused background brush key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonDisabledOuterBorderKey">
+            <summary>
+            Resource key of the button's disbled outer border brush key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.ButtonInnerBorderDisabledKey">
+            <summary>
+            Resource key of the button's disabled inner border brush key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.DropDownList_MouseOverBackgroundKey">
+            <summary>
+            Resource key of the drop down list item background key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.DropDownList_BackgroundKey">
+            <summary>
+            Resource key of the drop down background key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.DropDownList_BorderForegroundKey">
+            <summary>
+            Resource key of the drop down border key.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.GlyphNormalForegroundKey">
+            <summary>
+            Resource key object of the normal glyph color.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.GlyphMouseOverForegroundKey">
+            <summary>
+            Resource key object of the mouseover foreground glyph color.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.GlyphDisabledForegroundKey">
+            <summary>
+            Resource key object of the disabled foreground glyph color.
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.SpinButtonCornerRadiusKey">
+            <summary>
+            Resource key object of the corner radius property assigned in different UI elements (not just SpinButton).
+            </summary>
+        </member>
+        <member name="F:DropDownButtonLib.Themes.ResourceKeys.SpinnerButtonStyleKey">
+            <summary>
+            Resource style key of the repeat button.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.Utilities.KeyboardUtilities.IsKeyModifyingPopupState(System.Windows.Input.KeyEventArgs)">
+            <summary>
+            Determine whether the <paramref name="e"/> parameter represents a keyboard short-cut
+            that should modify the pop-up state of the drop-down button and return
+            true if so, otherwise false.
+            </summary>
+            <param name="e"></param>
+            <returns>true if keyboard short-cut should modify the pop-up state, otherwise false.</returns>
+        </member>
+        <member name="T:DropDownButtonLib.ViewModels.Base.BaseViewModel">
+            <summary>
+            Every ViewModel class is required to implement the INotifyPropertyChanged
+            interface in order to tell WPF when a property changed (for instance, when
+            a method or setter is executed).
+            
+            Therefore, the PropertyChanged methode has to be called when data changes,
+            because the relevant properties may or may not be bound to GUI elements,
+            which in turn have to refresh their display.
+            
+            The PropertyChanged method is to be called by the members and properties of
+            the class that derives from this class. Each call contains the name of the
+            property that has to be refreshed.
+            
+            The BaseViewModel is derived from from System.Windows.DependencyObject to allow
+            resulting ViewModels the implemantion of dependency properties. Dependency properties
+            in turn are useful when working with IValueConverter and ConverterParameters.
+            </summary>
+        </member>
+        <member name="E:DropDownButtonLib.ViewModels.Base.BaseViewModel.PropertyChanged">
+            <summary>
+            Standard event handler of the <seealso cref="T:System.ComponentModel.INotifyPropertyChanged"/> interface
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.ViewModels.Base.BaseViewModel.NotifyPropertyChanged``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Tell bound controls (via WPF binding) to refresh their display.
+            
+            Sample call: this.NotifyPropertyChanged(() => this.IsSelected);
+            where 'this' is derived from <seealso cref="T:DropDownButtonLib.ViewModels.Base.BaseViewModel"/>
+            and IsSelected is a property.
+            </summary>
+            <typeparam name="TProperty"></typeparam>
+            <param name="property"></param>
+        </member>
+        <member name="M:DropDownButtonLib.ViewModels.Base.BaseViewModel.OnPropertyChanged(System.String)">
+            <summary>
+            Tell bound controls (via WPF binding) to refresh their display.
+            
+            Sample call: this.OnPropertyChanged("IsSelected");
+            where 'this' is derived from <seealso cref="T:DropDownButtonLib.ViewModels.Base.BaseViewModel"/>
+            and IsSelected is a property.
+            </summary>
+            <param name="propertyName">Name of property to refresh</param>
+        </member>
+        <member name="T:DropDownButtonLib.ViewModels.DropDownButtonViewModel">
+            <summary>
+            Implements a viewmodel that drives the
+            the <seealso cref="T:DropDownButtonLib.Controls.DropDownButton"/> control.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.ViewModels.DropDownButtonViewModel.#ctor">
+            <summary>
+            Class constructor
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.DropDownButtonViewModel.DropDownButtonClickCommand">
+            <summary>
+            Command is invoked when user clicks on the DropDownButton
+            (either on label part or DropDown arrow).
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.DropDownButtonViewModel.ItemButtonClickCommand">
+            <summary>
+            Command is invoked when user clicks on the DropDownButton
+            (user clicked a button or hyperlink in DropDown part).
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.DropDownButtonViewModel.ItemCancelCommand">
+            <summary>
+            Gets a command that is executed to cancel a dropdown action.
+            This command closes the drop down and rolls back edited values (if any).
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.DropDownButtonViewModel.ButtonLabel">
+            <summary>
+            Gets the selected item of the DropDown viewmodel.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.DropDownButtonViewModel.IsOpen">
+            <summary>
+            Gets/sets bound property to determine whether
+            drop-down/pop-up element is open or not.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.DropDownButtonViewModel.IsEnabled">
+            <summary>
+            Gets/sets Boolean value to determine whether attached dropdown view is enabled or not.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.DropDownButtonViewModel.SliderValue">
+            <summary>
+            Gets/sets the current value displayed in the slider control.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.DropDownButtonViewModel.Status">
+            <summary>
+            Gets the status description of this viewmodel
+            (this property is present for testing/demo/debugging purposes only
+            since it gives us the ability to give state feedback without using
+            MessageBoxes, which steals the focus and thus influence the pop-up element)
+            </summary>
+        </member>
+        <member name="T:DropDownButtonLib.ViewModels.DropDownItemsButtonViewModel">
+            <summary>
+            Implements a viewmodel that drives the
+            the <seealso cref="T:DropDownButtonLib.Controls.DropDownButton"/> control.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.ViewModels.DropDownItemsButtonViewModel.#ctor">
+            <summary>
+            Class constructor
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.DropDownItemsButtonViewModel.DropDownButtonClickCommand">
+            <summary>
+            Command is invoked when user clicks on the DropDownButton
+            (either on label part or DropDown arrow).
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.DropDownItemsButtonViewModel.ItemButtonClickCommand">
+            <summary>
+            Command is invoked when user clicks on the DropDownButton
+            (user clicked a button or hyperlink in DropDown part).
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.DropDownItemsButtonViewModel.DropDownItems">
+            <summary>
+            Gets the list of drives and folders for display in treeview structure control.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.DropDownItemsButtonViewModel.ButtonLabel">
+            <summary>
+            Gets the caption of the dropdown button.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.DropDownItemsButtonViewModel.IsOpen">
+            <summary>
+            Gets/sets bound property to determine whether
+            drop-down/pop-up element is open or not.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.DropDownItemsButtonViewModel.IsEnabled">
+            <summary>
+            Gets/sets Boolean value to determine whether attached dropdown view is enabled or not.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.DropDownItemsButtonViewModel.Status">
+            <summary>
+            Gets the status description of this viewmodel
+            (this property is present for testing/demo/debugging purposes only
+            since it gives us the ability to give state feedback without using
+            MessageBoxes, which steals the focus and thus influence the pop-up element)
+            </summary>
+        </member>
+        <member name="T:DropDownButtonLib.ViewModels.Items.ItemsItemViewModel">
+            <summary>
+            Implements a viewmodel that drives the
+            the <seealso cref="T:DropDownButtonLib.Controls.DropDownButton"/> control.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.ViewModels.Items.ItemsItemViewModel.#ctor(System.String)">
+            <summary>
+            Parmeterized class constructor
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.ViewModels.Items.ItemsItemViewModel.#ctor">
+            <summary>
+            Class constructor
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.Items.ItemsItemViewModel.DisplayItemName">
+            <summary>
+            Gets the string that represents a name for display purposes.
+            </summary>
+        </member>
+        <member name="T:DropDownButtonLib.ViewModels.SplitButtonViewModel">
+            <summary>
+            Implements a viewmodel that drives the
+            the <seealso cref="T:DropDownButtonLib.Controls.DropDownButton"/> control.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.ViewModels.SplitButtonViewModel.#ctor">
+            <summary>
+            Class constructor
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.SplitButtonViewModel.DropDownButtonClickCommand">
+            <summary>
+            Command is invoked when user clicks on the DropDownButton
+            (either on label part or DropDown arrow).
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.SplitButtonViewModel.ItemButtonClickCommand">
+            <summary>
+            Command is invoked when user clicks on the DropDownButton
+            (user clicked a button or hyperlink in DropDown part).
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.SplitButtonViewModel.ItemCancelCommand">
+            <summary>
+            Gets a command that is executed to cancel a dropdown action.
+            This command closes the drop down and rolls back edited values (if any).
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.SplitButtonViewModel.SelectedItem">
+            <summary>
+            Gets the selected item of the DropDown viewmodel.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.SplitButtonViewModel.IsOpen">
+            <summary>
+            Gets/sets bound property to determine whether
+            drop-down/pop-up element is open or not.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.SplitButtonViewModel.IsEnabled">
+            <summary>
+            Gets/sets Boolean value to determine whether attached dropdown view is enabled or not.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.SplitButtonViewModel.SliderValue">
+            <summary>
+            Gets/sets the current value displayed in the slider control.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.SplitButtonViewModel.Status">
+            <summary>
+            Gets the status description of this viewmodel
+            (this property is present for testing/demo/debugging purposes only
+            since it gives us the ability to give state feedback without using
+            MessageBoxes, which steals the focus and thus influence the pop-up element)
+            </summary>
+        </member>
+        <member name="T:DropDownButtonLib.ViewModels.SplitItemsButtonViewModel">
+            <summary>
+            Implements a viewmodel for a split button that can display multiple items.
+            The user experience is similar to a combobox with the difference that a
+            splitbutton allows a re-apply of the last selected item.
+            </summary>
+        </member>
+        <member name="M:DropDownButtonLib.ViewModels.SplitItemsButtonViewModel.#ctor">
+            <summary>
+            Class constructor
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.SplitItemsButtonViewModel.DropDownButtonClickCommand">
+            <summary>
+            Command is invoked when user clicks on the DropDownButton
+            (either on label part or DropDown arrow).
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.SplitItemsButtonViewModel.ItemButtonClickCommand">
+            <summary>
+            Command is invoked when user clicks on the DropDownButton
+            (user clicked a button or hyperlink in DropDown part).
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.SplitItemsButtonViewModel.DropDownItems">
+            <summary>
+            Gets the list of drives and folders for display in treeview structure control.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.SplitItemsButtonViewModel.SelectedItem">
+            <summary>
+            Gets/sets the selected (current) item of this button viewmodel.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.SplitItemsButtonViewModel.IsOpen">
+            <summary>
+            Gets/sets bound property to determine whether
+            drop-down/pop-up element is open or not.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.SplitItemsButtonViewModel.IsEnabled">
+            <summary>
+            Gets/sets Boolean value to determine whether attached dropdown view is enabled or not.
+            </summary>
+        </member>
+        <member name="P:DropDownButtonLib.ViewModels.SplitItemsButtonViewModel.Status">
+            <summary>
+            Gets the status description of this viewmodel
+            (this property is present for testing/demo/debugging purposes only
+            since it gives us the ability to give state feedback without using
+            MessageBoxes, which steals the focus and thus influence the pop-up element)
+            </summary>
+        </member>
+    </members>
+</doc>
