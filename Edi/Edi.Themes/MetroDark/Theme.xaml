@@ -79,11 +79,8 @@
         <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/TextBlock.xaml" / -->
         <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/Hyperlink.xaml" / -->
 
-        <ResourceDictionary Source="/UnitComboLib;component/Themes/DarkBrushs.xaml" />
-        <!-- ResourceDictionary Source="/Edi.Themes;component/MetroDark/EdiControls/UnitCombobox.xaml" / -->
-
         <ResourceDictionary Source="/Edi.Themes;component/MetroDark/EdiControls/EdiAvalonEdit.xaml" />
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/EdiControls/MsgBox.xaml" />
+        
         <ResourceDictionary Source="/Edi.Themes;component/MetroDark/EdiControls/PinableListView.xaml" />
 
         <ResourceDictionary Source="/Edi.Themes;component/MetroDark/EdiControls/YalvLib/YalvLib.xaml" />
