@@ -3,6 +3,11 @@
 Edi - The open source integrated development environment (IDE) based on AvalonDock and AvalonEdit
 https://edi.codeplex.com/
 
+![screenshot](https://github.com/Dirkster99/Docu/blob/master/Edi/MetroDark_DeepBlack.png)
+![screenshot](https://github.com/Dirkster99/Docu/blob/master/Edi/MetroDark_TrueBlue.png)
+![screenshot](https://github.com/Dirkster99/Docu/blob/master/Edi/MetroLight_BrightStandard.png)
+![screenshot](https://github.com/Dirkster99/Docu/blob/master/Edi/Generic.png)
+
 ## Getting Started
 
 Dowload the source, compile and run should work out of the box (you may have to enable nuget package download).
