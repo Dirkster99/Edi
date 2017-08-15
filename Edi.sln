@@ -6,8 +6,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binaries", "Binaries", "{E3
 	ProjectSection(SolutionItems) = preProject
 		02_Libs\00_bin\log4net.dll = 02_Libs\00_bin\log4net.dll
 		02_Libs\00_bin\log4net.xml = 02_Libs\00_bin\log4net.xml
-		02_Libs\00_bin\NumericUpDownLib.dll = 02_Libs\00_bin\NumericUpDownLib.dll
-		02_Libs\00_bin\NumericUpDownLib.xml = 02_Libs\00_bin\NumericUpDownLib.xml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UML Application", "UML Application", "{C7A9E1F8-38FD-4268-BFC5-473CF16471D8}"
