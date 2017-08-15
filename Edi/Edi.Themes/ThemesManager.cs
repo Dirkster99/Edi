@@ -53,6 +53,10 @@ namespace Edi.Themes
       "/FirstFloor.ModernUI;component/Assets/TreeView.xaml",
 
       "/DropDownButtonLib;component/Themes/MetroDark.xaml",  // DropDownButtonLib theming
+      "/MsgBox;component/Themes/DarkBrushes.xaml",
+      "/MsgBox;component/Themes/DarkIcons.xaml",
+      "/UnitComboLib;component/Themes/DarkBrushs.xaml",
+      "/NumericUpDownLib;component/Themes/DarkBrushs.xaml",
 
       // This is required to style the dropdown button and frame of the control
       "/Edi.Themes;component/FileListView/Combobox.xaml",
@@ -109,6 +113,10 @@ namespace Edi.Themes
       "/FirstFloor.ModernUI;component/Assets/TreeView.xaml",
 
       "/DropDownButtonLib;component/Themes/MetroLight.xaml",  // DropDownButtonLib theming
+      "/MsgBox;component/Themes/LightBrushes.xaml",
+      "/MsgBox;component/Themes/LightIcons.xaml",
+      "/UnitComboLib;component/Themes/LightBrushs.xaml",
+      "/NumericUpDownLib;component/Themes/LightBrushs.xaml",
 
       // This is required to style the dropdown button and frame of the control
       "/Edi.Themes;component/FileListView/Combobox.xaml",

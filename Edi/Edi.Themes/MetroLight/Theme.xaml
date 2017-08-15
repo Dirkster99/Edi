@@ -28,9 +28,6 @@
         <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Slider.xaml" />
         <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Textblock.xaml" />
 
-        <ResourceDictionary Source="/UnitComboLib;component/Themes/LightBrushs.xaml" />
-        <!-- ResourceDictionary Source="/Edi.Themes;component/MetroDark/EdiControls/UnitCombobox.xaml" / -->
-
         <ResourceDictionary Source="/Edi.Themes;component/MetroLight/EdiAvalonEdit.xaml" />
 
         <ResourceDictionary Source="/MiniUML.View;component/SharedResources.xaml"/>

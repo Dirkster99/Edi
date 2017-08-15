@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NumericUpDownLib</name>
+    </assembly>
+    <members>
+        <member name="T:NumericUpDownLib.NumericRepeatButtonControl">
+            <summary>
+            Class implements a repeat button custom control that supports
+            custom <seealso cref="T:System.Windows.Media.Geometry"/> data for display as an error and
+            and <seealso cref="T:System.Windows.Input.ICommand"/> binding to relay a click command
+            to a hosting control or bound viewmodel.
+            </summary>
+        </member>
+        <member name="P:NumericUpDownLib.NumericRepeatButtonControl.RepeatButtonContent">
+            <summary>
+            Gets/sets an object that is bound to the
+            ContentControl of the RepeatButton.
+            </summary>
+        </member>
+        <member name="F:NumericUpDownLib.NumericRepeatButtonControl.RepeatButtonContentProperty">
+            <summary>
+            Using a DependencyProperty as the backing store for RepeatButtonContent.
+            This enables styling and usage of flexible binding.
+            </summary>
+        </member>
+        <member name="P:NumericUpDownLib.NumericRepeatButtonControl.ClickCommand">
+            <summary>
+            Gets/sets the command that is bound and
+            invocked when the repeat button is clicked.
+            </summary>
+        </member>
+        <member name="F:NumericUpDownLib.NumericRepeatButtonControl.ClickCommandProperty">
+            <summary>
+            Implments the backing store for a DependencyProperty of the ClickCommand.
+            </summary>
+        </member>
+        <member name="T:NumericUpDownLib.NumericUpDown">
+            <summary>
+            Implements an up/down numeric integer control.
+            Source: http://msdn.microsoft.com/en-us/library/vstudio/ms771573%28v=vs.90%29.aspx
+            </summary>
+        </member>
+        <member name="F:NumericUpDownLib.NumericUpDown.ValueProperty">
+            <summary>
+            Identifies the Value dependency property.
+            </summary>
+        </member>
+        <member name="F:NumericUpDownLib.NumericUpDown.ValueChangedEvent">
+            <summary>
+            Identifies the ValueChanged routed event.
+            </summary>
+        </member>
+        <member name="F:NumericUpDownLib.NumericUpDown.MinValueChangedEvent">
+            <summary>
+            Identifies the MinValueChanged routed event.
+            </summary>
+        </member>
+        <member name="F:NumericUpDownLib.NumericUpDown.MaxValueChangedEvent">
+            <summary>
+            Identifies the MaxValueChanged routed event.
+            </summary>
+        </member>
+        <member name="M:NumericUpDownLib.NumericUpDown.#cctor">
+            <summary>
+            Static class constructor
+            </summary>
+        </member>
+        <member name="M:NumericUpDownLib.NumericUpDown.#ctor">
+            <summary>
+            Initializes a new instance of the NumericUpDownControl.
+            </summary>
+        </member>
+        <member name="E:NumericUpDownLib.NumericUpDown.ValueChanged">
+            <summary>
+            Occurs when the Value property changes.
+            </summary>
+        </member>
+        <member name="E:NumericUpDownLib.NumericUpDown.MinValueChanged">
+            <summary>
+            Occurs when the MinValue property changes.
+            </summary>
+        </member>
+        <member name="E:NumericUpDownLib.NumericUpDown.MaxValueChanged">
+            <summary>
+            Occurs when the MaxValue property changes.
+            </summary>
+        </member>
+        <member name="P:NumericUpDownLib.NumericUpDown.Value">
+            <summary>
+            Gets or sets the value assigned to the control.
+            </summary>
+        </member>
+        <member name="P:NumericUpDownLib.NumericUpDown.MinValue">
+            <summary>
+            Get/set dependency property to define the minimum legal value.
+            </summary>
+        </member>
+        <member name="P:NumericUpDownLib.NumericUpDown.MaxValue">
+            <summary>
+            Get/set dependency property to define the maximum legal value.
+            </summary>
+        </member>
+        <member name="P:NumericUpDownLib.NumericUpDown.IncreaseCommand">
+            <summary>
+            Expose the increase value command via <seealso cref="T:System.Windows.Input.RoutedCommand"/> property.
+            </summary>
+        </member>
+        <member name="P:NumericUpDownLib.NumericUpDown.DecreaseCommand">
+            <summary>
+            Expose the decrease value command via <seealso cref="T:System.Windows.Input.RoutedCommand"/> property.
+            </summary>
+        </member>
+        <member name="M:NumericUpDownLib.NumericUpDown.OnIncrease">
+            <summary>
+            Increase the displayed integer value
+            </summary>
+        </member>
+        <member name="M:NumericUpDownLib.NumericUpDown.OnDecrease">
+            <summary>
+            Decrease the displayed integer value
+            </summary>
+        </member>
+        <member name="M:NumericUpDownLib.NumericUpDown.OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs{System.Int32})">
+            <summary>
+            Raises the ValueChanged event.
+            </summary>
+            <param name="args">Arguments associated with the ValueChanged event.</param>
+        </member>
+        <member name="M:NumericUpDownLib.NumericUpDown.OnMinValueChanged(System.Windows.RoutedPropertyChangedEventArgs{System.Int32})">
+            <summary>
+            Raises the MinValueChanged event.
+            </summary>
+            <param name="args">Arguments associated with the ValueChanged event.</param>
+        </member>
+        <member name="M:NumericUpDownLib.NumericUpDown.OnMaxValueChanged(System.Windows.RoutedPropertyChangedEventArgs{System.Int32})">
+            <summary>
+            Raises the MinValueChanged event.
+            </summary>
+            <param name="args">Arguments associated with the ValueChanged event.</param>
+        </member>
+        <member name="M:NumericUpDownLib.NumericUpDown.InitializeCommands">
+            <summary>
+            Initialize up down/button commands and key gestures for up/down cursor keys
+            </summary>
+        </member>
+        <member name="M:NumericUpDownLib.NumericUpDown.OnIncreaseCommand(System.Object,System.Windows.Input.ExecutedRoutedEventArgs)">
+            <summary>
+            Execute the increase value command
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:NumericUpDownLib.NumericUpDown.OnDecreaseCommand(System.Object,System.Windows.Input.ExecutedRoutedEventArgs)">
+            <summary>
+            Execute the decrease value command
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:NumericUpDownLib.Themes.ResourceKeys">
+            <summary>
+            Resource key management class to keep track of all resources
+            that can be re-styled in applications that make use of the implemented controls.
+            </summary>
+        </member>
+        <member name="F:NumericUpDownLib.Themes.ResourceKeys.ControlAccentColorKey">
+            <summary>
+            Accent Color Key - This Color key is used to accent elements in the UI
+            (e.g.: Color of Activated Normal Window Frame, ResizeGrip, Focus or MouseOver input elements)
+            </summary>
+        </member>
+        <member name="F:NumericUpDownLib.Themes.ResourceKeys.ControlAccentBrushKey">
+            <summary>
+            Accent Brush Key - This Brush key is used to accent elements in the UI
+            (e.g.: Color of Activated Normal Window Frame, ResizeGrip, Focus or MouseOver input elements)
+            </summary>
+        </member>
+        <member name="F:NumericUpDownLib.Themes.ResourceKeys.GlyphNormalForegroundKey">
+            <summary>
+            Resource key of the controls normal glyph brush key.
+            </summary>
+        </member>
+        <member name="F:NumericUpDownLib.Themes.ResourceKeys.GlyphMouseOverForegroundKey">
+            <summary>
+            Resource key of the controls normal glyph brush key.
+            </summary>
+        </member>
+        <member name="F:NumericUpDownLib.Themes.ResourceKeys.GlyphDisabledForegroundKey">
+            <summary>
+            Resource key of the controls disabled glyph brush key.
+            </summary>
+        </member>
+        <member name="F:NumericUpDownLib.Themes.ResourceKeys.GlyphPressedBackroundKey">
+            <summary>
+            Resource key of the controls disabled glyph brush key.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -70,8 +70,8 @@
     <Reference Include="FirstFloor.ModernUI">
       <HintPath>..\..\..\02_Libs\00_bin\Mui\FirstFloor.ModernUI.dll</HintPath>
     </Reference>
-    <Reference Include="NumericUpDownLib">
-      <HintPath>..\..\..\02_Libs\00_bin\NumericUpDownLib.dll</HintPath>
+    <Reference Include="NumericUpDownLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Dirkster.NumericUpDownLib.1.0.0\lib\net4\NumericUpDownLib.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
