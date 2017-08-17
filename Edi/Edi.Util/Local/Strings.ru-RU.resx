@@ -818,15 +818,6 @@
   <data name="STR_Settings_ApplicationLanguage_TT" xml:space="preserve">
     <value>Перезапустите приложение, чтобы увидеть эффект этого параметра.</value>
   </data>
-  <data name="STR_Settings_MRU_Section_Label" xml:space="preserve">
-    <value>Большинство недавних файлов (MRU) режим</value>
-  </data>
-  <data name="STR_Settings_MRU_Pin_At_StartOption" xml:space="preserve">
-    <value>Записей ПИН в начале списка</value>
-  </data>
-  <data name="STR_Settings_MRU_Pin_At_Current_Position" xml:space="preserve">
-    <value>Избранное (не сортируются)</value>
-  </data>
   <data name="STR_Settings_Editor_Section_Label" xml:space="preserve">
     <value>Параметры текстового редактора</value>
   </data>

@@ -73,23 +73,6 @@
                                             </Grid>
                                         </GroupBox>
 
-                                        <!-- This option can be set but is not implemented, yet, so we hide it for now -->
-                                        <GroupBox Header="{x:Static cmdLabel:Strings.STR_Settings_MRU_Section_Label}" Grid.Row="1" Visibility="Collapsed" Margin="9" Padding="9">
-                                            <StackPanel>
-                                                <RadioButton IsChecked="{Binding Path=MruPinSortMode, Mode=TwoWay,
-                                                             Converter={StaticResource enumConverter},
-                                                             ConverterParameter=PinnedEntriesFirst}"
-                                                             Content="{x:Static cmdLabel:Strings.STR_Settings_MRU_Pin_At_StartOption}"
-                                                             Grid.Row="0" Margin="3" />
-
-                                                <RadioButton IsChecked="{Binding Path=MruPinSortMode, Mode=TwoWay, 
-                                                            Converter={StaticResource enumConverter},
-                                                            ConverterParameter=UnsortedFavourites}"
-                                                            Content="{x:Static cmdLabel:Strings.STR_Settings_MRU_Pin_At_Current_Position}"
-                                                            Grid.Row="1" Margin="3" />
-                                            </StackPanel>
-                                        </GroupBox>
-
                                         <GroupBox Header="{x:Static cmdLabel:Strings.STR_Settings_Editor_Section_Label}" Grid.Row="1" Margin="9" Padding="9">
                                             <Grid>
                                                 <Grid.RowDefinitions>

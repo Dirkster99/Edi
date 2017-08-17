@@ -1,21 +1,23 @@
 ﻿namespace Edi.Apps.ViewModels
 {
+    using Edi.Apps.Enums;
+    using Edi.Core;
+    using Edi.Core.Interfaces;
+    using Edi.Core.ViewModels;
+    using Edi.Core.ViewModels.Command;
+    using Edi.Documents.ViewModels.EdiDoc;
+    using Edi.Documents.ViewModels.StartPage;
+    using Edi.Themes;
+    using Microsoft.Practices.ServiceLocation;
+    using MiniUML.Framework;
+    using MRULib.MRU.Interfaces;
+    using MsgBox;
     using System;
     using System.Diagnostics;
     using System.Threading;
     using System.Windows;
     using System.Windows.Input;
     using System.Windows.Threading;
-    using Edi.Core;
-    using Edi.Core.Interfaces;
-    using Edi.Core.ViewModels;
-    using Edi.Core.ViewModels.Command;
-    using Edi.Apps.Enums;
-    using Edi.Documents.ViewModels.EdiDoc;
-    using Edi.Documents.ViewModels.StartPage;
-    using MiniUML.Framework;
-    using MsgBox;
-    using Edi.Themes;
 
     public partial class ApplicationViewModel
     {
@@ -302,7 +304,8 @@
                     {
                         if (this.OnSave(this.ActiveDocument, true))
                         {
-                            this.mSettingsManager.SessionData.MruList.AddMRUEntry(this.ActiveDocument.FilePath);
+                            var mruList = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
+                            mruList.UpdateEntry(this.ActiveDocument.FilePath);
                             this.mSettingsManager.SessionData.LastActiveFile = this.ActiveDocument.FilePath;
                         }
                     }

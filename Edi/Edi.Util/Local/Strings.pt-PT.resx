@@ -818,15 +818,6 @@ Você quer remover esse arquivo na lista de arquivos recentes?</value>
   <data name="STR_Settings_ApplicationLanguage_TT" xml:space="preserve">
     <value>Reinicie o aplicativo para ver o efeito dessa configuração.</value>
   </data>
-  <data name="STR_Settings_MRU_Section_Label" xml:space="preserve">
-    <value>Modo a maioria de arquivos recentes (MRU)</value>
-  </data>
-  <data name="STR_Settings_MRU_Pin_At_StartOption" xml:space="preserve">
-    <value>Entradas de PIN no início da lista</value>
-  </data>
-  <data name="STR_Settings_MRU_Pin_At_Current_Position" xml:space="preserve">
-    <value>Favoritos (não classificados)</value>
-  </data>
   <data name="STR_Settings_Editor_Section_Label" xml:space="preserve">
     <value>Opções do Editor de texto</value>
   </data>

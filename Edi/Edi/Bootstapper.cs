@@ -19,6 +19,8 @@ namespace Edi
     using Edi.Settings.ProgramSettings;
     using SimpleControls.Local;
     using Edi.Themes.Interfaces;
+    using MRULib.MRU.Interfaces;
+    using MRULib.MRU.ViewModels;
 
     public class Bootstapper : MefBootstrapper
     {
@@ -32,6 +34,8 @@ namespace Edi
         private readonly App mApp = null;
 
         private readonly MsgBox.IMessageBoxService _MsgBox = null;
+        private readonly IMRUListViewModel _MruVM = null;
+
         private readonly Options mOptions = null;
         private readonly IThemesManager mThemes = null;
         private readonly ISettingsManager mProgramSettingsManager = null;
@@ -39,9 +43,9 @@ namespace Edi
 
         #region constructors
         public Bootstapper(App app,
-                            StartupEventArgs eventArgs,
-                            Options programSettings,
-                            IThemesManager themesManager)
+                           StartupEventArgs eventArgs,
+                           Options programSettings,
+                           IThemesManager themesManager)
             : this()
         {
             this.mThemes = themesManager;
@@ -55,6 +59,7 @@ namespace Edi
         protected Bootstapper()
         {
             _MsgBox = new MessageBoxService();
+            _MruVM = new MRUListViewModel();
         }
         #endregion constructors
 
@@ -229,6 +234,8 @@ namespace Edi
             // use the following statement to resolve queries towards the IMessageBoxService
             // var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
             this.Container.ComposeExportedValue<IMessageBoxService>(_MsgBox);
+
+            this.Container.ComposeExportedValue<IMRUListViewModel>(_MruVM);
 
             // Because we created the SettingsManager and it needs to be used immediately
             // we compose it to satisfy any imports it has.

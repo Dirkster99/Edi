@@ -818,15 +818,6 @@ Vuoi rimuovere questo file dall'elenco dei file recenti?</value>
   <data name="STR_Settings_ApplicationLanguage_TT" xml:space="preserve">
     <value>Riavviare l'applicazione per vedere l'effetto di questa impostazione.</value>
   </data>
-  <data name="STR_Settings_MRU_Section_Label" xml:space="preserve">
-    <value>La maggior parte delle modalità di file recenti (MRU)</value>
-  </data>
-  <data name="STR_Settings_MRU_Pin_At_StartOption" xml:space="preserve">
-    <value>Immissioni di pin all'inizio della lista</value>
-  </data>
-  <data name="STR_Settings_MRU_Pin_At_Current_Position" xml:space="preserve">
-    <value>Preferiti (non ordinati)</value>
-  </data>
   <data name="STR_Settings_Editor_Section_Label" xml:space="preserve">
     <value>Opzioni dell'Editor di testo</value>
   </data>

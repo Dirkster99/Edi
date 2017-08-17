@@ -64,16 +64,16 @@
                      />
         </MenuItem -->
 
-                <MenuItem ItemsSource="{Binding RecentFiles.MruList.ListOfMRUEntries}"
+                <MenuItem ItemsSource="{Binding RecentFiles.MruList.Entries}"
                   Header="{x:Static cmdLabel:Strings.STR_CmdName_RecentFiles}"
-                  Visibility="{Binding Path=RecentFiles.MruList.ListOfMRUEntries, Mode=OneWay, Converter={EdiViewsConv:ZeroToVisibilityConverter}}">
+                  Visibility="{Binding Path=RecentFiles.MruList.Entries, Mode=OneWay, Converter={EdiViewsConv:ZeroToVisibilityConverter}}">
                     <MenuItem.ItemContainerStyle>
                         <Style TargetType="MenuItem">
-                            <Setter Property="Header" Value="{Binding DisplayPathFileName, Mode=OneWay}" />
+                            <Setter Property="Header" Value="{Binding Value.DisplayPathFileName, Mode=OneWay}" />
                             <Setter Property="Command" Value="cmd:AppCommand.LoadFile" />
                             <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
                             <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" />
-                            <Setter Property="CommandParameter" Value="{Binding PathFileName, Mode=OneWay}" />
+                            <Setter Property="CommandParameter" Value="{Binding Value.PathFileName, Mode=OneWay}" />
                         </Style>
                     </MenuItem.ItemContainerStyle>
                 </MenuItem>

@@ -1,0 +1,322 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:MRULib.Controls"
+    xmlns:reskeys="clr-namespace:MRULib.Themes"
+    >
+
+    <Canvas x:Key="NoCheckMark" Width="100" Height="100" Opacity="0" Visibility="Visible">
+        <!-- Needle Pin in unpined mode (Opacity is set to different value on MouseOver) -->
+        <Path VerticalAlignment="Center" Fill="{DynamicResource {x:Static reskeys:ResourceKeys.Pin_Foreground}}">
+            <Path.Data>
+                <PathGeometry>
+                    <PathGeometry.Figures>
+                        <PathFigureCollection>
+                            <PathFigure IsClosed="True" StartPoint="0,0">
+                                <PathFigure.Segments>
+                                    <PathSegmentCollection>
+                                        <LineSegment Point="75,65" />
+                                        <LineSegment Point="75,85" />
+                                    </PathSegmentCollection>
+                                </PathFigure.Segments>
+                            </PathFigure>
+                        </PathFigureCollection>
+                    </PathGeometry.Figures>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+
+        <Line X1="0" Y1="0" X2="75" Y2="65" Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.Pin_Foreground}}" />
+        <Line X1="0" Y1="0" X2="75" Y2="85" Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.Pin_Foreground}}" />
+
+        <!-- Ellipse Canvas.Left="50" Canvas.Top="50" Width="50" Height="50" Fill="Blue" />
+        <Ellipse Canvas.Left="50" Canvas.Top="50" Width="50" Height="50">
+            <Ellipse.Fill>
+                <RadialGradientBrush GradientOrigin="0.15,0">
+                    - Source: http://www.codeproject.com/Articles/32257/A-Style-for-Round-Glassy-WPF-Buttons -
+                    <RadialGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="0.45" CenterX="50" CenterY="20"/>
+                            <ScaleTransform CenterX="0.5" 
+		                                                            CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                            <TranslateTransform X="0.02" Y="0.3"/>
+                        </TransformGroup>
+                    </RadialGradientBrush.RelativeTransform>
+                    <GradientStop Offset="1" Color="#00000000"/>
+                    <GradientStop Offset="0.4" Color="#FFFFFFFF"/>
+                </RadialGradientBrush>
+            </Ellipse.Fill>
+        </Ellipse -->
+    </Canvas>
+
+    <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        Checkbox style for pin visual
+        Original source of animation (is replaced with own XAML image)
+        http://stackoverflow.com/questions/7459642/how-do-i-create-a-wpf-checkbox-control-template-in-xaml-with-the-following-requi
+      -->
+    <Style TargetType="{x:Type local:CheckPin}">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <!-- Setter Property="OverridesDefaultStyle" Value="true" -->
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="LayoutTransform">
+            <Setter.Value>
+                <ScaleTransform CenterX="50"  CenterY="50" ScaleX=".15" ScaleY=".13"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:CheckPin}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <BulletDecorator Background="Transparent">
+                            <BulletDecorator.Bullet>
+                                <Border BorderThickness="{TemplateBinding Padding}"
+                                        BorderBrush="Transparent">
+                                    <Grid>
+                                        <Canvas Width="100" Height="100" x:Name="NoCheckMark" Opacity="0" Visibility="Visible">
+                                            <Canvas.LayoutTransform>
+                                                <RotateTransform Angle="90" />
+                                            </Canvas.LayoutTransform>
+
+                                            <Canvas Width="300" Height="300" Canvas.Left="0" Canvas.Top="0">
+                                                <Canvas Canvas.Top="15">
+                                                    <!-- Needle -->
+                                                    <Path VerticalAlignment="Center" Fill="{DynamicResource {x:Static reskeys:ResourceKeys.Pin_Foreground}}">
+                                                        <Path.Data>
+                                                            <PathGeometry>
+                                                                <PathGeometry.Figures>
+                                                                    <PathFigureCollection>
+                                                                        <PathFigure IsClosed="True" StartPoint="0,0">
+                                                                            <PathFigure.Segments>
+                                                                                <PathSegmentCollection>
+                                                                                    <LineSegment Point="45,50" />
+                                                                                    <LineSegment Point="45,85" />
+                                                                                    <LineSegment Point="55,95" />
+                                                                                    <LineSegment Point="55,50" />
+                                                                                    <LineSegment Point="45,50" />
+                                                                                </PathSegmentCollection>
+                                                                            </PathFigure.Segments>
+                                                                        </PathFigure>
+                                                                    </PathFigureCollection>
+                                                                </PathGeometry.Figures>
+                                                            </PathGeometry>
+                                                        </Path.Data>
+                                                    </Path>
+
+                                                    <!-- Line X1="45" Y1="50" X2="45" Y2="85" Stroke="White" Opacity="0.5" StrokeThickness="3" />
+                                                <Line X1="45" Y1="85" X2="55" Y2="95" Stroke="White" Opacity="0.5" StrokeThickness="3" />
+                                                <Line X2="55" Y2="95" X1="55" Y1="50" Stroke="White" Opacity="0.5" StrokeThickness="3" / -->
+                                                    <!-- Line X1="55" Y1="50" X2="45" Y2="50" Stroke="White" Opacity="0.5" StrokeThickness="3" / -->
+                                                    <!-- Needle -->
+
+                                                    <Path VerticalAlignment="Center" Fill="{DynamicResource {x:Static reskeys:ResourceKeys.Pin_Foreground}}">
+                                                        <Path.Data>
+                                                            <PathGeometry>
+                                                                <PathGeometry.Figures>
+                                                                    <PathFigureCollection>
+                                                                        <PathFigure IsClosed="True" StartPoint="0,0">
+                                                                            <PathFigure.Segments>
+                                                                                <PathSegmentCollection>
+                                                                                    <LineSegment Point=" 5,50" />
+                                                                                    <LineSegment Point="95,50" />
+                                                                                    <LineSegment Point="85,40" />
+                                                                                    <LineSegment Point="15,40" />
+                                                                                    <LineSegment Point=" 5,50" />
+                                                                                </PathSegmentCollection>
+                                                                            </PathFigure.Segments>
+                                                                        </PathFigure>
+                                                                    </PathFigureCollection>
+                                                                </PathGeometry.Figures>
+                                                            </PathGeometry>
+                                                        </Path.Data>
+                                                    </Path>
+
+                                                    <!-- Line X1="5"  Y1="50" X2="95" Y2="50" Stroke="White" Opacity="0.5" StrokeThickness="3" />
+                                                <Line X1="95" Y1="50" X2="85" Y2="40" Stroke="White" Opacity="0.5" StrokeThickness="3" />
+                                                <Line X2="85" Y2="40" X1="15" Y1="40" Stroke="White" Opacity="0.5" StrokeThickness="3" />
+                                                <Line X1="15" Y1="40" X2="5"  Y2="50" Stroke="White" Opacity="0.5" StrokeThickness="3" / -->
+                                                </Canvas>
+
+                                                <!-- Draw the head of the pin -->
+                                                <Path VerticalAlignment="Center" Fill="{DynamicResource {x:Static reskeys:ResourceKeys.Pin_Foreground}}">
+                                                    <Path.Data>
+                                                        <PathGeometry>
+                                                            <PathGeometry.Figures>
+                                                                <PathFigureCollection>
+                                                                    <PathFigure IsClosed="True" StartPoint="0,0">
+                                                                        <PathFigure.Segments>
+                                                                            <PathSegmentCollection>
+                                                                                <LineSegment Point="25,55" />
+                                                                                <LineSegment Point="75,55" />
+                                                                                <LineSegment Point="75,10" />
+                                                                                <LineSegment Point="25,10" />
+                                                                                <LineSegment Point="25,55" />
+                                                                            </PathSegmentCollection>
+                                                                        </PathFigure.Segments>
+                                                                    </PathFigure>
+                                                                </PathFigureCollection>
+                                                            </PathGeometry.Figures>
+                                                        </PathGeometry>
+                                                    </Path.Data>
+                                                </Path>
+
+                                                <!-- Line X1="25" Y1="55" X2="75" Y2="55" Stroke="Yellow" Opacity="0.5" StrokeThickness="3" / -->
+                                                <!-- Line X1="75" Y1="55" X2="75" Y2="10" Stroke="White" Opacity="0.5" StrokeThickness="3" />
+                                            <Line X2="75" Y2="10" X1="25" Y1="10" Stroke="White" Opacity="0.5" StrokeThickness="3" />
+                                            <Line X1="25" Y1="10" X2="25" Y2="55" Stroke="White" Opacity="0.5" StrokeThickness="3" / -->
+                                            </Canvas>
+                                        </Canvas>
+
+                                        <Canvas Width="100" Height="100" x:Name="CheckMark">
+                                            <!-- Needle Pin in pined mode XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+                                            <!-- Canvas.LayoutTransform>
+  		                                      <ScaleTransform CenterX="50" CenterY="50" ScaleX=".15" ScaleY=".15" />
+  	                                          </Canvas.LayoutTransform -->
+                                            <!-- Border BorderBrush="Black" BorderThickness="1" Width ="100" Height="100" / -->
+
+                                            <Canvas Width="300" Height="300" Canvas.Left="0" Canvas.Top="0">
+                                                <Canvas Canvas.Top="15">
+                                                    <!-- Needle -->
+                                                    <Path VerticalAlignment="Center" Fill="{DynamicResource {x:Static reskeys:ResourceKeys.Pin_Foreground}}">
+                                                        <Path.Data>
+                                                            <PathGeometry>
+                                                                <PathGeometry.Figures>
+                                                                    <PathFigureCollection>
+                                                                        <PathFigure IsClosed="True" StartPoint="0,0">
+                                                                            <PathFigure.Segments>
+                                                                                <PathSegmentCollection>
+                                                                                    <LineSegment Point="45,50" />
+                                                                                    <LineSegment Point="45,85" />
+                                                                                    <LineSegment Point="55,95" />
+                                                                                    <LineSegment Point="55,50" />
+                                                                                    <LineSegment Point="45,50" />
+                                                                                </PathSegmentCollection>
+                                                                            </PathFigure.Segments>
+                                                                        </PathFigure>
+                                                                    </PathFigureCollection>
+                                                                </PathGeometry.Figures>
+                                                            </PathGeometry>
+                                                        </Path.Data>
+                                                    </Path>
+
+                                                    <Line X1="45" Y1="50" X2="45" Y2="85" Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.Pin_ForegroundBorder}}" Opacity="0.5" StrokeThickness="3" />
+                                                    <Line X1="45" Y1="85" X2="55" Y2="95" Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.Pin_ForegroundBorder}}" Opacity="0.5" StrokeThickness="3" />
+                                                    <Line X2="55" Y2="95" X1="55" Y1="50" Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.Pin_ForegroundBorder}}" Opacity="0.5" StrokeThickness="3" />
+                                                    <!-- Line X1="55" Y1="50" X2="45" Y2="50" Stroke="White" Opacity="0.5" StrokeThickness="3" / -->
+                                                    <!-- Needle -->
+
+                                                    <Path VerticalAlignment="Center" Fill="{DynamicResource {x:Static reskeys:ResourceKeys.Pin_Foreground}}">
+                                                        <Path.Data>
+                                                            <PathGeometry>
+                                                                <PathGeometry.Figures>
+                                                                    <PathFigureCollection>
+                                                                        <PathFigure IsClosed="True" StartPoint="0,0">
+                                                                            <PathFigure.Segments>
+                                                                                <PathSegmentCollection>
+                                                                                    <LineSegment Point=" 5,50" />
+                                                                                    <LineSegment Point="95,50" />
+                                                                                    <LineSegment Point="85,40" />
+                                                                                    <LineSegment Point="15,40" />
+                                                                                    <LineSegment Point=" 5,50" />
+                                                                                </PathSegmentCollection>
+                                                                            </PathFigure.Segments>
+                                                                        </PathFigure>
+                                                                    </PathFigureCollection>
+                                                                </PathGeometry.Figures>
+                                                            </PathGeometry>
+                                                        </Path.Data>
+                                                    </Path>
+
+                                                    <Line X1="5"  Y1="50" X2="95" Y2="50" Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.Pin_ForegroundBorder}}" Opacity="0.5" StrokeThickness="3" />
+                                                    <Line X1="95" Y1="50" X2="85" Y2="40" Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.Pin_ForegroundBorder}}" Opacity="0.5" StrokeThickness="3" />
+                                                    <Line X2="85" Y2="40" X1="15" Y1="40" Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.Pin_ForegroundBorder}}" Opacity="0.5" StrokeThickness="3" />
+                                                    <Line X1="15" Y1="40" X2="5"  Y2="50" Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.Pin_ForegroundBorder}}" Opacity="0.5" StrokeThickness="3" />
+                                                </Canvas>
+
+                                                <Path VerticalAlignment="Center" Fill="{DynamicResource {x:Static reskeys:ResourceKeys.Pin_Foreground}}">
+                                                    <Path.Data>
+                                                        <PathGeometry>
+                                                            <PathGeometry.Figures>
+                                                                <PathFigureCollection>
+                                                                    <PathFigure IsClosed="True" StartPoint="0,0">
+                                                                        <PathFigure.Segments>
+                                                                            <PathSegmentCollection>
+                                                                                <LineSegment Point="25,55" />
+                                                                                <LineSegment Point="75,55" />
+                                                                                <LineSegment Point="75,10" />
+                                                                                <LineSegment Point="25,10" />
+                                                                                <LineSegment Point="25,55" />
+                                                                            </PathSegmentCollection>
+                                                                        </PathFigure.Segments>
+                                                                    </PathFigure>
+                                                                </PathFigureCollection>
+                                                            </PathGeometry.Figures>
+                                                        </PathGeometry>
+                                                    </Path.Data>
+                                                </Path>
+
+                                                <!-- Line X1="25" Y1="55" X2="75" Y2="55" Stroke="Yellow" Opacity="0.5" StrokeThickness="3" / -->
+                                                <Line X1="75" Y1="55" X2="75" Y2="10" Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.Pin_ForegroundBorder}}" Opacity="0.5" StrokeThickness="3" />
+                                                <Line X2="75" Y2="10" X1="25" Y1="10" Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.Pin_ForegroundBorder}}" Opacity="0.5" StrokeThickness="3" />
+                                                <Line X1="25" Y1="10" X2="25" Y2="55" Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.Pin_ForegroundBorder}}" Opacity="0.5" StrokeThickness="3" />
+                                            </Canvas>
+                                        </Canvas>
+                                    </Grid>
+                                </Border>
+                            </BulletDecorator.Bullet>
+                        </BulletDecorator>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOverListViewItem" Value="True"/>
+                                <Condition Property="IsChecked" Value="False" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter TargetName="NoCheckMark" Property="Opacity" Value="{DynamicResource {x:Static reskeys:ResourceKeys.Pin_NoCheckMarkOpacitiy}}" />
+                            <!--MultiTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                         Storyboard.TargetName="NoCheckMark"
+                                                         To="{DynamicResource {x:Static reskeys:ResourceKeys.Pin_NoCheckMarkOpacitiy}}"
+                                                         Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </>
+                            <MultiTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="NoCheckMark" To="0" Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.ExitActions -->
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOverListViewItem" Value="False"/>
+                                <Condition Property="IsChecked" Value="False" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter TargetName="NoCheckMark" Property="Opacity" Value="0" />
+                        </MultiTrigger>
+
+                        <Trigger Property="IsChecked" Value="True">
+                            <!-- Setter TargetName="CheckBorder" Property="Opacity" Value="1"/ -->
+                            <Setter TargetName="CheckMark" Property="Opacity" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="False">
+                            <!-- Setter TargetName="CheckBorder" Property="Opacity" Value="0"/ -->
+                            <Setter TargetName="CheckMark" Property="Opacity" Value="0"/>
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

@@ -801,15 +801,6 @@
   <data name="STR_Settings_ApplicationLanguage_TT" xml:space="preserve">
     <value>重新启动应用程序以查看此设置的效果。</value>
   </data>
-  <data name="STR_Settings_MRU_Section_Label" xml:space="preserve">
-    <value>大多数最近文件 (MRU) 模式</value>
-  </data>
-  <data name="STR_Settings_MRU_Pin_At_StartOption" xml:space="preserve">
-    <value>Pin 条目在列表的开头</value>
-  </data>
-  <data name="STR_Settings_MRU_Pin_At_Current_Position" xml:space="preserve">
-    <value>收藏 (不排序)</value>
-  </data>
   <data name="STR_Settings_Editor_Section_Label" xml:space="preserve">
     <value>文本编辑器选项</value>
   </data>

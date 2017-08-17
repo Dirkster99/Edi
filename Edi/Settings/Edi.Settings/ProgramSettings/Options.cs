@@ -8,7 +8,6 @@
     using ICSharpCode.AvalonEdit;
     using ICSharpCode.AvalonEdit.Highlighting.Themes;
     using Edi.Settings.Interfaces;
-    using SimpleControls.MRU.ViewModel;
     using Edi.Themes;
     using Edi.Themes.Interfaces;
     using UnitComboLib.Models.Unit;
@@ -48,7 +47,6 @@
 
         private string mCurrentTheme;
 
-        private MRUSortMethod mMRU_SortMethod;
         private string mLanguageSelected;
         private bool mIsDirty = false;
 
@@ -85,7 +83,6 @@
             this.mReloadOpenFilesOnAppStart = true;
             this.mRunSingleInstance = true;
             this.mCurrentTheme = ThemesManager.DefaultThemeName;
-            this.mMRU_SortMethod = MRUSortMethod.PinnedEntriesFirst;
             this.mLanguageSelected = Options.DefaultLocal;
 
             this.HighlightOnFileNew = true;
@@ -117,7 +114,6 @@
             this.mReloadOpenFilesOnAppStart = copyThis.mReloadOpenFilesOnAppStart;
             this.mRunSingleInstance = copyThis.mRunSingleInstance;
             this.mCurrentTheme = copyThis.mCurrentTheme;
-            this.mMRU_SortMethod = copyThis.mMRU_SortMethod;
             this.mLanguageSelected = copyThis.mLanguageSelected;
 
             this.mIsDirty = copyThis.mIsDirty;
@@ -251,27 +247,6 @@
                 if (this.mCurrentTheme != value)
                 {
                     this.mCurrentTheme = value;
-                    this.IsDirty = true;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Get/set the method for sorting MRU entries in the MRU list.
-        /// </summary>
-        [XmlElement("MRU_SortMethod")]
-        public MRUSortMethod MRU_SortMethod
-        {
-            get
-            {
-                return this.mMRU_SortMethod;
-            }
-
-            set
-            {
-                if (this.mMRU_SortMethod != value)
-                {
-                    this.mMRU_SortMethod = value;
                     this.IsDirty = true;
                 }
             }

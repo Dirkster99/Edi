@@ -4,7 +4,6 @@
 	using FileSystemModels.Models;
 	using ICSharpCode.AvalonEdit;
 	using Edi.Settings.ProgramSettings;
-	using SimpleControls.MRU.ViewModel;
 
 	public interface IOptions
 	{
@@ -49,12 +48,6 @@
 		/// </summary>
 		[XmlElement("CurrentTheme")]
 		string CurrentTheme { get; set; }
-
-		/// <summary>
-		/// Get/set the method for sorting MRU entries in the MRU list.
-		/// </summary>
-		[XmlElement("MRU_SortMethod")]
-		MRUSortMethod MRU_SortMethod { get; set; }
 
 		[XmlElement("LanguageSelected")]
 		string LanguageSelected { get; set; }

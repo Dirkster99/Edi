@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="MRULib.Controls.PathTrimmingFileHyperlink"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:hyperl="clr-namespace:MRULib.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+
+             xmlns:ellipsiedTxtBlock="clr-namespace:MRULib.Controls.PathTrimingTextBlock"
+             xmlns:reskeys="clr-namespace:MRULib.Themes"
+             >
+<!--
+    !!! NOT Using a Grid here because the PathTrimmingTextBlock looks for a parent Grid
+    !!! to compute its correct size. So, the complete control should be placed inside a Grid
+    !!! to make sure measuring works as expected.
+-->
+    <!--UserControl.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Copy Url to Clipboard"
+                      Command="{x:Static hyperl:PathTrimmingFileHyperlink.CopyUri}"
+                      CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"/>
+
+                <MenuItem Header="Open with Windows Application..."
+                      Command="{x:Static hyperl:PathTrimmingFileHyperlink.NavigateToUri}"
+                      CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"/>
+
+                <MenuItem Header="Open containing folder"
+                          Command="{x:Static hyperl:PathTrimmingFileHyperlink.OpenContainingFolder}"
+                          CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"/>
+            </ContextMenu>
+        </UserControl.ContextMenu-->
+        <!--
+        !!! NOT Using a Grid here because the PathTrimmingTextBlock looks for a parent Grid
+        !!! to compute its correct size. So, the complete control should be placed inside a Grid.
+        -->
+        <TextBlock>
+            <TextBlock.InputBindings>
+                <KeyBinding Key="C" Modifiers="Ctrl"
+                            Command="{x:Static hyperl:PathTrimmingFileHyperlink.CopyUri}"
+                            CommandParameter="{Binding ElementName=PART_Hyperlink,Path=NavigateUri}"/>
+            </TextBlock.InputBindings>
+            <!--
+                Relay NavigateUri dependency property to outside of PathTrimmingFileHyperlink Control.
+                Use this dp if you can offer a Uri compliant string that represents the target destination.
+                "file:///c:\\" or "https://mysite.com"
+                
+                !!! A standard string object "c:\\" is not suitable for binding to NavigateUri !!!
+            
+                Use Command Binding for custom actions (eg.: open file in current application)
+                when Hyplerink is clicked as this will overwrite the NavigateUri link.
+            
+                The Command and CommandParameter bindings are also relayed via additional DPs on this Control.
+            -->
+            <Hyperlink Name="PART_Hyperlink"
+                       NavigateUri="{Binding Path=NavigateUri, RelativeSource={RelativeSource FindAncestor, AncestorType=hyperl:PathTrimmingFileHyperlink, AncestorLevel=1}}"
+                       Command="{Binding Path=NavigateUriCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=hyperl:PathTrimmingFileHyperlink, AncestorLevel=1}}"
+                       CommandParameter="{Binding Path=NavigateUriCommandParameter, RelativeSource={RelativeSource FindAncestor, AncestorType=hyperl:PathTrimmingFileHyperlink, AncestorLevel=1}}"
+                       TextDecorations="{Binding Path=TextDecorations, RelativeSource={RelativeSource FindAncestor, AncestorType=hyperl:PathTrimmingFileHyperlink, AncestorLevel=1}}"
+                      >
+                <ellipsiedTxtBlock:PathTrimmingTextBlock
+                    Path="{Binding Path=Text, RelativeSource={RelativeSource FindAncestor, AncestorType=hyperl:PathTrimmingFileHyperlink, AncestorLevel=1}}"
+                    Foreground="{DynamicResource {x:Static reskeys:ResourceKeys.Hyperlink_Foreground}}"
+                    />
+              <!-- TextBlock Text="{Binding Path=Text, RelativeSource={RelativeSource FindAncestor, AncestorType=hyperl:PathTrimmingFileHyperlink, AncestorLevel=1}}" / -->
+            </Hyperlink>
+          </TextBlock>
+</UserControl>
