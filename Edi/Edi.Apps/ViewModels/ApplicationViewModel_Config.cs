@@ -9,6 +9,9 @@
     using Edi.Settings.ProgramSettings;
     using Edi.Settings.UserProfile;
     using Edi.Themes.Interfaces;
+    using Microsoft.Practices.ServiceLocation;
+    using MRULib.MRU.Interfaces;
+    using MRULib.MRU.Models.Persist;
 
     public partial class ApplicationViewModel
     {
@@ -37,6 +40,10 @@
                     this.mSettingsManager.SaveOptions(this.mAppCore.DirFileAppSettingsData, this.mSettingsManager.SettingData);
                 }
 
+                // Convert viewmodel data into model for persistance layer...
+                var mruVM = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
+                MRUEntrySerializer.ConvertToModel(mruVM, this.mSettingsManager.SessionData.MruList);
+
                 this.mSettingsManager.SaveSessionData(this.mAppCore.DirFileAppSessionData, this.mSettingsManager.SessionData);
             }
             catch (Exception exp)
@@ -60,6 +67,10 @@
             settings.LoadSessionData(this.mAppCore.DirFileAppSessionData);
 
             settings.CheckSettingsOnLoad(SystemParameters.VirtualScreenLeft, SystemParameters.VirtualScreenTop);
+
+            // Convert Session model into viewmodel instance
+            var mruVM = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
+            MRUEntrySerializer.ConvertToViewModel(settings.SessionData.MruList, mruVM);
 
             // Initialize skinning engine with this current skin
             // standard skins defined in class enum

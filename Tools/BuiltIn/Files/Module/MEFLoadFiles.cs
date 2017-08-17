@@ -62,7 +62,7 @@
 		{
 			this.RegisterDataTemplates(this.mAvLayout.ViewProperties.SelectPanesTemplate);
 
-			this.mToolRegistry.RegisterTool(new RecentFilesViewModel(this.mSettingsManager));
+			this.mToolRegistry.RegisterTool(new RecentFilesViewModel());
 
 			this.mToolRegistry.RegisterTool(new FileStatsViewModel());
 			RegisterFileExplorerViewModel();

@@ -2227,33 +2227,6 @@ namespace Edi.Util.Local {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Favourites (not sorted).
-        /// </summary>
-        public static string STR_Settings_MRU_Pin_At_Current_Position {
-            get {
-                return ResourceManager.GetString("STR_Settings_MRU_Pin_At_Current_Position", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Pin entries at the beginning of the list.
-        /// </summary>
-        public static string STR_Settings_MRU_Pin_At_StartOption {
-            get {
-                return ResourceManager.GetString("STR_Settings_MRU_Pin_At_StartOption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Most Recent Files (MRU) mode.
-        /// </summary>
-        public static string STR_Settings_MRU_Section_Label {
-            get {
-                return ResourceManager.GetString("STR_Settings_MRU_Section_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Restore last user session when application starts.
         /// </summary>
         public static string STR_Settings_RestoreUserSession {

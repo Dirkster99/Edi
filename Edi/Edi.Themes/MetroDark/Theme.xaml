@@ -1,12 +1,5 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    
-	  xmlns:AvalonEdit="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit"
-    xmlns:editing="clr-namespace:ICSharpCode.AvalonEdit.Editing;assembly=ICSharpCode.AvalonEdit"
-    
-    xmlns:pinlvw="clr-namespace:SimpleControls.MRU.View;assembly=SimpleControls"
-    xmlns:hyperl="clr-namespace:SimpleControls.Hyperlink;assembly=SimpleControls"
     >
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Edi.Themes;component/IconsDark.xaml" />
@@ -50,7 +43,7 @@
         <ResourceDictionary Source="/Edi.Themes;component/MetroDark/EdiControls/DocumentViewer.xaml" />
 
         <!-- This is required to style the dropdown button and frame of the control
-    ResourceDictionary Source="/Edi.Themes;component/FileListView/Combobox.xaml" /  -->
+            ResourceDictionary Source="/Edi.Themes;component/FileListView/Combobox.xaml" /  -->
 
         <!-- Use dark brush definitions -->
         <ResourceDictionary Source="/MsgBox;component/Themes/DarkBrushes.xaml" />
@@ -80,18 +73,15 @@
         <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/Hyperlink.xaml" / -->
 
         <ResourceDictionary Source="/Edi.Themes;component/MetroDark/EdiControls/EdiAvalonEdit.xaml" />
-        
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/EdiControls/PinableListView.xaml" />
 
         <ResourceDictionary Source="/Edi.Themes;component/MetroDark/EdiControls/YalvLib/YalvLib.xaml" />
 
+        <ResourceDictionary Source="/UnitComboLib;component/Themes/DarkBrushs.xaml" />
+        <ResourceDictionary Source="/MRULib;component/Themes/DarkBrushes.xaml" />
+        
         <ResourceDictionary Source="/MiniUML.View;component/SharedResources.xaml"/>
 
         <!-- ResourceDictionary Source="/AvalonDock.Themes.VS2010;component/Theme.xaml" / -->
     </ResourceDictionary.MergedDictionaries>
-
-    <Style x:Key="FileHyperlinkDefault"
-         TargetType="{x:Type hyperl:FileHyperlink}"
-         BasedOn="{StaticResource {x:Type hyperl:FileHyperlink}}" />
 
 </ResourceDictionary>

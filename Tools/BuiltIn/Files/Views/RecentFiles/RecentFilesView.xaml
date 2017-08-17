@@ -4,10 +4,7 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   
   xmlns:cmd="clr-namespace:Edi.Core;assembly=Edi.Core"
-  xmlns:pinlvw="clr-namespace:SimpleControls.MRU.View;assembly=SimpleControls"        
-  xmlns:hyperl="clr-namespace:SimpleControls.Hyperlink;assembly=SimpleControls"
   
-  xmlns:ellipsiedTxtBlock="clr-namespace:SimpleControls.PathTrimmingTextBlock;assembly=SimpleControls"
   xmlns:cmdLabel="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
   
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -15,8 +12,172 @@
   mc:Ignorable="d" 
   d:DesignHeight="300" d:DesignWidth="300">
 
-  <Grid>
     <Grid Background="{DynamicResource ToolViewBackground}">
+
+        <Grid xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+              xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
+              xmlns:ctrl="clr-namespace:MRULib.Controls;assembly=MRULib"
+          >
+            <Grid.Resources>
+                <CollectionViewSource Source="{Binding MruList.Entries}" x:Key="collViewEntries"
+                                      IsLiveGroupingRequested="True">
+                    <CollectionViewSource.SortDescriptions>
+                        <!--This will sort groups-->
+                        <scm:SortDescription PropertyName="Value.GroupItem.Group" Direction="Ascending" />
+
+                        <!--This will sort items-->
+                        <scm:SortDescription PropertyName="Value.LastUpdate" Direction="Descending"/>
+                    </CollectionViewSource.SortDescriptions>
+                    <CollectionViewSource.GroupDescriptions>
+                        <dat:PropertyGroupDescription PropertyName="Value.GroupItem.Group" />
+                    </CollectionViewSource.GroupDescriptions>
+                </CollectionViewSource>
+                <!-- Use a proxy to bind items to root properties of this collection -->
+                <ctrl:BindingProxy  x:Key="DataContextProxy"  Data="{Binding MruList}" />
+
+                <ctrl:BindingProxy  x:Key="AppDataContextProxy"  Data="{Binding}" />
+            </Grid.Resources>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+            </Grid>
+
+            <ListView Grid.Row="0"
+                      ItemsSource="{Binding Source={StaticResource collViewEntries}}"
+                      SelectionMode="Single"
+                      Name="list"
+                      xmlns:ellipsiedTxtBlock="clr-namespace:MRULib.Controls.PathTrimingTextBlock;assembly=MRULib"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      >
+                <!-- Use this for simplified testing with dark theme
+                  Background="Black"
+                  Foreground="White"
+            -->
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Focusable" Value="False"/>
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <!-- ColumnDefinition Width="Auto"/ -->
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.Column="0" Name="TextBlockGridWidth" Margin="3,0"
+                                          >
+                                            <!--
+                                            NavigateUri="{Binding Value.PathfileNameUri}"
+                                            -->
+                                            <ctrl:PathTrimmingFileHyperlink
+                                                Text ="{Binding Value.PathFileName}"
+                                                NavigateUri="{Binding Path=Value.PathFileName}"
+                                                
+                                                NavigateUriCommand="cmd:AppCommand.LoadFile"
+                                                NavigateUriCommandParameter="{Binding Path=Value.PathFileName}"
+                                                TextDecorations="{x:Null}"
+                                                >
+                                                <ctrl:PathTrimmingFileHyperlink.ContextMenu>
+                                                    <ContextMenu>
+                                                        <MenuItem Header="{x:Static cmdLabel:Strings.STR_MRU_MENUITEM_COPYURL}"
+                                                                  Command="{x:Static ctrl:PathTrimmingFileHyperlink.CopyUri}"
+                                                                  CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
+                                                                  Margin="3" />
+
+                                                        <MenuItem DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
+                                                                  Command="cmd:AppCommand.LoadFile"                            
+                                                                  CommandParameter="{Binding NavigateUri,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                                                                  Margin="3" />
+
+                                                        <MenuItem Header="{x:Static cmdLabel:Strings.STR_MRU_MENUITEM_OpenWithWindowsApp}"
+                                                                  Command="{x:Static ctrl:PathTrimmingFileHyperlink.NavigateToUri}"
+                                                                  CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
+                                                                  Margin="3" />
+
+                                                        <MenuItem Header="{x:Static cmdLabel:Strings.STR_MRU_MENUITEM_OpenInContainingFolder}"
+                                                                  Command="{x:Static ctrl:PathTrimmingFileHyperlink.OpenContainingFolder}"
+                                                                  CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
+                                                                  Margin="3" />
+                                                        <Separator />
+
+                                                        <MenuItem Header="{x:Static cmdLabel:Strings.STR_MRU_MENUITEM_Remove}"
+                                                                  Command="cmd:AppCommand.RemoveMruEntry"
+                                                                  CommandParameter="{Binding Value}"
+                                                                  CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
+                                                                  Margin="3" />
+                                                    </ContextMenu>
+
+                                                </ctrl:PathTrimmingFileHyperlink.ContextMenu>
+                                                <ctrl:PathTrimmingFileHyperlink.ToolTip>
+                                                    <TextBlock>
+                                                    <TextBlock Text="{Binding Value.PathFileName}"/><LineBreak/>
+                                                    <TextBlock Text="{Binding Value.LastUpdate}"/>
+                                                </TextBlock>
+                                                </ctrl:PathTrimmingFileHyperlink.ToolTip>
+                                            </ctrl:PathTrimmingFileHyperlink>
+                                        </Grid>
+
+                                        <!-- Grid Grid.Column="0" Name="TextBlockGridWidth" Margin="3,0">
+                                        <ellipsiedTxtBlock:PathTrimmingTextBlock
+                                            Path="{Binding Value.PathFileName}"
+                                            ToolTip="{Binding Value.PathFileName}"
+                                            />
+                                    </Grid -->
+
+                                        <ctrl:CheckPin Grid.Column="1" Margin="0,0,12,0"
+                                                       HorizontalAlignment="Right"
+                                                       Name="checkPin"
+                                                       IsChecked="{Binding Value.IsPinned, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                                                       Command="{Binding Path=Data.ItemIsPinnedChanged, Source={StaticResource DataContextProxy}}"
+                                                       CommandParameter="{Binding Key}"
+                                                      />
+
+                                        <!-- Visual Debugging for IsMouseOverListViewItem Dp -->
+                                        <!-- CheckBox Grid.Column="2" IsEnabled="False"
+                                              IsChecked="{Binding ElementName=checkPin, Path=IsMouseOverListViewItem, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                                              / -->
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True" >
+                                            <Setter TargetName="checkPin"  Property="IsMouseOverListViewItem" Value="True" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.HeaderTemplate>
+                            <DataTemplate>
+                                <!--
+                                https://social.msdn.microsoft.com/Forums/en-US/d2eafb97-a655-4742-a1ab-deeb05fbe6bd/listview-specify-group-name?forum=wpf
+                                https://msdn.microsoft.com/en-us/library/system.windows.data.collectionviewgroup_properties.aspx
+                                -->
+                                <TextBlock FontWeight="Bold" FontSize="14"
+                                       Text="{Binding Items[0].Value.GroupItem.GroupName}"/>
+                            </DataTemplate>
+                        </GroupStyle.HeaderTemplate>
+                    </GroupStyle>
+                </ListView.GroupStyle>
+            </ListView>
+        </Grid>
+
+        <!--Grid>
       <Grid.Resources>
         <Style TargetType="{x:Type hyperl:FileHyperlink}">
           <Setter Property="SnapsToDevicePixels" Value="True"/>
@@ -67,7 +228,7 @@
                                        CommandParameter="{Binding Path=NavigateUri, RelativeSource={RelativeSource FindAncestor, AncestorType=hyperl:FileHyperlink, AncestorLevel=1}}"
                                        >
                               <Hyperlink.Style>
-                                <!-- Change resource to show underline on mouseover only -->
+                                - Change resource to show underline on mouseover only -
                                 <Style TargetType="{x:Type Hyperlink}">
                                   <Style.Triggers>
                                     <Trigger Property="IsMouseOver"      Value="true">
@@ -85,8 +246,8 @@
                                   <Setter Property="Foreground"                Value="{DynamicResource HyperlinkForeground}" />
                                 </Style>
                               </Hyperlink.Style>
-                              <!-- Moved link to event handler RequestNavigate="Hyperlink_RequestNavigate" to code behind -->
-                              <!-- TextBlock Text="{Binding Path=Text, RelativeSource={RelativeSource FindAncestor, AncestorType=hyperl:FileHyperlink, AncestorLevel=1}}" / -->
+                              - Moved link to event handler RequestNavigate="Hyperlink_RequestNavigate" to code behind -
+                              - TextBlock Text="{Binding Path=Text, RelativeSource={RelativeSource FindAncestor, AncestorType=hyperl:FileHyperlink, AncestorLevel=1}}" / -
                               <ellipsiedTxtBlock:PathTrimmingTextBlock Path="{Binding Text, RelativeSource={RelativeSource FindAncestor, AncestorType=hyperl:FileHyperlink, AncestorLevel=1}}" />
                           </Hyperlink>
                         </TextBlock>
@@ -114,7 +275,7 @@
         <pinlvw:PinableListView.View>
           <GridView>
             <GridView.ColumnHeaderContainerStyle>
-              <!-- To hide the header of a ListView you can modify the Visibility property of the ColumnHeaderContainer by overriding the style. -->
+              - To hide the header of a ListView you can modify the Visibility property of the ColumnHeaderContainer by overriding the style. -
               <Style>
                 <Setter Property="FrameworkElement.Visibility" Value="Collapsed"/>
               </Style>
@@ -122,7 +283,7 @@
             <GridViewColumn Width="32">
               <GridViewColumn.CellTemplate>
                 <DataTemplate>
-                  <Grid><!-- Pin/Unpin column -->
+                  <Grid>- Pin/Unpin column -
                     <pinlvw:PinnableCheckbox Command="cmd:AppCommand.PinUnpin"
                                              CommandParameter="{Binding}"
                                              IsChecked="{Binding IsPinned, Mode=OneWay}">
@@ -152,6 +313,6 @@
           </GridView>
         </pinlvw:PinableListView.View>
       </pinlvw:PinableListView>
+    </ -->
     </Grid>
-  </Grid>
 </UserControl>

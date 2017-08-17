@@ -171,6 +171,10 @@
       <Project>{4654f58a-400c-4d47-9dc9-9fca153554d3}</Project>
       <Name>MiniUML.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MRU\MRULib\MRULib.csproj">
+      <Project>{59c17825-de5a-42bf-89a6-715b64af89f8}</Project>
+      <Name>MRULib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Settings\Edi.SettingsView\Edi.SettingsView.csproj">
       <Project>{972e4948-c781-4cf9-a13e-ac3146ab0ad1}</Project>
       <Name>Edi.SettingsView</Name>

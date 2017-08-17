@@ -818,15 +818,6 @@ No existe o no se puede cargar.
   <data name="STR_Settings_ApplicationLanguage_TT" xml:space="preserve">
     <value>Reiniciar la aplicación para ver el efecto de este ajuste.</value>
   </data>
-  <data name="STR_Settings_MRU_Section_Label" xml:space="preserve">
-    <value>Modo la mayoría de archivos recientes (MRU)</value>
-  </data>
-  <data name="STR_Settings_MRU_Pin_At_StartOption" xml:space="preserve">
-    <value>PIN entradas al principio de la lista</value>
-  </data>
-  <data name="STR_Settings_MRU_Pin_At_Current_Position" xml:space="preserve">
-    <value>Favoritos (no clasificados)</value>
-  </data>
   <data name="STR_Settings_Editor_Section_Label" xml:space="preserve">
     <value>Opciones del Editor de texto</value>
   </data>

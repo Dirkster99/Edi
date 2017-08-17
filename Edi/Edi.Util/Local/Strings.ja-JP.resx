@@ -812,15 +812,6 @@
   <data name="STR_Settings_ApplicationLanguage_TT" xml:space="preserve">
     <value>この設定の効果を確認するアプリケーションを再起動します。</value>
   </data>
-  <data name="STR_Settings_MRU_Section_Label" xml:space="preserve">
-    <value>最も最近のファイル (MRU) モード</value>
-  </data>
-  <data name="STR_Settings_MRU_Pin_At_StartOption" xml:space="preserve">
-    <value>リストの先頭で pin エントリ</value>
-  </data>
-  <data name="STR_Settings_MRU_Pin_At_Current_Position" xml:space="preserve">
-    <value>お気に入り (分類されない)</value>
-  </data>
   <data name="STR_Settings_Editor_Section_Label" xml:space="preserve">
     <value>テキスト エディターのオプション</value>
   </data>

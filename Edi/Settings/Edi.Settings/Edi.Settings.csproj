@@ -150,6 +150,10 @@
       <Project>{6c55b776-26d4-4db3-a6ab-87e783b2f3d1}</Project>
       <Name>ICSharpCode.AvalonEdit</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\MRU\MRULib\MRULib.csproj">
+      <Project>{59C17825-DE5A-42BF-89A6-715B64AF89F8}</Project>
+      <Name>MRULib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SimpleControls\SimpleControls.csproj">
       <Project>{0e69be38-78c0-4662-a0e1-56c5913b5c3a}</Project>
       <Name>SimpleControls</Name>

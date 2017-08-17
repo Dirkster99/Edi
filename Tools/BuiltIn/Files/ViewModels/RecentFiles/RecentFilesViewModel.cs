@@ -1,46 +1,38 @@
 namespace Files.ViewModels.RecentFiles
 {
-	using System;
-	using Edi.Core.Interfaces.Enums;
-	using Edi.Settings.Interfaces;
-	using SimpleControls.MRU.ViewModel;
+    using System;
+    using Edi.Core.Interfaces.Enums;
+    using MRULib.MRU.Interfaces;
+    using Microsoft.Practices.ServiceLocation;
 
-	public class RecentFilesViewModel : Edi.Core.ViewModels.ToolViewModel
-	{
-		#region fields
-		public const string ToolContentId = "<RecentFilesTool>";
+    public class RecentFilesViewModel : Edi.Core.ViewModels.ToolViewModel
+    {
+        #region fields
+        public const string ToolContentId = "<RecentFilesTool>";
+        #endregion fields
 
-		private MRUListVM mMruList = null;
-		#endregion fields
+        #region constructors
+        /// <summary>
+        /// Class constructor
+        /// </summary>
+        public RecentFilesViewModel()
+            : base("Recent Files")
+        {
+            ////Workspace.This.ActiveDocumentChanged += new EventHandler(OnActiveDocumentChanged);
+            ContentId = ToolContentId;
+        }
+        #endregion constructors
 
-		#region constructors
-		/// <summary>
-		/// Class constructor
-		/// </summary>
-		public RecentFilesViewModel()
-			: base("Recent Files")
-		{
-			////Workspace.This.ActiveDocumentChanged += new EventHandler(OnActiveDocumentChanged);
-			ContentId = ToolContentId;
-		}
+        #region properties
+        public override Uri IconSource
+        {
+            get
+            {
+                return new Uri("pack://application:,,,/Edi.Themes;component/Images/App/PinableListView/NoPin16.png", UriKind.RelativeOrAbsolute);
+            }
+        }
 
-		public RecentFilesViewModel(ISettingsManager settingsManager)
-			: this()
-		{
-			this.mMruList = settingsManager.SessionData.MruList;
-		}
-		#endregion constructors
-
-		#region properties
-		public override Uri IconSource
-		{
-			get
-			{
-				return new Uri("pack://application:,,,/Edi.Themes;component/Images/App/PinableListView/NoPin16.png", UriKind.RelativeOrAbsolute);
-			}
-		}
-
-		/***
+        /***
 				void OnActiveDocumentChanged(object sender, EventArgs e)
 				{
 					if (Workspace.This.ActiveDocument != null &&
@@ -59,13 +51,13 @@ namespace Files.ViewModels.RecentFiles
 				}
 		***/
 
-		public MRUListVM MruList
-		{
-			get
-			{
-				return this.mMruList;
-			}
-			/***
+        public IMRUListViewModel MruList
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<IMRUListViewModel>();
+            }
+            /***
 						private set
 						{
 							if (Workspace.This.Config.MruList != value)
@@ -75,26 +67,24 @@ namespace Files.ViewModels.RecentFiles
 							}
 						}
 			 ***/
-		}
+        }
 
-		public override PaneLocation PreferredLocation
-		{
-			get { return PaneLocation.Right; }
-		}
-		#endregion properties
+        public override PaneLocation PreferredLocation
+        {
+            get { return PaneLocation.Right; }
+        }
+        #endregion properties
 
-		#region methods
-		public void AddNewEntryIntoMRU(string filePath)
-		{
-			if (this.MruList.FindMRUEntry(filePath) == null)
-			{
-				MRUEntryVM e = new MRUEntryVM() { IsPinned = false, PathFileName = filePath };
-
-				this.MruList.AddMRUEntry(e);
-
-				this.RaisePropertyChanged(() => this.MruList);
-			}
-		}
-		#endregion methods
-	}
+        #region methods
+        /// <summary>
+        /// Adds a new MRU Entry into the available MRU entry implementation
+        /// </summary>
+        /// <param name="filePath"></param>
+        public void AddNewEntryIntoMRU(string filePath)
+        {
+            if (this.MruList.UpdateEntry(filePath) == true)
+                this.RaisePropertyChanged(() => this.MruList);
+        }
+        #endregion methods
+    }
 }

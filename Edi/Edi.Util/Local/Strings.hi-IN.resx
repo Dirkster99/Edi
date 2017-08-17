@@ -818,15 +818,6 @@
   <data name="STR_Settings_ApplicationLanguage_TT" xml:space="preserve">
     <value>इस सेटिंग का प्रभाव देखने के लिए अनुप्रयोग पुनरारंभ करें।</value>
   </data>
-  <data name="STR_Settings_MRU_Section_Label" xml:space="preserve">
-    <value>सबसे हाल ही में फ़ाइलें (MRU) मोड</value>
-  </data>
-  <data name="STR_Settings_MRU_Pin_At_StartOption" xml:space="preserve">
-    <value>Pin प्रविष्टियाँ सूची की शुरुआत</value>
-  </data>
-  <data name="STR_Settings_MRU_Pin_At_Current_Position" xml:space="preserve">
-    <value>प्रिय (नहीं हल)</value>
-  </data>
   <data name="STR_Settings_Editor_Section_Label" xml:space="preserve">
     <value>पाठ संपादक विकल्प</value>
   </data>

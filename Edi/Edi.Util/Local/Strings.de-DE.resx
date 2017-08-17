@@ -863,15 +863,6 @@ Do you want to remove this file from the list of recent files?</comment>
   <data name="STR_Settings_ApplicationLanguage_TT" xml:space="preserve">
     <value>Ein Neustart der Anwendung ist notwendig um den Effekt dieser Einstellung zu sehen.</value>
   </data>
-  <data name="STR_Settings_MRU_Section_Label" xml:space="preserve">
-    <value>Zuletzt verwendeten Dokumente (MRU) Modus</value>
-  </data>
-  <data name="STR_Settings_MRU_Pin_At_StartOption" xml:space="preserve">
-    <value>PIN-Einträge am Anfang der Liste</value>
-  </data>
-  <data name="STR_Settings_MRU_Pin_At_Current_Position" xml:space="preserve">
-    <value>Favoriten (nicht sortiert)</value>
-  </data>
   <data name="STR_Settings_Editor_Section_Label" xml:space="preserve">
     <value>Text-Editor-Optionen</value>
   </data>

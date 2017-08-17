@@ -135,7 +135,6 @@
     <Compile Include="ComboBox\ComboBoxWaterMarkTextInput.xaml.cs">
       <DependentUpon>ComboBoxWaterMarkTextInput.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Hyperlink\FileHyperlink.cs" />
     <Compile Include="Hyperlink\WebHyperlink.cs" />
     <Compile Include="Local\Strings.de-DE.Designer.cs">
       <DependentUpon>Strings.de-DE.resx</DependentUpon>
@@ -192,19 +191,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.zh-Hans.resx</DependentUpon>
     </Compile>
-    <Compile Include="MRU\View\ListViewColumns.cs" />
-    <Compile Include="MRU\View\BoolOrToVisibilityConverter.cs" />
-    <Compile Include="MRU\Model\MRUEntry.cs" />
-    <Compile Include="MRU\Model\MRUList.cs" />
-    <Compile Include="MRU\View\PinableListView.cs" />
-    <Compile Include="MRU\View\PinableListViewItem.cs" />
-    <Compile Include="MRU\View\PinnableCheckbox.cs" />
-    <Compile Include="PathTrimmingTextBlock\Extensions.cs" />
-    <Compile Include="PathTrimmingTextBlock\PathTrimmingTextBlock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MRU\ViewModel\Base\BaseViewModel.cs" />
-    <Compile Include="MRU\ViewModel\MRUEntryVM.cs" />
-    <Compile Include="MRU\ViewModel\MRUListVM.cs" />
     <Compile Include="Command\RelayCommand.cs" />
     <Compile Include="WatermarkTextBox\TextBoxWithWatermark.cs" />
     <Compile Include="WatermarkTextBox\WatermarkHelper.cs" />

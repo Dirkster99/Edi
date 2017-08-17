@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              
              xmlns:cmd="clr-namespace:Edi.Core;assembly=Edi.Core"
-             xmlns:hyperl="clr-namespace:SimpleControls.Hyperlink;assembly=SimpleControls"
 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
@@ -79,7 +78,11 @@
           </TextBlock>
         </Grid>
 
-        <view:RecentFilesView Grid.Row="2" Grid.ColumnSpan="2" MaxWidth="500" Margin="0, 12" />
+        <view:RecentFilesView DataContext="{Binding}"
+                              Grid.Row="2"
+                              Grid.ColumnSpan="2"
+                              MaxWidth="500"
+                              Margin="0, 12" />
       </Grid>
     </Border>
 
