@@ -17,6 +17,8 @@
         <Grid xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
               xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
               xmlns:ctrl="clr-namespace:MRULib.Controls;assembly=MRULib"
+              xmlns:hyperl="clr-namespace:MRULib.Controls;assembly=MRULib"
+              xmlns:conv="clr-namespace:MRULib.Converters;assembly=MRULib"
           >
             <Grid.Resources>
                 <CollectionViewSource Source="{Binding MruList.Entries}" x:Key="collViewEntries"
@@ -26,6 +28,7 @@
                         <scm:SortDescription PropertyName="Value.GroupItem.Group" Direction="Ascending" />
 
                         <!--This will sort items-->
+                        <scm:SortDescription PropertyName="Value.IsPinned" Direction="Ascending"/>
                         <scm:SortDescription PropertyName="Value.LastUpdate" Direction="Descending"/>
                     </CollectionViewSource.SortDescriptions>
                     <CollectionViewSource.GroupDescriptions>
@@ -36,6 +39,12 @@
                 <ctrl:BindingProxy  x:Key="DataContextProxy"  Data="{Binding MruList}" />
 
                 <ctrl:BindingProxy  x:Key="AppDataContextProxy"  Data="{Binding}" />
+
+                <conv:IntToBoolConverter x:Key="IntToBoolConverter" />
+
+                <!-- Make sure that an entry can either be pinned or unpinned via visibility in contextmenu -->
+                <conv:IntIsPinnedToVisibilityConverter ConvertZeroToVisible="True" x:Key="TrueIntIsPinnedToVisibilityConverter" />
+                <conv:IntIsPinnedToVisibilityConverter ConvertZeroToVisible="False" x:Key="FalseIntIsPinnedToVisibilityConverter" />
             </Grid.Resources>
 
             <Grid.RowDefinitions>
@@ -53,7 +62,6 @@
                       ItemsSource="{Binding Source={StaticResource collViewEntries}}"
                       SelectionMode="Single"
                       Name="list"
-                      xmlns:ellipsiedTxtBlock="clr-namespace:MRULib.Controls.PathTrimingTextBlock;assembly=MRULib"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       >
                 <!-- Use this for simplified testing with dark theme
@@ -82,15 +90,36 @@
                                             NavigateUri="{Binding Value.PathfileNameUri}"
                                             -->
                                             <ctrl:PathTrimmingFileHyperlink
-                                                Text ="{Binding Value.PathFileName}"
-                                                NavigateUri="{Binding Path=Value.PathFileName}"
+                                                DataContext="{Binding Value}"
+                                                Text ="{Binding PathFileName}"
+                                                NavigateUri="{Binding Path=PathFileName}"
                                                 
                                                 NavigateUriCommand="cmd:AppCommand.LoadFile"
-                                                NavigateUriCommandParameter="{Binding Path=Value.PathFileName}"
+                                                NavigateUriCommandParameter="{Binding Path=PathFileName}"
                                                 TextDecorations="{x:Null}"
                                                 >
                                                 <ctrl:PathTrimmingFileHyperlink.ContextMenu>
                                                     <ContextMenu>
+                                                        <MenuItem Header="{x:Static cmdLabel:Strings.CMD_MRU_MovePinnedMruItemUPCommand}"
+                                                                  Command="cmd:AppCommand.MovePinnedMruItemUPCommand"
+                                                                  CommandParameter="{Binding}"/>
+                                                        <MenuItem Header="{x:Static cmdLabel:Strings.CMD_MRU_MovePinnedMruItemDownCommand}"
+                                                                  Command="cmd:AppCommand.MovePinnedMruItemDownCommand"
+                                                                  CommandParameter="{Binding}"/>
+
+                                                        <Separator/>
+                                                        <MenuItem Header="{x:Static cmdLabel:Strings.CMD_MRU_PinItemCommand}"
+                                                                  Command="cmd:AppCommand.PinItemCommand"
+                                                                  CommandParameter="{Binding}"
+                                                                  Visibility="{Binding Path=IsPinned, Converter={StaticResource TrueIntIsPinnedToVisibilityConverter}}"
+                                                                  />
+                                                        <MenuItem Header="{x:Static cmdLabel:Strings.CMD_MRU_UnPinItemCommand}"
+                                                                  Command="cmd:AppCommand.UnPinItemCommand"
+                                                                  CommandParameter="{Binding}"
+                                                                  Visibility="{Binding Path=IsPinned, Converter={StaticResource FalseIntIsPinnedToVisibilityConverter}}"
+                                                                  />
+
+                                                        <Separator/>
                                                         <MenuItem Header="{x:Static cmdLabel:Strings.STR_MRU_MENUITEM_COPYURL}"
                                                                   Command="{x:Static ctrl:PathTrimmingFileHyperlink.CopyUri}"
                                                                   CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
@@ -114,7 +143,7 @@
 
                                                         <MenuItem Header="{x:Static cmdLabel:Strings.STR_MRU_MENUITEM_Remove}"
                                                                   Command="cmd:AppCommand.RemoveMruEntry"
-                                                                  CommandParameter="{Binding Value}"
+                                                                  CommandParameter="{Binding}"
                                                                   CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
                                                                   Margin="3" />
                                                     </ContextMenu>
@@ -122,19 +151,12 @@
                                                 </ctrl:PathTrimmingFileHyperlink.ContextMenu>
                                                 <ctrl:PathTrimmingFileHyperlink.ToolTip>
                                                     <TextBlock>
-                                                    <TextBlock Text="{Binding Value.PathFileName}"/><LineBreak/>
-                                                    <TextBlock Text="{Binding Value.LastUpdate}"/>
+                                                    <TextBlock Text="{Binding PathFileName}"/><LineBreak/>
+                                                    <TextBlock Text="{Binding LastUpdate}"/>
                                                 </TextBlock>
                                                 </ctrl:PathTrimmingFileHyperlink.ToolTip>
                                             </ctrl:PathTrimmingFileHyperlink>
                                         </Grid>
-
-                                        <!-- Grid Grid.Column="0" Name="TextBlockGridWidth" Margin="3,0">
-                                        <ellipsiedTxtBlock:PathTrimmingTextBlock
-                                            Path="{Binding Value.PathFileName}"
-                                            ToolTip="{Binding Value.PathFileName}"
-                                            />
-                                    </Grid -->
 
                                         <ctrl:CheckPin Grid.Column="1" Margin="0,0,12,0"
                                                        HorizontalAlignment="Right"

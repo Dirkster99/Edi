@@ -75,7 +75,11 @@
     </Compile>
     <Compile Include="Controls\PathTrimingTextBlock\Extensions.cs" />
     <Compile Include="Controls\PathTrimingTextBlock\PathTrimmingTextBlock.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\IntIsPinnedToVisibilityConverter.cs" />
+    <Compile Include="Converters\IntToBoolConverter.cs" />
     <Compile Include="Converters\ZeroToVisibilityConverter.cs" />
+    <Compile Include="MRU\Enums\MoveMRUItem.cs" />
     <Compile Include="MRU\Models\Persist\MRUEntry.cs" />
     <Compile Include="MRU\Models\Persist\MRUEntrySerializer.cs" />
     <Compile Include="MRU\Models\Persist\MRUList.cs" />
@@ -83,6 +87,8 @@
     <Compile Include="MRU\Models\TimeSpanModel.cs" />
     <Compile Include="MRU\Models\TimeSpanModelList.cs" />
     <Compile Include="Interfaces\IMRUListViewModel.cs" />
+    <Compile Include="Interfaces\IMRUEntryViewModel.cs" />
+    <Compile Include="MRU_Service.cs" />
     <Compile Include="Themes\ResourceKeys.cs" />
     <Page Include="Controls\CheckPin.xaml">
       <Generator>MSBuild:Compile</Generator>

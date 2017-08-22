@@ -8,8 +8,10 @@
     using Edi.Documents.ViewModels.EdiDoc;
     using Edi.Documents.ViewModels.StartPage;
     using Edi.Themes;
+    using Files.ViewModels.RecentFiles;
     using Microsoft.Practices.ServiceLocation;
     using MiniUML.Framework;
+    using MRULib.MRU.Enums;
     using MRULib.MRU.Interfaces;
     using MsgBox;
     using System;
@@ -454,6 +456,110 @@
                     e.CanExecute = false;
             }
             ));
+
+            
+            win.CommandBindings.Add(new CommandBinding(AppCommand.MovePinnedMruItemUPCommand,
+            (s, e) =>
+            {
+                if (e.Parameter is IMRUEntryViewModel == false)
+                    return;
+
+                var param = e.Parameter as IMRUEntryViewModel;
+
+                this.GetToolWindowVM<RecentFilesViewModel>().MruList.MovePinnedEntry(MoveMRUItem.Up, param);
+            },
+            (s, e) =>
+            {
+                if (e.Parameter is IMRUEntryViewModel == false)
+                {
+                    e.CanExecute = false;
+                    return;
+                }
+
+                if ((e.Parameter as IMRUEntryViewModel).IsPinned == 0)  //Make sure it is pinned
+                {
+                    e.CanExecute = false;
+                    return;
+                }
+
+                e.CanExecute = true;
+            }));
+
+            win.CommandBindings.Add(new CommandBinding(AppCommand.MovePinnedMruItemDownCommand,
+            (s, e) =>
+            {
+                if (e.Parameter is IMRUEntryViewModel == false)
+                    return;
+
+                var param = e.Parameter as IMRUEntryViewModel;
+
+                this.GetToolWindowVM<RecentFilesViewModel>().MruList.MovePinnedEntry(MoveMRUItem.Down, param);
+            },
+            (s, e) =>
+            {
+                if (e.Parameter is IMRUEntryViewModel == false)
+                {
+                    e.CanExecute = false;
+                    return;
+                }
+
+                if ((e.Parameter as IMRUEntryViewModel).IsPinned == 0)  //Make sure it is pinned
+                {
+                    e.CanExecute = false;
+                    return;
+                }
+
+                e.CanExecute = true;
+            }));
+
+            win.CommandBindings.Add(new CommandBinding(AppCommand.PinItemCommand,
+            (s, e) =>
+            {
+                this.GetToolWindowVM<RecentFilesViewModel>().MruList.PinUnpinEntry(true, e.Parameter as IMRUEntryViewModel);
+            },
+            (s, e) =>
+            {
+                if (e.Parameter is IMRUEntryViewModel == false)
+                {
+                    e.CanExecute = false;
+                    return;
+                }
+
+                if ((e.Parameter as IMRUEntryViewModel).IsPinned == 0)  //Make sure it is pinned
+                {
+                    e.CanExecute = true;
+                    return;
+                }
+
+                e.CanExecute = false;
+            }));
+
+            win.CommandBindings.Add(new CommandBinding(AppCommand.UnPinItemCommand,
+            (s, e) =>
+            {
+                if (e.Parameter is IMRUEntryViewModel == false)
+                    return;
+
+                var param = e.Parameter as IMRUEntryViewModel;
+
+                this.GetToolWindowVM<RecentFilesViewModel>().MruList.PinUnpinEntry(false, e.Parameter as IMRUEntryViewModel);
+            },
+            (s, e) =>
+            {
+                if (e.Parameter is IMRUEntryViewModel == false)
+                {
+                    e.CanExecute = false;
+                    return;
+                }
+
+                if ((e.Parameter as IMRUEntryViewModel).IsPinned == 0)  //Make sure it is pinned
+                {
+                    e.CanExecute = false;
+                    return;
+                }
+
+                e.CanExecute = true;
+            }));
 
             win.CommandBindings.Add(new CommandBinding(AppCommand.PinUnpin,
             (s, e) =>

@@ -20,7 +20,7 @@
         /// <summary>
         /// Parameterized class constructor
         /// </summary>
-        public MRUEntry(string pathFileName, bool isPinned, DateTime lastUpdate)
+        public MRUEntry(string pathFileName, int isPinned, DateTime lastUpdate)
         {
             PathFileName = pathFileName;
             IsPinned = isPinned;
@@ -37,7 +37,7 @@
         /// Gets/set whether the file reference is pinned or not.
         /// </summary>
         [XmlAttribute(AttributeName = "IsPinned")]
-        public bool IsPinned { get; set; }
+        public int IsPinned { get; set; }
 
         /// <summary>
         /// Gets/set the time of the last update for this file reference.

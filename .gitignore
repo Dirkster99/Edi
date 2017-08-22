@@ -16,3 +16,4 @@ tmp/
 *.suo
 *.sqlite
 Edi/MiniUML.Plugins/MiniUML.Plugins.UmlClassDiagram.dll
+/.vs/Edi/v15/sqlite3/storage.ide

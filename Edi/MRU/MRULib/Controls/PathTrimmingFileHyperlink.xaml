@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
 
-             xmlns:ellipsiedTxtBlock="clr-namespace:MRULib.Controls.PathTrimingTextBlock"
+             xmlns:ctrl="clr-namespace:MRULib.Controls"
              xmlns:reskeys="clr-namespace:MRULib.Themes"
              >
 <!--
@@ -58,7 +58,7 @@
                        CommandParameter="{Binding Path=NavigateUriCommandParameter, RelativeSource={RelativeSource FindAncestor, AncestorType=hyperl:PathTrimmingFileHyperlink, AncestorLevel=1}}"
                        TextDecorations="{Binding Path=TextDecorations, RelativeSource={RelativeSource FindAncestor, AncestorType=hyperl:PathTrimmingFileHyperlink, AncestorLevel=1}}"
                       >
-                <ellipsiedTxtBlock:PathTrimmingTextBlock
+                <ctrl:PathTrimmingTextBlock
                     Path="{Binding Path=Text, RelativeSource={RelativeSource FindAncestor, AncestorType=hyperl:PathTrimmingFileHyperlink, AncestorLevel=1}}"
                     Foreground="{DynamicResource {x:Static reskeys:ResourceKeys.Hyperlink_Foreground}}"
                     />

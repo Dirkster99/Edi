@@ -54,7 +54,7 @@
 
             if (model != null)
             {
-                VM.MaxMruEntryCount = model.MaxMruEntryCount;
+                VM.ResetMaxMruEntryCount(model.MaxMruEntryCount);
 
                 foreach (var item in model.ListOfMRUEntries)
                     VM.UpdateEntry(new MRUEntryViewModel(item.PathFileName

@@ -19,7 +19,7 @@ namespace Edi.Util.Local {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Strings {
@@ -169,6 +169,24 @@ namespace Edi.Util.Local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Move Down.
+        /// </summary>
+        public static string CMD_MRU_MovePinnedMruItemDownCommand {
+            get {
+                return ResourceManager.GetString("CMD_MRU_MovePinnedMruItemDownCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move Up.
+        /// </summary>
+        public static string CMD_MRU_MovePinnedMruItemUPCommand {
+            get {
+                return ResourceManager.GetString("CMD_MRU_MovePinnedMruItemUPCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pin or unpin an MRU entry.
         /// </summary>
         public static string CMD_MRU_Pin_Description {
@@ -178,11 +196,29 @@ namespace Edi.Util.Local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pin to this list.
+        /// </summary>
+        public static string CMD_MRU_PinItemCommand {
+            get {
+                return ResourceManager.GetString("CMD_MRU_PinItemCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove MRU Entry.
         /// </summary>
         public static string CMD_MRU_RemoveEntry_Description {
             get {
                 return ResourceManager.GetString("CMD_MRU_RemoveEntry_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unpin from this list.
+        /// </summary>
+        public static string CMD_MRU_UnPinItemCommand {
+            get {
+                return ResourceManager.GetString("CMD_MRU_UnPinItemCommand", resourceCulture);
             }
         }
         

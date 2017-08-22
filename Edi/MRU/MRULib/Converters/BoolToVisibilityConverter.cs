@@ -1,4 +1,4 @@
-﻿namespace MRU.Converters
+﻿namespace MRULib.Converters
 {
     using System;
     using System.Globalization;

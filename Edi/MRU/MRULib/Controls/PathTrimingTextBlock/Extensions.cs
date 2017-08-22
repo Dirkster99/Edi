@@ -1,4 +1,4 @@
-﻿namespace MRULib.Controls.PathTrimingTextBlock
+﻿namespace MRULib.Controls
 {
     using System.Globalization;
 

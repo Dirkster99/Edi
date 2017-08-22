@@ -20,7 +20,6 @@ namespace Edi
     using SimpleControls.Local;
     using Edi.Themes.Interfaces;
     using MRULib.MRU.Interfaces;
-    using MRULib.MRU.ViewModels;
 
     public class Bootstapper : MefBootstrapper
     {
@@ -59,7 +58,8 @@ namespace Edi
         protected Bootstapper()
         {
             _MsgBox = new MessageBoxService();
-            _MruVM = new MRUListViewModel();
+
+            _MruVM = MRULib.MRU_Service.Create_List();
         }
         #endregion constructors
 

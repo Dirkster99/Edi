@@ -1,18 +1,20 @@
 ﻿namespace MRULib.MRU.ViewModels
 {
     using MRULib.MRU.Enums;
+    using MRULib.MRU.Interfaces;
     using MRULib.MRU.Models;
     using System;
     using System.Globalization;
 
     /// <summary>
-    /// Implements a viewmodel that can be used to list all recently used files.
+    /// Implements a viewmodel entry that can be
+    /// used to list all recently used files.
     /// </summary>
-    public class MRUEntryViewModel : Base.BaseViewModel
+    internal class MRUEntryViewModel : Base.BaseViewModel, IMRUEntryViewModel
     {
         #region fields
         PathModel _File;
-        private bool _IsPinned;
+        private int _IsPinned;
         private DateTime _LastUpdate;
 
         private readonly GroupViewModel _GroupItem;
@@ -25,7 +27,7 @@
         /// <param name="pathFileName"></param>
         /// <param name="isPinned"></param>
         public MRUEntryViewModel(string pathFileName
-                               , bool isPinned = false)
+                               , int isPinned = 0)
                 : this(pathFileName, DateTime.Now, isPinned)
             {
             }
@@ -38,7 +40,7 @@
         /// <param name="isPinned"></param>
         public MRUEntryViewModel(string pathFileName
                                 , DateTime lastUpdate
-                                , bool isPinned = false)
+                                , int isPinned = 0)
             : this()
         {
             this.File = new PathModel(pathFileName, FSItemType.File);
@@ -67,7 +69,7 @@
         protected MRUEntryViewModel()
         {
             _File = null;
-            _IsPinned = false;
+            _IsPinned = 0;
             _LastUpdate = DateTime.Now;
 
             _GroupItem = new GroupViewModel(GroupType.Today);
@@ -133,7 +135,7 @@
         /// <summary>
         /// Gets the fact whether this item is currently pinned in the list or not.
         /// </summary>
-        public bool IsPinned
+        public int IsPinned
         {
             get
             {
@@ -207,7 +209,7 @@
         /// </summary>
         public void UpdateGroup()
         {
-            if (this.IsPinned == true)
+            if (this.IsPinned > 0)
             {
                 GroupItem.SetGroup(GroupType.IsPinned);
             }
@@ -251,7 +253,7 @@
         /// Sets the <see cref="IsPinned"/> property to true or false.
         /// </summary>
         /// <param name="isPinned"></param>
-        public void SetIsPinned(bool isPinned)
+        public void SetIsPinned(int isPinned)
         {
             this.IsPinned = isPinned;
             UpdateGroup();

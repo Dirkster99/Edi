@@ -16,9 +16,14 @@
 		private static RoutedUICommand exportUMLToImage;
 		private static RoutedUICommand exportTextToHTML;
 
-		private static RoutedUICommand pinUnpin;
+        private static RoutedUICommand movePinnedMruItemUPCommand;
+        private static RoutedUICommand movePinnedMruItemDownCommand;
+        private static RoutedUICommand pinItemCommand;
+        private static RoutedUICommand unPinItemCommand;
+        private static RoutedUICommand pinUnpin;
 		private static RoutedUICommand addMruEntry;
 		private static RoutedUICommand removeMruEntry;
+
 		private static RoutedUICommand closeFile;
 		private static RoutedUICommand viewTheme;
 
@@ -74,8 +79,22 @@
 			inputs = new InputGestureCollection();
 			AppCommand.exportTextToHTML = new RoutedUICommand(Strings.CMD_APP_ExportTextToHTML_Description, "ExportTextToHTML", typeof(AppCommand), inputs);
 
-			// Initialize pin command (to set or unset a pin in MRU and re-sort list accordingly)
-			inputs = new InputGestureCollection();
+            // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            // MRU Commands
+            inputs = new InputGestureCollection();
+            movePinnedMruItemUPCommand = new RoutedUICommand(string.Empty, "Move Up", typeof(AppCommand), inputs);
+
+            inputs = new InputGestureCollection();
+            movePinnedMruItemDownCommand = new RoutedUICommand(string.Empty, "Move Down", typeof(AppCommand), inputs);
+
+            inputs = new InputGestureCollection();
+            pinItemCommand = new RoutedUICommand(string.Empty, "Pin to this list", typeof(AppCommand), inputs);
+
+            inputs = new InputGestureCollection();
+            unPinItemCommand = new RoutedUICommand(string.Empty, "Unpin from this list", typeof(AppCommand), inputs);
+
+            // Initialize pin command (to set or unset a pin in MRU and re-sort list accordingly)
+            inputs = new InputGestureCollection();
 			AppCommand.pinUnpin = new RoutedUICommand(Strings.CMD_MRU_Pin_Description, "Pin", typeof(AppCommand), inputs);
 
 			// Execute add recent files list etnry pin command (to add another MRU entry into the list)
@@ -86,6 +105,8 @@
 			inputs = new InputGestureCollection();
 			AppCommand.removeMruEntry = new RoutedUICommand(Strings.CMD_MRU_RemoveEntry_Description, "RemoveEntry", typeof(AppCommand), inputs);
 
+            // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            // Window Close Command
 			inputs = new InputGestureCollection();
 			inputs.Add(new KeyGesture(Key.F4, ModifierKeys.Control, "Ctrl+F4"));
 			inputs.Add(new KeyGesture(Key.W, ModifierKeys.Control, "Ctrl+W"));
@@ -195,11 +216,32 @@
 		{
 			get { return AppCommand.exportTextToHTML; }
 		}
+      
+        public static RoutedUICommand MovePinnedMruItemUPCommand
+        {
+            get { return AppCommand.movePinnedMruItemUPCommand; }
+        }
 
-		/// <summary>
-		/// Execute pin/unpin command (to set or unset a pin in MRU and re-sort list accordingly)
-		/// </summary>
-		public static RoutedUICommand PinUnpin
+        public static RoutedUICommand MovePinnedMruItemDownCommand
+        {
+            get { return AppCommand.movePinnedMruItemDownCommand; }
+        }
+
+        public static RoutedUICommand PinItemCommand
+        {
+            get { return AppCommand.pinItemCommand; }
+        }
+
+        public static RoutedUICommand UnPinItemCommand
+        {
+            get { return AppCommand.unPinItemCommand; }
+        }
+
+
+        /// <summary>
+        /// Execute pin/unpin command (to set or unset a pin in MRU and re-sort list accordingly)
+        /// </summary>
+        public static RoutedUICommand PinUnpin
 		{
 			get { return AppCommand.pinUnpin; }
 		}
