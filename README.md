@@ -1,3 +1,4 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/7r06lm7v5o9xq7xj?svg=true)](https://ci.appveyor.com/project/Dirkster99/edi)
 # Edi
 
 Edi - The open source integrated development environment (IDE) based on AvalonDock and AvalonEdit
