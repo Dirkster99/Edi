@@ -420,8 +420,8 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>REM Make sure this library is available in the target path
-Copy /Y "$(SolutionDir)02_Libs\00_bin\NumericUpDownLib.dll" "$(TargetDir)"
-Copy /Y "$(SolutionDir)02_Libs\00_bin\DropDownButtonLib.dll" "$(TargetDir)"
+REM Copy /Y "$(SolutionDir)02_Libs\00_bin\NumericUpDownLib.dll" "$(TargetDir)"
+REM Copy /Y "$(SolutionDir)02_Libs\00_bin\DropDownButtonLib.dll" "$(TargetDir)"
 Copy /Y "$(SolutionDir)02_Libs\00_bin\InplaceEditBoxLib.dlll" "$(TargetDir)"
 Copy /Y "$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Expression.dll" "$(TargetDir)"
 Copy /Y "$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Metro.dll" "$(TargetDir)"
