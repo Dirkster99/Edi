@@ -98,6 +98,9 @@
       <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MRULib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.MRULib.1.0.0\lib\net451\MRULib.dll</HintPath>
+    </Reference>
     <Reference Include="MsgBox, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.MsgBox.1.4.2\lib\net451\MsgBox.dll</HintPath>
     </Reference>
@@ -164,10 +167,6 @@
     <ProjectReference Include="..\..\MiniUML\MiniUML.View\MiniUML.View.csproj">
       <Project>{aad6b1d6-f529-40f8-9786-dc8e2fdf0ad6}</Project>
       <Name>MiniUML.View</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MRU\MRULib\MRULib.csproj">
-      <Project>{59c17825-de5a-42bf-89a6-715b64af89f8}</Project>
-      <Name>MRULib</Name>
     </ProjectReference>
     <ProjectReference Include="..\Settings\Edi.SettingsView\Edi.SettingsView.csproj">
       <Project>{972e4948-c781-4cf9-a13e-ac3146ab0ad1}</Project>

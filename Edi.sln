@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binaries", "Binaries", "{E3D8DFD4-4299-4FE0-9BE8-0CB41F189489}"
 	ProjectSection(SolutionItems) = preProject
@@ -55,10 +55,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edi.Themes", "Edi\Edi.Themes\Edi.Themes.csproj", "{69BC833C-0FE1-4288-BB80-BB457D07E638}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Settings", "Settings", "{31B14E7F-36E2-464A-A90A-64A07DEB02EB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MRU", "MRU", "{B3AFD3F7-9802-41C7-B8E8-417312FF4B9C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRULib", "Edi\MRU\MRULib\MRULib.csproj", "{59C17825-DE5A-42BF-89A6-715B64AF89F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -271,18 +267,6 @@ Global
 		{69BC833C-0FE1-4288-BB80-BB457D07E638}.Release|x64.Build.0 = Release|x64
 		{69BC833C-0FE1-4288-BB80-BB457D07E638}.Release|x86.ActiveCfg = Release|x86
 		{69BC833C-0FE1-4288-BB80-BB457D07E638}.Release|x86.Build.0 = Release|x86
-		{59C17825-DE5A-42BF-89A6-715B64AF89F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{59C17825-DE5A-42BF-89A6-715B64AF89F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{59C17825-DE5A-42BF-89A6-715B64AF89F8}.Debug|x64.ActiveCfg = Debug|x64
-		{59C17825-DE5A-42BF-89A6-715B64AF89F8}.Debug|x64.Build.0 = Debug|x64
-		{59C17825-DE5A-42BF-89A6-715B64AF89F8}.Debug|x86.ActiveCfg = Debug|x86
-		{59C17825-DE5A-42BF-89A6-715B64AF89F8}.Debug|x86.Build.0 = Debug|x86
-		{59C17825-DE5A-42BF-89A6-715B64AF89F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{59C17825-DE5A-42BF-89A6-715B64AF89F8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{59C17825-DE5A-42BF-89A6-715B64AF89F8}.Release|x64.ActiveCfg = Release|x64
-		{59C17825-DE5A-42BF-89A6-715B64AF89F8}.Release|x64.Build.0 = Release|x64
-		{59C17825-DE5A-42BF-89A6-715B64AF89F8}.Release|x86.ActiveCfg = Release|x86
-		{59C17825-DE5A-42BF-89A6-715B64AF89F8}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -308,10 +292,9 @@ Global
 		{8DEA0927-9BD3-442F-AD3B-5F0C9E3186F6} = {39FEC70F-8F35-4A04-B770-59F12A0CE83F}
 		{69BC833C-0FE1-4288-BB80-BB457D07E638} = {39FEC70F-8F35-4A04-B770-59F12A0CE83F}
 		{31B14E7F-36E2-464A-A90A-64A07DEB02EB} = {39FEC70F-8F35-4A04-B770-59F12A0CE83F}
-		{B3AFD3F7-9802-41C7-B8E8-417312FF4B9C} = {39FEC70F-8F35-4A04-B770-59F12A0CE83F}
-		{59C17825-DE5A-42BF-89A6-715B64AF89F8} = {B3AFD3F7-9802-41C7-B8E8-417312FF4B9C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		RESX_NeutralResourcesLanguage = en-US
+		SolutionGuid = {132D3B9F-A6CB-49D9-B1E6-F122CCC2510E}
 	EndGlobalSection
 EndGlobal

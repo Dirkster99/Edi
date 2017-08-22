@@ -111,6 +111,9 @@
       <HintPath>..\..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MRULib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Dirkster.MRULib.1.0.0\lib\net451\MRULib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -149,10 +152,6 @@
     <ProjectReference Include="..\..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
       <Project>{6c55b776-26d4-4db3-a6ab-87e783b2f3d1}</Project>
       <Name>ICSharpCode.AvalonEdit</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MRU\MRULib\MRULib.csproj">
-      <Project>{59C17825-DE5A-42BF-89A6-715B64AF89F8}</Project>
-      <Name>MRULib</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\SimpleControls\SimpleControls.csproj">
       <Project>{0e69be38-78c0-4662-a0e1-56c5913b5c3a}</Project>

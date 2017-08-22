@@ -184,10 +184,6 @@
       <Project>{aad6b1d6-f529-40f8-9786-dc8e2fdf0ad6}</Project>
       <Name>MiniUML.View</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MRU\MRULib\MRULib.csproj">
-      <Project>{59c17825-de5a-42bf-89a6-715b64af89f8}</Project>
-      <Name>MRULib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SimpleControls\SimpleControls.csproj">
       <Project>{0E69BE38-78C0-4662-A0E1-56C5913B5C3A}</Project>
       <Name>SimpleControls</Name>
