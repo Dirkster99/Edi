@@ -150,6 +150,20 @@
   <data name="CMD_MRU_RemoveEntry_Description" xml:space="preserve">
     <value>Remove MRU Entry</value>
   </data>
+
+  <data name="CMD_MRU_MovePinnedMruItemUPCommand" xml:space="preserve">
+    <value>Move Up</value>
+  </data>
+  <data name="CMD_MRU_MovePinnedMruItemDownCommand" xml:space="preserve">
+    <value>Move Down</value>
+  </data>
+  <data name="CMD_MRU_PinItemCommand" xml:space="preserve">
+    <value>Pin to this list</value>
+  </data>
+  <data name="CMD_MRU_UnPinItemCommand" xml:space="preserve">
+    <value>Unpin from this list</value>
+  </data>
+
   <data name="CMD_TXT_DisableHighlighting_Description" xml:space="preserve">
     <value>Switch off syntax highlighting for current file</value>
   </data>

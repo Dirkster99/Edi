@@ -511,7 +511,7 @@ namespace Edi.Apps.ViewModels
             {
                 var mruList = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
 
-                if (mruList.FindMRUEntry(filePath) != null)
+                if (mruList.FindEntry(filePath) != null)
                 {
                     if (_MsgBox.Show(string.Format(Edi.Util.Local.Strings.STR_ERROR_LOADING_FILE_MSG, filePath),
                                                    Edi.Util.Local.Strings.STR_ERROR_LOADING_FILE_CAPTION, MsgBoxButtons.YesNo) == MsgBoxResult.Yes)
@@ -766,7 +766,7 @@ namespace Edi.Apps.ViewModels
         {
             try
             {
-                var cmdParam = o as MRUEntryViewModel;
+                var cmdParam = o as IMRUEntryViewModel;
 
                 if (cmdParam == null)
                     return;
@@ -774,7 +774,11 @@ namespace Edi.Apps.ViewModels
                 if (e != null)
                     e.Handled = true;
 
-                this.GetToolWindowVM<RecentFilesViewModel>().MruList.PinUnpinEntry(!cmdParam.IsPinned, cmdParam);
+                var isPinnedParam = false;    // Pin this if it was not pinned before or
+                if (cmdParam.IsPinned == 0)  // Vice Versa
+                    isPinnedParam = true;
+
+                this.GetToolWindowVM<RecentFilesViewModel>().MruList.PinUnpinEntry(isPinnedParam, cmdParam);
             }
             catch (Exception exp)
             {
@@ -791,7 +795,7 @@ namespace Edi.Apps.ViewModels
         {
             try
             {
-                var cmdParam = o as MRUEntryViewModel;
+                var cmdParam = o as IMRUEntryViewModel;
 
                 if (cmdParam == null)
                     return;
@@ -816,7 +820,7 @@ namespace Edi.Apps.ViewModels
         {
             try
             {
-                var cmdParam = o as MRUEntryViewModel;
+                var cmdParam = o as IMRUEntryViewModel;
 
                 if (cmdParam == null)
                     return;
@@ -824,7 +828,7 @@ namespace Edi.Apps.ViewModels
                 if (e != null)
                     e.Handled = true;
 
-                this.GetToolWindowVM<RecentFilesViewModel>().MruList.RemovePinEntry(cmdParam);
+                this.GetToolWindowVM<RecentFilesViewModel>().MruList.RemoveEntry(cmdParam);
             }
             catch (Exception exp)
             {
@@ -1456,7 +1460,7 @@ namespace Edi.Apps.ViewModels
                                     if (error is FileNotFoundException)
                                     {
                                         var mruList = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
-                                        if (mruList.FindMRUEntry(filePath) != null)
+                                        if (mruList.FindEntry(filePath) != null)
                                         {
                                             if (_MsgBox.Show(string.Format(Edi.Util.Local.Strings.STR_ERROR_LOADING_FILE_MSG, filePath),
                                                              Edi.Util.Local.Strings.STR_ERROR_LOADING_FILE_CAPTION, MsgBoxButtons.YesNo) == MsgBoxResult.Yes)
