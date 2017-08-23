@@ -11,6 +11,7 @@ https://edi.codeplex.com/
 ![screenshot](https://github.com/Dirkster99/Docu/blob/master/Edi/MetroDark_TrueBlue.png?raw=true)
 ![screenshot](https://github.com/Dirkster99/Docu/blob/master/Edi/MetroLight_BrightStandard.png?raw=true)
 ![screenshot](https://github.com/Dirkster99/Docu/blob/master/Edi/Generic.png?raw=true)
+![screenshot](https://github.com/Dirkster99/Docu/blob/master/Edi/MU_MenuItems.png?raw=true)
 
 ## Getting Started
 
