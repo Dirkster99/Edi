@@ -7,6 +7,7 @@ https://edi.codeplex.com/
 
 ![screenshot](https://github.com/Dirkster99/Docu/blob/master/Edi/MetroDark_DeepBlack.png?raw=true)
 ![screenshot](https://github.com/Dirkster99/Docu/blob/master/Edi/Edi_MRU_ContextMenu.png?raw=true)
+![screenshot](https://github.com/Dirkster99/Docu/blob/master/Edi/StartPage.png?raw=true)
 ![screenshot](https://github.com/Dirkster99/Docu/blob/master/Edi/MetroDark_TrueBlue.png?raw=true)
 ![screenshot](https://github.com/Dirkster99/Docu/blob/master/Edi/MetroLight_BrightStandard.png?raw=true)
 ![screenshot](https://github.com/Dirkster99/Docu/blob/master/Edi/Generic.png?raw=true)
