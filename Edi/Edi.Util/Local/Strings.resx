@@ -141,6 +141,45 @@
   <data name="CMD_APP_ViewTheme_Description" xml:space="preserve">
     <value>Change theme</value>
   </data>
+  <data name="Caption_MRU_RemoveEntries_Sub_Menu" xml:space="preserve">
+    <value>Remove Entries</value>
+  </data>
+  <data name="CMD_MRU_Remove_All" xml:space="preserve">
+    <value>Remove All</value>
+  </data>
+  <data name="CMD_MRU_Desc_Remove_All" xml:space="preserve">
+      <value>Removes all entries including pinned entries</value>
+  </data>
+    <data name="CMD_MRU_NotPinned" xml:space="preserve">
+      <value>Not Pinned</value>
+  </data>
+    <data name="CMD_MRU_Desc_NotPinned" xml:space="preserve">
+      <value>Removes all entries that are not pinned.</value>
+  </data>
+    <data name="CMD_MRU_OlderThanToday" xml:space="preserve">
+      <value>Older Than Today</value>
+  </data>
+    <data name="CMD_MRU_Desc_OlderThanToday" xml:space="preserve">
+      <value>Removes all entries that are older than today.</value>
+  </data>
+    <data name="CMD_MRU_OlderThanYesterday" xml:space="preserve">
+      <value>Older Than Yesterday</value>
+  </data>
+    <data name="CMD_MRU_Desc_OlderThanYesterday" xml:space="preserve">
+      <value>Removes all entries that are older than yesterday.</value>
+  </data>
+    <data name="CMD_MRU_OlderThan1Week" xml:space="preserve">
+      <value>Older Than 1 Week</value>
+  </data>
+    <data name="CMD_MRU_Desc_OlderThan1Week" xml:space="preserve">
+      <value>Removes all entries that are older than 1 week.</value>
+  </data>
+    <data name="CMD_MRU_OlderThan2Weeks" xml:space="preserve">
+      <value>Older Than 2 Weeks</value>
+  </data>
+    <data name="CMD_MRU_Desc_OlderThan2Weeks" xml:space="preserve">
+      <value>Removes all entries that are older than 2 weeks.</value>
+  </data>
   <data name="CMD_MRU_AddEntry_Description" xml:space="preserve">
     <value>Add MRU Entry</value>
   </data>

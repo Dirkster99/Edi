@@ -146,8 +146,52 @@
                                                                   CommandParameter="{Binding}"
                                                                   CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
                                                                   Margin="3" />
-                                                    </ContextMenu>
 
+                                                        <MenuItem Header="{x:Static cmdLabel:Strings.Caption_MRU_RemoveEntries_Sub_Menu}"
+                                                                  xmlns:enum="clr-namespace:MRULib.MRU.Enums;assembly=MRULib">
+
+                                                            <MenuItem Header="{x:Static cmdLabel:Strings.CMD_MRU_OlderThan2Weeks}"
+                                                                      Command="cmd:AppCommand.RemoveItemsOlderThanThisCommand"
+                                                                      CommandParameter="{x:Static enum:GroupType.LastWeek}"
+                                                                      CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
+                                                                      ToolTip="{x:Static cmdLabel:Strings.CMD_MRU_Desc_OlderThan2Weeks}"
+                                                                      Margin="3" />
+
+                                                            <MenuItem Header="{x:Static cmdLabel:Strings.CMD_MRU_OlderThan1Week}"
+                                                                        Command="cmd:AppCommand.RemoveItemsOlderThanThisCommand"
+                                                                        CommandParameter="{x:Static enum:GroupType.ThisWeek}"
+                                                                        CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
+                                                                        ToolTip="{x:Static cmdLabel:Strings.CMD_MRU_Desc_OlderThan1Week}"
+                                                                        Margin="3" />
+
+                                                            <MenuItem Header="{x:Static cmdLabel:Strings.CMD_MRU_OlderThanYesterday}"
+                                                                        Command="cmd:AppCommand.RemoveItemsOlderThanThisCommand"
+                                                                        CommandParameter="{x:Static enum:GroupType.Yesterday}"
+                                                                        CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
+                                                                        ToolTip="{x:Static cmdLabel:Strings.CMD_MRU_Desc_OlderThanYesterday}"
+                                                                        Margin="3" />
+
+                                                            <MenuItem Header="{x:Static cmdLabel:Strings.CMD_MRU_OlderThanToday}"
+                                                                        Command="cmd:AppCommand.RemoveItemsOlderThanThisCommand"
+                                                                        CommandParameter="{x:Static enum:GroupType.Today}"
+                                                                        CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
+                                                                        ToolTip="{x:Static cmdLabel:Strings.CMD_MRU_Desc_OlderThanToday}"
+                                                                        Margin="3" />
+
+                                                            <MenuItem Header="{x:Static cmdLabel:Strings.CMD_MRU_NotPinned}"
+                                                                        Command="cmd:AppCommand.RemoveItemsOlderThanThisCommand"
+                                                                        CommandParameter="{x:Static enum:GroupType.IsPinned}"
+                                                                        CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
+                                                                        ToolTip="{x:Static cmdLabel:Strings.CMD_MRU_Desc_NotPinned}"
+                                                                        Margin="3" />
+
+                                                            <MenuItem Header="{x:Static cmdLabel:Strings.CMD_MRU_Remove_All}"
+                                                                        Command="cmd:AppCommand.ClearAllMruItemsCommand"
+                                                                        CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
+                                                                        ToolTip="{x:Static cmdLabel:Strings.CMD_MRU_Desc_Remove_All}"
+                                                                        Margin="3" />
+                                                        </MenuItem>
+                                                    </ContextMenu>
                                                 </ctrl:PathTrimmingFileHyperlink.ContextMenu>
                                                 <ctrl:PathTrimmingFileHyperlink.ToolTip>
                                                     <TextBlock>

@@ -457,7 +457,42 @@
             }
             ));
 
-            
+
+            /// <summary>
+            /// Removes ALL MRU entries (even pinned entries) from the current list of entries.
+            /// </summary>
+            win.CommandBindings.Add(new CommandBinding(AppCommand.ClearAllMruItemsCommand,
+            (s, e) =>
+            {
+                this.GetToolWindowVM<RecentFilesViewModel>().MruList.Clear();
+            }));
+
+            /// <summary>
+            /// Gets a command that removes all items that are older
+            /// than a given <see cref="GroupType"/>.
+            /// Eg.: Remove all MRU entries older than yesterday.
+            /// </summary>
+            win.CommandBindings.Add(new CommandBinding(AppCommand.RemoveItemsOlderThanThisCommand,
+            (s, e) =>
+            {
+                if (e.Parameter is GroupType == false)
+                    return;
+
+                var param = (GroupType)e.Parameter;
+
+                this.GetToolWindowVM<RecentFilesViewModel>().MruList.RemoveEntryOlderThanThis(param);
+            },
+            (s, e) =>
+            {
+                if (e.Parameter is GroupType == false)
+                {
+                    e.CanExecute = false;
+                    return;
+                }
+
+                e.CanExecute = true;
+            }));
+
             win.CommandBindings.Add(new CommandBinding(AppCommand.MovePinnedMruItemUPCommand,
             (s, e) =>
             {

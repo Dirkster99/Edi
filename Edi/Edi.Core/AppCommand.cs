@@ -16,6 +16,8 @@
 		private static RoutedUICommand exportUMLToImage;
 		private static RoutedUICommand exportTextToHTML;
 
+        private static RoutedUICommand clearAllMruItemsCommand;
+        private static RoutedUICommand removeItemsOlderThanThisCommand;
         private static RoutedUICommand movePinnedMruItemUPCommand;
         private static RoutedUICommand movePinnedMruItemDownCommand;
         private static RoutedUICommand pinItemCommand;
@@ -81,6 +83,12 @@
 
             // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
             // MRU Commands
+            inputs = new InputGestureCollection();
+            clearAllMruItemsCommand = new RoutedUICommand(string.Empty, "Remove All MRU Entries", typeof(AppCommand), inputs);
+
+            inputs = new InputGestureCollection();
+            removeItemsOlderThanThisCommand = new RoutedUICommand(string.Empty, "Remove Entries older than this", typeof(AppCommand), inputs);
+
             inputs = new InputGestureCollection();
             movePinnedMruItemUPCommand = new RoutedUICommand(string.Empty, "Move Up", typeof(AppCommand), inputs);
 
@@ -216,7 +224,19 @@
 		{
 			get { return AppCommand.exportTextToHTML; }
 		}
-      
+
+
+        public static RoutedUICommand ClearAllMruItemsCommand
+        {
+            get { return AppCommand.clearAllMruItemsCommand; }
+        }
+
+
+        public static RoutedUICommand RemoveItemsOlderThanThisCommand
+        {
+            get { return AppCommand.removeItemsOlderThanThisCommand; }
+        }
+
         public static RoutedUICommand MovePinnedMruItemUPCommand
         {
             get { return AppCommand.movePinnedMruItemUPCommand; }

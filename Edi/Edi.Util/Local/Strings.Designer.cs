@@ -61,6 +61,15 @@ namespace Edi.Util.Local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove Entries.
+        /// </summary>
+        public static string Caption_MRU_RemoveEntries_Sub_Menu {
+            get {
+                return ResourceManager.GetString("Caption_MRU_RemoveEntries_Sub_Menu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show information about EDI.
         /// </summary>
         public static string CMD_APP_About_Description {
@@ -169,6 +178,60 @@ namespace Edi.Util.Local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Removes all entries that are not pinned..
+        /// </summary>
+        public static string CMD_MRU_Desc_NotPinned {
+            get {
+                return ResourceManager.GetString("CMD_MRU_Desc_NotPinned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removes all entries that are older than 1 week..
+        /// </summary>
+        public static string CMD_MRU_Desc_OlderThan1Week {
+            get {
+                return ResourceManager.GetString("CMD_MRU_Desc_OlderThan1Week", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removes all entries that are older than 2 weeks..
+        /// </summary>
+        public static string CMD_MRU_Desc_OlderThan2Weeks {
+            get {
+                return ResourceManager.GetString("CMD_MRU_Desc_OlderThan2Weeks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removes all entries that are older than today..
+        /// </summary>
+        public static string CMD_MRU_Desc_OlderThanToday {
+            get {
+                return ResourceManager.GetString("CMD_MRU_Desc_OlderThanToday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removes all entries that are older than yesterday..
+        /// </summary>
+        public static string CMD_MRU_Desc_OlderThanYesterday {
+            get {
+                return ResourceManager.GetString("CMD_MRU_Desc_OlderThanYesterday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removes all entries including pinned entries.
+        /// </summary>
+        public static string CMD_MRU_Desc_Remove_All {
+            get {
+                return ResourceManager.GetString("CMD_MRU_Desc_Remove_All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Move Down.
         /// </summary>
         public static string CMD_MRU_MovePinnedMruItemDownCommand {
@@ -187,6 +250,51 @@ namespace Edi.Util.Local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not Pinned.
+        /// </summary>
+        public static string CMD_MRU_NotPinned {
+            get {
+                return ResourceManager.GetString("CMD_MRU_NotPinned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Older Than 1 Week.
+        /// </summary>
+        public static string CMD_MRU_OlderThan1Week {
+            get {
+                return ResourceManager.GetString("CMD_MRU_OlderThan1Week", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Older Than 2 Weeks.
+        /// </summary>
+        public static string CMD_MRU_OlderThan2Weeks {
+            get {
+                return ResourceManager.GetString("CMD_MRU_OlderThan2Weeks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Older Than Today.
+        /// </summary>
+        public static string CMD_MRU_OlderThanToday {
+            get {
+                return ResourceManager.GetString("CMD_MRU_OlderThanToday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Older Than Yesterday.
+        /// </summary>
+        public static string CMD_MRU_OlderThanYesterday {
+            get {
+                return ResourceManager.GetString("CMD_MRU_OlderThanYesterday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pin or unpin an MRU entry.
         /// </summary>
         public static string CMD_MRU_Pin_Description {
@@ -201,6 +309,15 @@ namespace Edi.Util.Local {
         public static string CMD_MRU_PinItemCommand {
             get {
                 return ResourceManager.GetString("CMD_MRU_PinItemCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove All.
+        /// </summary>
+        public static string CMD_MRU_Remove_All {
+            get {
+                return ResourceManager.GetString("CMD_MRU_Remove_All", resourceCulture);
             }
         }
         
