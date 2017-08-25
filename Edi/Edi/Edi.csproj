@@ -408,23 +408,29 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="EdiAppWindowLogo.ico" />
-    <Content Include="Plugins\Log4NetTools.dll">
+    <!-- Content Include="Plugins\Log4NetTools.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\UML\MiniUML.Plugins.UmlClassDiagram.dll">
+    </Content -->
+    <!--Content Include="Plugins\UML\MiniUML.Plugins.UmlClassDiagram.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </Content -->
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>REM Make sure this library is available in the target path
+    <PostBuildEvent>
+REM Make sure this library is available in the target path
 REM Copy /Y "$(SolutionDir)02_Libs\00_bin\NumericUpDownLib.dll" "$(TargetDir)"
 REM Copy /Y "$(SolutionDir)02_Libs\00_bin\DropDownButtonLib.dll" "$(TargetDir)"
 REM Copy /Y "$(SolutionDir)02_Libs\00_bin\InplaceEditBoxLib.dlll" "$(TargetDir)"
 Copy /Y "$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Expression.dll" "$(TargetDir)"
 Copy /Y "$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Metro.dll" "$(TargetDir)"
-</PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>XCopy /S /Y "$(SolutionDir)MiniUML\Plugins\src\MiniUML.Plugins.UmlClassDiagram\$(OutDir)MiniUML.Plugins.UmlClassDiagram.dll" "$(ProjectDir)$(OutDir)\Plugins\UML\"
+XCopy /S /Y "$(SolutionDir)Tools\Log4NetTools\$(OutDir)Log4NetTools.dll" "$(ProjectDir)$(OutDir)\Plugins\"
+</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -45,8 +45,8 @@ RMDIR /S /Q .vs
 
 ECHO Deleting BIN and OBJ Folders in EDI folder
 ECHO.
-RMDIR /S /Q Edi\bin
-RMDIR /S /Q Edi\obj
+RMDIR /S /Q Edi\Edi\bin
+RMDIR /S /Q Edi\Edi\obj
 
 ECHO Deleting BIN and OBJ Folders in Edi.Apps
 ECHO.

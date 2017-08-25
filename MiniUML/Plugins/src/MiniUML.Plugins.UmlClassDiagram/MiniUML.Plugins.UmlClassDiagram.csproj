@@ -357,7 +357,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- Import Project="$(ProgramFiles)\MSBuild\StyleCop\v4.7\StyleCop.Targets" / -->
   <PropertyGroup>
-    <PostBuildEvent>Copy /Y "$(TargetPath)" "$(SolutionDir)Edi\Edi\Plugins\UML"
+    <PostBuildEvent>REM Copy /Y "$(TargetPath)" "$(SolutionDir)Edi\Edi\Plugins\UML"
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
