@@ -93,17 +93,8 @@
     <Reference Include="FileListView">
       <HintPath>..\..\02_Libs\00_bin\MsgBox\FileListView.dll</HintPath>
     </Reference>
-    <Reference Include="FileSystemModels">
-      <HintPath>..\..\02_Libs\00_bin\MsgBox\FileSystemModels.dll</HintPath>
-    </Reference>
     <Reference Include="FirstFloor.ModernUI">
       <HintPath>..\..\02_Libs\00_bin\Mui\FirstFloor.ModernUI.dll</HintPath>
-    </Reference>
-    <Reference Include="FolderBrowser">
-      <HintPath>..\..\02_Libs\00_bin\MsgBox\FolderBrowser.dll</HintPath>
-    </Reference>
-    <Reference Include="InplaceEditBoxLib">
-      <HintPath>..\..\02_Libs\00_bin\MsgBox\InplaceEditBoxLib.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\02_Libs\00_bin\log4net.dll</HintPath>
@@ -335,6 +326,10 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Tools\BuiltIn\Output\Output.csproj">
+      <Project>{d14d8609-693c-475d-a4a4-5a7f6188d633}</Project>
+      <Name>Output</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Edi.Apps\Edi.Apps.csproj">
       <Project>{4df91f4b-878a-4ab3-a5ec-16bce3d6e99d}</Project>
       <Name>Edi.Apps</Name>
@@ -359,10 +354,6 @@
       <Project>{aad6b1d6-f529-40f8-9786-dc8e2fdf0ad6}</Project>
       <Name>MiniUML.View</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Settings\Edi.SettingsView\Edi.SettingsView.csproj">
-      <Project>{972e4948-c781-4cf9-a13e-ac3146ab0ad1}</Project>
-      <Name>Edi.SettingsView</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Settings\Edi.Settings\Edi.Settings.csproj">
       <Project>{2807b493-cc2e-402e-901a-eb138698fedc}</Project>
       <Name>Edi.Settings</Name>
@@ -371,17 +362,9 @@
       <Project>{0E69BE38-78C0-4662-A0E1-56C5913B5C3A}</Project>
       <Name>SimpleControls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Tools\BuiltIn\Output\Output.csproj">
-      <Project>{d14d8609-693c-475d-a4a4-5a7f6188d633}</Project>
-      <Name>Output</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Edi.Dialogs\Edi.Dialogs.csproj">
       <Project>{c4bbc94f-aca4-4b4a-8558-248e2e684b05}</Project>
       <Name>Edi.Dialogs</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Edi.Documents\Edi.Documents.csproj">
-      <Project>{1fb5ac73-b203-4d42-b22a-af2690de3709}</Project>
-      <Name>Edi.Documents</Name>
     </ProjectReference>
     <ProjectReference Include="..\Edi.Themes\Edi.Themes.csproj">
       <Project>{69bc833c-0fe1-4288-bb80-bb457d07e638}</Project>
