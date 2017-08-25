@@ -425,12 +425,14 @@ REM Copy /Y "$(SolutionDir)02_Libs\00_bin\DropDownButtonLib.dll" "$(TargetDir)"
 REM Copy /Y "$(SolutionDir)02_Libs\00_bin\InplaceEditBoxLib.dlll" "$(TargetDir)"
 Copy /Y "$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Expression.dll" "$(TargetDir)"
 Copy /Y "$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Metro.dll" "$(TargetDir)"
-    </PostBuildEvent>
+
+XCopy /S /Y "$(SolutionDir)MiniUML\Plugins\src\MiniUML.Plugins.UmlClassDiagram\$(OutDir)MiniUML.Plugins.UmlClassDiagram.dll" "$(ProjectDir)$(OutDir)\Plugins\UML\"
+XCopy /S /Y "$(SolutionDir)Tools\Log4NetTools\$(OutDir)Log4NetTools.dll" "$(ProjectDir)$(OutDir)\Plugins\"
+</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>XCopy /S /Y "$(SolutionDir)MiniUML\Plugins\src\MiniUML.Plugins.UmlClassDiagram\$(OutDir)MiniUML.Plugins.UmlClassDiagram.dll" "$(ProjectDir)$(OutDir)\Plugins\UML\"
-XCopy /S /Y "$(SolutionDir)Tools\Log4NetTools\$(OutDir)Log4NetTools.dll" "$(ProjectDir)$(OutDir)\Plugins\"
-</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
