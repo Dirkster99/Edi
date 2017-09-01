@@ -19,10 +19,13 @@
               xmlns:ctrl="clr-namespace:MRULib.Controls;assembly=MRULib"
               xmlns:hyperl="clr-namespace:MRULib.Controls;assembly=MRULib"
               xmlns:conv="clr-namespace:MRULib.Converters;assembly=MRULib"
+              Margin="3,0,3,0"
           >
             <Grid.Resources>
                 <CollectionViewSource Source="{Binding MruList.Entries}" x:Key="collViewEntries"
-                                      IsLiveGroupingRequested="True">
+                                      IsLiveGroupingRequested="True"
+                                      IsLiveSortingRequested="True"
+                                      >
                     <CollectionViewSource.SortDescriptions>
                         <!--This will sort groups-->
                         <scm:SortDescription PropertyName="Value.GroupItem.Group" Direction="Ascending" />
@@ -202,7 +205,7 @@
                                             </ctrl:PathTrimmingFileHyperlink>
                                         </Grid>
 
-                                        <ctrl:CheckPin Grid.Column="1" Margin="0,0,12,0"
+                                        <ctrl:CheckPin Grid.Column="1"
                                                        HorizontalAlignment="Right"
                                                        Name="checkPin"
                                                        IsChecked="{Binding Value.IsPinned, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
