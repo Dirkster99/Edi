@@ -7,6 +7,7 @@ https://edi.codeplex.com/
 
 # Screenshots
 * [File Explorer Tool Window](https://github.com/Dirkster99/Edi/wiki/File-Explorer-Tool-Window)
+* [Log4Net Document Viewer](https://github.com/Dirkster99/Edi/wiki/Log4Net-Document-Viewer)
 
 ![screenshot](https://github.com/Dirkster99/Docu/blob/master/Edi/MetroDark_DeepBlack.png?raw=true)
 ![screenshot](https://github.com/Dirkster99/Docu/blob/master/Edi/Edi_MRU_ContextMenu.png?raw=true)
