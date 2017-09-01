@@ -5,6 +5,9 @@
 Edi - The open source integrated development environment (IDE) based on AvalonDock and AvalonEdit
 https://edi.codeplex.com/
 
+# Screenshots
+* ![File Explorer Tool Window](https://github.com/Dirkster99/Edi/wiki/File-Explorer-Tool-Window)
+
 ![screenshot](https://github.com/Dirkster99/Docu/blob/master/Edi/MetroDark_DeepBlack.png?raw=true)
 ![screenshot](https://github.com/Dirkster99/Docu/blob/master/Edi/Edi_MRU_ContextMenu.png?raw=true)
 ![screenshot](https://github.com/Dirkster99/Docu/blob/master/Edi/StartPage.png?raw=true)
