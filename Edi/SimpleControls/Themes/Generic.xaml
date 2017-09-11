@@ -6,54 +6,8 @@
   mc:Ignorable="d"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                
-  xmlns:watermark="clr-namespace:SimpleControls.WatermarkTextBox"
   xmlns:hyperl="clr-namespace:SimpleControls.Hyperlink"
   >
-  <!-- Define color of watermark in WatermarkTextBox name space -->
-  <SolidColorBrush x:Key="brushWatermarkForeground" Color="#AA000033" />
-  <SolidColorBrush x:Key="brushWatermarkBackground" Color="Transparent" />
-
-  <Style TargetType="{x:Type watermark:TextBoxWithWatermark}">
-    <Setter Property="SnapsToDevicePixels" Value="True"/>
-    <Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="{x:Type watermark:TextBoxWithWatermark}">
-          <ControlTemplate.Resources>
-            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-            <watermark:WatermarkHelper x:Key="WatermarkHelper" />
-          </ControlTemplate.Resources>
-          <Grid>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="Auto"/>
-              <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Label Content="{Binding Path=LabelTextBox, RelativeSource={RelativeSource FindAncestor, AncestorType=watermark:TextBoxWithWatermark, AncestorLevel=1}}"
-                   HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                   Grid.Column="0" Grid.Row="0"/>
-
-            <TextBox Name="txtUserEntry1"
-                     Text="{Binding Path=Text, RelativeSource={RelativeSource FindAncestor, AncestorType=watermark:TextBoxWithWatermark, AncestorLevel=1}}"
-                     VerticalAlignment="Center" HorizontalAlignment="Stretch"
-                     Grid.Column="0" Grid.Row="1" />
-            <TextBlock Text="{Binding Path=Watermark, RelativeSource={RelativeSource FindAncestor, AncestorType=watermark:TextBoxWithWatermark, AncestorLevel=1}}"
-                     Foreground="{StaticResource brushWatermarkForeground}"
-                     Background="{StaticResource brushWatermarkBackground}"
-                     IsHitTestVisible="False"
-                     VerticalAlignment="Center" HorizontalAlignment="Stretch"
-                     Grid.Column="0" Grid.Row="1" Margin="5,2">
-            <TextBlock.Visibility>
-              <Binding ElementName="txtUserEntry1" Path="Text.IsEmpty" Converter="{StaticResource BooleanToVisibilityConverter}" />
-            </TextBlock.Visibility>
-            </TextBlock>
-          </Grid>
-        </ControlTemplate>
-      </Setter.Value>
-    </Setter>
-  </Style>
 
   <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
   <Style TargetType="{x:Type hyperl:WebHyperlink}">
