@@ -98,8 +98,10 @@
       if (dragStartPoint != null)
       {
 
-                if (((FrameworkElement)sender).DataContext is ToolBoxData d)
+                if (((FrameworkElement)sender).DataContext is ToolBoxData)
                 {
+                    ToolBoxData d = ((FrameworkElement)sender).DataContext as ToolBoxData;
+
                     if (d.CreateShapeCommand.CreateShape.CanExecute(null))
                         d.CreateShapeCommand.CreateShape.Execute(null);
                 }
@@ -121,8 +123,9 @@
         DragObject dataObject = new DragObject();
 
 
-                if (((FrameworkElement)sender).DataContext is ToolBoxData d)
+                if (((FrameworkElement)sender).DataContext is ToolBoxData)
                 {
+                    ToolBoxData d = ((FrameworkElement)sender).DataContext as ToolBoxData;
                     dataObject.ObjectInstance = (object)d.CreateShapeCommand;
 
                     DragDrop.DoDragDrop((DependencyObject)sender, dataObject, DragDropEffects.Copy);

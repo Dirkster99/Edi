@@ -75,8 +75,12 @@
                     return;
 
 
-                if (toolwindowviewmodel is IRegisterableToolWindow registerTW)
+                if (toolwindowviewmodel is IRegisterableToolWindow)
+                {
+                    IRegisterableToolWindow registerTW = toolwindowviewmodel as IRegisterableToolWindow;
+
                     registerTW.SetToolWindowVisibility(this, !toolwindowviewmodel.IsVisible);
+                }
                 else
                     toolwindowviewmodel.SetToolWindowVisibility(!toolwindowviewmodel.IsVisible);
 
@@ -701,8 +705,11 @@
                 try
                 {
 
-                    if (this.ActiveDocument is EdiViewModel f)
+                    if (this.ActiveDocument is EdiViewModel)
+                    {
+                        EdiViewModel f = this.ActiveDocument as EdiViewModel;
                         f.DisableHighlighting();
+                    }
                 }
                 catch (Exception exp)
                 {
@@ -716,8 +723,10 @@
             (s, e) =>
             {
 
-                if (this.ActiveDocument is EdiViewModel f)
+                if (this.ActiveDocument is EdiViewModel)
                 {
+                    EdiViewModel f = this.ActiveDocument as EdiViewModel;
+
                     if (f.HighlightingDefinition != null)
                     {
                         e.CanExecute = true;
@@ -777,8 +786,10 @@
                     e.Handled = true;
 
 
-                    if (this.ActiveDocument is EdiViewModel f)
+                    if (this.ActiveDocument is EdiViewModel)
                     {
+                        EdiViewModel f = this.ActiveDocument as EdiViewModel;
+
                         if (this.FindReplaceVM != null)
                         {
                             this.FindReplaceVM.FindNext(this.FindReplaceVM, true);
@@ -808,8 +819,10 @@
                     e.Handled = true;
 
 
-                    if (this.ActiveDocument is EdiViewModel f)
+                    if (this.ActiveDocument is EdiViewModel)
                     {
+                        EdiViewModel f = this.ActiveDocument as EdiViewModel;
+
                         if (this.FindReplaceVM != null)
                         {
                             this.FindReplaceVM.FindNext(this.FindReplaceVM, false);
@@ -919,8 +932,12 @@
         private bool CanExecuteIfActiveDocumentIsEdiViewModel()
         {
 
-            if (this.ActiveDocument is EdiViewModel f)
+            if (this.ActiveDocument is EdiViewModel)
+            {
+                //EdiViewModel f = this.ActiveDocument as EdiViewModel;
+
                 return true;
+            }
 
             return false;
         }

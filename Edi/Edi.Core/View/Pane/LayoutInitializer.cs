@@ -27,8 +27,10 @@
 		/// <returns></returns>
 		public bool BeforeInsertAnchorable(LayoutRoot layout, LayoutAnchorable anchorableToShow, ILayoutContainer destinationContainer)
 		{
-            if (anchorableToShow.Content is IToolWindow tool)
+            if (anchorableToShow.Content is IToolWindow)
             {
+                IToolWindow tool = anchorableToShow.Content as IToolWindow;
+
                 var preferredLocation = tool.PreferredLocation;
 
                 LayoutAnchorGroup layoutGroup = null;
@@ -113,21 +115,27 @@
 		public void AfterInsertAnchorable(LayoutRoot layout, LayoutAnchorable anchorableShown)
 		{
             // If this is the first anchorable added to this pane, then use the preferred size.
-            if (anchorableShown.Content is IToolWindow tool)
+            if (anchorableShown.Content is IToolWindow)
             {
-                if (anchorableShown.Parent is LayoutAnchorablePane anchorablePane && anchorablePane.ChildrenCount == 1)
+                IToolWindow tool = anchorableShown.Content as IToolWindow;
+                if (anchorableShown.Parent is LayoutAnchorablePane)
                 {
-                    switch (tool.PreferredLocation)
+                    LayoutAnchorablePane anchorablePane = anchorableShown.Parent as LayoutAnchorablePane;
+
+                    if (anchorablePane.ChildrenCount == 1)
                     {
-                        case PaneLocation.Left:
-                        case PaneLocation.Right:
-                            anchorablePane.DockWidth = new GridLength(tool.PreferredWidth, GridUnitType.Pixel);
-                            break;
-                        case PaneLocation.Bottom:
-                            anchorablePane.DockHeight = new GridLength(tool.PreferredHeight, GridUnitType.Pixel);
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
+                        switch (tool.PreferredLocation)
+                        {
+                            case PaneLocation.Left:
+                            case PaneLocation.Right:
+                                anchorablePane.DockWidth = new GridLength(tool.PreferredWidth, GridUnitType.Pixel);
+                                break;
+                            case PaneLocation.Bottom:
+                                anchorablePane.DockHeight = new GridLength(tool.PreferredHeight, GridUnitType.Pixel);
+                                break;
+                            default:
+                                throw new ArgumentOutOfRangeException();
+                        }
                     }
                 }
             }

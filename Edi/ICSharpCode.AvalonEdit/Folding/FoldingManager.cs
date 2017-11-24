@@ -329,8 +329,9 @@ namespace ICSharpCode.AvalonEdit.Folding
 		{
 			if (manager == null)
 				throw new ArgumentNullException("manager");
-            if (manager is FoldingManagerInstallation installation)
+            if (manager is FoldingManagerInstallation)
             {
+                FoldingManagerInstallation installation = manager as FoldingManagerInstallation;
                 installation.Uninstall();
             }
             else

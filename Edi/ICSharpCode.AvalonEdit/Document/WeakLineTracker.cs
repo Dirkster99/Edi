@@ -63,40 +63,55 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		void ILineTracker.BeforeRemoveLine(DocumentLine line)
 		{
-            if (targetObject.Target is ILineTracker targetTracker)
+            if (targetObject.Target is ILineTracker)
+            {
+                ILineTracker targetTracker = targetObject.Target as ILineTracker;
                 targetTracker.BeforeRemoveLine(line);
+            }
             else
                 Deregister();
         }
 		
 		void ILineTracker.SetLineLength(DocumentLine line, int newTotalLength)
 		{
-            if (targetObject.Target is ILineTracker targetTracker)
+            if (targetObject.Target is ILineTracker)
+            {
+                ILineTracker targetTracker = targetObject.Target as ILineTracker;
                 targetTracker.SetLineLength(line, newTotalLength);
+            }
             else
                 Deregister();
         }
 		
 		void ILineTracker.LineInserted(DocumentLine insertionPos, DocumentLine newLine)
 		{
-            if (targetObject.Target is ILineTracker targetTracker)
+            if (targetObject.Target is ILineTracker)
+            {
+                ILineTracker targetTracker = targetObject.Target as ILineTracker;
                 targetTracker.LineInserted(insertionPos, newLine);
+            }
             else
                 Deregister();
         }
 		
 		void ILineTracker.RebuildDocument()
 		{
-            if (targetObject.Target is ILineTracker targetTracker)
+            if (targetObject.Target is ILineTracker)
+            {
+                ILineTracker targetTracker = targetObject.Target as ILineTracker;
                 targetTracker.RebuildDocument();
+            }
             else
                 Deregister();
         }
 		
 		void ILineTracker.ChangeComplete(DocumentChangeEventArgs e)
 		{
-            if (targetObject.Target is ILineTracker targetTracker)
+            if (targetObject.Target is ILineTracker)
+            {
+                ILineTracker targetTracker = targetObject.Target as ILineTracker;
                 targetTracker.ChangeComplete(e);
+            }
             else
                 Deregister();
         }

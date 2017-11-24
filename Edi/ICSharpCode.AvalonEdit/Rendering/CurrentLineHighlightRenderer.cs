@@ -65,7 +65,14 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		
 		public CurrentLineHighlightRenderer(TextView textView)
 		{
-			this.textView = textView ?? throw new ArgumentNullException("textView");
+            if (textView != null)
+            {
+                this.textView = textView;
+            }
+            else
+            {
+                throw new ArgumentNullException("textView");
+            }
 
             this.BorderPen = new Pen(new SolidColorBrush(DefaultBorder), 1);
 			this.BorderPen.Freeze();

@@ -644,9 +644,10 @@ namespace MiniUML.Model.ViewModels.Document
                 UmlTypeToStringConverterBase conv = null;
                 conv = m.ShapeConverter;
 
+                List<ShapeViewModelBase> coll;
                 // Convert Xml document into a list of shapes and page definition
                 PageViewModelBase page = conv.ReadDocument(xmlDocument,
-                                                   this.DocumentViewModel.vm_CanvasViewModel, out List<ShapeViewModelBase> coll);
+                                                   this.DocumentViewModel.vm_CanvasViewModel, out coll);
 
                 if (coll == null)
                     return;

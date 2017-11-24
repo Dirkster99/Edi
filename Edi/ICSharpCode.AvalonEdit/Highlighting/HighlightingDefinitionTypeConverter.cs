@@ -40,8 +40,11 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// <inheritdoc/>
 		public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
 		{
-            if (value is string definitionName)
+            if (value is string)
+            {
+                string definitionName = value as string;
                 return HighlightingManager.Instance.GetDefinition(definitionName);
+            }
             else
                 return base.ConvertFrom(context, culture, value);
         }
@@ -58,8 +61,11 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// <inheritdoc/>
 		public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
 		{
-            if (value is IHighlightingDefinition definition && destinationType == typeof(string))
+            if (value is IHighlightingDefinition && destinationType == typeof(string))
+            {
+                IHighlightingDefinition definition = value as IHighlightingDefinition;
                 return definition.Name;
+            }
             else
                 return base.ConvertTo(context, culture, value, destinationType);
         }

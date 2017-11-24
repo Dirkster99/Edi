@@ -14,8 +14,12 @@
       DataTemplate d = null;
 
 
-            if (PluginManager.GetPluginModel(PluginModel.ModelName) is PluginModel m)
+            if (PluginManager.GetPluginModel(PluginModel.ModelName) is PluginModel)
+            {
+                PluginModel m = PluginManager.GetPluginModel(PluginModel.ModelName) as PluginModel;
+
                 d = m.Resources[item.ToString()] as DataTemplate;
+            }
 
             return d;
       ////return PluginManager.PluginResources[item.ToString()] as DataTemplate;

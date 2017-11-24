@@ -314,8 +314,11 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		internal void RunUndo(IUndoableOperation op)
 		{
-            if (op is IUndoableOperationWithContext opWithCtx)
+            if (op is IUndoableOperationWithContext)
+            {
+                IUndoableOperationWithContext opWithCtx = op as IUndoableOperationWithContext;
                 opWithCtx.Undo(this);
+            }
             else
                 op.Undo();
         }
@@ -348,8 +351,11 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		internal void RunRedo(IUndoableOperation op)
 		{
-            if (op is IUndoableOperationWithContext opWithCtx)
+            if (op is IUndoableOperationWithContext)
+            {
+                IUndoableOperationWithContext opWithCtx = op as IUndoableOperationWithContext;
                 opWithCtx.Redo(this);
+            }
             else
                 op.Redo();
         }

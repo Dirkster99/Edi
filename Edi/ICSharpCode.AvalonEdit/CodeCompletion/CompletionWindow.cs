@@ -82,8 +82,9 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 				return;
 			object description = item.Description;
 			if (description != null) {
-                if (description is string descriptionText)
+                if (description is string)
                 {
+                    string descriptionText = description as string;
                     toolTip.Content = new TextBlock
                     {
                         Text = descriptionText,

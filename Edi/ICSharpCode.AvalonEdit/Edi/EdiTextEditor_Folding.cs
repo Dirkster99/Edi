@@ -83,8 +83,11 @@
                             mFoldingManager = FoldingManager.Install(this.TextArea);
 
 
-                        if (this.mFoldingStrategy is AbstractFoldingStrategy abstractFolder)
+                        if (this.mFoldingStrategy is AbstractFoldingStrategy)
+                        {
+                            AbstractFoldingStrategy abstractFolder = this.mFoldingStrategy as AbstractFoldingStrategy;
                             abstractFolder.UpdateFoldings(mFoldingManager, this.Document);
+                        }
                     }
                     else
                         this.mInstallFoldingManager = true;
@@ -127,8 +130,11 @@
                 if (mFoldingStrategy != null)
                 {
 
-                    if (this.mFoldingStrategy is AbstractFoldingStrategy abstractFolder)
+                    if (this.mFoldingStrategy is AbstractFoldingStrategy)
+                    {
+                        AbstractFoldingStrategy abstractFolder = this.mFoldingStrategy as AbstractFoldingStrategy;
                         abstractFolder.UpdateFoldings(mFoldingManager, this.Document);
+                    }
                 }
             }
         }

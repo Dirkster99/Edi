@@ -37,9 +37,13 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 			
 			// Find the scroll viewer:
 			scrollViewer = null;
-			if (this.VisualChildrenCount > 0) {
-                if (this.GetVisualChild(0) is Border border)
+			if (this.VisualChildrenCount > 0)
+            {
+                if (this.GetVisualChild(0) is Border)
+                {
+                    Border border = this.GetVisualChild(0) as Border;
                     scrollViewer = border.Child as ScrollViewer;
+                }
             }
 		}
 		

@@ -78,8 +78,10 @@
 			FrameworkElement framworkElement = d as FrameworkElement; // Remove the handler if it exist to avoid memory leaks
 			framworkElement.Loaded -= OnFrameworkElement_Loaded;
 
-            if (e.NewValue is ICommand command)
+            if (e.NewValue is ICommand)
             {
+                ICommand command = e.NewValue as ICommand;
+
                 // the property is attached so we attach the Drop event handler
                 framworkElement.Loaded += OnFrameworkElement_Loaded;
             }

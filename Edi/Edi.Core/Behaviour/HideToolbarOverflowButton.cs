@@ -101,8 +101,9 @@
             ////      }
             ////
 
-            if (mainToolBar.Template.FindName("OverflowGrid", mainToolBar) is FrameworkElement overflowGrid)
+            if (mainToolBar.Template.FindName("OverflowGrid", mainToolBar) is FrameworkElement)
             {
+                FrameworkElement overflowGrid = mainToolBar.Template.FindName("OverflowGrid", mainToolBar) as FrameworkElement;
                 overflowGrid.Visibility = Visibility.Collapsed;
             }
         }

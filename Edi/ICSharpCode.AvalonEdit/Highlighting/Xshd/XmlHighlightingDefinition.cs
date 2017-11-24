@@ -39,9 +39,12 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 			var rnev = new RegisterNamedElementsVisitor(this);
 			xshd.AcceptElements(rnev);
 			// Assign MainRuleSet so that references can be resolved
-			foreach (XshdElement element in xshd.Elements) {
-                if (element is XshdRuleSet xrs && xrs.Name == null)
+			foreach (XshdElement element in xshd.Elements)
+            {
+                XshdRuleSet xrs = element as XshdRuleSet;
+                if (element is XshdRuleSet && xrs.Name == null)
                 {
+
                     if (MainRuleSet != null)
                         throw Error(element, "Duplicate main RuleSet. There must be only one nameless RuleSet!");
                     else
@@ -163,20 +166,23 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 				
 				foreach (XshdElement element in ruleSet.Elements) {
 					object o = element.AcceptVisitor(this);
-                    if (o is HighlightingRuleSet elementRuleSet)
+                    if (o is HighlightingRuleSet)
                     {
+                        HighlightingRuleSet elementRuleSet = o as HighlightingRuleSet;
                         Merge(rs, elementRuleSet);
                     }
                     else
                     {
-                        if (o is HighlightingSpan span)
+                        if (o is HighlightingSpan)
                         {
+                            HighlightingSpan span = o as HighlightingSpan;
                             rs.Spans.Add(span);
                         }
                         else
                         {
-                            if (o is HighlightingRule elementRule)
+                            if (o is HighlightingRule)
                             {
+                                HighlightingRule elementRule = o as HighlightingRule;
                                 rs.Rules.Add(elementRule);
                             }
                         }

@@ -135,8 +135,9 @@
       if ((value is UmlTypes) == false)
         return null;
 
+            string str = string.Empty;
 
-            if (this.mMapUmlTypeToString.TryGetValue((UmlTypes)value, out string str) == false)
+            if (this.mMapUmlTypeToString.TryGetValue((UmlTypes)value, out str) == false)
                 this.mMapUmlTypeToString.TryGetValue(UmlTypes.Undefined, out str);
 
             return str;
@@ -159,8 +160,9 @@
       if ((value is string) == false)
         return null;
 
+            UmlTypes umlTypes;
 
-            if (this.mMapStringToUmlType.TryGetValue(value as string, out UmlTypes umlTypes) == false)
+            if (this.mMapStringToUmlType.TryGetValue(value as string, out umlTypes) == false)
                 return UmlTypes.Undefined;
 
             return umlTypes;

@@ -47,8 +47,10 @@
 		static void window_StateChanged(object sender, System.EventArgs e)
 		{
 
-            if (sender is Window w)
+            if (sender is Window)
             {
+                Window w = sender as Window;
+
                 if (w.WindowState == WindowState.Maximized)
                     WindowMaximized.SetIsNotMaximized(w, false);
                 else

@@ -148,8 +148,11 @@
         {
             while (obj != null)
             {
-                if (obj is CanvasView cv)
+                if (obj is CanvasView)
+                {
+                    CanvasView cv = obj as CanvasView;
                     return cv;
+                }
 
                 obj = VisualTreeHelper.GetParent(obj);
             }
@@ -231,8 +234,11 @@
         private void handler_RubberBandSelection(object sender, RubberBandSelectionEventArgs e)
         {
 
-            if (this.mCurrentMouseHandler is CreateRubberBandMouseHandler handler)
+            if (this.mCurrentMouseHandler is CreateRubberBandMouseHandler)
+            {
+                CreateRubberBandMouseHandler handler = this.mCurrentMouseHandler as CreateRubberBandMouseHandler;
                 handler.RubberBandSelection -= this.handler_RubberBandSelection;
+            }
 
             this.CanvasViewModel.Handle_RubberBandSelection(e);
 
@@ -284,8 +290,11 @@
                 shape.Position = p;
 
                 // Invoke snap event if possible to let lines adjust correctly
-                if (control is ISnapTarget ist)
+                if (control is ISnapTarget)
+                {
+                    ISnapTarget ist = control as ISnapTarget;
                     ist.NotifySnapTargetUpdate(new SnapTargetUpdateEventArgs(p - origin));
+                }
             }
         }
 
@@ -407,8 +416,11 @@
             while (shape != null)
             {
 
-                if (this.mPart_ItemsControl.ItemContainerGenerator.ItemFromContainer(shape) is ShapeViewModelBase item)
+                if (this.mPart_ItemsControl.ItemContainerGenerator.ItemFromContainer(shape) is ShapeViewModelBase)
+                {
+                    ShapeViewModelBase item = this.mPart_ItemsControl.ItemContainerGenerator.ItemFromContainer(shape) as ShapeViewModelBase;
                     return item;
+                }
 
                 shape = VisualTreeHelper.GetParent(shape);
             }

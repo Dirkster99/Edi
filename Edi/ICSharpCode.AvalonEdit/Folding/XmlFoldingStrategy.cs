@@ -116,9 +116,18 @@ namespace ICSharpCode.AvalonEdit.Folding
 		
 		static int GetOffset(TextDocument document, XmlReader reader)
 		{
-            if (reader is IXmlLineInfo info && info.HasLineInfo())
+            if (reader is IXmlLineInfo)
             {
-                return document.GetOffset(info.LineNumber, info.LinePosition);
+                IXmlLineInfo info = reader as IXmlLineInfo;
+
+                if (info.HasLineInfo())
+                {
+                    return document.GetOffset(info.LineNumber, info.LinePosition);
+                }
+                else
+                {
+                    throw new ArgumentException("XmlReader does not have positioning information.");
+                }
             }
             else
             {

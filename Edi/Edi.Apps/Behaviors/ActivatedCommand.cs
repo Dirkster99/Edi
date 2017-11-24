@@ -86,8 +86,10 @@
 			var uiElement = d as Window;	  // Remove the handler if it exist to avoid memory leaks
 			uiElement.Activated -= UiElement_Activated;
 
-            if (e.NewValue is ICommand command)
+            if (e.NewValue is ICommand)
             {
+                ICommand command = e.NewValue as ICommand;
+
                 // the property is attached so we attach the Drop event handler
                 uiElement.Activated += UiElement_Activated;
             }

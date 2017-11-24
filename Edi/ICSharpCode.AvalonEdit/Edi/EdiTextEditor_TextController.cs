@@ -61,8 +61,10 @@
       var txtBox = fileDoc as EdiTextEditor;
 
             // Remove event handler from old if OldValue is available
-            if (e.OldValue is ITextBoxController oldController)
+            if (e.OldValue is ITextBoxController)
             {
+                ITextBoxController oldController = e.OldValue as ITextBoxController;
+
                 elements.Remove(oldController);
                 oldController.SelectAll -= SelectAll;
                 oldController.Select -= Select;
@@ -74,8 +76,10 @@
             }
 
             // Add new eventhandler for each event declared in the interface declaration
-            if (e.NewValue is ITextBoxController newController)
+            if (e.NewValue is ITextBoxController)
             {
+                ITextBoxController newController = e.NewValue as ITextBoxController;
+
                 // Sometime the newController is already there but the event handling is not working
                 // Remove controller and event handling and install a new one instead.
                 TextEditor test;

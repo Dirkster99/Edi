@@ -68,8 +68,11 @@ namespace ICSharpCode.AvalonEdit.Utils
 		
 		public static void Freeze(object item)
 		{
-            if (item is IFreezable f)
+            if (item is IFreezable)
+            {
+                IFreezable f = item as IFreezable;
                 f.Freeze();
+            }
         }
 		
 		public static T FreezeAndReturn<T>(T item) where T : IFreezable

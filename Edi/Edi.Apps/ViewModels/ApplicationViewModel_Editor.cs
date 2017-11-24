@@ -63,8 +63,10 @@ namespace Edi.Apps.ViewModels
                     //// i = (i + (previous ? l.Count - 1 : +1)) % l.Count;
 
                     // Search text in document
-                    if (l[i] is EdiViewModel fTmp)
+                    if (l[i] is EdiViewModel)
                     {
+                        EdiViewModel fTmp = l[i] as EdiViewModel;
+
                         Regex r;
                         m = this.FindNextMatchInText(0, 0, false, fTmp.Text, ref f, out r);
 
@@ -231,8 +233,10 @@ namespace Edi.Apps.ViewModels
         private void ShowGotoLineDialog()
         {
 
-            if (this.ActiveDocument is EdiViewModel f)
+            if (this.ActiveDocument is EdiViewModel)
             {
+                EdiViewModel f = this.ActiveDocument as EdiViewModel;
+
                 Window dlg = null;
                 Edi.Dialogs.GotoLine.GotoLineViewModel dlgVM = null;
 
@@ -275,8 +279,9 @@ namespace Edi.Apps.ViewModels
         private void ShowFindReplaceDialog(bool ShowFind = true)
         {
 
-            if (this.ActiveDocument is EdiViewModel f)
+            if (this.ActiveDocument is EdiViewModel)
             {
+                EdiViewModel f = this.ActiveDocument as EdiViewModel;
                 Window dlg = null;
 
                 try

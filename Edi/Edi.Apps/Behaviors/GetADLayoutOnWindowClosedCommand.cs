@@ -54,8 +54,10 @@ namespace Edi.Apps.Behaviors
 			// Remove the handler if it exist to avoid memory leaks
 			win.Closed -= uiElement_Closed;
 
-            if (e.NewValue is ICommand command)
+            if (e.NewValue is ICommand)
             {
+                ICommand command = e.NewValue as ICommand;
+
                 // the property is attached so we attach the closed event handler
                 win.Closed += uiElement_Closed;
             }

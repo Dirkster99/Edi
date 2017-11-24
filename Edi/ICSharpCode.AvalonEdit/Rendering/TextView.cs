@@ -1316,11 +1316,16 @@ namespace ICSharpCode.AvalonEdit.Rendering
                     {
                         foreach (var span in textLine.GetTextRunSpans())
                         {
-                            if (span.Value is InlineObjectRun inline && inline.VisualLine != null)
+                            if (span.Value is InlineObjectRun)
                             {
-                                Debug.Assert(inlineObjects.Contains(inline));
-                                double distance = textLine.GetDistanceFromCharacterHit(new CharacterHit(offset, 0));
-                                inline.Element.Arrange(new Rect(new Point(pos.X + distance, pos.Y), inline.Element.DesiredSize));
+                                InlineObjectRun inline = span.Value as InlineObjectRun;
+
+                                if (inline.VisualLine != null)
+                                {
+                                    Debug.Assert(inlineObjects.Contains(inline));
+                                    double distance = textLine.GetDistanceFromCharacterHit(new CharacterHit(offset, 0));
+                                    inline.Element.Arrange(new Rect(new Point(pos.X + distance, pos.Y), inline.Element.DesiredSize));
+                                }
                             }
                             offset += span.Length;
                         }
@@ -2053,14 +2058,20 @@ namespace ICSharpCode.AvalonEdit.Rendering
 
         void ConnectToTextView(object obj)
         {
-            if (obj is ITextViewConnect c)
+            if (obj is ITextViewConnect)
+            {
+                ITextViewConnect c = obj as ITextViewConnect;
                 c.AddToTextView(this);
+            }
         }
 
         void DisconnectFromTextView(object obj)
         {
-            if (obj is ITextViewConnect c)
+            if (obj is ITextViewConnect)
+            {
+                ITextViewConnect c = obj as ITextViewConnect;
                 c.RemoveFromTextView(this);
+            }
         }
         #endregion
 

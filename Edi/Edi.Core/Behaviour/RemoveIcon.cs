@@ -59,8 +59,11 @@
 			if (sender != null)
 			{
 
-                if (sender is Window win)
+                if (sender is Window)
+                {
+                    Window win = sender as Window;
                     IconHelper.RemoveIcon(win);
+                }
             }
 		}
 	}
