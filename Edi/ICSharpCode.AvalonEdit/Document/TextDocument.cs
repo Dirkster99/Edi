@@ -131,17 +131,23 @@ namespace ICSharpCode.AvalonEdit.Document
 		{
 			if (textSource == null)
 				throw new ArgumentNullException("textSource");
-			
-			#if NREFACTORY
+
+#if NREFACTORY
 			if (textSource is ReadOnlyDocument)
 				textSource = textSource.CreateSnapshot(); // retrieve underlying text source, which might be a RopeTextSource
 #endif
 
-            if (textSource is RopeTextSource rts)
+            if (textSource is RopeTextSource)
+            {
+                RopeTextSource rts = textSource as RopeTextSource;
                 return rts.GetRope();
+            }
 
-            if (textSource is TextDocument doc)
+            if (textSource is TextDocument)
+            {
+                TextDocument doc = textSource as TextDocument;
                 return doc.rope;
+            }
 
             return textSource.Text;
 		}
@@ -852,8 +858,11 @@ namespace ICSharpCode.AvalonEdit.Document
 				if (offset == 0 && length == rope.Length) {
 					// optimize replacing the whole document
 					rope.Clear();
-                    if (newText is RopeTextSource newRopeTextSource)
+                    if (newText is RopeTextSource)
+                    {
+                        RopeTextSource newRopeTextSource = newText as RopeTextSource;
                         rope.InsertRange(0, newRopeTextSource.GetRope());
+                    }
                     else
                         rope.InsertText(0, newText.Text);
                     lineManager.Rebuild();
@@ -863,8 +872,11 @@ namespace ICSharpCode.AvalonEdit.Document
 #if DEBUG
 					lineTree.CheckProperties();
 #endif
-                    if (newText is RopeTextSource newRopeTextSource)
+                    if (newText is RopeTextSource)
+                    {
+                        RopeTextSource newRopeTextSource = newText as RopeTextSource;
                         rope.InsertRange(offset, newRopeTextSource.GetRope());
+                    }
                     else
                         rope.InsertText(offset, newText.Text);
                     lineManager.Insert(offset, newText);

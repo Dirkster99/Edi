@@ -183,8 +183,11 @@ namespace ICSharpCode.AvalonEdit.Editing
 					selecting = true;
 					selectionStart = new AnchorSegment(Document, currentSeg.Offset, currentSeg.Length);
 					if ((Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift) {
-                        if (textArea.Selection is SimpleSelection simpleSelection)
+                        if (textArea.Selection is SimpleSelection)
+                        {
+                            SimpleSelection simpleSelection = textArea.Selection as SimpleSelection;
                             selectionStart = new AnchorSegment(Document, simpleSelection.SurroundingSegment);
+                        }
                     }
 					textArea.Selection = Selection.Create(textArea, selectionStart);
 					if ((Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift) {

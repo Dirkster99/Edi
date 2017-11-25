@@ -90,7 +90,14 @@
 				throw new ArgumentNullException("processArgsFunc");
 			}
 
-            this.processArgsFunc = processArgsFunc ?? throw new ArgumentNullException("processArgsFunc1");
+            if (processArgsFunc != null)
+            {
+                this.processArgsFunc = processArgsFunc;
+            }
+            else
+            {
+                throw new ArgumentNullException("processArgsFunc1");
+            }
 
 			this.processActivateFunc = processArgsFunc1;
 			this.applicationId = applicationId;
@@ -109,8 +116,10 @@
             string argsWaitHandleName = "ArgsWaitHandle_" + applicationId;
             string memoryFileName = "ArgFile_" + applicationId;
 
-			EventWaitHandle argsWaitHandle = new EventWaitHandle(
-				false, EventResetMode.AutoReset, argsWaitHandleName, out bool createdNew);
+            bool createdNew;
+
+            EventWaitHandle argsWaitHandle = new EventWaitHandle(
+				false, EventResetMode.AutoReset, argsWaitHandleName, out createdNew);
 
 			GC.KeepAlive(argsWaitHandle);
              

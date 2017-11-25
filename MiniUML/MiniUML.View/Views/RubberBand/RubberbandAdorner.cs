@@ -124,8 +124,9 @@
     private static void OnChangeEndPoint(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
 
-            if (d is RubberbandAdorner rba && e.NewValue != null)
+            if (d is RubberbandAdorner && e.NewValue != null)
             {
+                RubberbandAdorner rba = d as RubberbandAdorner;
                 if (e.NewValue is Point?)
                 {
                     Point? db = e.NewValue as Point?;

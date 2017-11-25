@@ -24,8 +24,9 @@
 
 		private static void SelectedTextChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
 		{
-            if (obj is TextBox tb)
+            if (obj is TextBox)
             {
+                TextBox tb = obj as TextBox;
                 if (e.OldValue == null && e.NewValue != null)
                 {
                     tb.SelectionChanged += tb_SelectionChanged;
@@ -36,9 +37,11 @@
                 }
 
 
-                if (e.NewValue is string newValue && newValue != tb.SelectedText)
+                if (e.NewValue is string)
                 {
-                    if (newValue == tb.Text) // Just select the complete text if new values and text content is equal
+                    string newValue = e.NewValue as string;
+
+                    if (newValue == tb.Text && newValue != tb.SelectedText) // Just select the complete text if new values and text content is equal
                         tb.SelectAll();
                     else
                         tb.SelectedText = newValue as string;
@@ -48,8 +51,9 @@
 
 		static void tb_SelectionChanged(object sender, RoutedEventArgs e)
 		{
-            if (sender is TextBox tb)
+            if (sender is TextBox)
             {
+                TextBox tb = sender as TextBox;
                 SetSelectedText(tb, tb.SelectedText);
             }
         }

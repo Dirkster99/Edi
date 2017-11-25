@@ -51,8 +51,10 @@
 			UIElement uiElement = d as UIElement;	  // Remove the handler if it exist to avoid memory leaks
 			uiElement.Drop -= UIElement_Drop;
 
-            if (e.NewValue is ICommand command)
+            if (e.NewValue is ICommand)
             {
+                ICommand command = e.NewValue as ICommand;
+
                 // the property is attached so we attach the Drop event handler
                 uiElement.Drop += UIElement_Drop;
             }

@@ -410,15 +410,17 @@ namespace ICSharpCode.AvalonEdit
 		
 		static void OnIsReadOnlyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-            if (d is TextEditor editor)
+            if (d is TextEditor)
             {
+                TextEditor editor = d as TextEditor;
                 if ((bool)e.NewValue)
                     editor.TextArea.ReadOnlySectionProvider = ReadOnlySectionDocument.Instance;
                 else
                     editor.TextArea.ReadOnlySectionProvider = NoReadOnlySections.Instance;
 
-                if (TextEditorAutomationPeer.FromElement(editor) is TextEditorAutomationPeer peer)
+                if (TextEditorAutomationPeer.FromElement(editor) is TextEditorAutomationPeer)
                 {
+                    TextEditorAutomationPeer peer = TextEditorAutomationPeer.FromElement(editor) as TextEditorAutomationPeer;
                     peer.RaiseIsReadOnlyChanged((bool)e.OldValue, (bool)e.NewValue);
                 }
             }
@@ -443,8 +445,10 @@ namespace ICSharpCode.AvalonEdit
 		
 		static void OnIsModifiedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-            if (d is TextEditor editor)
+            if (d is TextEditor)
             {
+                TextEditor editor = d as TextEditor;
+
                 TextDocument document = editor.Document;
                 if (document != null)
                 {

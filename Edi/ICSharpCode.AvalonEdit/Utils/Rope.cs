@@ -66,8 +66,10 @@ namespace ICSharpCode.AvalonEdit.Utils
 		{
 			if (input == null)
 				throw new ArgumentNullException("input");
-            if (input is Rope<T> inputRope)
+            if (input is Rope<T>)
             {
+                Rope<T> inputRope = input as Rope<T>;
+
                 // clone ropes instead of copying them
                 inputRope.root.Publish();
                 this.root = inputRope.root;
@@ -223,8 +225,9 @@ namespace ICSharpCode.AvalonEdit.Utils
 		{
 			if (newElements == null)
 				throw new ArgumentNullException("newElements");
-            if (newElements is Rope<T> newElementsRope)
+            if (newElements is Rope<T>)
             {
+                Rope<T> newElementsRope = newElements as Rope<T>;
                 InsertRange(index, newElementsRope);
             }
             else

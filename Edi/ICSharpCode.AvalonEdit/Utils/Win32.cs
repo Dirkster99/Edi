@@ -44,8 +44,10 @@ namespace ICSharpCode.AvalonEdit.Utils
 		{
 			if (owner == null)
 				throw new ArgumentNullException("owner");
-            if (PresentationSource.FromVisual(owner) is HwndSource source)
+            if (PresentationSource.FromVisual(owner) is HwndSource)
             {
+                HwndSource source = PresentationSource.FromVisual(owner) as HwndSource;
+
                 Vector r = owner.PointToScreen(new Point(size.Width, size.Height)) - owner.PointToScreen(new Point(0, 0));
                 return SafeNativeMethods.CreateCaret(source.Handle, IntPtr.Zero, (int)Math.Ceiling(r.X), (int)Math.Ceiling(r.Y));
             }
@@ -62,8 +64,10 @@ namespace ICSharpCode.AvalonEdit.Utils
 		{
 			if (owner == null)
 				throw new ArgumentNullException("owner");
-            if (PresentationSource.FromVisual(owner) is HwndSource source)
+            if (PresentationSource.FromVisual(owner) is HwndSource)
             {
+                HwndSource source = PresentationSource.FromVisual(owner) as HwndSource;
+
                 Point pointOnRootVisual = owner.TransformToAncestor(source.RootVisual).Transform(position);
                 Point pointOnHwnd = pointOnRootVisual.TransformToDevice(source.RootVisual);
                 return SafeNativeMethods.SetCaretPos((int)pointOnHwnd.X, (int)pointOnHwnd.Y);

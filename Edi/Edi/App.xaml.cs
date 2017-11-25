@@ -292,8 +292,10 @@ namespace Edi
 
 
                         // Filter name of executeable if present in command line args
-                        if (mainWindow.DataContext is ApplicationViewModel appVM)
+                        if (mainWindow.DataContext is ApplicationViewModel)
                         {
+                            ApplicationViewModel appVM = mainWindow.DataContext as ApplicationViewModel;
+
                             if (args != null)
                                 ProcessCmdLine(App.FilterAssemblyName(args), appVM);
                         }
@@ -336,8 +338,12 @@ namespace Edi
         private static ApplicationViewModel GetWorkSpace()
         {
 
-            if (Application.Current.MainWindow is MainWindow mainWindow)
+            if (Application.Current.MainWindow is MainWindow)
+            {
+                MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+
                 return mainWindow.DataContext as ApplicationViewModel;
+            }
 
             return null;
         }

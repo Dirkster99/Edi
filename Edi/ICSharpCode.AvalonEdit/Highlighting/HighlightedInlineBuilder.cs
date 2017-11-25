@@ -42,8 +42,11 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 	{
 		static HighlightingBrush MakeBrush(Brush b)
 		{
-            if (b is SolidColorBrush scb)
+            if (b is SolidColorBrush)
+            {
+                SolidColorBrush scb = b as SolidColorBrush;
                 return new SimpleHighlightingBrush(scb);
+            }
             else
                 return null;
         }

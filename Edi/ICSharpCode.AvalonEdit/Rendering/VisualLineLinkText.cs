@@ -101,8 +101,9 @@ namespace ICSharpCode.AvalonEdit.Rendering
 			if (e.ChangedButton == MouseButton.Left && !e.Handled && LinkIsClickable()) {
 				RequestNavigateEventArgs args = new RequestNavigateEventArgs(this.NavigateUri, this.TargetName);
 				args.RoutedEvent = Hyperlink.RequestNavigateEvent;
-                if (e.Source is FrameworkElement element)
+                if (e.Source is FrameworkElement)
                 {
+                    FrameworkElement element = e.Source as FrameworkElement;
                     // allow user code to handle the navigation request
                     element.RaiseEvent(args);
                 }

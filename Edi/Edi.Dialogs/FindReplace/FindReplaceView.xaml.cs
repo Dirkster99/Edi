@@ -52,8 +52,10 @@ namespace Edi.Dialogs.FindReplace
 				ediableComboBox.GotKeyboardFocus += (s, e) =>
 				{
                     // focus the TextBox inside the ComboBox
-                    if (ediableComboBox.FindChild("PART_EditableTextBox") is TextBox textBox)
+                    if (ediableComboBox.FindChild("PART_EditableTextBox") is TextBox)
                     {
+                        TextBox textBox = ediableComboBox.FindChild("PART_EditableTextBox") as TextBox;
+
                         textBox.Focus();
                     }
                 };

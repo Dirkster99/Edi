@@ -305,8 +305,10 @@ namespace Edi.Apps.ViewModels
             get
             {
 
-                if (this.mActiveDocument is MiniUmlViewModel vm)
+                if (this.mActiveDocument is MiniUmlViewModel)
                 {
+                    MiniUmlViewModel vm = this.mActiveDocument as MiniUmlViewModel;
+
                     return vm.DocumentMiniUML as MiniUML.Model.ViewModels.Document.AbstractDocumentViewModel;
                 }
 
@@ -529,8 +531,9 @@ namespace Edi.Apps.ViewModels
 
             // reset viewmodel options in accordance to current program settings
 
-            if (fileViewModel is IDocumentEdi ediVM)
+            if (fileViewModel is IDocumentEdi)
             {
+                IDocumentEdi ediVM = fileViewModel as IDocumentEdi;
                 this.SetActiveDocumentOnNewFileOrOpenFile(ediVM);
             }
             else
@@ -556,8 +559,12 @@ namespace Edi.Apps.ViewModels
             var anchorable_vm = this.Tools.FirstOrDefault(d => d.ContentId == content_id);
 
 
-            if (anchorable_vm is IRegisterableToolWindow registerTW)
+            if (anchorable_vm is IRegisterableToolWindow)
+            {
+                IRegisterableToolWindow registerTW = anchorable_vm as IRegisterableToolWindow;
+
                 registerTW.SetDocumentParent(this);
+            }
 
             if (anchorable_vm != null)
                 return anchorable_vm;
@@ -1412,8 +1419,11 @@ namespace Edi.Apps.ViewModels
             if (f != null)
             {
                 // Detach EdiViewModel specific events
-                if (f is EdiViewModel eVM)
+                if (f is EdiViewModel)
+                {
+                    EdiViewModel eVM = f as EdiViewModel;
                     eVM.ProcessingResultEvent -= Vm_ProcessingResultEvent;
+                }
 
                 this.Close(f);
             }
@@ -1428,8 +1438,10 @@ namespace Edi.Apps.ViewModels
         private void Vm_ProcessingResultEvent(object sender, ProcessResultEvent e)
         {
 
-            if (sender is IDocumentFileWatcher watcher)
+            if (sender is IDocumentFileWatcher)
             {
+                IDocumentFileWatcher watcher = sender as IDocumentFileWatcher;
+
                 try
                 {
                     // Activate file watcher for this document

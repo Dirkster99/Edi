@@ -39,8 +39,10 @@
 			FrameworkElement frameworkElement = d as FrameworkElement;	  // Remove the handler if it exist to avoid memory leaks
 			frameworkElement.Loaded -= frameworkElement_Loaded;
 
-            if (e.NewValue is ICommand command)
+            if (e.NewValue is ICommand)
             {
+                ICommand command = e.NewValue as ICommand;
+
                 // the property is attached so we attach the Loaded event handler
                 frameworkElement.Loaded += frameworkElement_Loaded;
             }

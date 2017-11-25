@@ -55,8 +55,10 @@ namespace ICSharpCode.AvalonEdit.Rendering
 							throw new ArgumentException("The returned TextRun must not have length 0.", element.GetType().Name + ".Length");
 						if (relativeOffset + run.Length > element.VisualLength)
 							throw new ArgumentException("The returned TextRun is too long.", element.GetType().Name + ".CreateTextRun");
-                        if (run is InlineObjectRun inlineRun)
+                        if (run is InlineObjectRun)
                         {
+                            InlineObjectRun inlineRun = run as InlineObjectRun;
+
                             inlineRun.VisualLine = VisualLine;
                             VisualLine.hasInlineObjects = true;
                             TextView.AddInlineObject(inlineRun);

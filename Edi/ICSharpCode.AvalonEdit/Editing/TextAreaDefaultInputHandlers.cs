@@ -63,8 +63,11 @@ namespace ICSharpCode.AvalonEdit.Editing
 			KeyBinding kb = new KeyBinding(command, key, modifiers);
             // Mark KeyBindings as frozen because they're shared between multiple editor instances.
             // KeyBinding derives from Freezable only in .NET 4, so we have to use this little trick:
-            if (((object)kb) is Freezable f)
+            if (((object)kb) is Freezable)
+            {
+                Freezable f = kb as Freezable;
                 f.Freeze();
+            }
             return kb;
 		}
 		

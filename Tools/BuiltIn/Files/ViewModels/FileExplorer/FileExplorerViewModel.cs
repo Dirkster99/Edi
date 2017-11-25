@@ -280,8 +280,10 @@ namespace Files.ViewModels.FileExplorer
 				if (e.ActiveDocument != null)
 				{
 
-                    if (e.ActiveDocument is FileBaseViewModel f)
+                    if (e.ActiveDocument is FileBaseViewModel)
                     {
+                        FileBaseViewModel f = e.ActiveDocument as FileBaseViewModel;
+
                         if (File.Exists(f.FilePath) == true)
                         {
                             var fi = new FileInfo(f.FilePath);

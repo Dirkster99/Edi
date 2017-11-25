@@ -227,8 +227,10 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 		/// </summary>
 		static void SetPosition(XshdElement element, XmlReader reader)
 		{
-            if (reader is IXmlLineInfo lineInfo)
+            if (reader is IXmlLineInfo)
             {
+                IXmlLineInfo lineInfo = reader as IXmlLineInfo;
+
                 element.LineNumber = lineInfo.LineNumber;
                 element.ColumnNumber = lineInfo.LinePosition;
             }

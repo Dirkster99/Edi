@@ -68,8 +68,11 @@
       element.CommandBindings.Clear();
 
             // If we're given a new command model, set up a binding.
-            if (e.NewValue is CommandModel commandModel)
+            if (e.NewValue is CommandModel)
+            {
+                CommandModel commandModel = e.NewValue as CommandModel;
                 element.CommandBindings.Add(new CommandBinding(commandModel.Command, commandModel.OnExecute, commandModel.OnQueryEnabled));
+            }
 
             // Suggest to WPF to refresh commands.
             CommandManager.InvalidateRequerySuggested();

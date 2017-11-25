@@ -16,8 +16,10 @@
         return null;
 
 
-            if (value is string s)
+            if (value is string)
             {
+                string s = value as string;
+
                 if (s == string.Empty)
                     return null;
             }

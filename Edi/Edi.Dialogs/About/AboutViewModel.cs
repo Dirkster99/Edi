@@ -131,8 +131,9 @@ namespace Edi.Dialogs.About
 				{
 					try
 					{
+                        string val = string.Empty;
 
-                        if (l.TryGetValue(assembly.Name, out string val) == false)
+                        if (l.TryGetValue(assembly.Name, out val) == false)
                             l.Add(assembly.Name, string.Format("{0}, {1}={2}", assembly.Name,
                                                         Edi.Util.Local.Strings.STR_ABOUT_Version,
                                                         assembly.Version));

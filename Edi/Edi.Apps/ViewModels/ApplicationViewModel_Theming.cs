@@ -217,8 +217,12 @@ namespace Edi.Apps.ViewModels
                             var Res = new Uri(item, UriKind.Relative);
 
 
-                            if (Application.LoadComponent(Res) is ResourceDictionary dictionary)
+                            if (Application.LoadComponent(Res) is ResourceDictionary)
+                            {
+                                ResourceDictionary dictionary = Application.LoadComponent(Res) as ResourceDictionary;
+
                                 Application.Current.Resources.MergedDictionaries.Add(dictionary);
+                            }
                         }
                         catch (Exception Exp)
                         {

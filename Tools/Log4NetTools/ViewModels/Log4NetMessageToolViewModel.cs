@@ -126,8 +126,11 @@
 				if (e.ActiveDocument != null)
 				{
 
-                    if (e.ActiveDocument is Log4NetViewModel log4NetVM)
+                    if (e.ActiveDocument is Log4NetViewModel)
+                    {
+                        Log4NetViewModel log4NetVM = e.ActiveDocument as Log4NetViewModel;
                         this.Log4NetVM = log4NetVM;  // There is an active Log4Net document -> display corresponding content
+                    }
                     else
                         this.Log4NetVM = null;
                 }
