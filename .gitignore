@@ -17,3 +17,4 @@ tmp/
 *.sqlite
 Edi/MiniUML.Plugins/MiniUML.Plugins.UmlClassDiagram.dll
 /.vs/
+/packages/
