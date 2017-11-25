@@ -171,6 +171,21 @@ namespace Edi
                 Console.WriteLine("StackTrace:{0}", exp.StackTrace);
                 Console.WriteLine("");
 
+                // Typically thrown by MEF when module binding does not work
+                if (exp is System.Reflection.ReflectionTypeLoadException)
+                {
+                    var loaderExcept = (exp as System.Reflection.ReflectionTypeLoadException).LoaderExceptions;
+
+                    Console.WriteLine("Loader Exception(s):");
+                    Logger.Error("Loader Exception(s):");
+
+                    foreach (var item in loaderExcept)
+                    {
+                        Console.WriteLine("Message {0}:", item.Message);
+                        Console.WriteLine("StackTrace {0}:", item.StackTrace);
+                    }
+                }
+
                 // Cannot set shutdown mode when application is already shuttong down
                 if (this.AppIsShuttingDown == false)
                     this.ShutdownMode = ShutdownMode.OnExplicitShutdown;
