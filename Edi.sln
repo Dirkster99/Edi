@@ -1,13 +1,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.8
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binaries", "Binaries", "{E3D8DFD4-4299-4FE0-9BE8-0CB41F189489}"
-	ProjectSection(SolutionItems) = preProject
-		02_Libs\00_bin\log4net.dll = 02_Libs\00_bin\log4net.dll
-		02_Libs\00_bin\log4net.xml = 02_Libs\00_bin\log4net.xml
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UML Application", "UML Application", "{C7A9E1F8-38FD-4268-BFC5-473CF16471D8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UML Plugins", "UML Plugins", "{2D26ECAB-01CB-4A96-B34C-EA616F547227}"
@@ -294,7 +288,7 @@ Global
 		{31B14E7F-36E2-464A-A90A-64A07DEB02EB} = {39FEC70F-8F35-4A04-B770-59F12A0CE83F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_NeutralResourcesLanguage = en-US
 		SolutionGuid = {132D3B9F-A6CB-49D9-B1E6-F122CCC2510E}
+		RESX_NeutralResourcesLanguage = en-US
 	EndGlobalSection
 EndGlobal
