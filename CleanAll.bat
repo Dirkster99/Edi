@@ -64,8 +64,8 @@ RMDIR /S /Q Edi\Edi.Dialogs\obj
 RMDIR /S /Q Edi\Edi.Documents\bin
 RMDIR /S /Q Edi\Edi.Documents\obj
 
-RMDIR /S /Q Edi.Themes\bin
-RMDIR /S /Q Edi.Themes\obj
+RMDIR /S /Q Edi\Edi.Themes\bin
+RMDIR /S /Q Edi\Edi.Themes\obj
 
 ECHO Deleting BIN and OBJ Folders in Settings
 ECHO.
@@ -79,8 +79,8 @@ RMDIR /S /Q Edi\Settings\Edi.SettingsView\obj
 
 ECHO Deleting BIN and OBJ Folders in Util
 ECHO.
-RMDIR /S /Q Edi.Util\bin
-RMDIR /S /Q Edi.Util\obj
+RMDIR /S /Q Edi\Edi.Util\bin
+RMDIR /S /Q Edi\Edi.Util\obj
 
 RMDIR /S /Q Edi\ICSharpCode.AvalonEdit\bin
 RMDIR /S /Q Edi\ICSharpCode.AvalonEdit\obj

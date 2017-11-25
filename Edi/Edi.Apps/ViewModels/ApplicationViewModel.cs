@@ -1,5 +1,6 @@
 namespace Edi.Apps.ViewModels
 {
+    using Microsoft.Practices.ServiceLocation;
     using Edi.Apps.Enums;
     using Edi.Apps.Interfaces.ViewModel;
     using Edi.Core.Interfaces;
@@ -19,13 +20,11 @@ namespace Edi.Apps.ViewModels
     using Edi.Themes.Interfaces;
     using EdiApp.Events;   // XXX TODO Implementation in Edi.Core should have a different namespace
     using Files.ViewModels.RecentFiles;
-    using Microsoft.Practices.Prism.Modularity;
-    using Microsoft.Practices.Prism.PubSubEvents;
-    using Microsoft.Practices.ServiceLocation;
     using Microsoft.Win32;
     using MRULib.MRU.Interfaces;
-    using MRULib.MRU.ViewModels;
     using MsgBox;
+    using Prism.Events;
+    using Prism.Modularity;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;

@@ -1,5 +1,6 @@
 ﻿namespace Edi.Apps.ViewModels
 {
+    using Microsoft.Practices.ServiceLocation;
     using Edi.Apps.Enums;
     using Edi.Core;
     using Edi.Core.Interfaces;
@@ -9,7 +10,6 @@
     using Edi.Documents.ViewModels.StartPage;
     using Edi.Themes;
     using Files.ViewModels.RecentFiles;
-    using Microsoft.Practices.ServiceLocation;
     using MiniUML.Framework;
     using MRULib.MRU.Enums;
     using MRULib.MRU.Interfaces;

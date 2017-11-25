@@ -1,6 +1,6 @@
 namespace Edi.Apps.Events
 {
-	using Microsoft.Practices.Prism.PubSubEvents;
+	using Prism.Events;
 
 	/// <summary>
 	/// Class implements a simple PRISM LoadLayout string event

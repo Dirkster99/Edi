@@ -7,8 +7,8 @@ namespace MiniUML.View.Windows
     using MiniUML.Framework;
     using MiniUML.Model.ViewModels.Document;
     using MiniUML.View.Converter;
-    using Microsoft.Practices.ServiceLocation;
     using MsgBox;
+    using Microsoft.Practices.ServiceLocation;
 
     /// <summary>
     /// Interaction logic for NewDocumentWindow.xaml

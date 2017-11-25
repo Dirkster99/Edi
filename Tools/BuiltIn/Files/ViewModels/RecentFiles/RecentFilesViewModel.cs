@@ -57,16 +57,6 @@ namespace Files.ViewModels.RecentFiles
             {
                 return ServiceLocator.Current.GetInstance<IMRUListViewModel>();
             }
-            /***
-						private set
-						{
-							if (Workspace.This.Config.MruList != value)
-							{
-								Workspace.This.Config.MruList = value;
-								this.NotifyPropertyChanged(() => this.MruList);
-							}
-						}
-			 ***/
         }
 
         public override PaneLocation PreferredLocation

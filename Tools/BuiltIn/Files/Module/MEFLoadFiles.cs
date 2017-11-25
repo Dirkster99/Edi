@@ -10,8 +10,8 @@
 	using Files.ViewModels.FileExplorer;
 	using Files.ViewModels.FileStats;
 	using FileSystemModels.Models;
-	using Microsoft.Practices.Prism.MefExtensions.Modularity;
-	using Microsoft.Practices.Prism.Modularity;
+    using Prism.Mef.Modularity;
+    using Prism.Modularity;
 	using Edi.Settings.Interfaces;
 
 	/// <summary>
@@ -28,8 +28,8 @@
 	/// 				startupLoaded="true" />
 	/// &lt;/modules>
 	/// </summary>
-	[ModuleExport(typeof(MEFLoadFiles), InitializationMode = InitializationMode.WhenAvailable)]
-	public class MEFLoadFiles : IModule
+	[ModuleExport(typeof(MEFLoadFiles))] //// , InitializationMode = InitializationMode.WhenAvailable
+    public class MEFLoadFiles : IModule
 	{
 		#region fields
 		private readonly IAvalonDockLayoutViewModel mAvLayout;
@@ -44,9 +44,9 @@
 		/// <param name="avLayout"></param>
 		[ImportingConstructor]
 		public MEFLoadFiles(IAvalonDockLayoutViewModel avLayout,
-													 ISettingsManager programSettings,
-													 IToolWindowRegistry toolRegistry,
-													 IFileOpenService fileOpenService)
+                            ISettingsManager programSettings,
+                            IToolWindowRegistry toolRegistry,
+                            IFileOpenService fileOpenService)
 		{
 			this.mAvLayout = avLayout;
 			this.mSettingsManager = programSettings;

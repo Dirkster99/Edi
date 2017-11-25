@@ -5,7 +5,7 @@ namespace Edi.Apps.Views.Shell
 	using Edi.Core.Interfaces;
 	using Edi.Apps.Events;
 	using Edi.Apps.Interfaces.ViewModel;
-	using Microsoft.Practices.Prism.PubSubEvents;
+	using Prism.Events;
 
   /// <summary>
   /// Interaction logic for MainWindow.xaml

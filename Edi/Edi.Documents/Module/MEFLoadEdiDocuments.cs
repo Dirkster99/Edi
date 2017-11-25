@@ -11,8 +11,8 @@
 	using Edi.Documents.ViewModels.EdiDoc;
 	using Edi.Documents.ViewModels.MiniUml;
 	using Edi.Documents.ViewModels.StartPage;
-	using Microsoft.Practices.Prism.MefExtensions.Modularity;
-	using Microsoft.Practices.Prism.Modularity;
+    using Prism.Mef.Modularity;
+    using Prism.Modularity;
 	using Edi.Settings.Interfaces;
 
 	/// <summary>

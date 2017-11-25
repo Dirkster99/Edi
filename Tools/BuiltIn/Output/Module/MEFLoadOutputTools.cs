@@ -1,14 +1,14 @@
 ﻿namespace Output.Module
 {
-    using System.ComponentModel.Composition;
-    using System.Reflection;
-    using System.Windows;
     using Edi.Core.Interfaces;
     using Edi.Core.Resources;
     using Edi.Core.View.Pane;
-    using Microsoft.Practices.Prism.MefExtensions.Modularity;
-    using Microsoft.Practices.Prism.Modularity;
     using Output.ViewModels;
+    using Prism.Mef.Modularity;
+    using Prism.Modularity;
+    using System.ComponentModel.Composition;
+    using System.Reflection;
+    using System.Windows;
 
     /// <summary>
     /// PRISM MEF Loader/Initializer class

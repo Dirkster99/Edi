@@ -1,25 +1,25 @@
 namespace Edi
 {
+    using Edi.Apps.Interfaces.ViewModel;
+    using Edi.Apps.ViewModels;
+    using Edi.Apps.Views.Shell;
+    using Edi.Core;
+    using Edi.Core.Interfaces;
+    using Edi.Settings;
+    using Edi.Settings.Interfaces;
+    using Edi.Settings.ProgramSettings;
+    using Edi.Themes.Interfaces;
+    using MRULib.MRU.Interfaces;
+    using MsgBox;
+    using Output.Views;
+    using Prism.Mef;
+    using Prism.Modularity;
+    using SimpleControls.Local;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.ComponentModel.Composition.Hosting;
     using System.Windows;
-    using Edi.Core;
-    using Edi.Core.Interfaces;
-    using Edi.Apps.Interfaces.ViewModel;
-    using Edi.Apps.ViewModels;
-    using Edi.Apps.Views.Shell;
-    using Microsoft.Practices.Prism.MefExtensions;
-    using Microsoft.Practices.Prism.Modularity;
-    using MsgBox;
-    using Output.Views;
-    using Edi.Settings;
-    using Edi.Settings.Interfaces;
-    using Edi.Settings.ProgramSettings;
-    using SimpleControls.Local;
-    using Edi.Themes.Interfaces;
-    using MRULib.MRU.Interfaces;
 
     public class Bootstapper : MefBootstrapper
     {
@@ -118,9 +118,14 @@ namespace Edi
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(AvalonDockLayoutViewModel).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(Bootstapper).Assembly));
 
-            ////Scan directory for content
-            ////DirectoryCatalog catalog = new DirectoryCatalog("Plugins");
-            ////this.AggregateCatalog.Catalogs.Add(catalog);
+            //Scan directory for content
+////        string execPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
+
+            DirectoryCatalog catalog = new DirectoryCatalog(".\\Plugins");
+            this.AggregateCatalog.Catalogs.Add(catalog);
+
+            catalog = new DirectoryCatalog(@"Plugins\UML");
+            this.AggregateCatalog.Catalogs.Add(catalog);
         }
 
         protected override DependencyObject CreateShell()
@@ -206,7 +211,7 @@ namespace Edi
             Application.Current.MainWindow.Show();
         }
 
-        protected override Microsoft.Practices.Prism.Regions.IRegionBehaviorFactory ConfigureDefaultRegionBehaviors()
+        protected override Prism.Regions.IRegionBehaviorFactory ConfigureDefaultRegionBehaviors()
         {
             var factory = base.ConfigureDefaultRegionBehaviors();
             return factory;
