@@ -383,16 +383,37 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="AfterBuild">
+    <ItemGroup>
+      <!-- Specify locally dependent binaries -->
+      <EdiProjectFiles Include="$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Expression.dll" />
+      <EdiProjectFiles Include="$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
+      <!-- Specify Plugin files -->
+      <EdiPluginUMLFiles Include="$(SolutionDir)MiniUML\Plugins\src\MiniUML.Plugins.UmlClassDiagram\$(OutDir)MiniUML.Plugins.UmlClassDiagram.dll" />
+      <!-- EdiPluginFiles Include="$(SolutionDir)Tools\BuiltIn\Files\$(OutDir)Files.dll" / -->
+      <EdiPluginFiles Include="$(SolutionDir)Tools\Log4NetTools\$(OutDir)Log4NetTools.dll" />
+      <EdiPluginFiles Include="$(SolutionDir)Edi\Edi.Documents\$(OutDir)Edi.Documents.dll" />
+    </ItemGroup>
+    <!-- Copy binaries not yet avalabile as nuget but as local binary only -->
+    <Copy SourceFiles="@(EdiProjectFiles)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="false" />
+    <!-- Copy binaries from build into their respective Plugins Folder (UML Plugins is seperate) -->
+    <Copy SourceFiles="@(EdiPluginUMLFiles)" DestinationFolder="$(ProjectDir)$(OutDir)\Plugins\UML\" SkipUnchangedFiles="false" />
+    <Copy SourceFiles="@(EdiPluginFiles)" DestinationFolder="$(ProjectDir)$(OutDir)\Plugins\" SkipUnchangedFiles="false" />
+  </Target>
   <PropertyGroup>
-    <PostBuildEvent>Copy /Y "$(SolutionDir)02_Libs\00_bin\NumericUpDownLib.dll" "$(TargetDir)"
+    <!--
+<PostBuildEvent>
+Copy /Y "$(SolutionDir)02_Libs\00_bin\NumericUpDownLib.dll" "$(TargetDir)"
 Copy /Y "$(SolutionDir)02_Libs\00_bin\DropDownButtonLib.dll" "$(TargetDir)"
 Copy /Y "$(SolutionDir)02_Libs\00_bin\InplaceEditBoxLib.dlll" "$(TargetDir)"
-Copy /Y "$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Expression.dll" "$(TargetDir)"
-Copy /Y "$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Metro.dll" "$(TargetDir)"
 
 XCopy /S /Y "$(SolutionDir)MiniUML\Plugins\src\MiniUML.Plugins.UmlClassDiagram\$(OutDir)MiniUML.Plugins.UmlClassDiagram.dll" "$(ProjectDir)$(OutDir)\Plugins\UML\"
 XCopy /S /Y "$(SolutionDir)Tools\Log4NetTools\$(OutDir)Log4NetTools.dll" "$(ProjectDir)$(OutDir)\Plugins\"
+
+Copy /Y "$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Expression.dll" "$(TargetDir)"
+Copy /Y "$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Metro.dll" "$(TargetDir)"
 </PostBuildEvent>
+-->
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
