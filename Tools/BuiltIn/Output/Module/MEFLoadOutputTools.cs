@@ -33,6 +33,11 @@
         private readonly IMessageManager mMessageManager = null;
         #endregion fields
 
+        static MEFLoadOutputTools()
+        {
+            
+        }
+
         /// <summary>
         /// Class constructor
         /// </summary>

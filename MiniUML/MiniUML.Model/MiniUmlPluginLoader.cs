@@ -7,15 +7,22 @@ namespace MiniUML.Model
     using MiniUML.Model.ViewModels.Document;
     using MsgBox;
     using Microsoft.Practices.ServiceLocation;
+    using System.ComponentModel.Composition;
+    using Prism.Mef.Modularity;
 
     /// <summary>
     /// This class load MiniUML Plug-Ins at run-time from the specified folder.
     /// </summary>
-    public static class MiniUmlPluginLoader
+    [ModuleExport(typeof(MiniUmlPluginLoader))]
+    public class MiniUmlPluginLoader
     {
-        #region methods
-        public static void LoadPlugins(string pluginDirectory,
+        [ImportingConstructor]
+        public MiniUmlPluginLoader(string pluginDirectory,
                                        IMiniUMLDocument windowViewModel)
+        
+        #region methods
+        //public static void LoadPlugins(string pluginDirectory,
+        //                               IMiniUMLDocument windowViewModel)
         {
             string[] assemblyFiles = { };
             var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();

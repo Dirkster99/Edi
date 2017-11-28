@@ -18,6 +18,7 @@
     <WarningLevel>4</WarningLevel>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <DeployApplication>true</DeployApplication>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -158,6 +159,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Bootstapper.cs" />
+    <Compile Include="PluginModuleCatalog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -383,22 +385,28 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir).build\Edi.targets" />
+  <PropertyGroup>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(SolutionDir)$(Configuration)\$(TargetFileName)</StartProgram>
+    <StartWorkingDirectory>$(SolutionDir)$(Configuration)</StartWorkingDirectory>
+  </PropertyGroup>
   <Target Name="AfterBuild">
     <ItemGroup>
       <!-- Specify locally dependent binaries -->
       <EdiProjectFiles Include="$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Expression.dll" />
       <EdiProjectFiles Include="$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
       <!-- Specify Plugin files -->
-      <EdiPluginUMLFiles Include="$(SolutionDir)MiniUML\Plugins\src\MiniUML.Plugins.UmlClassDiagram\$(OutDir)MiniUML.Plugins.UmlClassDiagram.dll" />
+      <!--<EdiPluginUMLFiles Include="$(SolutionDir)MiniUML\Plugins\src\MiniUML.Plugins.UmlClassDiagram\$(OutDir)MiniUML.Plugins.UmlClassDiagram.dll" />-->
       <!-- EdiPluginFiles Include="$(SolutionDir)Tools\BuiltIn\Files\$(OutDir)Files.dll" / -->
-      <EdiPluginFiles Include="$(SolutionDir)Tools\Log4NetTools\$(OutDir)Log4NetTools.dll" />
-      <EdiPluginFiles Include="$(SolutionDir)Edi\Edi.Documents\$(OutDir)Edi.Documents.dll" />
+      <!--<EdiPluginFiles Include="$(SolutionDir)Tools\Log4NetTools\$(OutDir)Log4NetTools.dll" />-->
+      <!--<EdiPluginFiles Include="$(SolutionDir)Edi\Edi.Documents\$(OutDir)Edi.Documents.dll" />-->
     </ItemGroup>
     <!-- Copy binaries not yet avalabile as nuget but as local binary only -->
     <Copy SourceFiles="@(EdiProjectFiles)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="false" />
     <!-- Copy binaries from build into their respective Plugins Folder (UML Plugins is seperate) -->
-    <Copy SourceFiles="@(EdiPluginUMLFiles)" DestinationFolder="$(ProjectDir)$(OutDir)\Plugins\UML\" SkipUnchangedFiles="false" />
-    <Copy SourceFiles="@(EdiPluginFiles)" DestinationFolder="$(ProjectDir)$(OutDir)\Plugins\" SkipUnchangedFiles="false" />
+    <!--<Copy SourceFiles="@(EdiPluginUMLFiles)" DestinationFolder="$(ProjectDir)$(OutDir)\Plugins\UML\" SkipUnchangedFiles="false" />-->
+    <!--<Copy SourceFiles="@(EdiPluginFiles)" DestinationFolder="$(ProjectDir)$(OutDir)\Plugins\" SkipUnchangedFiles="false" />-->
   </Target>
   <PropertyGroup>
     <!--
