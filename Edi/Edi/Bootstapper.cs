@@ -146,7 +146,7 @@ namespace Edi
                 appVM.LoadConfigOnAppStartup(this.mOptions, this.mProgramSettingsManager, this.mThemes);
 
                 // Attempt to load a MiniUML plugin via the model class
-                //MiniUML.Model.MiniUmlPluginLoader.LoadPlugins(appCore.AssemblyEntryLocation + @".\Plugins\UML\", this.AppViewModel); // discover via Plugin folder instead
+                MiniUML.Model.MiniUmlPluginLoader.LoadPlugins(appCore.AssemblyEntryLocation + @".\Plugins\MiniUML.Plugins.UmlClassDiagram\", this.AppViewModel); // discover via Plugin folder instead
 
                 this.mMainWin = this.Container.GetExportedValue<MainWindow>();
 
