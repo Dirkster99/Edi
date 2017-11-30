@@ -40,6 +40,15 @@ namespace Edi
         private readonly ISettingsManager mProgramSettingsManager = null;
         #endregion fields
 
+        /// <summary>
+        /// Initializes static members of the <see cref="Bootstapper"/> class.
+        /// This constructor will be called before MEF begins to take over.
+        /// </summary>
+        static Bootstapper()
+        {
+            System.IO.Directory.CreateDirectory(@".\Plugins");
+        }
+
         #region constructors
         public Bootstapper(App app,
                            StartupEventArgs eventArgs,
@@ -117,15 +126,8 @@ namespace Edi
 
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(AvalonDockLayoutViewModel).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(Bootstapper).Assembly));
-
-            //Scan directory for content
-////        string execPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
-
-            DirectoryCatalog catalog = new DirectoryCatalog(".\\Plugins");
-            this.AggregateCatalog.Catalogs.Add(catalog);
-
-            catalog = new DirectoryCatalog(@"Plugins\UML");
-            this.AggregateCatalog.Catalogs.Add(catalog);
+            ////this.AggregateCatalog.Catalogs.Add(new PluginModuleCatalog(@".\Plugins"));
+            
         }
 
         protected override DependencyObject CreateShell()
@@ -144,7 +146,7 @@ namespace Edi
                 appVM.LoadConfigOnAppStartup(this.mOptions, this.mProgramSettingsManager, this.mThemes);
 
                 // Attempt to load a MiniUML plugin via the model class
-                MiniUML.Model.MiniUmlPluginLoader.LoadPlugins(appCore.AssemblyEntryLocation + @".\Plugins\UML\", this.AppViewModel);
+                //MiniUML.Model.MiniUmlPluginLoader.LoadPlugins(appCore.AssemblyEntryLocation + @".\Plugins\UML\", this.AppViewModel); // discover via Plugin folder instead
 
                 this.mMainWin = this.Container.GetExportedValue<MainWindow>();
 
@@ -228,7 +230,7 @@ namespace Edi
         protected override IModuleCatalog CreateModuleCatalog()
         {
             // Configure Prism ModuleCatalog via app.config configuration file
-            return new ConfigurationModuleCatalog();
+            return new PluginModuleCatalog(@".\Plugins", new ConfigurationModuleCatalog());
         }
 
         protected override void ConfigureContainer()

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
+
+    <!-- Application directory -->
+    <ApplicationTargetDir Condition="$(ApplicationTargetDir) == '' Or $(ApplicationTargetDir) == '*Undefined*'">$(SolutionDir)$(Configuration)\</ApplicationTargetDir>
+
+    <!-- Plugins directory -->
+    <PluginsTargetDir Condition="$(PluginsTargetDir) == '' Or $(PluginsTargetDir) == '*Undefined*'">$(ApplicationTargetDir)Plugins\</PluginsTargetDir>
+
+    <!-- Determines if project is a plugin and it needs to be deployed to the solution application plugins folder -->
+    <DeployPlugin Condition=" '$(DeployPlugin)' == '' ">false</DeployPlugin>
+    
+    <!-- Determines if project is the main application and it needs to be deployed to the solution application folder -->
+    <DeployApplication Condition=" '$(DeployApplication)' == '' ">false</DeployApplication>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Deploy plugin -->
+    <BuildDependsOn Condition="$(DeployPlugin) == 'true'">
+      $(BuildDependsOn);
+      DeployPlugin;
+    </BuildDependsOn>
+
+    <!-- Deploy application -->
+    <BuildDependsOn Condition="$(DeployApplication) == 'true'">
+      $(BuildDependsOn);
+      DeployApplication;
+    </BuildDependsOn>
+  </PropertyGroup>
+
+  <Target Name="DeployPlugin">
+    <ItemGroup>
+      <PluginFiles Include="$(TargetDir)**\*.*"/>
+    </ItemGroup>
+    <Copy SourceFiles="@(PluginFiles)" DestinationFolder="$(PluginsTargetDir)$(TargetName)\%(RecursiveDir)"/>
+    <!-- <Message Text=" %(PluginFiles.Identity)" Importance="High"/> -->
+  </Target>
+
+  <Target Name="DeployApplication">
+    <ItemGroup>
+      <ApplicationFiles Include="$(TargetDir)**\*.*"/>
+    </ItemGroup>
+    <Copy SourceFiles="@(ApplicationFiles)" DestinationFolder="$(ApplicationTargetDir)%(RecursiveDir)"/>
+    <!-- <Message Text=" %(ApplicationFiles.Identity)" Importance="High"/> -->
+  </Target>
+</Project>
