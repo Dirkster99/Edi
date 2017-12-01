@@ -106,7 +106,14 @@ namespace Edi
 
                 // Register imported tool window definitions with Avalondock
                 var toolWindowRegistry = this.Container.GetExportedValue<IToolWindowRegistry>();
+
+                MEFLoadFiles.Initialize(this.appVM.ADLayout,
+                                        this.mProgramSettingsManager,
+                                        toolWindowRegistry,
+                                        appVM as IFileOpenService);
+
                 toolWindowRegistry.PublishTools();
+
 
                 // Show the startpage if application starts for the very first time
                 // (This requires that command binding was succesfully done before this line)
@@ -159,6 +166,8 @@ namespace Edi
 
                 var avLayout = this.Container.GetExportedValue<IAvalonDockLayoutViewModel>();
                 this.appVM = this.Container.GetExportedValue<IApplicationViewModel>();
+
+                var toolWindowRegistry = this.Container.GetExportedValue<IToolWindowRegistry>();
 
                 appVM.LoadConfigOnAppStartup(this.mOptions, this.mProgramSettingsManager, this.mThemes);
 

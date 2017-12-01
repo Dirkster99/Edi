@@ -112,8 +112,6 @@ namespace Edi.Apps.ViewModels
             this.mAVLayout = avLayout;
             this.mModuleManager = moduleManager;
 
-            MEFLoadFiles.RegisterFileExplorerViewModel(this, toolRegistry, programSettings);
-
             this.mMessageManager = messageManager;
             if (messageManager.MessageBox != null)   // reset messagebox service
                 _MsgBox = messageManager.MessageBox;
