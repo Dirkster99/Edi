@@ -311,6 +311,10 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Tools\BuiltIn\Files\Files.csproj">
+      <Project>{ef9b7e8d-b722-48e0-a941-e21f4f7cc2df}</Project>
+      <Name>Files</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Tools\BuiltIn\Output\Output.csproj">
       <Project>{d14d8609-693c-475d-a4a4-5a7f6188d633}</Project>
       <Name>Output</Name>
@@ -322,6 +326,10 @@
     <ProjectReference Include="..\Edi.Core\Edi.Core.csproj">
       <Project>{f17e5e06-f28c-4e91-964f-cdb9f8589bb7}</Project>
       <Name>Edi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Edi.Documents\Edi.Documents.csproj">
+      <Project>{1fb5ac73-b203-4d42-b22a-af2690de3709}</Project>
+      <Name>Edi.Documents</Name>
     </ProjectReference>
     <ProjectReference Include="..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
       <Project>{6c55b776-26d4-4db3-a6ab-87e783b2f3d1}</Project>

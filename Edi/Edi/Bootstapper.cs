@@ -5,10 +5,12 @@ namespace Edi
     using Edi.Apps.Views.Shell;
     using Edi.Core;
     using Edi.Core.Interfaces;
+    using Edi.Documents.Module;
     using Edi.Settings;
     using Edi.Settings.Interfaces;
     using Edi.Settings.ProgramSettings;
     using Edi.Themes.Interfaces;
+    using Files.Module;
     using MRULib.MRU.Interfaces;
     using MsgBox;
     using Output.Views;
@@ -98,36 +100,51 @@ namespace Edi
         /// </summary>
         public override void Run(bool runWithDefaultConfiguration)
         {
-            base.Run(runWithDefaultConfiguration);
+            try
+            {
+                base.Run(runWithDefaultConfiguration);
 
-            // Register imported tool window definitions with Avalondock
-            var toolWindowRegistry = this.Container.GetExportedValue<IToolWindowRegistry>();
-            toolWindowRegistry.PublishTools();
+                // Register imported tool window definitions with Avalondock
+                var toolWindowRegistry = this.Container.GetExportedValue<IToolWindowRegistry>();
+                toolWindowRegistry.PublishTools();
 
-            // Show the startpage if application starts for the very first time
-            // (This requires that command binding was succesfully done before this line)
-            if (this.appVM.ADLayout.LayoutSoure == Core.Models.Enums.LayoutLoaded.FromDefault)
-                AppCommand.ShowStartPage.Execute(null, null);
+                // Show the startpage if application starts for the very first time
+                // (This requires that command binding was succesfully done before this line)
+                if (this.appVM.ADLayout.LayoutSoure == Core.Models.Enums.LayoutLoaded.FromDefault)
+                    AppCommand.ShowStartPage.Execute(null, null);
 
-            if (this.mEventArgs != null)
-                ProcessCmdLine(this.mEventArgs.Args, this.appVM);
+                if (this.mEventArgs != null)
+                    ProcessCmdLine(this.mEventArgs.Args, this.appVM);
 
-            // PRISM modules (and everything else) have been initialized if we got here
-            var output = this.Container.GetExportedValue<IMessageManager>();
-            output.Output.AppendLine("Get involved at: https://github.com/Dirkster99/Edi");
+                // PRISM modules (and everything else) have been initialized if we got here
+                var output = this.Container.GetExportedValue<IMessageManager>();
+                output.Output.AppendLine("Get involved at: https://github.com/Dirkster99/Edi");
 
-            this.appVM.EnableMainWindowActivated(true);
+                this.appVM.EnableMainWindowActivated(true);
+            }
+            catch (Exception exp)
+            {
+                logger.Error(exp);
+            }
         }
 
         protected override void ConfigureAggregateCatalog()
         {
+            // Loading these items is equivalent to using static construction, except MEF runs the
+            // decorated class and method to initialize each module
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(IOutputView).Assembly));
+
+            // These module register services (e.g.: file open) and are required for other plug-ins to work
+////            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(MEFLoadFiles).Assembly));
+            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(MEFLoadEdiDocuments).Assembly));
+
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(IAppCoreModel).Assembly));
 
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(AvalonDockLayoutViewModel).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(Bootstapper).Assembly));
+
             ////this.AggregateCatalog.Catalogs.Add(new PluginModuleCatalog(@".\Plugins"));
-            
+
         }
 
         protected override DependencyObject CreateShell()
