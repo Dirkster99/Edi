@@ -35,6 +35,7 @@ namespace Edi.Apps.ViewModels
     using System.Windows;
     using System.Windows.Input;
     using System.Windows.Threading;
+    using Files.Module;
 
     /// <summary>
     /// This class manages the complete application life cyle from start to end.
@@ -110,6 +111,8 @@ namespace Edi.Apps.ViewModels
             this.mAppCore = appCore;
             this.mAVLayout = avLayout;
             this.mModuleManager = moduleManager;
+
+            MEFLoadFiles.RegisterFileExplorerViewModel(this, toolRegistry, programSettings);
 
             this.mMessageManager = messageManager;
             if (messageManager.MessageBox != null)   // reset messagebox service

@@ -35,7 +35,7 @@
 		private readonly IAvalonDockLayoutViewModel mAvLayout;
 		private readonly IToolWindowRegistry mToolRegistry;
 		private readonly ISettingsManager mSettingsManager;
-		private readonly IFileOpenService mFileOpenService;
+////		private readonly IFileOpenService mFileOpenService;
 		#endregion fields
 
 		/// <summary>
@@ -45,13 +45,14 @@
 		[ImportingConstructor]
 		public MEFLoadFiles(IAvalonDockLayoutViewModel avLayout,
                             ISettingsManager programSettings,
-                            IToolWindowRegistry toolRegistry,
-                            IFileOpenService fileOpenService)
+                            IToolWindowRegistry toolRegistry
+                          ,IFileOpenService fileOpenService
+            )
 		{
 			this.mAvLayout = avLayout;
 			this.mSettingsManager = programSettings;
 			this.mToolRegistry = toolRegistry;
-			this.mFileOpenService = fileOpenService;
+///			this.mFileOpenService = fileOpenService;
 		}
 
 		#region methods
@@ -65,26 +66,29 @@
 			this.mToolRegistry.RegisterTool(new RecentFilesViewModel());
 
 			this.mToolRegistry.RegisterTool(new FileStatsViewModel());
-			RegisterFileExplorerViewModel();
+////			RegisterFileExplorerViewModel();
 		}
 
-		private void RegisterFileExplorerViewModel()
+		public static void RegisterFileExplorerViewModel(
+            IFileOpenService fileOpenService,
+            IToolWindowRegistry toowindow,
+            ISettingsManager programSettings)
 		{
-			var FileExplorer = new FileExplorerViewModel(this.mSettingsManager, this.mFileOpenService);
+			var FileExplorer = new FileExplorerViewModel(programSettings, fileOpenService);
 
 			ExplorerSettingsModel settings = null;
 
-			settings = this.mSettingsManager.SettingData.ExplorerSettings;
+			settings = programSettings.SettingData.ExplorerSettings;
 
 			if (settings == null)
 				settings = new ExplorerSettingsModel();
 
-			settings.UserProfile = this.mSettingsManager.SessionData.LastActiveExplorer;
+			settings.UserProfile = programSettings.SessionData.LastActiveExplorer;
 
 			// (re-)configure previous explorer settings and (re-)activate current location
 			FileExplorer.Settings.ConfigureExplorerSettings(settings);
 
-			this.mToolRegistry.RegisterTool(FileExplorer);
+            toowindow.RegisterTool(FileExplorer);
 		}
 
 		/// <summary>
