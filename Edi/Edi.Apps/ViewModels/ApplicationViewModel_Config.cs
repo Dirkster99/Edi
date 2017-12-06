@@ -11,7 +11,7 @@
     using Edi.Themes.Interfaces;
     using MRULib.MRU.Interfaces;
     using MRULib.MRU.Models.Persist;
-    using Microsoft.Practices.ServiceLocation;
+    using CommonServiceLocator;
 
     public partial class ApplicationViewModel
     {

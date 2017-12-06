@@ -12,7 +12,7 @@ namespace MiniUML.Model.ViewModels.Document
     using MiniUML.Model.ViewModels.Shapes;
     using MiniUML.View.Views.RubberBand;
     using MsgBox;
-    using Microsoft.Practices.ServiceLocation;
+    using CommonServiceLocator;
 
     /// <summary>
     /// Interface to define interaction for drag and drop

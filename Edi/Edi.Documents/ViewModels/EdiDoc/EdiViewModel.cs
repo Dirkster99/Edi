@@ -25,7 +25,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
     using Edi.Settings.ProgramSettings;
     using UnitComboLib.Models.Unit.Screen;
     using UnitComboLib.ViewModels;
-    using Microsoft.Practices.ServiceLocation;
+    using CommonServiceLocator;
 
     public interface IDocumentEdi : IFileBaseViewModel
     {

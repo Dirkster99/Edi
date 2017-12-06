@@ -7,7 +7,7 @@ namespace Log4NetTools.ViewModels
     using Edi.Core.Interfaces.Documents;
     using Edi.Core.ViewModels.Command;
     using MsgBox;
-    using Microsoft.Practices.ServiceLocation;
+    using CommonServiceLocator;
 
     public class Log4NetViewModel : Edi.Core.ViewModels.FileBaseViewModel
     {

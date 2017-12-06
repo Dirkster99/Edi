@@ -11,7 +11,7 @@ namespace Edi.Documents.ViewModels.MiniUml
 	using Edi.Core.ViewModels.Command;
 	using MiniUML.Model.ViewModels.Document;
 	using MsgBox;
-    using Microsoft.Practices.ServiceLocation;
+    using CommonServiceLocator;
 
     public class MiniUmlViewModel : Edi.Core.ViewModels.FileBaseViewModel
 	{

@@ -7,7 +7,7 @@ namespace MiniUML.View.Windows
     using MiniUML.Framework;
     using MiniUML.Model.ViewModels.Document;
     using MsgBox;
-    using Microsoft.Practices.ServiceLocation;
+    using CommonServiceLocator;
 
     /// <summary>
     /// Interaction logic for ExportDocumentWindow.xaml

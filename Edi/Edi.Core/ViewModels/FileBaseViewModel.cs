@@ -10,7 +10,7 @@ namespace Edi.Core.ViewModels
     using Edi.Core.ViewModels.Command;
     using Edi.Core.ViewModels.Events;
     using MsgBox;
-    using Microsoft.Practices.ServiceLocation;
+    using CommonServiceLocator;
 
     /// <summary>
     /// Base class that shares common properties, methods, and intefaces

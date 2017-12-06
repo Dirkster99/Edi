@@ -7,7 +7,7 @@ namespace Edi.Dialogs.FindReplace.ViewModel
     using Edi.Core.ViewModels.Base;
     using Edi.Core.ViewModels.Command;
     using MsgBox;
-    using Microsoft.Practices.ServiceLocation;
+    using CommonServiceLocator;
 
     public class FindReplaceViewModel : DialogViewModelBase
     {

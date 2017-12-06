@@ -7,7 +7,7 @@ namespace Edi.Documents.ViewModels.StartPage
     using Edi.Core.ViewModels.Command;
     using MsgBox;
     using MRULib.MRU.Interfaces;
-    using Microsoft.Practices.ServiceLocation;
+    using CommonServiceLocator;
 
     public class StartPageViewModel : Edi.Core.ViewModels.FileBaseViewModel
     {

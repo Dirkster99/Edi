@@ -16,7 +16,7 @@
     using MiniUML.Framework;
     using MiniUML.Model.ViewModels.Shapes;
     using MsgBox;
-    using Microsoft.Practices.ServiceLocation;
+    using CommonServiceLocator;
 
     public partial class DocumentViewModel : AbstractDocumentViewModel
     {

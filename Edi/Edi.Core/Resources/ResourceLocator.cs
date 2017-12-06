@@ -1,6 +1,6 @@
 namespace Edi.Core.Resources
 {
-    using Microsoft.Practices.ServiceLocation;
+    using CommonServiceLocator;
     using MsgBox;
     using System;
     using System.Linq;
