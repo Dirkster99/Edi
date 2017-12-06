@@ -82,7 +82,7 @@
             </avalonDock:DockingManager.DocumentContextMenu>
 
             <avalonDock:LayoutRoot>
-              <avalonDock:LayoutPanel Orientation="Horizontal">
+              <avalonDock:LayoutPanel Orientation="Vertical">
                 <avalonDock:LayoutDocumentPaneGroup>
                   <avalonDock:LayoutDocumentPane>
                     <avalonDock:LayoutDocument IsSelected="True" ContentId=">StartPage&lt;" />
@@ -91,7 +91,7 @@
               </avalonDock:LayoutPanel>
             </avalonDock:LayoutRoot>
 
-					</avalonDock:DockingManager>
+	      </avalonDock:DockingManager>
         </ControlTemplate>
       </Setter.Value>
     </Setter>

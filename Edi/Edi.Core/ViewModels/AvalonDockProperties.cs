@@ -1,15 +1,14 @@
 ﻿namespace Edi.Core.ViewModels
 {
-	using System.Windows;
-	using Edi.Core.Resources;
-	using Edi.Core.View.Pane;
-	using Edi.Core.ViewModels;
+    using System.Windows;
+    using Edi.Core.Resources;
+    using Edi.Core.View.Pane;
 
-	/// <summary>
-	/// This class exports properties that are relevant to viewing, styling and templating
-	/// of document and tool winodw items managed by AvalonDock.
-	/// </summary>
-	public class AvalonDockViewProperties
+    /// <summary>
+    /// This class exports properties that are relevant to viewing, styling and templating
+    /// of document and tool winodw items managed by AvalonDock.
+    /// </summary>
+    public class AvalonDockViewProperties
 	{
 		#region fields
 		private DataTemplate mDocumentHeaderTemplate;

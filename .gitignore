@@ -18,3 +18,4 @@ tmp/
 Edi/MiniUML.Plugins/MiniUML.Plugins.UmlClassDiagram.dll
 /.vs/
 /packages/
+/02_Libs/AvalonDock/.vs/Xceed.Wpf.AvalonDock/v15/Server/sqlite3/storage.ide

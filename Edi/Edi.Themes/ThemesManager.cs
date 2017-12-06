@@ -61,7 +61,10 @@ namespace Edi.Themes
       // This is required to style the dropdown button and frame of the control
       "/Edi.Themes;component/FileListView/Combobox.xaml",
       "/Edi.Themes;component/MetroDark/Theme.xaml",
+
       "/Xceed.Wpf.AvalonDock.Themes.Expression;component/DarkTheme.xaml",
+      //"/Xceed.Wpf.AvalonDock.Themes.VS2013;component/DarkTheme.xaml",
+
       "/Edi.Apps;component/Themes/MetroDark.xaml",
       "/FileListView;component/Images/MetroDarkIcons.xaml"
     };
@@ -121,7 +124,10 @@ namespace Edi.Themes
       // This is required to style the dropdown button and frame of the control
       "/Edi.Themes;component/FileListView/Combobox.xaml",
       "/Edi.Themes;component/MetroLight/Theme.xaml",
-      "/Xceed.Wpf.AvalonDock.Themes.Metro;component/Theme.xaml",
+
+      "/Xceed.Wpf.AvalonDock.Themes.Expression;component/LightTheme.xaml",
+      //"/Xceed.Wpf.AvalonDock.Themes.VS2013;component/LightTheme.xaml",
+
       "/Edi.Apps;component/Themes/MetroLight.xaml",
       "/FileListView;component/Images/MetroLightIcons.xaml"
     };

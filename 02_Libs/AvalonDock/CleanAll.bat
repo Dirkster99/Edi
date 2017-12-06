@@ -5,7 +5,6 @@ ECHO This script deletes all temporary build files in their
 ECHO corresponding BIN and OBJ Folder contained in the following projects
 ECHO.
 ECHO Xceed.Wpf.AvalonDock.AvalonDock
-ECHO Xceed.Wpf.AvalonDock.AvalonDock.Themes.Expression
 ECHO Xceed.Wpf.AvalonDock.AvalonDock.Themes.Metro
 ECHO TestApplication
 ECHO.
@@ -22,11 +21,6 @@ ECHO Deleting BIN and OBJ Folders in AvalonDock
 ECHO.
 RMDIR /S /Q Xceed.Wpf.AvalonDock\bin
 RMDIR /S /Q Xceed.Wpf.AvalonDock\obj
-
-REM DEL /F /Q /S /A:H Automation.Tasks.Core\StyleCop.Cache >> C:\TEMP\CleanFiles.txt
-
-RMDIR /S /Q Xceed.Wpf.AvalonDock.Themes.Expression\bin
-RMDIR /S /Q Xceed.Wpf.AvalonDock.Themes.Expression\obj
 
 RMDIR /S /Q Xceed.Wpf.AvalonDock.Themes.Metro\bin
 RMDIR /S /Q Xceed.Wpf.AvalonDock.Themes.Metro\obj

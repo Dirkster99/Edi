@@ -1,19 +1,16 @@
 ﻿namespace Edi.Core.View.Pane
 {
-	using System;
-	using System.ComponentModel.Composition;
-	using System.Linq;
-	using System.Windows;
-	using System.Windows.Controls;
-	using Edi.Core.Interfaces.Enums;
-	using Edi.Core.ViewModels;
-	using Xceed.Wpf.AvalonDock.Layout;
+    using System;
+    using System.Windows;
+    using Edi.Core.Interfaces.Enums;
+    using Edi.Core.ViewModels;
+    using Xceed.Wpf.AvalonDock.Layout;
 
-	/// <summary>
-	/// Initialize the AvalonDock Layout. Methods in this class
-	/// are called before and after the layout is changed.
-	/// </summary>
-	public class LayoutInitializer : ILayoutUpdateStrategy
+    /// <summary>
+    /// Initialize the AvalonDock Layout. Methods in this class
+    /// are called before and after the layout is changed.
+    /// </summary>
+    public class LayoutInitializer : ILayoutUpdateStrategy
 	{
 		protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 

@@ -148,9 +148,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Xceed.Wpf.AvalonDock">
-      <HintPath>..\..\02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.dll</HintPath>
-    </Reference>
     <Reference Include="YalvLib">
       <HintPath>..\..\02_Libs\00_bin\YalvLib\YalvLib.dll</HintPath>
     </Reference>
@@ -320,6 +317,14 @@
       <Project>{d14d8609-693c-475d-a4a4-5a7f6188d633}</Project>
       <Name>Output</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AvalonDock\Xceed.Wpf.AvalonDock.Themes.Expression\Xceed.Wpf.AvalonDock.Themes.Expression.csproj">
+      <Project>{488dd8f7-9d3c-4f53-bd1f-84a095d9bc10}</Project>
+      <Name>Xceed.Wpf.AvalonDock.Themes.Expression</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AvalonDock\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.csproj">
+      <Project>{db81988f-e0f2-45a0-a1fd-8c37f3d35244}</Project>
+      <Name>Xceed.Wpf.AvalonDock</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Edi.Apps\Edi.Apps.csproj">
       <Project>{4df91f4b-878a-4ab3-a5ec-16bce3d6e99d}</Project>
       <Name>Edi.Apps</Name>
@@ -403,8 +408,8 @@
   <Target Name="AfterBuild">
     <ItemGroup>
       <!-- Specify locally dependent binaries -->
-      <EdiProjectFiles Include="$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Expression.dll" />
-      <EdiProjectFiles Include="$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
+      <!-- EdiProjectFiles Include="$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Expression.dll" / -->
+      <!-- EdiProjectFiles Include="$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Metro.dll" / -->
       <!-- Specify Plugin files -->
       <!--<EdiPluginUMLFiles Include="$(SolutionDir)MiniUML\Plugins\src\MiniUML.Plugins.UmlClassDiagram\$(OutDir)MiniUML.Plugins.UmlClassDiagram.dll" />-->
       <!-- EdiPluginFiles Include="$(SolutionDir)Tools\BuiltIn\Files\$(OutDir)Files.dll" / -->

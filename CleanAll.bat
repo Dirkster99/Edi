@@ -29,6 +29,7 @@ ECHO MiniUML.Model
 ECHO MiniUML.View
 ECHO MiniUML.Plugins.UmlClassDiagram
 ECHO.
+ECHO Debug and Release folders
 ECHO.
 REM Ask the user if hes really sure to continue beyond this point XXXXXXXX
 set /p choice=Are you sure to continue (Y/N)?
@@ -120,6 +121,9 @@ RMDIR /S /Q .\MiniUML\MiniUML.View\obj
 
 RMDIR /S /Q .\MiniUML\Plugins\src\MiniUML.Plugins.UmlClassDiagram\bin
 RMDIR /S /Q .\MiniUML\Plugins\src\MiniUML.Plugins.UmlClassDiagram\obj
+
+RMDIR /S /Q .\Release
+RMDIR /S /Q .\Debug
 
 PAUSE
 
