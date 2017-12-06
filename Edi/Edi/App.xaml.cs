@@ -14,7 +14,6 @@ namespace Edi
     using MsgBox;
     using Edi.Settings;
     using Edi.Settings.ProgramSettings;
-    using SimpleControls.Local;
     using Edi.Themes;
     using Edi.Themes.Interfaces;
     using Edi.Util;
@@ -187,8 +186,14 @@ namespace Edi
                 }
 
                 // Cannot set shutdown mode when application is already shuttong down
-                if (this.AppIsShuttingDown == false)
-                    this.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+                try
+                {
+                    if (this.AppIsShuttingDown == false)
+                        this.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+                }
+                catch
+                {
+                }
 
                 // 1) Application hangs when this is set to null while MainWindow is visible
                 // 2) Application throws exception when this is set as owner of window when it

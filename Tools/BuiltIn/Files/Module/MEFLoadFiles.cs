@@ -10,8 +10,8 @@
 	using Files.ViewModels.FileExplorer;
 	using Files.ViewModels.FileStats;
 	using FileSystemModels.Models;
-	using Microsoft.Practices.Prism.MefExtensions.Modularity;
-	using Microsoft.Practices.Prism.Modularity;
+    using Prism.Mef.Modularity;
+    using Prism.Modularity;
 	using Edi.Settings.Interfaces;
 
 	/// <summary>
@@ -28,8 +28,8 @@
 	/// 				startupLoaded="true" />
 	/// &lt;/modules>
 	/// </summary>
-	[ModuleExport(typeof(MEFLoadFiles), InitializationMode = InitializationMode.WhenAvailable)]
-	public class MEFLoadFiles : IModule
+	//[ModuleExport(typeof(MEFLoadFiles))] //// , InitializationMode = InitializationMode.WhenAvailable
+    public class MEFLoadFiles //: IModule
 	{
 		#region fields
 		private readonly IAvalonDockLayoutViewModel mAvLayout;
@@ -42,11 +42,12 @@
 		/// Class constructor
 		/// </summary>
 		/// <param name="avLayout"></param>
-		[ImportingConstructor]
+///		[ImportingConstructor]
 		public MEFLoadFiles(IAvalonDockLayoutViewModel avLayout,
-													 ISettingsManager programSettings,
-													 IToolWindowRegistry toolRegistry,
-													 IFileOpenService fileOpenService)
+                            ISettingsManager programSettings,
+                            IToolWindowRegistry toolRegistry
+                           ,IFileOpenService fileOpenService
+            )
 		{
 			this.mAvLayout = avLayout;
 			this.mSettingsManager = programSettings;
@@ -58,33 +59,40 @@
 		/// <summary>
 		/// Initialize this module via standard PRISM MEF procedure
 		/// </summary>
-		void IModule.Initialize()
+		public static void Initialize(IAvalonDockLayoutViewModel avLayout,
+                            ISettingsManager programSettings,
+                            IToolWindowRegistry toolRegistry
+                           , IFileOpenService fileOpenService)
 		{
-			this.RegisterDataTemplates(this.mAvLayout.ViewProperties.SelectPanesTemplate);
+			RegisterDataTemplates(avLayout.ViewProperties.SelectPanesTemplate);
 
-			this.mToolRegistry.RegisterTool(new RecentFilesViewModel());
+			toolRegistry.RegisterTool(new RecentFilesViewModel());
 
-			this.mToolRegistry.RegisterTool(new FileStatsViewModel());
-			RegisterFileExplorerViewModel();
+			toolRegistry.RegisterTool(new FileStatsViewModel());
+			RegisterFileExplorerViewModel(programSettings,
+                            toolRegistry
+                           , fileOpenService);
 		}
 
-		private void RegisterFileExplorerViewModel()
+		private static void RegisterFileExplorerViewModel(ISettingsManager programSettings,
+                                                        IToolWindowRegistry toolRegistry
+                                                        , IFileOpenService fileOpenService)
 		{
-			var FileExplorer = new FileExplorerViewModel(this.mSettingsManager, this.mFileOpenService);
+			var FileExplorer = new FileExplorerViewModel(programSettings, fileOpenService);
 
 			ExplorerSettingsModel settings = null;
 
-			settings = this.mSettingsManager.SettingData.ExplorerSettings;
+			settings = programSettings.SettingData.ExplorerSettings;
 
 			if (settings == null)
 				settings = new ExplorerSettingsModel();
 
-			settings.UserProfile = this.mSettingsManager.SessionData.LastActiveExplorer;
+			settings.UserProfile = programSettings.SessionData.LastActiveExplorer;
 
 			// (re-)configure previous explorer settings and (re-)activate current location
 			FileExplorer.Settings.ConfigureExplorerSettings(settings);
 
-			this.mToolRegistry.RegisterTool(FileExplorer);
+            toolRegistry.RegisterTool(FileExplorer);
 		}
 
 		/// <summary>
@@ -93,7 +101,7 @@
 		/// </summary>
 		/// <param name="paneSel"></param>
 		/// <returns></returns>
-		private PanesTemplateSelector RegisterDataTemplates(PanesTemplateSelector paneSel)
+		private static PanesTemplateSelector RegisterDataTemplates(PanesTemplateSelector paneSel)
 		{
 			// FileStatsView
 			var template = ResourceLocator.GetResource<DataTemplate>(

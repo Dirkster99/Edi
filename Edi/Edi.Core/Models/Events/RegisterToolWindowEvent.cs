@@ -1,6 +1,6 @@
 namespace EdiApp.Events
 {
-	using Microsoft.Practices.Prism.PubSubEvents;
+	using Prism.Events;
 
 	/// <summary>
 	/// Class implements a PRISM tool window registration event

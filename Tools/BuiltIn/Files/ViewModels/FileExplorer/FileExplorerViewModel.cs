@@ -1,29 +1,28 @@
 namespace Files.ViewModels.FileExplorer
 {
-	using System;
-	using System.IO;
-	using System.Windows;
-	using System.Windows.Input;
-	using Edi.Core.Interfaces;
-	using Edi.Core.Interfaces.Enums;
-	using Edi.Core.Models;
-	using Edi.Core.ViewModels;
-	using FileListView.Command;
-	using FileListView.ViewModels;
-	using FileListView.ViewModels.Interfaces;
-	using FileSystemModels.Interfaces;
-	using FileSystemModels.Models;
-	using FolderBrowser.ViewModels;
-	using FolderBrowser.ViewModels.Interfaces;
-	using Edi.Settings.Interfaces;
+    using System;
+    using System.IO;
+    using System.Windows;
+    using System.Windows.Input;
+    using Edi.Core.Interfaces;
+    using Edi.Core.Interfaces.Enums;
+    using Edi.Core.ViewModels;
+    using FileListView.Command;
+    using FileListView.ViewModels;
+    using FileListView.ViewModels.Interfaces;
+    using FileSystemModels.Interfaces;
+    using FileSystemModels.Models;
+    using FolderBrowser.ViewModels;
+    using FolderBrowser.ViewModels.Interfaces;
+    using Edi.Settings.Interfaces;
 
-	/// <summary>
-	/// This class can be used to present file based information, such as,
-	/// Size, Path etc to the user.
-	/// </summary>
-	public class FileExplorerViewModel : Edi.Core.ViewModels.ToolViewModel,
-																			 IRegisterableToolWindow,
-																			 IExplorer
+    /// <summary>
+    /// This class can be used to present file based information, such as,
+    /// Size, Path etc to the user.
+    /// </summary>
+    public class FileExplorerViewModel : Edi.Core.ViewModels.ToolViewModel,
+										 IRegisterableToolWindow,
+										 IExplorer
 	{
 		#region fields
 		public const string ToolContentId = "<FileExplorerTool>";

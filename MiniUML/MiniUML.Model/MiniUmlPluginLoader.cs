@@ -11,7 +11,7 @@ namespace MiniUML.Model
     /// <summary>
     /// This class load MiniUML Plug-Ins at run-time from the specified folder.
     /// </summary>
-    public static class MiniUmlPluginLoader
+    public class MiniUmlPluginLoader
     {
         #region methods
         public static void LoadPlugins(string pluginDirectory,
@@ -25,7 +25,7 @@ namespace MiniUML.Model
                 try
                 {
                     // Get the names of all assembly files in the plugin directory.
-                    assemblyFiles = Directory.GetFiles(pluginDirectory, "*.dll", SearchOption.AllDirectories);
+                    assemblyFiles = Directory.GetFiles(pluginDirectory, "MiniUML.Plugins.*.dll", SearchOption.AllDirectories);
                 }
                 catch (DirectoryNotFoundException ex)
                 {

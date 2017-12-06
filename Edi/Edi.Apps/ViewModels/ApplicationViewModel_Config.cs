@@ -9,9 +9,9 @@
     using Edi.Settings.ProgramSettings;
     using Edi.Settings.UserProfile;
     using Edi.Themes.Interfaces;
-    using Microsoft.Practices.ServiceLocation;
     using MRULib.MRU.Interfaces;
     using MRULib.MRU.Models.Persist;
+    using Microsoft.Practices.ServiceLocation;
 
     public partial class ApplicationViewModel
     {

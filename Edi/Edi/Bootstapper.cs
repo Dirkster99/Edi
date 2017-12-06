@@ -1,25 +1,27 @@
 namespace Edi
 {
+    using Edi.Apps.Interfaces.ViewModel;
+    using Edi.Apps.ViewModels;
+    using Edi.Apps.Views.Shell;
+    using Edi.Core;
+    using Edi.Core.Interfaces;
+    using Edi.Documents.Module;
+    using Edi.Settings;
+    using Edi.Settings.Interfaces;
+    using Edi.Settings.ProgramSettings;
+    using Edi.Themes.Interfaces;
+    using Files.Module;
+    using MRULib.MRU.Interfaces;
+    using MsgBox;
+    using Output.Views;
+    using Prism.Mef;
+    using Prism.Modularity;
+    using SimpleControls.Local;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.ComponentModel.Composition.Hosting;
     using System.Windows;
-    using Edi.Core;
-    using Edi.Core.Interfaces;
-    using Edi.Apps.Interfaces.ViewModel;
-    using Edi.Apps.ViewModels;
-    using Edi.Apps.Views.Shell;
-    using Microsoft.Practices.Prism.MefExtensions;
-    using Microsoft.Practices.Prism.Modularity;
-    using MsgBox;
-    using Output.Views;
-    using Edi.Settings;
-    using Edi.Settings.Interfaces;
-    using Edi.Settings.ProgramSettings;
-    using SimpleControls.Local;
-    using Edi.Themes.Interfaces;
-    using MRULib.MRU.Interfaces;
 
     public class Bootstapper : MefBootstrapper
     {
@@ -39,6 +41,15 @@ namespace Edi
         private readonly IThemesManager mThemes = null;
         private readonly ISettingsManager mProgramSettingsManager = null;
         #endregion fields
+
+        /// <summary>
+        /// Initializes static members of the <see cref="Bootstapper"/> class.
+        /// This constructor will be called before MEF begins to take over.
+        /// </summary>
+        static Bootstapper()
+        {
+            System.IO.Directory.CreateDirectory(@".\Plugins");
+        }
 
         #region constructors
         public Bootstapper(App app,
@@ -89,38 +100,58 @@ namespace Edi
         /// </summary>
         public override void Run(bool runWithDefaultConfiguration)
         {
-            base.Run(runWithDefaultConfiguration);
+            try
+            {
+                base.Run(runWithDefaultConfiguration);
 
-            // Register imported tool window definitions with Avalondock
-            var toolWindowRegistry = this.Container.GetExportedValue<IToolWindowRegistry>();
-            toolWindowRegistry.PublishTools();
+                // Register imported tool window definitions with Avalondock
+                var toolWindowRegistry = this.Container.GetExportedValue<IToolWindowRegistry>();
 
-            // Show the startpage if application starts for the very first time
-            // (This requires that command binding was succesfully done before this line)
-            if (this.appVM.ADLayout.LayoutSoure == Core.Models.Enums.LayoutLoaded.FromDefault)
-                AppCommand.ShowStartPage.Execute(null, null);
+                MEFLoadFiles.Initialize(this.appVM.ADLayout,
+                                        this.mProgramSettingsManager,
+                                        toolWindowRegistry,
+                                        appVM as IFileOpenService);
 
-            if (this.mEventArgs != null)
-                ProcessCmdLine(this.mEventArgs.Args, this.appVM);
+                toolWindowRegistry.PublishTools();
 
-            // PRISM modules (and everything else) have been initialized if we got here
-            var output = this.Container.GetExportedValue<IMessageManager>();
-            output.Output.AppendLine("Get involved at: https://github.com/Dirkster99/Edi");
 
-            this.appVM.EnableMainWindowActivated(true);
+                // Show the startpage if application starts for the very first time
+                // (This requires that command binding was succesfully done before this line)
+                if (this.appVM.ADLayout.LayoutSoure == Core.Models.Enums.LayoutLoaded.FromDefault)
+                    AppCommand.ShowStartPage.Execute(null, null);
+
+                if (this.mEventArgs != null)
+                    ProcessCmdLine(this.mEventArgs.Args, this.appVM);
+
+                // PRISM modules (and everything else) have been initialized if we got here
+                var output = this.Container.GetExportedValue<IMessageManager>();
+                output.Output.AppendLine("Get involved at: https://github.com/Dirkster99/Edi");
+
+                this.appVM.EnableMainWindowActivated(true);
+            }
+            catch (Exception exp)
+            {
+                logger.Error(exp);
+            }
         }
 
         protected override void ConfigureAggregateCatalog()
         {
+            // Loading these items is equivalent to using static construction, except MEF runs the
+            // decorated class and method to initialize each module
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(IOutputView).Assembly));
+
+            // These module register services (e.g.: file open) and are required for other plug-ins to work
+////            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(MEFLoadFiles).Assembly));
+            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(MEFLoadEdiDocuments).Assembly));
+
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(IAppCoreModel).Assembly));
 
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(AvalonDockLayoutViewModel).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(Bootstapper).Assembly));
 
-            ////Scan directory for content
-            ////DirectoryCatalog catalog = new DirectoryCatalog("Plugins");
-            ////this.AggregateCatalog.Catalogs.Add(catalog);
+            ////this.AggregateCatalog.Catalogs.Add(new PluginModuleCatalog(@".\Plugins"));
+
         }
 
         protected override DependencyObject CreateShell()
@@ -136,10 +167,12 @@ namespace Edi
                 var avLayout = this.Container.GetExportedValue<IAvalonDockLayoutViewModel>();
                 this.appVM = this.Container.GetExportedValue<IApplicationViewModel>();
 
+                var toolWindowRegistry = this.Container.GetExportedValue<IToolWindowRegistry>();
+
                 appVM.LoadConfigOnAppStartup(this.mOptions, this.mProgramSettingsManager, this.mThemes);
 
                 // Attempt to load a MiniUML plugin via the model class
-                MiniUML.Model.MiniUmlPluginLoader.LoadPlugins(appCore.AssemblyEntryLocation + @".\Plugins\UML\", this.AppViewModel);
+                MiniUML.Model.MiniUmlPluginLoader.LoadPlugins(appCore.AssemblyEntryLocation + @".\Plugins\MiniUML.Plugins.UmlClassDiagram\", this.AppViewModel); // discover via Plugin folder instead
 
                 this.mMainWin = this.Container.GetExportedValue<MainWindow>();
 
@@ -206,7 +239,7 @@ namespace Edi
             Application.Current.MainWindow.Show();
         }
 
-        protected override Microsoft.Practices.Prism.Regions.IRegionBehaviorFactory ConfigureDefaultRegionBehaviors()
+        protected override Prism.Regions.IRegionBehaviorFactory ConfigureDefaultRegionBehaviors()
         {
             var factory = base.ConfigureDefaultRegionBehaviors();
             return factory;
@@ -223,7 +256,7 @@ namespace Edi
         protected override IModuleCatalog CreateModuleCatalog()
         {
             // Configure Prism ModuleCatalog via app.config configuration file
-            return new ConfigurationModuleCatalog();
+            return new PluginModuleCatalog(@".\Plugins", new ConfigurationModuleCatalog());
         }
 
         protected override void ConfigureContainer()

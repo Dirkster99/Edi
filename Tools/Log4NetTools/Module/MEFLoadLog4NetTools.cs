@@ -6,8 +6,8 @@
     using Edi.Core.View.Pane;
     using Edi.Settings.Interfaces;
     using Log4NetTools.ViewModels;
-    using Microsoft.Practices.Prism.MefExtensions.Modularity;
-    using Microsoft.Practices.Prism.Modularity;
+    using Prism.Mef.Modularity;
+    using Prism.Modularity;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.Reflection;

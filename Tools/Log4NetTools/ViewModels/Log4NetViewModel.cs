@@ -5,7 +5,6 @@ namespace Log4NetTools.ViewModels
     using System.IO;
     using System.Windows.Input;
     using Edi.Core.Interfaces.Documents;
-    using Edi.Core.Models.Documents;
     using Edi.Core.ViewModels.Command;
     using MsgBox;
     using Microsoft.Practices.ServiceLocation;
