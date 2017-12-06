@@ -18,7 +18,7 @@
     using MiniUML.View.Controls;
     using MiniUML.View.Views.RubberBand;
     using MsgBox;
-    using Microsoft.Practices.ServiceLocation;
+    using CommonServiceLocator;
 
     public delegate void LayoutUpdatedHandler();
 

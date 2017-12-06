@@ -1,6 +1,6 @@
 namespace Edi.Apps.ViewModels
 {
-    using Microsoft.Practices.ServiceLocation;
+    using CommonServiceLocator;
     using Edi.Apps.Enums;
     using Edi.Apps.Interfaces.ViewModel;
     using Edi.Core.Interfaces;
@@ -35,7 +35,6 @@ namespace Edi.Apps.ViewModels
     using System.Windows;
     using System.Windows.Input;
     using System.Windows.Threading;
-    using Files.Module;
 
     /// <summary>
     /// This class manages the complete application life cyle from start to end.

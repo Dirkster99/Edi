@@ -7,7 +7,7 @@ namespace SimpleControls.Hyperlink
     using System.Windows.Input;
 
     using MsgBox;
-    using Microsoft.Practices.ServiceLocation;
+    using CommonServiceLocator;
 
     /// <summary>
     /// Interaction logic for WebHyperlink.xaml

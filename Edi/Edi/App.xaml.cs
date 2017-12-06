@@ -18,7 +18,7 @@ namespace Edi
     using Edi.Themes.Interfaces;
     using Edi.Util;
     using Edi.Util.ActivateWindow;
-    using Microsoft.Practices.ServiceLocation;
+    using CommonServiceLocator;
 
     /// <summary>
     /// Interaction logic for App.xaml

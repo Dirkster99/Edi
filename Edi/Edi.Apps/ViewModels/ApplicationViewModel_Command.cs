@@ -1,6 +1,6 @@
 ﻿namespace Edi.Apps.ViewModels
 {
-    using Microsoft.Practices.ServiceLocation;
+    using CommonServiceLocator;
     using Edi.Apps.Enums;
     using Edi.Core;
     using Edi.Core.Interfaces;

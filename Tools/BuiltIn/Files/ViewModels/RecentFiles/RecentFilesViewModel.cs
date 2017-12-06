@@ -3,7 +3,7 @@ namespace Files.ViewModels.RecentFiles
     using System;
     using Edi.Core.Interfaces.Enums;
     using MRULib.MRU.Interfaces;
-    using Microsoft.Practices.ServiceLocation;
+    using CommonServiceLocator;
 
     public class RecentFilesViewModel : Edi.Core.ViewModels.ToolViewModel
     {
