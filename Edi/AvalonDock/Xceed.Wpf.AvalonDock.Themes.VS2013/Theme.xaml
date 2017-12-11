@@ -23,8 +23,10 @@
                     xmlns:avalonDockControls="clr-namespace:Xceed.Wpf.AvalonDock.Controls;assembly=Xceed.Wpf.AvalonDock"
                     xmlns:avalonDockConverters="clr-namespace:Xceed.Wpf.AvalonDock.Converters;assembly=Xceed.Wpf.AvalonDock"
                     xmlns:avalonDockProperties="clr-namespace:Xceed.Wpf.AvalonDock.Properties;assembly=Xceed.Wpf.AvalonDock"
-                    xmlns:shell="clr-namespace:Microsoft.Windows.Shell;assembly=Xceed.Wpf.AvalonDock">
-    <avalonDockConverters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+                    xmlns:shell="clr-namespace:Microsoft.Windows.Shell;assembly=Xceed.Wpf.AvalonDock"
+                    xmlns:conv="clr-namesoace:Edi.Themes.Converters"
+                    >
+    <conv:BoolToVisibilityConverter1 x:Key="BoolToVisibilityConverter" />
     <avalonDockConverters:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" />
     <avalonDockConverters:AnchorSideToOrientationConverter x:Key="AnchorSideToOrientationConverter" />
     <avalonDockConverters:AnchorSideToAngleConverter x:Key="AnchorSideToAngleConverter" />

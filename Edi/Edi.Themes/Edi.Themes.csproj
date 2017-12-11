@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviour\MergeStyleBehaviour.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter1.cs" />
     <Compile Include="Itnterfaces\IParentSelectedTheme.cs" />
     <Compile Include="Itnterfaces\IThemesManager.cs" />
     <Compile Include="MetroControls\TextboxHelper.cs" />
