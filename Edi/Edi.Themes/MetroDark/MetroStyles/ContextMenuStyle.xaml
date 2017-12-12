@@ -7,7 +7,7 @@
   </ResourceDictionary.MergedDictionaries>
 
   <!-- CONTEXT MENU XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
-  <DropShadowBitmapEffect x:Key="PopupDropShadow" ShadowDepth="3" Softness="0.25" Opacity="0.3" Color="White" />
+  <!-- DropShadowBitmapEffect x:Key="PopupDropShadow" ShadowDepth="3" Softness="0.25" Opacity="0.3" Color="White" />
   <Style TargetType="{x:Type ContextMenu}">
     <Style.Resources>
       <Style x:Key="MenuScrollButton" BasedOn="{x:Null}" TargetType="{x:Type RepeatButton}">
@@ -90,7 +90,7 @@
         </Setter>
       </Style>
 
-      <!-- Style the area of each sub-menu in which items are placed -->
+      - Style the area of each sub-menu in which items are placed -
       <ControlTemplate x:Key="{ComponentResourceKey ResourceId=ContextmenuContent, TypeInTargetAssembly={x:Type FrameworkElement}}"
                        TargetType="{x:Type ContentControl}">
         <Border Background="{StaticResource MenuBackground}"
@@ -104,16 +104,16 @@
       </ControlTemplate>
       </Style.Resources>
 
-    <!-- Setter Property="Background" Value="{DynamicResource MenuBackgroundBrush}"/ -->
-    <!-- Setter Property="BorderThickness" Value="1"/ -->
-    <!-- Setter Property="BorderBrush" Value="{DynamicResource WindowBorderBrush}"/ -->
+    - Setter Property="Background" Value="{DynamicResource MenuBackgroundBrush}"/ -
+    - Setter Property="BorderThickness" Value="1"/ -
+    - Setter Property="BorderBrush" Value="{DynamicResource WindowBorderBrush}"/ -
     <Setter Property="HasDropShadow" Value="True" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type ContextMenu}">
-          <!-- Style ContextMenu such that Drop shadow is visible through Grid with Margin 0,0,3,3 -->
+          <- Style ContextMenu such that Drop shadow is visible through Grid with Margin 0,0,3,3 -
           <Grid x:Name="SubMenu" Margin="0,0,3,3" SnapsToDevicePixels="true">
-            <!-- Implement drop shadow through border with bitmap effect -->
+            - Implement drop shadow through border with bitmap effect -
             <Border x:Name="Shdw"
                       Background="{StaticResource MenuBackground}"
                       CornerRadius="0,0,6,0"
@@ -127,7 +127,7 @@
                   <ScrollViewer Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}"
                                     CanContentScroll="true">
                     <Grid>
-                      <!-- Display nice icon column enhancement (even if there is no icon to be displayed) -->
+                      - Display nice icon column enhancement (even if there is no icon to be displayed) -
                       <Border Margin="0,0,0,0"
                               Width="36"
                               Background="{StaticResource MenuDecorationBarGradient}"
@@ -148,6 +148,6 @@
         </ControlTemplate>
       </Setter.Value>
     </Setter>
-  </Style>
+  </Style -->
 
 </ResourceDictionary>

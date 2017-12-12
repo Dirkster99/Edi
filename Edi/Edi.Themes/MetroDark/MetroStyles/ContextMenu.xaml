@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 
-  <Style x:Key="{x:Type ContextMenu}" TargetType="{x:Type ContextMenu}">
+  <!-- Style x:Key="{x:Type ContextMenu}" TargetType="{x:Type ContextMenu}">
     <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}"/>
     <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
     <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
@@ -45,6 +45,6 @@
         </ControlTemplate>
       </Setter.Value>
     </Setter>
-  </Style>
+  </ -->
 
 </ResourceDictionary>

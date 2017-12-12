@@ -24,7 +24,7 @@
         <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/MenuStyles.xaml" />
         <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/MetroStyles/MenuItem.xaml" / -->
 
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/Controls.ContextMenu.xaml" />
+        <!-- ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/Controls.ContextMenu.xaml" / -->
         <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/MetroStyles/ContextMenu.xaml" / -->
         <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/MetroStyles/ContextMenuStyle.xaml" / -->
 
