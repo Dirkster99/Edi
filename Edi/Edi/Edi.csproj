@@ -151,16 +151,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\02_Libs\00_bin\AvalonDock\Xceed.Wpf.AvalonDock.dll</HintPath>
     </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Expression, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\02_Libs\00_bin\AvalonDock\Xceed.Wpf.AvalonDock.Themes.Expression.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\02_Libs\00_bin\AvalonDock\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2013, Version=2.9.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2013">
       <HintPath>..\..\02_Libs\00_bin\AvalonDock\Xceed.Wpf.AvalonDock.Themes.VS2013.dll</HintPath>
     </Reference>
     <Reference Include="YalvLib">
