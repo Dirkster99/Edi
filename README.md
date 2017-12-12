@@ -2,7 +2,7 @@
 [![Release](https://img.shields.io/github/release/Dirkster99/Edi.svg)](https://github.com/Dirkster99/Edi/releases/latest)
 # Edi
 
-Edi - The open source integrated development environment (IDE) based on AvalonDock and AvalonEdit
+Edi - The open source integrated development environment (IDE) based on <a href="https://github.com/Dirkster99/AvalonDock">AvalonDock</a> and AvalonEdit
 
 # Screenshots
 * [File Explorer Tool Window](https://github.com/Dirkster99/Edi/wiki/File-Explorer-Tool-Window)
