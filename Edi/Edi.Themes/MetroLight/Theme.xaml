@@ -6,6 +6,10 @@
         <!-- ResourceDictionary Source="/Edi.Themes;component/Metro/Brushes.xaml" / -->
         <!-- ResourceDictionary Source="/Edi.Themes;component/Metro/StatusBar.xaml" / -->
 
+        <ResourceDictionary Source="/Mlib;component/Themes/LightTheme.xaml" />
+        <ResourceDictionary Source="/MWindowLib;component/Themes/LightTheme.xaml" />
+        <!-- ResourceDictionary Source="/Themes;component/BindToMLib/MWindowLib/LightBrushs.xaml" / -->
+
         <ResourceDictionary Source="/Edi.Themes;component/MetroLight/ModernUI.Light.xaml" />
 
         <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Controls.TabControl.xaml" />

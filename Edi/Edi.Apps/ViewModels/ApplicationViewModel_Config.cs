@@ -12,6 +12,7 @@
     using MRULib.MRU.Interfaces;
     using MRULib.MRU.Models.Persist;
     using CommonServiceLocator;
+    using MLib.Interfaces;
 
     public partial class ApplicationViewModel
     {
@@ -60,10 +61,11 @@
         /// <param name="themes"></param>
         public void LoadConfigOnAppStartup(Options programSettings,
                                             ISettingsManager settings,
-                                            IThemesManager themes)
+                                            IThemesManager themes,
+                                            IAppearanceManager appear)
         {
             // Re/Load program options and user profile session data to control global behaviour of program
-            settings.LoadOptions(this.mAppCore.DirFileAppSettingsData, themes, programSettings);
+            settings.LoadOptions(this.mAppCore.DirFileAppSettingsData, themes, appear, programSettings);
             settings.LoadSessionData(this.mAppCore.DirFileAppSessionData);
 
             settings.CheckSettingsOnLoad(SystemParameters.VirtualScreenLeft, SystemParameters.VirtualScreenTop);

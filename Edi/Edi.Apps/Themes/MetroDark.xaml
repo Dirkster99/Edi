@@ -4,9 +4,9 @@
                     xmlns:avalondock="clr-namespace:Xceed.Wpf.AvalonDock.Controls;assembly=Xceed.Wpf.avalondock"
                     xmlns:local="clr-namespace:Edi.Apps.Views.Shell"
                     >
-  <ResourceDictionary.MergedDictionaries>
-    <ResourceDictionary Source="/Edi.Apps;component/Themes/EmptyWindow.xaml" />
-  </ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Edi.Apps;component/BindToMLib/MWindowLib/DarkBrushs.xaml" />
+    </ResourceDictionary.MergedDictionaries>
 
     <!--
   Re-styling this in AvalonDock since the menu on the drop-down button for more documents is otherwise black
@@ -14,6 +14,6 @@
   -->
   <Style TargetType="{x:Type avalondock:ContextMenuEx}" BasedOn="{StaticResource {x:Type ContextMenu}}" />
 
-  <Style TargetType="{x:Type local:MainWindow}" BasedOn="{StaticResource EmptyWindow}" />
+  <!-- Style TargetType="{x:Type local:MainWindow}" BasedOn="{StaticResource EmptyWindow}" / -->
 
 </ResourceDictionary>

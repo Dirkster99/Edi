@@ -1,0 +1,319 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:MWindowLib"
+                    xmlns:reskeys="clr-namespace:MWindowLib.Themes"
+                    
+                    xmlns:Controls="clr-namespace:MWindowLib.Controls"
+                    >
+
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+    <!-- This ControlTemplate is also used to show a dialog window externally outside of the main window -->
+    <ControlTemplate x:Key="MetroWindowTemplate" TargetType="{x:Type local:MetroWindow}">
+        <Border x:Name="WindowBorder"
+                Margin="{Binding Source={x:Static SystemParameters.WindowNonClientFrameThickness}}"
+                Background="{DynamicResource {x:Static reskeys:ResourceKeys.ControlNormalBackgroundBrushKey}}">
+            <Grid>
+                <!-- Border is displayed when window is inactive -->
+                <Border BorderThickness="1">
+                    <AdornerDecorator>
+                        <Grid x:Name="LayoutRoot">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="15" />
+                            </Grid.RowDefinitions>
+
+                            <!--  the main window content  -->
+                            <ContentPresenter Grid.Column="0"
+                                              Grid.Row="1"
+                                              Grid.RowSpan="2"
+                                              Margin="0"
+                                              Panel.ZIndex="1"
+                                              />
+
+                            <Grid VerticalAlignment="Top"
+                                  Grid.Row="0"
+                                  Visibility="{TemplateBinding ShowTitleBar, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                  >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image x:Name="PART_Icon"
+                                           Grid.Column="0"
+                                           Source="{Binding Icon, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                           Margin="0"
+                                           VerticalAlignment="Top"
+                                           Width="32"
+                                           Panel.ZIndex="1"
+                                           Visibility="{TemplateBinding ShowIcon, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                       />
+
+                                    <TextBlock  Grid.Column="1"
+                                                x:Name="WindowTitleTextBlock"
+                                                Margin="6,1,3,1"
+                                                Text="{Binding Title, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                ToolTip="{Binding Title, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Height="{Binding Source={x:Static SystemParameters.CaptionHeight}}"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center"
+                                                TextTrimming="CharacterEllipsis"
+                                                Foreground="{TemplateBinding Foreground}"
+                                                Panel.ZIndex="1"
+                                                Visibility="{TemplateBinding ShowTitle, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                />
+                                    <!--       Margin="8 -1 0 0" FontSize="16" -->
+                                </Grid>
+
+                                <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"
+                                            WindowChrome.IsHitTestVisibleInChrome="True"
+                                            Grid.Column="1"
+                                            Panel.ZIndex="1"
+                                            >
+                                    <Button x:Name="Minimize"
+                                            Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}"
+                                            ToolTip="minimize"
+                                            Style="{DynamicResource {x:Static reskeys:ResourceKeys.WindowButtonStyleKey}}"
+                                            Visibility="{TemplateBinding ShowMinButton, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                            >
+                                        <Button.Content>
+                                            <Grid>
+                                                <TextBlock Text="0" FontFamily="Marlett" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="3.5,0,0,3" />
+                                            </Grid>
+                                        </Button.Content>
+                                    </Button>
+                                    <Grid>
+                                        <Button x:Name="Restore"
+                                                Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}"
+                                                ToolTip="restore"
+                                                Visibility="Collapsed"
+                                                Style="{DynamicResource {x:Static reskeys:ResourceKeys.WindowButtonStyleKey}}"
+                                                >
+                                            <Button.Content>
+                                                <Grid>
+                                                    <TextBlock Text="2" FontFamily="Marlett" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="2,0,0,1" />
+                                                </Grid>
+                                            </Button.Content>
+                                        </Button>
+                                        <Button x:Name="Maximize"
+                                                Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}"
+                                                ToolTip="maximize"
+                                                Style="{DynamicResource {x:Static reskeys:ResourceKeys.WindowButtonStyleKey}}"
+                                                Visibility="{TemplateBinding ShowMaxButton, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                >
+                                            <Button.Content>
+                                                <Grid>
+                                                    <TextBlock Text="1" FontFamily="Marlett" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="2,0,0,1" />
+                                                </Grid>
+                                            </Button.Content>
+                                        </Button>
+                                    </Grid>
+                                    <Button x:Name="Close"
+                                            Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"
+                                            ToolTip="close"
+                                                Style="{DynamicResource {x:Static reskeys:ResourceKeys.WindowButtonStyleKey}}"
+                                            Visibility="{TemplateBinding ShowCloseButton, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                            >
+                                        <Button.Content>
+                                            <Grid>
+                                                <TextBlock Text="r" FontFamily="Marlett" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0,0,0,1" />
+                                            </Grid>
+                                        </Button.Content>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- This is required to move the window around using the title bar
+                                     or for showing the system menu with the right mouse button over
+                                     titlebar and window icon.
+                                -->
+                                <Controls:MetroThumb x:Name="PART_WindowTitleThumb"
+                                         Grid.Row="0"
+                                         Grid.Column="0"
+                                         Grid.ColumnSpan="5">
+                                    <Controls:MetroThumb.Style>
+                                        <Style TargetType="{x:Type Thumb}">
+                                            <Setter Property="Background" Value="Transparent" />
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate>
+                                                        <Grid Background="{TemplateBinding Background}" />
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Controls:MetroThumb.Style>
+                                </Controls:MetroThumb>
+                            </Grid>
+
+                            <Grid Grid.Row="2">
+                                <Path x:Name="WindowResizeGrip"
+                                    Visibility="Collapsed"
+                                    Width="12"
+                                    Height="12"
+                                    Margin="1"
+                                    HorizontalAlignment="Right"
+                                    Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.ControlAccentBrushKey}}"
+                                    StrokeThickness="1"
+                                    Stretch="None"
+                                    Data="F1 M1,10 L3,10 M5,10 L7,10 M9,10 L11,10 M2,9 L2,11 M6,9 L6,11 M10,9 L10,11 M5,6 L7,6 M9,6 L11,6 M6,5 L6,7 M10,5 L10,7 M9,2 L11,2 M10,1 L10,3"
+                                    Panel.ZIndex="1"
+                                      />
+                            </Grid>
+
+                            <!--  inactive dialog container  -->
+                            <Grid x:Name="PART_MetroInactiveDialogsContainer"
+                                  Grid.Row="0"
+                                  Grid.RowSpan="3"
+                                  Grid.Column="0"
+                                  Grid.ColumnSpan="1"
+                                  Panel.ZIndex="3"
+                                  FocusVisualStyle="{x:Null}" />
+
+                            <!--  overlay effect container  -->
+                            <Grid x:Name="PART_OverlayBox"
+                                  Grid.Row="0"
+                                  Grid.RowSpan="3"
+                                  Grid.Column="0"
+                                  Grid.ColumnSpan="1"
+                                  Panel.ZIndex="4"
+                                  Background="{DynamicResource {x:Static reskeys:ResourceKeys.OverlayBrushKey}}"
+                                  Opacity="0"
+                                  FocusVisualStyle="{x:Null}"
+                                  Focusable="False"
+                                  Visibility="Hidden" />
+
+                            <!--  active dialog container  -->
+                            <Grid x:Name="PART_MetroActiveDialogContainer"
+                                  Grid.Row="0"
+                                  Grid.RowSpan="3"
+                                  Grid.Column="0"
+                                  Grid.ColumnSpan="1"
+                                  Panel.ZIndex="5"
+                                  FocusVisualStyle="{x:Null}" />
+                        </Grid>
+                    </AdornerDecorator>
+                </Border>
+
+                <!-- BorderBrush="{TemplateBinding GlowBrush}" -->
+                <Border x:Name="PART_Border"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="{x:Null}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        UseLayoutRounding="True" />
+
+                <!-- This border is displayed when window is active -->
+                <Border x:Name="ActiveBorder"
+                        BorderBrush="{DynamicResource {x:Static reskeys:ResourceKeys.ControlAccentBrushKey}}"
+                        BorderThickness="1"
+                        Visibility="Hidden"
+                        />
+                <!--
+                                Visibility="{Binding IsActive, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Converter={StaticResource bool2VisibilityConverter}}" -->
+            </Grid>
+        </Border>
+        <ControlTemplate.Resources>
+            <Storyboard x:Key="OverlayFastSemiFadeIn"
+                        AccelerationRatio=".97"
+                        BeginTime="0:0:0"
+                        SpeedRatio="2.7"
+                        Storyboard.TargetProperty="Opacity">
+                <DoubleAnimation To=".7" />
+            </Storyboard>
+            <Storyboard x:Key="OverlayFastSemiFadeOut"
+                        AccelerationRatio=".97"
+                        BeginTime="0:0:0"
+                        SpeedRatio="2.7"
+                        Storyboard.TargetProperty="Opacity">
+                <DoubleAnimation To="0.0" />
+            </Storyboard>
+        </ControlTemplate.Resources>
+
+        <ControlTemplate.Triggers>
+            <!-- Lets make user cannot Tab into a Window Button -->
+            <Trigger Property="IsContentDialogVisible" Value="true">
+                <Setter TargetName="Restore" Property="Focusable" Value="false" />
+                <Setter TargetName="Maximize" Property="Focusable" Value="false" />
+                <Setter TargetName="Minimize" Property="Focusable" Value="false" />
+                <Setter TargetName="Close" Property="Focusable" Value="false" />
+            </Trigger>
+            
+
+            <Trigger Property="ShowDialogsOverTitleBar" Value="False">
+                <Setter TargetName="PART_MetroInactiveDialogsContainer" Property="Grid.Row" Value="1" />
+                <Setter TargetName="PART_OverlayBox" Property="Grid.Row" Value="1" />
+                <Setter TargetName="PART_MetroActiveDialogContainer" Property="Grid.Row" Value="1" />
+            </Trigger>
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsActive" Value="true" />
+                    <Condition Property="WindowState" Value="Normal" />
+                </MultiTrigger.Conditions>
+                <MultiTrigger.Setters>
+                    <Setter TargetName="ActiveBorder" Property="Visibility" Value="Visible" />
+                </MultiTrigger.Setters>
+            </MultiTrigger>
+            <Trigger Property="WindowState" Value="Maximized">
+                <Setter TargetName="ActiveBorder" Property="Visibility" Value="Hidden" />
+                <Setter TargetName="Maximize" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="Restore" Property="Visibility" Value="Visible" />
+                <Setter TargetName="LayoutRoot" Property="Margin" Value="7" />
+                <Setter TargetName="WindowResizeGrip" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="WindowState" Value="Normal">
+                <Setter TargetName="Maximize" Property="Visibility" Value="Visible" />
+                <Setter TargetName="Restore" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="ResizeMode" Value="CanResizeWithGrip" />
+                    <Condition Property="WindowState" Value="Normal" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="WindowResizeGrip" Property="Visibility" Value="Visible" />
+            </MultiTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type local:MetroWindow}"
+            xmlns:Behaviours="clr-namespace:MWindowLib.Behaviours"
+           >
+        <Setter Property="Behaviours:StylizedBehaviors.Behaviors">
+            <Setter.Value>
+                <Behaviours:StylizedBehaviorCollection>
+                    <!-- This makes sure that the system menu and other related
+                         Windows system commands are unavailable when a dialog is shown,
+                         otherwise a user can:
+                         - switch between normal layout and maximized on double click
+                         - right click to view the system menu and exit the application
+                    -->
+                    <Behaviours:BorderlessWindowBehavior />
+                </Behaviours:StylizedBehaviorCollection>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static reskeys:ResourceKeys.ControlNormalForegroundBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource {x:Static reskeys:ResourceKeys.ControlNormalBackgroundBrushKey}}"/>
+        <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="MinHeight" Value="{Binding Source={x:Static SystemParameters.MinimumWindowHeight}}" />
+        <Setter Property="MinWidth" Value="{Binding Source={x:Static SystemParameters.MinimumWindowWidth}}" />
+        <Setter Property="Template" Value="{StaticResource MetroWindowTemplate}" />
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome CornerRadius="0" GlassFrameThickness="1" UseAeroCaptionButtons="False" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

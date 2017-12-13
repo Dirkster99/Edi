@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Edi</RootNamespace>
     <AssemblyName>Edi</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -315,6 +315,18 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\MLib\MLib\MLib.csproj">
+      <Project>{87a9302d-c6a7-4507-82d5-d83a40e899e2}</Project>
+      <Name>MLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MLib\MWindowInterfacesLib\MWindowInterfacesLib.csproj">
+      <Project>{37633896-6066-49c5-b76a-0e5d5d6d1d23}</Project>
+      <Name>MWindowInterfacesLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MLib\MWindowLib\MWindowLib.csproj">
+      <Project>{be4c8126-e5c8-405e-958f-4de9f686089b}</Project>
+      <Name>MWindowLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Tools\BuiltIn\Files\Files.csproj">
       <Project>{ef9b7e8d-b722-48e0-a941-e21f4f7cc2df}</Project>
       <Name>Files</Name>

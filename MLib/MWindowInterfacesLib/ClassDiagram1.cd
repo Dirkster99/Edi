@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MWindowInterfacesLib.Events.DialogStateChangedEventArgs">
+    <Position X="7.75" Y="2.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Events\DialogStateChangedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MWindowInterfacesLib.Interfaces.DialogIntResults">
+    <Position X="7.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAgAAAAAQAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Interfaces\IMsgBoxDialogFrame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Windows.Controls.Grid" Collapsed="true">
+    <Position X="17.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="MWindowInterfacesLib.Interfaces.IBaseMetroDialogFrame">
+    <Position X="0.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>gAABAAAAEAABAEIAAQAAEAAAABIAAAAAAAIAAAAAEAA=</HashCode>
+      <FileName>Interfaces\IBaseMetroDialogFrame.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MWindowInterfacesLib.Interfaces.IBaseMetroDialogFrameViewModel&lt;TResult&gt;">
+    <Position X="3.75" Y="3.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIEAAAAABAEQAAAAAAQAAAAAAAAAAICA=</HashCode>
+      <FileName>Interfaces\IBaseMetroDialogFrameViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MWindowInterfacesLib.Interfaces.IContentDialogService">
+    <Position X="21" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAIABAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IContentDialogService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DialogSettings" />
+      <Property Name="Manager" />
+      <Property Name="Coordinator" />
+      <Property Name="MsgBox" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="MWindowInterfacesLib.Interfaces.IDialogCoordinator">
+    <Position X="21" Y="3.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAAAAACAAAABAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IDialogCoordinator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MWindowInterfacesLib.Interfaces.IDialogManager">
+    <Position X="24" Y="3" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAQAAAAACAECAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IDialogManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MWindowInterfacesLib.Interfaces.IMetroDialogFrameSettings">
+    <Position X="24" Y="1.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAABAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IMetroDialogFrameSettings.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MWindowInterfacesLib.Interfaces.IMetroWindow">
+    <Position X="12.75" Y="0.5" Width="2.5" />
+    <AssociationLine Name="OverlayBox" Type="System.Windows.Controls.Grid" FixedToPoint="true">
+      <Path>
+        <Point X="15.25" Y="1.191" />
+        <Point X="17.5" Y="1.191" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="MetroActiveDialogContainer" Type="System.Windows.Controls.Grid" FixedToPoint="true">
+      <Path>
+        <Point X="15.25" Y="0.937" />
+        <Point X="17.5" Y="0.937" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAgAADAAAAAAAFAAABAAAAAARCAiBEACAAAAAAAAAg=</HashCode>
+      <FileName>Interfaces\IMetroWindow.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="OverlayBox" />
+      <Property Name="MetroActiveDialogContainer" />
+      <Property Name="MetroInactiveDialogContainer" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="MWindowInterfacesLib.Interfaces.IMsgBoxDialogFrame&lt;TResult&gt;">
+    <Position X="3.75" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAACAAAAQAAAAAAAAAAAAAAAAAAAICA=</HashCode>
+      <FileName>Interfaces\IMsgBoxDialogFrame.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MWindowInterfacesLib.Interfaces.IMetroWindowService">
+    <Position X="26.75" Y="3" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Interfaces\MWindow\IMetroWindowService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MWindowInterfacesLib.MsgBox.IMessageBoxService">
+    <Position X="21" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>MsgBox\IMessageBoxService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="MWindowInterfacesLib.Enums.StaticMsgBoxModes">
+    <Position X="21.25" Y="9" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAQ=</HashCode>
+      <FileName>Enums\StaticMsgBoxModes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MWindowInterfacesLib.MsgBox.Enums.MsgBoxButtons">
+    <Position X="23.5" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAUAAAAAAAQAAAAAAAAAACAAJDACCQAA=</HashCode>
+      <FileName>MsgBox\Enums\MsgBoxButtons.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MWindowInterfacesLib.MsgBox.Enums.MsgBoxImage">
+    <Position X="25.75" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAFAAAACAAAQAEAAAAIBAAAAAgAAAEAAABAIEAAAI=</HashCode>
+      <FileName>MsgBox\Enums\MsgBoxImage.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MWindowInterfacesLib.MsgBox.Enums.MsgBoxResult">
+    <Position X="21.25" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAQgAAAAAAAAAAAACAAAAAAAAABAAGAAAA=</HashCode>
+      <FileName>MsgBox\Enums\MsgBoxResult.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

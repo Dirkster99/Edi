@@ -3,10 +3,10 @@
                     
                     xmlns:local="clr-namespace:Edi.Apps.Views.Shell"
                     >
-  <ResourceDictionary.MergedDictionaries>
-    <ResourceDictionary Source="/Edi.Apps;component/Themes/EmptyWindow.xaml" />
-  </ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Edi.Apps;component/BindToMLib/MWindowLib/LightBrushs.xaml" />
+    </ResourceDictionary.MergedDictionaries>
 
-  <Style TargetType="{x:Type local:MainWindow}" BasedOn="{StaticResource EmptyWindow}" />
+    <!-- Style TargetType="{x:Type local:MainWindow}" BasedOn="{StaticResource EmptyWindow}" / -->
 
 </ResourceDictionary>

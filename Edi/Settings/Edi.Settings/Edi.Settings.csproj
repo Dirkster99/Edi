@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Edi.Settings</RootNamespace>
     <AssemblyName>Edi.Settings</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -123,6 +123,10 @@
     <Compile Include="UserProfile\ViewPosSizeModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\MLib\MLib\MLib.csproj">
+      <Project>{87a9302d-c6a7-4507-82d5-d83a40e899e2}</Project>
+      <Name>MLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Edi.Core\Edi.Core.csproj">
       <Project>{f17e5e06-f28c-4e91-964f-cdb9f8589bb7}</Project>
       <Name>Edi.Core</Name>

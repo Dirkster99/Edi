@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Edi.Apps</RootNamespace>
     <AssemblyName>Edi.Apps</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -161,6 +161,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\MLib\MLib\MLib.csproj">
+      <Project>{87a9302d-c6a7-4507-82d5-d83a40e899e2}</Project>
+      <Name>MLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MLib\MWindowInterfacesLib\MWindowInterfacesLib.csproj">
+      <Project>{37633896-6066-49c5-b76a-0e5d5d6d1d23}</Project>
+      <Name>MWindowInterfacesLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MLib\MWindowLib\MWindowLib.csproj">
+      <Project>{be4c8126-e5c8-405e-958f-4de9f686089b}</Project>
+      <Name>MWindowLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Edi.Core\Edi.Core.csproj">
       <Project>{f17e5e06-f28c-4e91-964f-cdb9f8589bb7}</Project>
       <Name>Edi.Core</Name>
@@ -218,15 +230,19 @@
     <Resource Include="Images\DocTab\Lock-icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="BindToMLib\MWindowLib\DarkBrushs.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="BindToMLib\MWindowLib\LightBrushs.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\DocumentHeaderDataTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Styles\AvalonDockStyles.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\EmptyWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

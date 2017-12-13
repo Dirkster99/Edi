@@ -1,7 +1,8 @@
-<mui:ModernWindow x:Class="Edi.Apps.Views.Shell.MainWindow"
+<mWinlib:SimpleMetroWindow x:Class="Edi.Apps.Views.Shell.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+                  
+        xmlns:mWinlib="clr-namespace:MWindowLib;assembly=MWindowLib"
           
         xmlns:view="clr-namespace:Edi.Apps.Views.Shell"
 
@@ -18,14 +19,16 @@
         ADBehav:ActivatedCommand.Command="{Binding MainWindowActivated}"
         >
     <Grid>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition Height="*"/>
-    </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-    <view:MainToolbar Grid.Row="0" SnapsToDevicePixels="True" Margin="3,0" />
+        <view:MainMenu Grid.Row="0" />
+        <view:MainToolbar Grid.Row="1" SnapsToDevicePixels="True" Margin="3,0" />
 
-    <ADView:AvalonDockView  Grid.Row="1" x:Name="dockView" x:FieldModifier="private" />
-  </Grid>
+        <ADView:AvalonDockView  Grid.Row="2" x:Name="dockView" x:FieldModifier="private" />
+    </Grid>
 
-</mui:ModernWindow>
+</mWinlib:SimpleMetroWindow>

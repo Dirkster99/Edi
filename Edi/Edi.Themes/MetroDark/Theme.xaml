@@ -6,6 +6,10 @@
         <ResourceDictionary Source="/Edi.Themes;component/MetroDark/Brushes.xaml" />
         <ResourceDictionary Source="/Edi.Themes;component/MetroDark/Edi.ModernUI.Dark.xaml" />
 
+        <ResourceDictionary Source="/Mlib;component/Themes/DarkTheme.xaml" />
+        <ResourceDictionary Source="/MWindowLib;component/Themes/DarkTheme.xaml" />
+        <!-- ResourceDictionary Source="/Themes;component/BindToMLib/MWindowLib/DarkBrushs.xaml" / -->
+
         <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/TabControl.xaml" / -->
         <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/Controls.TabControl.xaml" />
 
