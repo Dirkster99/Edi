@@ -1,0 +1,28 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- This file contains a list of icons that can be used in a generic (light) non-Metro theme. -->
+
+  <!-- These icons are shown inside the treeview of the folder browser -->
+  <BitmapImage x:Key="FolderItem_Image_HardDisk"     UriSource="/FolderBrowser;component/Images/Metro/Light/HardDisk.png" />
+  <BitmapImage x:Key="FolderItem_Image_FolderClosed" UriSource="/FolderBrowser;component/Images/Metro/Light/FolderClosed.png" />
+  <BitmapImage x:Key="FolderItem_Image_FolderOpen"   UriSource="/FolderBrowser;component/Images/Metro/Light/FolderOpen.png" />
+
+  <!-- Special folder  dynamic resources are required to confirm to a set naming convention:
+       string.Format("SpecialFolder_Image_{0}", Enum.GetName(typeof(System.Environment.SpecialFolder)
+   -->
+  <BitmapImage x:Key="SpecialFolder_Image_Desktop" UriSource="pack://application:,,,/FolderBrowser;component/Images/Metro/Light/Desktop.png" />
+  <BitmapImage x:Key="SpecialFolder_Image_Favourites" UriSource="pack://application:,,,/FolderBrowser;component/Images/Metro/Light/Favourites.png" />
+
+  <!-- Fallback dynamic resource image when all else fails -->
+  <BitmapImage x:Key="SpecialFolder_Image_Folder" UriSource="pack://application:,,,/FolderBrowser;component/Images/Metro/Light/Folder.png" />
+
+  <BitmapImage x:Key="SpecialFolder_Image_MyDocuments" UriSource="pack://application:,,,/FolderBrowser;component/Images/Metro/Light/MyDocuments.png" />
+  <BitmapImage x:Key="SpecialFolder_Image_MyMusic" UriSource="pack://application:,,,/FolderBrowser;component/Images/Metro/Light/MyMusic.png" />
+
+  <BitmapImage x:Key="SpecialFolder_Image_MyPictures" UriSource="pack://application:,,,/FolderBrowser;component/Images/Metro/Light/MyPictures.png" />
+  <BitmapImage x:Key="SpecialFolder_Image_MyVideos" UriSource="pack://application:,,,/FolderBrowser;component/Images/Metro/Light/MyVideos.png" />
+  <BitmapImage x:Key="SpecialFolder_Image_ProgramFiles" UriSource="pack://application:,,,/FolderBrowser;component/Images/Metro/Light/ProgramFiles.png" />
+
+  
+</ResourceDictionary>

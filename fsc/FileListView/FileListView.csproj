@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{735CF8EC-A4EF-49A2-BC72-EC360A0185A4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FileListView</RootNamespace>
+    <AssemblyName>FileListView</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\x86\Debug\FileListView.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\x86\Release\FileListView.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="InplaceEditBoxLib, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.InplaceEditBoxLib.1.0.0.3\lib\net4\InplaceEditBoxLib.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.InplaceEditBoxLib.1.0.0.3\lib\net4\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MsgBox, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.MsgBox.1.4.2\lib\net451\MsgBox.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UserNotification, Version=1.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.InplaceEditBoxLib.1.0.0.3\lib\net4\UserNotification.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\IconUtilities.cs" />
+    <Compile Include="ViewModels\FileListViewModel.cs" />
+    <Compile Include="ViewModels\FolderListViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IFileListViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IFolderListViewModel.cs" />
+    <Compile Include="ViewModels\RecentLocationsViewModel.cs" />
+    <Compile Include="ViewModels\SortableObservableCollection.cs" />
+    <Compile Include="Views\Behavior\DoubleClickSelectorItem.cs" />
+    <Compile Include="Views\Behavior\BringIntoViewListBoxItem.cs" />
+    <Compile Include="Views\Behavior\SelectionChangedBehavior.cs" />
+    <Compile Include="Views\BindingProxy.cs" />
+    <Compile Include="Views\FListView.xaml.cs">
+      <DependentUpon>FListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FolderComboBox.xaml.cs">
+      <DependentUpon>FolderComboBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FilterComboBox.xaml.cs">
+      <DependentUpon>FilterComboBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\FolderComboBoxViewModel.cs" />
+    <Compile Include="ViewModels\FilterComboBoxViewModel.cs" />
+    <Compile Include="ViewModels\FSItemViewModel.cs" />
+    <Compile Include="ViewModels\FilterItemViewModel.cs" />
+    <Compile Include="ViewModels\Base\ViewModelBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Images\GenericIcons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Images\MetroDarkIcons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Images\MetroLightIcons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Brushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\FListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\FolderComboBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\FilterComboBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Generic\075b_UpFolder_16x16_72.png" />
+    <Resource Include="Images\Generic\Back.png" />
+    <Resource Include="Images\Generic\Folder\folderopened_yellow_128.png" />
+    <Resource Include="Images\Generic\Folder\folderopened_yellow_16.png" />
+    <Resource Include="Images\Generic\Folder\folderopened_yellow_64.png" />
+    <Resource Include="Images\Generic\Folder\Folder_yellow_32.png" />
+    <Resource Include="Images\Generic\forward.png" />
+    <Resource Include="Images\Generic\refresh.png" />
+    <Resource Include="Images\Metro\Dark\appbar.arrow.up_16.png" />
+    <Resource Include="Images\Metro\Dark\appbar.arrow.up_32.png" />
+    <Resource Include="Images\Metro\Dark\appbar.folder_16.png" />
+    <Resource Include="Images\Metro\Dark\appbar.folder_32.png" />
+    <Resource Include="Images\Metro\Dark\appbar.image.macro_16.png" />
+    <Resource Include="Images\Metro\Dark\appbar.image.macro_32.png" />
+    <Resource Include="Images\Metro\Dark\appbar.page.hidden_16.png" />
+    <Resource Include="Images\Metro\Dark\appbar.page.hidden_32.png" />
+    <Resource Include="Images\Metro\Dark\appbar.refresh_16.png" />
+    <Resource Include="Images\Metro\Dark\appbar.refresh_32.png" />
+    <Resource Include="Images\Metro\Dark\File_16.png" />
+    <Resource Include="Images\Metro\Dark\File_32.png" />
+    <Resource Include="Images\Metro\Dark\MyBase.ArrowLeft_16.png" />
+    <Resource Include="Images\Metro\Dark\MyBase.ArrowLeft_32.png" />
+    <Resource Include="Images\Metro\Dark\MyBase.ArrowRight_16.png" />
+    <Resource Include="Images\Metro\Dark\MyBase.ArrowRight_32.png" />
+    <Resource Include="Images\Metro\Light\appbar.arrow.up_16.png" />
+    <Resource Include="Images\Metro\Light\appbar.arrow.up_32.png" />
+    <Resource Include="Images\Metro\Light\appbar.folder_16.png" />
+    <Resource Include="Images\Metro\Light\appbar.folder_32.png" />
+    <Resource Include="Images\Metro\Light\appbar.image.macro_16.png" />
+    <Resource Include="Images\Metro\Light\appbar.image.macro_32.png" />
+    <Resource Include="Images\Metro\Light\appbar.page.hidden_16.png" />
+    <Resource Include="Images\Metro\Light\appbar.page.hidden_32.png" />
+    <Resource Include="Images\Metro\Light\appbar.refresh_16.png" />
+    <Resource Include="Images\Metro\Light\appbar.refresh_32.png" />
+    <Resource Include="Images\Metro\Light\File_16.png" />
+    <Resource Include="Images\Metro\Light\File_32.png" />
+    <Resource Include="Images\Metro\Light\MyBase.ArrowLeft_16.png" />
+    <Resource Include="Images\Metro\Light\MyBase.ArrowLeft_32.png" />
+    <Resource Include="Images\Metro\Light\MyBase.ArrowRight_16.png" />
+    <Resource Include="Images\Metro\Light\MyBase.ArrowRight_32.png" />
+    <Resource Include="Images\Generic\IsHiddenVisible.png" />
+    <Resource Include="Images\Generic\appbar.image.macro.png" />
+    <Resource Include="Images\Generic\magnifying_glass.png" />
+    <Content Include="Images\Generic\magnifying_glass.svg" />
+    <Resource Include="Images\Metro\Light\appbar.magnify.png" />
+    <Resource Include="Images\Metro\Dark\appbar.magnify.png" />
+    <Content Include="Images\Metro\SVG\appbar.arrow.up.svg" />
+    <Content Include="Images\Metro\SVG\appbar.folder.svg" />
+    <Content Include="Images\Metro\SVG\appbar.image.macro.svg" />
+    <Content Include="Images\Metro\SVG\appbar.magnify.svg" />
+    <Content Include="Images\Metro\SVG\appbar.page.hidden.svg" />
+    <Content Include="Images\Metro\SVG\appbar.refresh.svg" />
+    <Content Include="Images\Metro\SVG\File.svg" />
+    <Content Include="Images\Metro\SVG\MyBase.ArrowLeft.svg" />
+    <Content Include="Images\Metro\SVG\MyBase.ArrowRight.svg" />
+    <Content Include="Images\Metro\SVG\Sketchup\appbar.arrow.left.svg" />
+    <Content Include="Images\Metro\SVG\Sketchup\appbar.arrow.right.left.svg" />
+    <Content Include="Images\Metro\SVG\Sketchup\appbar.base.svg" />
+    <Content Include="Images\Metro\SVG\Sketchup\appbar.chevron.down.svg" />
+    <Content Include="Images\Metro\SVG\Sketchup\appbar.chevron.left.svg" />
+    <Content Include="Images\Metro\SVG\Sketchup\appbar.chevron.right.svg" />
+    <Content Include="Images\Metro\SVG\Sketchup\appbar.chevron.up.svg" />
+    <Content Include="Images\Metro\SVG\Sketchup\appbar.navigate.next.svg" />
+    <Content Include="Images\Metro\SVG\Sketchup\appbar.navigate.previous.svg" />
+    <Content Include="Images\Metro\SVG\Sketchup\MyBase.svg" />
+    <Content Include="Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FileSystemModels\FileSystemModels.csproj">
+      <Project>{c3eb23fd-78e7-4298-922c-48c254551cc9}</Project>
+      <Name>FileSystemModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FolderBrowser\FolderBrowser.csproj">
+      <Project>{0b8c3b19-940d-408d-9f6b-4afee7246642}</Project>
+      <Name>FolderBrowser</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- Import Project="$(ProgramFiles)\MSBuild\StyleCop\v4.7\StyleCop.Targets" / -->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

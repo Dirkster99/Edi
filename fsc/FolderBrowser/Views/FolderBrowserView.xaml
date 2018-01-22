@@ -1,0 +1,145 @@
+<UserControl x:Class="FolderBrowser.Views.FolderBrowserView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+
+             xmlns:behav="clr-namespace:FolderBrowser.Views.Behaviours"
+             xmlns:bindLocal="clr-namespace:FolderBrowser.Views"
+             xmlns:conv="clr-namespace:FolderBrowser.Converters"
+
+             xmlns:loc="clr-namespace:FileSystemModels.Local;assembly=FileSystemModels"
+             xmlns:EditInPlace="clr-namespace:InplaceEditBoxLib.Views;assembly=InplaceEditBoxLib"
+
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="100"
+             >
+    <Grid>
+    <!-- The windows explorer style treeview of folders -->
+    <TreeView ItemsSource="{Binding Folders}"
+              behav:TreeViewSelectionChangedBehavior.ChangedCommand="{Binding FolderSelectedCommand}"
+              >
+      <TreeView.Resources>
+        <!-- Use a proxy to bind items to root properties of this collection -->
+        <bindLocal:BindingProxy  x:Key="DataContextProxy"  Data="{Binding}" />
+      </TreeView.Resources>
+      
+      <TreeView.ItemTemplate>
+        <HierarchicalDataTemplate ItemsSource="{Binding Folders}">
+          <StackPanel Orientation="Horizontal">
+          <!-- StackPanel.InputBindings>
+            <KeyBinding Key="F2"
+              Command="{Binding Path=Data.StartRenameCommand, Source={StaticResource DataContextProxy}}"
+              CommandParameter="{Binding}" />
+          </StackPanel.InputBindings -->
+            <StackPanel.ContextMenu>
+              <ContextMenu>
+                <ContextMenu.Resources>
+                  <BooleanToVisibilityConverter x:Key="BoolToVis" />
+                </ContextMenu.Resources>
+                <MenuItem Command="{Binding Path=Data.FinalSelectDirectoryCommand, Source={StaticResource DataContextProxy}}"
+                          CommandParameter="{Binding}"
+                          Header="{x:Static loc:Strings.CMD_Select_Folder_Label}"
+                          ToolTip="{x:Static loc:Strings.CMD_Select_Folder_Label_TT}"
+                          />
+
+                <Separator Margin="3" />
+                <MenuItem Command="{Binding OpenInWindowsCommand}"
+                          CommandParameter="{Binding}"
+                          Header="{x:Static loc:Strings.CMD_Open_in_Windows_Label}"
+                          ToolTip="{x:Static loc:Strings.CMD_Open_in_Windows_Label_TT}"
+                          />
+
+                <MenuItem Command="{Binding CopyPathCommand}"
+                          CommandParameter="{Binding}"
+                          Header="{x:Static loc:Strings.CMD_Copy_Path_To_Clipboard_Label}"
+                          ToolTip="{x:Static loc:Strings.CMD_Copy_Path_To_Clipboard_Label_TT}"
+                          />
+
+                <!-- This group of commands cannot be executed if action cannot be executed -->
+                <Separator Visibility="{Binding Data.RecentFolderCommandCanExecute, Source={StaticResource DataContextProxy}, Converter={StaticResource BoolToVis}}" />
+
+                <MenuItem Command="{Binding Data.RecentFolderAddCommand, Source={StaticResource DataContextProxy}}"
+                          CommandParameter="{Binding}"
+                          Header="{x:Static loc:Strings.CMD_RecentFolderAdd_Label}"
+                          ToolTip="{x:Static loc:Strings.CMD_RecentFolderAdd_TT}"
+                          Visibility="{Binding Data.RecentFolderCommandCanExecute, Source={StaticResource DataContextProxy}, Converter={StaticResource BoolToVis}}"
+                          />
+
+                <MenuItem Command="{Binding Data.RecentFolderRemoveCommand, Source={StaticResource DataContextProxy}}"
+                          CommandParameter="{Binding}"
+                          Header="{x:Static loc:Strings.CMD_RecentFolderRemove_Label}"
+                          ToolTip="{x:Static loc:Strings.CMD_RecentFolderRemove_TT}"
+                          Visibility="{Binding Data.RecentFolderCommandCanExecute, Source={StaticResource DataContextProxy}, Converter={StaticResource BoolToVis}}"
+                          />
+
+                <Separator />
+
+                <MenuItem Command="{Binding Path=Data.CreateFolderCommand, Source={StaticResource DataContextProxy}}"
+                          CommandParameter="{Binding}"
+                          Header="New Folder"
+                          ToolTip="Create a new folder"
+                          />
+
+                <MenuItem Command="{Binding Path=Data.StartRenameCommand, Source={StaticResource DataContextProxy}}"
+                          CommandParameter="{Binding}"
+                          Header="Rename"
+                          ToolTip="Rename a folder"
+                          />
+              </ContextMenu>
+              </StackPanel.ContextMenu>
+              <Image Margin="2,0"
+                     VerticalAlignment="Center"
+                     Width="16"
+                     Height="16"
+                     Focusable="False">
+                <Image.Source>
+                  <MultiBinding Converter="{conv:BrowseItemTypeToImageConverter}">
+                    <Binding Path="IsExpanded" />
+                    <Binding Path="ItemType" />
+                  </MultiBinding>
+                </Image.Source>
+              </Image>
+
+              <EditInPlace:EditBox Text="{Binding Path=FolderName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                   DisplayText="{Binding DisplayItemString, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                   ToolTip="{Binding FolderPath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                   Focusable="True"
+                                   
+                                   VerticalAlignment="Stretch"
+                                   HorizontalAlignment="Left"
+                                   IsReadOnly="{Binding IsReadOnly}"
+                                   RenameCommand="{Binding Path=Data.RenameCommand, Source={StaticResource DataContextProxy}}"
+                                   ToolTipService.ShowOnDisabled="True"
+
+                                   InvalidInputCharacters="{x:Static loc:Strings.ForbiddenRenameKeys}"
+                                   InvalidInputCharactersErrorMessage="{x:Static loc:Strings.ForbiddenRenameKeysMessage}"
+                                   InvalidInputCharactersErrorMessageTitle="{x:Static loc:Strings.ForbiddenRenameKeysTitle}"
+
+                                   Margin="2,0" />
+            <!-- Its important to use margin Margin="2,0" since overlay will otherwise not work -->
+
+            <!-- TextBlock Text="{Binding DisplayItemString}"
+                           ToolTip="{Binding FolderPath}"
+                           ToolTipService.ShowOnDisabled="True"
+                           VerticalAlignment="Center" Margin="2" / -->
+            </StackPanel>
+        </HierarchicalDataTemplate>
+      </TreeView.ItemTemplate>
+      <TreeView.ItemContainerStyle>
+        <Style TargetType="{x:Type TreeViewItem}">
+          <Setter Property="behav:TreeViewItemBehaviour.IsBroughtIntoViewWhenSelected" Value="True" />
+          <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+          <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+          <!-- Setter Property="FontWeight" Value="Normal" />
+          <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+              <Setter Property="FontWeight" Value="Bold" />
+            </Trigger>
+          </Style.Triggers -->
+        </Style>
+      </TreeView.ItemContainerStyle>
+    </TreeView>
+  </Grid>
+</UserControl>

@@ -95,9 +95,6 @@
     <Reference Include="DropDownButtonLib, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.DropDownButtonLib.1.0.2.1\lib\net4\DropDownButtonLib.dll</HintPath>
     </Reference>
-    <Reference Include="FileListView">
-      <HintPath>..\..\02_Libs\00_bin\MsgBox\FileListView.dll</HintPath>
-    </Reference>
     <Reference Include="FirstFloor.ModernUI">
       <HintPath>..\..\02_Libs\00_bin\Mui\FirstFloor.ModernUI.dll</HintPath>
     </Reference>
@@ -117,7 +114,7 @@
       <HintPath>..\..\packages\Dirkster.MsgBox.1.4.2\lib\net451\MsgBox.dll</HintPath>
     </Reference>
     <Reference Include="NumericUpDownLib, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.NumericUpDownLib.1.0.1\lib\net4\NumericUpDownLib.dll</HintPath>
+      <HintPath>..\..\packages\Dirkster.NumericUpDownLib.1.0.2\lib\net4\NumericUpDownLib.dll</HintPath>
     </Reference>
     <Reference Include="Prism, Version=7.0.0.269, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Prism.Core.7.0.0.269-pre\lib\net45\Prism.dll</HintPath>
@@ -315,6 +312,10 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\fsc\FileListView\FileListView.csproj">
+      <Project>{735cf8ec-a4ef-49a2-bc72-ec360a0185a4}</Project>
+      <Name>FileListView</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\MLib\MLib\MLib.csproj">
       <Project>{87a9302d-c6a7-4507-82d5-d83a40e899e2}</Project>
       <Name>MLib</Name>

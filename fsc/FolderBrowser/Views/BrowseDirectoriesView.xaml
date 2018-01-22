@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="FolderBrowser.Views.BrowseDirectoriesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             
+             xmlns:behav="clr-namespace:FolderBrowser.Views.Behaviours"
+             xmlns:views="clr-namespace:FolderBrowser.Views"
+             xmlns:conv="clr-namespace:FolderBrowser.Converters"
+             xmlns:bindLocal="clr-namespace:FolderBrowser.Views"
+
+             xmlns:syscontrols="http://schemas.microsoft.com/netfx/2007/xaml/presentation"
+             >
+    <Grid>
+    <DockPanel>
+      <DockPanel.Resources>
+        <syscontrols:BooleanToVisibilityConverter x:Key="BoolToVis" />
+      </DockPanel.Resources>
+        <!-- Quick navigation panel on left-->
+      <Border BorderThickness="2" BorderBrush="Gray"
+              Visibility="{Binding IsSpecialFoldersVisisble, Converter={StaticResource BoolToVis}}">
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      HorizontalAlignment="Left"
+                      DockPanel.Dock="Left"
+                      Background="#FF606060" Margin="0,6,0,-6">
+            <ItemsControl ItemsSource="{Binding SpecialFolders}">
+            <ItemsControl.Resources>
+              <!-- Use a proxy to bind items to root properties of this collection -->
+              <bindLocal:BindingProxy  x:Key="DataContextProxy"  Data="{Binding}" />
+              <conv:SpecialFolderToImageResourceConverter x:Key="SpecialFolderToImageConv" />
+            </ItemsControl.Resources>
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <StackPanel Orientation="Vertical"/>
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Button Command="{Binding Path=Data.FolderSelectedCommand, Source={StaticResource DataContextProxy}}"
+                      CommandParameter="{Binding Path=Path}">
+                <StackPanel>
+                    <Image Source="{Binding SpecialFolder, Converter={StaticResource SpecialFolderToImageConv}}"
+                           ToolTip="{Binding Path=Path}"
+                           ToolTipService.IsEnabled="True"
+                           Height="48" Width="48" />
+                </StackPanel>
+              </Button>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </ScrollViewer>
+      </Border>
+
+      <!-- The windows explorer style treeview of folders -->
+      <views:FolderBrowserView DataContext="{Binding}" />
+    </DockPanel>
+  </Grid>
+</UserControl>

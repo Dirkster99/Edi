@@ -1,0 +1,32 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- This file contains a list of toolbar (related command) icons that
+       can be used in a generic (light) non-Metro theme.
+  -->
+
+  <!-- 16 pixel Folder Up command icon -->
+  <BitmapImage x:Key="FLV_Image_FolderUp" UriSource="pack://application:,,,/FileListView;component/Images/Generic/075b_UpFolder_16x16_72.png" />
+
+  <!-- 16 pixel back command icon -->
+  <BitmapImage x:Key="FLV_Image_Back" UriSource="pack://application:,,,/FileListView;component/Images/Generic/Back.png" />
+
+  <!-- 16 pixel forward command icon -->
+  <BitmapImage x:Key="FLV_Image_Forward" UriSource="pack://application:,,,/FileListView;component/Images/Generic/forward.png" />
+
+  <!-- 16 pixel refresh command icon -->
+  <BitmapImage x:Key="FLV_Image_Refresh" UriSource="pack://application:,,,/FileListView;component/Images/Generic/refresh.png" />
+
+
+  <!-- 16 pixel Toggle folder Visible command -->
+  <BitmapImage x:Key="FLV_Image_IsFoldersVisible" UriSource="pack://application:,,,/FileListView;component/Images/Generic/Folder/folderopened_yellow_16.png" />
+
+  <!-- 16 pixel Toggle icons visible command icon -->
+  <BitmapImage x:Key="FLV_Image_IsIconVisible" UriSource="pack://application:,,,/FileListView;component/Images/Generic/appbar.image.macro.png" />
+
+  <!-- 16 pixel Toggle hidden items visible command icon -->
+  <BitmapImage x:Key="FLV_Image_IsHiddenFileVisible" UriSource="pack://application:,,,/FileListView;component/Images/Generic/IsHiddenVisible.png" />
+
+  <BitmapImage x:Key="FLV_Image_IsFiltered" UriSource="pack://application:,,,/FileListView;component/Images/Generic/magnifying_glass.png" />
+  
+</ResourceDictionary>

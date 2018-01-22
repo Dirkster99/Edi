@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0B8C3B19-940D-408D-9F6B-4AFEE7246642}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FolderBrowser</RootNamespace>
+    <AssemblyName>FolderBrowser</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\x86\Debug\FolderBrowser.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\x86\Release\FolderBrowser.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="InplaceEditBoxLib, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.InplaceEditBoxLib.1.0.0.3\lib\net4\InplaceEditBoxLib.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MsgBox, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.MsgBox.1.4.2\lib\net451\MsgBox.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UserNotification, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.UserNotifications.1.4.0\lib\net451\UserNotification.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ViewModels\Interfaces\IBrowserViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IFolderViewModel.cs" />
+    <Compile Include="Views\Behaviours\DialogCloser.cs" />
+    <Compile Include="Converters\BrowseItemTypeToImageConverter .cs" />
+    <Compile Include="Converters\SpecialFolderToImageConverter .cs" />
+    <Compile Include="ViewModels\CustomFolderItemViewModel.cs" />
+    <Compile Include="Views\Behaviours\TextChangedCommand.cs" />
+    <Compile Include="Views\Behaviours\TreeViewSelectionChangedBehavior.cs" />
+    <Compile Include="Views\BindingProxy.cs" />
+    <Compile Include="Views\BrowseDirectoriesView.xaml.cs">
+      <DependentUpon>BrowseDirectoriesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\BrowserViewModel.cs" />
+    <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="Views\FolderBrowserDialog.xaml.cs">
+      <DependentUpon>FolderBrowserDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\DialogViewModel.cs" />
+    <Compile Include="ViewModels\FolderViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Behaviours\TreeViewItemBehaviour.cs" />
+    <Compile Include="ViewModels\Base\ViewModelBase.cs" />
+    <Compile Include="Views\FolderBrowserView.xaml.cs">
+      <DependentUpon>FolderBrowserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SpecialFolderMarkUpExtension.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Images\MetroDarkIcons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Images\MetroLightIcons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Images\GenericIcons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BrowseDirectoriesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FolderBrowserDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FolderBrowserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Generic\Desktop.png" />
+    <Resource Include="Images\Generic\MyPictures.png" />
+    <Resource Include="Images\Generic\MyDocuments.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Generic\HardDisk.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Generic\FolderClosed.png" />
+    <Resource Include="Images\Generic\FolderOpen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Generic\MyVideos.png" />
+    <Resource Include="Images\Generic\ProgramFiles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Resource Include="Images\Generic\Folder.png" />
+    <Resource Include="Images\Generic\Favourites.png" />
+    <Resource Include="Images\Generic\MyMusic.png" />
+    <None Include="Images\Metro\SVG\Desktop.svg" />
+    <None Include="Images\Metro\SVG\Favourites.svg" />
+    <None Include="Images\Metro\SVG\FolderClosed.svg" />
+    <None Include="Images\Metro\SVG\FolderOpen.svg" />
+    <None Include="Images\Metro\SVG\MyMusic.svg" />
+    <Resource Include="Images\Metro\Light\Desktop.png" />
+    <Resource Include="Images\Metro\Light\Favourites.png" />
+    <Resource Include="Images\Metro\Light\Folder.png" />
+    <Resource Include="Images\Metro\Light\FolderClosed.png" />
+    <Resource Include="Images\Metro\Light\FolderOpen.png" />
+    <Resource Include="Images\Metro\Light\HardDisk.png" />
+    <Resource Include="Images\Metro\Light\MyDocuments.png" />
+    <Resource Include="Images\Metro\Light\MyMusic.png" />
+    <Resource Include="Images\Metro\Light\MyPictures.png" />
+    <Resource Include="Images\Metro\Light\MyVideos.png" />
+    <Resource Include="Images\Metro\Light\ProgramFiles.png" />
+    <Resource Include="Images\Metro\Dark\Desktop.png" />
+    <Resource Include="Images\Metro\Dark\Favourites.png" />
+    <Resource Include="Images\Metro\Dark\Folder.png" />
+    <Resource Include="Images\Metro\Dark\FolderClosed.png" />
+    <Resource Include="Images\Metro\Dark\FolderOpen.png" />
+    <Resource Include="Images\Metro\Dark\HardDisk.png" />
+    <Resource Include="Images\Metro\Dark\MyDocuments.png" />
+    <Resource Include="Images\Metro\Dark\MyMusic.png" />
+    <Resource Include="Images\Metro\Dark\MyPictures.png" />
+    <Resource Include="Images\Metro\Dark\MyVideos.png" />
+    <Resource Include="Images\Metro\Dark\ProgramFiles.png" />
+    <Content Include="Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FileSystemModels\FileSystemModels.csproj">
+      <Project>{c3eb23fd-78e7-4298-922c-48c254551cc9}</Project>
+      <Name>FileSystemModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- Import Project="$(ProgramFiles)\MSBuild\StyleCop\v4.7\StyleCop.Targets" / -->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
