@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("HP")]
 [assembly: AssemblyProduct("FileSystemModels")]
-[assembly: AssemblyCopyright("Copyright © HP 2014")]
+[assembly: AssemblyCopyright("Copyright © HP 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("feaa3599-935c-43df-a3d6-f332225ac858")]
+[assembly: Guid("e84080d8-8b21-487f-99ee-cddff6d1aff2")]
 
 // Version information for an assembly consists of the following four values:
 //

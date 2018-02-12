@@ -1,15 +1,15 @@
-namespace FileSystemModels.Events
+﻿namespace FileSystemModels.Events
 {
-  using System;
+    using System;
 
-  /// <summary>
-  /// Class implements ...
-  /// </summary>
-  public class FilterChangedEventArgs : EventArgs
-  {
     /// <summary>
-    /// Path of directory...
+    /// Class implements ...
     /// </summary>
-    public string FilterText { get; set; }
-  }
+    public class FilterChangedEventArgs : EventArgs
+    {
+        /// <summary>
+        /// Path of directory...
+        /// </summary>
+        public string FilterText { get; set; }
+    }
 }

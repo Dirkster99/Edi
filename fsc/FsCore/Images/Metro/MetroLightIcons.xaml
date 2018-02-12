@@ -1,0 +1,10 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- This file contains a list of icons that can be used in a generic (light) non-Metro theme. -->
+
+    <!-- 16 pixel IsFolders Visible command icon -->
+    <BitmapImage x:Key="FLV_Image_IsFoldersVisible" UriSource="/FsCore;component/Images/Metro/Light/appbar.folder_16.png" />
+
+
+</ResourceDictionary>

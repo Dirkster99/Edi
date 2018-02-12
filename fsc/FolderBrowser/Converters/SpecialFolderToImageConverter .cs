@@ -53,7 +53,7 @@ namespace FolderBrowser.Converters
       switch (folder)
       {
         case Environment.SpecialFolder.Desktop:
-          pathValue = "pack://application:,,,/FolderBrowser;component/Images/Generic/Desktop.png";
+              pathValue = "pack://application:,,,/FolderBrowser;component/Images/Generic/Desktop.png";
           break;
         case Environment.SpecialFolder.Favorites:
           pathValue = "pack://application:,,,/FolderBrowser;component/Images/Generic/Favourites.png";
@@ -98,7 +98,7 @@ namespace FolderBrowser.Converters
       else
       {
         // Attempt to load fallback folder from fixed Uri
-        pathValue = "pack://application:,,,/FolderBrowser;component/Images/Generic/Folder.png";
+          pathValue = "pack://application:,,,/FolderBrowser;component/Images/Generic/Folder.png";
 
         try
         {

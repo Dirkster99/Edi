@@ -11,13 +11,13 @@
     It is therefore sufficient to load these for Bright and Dark styles without having
     to define extra styles for each theme.
   -->
-  <ControlTemplate x:Key="FilterComboBoxToggleButton" TargetType="ToggleButton">
+  <!--ControlTemplate x:Key="FilterComboBoxToggleButton" TargetType="ToggleButton">
     <Grid>
       <Grid.ColumnDefinitions>
         <ColumnDefinition />
         <ColumnDefinition Width="Auto" />
       </Grid.ColumnDefinitions>
-      <!-- CornerRadius="2" -->
+      - CornerRadius="2" -
       <Border x:Name="Border" 
               Grid.ColumnSpan="2"
               Background="{TemplateBinding Background}"
@@ -38,9 +38,9 @@
         <Setter Property="Foreground" Value="{DynamicResource InputTextDisabled}"/>
       </Trigger>
     </ControlTemplate.Triggers>
-  </ControlTemplate>
+  </ControlTemplate-->
 
-  <Style TargetType="{x:Type local:FilterComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+  <!-- Style TargetType="{x:Type local:FilterComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
     <Setter Property="SnapsToDevicePixels" Value="true"/>
     <Setter Property="OverridesDefaultStyle" Value="true"/>
     <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
@@ -72,7 +72,7 @@
                 <ColumnDefinition Width="Auto" />
               </Grid.ColumnDefinitions>
 
-              <!-- Margin="3,3,23,3" -->
+              - Margin="3,3,23,3" -
               <ContentPresenter Name="ContentSite"
                                 IsHitTestVisible="False" 
                                 Content="{TemplateBinding SelectionBoxItem}"
@@ -126,7 +126,7 @@
                           BorderBrush="{DynamicResource WindowBorderActive}"
                           BorderThickness="1"
                           Margin="0,-1,0,0">
-                    <!-- popup border thickness not dependent on BorderThickness property-->
+                    - popup border thickness not dependent on BorderThickness property-
                     <ScrollViewer Name="DropDownScrollViewer">
                       <Grid RenderOptions.ClearTypeHint="Enabled">
                         <Canvas Height="0" Width="0" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -179,9 +179,9 @@
         </ControlTemplate>
       </Setter.Value>
     </Setter>
-  </Style>
+  </Style -->
 
-  <Style TargetType="{x:Type local:FolderComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+  <!-- Style TargetType="{x:Type local:FolderComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
     <Setter Property="SnapsToDevicePixels" Value="true"/>
     <Setter Property="OverridesDefaultStyle" Value="true"/>
     <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
@@ -218,7 +218,7 @@
               <ColumnDefinition Width="{Binding Indentation}"/>
               <ColumnDefinition Width="20"/>
               <ColumnDefinition Width="*"/>
-              <!-- File/folder name should use up all remaining space -->
+              - File/folder name should use up all remaining space -
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
               <RowDefinition />
@@ -243,7 +243,7 @@
                 <ColumnDefinition Width="Auto" />
               </Grid.ColumnDefinitions>
 
-              <!-- Margin="3,3,23,3" -->
+              - Margin="3,3,23,3" -
               <ContentPresenter Name="ContentSite"
                                 IsHitTestVisible="False" 
                                 Content="{TemplateBinding SelectionBoxItem}"
@@ -297,7 +297,7 @@
                           BorderBrush="{DynamicResource WindowBorderActive}"
                           BorderThickness="1"
                           Margin="0,-1,0,0">
-                    <!-- popup border thickness not dependent on BorderThickness property-->
+                    - popup border thickness not dependent on BorderThickness property-
                     <ScrollViewer Name="DropDownScrollViewer">
                       <Grid RenderOptions.ClearTypeHint="Enabled">
                         <Canvas Height="0" Width="0" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -353,6 +353,6 @@
         </ControlTemplate>
       </Setter.Value>
     </Setter>
-  </Style>
+  </Style -->
 
 </ResourceDictionary>

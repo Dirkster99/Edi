@@ -72,8 +72,8 @@
     <Reference Include="CommonServiceLocator, Version=2.0.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\CommonServiceLocator.2.0.1\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
-    <Reference Include="DropDownButtonLib, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Dirkster.DropDownButtonLib.1.0.2.1\lib\net4\DropDownButtonLib.dll</HintPath>
+    <Reference Include="DropDownButtonLib, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Dirkster.DropDownButtonLib.1.0.4\lib\net4\DropDownButtonLib.dll</HintPath>
     </Reference>
     <Reference Include="InplaceEditBoxLib, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Dirkster.InplaceEditBoxLib.1.0.0.3\lib\net4\InplaceEditBoxLib.dll</HintPath>
@@ -119,6 +119,7 @@
     <Compile Include="Module\MEFLoadFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\FileExplorer\FileExplorerViewModel.cs" />
+    <Compile Include="ViewModels\FileExplorer\ITreeListControllerViewModel.cs" />
     <Compile Include="ViewModels\FileStats\FileStatsViewModel.cs" />
     <Compile Include="ViewModels\RecentFiles\RecentFilesViewModel.cs" />
     <Compile Include="Views\FileExplorer\FileExplorerView.xaml.cs">
@@ -182,9 +183,17 @@
       <Project>{c3eb23fd-78e7-4298-922c-48c254551cc9}</Project>
       <Name>FileSystemModels</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\fsc\FilterControlsLib\FilterControlsLib.csproj">
+      <Project>{52f61815-3ec5-461b-bce0-ab80b1c5b229}</Project>
+      <Name>FilterControlsLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\fsc\FolderBrowser\FolderBrowser.csproj">
       <Project>{0b8c3b19-940d-408d-9f6b-4afee7246642}</Project>
       <Name>FolderBrowser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\fsc\FolderControlsLib\FolderControlsLib.csproj">
+      <Project>{511fa2d6-2022-4de1-9a3e-731e04e8f10c}</Project>
+      <Name>FolderControlsLib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

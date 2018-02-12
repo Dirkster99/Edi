@@ -22,11 +22,11 @@
           <Setter Property="FrameworkElement.Visibility" Value="Collapsed"/>
         </Style>
       </GridView.ColumnHeaderContainerStyle>
-      <GridViewColumn Header="Filename" Width="Auto"><!-- x:Name="TheGVColumn" -->
+      <GridViewColumn Header="Filename" Width="Auto">
         <GridViewColumn.CellTemplate>
           <DataTemplate>
             <DockPanel Width="Auto">
-              <Image Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ListView}}, Path=DataContext.ShowIcons, Converter={StaticResource boolToVis}}"
+              <Image Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ListView}}, Path=DataContext.ShowIcons,Mode=OneWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource boolToVis}}"
                                    Margin="0" Source="{Binding Path=DisplayIcon}" SnapsToDevicePixels="True" 
                                    DockPanel.Dock="Left" Width="16" Height="16" 
                                  >

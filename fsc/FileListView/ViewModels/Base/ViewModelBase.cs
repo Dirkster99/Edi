@@ -8,7 +8,7 @@ namespace FileListView.ViewModels.Base
   /// Implements a base class for all viewmodel classes
   /// that implements <seealso cref="INotifyPropertyChanged"/> interface for binding.
   /// </summary>
-  public class ViewModelBase : INotifyPropertyChanged
+  internal class ViewModelBase : INotifyPropertyChanged
   {
     /// <summary>
     /// Standard implementation of <seealso cref="INotifyPropertyChanged"/>.

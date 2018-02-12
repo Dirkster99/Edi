@@ -4,41 +4,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d"
-        x:Name="view"
-
-        xmlns:behav="clr-namespace:FolderBrowser.Views.Behaviours"
-        xmlns:views="clr-namespace:FolderBrowser.Views"
 
         Width="600"
         Height="600"
         WindowStyle="ToolWindow"
         ResizeMode="CanResizeWithGrip"
-        Title="Browse For Folder"
-        Background="#FFD3CCCC"
-        behav:DialogCloser.DialogResult="{Binding DialogCloseResult}"        
-        >
-   
-    <DockPanel  Width="Auto" Height="Auto">
-        <!-- The selected folder path -->
-        <StackPanel DockPanel.Dock="Bottom">
-            <TextBox DataContext="{Binding TreeBrowser}"
-                     Text="{Binding Path=SelectedFolder, UpdateSourceTrigger=PropertyChanged}"
-                     behav:TextChangedCommand.ChangedCommand="{Binding FolderSelectedCommand}"
+        Title="{x:Static Local:Strings.STR_SELECT_FOLDER_DIALOG_CAPTION}"
+        
+        xmlns:behav="clr-namespace:FolderBrowser.Views.Behaviours"
+        xmlns:Local="clr-namespace:FileSystemModels.Local;assembly=FileSystemModels"
+        xmlns:views="clr-namespace:FolderBrowser.Views"
+        
+        behav:DialogCloser.DialogResult="{Binding DialogCloseResult}"
 
-                     MinHeight="25"
-                     Margin="5"
-                     VerticalContentAlignment="Center" />
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Right">
-                <Button Width="75"
-                        Margin="10" Click="Ok_Click">Ok</Button>
-                <Button Width="75"
-                        Margin="10"
-                        IsCancel="True">Cancel</Button>
-            </StackPanel>
+        xmlns:themes="clr-namespace:FolderBrowser.Themes"
+        Background="{DynamicResource {x:Static themes:ResourceKeys.DialogBackgroundKey}}"
+        >
+
+    <Grid Width="Auto" Height="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <views:FolderBrowserDialogView Grid.Row="0" />
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1" Margin="0,18,0,18">
+            <Button MinWidth="75" Margin="9,3,9,3" IsDefault="True" Click="Ok_Click" Content="{x:Static Local:Strings.STR_OK_BUTTON_CAPTION}" />
+            <Button MinWidth="75" Margin="9,3,3,3" IsCancel="True" Content="{x:Static Local:Strings.STR_CANCEL_BUTTON_CAPTION}" />
         </StackPanel>
 
-    <views:BrowseDirectoriesView DataContext="{Binding TreeBrowser}" />
-
-  </DockPanel>
+    </Grid>
 </Window>

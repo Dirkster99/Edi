@@ -1,34 +1,35 @@
 namespace FileSystemModels.Events
 {
-  using System;
-  using FileSystemModels.Models;
+    using System;
+    using FileSystemModels.Interfaces;
 
-  /// <summary>
-  /// Class implements ...
-  /// </summary>
-  public class FolderChangedEventArgs : EventArgs
-  {
     /// <summary>
-    /// Event type class constructor from parameter
+    /// Class implements an event that signals that
+    /// event source (caller) would like to change to indicated path.
     /// </summary>
-    public FolderChangedEventArgs(PathModel path)
-    : this()
+    public class FolderChangedEventArgs : EventArgs
     {
-      this.Folder = path;
-    }
+        /// <summary>
+        /// Event type class constructor from parameter
+        /// </summary>
+        public FolderChangedEventArgs(IPathModel path)
+        : this()
+        {
+            this.Folder = path;
+        }
 
-    /// <summary>
-    /// Class constructor
-    /// </summary>
-    public FolderChangedEventArgs()
-    : base()
-    {
-      this.Folder = null;
-    }
+        /// <summary>
+        /// Class constructor
+        /// </summary>
+        public FolderChangedEventArgs()
+        : base()
+        {
+            this.Folder = null;
+        }
 
-    /// <summary>
-    /// Path to this directory...
-    /// </summary>
-    public PathModel Folder { get; set; }
-  }
+        /// <summary>
+        /// Path to this directory...
+        /// </summary>
+        public IPathModel Folder { get; private set; }
+    }
 }

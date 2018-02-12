@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C3EB23FD-78E7-4298-922C-48C254551CC9}</ProjectGuid>
+    <ProjectGuid>{391639C4-5C43-4391-9465-27686E82C33F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FileSystemModels</RootNamespace>
     <AssemblyName>FileSystemModels</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,7 +29,24 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -40,9 +55,7 @@
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\x86\Debug\FileSystemModels.XML</DocumentationFile>
-    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -51,9 +64,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\x86\Release\FileSystemModels.XML</DocumentationFile>
-    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
@@ -73,72 +84,88 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Browse\BrowseResult.cs" />
+    <Compile Include="Browse\BrowsingEventArgs.cs" />
+    <Compile Include="Browse\ICanNavigate.cs" />
+    <Compile Include="Browse\INavigateable.cs" />
     <Compile Include="Events\FileOpenEventArgs.cs" />
     <Compile Include="Events\FilterChangedEventArgs.cs" />
     <Compile Include="Events\FolderChangedEventArgs.cs" />
-    <Compile Include="Events\RecentFolderEvent.cs" />
+    <Compile Include="Events\EditBookmarkEvent.cs" />
+    <Compile Include="FileSystemCommands.cs" />
+    <Compile Include="Interfaces\Bookmark\IBookmarksViewModel.cs" />
+    <Compile Include="Interfaces\Bookmark\IEditBookmarks.cs" />
+    <Compile Include="Interfaces\IBrowseNavigation.cs" />
     <Compile Include="Interfaces\IConfigExplorerSettings.cs" />
+    <Compile Include="Interfaces\IListItemViewModel.cs" />
+    <Compile Include="Interfaces\IPathModel.cs" />
     <Compile Include="Local\Strings.de-DE.Designer.cs">
-      <DependentUpon>Strings.de-DE.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.de-DE.resx</DependentUpon>
     </Compile>
     <Compile Include="Local\Strings.Designer.cs">
-      <DependentUpon>Strings.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="Local\Strings.es-ES.Designer.cs">
-      <DependentUpon>Strings.es-ES.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.es-ES.resx</DependentUpon>
     </Compile>
     <Compile Include="Local\Strings.fr-FR.Designer.cs">
-      <DependentUpon>Strings.fr-FR.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.fr-FR.resx</DependentUpon>
     </Compile>
     <Compile Include="Local\Strings.hi-IN.Designer.cs">
-      <DependentUpon>Strings.hi-IN.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.hi-IN.resx</DependentUpon>
     </Compile>
     <Compile Include="Local\Strings.it-IT.Designer.cs">
-      <DependentUpon>Strings.it-IT.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.it-IT.resx</DependentUpon>
     </Compile>
     <Compile Include="Local\Strings.ja-JP.Designer.cs">
-      <DependentUpon>Strings.ja-JP.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.ja-JP.resx</DependentUpon>
     </Compile>
     <Compile Include="Local\Strings.ru-RU.Designer.cs">
-      <DependentUpon>Strings.ru-RU.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.ru-RU.resx</DependentUpon>
     </Compile>
     <Compile Include="Local\Strings.zh-CHS.Designer.cs">
-      <DependentUpon>Strings.zh-CHS.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.zh-CHS.resx</DependentUpon>
     </Compile>
     <Compile Include="Models\BrowseNavigation.cs" />
     <Compile Include="Models\CustomFolderItemModel.cs" />
     <Compile Include="Models\ExplorerSettingsModel.cs" />
     <Compile Include="Models\ExplorerUserProfile.cs" />
     <Compile Include="Models\FilterItemModel.cs" />
-    <Compile Include="Models\FSItems\DriveModel.cs" />
     <Compile Include="Models\FSItems\Base\FileSystemModel.cs" />
+    <Compile Include="Models\FSItems\DriveModel.cs" />
     <Compile Include="Models\FSItems\FileModel.cs" />
     <Compile Include="Models\FSItems\FolderModel.cs" />
-    <Compile Include="Utils\LinqExtensions.cs" />
-    <Compile Include="Utils\DirectoryInfoExtension.cs" />
-    <Compile Include="Models\PathModel.cs" />
-    <Compile Include="Models\FSItemType.cs" />
-    <Compile Include="Utils\IconExtractor.cs" />
-    <Compile Include="Interfaces\IBrowseNavigation.cs" />
+    <Compile Include="Models\FSItems\Base\FSItemType.cs" />
+    <Compile Include="Models\FSItems\Base\PathModel.cs" />
+    <Compile Include="Factory.cs" />
+    <Compile Include="PathFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\DirectoryInfoExtension.cs" />
+    <Compile Include="Utils\IconExtractor.cs" />
+    <Compile Include="Utils\IconUtilities.cs" />
+    <Compile Include="Utils\LinqExtensions.cs" />
+    <Compile Include="ViewModels\Base\RelayCommand.cs" />
+    <Compile Include="ViewModels\Base\ViewModelBase.cs" />
+    <Compile Include="ViewModels\Bookmarks\BookmarkesViewModel.cs" />
+    <Compile Include="ViewModels\ListItemViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Local\Strings.de-DE.resx">
@@ -183,7 +210,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- Import Project="$(ProgramFiles)\MSBuild\StyleCop\v4.7\StyleCop.Targets" / -->
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

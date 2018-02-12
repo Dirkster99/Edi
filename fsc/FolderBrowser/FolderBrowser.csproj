@@ -1,27 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0B8C3B19-940D-408D-9F6B-4AFEE7246642}</ProjectGuid>
+    <ProjectGuid>{7D4BD5F8-A98E-4966-ABBD-CBE202DFBEF7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FolderBrowser</RootNamespace>
     <AssemblyName>FolderBrowser</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -40,7 +29,24 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -49,9 +55,7 @@
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\x86\Debug\FolderBrowser.XML</DocumentationFile>
-    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -60,23 +64,23 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\x86\Release\FolderBrowser.XML</DocumentationFile>
-    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DropDownButtonLib, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.DropDownButtonLib.1.0.4\lib\net4\DropDownButtonLib.dll</HintPath>
+    </Reference>
     <Reference Include="InplaceEditBoxLib, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.InplaceEditBoxLib.1.0.0.3\lib\net4\InplaceEditBoxLib.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="MsgBox, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.MsgBox.1.4.2\lib\net451\MsgBox.dll</HintPath>
+      <HintPath>..\..\packages\Dirkster.InplaceEditBoxLib.1.0.0.3\lib\net4\log4net.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -89,34 +93,134 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewModels\Interfaces\IBrowserViewModel.cs" />
-    <Compile Include="ViewModels\Interfaces\IFolderViewModel.cs" />
-    <Compile Include="Views\Behaviours\DialogCloser.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter .cs" />
     <Compile Include="Converters\BrowseItemTypeToImageConverter .cs" />
+    <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Converters\SpecialFolderToImageConverter .cs" />
+    <Compile Include="Converters\UpdateBindingConverter.cs" />
+    <Compile Include="Interfaces\IDriveViewModel.cs" />
+    <Compile Include="Interfaces\ITreeItemViewModel.cs" />
+    <Compile Include="Interfaces\IParent.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Themes\ResourceKeys.cs" />
+    <Compile Include="ViewModels\DriveViewModel.cs" />
+    <Compile Include="ViewModels\EditFolderBookmarks.cs" />
+    <Compile Include="ViewModels\TreeItemViewModel.cs" />
+    <Compile Include="Views\Behaviours\TreeViewVirtualItemBehaviour.cs" />
+    <Compile Include="ViewModels\BrowserViewModel.cs" />
     <Compile Include="ViewModels\CustomFolderItemViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\DialogBaseViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\DropDownViewModel .cs" />
+    <Compile Include="ViewModels\Dialogs\DialogViewModel.cs" />
+    <Compile Include="FolderBrowserFactory.cs" />
+    <Compile Include="ViewModels\FolderViewModel.cs" />
+    <Compile Include="Interfaces\Dialogs\IDropDownViewModel.cs" />
+    <Compile Include="Interfaces\IBrowserViewModel.cs" />
+    <Compile Include="Interfaces\Dialogs\IDialogViewModel.cs" />
+    <Compile Include="Interfaces\IFolderViewModel.cs" />
+    <Compile Include="Interfaces\ICustomFolderItemViewModel.cs" />
+    <Compile Include="ViewModels\Messages\DisplayMessageViewModel.cs" />
+    <Compile Include="ViewModels\Messages\IDisplayMessageViewModel.cs" />
+    <Compile Include="ViewModels\SortableObservableDictionaryCollection.cs" />
+    <Compile Include="Views\Behaviours\DialogCloser.cs" />
+    <Compile Include="Views\Behaviours\SelectTextOnFocus .cs" />
     <Compile Include="Views\Behaviours\TextChangedCommand.cs" />
+    <Compile Include="Views\Behaviours\TextEnterCommand.cs" />
+    <Compile Include="Views\Behaviours\TreeViewItemExpanded.cs" />
     <Compile Include="Views\Behaviours\TreeViewSelectionChangedBehavior.cs" />
     <Compile Include="Views\BindingProxy.cs" />
+    <Compile Include="Views\BookmarkFolderDropDown.xaml.cs">
+      <DependentUpon>BookmarkFolderDropDown.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BrowseDirectoriesView.xaml.cs">
       <DependentUpon>BrowseDirectoriesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\BrowserViewModel.cs" />
-    <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="Views\DropDownView.xaml.cs">
+      <DependentUpon>DropDownView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FolderBrowserDialog.xaml.cs">
       <DependentUpon>FolderBrowserDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\DialogViewModel.cs" />
-    <Compile Include="ViewModels\FolderViewModel.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\Behaviours\TreeViewItemBehaviour.cs" />
-    <Compile Include="ViewModels\Base\ViewModelBase.cs" />
-    <Compile Include="Views\FolderBrowserView.xaml.cs">
-      <DependentUpon>FolderBrowserView.xaml</DependentUpon>
+    <Compile Include="Views\FolderBrowserDialogView.xaml.cs">
+      <DependentUpon>FolderBrowserDialogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FolderBrowserTreeView.xaml.cs">
+      <DependentUpon>FolderBrowserTreeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SpecialFolderMarkUpExtension.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FileSystemModels\FileSystemModels.csproj">
+      <Project>{391639c4-5c43-4391-9465-27686e82c33f}</Project>
+      <Name>FileSystemModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FsCore\FsCore.csproj">
+      <Project>{8391f556-c4cb-4aa9-9874-bf665fb2b072}</Project>
+      <Name>FsCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\Generic\BrowseButton\arrow-right-b.svg" />
+    <Content Include="Images\Generic\BrowseButton\close-round.svg" />
+    <Resource Include="Images\Generic\Error.png" />
+    <Resource Include="Images\Metro\Dark\BrowseButton\arrow-right-b_64.png" />
+    <Resource Include="Images\Metro\Dark\BrowseButton\close-round.png" />
+    <Resource Include="Images\Metro\Light\BrowseButton\appbar.refresh_16.png" />
+    <Resource Include="Images\Metro\Light\BrowseButton\appbar.refresh_32.png" />
+    <Resource Include="Images\Metro\Dark\BrowseButton\appbar.refresh_32.png" />
+    <Resource Include="Images\Metro\Dark\BrowseButton\appbar.refresh_16.png" />
+    <Resource Include="Images\Generic\BrowseButton\refresh.png" />
+    <Content Include="Images\Metro\SVG\Desktop.svg" />
+    <Content Include="Images\Metro\SVG\Favourites.svg" />
+    <Content Include="Images\Metro\SVG\FolderClosed.svg" />
+    <Content Include="Images\Metro\SVG\FolderOpen.svg" />
+    <Content Include="Images\Metro\SVG\HardDisk.svg" />
+    <Content Include="Images\Metro\SVG\MyDocuments.svg" />
+    <Content Include="Images\Metro\SVG\MyMusic.svg" />
+    <Content Include="Images\Metro\SVG\MyPictures.svg" />
+    <Content Include="Images\Metro\SVG\MyVideos.svg" />
+    <Content Include="Images\Metro\SVG\ProgramFiles.svg" />
+    <Resource Include="Images\Metro\Light\ProgramFiles.png" />
+    <Resource Include="Images\Metro\Light\MyVideos.png" />
+    <Resource Include="Images\Metro\Light\MyPictures.png" />
+    <Resource Include="Images\Metro\Light\MyMusic.png" />
+    <Resource Include="Images\Metro\Light\MyDocuments.png" />
+    <Resource Include="Images\Metro\Light\HardDisk.png" />
+    <Resource Include="Images\Metro\Light\FolderOpen.png" />
+    <Resource Include="Images\Metro\Light\FolderClosed.png" />
+    <Resource Include="Images\Metro\Light\Folder.png" />
+    <Resource Include="Images\Metro\Light\Favourites.png" />
+    <Resource Include="Images\Metro\Light\Desktop.png" />
+    <Resource Include="Images\Metro\Dark\ProgramFiles.png" />
+    <Resource Include="Images\Metro\Dark\MyVideos.png" />
+    <Resource Include="Images\Metro\Dark\MyPictures.png" />
+    <Resource Include="Images\Metro\Dark\MyMusic.png" />
+    <Resource Include="Images\Metro\Dark\MyDocuments.png" />
+    <Resource Include="Images\Metro\Dark\HardDisk.png" />
+    <Resource Include="Images\Metro\Dark\FolderOpen.png" />
+    <Resource Include="Images\Metro\Dark\FolderClosed.png" />
+    <Resource Include="Images\Metro\Dark\Folder.png" />
+    <Resource Include="Images\Metro\Dark\Favourites.png" />
+    <Resource Include="Images\Metro\Dark\Desktop.png" />
+    <Resource Include="Images\Generic\ProgramFiles.png" />
+    <Resource Include="Images\Generic\MyVideos.png" />
+    <Resource Include="Images\Generic\MyPictures.png" />
+    <Resource Include="Images\Generic\MyMusic.png" />
+    <Resource Include="Images\Generic\MyDocuments.png" />
+    <Resource Include="Images\Generic\HardDisk.ico" />
+    <Resource Include="Images\Generic\FolderOpen.png" />
+    <Resource Include="Images\Generic\FolderClosed.png" />
+    <Resource Include="Images\Generic\Folder.png" />
+    <Resource Include="Images\Generic\Favourites.png" />
+    <Resource Include="Images\Generic\Desktop.png" />
+    <Resource Include="Images\Generic\BrowseButton\close-round.png" />
+    <Resource Include="Images\Generic\BrowseButton\arrow-right-b_64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Images\GenericIcons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Images\MetroDarkIcons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -125,82 +229,48 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Images\GenericIcons.xaml">
+    <Page Include="Themes\MetroLight.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\MetroDark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BookmarkFolderDropDown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\BrowseDirectoriesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DropDownView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FolderBrowserDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\FolderBrowserDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FolderBrowserView.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Views\FolderBrowserTreeView.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Generic\Desktop.png" />
-    <Resource Include="Images\Generic\MyPictures.png" />
-    <Resource Include="Images\Generic\MyDocuments.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Generic\HardDisk.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Generic\FolderClosed.png" />
-    <Resource Include="Images\Generic\FolderOpen.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Generic\MyVideos.png" />
-    <Resource Include="Images\Generic\ProgramFiles.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Resource Include="Images\Generic\Folder.png" />
-    <Resource Include="Images\Generic\Favourites.png" />
-    <Resource Include="Images\Generic\MyMusic.png" />
-    <None Include="Images\Metro\SVG\Desktop.svg" />
-    <None Include="Images\Metro\SVG\Favourites.svg" />
-    <None Include="Images\Metro\SVG\FolderClosed.svg" />
-    <None Include="Images\Metro\SVG\FolderOpen.svg" />
-    <None Include="Images\Metro\SVG\MyMusic.svg" />
-    <Resource Include="Images\Metro\Light\Desktop.png" />
-    <Resource Include="Images\Metro\Light\Favourites.png" />
-    <Resource Include="Images\Metro\Light\Folder.png" />
-    <Resource Include="Images\Metro\Light\FolderClosed.png" />
-    <Resource Include="Images\Metro\Light\FolderOpen.png" />
-    <Resource Include="Images\Metro\Light\HardDisk.png" />
-    <Resource Include="Images\Metro\Light\MyDocuments.png" />
-    <Resource Include="Images\Metro\Light\MyMusic.png" />
-    <Resource Include="Images\Metro\Light\MyPictures.png" />
-    <Resource Include="Images\Metro\Light\MyVideos.png" />
-    <Resource Include="Images\Metro\Light\ProgramFiles.png" />
-    <Resource Include="Images\Metro\Dark\Desktop.png" />
-    <Resource Include="Images\Metro\Dark\Favourites.png" />
-    <Resource Include="Images\Metro\Dark\Folder.png" />
-    <Resource Include="Images\Metro\Dark\FolderClosed.png" />
-    <Resource Include="Images\Metro\Dark\FolderOpen.png" />
-    <Resource Include="Images\Metro\Dark\HardDisk.png" />
-    <Resource Include="Images\Metro\Dark\MyDocuments.png" />
-    <Resource Include="Images\Metro\Dark\MyMusic.png" />
-    <Resource Include="Images\Metro\Dark\MyPictures.png" />
-    <Resource Include="Images\Metro\Dark\MyVideos.png" />
-    <Resource Include="Images\Metro\Dark\ProgramFiles.png" />
-    <Content Include="Readme.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FileSystemModels\FileSystemModels.csproj">
-      <Project>{c3eb23fd-78e7-4298-922c-48c254551cc9}</Project>
-      <Name>FileSystemModels</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- Import Project="$(ProgramFiles)\MSBuild\StyleCop\v4.7\StyleCop.Targets" / -->
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

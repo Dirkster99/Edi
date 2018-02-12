@@ -90,7 +90,7 @@
 			settings.UserProfile = programSettings.SessionData.LastActiveExplorer;
 
 			// (re-)configure previous explorer settings and (re-)activate current location
-			FileExplorer.Settings.ConfigureExplorerSettings(settings);
+			FileExplorer.ConfigureExplorerSettings(settings);
 
             toolRegistry.RegisterTool(FileExplorer);
 		}

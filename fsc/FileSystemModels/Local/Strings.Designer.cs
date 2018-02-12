@@ -19,7 +19,7 @@ namespace FileSystemModels.Local {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Strings {
@@ -142,15 +142,6 @@ namespace FileSystemModels.Local {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open folder in Windows Explorer....
-        /// </summary>
-        public static string CMD_Open_in_Windows_Label1 {
-            get {
-                return ResourceManager.GetString("CMD_Open_in_Windows_Label1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Open in Windows....
         /// </summary>
         public static string CMD_Open_with_Windows_Association_Label {
@@ -196,15 +187,6 @@ namespace FileSystemModels.Local {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Adds the selected folder to the list of bookmarked folders..
-        /// </summary>
-        public static string CMD_RecentFolderAdd_TT1 {
-            get {
-                return ResourceManager.GetString("CMD_RecentFolderAdd_TT1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Remove folder bookmark.
         /// </summary>
         public static string CMD_RecentFolderRemove_Label {
@@ -228,33 +210,6 @@ namespace FileSystemModels.Local {
         public static string CMD_RecentFolderRemove_TT {
             get {
                 return ResourceManager.GetString("CMD_RecentFolderRemove_TT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Removes the selected folder from the list of bookmarked folders..
-        /// </summary>
-        public static string CMD_RecentFolderRemove_TT1 {
-            get {
-                return ResourceManager.GetString("CMD_RecentFolderRemove_TT1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select Folder....
-        /// </summary>
-        public static string CMD_Select_Folder_Label {
-            get {
-                return ResourceManager.GetString("CMD_Select_Folder_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Selects the current folder and updates all related views..
-        /// </summary>
-        public static string CMD_Select_Folder_Label_TT {
-            get {
-                return ResourceManager.GetString("CMD_Select_Folder_Label_TT", resourceCulture);
             }
         }
         
@@ -377,11 +332,29 @@ namespace FileSystemModels.Local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string STR_CANCEL_BUTTON_CAPTION {
+            get {
+                return ResourceManager.GetString("STR_CANCEL_BUTTON_CAPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error while creating new folder.
         /// </summary>
         public static string STR_CREATE_FOLDER_ERROR_TITLE {
             get {
                 return ResourceManager.GetString("STR_CREATE_FOLDER_ERROR_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folder &apos;{0}&apos; does not exist..
+        /// </summary>
+        public static string STR_ERROR_FOLDER_DOES_NOT_EXIST {
+            get {
+                return ResourceManager.GetString("STR_ERROR_FOLDER_DOES_NOT_EXIST", resourceCulture);
             }
         }
         
@@ -485,6 +458,15 @@ namespace FileSystemModels.Local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string STR_OK_BUTTON_CAPTION {
+            get {
+                return ResourceManager.GetString("STR_OK_BUTTON_CAPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rename.
         /// </summary>
         public static string STR_Rename_Command {
@@ -508,6 +490,15 @@ namespace FileSystemModels.Local {
         public static string STR_RenameFolderErrorTitle {
             get {
                 return ResourceManager.GetString("STR_RenameFolderErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a Folder.
+        /// </summary>
+        public static string STR_SELECT_FOLDER_DIALOG_CAPTION {
+            get {
+                return ResourceManager.GetString("STR_SELECT_FOLDER_DIALOG_CAPTION", resourceCulture);
             }
         }
         

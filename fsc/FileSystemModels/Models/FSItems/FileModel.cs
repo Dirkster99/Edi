@@ -1,67 +1,108 @@
 ﻿namespace FileSystemModels.Models.FSItems
 {
-  using System.IO;
-  using System.Security;
+    using FileSystemModels.Interfaces;
+    using System.IO;
+    using System.Security;
 
-  public class FileModel : Base.FileSystemModel
-  {
-    #region fields
-    FileInfo mFile;
-    #endregion fields
-
-    #region constructors
-    /// <summary>
-    /// Parameterized class  constructor
-    /// </summary>
-    /// <param name="model"></param>
-    [SecuritySafeCritical]
-    public FileModel(PathModel model)
-      : base(model)
+    public class FileModel : Base.FileSystemModel
     {
-      this.mFile = new FileInfo(model.Path);
-    }
-    #endregion constructors
+        #region constructors
+        /// <summary>
+        /// Parameterized class  constructor
+        /// </summary>
+        /// <param name="model"></param>
+        [SecuritySafeCritical]
+        public FileModel(IPathModel model)
+          : base(model)
+        {
+        }
+        #endregion constructors
 
-    #region properties
-    public DirectoryInfo Directory
-    {
-      get
-      {
-        return this.mFile.Directory;
-      }
-    }
+        #region properties
+        /// <summary>
+        /// Gets an instance of the parent directory or null
+        /// if file is no longer available or in-accessible or ...
+        /// </summary>
+        public DirectoryInfo Directory
+        {
+            get
+            {
+                var file = GetFileInfo();
+                
+                return (file != null ? file.Directory : null);
+            }
+        }
 
-    public string DirectoryName
-    {
-      get
-      {
-        return this.mFile.DirectoryName;
-      }
-    }
+        /// <summary>
+        /// Gets a string representing the directory's full path.
+        /// or string.Empty if file is no longer available or in-accessible or ...
+        /// </summary>
+        public string DirectoryName
+        {
+            get
+            {
+                var file = GetFileInfo();
 
-    public bool Exists
-    {
-      get
-      {
-        return this.mFile.Exists;
-      }
-    }
+                return (file != null ? file.DirectoryName : string.Empty);
+            }
+        }
 
-    public bool IsReadOnly
-    {
-      get
-      {
-        return this.mFile.IsReadOnly;
-      }
-    }
+        /// <summary>
+        /// Gets a true value if file actually exists, or false if not,
+        /// if file is no longer available or in-accessible or ...
+        /// </summary>
+        public bool Exists
+        {
+            get
+            {
+                var file = GetFileInfo();
 
-    public long Length
-    {
-      get
-      {
-        return this.mFile.Length;
-      }
+                return (file != null ? file.Exists : false);
+            }
+        }
+
+        /// <summary>
+        /// Gets a false value if file is not readonly,
+        /// or true if it is readonly, or if file is no
+        /// longer available or in-accessible or ...
+        /// </summary>
+        public bool IsReadOnly
+        {
+            get
+            {
+                var file = GetFileInfo();
+
+                return (file != null ? file.IsReadOnly : true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the length of a file in bytes,
+        /// or 0 if file is no longer available or in-accessible or ...
+        /// </summary>
+        public long Length
+        {
+            get
+            {
+                var file = GetFileInfo();
+
+                return (file != null ? file.Length : 0);
+            }
+        }
+
+        private FileInfo GetFileInfo()
+        {
+            try
+            {
+                var file = new FileInfo(Model.Path);
+                return file;
+            }
+            catch
+            {
+            }
+
+            return null;
+        }
+        #endregion properties
     }
-    #endregion properties
-  }
 }

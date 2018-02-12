@@ -117,14 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CMD_Select_Folder_Label" xml:space="preserve">
-    <value>Select Folder...</value>
-    <comment>A command label string to select a folder in a folder browser view</comment>
-  </data>
-  <data name="CMD_Select_Folder_Label_TT" xml:space="preserve">
-    <value>Selects the current folder and updates all related views.</value>
-    <comment>A tool tip string for a command that selects a folder in a folder browser view</comment>
-  </data>
   <data name="CMD_Open_in_Windows_Label" xml:space="preserve">
     <value>Open folder in Windows Explorer...</value>
     <comment>A command that is applied to a folder and displays the Windows Explorer with the selected folder.</comment>
@@ -193,10 +185,6 @@
     <value>Open the selected file in the application.</value>
     <comment>A tool tip string for a command that opens the selected file(s) in the application.</comment>
   </data>
-  <data name="CMD_Open_in_Windows_Label1" xml:space="preserve">
-    <value>Open folder in Windows Explorer...</value>
-    <comment>A command that is applied to a folder and displays the Windows Explorer with the selected folder.</comment>
-  </data>
   <data name="CMD_Open_in_Windows_Label_TT1" xml:space="preserve">
     <value>Displays the Windows Explorer with the selected folder.</value>
     <comment>A tool tip string for a command that is applied to a folder and displays the Windows Explorer with the selected folder.</comment>
@@ -212,14 +200,8 @@
   <data name="CMD_RecentFolderAdd_Label1" xml:space="preserve">
     <value>Bookmark folder</value>
   </data>
-  <data name="CMD_RecentFolderAdd_TT1" xml:space="preserve">
-    <value>Adds the selected folder to the list of bookmarked folders.</value>
-  </data>
   <data name="CMD_RecentFolderRemove_Label1" xml:space="preserve">
     <value>Remove folder bookmark</value>
-  </data>
-  <data name="CMD_RecentFolderRemove_TT1" xml:space="preserve">
-    <value>Removes the selected folder from the list of bookmarked folders.</value>
   </data>
   <data name="CMD_ToggleIsFolderVisibleCommand_TT" xml:space="preserve">
     <value>Show or hide folder.</value>
@@ -311,5 +293,17 @@
   <data name="STR_NewFolder_Command_TT" xml:space="preserve">
     <value>Create a new folder in the Windows file system</value>
     <comment>Toot tip type text for the new folder command for creating folders in the file system.</comment>
+  </data>
+  <data name="STR_CANCEL_BUTTON_CAPTION" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="STR_OK_BUTTON_CAPTION" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="STR_SELECT_FOLDER_DIALOG_CAPTION" xml:space="preserve">
+    <value>Select a Folder</value>
+  </data>
+  <data name="STR_ERROR_FOLDER_DOES_NOT_EXIST" xml:space="preserve">
+    <value>Folder '{0}' does not exist.</value>
   </data>
 </root>

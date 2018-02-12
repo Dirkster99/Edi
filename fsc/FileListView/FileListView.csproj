@@ -56,11 +56,14 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DropDownButtonLib, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.DropDownButtonLib.1.0.4\lib\net4\DropDownButtonLib.dll</HintPath>
+    </Reference>
     <Reference Include="InplaceEditBoxLib, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.InplaceEditBoxLib.1.0.0.3\lib\net4\InplaceEditBoxLib.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.InplaceEditBoxLib.1.0.0.3\lib\net4\log4net.dll</HintPath>
+      <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="MsgBox, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.MsgBox.1.4.2\lib\net451\MsgBox.dll</HintPath>
@@ -76,21 +79,19 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="UserNotification, Version=1.3.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.InplaceEditBoxLib.1.0.0.3\lib\net4\UserNotification.dll</HintPath>
+    <Reference Include="UserNotification, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.UserNotifications.1.4.0\lib\net451\UserNotification.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="Factory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\IconUtilities.cs" />
+    <Compile Include="ViewModels\Base\RelayCommand.cs" />
+    <Compile Include="ViewModels\EditFolderBookmarks.cs" />
     <Compile Include="ViewModels\FileListViewModel.cs" />
-    <Compile Include="ViewModels\FolderListViewModel.cs" />
-    <Compile Include="ViewModels\Interfaces\IFileListViewModel.cs" />
-    <Compile Include="ViewModels\Interfaces\IFolderListViewModel.cs" />
-    <Compile Include="ViewModels\RecentLocationsViewModel.cs" />
-    <Compile Include="ViewModels\SortableObservableCollection.cs" />
+    <Compile Include="Interfaces\ILVItemViewModel.cs" />
+    <Compile Include="Interfaces\IFileListViewModel.cs" />
     <Compile Include="Views\Behavior\DoubleClickSelectorItem.cs" />
     <Compile Include="Views\Behavior\BringIntoViewListBoxItem.cs" />
     <Compile Include="Views\Behavior\SelectionChangedBehavior.cs" />
@@ -98,16 +99,7 @@
     <Compile Include="Views\FListView.xaml.cs">
       <DependentUpon>FListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FolderComboBox.xaml.cs">
-      <DependentUpon>FolderComboBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FilterComboBox.xaml.cs">
-      <DependentUpon>FilterComboBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\FolderComboBoxViewModel.cs" />
-    <Compile Include="ViewModels\FilterComboBoxViewModel.cs" />
-    <Compile Include="ViewModels\FSItemViewModel.cs" />
-    <Compile Include="ViewModels\FilterItemViewModel.cs" />
+    <Compile Include="ViewModels\LVItemViewModel.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -132,14 +124,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\FListView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\FolderComboBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\FilterComboBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -210,16 +194,11 @@
     <Content Include="Images\Metro\SVG\Sketchup\appbar.navigate.next.svg" />
     <Content Include="Images\Metro\SVG\Sketchup\appbar.navigate.previous.svg" />
     <Content Include="Images\Metro\SVG\Sketchup\MyBase.svg" />
-    <Content Include="Readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FileSystemModels\FileSystemModels.csproj">
       <Project>{c3eb23fd-78e7-4298-922c-48c254551cc9}</Project>
       <Name>FileSystemModels</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FolderBrowser\FolderBrowser.csproj">
-      <Project>{0b8c3b19-940d-408d-9f6b-4afee7246642}</Project>
-      <Name>FolderBrowser</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

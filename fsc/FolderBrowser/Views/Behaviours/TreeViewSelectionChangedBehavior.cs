@@ -92,6 +92,8 @@ namespace FolderBrowser.Views.Behaviours
       if (changedCommand == null)
         return;
 
+
+
       ////if ((e.NewValue == null && e.NewValue == null))
       ////  return;
       ////else

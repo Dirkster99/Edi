@@ -1,543 +1,994 @@
-namespace FolderBrowser.ViewModels
+﻿namespace FolderBrowser.ViewModels
 {
-  using System;
-  using System.Collections.ObjectModel;
-  using System.Linq;
-  using System.Windows.Input;
-  using System.Windows.Threading;
-  using FileSystemModels.Events;
-  using FileSystemModels.Models;
-  using FolderBrowser.Command;
-  using FolderBrowser.ViewModels.Interfaces;
+    using FileSystemModels;
+    using FileSystemModels.Browse;
+    using FileSystemModels.Interfaces;
+    using FileSystemModels.Interfaces.Bookmark;
+    using FileSystemModels.Models.FSItems;
+    using FileSystemModels.Models.FSItems.Base;
+    using FileSystemModels.ViewModels.Base;
+    using FolderBrowser.Interfaces;
+    using FolderBrowser.ViewModels.Messages;
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Input;
+    using System.Windows.Threading;
 
-  /// <summary>
-  /// Class implements a viewmodel for browsing folder structures in the file system.
-  /// 
-  /// Source: http://www.codeproject.com/Articles/352874/WPF-Folder-Browser
-  /// (but with RelayCommand instead of PRISM).
-  /// </summary>
-  public class BrowserViewModel : Base.ViewModelBase, IBrowserViewModel
-  {
-    #region fields
     /// <summary>
-    /// Log4net logger facility for this class.
+    /// A browser viewmodel is about managing activities and properties related
+    /// to displaying a treeview that repesents folders in the file system.
+    /// 
+    /// This viewmodel is almost equivalent to the backend code needed to drive
+    /// the Treeview that shows the items in the UI.
     /// </summary>
-    protected static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
-    private string mSelectedFolder;
-    private bool mExpanding = false;
-
-    private RelayCommand<object> mFolderSelectedCommand = null;
-    private RelayCommand<object> mFinalSelectDirectoryCommand = null;
-
-    private RelayCommand<object> mRecentFolderRemoveCommand = null;
-    private RelayCommand<object> mRecentFolderAddCommand = null;
-
-    private RelayCommand<object> mRenameCommand = null;
-    private RelayCommand<object> mStartRenameCommand = null;
-    private RelayCommand<object> mCreateFolderCommand = null;
-
-    private object mLockObject = new object();
-
-    private bool mIsSpecialFoldersVisisble;
-    #endregion fields
-
-    #region constructor
-    /// <summary>
-    /// Standard <seealso cref="BrowserViewModel"/> constructor
-    /// </summary>
-    public BrowserViewModel()
+    internal class BrowserViewModel : ViewModelBase, IBrowserViewModel
     {
-      this.IsSpecialFoldersVisisble = true;
+        #region fields
+        private string _SelectedFolder;
+        private bool _IsSpecialFoldersVisisble;
 
-      this.Folders = new ObservableCollection<IFolderViewModel>();
-      Environment.GetLogicalDrives().ToList().ForEach(it =>
-      {
-        try
+        private ICommand _ExpandCommand;
+        private ICommand _FolderSelectedCommand = null;
+        private ICommand _SelectedFolderChangedCommand;
+        private ICommand _OpenInWindowsCommand = null;
+        private ICommand _CopyPathCommand = null;
+        private ICommand _RenameCommand;
+        private ICommand _StartRenameCommand;
+        private ICommand _CreateFolderCommand;
+        private ICommand _CancelBrowsingCommand;
+        private ICommand _RefreshViewCommand;
+
+        private bool _IsBrowsing;
+
+        private bool _IsExpanding = false;
+
+        private string _InitalPath;
+        private bool _UpdateView;
+        private bool _IsBrowseViewEnabled;
+        private ITreeItemViewModel _SelectedItem = null;
+        private SortableObservableDictionaryCollection _Root;
+        private ObservableCollection<ICustomFolderItemViewModel> _SpecialFolders;
+        private bool _IsExternallyBrowsing;
+        #endregion fields
+
+        #region constructor
+        /// <summary>
+        /// Standard class constructor
+        /// </summary>
+        public BrowserViewModel()
         {
-          string driveLetter = it.TrimEnd('\\');
+            DisplayMessage = new DisplayMessageViewModel();
+            BookmarkFolder = new EditFolderBookmarks();
+            InitializeSpecialFolders();
 
-          if (string.IsNullOrEmpty(driveLetter) == false)
-            this.Folders.Add(FolderViewModel.ConstructDriveFolderViewModel(it));
+            _OpenInWindowsCommand = null;
+            _CopyPathCommand = null;
+
+            _Root = new SortableObservableDictionaryCollection();
+
+            InitialPath = string.Empty;
+
+            _UpdateView = true;
+            _IsBrowseViewEnabled = true;
+
+            _IsBrowsing = true;
+            _IsExternallyBrowsing = false;
         }
-        catch
+        #endregion constructor
+
+        #region browsing events
+        /// <summary>
+        /// Indicates when the viewmodel starts heading off somewhere else
+        /// and when its done browsing to a new location.
+        /// </summary>
+        public event EventHandler<BrowsingEventArgs> BrowseEvent;
+        #endregion browsing events
+
+        #region properties
+        /// <summary>
+        /// This property determines whether the control
+        /// is to be updated right now or not. Switching off updates at times
+        /// can save performance when browsing long and deep paths with multiple
+        /// levels - so we:
+        /// 1) Switch off view updates
+        /// 2) Browse the structure to a target
+        /// 3) Switch on updates and update view at current/new location.
+        /// </summary>
+        public bool UpdateView
         {
+            get
+            {
+                return _UpdateView;
+            }
+
+            set
+            {
+                if (_UpdateView != value)
+                {
+                    _UpdateView = value;
+                    RaisePropertyChanged(() => UpdateView);
+                }
+            }
         }
-      });
 
-      this.SpecialFolders = new ObservableCollection<CustomFolderItemViewModel>();
-
-      this.SpecialFolders.Add(new CustomFolderItemViewModel(Environment.SpecialFolder.Desktop));
-      this.SpecialFolders.Add(new CustomFolderItemViewModel(Environment.SpecialFolder.MyDocuments));
-      this.SpecialFolders.Add(new CustomFolderItemViewModel(Environment.SpecialFolder.MyMusic));
-      this.SpecialFolders.Add(new CustomFolderItemViewModel(Environment.SpecialFolder.MyVideos));
-    }
-    #endregion constructor
-    
-    #region events
-    /// <summary>
-    /// Event is fired to indicate that user wishes to select a certain Path.
-    /// </summary>
-    public event EventHandler<FolderChangedEventArgs> FinalPathSelectionEvent;
-
-    /// <summary>
-    /// This event is triggered when the currently selected folder has changed.
-    /// </summary>
-    public event EventHandler<FolderChangedEventArgs> FolderSelectionChangedEvent;
-
-    /// <summary>
-    /// Generate an event to remove or add a recent folder to a collection.
-    /// </summary>
-    public event EventHandler<RecentFolderEvent> RequestEditBookmarkedFolders;
-    #endregion events
-
-    #region properties
-    /// <summary>
-    /// Get/set currently selected folder.
-    /// </summary>
-    public string SelectedFolder
-    {
-      get
-      {
-        return this.mSelectedFolder;
-      }
-      
-      set
-      {
-        Logger.DebugFormat("set SelectedFolder property");
-
-        lock (this.mLockObject)
+        public bool IsBrowseViewEnabled
         {
-          if (this.mSelectedFolder != value)
-          {
-            this.mSelectedFolder = value;
-            this.RaisePropertyChanged(() => this.SelectedFolder);
-          }
+            get
+            {
+                return _IsBrowseViewEnabled;
+            }
+
+            set
+            {
+                if (_IsBrowseViewEnabled != value)
+                {
+                    _IsBrowseViewEnabled = value;
+                    RaisePropertyChanged(() => IsBrowseViewEnabled);
+                }
+            }
         }
-      }
-    }
 
-    /// <summary>
-    /// Gets the list of drives and folders for display in treeview structure control.
-    /// </summary>
-    public ObservableCollection<IFolderViewModel> Folders
-    {
-      get; private set;
-    }
-
-    /// <summary>
-    /// Get/set command to select the current folder.
-    /// </summary>
-    public ICommand FolderSelectedCommand
-    {
-      get
-      {
-        Logger.DebugFormat("get FolderSelectedCommand property");
-
-        if (this.mFolderSelectedCommand == null)
+        /// <summary>
+        /// Gets whether the tree browser is currently processing
+        /// a request for brwosing to a known location.
+        /// 
+        /// Can only be set by the control if user started browser process
+        /// 
+        /// Use IsBrowsing and IsExternallyBrowsing to lock the controls UI
+        /// during browse operations or display appropriate progress bar(s).
+        /// </summary>
+        public bool IsBrowsing
         {
-          this.mFolderSelectedCommand = new RelayCommand<object>(p =>
-          {
+            get
+            {
+                return _IsBrowsing;
+            }
+
+            private set
+            {
+                if (_IsBrowsing != value)
+                {
+                    _IsBrowsing = value;
+                    RaisePropertyChanged(() => IsBrowsing);
+                }
+            }
+        }
+
+        /// <summary>
+        /// This should only be set by the controller that started the browser process.
+        /// 
+        /// Use IsBrowsing and IsExternallyBrowsing to lock the controls UI
+        /// during browse operations or display appropriate progress bar(s).
+        /// </summary>
+        public bool IsExternallyBrowsing
+        {
+            get
+            {
+                return _IsExternallyBrowsing;
+            }
+
+            protected set
+            {
+                if (_IsExternallyBrowsing != value)
+                {
+                    _IsExternallyBrowsing = value;
+                    RaisePropertyChanged(() => IsExternallyBrowsing);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the list of drives and folders for display in treeview structure control.
+        /// </summary>
+        public IEnumerable<ITreeItemViewModel> Root
+        {
+            get
+            {
+                return _Root;
+            }
+        }
+
+        /// <summary>
+        /// Get/set currently selected folder.
+        /// 
+        /// This property is used as output of the current path
+        /// but also used as a parameter when browsing to a new path.
+        /// </summary>
+        public string SelectedFolder
+        {
+            get
+            {
+                return this._SelectedFolder;
+            }
+
+            set
+            {
+                if (this._SelectedFolder != value)
+                {
+                    this._SelectedFolder = value;
+                    this.RaisePropertyChanged(() => this.SelectedFolder);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the currently selected viewmodel object (if any).
+        /// </summary>
+        public ITreeItemViewModel SelectedItem
+        {
+            get
+            {
+                return _SelectedItem;
+            }
+
+            private set
+            {
+                if (_SelectedItem != value)
+                {
+                    _SelectedItem = value;
+                    RaisePropertyChanged(() => SelectedItem);
+
+                    if (_SelectedItem != null)
+                        SelectedFolder = _SelectedItem.ItemPath;
+                    else
+                        SelectedFolder = string.Empty;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets a command to cancel the current browsing process.
+        /// </summary>
+        public ICommand CancelBrowsingCommand
+        {
+            get
+            {
+                if (_CancelBrowsingCommand == null)
+                {
+                    _CancelBrowsingCommand = new RelayCommand<object>((p) =>
+                    {
+//// TODO XXX
+////                        if (_Processor != null)
+////                        {
+////                            if (_Processor.IsCancelable == true)
+////                                _Processor.Cancel();
+////                        }
+                    },
+                    (p) =>
+                    {
+                        if (IsBrowsing == true)
+                        {
+//// TODO XXX                            if (_Processor.IsCancelable == true)
+////                                 return _Processor.IsProcessing;
+                        }
+
+                        return false;
+                    });
+                }
+
+                return _CancelBrowsingCommand;
+            }
+        }
+
+        /// <summary>
+        /// Gets a command that will open the selected item with the current default application
+        /// in Windows. The selected item (path to a file) is expected as FSItemVM parameter.
+        /// (eg: Item is HTML file -> Open in Windows starts the web browser for viewing the HTML
+        /// file if thats the currently associated Windows default application.
+        /// </summary>
+        public ICommand OpenInWindowsCommand
+        {
+            get
+            {
+                if (_OpenInWindowsCommand == null)
+                    _OpenInWindowsCommand = new RelayCommand<object>(
+                      (p) =>
+                      {
+                          var vm = p as ITreeItemViewModel;
+
+                          if (vm == null)
+                              return;
+
+                          if (string.IsNullOrEmpty(vm.ItemPath) == true)
+                              return;
+
+                          FileSystemCommands.OpenContainingFolder(vm.ItemPath);
+                      });
+
+                return _OpenInWindowsCommand;
+            }
+        }
+
+        /// <summary>
+        /// Gets a command that will copy the path of an item into the Windows Clipboard.
+        /// The item (path to a file) is expected as FSItemVM parameter.
+        /// </summary>
+        public ICommand CopyPathCommand
+        {
+            get
+            {
+                if (_CopyPathCommand == null)
+                    _CopyPathCommand = new RelayCommand<object>(
+                      (p) =>
+                      {
+                          var vm = p as ITreeItemViewModel;
+
+                          if (vm == null)
+                              return;
+
+                          if (string.IsNullOrEmpty(vm.ItemPath) == true)
+                              return;
+
+                          FileSystemCommands.CopyPath(vm.ItemPath);
+                      });
+
+                return _CopyPathCommand;
+            }
+        }
+
+        /// <summary>
+        /// Gets a command that executes when the selected item in the treeview has changed.
+        /// This updates a text property to inform other attached dependencies property controls
+        /// about this change in selection state.
+        /// </summary>
+        public ICommand SelectedFolderChangedCommand
+        {
+            get
+            {
+                if (_SelectedFolderChangedCommand == null)
+                {
+                    _SelectedFolderChangedCommand = new RelayCommand<object>((p) =>
+                    {
+                        var param = p as ITreeItemViewModel;
+
+                        if (param != null)
+                        {
+                            SelectedItem = param;
+
+                            try
+                            {
+                                var location = PathFactory.Create(param.ItemPath);
+                                if (BrowseEvent != null)
+                                    BrowseEvent(this, new BrowsingEventArgs(location, false, BrowseResult.Complete));
+                            }
+                            catch
+                            {
+                            }
+
+                        }
+                    });
+                }
+
+                return _SelectedFolderChangedCommand;
+            }
+        }
+
+        /// <summary>
+        /// Gets a command that executes when a user expands a tree view item node in the treeview.
+        /// </summary>
+        public ICommand ExpandCommand
+        {
+            get
+            {
+                if (_ExpandCommand == null)
+                {
+                    _ExpandCommand = new RelayCommand<object>(async (p) =>
+                    {
+                        if (IsBrowsing == true) // This is probably not relevant since the
+                        {                      // viewmodel is currently processing a navigation
+                            return;           // request to browse the view to a new location...
+                        }
+
+                        var expandedItem = p as ITreeItemViewModel;
+
+                        if (expandedItem != null && _IsExpanding == false)
+                        {
+                            if (expandedItem.HasDummyChild == true)
+                                await ExpandDummyFolderAsync(expandedItem);
+                        }
+                    });
+                }
+
+                return _ExpandCommand;
+            }
+        }
+
+        /// <summary>
+        /// Starts the rename folder process on the CommandParameter
+        /// which must be FolderViewModel item that represented the to be renamed folder.
+        /// 
+        /// This command implements an event that triggers the actual rename
+        /// process in the connected view.
+        /// </summary>
+        public ICommand StartRenameCommand
+        {
+            get
+            {
+                if (this._StartRenameCommand == null)
+                    this._StartRenameCommand = new RelayCommand<object>(it =>
+                    {
+                        var folder = it as FolderViewModel;
+
+                        if (folder != null)
+                        {
+                            folder.RequestEditMode(InplaceEditBoxLib.Events.RequestEditEvent.StartEditMode);
+                        }
+                    },
+                    (it) =>
+                    {
+                        var folder = it as FolderViewModel;
+
+                        if (folder != null)
+                        {
+                            if (folder.IsReadOnly == true)
+                                return false;
+                        }
+
+                        return true;
+                    });
+
+                return this._StartRenameCommand;
+            }
+        }
+
+        /// <summary>
+        /// Renames the folder that is represented by this viewmodel.
+        /// This command should be called directly by the implementing view
+        /// since the new name of the folder is delivered in the
+        /// CommandParameter as a string.
+        /// </summary>
+        public ICommand RenameCommand
+        {
+            get
+            {
+                if (this._RenameCommand == null)
+                    this._RenameCommand = new RelayCommand<object>(it =>
+                    {
+                        var tuple = it as Tuple<string, object>;
+
+                        if (tuple != null)
+                        {
+                            var folderVM = tuple.Item2 as FolderViewModel;
+
+                            var newFolderName = tuple.Item1;
+
+                            if (folderVM == null)
+                                return;
+
+                            if (string.IsNullOrEmpty(newFolderName) == false &&
+                                folderVM != null)
+                            {
+                                var parent = folderVM.Parent;
+                                if (parent != null)
+                                {
+                                    parent.ChildRename(folderVM.ItemName, newFolderName);
+
+                                    this.SelectedFolder = folderVM.ItemPath;
+                                }
+                            }
+                        }
+                    });
+
+                return this._RenameCommand;
+            }
+        }
+
+        /// <summary>
+        /// Starts the create folder process by creating a new folder
+        /// in the given location. The location is supplied as <seealso cref="System.Windows.Input.ICommandSource.CommandParameter"/>
+        /// which is a <seealso cref="ITreeItemViewModel"/> item.
+        /// 
+        /// So, the <seealso cref="ITreeItemViewModel"/> item is the parent of the new folder
+        /// <seealso cref="IFolderViewModel"/> and the new folder is created with a standard
+        /// name: 'New Folder n'. The new folder n is selected and in rename mode such that
+        /// users can edit the name of the new folder right away.
+        /// 
+        /// This command implements an event that triggers the actual rename process in the
+        /// connected view.
+        /// </summary>
+        public ICommand CreateFolderCommand
+        {
+            get
+            {
+                if (this._CreateFolderCommand == null)
+                    this._CreateFolderCommand = new RelayCommand<object>(async it =>
+                    {
+                        var folder = it as TreeItemViewModel;
+
+                        if (folder == null)
+                            return;
+
+                        if (folder.IsExpanded == false)
+                        {
+                            folder.IsExpanded = true;
+
+                            // Refresh child items if this has been expanded for the 1st time
+                            if (folder.HasDummyChild == true)
+                            {
+                                var x = await RequeryChildItems(folder);
+                            }
+                        }
+
+                        this.CreateFolderCommandNewFolder(folder);
+                    });
+
+                return this._CreateFolderCommand;
+            }
+        }
+
+        /// <summary>
+        /// Gets command to select the current folder.
+        /// 
+        /// This binding can be used for browsing to a certain folder
+        /// e.g. Users Document folder.
+        /// 
+        /// Expected parameter: string containing a path to be browsed to.
+        /// </summary>
+        [System.Obsolete("This is no longer supported.")]
+        public ICommand FolderSelectedCommand
+        {
+            get
+            {
+                if (this._FolderSelectedCommand == null)
+                {
+                    this._FolderSelectedCommand = new RelayCommand<object>(p =>
+                    {
+                        string path = p as string;
+
+                        if (string.IsNullOrEmpty(path) == true)
+                            return;
+
+                        if (IsBrowsing == true)
+                            return;
+
+                        IPathModel location = null;
+                        try
+                        {
+                            location = PathFactory.Create(path);
+                            NavigateTo(location, false);
+                        }
+                        catch
+                        {
+                        }
+                    },
+                    (p) => { return ! IsBrowsing; });
+                }
+
+                return this._FolderSelectedCommand;
+            }
+        }
+
+        /// <summary>
+        /// Gets a command that will reload the folder view up to the
+        /// selected path that is expected as <seealso cref="ITreeItemViewModel"/>
+        /// in the CommandParameter.
+        /// 
+        /// This command is particularly useful when users create/delete a folder
+        /// and want to update the treeview accordingly.
+        /// </summary>
+        public ICommand RefreshViewCommand
+        {
+            get
+            {
+                if (this._RefreshViewCommand == null)
+                {
+                    this._RefreshViewCommand = new RelayCommand<object>(p =>
+                    {
+                        try
+                        {
+                            var item = p as ITreeItemViewModel;
+
+                            if (item == null)
+                                return;
+
+                            if (string.IsNullOrEmpty(item.ItemPath) == true)
+                                return;
+
+                            if (IsBrowsing == true)
+                                return;
+
+                            IPathModel location = null;
+                            location = PathFactory.Create(item.ItemPath);
+                            NavigateTo(location, false);
+                        }
+                        catch
+                        {
+                        }
+                    }, (p) =>
+                        {
+                            return ! IsBrowsing;
+                        });
+                }
+
+                return this._RefreshViewCommand;
+            }
+        }
+
+        /// <summary>
+        /// Expand folder for the very first time (using the process background viewmodel).
+        /// </summary>
+        /// <param name="expandedItem"></param>
+        private async Task ExpandDummyFolderAsync(ITreeItemViewModel expandedItem)
+        {
+            if (expandedItem != null && _IsExpanding == false)
+            {
+                if (expandedItem.HasDummyChild == true)
+                {
+                    _IsExpanding = true;
+                    try
+                    {
+                        if ((expandedItem is TreeItemViewModel) == true)
+                        {
+                            var item = expandedItem as TreeItemViewModel;
+
+                            item.ChildrenClear();  // Requery sub-folders of this item
+                            await item.ChildrenLoadAsync();
+                        }
+                    }
+                    finally
+                    {
+                        _IsExpanding = false;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Methid executes when expand method is finished processing.
+        /// </summary>
+        /// <param name="processWasSuccessful"></param>
+        /// <param name="exp"></param>
+        /// <param name="caption"></param>
+        private void ExpandProcessinishedEvent(bool processWasSuccessful, Exception exp, string caption)
+        {
+            _IsExpanding = false;
+        }
+
+        /// <summary>
+        /// Requery all child items - this can be useful when we
+        /// expand a folder for the very first time. Here we use task library with
+        /// async to enable synchronization. This is for parts of other commands
+        /// such as New Folder command which requires expansion of sub-folder
+        /// items before actual New Folder command can execute.
+        /// </summary>
+        /// <param name="expandedItem"></param>
+        /// <returns></returns>
+        private async Task<bool> RequeryChildItems(TreeItemViewModel expandedItem)
+        {
+            await Task.Run(() => 
+            {
+                expandedItem.ChildrenClear();  // Requery sub-folders of this item
+                expandedItem.ChildrenLoad();
+            });
+
+            return true;
+        }
+
+        /// <summary>
+        /// Gets a property to an object that is used to pop-up UI messages when errors occur.
+        /// </summary>
+        public IDisplayMessageViewModel DisplayMessage { get; private set; }
+
+        /// <summary>
+        /// Expose properties to commands that work with the bookmarking of folders.
+        /// </summary>
+        public IEditBookmarks BookmarkFolder { get; private set; }
+
+        #region SpecialFolders property
+        /// <summary>
+        /// Gets a list of Special Windows Standard folders for display in view.
+        /// </summary>
+        public IEnumerable<ICustomFolderItemViewModel> SpecialFolders
+        {
+            get
+            {
+                return _SpecialFolders;
+            }
+        }
+
+        /// <summary>
+        /// Gets whether the browser view should show a special folder control or not
+        /// (A special folder control lets users browse to folders like 'My Documents'
+        /// with a mouse click).
+        /// </summary>
+        public bool IsSpecialFoldersVisisble
+        {
+            get
+            {
+                return _IsSpecialFoldersVisisble;
+            }
+
+            private set
+            {
+                if (_IsSpecialFoldersVisisble != value)
+                {
+                    _IsSpecialFoldersVisisble = value;
+                    RaisePropertyChanged(() => IsSpecialFoldersVisisble);
+                }
+            }
+        }
+        #endregion SpecialFolders property
+
+        /// <summary>
+        /// Get/set property to indicate the initial path when control
+        /// starts up via Loading. The control attempts to change the
+        /// current directory to the indicated directory if the
+        /// ... method is called in the Loaded event of the
+        /// <seealso cref="FolderBrowserDialog"/>.
+        /// </summary>
+        public string InitialPath
+        {
+            get
+            {
+                return _InitalPath;
+
+            }
+
+            set
+            {
+                if (_InitalPath != value)
+                {
+                    _InitalPath = value;
+                    RaisePropertyChanged(() => InitialPath);
+                }
+            }
+        }
+        #endregion properties
+
+        #region methods
+        /// <summary>
+        /// Controller can start browser process if IsBrowsing = false
+        /// </summary>
+        /// <param name="newPath"></param>
+        /// <returns></returns>
+        bool INavigateable.NavigateTo(IPathModel location)
+        {
+            return NavigateTo(location, false);
+        }
+
+        /// <summary>
+        /// Controller can start browser process if IsBrowsing = false
+        /// </summary>
+        /// <param name="newPath"></param>
+        /// <returns></returns>
+        async Task<bool> INavigateable.NavigateToAsync(IPathModel location)
+        {
+            return await Task.Run(() =>
+            {
+                return NavigateTo(location, false);
+            });
+        }
+
+        /// <summary>
+        /// Sets the IsExternalBrowsing state and cleans up any running processings
+        /// if any. This method should only be called by an external controll instance.
+        /// </summary>
+        /// <param name="isBrowsing"></param>
+        public void SetExternalBrowsingState(bool isBrowsing)
+        {
+            IsExternallyBrowsing = isBrowsing;
+        }
+
+        /// <summary>
+        /// Determines whether the list of Windows special folder shortcut
+        /// buttons (Music, Video etc) is visible or not.
+        /// </summary>
+        /// <param name="visible"></param>
+        public void SetSpecialFoldersVisibility(bool visible)
+        {
+            this.IsSpecialFoldersVisisble = visible;
+        }
+
+        /// <summary>
+        /// Controller can start browser process if IsBrowsing = false
+        /// </summary>
+        /// <param name="newPath"></param>
+        /// <returns></returns>
+        private bool NavigateTo(IPathModel location,
+                                bool ResetBrowserStatus = true)
+        {
+            CancellationTokenSource cts = null;
+            bool ret = false;
+
+            IsBrowsing = true;
+            IsBrowseViewEnabled = UpdateView = false;
+
             try
             {
-              string path = p as string;
+                ret = InternalBrowsePathAsync(location.Path, ResetBrowserStatus, cts);
+            }
+            finally
+            {
+                // Make sure that view updates at the end of browsing process
+                IsBrowsing = false;
+                IsBrowseViewEnabled = UpdateView = true;
+            }
 
-              if (string.IsNullOrEmpty(path) == true)
-              {
-                var item = p as IFolderViewModel;
+            return ret;
+        }
 
-                if (item != null)
-                  path = item.FolderPath;
+        /// <summary>
+        /// Initialize the treeview with a set of local drives
+        /// currently available on the computer.
+        /// </summary>
+        private void SetInitialDrives(CancellationTokenSource cts = null)
+        {
+            ClearFoldersCollections();
 
-                if (string.IsNullOrEmpty(path) == true)
-                  return;
-              }
+            var items = DriveModel.GetLogicalDrives().ToList();
 
-              // Set new path if it changed in comparison to old path
-              this.SetSelectedFolder(PathModel.NormalizePath(path), true);
+            foreach (var item in items)
+            {
+                if (cts != null)
+                    cts.Token.ThrowIfCancellationRequested();
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    var vmItem = new DriveViewModel(item.Model, null);
+                    _Root.AddItem(vmItem);
+                });
+            }
+        }
+
+        private void ClearFoldersCollections()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _Root.Clear();
+            });
+        }
+
+        private bool InternalBrowsePathAsync(string path,
+                                             bool ResetBrowserStatus,
+                                             CancellationTokenSource cts = null)
+        {
+            if (ResetBrowserStatus == true)
+                ClearBrowserStates();
+
+            if (System.IO.Directory.Exists(path) == false)
+            {
+                DisplayMessage.IsErrorMessageAvailable = true;
+                DisplayMessage.Message = string.Format(FileSystemModels.Local.Strings.STR_ERROR_FOLDER_DOES_NOT_EXIST, path);
+                return false;
+            }
+
+            if (_Root.Count == 0)        // Make sure drives are available
+                SetInitialDrives(cts);
+
+            if (cts != null)
+                cts.Token.ThrowIfCancellationRequested();
+
+            var pathItem = SelectDirectory(PathFactory.Create(path, FSItemType.Folder), cts);
+
+            if (pathItem != null)
+            {
+                if (pathItem.Length > 0)
+                    SelectedItem = pathItem[pathItem.Length - 1];
+
+                return true;
+            }
+
+            return false;
+        }
+
+        internal ITreeItemViewModel[] SelectDirectory(
+            IPathModel inputPath,
+            CancellationTokenSource cts = null)
+        {
+            try
+            {
+                // Check if a given path exists
+                var exists = PathFactory.DirectoryPathExists(inputPath.Path);
+
+                if (exists == false)
+                    return null;
+
+                // Transform string into array of normalized path elements
+                // Drive 'C:\' , 'Folder', 'SubFolder', etc...
+                var folders = PathFactory.GetDirectories(inputPath.Path);
+
+                if (folders != null)
+                {
+                    // Find the drive that is the root of this path
+                    var drive = this._Root.TryGet(folders[0]);
+
+                    return NavigatePath(drive, folders);
+                }
+
+                return null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private ITreeItemViewModel[] NavigatePath(
+            ITreeItemViewModel parent
+          , string[] folders
+          , int iMatchIdx = 0)
+        {
+            ITreeItemViewModel[] pathFolders = new ITreeItemViewModel[folders.Count()];
+
+            pathFolders[0] = parent;
+
+            int iNext = iMatchIdx + 1;
+            for (; iNext < folders.Count(); iNext++)
+            {
+                if (parent.HasDummyChild == true)
+                    parent.ChildrenLoad();
+
+                var nextChild = parent.ChildTryGet(folders[iNext]);
+
+                if (nextChild != null)
+                {
+                    pathFolders[iNext] = nextChild;
+                    parent = nextChild;
+                }
+                else
+                    return null; // couln not find target
+            }
+
+            return pathFolders;
+        }
+
+        /// <summary>
+        /// Create a new folder underneath the given parent folder. This method creates
+        /// the folder with a standard name (eg 'New folder n') on disk and selects it
+        /// in editing mode to give users a chance for renaming it right away.
+        /// </summary>
+        /// <param name="parentFolder"></param>
+        private void CreateFolderCommandNewFolder(TreeItemViewModel parentFolder)
+        {
+            if (parentFolder == null)
+                return;
+
+            // Cast this to access internal methods and setters
+            var item = parentFolder.CreateNewDirectory();
+            var newSubFolder = item as FolderViewModel;
+            SelectedItem = newSubFolder;
+
+            if (newSubFolder != null)
+            {
+                // Do this with low priority (thanks for that tip to Joseph Leung)
+                Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background, (Action)delegate
+                {
+                    newSubFolder.IsSelected = true;
+                    newSubFolder.RequestEditMode(InplaceEditBoxLib.Events.RequestEditEvent.StartEditMode);
+                });
+            }
+        }
+
+        /// <summary>
+        /// Clear states of browser control (hide error message and other things that may not apply now)
+        /// </summary>
+        private void ClearBrowserStates()
+        {
+            DisplayMessage.Message = string.Empty;
+            DisplayMessage.IsErrorMessageAvailable = false;
+        }
+
+        private void InitializeSpecialFolders()
+        {
+            _SpecialFolders = new ObservableCollection<ICustomFolderItemViewModel>();
+
+            try
+            {
+                _SpecialFolders.Add(new CustomFolderItemViewModel(Environment.SpecialFolder.Desktop));
+                _SpecialFolders.Add(new CustomFolderItemViewModel(Environment.SpecialFolder.MyDocuments));
+                _SpecialFolders.Add(new CustomFolderItemViewModel(Environment.SpecialFolder.MyMusic));
+                _SpecialFolders.Add(new CustomFolderItemViewModel(Environment.SpecialFolder.MyPictures));
+                _SpecialFolders.Add(new CustomFolderItemViewModel(Environment.SpecialFolder.MyVideos));
             }
             catch
             {
             }
-          });
         }
-
-        return this.mFolderSelectedCommand;
-      }
+        #endregion methods
     }
-
-    /// <summary>
-    /// This command can be used to do a final select of a particular folder and tell
-    /// the consumer of this viewmodel that the user wants to select this folder.
-    /// The consumer can then diactivate the dialog or browse to the requested location
-    /// using whatever is required outside of this control....
-    /// </summary>
-    public ICommand FinalSelectDirectoryCommand
-    {
-      get
-      {
-        Logger.DebugFormat("get FinalSelectDirectoryCommand property");
-
-        if (this.mFinalSelectDirectoryCommand == null)
-          this.mFinalSelectDirectoryCommand = new RelayCommand<object>(it =>
-          {
-            var path = it as IFolderViewModel;
-
-            if (path != null)
-            {
-              this.SetSelectedFolder(path.FolderPath, true);
-
-              if (this.FinalPathSelectionEvent != null)
-                this.FinalPathSelectionEvent(this, new FolderChangedEventArgs(new PathModel(path.FolderPath, FSItemType.Folder)));
-            }
-          });
-
-        return this.mFinalSelectDirectoryCommand;
-      }
-    }
-
-    /// <summary>
-    /// Renames the folder that is represented by this viewmodel.
-    /// This command should be called directly by the implementing view
-    /// since the new name of the folder is delivered as string.
-    /// </summary>
-    public ICommand RenameCommand
-    {
-      get
-      {
-        Logger.DebugFormat("get RenameCommand property");
-
-        if (this.mRenameCommand == null)
-          this.mRenameCommand = new RelayCommand<object>(it =>
-          {
-            var tuple = it as Tuple<string, object>;
-
-            if (tuple != null)
-            {
-              var folderVM = tuple.Item2 as IFolderViewModel;
-
-              if (tuple.Item1 != null && folderVM != null)
-              {
-                folderVM.RenameFolder(tuple.Item1);
-                this.SelectedFolder = folderVM.FolderPath;
-              }
-            }
-          });
-
-        return this.mRenameCommand;
-      }
-    }
-
-    /// <summary>
-    /// Starts the rename folder process by that renames the folder
-    /// that is represented by this viewmodel.
-    /// 
-    /// This command implements an event that triggers the actual rename
-    /// process in the connected view.
-    /// </summary>
-    public ICommand StartRenameCommand
-    {
-      get
-      {
-        Logger.DebugFormat("get StartRenameCommand property");
-
-        if (this.mStartRenameCommand == null)
-          this.mStartRenameCommand = new RelayCommand<object>(it =>
-          {
-            var folder = it as IFolderViewModel;
-
-            if (folder != null)
-              folder.RequestEditMode(InplaceEditBoxLib.Events.RequestEditEvent.StartEditMode);
-          });
-
-        return this.mStartRenameCommand;
-      }
-    }
-
-    /// <summary>
-    /// Starts the create folder process by creating a new folder
-    /// in the given location. The location is supplied as <seealso cref="System.Windows.Input.ICommandSource.CommandParameter"/>
-    /// which is a <seealso cref="IFolderViewModel"/> item. So, the <seealso cref="IFolderViewModel"/> item
-    /// is the parent of the new folder and the new folder is created with a standard name:
-    /// 'New Folder n'. The new folder n is selected and in rename mode such that users can edit
-    /// the name of the new folder right away.
-    /// 
-    /// This command implements an event that triggers the actual rename
-    /// process in the connected view.
-    /// </summary>
-    public ICommand CreateFolderCommand
-    {
-      get
-      {
-        Logger.DebugFormat("get CreateFolderCommand property");
-
-        if (this.mCreateFolderCommand == null)
-          this.mCreateFolderCommand = new RelayCommand<object>(it =>
-          {
-            var folder = it as IFolderViewModel;
-            this.CreateFolderCommandNewFolder(folder);
-          });
-
-        return this.mCreateFolderCommand;
-      }
-    }
-
-    #region Add Remove Recent Folder commands
-    /// <summary>
-    /// Determine whether an Add/Remove command can execute or not.
-    /// </summary>
-    public bool RecentFolderCommandCanExecute
-    {
-      get
-      {
-        if (this.RequestEditBookmarkedFolders != null)
-          return true;
-
-        return false;
-      }
-    }
-
-    /// <summary>
-    /// Implements a command that adds a removes a folder location.
-    /// Expected parameter is of type FSItemVM.
-    /// </summary>
-    public ICommand RecentFolderRemoveCommand
-    {
-      get
-      {
-        if (this.mRecentFolderRemoveCommand == null)
-          this.mRecentFolderRemoveCommand = new RelayCommand<object>((p) => this.RecentFolderRemove_Executed(p),
-                                                                     (p) => this.RecentFolderCommand_CanExecute(p));
-
-        return this.mRecentFolderRemoveCommand;
-      }
-    }
-
-    /// <summary>
-    /// Implements a command that adds a recent folder location.
-    /// Expected parameter is of type FSItemVM.
-    /// </summary>
-    public ICommand RecentFolderAddCommand
-    {
-      get
-      {
-        if (this.mRecentFolderAddCommand == null)
-          this.mRecentFolderAddCommand = new RelayCommand<object>((p) => this.RecentFolderAdd_Executed(p),
-                                                                  (p) => this.RecentFolderCommand_CanExecute(p));
-
-        return this.mRecentFolderAddCommand;
-      }
-    }
-    #endregion Add Remove Recent Folder commands
-
-    #region SpecialFolders property
-    /// <summary>
-    /// Gets a list of Special Windows Standard folders for display in view.
-    /// </summary>
-    public ObservableCollection<CustomFolderItemViewModel> SpecialFolders { get; private set; }
-
-    /// <summary>
-    /// Gets whether the browser view should show a special folder control or not
-    /// (A special folder control lets users browse to folders like 'My Documents'
-    /// with a mouse click).
-    /// </summary>
-    public bool IsSpecialFoldersVisisble
-    {
-      get
-      {
-        return this.mIsSpecialFoldersVisisble;
-      }
-
-      private set
-      {
-        if (this.mIsSpecialFoldersVisisble != value)
-        {
-          this.mIsSpecialFoldersVisisble = value;
-          this.RaisePropertyChanged(() => this.IsSpecialFoldersVisisble);
-        }
-      }
-    }
-    #endregion SpecialFolders property
-    #endregion properties
-
-    #region methods
-    /// <summary>
-    /// Determines whether the browser view should show a special folder control or not
-    /// (A special folder control lets users browse to folders like 'My Documents'
-    /// with a mouse click).
-    /// </summary>
-    /// <param name="visible"></param>
-    public void SetSpecialFoldersVisibility(bool visible)
-    {
-      this.IsSpecialFoldersVisisble = visible;
-    }
-
-    /// <summary>
-    /// Select the <paramref name="selectedFolder"/> in the current viewmodel
-    /// to update display of folders in this regard.
-    /// </summary>
-    /// <param name="selectedFolder"></param>
-    void IBrowserViewModel.SetSelectedFolder(string selectedFolder)
-    {
-      this.SetSelectedFolder(selectedFolder, false);
-    }
-
-    /// <summary>
-    /// Get all child entries for a given path entry
-    /// </summary>
-    /// <param name="childFolders"></param>
-    /// <param name="path"></param>
-    /// <returns></returns>
-    private static IFolderViewModel Expand(ObservableCollection<IFolderViewModel> childFolders, string path)
-    {
-      Logger.DebugFormat("static Expand folder method for {0}", path);
-
-      if (string.IsNullOrEmpty(path) || childFolders.Count == 0)
-      {
-        return null;
-      }
-
-      string folderName = path;
-      if (path.Contains('/') || path.Contains('\\'))
-      {
-        int idx = path.IndexOfAny(new char[] { '/', '\\' });
-        folderName = path.Substring(0, idx);
-        path = path.Substring(idx + 1);
-      }
-      else
-      {
-        path = null;
-      }
-
-      // bugfix: Folder names on windows are case insensitiv
-      var results = childFolders.Where<IFolderViewModel>(folder => string.Compare(folder.FolderName, folderName, true) == 0);
-      if (results != null && results.Count() > 0)
-      {
-        IFolderViewModel fvm = results.First();
-        fvm.IsExpanded = true;
-
-        var retVal = BrowserViewModel.Expand(fvm.Folders, path);
-        if (retVal != null)
-        {
-          return retVal;
-        }
-        else
-        {
-          return fvm;
-        }
-      }
-
-      return null;
-    }
-
-    /// <summary>
-    /// Assign the currently selected folder with this path.
-    /// </summary>
-    /// <param name="selectedFolder"></param>
-    /// <param name="updateViews"></param>
-    private void SetSelectedFolder(string selectedFolder, bool updateViews)
-    {
-      Logger.DebugFormat("SetSelectedFolder folder method for {0}", selectedFolder);
-
-      this.SelectedFolder = PathModel.NormalizePath(selectedFolder);
-      this.OnSelectedFolderChanged();
-
-      if (updateViews == true)
-      {
-        // Send the event if there is a receiver
-        if (this.FolderSelectionChangedEvent != null)
-          this.FolderSelectionChangedEvent(this, new FolderChangedEventArgs(new PathModel(this.SelectedFolder, FSItemType.Folder)));
-      }
-    }
-
-    private void OnSelectedFolderChanged()
-    {
-      Logger.DebugFormat("OnSelectedFolderChanged method");
-
-      if (this.mExpanding == false)
-      {
-        try
-        {
-          this.mExpanding = true;
-          IFolderViewModel child = BrowserViewModel.Expand(this.Folders, this.SelectedFolder);
-
-          if (child != null)
-            child.IsSelected = true;
-        }
-        finally
-        {
-          this.mExpanding = false;
-        }
-      }
-    }
-
-    /// <summary>
-    /// Create a new folder underneath the given parent folder. This method creates
-    /// the folder with a standard name (eg 'New folder n') on disk and selects it
-    /// in editing mode to give users a chance for renaming it right away.
-    /// </summary>
-    /// <param name="parentFolder"></param>
-    private void CreateFolderCommandNewFolder(IFolderViewModel parentFolder)
-    {
-      Logger.DebugFormat("CreateFolderCommandNewFolder method for '{0}'", parentFolder);
-
-      if (parentFolder == null)
-        return;
-
-      IFolderViewModel newSubFolder = parentFolder.CreateNewDirectory();
-
-      ////this.SelectedFolder = newSubFolder.FolderPath;
-      ////this.SetSelectedFolder(newSubFolder.FolderPath, true);
-
-      if (newSubFolder != null)
-      {
-        // Do this with low priority (thanks for that tip to Joseph Leung)
-        Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background, (Action)delegate
-        {
-          newSubFolder.IsSelected = true;
-          newSubFolder.RequestEditMode(InplaceEditBoxLib.Events.RequestEditEvent.StartEditMode);
-        });
-      }
-    }
-
-    #region Add Remove Recent Folder commands
-    private bool RecentFolderCommand_CanExecute(object param)
-    {
-      if (this.RequestEditBookmarkedFolders != null)
-      {
-        var item = param as FolderViewModel;
-      
-        if (item != null)
-          return true;
-      }
-
-      return false;
-    }
-
-    private void RecentFolderRemove_Executed(object param)
-    {
-      var item = param as FolderViewModel;
-      
-      if (item == null)
-        return;
-      
-      if (this.RequestEditBookmarkedFolders != null)
-        this.RequestEditBookmarkedFolders(this, new RecentFolderEvent(new PathModel(item.FolderPath, FSItemType.Folder),
-                                                                   RecentFolderEvent.RecentFolderAction.Remove));
-    }
-
-    private void RecentFolderAdd_Executed(object param)
-    {
-      var item = param as FolderViewModel;
-      
-      if (item == null)
-        return;
-      
-      if (this.RequestEditBookmarkedFolders != null)
-        this.RequestEditBookmarkedFolders(this, new RecentFolderEvent(new PathModel(item.FolderPath, FSItemType.Folder),
-                                                                   RecentFolderEvent.RecentFolderAction.Add));
-    }
-    #endregion Add Remove Recent Folder commands
-    #endregion methods
-  }
 }

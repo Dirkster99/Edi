@@ -1,27 +1,31 @@
 namespace FileListView.ViewModels
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Diagnostics;
-    using System.Globalization;
     using System.IO;
+    using System.Threading.Tasks;
+    using System.Windows;
     using System.Windows.Input;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using System.Windows.Threading;
-    using FileListView.Command;
-    using FileListView.ViewModels.Interfaces;
+    using FileListView.Interfaces;
+    using FileListView.ViewModels.Base;
+    using FileSystemModels;
+    using FileSystemModels.Browse;
     using FileSystemModels.Events;
     using FileSystemModels.Interfaces;
+    using FileSystemModels.Interfaces.Bookmark;
     using FileSystemModels.Models;
+    using FileSystemModels.Models.FSItems.Base;
     using FileSystemModels.Utils;
-    using MsgBox;
     using UserNotification.ViewModel;
 
     /// <summary>
     /// Class implements a list of file items viewmodel for a given directory.
     /// </summary>
-    public class FileListViewModel : Base.ViewModelBase, IFileListViewModel
+    internal class FileListViewModel : Base.ViewModelBase, IFileListViewModel
     {
         #region fields
         /// <summary>
@@ -36,9 +40,10 @@ namespace FileListView.ViewModels
         private bool mShowHidden = true;
         private bool mShowIcons = true;
         private bool mIsFiltered = false;
-        private FSItemViewModel mSelectedItem;
+        private LVItemViewModel mSelectedItem;
 
         private IBrowseNavigation mBrowseNavigation = null;
+        private readonly ObservableCollection<ILVItemViewModel> _CurrentItems = null;
 
         private RelayCommand<object> mNavigateForwardCommand = null;
         private RelayCommand<object> mNavigateBackCommand = null;
@@ -50,9 +55,6 @@ namespace FileListView.ViewModels
         private RelayCommand<object> mToggleIsHiddenVisibleCommand = null;
         private RelayCommand<object> mToggleIsFilteredCommand = null;
 
-        private RelayCommand<object> mRecentFolderRemoveCommand = null;
-        private RelayCommand<object> mRecentFolderAddCommand = null;
-
         private RelayCommand<object> mOpenContainingFolderCommand = null;
         private RelayCommand<object> mOpenInWindowsCommand = null;
         private RelayCommand<object> mCopyPathCommand = null;
@@ -62,6 +64,8 @@ namespace FileListView.ViewModels
         private RelayCommand<object> mCreateFolderCommand = null;
 
         private SendNotificationViewModel mNotification;
+        private bool _IsExternallyBrowsing;
+        private bool _IsBrowsing;
         #endregion fields
 
         #region constructor
@@ -81,8 +85,9 @@ namespace FileListView.ViewModels
         /// </summary>
         protected FileListViewModel()
         {
-            this.Notification = new SendNotificationViewModel();
-            this.CurrentItems = new ObservableCollection<FSItemViewModel>();
+            BookmarkFolder = new EditFolderBookmarks();
+            Notification = new SendNotificationViewModel();
+            _CurrentItems = new ObservableCollection<ILVItemViewModel>();
         }
         #endregion constructor
 
@@ -93,28 +98,81 @@ namespace FileListView.ViewModels
         public event EventHandler<FileOpenEventArgs> OnFileOpen;
 
         /// <summary>
-        /// Event is fired when user interaction in listview requires naviagtion to another location.
+        /// Indicates when the viewmodel starts heading off somewhere else
+        /// and when its done browsing to a new location.
         /// </summary>
-        public event EventHandler<FolderChangedEventArgs> RequestChangeOfDirectory;
-
-        /// <summary>
-        /// Generate an event to remove or add a recent folder to a collection.
-        /// </summary>
-        public event EventHandler<RecentFolderEvent> RequestEditRecentFolder;
+        public event EventHandler<BrowsingEventArgs> BrowseEvent;
         #endregion
 
         #region properties
         /// <summary>
+        /// Can only be set by the control if user started browser process
+        /// 
+        /// Use IsBrowsing and IsExternallyBrowsing to lock the controls UI
+        /// during browse operations or display appropriate progress bar(s).
+        /// </summary>
+        public bool IsBrowsing
+        {
+            get
+            {
+                return _IsBrowsing;
+            }
+
+            protected set
+            {
+                if (_IsBrowsing != value)
+                {
+                    _IsBrowsing = value;
+                    RaisePropertyChanged(() => IsBrowsing);
+                }
+            }
+        }
+
+        /// <summary>
+        /// This should only be set by the controller that started the browser process.
+        /// 
+        /// Use IsBrowsing and IsExternallyBrowsing to lock the controls UI
+        /// during browse operations or display appropriate progress bar(s).
+        /// </summary>
+        public bool IsExternallyBrowsing
+        {
+            get
+            {
+                return _IsExternallyBrowsing;
+            }
+
+            protected set
+            {
+                if (_IsExternallyBrowsing != value)
+                {
+                    _IsExternallyBrowsing = value;
+                    RaisePropertyChanged(() => IsExternallyBrowsing);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Expose properties to commands that work with the bookmarking of folders.
+        /// </summary>
+        public IEditBookmarks BookmarkFolder { get; }
+
+        /// <summary>
         /// Gets/sets list of files and folders to be displayed in connected view.
         /// </summary>
-        public ObservableCollection<FSItemViewModel> CurrentItems { get; set; }
+        public IEnumerable<ILVItemViewModel> CurrentItems
+        {
+            get
+            {
+                return _CurrentItems;
+            }
+        }
 
         /// <summary>
         /// Get/set select item in filelist viemodel. This property is used to bind
         /// the selectitem of the listbox and enable the BringIntoView behaviour
         /// to scroll a selected item into view.
         /// </summary>
-        public FSItemViewModel SelectedItem
+        public LVItemViewModel SelectedItem
         {
             get
             {
@@ -143,7 +201,7 @@ namespace FileListView.ViewModels
                 return this.mShowFolders;
             }
 
-            set
+            protected set
             {
                 Logger.DebugFormat("Set ShowFolders '{0}' property", value);
 
@@ -165,7 +223,7 @@ namespace FileListView.ViewModels
                 return this.mShowHidden;
             }
 
-            set
+            protected set
             {
                 Logger.DebugFormat("Set ShowHidden '{0}' property", value);
 
@@ -187,7 +245,7 @@ namespace FileListView.ViewModels
                 return this.mShowIcons;
             }
 
-            set
+            protected set
             {
                 Logger.DebugFormat("Set ShowIcons '{0}' property", value);
 
@@ -257,10 +315,10 @@ namespace FileListView.ViewModels
 
                         if (newFolder != null)
                         {
-                            this.UpdateView(newFolder.Path);
+                            PopulateView(newFolder);
 
-                            if (this.RequestChangeOfDirectory != null)
-                                this.RequestChangeOfDirectory(this, new FolderChangedEventArgs(newFolder));
+                            if (this.BrowseEvent != null)
+                                this.BrowseEvent(this, new BrowsingEventArgs(newFolder, false, BrowseResult.Complete));
                         }
                     },
                     (p) => this.mBrowseNavigation.CanBrowseForward());
@@ -283,10 +341,10 @@ namespace FileListView.ViewModels
 
                         if (newFolder != null)
                         {
-                            this.UpdateView(newFolder.Path);
+                            PopulateView(newFolder);
 
-                            if (this.RequestChangeOfDirectory != null)
-                                this.RequestChangeOfDirectory(this, new FolderChangedEventArgs(newFolder));
+                            if (this.BrowseEvent != null)
+                                this.BrowseEvent(this, new BrowsingEventArgs(newFolder, false, BrowseResult.Complete));
                         }
                     },
                     (p) => this.mBrowseNavigation.CanBrowseBack());
@@ -312,10 +370,10 @@ namespace FileListView.ViewModels
                             if (newFolder.DirectoryPathExists() == false)
                                 return;
 
-                            this.UpdateView(newFolder.Path);
+                            PopulateView(newFolder);
 
-                            if (this.RequestChangeOfDirectory != null)
-                                this.RequestChangeOfDirectory(this, new FolderChangedEventArgs(newFolder));
+////                            if (this.BrowseEvent != null)
+////                                this.BrowseEvent(this, new BrowsingEventArgs(newFolder, false, BrowseResult.Complete));
                         }
                     },
                     (p) => this.mBrowseNavigation.CanBrowseUp());
@@ -334,26 +392,31 @@ namespace FileListView.ViewModels
                 if (this.mNavigateDownCommand == null)
                     this.mNavigateDownCommand = new RelayCommand<object>((p) =>
                     {
-                        var info = p as FSItemViewModel;
+                        var info = p as LVItemViewModel;
 
                         if (info == null)
                             return;
 
-                        FSItemType t = this.mBrowseNavigation.BrowseDown(info.Type, info.FullPath);
-
-                        this.PopulateView();
-
-                        if (this.RequestChangeOfDirectory != null && t == FSItemType.Folder)
-                            this.RequestChangeOfDirectory(this, new FolderChangedEventArgs(info.GetModel));
-                        else
+                        try
                         {
-                            if (this.OnFileOpen != null && t == FSItemType.File)
-                                this.OnFileOpen(this, new FileOpenEventArgs() { FileName = info.FullPath });
+                            if (info.Type == FSItemType.Folder || info.Type == FSItemType.LogicalDrive)
+                            {
+                                mBrowseNavigation.BrowseDown(info.Type, info.FullPath);
+                                PopulateView(info.GetModel);
+                            }
+                            else
+                            {
+                                if (this.OnFileOpen != null && info.Type == FSItemType.File)
+                                    this.OnFileOpen(this, new FileOpenEventArgs() { FileName = info.FullPath });
+                            }
+                        }
+                        catch
+                        {
                         }
                     },
                     (p) =>
                     {
-                        return (p as FSItemViewModel) != null;
+                        return (p as LVItemViewModel) != null;
                     });
 
                 return this.mNavigateDownCommand;
@@ -416,38 +479,8 @@ namespace FileListView.ViewModels
                 return this.mToggleIsHiddenVisibleCommand;
             }
         }
-
-        /// <summary>
-        /// Implements a command that adds a removes a folder location.
-        /// Expected parameter is of type <seealso cref="FSItemViewModel"/>.
-        /// </summary>
-        public ICommand RecentFolderRemoveCommand
-        {
-            get
-            {
-                if (this.mRecentFolderRemoveCommand == null)
-                    this.mRecentFolderRemoveCommand = new RelayCommand<object>((p) => this.RecentFolderRemove_Executed(p));
-
-                return this.mRecentFolderRemoveCommand;
-            }
-        }
-
-        /// <summary>
-        /// Implements a command that adds a recent folder location.
-        /// Expected parameter is of type <seealso cref="FSItemViewModel"/>.
-        /// </summary>
-        public ICommand RecentFolderAddCommand
-        {
-            get
-            {
-                if (this.mRecentFolderAddCommand == null)
-                    this.mRecentFolderAddCommand = new RelayCommand<object>((p) => this.RecentFolderAdd_Executed(p));
-
-                return this.mRecentFolderAddCommand;
-            }
-        }
-
         #region Windows Integration FileSystem Commands
+
         /// <summary>
         /// Gets a command that will open the folder in which an item is stored.
         /// The item (path to a file) is expected as <seealso cref="FSItemViewModel"/> parameter.
@@ -460,7 +493,7 @@ namespace FileListView.ViewModels
                     this.mOpenContainingFolderCommand = new RelayCommand<object>(
                       (p) =>
                       {
-                          var path = p as FSItemViewModel;
+                          var path = p as LVItemViewModel;
 
                           if (path == null)
                               return;
@@ -468,7 +501,7 @@ namespace FileListView.ViewModels
                           if (string.IsNullOrEmpty(path.FullPath) == true)
                               return;
 
-                          FileListViewModel.OpenContainingFolderCommand_Executed(path.FullPath);
+                          FileSystemCommands.OpenContainingFolder(path.FullPath);
                       });
 
                 return this.mOpenContainingFolderCommand;
@@ -489,7 +522,7 @@ namespace FileListView.ViewModels
                     this.mOpenInWindowsCommand = new RelayCommand<object>(
                       (p) =>
                       {
-                          var path = p as FSItemViewModel;
+                          var path = p as LVItemViewModel;
 
                           if (path == null)
                               return;
@@ -497,7 +530,7 @@ namespace FileListView.ViewModels
                           if (string.IsNullOrEmpty(path.FullPath) == true)
                               return;
 
-                          FileListViewModel.OpenInWindowsCommand_Executed(path.FullPath);
+                          FileSystemCommands.OpenInWindows(path.FullPath);
                       });
 
                 return this.mOpenInWindowsCommand;
@@ -516,7 +549,7 @@ namespace FileListView.ViewModels
                     this.mCopyPathCommand = new RelayCommand<object>(
                       (p) =>
                       {
-                          var path = p as FSItemViewModel;
+                          var path = p as LVItemViewModel;
 
                           if (path == null)
                               return;
@@ -567,7 +600,7 @@ namespace FileListView.ViewModels
 
                         if (tuple != null)
                         {
-                            var folderVM = tuple.Item2 as FSItemViewModel;
+                            var folderVM = tuple.Item2 as LVItemViewModel;
 
                             if (tuple.Item1 != null && folderVM != null)
                                 folderVM.RenameFileOrFolder(tuple.Item1);
@@ -592,7 +625,7 @@ namespace FileListView.ViewModels
                 if (this.mStartRenameCommand == null)
                     this.mStartRenameCommand = new RelayCommand<object>(it =>
                     {
-                        var folder = it as FSItemViewModel;
+                        var folder = it as LVItemViewModel;
 
                         if (folder != null)
                             folder.RequestEditMode(InplaceEditBoxLib.Events.RequestEditEvent.StartEditMode);
@@ -659,32 +692,33 @@ namespace FileListView.ViewModels
 
         #region methods
         /// <summary>
-        /// Updates the current display with the given filter string.
+        /// Controller can start browser process if IsBrowsing = false
         /// </summary>
-        /// <param name="p"></param>
-        public void UpdateView(string p)
+        /// <param name="newPath"></param>
+        /// <returns></returns>
+        bool INavigateable.NavigateTo(IPathModel newPath)
         {
-            Logger.DebugFormat("UpdateView method with '{0}' property", p);
-
-            if (string.IsNullOrEmpty(p) == true)
-                return;
-
-            this.mBrowseNavigation.SetCurrentFolder(p, false);
-            this.PopulateView();
+            return PopulateView(newPath, false);
         }
 
         /// <summary>
-        /// Fills the CurrentItems property for display in ItemsControl
+        /// Controller can start browser process if IsBrowsing = false
         /// </summary>
-        public void NavigateToThisFolder(string sFolder)
+        /// <param name="newPath"></param>
+        /// <returns></returns>
+        async Task<bool> INavigateable.NavigateToAsync(IPathModel newPath)
         {
-            Logger.DebugFormat("NavigateToThisFolder method with '{0}'", sFolder);
+            return await Task.Run(() => { return PopulateView(newPath, false); });
+        }
 
-            this.mBrowseNavigation.BrowseDown(FSItemType.Folder, sFolder);
-
-            ////this.RecentFolders.Push(this.CurrentFolder);
-            this.UpdateView(sFolder);
-            this.RaisePropertyChanged(() => this.CurrentFolder);
+        /// <summary>
+        /// Sets the IsExternalBrowsing state and cleans up any running processings
+        /// if any. This method should only be called by an external controll instance.
+        /// </summary>
+        /// <param name="isBrowsing"></param>
+        public void SetExternalBrowsingState(bool isBrowsing)
+        {
+            IsBrowsing = isBrowsing;
         }
 
         /// <summary>
@@ -697,9 +731,9 @@ namespace FileListView.ViewModels
         {
             Logger.DebugFormat("ApplyFilter method with '{0}'", filterText);
 
-            this.mFilterString = filterText;
+            mFilterString = filterText;
 
-            string[] tempParsedFilter = BrowseNavigation.GetParsedFilters(this.mFilterString);
+            string[] tempParsedFilter = BrowseNavigation.GetParsedFilters(mFilterString);
 
             // Optimize nultiple requests for populating same view with unchanged filter away
             if (tempParsedFilter != this.mParsedFilter)
@@ -736,108 +770,85 @@ namespace FileListView.ViewModels
         }
 
         /// <summary>
+        /// Configure whether icons in listview should be shown or not.
+        /// </summary>
+        /// <param name="showIcons"></param>
+        public void SetShowIcons(bool showIcons)
+        {
+            ShowIcons = showIcons;
+        }
+
+        /// <summary>
+        /// Configure whether or not hidden files are shown in listview.
+        /// </summary>
+        /// <param name="showHiddenFiles"></param>
+        public void SetShowHidden(bool showHiddenFiles)
+        {
+            ShowHidden = showHiddenFiles;
+        }
+
+        /// <summary>
         /// Fills the CurrentItems property for display in ItemsControl
         /// based view (ListBox, ListView etc.).
         /// 
         /// This method wraps a parameterized version of the same method 
         /// with a call that contains the standard data field.
         /// </summary>
-        protected void PopulateView()
+        protected bool PopulateView(IPathModel newPathToNavigateTo = null,
+                                    bool browseEvent = true)
         {
             Logger.DebugFormat("PopulateView method");
 
-            this.PopulateView(this.mParsedFilter);
-            this.RaisePropertyChanged(() => this.CurrentFolder);
+            bool result = false;
+            IsBrowsing = true;
+            try
+            {
+                if (newPathToNavigateTo != null && browseEvent == true)
+                {
+                    if (this.BrowseEvent != null)
+                        this.BrowseEvent(this,
+                                         new BrowsingEventArgs(newPathToNavigateTo, true));
+                }
+
+                if (newPathToNavigateTo != null)
+                    mBrowseNavigation.SetCurrentFolder(newPathToNavigateTo.Path, false);
+
+                CurrentItemClear();
+
+                if (mBrowseNavigation.IsCurrentPathDirectory() == false)
+                    return false;
+
+                DirectoryInfo cur = this.mBrowseNavigation.GetDirectoryInfoOnCurrentFolder();
+
+                if (cur.Exists == false)
+                    return false;
+
+                result = InternalPopulateView(this.mParsedFilter, cur, this.ShowIcons);
+                RaisePropertyChanged(() => this.CurrentFolder);
+
+                return result;
+            }
+            catch
+            {
+            }
+            finally
+            {
+                if (newPathToNavigateTo != null && browseEvent == true)
+                {
+                    if (this.BrowseEvent != null)
+                        this.BrowseEvent(this,
+                                         new BrowsingEventArgs(newPathToNavigateTo, false,
+                                                              (result == true ? BrowseResult.Complete :
+                                                                                BrowseResult.InComplete)));
+                }
+
+                IsBrowsing = false;
+            }
+
+            return result;
         }
 
         #region FileSystem Commands
-        /// <summary>
-        /// Convinience method to open Windows Explorer with a selected file (if it exists).
-        /// Otherwise, Windows Explorer is opened in the location where the file should be at.
-        /// </summary>
-        /// <param name="sFileName"></param>
-        /// <returns></returns>
-        private static bool OpenContainingFolderCommand_Executed(string sFileName)
-        {
-            if (string.IsNullOrEmpty(sFileName) == true)
-                return false;
-
-            // XXX TODO Add this back in
-            //var msg = ServiceLocator.ServiceContainer.Instance.GetService<IMessageBoxService>();
-            try
-            {
-                if (System.IO.File.Exists(sFileName) == true)
-                {
-                    // combine the arguments together it doesn't matter if there is a space after ','
-                    string argument = @"/select, " + sFileName;
-
-                    System.Diagnostics.Process.Start("explorer.exe", argument);
-                    return true;
-                }
-                else
-                {
-                    string sParentDir = string.Empty;
-
-                    if (System.IO.Directory.Exists(sFileName) == true)
-                        sParentDir = sFileName;
-                    else
-                        sParentDir = System.IO.Directory.GetParent(sFileName).FullName;
-
-                    if (System.IO.Directory.Exists(sParentDir) == false)
-                    {
-////                        msg.Show(string.Format(FileSystemModels.Local.Strings.STR_MSG_DIRECTORY_DOES_NOT_EXIST, sParentDir),
-////                                               FileSystemModels.Local.Strings.STR_MSG_ERROR_FINDING_RESOURCE,
-////                                               MsgBoxButtons.OK, MsgBoxImage.Error);
-
-                        return false;
-                    }
-                    else
-                    {
-                        // combine the arguments together it doesn't matter if there is a space after ','
-                        string argument = @"/select, " + sParentDir;
-
-                        System.Diagnostics.Process.Start("explorer.exe", argument);
-
-                        return true;
-                    }
-                }
-            }
-            catch (System.Exception ex)
-            {
-                Logger.Error(ex);
-////                msg.Show(string.Format("{0}\n'{1}'.", ex.Message, (sFileName == null ? string.Empty : sFileName)),
-////                          FileSystemModels.Local.Strings.STR_MSG_ERROR_FINDING_RESOURCE,
-////                          MsgBoxButtons.OK, MsgBoxImage.Error);
-
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Process command when a hyperlink has been clicked.
-        /// Start a web browser and let it browse to where this points to...
-        /// </summary>
-        /// <param name="sFileName"></param>
-        private static void OpenInWindowsCommand_Executed(string sFileName)
-        {
-            if (string.IsNullOrEmpty(sFileName) == true)
-                return;
-
-            // XXX TODO Add this back in
-            //var msg = ServiceLocator.ServiceContainer.Instance.GetService<IMessageBoxService>();
-            try
-            {
-                Process.Start(new ProcessStartInfo(sFileName));
-                ////OpenFileLocationInWindowsExplorer(whLink.NavigateUri.OriginalString);
-            }
-            catch (System.Exception ex)
-            {
-////                msg.Show(string.Format(CultureInfo.CurrentCulture, "{0}", ex.Message),
-////                         FileSystemModels.Local.Strings.STR_MSG_ERROR_FINDING_RESOURCE,
-////                         MsgBoxButtons.OK, MsgBoxImage.Error);
-            }
-        }
-
         /// <summary>
         /// A hyperlink has been clicked. Start a web browser and let it browse to where this points to...
         /// </summary>
@@ -865,20 +876,14 @@ namespace FileListView.ViewModels
         /// seperately and does not need to b parsed each time when this method
         /// executes.
         /// </summary>
-        private void PopulateView(string[] filterString)
+        private bool InternalPopulateView(string[] filterString
+                                        , DirectoryInfo cur
+                                        , bool showIcons)
         {
             Logger.DebugFormat("PopulateView method with filterString parameter");
 
-            this.CurrentItems.Clear();
-
-            if (this.mBrowseNavigation.IsCurrentPathDirectory() == false)
-                return;
-
             try
             {
-                DirectoryInfo cur = this.mBrowseNavigation.GetDirectoryInfoOnCurrentFolder();
-                ImageSource dummy = new BitmapImage();
-
                 // Retrieve and add (filtered) list of directories
                 if (this.ShowFolders)
                 {
@@ -899,13 +904,10 @@ namespace FileListView.ViewModels
                             }
                         }
 
-                        FSItemViewModel info = new FSItemViewModel(dir.FullName, FSItemType.Folder, dir.Name);
+                        var info = new LVItemViewModel(dir.FullName,
+                                                       FSItemType.Folder, dir.Name, showIcons);
 
-                        // to prevent the icon from being loaded from file later
-                        if (this.ShowIcons == false)
-                            info.SetDisplayIcon(dummy);
-
-                        this.CurrentItems.Add(info);
+                        CurrentItemAdd(info);
                     }
                 }
 
@@ -924,21 +926,43 @@ namespace FileListView.ViewModels
                         }
                     }
 
-                    FSItemViewModel info = new FSItemViewModel(f.FullName, FSItemType.File, f.Name);
+                    var info = new LVItemViewModel(f.FullName,
+                                                   FSItemType.File, f.Name, showIcons);
 
-                    if (this.ShowIcons == false)
-                        info.SetDisplayIcon(dummy);  // to prevent the icon from being loaded from file later
-
-                    this.CurrentItems.Add(info);
+                    CurrentItemAdd(info);
                 }
+
+                return true;
             }
             catch
             {
             }
 
-            // reset column width manually (otherwise it is not updated)
-            ////this.mFileListView.TheGVColumn.Width = this.mFileListView.TheGVColumn.ActualWidth;
-            ////this.mFileListView.TheGVColumn.Width = double.NaN;
+            return false;
+        }
+
+        /// <summary>
+        /// Clears the collection of current file/folder items and makes sure
+        /// the operation is performed on the dispatcher thread.
+        /// </summary>
+        private void CurrentItemClear()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _CurrentItems.Clear();
+            });
+        }
+
+        /// <summary>
+        /// Adds another item into the collection of file/folder items
+        /// and ensures the operation is performed on the dispatcher thread.
+        /// </summary>
+        private void CurrentItemAdd(LVItemViewModel item)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _CurrentItems.Add(item);
+            });
         }
 
         private void ToggleIsFolderVisible_Executed()
@@ -959,30 +983,6 @@ namespace FileListView.ViewModels
             this.PopulateView();
         }
 
-        private void RecentFolderRemove_Executed(object param)
-        {
-            var item = param as FSItemViewModel;
-
-            if (item == null)
-                return;
-
-            if (this.RequestEditRecentFolder != null)
-                this.RequestEditRecentFolder(this, new RecentFolderEvent(item.GetModel,
-                                                                         RecentFolderEvent.RecentFolderAction.Remove));
-        }
-
-        private void RecentFolderAdd_Executed(object param)
-        {
-            var item = param as FSItemViewModel;
-
-            if (item == null)
-                return;
-
-            if (this.RequestEditRecentFolder != null)
-                this.RequestEditRecentFolder(this, new RecentFolderEvent(item.GetModel,
-                                                                         RecentFolderEvent.RecentFolderAction.Add));
-        }
-
         /// <summary>
         /// Create a new folder underneath the given parent folder. This method creates
         /// the folder with a standard name (eg 'New folder n') on disk and selects it
@@ -996,7 +996,7 @@ namespace FileListView.ViewModels
             if (parentFolder == null)
                 return;
 
-            FSItemViewModel newSubFolder = this.CreateNewDirectory(parentFolder);
+            LVItemViewModel newSubFolder = this.CreateNewDirectory(parentFolder);
 
             if (newSubFolder != null)
             {
@@ -1014,19 +1014,20 @@ namespace FileListView.ViewModels
         /// Creates a new folder with a standard name (eg: 'New folder n').
         /// </summary>
         /// <returns></returns>
-        private FSItemViewModel CreateNewDirectory(string parentFolder)
+        private LVItemViewModel CreateNewDirectory(string parentFolder)
         {
             Logger.DebugFormat("CreateNewDirectory method with '{0}'", parentFolder);
 
             try
             {
-                var newSubFolder = PathModel.CreateDir(new PathModel(parentFolder, FSItemType.Folder));
+                var model = PathFactory.Create(parentFolder, FSItemType.Folder);
+                var newSubFolder = PathFactory.CreateDir(model);
 
                 if (newSubFolder != null)
                 {
-                    var newFolderVM = new FSItemViewModel(newSubFolder.Path, newSubFolder.PathType, newSubFolder.Name);
+                    var newFolderVM = new LVItemViewModel(newSubFolder.Path, newSubFolder.PathType, newSubFolder.Name);
 
-                    this.CurrentItems.Add(newFolderVM);
+                    _CurrentItems.Add(newFolderVM);
 
                     return newFolderVM;
                 }

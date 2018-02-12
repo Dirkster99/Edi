@@ -9,9 +9,9 @@ using System.Windows;
 [assembly: AssemblyTitle("FolderBrowser")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Schlumberger")]
+[assembly: AssemblyCompany("Open Source")]
 [assembly: AssemblyProduct("FolderBrowser")]
-[assembly: AssemblyCopyright("Copyright © Schlumberger 2010")]
+[assembly: AssemblyCopyright("Copyright © 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -21,7 +21,7 @@ using System.Windows;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8b07f117-7076-4cb8-b2f5-a5779d8f961f")]
+[assembly: Guid("bb99c5a6-261d-43ee-ae71-e1bd8ed6c9ec")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -38,9 +38,8 @@ using System.Windows;
 
 [assembly: ThemeInfo(
     ResourceDictionaryLocation.None, // where theme specific resource dictionaries are located
-  // (used if a resource is not found in the page, 
-  // or application resource dictionaries)
+    // (used if a resource is not found in the page, or application resource dictionaries)
     ResourceDictionaryLocation.SourceAssembly // where the generic resource dictionary is located
-  // (used if a resource is not found in the page, 
-  // app, or any theme specific resource dictionaries)
-)]
+    // (used if a resource is not found in the page, 
+    // app, or any theme specific resource dictionaries)
+)] 

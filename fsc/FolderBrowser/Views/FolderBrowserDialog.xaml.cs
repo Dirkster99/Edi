@@ -1,29 +1,45 @@
 ﻿namespace FolderBrowser.Views
 {
-  using System.Windows;
-  using System.Windows.Input;
-  using FolderBrowser.ViewModels;
+    using FolderBrowser.Dialogs.ViewModels;
+    using System.Windows;
 
-  /// <summary>
-  /// Interaction logic for FolderBrowserDialog.xaml
-  /// </summary>
-  public partial class FolderBrowserDialog : Window
-  {
-    #region constructor
     /// <summary>
-    /// Standard <seealso cref="FolderBrowserDialog"/> constructor
+    /// Interaction logic for FolderBrowserDialog.xaml
     /// </summary>
-    public FolderBrowserDialog()
+    public partial class FolderBrowserDialog : Window
     {
-      this.InitializeComponent();
-    }
-    #endregion constructor
+        #region constructor
+        /// <summary>
+        /// Standard <seealso cref="FolderBrowserDialog"/> constructor
+        /// </summary>
+        public FolderBrowserDialog()
+        {
+            InitializeComponent();
 
-    #region methods
-    private void Ok_Click(object sender, RoutedEventArgs e)
-    {
-      this.DialogResult = true;
+            Closing += FolderBrowserDialog_Closing;
+        }
+
+        private void FolderBrowserDialog_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // Make sure that dialog cannot be closed while task is being processed...
+            var dlg = DataContext as DialogViewModel;
+
+            if (dlg == null)
+                return;
+
+            if (dlg.TreeBrowser != null)
+            {
+                if (dlg.TreeBrowser.IsBrowsing == true)
+                    e.Cancel = true;
+            }
+        }
+        #endregion constructor
+
+        #region methods
+        private void Ok_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+        }
+        #endregion methods
     }
-    #endregion methods
-  }
 }
