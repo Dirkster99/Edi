@@ -7,6 +7,7 @@
     /// The Viewmodel for filter item displayed in list of filters
     /// </summary>
     [Serializable]
+    [XmlRoot(ElementName = "CurrentFilter", IsNullable = true)]
     public class FilterItemModel : IComparable
     {
         #region fields

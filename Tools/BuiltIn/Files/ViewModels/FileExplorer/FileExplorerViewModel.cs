@@ -677,12 +677,9 @@ namespace Files.ViewModels.FileExplorer
             await SlowStuffSemaphore.WaitAsync();
             try
             {
-                lock (_LockObject)
-                {
-                    TreeBrowser.SetExternalBrowsingState(true);
-                    FolderItemsView.SetExternalBrowsingState(true);
-                    FolderTextPath.SetExternalBrowsingState(true);
-                }
+                TreeBrowser.SetExternalBrowsingState(true);
+                FolderItemsView.SetExternalBrowsingState(true);
+                FolderTextPath.SetExternalBrowsingState(true);
 
                 bool? browseResult = null;
 

@@ -3,6 +3,8 @@
     using FileSystemModels.Interfaces;
     using FileSystemModels.Models.FSItems.Base;
     using System;
+    using System.Xml;
+    using System.Xml.Schema;
     using System.Xml.Serialization;
 
     /// <summary>
@@ -13,7 +15,7 @@
     /// </summary>
     [Serializable]
     [XmlRoot(ElementName = "ExplorerUserProfile", IsNullable = true)]
-    public class ExplorerUserProfile
+    public class ExplorerUserProfile : IXmlSerializable
     {
         #region constructor
         /// <summary>
@@ -32,7 +34,6 @@
         /// Use this property to save/re-restore data when the application
         /// starts or shutsdown.
         /// </summary>
-        [XmlElement(ElementName = "CurrentPath")]
         public IPathModel CurrentPath { get; set; }
 
         /// <summary>
@@ -40,7 +41,6 @@
         /// Use this property to save/re-restore data when the application
         /// starts or shutsdown.
         /// </summary>
-        [XmlElement(ElementName = "CurrentFilter")]
         public FilterItemModel CurrentFilter { get; set; }
         #endregion properties
 
@@ -53,6 +53,54 @@
         {
             this.CurrentPath = PathFactory.Create(path, FSItemType.Folder);
         }
+
+        #region IXmlSerializable
+        public XmlSchema GetSchema()
+        {
+            return null;
+        }
+
+        public void ReadXml(XmlReader reader)
+        {
+            reader.ReadStartElement();
+
+            while (reader.NodeType == System.Xml.XmlNodeType.Whitespace)
+                reader.Read();
+
+            if (reader.NodeType != System.Xml.XmlNodeType.EndElement)
+            {
+                try
+                {
+                    var path = reader.GetAttribute("Path");
+                    CurrentPath = PathFactory.Create(path);
+                }
+                catch
+                {
+                    CurrentPath = PathFactory.Create("C:\\");
+                }
+            }
+
+            reader.ReadStartElement("CurrentPath");
+
+            while (reader.NodeType == System.Xml.XmlNodeType.Whitespace)
+                reader.Read();
+
+            // Read current filter settings
+            var deserializer = new XmlSerializer(typeof(FilterItemModel));
+            CurrentFilter = (FilterItemModel)deserializer.Deserialize(reader);
+        }
+
+        public void WriteXml(XmlWriter writer)
+        {
+            writer.WriteStartElement("CurrentPath");
+            writer.WriteAttributeString("Path", CurrentPath.Path);
+            writer.WriteEndElement();
+
+            // Write current filter settings
+            var serializer = new XmlSerializer(typeof(FilterItemModel));
+            serializer.Serialize(writer, CurrentFilter);
+        }
+        #endregion IXmlSerializable
         #endregion methods
     }
 }
