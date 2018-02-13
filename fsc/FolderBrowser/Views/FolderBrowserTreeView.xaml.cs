@@ -34,6 +34,9 @@ namespace FolderBrowser.Views
 
             if (vm != null)
             {
+                if (string.IsNullOrEmpty(vm.InitialPath) == true)
+                    return;
+
                 IPathModel location = null;
                 try
                 {

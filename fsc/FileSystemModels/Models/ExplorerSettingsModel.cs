@@ -71,7 +71,7 @@
                 return this.mUserProfile;
             }
 
-            set
+            private set
             {
                 this.mUserProfile = value;
             }
@@ -270,6 +270,15 @@
         }
 
         /// <summary>
+        /// Sets the session data for this settings object.
+        /// </summary>
+        /// <param name="profile"></param>
+        public void SetUserProfile(ExplorerUserProfile profile)
+        {
+            UserProfile = profile;
+        }
+
+        /// <summary>
         /// Creates a default collection of special folders (Desktop, MyDocuments, MyMusic, MyVideos).
         /// </summary>
         public List<CustomFolderItemModel> CreateSpecialFolderCollection()
@@ -336,7 +345,7 @@
             this.mFilterCollection.Add(newFilter);
 
             if (bSelectNewFilter == true && this.mUserProfile != null)
-                this.mUserProfile.CurrentFilter = newFilter;
+                this.mUserProfile.SetCurrentFilter(newFilter);
         }
 
         /// <summary>
@@ -347,7 +356,7 @@
         {
             this.ShowFolders = this.ShowHiddenFiles = this.ShowIcons = true;
             this.IsFiltered = false;
-            this.UserProfile.CurrentFilter = new FilterItemModel("Text files", "*.txt");
+            this.UserProfile.SetCurrentFilter(new FilterItemModel("Text files", "*.txt"));
 
             this.LastSelectedRecentFolder = @"C:\temp\";
 
@@ -387,7 +396,6 @@
             this.AddFilter("VTL", "*.vtl;*.vm");
             this.AddFilter("All Files", "*.*");
         }
-
         #endregion methods
     }
 }

@@ -250,7 +250,10 @@
         /// <returns>true if directory otherwise false</returns>
         bool IBrowseNavigation.IsCurrentPathDirectory()
         {
-            return (this.CurrentFolder.DirectoryPathExists());
+            if (CurrentFolder != null)
+                return (CurrentFolder.DirectoryPathExists());
+
+            return false;
         }
 
         /// <summary>

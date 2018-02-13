@@ -135,7 +135,9 @@ namespace FilterControlsLib.ViewModels
             get
             {
                 if (this._SelectionChanged == null)
-                    this._SelectionChanged = new RelayCommand<object>((p) => this.SelectionChanged_Executed(p));
+                    this._SelectionChanged = new RelayCommand<object>(
+                        (p) => this.SelectionChanged_Executed(p));
+
 
                 return this._SelectionChanged;
             }
@@ -234,14 +236,19 @@ namespace FilterControlsLib.ViewModels
 
             if (similarFilter != null)
             {
-                var firstElement = similarFilter.First();
-
-                if (firstElement != null)
+                try
                 {
-                    // we found this filter item aleady -> make this the currently selected item
-                    this.SelectedItem = firstElement;
+                    var firstElement = similarFilter.First();
 
-                    return;
+                    if (firstElement != null)
+                    {
+                        // we found this filter item aleady -> make this the currently selected item
+                        this.SelectedItem = firstElement;
+                        return;
+                    }
+                }
+                catch
+                {
                 }
             }
 
@@ -275,6 +282,8 @@ namespace FilterControlsLib.ViewModels
 
                     if (item != null)
                     {
+                        SelectedItem = item;
+
                         if (this.OnFilterChanged != null)
                             this.OnFilterChanged(this, new FilterChangedEventArgs() { FilterText = item.FilterText });
                     }
@@ -285,6 +294,24 @@ namespace FilterControlsLib.ViewModels
             var paramString = p as string;
             if (paramString != null)
             {
+                // Search for filterstring in items collection and select it or
+                // create a new item and select it
+                IFilterItemViewModel selectedItem = null;
+                foreach (var item in CurrentItems)
+                {
+                    if (item.FilterText == paramString)
+                    {
+                        selectedItem = item;
+                        break;
+                    }
+                }
+
+                // Item not found -> lets create a new one then ...
+                if (selectedItem != null)
+                    SelectedItem = selectedItem;
+                else
+                    AddFilter(paramString, true);
+
                 if (this.OnFilterChanged != null)
                     this.OnFilterChanged(this, new FilterChangedEventArgs() { FilterText = paramString });
             }

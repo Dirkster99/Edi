@@ -7,7 +7,6 @@ namespace Files.ViewModels.FileExplorer
     using Edi.Core.Interfaces;
     using Edi.Core.Interfaces.Enums;
     using Edi.Core.ViewModels;
-    using FileListView.Interfaces;
     using FileSystemModels.Interfaces;
     using FileSystemModels.Models;
     using FolderBrowser.Interfaces;
@@ -15,20 +14,16 @@ namespace Files.ViewModels.FileExplorer
     using Edi.Core.ViewModels.Command;
     using FileSystemModels;
     using System.Threading;
-    using FileSystemModels.Interfaces.Bookmark;
-    using FolderControlsLib.Interfaces;
-    using FilterControlsLib.Interfaces;
     using FileSystemModels.Browse;
     using System.Threading.Tasks;
-    using FileSystemModels.Events;
 
     /// <summary>
     /// This class can be used to present file based information, such as,
     /// Size, Path etc to the user.
     /// </summary>
-    public class FileExplorerViewModel : Edi.Core.ViewModels.ToolViewModel,
+    public class FileExplorerViewModel : ControllerBaseViewModel,
 										 IRegisterableToolWindow,
-										 IExplorer,
+                                         IExplorer,
                                          ITreeListControllerViewModel
     {
 		#region fields
@@ -45,6 +40,8 @@ namespace Files.ViewModels.FileExplorer
 
         private readonly SemaphoreSlim SlowStuffSemaphore;
         private readonly object _LockObject;
+        private readonly string _InitialPath;
+
         private string _SelectedFolder = string.Empty;
         #endregion fields
 
@@ -108,83 +105,25 @@ namespace Files.ViewModels.FileExplorer
 				settings = new ExplorerSettingsModel();
 
 			if (programSettings.SessionData.LastActiveExplorer != null)
-				settings.UserProfile = programSettings.SessionData.LastActiveExplorer;
+				settings.SetUserProfile(programSettings.SessionData.LastActiveExplorer);
 			else
 				settings.UserProfile.SetCurrentPath(@"C:");
 
-			this.ConfigureExplorerSettings(settings);
-			this.mFileOpenMethod = this.mFileOpenService.FileOpen;
+            if (settings.UserProfile.CurrentPath != null)
+                _InitialPath = settings.UserProfile.CurrentPath.Path;
+
+
+            ////			this.ConfigureExplorerSettings(settings);
+            this.mFileOpenMethod = this.mFileOpenService.FileOpen;
 		}
         #endregion constructor
 
         #region properties
         /// <summary>
-        /// Gets the viewmodel that exposes recently visited locations (bookmarked folders).
-        /// </summary>
-        public IBookmarksViewModel RecentFolders { get; }
-
-        /// <summary>
-        /// Expose a viewmodel that can represent a Folder-ComboBox drop down
-        /// element similar to a web browser Uri drop down control but using
-        /// local paths only.
-        /// </summary>
-        public IFolderComboBoxViewModel FolderTextPath { get; }
-
-        /// <summary>
-        /// Expose a viewmodel that can represent a Filter-ComboBox drop down
-        /// similar to the top-right filter/search combo box in Windows Exploer windows.
-        /// </summary>
-        public IFilterComboBoxViewModel Filters { get; }
-
-        /// <summary>
-        /// Expose a viewmodel that can support a listview showing folders and files
-        /// with their system specific icon.
-        /// </summary>
-        public IFileListViewModel FolderItemsView { get; }
-
-        /// <summary>
         /// Gets the viewmodel that drives the folder picker control.
         /// </summary>
         public IBrowserViewModel TreeBrowser { get; }
 
-        /// <summary>
-        /// Gets the currently selected folder path string.
-        /// </summary>
-        public string SelectedFolder
-        {
-            get
-            {
-                return this._SelectedFolder;
-            }
-
-            private set
-            {
-                if (this._SelectedFolder != value)
-                {
-                    this._SelectedFolder = value;
-                    base.RaisePropertyChanged(() => this.SelectedFolder);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets the currently selected recent location string (if any) or null.
-        /// </summary>
-        public string SelectedRecentLocation
-        {
-            get
-            {
-                if (this.RecentFolders != null)
-                {
-                    if (this.RecentFolders.SelectedItem != null)
-                        return this.RecentFolders.SelectedItem.FullPath;
-                }
-
-                return null;
-            }
-        }
-
-        #region FileName
         public string FileName
 		{
 			get
@@ -202,9 +141,7 @@ namespace Files.ViewModels.FileExplorer
 				}
 			}
 		}
-		#endregion
 
-		#region FilePath
 		public string FilePath
 		{
 			get
@@ -222,17 +159,17 @@ namespace Files.ViewModels.FileExplorer
 				}
 			}
 		}
-		#endregion
 
-		#region ToolWindow Icon
-		public override Uri IconSource
+        /// <summary>
+        /// ToolWindow Icon
+        /// </summary>
+        public override Uri IconSource
 		{
 			get
 			{
 				return new Uri("pack://application:,,,/FileListView;component/Images/Generic/Folder/folderopened_yellow_16.png", UriKind.RelativeOrAbsolute);
 			}
 		}
-		#endregion ToolWindow Icon
 
 		#region Commands
 		/// <summary>
@@ -280,7 +217,7 @@ namespace Files.ViewModels.FileExplorer
 			else
 				settingsManager.SessionData.LastActiveExplorer = vm.GetExplorerSettings(null).UserProfile;
 		}
-
+/***
 		/// <summary>
 		/// Load Explorer (Tool Window) seetings from persistence.
 		/// </summary>
@@ -296,12 +233,12 @@ namespace Files.ViewModels.FileExplorer
 			if (settings == null)
 				settings = new ExplorerSettingsModel();
 
-			settings.UserProfile = settingsManager.SessionData.LastActiveExplorer;
+			settings.SetUserProfile(settingsManager.SessionData.LastActiveExplorer);
 
 			// (re-)configure previous explorer settings and (re-)activate current location
 			vm.ConfigureExplorerSettings(settings);
 		}
-
+***/
 		#region IRegisterableToolWindow
 		/// <summary>
 		/// Set the document parent handling object to deactivation and activation
@@ -373,7 +310,7 @@ namespace Files.ViewModels.FileExplorer
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		public void FolderItemsView_OnFileOpen(object sender, FileSystemModels.Events.FileOpenEventArgs e)
+		protected override void FolderItemsView_OnFileOpen(object sender, FileSystemModels.Events.FileOpenEventArgs e)
 		{
 			if (this.mFileOpenMethod != null)
 				this.mFileOpenMethod(e.FileName);
@@ -414,132 +351,9 @@ namespace Files.ViewModels.FileExplorer
 			NavigateToFolder(this.mFilePathName);
 		}
 
-        // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-        #region Explorer settings model
-        /// <summary>
-        /// Configure this viewmodel (+ attached browser viewmodel) with the given settings and
-        /// initialize viewmodels with UserProfile.CurrentPath location.
-        /// </summary>
-        /// <param name="settings"></param>
-        /// <returns></returns>
-        public bool ConfigureExplorerSettings(ExplorerSettingsModel settings)
-        {
-            if (settings == null)
-                return false;
-
-            if (settings.UserProfile == null)
-                return false;
-
-            if (settings.UserProfile.CurrentPath == null)
-                return false;
-
-            try
-            {
-                // Set currently viewed folder in Explorer Tool Window
-                var t = new Task(async () =>
-                {
-                    await this.NavigateToFolderAsync(settings.UserProfile.CurrentPath, null);
-                });
-
-                t.RunSynchronously();
-            }
-            catch
-            {
-                NavigateToFolder(@"C:\\");
-            }
-
-            try
-            {
-                this.Filters.ClearFilter();
-
-                // Set file filter in file/folder list view
-                foreach (var item in settings.FilterCollection)
-                    this.Filters.AddFilter(item.FilterDisplayName, item.FilterText);
-
-                // Add a current filter setting (if any is available)
-                if (settings.UserProfile.CurrentFilter != null)
-                {
-                    this.Filters.SetCurrentFilter(settings.UserProfile.CurrentFilter.FilterDisplayName,
-                                                  settings.UserProfile.CurrentFilter.FilterText);
-                }
-
-                this.RecentFolders.ClearFolderCollection();
-
-                // Set collection of recent folder locations
-                foreach (var item in settings.RecentFolders)
-                    this.RecentFolders.AddFolder(item);
-
-                this.FolderItemsView.SetShowIcons(settings.ShowIcons);
-                this.FolderItemsView.SetIsFolderVisible(settings.ShowFolders);
-                this.FolderItemsView.SetShowHidden(settings.ShowHiddenFiles);
-                this.FolderItemsView.SetIsFiltered(settings.IsFiltered);
-            }
-            catch
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// Compare given <paramref name="input"/> settings with current settings
-        /// and return a new settings model if the current settings
-        /// changed in comparison to the given <paramref name="input"/> settings.
-        /// 
-        /// Always return current settings if <paramref name="input"/> settings is null.
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public ExplorerSettingsModel GetExplorerSettings(ExplorerSettingsModel input)
-        {
-            var settings = new ExplorerSettingsModel();
-
-            try
-            {
-                settings.UserProfile.SetCurrentPath(this.SelectedFolder);
-
-                foreach (var item in settings.FilterCollection)
-                {
-                    if (item == settings.UserProfile.CurrentFilter)
-                        this.AddFilter(item.FilterDisplayName, item.FilterText, true);
-                    else
-                        this.AddFilter(item.FilterDisplayName, item.FilterText);
-                }
-
-                foreach (var item in this.Filters.CurrentItems)
-                {
-                    if (item == this.Filters.SelectedItem)
-                        settings.AddFilter(item.FilterDisplayName, item.FilterText, true);
-                    else
-                        settings.AddFilter(item.FilterDisplayName, item.FilterText);
-                }
-
-                foreach (var item in this.RecentFolders.DropDownItems)
-                    settings.AddRecentFolder(item.FullPath);
-
-                if (string.IsNullOrEmpty(this.SelectedRecentLocation) == false)
-                {
-                    settings.LastSelectedRecentFolder = this.SelectedRecentLocation;
-                    settings.AddRecentFolder(this.SelectedRecentLocation);
-                }
-
-                settings.ShowIcons = this.FolderItemsView.ShowIcons;
-                settings.ShowFolders = this.FolderItemsView.ShowFolders;
-                settings.ShowHiddenFiles = this.FolderItemsView.ShowHidden;
-                settings.IsFiltered = this.FolderItemsView.IsFiltered;
-
-                if (ExplorerSettingsModel.CompareSettings(input, settings) == false)
-                    return settings;
-                else
-                    return null;
-            }
-            catch
-            {
-                throw;
-            }
-        }
-        #endregion Explorer settings model
+        // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
         /// <summary>
         /// Master controller interface method to navigate all views
@@ -548,120 +362,10 @@ namespace Files.ViewModels.FileExplorer
         /// </summary>
         /// <param name="itemPath"></param>
         /// <param name="requestor"</param>
-        public void NavigateToFolder(IPathModel itemPath)
+        public override async void NavigateToFolder(IPathModel itemPath)
         {
             // XXX Todo Keep task reference, support cancel, and remove on end?
-            var t = NavigateToFolderAsync(itemPath, null);
-        }
-
-        #region Bookmarked Folders Methods
-        /// <summary>
-        /// Add a recent folder location into the collection of recent folders.
-        /// This collection can then be used in the folder combobox drop down
-        /// list to store user specific customized folder short-cuts.
-        /// </summary>
-        /// <param name="folderPath"></param>
-        /// <param name="selectNewFolder"></param>
-        public void AddRecentFolder(string folderPath, bool selectNewFolder = false)
-        {
-            this.RecentFolders.AddFolder(folderPath, selectNewFolder);
-        }
-
-        /// <summary>
-        /// Removes a recent folder location into the collection of recent folders.
-        /// This collection can then be used in the folder combobox drop down
-        /// list to store user specific customized folder short-cuts.
-        /// </summary>
-        /// <param name="path"></param>
-        public void RemoveRecentFolder(string path)
-        {
-            if (string.IsNullOrEmpty(path) == true)
-                return;
-
-            this.RecentFolders.RemoveFolder(path);
-        }
-
-        /// <summary>
-        /// Copies all of the given bookmars into the destionations bookmarks collection.
-        /// </summary>
-        /// <param name="srcRecentFolders"></param>
-        /// <param name="dstRecentFolders"></param>
-        public void CloneBookmarks(IBookmarksViewModel srcRecentFolders,
-                                   IBookmarksViewModel dstRecentFolders)
-        {
-            if (srcRecentFolders == null || dstRecentFolders == null)
-                return;
-
-            dstRecentFolders.ClearFolderCollection();
-
-            // Set collection of recent folder locations
-            foreach (var item in srcRecentFolders.DropDownItems)
-                dstRecentFolders.AddFolder(item.FullPath);
-        }
-        #endregion Bookmarked Folders Methods
-
-        #region Change filter methods
-        /// <summary>
-        /// Add a new filter argument to the list of filters and
-        /// select this filter if <paramref name="bSelectNewFilter"/>
-        /// indicates it.
-        /// </summary>
-        /// <param name="filterString"></param>
-        /// <param name="bSelectNewFilter"></param>
-        public void AddFilter(string filterString,
-                              bool bSelectNewFilter = false)
-        {
-            this.Filters.AddFilter(filterString, bSelectNewFilter);
-        }
-
-        /// <summary>
-        /// Add a new filter argument to the list of filters and
-        /// select this filter if <paramref name="bSelectNewFilter"/>
-        /// indicates it.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="filterString"></param>
-        /// <param name="bSelectNewFilter"></param>
-        public void AddFilter(string name, string filterString,
-                              bool bSelectNewFilter = false)
-        {
-            this.Filters.AddFilter(name, filterString, bSelectNewFilter);
-        }
-        #endregion Change filter methods
-
-        /// <summary>
-        /// Applies the file/directory filter from the combobox on the listview entries.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FileViewFilter_Changed(object sender, FileSystemModels.Events.FilterChangedEventArgs e)
-        {
-            this.FolderItemsView.ApplyFilter(e.FilterText);
-        }
-
-        /// <summary>
-        /// The list view of folders and files requests to add or remove a folder
-        /// to/from the collection of recent folders.
-        /// -> Forward event to <seealso cref="FolderComboBoxViewModel"/> who manages
-        /// the actual list of recent folders.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FolderItemsView_RequestEditBookmarkedFolders(object sender, EditBookmarkEvent e)
-        {
-            switch (e.Action)
-            {
-                case EditBookmarkEvent.RecentFolderAction.Remove:
-                    this.RecentFolders.RemoveFolder(e.Folder);
-                    break;
-
-                case EditBookmarkEvent.RecentFolderAction.Add:
-                    this.RecentFolders.AddFolder(e.Folder.Path);
-                    break;
-
-                default:
-                    break;
-            }
+            await NavigateToFolderAsync(itemPath, null);
         }
 
         /// <summary>
@@ -744,6 +448,26 @@ namespace Files.ViewModels.FileExplorer
                     if (FolderItemsView != sender)
                         FolderItemsView.SetExternalBrowsingState(true);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Initialize Explorer ViewModel as soon as view is loaded.
+        /// This is required for virtualized controls, such as, treeviews
+        /// since they won't synchronize with the viewmodel, otherwise.
+        /// </summary>
+        internal void InitialzeOnLoad()
+        {
+            try
+            {
+                if (_InitialPath != null)
+                    NavigateToFolder(_InitialPath);
+                else
+                    NavigateToFolder(@"C:\");
+            }
+            catch
+            {
+                NavigateToFolder(@"C:\");
             }
         }
         #endregion methods

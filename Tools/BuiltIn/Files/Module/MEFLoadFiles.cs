@@ -87,7 +87,7 @@
 			if (settings == null)
 				settings = new ExplorerSettingsModel();
 
-			settings.UserProfile = programSettings.SessionData.LastActiveExplorer;
+			settings.SetUserProfile(programSettings.SessionData.LastActiveExplorer);
 
 			// (re-)configure previous explorer settings and (re-)activate current location
 			FileExplorer.ConfigureExplorerSettings(settings);

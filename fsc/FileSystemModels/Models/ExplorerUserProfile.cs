@@ -13,7 +13,6 @@
     /// settings that change in every session and are therefore stored and
     /// retrieved on EACH application start and shut-down.
     /// </summary>
-    [Serializable]
     [XmlRoot(ElementName = "ExplorerUserProfile", IsNullable = true)]
     public class ExplorerUserProfile : IXmlSerializable
     {
@@ -30,18 +29,18 @@
 
         #region properties
         /// <summary>
-        /// Gets/sets the currently viewed path.
+        /// Gets the currently viewed path.
         /// Use this property to save/re-restore data when the application
         /// starts or shutsdown.
         /// </summary>
-        public IPathModel CurrentPath { get; set; }
+        public IPathModel CurrentPath { get; private set; }
 
         /// <summary>
-        /// Sets the currently viewed path.
+        /// Gets the currently set filter.
         /// Use this property to save/re-restore data when the application
         /// starts or shutsdown.
         /// </summary>
-        public FilterItemModel CurrentFilter { get; set; }
+        public FilterItemModel CurrentFilter { get; private set; }
         #endregion properties
 
         #region methods
@@ -51,15 +50,32 @@
         /// <param name="path"></param>
         public void SetCurrentPath(string path)
         {
-            this.CurrentPath = PathFactory.Create(path, FSItemType.Folder);
+            CurrentPath = PathFactory.Create(path, FSItemType.Folder);
+        }
+
+        /// <summary>
+        /// Resets the currently viewed path to the path indicated by <paramref name="path"/>.
+        /// </summary>
+        /// <param name="path"></param>
+        public void SetCurrentFilter(FilterItemModel model)
+        {
+            CurrentFilter = model;
         }
 
         #region IXmlSerializable
+        /// <summary>
+        /// Standard method of the <see cref="IXmlSerializable"/> interface.
+        /// </summary>
+        /// <returns></returns>
         public XmlSchema GetSchema()
         {
             return null;
         }
 
+        /// <summary>
+        /// Standard method of the <see cref="IXmlSerializable"/> interface.
+        /// </summary>
+        /// <returns></returns>
         public void ReadXml(XmlReader reader)
         {
             reader.ReadStartElement();
@@ -90,6 +106,10 @@
             CurrentFilter = (FilterItemModel)deserializer.Deserialize(reader);
         }
 
+        /// <summary>
+        /// Standard method of the <see cref="IXmlSerializable"/> interface.
+        /// </summary>
+        /// <returns></returns>
         public void WriteXml(XmlWriter writer)
         {
             writer.WriteStartElement("CurrentPath");

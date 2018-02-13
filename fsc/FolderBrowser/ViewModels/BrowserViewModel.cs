@@ -344,10 +344,24 @@
                 {
                     _SelectedFolderChangedCommand = new RelayCommand<object>((p) =>
                     {
+                        if (IsBrowsing == true)  // ignore it since the viewmodel is the driver
+                          return;
+                      
                         var param = p as ITreeItemViewModel;
 
                         if (param != null)
                         {
+                            // Did selection really change? => Use refresh to re-query same element
+                            if (SelectedItem == null && param == null)
+                              return;
+                            
+                            if (SelectedItem != null && param != null)
+                            {
+                              if(object.Equals(SelectedItem, param) == true)
+                                return;
+                            }
+                            
+                          
                             SelectedItem = param;
 
                             try

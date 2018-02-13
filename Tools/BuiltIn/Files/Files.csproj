@@ -118,6 +118,7 @@
   <ItemGroup>
     <Compile Include="Module\MEFLoadFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\FileExplorer\ControllerBaseViewModel.cs" />
     <Compile Include="ViewModels\FileExplorer\FileExplorerViewModel.cs" />
     <Compile Include="ViewModels\FileExplorer\ITreeListControllerViewModel.cs" />
     <Compile Include="ViewModels\FileStats\FileStatsViewModel.cs" />
