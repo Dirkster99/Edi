@@ -358,10 +358,10 @@
             this.IsFiltered = false;
             this.UserProfile.SetCurrentFilter(new FilterItemModel("Text files", "*.txt"));
 
-            this.LastSelectedRecentFolder = @"C:\temp\";
+            this.LastSelectedRecentFolder = @"C:\";
 
-            this.AddRecentFolder(@"C:\temp\");
-            this.AddRecentFolder(@"C:\windows\");
+            this.AddRecentFolder(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+            this.AddRecentFolder(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
 
             this.AddFilter("XML", "*.aml;*.xml;*.xsl;*.xslt;*.xsd;*.config;*.addin;*.wxs;*.wxi;*.wxl;*.build;*.xfrm;*.targets;*.xpt;*.xft;*.map;*.wsdl;*.disco;*.ps1xml;*.nuspec");
             this.AddFilter("C#", "*.cs;*.manifest;*.resx;*.xaml");

@@ -75,7 +75,7 @@
 		}
 
 		private static void RegisterFileExplorerViewModel(ISettingsManager programSettings,
-                                                        IToolWindowRegistry toolRegistry
+                                                          IToolWindowRegistry toolRegistry
                                                         , IFileOpenService fileOpenService)
 		{
 			var FileExplorer = new FileExplorerViewModel(programSettings, fileOpenService);
