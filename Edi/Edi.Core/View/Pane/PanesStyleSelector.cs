@@ -1,15 +1,14 @@
 ﻿namespace Edi.Core.View.Pane
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Windows;
-	using System.Windows.Controls;
-	using System.ComponentModel.Composition;
+    using System;
+    using System.Collections.Generic;
+    using System.Windows;
+    using System.Windows.Controls;
 
-	/// <summary>
-	/// Select a tool window style for an instance of its view.
-	/// </summary>
-	public class PanesStyleSelector : StyleSelector
+    /// <summary>
+    /// Select a tool window style for an instance of its view.
+    /// </summary>
+    public class PanesStyleSelector : StyleSelector
 	{
 		#region fields
 		private Dictionary<Type, Style> mStyleDirectory = null;
@@ -47,20 +46,33 @@
 			if (o != null)
 				return o;
 
-			// Get next base of the current type in inheritance tree
-			Type t1 = item.GetType().BaseType;
+            // Get next base of the current type in inheritance tree
+            ////        Type t1 = item.GetType().BaseType;
 
-			// Traverse backwards in the inheritance chain to find a mapping there
-			while (t1 != t && t != null)
-			{
-				t = t1;
-				this.mStyleDirectory.TryGetValue(t, out o);
+            // Traverse backwards in the inheritance chain to find a mapping there
+            ////			while (t1 != t && t != null)
+            ////			{
+            ////				t = t1;
+            ////				this.mStyleDirectory.TryGetValue(t, out o);
+            ////
+            ////				if (o != null)
+            ////					return o;
+            ////
+            ////				t1 = item.GetType().BaseType;
+            ////			}
 
-				if (o != null)
-					return o;
-
-				t1 = item.GetType().BaseType;
-			}
+            // https://stackoverflow.com/questions/8699053/how-to-check-if-a-class-inherits-another-class-without-instantiating-it
+            // Lets use .net to check up the inheritance chain to determine
+            // if we can return a style for an inheritated viewmodel instead
+            // of using the direct viewmodel <-> style association.
+            foreach (var vmItem in mStyleDirectory.Keys)
+            {
+                if (t.IsSubclassOf(vmItem) == true)
+                {
+                    mStyleDirectory.TryGetValue(vmItem, out o);
+                    return o;
+                }
+            }
 
 			return base.SelectStyle(item, container);
 		}
