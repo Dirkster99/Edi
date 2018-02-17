@@ -35,9 +35,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		
 		public CallbackOnDispose(Action action)
 		{
-			if (action == null)
-				throw new ArgumentNullException("action");
-			this.action = action;
+            this.action = action ?? throw new ArgumentNullException(nameof(action));
 		}
 		
 		public void Dispose()
@@ -71,11 +69,9 @@ namespace ICSharpCode.AvalonEdit.Utils
 				this.objectList = objectList;
 			}
 			
-			public bool Success {
-				get { return objectList != null; }
-			}
-			
-			public void Dispose()
+			public bool Success => objectList != null;
+
+		    public void Dispose()
 			{
 				if (objectList != null) {
 					objectList.RemoveAt(objectList.Count - 1);

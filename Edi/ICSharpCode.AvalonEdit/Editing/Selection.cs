@@ -41,7 +41,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		public static Selection Create(TextArea textArea, int startOffset, int endOffset)
 		{
 			if (textArea == null)
-				throw new ArgumentNullException("textArea");
+				throw new ArgumentNullException(nameof(textArea));
 			if (startOffset == endOffset)
 				return textArea.emptySelection;
 			else
@@ -53,7 +53,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		internal static Selection Create(TextArea textArea, TextViewPosition start, TextViewPosition end)
 		{
 			if (textArea == null)
-				throw new ArgumentNullException("textArea");
+				throw new ArgumentNullException(nameof(textArea));
 			if (textArea.Document.GetOffset(start.Location) == textArea.Document.GetOffset(end.Location) && start.VisualColumn == end.VisualColumn)
 				return textArea.emptySelection;
 			else
@@ -66,7 +66,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		public static Selection Create(TextArea textArea, ISegment segment)
 		{
 			if (segment == null)
-				throw new ArgumentNullException("segment");
+				throw new ArgumentNullException(nameof(segment));
 			return Create(textArea, segment.Offset, segment.EndOffset);
 		}
 		
@@ -77,9 +77,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		/// </summary>
 		protected Selection(TextArea textArea)
 		{
-			if (textArea == null)
-				throw new ArgumentNullException("textArea");
-			this.textArea = textArea;
+            this.textArea = textArea ?? throw new ArgumentNullException(nameof(textArea));
 		}
 		
 		/// <summary>
@@ -150,11 +148,9 @@ namespace ICSharpCode.AvalonEdit.Editing
 		/// <summary>
 		/// Gets whether the selection is empty.
 		/// </summary>
-		public virtual bool IsEmpty {
-			get { return Length == 0; }
-		}
-		
-		/// <summary>
+		public virtual bool IsEmpty => Length == 0;
+
+	    /// <summary>
 		/// Gets whether virtual space is enabled for this selection.
 		/// </summary>
 		public virtual bool EnableVirtualSpace {
@@ -190,7 +186,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		/// </summary>
 		public virtual bool IsMultiline {
 			get {
-				ISegment surroundingSegment = this.SurroundingSegment;
+				ISegment surroundingSegment = SurroundingSegment;
 				if (surroundingSegment == null)
 					return false;
 				int start = surroundingSegment.Offset;
@@ -235,11 +231,11 @@ namespace ICSharpCode.AvalonEdit.Editing
 		public string CreateHtmlFragment(HtmlOptions options)
 		{
 			if (options == null)
-				throw new ArgumentNullException("options");
+				throw new ArgumentNullException(nameof(options));
 			IHighlighter highlighter = textArea.GetService(typeof(IHighlighter)) as IHighlighter;
 			StringBuilder html = new StringBuilder();
 			bool first = true;
-			foreach (ISegment selectedSegment in this.Segments) {
+			foreach (ISegment selectedSegment in Segments) {
 				if (first)
 					first = false;
 				else
@@ -262,10 +258,10 @@ namespace ICSharpCode.AvalonEdit.Editing
 		/// otherwise, false.</returns>
 		public virtual bool Contains(int offset)
 		{
-			if (this.IsEmpty)
+			if (IsEmpty)
 				return false;
-			if (this.SurroundingSegment.Contains(offset, 0)) {
-				foreach (ISegment s in this.Segments) {
+			if (SurroundingSegment.Contains(offset, 0)) {
+				foreach (ISegment s in Segments) {
 					if (s.Contains(offset, 0)) {
 						return true;
 					}

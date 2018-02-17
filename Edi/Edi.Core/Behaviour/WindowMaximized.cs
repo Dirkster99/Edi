@@ -38,9 +38,9 @@
 				window.StateChanged += window_StateChanged;
 
 				if (window.WindowState == WindowState.Maximized)
-					WindowMaximized.SetIsNotMaximized(window, false);
+					SetIsNotMaximized(window, false);
 				else
-					WindowMaximized.SetIsNotMaximized(window, true);
+					SetIsNotMaximized(window, true);
 			}
 		}
 
@@ -52,9 +52,9 @@
                 Window w = sender as Window;
 
                 if (w.WindowState == WindowState.Maximized)
-                    WindowMaximized.SetIsNotMaximized(w, false);
+                    SetIsNotMaximized(w, false);
                 else
-                    WindowMaximized.SetIsNotMaximized(w, true);
+                    SetIsNotMaximized(w, true);
             }
         }
 	}

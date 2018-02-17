@@ -1,7 +1,7 @@
 namespace Edi.Dialogs.About
 {
 	using System.Reflection;
-	using Edi.Core.ViewModels.Base;
+	using Core.ViewModels.Base;
 	using System.Collections.Generic;
 
 	/// <summary>
@@ -48,7 +48,7 @@ namespace Edi.Dialogs.About
 		{
 			get
 			{
-				return Edi.Util.Local.Strings.STR_ABOUT_MSG;
+				return Util.Local.Strings.STR_ABOUT_MSG;
 			}
 		}
 
@@ -135,7 +135,7 @@ namespace Edi.Dialogs.About
 
                         if (l.TryGetValue(assembly.Name, out val) == false)
                             l.Add(assembly.Name, string.Format("{0}, {1}={2}", assembly.Name,
-                                                        Edi.Util.Local.Strings.STR_ABOUT_Version,
+                                                        Util.Local.Strings.STR_ABOUT_Version,
                                                         assembly.Version));
                     }
 					catch (System.Exception)

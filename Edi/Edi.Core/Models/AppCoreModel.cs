@@ -2,7 +2,7 @@
 {
 	using System;
 	using System.ComponentModel.Composition;
-	using Edi.Core.Interfaces;
+	using Interfaces;
 
 	/// <summary>
 	/// Class maintains and helps access to core facts of this application.
@@ -141,8 +141,8 @@
 		{
 			try
 			{
-				if (System.IO.Directory.Exists(this.DirAppData) == false)
-					System.IO.Directory.CreateDirectory(this.DirAppData);
+				if (System.IO.Directory.Exists(DirAppData) == false)
+					System.IO.Directory.CreateDirectory(DirAppData);
 			}
 			catch (Exception exp)
 			{

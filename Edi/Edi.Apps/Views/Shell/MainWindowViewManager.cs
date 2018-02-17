@@ -8,44 +8,22 @@
 	public static class MainWindowViewManager
 	{
 		#region fields
-		private static MainMenu mMainMenu = null;
-		private static StatusBar mMainWindowStatusBar = null;
+		private static MainMenu mMainMenu;
+		private static StatusBar mMainWindowStatusBar;
 		#endregion fields
 
 		#region constructor
-		/// <summary>
-		/// Staic class constructor
-		/// </summary>
-		static MainWindowViewManager()
-		{
-		}
-		#endregion constructor
+
+	    #endregion constructor
 
 		#region properties
 		/// <summary>
 		/// Get the currently available main menu to be displayed in the main menu.
 		/// </summary>
-		public static MainMenu MainWindowMenu
-		{
-			get
-			{
-				if (MainWindowViewManager.mMainMenu == null)
-					MainWindowViewManager.mMainMenu = new MainMenu();
+		public static MainMenu MainWindowMenu => mMainMenu ?? (mMainMenu = new MainMenu());
 
-				return MainWindowViewManager.mMainMenu;
-			}
-		}
+	    public static StatusBar MainWindowStatusBar => mMainWindowStatusBar ?? (mMainWindowStatusBar = new StatusBar());
 
-		public static StatusBar MainWindowStatusBar
-		{
-			get
-			{
-				if (MainWindowViewManager.mMainWindowStatusBar == null)
-					MainWindowViewManager.mMainWindowStatusBar = new StatusBar();
-
-				return MainWindowViewManager.mMainWindowStatusBar;
-			}
-		}
-		#endregion properties
+	    #endregion properties
 	}
 }

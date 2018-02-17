@@ -1,9 +1,8 @@
 ﻿namespace ICSharpCode.AvalonEdit.Edi.Folding
 {
-    using System;
-    using ICSharpCode.AvalonEdit.Document;
+    using Document;
     using System.Collections.Generic;
-    using ICSharpCode.AvalonEdit.Folding;
+    using AvalonEdit.Folding;
 
 
     /// <summary>

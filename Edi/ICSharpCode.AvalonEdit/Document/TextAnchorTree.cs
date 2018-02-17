@@ -16,7 +16,6 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
@@ -316,22 +315,23 @@ namespace ICSharpCode.AvalonEdit.Document
 		{
 			TextAnchorNode n = root;
 			while (true) {
-				if (n.left != null) {
-					if (offset < n.left.totalLength) {
+				if (n.left != null)
+				{
+				    if (offset < n.left.totalLength) {
 						n = n.left; // descend into left subtree
 						continue;
-					} else {
-						offset -= n.left.totalLength; // skip left subtree
 					}
+
+				    offset -= n.left.totalLength; // skip left subtree
 				}
 				if (!n.IsAlive)
 					MarkNodeForDelete(n);
 				if (offset < n.length) {
 					return n; // found correct node
-				} else {
-					offset -= n.length; // skip this node
 				}
-				if (n.right != null) {
+
+			    offset -= n.length; // skip this node
+			    if (n.right != null) {
 					n = n.right; // descend into right subtree
 				} else {
 					// didn't find any node containing the offset
@@ -650,10 +650,9 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		static TextAnchorNode Sibling(TextAnchorNode node)
 		{
-			if (node == node.parent.left)
+		    if (node == node.parent.left)
 				return node.parent.right;
-			else
-				return node.parent.left;
+		    return node.parent.left;
 		}
 		
 		static TextAnchorNode Sibling(TextAnchorNode node, TextAnchorNode parentNode)
@@ -661,8 +660,7 @@ namespace ICSharpCode.AvalonEdit.Document
 			Debug.Assert(node == null || node.parent == parentNode);
 			if (node == parentNode.left)
 				return parentNode.right;
-			else
-				return parentNode.left;
+		    return parentNode.left;
 		}
 		
 		static bool GetColor(TextAnchorNode node)

@@ -16,9 +16,8 @@
 	{
 		#region fields
 		private readonly OutputWriter _writer;
-		private readonly TextViewModel mText;
 
-		public const string ToolContentId = "<OutputToolWindow>";
+	    public const string ToolContentId = "<OutputToolWindow>";
 		#endregion fields
 
 		#region constructors
@@ -30,39 +29,25 @@
 		{
 			_writer = new OutputWriter(this);
 
-			this.mText = new TextViewModel();
+			Text = new TextViewModel();
 
-			this.ContentId = OutputViewModel.ToolContentId;
+			ContentId = ToolContentId;
 		}
 		#endregion constructors
 
 		#region properties
-		public override Uri IconSource
-		{
-			get
-			{
-				return new Uri("pack://application:,,,/Output;component/Images/MetroLight/appbar.monitor.png", UriKind.RelativeOrAbsolute);
-			}
-		}
+		public override Uri IconSource => new Uri("pack://application:,,,/Output;component/Images/MetroLight/appbar.monitor.png", UriKind.RelativeOrAbsolute);
 
-		/// <summary>
+	    /// <summary>
 		/// Implements the <seealso cref="IOutput"/> interface.
 		/// </summary>
-		public TextWriter Writer { get { return _writer; } }
+		public TextWriter Writer => _writer;
 
-		public TextViewModel Text
-		{
-			get
-			{
-				return this.mText;
-			}
-		}
+	    public TextViewModel Text { get; }
 
-		public override PaneLocation PreferredLocation
-		{
-			get { return PaneLocation.Bottom; }
-		}
-		#endregion properties
+	    public override PaneLocation PreferredLocation => PaneLocation.Bottom;
+
+	    #endregion properties
 
 		#region methods
 		/// <summary>
@@ -70,7 +55,7 @@
 		/// </summary>
 		public void Clear()
 		{
-			this.mText.Clear();
+			Text.Clear();
 		}
 
 		/// <summary>
@@ -78,7 +63,7 @@
 		/// </summary>
 		public void AppendLine(string text)
 		{
-			this.mText.Append(text + Environment.NewLine);
+			Text.Append(text + Environment.NewLine);
 		}
 
 		/// <summary>
@@ -86,7 +71,7 @@
 		/// </summary>
 		public void Append(string text)
 		{
-			this.mText.Append(text);
+			Text.Append(text);
 		}
 		#endregion methods
 	}

@@ -21,7 +21,7 @@
     /// </summary>
     static RubberBandChrome()
     {
-      FrameworkElement.DefaultStyleKeyProperty.OverrideMetadata(typeof(RubberBandChrome),
+      DefaultStyleKeyProperty.OverrideMetadata(typeof(RubberBandChrome),
        new FrameworkPropertyMetadata(typeof(RubberBandChrome)));
     }
 

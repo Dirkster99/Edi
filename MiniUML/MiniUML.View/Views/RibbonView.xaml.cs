@@ -9,7 +9,7 @@ namespace MiniUML.View.Views
   {
     public RibbonView()
     {
-      this.InitializeComponent();
+      InitializeComponent();
     }
   }
 }

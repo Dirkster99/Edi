@@ -30,7 +30,7 @@
       else
         memberExpression = (MemberExpression)lambda.Body;
 
-      this.SendPropertyChanged(memberExpression.Member.Name);
+      SendPropertyChanged(memberExpression.Member.Name);
     }
 
     /// <summary>
@@ -39,10 +39,10 @@
     /// <param name="propertyName">The names of the properties.</param>
     protected void SendPropertyChanged(params string[] propertyNames)
     {
-      if (this.PropertyChanged != null)
+      if (PropertyChanged != null)
       {
         foreach (string propertyName in propertyNames)
-          this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+          PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
       }
     }
   }

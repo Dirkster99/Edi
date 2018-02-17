@@ -17,21 +17,15 @@
 // DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Threading;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
-using ICSharpCode.AvalonEdit.Folding;
 using ICSharpCode.AvalonEdit.Rendering;
 
 namespace ICSharpCode.AvalonEdit.Search
@@ -251,9 +245,9 @@ namespace ICSharpCode.AvalonEdit.Search
 			textArea.DocumentChanged += textArea_DocumentChanged;
 			KeyDown += SearchLayerKeyDown;
 			
-			this.CommandBindings.Add(new CommandBinding(SearchCommands.FindNext, (sender, e) => FindNext()));
-			this.CommandBindings.Add(new CommandBinding(SearchCommands.FindPrevious, (sender, e) => FindPrevious()));
-			this.CommandBindings.Add(new CommandBinding(SearchCommands.CloseSearchPanel, (sender, e) => Close()));
+			CommandBindings.Add(new CommandBinding(SearchCommands.FindNext, (sender, e) => FindNext()));
+			CommandBindings.Add(new CommandBinding(SearchCommands.FindPrevious, (sender, e) => FindPrevious()));
+			CommandBindings.Add(new CommandBinding(SearchCommands.CloseSearchPanel, (sender, e) => Close()));
 			IsClosed = true;
 		}
 
@@ -408,7 +402,7 @@ namespace ICSharpCode.AvalonEdit.Search
 		/// </summary>
 		public void Close()
 		{
-			bool hasFocus = this.IsKeyboardFocusWithin;
+			bool hasFocus = IsKeyboardFocusWithin;
 			
 			var layer = AdornerLayer.GetAdornerLayer(textArea);
 			if (layer != null)
@@ -495,10 +489,10 @@ namespace ICSharpCode.AvalonEdit.Search
 		/// </summary>
 		public SearchOptionsChangedEventArgs(string searchPattern, bool matchCase, bool useRegex, bool wholeWords)
 		{
-			this.SearchPattern = searchPattern;
-			this.MatchCase = matchCase;
-			this.UseRegex = useRegex;
-			this.WholeWords = wholeWords;
+			SearchPattern = searchPattern;
+			MatchCase = matchCase;
+			UseRegex = useRegex;
+			WholeWords = wholeWords;
 		}
 	}
 	

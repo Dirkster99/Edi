@@ -35,15 +35,8 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 		/// Gets/sets the value.
 		/// </summary>
 		public string Value { get; set; }
-		
-		/// <summary>
-		/// Creates a new XshdColor instance.
-		/// </summary>
-		public XshdProperty()
-		{
-		}
-		
-		/// <inheritdoc/>
+
+	    /// <inheritdoc/>
 		public override object AcceptVisitor(IXshdVisitor visitor)
 		{
 			return null;

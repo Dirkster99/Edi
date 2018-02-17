@@ -20,7 +20,6 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
-using ICSharpCode.NRefactory.Editor;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Utils;
 
@@ -43,10 +42,8 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		public RichTextModelWriter(RichTextModel richTextModel, IDocument document, int insertionOffset)
 			: base(new DocumentTextWriter(document, insertionOffset))
 		{
-			if (richTextModel == null)
-				throw new ArgumentNullException("richTextModel");
-			this.richTextModel = richTextModel;
-			this.documentTextWriter = (DocumentTextWriter)base.textWriter;
+            this.richTextModel = richTextModel ?? throw new ArgumentNullException(nameof(richTextModel));
+			documentTextWriter = (DocumentTextWriter)textWriter;
 			currentColor = richTextModel.GetHighlightingAt(Math.Max(0, insertionOffset - 1));
 		}
 		
@@ -54,8 +51,8 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// Gets/Sets the current insertion offset.
 		/// </summary>
 		public int InsertionOffset {
-			get { return documentTextWriter.InsertionOffset; }
-			set { documentTextWriter.InsertionOffset = value; }
+			get => documentTextWriter.InsertionOffset;
+		    set => documentTextWriter.InsertionOffset = value;
 		}
 		
 		

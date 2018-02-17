@@ -1,18 +1,19 @@
+using System;
+using System.Collections.Generic;
+using System.Windows;
+using System.Xml;
+using MiniUML.Framework.Local;
+using MiniUML.Model.ViewModels;
+using MiniUML.Model.ViewModels.Command;
+using MiniUML.Model.ViewModels.Shapes;
+using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Connect;
+using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.ConnectCreate;
+using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape;
+using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.ShapeCreate;
+
 namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Windows;
-  using System.Xml;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Command;
-  using MiniUML.Model.ViewModels.Shapes;
-  using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Connect;
-  using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.ConnectCreate;
-  using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape;
-  using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.ShapeCreate;
-
-  internal class UmlElementDataDef
+    internal class UmlElementDataDef
   {
     #region fields
     // Character code for '«' much smaller symbol typically used as lead-in on display of stereotype name
@@ -21,7 +22,7 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
     // Character code for '»' much greater symbol typically used as lead-out on display of stereotype name
     public const int StereotypeLeadOut = 187;
 
-    private static readonly Dictionary<UmlTypes, DataDef> mUmlElements = new Dictionary<UmlTypes, DataDef>()
+    private static readonly Dictionary<UmlTypes, DataDef> mUmlElements = new Dictionary<UmlTypes, DataDef>
     {
       // Common diagram shapes
       {
@@ -70,7 +71,7 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
         "/MiniUML.Plugins.UmlClassDiagram;component/Images/Shapes/Class/Primitive.png",
         ShapeViewModelKey.SquareShape,
         "PrimitiveType1",
-        string.Format("{0}primitive{1}", (char)StereotypeLeadIn, (char)StereotypeLeadOut),
+        $"{(char) StereotypeLeadIn}primitive{(char) StereotypeLeadOut}",
         "Primitive",
         "Creates a primitive shape",
         null,
@@ -84,7 +85,7 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
         "/MiniUML.Plugins.UmlClassDiagram;component/Images/Shapes/Class/DataType.png",
         ShapeViewModelKey.SquareShape,
         "DataType1",
-        string.Format("{0}datatype{1}", (char)StereotypeLeadIn, (char)StereotypeLeadOut),
+        $"{(char) StereotypeLeadIn}datatype{(char) StereotypeLeadOut}",
         "Data Type",
         "Creates a data type shape",
         null)
@@ -96,7 +97,7 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
         "/MiniUML.Plugins.UmlClassDiagram;component/Images/Shapes/Class/Signal.png",
         ShapeViewModelKey.SquareShape,
         "Signal1",
-        string.Format("{0}signal{1}", (char)StereotypeLeadIn, (char)StereotypeLeadOut),
+        $"{(char) StereotypeLeadIn}signal{(char) StereotypeLeadOut}",
         "Signal",
         "Creates a signal shape",
         null)
@@ -132,7 +133,7 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
         "/MiniUML.Plugins.UmlClassDiagram;component/Images/Shapes/Class/Enumeration.png",
         ShapeViewModelKey.SquareShape,
         "Enumeration1",
-        string.Format("{0}enumeration{1}", (char)StereotypeLeadIn, (char)StereotypeLeadOut),
+        $"{(char) StereotypeLeadIn}enumeration{(char) StereotypeLeadOut}",
         "Enumeration",
         "Creates an enumeration shape",
         null, true,
@@ -145,7 +146,7 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
         "/MiniUML.Plugins.UmlClassDiagram;component/Images/Shapes/Class/Interface.png",
         ShapeViewModelKey.SquareShape,
         "Interface1",
-        string.Format("{0}interface{1}", (char)StereotypeLeadIn, (char)StereotypeLeadOut),
+        $"{(char) StereotypeLeadIn}interface{(char) StereotypeLeadOut}",
         "Interface",
         "Creates an interface shape",
         null, true)
@@ -320,7 +321,7 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
         "/MiniUML.Plugins.UmlClassDiagram;component/Images/Shapes/Deployment/DeviceToolBox.png",
         ShapeViewModelKey.NodeShape,
         "Device",
-        string.Format("{0}device{1}", (char)StereotypeLeadIn, (char)StereotypeLeadOut),
+        $"{(char) StereotypeLeadIn}device{(char) StereotypeLeadOut}",
         "Device",
         "Creates a device shape",
         null,
@@ -334,7 +335,7 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
         "/MiniUML.Plugins.UmlClassDiagram;component/Images/Shapes/Deployment/ExecutionEnvironmentToolBox.png",
         ShapeViewModelKey.NodeShape,
         "ExecutionEnvironment",
-        string.Format("{0}execution environment{1}", (char)StereotypeLeadIn, (char)StereotypeLeadOut),
+        $"{(char) StereotypeLeadIn}execution environment{(char) StereotypeLeadOut}",
         "ExecutionEnvironment",
         "Creates a execution environment shape",
         null,
@@ -348,7 +349,7 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
         "/MiniUML.Plugins.UmlClassDiagram;component/Images/Shapes/Deployment/DeploymentSpecificationToolBox.png",
         ShapeViewModelKey.SquareShape,
         "Deployment Specification",
-        string.Format("{0}deployment spec{1}", (char)StereotypeLeadIn, (char)StereotypeLeadOut),
+        $"{(char) StereotypeLeadIn}deployment spec{(char) StereotypeLeadOut}",
         "Deployment Specification",
         "Creates a deployment specification shape",
         null, false,
@@ -388,7 +389,7 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
         "/MiniUML.Plugins.UmlClassDiagram;component/Images/Shapes/UseCase/ActorSquareToolbox.png",
         ShapeViewModelKey.SquareShape,
         "Actor1",
-        string.Format("{0}actor{1}", (char)StereotypeLeadIn, (char)StereotypeLeadOut),
+        $"{(char) StereotypeLeadIn}actor{(char) StereotypeLeadOut}",
         "Actor",
         "Creates an actor shape (square with stereotype)")
       },
@@ -414,8 +415,8 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
         ShapeViewModelKey.AssocationShape,
         null,
         null,
-        MiniUML.Framework.Local.Strings.STR_CMD_Association,
-        MiniUML.Framework.Local.Strings.STR_CMD_Association_description)
+        Strings.STR_CMD_Association,
+        Strings.STR_CMD_Association_description)
       },
       {
         UmlTypes.ConnectorAssociation,
@@ -425,8 +426,8 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
         ShapeViewModelKey.AssocationShape,
         null,
         null,
-        MiniUML.Framework.Local.Strings.STR_CMD_Aggregation,
-        MiniUML.Framework.Local.Strings.STR_CMD_Aggregation_description)
+        Strings.STR_CMD_Aggregation,
+        Strings.STR_CMD_Aggregation_description)
       },
       {
         UmlTypes.ConnectorComposition,
@@ -436,8 +437,8 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
         ShapeViewModelKey.AssocationShape,
         null,
         null,
-        MiniUML.Framework.Local.Strings.STR_CMD_Composition,
-        MiniUML.Framework.Local.Strings.STR_CMD_Composition_description)
+        Strings.STR_CMD_Composition,
+        Strings.STR_CMD_Composition_description)
       },
       {
         UmlTypes.ConnectorInheritance,
@@ -447,8 +448,8 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
         ShapeViewModelKey.AssocationShape,
         null,
         null,
-        MiniUML.Framework.Local.Strings.STR_CMD_InheritanceAssociation,
-        MiniUML.Framework.Local.Strings.STR_CMD_InheritanceAssociation_description)
+        Strings.STR_CMD_InheritanceAssociation,
+        Strings.STR_CMD_InheritanceAssociation_description)
       }
     };
     #endregion fields
@@ -463,9 +464,7 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
     /// <returns></returns>
     public static ShapeViewModelBase CreateShape(UmlTypes umlType, Point dropPoint, IShapeParent parent)
     {
-      DataDef item;
-
-      if (UmlElementDataDef.mUmlElements.TryGetValue(umlType, out item) == true)
+        if (mUmlElements.TryGetValue(umlType, out var item))
       {
         switch (item.ImplementingViewModel)
         {
@@ -496,9 +495,8 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
           case ShapeViewModelKey.AssocationShape:
             return CreateAssocationShapeViewModel(dropPoint, parent, item, umlType);
 
-          case ShapeViewModelKey.Undefined:
-          default:
-            throw new NotImplementedException(string.Format("System error: '{0}' not supported in CreateShape.", umlType));
+            default:
+            throw new NotImplementedException($"System error: '{umlType}' not supported in CreateShape.");
         }
       }
 
@@ -569,10 +567,8 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
 
         case UmlTypes.Undefined:
         default:
-          throw new NotImplementedException(string.Format("System error: '{0}' not supported in ReadShape.", umlType));
+          throw new NotImplementedException($"System error: '{umlType}' not supported in ReadShape.");
       }
-
-      throw new NotImplementedException(umlType.ToString());
     }
 
     /// <summary>
@@ -584,9 +580,7 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
     /// <returns></returns>
     public CommandModelBase GetShapeCreateCommand(PluginViewModel viewModel, UmlTypes umlType)
     {
-      DataDef item;
-
-      if (UmlElementDataDef.mUmlElements.TryGetValue(umlType, out item) == true)
+        if (mUmlElements.TryGetValue(umlType, out var item))
       {
         switch (item.ImplementingViewModel)
         {
@@ -615,174 +609,207 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
         }
       }
 
-      throw new NotImplementedException(string.Format("System error: '{0}' not supported in CreateCommand.", umlType));
+      throw new NotImplementedException($"System error: '{umlType}' not supported in CreateCommand.");
     }
 
     #region create shapeviewmodel
-    /// <summary>
-    /// Create a shape viewwmodel that represents a canvas element.
-    /// </summary>
-    /// <param name="dropPoint"></param>
-    /// <returns></returns>
-    private static ShapeViewModelBase CreateSquareShapeViewModel(Point dropPoint,
+
+      /// <summary>
+      /// Create a shape viewwmodel that represents a canvas element.
+      /// </summary>
+      /// <param name="dropPoint"></param>
+      /// <param name="parent"></param>
+      /// <param name="item"></param>
+      /// <param name="umlType"></param>
+      /// <returns></returns>
+      private static ShapeViewModelBase CreateSquareShapeViewModel(Point dropPoint,
                                                                 IShapeParent parent,
                                                                 DataDef item,
                                                                 UmlTypes umlType)
     {
-      var element = new UmlSquareShapeViewModel(parent, umlType);
+        var element = new UmlSquareShapeViewModel(parent, umlType)
+        {
+            Stereotype = item.ShapeStereotype ?? string.Empty,
+            Name = item.ShapeName,
+            ShapeImageUrl = item.ShapeImageUrl ?? string.Empty,
+            HorizontalLine = item.ShapeHorizontalLine,
+            Top = dropPoint.Y,
+            Left = dropPoint.X,
+            Width = item.DefaultWidth,
+            Height = item.DefaultHeight
+        };
 
-      element.Stereotype = item.ShapeStereotype == null ? string.Empty : item.ShapeStereotype;
-      element.Name = item.ShapeName;
-      element.ShapeImageUrl = item.ShapeImageUrl == null ? string.Empty : item.ShapeImageUrl;
-      element.HorizontalLine = item.ShapeHorizontalLine;
-      element.Top = dropPoint.Y;
-      element.Left = dropPoint.X;
-      element.Width = item.DefaultWidth;
-      element.Height = item.DefaultHeight;
 
-      return element;
+        return element;
     }
 
-    /// <summary>
-    /// Create a shape viewwmodel that represents a canvas element.
-    /// </summary>
-    /// <param name="dropPoint"></param>
-    /// <returns></returns>
-    private static ShapeViewModelBase CreateDecisionShapeViewModel(Point dropPoint,
+      /// <summary>
+      /// Create a shape viewwmodel that represents a canvas element.
+      /// </summary>
+      /// <param name="dropPoint"></param>
+      /// <param name="parent"></param>
+      /// <param name="item"></param>
+      /// <param name="umlType"></param>
+      /// <returns></returns>
+      private static ShapeViewModelBase CreateDecisionShapeViewModel(Point dropPoint,
                                                                    IShapeParent parent,
                                                                    DataDef item,
                                                                    UmlTypes umlType)
     {
-      var element = new UmlDecisionShapeViewModel(parent, umlType);
+        var element = new UmlDecisionShapeViewModel(parent, umlType)
+        {
+            Name = item.ShapeName,
+            Top = dropPoint.Y,
+            Left = dropPoint.X,
+            Width = item.DefaultWidth,
+            Height = item.DefaultHeight
+        };
 
-      element.Name = item.ShapeName;
-
-      if (dropPoint == null)
-        dropPoint = new Point(100, 100);
-
-      element.Top = dropPoint.Y;
-      element.Left = dropPoint.X;
-
-      element.Width = item.DefaultWidth;
-      element.Height = item.DefaultHeight;
-
-      return element;
+        return element;
     }
 
-    /// <summary>
-    /// Create a shape viewwmodel that represents a canvas element.
-    /// </summary>
-    /// <param name="dropPoint"></param>
-    /// <returns></returns>
-    private static ShapeViewModelBase CreatePackageShapeViewModel(Point dropPoint,
+      /// <summary>
+      /// Create a shape viewwmodel that represents a canvas element.
+      /// </summary>
+      /// <param name="dropPoint"></param>
+      /// <param name="parent"></param>
+      /// <param name="item"></param>
+      /// <param name="umlType"></param>
+      /// <returns></returns>
+      private static ShapeViewModelBase CreatePackageShapeViewModel(Point dropPoint,
                                                                   IShapeParent parent,
                                                                   DataDef item,
                                                                   UmlTypes umlType)
     {
-      var element = new UmlPackageShapeViewModel(parent, umlType);
+        var element = new UmlPackageShapeViewModel(parent, umlType)
+        {
+            Name = item.ShapeName,
+            Top = dropPoint.Y,
+            Left = dropPoint.X,
+            Width = item.DefaultWidth,
+            Height = item.DefaultHeight
+        };
 
-      element.Name = item.ShapeName;
-      element.Top = dropPoint.Y;
-      element.Left = dropPoint.X;
-      element.Width = item.DefaultWidth;
-      element.Height = item.DefaultHeight;
 
-      return element;
+        return element;
     }
 
-    /// <summary>
-    /// Create a shape viewwmodel that represents a canvas element.
-    /// </summary>
-    /// <param name="dropPoint"></param>
-    /// <returns></returns>
-    private static ShapeViewModelBase CreateBoundaryShapeViewModel(Point dropPoint,
+      /// <summary>
+      /// Create a shape viewwmodel that represents a canvas element.
+      /// </summary>
+      /// <param name="dropPoint"></param>
+      /// <param name="parent"></param>
+      /// <param name="item"></param>
+      /// <param name="umlType"></param>
+      /// <returns></returns>
+      private static ShapeViewModelBase CreateBoundaryShapeViewModel(Point dropPoint,
                                                                    IShapeParent parent,
                                                                    DataDef item,
                                                                    UmlTypes umlType)
     {
-      var element = new UmlBoundaryShapeViewModel(parent, umlType);
+        var element = new UmlBoundaryShapeViewModel(parent, umlType)
+        {
+            Name = item.ShapeName,
+            Top = dropPoint.Y,
+            Left = dropPoint.X,
+            Width = item.DefaultWidth,
+            Height = item.DefaultHeight
+        };
 
-      element.Name = item.ShapeName;
-      element.Top = dropPoint.Y;
-      element.Left = dropPoint.X;
-      element.Width = item.DefaultWidth;
-      element.Height = item.DefaultHeight;
 
-      return element;
+        return element;
     }
 
-    /// <summary>
-    /// Create a shape viewwmodel that represents a canvas element.
-    /// </summary>
-    /// <param name="dropPoint"></param>
-    /// <returns></returns>
-    private static ShapeViewModelBase CreateNoteShapeViewModel(Point dropPoint,
+      /// <summary>
+      /// Create a shape viewwmodel that represents a canvas element.
+      /// </summary>
+      /// <param name="dropPoint"></param>
+      /// <param name="parent"></param>
+      /// <param name="item"></param>
+      /// <param name="umlType"></param>
+      /// <returns></returns>
+      private static ShapeViewModelBase CreateNoteShapeViewModel(Point dropPoint,
                                                                IShapeParent parent,
                                                                DataDef item,
                                                                UmlTypes umlType)
     {
-      var element = new UmlNoteShapeViewModel(parent, umlType);
+        var element = new UmlNoteShapeViewModel(parent, umlType)
+        {
+            Text = item.ToolboxName,
+            Top = dropPoint.Y,
+            Left = dropPoint.X,
+            Width = item.DefaultWidth,
+            Height = item.DefaultHeight
+        };
 
-      element.Text = item.ToolboxName;
-      element.Top = dropPoint.Y;
-      element.Left = dropPoint.X;
-      element.Width = item.DefaultWidth;
-      element.Height = item.DefaultHeight;
 
-      return element;
+        return element;
     }
 
-    /// <summary>
-    /// Create a shape viewwmodel that represents a canvas element.
-    /// </summary>
-    /// <param name="dropPoint"></param>
-    /// <returns></returns>
-    private static ShapeViewModelBase CreateNodeShapeViewModel(Point dropPoint,
+      /// <summary>
+      /// Create a shape viewwmodel that represents a canvas element.
+      /// </summary>
+      /// <param name="dropPoint"></param>
+      /// <param name="parent"></param>
+      /// <param name="item"></param>
+      /// <param name="umlType"></param>
+      /// <returns></returns>
+      private static ShapeViewModelBase CreateNodeShapeViewModel(Point dropPoint,
                                                                IShapeParent parent,
                                                                DataDef item,
                                                                UmlTypes umlType)
     {
-      var element = new UmlNodeShapeViewModel(parent, umlType);
+        var element = new UmlNodeShapeViewModel(parent, umlType)
+        {
+            Stereotype = item.ShapeStereotype ?? string.Empty,
+            Name = item.ShapeName,
+            ShapeImageUrl = item.ShapeImageUrl ?? string.Empty,
+            Top = dropPoint.Y,
+            Left = dropPoint.X,
+            Width = item.DefaultWidth,
+            Height = item.DefaultHeight
+        };
 
-      element.Stereotype = item.ShapeStereotype == null ? string.Empty : item.ShapeStereotype;
-      element.Name = item.ShapeName;
-      element.ShapeImageUrl = item.ShapeImageUrl == null ? string.Empty : item.ShapeImageUrl;
-      element.Top = dropPoint.Y;
-      element.Left = dropPoint.X;
-      element.Width = item.DefaultWidth;
-      element.Height = item.DefaultHeight;
 
-      return element;
+        return element;
     }
 
-    /// <summary>
-    /// Create a shape viewwmodel that represents a canvas element.
-    /// </summary>
-    /// <param name="dropPoint"></param>
-    /// <returns></returns>
-    private static ShapeViewModelBase CreateUseCaseShapeViewModel(Point dropPoint,
+      /// <summary>
+      /// Create a shape viewwmodel that represents a canvas element.
+      /// </summary>
+      /// <param name="dropPoint"></param>
+      /// <param name="parent"></param>
+      /// <param name="item"></param>
+      /// <param name="umlType"></param>
+      /// <returns></returns>
+      private static ShapeViewModelBase CreateUseCaseShapeViewModel(Point dropPoint,
                                                                   IShapeParent parent,
                                                                   DataDef item,
                                                                   UmlTypes umlType)
     {
-      var element = new UmlUseCaseShapeViewModel(parent, umlType);
+        var element = new UmlUseCaseShapeViewModel(parent, umlType)
+        {
+            Name = item.ShapeName,
+            Top = dropPoint.Y,
+            Left = dropPoint.X,
+            Width = item.DefaultWidth,
+            Height = item.DefaultHeight,
+            StrokeDashArray = item.StrokeDashArray ?? string.Empty
+        };
 
-      element.Name = item.ShapeName;
-      element.Top = dropPoint.Y;
-      element.Left = dropPoint.X;
-      element.Width = item.DefaultWidth;
-      element.Height = item.DefaultHeight;
-      element.StrokeDashArray = (item.StrokeDashArray == null ? string.Empty : item.StrokeDashArray);
 
-      return element;
+        return element;
     }
 
-    /// <summary>
-    /// Create a shape viewwmodel that represents a canvas element.
-    /// </summary>
-    /// <param name="dropPoint"></param>
-    /// <returns></returns>
-    private static ShapeViewModelBase CreateAssocationShapeViewModel(Point dropPoint,
+      /// <summary>
+      /// Create a shape viewwmodel that represents a canvas element.
+      /// </summary>
+      /// <param name="dropPoint"></param>
+      /// <param name="parent"></param>
+      /// <param name="item"></param>
+      /// <param name="umlType"></param>
+      /// <returns></returns>
+      private static ShapeViewModelBase CreateAssocationShapeViewModel(Point dropPoint,
                                                                       IShapeParent parent,
                                                                       DataDef item,
                                                                       UmlTypes umlType)
@@ -804,29 +831,34 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
           return new UmlAssociationShapeViewModel(parent, ConnectorKeys.None, ConnectorKeys.Triangle, UmlTypes.ConnectorInheritance);
 
         default:
-          throw new System.NotImplementedException(umlType.ToString());
+          throw new NotImplementedException(umlType.ToString());
       }
     }
 
-    /// <summary>
-    /// Create a shape viewwmodel that represents a canvas element.
-    /// </summary>
-    /// <param name="dropPoint"></param>
-    /// <returns></returns>
-    private static ShapeViewModelBase CreateCanvasShapeViewModel(Point dropPoint,
+      /// <summary>
+      /// Create a shape viewwmodel that represents a canvas element.
+      /// </summary>
+      /// <param name="dropPoint"></param>
+      /// <param name="parent"></param>
+      /// <param name="item"></param>
+      /// <param name="umlType"></param>
+      /// <returns></returns>
+      private static ShapeViewModelBase CreateCanvasShapeViewModel(Point dropPoint,
                                                                  IShapeParent parent,
                                                                  DataDef item,
                                                                  UmlTypes umlType)
     {
-      var element = new UmlCanvasShapeViewModel(parent, item.ShapeViewModelSubKey, umlType);
+        var element = new UmlCanvasShapeViewModel(parent, item.ShapeViewModelSubKey, umlType)
+        {
+            Name = item.ShapeName,
+            Top = dropPoint.Y,
+            Left = dropPoint.X,
+            Width = item.DefaultWidth,
+            Height = item.DefaultHeight
+        };
 
-      element.Name = item.ShapeName;
-      element.Top = dropPoint.Y;
-      element.Left = dropPoint.X;
-      element.Width = item.DefaultWidth;
-      element.Height = item.DefaultHeight;
 
-      return element;
+        return element;
     }
     #endregion create shapeviewmodel
     #endregion Methods
@@ -845,42 +877,42 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
                      double defaultWidth = 95,
                      double defaultHeight = 75)
       {
-        this.ToolboxImageUrl = toolboxImageUrl;
-        this.ImplementingViewModel = implementingViewModel;
-        this.ShapeName = shapeName;
-        this.ShapeStereotype = shapeStereotype;
-        this.ToolboxName = toolboxName;
-        this.ToolBoxDescription = description;
-        this.ShapeImageUrl = shapeImageUrl;
-        this.ShapeHorizontalLine = shapeHorizontalLine;
+        ToolboxImageUrl = toolboxImageUrl;
+        ImplementingViewModel = implementingViewModel;
+        ShapeName = shapeName;
+        ShapeStereotype = shapeStereotype;
+        ToolboxName = toolboxName;
+        ToolBoxDescription = description;
+        ShapeImageUrl = shapeImageUrl;
+        ShapeHorizontalLine = shapeHorizontalLine;
 
-        this.DefaultHeight = defaultHeight;
-        this.DefaultWidth = defaultWidth;
+        DefaultHeight = defaultHeight;
+        DefaultWidth = defaultWidth;
       }
 
-      public string ToolboxImageUrl { get; private set; }
+        public string ToolboxImageUrl { get; }
 
-      public ShapeViewModelKey ImplementingViewModel { get; private set; }
+        public ShapeViewModelKey ImplementingViewModel { get; }
 
-      public ShapeViewModelSubKeys ShapeViewModelSubKey { get; set; }
+        public ShapeViewModelSubKeys ShapeViewModelSubKey { get; set; }
 
-      public string ShapeName { get; private set; }
+        public string ShapeName { get; }
 
-      public string ShapeStereotype { get; private set; }
+        public string ShapeStereotype { get; }
 
-      public string ToolboxName { get; private set; }
+        public string ToolboxName { get; }
 
-      public string ToolBoxDescription { get; private set; }
+        public string ToolBoxDescription { get; }
 
-      public string ShapeImageUrl { get; private set; }
+        public string ShapeImageUrl { get; }
 
-      public bool ShapeHorizontalLine { get; private set; }
+        public bool ShapeHorizontalLine { get; }
 
-      public double DefaultWidth { get; private set; }
+        public double DefaultWidth { get; }
 
-      public double DefaultHeight { get; private set; }
+        public double DefaultHeight { get; }
 
-      public string StrokeDashArray { get; set; }
+        public string StrokeDashArray { get; set; }
     }
     #endregion private class
   }

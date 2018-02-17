@@ -3,8 +3,8 @@
   using System.Windows;
   using System.Windows.Controls;
   using System.Windows.Input;
-  using MiniUML.Model.Events;
-  using MiniUML.View.Views.ResizeAdorner.Decorators;
+  using Model.Events;
+  using Decorators;
 
   /// <summary>
   /// The <seealso cref="DesignerItem"/> class organizes a contentcontrol with a resize
@@ -47,7 +47,7 @@
     /// </summary>
     static DesignerItem()
     {
-      FrameworkElement.DefaultStyleKeyProperty.OverrideMetadata(typeof(DesignerItem),
+      DefaultStyleKeyProperty.OverrideMetadata(typeof(DesignerItem),
                                                                 new FrameworkPropertyMetadata(typeof(DesignerItem)));
     }
 
@@ -67,7 +67,7 @@
     public ICommand ResizeSelectedShapes
     {
       get { return (ICommand)GetValue(ResizeSelectedShapesProperty); }
-      set { this.SetValue(ResizeSelectedShapesProperty, value); }
+      set { SetValue(ResizeSelectedShapesProperty, value); }
     }
 
     /// <summary>
@@ -76,7 +76,7 @@
     public bool IsSelected
     {
       get { return (bool)GetValue(IsSelectedProperty); }
-      set { this.SetValue(IsSelectedProperty, value); }
+      set { SetValue(IsSelectedProperty, value); }
     }
     #endregion properties
 
@@ -89,25 +89,25 @@
     {
       base.OnApplyTemplate();
 
-      if (this.Template != null)
+      if (Template != null)
       {
         // Get links to required child elements inside this control.
-        this.mContentPresenter = this.GetTemplateChild("PART_ContentPresenter") as ContentPresenter;
-        this.mResizeDecorator = this.GetTemplateChild("PART_DesignerItemDecorator") as ResizeDecorator;
+        mContentPresenter = GetTemplateChild("PART_ContentPresenter") as ContentPresenter;
+        mResizeDecorator = GetTemplateChild("PART_DesignerItemDecorator") as ResizeDecorator;
         ////this.mThumb = this.GetTemplateChild("PART_MoveThumb") as MoveThumb;
 
-        if (this.mResizeDecorator != null)
-          this.mResizeDecorator.AssignDragDeltaEvent(this.ResizeThumb_DragDelta);
+        if (mResizeDecorator != null)
+          mResizeDecorator.AssignDragDeltaEvent(ResizeThumb_DragDelta);
       }
     }
 
     public void ResizeThumb_DragDelta(object sender, DragDeltaThumbEvent e)
     {
-      if (this.mResizeSelectedShapes != null)
+      if (mResizeSelectedShapes != null)
       {
         // Call the bound (ShapeSizeViewModel) to implement this change via (XAML) command binding
-        if (this.mResizeSelectedShapes.CanExecute(null))
-          this.mResizeSelectedShapes.Execute(e);
+        if (mResizeSelectedShapes.CanExecute(null))
+          mResizeSelectedShapes.Execute(e);
       }
     }
 
@@ -167,7 +167,7 @@
 
     private void ResetChangedResizeSelectedShapesCommand(ICommand resizeSelectedShapes)
     {
-      this.mResizeSelectedShapes = resizeSelectedShapes;
+      mResizeSelectedShapes = resizeSelectedShapes;
     }
     #endregion methods
   }

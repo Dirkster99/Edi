@@ -1,10 +1,9 @@
 namespace MiniUML.Model.ViewModels.Shapes
 {
   using System.Windows;
-  using System.Windows.Controls.Primitives;
   using System.Windows.Input;
-  using MiniUML.Framework.Command;
-  using MiniUML.Model.Events;
+  using Framework.Command;
+  using Events;
 
   /// <summary>
   /// Base class to manage data items for each shape that is visible on the canvas.
@@ -41,16 +40,16 @@ namespace MiniUML.Model.ViewModels.Shapes
     {
       get
       {
-        return this.mWidth;
+        return mWidth;
       }
       
       set
       {
-        if (this.mWidth != value)
+        if (mWidth != value)
         {
-          this.mWidth = value;
-          this.NotifyPropertyChanged(() => this.Width);
-          this.NotifyPropertyChanged(() => this.EndPosition);
+          mWidth = value;
+          NotifyPropertyChanged(() => Width);
+          NotifyPropertyChanged(() => EndPosition);
         }
       }
     }
@@ -62,16 +61,16 @@ namespace MiniUML.Model.ViewModels.Shapes
     {
       get
       {
-        return this.mHeight;
+        return mHeight;
       }
       
       set
       {
-        if (this.mHeight != value)
+        if (mHeight != value)
         {
-          this.mHeight = value;
-          this.NotifyPropertyChanged(() => this.Height);
-          this.NotifyPropertyChanged(() => this.EndPosition);
+          mHeight = value;
+          NotifyPropertyChanged(() => Height);
+          NotifyPropertyChanged(() => EndPosition);
         }
       }
     }
@@ -83,15 +82,15 @@ namespace MiniUML.Model.ViewModels.Shapes
     {
       get
       {
-        return this.mMinWidth;
+        return mMinWidth;
       }
 
       set
       {
-        if (this.mMinWidth != value)
+        if (mMinWidth != value)
         {
-          this.mMinWidth = value;
-          this.NotifyPropertyChanged(() => this.MinWidth);
+          mMinWidth = value;
+          NotifyPropertyChanged(() => MinWidth);
         }
       }
     }
@@ -103,15 +102,15 @@ namespace MiniUML.Model.ViewModels.Shapes
     {
       get
       {
-        return this.mMinHeight;
+        return mMinHeight;
       }
 
       set
       {
-        if (this.mMinHeight != value)
+        if (mMinHeight != value)
         {
-          this.mMinHeight = value;
-          this.NotifyPropertyChanged(() => this.MinHeight);
+          mMinHeight = value;
+          NotifyPropertyChanged(() => MinHeight);
         }
       }
     }
@@ -125,19 +124,19 @@ namespace MiniUML.Model.ViewModels.Shapes
     {
       get
       {
-        return new Point(this.Left + this.Width, this.Top + this.Height);
+        return new Point(Left + Width, Top + Height);
       }
 
       set
       {
-        if (value != new Point(this.Left, this.Top))
+        if (value != new Point(Left, Top))
         {
-          this.Width = value.X - this.Left;
-          this.Height = value.Y - this.Top;
+          Width = value.X - Left;
+          Height = value.Y - Top;
 
-          this.NotifyPropertyChanged(() => this.EndPosition);
-          this.NotifyPropertyChanged(() => this.Height);
-          this.NotifyPropertyChanged(() => this.Width);
+          NotifyPropertyChanged(() => EndPosition);
+          NotifyPropertyChanged(() => Height);
+          NotifyPropertyChanged(() => Width);
         }
       }
     }
@@ -151,11 +150,11 @@ namespace MiniUML.Model.ViewModels.Shapes
     {
       get
       {
-        if (this.mResizeSelectedShapes == null)
-          this.mResizeSelectedShapes = new RelayCommand<DragDeltaThumbEvent>((p) => this.ResizeSelectedShapes_Executed(p),
-                                                                             (p) => this.ResizeSelectedShapes_CanExecute());
+        if (mResizeSelectedShapes == null)
+          mResizeSelectedShapes = new RelayCommand<DragDeltaThumbEvent>((p) => ResizeSelectedShapes_Executed(p),
+                                                                             (p) => ResizeSelectedShapes_CanExecute());
 
-        return this.mResizeSelectedShapes;
+        return mResizeSelectedShapes;
       }
     }
 
@@ -168,19 +167,19 @@ namespace MiniUML.Model.ViewModels.Shapes
     {
       get
       {
-        if (this.mAlignObjectsBottom == null)
-          this.mAlignObjectsBottom = new RelayCommand<object>(p =>
+        if (mAlignObjectsBottom == null)
+          mAlignObjectsBottom = new RelayCommand<object>(p =>
           {
             if (p is AlignShapes)
             {
               AlignShapes alignmentOption = (AlignShapes)p;
 
-              if (this.Parent != null)
-                this.Parent.AlignShapes(this, alignmentOption);
+              if (Parent != null)
+                Parent.AlignShapes(this, alignmentOption);
             }
           });
 
-        return this.mAlignObjectsBottom;
+        return mAlignObjectsBottom;
       }
     }
   
@@ -196,19 +195,19 @@ namespace MiniUML.Model.ViewModels.Shapes
     {
       get
       {
-        if (this.mAdjustShapesToSameSize == null)
-          this.mAdjustShapesToSameSize = new RelayCommand<object>(p =>
+        if (mAdjustShapesToSameSize == null)
+          mAdjustShapesToSameSize = new RelayCommand<object>(p =>
           {
             if (p is SameSize)
             {
               SameSize sameSize = (SameSize)p;
 
-              if (this.Parent != null)
-                this.Parent.AdjustShapesToSameSize(this, sameSize);
+              if (Parent != null)
+                Parent.AdjustShapesToSameSize(this, sameSize);
             }
           });
 
-        return this.mAdjustShapesToSameSize;
+        return mAdjustShapesToSameSize;
       }
     }
 
@@ -221,19 +220,19 @@ namespace MiniUML.Model.ViewModels.Shapes
     {
       get
       {
-        if (this.mDestributeShapes == null)
-          this.mDestributeShapes = new RelayCommand<object>(p =>
+        if (mDestributeShapes == null)
+          mDestributeShapes = new RelayCommand<object>(p =>
           {
             if (p is Destribute)
             {
               Destribute distibOption = (Destribute)p;
 
-              if (this.Parent != null)
-                this.Parent.DistributeShapes(distibOption);
+              if (Parent != null)
+                Parent.DistributeShapes(distibOption);
             }
           });
 
-        return this.mDestributeShapes;
+        return mDestributeShapes;
       }
     }
     #endregion properties
@@ -248,8 +247,8 @@ namespace MiniUML.Model.ViewModels.Shapes
       if (point == null)
         return;
 
-      this.Left = point.X - this.Width;
-      this.Top = point.Y - this.Height;
+      Left = point.X - Width;
+      Top = point.Y - Height;
     }
 
     /// <summary>
@@ -261,19 +260,19 @@ namespace MiniUML.Model.ViewModels.Shapes
       if (point == null)
         return;
 
-      this.Left = point.X;
-      this.Top = point.Y;
+      Left = point.X;
+      Top = point.Y;
     }
 
     private void ResizeSelectedShapes_Executed(DragDeltaThumbEvent e)
     {
-      if (this.Parent != null)
-        this.Parent.ResizeSelectedShapes(e);
+      if (Parent != null)
+        Parent.ResizeSelectedShapes(e);
     }
 
     private bool ResizeSelectedShapes_CanExecute()
     {
-      if (this.Parent != null)
+      if (Parent != null)
         return true;
       else
         return false;

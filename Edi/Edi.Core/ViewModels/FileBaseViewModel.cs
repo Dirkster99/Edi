@@ -3,14 +3,12 @@ namespace Edi.Core.ViewModels
     using System;
     using System.Globalization;
     using System.Windows.Input;
-    using Edi.Core.Interfaces;
-    using Edi.Core.Interfaces.Documents;
-    using Edi.Core.Interfaces.Enums;
-    using Edi.Core.Models.Documents;
-    using Edi.Core.ViewModels.Command;
-    using Edi.Core.ViewModels.Events;
-    using MsgBox;
-    using CommonServiceLocator;
+    using Interfaces;
+    using Interfaces.Documents;
+    using Interfaces.Enums;
+    using Models.Documents;
+    using Command;
+    using Events;
 
     /// <summary>
     /// Base class that shares common properties, methods, and intefaces
@@ -41,8 +39,8 @@ namespace Edi.Core.ViewModels
         public FileBaseViewModel(string documentTypeKey)
             : this()
         {
-            this.mDocumentModel = new DocumentModel();
-            this.mDocumentTypeKey = documentTypeKey;
+            mDocumentModel = new DocumentModel();
+            mDocumentTypeKey = documentTypeKey;
         }
 
         /// <summary>
@@ -76,7 +74,7 @@ namespace Edi.Core.ViewModels
         {
             get
             {
-                return this.mDocumentTypeKey;
+                return mDocumentTypeKey;
             }
         }
 
@@ -90,8 +88,8 @@ namespace Edi.Core.ViewModels
         {
             get
             {
-                if (this.mDocumentModel != null)
-                    return this.mDocumentModel.IsReal;
+                if (mDocumentModel != null)
+                    return mDocumentModel.IsReal;
 
                 return false;
             }
@@ -110,21 +108,21 @@ namespace Edi.Core.ViewModels
         {
             get
             {
-                lock (this.lockObject)
+                lock (lockObject)
                 {
-                    return this.mState;
+                    return mState;
                 }
             }
 
             protected set
             {
-                lock (this.lockObject)
+                lock (lockObject)
                 {
-                    if (this.mState != value)
+                    if (mState != value)
                     {
-                        this.mState = value;
+                        mState = value;
 
-                        this.RaisePropertyChanged(() => this.State);
+                        RaisePropertyChanged(() => State);
                     }
                 }
             }
@@ -179,7 +177,7 @@ namespace Edi.Core.ViewModels
             get
             {
                 if (mOpenContainingFolderCommand == null)
-                    mOpenContainingFolderCommand = new RelayCommand<object>((p) => this.OnOpenContainingFolderCommand());
+                    mOpenContainingFolderCommand = new RelayCommand<object>((p) => OnOpenContainingFolderCommand());
 
                 return mOpenContainingFolderCommand;
             }
@@ -195,7 +193,7 @@ namespace Edi.Core.ViewModels
             get
             {
                 if (mCopyFullPathtoClipboard == null)
-                    mCopyFullPathtoClipboard = new RelayCommand<object>((p) => this.OnCopyFullPathtoClipboardCommand());
+                    mCopyFullPathtoClipboard = new RelayCommand<object>((p) => OnCopyFullPathtoClipboardCommand());
 
                 return mCopyFullPathtoClipboard;
             }
@@ -208,10 +206,10 @@ namespace Edi.Core.ViewModels
         {
             get
             {
-                if (this.mSyncPathToExplorerCommand == null)
-                    this.mSyncPathToExplorerCommand = new RelayCommand<object>((p) => this.OnSyncPathToExplorerCommand());
+                if (mSyncPathToExplorerCommand == null)
+                    mSyncPathToExplorerCommand = new RelayCommand<object>((p) => OnSyncPathToExplorerCommand());
 
-                return this.mSyncPathToExplorerCommand;
+                return mSyncPathToExplorerCommand;
             }
         }
         #endregion commands
@@ -227,19 +225,19 @@ namespace Edi.Core.ViewModels
         {
             get
             {
-                if (this.mDocumentModel == null)
+                if (mDocumentModel == null)
                     return false;
 
-                return this.mDocumentModel.WasChangedExternally;
+                return mDocumentModel.WasChangedExternally;
             }
 
             private set
             {
-                if (this.mDocumentModel == null)
+                if (mDocumentModel == null)
                     return;
 
-                if (this.mDocumentModel.WasChangedExternally != value)
-                    this.mDocumentModel.WasChangedExternally = value;
+                if (mDocumentModel.WasChangedExternally != value)
+                    mDocumentModel.WasChangedExternally = value;
             }
         }
         #endregion properties
@@ -277,7 +275,7 @@ namespace Edi.Core.ViewModels
         /// </summary>
         virtual public void ReOpen()
         {
-            this.WasChangedExternally = false;
+            WasChangedExternally = false;
         }
 
         /// <summary>
@@ -307,7 +305,7 @@ namespace Edi.Core.ViewModels
         /// <returns></returns>
         public string GetAlternativePath()
         {
-            return this.FilePath;
+            return FilePath;
         }
 
         /// <summary>
@@ -315,7 +313,7 @@ namespace Edi.Core.ViewModels
         /// </summary>
         protected virtual void OnClose()
         {
-            this.DocumentEvent?.Invoke(this, new FileBaseEvent(FileEventType.CloseDocument));
+            DocumentEvent?.Invoke(this, new FileBaseEvent(FileEventType.CloseDocument));
         }
 
         /// <summary>
@@ -324,14 +322,14 @@ namespace Edi.Core.ViewModels
         /// <returns></returns>
         public virtual bool CanClose()
         {
-            return (this.DocumentEvent != null);
+            return (DocumentEvent != null);
         }
 
         private void OnCopyFullPathtoClipboardCommand()
         {
             try
             {
-                System.Windows.Clipboard.SetText(this.FilePath);
+                System.Windows.Clipboard.SetText(FilePath);
             }
             catch
             {
@@ -347,20 +345,20 @@ namespace Edi.Core.ViewModels
 
             try
             {
-                if (System.IO.File.Exists(this.FilePath) == true)
+                if (System.IO.File.Exists(FilePath))
                 {
                     // combine the arguments together it doesn't matter if there is a space after ','
-                    string argument = @"/select, " + this.FilePath;
+                    string argument = @"/select, " + FilePath;
 
                     System.Diagnostics.Process.Start("explorer.exe", argument);
                 }
                 else
                 {
-                    string parentDir = System.IO.Directory.GetParent(this.FilePath).FullName;
+                    string parentDir = System.IO.Directory.GetParent(FilePath).FullName;
 
                     if (System.IO.Directory.Exists(parentDir) == false)
-                        msgBox.Show(string.Format(CultureInfo.CurrentCulture, Edi.Util.Local.Strings.STR_ACCESS_DIRECTORY_ERROR, parentDir),
-                                    Edi.Util.Local.Strings.STR_FILE_FINDING_CAPTION,
+                        msgBox.Show(string.Format(CultureInfo.CurrentCulture, Util.Local.Strings.STR_ACCESS_DIRECTORY_ERROR, parentDir),
+                                    Util.Local.Strings.STR_FILE_FINDING_CAPTION,
                                     MsgBoxButtons.OK, MsgBoxImage.Error);
                     else
                     {
@@ -370,10 +368,10 @@ namespace Edi.Core.ViewModels
                     }
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                msgBox.Show(string.Format(CultureInfo.CurrentCulture, "{0}\n'{1}'.", ex.Message, (this.FilePath ?? string.Empty)),
-                            Edi.Util.Local.Strings.STR_FILE_FINDING_CAPTION,
+                msgBox.Show(string.Format(CultureInfo.CurrentCulture, "{0}\n'{1}'.", ex.Message, (FilePath ?? string.Empty)),
+                            Util.Local.Strings.STR_FILE_FINDING_CAPTION,
                             MsgBoxButtons.OK, MsgBoxImage.Error);
             }
         }
@@ -396,9 +394,9 @@ namespace Edi.Core.ViewModels
         public bool FireFileProcessingResultEvent(ResultEvent e, TypeOfResult typeOfResult)
         {
             // Continue processing in parent of this viewmodel if there is any such requested
-            if (this.ProcessingResultEvent != null)
+            if (ProcessingResultEvent != null)
             {
-                this.ProcessingResultEvent(this, new ProcessResultEvent(e.Message, e.Error, e.Cancel, typeOfResult,
+                ProcessingResultEvent(this, new ProcessResultEvent(e.Message, e.Error, e.Cancel, typeOfResult,
                                                                                                                                 e.ResultObjects, e.InnerException));
 
                 return true;
@@ -409,10 +407,10 @@ namespace Edi.Core.ViewModels
 
         public void Dispose()
         {
-            if (this.mDocumentModel != null)
+            if (mDocumentModel != null)
             {
-                this.mDocumentModel.Dispose();
-                this.mDocumentModel = null;
+                mDocumentModel.Dispose();
+                mDocumentModel = null;
             }
         }
         #endregion methods

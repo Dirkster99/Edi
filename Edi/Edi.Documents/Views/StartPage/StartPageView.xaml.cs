@@ -9,7 +9,7 @@ namespace Edi.Documents.Views.StartPage
 	{
 		public StartPageView()
 		{
-			this.InitializeComponent();
+			InitializeComponent();
 		}
 	}
 }

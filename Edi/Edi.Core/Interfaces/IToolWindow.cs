@@ -1,7 +1,7 @@
 ﻿namespace Edi.Core.ViewModels
 {
-	using Edi.Core.Interfaces;
-	using Edi.Core.Interfaces.Enums;
+	using Interfaces;
+	using Interfaces.Enums;
 
 	public interface IToolWindow : ILayoutItem
 	{

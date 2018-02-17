@@ -4,9 +4,9 @@
   using System.Collections.Generic;
   using System.Globalization;
   using System.Windows.Data;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Document;
-  using MiniUML.Model.ViewModels.Shapes;
+  using ViewModels;
+  using ViewModels.Document;
+  using ViewModels.Shapes;
 
   public abstract class UmlTypeToStringConverterBase : IValueConverter
   {

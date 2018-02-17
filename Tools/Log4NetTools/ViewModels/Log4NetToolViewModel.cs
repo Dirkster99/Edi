@@ -9,7 +9,7 @@ namespace Log4NetTools.ViewModels
 	/// This viewmodel manages the functions of the Log4Net Tool Window which contains
 	/// filter function to adjust the display of log4net information.
 	/// </summary>
-	public class Log4NetToolViewModel : Edi.Core.ViewModels.ToolViewModel, IRegisterableToolWindow
+	public class Log4NetToolViewModel : ToolViewModel, IRegisterableToolWindow
 	{
 		#region fields
 		public const string ToolContentId = "<Log4NetTool>";
@@ -25,10 +25,10 @@ namespace Log4NetTools.ViewModels
 			: base("Log4Net")
 		{
 			// Check if active document is a log4net document to display data for...
-			this.OnActiveDocumentChanged(null, null);
+			OnActiveDocumentChanged(null, null);
 
 			////Workspace.This.ActiveDocumentChanged += new EventHandler(OnActiveDocumentChanged);
-			this.ContentId = ToolContentId;
+			ContentId = ToolContentId;
 		}
 		#endregion constructor
 
@@ -45,16 +45,16 @@ namespace Log4NetTools.ViewModels
 		{
 			get
 			{
-				return this.mLog4NetVM;
+				return mLog4NetVM;
 			}
 
 			protected set
 			{
-				if (this.mLog4NetVM != value)
+				if (mLog4NetVM != value)
 				{
-					this.mLog4NetVM = value;
-					this.RaisePropertyChanged(() => this.Log4NetVM);
-					this.RaisePropertyChanged(() => this.IsOnline);
+					mLog4NetVM = value;
+					RaisePropertyChanged(() => Log4NetVM);
+					RaisePropertyChanged(() => IsOnline);
 				}
 			}
 		}
@@ -63,7 +63,7 @@ namespace Log4NetTools.ViewModels
 		{
 			get
 			{
-				return (this.Log4NetVM != null);
+				return (Log4NetVM != null);
 			}
 		}
 
@@ -82,15 +82,15 @@ namespace Log4NetTools.ViewModels
 		public void SetDocumentParent(IDocumentParent parent)
 		{
 			if (parent != null)
-				parent.ActiveDocumentChanged -= this.OnActiveDocumentChanged;
+				parent.ActiveDocumentChanged -= OnActiveDocumentChanged;
 
-			this.mParent = parent;
+			mParent = parent;
 
 			// Check if active document is a log4net document to display data for...
-			if (this.mParent != null)
-				parent.ActiveDocumentChanged += new DocumentChangedEventHandler(this.OnActiveDocumentChanged);
+			if (mParent != null)
+				parent.ActiveDocumentChanged += new DocumentChangedEventHandler(OnActiveDocumentChanged);
 			else
-				this.OnActiveDocumentChanged(null, null);
+				OnActiveDocumentChanged(null, null);
 		}
 
 		/// <summary>
@@ -103,10 +103,10 @@ namespace Log4NetTools.ViewModels
 		public void SetToolWindowVisibility(IDocumentParent parent,
 																				bool isVisible = true)
 		{
-			if (IsVisible == true)
-				this.SetDocumentParent(parent);
+			if (IsVisible)
+				SetDocumentParent(parent);
 			else
-				this.SetDocumentParent(null);
+				SetDocumentParent(null);
 
 			base.SetToolWindowVisibility(isVisible);
 		}
@@ -128,15 +128,15 @@ namespace Log4NetTools.ViewModels
                     if (e.ActiveDocument is Log4NetViewModel)
                     {
                        Log4NetViewModel log4NetVM = e.ActiveDocument as Log4NetViewModel;
-                        this.Log4NetVM = log4NetVM;  // There is an active Log4Net document -> display corresponding content
+                        Log4NetVM = log4NetVM;  // There is an active Log4Net document -> display corresponding content
                     }
                     else
-                        this.Log4NetVM = null;
+                        Log4NetVM = null;
                 }
 			}
 			else // There is no active document hence we do not have corresponding content to display
 			{
-				this.Log4NetVM = null;
+				Log4NetVM = null;
 			}
 		}
 		#endregion methods

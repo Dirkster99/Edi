@@ -41,12 +41,12 @@
 															 Dictionary<string, object> objColl = null,
 															 ApplicationException innerException = null)
 		{
-			this.mMessage = sMessage;
-			this.mError = bError;
-			this.mTypeOfResult = processResult;
-			this.mCancel = bCancel;
-			this.mInnerException = innerException;
-			this.mObjColl = (objColl == null ? null : new Dictionary<string, object>(objColl));
+			mMessage = sMessage;
+			mError = bError;
+			mTypeOfResult = processResult;
+			mCancel = bCancel;
+			mInnerException = innerException;
+			mObjColl = (objColl == null ? null : new Dictionary<string, object>(objColl));
 		}
 
 		/// <summary>
@@ -56,10 +56,10 @@
 		/// <param name="message"></param>
 		public ProcessResultEvent(string message)
 		{
-			this.mMessage = message;
-			this.mError = false;
-			this.mCancel = false;
-			this.mInnerException = null;
+			mMessage = message;
+			mError = false;
+			mCancel = false;
+			mInnerException = null;
 		}
 		#endregion Constructors
 
@@ -69,7 +69,7 @@
 		/// </summary>
 		public bool Error
 		{
-			get { return this.mError; }
+			get { return mError; }
 		}
 
 		/// <summary>
@@ -77,12 +77,12 @@
 		/// </summary>
 		public bool Cancel
 		{
-			get { return this.mCancel; }
+			get { return mCancel; }
 		}
 
 		public TypeOfResult TypeOfResult
 		{
-			get { return this.mTypeOfResult; }
+			get { return mTypeOfResult; }
 		}
 
 		/// <summary>
@@ -91,7 +91,7 @@
 		/// </summary>
 		public ApplicationException InnerException
 		{
-			get { return this.mInnerException; }
+			get { return mInnerException; }
 		}
 
 		/// <summary>
@@ -100,7 +100,7 @@
 		/// </summary>
 		public string Message
 		{
-			get { return this.mMessage; }
+			get { return mMessage; }
 		}
 
 		/// <summary>
@@ -110,7 +110,7 @@
 		{
 			get
 			{
-				return (this.mObjColl == null
+				return (mObjColl == null
 										? new Dictionary<string, object>()
 										: new Dictionary<string, object>(mObjColl));
 			}

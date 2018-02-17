@@ -1,8 +1,8 @@
 ﻿namespace MiniUML.Model.ViewModels.Command
 {
   using System.Windows.Input;
-  using MiniUML.Model.ViewModels.Document;
-  using MiniUML.Model.ViewModels.Shapes;
+  using Document;
+  using Shapes;
 
   /// <summary>
   /// Model for a command
@@ -30,14 +30,14 @@
     {
      get
      {
-       return this.mToolBoxImageUrl;
+       return mToolBoxImageUrl;
      }
 
      protected set
      {
-       if (this.mToolBoxImageUrl != value)
+       if (mToolBoxImageUrl != value)
        {
-          this.mToolBoxImageUrl = value;
+          mToolBoxImageUrl = value;
        }
      }
    }

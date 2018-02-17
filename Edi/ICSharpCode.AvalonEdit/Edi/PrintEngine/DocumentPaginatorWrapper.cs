@@ -27,44 +27,34 @@
     /// </summary>
     public string Title
     {
-      set { m_Title = value; }
+      set => m_Title = value;
     }
 
     /// <summary>
     /// Gets whether the current page count is valid or not.
     /// </summary>
-    public override bool IsPageCountValid
-    {
+    public override bool IsPageCountValid => m_Paginator.IsPageCountValid;
 
-      get { return m_Paginator.IsPageCountValid; }
-    }
-
-    /// <summary>
+      /// <summary>
     /// Gets the number of pages to be printed.
     /// </summary>
-    public override int PageCount
-    {
+    public override int PageCount => m_Paginator.PageCount;
 
-      get { return m_Paginator.PageCount; }
-    }
-
-    /// <summary>
+      /// <summary>
     /// Gets/set page size of printed page.
     /// </summary>
     public override Size PageSize
     {
-      get { return m_Paginator.PageSize; }
-      set { m_Paginator.PageSize = value; }
-    }
+      get => m_Paginator.PageSize;
+          set => m_Paginator.PageSize = value;
+      }
 
     /// <summary>
     /// Gets the source object that performs actual content pagination.
     /// </summary>
-    public override IDocumentPaginatorSource Source
-    {
-      get { return m_Paginator.Source; }
-    }
-    #endregion
+    public override IDocumentPaginatorSource Source => m_Paginator.Source;
+
+      #endregion
 
     #region constructor
     /// <summary>
@@ -109,9 +99,9 @@
 
       using (DrawingContext ctx = header.RenderOpen())
       {
-        DrawPath(ctx, this.m_Margins.Top - 20, this.m_Title, TextAlignment.Left);
-        DrawText(ctx, this.m_Margins.Top - 20, String.Format("{0}", DateTime.Now), TextAlignment.Right);
-        DrawLine(ctx, this.m_Margins.Top - 5, 0.5);
+        DrawPath(ctx, m_Margins.Top - 20, m_Title, TextAlignment.Left);
+        DrawText(ctx, m_Margins.Top - 20, $"{DateTime.Now}", TextAlignment.Right);
+        DrawLine(ctx, m_Margins.Top - 5, 0.5);
       }
 
       //
@@ -137,14 +127,12 @@
 
     private Rect Move(Rect rect)
     {
-      if (rect.IsEmpty)
+        if (rect.IsEmpty)
       {
         return rect;
       }
-      else
-      {
+
         return new Rect(rect.Left + m_Margins.Left, rect.Top + m_Margins.Top, rect.Width, rect.Height);
-      }
     }
 
     /// <summary>
@@ -204,13 +192,11 @@
         m_Typeface = new Typeface("Times New Roman");
       }
 
-      double textWidth;
-
-      FormattedText formattedText = new FormattedText(text,
+        FormattedText formattedText = new FormattedText(text,
               System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
               m_Typeface, 12, Brushes.Black);
 
-      textWidth = formattedText.Width;
+      var textWidth = formattedText.Width;
 
       double maxTextLength = m_PageSize.Width * 2 / 3;
 
@@ -227,36 +213,40 @@
       string path = Path.GetDirectoryName(text);
       string fileName = "\\" + Path.GetFileName(text);
 
-      // get the length of the trimmed file name
-      formattedText = new FormattedText(fileName,
-              System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-              m_Typeface, 12, Brushes.Black);
-
-      formattedText.MaxTextWidth = maxTextLength - 100;
-      formattedText.MaxTextHeight = 16;
-      formattedText.Trimming = TextTrimming.WordEllipsis;
-      textWidth = formattedText.Width;
+            // get the length of the trimmed file name
+            formattedText = new FormattedText(fileName,
+                    System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
+                    m_Typeface, 12, Brushes.Black)
+            {
+                MaxTextWidth = maxTextLength - 100,
+                MaxTextHeight = 16,
+                Trimming = TextTrimming.WordEllipsis
+            };
+            textWidth = formattedText.Width;
 
       // draw the path
-      formattedText = new FormattedText(path,
-              System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-              m_Typeface, 12, Brushes.Black);
+        formattedText = new FormattedText(path,
+            System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
+            m_Typeface, 12, Brushes.Black)
+        {
+            MaxTextWidth = maxTextLength - textWidth,
+            MaxTextHeight = 16,
+            Trimming = TextTrimming.WordEllipsis
+        };
 
-      formattedText.MaxTextWidth = maxTextLength - textWidth;
-      formattedText.MaxTextHeight = 16;
-      formattedText.Trimming = TextTrimming.WordEllipsis;
-      ctx.DrawText(formattedText, new Point(m_Margins.Left, yPos));
+        ctx.DrawText(formattedText, new Point(m_Margins.Left, yPos));
       textWidth = formattedText.Width;
 
-      // draw the file name
-      formattedText = new FormattedText(fileName,
-              System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-              m_Typeface, 12, Brushes.Black);
-
-      formattedText.MaxTextWidth = maxTextLength - textWidth;
-      formattedText.MaxTextHeight = 16;
-      formattedText.Trimming = TextTrimming.WordEllipsis;
-      ctx.DrawText(formattedText, new Point(m_Margins.Left + textWidth, yPos));
+            // draw the file name
+            formattedText = new FormattedText(fileName,
+                    System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
+                    m_Typeface, 12, Brushes.Black)
+            {
+                MaxTextWidth = maxTextLength - textWidth,
+                MaxTextHeight = 16,
+                Trimming = TextTrimming.WordEllipsis
+            };
+            ctx.DrawText(formattedText, new Point(m_Margins.Left + textWidth, yPos));
     }
 
     /// <summary>
@@ -290,7 +280,6 @@
     /// </summary>
     private int ConvertToPx(double inch)
     {
-
       return (int)(inch * 0.96);
     }
     #endregion methods

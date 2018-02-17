@@ -3,8 +3,8 @@
   using System.Windows;
   using System.Windows.Controls;
   using System.Windows.Documents;
-  using MiniUML.Model.Events;
-  using MiniUML.View.Views.ResizeAdorner.Adorners;
+  using Model.Events;
+  using Adorners;
 
   /// <summary>
   /// The <seealso cref="ResizeDecorator"/> class connects the <seealso cref="DesignerItem"/>
@@ -37,7 +37,7 @@
     /// </summary>
     public ResizeDecorator()
     {
-      this.Unloaded += new RoutedEventHandler(this.ResizeDecorator_Unloaded);
+      Unloaded += new RoutedEventHandler(ResizeDecorator_Unloaded);
     }
     #endregion constructor
 
@@ -49,7 +49,7 @@
     public bool ShowDecorator
     {
       get { return (bool)GetValue(ShowDecoratorProperty); }
-      set { this.SetValue(ShowDecoratorProperty, value); }
+      set { SetValue(ShowDecoratorProperty, value); }
     }
     #endregion properties
 
@@ -61,7 +61,7 @@
     /// <param name="functionToAssign"></param>
     public void AssignDragDeltaEvent(DragDeltaThumbEventHandler functionToAssign)
     {
-      this.mDragDeltaAction_DelegateFunction = functionToAssign;
+      mDragDeltaAction_DelegateFunction = functionToAssign;
     }
 
     /// <summary>
@@ -92,9 +92,9 @@
     /// </summary>
     private void HideAdorner()
     {
-      if (this.mAdorner != null)
+      if (mAdorner != null)
       {
-        this.mAdorner.Visibility = Visibility.Hidden;
+        mAdorner.Visibility = Visibility.Hidden;
       }
     }
 
@@ -104,41 +104,41 @@
     /// </summary>
     private void ShowAdorner()
     {
-      if (this.mAdorner == null)
+      if (mAdorner == null)
       {
         AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this);
 
         if (adornerLayer != null)
         {
-          ContentControl designerItem = this.DataContext as ContentControl;
+          ContentControl designerItem = DataContext as ContentControl;
           
           ////Canvas canvas = VisualTreeHelper.GetParent(designerItem) as Canvas;
-          this.mAdorner = new ResizeAdorner(designerItem, this.mDragDeltaAction_DelegateFunction);
+          mAdorner = new ResizeAdorner(designerItem, mDragDeltaAction_DelegateFunction);
 
-          adornerLayer.Add(this.mAdorner);
+          adornerLayer.Add(mAdorner);
 
-          if (this.ShowDecorator)
-            this.mAdorner.Visibility = Visibility.Visible;
+          if (ShowDecorator)
+            mAdorner.Visibility = Visibility.Visible;
           else
-            this.mAdorner.Visibility = Visibility.Hidden;
+            mAdorner.Visibility = Visibility.Hidden;
         }
       }
       else
       {
-        this.mAdorner.Visibility = Visibility.Visible;
+        mAdorner.Visibility = Visibility.Visible;
       }
     }
 
     private void ResizeDecorator_Unloaded(object sender, RoutedEventArgs e)
     {
-      if (this.mAdorner != null)
+      if (mAdorner != null)
       {
         AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this);
 
         if (adornerLayer != null)
-          adornerLayer.Remove(this.mAdorner);
+          adornerLayer.Remove(mAdorner);
 
-        this.mAdorner = null;
+        mAdorner = null;
       }
     }
     #endregion methods

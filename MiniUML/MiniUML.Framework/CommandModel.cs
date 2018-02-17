@@ -1,7 +1,6 @@
 ﻿namespace MiniUML.Framework
 {
-  using System.Windows;
-  using System.Windows.Input;
+    using System.Windows.Input;
   using System.Windows.Media.Imaging;
 
   /// <summary>
@@ -20,13 +19,13 @@
 
     public CommandModel()
     {
-      this.mRoutedCommand = new RoutedCommand();
+      mRoutedCommand = new RoutedCommand();
     }
 
     public CommandModel(RoutedUICommand command)
     {
-      this.mRoutedCommand = command;
-      this.mName = command.Text;
+      mRoutedCommand = command;
+      mName = command.Text;
     }
 
     #endregion
@@ -38,7 +37,7 @@
     /// </summary>
     public RoutedCommand Command
     {
-      get { return this.mRoutedCommand; }
+      get { return mRoutedCommand; }
     }
 
     /// <summary>
@@ -46,8 +45,8 @@
     /// </summary>
     public string Name
     {
-      get { return this.mName; }
-      set { this.mName = value; }
+      get { return mName; }
+      set { mName = value; }
     }
 
     /// <summary>
@@ -55,8 +54,8 @@
     /// </summary>
     public string Description
     {
-      get { return this.mDescription; }
-      set { this.mDescription = value; }
+      get { return mDescription; }
+      set { mDescription = value; }
     }
 
     /// <summary>
@@ -64,8 +63,8 @@
     /// </summary>
     public BitmapImage Image
     {
-      get { return this.mImage; }
-      set { this.mImage = value; }
+      get { return mImage; }
+      set { mImage = value; }
     }
 
     #endregion

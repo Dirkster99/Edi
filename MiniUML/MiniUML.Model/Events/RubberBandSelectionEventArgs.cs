@@ -77,12 +77,12 @@
                                         MouseSelection ms)
       : base()
     {
-      this.Top = top;
-      this.Left = left;
-      this.Right = right;
-      this.Bottom = bottom;
+      Top = top;
+      Left = left;
+      Right = right;
+      Bottom = bottom;
 
-      this.Select = ms;
+      Select = ms;
     }
     #endregion constructor
 
@@ -114,7 +114,7 @@
     {
       get
       {
-        return new Point(this.Left, this.Top);
+        return new Point(Left, Top);
       }
     }
 
@@ -125,7 +125,7 @@
     {
       get
       {
-        return new Point(this.Right, this.Bottom);
+        return new Point(Right, Bottom);
       }
     }
 

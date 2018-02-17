@@ -3,7 +3,6 @@
   using System;
   using System.Globalization;
   using System.Windows;
-  using System.Xml;
   using System.Xml.Linq;
 
   /// <summary>
@@ -167,10 +166,10 @@
     /// </summary>
     public FourDoubles(double left, double top, double right, double bottom)
     {
-      this.Left = left;
-      this.Top = top;
-      this.Right = right;
-      this.Bottom = bottom;
+      Left = left;
+      Top = top;
+      Right = right;
+      Bottom = bottom;
     }
 
     /// <summary>

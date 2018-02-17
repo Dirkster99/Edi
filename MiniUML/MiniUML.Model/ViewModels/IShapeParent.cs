@@ -1,7 +1,7 @@
 ﻿namespace MiniUML.Model.ViewModels
 {
-  using MiniUML.Model.Events;
-  using MiniUML.Model.ViewModels.Shapes;
+  using Events;
+  using Shapes;
 
   /// <summary>
   /// Shape size adjustment operations

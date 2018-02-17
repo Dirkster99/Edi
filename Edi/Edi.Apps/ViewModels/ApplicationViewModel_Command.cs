@@ -1,19 +1,15 @@
 ﻿namespace Edi.Apps.ViewModels
 {
-    using CommonServiceLocator;
-    using Edi.Apps.Enums;
-    using Edi.Core;
-    using Edi.Core.Interfaces;
-    using Edi.Core.ViewModels;
-    using Edi.Core.ViewModels.Command;
-    using Edi.Documents.ViewModels.EdiDoc;
-    using Edi.Documents.ViewModels.StartPage;
-    using Edi.Themes;
+    using Enums;
+    using Core;
+    using Core.Interfaces;
+    using Core.ViewModels;
+    using Core.ViewModels.Command;
+    using Documents.ViewModels.EdiDoc;
+    using Documents.ViewModels.StartPage;
+    using Themes;
     using Files.ViewModels.RecentFiles;
     using MiniUML.Framework;
-    using MRULib.MRU.Enums;
-    using MRULib.MRU.Interfaces;
-    using MsgBox;
     using System;
     using System.Diagnostics;
     using System.Threading;
@@ -25,7 +21,7 @@
     {
         private bool Closing_CanExecute()
         {
-            if (this.mShutDownInProgress == true)
+            if (mShutDownInProgress)
                 return false;
 
             // Check if conditions within the WorkspaceViewModel are suitable to close the application
@@ -40,26 +36,26 @@
         /// <param name="win"></param>
         public void InitCommandBinding(Window win)
         {
-            this.InitEditCommandBinding(win);
+            InitEditCommandBinding(win);
 
             win.CommandBindings.Add(new CommandBinding(AppCommand.Exit,
             (s, e) =>
             {
-                this.AppExit_CommandExecuted();
+                AppExit_CommandExecuted();
                 e.Handled = true;
             }));
 
             win.CommandBindings.Add(new CommandBinding(AppCommand.About,
             (s, e) =>
             {
-                this.AppAbout_CommandExecuted();
+                AppAbout_CommandExecuted();
                 e.Handled = true;
             }));
 
             win.CommandBindings.Add(new CommandBinding(AppCommand.ProgramSettings,
             (s, e) =>
             {
-                this.AppProgramSettings_CommandExecuted();
+                AppProgramSettings_CommandExecuted();
                 e.Handled = true;
             }));
 
@@ -104,7 +100,7 @@
                     }
                 }
 
-                this.OnNew(t);
+                OnNew(t);
             }
             ));
 
@@ -123,7 +119,7 @@
                     }
                 }
 
-                this.OnOpen(t);
+                OnOpen(t);
                 e.Handled = true;
             }
             ));
@@ -145,20 +141,20 @@
                     }
 
                     if (f != null)
-                        this.Close(f);
+                        Close(f);
                     else
                     {
-                        if (this.ActiveDocument != null)
-                            this.Close(this.ActiveDocument);
+                        if (ActiveDocument != null)
+                            Close(ActiveDocument);
                     }
                 }
                 catch (Exception exp)
                 {
                     logger.Error(exp.Message, exp);
-                    _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                                 this.mAppCore.IssueTrackerLink,
-                                 this.mAppCore.IssueTrackerLink,
-                                 Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                    _MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                                 mAppCore.IssueTrackerLink,
+                                 mAppCore.IssueTrackerLink,
+                                 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
                 }
             },
             (s, e) =>
@@ -182,24 +178,24 @@
                             e.CanExecute = f.CanClose();
                         else
                         {
-                            if (this.ActiveDocument != null)
-                                e.CanExecute = this.ActiveDocument.CanClose();
+                            if (ActiveDocument != null)
+                                e.CanExecute = ActiveDocument.CanClose();
                         }
                     }
                 }
                 catch (Exception exp)
                 {
                     logger.Error(exp.Message, exp);
-                    _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                                 this.mAppCore.IssueTrackerLink,
-                                 this.mAppCore.IssueTrackerLink,
+                    _MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                                 mAppCore.IssueTrackerLink,
+                                 mAppCore.IssueTrackerLink,
                                  Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
                 }
             }));
 
             // Change the WPF/TextEditor highlighting theme currently used in the application
             win.CommandBindings.Add(new CommandBinding(AppCommand.ViewTheme,
-                                                            (s, e) => this.ChangeThemeCmd_Executed(s, e, win.Dispatcher)));
+                                                            (s, e) => ChangeThemeCmd_Executed(s, e, win.Dispatcher)));
 
             win.CommandBindings.Add(new CommandBinding(AppCommand.BrowseURL,
             (s, e) =>
@@ -210,12 +206,12 @@
             win.CommandBindings.Add(new CommandBinding(AppCommand.ShowStartPage,
             (s, e) =>
             {
-                StartPageViewModel spage = this.GetStartPage(true);
+                StartPageViewModel spage = GetStartPage(true);
 
                 if (spage != null)
                 {
                     logger.InfoFormat("TRACE Before setting startpage as ActiveDocument");
-                    this.ActiveDocument = spage;
+                    ActiveDocument = spage;
                     logger.InfoFormat("TRACE After setting startpage as ActiveDocument");
                 }
             }));
@@ -227,14 +223,14 @@
 
                 try
                 {
-                    var newViewSetting = !this.IsWorkspaceAreaOptimized;
-                    this.IsWorkspaceAreaOptimized = newViewSetting;
+                    var newViewSetting = !IsWorkspaceAreaOptimized;
+                    IsWorkspaceAreaOptimized = newViewSetting;
                 }
                 catch (Exception exp)
                 {
                     logger.Error(exp.Message, exp);
-                    _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                                 this.mAppCore.IssueTrackerLink, this.mAppCore.IssueTrackerLink,
+                    _MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                                 mAppCore.IssueTrackerLink, mAppCore.IssueTrackerLink,
                                  Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
                 }
             }));
@@ -256,13 +252,13 @@
 
                     logger.InfoFormat("TRACE AppCommand.LoadFile with: '{0}'", filename);
 
-                    this.Open(filename);
+                    Open(filename);
                 }
                 catch (Exception exp)
                 {
                     logger.Error(exp.Message, exp);
-                    _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                                 this.mAppCore.IssueTrackerLink, this.mAppCore.IssueTrackerLink,
+                    _MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                                 mAppCore.IssueTrackerLink, mAppCore.IssueTrackerLink,
                                  Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
                 }
             }));
@@ -275,16 +271,16 @@
                     if (e != null)
                         e.Handled = true;
 
-                    if (this.ActiveDocument != null)
-                        this.OnSave(this.ActiveDocument, false);
+                    if (ActiveDocument != null)
+                        OnSave(ActiveDocument, false);
                 }
                 catch (Exception exp)
                 {
                     logger.Error(exp.Message, exp);
-                    _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_UnknownError_Caption,
+                    _MsgBox.Show(exp, Util.Local.Strings.STR_MSG_UnknownError_Caption,
                                  MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                                 this.mAppCore.IssueTrackerLink, this.mAppCore.IssueTrackerLink,
-                                 Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                                 mAppCore.IssueTrackerLink, mAppCore.IssueTrackerLink,
+                                 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
                 }
             },
             (s, e) =>
@@ -293,8 +289,8 @@
                 {
                     e.Handled = true;
 
-                    if (this.ActiveDocument != null)
-                        e.CanExecute = this.ActiveDocument.CanSave();
+                    if (ActiveDocument != null)
+                        e.CanExecute = ActiveDocument.CanSave();
                 }
             }));
 
@@ -306,23 +302,23 @@
                     if (e != null)
                         e.Handled = true;
 
-                    if (this.ActiveDocument != null)
+                    if (ActiveDocument != null)
                     {
-                        if (this.OnSave(this.ActiveDocument, true))
+                        if (OnSave(ActiveDocument, true))
                         {
                             var mruList = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
-                            mruList.UpdateEntry(this.ActiveDocument.FilePath);
-                            this.mSettingsManager.SessionData.LastActiveFile = this.ActiveDocument.FilePath;
+                            mruList.UpdateEntry(ActiveDocument.FilePath);
+                            mSettingsManager.SessionData.LastActiveFile = ActiveDocument.FilePath;
                         }
                     }
                 }
                 catch (Exception exp)
                 {
                     logger.Error(exp.Message, exp);
-                    _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                                 this.mAppCore.IssueTrackerLink,
-                                 this.mAppCore.IssueTrackerLink,
-                                 Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                    _MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                                 mAppCore.IssueTrackerLink,
+                                 mAppCore.IssueTrackerLink,
+                                 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
                 }
             },
             (s, e) =>
@@ -334,17 +330,17 @@
                         e.Handled = true;
                         e.CanExecute = false;
 
-                        if (this.ActiveDocument != null)
-                            e.CanExecute = this.ActiveDocument.CanSaveAs();
+                        if (ActiveDocument != null)
+                            e.CanExecute = ActiveDocument.CanSaveAs();
                     }
                 }
                 catch (Exception exp)
                 {
                     logger.Error(exp.Message, exp);
-                    _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                                 this.mAppCore.IssueTrackerLink,
-                                 this.mAppCore.IssueTrackerLink,
-                                 Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                    _MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                                 mAppCore.IssueTrackerLink,
+                                 mAppCore.IssueTrackerLink,
+                                 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
                 }
             }
             ));
@@ -356,47 +352,47 @@
                 try
                 {
                     // Save all edited documents
-                    if (this.mFiles != null)               // Close all open files and make sure there are no unsaved edits
+                    if (mFiles != null)               // Close all open files and make sure there are no unsaved edits
                     {                                     // If there are any: Ask user if edits should be saved
-                        IFileBaseViewModel activeDoc = this.ActiveDocument;
+                        IFileBaseViewModel activeDoc = ActiveDocument;
 
                         try
                         {
-                            for (int i = 0; i < this.Files.Count; i++)
+                            for (int i = 0; i < Files.Count; i++)
                             {
-                                IFileBaseViewModel f = this.Files[i];
+                                IFileBaseViewModel f = Files[i];
 
                                 if (f != null)
                                 {
-                                    if (f.IsDirty == true && f.CanSaveData == true)
+                                    if (f.IsDirty && f.CanSaveData)
                                     {
-                                        this.ActiveDocument = f;
-                                        this.OnSave(f);
+                                        ActiveDocument = f;
+                                        OnSave(f);
                                     }
                                 }
                             }
                         }
                         catch (Exception exp)
                         {
-                            _MsgBox.Show(exp.ToString(), Edi.Util.Local.Strings.STR_MSG_UnknownError_Caption, MsgBoxButtons.OK);
+                            _MsgBox.Show(exp.ToString(), Util.Local.Strings.STR_MSG_UnknownError_Caption, MsgBoxButtons.OK);
                         }
                         finally
                         {
                             if (activeDoc != null)
-                                this.ActiveDocument = activeDoc;
+                                ActiveDocument = activeDoc;
                         }
                     }
 
                     // Save program settings
-                    this.SaveConfigOnAppClosed();
+                    SaveConfigOnAppClosed();
                 }
                 catch (Exception exp)
                 {
                     logger.Error(exp.Message, exp);
-                    _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                                 this.mAppCore.IssueTrackerLink,
-                                 this.mAppCore.IssueTrackerLink,
-                                 Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                    _MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                                 mAppCore.IssueTrackerLink,
+                                 mAppCore.IssueTrackerLink,
+                                 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
                 }
             }));
 
@@ -406,27 +402,27 @@
             {
                 try
                 {
-                    if (this.vm_DocumentViewModel != null)
+                    if (vm_DocumentViewModel != null)
                     {
-                        if ((this.vm_DocumentViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready) == true)
+                        if ((vm_DocumentViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready))
                         {
-                            this.vm_DocumentViewModel.ExecuteExport(s, e, this.ActiveDocument.FileName + ".png");
+                            vm_DocumentViewModel.ExecuteExport(s, e, ActiveDocument.FileName + ".png");
                         }
                     }
                 }
                 catch (Exception exp)
                 {
                     logger.Error(exp.Message, exp);
-                    _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                                 this.mAppCore.IssueTrackerLink,
-                                 this.mAppCore.IssueTrackerLink,
-                                 Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                    _MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                                 mAppCore.IssueTrackerLink,
+                                 mAppCore.IssueTrackerLink,
+                                 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
                 }
             },
             (s, e) =>  // Execute this command only if an UML document is currently active
             {
-                if (this.vm_DocumentViewModel != null)
-                    e.CanExecute = (this.vm_DocumentViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready);
+                if (vm_DocumentViewModel != null)
+                    e.CanExecute = (vm_DocumentViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready);
                 else
                     e.CanExecute = false;
             }
@@ -438,23 +434,23 @@
             {
                 try
                 {
-                    if (this.ActiveEdiDocument != null)
-                        this.ActiveEdiDocument.ExportToHTML(this.ActiveDocument.FileName + ".html",
-                                                                                                this.mSettingsManager.SettingData.TextToHTML_ShowLineNumbers,
-                                                                                                this.mSettingsManager.SettingData.TextToHTML_AlternateLineBackground);
+                    if (ActiveEdiDocument != null)
+                        ActiveEdiDocument.ExportToHTML(ActiveDocument.FileName + ".html",
+                                                                                                mSettingsManager.SettingData.TextToHTML_ShowLineNumbers,
+                                                                                                mSettingsManager.SettingData.TextToHTML_AlternateLineBackground);
                 }
                 catch (Exception exp)
                 {
                     logger.Error(exp.Message, exp);
-                    _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                                 this.mAppCore.IssueTrackerLink,
-                                 this.mAppCore.IssueTrackerLink,
-                                 Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                    _MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                                 mAppCore.IssueTrackerLink,
+                                 mAppCore.IssueTrackerLink,
+                                 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
                 }
             },
             (s, e) =>  // Execute this command only if a Text document is currently active
             {
-                if (this.ActiveEdiDocument != null)
+                if (ActiveEdiDocument != null)
                     e.CanExecute = true;
                 else
                     e.CanExecute = false;
@@ -468,7 +464,7 @@
             win.CommandBindings.Add(new CommandBinding(AppCommand.ClearAllMruItemsCommand,
             (s, e) =>
             {
-                this.GetToolWindowVM<RecentFilesViewModel>().MruList.Clear();
+                GetToolWindowVM<RecentFilesViewModel>().MruList.Clear();
             }));
 
             /// <summary>
@@ -484,7 +480,7 @@
 
                 var param = (GroupType)e.Parameter;
 
-                this.GetToolWindowVM<RecentFilesViewModel>().MruList.RemoveEntryOlderThanThis(param);
+                GetToolWindowVM<RecentFilesViewModel>().MruList.RemoveEntryOlderThanThis(param);
             },
             (s, e) =>
             {
@@ -505,7 +501,7 @@
 
                 var param = e.Parameter as IMRUEntryViewModel;
 
-                this.GetToolWindowVM<RecentFilesViewModel>().MruList.MovePinnedEntry(MoveMRUItem.Up, param);
+                GetToolWindowVM<RecentFilesViewModel>().MruList.MovePinnedEntry(MoveMRUItem.Up, param);
             },
             (s, e) =>
             {
@@ -532,7 +528,7 @@
 
                 var param = e.Parameter as IMRUEntryViewModel;
 
-                this.GetToolWindowVM<RecentFilesViewModel>().MruList.MovePinnedEntry(MoveMRUItem.Down, param);
+                GetToolWindowVM<RecentFilesViewModel>().MruList.MovePinnedEntry(MoveMRUItem.Down, param);
             },
             (s, e) =>
             {
@@ -554,7 +550,7 @@
             win.CommandBindings.Add(new CommandBinding(AppCommand.PinItemCommand,
             (s, e) =>
             {
-                this.GetToolWindowVM<RecentFilesViewModel>().MruList.PinUnpinEntry(true, e.Parameter as IMRUEntryViewModel);
+                GetToolWindowVM<RecentFilesViewModel>().MruList.PinUnpinEntry(true, e.Parameter as IMRUEntryViewModel);
             },
             (s, e) =>
             {
@@ -581,7 +577,7 @@
 
                 var param = e.Parameter as IMRUEntryViewModel;
 
-                this.GetToolWindowVM<RecentFilesViewModel>().MruList.PinUnpinEntry(false, e.Parameter as IMRUEntryViewModel);
+                GetToolWindowVM<RecentFilesViewModel>().MruList.PinUnpinEntry(false, e.Parameter as IMRUEntryViewModel);
             },
             (s, e) =>
             {
@@ -603,19 +599,19 @@
             win.CommandBindings.Add(new CommandBinding(AppCommand.PinUnpin,
             (s, e) =>
             {
-                this.PinCommand_Executed(e.Parameter, e);
+                PinCommand_Executed(e.Parameter, e);
             }));
 
             win.CommandBindings.Add(new CommandBinding(AppCommand.RemoveMruEntry,
             (s, e) =>
             {
-                this.RemoveMRUEntry_Executed(e.Parameter, e);
+                RemoveMRUEntry_Executed(e.Parameter, e);
             }));
 
             win.CommandBindings.Add(new CommandBinding(AppCommand.AddMruEntry,
             (s, e) =>
             {
-                this.AddMRUEntry_Executed(e.Parameter, e);
+                AddMRUEntry_Executed(e.Parameter, e);
             }));
         }
 
@@ -628,7 +624,7 @@
         /// <param name="disp"></param>
         private void ChangeThemeCmd_Executed(object s,
                                             ExecutedRoutedEventArgs e,
-                                            System.Windows.Threading.Dispatcher disp)
+                                            Dispatcher disp)
         {
             string oldTheme = ThemesManager.DefaultThemeName;
 
@@ -646,7 +642,7 @@
                 if (newThemeName == null)
                     return;
 
-                oldTheme = this.mSettingsManager.SettingData.CurrentTheme;
+                oldTheme = mSettingsManager.SettingData.CurrentTheme;
 
                 // The Work to perform on another thread
                 ThreadStart start = delegate
@@ -657,19 +653,19 @@
                     {
                         try
                         {
-                            if (this.mThemesManager.SetSelectedTheme(newThemeName) == true)
+                            if (mThemesManager.SetSelectedTheme(newThemeName))
                             {
-                                this.mSettingsManager.SettingData.CurrentTheme = newThemeName;
-                                this.ResetTheme();                        // Initialize theme in process
+                                mSettingsManager.SettingData.CurrentTheme = newThemeName;
+                                ResetTheme();                        // Initialize theme in process
                             }
                         }
                         catch (Exception exp)
                         {
                             logger.Error(exp.Message, exp);
-                            _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                                         this.mAppCore.IssueTrackerLink,
-                                         this.mAppCore.IssueTrackerLink,
-                                         Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                            _MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                                         mAppCore.IssueTrackerLink,
+                                         mAppCore.IssueTrackerLink,
+                                         Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
                         }
                     }));
                 };
@@ -681,13 +677,13 @@
             }
             catch (Exception exp)
             {
-                this.mSettingsManager.SettingData.CurrentTheme = oldTheme;
+                mSettingsManager.SettingData.CurrentTheme = oldTheme;
 
                 logger.Error(exp.Message, exp);
-                _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                             this.mAppCore.IssueTrackerLink,
-                             this.mAppCore.IssueTrackerLink,
-                             Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                _MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                             mAppCore.IssueTrackerLink,
+                             mAppCore.IssueTrackerLink,
+                             Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
             }
         }
 
@@ -705,27 +701,27 @@
                 try
                 {
 
-                    if (this.ActiveDocument is EdiViewModel)
+                    if (ActiveDocument is EdiViewModel)
                     {
-                        EdiViewModel f = this.ActiveDocument as EdiViewModel;
+                        EdiViewModel f = ActiveDocument as EdiViewModel;
                         f.DisableHighlighting();
                     }
                 }
                 catch (Exception exp)
                 {
                     logger.Error(exp.Message, exp);
-                    _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                                 this.mAppCore.IssueTrackerLink,
-                                 this.mAppCore.IssueTrackerLink,
-                                 Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                    _MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                                 mAppCore.IssueTrackerLink,
+                                 mAppCore.IssueTrackerLink,
+                                 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
                 }
             },
             (s, e) =>
             {
 
-                if (this.ActiveDocument is EdiViewModel)
+                if (ActiveDocument is EdiViewModel)
                 {
-                    EdiViewModel f = this.ActiveDocument as EdiViewModel;
+                    EdiViewModel f = ActiveDocument as EdiViewModel;
 
                     if (f.HighlightingDefinition != null)
                     {
@@ -745,15 +741,15 @@
                 {
                     e.Handled = true;
 
-                    this.ShowGotoLineDialog();
+                    ShowGotoLineDialog();
                 }
                 catch (Exception exp)
                 {
                     logger.Error(exp.Message, exp);
-                    _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                                 this.mAppCore.IssueTrackerLink,
-                                 this.mAppCore.IssueTrackerLink,
-                                 Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                    _MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                                 mAppCore.IssueTrackerLink,
+                                 mAppCore.IssueTrackerLink,
+                                 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
                 }
             },
             (s, e) => { e.CanExecute = CanExecuteIfActiveDocumentIsEdiViewModel(); }));
@@ -765,15 +761,15 @@
                 {
                     e.Handled = true;
 
-                    this.ShowFindReplaceDialog();
+                    ShowFindReplaceDialog();
                 }
                 catch (Exception exp)
                 {
                     logger.Error(exp.Message, exp);
-                    _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                                 this.mAppCore.IssueTrackerLink,
-                                 this.mAppCore.IssueTrackerLink,
-                                 Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                    _MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                                 mAppCore.IssueTrackerLink,
+                                 mAppCore.IssueTrackerLink,
+                                 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
                 }
             },
             (s, e) => { e.CanExecute = CanExecuteIfActiveDocumentIsEdiViewModel(); }));
@@ -786,27 +782,27 @@
                     e.Handled = true;
 
 
-                    if (this.ActiveDocument is EdiViewModel)
+                    if (ActiveDocument is EdiViewModel)
                     {
-                        EdiViewModel f = this.ActiveDocument as EdiViewModel;
+                        EdiViewModel f = ActiveDocument as EdiViewModel;
 
-                        if (this.FindReplaceVM != null)
+                        if (FindReplaceVM != null)
                         {
-                            this.FindReplaceVM.FindNext(this.FindReplaceVM, true);
+                            FindReplaceVM.FindNext(FindReplaceVM, true);
                         }
                         else
                         {
-                            this.ShowFindReplaceDialog();
+                            ShowFindReplaceDialog();
                         }
                     }
                 }
                 catch (Exception exp)
                 {
                     logger.Error(exp.Message, exp);
-                    _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                                 this.mAppCore.IssueTrackerLink,
-                                 this.mAppCore.IssueTrackerLink,
-                                 Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                    _MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                                 mAppCore.IssueTrackerLink,
+                                 mAppCore.IssueTrackerLink,
+                                 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
                 }
             },
             (s, e) => { e.CanExecute = CanExecuteIfActiveDocumentIsEdiViewModel(); }));
@@ -819,27 +815,27 @@
                     e.Handled = true;
 
 
-                    if (this.ActiveDocument is EdiViewModel)
+                    if (ActiveDocument is EdiViewModel)
                     {
-                        EdiViewModel f = this.ActiveDocument as EdiViewModel;
+                        EdiViewModel f = ActiveDocument as EdiViewModel;
 
-                        if (this.FindReplaceVM != null)
+                        if (FindReplaceVM != null)
                         {
-                            this.FindReplaceVM.FindNext(this.FindReplaceVM, false);
+                            FindReplaceVM.FindNext(FindReplaceVM, false);
                         }
                         else
                         {
-                            this.ShowFindReplaceDialog();
+                            ShowFindReplaceDialog();
                         }
                     }
                 }
                 catch (Exception exp)
                 {
                     logger.Error(exp.Message, exp);
-                    _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                                 this.mAppCore.IssueTrackerLink,
-                                 this.mAppCore.IssueTrackerLink,
-                                 Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                    _MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                                 mAppCore.IssueTrackerLink,
+                                 mAppCore.IssueTrackerLink,
+                                 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
                 }
             },
             (s, e) => { e.CanExecute = CanExecuteIfActiveDocumentIsEdiViewModel(); }));
@@ -851,15 +847,15 @@
                 {
                     e.Handled = true;
 
-                    this.ShowFindReplaceDialog(false);
+                    ShowFindReplaceDialog(false);
                 }
                 catch (Exception exp)
                 {
                     logger.Error(exp.Message, exp);
-                    _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                                 this.mAppCore.IssueTrackerLink,
-                                 this.mAppCore.IssueTrackerLink,
-                                 Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                    _MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                                 mAppCore.IssueTrackerLink,
+                                 mAppCore.IssueTrackerLink,
+                                 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
                 }
             },
             (s, e) => { e.CanExecute = CanExecuteIfActiveDocumentIsEdiViewModel(); }));
@@ -872,20 +868,20 @@
         {
             get
             {
-                if (this._toggleEditorOptionCommand == null)
+                if (_toggleEditorOptionCommand == null)
                 {
-                    this._toggleEditorOptionCommand = new RelayCommand<ToggleEditorOption>
-                                        ((p) => this.OnToggleEditorOption(p),
-                                         (p) => this.CanExecuteIfActiveDocumentIsEdiViewModel());
+                    _toggleEditorOptionCommand = new RelayCommand<ToggleEditorOption>
+                                        ((p) => OnToggleEditorOption(p),
+                                         (p) => CanExecuteIfActiveDocumentIsEdiViewModel());
                 }
 
-                return this._toggleEditorOptionCommand;
+                return _toggleEditorOptionCommand;
             }
         }
 
         private void OnToggleEditorOption(object parameter)
         {
-            EdiViewModel f = this.ActiveDocument as EdiViewModel;
+            EdiViewModel f = ActiveDocument as EdiViewModel;
 
             if (f == null)
                 return;
@@ -932,7 +928,7 @@
         private bool CanExecuteIfActiveDocumentIsEdiViewModel()
         {
 
-            if (this.ActiveDocument is EdiViewModel)
+            if (ActiveDocument is EdiViewModel)
             {
                 //EdiViewModel f = this.ActiveDocument as EdiViewModel;
 

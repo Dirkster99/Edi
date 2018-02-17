@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary
-  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  >
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
   <!-- Fill Brush for path items -->
   <LinearGradientBrush x:Key="ItemBrush" StartPoint="0,0" EndPoint="0,1">

@@ -19,7 +19,6 @@
 using System;
 using System.Windows.Documents;
 using ICSharpCode.AvalonEdit.Document;
-using ICSharpCode.NRefactory.Editor;
 
 namespace ICSharpCode.AvalonEdit.Snippets
 {
@@ -35,8 +34,8 @@ namespace ICSharpCode.AvalonEdit.Snippets
 		/// Gets/Sets the target element.
 		/// </summary>
 		public SnippetReplaceableTextElement TargetElement {
-			get { return targetElement; }
-			set { targetElement = value; }
+			get => targetElement;
+		    set => targetElement = value;
 		}
 		
 		/// <summary>
@@ -127,12 +126,8 @@ namespace ICSharpCode.AvalonEdit.Snippets
 		{
 		}
 		
-		public bool IsEditable {
-			get { return false; }
-		}
-		
-		public ISegment Segment {
-			get { return segment; }
-		}
+		public bool IsEditable => false;
+
+	    public ISegment Segment => segment;
 	}
 }

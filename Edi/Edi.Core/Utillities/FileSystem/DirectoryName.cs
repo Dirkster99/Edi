@@ -20,7 +20,6 @@
 
 	using System;
 	using System.ComponentModel;
-	using System.Globalization;
 	using System.IO;
 	using System.Text;
 
@@ -75,7 +74,7 @@
 		{
 			if (relativePath == null)
 				return null;
-			return DirectoryName.Create(Path.Combine(normalizedPath, relativePath));
+			return Create(Path.Combine(normalizedPath, relativePath));
 		}
 
 		/// <summary>
@@ -105,7 +104,7 @@
 		{
 			if (relativeDirectoryName == null)
 				return null;
-			return DirectoryName.Create(Path.Combine(normalizedPath, relativeDirectoryName));
+			return Create(Path.Combine(normalizedPath, relativeDirectoryName));
 		}
 
 		/// <summary>
@@ -115,7 +114,7 @@
 		{
 			if (path == null)
 				return null;
-			return DirectoryName.Create(DirectoryName.GetRelativePath(normalizedPath, path));
+			return Create(GetRelativePath(normalizedPath, path));
 		}
 
 		/// <summary>
@@ -125,7 +124,7 @@
 		{
 			if (path == null)
 				return null;
-			return FileName.Create(DirectoryName.GetRelativePath(normalizedPath, path));
+			return FileName.Create(GetRelativePath(normalizedPath, path));
 		}
 
 		/// <summary>

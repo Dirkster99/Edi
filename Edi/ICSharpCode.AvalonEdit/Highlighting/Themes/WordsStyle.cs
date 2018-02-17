@@ -2,10 +2,8 @@
 {
   using System.Windows;
   using System.Windows.Media;
-  using System;
-  using System.Globalization;
-  
-  /// <summary>
+
+    /// <summary>
   /// Class to manage a highlighting style 
   /// </summary>
   public class WordsStyle
@@ -18,7 +16,7 @@
     public WordsStyle(string name)
       : this()
     {
-      this.Name = name;
+      Name = name;
     }
 
     /// <summary>
@@ -26,13 +24,13 @@
     /// </summary>
     protected WordsStyle()
     {
-      this.Name = string.Empty;
+      Name = string.Empty;
 
-      this.fgColor = null;
-      this.bgColor = null;
+      fgColor = null;
+      bgColor = null;
 
-      this.fontWeight = null;
-      this.fontStyle = null;
+      fontWeight = null;
+      fontStyle = null;
     }
     #endregion constructors
 

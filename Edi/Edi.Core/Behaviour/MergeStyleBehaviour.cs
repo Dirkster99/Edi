@@ -177,11 +177,11 @@ namespace Edi.Core.Behaviour
 				if ((bool)e.NewValue)
 				{
 					Type type = d.GetType();
-					control.SetResourceReference(MergeStyleBehaviour.BaseOnStyleProperty, type);
+					control.SetResourceReference(BaseOnStyleProperty, type);
 				}
 				else
 				{
-					control.ClearValue(MergeStyleBehaviour.BaseOnStyleProperty);
+					control.ClearValue(BaseOnStyleProperty);
 				}
 			}
 			catch (Exception exp)
@@ -231,14 +231,16 @@ namespace Edi.Core.Behaviour
 
 				if (originalStyle.IsSealed)
 				{
-					////Console.WriteLine("+++ ORIGINAL STYLE IS SEALED. +++ ");
+                    ////Console.WriteLine("+++ ORIGINAL STYLE IS SEALED. +++ ");
 
-					newStyle = new Style(originalStyle.TargetType);
-					////newStyle.TargetType = originalStyle.TargetType;
+                    newStyle = new Style(originalStyle.TargetType)
+                    {
+                        ////newStyle.TargetType = originalStyle.TargetType;
 
-					// 1. Copy resources, setters, triggers
-					newStyle.Resources = originalStyle.Resources;
-					foreach (var st in originalStyle.Setters)
+                        // 1. Copy resources, setters, triggers
+                        Resources = originalStyle.Resources
+                    };
+                    foreach (var st in originalStyle.Setters)
 					{
 						newStyle.Setters.Add(st);
 					}

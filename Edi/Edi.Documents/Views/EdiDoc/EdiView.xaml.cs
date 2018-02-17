@@ -9,7 +9,7 @@
 	{
 		public EdiView()
 		{
-			this.InitializeComponent();
+			InitializeComponent();
 		}
 	}
 }

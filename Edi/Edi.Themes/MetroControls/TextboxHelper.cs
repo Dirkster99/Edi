@@ -53,17 +53,12 @@ namespace MahApps.Metro.Controls
             obj.SetValue(hasTextProperty, value >= 1);
         }
 
-        public bool HasText
-        {
-            get { return (bool)GetValue(hasTextProperty); }
-        }
+        public bool HasText => (bool)GetValue(hasTextProperty);
 
         static void OnIsMonitoringChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is TextBox)
+            if (d is TextBox txtBox)
             {
-                var txtBox = d as TextBox;
-
                 if ((bool)e.NewValue)
                 {
                     txtBox.TextChanged += TextChanged;
@@ -217,16 +212,12 @@ namespace MahApps.Metro.Controls
 
         static void TextBoxLoaded(object sender, RoutedEventArgs e)
         {
-            var textbox = sender as TextBox;
-            if (textbox == null || textbox.Style == null)
+            if (!(sender is TextBox textbox) || textbox.Style == null)
                 return;
 
             var template = textbox.Template;
-            if (template == null)
-                return;
 
-            var button = template.FindName("PART_ClearText", textbox) as Button;
-            if (button == null)
+            if (!(template?.FindName("PART_ClearText", textbox) is Button button))
                 return;
 
             if (GetButtonCommand(textbox) != null || GetClearTextButton(textbox))
@@ -258,11 +249,11 @@ namespace MahApps.Metro.Controls
 
             if (GetClearTextButton(parent))
             {
-                if (parent is TextBox)
+                if (parent is TextBox box)
                 {
-                    ((TextBox)parent).Clear();
+                    box.Clear();
                 }
-                else if (parent is PasswordBox)
+                else
                 {
                     ((PasswordBox)parent).Clear();
                 }

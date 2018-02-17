@@ -1,6 +1,6 @@
 ﻿namespace Edi.Util.Msg
 {
-	using Edi.Util.Local;
+	using Local;
 
 	/// <summary>
 	/// This class is used to display categorized (Information, Error etc.) messages to the user.
@@ -13,8 +13,8 @@
 		/// </summary>
 		public Msg()
 		{
-			this.Message = string.Empty;
-			this.CategoryOfMsg = MsgCategory.Error;
+			Message = string.Empty;
+			CategoryOfMsg = MsgCategory.Error;
 		}
 
 		/// <summary>
@@ -25,8 +25,8 @@
 		public Msg(string strMsg, MsgCategory type = MsgCategory.Error)
 			: this()
 		{
-			this.Message = ((strMsg == null ? string.Empty : strMsg).Length == 0 ? Strings.STR_Category_Unknown_Internal_Error : strMsg);
-			this.CategoryOfMsg = type;
+			Message = ((strMsg == null ? string.Empty : strMsg).Length == 0 ? Strings.STR_Category_Unknown_Internal_Error : strMsg);
+			CategoryOfMsg = type;
 		}
 
 		/// <summary>
@@ -37,8 +37,8 @@
 		{
 			if (copyThis == null) return;
 
-			this.CategoryOfMsg = copyThis.CategoryOfMsg;
-			this.Message = copyThis.Message;
+			CategoryOfMsg = copyThis.CategoryOfMsg;
+			Message = copyThis.Message;
 		}
 		#endregion constructor
 
@@ -93,7 +93,7 @@
 		{
 			get
 			{
-				switch (this.CategoryOfMsg)
+				switch (CategoryOfMsg)
 				{
 					case MsgCategory.Information:
 						return Strings.STR_Category_Information;

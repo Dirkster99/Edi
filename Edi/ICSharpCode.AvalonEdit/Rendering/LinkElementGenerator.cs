@@ -53,8 +53,8 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		/// </summary>
 		public LinkElementGenerator()
 		{
-			this.linkRegex = defaultLinkRegex;
-			this.RequireControlModifierForClick = true;
+			linkRegex = defaultLinkRegex;
+			RequireControlModifierForClick = true;
 		}
 		
 		/// <summary>
@@ -62,14 +62,12 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		/// </summary>
 		protected LinkElementGenerator(Regex regex) : this()
 		{
-			if (regex == null)
-				throw new ArgumentNullException("regex");
-			this.linkRegex = regex;
+            linkRegex = regex ?? throw new ArgumentNullException(nameof(regex));
 		}
 		
 		void IBuiltinElementGenerator.FetchOptions(TextEditorOptions options)
 		{
-			this.RequireControlModifierForClick = options.RequireControlModifierForHyperlinkClick;
+			RequireControlModifierForClick = options.RequireControlModifierForHyperlinkClick;
 		}
 		
 		Match GetMatch(int startOffset, out int matchOffset)
@@ -96,9 +94,9 @@ namespace ICSharpCode.AvalonEdit.Rendering
 			Match m = GetMatch(offset, out matchOffset);
 			if (m.Success && matchOffset == offset) {
 				return ConstructElementFromMatch(m);
-			} else {
-				return null;
 			}
+
+		    return null;
 		}
 		
 		/// <summary>
@@ -111,10 +109,12 @@ namespace ICSharpCode.AvalonEdit.Rendering
 			Uri uri = GetUriFromMatch(m);
 			if (uri == null)
 				return null;
-			VisualLineLinkText linkText = new VisualLineLinkText(CurrentContext.VisualLine, m.Length);
-			linkText.NavigateUri = uri;
-			linkText.RequireControlModifierForClick = this.RequireControlModifierForClick;
-			return linkText;
+            VisualLineLinkText linkText = new VisualLineLinkText(CurrentContext.VisualLine, m.Length)
+            {
+                NavigateUri = uri,
+                RequireControlModifierForClick = RequireControlModifierForClick
+            };
+            return linkText;
 		}
 		
 		/// <summary>
@@ -177,9 +177,9 @@ namespace ICSharpCode.AvalonEdit.Rendering
         private const string UNCLink = @"([""][\\\\][ a-zA-Z0-9\\\.~_\-~%@()+:?&=#!]*[\\]?[ a-zA-Z0-9\\\.~_\-~%@()+:?&=#!]*)[""]";
 
         internal readonly new static Regex defaultLinkRegex = new Regex(
-                  FileLinkElementGenerator.UNCLink
-          + "|" + FileLinkElementGenerator.FileLink
-          + "|" + FileLinkElementGenerator.DriveLink
+                  UNCLink
+          + "|" + FileLink
+          + "|" + DriveLink
           );
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
         /// which can be used to match and highlight links into the Windows file system.
         /// </summary>
         public FileLinkElementGenerator()
-          : base(FileLinkElementGenerator.defaultLinkRegex)
+          : base(defaultLinkRegex)
         {
         }
 

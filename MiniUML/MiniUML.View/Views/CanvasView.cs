@@ -10,15 +10,13 @@
     using System.Windows.Documents;
     using System.Windows.Input;
     using System.Windows.Media;
-    using MiniUML.Framework;
-    using MiniUML.Framework.interfaces;
-    using MiniUML.Model.ViewModels.Document;
-    using MiniUML.Model.ViewModels.RubberBand;
-    using MiniUML.Model.ViewModels.Shapes;
-    using MiniUML.View.Controls;
-    using MiniUML.View.Views.RubberBand;
-    using MsgBox;
-    using CommonServiceLocator;
+    using Framework;
+    using Framework.interfaces;
+    using Model.ViewModels.Document;
+    using Model.ViewModels.RubberBand;
+    using Model.ViewModels.Shapes;
+    using Controls;
+    using RubberBand;
 
     public delegate void LayoutUpdatedHandler();
 
@@ -41,15 +39,15 @@
                                                                    typeof(bool), typeof(CanvasView),
                                                                    new FrameworkPropertyMetadata(false));
 
-        private static BooleanToVisibilityConverter mBoolToVisConverter = null;
+        private static BooleanToVisibilityConverter mBoolToVisConverter;
 
         private LeftMouseButton mGotMouseDown = LeftMouseButton.IsNotClicked;
 
-        private ICanvasViewMouseHandler mCurrentMouseHandler = null;
+        private ICanvasViewMouseHandler mCurrentMouseHandler;
 
         // start point of the rubberband drag operation
         ////private Point? mRubberbandSelectionStartPoint = null;
-        private RubberbandAdorner mRubberbandAdorner = null;
+        private RubberbandAdorner mRubberbandAdorner;
 
         /// <summary>
         /// Mouse position at drag start / last drag update.
@@ -63,7 +61,7 @@
 
         private HashSet<LayoutUpdatedHandler> mLayoutUpdatedHandlers = new HashSet<LayoutUpdatedHandler>();
 
-        private ItemsControl mPart_ItemsControl = null;
+        private ItemsControl mPart_ItemsControl;
         #endregion fields
 
         #region constructor
@@ -74,14 +72,14 @@
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(CanvasView), new FrameworkPropertyMetadata(typeof(CanvasView)));
 
-            CanvasView.CmdBindings.Add(new CommandBinding(ApplicationCommands.Copy, OnCopy, CanCopy));
-            CanvasView.CmdBindings.Add(new CommandBinding(ApplicationCommands.Cut, OnCut, CanCut));
-            CanvasView.CmdBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPaste, CanPaste));
-            CanvasView.CmdBindings.Add(new CommandBinding(ApplicationCommands.Delete, OnDelete, CanDelete));
-            CanvasView.CmdBindings.Add(new CommandBinding(ApplicationCommands.Undo, OnUndo, CanUndo));
-            CanvasView.CmdBindings.Add(new CommandBinding(ApplicationCommands.Redo, OnRedo, CanRedo));
+            CmdBindings.Add(new CommandBinding(ApplicationCommands.Copy, OnCopy, CanCopy));
+            CmdBindings.Add(new CommandBinding(ApplicationCommands.Cut, OnCut, CanCut));
+            CmdBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPaste, CanPaste));
+            CmdBindings.Add(new CommandBinding(ApplicationCommands.Delete, OnDelete, CanDelete));
+            CmdBindings.Add(new CommandBinding(ApplicationCommands.Undo, OnUndo, CanUndo));
+            CmdBindings.Add(new CommandBinding(ApplicationCommands.Redo, OnRedo, CanRedo));
 
-            CanvasView.mBoolToVisConverter = new BooleanToVisibilityConverter();
+            mBoolToVisConverter = new BooleanToVisibilityConverter();
         }
 
         /// <summary>
@@ -90,19 +88,19 @@
         public CanvasView()
         {
             // Copy static collection of commands to collection of commands of this instance
-            this.CommandBindings.AddRange(CanvasView.CmdBindings);
+            CommandBindings.AddRange(CmdBindings);
 
-            this.LayoutUpdated += this.canvas_LayoutUpdated;
+            LayoutUpdated += canvas_LayoutUpdated;
 
-            this.DataContextChanged += delegate (object sender, DependencyPropertyChangedEventArgs e)
+            DataContextChanged += delegate (object sender, DependencyPropertyChangedEventArgs e)
             {
-                if (this.CanvasViewModel != null)
-                    this.CanvasViewModel.SelectedItem.SelectionChanged -= this.model_SelectionChanged;
+                if (CanvasViewModel != null)
+                    CanvasViewModel.SelectedItem.SelectionChanged -= model_SelectionChanged;
 
-                this.CanvasViewModel = (CanvasViewModel)DataContext;
+                CanvasViewModel = (CanvasViewModel)DataContext;
 
-                if (this.CanvasViewModel != null)
-                    this.CanvasViewModel.SelectedItem.SelectionChanged += this.model_SelectionChanged;
+                if (CanvasViewModel != null)
+                    CanvasViewModel.SelectedItem.SelectionChanged += model_SelectionChanged;
             };
         }
         #endregion constructor
@@ -176,7 +174,7 @@
 
                 // Toggle shape selection
                 // equivalent expression is _CanvasViewModel.SelectedItem.Contains(shape)
-                if (shape.IsSelected == true)
+                if (shape.IsSelected)
                     CanvasViewModel.SelectedItem.Remove(shape);
                 else
                     CanvasViewModel.SelectedItem.Add(shape);
@@ -204,11 +202,11 @@
             {
                 // Activate shape selection if user starts to drag a shape
                 if (shape.IsSelected == false)
-                    ((ICanvasViewMouseHandler)this).OnShapeClick(this.mDragShape);
+                    ((ICanvasViewMouseHandler)this).OnShapeClick(mDragShape);
             }
             else // user starts a drag operation on the canvas so we setup a rubber band adorner command
             {   // to implement multi object selection via rubber band
-                if (this.mCurrentMouseHandler == this)
+                if (mCurrentMouseHandler == this)
                 {
                     // Clear current selection if no control key is pressed on the keyboard (which would allow adding selected items)
                     if ((Keyboard.IsKeyDown(Key.LeftCtrl) == false &&
@@ -217,15 +215,15 @@
                         CanvasViewModel.SelectedItem.SelectShape(null);
                     }
 
-                    RubberBandViewModel vm = this.GetRubberBand(position);
+                    RubberBandViewModel vm = GetRubberBand(position);
 
                     // Create a new mouse handler command, attach event on completion, and hook it into the system
-                    CreateRubberBandMouseHandler handler = new CreateRubberBandMouseHandler(vm, this.CanvasViewModel);
+                    CreateRubberBandMouseHandler handler = new CreateRubberBandMouseHandler(vm, CanvasViewModel);
                     handler.RubberBandSelection += handler_RubberBandSelection;
 
                     // Hook up into frame work system
-                    this.CanvasViewModel.BeginCanvasViewMouseHandler(handler);
-                    this.BeginMouseOperation();
+                    CanvasViewModel.BeginCanvasViewMouseHandler(handler);
+                    BeginMouseOperation();
                     //this.mCurrentMouseHandler = this.CanvasViewModel.CanvasViewMouseHandler;
                 }
             }
@@ -234,16 +232,16 @@
         private void handler_RubberBandSelection(object sender, RubberBandSelectionEventArgs e)
         {
 
-            if (this.mCurrentMouseHandler is CreateRubberBandMouseHandler)
+            if (mCurrentMouseHandler is CreateRubberBandMouseHandler)
             {
-                CreateRubberBandMouseHandler handler = this.mCurrentMouseHandler as CreateRubberBandMouseHandler;
-                handler.RubberBandSelection -= this.handler_RubberBandSelection;
+                CreateRubberBandMouseHandler handler = mCurrentMouseHandler as CreateRubberBandMouseHandler;
+                handler.RubberBandSelection -= handler_RubberBandSelection;
             }
 
-            this.CanvasViewModel.Handle_RubberBandSelection(e);
+            CanvasViewModel.Handle_RubberBandSelection(e);
 
-            this.EndMouseOperation();
-            this.DestroyRubberband();
+            EndMouseOperation();
+            DestroyRubberband();
         }
 
         /// <summary>
@@ -253,14 +251,14 @@
         /// <param name="delta"></param>
         void ICanvasViewMouseHandler.OnShapeDragUpdate(Point position, Vector delta)
         {
-            if (this.mPart_ItemsControl == null)
+            if (mPart_ItemsControl == null)
                 return;
 
             foreach (ShapeViewModelBase shape in CanvasViewModel.SelectedItem.Shapes)
             {
-                FrameworkElement control = this.ControlFromElement(shape);
+                FrameworkElement control = ControlFromElement(shape);
 
-                if ((bool)control.GetValue(CanvasView.CustomDragProperty))
+                if ((bool)control.GetValue(CustomDragProperty))
                     continue;
 
                 // Get current position of shape
@@ -274,16 +272,16 @@
                     p.X = 0;
                 else
                 {
-                    if (p.X + control.ActualWidth > this.mPart_ItemsControl.ActualWidth)
-                        p.X = this.mPart_ItemsControl.ActualWidth - control.ActualWidth;
+                    if (p.X + control.ActualWidth > mPart_ItemsControl.ActualWidth)
+                        p.X = mPart_ItemsControl.ActualWidth - control.ActualWidth;
                 }
 
                 if (p.Y < 0)
                     p.Y = 0;
                 else
                 {
-                    if (p.Y + control.ActualHeight > this.mPart_ItemsControl.ActualHeight)
-                        p.Y = this.mPart_ItemsControl.ActualHeight - control.ActualHeight;
+                    if (p.Y + control.ActualHeight > mPart_ItemsControl.ActualHeight)
+                        p.Y = mPart_ItemsControl.ActualHeight - control.ActualHeight;
                 }
 
                 // Set shape to new position
@@ -300,7 +298,7 @@
 
         void ICanvasViewMouseHandler.OnShapeDragEnd(Point position, ShapeViewModelBase element)
         {
-            CanvasViewModel viewModel = this.DataContext as CanvasViewModel;
+            CanvasViewModel viewModel = DataContext as CanvasViewModel;
         }
 
         void ICanvasViewMouseHandler.OnCancelMouseHandler()
@@ -312,7 +310,7 @@
         #region Coercion
         public void NotifyOnLayoutUpdated(LayoutUpdatedHandler handler)
         {
-            this.mLayoutUpdatedHandlers.Add(handler);
+            mLayoutUpdatedHandlers.Add(handler);
         }
         #endregion Coercion
 
@@ -324,16 +322,16 @@
         {
             base.OnApplyTemplate();
 
-            this.mPart_ItemsControl = this.GetTemplateChild("Part_ItemsControl") as ItemsControl;
+            mPart_ItemsControl = GetTemplateChild("Part_ItemsControl") as ItemsControl;
         }
 
         #region Utility methods
         public ShapeViewModelBase GetShapeAt(Point p)
         {
-            if (this.mPart_ItemsControl == null)
+            if (mPart_ItemsControl == null)
                 return null;
 
-            DependencyObject hitObject = (DependencyObject)this.mPart_ItemsControl.InputHitTest(p);
+            DependencyObject hitObject = (DependencyObject)mPart_ItemsControl.InputHitTest(p);
 
             // Workaround: For reasons unknown, InputHitTest sometimes return null when it clearly should not.
             // This appears to be a framework bug.
@@ -356,13 +354,13 @@
 
                 hitObject = VisualTreeHelper.GetParent(hitObject);
             }
-            while (hitObject != this.mPart_ItemsControl);
+            while (hitObject != mPart_ItemsControl);
 
             // Something's wrong: We clicked a control not wrapped in a ContentPresenter... Never mind, then.
             if (presenter == null)
                 return null;
 
-            var element = this.mPart_ItemsControl.ItemContainerGenerator.ItemFromContainer(presenter);
+            var element = mPart_ItemsControl.ItemContainerGenerator.ItemFromContainer(presenter);
 
             return (element == DependencyProperty.UnsetValue) ? null : (ShapeViewModelBase)element;
         }
@@ -377,10 +375,10 @@
             if (element == null)
                 return null;
 
-            if (this.mPart_ItemsControl == null)
+            if (mPart_ItemsControl == null)
                 return null;
 
-            return (UIElement)this.mPart_ItemsControl.ItemContainerGenerator.ContainerFromItem(element);
+            return (UIElement)mPart_ItemsControl.ItemContainerGenerator.ContainerFromItem(element);
         }
 
         public FrameworkElement ControlFromElement(ShapeViewModelBase element)
@@ -388,11 +386,11 @@
             if (element == null)
                 return null;
 
-            if (this.mPart_ItemsControl == null)
+            if (mPart_ItemsControl == null)
                 return null;
 
             // TODO XXX Dirkster Bug ???
-            DependencyObject dob = this.mPart_ItemsControl.ItemContainerGenerator.ContainerFromItem(element);
+            DependencyObject dob = mPart_ItemsControl.ItemContainerGenerator.ContainerFromItem(element);
 
             if (dob == null)
                 return null;
@@ -410,15 +408,15 @@
 
         public ShapeViewModelBase ElementFromControl(DependencyObject shape)
         {
-            if (this.mPart_ItemsControl == null)
+            if (mPart_ItemsControl == null)
                 return null;
 
             while (shape != null)
             {
 
-                if (this.mPart_ItemsControl.ItemContainerGenerator.ItemFromContainer(shape) is ShapeViewModelBase)
+                if (mPart_ItemsControl.ItemContainerGenerator.ItemFromContainer(shape) is ShapeViewModelBase)
                 {
-                    ShapeViewModelBase item = this.mPart_ItemsControl.ItemContainerGenerator.ItemFromContainer(shape) as ShapeViewModelBase;
+                    ShapeViewModelBase item = mPart_ItemsControl.ItemContainerGenerator.ItemFromContainer(shape) as ShapeViewModelBase;
                     return item;
                 }
 
@@ -437,20 +435,20 @@
         /// </summary>
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
-            if (this.mPart_ItemsControl == null)
+            if (mPart_ItemsControl == null)
                 return;
 
-            if (this.mGotMouseDown == LeftMouseButton.IsClicked ||
+            if (mGotMouseDown == LeftMouseButton.IsClicked ||
                (CanvasViewModel.CanvasViewMouseHandler == null && e.ChangedButton != MouseButton.Left))
             {
                 base.OnPreviewMouseDown(e);
                 return;
             }
 
-            this.BeginMouseOperation();
+            BeginMouseOperation();
 
-            this.mDragStart = e.GetPosition(this.mPart_ItemsControl);
-            this.mDragShape = this.GetShapeAt(this.mDragStart);
+            mDragStart = e.GetPosition(mPart_ItemsControl);
+            mDragShape = GetShapeAt(mDragStart);
 
             e.Handled = (CanvasViewModel.CanvasViewMouseHandler != null) || (CanvasViewModel.SelectedItem.Count > 1);
         }
@@ -460,70 +458,70 @@
         /// </summary>
         protected override void OnPreviewMouseMove(MouseEventArgs e)
         {
-            if (this.mPart_ItemsControl == null)
+            if (mPart_ItemsControl == null)
                 return;
 
-            if (this.mGotMouseDown == LeftMouseButton.IsNotClicked)
+            if (mGotMouseDown == LeftMouseButton.IsNotClicked)
                 return;
 
-            Point position = e.GetPosition(this.mPart_ItemsControl);
-            Vector dragDelta = position - this.mDragStart;
+            Point position = e.GetPosition(mPart_ItemsControl);
+            Vector dragDelta = position - mDragStart;
 
-            if (this.IsMouseCaptured == false)
+            if (IsMouseCaptured == false)
             {
                 if (e.LeftButton != MouseButtonState.Pressed)
                     return;                                      // We're not dragging anything.
 
                 // This CanvasView is not responsible for the dragging.
-                if (this.IsMouseCaptureWithin == true)
+                if (IsMouseCaptureWithin)
                     return;
 
                 if (Math.Abs(dragDelta.X) < SystemParameters.MinimumHorizontalDragDistance &&
                     Math.Abs(dragDelta.Y) < SystemParameters.MinimumVerticalDragDistance)
                     return;
 
-                this.mCurrentMouseHandler.OnShapeDragBegin(position, this.mDragShape);
+                mCurrentMouseHandler.OnShapeDragBegin(position, mDragShape);
 
-                this.CaptureMouse();
+                CaptureMouse();
             }
 
-            this.mCurrentMouseHandler.OnShapeDragUpdate(position, dragDelta);
+            mCurrentMouseHandler.OnShapeDragUpdate(position, dragDelta);
 
             // The new "drag start" is the current mouse position.
-            this.mDragStart = position;
+            mDragStart = position;
         }
 
         protected override void OnPreviewMouseUp(MouseButtonEventArgs e)
         {
-            if (this.mPart_ItemsControl == null)
+            if (mPart_ItemsControl == null)
                 return;
 
-            if (this.mGotMouseDown == LeftMouseButton.IsNotClicked)
+            if (mGotMouseDown == LeftMouseButton.IsNotClicked)
                 return;
 
             // This try block ends with an EndMouseOperation which chnages/checks the datamodel state
             // be careful when editing this part !!!
             try
             {
-                if (this.mPart_ItemsControl != null)
+                if (mPart_ItemsControl != null)
                 {
-                    Point position = e.GetPosition(this.mPart_ItemsControl);
+                    Point position = e.GetPosition(mPart_ItemsControl);
 
-                    if (this.IsMouseCaptured == false)
+                    if (IsMouseCaptured == false)
                     {
-                        this.mCurrentMouseHandler.OnShapeClick(this.mDragShape);
+                        mCurrentMouseHandler.OnShapeClick(mDragShape);
                         return;
                     }
 
-                    this.ReleaseMouseCapture();
+                    ReleaseMouseCapture();
 
-                    this.mCurrentMouseHandler.OnShapeDragUpdate(position, position - this.mDragStart);
-                    this.mCurrentMouseHandler.OnShapeDragEnd(position, this.GetShapeAt(position));
+                    mCurrentMouseHandler.OnShapeDragUpdate(position, position - mDragStart);
+                    mCurrentMouseHandler.OnShapeDragEnd(position, GetShapeAt(position));
                 }
             }
             finally
             {
-                this.EndMouseOperation();
+                EndMouseOperation();
             }
 
             /* HACK: Work-around for bug 4
@@ -543,17 +541,17 @@
 
             if (e.Source == this)
             {
-                if (this.IsFocused == false)
-                    this.Focus();
+                if (IsFocused == false)
+                    Focus();
             }
             else
             {
                 // in case that this click is the start for a drag operation we cache the start point
-                if (this.mCurrentMouseHandler != this && this.mCurrentMouseHandler != null)
+                if (mCurrentMouseHandler != this && mCurrentMouseHandler != null)
                 {
                     Point position = e.GetPosition(this);
 
-                    this.mCurrentMouseHandler.OnShapeDragBegin(position, null);
+                    mCurrentMouseHandler.OnShapeDragBegin(position, null);
                 }
             }
 
@@ -569,30 +567,30 @@
         {
             base.OnDrop(e);
 
-            if (this.mPart_ItemsControl == null)
+            if (mPart_ItemsControl == null)
                 return;
 
             if (e.Data.GetDataPresent(typeof(IDragableCommandModel)))
             {
                 IDragableCommandModel cmd = (IDragableCommandModel)e.Data.GetData(typeof(IDragableCommandModel));
 
-                cmd.OnDragDropExecute(e.GetPosition(this.mPart_ItemsControl));
+                cmd.OnDragDropExecute(e.GetPosition(mPart_ItemsControl));
                 e.Handled = true;
                 return;
             }
 
-            if (e.Data.GetDataPresent(typeof(MiniUML.Framework.helpers.DragObject)))
+            if (e.Data.GetDataPresent(typeof(Framework.helpers.DragObject)))
             {
                 try
                 {
-                    MiniUML.Framework.helpers.DragObject dragObject = (MiniUML.Framework.helpers.DragObject)e.Data.GetData(typeof(MiniUML.Framework.helpers.DragObject));
+                    Framework.helpers.DragObject dragObject = (Framework.helpers.DragObject)e.Data.GetData(typeof(Framework.helpers.DragObject));
 
                     IDragableCommandModel c = dragObject.ObjectInstance as IDragableCommandModel;
 
                     if (c == null)
                         return;
 
-                    Point p = e.GetPosition(this.mPart_ItemsControl);
+                    Point p = e.GetPosition(mPart_ItemsControl);
 
                     if (p != null)
                         c.OnDragDropExecute(p);
@@ -607,17 +605,17 @@
                 }
             }
 
-            string fileName = this.IsSingleFile(e);
+            string fileName = IsSingleFile(e);
             if (fileName != null)
             {
                 // Check if the datamodel is ready
-                if (!(this.CanvasViewModel.DocumentViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready ||
-                      this.CanvasViewModel.DocumentViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Invalid))
+                if (!(CanvasViewModel.DocumentViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready ||
+                      CanvasViewModel.DocumentViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Invalid))
                     return;
 
                 Application.Current.MainWindow.Activate();
 
-                if (this.CanvasViewModel.DocumentViewModel.QuerySaveChanges() == false)
+                if (CanvasViewModel.DocumentViewModel.QuerySaveChanges() == false)
                     return;
 
                 try
@@ -628,8 +626,8 @@
                 catch (Exception ex)
                 {
                     var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                    msgBox.Show(ex, string.Format(MiniUML.Framework.Local.Strings.STR_OpenFILE_MSG, fileName),
-                                MiniUML.Framework.Local.Strings.STR_OpenFILE_MSG_CAPTION, MsgBoxButtons.OK);
+                    msgBox.Show(ex, string.Format(Framework.Local.Strings.STR_OpenFILE_MSG, fileName),
+                                Framework.Local.Strings.STR_OpenFILE_MSG_CAPTION, MsgBoxButtons.OK);
                 }
 
                 return;
@@ -656,11 +654,11 @@
             else
             {
                 // the user dragged a toolbox item over wrapped in a DragObject over the canvas
-                if (e.Data.GetDataPresent(typeof(MiniUML.Framework.helpers.DragObject)))
+                if (e.Data.GetDataPresent(typeof(Framework.helpers.DragObject)))
                 {
                     e.Effects = DragDropEffects.Copy;
                 }
-                else if (this.IsSingleFile(e) != null)
+                else if (IsSingleFile(e) != null)
                 {
                     e.Effects = DragDropEffects.Copy;
                 }
@@ -806,21 +804,21 @@
         private void BeginMouseOperation()
         {
             //// DebugUtilities.Assert(_gotMouseDown == false, "beginMouseOperation called when already in mouse operation");
-            this.mGotMouseDown = LeftMouseButton.IsClicked;
+            mGotMouseDown = LeftMouseButton.IsClicked;
 
             // Use the handler specified on Model, if not null. Otherwise, use ourself
             // Default is the ICanvasViewMouseHandler interface implementation of the CanvasView
-            this.mCurrentMouseHandler = this.CanvasViewModel.CanvasViewMouseHandler != null ?
-                                        this.CanvasViewModel.CanvasViewMouseHandler : this;
+            mCurrentMouseHandler = CanvasViewModel.CanvasViewMouseHandler != null ?
+                                        CanvasViewModel.CanvasViewMouseHandler : this;
 
             // Don't create undo states at every drag update.
-            this.CanvasViewModel.DocumentViewModel.dm_DocumentDataModel.BeginOperation("CanvasView mouse operation");
+            CanvasViewModel.DocumentViewModel.dm_DocumentDataModel.BeginOperation("CanvasView mouse operation");
         }
 
         private void EndMouseOperation()
         {
-            this.mGotMouseDown = LeftMouseButton.IsNotClicked;
-            this.mCurrentMouseHandler = null;
+            mGotMouseDown = LeftMouseButton.IsNotClicked;
+            mCurrentMouseHandler = null;
 
             // Re-enable the data model.
             CanvasViewModel.DocumentViewModel.dm_DocumentDataModel.EndOperation("CanvasView mouse operation");
@@ -832,7 +830,7 @@
             e.CanExecute = false;
 
             if (CanvasViewModel != null)
-                e.CanExecute = this.CanvasViewModel.DeleteCommand.CanExecute(e.Parameter);
+                e.CanExecute = CanvasViewModel.DeleteCommand.CanExecute(e.Parameter);
 
             e.Handled = true;
         }
@@ -840,7 +838,7 @@
         private void CommandDelete_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (CanvasViewModel != null)
-                this.CanvasViewModel.DeleteCommand.Execute(e.Parameter);
+                CanvasViewModel.DeleteCommand.Execute(e.Parameter);
 
             e.Handled = true;
         }
@@ -852,7 +850,7 @@
             e.CanExecute = false;
 
             if (CanvasViewModel != null)
-                e.CanExecute = this.CanvasViewModel.CopyCommand.CanExecute(e.Parameter);
+                e.CanExecute = CanvasViewModel.CopyCommand.CanExecute(e.Parameter);
 
             e.Handled = true;
         }
@@ -860,7 +858,7 @@
         private void CommandCopy_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (CanvasViewModel != null)
-                this.CanvasViewModel.CopyCommand.Execute(e.Parameter);
+                CanvasViewModel.CopyCommand.Execute(e.Parameter);
 
             e.Handled = true;
         }
@@ -872,7 +870,7 @@
             e.CanExecute = false;
 
             if (CanvasViewModel != null)
-                e.CanExecute = this.CanvasViewModel.CutCommand.CanExecute(e.Parameter);
+                e.CanExecute = CanvasViewModel.CutCommand.CanExecute(e.Parameter);
 
             e.Handled = true;
         }
@@ -880,7 +878,7 @@
         private void CommandCut_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (CanvasViewModel != null)
-                this.CanvasViewModel.CutCommand.Execute(e.Parameter);
+                CanvasViewModel.CutCommand.Execute(e.Parameter);
 
             e.Handled = true;
         }
@@ -892,7 +890,7 @@
             e.CanExecute = false;
 
             if (CanvasViewModel != null)
-                e.CanExecute = this.CanvasViewModel.PasteCommand.CanExecute(e.Parameter);
+                e.CanExecute = CanvasViewModel.PasteCommand.CanExecute(e.Parameter);
 
             e.Handled = true;
         }
@@ -900,7 +898,7 @@
         private void CommandPaste_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (CanvasViewModel != null)
-                this.CanvasViewModel.PasteCommand.Execute(e.Parameter);
+                CanvasViewModel.PasteCommand.Execute(e.Parameter);
 
             e.Handled = true;
         }
@@ -967,12 +965,12 @@
             if (CanvasViewModel == null)
                 return;
 
-            HashSet<LayoutUpdatedHandler> set = this.mLayoutUpdatedHandlers;
+            HashSet<LayoutUpdatedHandler> set = mLayoutUpdatedHandlers;
 
             if (set.Count == 0)
                 return;
 
-            this.mLayoutUpdatedHandlers = new HashSet<LayoutUpdatedHandler>();
+            mLayoutUpdatedHandlers = new HashSet<LayoutUpdatedHandler>();
 
             try
             {
@@ -995,12 +993,12 @@
         /// </summary>
         private void model_SelectionChanged(object sender, EventArgs e)
         {
-            if (this.mPart_ItemsControl == null)
+            if (mPart_ItemsControl == null)
                 return;
 
-            foreach (ShapeViewModelBase shape in this.mPart_ItemsControl.Items)
+            foreach (ShapeViewModelBase shape in mPart_ItemsControl.Items)
             {
-                this.mPart_ItemsControl.ItemContainerGenerator.ContainerFromItem(shape).SetValue(
+                mPart_ItemsControl.ItemContainerGenerator.ContainerFromItem(shape).SetValue(
                                            Selector.IsSelectedProperty, CanvasViewModel.SelectedItem.Contains(shape));
             }
         }
@@ -1039,24 +1037,24 @@
         /// </summary>
         private void DestroyRubberband()
         {
-            if (this.mRubberbandAdorner != null)
+            if (mRubberbandAdorner != null)
             {
                 try
                 {
-                    this.mRubberbandAdorner.Visibility = System.Windows.Visibility.Hidden;
+                    mRubberbandAdorner.Visibility = Visibility.Hidden;
 
-                    this.CanvasViewModel.ResetRubberBand();
+                    CanvasViewModel.ResetRubberBand();
 
                     AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this);
 
                     if (adornerLayer != null)
                     {
-                        adornerLayer.Remove(this.mRubberbandAdorner);
+                        adornerLayer.Remove(mRubberbandAdorner);
                     }
                 }
                 finally
                 {
-                    this.mRubberbandAdorner = null;
+                    mRubberbandAdorner = null;
                 }
             }
         }
@@ -1068,38 +1066,44 @@
         /// <returns></returns>
         private RubberBandViewModel GetRubberBand(Point position)
         {
-            this.DestroyRubberband();
+            DestroyRubberband();
 
-            RubberBandViewModel rbViewModel = this.CanvasViewModel.RubberBand;
+            RubberBandViewModel rbViewModel = CanvasViewModel.RubberBand;
             rbViewModel.IsVisible = false;
             rbViewModel.Position = new Point(position.X, position.Y);
             rbViewModel.EndPosition = new Point(position.X, position.Y);
 
-            if (this.mRubberbandAdorner == null)
+            if (mRubberbandAdorner == null)
             {
-                this.mRubberbandAdorner = new RubberbandAdorner(this, new Point(position.X, position.Y));
-                this.mRubberbandAdorner.Visibility = System.Windows.Visibility.Hidden;
-                this.mRubberbandAdorner.Width = this.mRubberbandAdorner.Height = 0;
+                mRubberbandAdorner = new RubberbandAdorner(this, new Point(position.X, position.Y))
+                {
+                    Visibility = Visibility.Hidden
+                };
+                mRubberbandAdorner.Width = mRubberbandAdorner.Height = 0;
 
                 // EndPosition binding with converter
                 {
-                    var endPosBinding = new Binding("EndPosition");
-                    endPosBinding.Source = rbViewModel;
-                    BindingOperations.SetBinding(this.mRubberbandAdorner, RubberbandAdorner.EndPointProperty, endPosBinding);
+                    var endPosBinding = new Binding("EndPosition")
+                    {
+                        Source = rbViewModel
+                    };
+                    BindingOperations.SetBinding(mRubberbandAdorner, RubberbandAdorner.EndPointProperty, endPosBinding);
                 }
 
                 // Visibility binding with converter
                 {
-                    var visiblityBinding = new Binding("IsVisible");
-                    visiblityBinding.Source = rbViewModel;
-                    visiblityBinding.Converter = CanvasView.mBoolToVisConverter;
-                    BindingOperations.SetBinding(this.mRubberbandAdorner, RubberbandAdorner.VisibilityProperty, visiblityBinding);
+                    var visiblityBinding = new Binding("IsVisible")
+                    {
+                        Source = rbViewModel,
+                        Converter = mBoolToVisConverter
+                    };
+                    BindingOperations.SetBinding(mRubberbandAdorner, VisibilityProperty, visiblityBinding);
                 }
 
                 AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this);
 
                 if (adornerLayer != null)
-                    adornerLayer.Add(this.mRubberbandAdorner);
+                    adornerLayer.Add(mRubberbandAdorner);
             }
 
             rbViewModel.IsVisible = true;

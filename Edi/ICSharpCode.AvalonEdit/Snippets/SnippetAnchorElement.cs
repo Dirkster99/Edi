@@ -16,9 +16,7 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-using System;
 using ICSharpCode.AvalonEdit.Document;
-using ICSharpCode.NRefactory.Editor;
 
 namespace ICSharpCode.AvalonEdit.Snippets
 {
@@ -37,7 +35,7 @@ namespace ICSharpCode.AvalonEdit.Snippets
 		/// </summary>
 		public SnippetAnchorElement(string name)
 		{
-			this.Name = name;
+			Name = name;
 		}
 		
 		/// <inheritdoc />
@@ -76,7 +74,7 @@ namespace ICSharpCode.AvalonEdit.Snippets
 		{
 			this.segment = segment;
 			this.context = context;
-			this.Name = name;
+			Name = name;
 		}
 		
 		/// <summary>

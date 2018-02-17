@@ -90,10 +90,9 @@ namespace ICSharpCode.AvalonEdit.Document
 			int num = (int)controlCharacter;
 			if (num < c0Table.Length)
 				return c0Table[num];
-			else if (num >= 127 && num <= 159)
-				return delAndC1Table[num - 127];
-			else
-				return num.ToString("x4", CultureInfo.InvariantCulture);
+		    if (num >= 127 && num <= 159)
+		        return delAndC1Table[num - 127];
+		    return num.ToString("x4", CultureInfo.InvariantCulture);
 		}
 		#endregion
 		
@@ -109,7 +108,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		public static ISegment GetWhitespaceAfter(ITextSource textSource, int offset)
 		{
 			if (textSource == null)
-				throw new ArgumentNullException("textSource");
+				throw new ArgumentNullException(nameof(textSource));
 			int pos;
 			for (pos = offset; pos < textSource.TextLength; pos++) {
 				char c = textSource.GetCharAt(pos);
@@ -130,7 +129,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		public static ISegment GetWhitespaceBefore(ITextSource textSource, int offset)
 		{
 			if (textSource == null)
-				throw new ArgumentNullException("textSource");
+				throw new ArgumentNullException(nameof(textSource));
 			int pos;
 			for (pos = offset - 1; pos >= 0; pos--) {
 				char c = textSource.GetCharAt(pos);
@@ -151,7 +150,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		public static ISegment GetLeadingWhitespace(TextDocument document, DocumentLine documentLine)
 		{
 			if (documentLine == null)
-				throw new ArgumentNullException("documentLine");
+				throw new ArgumentNullException(nameof(documentLine));
 			return GetWhitespaceAfter(document, documentLine.Offset);
 		}
 		
@@ -165,14 +164,13 @@ namespace ICSharpCode.AvalonEdit.Document
 		public static ISegment GetTrailingWhitespace(TextDocument document, DocumentLine documentLine)
 		{
 			if (documentLine == null)
-				throw new ArgumentNullException("documentLine");
+				throw new ArgumentNullException(nameof(documentLine));
 			ISegment segment = GetWhitespaceBefore(document, documentLine.EndOffset);
 			// If the whole line consists of whitespace, we consider all of it as leading whitespace,
 			// so return an empty segment as trailing whitespace.
 			if (segment.Offset == documentLine.Offset)
 				return new SimpleSegment(documentLine.EndOffset, 0);
-			else
-				return segment;
+		    return segment;
 		}
 		#endregion
 		
@@ -190,22 +188,24 @@ namespace ICSharpCode.AvalonEdit.Document
 		public static ISegment GetSingleIndentationSegment(ITextSource textSource, int offset, int indentationSize)
 		{
 			if (textSource == null)
-				throw new ArgumentNullException("textSource");
+				throw new ArgumentNullException(nameof(textSource));
 			int pos = offset;
 			while (pos < textSource.TextLength) {
 				char c = textSource.GetCharAt(pos);
-				if (c == '\t') {
-					if (pos == offset)
+				if (c == '\t')
+				{
+				    if (pos == offset)
 						return new SimpleSegment(offset, 1);
-					else
-						break;
-				} else if (c == ' ') {
-					if (pos - offset >= indentationSize)
-						break;
-				} else {
-					break;
+				    break;
 				}
-				// continue only if c==' ' and (pos-offset)<tabSize
+
+			    if (c == ' ') {
+			        if (pos - offset >= indentationSize)
+			            break;
+			    } else {
+			        break;
+			    }
+			    // continue only if c==' ' and (pos-offset)<tabSize
 				pos++;
 			}
 			return new SimpleSegment(offset, pos - offset);
@@ -230,10 +230,10 @@ namespace ICSharpCode.AvalonEdit.Document
 		{
 			if (char.IsSurrogatePair(highSurrogate, lowSurrogate)) {
 				return GetCharacterClass(char.GetUnicodeCategory(highSurrogate.ToString() + lowSurrogate.ToString(), 0));
-			} else {
-				// malformed surrogate pair
-				return CharacterClass.Other;
 			}
+
+		    // malformed surrogate pair
+		    return CharacterClass.Other;
 		}
 		
 		static CharacterClass GetCharacterClass(UnicodeCategory c)
@@ -279,7 +279,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		public static int GetNextCaretPosition(ITextSource textSource, int offset, LogicalDirection direction, CaretPositioningMode mode)
 		{
 			if (textSource == null)
-				throw new ArgumentNullException("textSource");
+				throw new ArgumentNullException(nameof(textSource));
 			switch (mode) {
 				case CaretPositioningMode.Normal:
 				case CaretPositioningMode.EveryCodepoint:
@@ -289,12 +289,12 @@ namespace ICSharpCode.AvalonEdit.Document
 				case CaretPositioningMode.WordStartOrSymbol:
 					break; // OK
 				default:
-					throw new ArgumentException("Unsupported CaretPositioningMode: " + mode, "mode");
+					throw new ArgumentException("Unsupported CaretPositioningMode: " + mode, nameof(mode));
 			}
 			if (direction != LogicalDirection.Backward
 			    && direction != LogicalDirection.Forward)
 			{
-				throw new ArgumentException("Invalid LogicalDirection: " + direction, "direction");
+				throw new ArgumentException("Invalid LogicalDirection: " + direction, nameof(direction));
 			}
 			int textLength = textSource.TextLength;
 			if (textLength <= 0) {

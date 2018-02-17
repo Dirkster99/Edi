@@ -9,7 +9,7 @@ namespace MiniUML.Plugins.UmlClassDiagram
   {
     public PluginView()
     {
-      this.InitializeComponent();
+      InitializeComponent();
     }
   }
 }

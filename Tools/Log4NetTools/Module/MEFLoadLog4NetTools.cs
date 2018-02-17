@@ -5,9 +5,7 @@
     using Edi.Core.Resources;
     using Edi.Core.View.Pane;
     using Edi.Settings.Interfaces;
-    using Log4NetTools.ViewModels;
-    using Prism.Mef.Modularity;
-    using Prism.Modularity;
+    using ViewModels;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.Reflection;
@@ -47,10 +45,10 @@
 															 ISettingsManager settingsManager,
 															 IDocumentTypeManager documentTypeManager)
 		{
-			this.mAvLayout = avLayout;
-			this.mToolRegistry = toolRegistry;
-			this.mSettingsManager = settingsManager;
-			this.mDocumentTypeManager = documentTypeManager;
+			mAvLayout = avLayout;
+			mToolRegistry = toolRegistry;
+			mSettingsManager = settingsManager;
+			mDocumentTypeManager = documentTypeManager;
 		}
 
 		#region methods
@@ -59,13 +57,13 @@
 		/// </summary>
 		void IModule.Initialize()
 		{
-			this.RegisterDataTemplates(this.mAvLayout.ViewProperties.SelectPanesTemplate);
-			this.RegisterStyles(this.mAvLayout.ViewProperties.SelectPanesStyle);
+			RegisterDataTemplates(mAvLayout.ViewProperties.SelectPanesTemplate);
+			RegisterStyles(mAvLayout.ViewProperties.SelectPanesStyle);
 
-			this.mToolRegistry.RegisterTool(new Log4NetToolViewModel());
-			this.mToolRegistry.RegisterTool(new Log4NetMessageToolViewModel());
+			mToolRegistry.RegisterTool(new Log4NetToolViewModel());
+			mToolRegistry.RegisterTool(new Log4NetMessageToolViewModel());
 
-			var docType = this.mDocumentTypeManager.RegisterDocumentType(Log4NetViewModel.DocumentKey,
+			var docType = mDocumentTypeManager.RegisterDocumentType(Log4NetViewModel.DocumentKey,
 			                                                             Log4NetViewModel.Description,
 			                                                             Log4NetViewModel.FileFilterName,
 																																	 Log4NetViewModel.DefaultFilter,

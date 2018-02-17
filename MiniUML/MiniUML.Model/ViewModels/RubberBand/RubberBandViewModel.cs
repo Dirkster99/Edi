@@ -1,9 +1,8 @@
 ﻿namespace MiniUML.Model.ViewModels.RubberBand
 {
-  using System;
-  using System.Windows;
-  using MiniUML.Framework;
-  using MiniUML.View.Views.RubberBand;
+    using System.Windows;
+  using Framework;
+  using View.Views.RubberBand;
 
   /// <summary>
   /// Base class to manage data items for each shape that is visible on the canvas.
@@ -26,8 +25,8 @@
     /// </summary>
     public RubberBandViewModel()
     {
-      this.Top = this.Left = 100;
-      this.Height = this.Width = 200;
+      Top = Left = 100;
+      Height = Width = 200;
     }
     #endregion constructor
 
@@ -39,16 +38,16 @@
     {
       get
       {
-        return this.mLeft;
+        return mLeft;
       }
 
       set
       {
-        if (this.mLeft != value)
+        if (mLeft != value)
         {
-          this.mLeft = value;
-          this.NotifyPropertyChanged(() => this.Left);
-          this.NotifyPropertyChanged(() => this.Position);
+          mLeft = value;
+          NotifyPropertyChanged(() => Left);
+          NotifyPropertyChanged(() => Position);
         }
       }
     }
@@ -60,16 +59,16 @@
     {
       get
       {
-        return this.mTop;
+        return mTop;
       }
 
       set
       {
-        if (this.mTop != value)
+        if (mTop != value)
         {
-          this.mTop = value;
-          this.NotifyPropertyChanged(() => this.Top);
-          this.NotifyPropertyChanged(() => this.Position);
+          mTop = value;
+          NotifyPropertyChanged(() => Top);
+          NotifyPropertyChanged(() => Position);
         }
       }
     }
@@ -81,19 +80,19 @@
     {
       get
       {
-        return new Point(this.Left, this.Top);
+        return new Point(Left, Top);
       }
 
       set
       {
-        if (value != new Point(this.Left, this.Top))
+        if (value != new Point(Left, Top))
         {
-          this.Left = value.X;
-          this.Top = value.Y;
+          Left = value.X;
+          Top = value.Y;
 
-          this.NotifyPropertyChanged(() => this.Position);
-          this.NotifyPropertyChanged(() => this.Top);
-          this.NotifyPropertyChanged(() => this.Left);
+          NotifyPropertyChanged(() => Position);
+          NotifyPropertyChanged(() => Top);
+          NotifyPropertyChanged(() => Left);
         }
       }
     }
@@ -105,16 +104,16 @@
     {
       get
       {
-        return this.mHeight;
+        return mHeight;
       }
 
       set
       {
-        if (this.mHeight != value)
+        if (mHeight != value)
         {
-          this.mHeight = value;
-          this.NotifyPropertyChanged(() => this.Height);
-          this.NotifyPropertyChanged(() => this.EndPosition);
+          mHeight = value;
+          NotifyPropertyChanged(() => Height);
+          NotifyPropertyChanged(() => EndPosition);
         }
       }
     }
@@ -126,16 +125,16 @@
     {
       get
       {
-        return this.mWidth;
+        return mWidth;
       }
 
       set
       {
-        if (this.mWidth != value)
+        if (mWidth != value)
         {
-          this.mWidth = value;
-          this.NotifyPropertyChanged(() => this.Width);
-          this.NotifyPropertyChanged(() => this.EndPosition);
+          mWidth = value;
+          NotifyPropertyChanged(() => Width);
+          NotifyPropertyChanged(() => EndPosition);
         }
       }
     }
@@ -147,19 +146,19 @@
     {
       get
       {
-        return new Point(this.Left + this.Width, this.Top + this.Height);
+        return new Point(Left + Width, Top + Height);
       }
 
       set
       {
-        if (value != new Point(this.Left, this.Top))
+        if (value != new Point(Left, Top))
         {
-          this.Width = value.X - this.Left;
-          this.Height = value.Y - this.Top;
+          Width = value.X - Left;
+          Height = value.Y - Top;
 
-          this.NotifyPropertyChanged(() => this.EndPosition);
-          this.NotifyPropertyChanged(() => this.Height);
-          this.NotifyPropertyChanged(() => this.Width);
+          NotifyPropertyChanged(() => EndPosition);
+          NotifyPropertyChanged(() => Height);
+          NotifyPropertyChanged(() => Width);
         }
       }
     }
@@ -171,15 +170,15 @@
     {
       get
       {
-        return this.mIsVisible;
+        return mIsVisible;
       }
 
       set
       {
-        if (this.mIsVisible != value)
+        if (mIsVisible != value)
         {
-          this.mIsVisible = value;
-          this.NotifyPropertyChanged(() => this.IsVisible);
+          mIsVisible = value;
+          NotifyPropertyChanged(() => IsVisible);
         }
       }
     }
@@ -188,15 +187,15 @@
     {
       get
       {
-        return this.mSelect;
+        return mSelect;
       }
 
       set
       {
-        if (this.mSelect != value)
+        if (mSelect != value)
         {
-          this.mSelect = value;
-          this.NotifyPropertyChanged(() => this.Select);
+          mSelect = value;
+          NotifyPropertyChanged(() => Select);
         }
       }
     }
@@ -210,8 +209,8 @@
     /// <returns></returns>
     public RubberBandSelectionEventArgs GetSelectionEvent()
     {
-      return new RubberBandSelectionEventArgs(this.Position.X, this.Position.Y,
-                                              this.EndPosition.X, this.EndPosition.Y, this.Select);
+      return new RubberBandSelectionEventArgs(Position.X, Position.Y,
+                                              EndPosition.X, EndPosition.Y, Select);
     }
     #endregion methods
   }

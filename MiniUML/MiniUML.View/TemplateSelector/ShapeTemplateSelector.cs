@@ -2,9 +2,8 @@
 {
   using System.Windows;
   using System.Windows.Controls;
-  using MiniUML.Model;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Shapes;
+  using Model;
+  using Model.ViewModels.Shapes;
 
   /// <summary>
   /// Select a view for a given viewmodel by loading the DataTemplate as Resource.

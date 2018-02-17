@@ -2,16 +2,12 @@
 {
     using System;
     using System.Windows;
-    using Edi.Core.Interfaces;
+    using Core.Interfaces;
     using Files.ViewModels.FileExplorer;
-    using MsgBox;
-    using Edi.Settings.Interfaces;
-    using Edi.Settings.ProgramSettings;
-    using Edi.Settings.UserProfile;
-    using Edi.Themes.Interfaces;
-    using MRULib.MRU.Interfaces;
-    using MRULib.MRU.Models.Persist;
-    using CommonServiceLocator;
+    using Settings.Interfaces;
+    using Settings.ProgramSettings;
+    using Settings.UserProfile;
+    using Themes.Interfaces;
 
     public partial class ApplicationViewModel
     {
@@ -22,29 +18,29 @@
         {
             try
             {
-                this.mAppCore.CreateAppDataFolder();
+                mAppCore.CreateAppDataFolder();
 
                 // Save current explorer settings and user profile data
                 // Query for an explorer tool window and return it
                 // Query for an explorer tool window and return it
-                var explorerTW = this.GetToolWindowVM<IExplorer>();
+                var explorerTW = GetToolWindowVM<IExplorer>();
 
                 if (explorerTW != null)
-                    FileExplorerViewModel.SaveSettings(this.mSettingsManager, explorerTW);
+                    FileExplorerViewModel.SaveSettings(mSettingsManager, explorerTW);
 
                 // Save program options only if there are un-saved changes that need persistence
                 // This can be caused when WPF theme was changed or something else
                 // but should normally not occur as often as saving session data
-                if (this.mSettingsManager.SettingData.IsDirty == true)
+                if (mSettingsManager.SettingData.IsDirty)
                 {
-                    this.mSettingsManager.SaveOptions(this.mAppCore.DirFileAppSettingsData, this.mSettingsManager.SettingData);
+                    mSettingsManager.SaveOptions(mAppCore.DirFileAppSettingsData, mSettingsManager.SettingData);
                 }
 
                 // Convert viewmodel data into model for persistance layer...
                 var mruVM = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
-                MRUEntrySerializer.ConvertToModel(mruVM, this.mSettingsManager.SessionData.MruList);
+                MRUEntrySerializer.ConvertToModel(mruVM, mSettingsManager.SessionData.MruList);
 
-                this.mSettingsManager.SaveSessionData(this.mAppCore.DirFileAppSessionData, this.mSettingsManager.SessionData);
+                mSettingsManager.SaveSessionData(mAppCore.DirFileAppSessionData, mSettingsManager.SessionData);
             }
             catch (Exception exp)
             {
@@ -63,8 +59,8 @@
                                             IThemesManager themes)
         {
             // Re/Load program options and user profile session data to control global behaviour of program
-            settings.LoadOptions(this.mAppCore.DirFileAppSettingsData, themes, programSettings);
-            settings.LoadSessionData(this.mAppCore.DirFileAppSessionData);
+            settings.LoadOptions(mAppCore.DirFileAppSettingsData, themes, programSettings);
+            settings.LoadSessionData(mAppCore.DirFileAppSessionData);
 
             settings.CheckSettingsOnLoad(SystemParameters.VirtualScreenLeft, SystemParameters.VirtualScreenTop);
 
@@ -76,7 +72,7 @@
             // standard skins defined in class enum
             // plus configured skins with highlighting
             themes.SetSelectedTheme(settings.SettingData.CurrentTheme);
-            this.ResetTheme();                       // Initialize theme in process
+            ResetTheme();                       // Initialize theme in process
         }
 
         /// <summary>
@@ -88,16 +84,16 @@
         {
             try
             {
-                if (this.Exit_CheckConditions(sender) == true)      // Close all open files and check whether application is ready to close
+                if (Exit_CheckConditions(sender))      // Close all open files and check whether application is ready to close
                 {
-                    this.OnRequestClose();                          // (other than exception and error handling)
+                    OnRequestClose();                          // (other than exception and error handling)
 
                     e.Cancel = false;
                     //if (wsVM != null)
                     //  wsVM.SaveConfigOnAppClosed(); // Save application layout
                 }
                 else
-                    e.Cancel = this.ShutDownInProgress_Cancel = true;
+                    e.Cancel = ShutDownInProgress_Cancel = true;
             }
             catch (Exception exp)
             {
@@ -114,19 +110,19 @@
         {
             try
             {
-                this.EnableMainWindowActivated(false);
+                EnableMainWindowActivated(false);
 
                 // Persist window position, width and height from this session
-                this.mSettingsManager.SessionData.MainWindowPosSz =
+                mSettingsManager.SessionData.MainWindowPosSz =
                     new ViewPosSizeModel(win.Left, win.Top, win.Width, win.Height,
                                                              (win.WindowState == WindowState.Maximized ? true : false));
 
-                this.mSettingsManager.SessionData.IsWorkspaceAreaOptimized = this.IsWorkspaceAreaOptimized;
+                mSettingsManager.SessionData.IsWorkspaceAreaOptimized = IsWorkspaceAreaOptimized;
 
                 // Save/initialize program options that determine global programm behaviour
-                this.SaveConfigOnAppClosed();
+                SaveConfigOnAppClosed();
 
-                this.DisposeResources();
+                DisposeResources();
             }
             catch (Exception exp)
             {
@@ -144,7 +140,7 @@
         {
             try
             {
-                foreach (var item in this.Files)
+                foreach (var item in Files)
                 {
                     try
                     {

@@ -22,7 +22,6 @@ using System.Globalization;
 using System.Text;
 using System.Windows;
 using ICSharpCode.AvalonEdit.Document;
-using ICSharpCode.NRefactory.Editor;
 
 namespace ICSharpCode.AvalonEdit.Highlighting
 {
@@ -52,9 +51,9 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		public static void SetHtml(DataObject dataObject, string htmlFragment)
 		{
 			if (dataObject == null)
-				throw new ArgumentNullException("dataObject");
+				throw new ArgumentNullException(nameof(dataObject));
 			if (htmlFragment == null)
-				throw new ArgumentNullException("htmlFragment");
+				throw new ArgumentNullException(nameof(htmlFragment));
 			
 			string htmlStart = @"<!DOCTYPE HTML PUBLIC ""-//W3C//DTD HTML 4.0 Transitional//EN"">" + Environment.NewLine
 				+ "<HTML>" + Environment.NewLine
@@ -83,9 +82,9 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		public static string CreateHtmlFragment(IDocument document, IHighlighter highlighter, ISegment segment, HtmlOptions options)
 		{
 			if (document == null)
-				throw new ArgumentNullException("document");
+				throw new ArgumentNullException(nameof(document));
 			if (options == null)
-				throw new ArgumentNullException("options");
+				throw new ArgumentNullException(nameof(options));
 			if (highlighter != null && highlighter.Document != document)
 				throw new ArgumentException("Highlighter does not belong to the specified document.");
 			if (segment == null)

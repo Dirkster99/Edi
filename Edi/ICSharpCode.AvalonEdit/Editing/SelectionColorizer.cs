@@ -30,9 +30,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		
 		public SelectionColorizer(TextArea textArea)
 		{
-			if (textArea == null)
-				throw new ArgumentNullException("textArea");
-			this.textArea = textArea;
+            this.textArea = textArea ?? throw new ArgumentNullException(nameof(textArea));
 		}
 		
 		protected override void Colorize(ITextRunConstructionContext context)

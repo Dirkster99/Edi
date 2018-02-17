@@ -8,8 +8,7 @@ namespace MahApps.Metro.Converters
     {
         protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var val = value as string;
-            return val != null ? val.ToUpper() : value;
+            return value is string val ? val.ToUpper() : value;
         }
 
         protected override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -22,8 +21,7 @@ namespace MahApps.Metro.Converters
     {
         protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var val = value as string;
-            return val != null ? val.ToLower() : value;
+            return value is string val ? val.ToLower() : value;
         }
 
         protected override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

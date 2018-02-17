@@ -16,7 +16,6 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-using System;
 using System.Diagnostics;
 
 namespace ICSharpCode.AvalonEdit.Document
@@ -40,7 +39,7 @@ namespace ICSharpCode.AvalonEdit.Document
 			Debug.Assert(stack.state == UndoStack.StatePlayback);
 			stack.RegisterAffectedDocument(document);
 			stack.state = UndoStack.StatePlaybackModifyDocument;
-			this.Undo();
+			Undo();
 			stack.state = UndoStack.StatePlayback;
 		}
 		
@@ -49,14 +48,14 @@ namespace ICSharpCode.AvalonEdit.Document
 			Debug.Assert(stack.state == UndoStack.StatePlayback);
 			stack.RegisterAffectedDocument(document);
 			stack.state = UndoStack.StatePlaybackModifyDocument;
-			this.Redo();
+			Redo();
 			stack.state = UndoStack.StatePlayback;
 		}
 		
 		public void Undo()
 		{
 			OffsetChangeMap map = change.OffsetChangeMapOrNull;
-			document.Replace(change.Offset, change.InsertionLength, change.RemovedText, map != null ? map.Invert() : null);
+			document.Replace(change.Offset, change.InsertionLength, change.RemovedText, map?.Invert());
 		}
 		
 		public void Redo()

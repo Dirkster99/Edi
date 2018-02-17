@@ -33,10 +33,10 @@
 		/// <returns></returns>
 		public override object ProvideValue(IServiceProvider serviceProvider)
 		{
-			if (BoolToVisibilityConverter.mConverter == null)
-				BoolToVisibilityConverter.mConverter = new BoolToVisibilityConverter();
+			if (mConverter == null)
+				mConverter = new BoolToVisibilityConverter();
 
-			return BoolToVisibilityConverter.mConverter;
+			return mConverter;
 		}
 
 		/// <summary>

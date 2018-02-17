@@ -32,15 +32,14 @@ namespace ICSharpCode.AvalonEdit.Document
 	public sealed class RopeTextSource : ITextSource
 	{
 		readonly Rope<char> rope;
-		readonly ITextSourceVersion version;
-		
-		/// <summary>
+
+	    /// <summary>
 		/// Creates a new RopeTextSource.
 		/// </summary>
 		public RopeTextSource(Rope<char> rope)
 		{
 			if (rope == null)
-				throw new ArgumentNullException("rope");
+				throw new ArgumentNullException(nameof(rope));
 			this.rope = rope.Clone();
 		}
 		
@@ -50,9 +49,9 @@ namespace ICSharpCode.AvalonEdit.Document
 		public RopeTextSource(Rope<char> rope, ITextSourceVersion version)
 		{
 			if (rope == null)
-				throw new ArgumentNullException("rope");
+				throw new ArgumentNullException(nameof(rope));
 			this.rope = rope.Clone();
-			this.version = version;
+			this.Version = version;
 		}
 		
 		/// <summary>
@@ -68,16 +67,12 @@ namespace ICSharpCode.AvalonEdit.Document
 		}
 		
 		/// <inheritdoc/>
-		public string Text {
-			get { return rope.ToString(); }
-		}
-		
-		/// <inheritdoc/>
-		public int TextLength {
-			get { return rope.Length; }
-		}
-		
-		/// <inheritdoc/>
+		public string Text => rope.ToString();
+
+	    /// <inheritdoc/>
+		public int TextLength => rope.Length;
+
+	    /// <inheritdoc/>
 		public char GetCharAt(int offset)
 		{
 			return rope[offset];
@@ -138,11 +133,9 @@ namespace ICSharpCode.AvalonEdit.Document
 		}
 		
 		/// <inheritdoc/>
-		public ITextSourceVersion Version {
-			get { return version; }
-		}
-		
-		/// <inheritdoc/>
+		public ITextSourceVersion Version { get; }
+
+	    /// <inheritdoc/>
 		public int IndexOf(string searchText, int startIndex, int count, StringComparison comparisonType)
 		{
 			return rope.IndexOf(searchText, startIndex, count, comparisonType);

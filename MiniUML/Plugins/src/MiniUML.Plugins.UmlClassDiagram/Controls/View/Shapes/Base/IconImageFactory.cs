@@ -84,7 +84,7 @@
           throw new NotImplementedException(typeOfIcon.ToString());
       }
 
-      source = string.Format("pack://application:,,,/{0};component/{1}", "MiniUML.View", source);
+      source = $"pack://application:,,,/{"MiniUML.View"};component/{source}";
 
       return new Image()
                  {

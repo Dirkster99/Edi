@@ -61,9 +61,9 @@ namespace ICSharpCode.AvalonEdit.Utils
 				// If the list is already read-only, return it directly.
 				// This is important, otherwise we might undo the effects of interning.
 				return list;
-			} else {
-				return new ReadOnlyCollection<T>(list.ToArray());
 			}
+
+		    return new ReadOnlyCollection<T>(list.ToArray());
 		}
 		
 		public static void Freeze(object item)
@@ -98,23 +98,19 @@ namespace ICSharpCode.AvalonEdit.Utils
 	[Serializable]
 	abstract class AbstractFreezable : IFreezable
 	{
-		bool isFrozen;
-		
-		/// <summary>
+	    /// <summary>
 		/// Gets if this instance is frozen. Frozen instances are immutable and thus thread-safe.
 		/// </summary>
-		public bool IsFrozen {
-			get { return isFrozen; }
-		}
-		
-		/// <summary>
+		public bool IsFrozen { get; private set; }
+
+	    /// <summary>
 		/// Freezes this instance.
 		/// </summary>
 		public void Freeze()
 		{
-			if (!isFrozen) {
+			if (!IsFrozen) {
 				FreezeInternal();
-				isFrozen = true;
+				IsFrozen = true;
 			}
 		}
 		

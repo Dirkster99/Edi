@@ -1,11 +1,9 @@
 ﻿namespace MiniUML.View.Controls
 {
-  using System;
-  using System.Windows;
+    using System.Windows;
   using System.Windows.Controls;
   using System.Windows.Input;
-  using MiniUML.Framework;
-  using MiniUML.Framework.interfaces;
+    using Framework.interfaces;
 
   /// <summary>
   /// Interaction logic for RibbonGallery.xaml
@@ -27,10 +25,10 @@
     protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
     {
       base.OnPreviewMouseDown(e);
-      this.mStartPoint = e.GetPosition(null);
+      mStartPoint = e.GetPosition(null);
 
       // TODO: This works, but it's a bit too fragile...
-      this.SelectedItem = e.Source;
+      SelectedItem = e.Source;
     }
 
     /// <summary>
@@ -90,7 +88,7 @@
     protected override void OnPreviewMouseUp(MouseButtonEventArgs e)
     {
       base.OnPreviewMouseUp(e);
-      this.SelectedIndex = -1;
+      SelectedIndex = -1;
     }
 
     private void DoDragDrop(MouseEventArgs e, IDragableCommandModel cmd)

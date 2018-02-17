@@ -17,7 +17,6 @@
 // DEALINGS IN THE SOFTWARE.
 
 using System;
-using ICSharpCode.NRefactory.Editor;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
 
@@ -35,7 +34,7 @@ namespace ICSharpCode.AvalonEdit.Snippets
 		public void Insert(TextArea textArea)
 		{
 			if (textArea == null)
-				throw new ArgumentNullException("textArea");
+				throw new ArgumentNullException(nameof(textArea));
 			
 			ISegment selection = textArea.Selection.SurroundingSegment;
 			int insertionPosition = textArea.Caret.Offset;

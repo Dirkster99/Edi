@@ -20,7 +20,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ICSharpCode.AvalonEdit.Document;
-using ICSharpCode.NRefactory.Editor;
 using ICSharpCode.AvalonEdit.Utils;
 
 namespace ICSharpCode.AvalonEdit.Editing
@@ -40,7 +39,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		public IEnumerable<ISegment> GetDeletableSegments(ISegment segment)
 		{
 			if (segment == null)
-				throw new ArgumentNullException("segment");
+				throw new ArgumentNullException(nameof(segment));
 			// the segment is always deletable
 			return ExtensionMethods.Sequence(segment);
 		}

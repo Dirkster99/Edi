@@ -23,7 +23,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
 using ICSharpCode.AvalonEdit.Document;
-using ICSharpCode.NRefactory.Editor;
 
 namespace ICSharpCode.AvalonEdit.Highlighting
 {
@@ -38,7 +37,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		int GetIndexForOffset(int offset)
 		{
 			if (offset < 0)
-				throw new ArgumentOutOfRangeException("offset");
+				throw new ArgumentOutOfRangeException(nameof(offset));
 			int index = stateChangeOffsets.BinarySearch(offset);
 			if (index < 0) {
 				// If no color change exists directly at offset,
@@ -53,7 +52,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		int GetIndexForOffsetUseExistingSegment(int offset)
 		{
 			if (offset < 0)
-				throw new ArgumentOutOfRangeException("offset");
+				throw new ArgumentOutOfRangeException(nameof(offset));
 			int index = stateChangeOffsets.BinarySearch(offset);
 			if (index < 0) {
 				// If no color change exists directly at offset,
@@ -65,11 +64,10 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		
 		int GetEnd(int index)
 		{
-			// Gets the end of the color segment no. index.
+		    // Gets the end of the color segment no. index.
 			if (index + 1 < stateChangeOffsets.Count)
 				return stateChangeOffsets[index + 1];
-			else
-				return int.MaxValue;
+		    return int.MaxValue;
 		}
 		
 		/// <summary>
@@ -99,7 +97,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		public void UpdateOffsets(TextChangeEventArgs e)
 		{
 			if (e == null)
-				throw new ArgumentNullException("e");
+				throw new ArgumentNullException(nameof(e));
 			UpdateOffsets(e.GetNewOffset);
 		}
 		
@@ -110,7 +108,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		public void UpdateOffsets(OffsetChangeMap change)
 		{
 			if (change == null)
-				throw new ArgumentNullException("change");
+				throw new ArgumentNullException(nameof(change));
 			UpdateOffsets(change.GetNewOffset);
 		}
 		

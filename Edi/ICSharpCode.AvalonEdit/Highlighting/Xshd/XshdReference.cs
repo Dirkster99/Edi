@@ -26,41 +26,29 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 	[Serializable]
 	public struct XshdReference<T> : IEquatable<XshdReference<T>> where T : XshdElement
 	{
-		string referencedDefinition;
-		string referencedElement;
-		T inlineElement;
-		
-		/// <summary>
+	    /// <summary>
 		/// Gets the reference.
 		/// </summary>
-		public string ReferencedDefinition {
-			get { return referencedDefinition; }
-		}
-		
-		/// <summary>
+		public string ReferencedDefinition { get; }
+
+	    /// <summary>
 		/// Gets the reference.
 		/// </summary>
-		public string ReferencedElement {
-			get { return referencedElement; }
-		}
-		
-		/// <summary>
+		public string ReferencedElement { get; }
+
+	    /// <summary>
 		/// Gets the inline element.
 		/// </summary>
-		public T InlineElement {
-			get { return inlineElement; }
-		}
-		
-		/// <summary>
+		public T InlineElement { get; }
+
+	    /// <summary>
 		/// Creates a new XshdReference instance.
 		/// </summary>
 		public XshdReference(string referencedDefinition, string referencedElement)
 		{
-			if (referencedElement == null)
-				throw new ArgumentNullException("referencedElement");
-			this.referencedDefinition = referencedDefinition;
-			this.referencedElement = referencedElement;
-			this.inlineElement = null;
+            this.ReferencedDefinition = referencedDefinition;
+			this.ReferencedElement = referencedElement ?? throw new ArgumentNullException(nameof(referencedElement));
+			InlineElement = null;
 		}
 		
 		/// <summary>
@@ -68,11 +56,9 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 		/// </summary>
 		public XshdReference(T inlineElement)
 		{
-			if (inlineElement == null)
-				throw new ArgumentNullException("inlineElement");
-			this.referencedDefinition = null;
-			this.referencedElement = null;
-			this.inlineElement = inlineElement;
+            ReferencedDefinition = null;
+			ReferencedElement = null;
+			this.InlineElement = inlineElement ?? throw new ArgumentNullException(nameof(inlineElement));
 		}
 		
 		/// <summary>
@@ -80,8 +66,8 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 		/// </summary>
 		public object AcceptVisitor(IXshdVisitor visitor)
 		{
-			if (inlineElement != null)
-				return inlineElement.AcceptVisitor(visitor);
+			if (InlineElement != null)
+				return InlineElement.AcceptVisitor(visitor);
 			else
 				return null;
 		}
@@ -105,16 +91,16 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 		public bool Equals(XshdReference<T> other)
 		{
 			// add comparisions for all members here
-			return this.referencedDefinition == other.referencedDefinition
-				&& this.referencedElement == other.referencedElement
-				&& this.inlineElement == other.inlineElement;
+			return ReferencedDefinition == other.ReferencedDefinition
+				&& ReferencedElement == other.ReferencedElement
+				&& InlineElement == other.InlineElement;
 		}
 		
 		/// <inheritdoc/>
 		public override int GetHashCode()
 		{
 			// combine the hash codes of all members here (e.g. with XOR operator ^)
-			return GetHashCode(referencedDefinition) ^ GetHashCode(referencedElement) ^ GetHashCode(inlineElement);
+			return GetHashCode(ReferencedDefinition) ^ GetHashCode(ReferencedElement) ^ GetHashCode(InlineElement);
 		}
 		
 		static int GetHashCode(object o)

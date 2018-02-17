@@ -24,10 +24,9 @@
 		{
 			get
 			{
-				if (string.IsNullOrEmpty(this.Locale) == false)
-					return String.Format("{0}-{1}", this.Language, this.Locale);
-				else
-					return String.Format("{0}", this.Language);
+			    if (string.IsNullOrEmpty(Locale) == false)
+					return $"{Language}-{Locale}";
+			    return $"{Language}";
 			}
 		}
 
@@ -35,12 +34,6 @@
 		/// Get BCP47 language tag for this language
 		/// See also http://en.wikipedia.org/wiki/IETF_language_tag
 		/// </summary>
-		public string DisplayName
-		{
-			get
-			{
-				return String.Format("{0} {1}", this.Name, this.BCP47);
-			}
-		}
+		public string DisplayName => $"{Name} {BCP47}";
 	}
 }

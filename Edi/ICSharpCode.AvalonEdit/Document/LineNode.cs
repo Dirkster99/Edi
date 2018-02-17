@@ -16,8 +16,6 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-using System;
-
 namespace ICSharpCode.AvalonEdit.Document
 {
 	using LineNode = DocumentLine;
@@ -58,8 +56,8 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		internal LineNode InitLineNode()
 		{
-			this.nodeTotalCount = 1;
-			this.nodeTotalLength = this.TotalLength;
+			nodeTotalCount = 1;
+			nodeTotalLength = TotalLength;
 			return this;
 		}
 		

@@ -227,18 +227,13 @@ namespace ICSharpCode.AvalonEdit.Document
 		/// Gets a text source containing the empty string.
 		/// </summary>
 		public static readonly StringTextSource Empty = new StringTextSource(string.Empty);
-		
-		readonly string text;
-		readonly ITextSourceVersion version;
-		
-		/// <summary>
+
+	    /// <summary>
 		/// Creates a new StringTextSource with the given text.
 		/// </summary>
 		public StringTextSource(string text)
 		{
-			if (text == null)
-				throw new ArgumentNullException("text");
-			this.text = text;
+            this.Text = text ?? throw new ArgumentNullException(nameof(text));
 		}
 		
 		/// <summary>
@@ -246,28 +241,20 @@ namespace ICSharpCode.AvalonEdit.Document
 		/// </summary>
 		public StringTextSource(string text, ITextSourceVersion version)
 		{
-			if (text == null)
-				throw new ArgumentNullException("text");
-			this.text = text;
-			this.version = version;
+            this.Text = text ?? throw new ArgumentNullException(nameof(text));
+			this.Version = version;
 		}
 		
 		/// <inheritdoc/>
-		public ITextSourceVersion Version {
-			get { return version; }
-		}
-		
-		/// <inheritdoc/>
-		public int TextLength {
-			get { return text.Length; }
-		}
-		
-		/// <inheritdoc/>
-		public string Text {
-			get { return text; }
-		}
-		
-		/// <inheritdoc/>
+		public ITextSourceVersion Version { get; }
+
+	    /// <inheritdoc/>
+		public int TextLength => Text.Length;
+
+	    /// <inheritdoc/>
+		public string Text { get; }
+
+	    /// <inheritdoc/>
 		public ITextSource CreateSnapshot()
 		{
 			return this; // StringTextSource is immutable
@@ -276,81 +263,81 @@ namespace ICSharpCode.AvalonEdit.Document
 		/// <inheritdoc/>
 		public ITextSource CreateSnapshot(int offset, int length)
 		{
-			return new StringTextSource(text.Substring(offset, length));
+			return new StringTextSource(Text.Substring(offset, length));
 		}
 		
 		/// <inheritdoc/>
 		public TextReader CreateReader()
 		{
-			return new StringReader(text);
+			return new StringReader(Text);
 		}
 		
 		/// <inheritdoc/>
 		public TextReader CreateReader(int offset, int length)
 		{
-			return new StringReader(text.Substring(offset, length));
+			return new StringReader(Text.Substring(offset, length));
 		}
 		
 		/// <inheritdoc/>
 		public void WriteTextTo(TextWriter writer)
 		{
-			writer.Write(text);
+			writer.Write(Text);
 		}
 		
 		/// <inheritdoc/>
 		public void WriteTextTo(TextWriter writer, int offset, int length)
 		{
-			writer.Write(text.Substring(offset, length));
+			writer.Write(Text.Substring(offset, length));
 		}
 		
 		/// <inheritdoc/>
 		public char GetCharAt(int offset)
 		{
-			return text[offset];
+			return Text[offset];
 		}
 		
 		/// <inheritdoc/>
 		public string GetText(int offset, int length)
 		{
-			return text.Substring(offset, length);
+			return Text.Substring(offset, length);
 		}
 		
 		/// <inheritdoc/>
 		public string GetText(ISegment segment)
 		{
 			if (segment == null)
-				throw new ArgumentNullException("segment");
-			return text.Substring(segment.Offset, segment.Length);
+				throw new ArgumentNullException(nameof(segment));
+			return Text.Substring(segment.Offset, segment.Length);
 		}
 		
 		/// <inheritdoc/>
 		public int IndexOf(char c, int startIndex, int count)
 		{
-			return text.IndexOf(c, startIndex, count);
+			return Text.IndexOf(c, startIndex, count);
 		}
 		
 		/// <inheritdoc/>
 		public int IndexOfAny(char[] anyOf, int startIndex, int count)
 		{
-			return text.IndexOfAny(anyOf, startIndex, count);
+			return Text.IndexOfAny(anyOf, startIndex, count);
 		}
 		
 		/// <inheritdoc/>
 		public int IndexOf(string searchText, int startIndex, int count, StringComparison comparisonType)
 		{
-			return text.IndexOf(searchText, startIndex, count, comparisonType);
+			return Text.IndexOf(searchText, startIndex, count, comparisonType);
 		}
 		
 		/// <inheritdoc/>
 		public int LastIndexOf(char c, int startIndex, int count)
 		{
-			return text.LastIndexOf(c, startIndex + count - 1, count);
+			return Text.LastIndexOf(c, startIndex + count - 1, count);
 		}
 		
 		/// <inheritdoc/>
 		public int LastIndexOf(string searchText, int startIndex, int count, StringComparison comparisonType)
 		{
-			return text.LastIndexOf(searchText, startIndex + count - 1, count, comparisonType);
+			return Text.LastIndexOf(searchText, startIndex + count - 1, count, comparisonType);
 		}
 	}
 	#endif

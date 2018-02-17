@@ -4,12 +4,9 @@ namespace Edi.Documents.ViewModels.StartPage
     using System.Globalization;
     using System.Reflection;
     using System.Windows.Input;
-    using Edi.Core.ViewModels.Command;
-    using MsgBox;
-    using MRULib.MRU.Interfaces;
-    using CommonServiceLocator;
+    using Core.ViewModels.Command;
 
-    public class StartPageViewModel : Edi.Core.ViewModels.FileBaseViewModel
+    public class StartPageViewModel : Core.ViewModels.FileBaseViewModel
     {
         #region fields
         public const string StartPageContentId = ">StartPage<";
@@ -21,9 +18,9 @@ namespace Edi.Documents.ViewModels.StartPage
         /// </summary>
         public StartPageViewModel()
         {
-            this.Title = Edi.Util.Local.Strings.STR_STARTPAGE_TITLE;
-            this.StartPageTip = Edi.Util.Local.Strings.STR_STARTPAGE_WELCOME_TT;
-            this.ContentId = StartPageViewModel.StartPageContentId;
+            Title = Util.Local.Strings.STR_STARTPAGE_TITLE;
+            StartPageTip = Util.Local.Strings.STR_STARTPAGE_WELCOME_TT;
+            ContentId = StartPageContentId;
         }
         #endregion constructor
 
@@ -35,8 +32,8 @@ namespace Edi.Documents.ViewModels.StartPage
             get
             {
                 if (_closeCommand == null)
-                    _closeCommand = new RelayCommand<object>((p) => this.OnClose(),
-                                                                                                     (p) => this.CanClose());
+                    _closeCommand = new RelayCommand<object>((p) => OnClose(),
+                                                                                                     (p) => CanClose());
 
                 return _closeCommand;
             }
@@ -56,7 +53,7 @@ namespace Edi.Documents.ViewModels.StartPage
             get
             {
                 if (_openContainingFolderCommand == null)
-                    _openContainingFolderCommand = new RelayCommand<object>((p) => this.OnOpenContainingFolderCommand());
+                    _openContainingFolderCommand = new RelayCommand<object>((p) => OnOpenContainingFolderCommand());
 
                 return _openContainingFolderCommand;
             }
@@ -67,14 +64,14 @@ namespace Edi.Documents.ViewModels.StartPage
             try
             {
                 // combine the arguments together it doesn't matter if there is a space after ','
-                string argument = @"/select, " + this.GetAlternativePath();
+                string argument = @"/select, " + GetAlternativePath();
 
                 System.Diagnostics.Process.Start("explorer.exe", argument);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                msgBox.Show(string.Format(CultureInfo.CurrentCulture, "{0}\n'{1}'.", ex.Message, (FilePath == null ? string.Empty : this.FilePath)),
+                msgBox.Show(string.Format(CultureInfo.CurrentCulture, "{0}\n'{1}'.", ex.Message, (FilePath == null ? string.Empty : FilePath)),
                                             Util.Local.Strings.STR_FILE_FINDING_CAPTION,
                                             MsgBoxButtons.OK, MsgBoxImage.Error);
             }
@@ -93,7 +90,7 @@ namespace Edi.Documents.ViewModels.StartPage
             get
             {
                 if (_copyFullPathtoClipboard == null)
-                    _copyFullPathtoClipboard = new RelayCommand<object>((p) => this.OnCopyFullPathtoClipboardCommand());
+                    _copyFullPathtoClipboard = new RelayCommand<object>((p) => OnCopyFullPathtoClipboardCommand());
 
                 return _copyFullPathtoClipboard;
             }
@@ -103,7 +100,7 @@ namespace Edi.Documents.ViewModels.StartPage
         {
             try
             {
-                System.Windows.Clipboard.SetText(this.GetAlternativePath());
+                System.Windows.Clipboard.SetText(GetAlternativePath());
             }
             catch
             {
@@ -161,7 +158,7 @@ namespace Edi.Documents.ViewModels.StartPage
         {
             get
             {
-                return this.ContentId;
+                return ContentId;
             }
 
             protected set

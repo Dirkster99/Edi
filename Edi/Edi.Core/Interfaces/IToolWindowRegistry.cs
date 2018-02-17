@@ -1,7 +1,7 @@
 ﻿namespace Edi.Core.Interfaces
 {
 	using System.Collections.ObjectModel;
-	using Edi.Core.ViewModels;
+	using ViewModels;
 
 	/// <summary>
 	/// Defines an interface for a class that can register

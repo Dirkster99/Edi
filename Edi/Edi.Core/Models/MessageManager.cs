@@ -1,7 +1,7 @@
 ﻿namespace Edi.Core.Models
 {
 	using System.ComponentModel.Composition;
-	using Edi.Core.Interfaces;
+	using Interfaces;
 
 	/// <summary>
 	/// Class registers and manages output stream channels:
@@ -23,7 +23,7 @@
 		/// </summary>
 		public MessageManager()
 		{
-            this._MessageBox = new MsgBox.MessageBoxService();
+            _MessageBox = new MsgBox.MessageBoxService();
 		}
 		#endregion constructors
 
@@ -35,7 +35,7 @@
         /// </summary>
 		public MsgBox.IMessageBoxService MessageBox
         {
-			get { return this._MessageBox; }
+			get { return _MessageBox; }
 		}
 
         /// <summary>
@@ -45,7 +45,7 @@
         /// </summary>
 		public IOutput Output
 		{
-			get { return this.mOutput; }
+			get { return mOutput; }
 		}
 		#endregion properties
 
@@ -57,7 +57,7 @@
         /// <param name="output"></param>
 		public void RegisterOutputStream(IOutput output)
 		{
-			this.mOutput = output;
+			mOutput = output;
 		}
 		#endregion Methods
 	}

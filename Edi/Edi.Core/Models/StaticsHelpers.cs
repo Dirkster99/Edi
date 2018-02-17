@@ -21,7 +21,7 @@
 		/// </summary>
 		public const string IssueTrackerLink = "https://github.com/Dirkster99/Edi/issues";
 
-		protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+		protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
 		#region properties
 		/// <summary>
@@ -34,7 +34,7 @@
 			{
 				return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
 																				 System.IO.Path.DirectorySeparatorChar +
-																				 AppHelpers.Company;
+																				 Company;
 			}
 		}
 
@@ -92,9 +92,9 @@
 		{
 			get
 			{
-				return System.IO.Path.Combine(AppHelpers.DirAppData,
+				return System.IO.Path.Combine(DirAppData,
 																			string.Format(CultureInfo.InvariantCulture, "{0}.App.session",
-																										AppHelpers.AssemblyTitle));
+																										AssemblyTitle));
 			}
 		}
 
@@ -105,9 +105,9 @@
 		{
 			get
 			{
-				return System.IO.Path.Combine(AppHelpers.DirAppData,
+				return System.IO.Path.Combine(DirAppData,
 																			string.Format(CultureInfo.InvariantCulture, "{0}.App.settings",
-																										AppHelpers.AssemblyTitle));
+																										AssemblyTitle));
 			}
 		}
 		#endregion properties
@@ -120,7 +120,7 @@
 		/// </summary>
 		public static void RestoreCurrentMainWindow()
 		{
-			if (System.Windows.Application.Current != null)
+			if (Application.Current != null)
 			{
 				if (Application.Current.MainWindow != null)
 				{

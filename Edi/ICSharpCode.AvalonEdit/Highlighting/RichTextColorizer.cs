@@ -34,9 +34,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// </summary>
 		public RichTextColorizer(RichTextModel richTextModel)
 		{
-			if (richTextModel == null)
-				throw new ArgumentNullException("richTextModel");
-			this.richTextModel = richTextModel;
+            this.richTextModel = richTextModel ?? throw new ArgumentNullException(nameof(richTextModel));
 		}
 		
 		/// <inheritdoc/>

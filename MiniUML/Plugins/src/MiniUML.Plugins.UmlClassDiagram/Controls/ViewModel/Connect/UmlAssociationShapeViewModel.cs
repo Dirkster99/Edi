@@ -5,11 +5,11 @@
   using System.Globalization;
   using System.Windows.Media;
   using System.Xml;
-  using MiniUML.Framework;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Shapes;
-  using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements;
-  using MiniUML.Plugins.UmlClassDiagram.Converter;
+  using Framework;
+  using Model.ViewModels;
+  using Model.ViewModels.Shapes;
+  using UmlElements;
+  using Converter;
 
   /// <summary>
   /// Maintains a viewmodel that manages the data required for an UML Assoziation
@@ -43,12 +43,12 @@
                                           UmlTypes umlType)
       : base(parent)
     {
-      this.mUmlType = umlType;
-      this.mFromConnectorKey = fromConnectorKey;
-      this.mToConnectorKey = toConnectorKey;
+      mUmlType = umlType;
+      mFromConnectorKey = fromConnectorKey;
+      mToConnectorKey = toConnectorKey;
 
-      this.mElementName = UmlTypeToStringConverter.Instance.Convert(umlType, umlType.GetType(), null,
-                                                                    System.Globalization.CultureInfo.InvariantCulture) as string;
+      mElementName = UmlTypeToStringConverter.Instance.Convert(umlType, umlType.GetType(), null,
+                                                                    CultureInfo.InvariantCulture) as string;
     }
     #endregion constructor
 
@@ -60,7 +60,7 @@
     {
       get
       {
-        return this.mElementName;
+        return mElementName;
       }
     }
 
@@ -71,15 +71,15 @@
     {
       get
       {
-        return this.mFrom;
+        return mFrom;
       }
 
       set
       {
-        if (this.mFrom != value)
+        if (mFrom != value)
         {
-          this.mFrom = value;
-          this.NotifyPropertyChanged(() => this.From);
+          mFrom = value;
+          NotifyPropertyChanged(() => From);
         }
       }
     }
@@ -91,15 +91,15 @@
     {
       get
       {
-        return this.mTo;
+        return mTo;
       }
 
       set
       {
-        if (this.mTo != value)
+        if (mTo != value)
         {
-          this.mTo = value;
-          this.NotifyPropertyChanged(() => this.To);
+          mTo = value;
+          NotifyPropertyChanged(() => To);
         }
       }
     }
@@ -111,18 +111,18 @@
     {
       get
       {
-        return ConnectorKeyStrings.GetConnectorPresentationKey(this.mFromConnectorKey);
+        return ConnectorKeyStrings.GetConnectorPresentationKey(mFromConnectorKey);
       }
 
       set
       {
         ConnectorKeys c = ConnectorKeyStrings.GetConnectorEnumKey(value);
 
-        if (this.mFromConnectorKey != c)
+        if (mFromConnectorKey != c)
         {
-          this.mFromConnectorKey = c;
+          mFromConnectorKey = c;
 
-          this.NotifyPropertyChanged(() => this.FromArrow);
+          NotifyPropertyChanged(() => FromArrow);
         }
       }
     }
@@ -134,18 +134,18 @@
     {
       get
       {
-        return ConnectorKeyStrings.GetConnectorPresentationKey(this.mToConnectorKey);
+        return ConnectorKeyStrings.GetConnectorPresentationKey(mToConnectorKey);
       }
 
       set
       {
         ConnectorKeys c = ConnectorKeyStrings.GetConnectorEnumKey(value);
 
-        if (this.mToConnectorKey != c)
+        if (mToConnectorKey != c)
         {
-          this.mToConnectorKey = c;
+          mToConnectorKey = c;
 
-          this.NotifyPropertyChanged(() => this.ToArrow);
+          NotifyPropertyChanged(() => ToArrow);
         }
       }
     }
@@ -157,16 +157,16 @@
     {
       get
       {
-        return this.mStroke;
+        return mStroke;
       }
 
       set
       {
-        if (this.mStroke != value)
+        if (mStroke != value)
         {
-          this.mStroke = value;
+          mStroke = value;
 
-          this.NotifyPropertyChanged(() => this.Stroke);
+          NotifyPropertyChanged(() => Stroke);
         }
       }
     }
@@ -182,7 +182,7 @@
     {
       get
       {
-        return ShapeViewModelKeyStrings.GetPresentationStringKey(this.mShapeKey);
+        return ShapeViewModelKeyStrings.GetPresentationStringKey(mShapeKey);
       }
     }
 
@@ -193,7 +193,7 @@
     {
       get
       {
-        return this.mUmlType;
+        return mUmlType;
       }
     }
     
@@ -205,11 +205,11 @@
     {
       get
       {
-        object o = UmlTypeToStringConverter.Instance.Convert(this.UmlDataType, this.UmlDataType.GetType(),
+        object o = UmlTypeToStringConverter.Instance.Convert(UmlDataType, UmlDataType.GetType(),
                                                              null, CultureInfo.InvariantCulture);
 
         if ((o is string) == false)
-          throw new ArgumentException(string.Format("Node name: '{0}' is not supported.", this.UmlDataType));
+          throw new ArgumentException(string.Format("Node name: '{0}' is not supported.", UmlDataType));
 
         string umlType = o as string;
 
@@ -275,9 +275,9 @@
     public override void SaveDocument(XmlWriter writer,
                                       IEnumerable<ShapeViewModelBase> root)
     {
-      writer.WriteStartElement(this.XElementName);
+      writer.WriteStartElement(XElementName);
 
-      this.SaveAttributes(writer);
+      SaveAttributes(writer);
 
       if (root != null)
       {
@@ -294,17 +294,17 @@
     /// Save the attribute values of this class to XML.
     /// </summary>
     /// <param name="writer"></param>
-    protected virtual void SaveAttributes(System.Xml.XmlWriter writer)
+    protected virtual void SaveAttributes(XmlWriter writer)
     {
-      writer.WriteAttributeString("Name", string.Format("{0}", this.Name));
-      writer.WriteAttributeString("ID", string.Format("{0}", this.ID));
-      writer.WriteAttributeString("Position", string.Format("{0},{1}", this.Left, this.Top));
+      writer.WriteAttributeString("Name", string.Format("{0}", Name));
+      writer.WriteAttributeString("ID", string.Format("{0}", ID));
+      writer.WriteAttributeString("Position", string.Format("{0},{1}", Left, Top));
 
-      writer.WriteAttributeString("From", string.Format("{0}", this.From));
-      writer.WriteAttributeString("FromArrow", string.Format("{0}", this.FromArrow));
+      writer.WriteAttributeString("From", string.Format("{0}", From));
+      writer.WriteAttributeString("FromArrow", string.Format("{0}", FromArrow));
 
-      writer.WriteAttributeString("To", string.Format("{0}", this.To));
-      writer.WriteAttributeString("ToArrow", string.Format("{0}", this.ToArrow));
+      writer.WriteAttributeString("To", string.Format("{0}", To));
+      writer.WriteAttributeString("ToArrow", string.Format("{0}", ToArrow));
     }
 
     /// <summary>
@@ -318,32 +318,32 @@
       switch (readerName)
       {
         case "Name":
-          this.Name = readerValue;
+          Name = readerValue;
           return true;
 
         case "ID":
-          this.ID = readerValue;
+          ID = readerValue;
           return true;
 
         case "Position":
           double[] size = FrameworkUtilities.GetDoubleAttributes(readerValue, 2, new double[] { 100, 100 });
-          this.Position = new System.Windows.Point(size[0], size[1]);
+          Position = new System.Windows.Point(size[0], size[1]);
           return true;
 
         case "From":
-          this.From = readerValue;
+          From = readerValue;
           return true;
 
         case "FromArrow":
-          this.FromArrow = readerValue;
+          FromArrow = readerValue;
           return true;
 
         case "To":
-          this.To = readerValue;
+          To = readerValue;
           return true;
 
         case "ToArrow":
-          this.ToArrow = readerValue;
+          ToArrow = readerValue;
           return true;
 
         case "xmlns":

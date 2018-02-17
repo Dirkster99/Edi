@@ -1,18 +1,15 @@
 ﻿namespace Files.Module
 {
-	using System.ComponentModel.Composition;
-	using System.Reflection;
+    using System.Reflection;
 	using System.Windows;
 	using Edi.Core.Interfaces;
 	using Edi.Core.Resources;
 	using Edi.Core.View.Pane;
-	using Files.ViewModels.RecentFiles;
-	using Files.ViewModels.FileExplorer;
-	using Files.ViewModels.FileStats;
+	using ViewModels.RecentFiles;
+	using ViewModels.FileExplorer;
+	using ViewModels.FileStats;
 	using FileSystemModels.Models;
-    using Prism.Mef.Modularity;
-    using Prism.Modularity;
-	using Edi.Settings.Interfaces;
+    using Edi.Settings.Interfaces;
 
 	/// <summary>
 	/// PRISM MEF Loader/Initializer class
@@ -49,10 +46,10 @@
                            ,IFileOpenService fileOpenService
             )
 		{
-			this.mAvLayout = avLayout;
-			this.mSettingsManager = programSettings;
-			this.mToolRegistry = toolRegistry;
-			this.mFileOpenService = fileOpenService;
+			mAvLayout = avLayout;
+			mSettingsManager = programSettings;
+			mToolRegistry = toolRegistry;
+			mFileOpenService = fileOpenService;
 		}
 
 		#region methods

@@ -12,18 +12,12 @@ namespace MahApps.Metro.Converters
 
         // Explicit static constructor to tell C# compiler
         // not to mark type as beforefieldinit
-        static BackgroundToForegroundConverter()
-        {
-        }
 
         private BackgroundToForegroundConverter()
         {
         }
 
-        public static BackgroundToForegroundConverter Instance
-        {
-            get { return _instance ?? (_instance = new BackgroundToForegroundConverter()); }
-        }
+        public static BackgroundToForegroundConverter Instance => _instance ?? (_instance = new BackgroundToForegroundConverter());
 
         /// <summary>
         /// Determining Ideal Text Color Based on Specified Background Color
@@ -41,9 +35,9 @@ namespace MahApps.Metro.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is SolidColorBrush)
+            if (value is SolidColorBrush brush)
             {
-                var idealForegroundColor = this.IdealTextColor(((SolidColorBrush)value).Color);
+                var idealForegroundColor = IdealTextColor(brush.Color);
                 var foreGroundBrush = new SolidColorBrush(idealForegroundColor);
                 foreGroundBrush.Freeze();
                 return foreGroundBrush;

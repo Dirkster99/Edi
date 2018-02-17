@@ -23,14 +23,14 @@
     {
       add
       {
-        this.VerifyAccess();
-        this.mPropertyChangedEvent += value;
+        VerifyAccess();
+        mPropertyChangedEvent += value;
       }
 
       remove
       {
-        this.VerifyAccess();
-        this.mPropertyChangedEvent -= value;
+        VerifyAccess();
+        mPropertyChangedEvent -= value;
       }
     }
 
@@ -54,22 +54,22 @@
     {
       get
       {
-        this.VerifyAccess();
-        return this.mState;
+        VerifyAccess();
+        return mState;
       }
 
       set
       {
-        this.VerifyAccess();
+        VerifyAccess();
 
         // Ensure that the state cannot be set to Ready while the model is invalid.
-        if (value == ModelState.Ready && this.IsValid() == false)
+        if (value == ModelState.Ready && IsValid() == false)
           value = ModelState.Invalid;
 
-        if (value != this.mState)
+        if (value != mState)
         {
-          this.mState = value;
-          this.SendPropertyChanged("State");
+          mState = value;
+          SendPropertyChanged("State");
         }
       }
     }
@@ -80,11 +80,11 @@
     /// <param name="propertyName">The names of the properties.</param>
     protected void SendPropertyChanged(params string[] propertyNames)
     {
-      this.VerifyAccess();
-      if (this.mPropertyChangedEvent != null)
+      VerifyAccess();
+      if (mPropertyChangedEvent != null)
       {
         foreach (string propertyName in propertyNames)
-          this.mPropertyChangedEvent(this, new PropertyChangedEventArgs(propertyName));
+          mPropertyChangedEvent(this, new PropertyChangedEventArgs(propertyName));
       }
     }
 
@@ -101,7 +101,7 @@
       else
         memberExpression = (MemberExpression)lambda.Body;
 
-      this.SendPropertyChanged(memberExpression.Member.Name);
+      SendPropertyChanged(memberExpression.Member.Name);
     }
 
     /// <summary>
@@ -124,7 +124,7 @@
     {
       foreach (ModelState s in acceptedStates)
       {
-        if (this.State == s)
+        if (State == s)
           return; // OK.
       }
 

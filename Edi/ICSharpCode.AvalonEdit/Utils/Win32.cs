@@ -33,17 +33,15 @@ namespace ICSharpCode.AvalonEdit.Utils
 		/// <summary>
 		/// Gets the caret blink time.
 		/// </summary>
-		public static TimeSpan CaretBlinkTime {
-			get { return TimeSpan.FromMilliseconds(SafeNativeMethods.GetCaretBlinkTime()); }
-		}
-		
-		/// <summary>
+		public static TimeSpan CaretBlinkTime => TimeSpan.FromMilliseconds(SafeNativeMethods.GetCaretBlinkTime());
+
+	    /// <summary>
 		/// Creates an invisible Win32 caret for the specified Visual with the specified size (coordinates local to the owner visual).
 		/// </summary>
 		public static bool CreateCaret(Visual owner, Size size)
 		{
 			if (owner == null)
-				throw new ArgumentNullException("owner");
+				throw new ArgumentNullException(nameof(owner));
             if (PresentationSource.FromVisual(owner) is HwndSource)
             {
                 HwndSource source = PresentationSource.FromVisual(owner) as HwndSource;
@@ -51,11 +49,9 @@ namespace ICSharpCode.AvalonEdit.Utils
                 Vector r = owner.PointToScreen(new Point(size.Width, size.Height)) - owner.PointToScreen(new Point(0, 0));
                 return SafeNativeMethods.CreateCaret(source.Handle, IntPtr.Zero, (int)Math.Ceiling(r.X), (int)Math.Ceiling(r.Y));
             }
-            else
-            {
-                return false;
-            }
-        }
+
+		    return false;
+		}
 		
 		/// <summary>
 		/// Sets the position of the caret previously created using <see cref="CreateCaret"/>. position is relative to the owner visual.
@@ -63,7 +59,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		public static bool SetCaretPosition(Visual owner, Point position)
 		{
 			if (owner == null)
-				throw new ArgumentNullException("owner");
+				throw new ArgumentNullException(nameof(owner));
             if (PresentationSource.FromVisual(owner) is HwndSource)
             {
                 HwndSource source = PresentationSource.FromVisual(owner) as HwndSource;
@@ -72,11 +68,9 @@ namespace ICSharpCode.AvalonEdit.Utils
                 Point pointOnHwnd = pointOnRootVisual.TransformToDevice(source.RootVisual);
                 return SafeNativeMethods.SetCaretPos((int)pointOnHwnd.X, (int)pointOnHwnd.Y);
             }
-            else
-            {
-                return false;
-            }
-        }
+
+		    return false;
+		}
 		
 		/// <summary>
 		/// Destroys the caret previously created using <see cref="CreateCaret"/>.

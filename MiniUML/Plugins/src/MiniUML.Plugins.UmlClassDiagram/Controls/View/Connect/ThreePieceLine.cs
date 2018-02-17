@@ -7,7 +7,7 @@
   using System.Windows.Media;
   using System.Windows.Shapes;
 
-  using MiniUML.Framework;
+  using Framework;
   using MiniUML.View.Controls;
 
   public class ThreePieceLine : UserControl, INotifyPropertyChanged, ISnapTarget
@@ -48,12 +48,12 @@
     #region constructor
     public ThreePieceLine()
     {
-      this.mLine = new Polyline();
+      mLine = new Polyline();
 
       Canvas canvas = new Canvas();
 
-      canvas.Children.Add(this.mLine);
-      this.Content = canvas;
+      canvas.Children.Add(mLine);
+      Content = canvas;
     }
     #endregion constructor
 
@@ -77,7 +77,7 @@
     {
       get
       {
-        return this.mFromAngleInDegrees;
+        return mFromAngleInDegrees;
       }
     }
 
@@ -88,45 +88,45 @@
     {
       get
       {
-        return this.mToAngleInDegrees;
+        return mToAngleInDegrees;
       }
     }
 
     #region dependency properties
     public double FromX
     {
-      get { return (double)this.GetValue(FromXProperty); }
-      set { this.SetValue(FromXProperty, value); }
+      get { return (double)GetValue(FromXProperty); }
+      set { SetValue(FromXProperty, value); }
     }
 
     public double FromY
     {
-      get { return (double)this.GetValue(FromYProperty); }
-      set { this.SetValue(FromYProperty, value); }
+      get { return (double)GetValue(FromYProperty); }
+      set { SetValue(FromYProperty, value); }
     }
 
     public Orientation FromOrientation
     {
-      get { return (Orientation)this.GetValue(FromOrientationProperty); }
-      set { this.SetValue(FromOrientationProperty, value); }
+      get { return (Orientation)GetValue(FromOrientationProperty); }
+      set { SetValue(FromOrientationProperty, value); }
     }
 
     public double ToX
     {
-      get { return (double)this.GetValue(ToXProperty); }
-      set { this.SetValue(ToXProperty, value); }
+      get { return (double)GetValue(ToXProperty); }
+      set { SetValue(ToXProperty, value); }
     }
 
     public double ToY
     {
-      get { return (double)this.GetValue(ToYProperty); }
-      set { this.SetValue(ToYProperty, value); }
+      get { return (double)GetValue(ToYProperty); }
+      set { SetValue(ToYProperty, value); }
     }
 
     public Orientation ToOrientation
     {
-      get { return (Orientation)this.GetValue(ToOrientationProperty); }
-      set { this.SetValue(ToOrientationProperty, value); }
+      get { return (Orientation)GetValue(ToOrientationProperty); }
+      set { SetValue(ToOrientationProperty, value); }
     }
     #endregion dependency properties
     #endregion properties
@@ -142,7 +142,7 @@
     {
       snapAngle = 0;
 
-      PointCollection points = this.mLine.Points;
+      PointCollection points = mLine.Points;
 
       if (points.Count < 2)
         return;
@@ -167,8 +167,8 @@
     /// <param name="e"></param>
     public void NotifySnapTargetUpdate(SnapTargetUpdateEventArgs e)
     {
-      if (this.SnapTargetUpdate != null)
-        this.SnapTargetUpdate(this, e);
+      if (SnapTargetUpdate != null)
+        SnapTargetUpdate(this, e);
     }
     #endregion
 
@@ -179,48 +179,48 @@
 
     private void rerouteLine()
     {
-      Point from = new Point(this.FromX, this.FromY);
-      Point to = new Point(this.ToX, this.ToY);
+      Point from = new Point(FromX, FromY);
+      Point to = new Point(ToX, ToY);
 
-      this.mLine.Points.Clear();
-      this.mLine.Points.Add(from);
+      mLine.Points.Clear();
+      mLine.Points.Add(from);
 
-      if (this.FromOrientation != this.ToOrientation)
+      if (FromOrientation != ToOrientation)
       {
         // Fine, we'll just do a two-piece line, then.
-        if (this.FromOrientation == Orientation.Horizontal)
-          this.mLine.Points.Add(new Point(to.X, from.Y));
-        else this.mLine.Points.Add(new Point(from.X, to.Y));
+        if (FromOrientation == Orientation.Horizontal)
+          mLine.Points.Add(new Point(to.X, from.Y));
+        else mLine.Points.Add(new Point(from.X, to.Y));
       }
-      else if (this.FromOrientation /* == ToOrientation */ == Orientation.Horizontal)
+      else if (FromOrientation /* == ToOrientation */ == Orientation.Horizontal)
       {
         double mid = from.X + ((to.X - from.X) / 2);
 
-        this.mLine.Points.Add(new Point(mid, from.Y));
-        this.mLine.Points.Add(new Point(mid, to.Y));
+        mLine.Points.Add(new Point(mid, from.Y));
+        mLine.Points.Add(new Point(mid, to.Y));
       }
       else /* FromOrientation == ToOrientation == Orientation.Vertical */
       {
         double mid = from.Y + ((to.Y - from.Y) / 2);
 
-        this.mLine.Points.Add(new Point(from.X, mid));
-        this.mLine.Points.Add(new Point(to.X, mid));
+        mLine.Points.Add(new Point(from.X, mid));
+        mLine.Points.Add(new Point(to.X, mid));
       }
 
-      this.mLine.Points.Add(to);
+      mLine.Points.Add(to);
 
-      Vector firstSegment = from - this.mLine.Points[1];
-      Vector lastSegment = to - this.mLine.Points[this.mLine.Points.Count() - 2];
-      this.mFromAngleInDegrees = FrameworkUtilities.RadiansToDegrees(firstSegment.GetAngularCoordinate());
-      this.mToAngleInDegrees = FrameworkUtilities.RadiansToDegrees(lastSegment.GetAngularCoordinate());
+      Vector firstSegment = from - mLine.Points[1];
+      Vector lastSegment = to - mLine.Points[mLine.Points.Count() - 2];
+      mFromAngleInDegrees = FrameworkUtilities.RadiansToDegrees(firstSegment.GetAngularCoordinate());
+      mToAngleInDegrees = FrameworkUtilities.RadiansToDegrees(lastSegment.GetAngularCoordinate());
 
-      if (this.PropertyChanged != null)
+      if (PropertyChanged != null)
       {
-        this.PropertyChanged(this, new PropertyChangedEventArgs("FromAngleInDegrees"));
-        this.PropertyChanged(this, new PropertyChangedEventArgs("ToAngleInDegrees"));
+        PropertyChanged(this, new PropertyChangedEventArgs("FromAngleInDegrees"));
+        PropertyChanged(this, new PropertyChangedEventArgs("ToAngleInDegrees"));
       }
 
-      this.NotifySnapTargetUpdate(new SnapTargetUpdateEventArgs());
+      NotifySnapTargetUpdate(new SnapTargetUpdateEventArgs());
     }
 
     #endregion methods

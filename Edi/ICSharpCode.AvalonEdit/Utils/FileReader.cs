@@ -37,7 +37,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		public static bool IsUnicode(Encoding encoding)
 		{
 			if (encoding == null)
-				throw new ArgumentNullException("encoding");
+				throw new ArgumentNullException(nameof(encoding));
 			switch (encoding.CodePage) {
 				case 65000: // UTF-7
 				case 65001: // UTF-8
@@ -104,7 +104,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		public static StreamReader OpenFile(string fileName, Encoding defaultEncoding)
 		{
 			if (fileName == null)
-				throw new ArgumentNullException("fileName");
+				throw new ArgumentNullException(nameof(fileName));
 			FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
 			try {
 				return OpenStream(fs, defaultEncoding);
@@ -125,11 +125,11 @@ namespace ICSharpCode.AvalonEdit.Utils
 		public static StreamReader OpenStream(Stream stream, Encoding defaultEncoding)
 		{
 			if (stream == null)
-				throw new ArgumentNullException("stream");
+				throw new ArgumentNullException(nameof(stream));
 			if (stream.Position != 0)
-				throw new ArgumentException("stream is not positioned at beginning.", "stream");
+				throw new ArgumentException("stream is not positioned at beginning.", nameof(stream));
 			if (defaultEncoding == null)
-				throw new ArgumentNullException("defaultEncoding");
+				throw new ArgumentNullException(nameof(defaultEncoding));
 			
 			if (stream.Length >= 2) {
 				// the autodetection of StreamReader is not capable of detecting the difference
@@ -147,13 +147,13 @@ namespace ICSharpCode.AvalonEdit.Utils
 					default:
 						return AutoDetect(stream, (byte)firstByte, (byte)secondByte, defaultEncoding);
 				}
-			} else {
-				if (defaultEncoding != null) {
-					return new StreamReader(stream, defaultEncoding);
-				} else {
-					return new StreamReader(stream);
-				}
 			}
+
+		    if (defaultEncoding != null) {
+		        return new StreamReader(stream, defaultEncoding);
+		    }
+
+		    return new StreamReader(stream);
 		}
 		
 		static readonly Encoding UTF8NoBOM = new UTF8Encoding(false);
@@ -189,9 +189,11 @@ namespace ICSharpCode.AvalonEdit.Utils
 						if (sequenceLength < 0) {
 							state = Error;
 							break;
-						} else if (sequenceLength == 0) {
-							state = UTF8;
 						}
+
+					    if (sequenceLength == 0) {
+					        state = UTF8;
+					    }
 					} else {
 						state = Error;
 						break;

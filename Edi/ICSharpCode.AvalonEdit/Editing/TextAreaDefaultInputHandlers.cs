@@ -16,7 +16,6 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
@@ -50,12 +49,12 @@ namespace ICSharpCode.AvalonEdit.Editing
 		/// </summary>
 		public TextAreaDefaultInputHandler(TextArea textArea) : base(textArea)
 		{
-			this.NestedInputHandlers.Add(CaretNavigation = CaretNavigationCommandHandler.Create(textArea));
-			this.NestedInputHandlers.Add(Editing = EditingCommandHandler.Create(textArea));
-			this.NestedInputHandlers.Add(MouseSelection = new SelectionMouseHandler(textArea));
+			NestedInputHandlers.Add(CaretNavigation = CaretNavigationCommandHandler.Create(textArea));
+			NestedInputHandlers.Add(Editing = EditingCommandHandler.Create(textArea));
+			NestedInputHandlers.Add(MouseSelection = new SelectionMouseHandler(textArea));
 			
-			this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Undo, ExecuteUndo, CanExecuteUndo));
-			this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Redo, ExecuteRedo, CanExecuteRedo));
+			CommandBindings.Add(new CommandBinding(ApplicationCommands.Undo, ExecuteUndo, CanExecuteUndo));
+			CommandBindings.Add(new CommandBinding(ApplicationCommands.Redo, ExecuteRedo, CanExecuteRedo));
 		}
 		
 		internal static KeyBinding CreateFrozenKeyBinding(ICommand command, ModifierKeys modifiers, Key key)
@@ -84,7 +83,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		#region Undo / Redo
 		UndoStack GetUndoStack()
 		{
-			TextDocument document = this.TextArea.Document;
+			TextDocument document = TextArea.Document;
 			if (document != null)
 				return document.UndoStack;
 			else
@@ -97,7 +96,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 			if (undoStack != null) {
 				if (undoStack.CanUndo) {
 					undoStack.Undo();
-					this.TextArea.Caret.BringCaretToView();
+					TextArea.Caret.BringCaretToView();
 				}
 				e.Handled = true;
 			}
@@ -118,7 +117,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 			if (undoStack != null) {
 				if (undoStack.CanRedo) {
 					undoStack.Redo();
-					this.TextArea.Caret.BringCaretToView();
+					TextArea.Caret.BringCaretToView();
 				}
 				e.Handled = true;
 			}

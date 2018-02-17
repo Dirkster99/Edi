@@ -3,9 +3,7 @@
     using Edi.Core.Interfaces;
     using Edi.Core.Resources;
     using Edi.Core.View.Pane;
-    using Output.ViewModels;
-    using Prism.Mef.Modularity;
-    using Prism.Modularity;
+    using ViewModels;
     using System.ComponentModel.Composition;
     using System.Reflection;
     using System.Windows;
@@ -28,9 +26,9 @@
     public class MEFLoadOutputTools : IModule
     {
         #region fields
-        private readonly IAvalonDockLayoutViewModel mAvLayout = null;
-        private readonly IToolWindowRegistry mToolRegistry = null;
-        private readonly IMessageManager mMessageManager = null;
+        private readonly IAvalonDockLayoutViewModel mAvLayout;
+        private readonly IToolWindowRegistry mToolRegistry;
+        private readonly IMessageManager mMessageManager;
         #endregion fields
 
         static MEFLoadOutputTools()
@@ -47,9 +45,9 @@
                                   IToolWindowRegistry toolRegistry,
                                   IMessageManager messageManager)
         {
-            this.mAvLayout = avLayout;
-            this.mToolRegistry = toolRegistry;
-            this.mMessageManager = messageManager;
+            mAvLayout = avLayout;
+            mToolRegistry = toolRegistry;
+            mMessageManager = messageManager;
         }
 
         #region methods
@@ -58,17 +56,17 @@
         /// </summary>
         void IModule.Initialize()
         {
-            if (this.mAvLayout != null)
+            if (mAvLayout != null)
             {
-                this.RegisterDataTemplates(this.mAvLayout.ViewProperties.SelectPanesTemplate);
+                RegisterDataTemplates(mAvLayout.ViewProperties.SelectPanesTemplate);
             }
 
-            if (this.mToolRegistry != null && this.mMessageManager != null)
+            if (mToolRegistry != null && mMessageManager != null)
             {
                 var toolVM = new OutputViewModel();
 
-                this.mMessageManager.RegisterOutputStream(toolVM);
-                this.mToolRegistry.RegisterTool(toolVM);
+                mMessageManager.RegisterOutputStream(toolVM);
+                mToolRegistry.RegisterTool(toolVM);
             }
         }
 

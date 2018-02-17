@@ -9,7 +9,7 @@
   {
     public MainToolbar()
     {
-      this.InitializeComponent();
+      InitializeComponent();
     }
   }
 }

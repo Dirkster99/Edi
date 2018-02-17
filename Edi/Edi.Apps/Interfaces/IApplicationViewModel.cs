@@ -2,12 +2,12 @@
 {
     using System;
     using System.Windows;
-    using Edi.Core.Interfaces;
-    using Edi.Apps.Enums;
+    using Core.Interfaces;
+    using Enums;
     using MiniUML.Model.ViewModels.Document;
-    using Edi.Settings.Interfaces;
-    using Edi.Settings.ProgramSettings;
-    using Edi.Themes.Interfaces;
+    using Settings.Interfaces;
+    using Settings.ProgramSettings;
+    using Themes.Interfaces;
 
     /// <summary>
     /// This interface models the viewmodel that manages the complete
@@ -61,12 +61,13 @@
 		/// <param name="e"></param>
 		void OnClosing(object sender, System.ComponentModel.CancelEventArgs e);
 
-		/// <summary>
-		/// Execute closing function and persist session data to be reloaded on next restart
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		void OnClosed(Window win);
+	    /// <summary>
+	    /// Execute closing function and persist session data to be reloaded on next restart
+	    /// </summary>
+	    /// <param name="sender"></param>
+	    /// <param name="e"></param>
+	    /// <param name="win"></param>
+	    void OnClosed(Window win);
 
 		/// <summary>
 		/// Check if pre-requisites for closing application are available.

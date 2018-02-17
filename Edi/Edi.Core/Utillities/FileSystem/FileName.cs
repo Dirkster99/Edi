@@ -19,20 +19,14 @@
 	// DEALINGS IN THE SOFTWARE.
 
 	using System;
-	using System.Collections.Generic;
 	using System.ComponentModel;
-	using System.Globalization;
 	using System.IO;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
-	using log4net.Util.TypeConverters;
 
-	/// <summary>
+    /// <summary>
 	/// Represents a path to a file.
 	/// The equality operator is overloaded to compare for path equality (case insensitive, normalizing paths with '..\')
 	/// </summary>
-	[System.ComponentModel.TypeConverter(typeof(FileNameConverter))]
+	[TypeConverter(typeof(FileNameConverter))]
 	public sealed class FileName : PathName, IEquatable<FileName>
 	{
 		#region constructors

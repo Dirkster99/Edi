@@ -20,8 +20,8 @@ namespace ICSharpCode.AvalonEdit.Edi.Folding
 {
   using System.Collections.Generic;
   using System.Text.RegularExpressions;
-  using ICSharpCode.AvalonEdit.Document;
-  using ICSharpCode.AvalonEdit.Folding;
+  using Document;
+  using AvalonEdit.Folding;
 
   /// <summary>
   /// Allows producing foldings from a document based on braces.
@@ -43,8 +43,8 @@ namespace ICSharpCode.AvalonEdit.Edi.Folding
     /// </summary>
     public CSharpBraceFoldingStrategy()
     {
-      this.OpeningBrace = '{';
-      this.ClosingBrace = '}';
+      OpeningBrace = '{';
+      ClosingBrace = '}';
     }
 
     /// <summary>
@@ -79,8 +79,8 @@ namespace ICSharpCode.AvalonEdit.Edi.Folding
       Stack<int> startOffsets = new Stack<int>();
       int lastNewLineOffset = 0;
 
-      char openingBrace = this.OpeningBrace;
-      char closingBrace = this.ClosingBrace;
+      char openingBrace = OpeningBrace;
+      char closingBrace = ClosingBrace;
 
       for (int i = 0; i < document.TextLength; i++)
       {
@@ -120,13 +120,13 @@ namespace ICSharpCode.AvalonEdit.Edi.Folding
 
         foreach (string item in lines)
         {
-          if (Regex.Match(item, reStartRegion, RegexOptions.IgnoreCase).Success == true)
+          if (Regex.Match(item, reStartRegion, RegexOptions.IgnoreCase).Success)
           {
             LineOffsets.Push(new FoldLine() { Name = item, Offste = offset, TypeOfFold = FoldType.Line});
           }
           else
           {
-            if (Regex.Match(item, reEndRegion, RegexOptions.IgnoreCase).Success == true)
+            if (Regex.Match(item, reEndRegion, RegexOptions.IgnoreCase).Success)
             {
               FoldLine Line = LineOffsets.Pop();
 

@@ -41,11 +41,9 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		/// </summary>
 		public FormattedTextElement(string text, int documentLength) : base(1, documentLength)
 		{
-			if (text == null)
-				throw new ArgumentNullException("text");
-			this.text = text;
-			this.BreakBefore = LineBreakCondition.BreakPossible;
-			this.BreakAfter = LineBreakCondition.BreakPossible;
+            this.text = text ?? throw new ArgumentNullException(nameof(text));
+			BreakBefore = LineBreakCondition.BreakPossible;
+			BreakAfter = LineBreakCondition.BreakPossible;
 		}
 		
 		/// <summary>
@@ -54,11 +52,9 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		/// </summary>
 		public FormattedTextElement(TextLine text, int documentLength) : base(1, documentLength)
 		{
-			if (text == null)
-				throw new ArgumentNullException("text");
-			this.textLine = text;
-			this.BreakBefore = LineBreakCondition.BreakPossible;
-			this.BreakAfter = LineBreakCondition.BreakPossible;
+            textLine = text ?? throw new ArgumentNullException(nameof(text));
+			BreakBefore = LineBreakCondition.BreakPossible;
+			BreakAfter = LineBreakCondition.BreakPossible;
 		}
 		
 		/// <summary>
@@ -67,11 +63,9 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		/// </summary>
 		public FormattedTextElement(FormattedText text, int documentLength) : base(1, documentLength)
 		{
-			if (text == null)
-				throw new ArgumentNullException("text");
-			this.formattedText = text;
-			this.BreakBefore = LineBreakCondition.BreakPossible;
-			this.BreakAfter = LineBreakCondition.BreakPossible;
+            formattedText = text ?? throw new ArgumentNullException(nameof(text));
+			BreakBefore = LineBreakCondition.BreakPossible;
+			BreakAfter = LineBreakCondition.BreakPossible;
 		}
 		
 		/// <summary>
@@ -91,10 +85,10 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		{
 			if (textLine == null) {
 				var formatter = TextFormatterFactory.Create(context.TextView);
-				textLine = PrepareText(formatter, this.text, this.TextRunProperties);
-				this.text = null;
+				textLine = PrepareText(formatter, text, TextRunProperties);
+				text = null;
 			}
-			return new FormattedTextRun(this, this.TextRunProperties);
+			return new FormattedTextRun(this, TextRunProperties);
 		}
 		
 		/// <summary>
@@ -103,11 +97,11 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		public static TextLine PrepareText(TextFormatter formatter, string text, TextRunProperties properties)
 		{
 			if (formatter == null)
-				throw new ArgumentNullException("formatter");
+				throw new ArgumentNullException(nameof(formatter));
 			if (text == null)
-				throw new ArgumentNullException("text");
+				throw new ArgumentNullException(nameof(text));
 			if (properties == null)
-				throw new ArgumentNullException("properties");
+				throw new ArgumentNullException(nameof(properties));
 			return formatter.FormatLine(
 				new SimpleTextSource(text, properties),
 				0,
@@ -126,69 +120,48 @@ namespace ICSharpCode.AvalonEdit.Rendering
 	/// </summary>
 	public class FormattedTextRun : TextEmbeddedObject
 	{
-		readonly FormattedTextElement element;
-		TextRunProperties properties;
-		
-		/// <summary>
+	    /// <summary>
 		/// Creates a new FormattedTextRun.
 		/// </summary>
 		public FormattedTextRun(FormattedTextElement element, TextRunProperties properties)
 		{
-			if (element == null)
-				throw new ArgumentNullException("element");
-			if (properties == null)
-				throw new ArgumentNullException("properties");
-			this.properties = properties;
-			this.element = element;
+            this.Properties = properties ?? throw new ArgumentNullException(nameof(properties));
+			this.Element = element ?? throw new ArgumentNullException(nameof(element));
 		}
 		
 		/// <summary>
 		/// Gets the element for which the FormattedTextRun was created.
 		/// </summary>
-		public FormattedTextElement Element {
-			get { return element; }
-		}
-		
-		/// <inheritdoc/>
-		public override LineBreakCondition BreakBefore {
-			get { return element.BreakBefore; }
-		}
-		
-		/// <inheritdoc/>
-		public override LineBreakCondition BreakAfter {
-			get { return element.BreakAfter; }
-		}
-		
-		/// <inheritdoc/>
-		public override bool HasFixedSize {
-			get { return true; }
-		}
-		
-		/// <inheritdoc/>
-		public override CharacterBufferReference CharacterBufferReference {
-			get { return new CharacterBufferReference(); }
-		}
-		
-		/// <inheritdoc/>
-		public override int Length {
-			get { return element.VisualLength; }
-		}
-		
-		/// <inheritdoc/>
-		public override TextRunProperties Properties {
-			get { return properties; }
-		}
-		
-		/// <inheritdoc/>
+		public FormattedTextElement Element { get; }
+
+	    /// <inheritdoc/>
+		public override LineBreakCondition BreakBefore => Element.BreakBefore;
+
+	    /// <inheritdoc/>
+		public override LineBreakCondition BreakAfter => Element.BreakAfter;
+
+	    /// <inheritdoc/>
+		public override bool HasFixedSize => true;
+
+	    /// <inheritdoc/>
+		public override CharacterBufferReference CharacterBufferReference => new CharacterBufferReference();
+
+	    /// <inheritdoc/>
+		public override int Length => Element.VisualLength;
+
+	    /// <inheritdoc/>
+		public override TextRunProperties Properties { get; }
+
+	    /// <inheritdoc/>
 		public override TextEmbeddedObjectMetrics Format(double remainingParagraphWidth)
 		{
-			var formattedText = element.formattedText;
+			var formattedText = Element.formattedText;
 			if (formattedText != null) {
 				return new TextEmbeddedObjectMetrics(formattedText.WidthIncludingTrailingWhitespace,
 				                                     formattedText.Height,
 				                                     formattedText.Baseline);
 			} else {
-				var text = element.textLine;
+				var text = Element.textLine;
 				return new TextEmbeddedObjectMetrics(text.WidthIncludingTrailingWhitespace,
 				                                     text.Height,
 				                                     text.Baseline);
@@ -198,11 +171,11 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		/// <inheritdoc/>
 		public override Rect ComputeBoundingBox(bool rightToLeft, bool sideways)
 		{
-			var formattedText = element.formattedText;
+			var formattedText = Element.formattedText;
 			if (formattedText != null) {
 				return new Rect(0, 0, formattedText.WidthIncludingTrailingWhitespace, formattedText.Height);
 			} else {
-				var text = element.textLine;
+				var text = Element.textLine;
 				return new Rect(0, 0, text.WidthIncludingTrailingWhitespace, text.Height);
 			}
 		}
@@ -210,12 +183,12 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		/// <inheritdoc/>
 		public override void Draw(DrawingContext drawingContext, Point origin, bool rightToLeft, bool sideways)
 		{
-			if (element.formattedText != null) {
-				origin.Y -= element.formattedText.Baseline;
-				drawingContext.DrawText(element.formattedText, origin);
+			if (Element.formattedText != null) {
+				origin.Y -= Element.formattedText.Baseline;
+				drawingContext.DrawText(Element.formattedText, origin);
 			} else {
-				origin.Y -= element.textLine.Baseline;
-				element.textLine.Draw(drawingContext, origin, InvertAxes.None);
+				origin.Y -= Element.textLine.Baseline;
+				Element.textLine.Draw(drawingContext, origin, InvertAxes.None);
 			}
 		}
 	}

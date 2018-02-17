@@ -19,11 +19,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Linq;
 using ICSharpCode.AvalonEdit.Utils;
@@ -40,18 +38,14 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 			DefaultStyleKeyProperty.OverrideMetadata(typeof(CompletionList),
 			                                         new FrameworkPropertyMetadata(typeof(CompletionList)));
 		}
-		
-		bool isFiltering = true;
-		/// <summary>
+
+	    /// <summary>
 		/// If true, the CompletionList is filtered to show only matching items. Also enables search by substring.
 		/// If false, enables the old behavior: no filtering, search by string.StartsWith.
 		/// </summary>
-		public bool IsFiltering {
-			get { return isFiltering; }
-			set { isFiltering = value; }
-		}
-		
-		/// <summary>
+		public bool IsFiltering { get; set; } = true;
+
+	    /// <summary>
 		/// Dependency property for <see cref="EmptyTemplate" />.
 		/// </summary>
 		public static readonly DependencyProperty EmptyTemplateProperty =
@@ -63,8 +57,8 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		/// If EmptyTemplate is null, nothing will be shown.
 		/// </summary>
 		public ControlTemplate EmptyTemplate {
-			get { return (ControlTemplate)GetValue(EmptyTemplateProperty); }
-			set { SetValue(EmptyTemplateProperty, value); }
+			get => (ControlTemplate)GetValue(EmptyTemplateProperty);
+		    set => SetValue(EmptyTemplateProperty, value);
 		}
 		
 		/// <summary>
@@ -109,20 +103,16 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		/// <summary>
 		/// Gets the scroll viewer used in this list box.
 		/// </summary>
-		public ScrollViewer ScrollViewer {
-			get { return listBox != null ? listBox.scrollViewer : null; }
-		}
-		
-		ObservableCollection<ICompletionData> completionData = new ObservableCollection<ICompletionData>();
+		public ScrollViewer ScrollViewer => listBox?.scrollViewer;
+
+	    ObservableCollection<ICompletionData> completionData = new ObservableCollection<ICompletionData>();
 		
 		/// <summary>
 		/// Gets the list to which completion data can be added.
 		/// </summary>
-		public IList<ICompletionData> CompletionData {
-			get { return completionData; }
-		}
-		
-		/// <inheritdoc/>
+		public IList<ICompletionData> CompletionData => completionData;
+
+	    /// <inheritdoc/>
 		protected override void OnKeyDown(KeyEventArgs e)
 		{
 			base.OnKeyDown(e);
@@ -197,10 +187,8 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		/// You might want to also call <see cref="ScrollIntoView"/>.
 		/// </remarks>
 		public ICompletionData SelectedItem {
-			get {
-				return (listBox != null ? listBox.SelectedItem : null) as ICompletionData;
-			}
-			set {
+			get => (listBox?.SelectedItem) as ICompletionData;
+		    set {
 				if (listBox == null && value != null)
 					ApplyTemplate();
 				if (listBox != null) // may still be null if ApplyTemplate fails, or if listBox and value both are null
@@ -223,8 +211,8 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		/// Occurs when the SelectedItem property changes.
 		/// </summary>
 		public event SelectionChangedEventHandler SelectionChanged {
-			add { AddHandler(Selector.SelectionChangedEvent, value); }
-			remove { RemoveHandler(Selector.SelectionChangedEvent, value); }
+			add => AddHandler(Selector.SelectionChangedEvent, value);
+		    remove => RemoveHandler(Selector.SelectionChangedEvent, value);
 		}
 		
 		// SelectItem gets called twice for every typed character (once from FormatLine), this helps execute SelectItem only once
@@ -241,7 +229,7 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 			if (listBox == null)
 				ApplyTemplate();
 			
-			if (this.IsFiltering) {
+			if (IsFiltering) {
 				SelectItemFiltering(text);
 			}
 			else {
@@ -256,9 +244,9 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		void SelectItemFiltering(string query)
 		{
 			// if the user just typed one more character, don't filter all data but just filter what we are already displaying
-			var listToFilter = (this.currentList != null && (!string.IsNullOrEmpty(this.currentText)) && (!string.IsNullOrEmpty(query)) &&
-			                    query.StartsWith(this.currentText, StringComparison.Ordinal)) ?
-				this.currentList : this.completionData;
+			var listToFilter = (currentList != null && (!string.IsNullOrEmpty(currentText)) && (!string.IsNullOrEmpty(query)) &&
+			                    query.StartsWith(currentText, StringComparison.Ordinal)) ?
+				currentList : completionData;
 			
 			var matchingItems =
 				from item in listToFilter
@@ -285,7 +273,7 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 				listBoxItems.Add(matchingItem.Item);
 				i++;
 			}
-			this.currentList = listBoxItems;
+			currentList = listBoxItems;
 			listBox.ItemsSource = listBoxItems;
 			SelectIndexCentered(bestIndex);
 		}
@@ -350,7 +338,7 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		int GetMatchQuality(string itemText, string query)
 		{
 			if (itemText == null)
-				throw new ArgumentNullException("itemText", "ICompletionData.Text returned null");
+				throw new ArgumentNullException(nameof(itemText), "ICompletionData.Text returned null");
 			
 			// Qualities:
 			//  	8 = full match case sensitive

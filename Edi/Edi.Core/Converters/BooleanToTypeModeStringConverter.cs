@@ -9,8 +9,8 @@ namespace Edi.Core.Converters
 	[ValueConversion(typeof(bool), typeof(string))]
 	public class BooleanToTypeModeStringConverter : IValueConverter
 	{
-		public readonly static string TypeOver = Edi.Util.Local.Strings.STR_EDIT_MODE_TYPEOVER;
-		public readonly static string TypeToInsert = Edi.Util.Local.Strings.STR_EDIT_MODE_INSERT;
+		public readonly static string TypeOver = Util.Local.Strings.STR_EDIT_MODE_TYPEOVER;
+		public readonly static string TypeToInsert = Util.Local.Strings.STR_EDIT_MODE_INSERT;
 
 		/// <summary>
 		/// Enum to Boolean Converter method
@@ -26,14 +26,14 @@ namespace Edi.Core.Converters
 				throw new ArgumentException("Invalid argument/return type. Expected argument: bool (return type: string).");
 
 			if (value == null)
-				return BooleanToTypeModeStringConverter.TypeToInsert;
+				return TypeToInsert;
 
 			bool bRet = (bool)value;
 
-			if (bRet == true)
-				return (object)BooleanToTypeModeStringConverter.TypeToInsert;
+			if (bRet)
+				return (object)TypeToInsert;
 			else
-				return (object)BooleanToTypeModeStringConverter.TypeOver;
+				return (object)TypeOver;
 		}
 
 		/// <summary>

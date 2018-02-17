@@ -1,6 +1,6 @@
 ﻿namespace MiniUML.Model.ViewModels.Document
 {
-  using MiniUML.Framework;
+  using Framework;
 
   public class ExportDocumentWindowViewModel : BaseViewModel
   {
@@ -15,13 +15,13 @@
     {
       get
       {
-        return this.mResolution;
+        return mResolution;
       }
 
       set
       {
-        this.mResolution = value;
-        this.NotifyPropertyChanged(() => this.prop_Resolution);
+        mResolution = value;
+        NotifyPropertyChanged(() => prop_Resolution);
       }
     }
 
@@ -29,13 +29,13 @@
     {
       get
       {
-        return this.mTransparentBackground;
+        return mTransparentBackground;
       }
 
       set
       {
-        this.mTransparentBackground = value;
-        this.NotifyPropertyChanged(() => this.prop_TransparentBackground);
+        mTransparentBackground = value;
+        NotifyPropertyChanged(() => prop_TransparentBackground);
       }
     }
 
@@ -43,13 +43,13 @@
     {
       get
       {
-        return this.mEnableTransparentBackground;
+        return mEnableTransparentBackground;
       }
 
       set
       {
-        this.mEnableTransparentBackground = value;
-        this.NotifyPropertyChanged(() => this.prop_EnableTransparentBackground);
+        mEnableTransparentBackground = value;
+        NotifyPropertyChanged(() => prop_EnableTransparentBackground);
       }
     }
     #endregion properties

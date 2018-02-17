@@ -19,8 +19,6 @@
 using System;
 using System.Windows;
 using System.Windows.Media;
-
-using ICSharpCode.AvalonEdit.Rendering;
 using ICSharpCode.AvalonEdit.Utils;
 
 namespace ICSharpCode.AvalonEdit.Rendering
@@ -38,32 +36,27 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		
 		public ColumnRulerRenderer(TextView textView)
 		{
-			if (textView == null)
-				throw new ArgumentNullException("textView");
-			
-			this.pen = new Pen(new SolidColorBrush(DefaultForeground), 1);
-			this.pen.Freeze();
-			this.textView = textView;
+            pen = new Pen(new SolidColorBrush(DefaultForeground), 1);
+			pen.Freeze();
+			this.textView = textView ?? throw new ArgumentNullException(nameof(textView));
 			this.textView.BackgroundRenderers.Add(this);
 		}
 		
-		public KnownLayer Layer {
-			get { return KnownLayer.Background; }
-		}
-		
-		public void SetRuler(int column, Pen pen)
+		public KnownLayer Layer => KnownLayer.Background;
+
+	    public void SetRuler(int column, Pen pen)
 		{
 			if (this.column != column) {
 				this.column = column;
-				textView.InvalidateLayer(this.Layer);
+				textView.InvalidateLayer(Layer);
 			}
 			if (this.pen != pen) {
 				this.pen = pen;
-				textView.InvalidateLayer(this.Layer);
+				textView.InvalidateLayer(Layer);
 			}
 		}
 		
-		public void Draw(TextView textView, System.Windows.Media.DrawingContext drawingContext)
+		public void Draw(TextView textView, DrawingContext drawingContext)
 		{
 			if (column < 1) return;
 			double offset = textView.WideSpaceWidth * column;

@@ -7,7 +7,7 @@
   using System.Windows;
   using System.Xml.Serialization;
 
-  using ICSharpCode.AvalonEdit.CodeCompletion;
+  using CodeCompletion;
 
   /// <summary>
   /// File based text completion class.
@@ -32,9 +32,7 @@
 				var result = GetData(highlightingName);
 				Data.Add(highlightingName, result);
 			}
-			if (input == " ")
-				return Data[highlightingName];
-			return new List<ICompletionData>();
+			return input == " " ? Data[highlightingName] : new List<ICompletionData>();
 		}
 
     /// <summary>
@@ -53,11 +51,11 @@
 				  var ser = new XmlSerializer(typeof(List<KeywordsFileOption>));
 				  var ops = (List<KeywordsFileOption>)ser.Deserialize(sr);
 
-          string sLocation = System.IO.Path.GetDirectoryName(Application.ResourceAssembly.Location);
+          string sLocation = Path.GetDirectoryName(Application.ResourceAssembly.Location);
 
           var filePath = Path.Combine(sLocation, "AvalonEdit\\Intellisense", "Keywords",
 					  ops
-					  .Where(x => string.Compare(x.HighlightingName, highlightingName) == 0)
+					  .Where(x => String.CompareOrdinal(x.HighlightingName, highlightingName) == 0)
 					  .Select(x => x.Filename)
 					  .FirstOrDefault() ?? string.Empty);
 

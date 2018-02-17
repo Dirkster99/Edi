@@ -33,7 +33,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		public UndoOperationGroup(Deque<IUndoableOperation> stack, int numops)
 		{
 			if (stack == null)  {
-				throw new ArgumentNullException("stack");
+				throw new ArgumentNullException(nameof(stack));
 			}
 			
 			Debug.Assert(numops > 0 , "UndoOperationGroup : numops should be > 0");

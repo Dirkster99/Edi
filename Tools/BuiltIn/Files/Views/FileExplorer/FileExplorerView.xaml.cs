@@ -9,7 +9,7 @@ namespace Files.Views.FileExplorer
   {
     public FileExplorerView()
     {
-      this.InitializeComponent();
+      InitializeComponent();
     }
   }
 }

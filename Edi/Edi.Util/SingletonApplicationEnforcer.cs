@@ -2,7 +2,6 @@
 {
 	using System;
 	using System.Collections.Generic;
-	using System.Diagnostics;
 	using System.IO;
 	using System.IO.MemoryMappedFiles;
 	using System.Threading;
@@ -99,7 +98,7 @@
                 throw new ArgumentNullException("processArgsFunc1");
             }
 
-			this.processActivateFunc = processArgsFunc1;
+			processActivateFunc = processArgsFunc1;
 			this.applicationId = applicationId;
 		}
 		#endregion properties
@@ -177,7 +176,7 @@
 					{
 						try
 						{
-							processActivateFunc(this.applicationId);
+							processActivateFunc(applicationId);
 						}
 						catch (Exception ex)
 						{

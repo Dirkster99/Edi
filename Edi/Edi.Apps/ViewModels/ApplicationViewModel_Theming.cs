@@ -6,12 +6,11 @@ namespace Edi.Apps.ViewModels
     using System.Reflection;
     using System.Windows;
     using System.Windows.Media;
-    using Edi.Documents.ViewModels.EdiDoc;
+    using Documents.ViewModels.EdiDoc;
     using ICSharpCode.AvalonEdit.Edi;
     using ICSharpCode.AvalonEdit.Highlighting;
     using ICSharpCode.AvalonEdit.Highlighting.Themes;
-    using MsgBox;
-    using Edi.Themes.Definition;
+    using Themes.Definition;
 
     public partial class ApplicationViewModel
     {
@@ -47,13 +46,13 @@ namespace Edi.Apps.ViewModels
             }
 
             // Get WPF Theme definition from Themes Assembly
-            ThemeBase nextThemeToSwitchTo = this.mThemesManager.SelectedTheme;
-            this.SwitchToSelectedTheme(nextThemeToSwitchTo);
+            ThemeBase nextThemeToSwitchTo = mThemesManager.SelectedTheme;
+            SwitchToSelectedTheme(nextThemeToSwitchTo);
 
             // Backup highlighting names (if any) and restore highlighting associations after reloading highlighting definitions
             var HlNames = new List<string>();
 
-            foreach (EdiViewModel f in this.Documents)
+            foreach (EdiViewModel f in Documents)
             {
                 if (f != null)
                 {
@@ -72,7 +71,7 @@ namespace Edi.Apps.ViewModels
             HighlightingExtension.RegisterCustomHighlightingPatterns(hlThemes);
 
             //Re-apply highlightings after resetting highlighting manager
-            List<EdiViewModel> l = this.Documents;
+            List<EdiViewModel> l = Documents;
             for (int i = 0; i < l.Count; i++)
             {
                 if (l[i] != null)
@@ -188,7 +187,7 @@ namespace Edi.Apps.ViewModels
                 _MsgBox.Style = MsgBoxStyle.System;
 
                 // Get WPF Theme definition from Themes Assembly
-                ThemeBase theme = this.mThemesManager.SelectedTheme;
+                ThemeBase theme = mThemesManager.SelectedTheme;
 
                 if (theme != null)
                 {
@@ -233,7 +232,7 @@ namespace Edi.Apps.ViewModels
             }
             catch (Exception exp)
             {
-                _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_THEMING_CAPTION,
+                _MsgBox.Show(exp, Util.Local.Strings.STR_THEMING_CAPTION,
                              MsgBoxButtons.OK, MsgBoxImage.Error);
 
                 return false;

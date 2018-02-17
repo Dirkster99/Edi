@@ -43,11 +43,9 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 		/// <summary>
 		/// Gets the collection of elements.
 		/// </summary>
-		public IList<XshdElement> Elements {
-			get { return elements; }
-		}
-		
-		/// <summary>
+		public IList<XshdElement> Elements => elements;
+
+	    /// <summary>
 		/// Applies the visitor to all elements.
 		/// </summary>
 		public void AcceptElements(IXshdVisitor visitor)

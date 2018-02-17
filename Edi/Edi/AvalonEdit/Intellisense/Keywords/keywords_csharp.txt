@@ -2,7 +2,9 @@
 add
 alias
 as
+async
 ascending
+await
 base
 bool
 break

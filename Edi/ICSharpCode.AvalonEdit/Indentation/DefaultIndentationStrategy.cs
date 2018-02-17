@@ -17,7 +17,6 @@
 // DEALINGS IN THE SOFTWARE.
 
 using System;
-using ICSharpCode.NRefactory.Editor;
 using ICSharpCode.AvalonEdit.Document;
 
 namespace ICSharpCode.AvalonEdit.Indentation
@@ -32,9 +31,9 @@ namespace ICSharpCode.AvalonEdit.Indentation
 		public virtual void IndentLine(TextDocument document, DocumentLine line)
 		{
 			if (document == null)
-				throw new ArgumentNullException("document");
+				throw new ArgumentNullException(nameof(document));
 			if (line == null)
-				throw new ArgumentNullException("line");
+				throw new ArgumentNullException(nameof(line));
 			DocumentLine previousLine = line.PreviousLine;
 			if (previousLine != null) {
 				ISegment indentationSegment = TextUtilities.GetWhitespaceAfter(document, previousLine.Offset);

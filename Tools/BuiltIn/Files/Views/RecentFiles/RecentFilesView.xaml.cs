@@ -9,7 +9,7 @@
 	{
 		public RecentFilesView()
 		{
-			this.InitializeComponent();
+			InitializeComponent();
 		}
 	}
 }

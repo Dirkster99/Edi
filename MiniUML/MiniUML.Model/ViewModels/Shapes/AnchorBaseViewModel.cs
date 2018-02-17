@@ -1,9 +1,6 @@
 ﻿namespace MiniUML.Model.ViewModels.Shapes
 {
-  using System.Collections.Generic;
-  using System.Xml;
-
-  public abstract class AnchorBaseViewModel : ShapeViewModelBase
+    public abstract class AnchorBaseViewModel : ShapeViewModelBase
   {
     #region constructor
     /// <summary>

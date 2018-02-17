@@ -17,7 +17,6 @@
 // DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Windows;
 using System.Windows.Controls;
 using ICSharpCode.AvalonEdit.Utils;
 
@@ -37,11 +36,11 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 			
 			// Find the scroll viewer:
 			scrollViewer = null;
-			if (this.VisualChildrenCount > 0)
+			if (VisualChildrenCount > 0)
             {
-                if (this.GetVisualChild(0) is Border)
+                if (GetVisualChild(0) is Border)
                 {
-                    Border border = this.GetVisualChild(0) as Border;
+                    Border border = GetVisualChild(0) as Border;
                     scrollViewer = border.Child as ScrollViewer;
                 }
             }
@@ -55,14 +54,12 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 				if (scrollViewer == null || scrollViewer.ExtentHeight == 0) {
 					return 0;
 				} else {
-					return (int)(this.Items.Count * scrollViewer.VerticalOffset / scrollViewer.ExtentHeight);
+					return (int)(Items.Count * scrollViewer.VerticalOffset / scrollViewer.ExtentHeight);
 				}
 			}
 			set {
-				value = value.CoerceValue(0, this.Items.Count - this.VisibleItemCount);
-				if (scrollViewer != null) {
-					scrollViewer.ScrollToVerticalOffset((double)value / this.Items.Count * scrollViewer.ExtentHeight);
-				}
+				value = value.CoerceValue(0, Items.Count - VisibleItemCount);
+			    scrollViewer?.ScrollToVerticalOffset((double)value / Items.Count * scrollViewer.ExtentHeight);
 			}
 		}
 		
@@ -76,7 +73,7 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 				} else {
 					return Math.Max(
 						3,
-						(int)Math.Ceiling(this.Items.Count * scrollViewer.ViewportHeight
+						(int)Math.Ceiling(Items.Count * scrollViewer.ViewportHeight
 						                  / scrollViewer.ExtentHeight));
 				}
 			}
@@ -87,7 +84,7 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		/// </summary>
 		public void ClearSelection()
 		{
-			this.SelectedIndex = -1;
+			SelectedIndex = -1;
 		}
 		
 		/// <summary>
@@ -95,12 +92,12 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		/// </summary>
 		public void SelectIndex(int index)
 		{
-			if (index >= this.Items.Count)
-				index = this.Items.Count - 1;
+			if (index >= Items.Count)
+				index = Items.Count - 1;
 			if (index < 0)
 				index = 0;
-			this.SelectedIndex = index;
-			this.ScrollIntoView(this.SelectedItem);
+			SelectedIndex = index;
+			ScrollIntoView(SelectedItem);
 		}
 		
 		/// <summary>
@@ -108,7 +105,7 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		/// </summary>
 		public void CenterViewOn(int index)
 		{
-			this.FirstVisibleItem = index - VisibleItemCount / 2;
+			FirstVisibleItem = index - VisibleItemCount / 2;
 		}
 	}
 }

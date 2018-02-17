@@ -2,15 +2,12 @@ namespace MiniUML.Model.ViewModels.Shapes
 {
   using System.Collections.Generic;
   using System.Collections.ObjectModel;
-  using System.Runtime;
   using System.Windows;
   using System.Xml;
-  using System.Xml.Linq;
-  using MiniUML.Framework;
-  using MiniUML.Framework.Command;
-  using MiniUML.Model.ViewModels.Document;
+  using Framework;
+  using Framework.Command;
 
-  /// <summary>
+    /// <summary>
   /// Base class to manage data items for each shape that is visible on the canvas.
   /// </summary>
   public abstract class ShapeViewModelBase : BaseViewModel
@@ -39,7 +36,7 @@ namespace MiniUML.Model.ViewModels.Shapes
     /// </summary>
     public ShapeViewModelBase(IShapeParent parent)
     {
-      this.mParent = parent;
+      mParent = parent;
     }
     #endregion constructor
 
@@ -59,15 +56,15 @@ namespace MiniUML.Model.ViewModels.Shapes
     {
       get
       {
-        return this.mID;
+        return mID;
       }
       
       set
       {
-        if (this.mID != value)
+        if (mID != value)
         {
-          this.mID = value;
-          this.NotifyPropertyChanged(() => this.ID);
+          mID = value;
+          NotifyPropertyChanged(() => ID);
         }
       }
     }
@@ -82,15 +79,15 @@ namespace MiniUML.Model.ViewModels.Shapes
     {
       get
       {
-        return this.mName;
+        return mName;
       }
 
       set
       {
-        if (this.mName != value)
+        if (mName != value)
         {
-          this.mName = value;
-          this.NotifyPropertyChanged(() => this.Name);
+          mName = value;
+          NotifyPropertyChanged(() => Name);
         }
       }
     }
@@ -103,16 +100,16 @@ namespace MiniUML.Model.ViewModels.Shapes
     {
       get
       {
-        return this.mLeft;
+        return mLeft;
       }
       
       set
       {
-        if (this.mLeft != value)
+        if (mLeft != value)
         {
-          this.mLeft = value;
-          this.NotifyPropertyChanged(() => this.Left);
-          this.NotifyPropertyChanged(() => this.Position);
+          mLeft = value;
+          NotifyPropertyChanged(() => Left);
+          NotifyPropertyChanged(() => Position);
         }
       }
     }
@@ -124,16 +121,16 @@ namespace MiniUML.Model.ViewModels.Shapes
     {
       get
       {
-        return this.mTop;
+        return mTop;
       }
       
       set
       {
-        if (this.mTop != value)
+        if (mTop != value)
         {
-          this.mTop = value;
-          this.NotifyPropertyChanged(() => this.Top);
-          this.NotifyPropertyChanged(() => this.Position);
+          mTop = value;
+          NotifyPropertyChanged(() => Top);
+          NotifyPropertyChanged(() => Position);
         }
       }
     }
@@ -145,19 +142,19 @@ namespace MiniUML.Model.ViewModels.Shapes
     {
       get
       {
-        return new Point(this.Left, this.Top);
+        return new Point(Left, Top);
       }
 
       set
       {
-        if (value != new Point(this.Left, this.Top))
+        if (value != new Point(Left, Top))
         {
-          this.Left = value.X;
-          this.Top = value.Y;
+          Left = value.X;
+          Top = value.Y;
 
-          this.NotifyPropertyChanged(() => this.Position);
-          this.NotifyPropertyChanged(() => this.Top);
-          this.NotifyPropertyChanged(() => this.Left);
+          NotifyPropertyChanged(() => Position);
+          NotifyPropertyChanged(() => Top);
+          NotifyPropertyChanged(() => Left);
         }
       }
     }
@@ -170,15 +167,15 @@ namespace MiniUML.Model.ViewModels.Shapes
     {
       get
       {
-        return this.mIsSelected;
+        return mIsSelected;
       }
 
       internal set
       {
-        if (this.mIsSelected != value)
+        if (mIsSelected != value)
         {
-          this.mIsSelected = value;
-          this.NotifyPropertyChanged(() => this.IsSelected);
+          mIsSelected = value;
+          NotifyPropertyChanged(() => IsSelected);
         }
       }
     }
@@ -191,10 +188,10 @@ namespace MiniUML.Model.ViewModels.Shapes
     {
       get
       {
-        if (this.mBringToFront == null)
-          this.mBringToFront = new RelayCommand<object>(p => this.BringToFront_Executed());
+        if (mBringToFront == null)
+          mBringToFront = new RelayCommand<object>(p => BringToFront_Executed());
 
-        return this.mBringToFront;
+        return mBringToFront;
       }
     }
 
@@ -205,10 +202,10 @@ namespace MiniUML.Model.ViewModels.Shapes
     {
       get
       {
-        if (this.mSendToBack == null)
-          this.mSendToBack = new RelayCommand<object>(p => this.SendToBack_Executed());
+        if (mSendToBack == null)
+          mSendToBack = new RelayCommand<object>(p => SendToBack_Executed());
 
-        return this.mSendToBack;
+        return mSendToBack;
       }
     }
     #endregion Commands
@@ -222,10 +219,10 @@ namespace MiniUML.Model.ViewModels.Shapes
     {
       get
       {
-        if (this.mElements.Count == 0)
+        if (mElements.Count == 0)
           return null;
 
-        return this.mElements[0];
+        return mElements[0];
       }
     }
 
@@ -238,10 +235,10 @@ namespace MiniUML.Model.ViewModels.Shapes
     {
       get
       {
-        if (this.mElements.Count == 0)
+        if (mElements.Count == 0)
           return null;
 
-        return this.mElements[this.mElements.Count - 1];
+        return mElements[mElements.Count - 1];
       }
     }
 
@@ -249,7 +246,7 @@ namespace MiniUML.Model.ViewModels.Shapes
     {
       get
       {
-        return this.mParent;
+        return mParent;
       }
     }
     #endregion properties
@@ -262,7 +259,7 @@ namespace MiniUML.Model.ViewModels.Shapes
     /// <param name="shape"></param>
     public void Add(ShapeViewModelBase shape)
     {
-      this.mElements.Add(shape);
+      mElements.Add(shape);
     }
 
     /// <summary>
@@ -276,7 +273,7 @@ namespace MiniUML.Model.ViewModels.Shapes
       {
         foreach (var item in shapes)
         {
-          this.mElements.Add(item);
+          mElements.Add(item);
         }
       }
     }
@@ -286,8 +283,8 @@ namespace MiniUML.Model.ViewModels.Shapes
     /// </summary>
     public void Remove()
     {
-      if (this.mParent != null)
-        this.mParent.Remove(this);
+      if (mParent != null)
+        mParent.Remove(this);
     }
 
     /// <summary>
@@ -302,12 +299,12 @@ namespace MiniUML.Model.ViewModels.Shapes
 
     public IEnumerable<ShapeViewModelBase> Elements()
     {
-      return (IEnumerable<ShapeViewModelBase>)this.mElements;
+      return (IEnumerable<ShapeViewModelBase>)mElements;
     }
 
     public int ElementsCount()
     {
-      return this.mElements.Count;
+      return mElements.Count;
     }
 
     /// <summary>
@@ -316,8 +313,8 @@ namespace MiniUML.Model.ViewModels.Shapes
     /// </summary>
     protected void BringToFront_Executed()
     {
-      if (this.mParent != null)
-        this.mParent.BringToFront(this);
+      if (mParent != null)
+        mParent.BringToFront(this);
     }
 
     /// <summary>
@@ -326,8 +323,8 @@ namespace MiniUML.Model.ViewModels.Shapes
     /// </summary>
     protected void SendToBack_Executed()
     {
-      if (this.mParent != null)
-        this.mParent.SendToBack(this);
+      if (mParent != null)
+        mParent.SendToBack(this);
     }
     #endregion methods
   }

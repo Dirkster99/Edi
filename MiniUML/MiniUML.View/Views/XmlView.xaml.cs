@@ -9,7 +9,7 @@ namespace MiniUML.View.Views
   {
     public XmlView()
     {
-      this.InitializeComponent();
+      InitializeComponent();
     }
   }
 }

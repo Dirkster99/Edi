@@ -27,7 +27,7 @@
     /// </summary>
     public SchemaValidator()
     {
-      this.mErrorMessages = null;
+      mErrorMessages = null;
     }
     #endregion constructor
 
@@ -39,7 +39,7 @@
     {
       get
       {
-        return (this.mErrorMessages == null ? new List<string>() : this.mErrorMessages);
+        return (mErrorMessages == null ? new List<string>() : mErrorMessages);
       }
     }
 
@@ -51,7 +51,7 @@
     {
       get
       {
-        return (this.mErrorMessages == null ? true : ((this.mErrorMessages.Count) > 0 ? false : true));
+        return (mErrorMessages == null ? true : ((mErrorMessages.Count) > 0 ? false : true));
       }
     }
     #endregion properties
@@ -68,7 +68,7 @@
                              XmlReaderSettings xmlSettings = null)
     {
       StreamReader strmrStreamReader = new StreamReader(xsdStream);
-      System.Xml.Schema.XmlSchema xSchema = new System.Xml.Schema.XmlSchema();
+      XmlSchema xSchema = new XmlSchema();
       xSchema = XmlSchema.Read(strmrStreamReader, null);
 
       // Set the validation settings.
@@ -82,7 +82,7 @@
         xmlSettings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings;
       }
 
-      xmlSettings.ValidationEventHandler += new ValidationEventHandler(this.ValidationCallBack);
+      xmlSettings.ValidationEventHandler += new ValidationEventHandler(ValidationCallBack);
 
       using (XmlReader reader = XmlReader.Create(xmlPathFileName, xmlSettings))
       {
@@ -100,27 +100,27 @@
     /// <param name="args"></param>
     protected void ValidationCallBack(object sender, ValidationEventArgs args)
     {
-      if (this.mErrorMessages == null)
-        this.mErrorMessages = new List<string>();
+      if (mErrorMessages == null)
+        mErrorMessages = new List<string>();
 
       switch (args.Severity)
       {
         case XmlSeverityType.Warning:
-          this.mErrorMessages.Add(string.Format(CultureInfo.CurrentCulture, "Line: {0}, Position: {1} {2}",
+          mErrorMessages.Add(string.Format(CultureInfo.CurrentCulture, "Line: {0}, Position: {1} {2}",
                          args.Exception.LineNumber,
                          args.Exception.LinePosition,
                          args.Exception.Message));
           break;
 
         case XmlSeverityType.Error:
-          this.mErrorMessages.Add(string.Format(CultureInfo.CurrentCulture, "Line: {0}, Position: {1} {2}",
+          mErrorMessages.Add(string.Format(CultureInfo.CurrentCulture, "Line: {0}, Position: {1} {2}",
                          args.Exception.LineNumber,
                          args.Exception.LinePosition,
                          args.Exception.Message));
           break;
 
         default:
-          this.mErrorMessages.Add(string.Format(CultureInfo.CurrentCulture ,"Unhandled XML error with severity of type: {0} and message: {1}",
+          mErrorMessages.Add(string.Format(CultureInfo.CurrentCulture ,"Unhandled XML error with severity of type: {0} and message: {1}",
                                                 args.Severity.ToString(), args.Message));
           break;
       }

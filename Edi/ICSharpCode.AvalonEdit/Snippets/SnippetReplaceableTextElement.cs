@@ -21,7 +21,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
-using ICSharpCode.NRefactory.Editor;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Rendering;
 
@@ -107,7 +106,7 @@ namespace ICSharpCode.AvalonEdit.Snippets
 			context.TextArea.Caret.PositionChanged += Caret_PositionChanged;
 			Caret_PositionChanged(null, null);
 			
-			this.Text = GetText();
+			Text = GetText();
 		}
 
 		public void Deactivate(SnippetEventArgs e)
@@ -122,7 +121,7 @@ namespace ICSharpCode.AvalonEdit.Snippets
 		
 		void Caret_PositionChanged(object sender, EventArgs e)
 		{
-			ISegment s = this.Segment;
+			ISegment s = Segment;
 			if (s != null) {
 				bool newIsCaretInside = s.Contains(context.TextArea.Caret.Offset, 0);
 				if (newIsCaretInside != isCaretInside) {
@@ -138,10 +137,9 @@ namespace ICSharpCode.AvalonEdit.Snippets
 		
 		string GetText()
 		{
-			if (start.IsDeleted || end.IsDeleted)
+		    if (start.IsDeleted || end.IsDeleted)
 				return string.Empty;
-			else
-				return context.Document.GetText(start.Offset, Math.Max(0, end.Offset - start.Offset));
+		    return context.Document.GetText(start.Offset, Math.Max(0, end.Offset - start.Offset));
 		}
 		
 		public event EventHandler TextChanged;
@@ -150,8 +148,8 @@ namespace ICSharpCode.AvalonEdit.Snippets
 		{
 			if (managerType == typeof(TextDocumentWeakEventManager.TextChanged)) {
 				string newText = GetText();
-				if (this.Text != newText) {
-					this.Text = newText;
+				if (Text != newText) {
+					Text = newText;
 					if (TextChanged != null)
 						TextChanged(this, e);
 				}
@@ -160,16 +158,14 @@ namespace ICSharpCode.AvalonEdit.Snippets
 			return false;
 		}
 		
-		public bool IsEditable {
-			get { return true; }
-		}
-		
-		public ISegment Segment {
-			get {
-				if (start.IsDeleted || end.IsDeleted)
+		public bool IsEditable => true;
+
+	    public ISegment Segment {
+			get
+			{
+			    if (start.IsDeleted || end.IsDeleted)
 					return null;
-				else
-					return new SimpleSegment(start.Offset, Math.Max(0, end.Offset - start.Offset));
+			    return new SimpleSegment(start.Offset, Math.Max(0, end.Offset - start.Offset));
 			}
 		}
 		
@@ -180,17 +176,21 @@ namespace ICSharpCode.AvalonEdit.Snippets
 			
 			static Brush CreateBackgroundBrush()
 			{
-				SolidColorBrush b = new SolidColorBrush(Colors.LimeGreen);
-				b.Opacity = 0.4;
-				b.Freeze();
+                SolidColorBrush b = new SolidColorBrush(Colors.LimeGreen)
+                {
+                    Opacity = 0.4
+                };
+                b.Freeze();
 				return b;
 			}
 			
 			static Pen CreateBorderPen()
 			{
-				Pen p = new Pen(Brushes.Black, 1);
-				p.DashStyle = DashStyles.Dot;
-				p.Freeze();
+                Pen p = new Pen(Brushes.Black, 1)
+                {
+                    DashStyle = DashStyles.Dot
+                };
+                p.Freeze();
 				return p;
 			}
 			
@@ -198,14 +198,16 @@ namespace ICSharpCode.AvalonEdit.Snippets
 			
 			public KnownLayer Layer { get; set; }
 			
-			public void Draw(TextView textView, System.Windows.Media.DrawingContext drawingContext)
+			public void Draw(TextView textView, DrawingContext drawingContext)
 			{
 				ISegment s = element.Segment;
 				if (s != null) {
-					BackgroundGeometryBuilder geoBuilder = new BackgroundGeometryBuilder();
-					geoBuilder.AlignToWholePixels = true;
-					geoBuilder.BorderThickness = activeBorderPen != null ? activeBorderPen.Thickness : 0;
-					if (Layer == KnownLayer.Background) {
+                    BackgroundGeometryBuilder geoBuilder = new BackgroundGeometryBuilder
+                    {
+                        AlignToWholePixels = true,
+                        BorderThickness = activeBorderPen != null ? activeBorderPen.Thickness : 0
+                    };
+                    if (Layer == KnownLayer.Background) {
 						geoBuilder.AddSegment(textView, s);
 						drawingContext.DrawGeometry(backgroundBrush, null, geoBuilder.CreateGeometry());
 					} else {

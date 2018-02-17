@@ -1,10 +1,9 @@
 ﻿namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel
 {
-  using System;
-  using System.Windows;
-  using MiniUML.Framework;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Document;
+    using System;
+    using System.Windows;
+    using Framework;
+    using Model.ViewModels.Document;
 
   public class PageViewModel : PageViewModelBase
   {
@@ -22,20 +21,20 @@
       switch (readerName)
       {
         case "Size":
-          double[] size = FrameworkUtilities.GetDoubleAttributes(readerValue, 2,
+          var size = FrameworkUtilities.GetDoubleAttributes(readerValue, 2,
                                                                   new double[] { DefaultXSize, DefaultYSize });
-          this.prop_PageSize = new Size(size[0], size[1]);
+          prop_PageSize = new Size(size[0], size[1]);
           return true;
 
         case "xmlns":
-          if (readerValue != PageViewModelBase.NameSpace)
+          if (readerValue != NameSpace)
             throw new ArgumentException("XML namespace:'" + readerValue + "' is not supported.");
 
           return true;
 
         default:
-          if (readerName.Trim().Length > 0 && readerName != PageViewModelBase.XmlComment)
-            throw new ArgumentException("XML node:'" + readerName + "' as child of '" + PageViewModel.XmlElementName + "' is not supported.");
+          if (readerName.Trim().Length > 0 && readerName != XmlComment)
+            throw new ArgumentException("XML node:'" + readerName + "' as child of '" + XmlElementName + "' is not supported.");
           break;
       }
 

@@ -28,7 +28,7 @@ namespace Edi.Dialogs.GotoLine
 		/// </summary>
 		public GotoLineView()
 		{
-			this.mTxtLineNumber = null;
+			mTxtLineNumber = null;
 		}
 
 		/// <summary>
@@ -40,22 +40,22 @@ namespace Edi.Dialogs.GotoLine
 
 			try
 			{
-				this.mTxtLineNumber = this.GetTemplateChild("PART_TxtLineNumber") as TextBox;
+				mTxtLineNumber = GetTemplateChild("PART_TxtLineNumber") as TextBox;
 
-				if (this.mTxtLineNumber != null)
+				if (mTxtLineNumber != null)
 				{
-					this.mTxtLineNumber.Loaded += (s, e) =>  // Set textbox to be intially focussed
+					mTxtLineNumber.Loaded += (s, e) =>  // Set textbox to be intially focussed
 					{
-						this.mTxtLineNumber.Focus();
+						mTxtLineNumber.Focus();
 					};
 
-					this.mTxtLineNumber.GotKeyboardFocus += (s, e) =>
+					mTxtLineNumber.GotKeyboardFocus += (s, e) =>
 					{
-						this.mTxtLineNumber.SelectAll();
+						mTxtLineNumber.SelectAll();
 					};
 				}
 			}
-			catch (System.Exception e)
+			catch (Exception e)
 			{
 				Console.WriteLine(e.ToString());
 			}
@@ -69,8 +69,8 @@ namespace Edi.Dialogs.GotoLine
 		{
 			base.OnRender(drawingContext);
 
-			if (this.mTxtLineNumber != null)
-				this.mTxtLineNumber.SelectAll();
+			if (mTxtLineNumber != null)
+				mTxtLineNumber.SelectAll();
 		}
 	}
 }

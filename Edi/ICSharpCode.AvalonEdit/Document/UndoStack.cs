@@ -47,8 +47,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		int undoGroupDepth;
 		int actionCountInUndoGroup;
 		int optionalActionCount;
-		object lastGroupDescriptor;
-		bool allowContinue;
+	    bool allowContinue;
 		
 		#region IsOriginalFile implementation
 		// implements feature request SD2-784 - File still considered dirty after undoing all changes
@@ -59,21 +58,17 @@ namespace ICSharpCode.AvalonEdit.Document
 		/// Special case: int.MinValue == original state is unreachable
 		/// </summary>
 		int elementsOnUndoUntilOriginalFile;
-		
-		bool isOriginalFile = true;
-		
-		/// <summary>
+
+	    /// <summary>
 		/// Gets whether the document is currently in its original state (no modifications).
 		/// </summary>
-		public bool IsOriginalFile {
-			get { return isOriginalFile; }
-		}
-		
-		void RecalcIsOriginalFile()
+		public bool IsOriginalFile { get; private set; } = true;
+
+	    void RecalcIsOriginalFile()
 		{
 			bool newIsOriginalFile = (elementsOnUndoUntilOriginalFile == 0);
-			if (newIsOriginalFile != isOriginalFile) {
-				isOriginalFile = newIsOriginalFile;
+			if (newIsOriginalFile != IsOriginalFile) {
+				IsOriginalFile = newIsOriginalFile;
 				NotifyPropertyChanged("IsOriginalFile");
 			}
 		}
@@ -113,34 +108,28 @@ namespace ICSharpCode.AvalonEdit.Document
 		/// Gets if the undo stack currently accepts changes.
 		/// Is false while an undo action is running.
 		/// </summary>
-		public bool AcceptChanges {
-			get { return state == StateListen; }
-		}
-		
-		/// <summary>
+		public bool AcceptChanges => state == StateListen;
+
+	    /// <summary>
 		/// Gets if there are actions on the undo stack.
 		/// Use the PropertyChanged event to listen to changes of this property.
 		/// </summary>
-		public bool CanUndo {
-			get { return undostack.Count > 0; }
-		}
-		
-		/// <summary>
+		public bool CanUndo => undostack.Count > 0;
+
+	    /// <summary>
 		/// Gets if there are actions on the redo stack.
 		/// Use the PropertyChanged event to listen to changes of this property.
 		/// </summary>
-		public bool CanRedo {
-			get { return redostack.Count > 0; }
-		}
-		
-		/// <summary>
+		public bool CanRedo => redostack.Count > 0;
+
+	    /// <summary>
 		/// Gets/Sets the limit on the number of items on the undo stack.
 		/// </summary>
 		/// <remarks>The size limit is enforced only on the number of stored top-level undo groups.
 		/// Elements within undo groups do not count towards the size limit.</remarks>
 		public int SizeLimit {
-			get { return sizeLimit; }
-			set {
+			get => sizeLimit;
+	        set {
 				if (value < 0)
 					ThrowUtil.CheckNotNegative(value, "value");
 				if (sizeLimit != value) {
@@ -170,11 +159,9 @@ namespace ICSharpCode.AvalonEdit.Document
 		/// use a group descriptor to mark your changes, and on the second action,
 		/// compare LastGroupDescriptor and use <see cref="StartContinuedUndoGroup"/> if you
 		/// want to join the undo groups.</remarks>
-		public object LastGroupDescriptor {
-			get { return lastGroupDescriptor; }
-		}
-		
-		/// <summary>
+		public object LastGroupDescriptor { get; private set; }
+
+	    /// <summary>
 		/// Starts grouping changes.
 		/// Maintains a counter so that nested calls are possible.
 		/// </summary>
@@ -194,7 +181,7 @@ namespace ICSharpCode.AvalonEdit.Document
 			if (undoGroupDepth == 0) {
 				actionCountInUndoGroup = 0;
 				optionalActionCount = 0;
-				lastGroupDescriptor = groupDescriptor;
+				LastGroupDescriptor = groupDescriptor;
 			}
 			undoGroupDepth++;
             //Edi.Util.LoggingService.Debug("Open undo group (new depth=" + undoGroupDepth + ")");
@@ -213,7 +200,7 @@ namespace ICSharpCode.AvalonEdit.Document
 			if (undoGroupDepth == 0) {
 				actionCountInUndoGroup = (allowContinue && undostack.Count > 0) ? 1 : 0;
 				optionalActionCount = 0;
-				lastGroupDescriptor = groupDescriptor;
+				LastGroupDescriptor = groupDescriptor;
 			}
 			undoGroupDepth++;
             //Edi.Util.LoggingService.Debug("Continue undo group (new depth=" + undoGroupDepth + ")");
@@ -292,7 +279,7 @@ namespace ICSharpCode.AvalonEdit.Document
 			ThrowIfUndoGroupOpen();
 			if (undostack.Count > 0) {
 				// disallow continuing undo groups after undo operation
-				lastGroupDescriptor = null; allowContinue = false;
+				LastGroupDescriptor = null; allowContinue = false;
 				// fetch operation to undo and move it to redo stack
 				IUndoableOperation uedit = undostack.PopBack();
 				redostack.PushBack(uedit);
@@ -330,7 +317,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		{
 			ThrowIfUndoGroupOpen();
 			if (redostack.Count > 0) {
-				lastGroupDescriptor = null; allowContinue = false;
+				LastGroupDescriptor = null; allowContinue = false;
 				IUndoableOperation uedit = redostack.PopBack();
 				undostack.PushBack(uedit);
 				state = StatePlayback;
@@ -386,7 +373,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		void Push(IUndoableOperation operation, bool isOptional)
 		{
 			if (operation == null) {
-				throw new ArgumentNullException("operation");
+				throw new ArgumentNullException(nameof(operation));
 			}
 			
 			if (state == StateListen && sizeLimit > 0) {
@@ -430,7 +417,7 @@ namespace ICSharpCode.AvalonEdit.Document
 			actionCountInUndoGroup = 0;
 			optionalActionCount = 0;
 			if (undostack.Count != 0) {
-				lastGroupDescriptor = null;
+				LastGroupDescriptor = null;
 				allowContinue = false;
 				undostack.Clear();
 				NotifyPropertyChanged("CanUndo");

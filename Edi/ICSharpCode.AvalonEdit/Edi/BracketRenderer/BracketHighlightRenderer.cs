@@ -1,10 +1,9 @@
 ﻿namespace ICSharpCode.AvalonEdit.BracketRenderer
 {
   using System;
-  using System.Collections.Generic;
   using System.Windows.Media;
-  using ICSharpCode.AvalonEdit.Document;
-  using ICSharpCode.AvalonEdit.Rendering;
+  using Document;
+  using Rendering;
 
   /// <summary>
   /// Highlight opening and closing brackets when when moving the carret in the text
@@ -39,12 +38,9 @@
     /// <param name="textView"></param>
     public BracketHighlightRenderer(TextView textView)
     {
-      if (textView == null)
-        throw new ArgumentNullException("textView");
+            mTextView = textView ?? throw new ArgumentNullException(nameof(textView));
 
-      this.mTextView = textView;
-
-      this.mTextView.BackgroundRenderers.Add(this);
+      mTextView.BackgroundRenderers.Add(this);
     }
     #endregion constructor
 
@@ -72,10 +68,10 @@
     /// <param name="result"></param>
     public void SetHighlight(BracketSearchResult result)
     {
-      if (this.mResult != result)
+      if (mResult != result)
       {
-        this.mResult = result;
-        mTextView.InvalidateLayer(this.Layer);
+        mResult = result;
+        mTextView.InvalidateLayer(Layer);
       }
     }
 
@@ -83,30 +79,25 @@
     /// Gets the <seealso cref="KnownLayer"/> that is used to highlight brackets
     /// within the text.
     /// </summary>
-    public KnownLayer Layer
-    {
-      get
-      {
-        return KnownLayer.Selection;
-      }
-    }
+    public KnownLayer Layer => KnownLayer.Selection;
 
-    /// <summary>
+      /// <summary>
     /// Draw method for drawing highlighted brackets.
     /// </summary>
     /// <param name="textView"></param>
     /// <param name="drawingContext"></param>
     public void Draw(TextView textView, DrawingContext drawingContext)
     {
-      if (this.mResult == null)
+      if (mResult == null)
         return;
 
-      BackgroundGeometryBuilder builder = new BackgroundGeometryBuilder();
+            BackgroundGeometryBuilder builder = new BackgroundGeometryBuilder
+            {
+                CornerRadius = 1,
+                AlignToMiddleOfPixels = true
+            };
 
-      builder.CornerRadius = 1;
-      builder.AlignToMiddleOfPixels = true;
-
-      builder.AddSegment(textView, new TextSegment()
+            builder.AddSegment(textView, new TextSegment()
                                    {
                                      StartOffset = mResult.OpeningBracketOffset,
                                      Length = mResult.OpeningBracketLength
@@ -123,7 +114,7 @@
       Geometry geometry = builder.CreateGeometry();
 
       if (mBorderPen == null)
-        this.UpdateColors(DefaultBackground, DefaultBackground);
+        UpdateColors(DefaultBackground, DefaultBackground);
 
       if (geometry != null)
       {
@@ -138,11 +129,11 @@
     /// <param name="foreground"></param>
     private void UpdateColors(Color background, Color foreground)
     {
-      this.mBorderPen = new Pen(new SolidColorBrush(foreground), 1);
-      this.mBorderPen.Freeze();
+      mBorderPen = new Pen(new SolidColorBrush(foreground), 1);
+      mBorderPen.Freeze();
 
-      this.mBackgroundBrush = new SolidColorBrush(background);
-      this.mBackgroundBrush.Freeze();
+      mBackgroundBrush = new SolidColorBrush(background);
+      mBackgroundBrush.Freeze();
     }
     #endregion methods
   }

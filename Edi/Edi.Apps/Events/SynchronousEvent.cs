@@ -1,9 +1,8 @@
 namespace Edi.Apps.Events
 {
 	using System;
-	using Prism.Events;
 
-	/// <summary>
+    /// <summary>
 	/// Class implements a simple PRISM LoadLayout string event
 	/// 
 	/// Sources:
@@ -21,8 +20,8 @@ namespace Edi.Apps.Events
 		/// </summary>
 		static SynchronousEvent()
 		{
-			SynchronousEvent<TPayload>._eventAggregator = new EventAggregator();
-			SynchronousEvent<TPayload>._event = _eventAggregator.GetEvent<SynchronousEvent<TPayload>>();
+			_eventAggregator = new EventAggregator();
+			_event = _eventAggregator.GetEvent<SynchronousEvent<TPayload>>();
 		}
 
 		/// <summary>

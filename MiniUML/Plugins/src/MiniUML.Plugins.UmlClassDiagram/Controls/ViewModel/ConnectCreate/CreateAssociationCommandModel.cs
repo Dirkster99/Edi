@@ -2,26 +2,25 @@
 {
   using System.Windows;
   using System.Windows.Input;
-  using MiniUML.Framework;
-  using MiniUML.Framework.Command;
-  using MiniUML.Framework.interfaces;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Command;
-  using MiniUML.Model.ViewModels.Document;
-  using MiniUML.Model.ViewModels.Shapes;
-  using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Connect;
-  using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements;
+  using Framework;
+  using Framework.Command;
+  using Framework.interfaces;
+  using Model.ViewModels;
+  using Model.ViewModels.Command;
+  using Model.ViewModels.Document;
+  using Model.ViewModels.Shapes;
+  using Connect;
+  using UmlElements;
 
   public class CreateAssociationCommandModel : CommandModelBase, IDragableCommandModel
   {
     #region fields
     private PluginViewModel mViewModel;
-    private RelayCommand<object> mCreateShape = null;
+    private RelayCommand<object> mCreateShape;
 
     private UmlTypes mUmlType;
-    private string mToolBoxName;
-    private string mToolBoxDescription;
-    #endregion fields
+
+      #endregion fields
 
     #region constructor
     /// <summary>
@@ -33,12 +32,12 @@
                                          string toolBoxName,
                                          string toolBoxDescription)
     {
-      this.mViewModel = viewModel;
+      mViewModel = viewModel;
 
-      this.ToolBoxImageUrl = toolboxImageUrl;
-      this.mUmlType = umlType;
-      this.mToolBoxName = toolBoxName;
-      this.mToolBoxDescription = toolBoxDescription;
+      ToolBoxImageUrl = toolboxImageUrl;
+      mUmlType = umlType;
+      Title = toolBoxName;
+      ToolTip = toolBoxDescription;
     }
     #endregion constructor
 
@@ -49,36 +48,20 @@
     public override ICommand CreateShape
     {
       get
-      {
-        if (this.mCreateShape == null)
-          this.mCreateShape = new RelayCommand<object>((p) => this.OnExecute(), (p) => this.OnQueryEnabled());
-
-        return this.mCreateShape;
-      }
+      { return mCreateShape ?? (mCreateShape = new RelayCommand<object>((p) => OnExecute(), (p) => OnQueryEnabled())); }
     }
 
     /// <summary>
     /// Get description string for this canvase item.
     /// </summary>
-    public string ToolTip
-    {
-      get
-      {
-        return this.mToolBoxDescription;
-      }
-    }
+    public string ToolTip { get; }
 
-    /// <summary>
+      /// <summary>
     /// Get title string for this canvase item.
     /// </summary>
-    public string Title
-    {
-      get
-      {
-        return this.mToolBoxName;
-      }
-    }
-    #endregion properties
+    public string Title { get; }
+
+      #endregion properties
 
     #region methods
     /// <summary>
@@ -89,7 +72,7 @@
     /// <param name="dropPoint"></param>
     public void OnDragDropExecute(Point dropPoint)
     {
-      var model = this.mViewModel.mWindowViewModel.vm_DocumentViewModel;
+      var model = mViewModel.mWindowViewModel.vm_DocumentViewModel;
 
       model.v_CanvasView.ForceCursor = true;
       model.v_CanvasView.Cursor = Cursors.Pen;
@@ -100,21 +83,21 @@
       // to one which allows us to connect things on the canvas.
       model.vm_CanvasViewModel.BeginCanvasViewMouseHandler(
           new CreateAssociationMouseHandler(model,
-                                            UmlElementDataDef.CreateShape(this.mUmlType, dropPoint, parent) as UmlAssociationShapeViewModel));
+                                            UmlElementDataDef.CreateShape(mUmlType, dropPoint, parent) as UmlAssociationShapeViewModel));
     }
 
     #region CreateShape Command
     private bool OnQueryEnabled()
     {
-      if (this.mViewModel == null)
+      if (mViewModel == null)
         return false;
 
-      return this.mViewModel.mWindowViewModel.vm_DocumentViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready;
+      return mViewModel.mWindowViewModel.vm_DocumentViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready;
     }
 
     private void OnExecute()
     {
-      this.OnDragDropExecute(new Point(100, 10));
+      OnDragDropExecute(new Point(100, 10));
     }
     #endregion CreateShape Command
     #endregion methods

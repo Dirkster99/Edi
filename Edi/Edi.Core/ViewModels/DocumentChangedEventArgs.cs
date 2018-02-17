@@ -18,7 +18,7 @@ namespace Edi.Core.ViewModels
 		#region constrcutor
 		public DocumentChangedEventArgs(IFileBaseViewModel activeDocument)
 		{
-			this.mActiveDocument = activeDocument;
+			mActiveDocument = activeDocument;
 		}
 		#endregion constrcutor
 
@@ -30,7 +30,7 @@ namespace Edi.Core.ViewModels
 		{
 			get
 			{
-				return this.mActiveDocument;
+				return mActiveDocument;
 			}
 		}
 		#endregion methods

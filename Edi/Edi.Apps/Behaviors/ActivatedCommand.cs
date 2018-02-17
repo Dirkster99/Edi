@@ -17,7 +17,7 @@
 				"Command",
 				typeof(ICommand),
 				typeof(ActivatedCommand),
-				new PropertyMetadata(null, ActivatedCommand.OnCommandChange));
+				new PropertyMetadata(null, OnCommandChange));
 
 		/// <summary>
 		/// <seealso cref="object"/> field for CommandParameter binding if user wants to
@@ -88,8 +88,6 @@
 
             if (e.NewValue is ICommand)
             {
-                ICommand command = e.NewValue as ICommand;
-
                 // the property is attached so we attach the Drop event handler
                 uiElement.Activated += UiElement_Activated;
             }
@@ -109,15 +107,13 @@
 		/// <param name="e"></param>
 		private static void UiElement_Activated(object sender, System.EventArgs e)
 		{
-			var uiElement = sender as Window;
-
-			// Sanity check just in case this was somehow send by something else
-			if (uiElement == null)
+		    // Sanity check just in case this was somehow send by something else
+			if (!(sender is Window uiElement))
 				return;
 
-			ICommand Command = ActivatedCommand.GetCommand(uiElement);
+			ICommand Command = GetCommand(uiElement);
 
-			object CommandParameter = ActivatedCommand.GetCommandParameter(uiElement);
+			object CommandParameter = GetCommandParameter(uiElement);
 
 			// There may not be a command bound to this after all
 			if (Command == null)

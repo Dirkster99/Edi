@@ -3,7 +3,7 @@
   using System.Windows;
   using System.Windows.Input;
 
-  using MiniUML.Framework.helpers;
+  using Framework.helpers;
 
   /// <summary>
   /// Drag and drop behviour to drag & drop elements from
@@ -109,7 +109,7 @@
     }
     #endregion
 
-    private static void Fe_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+    private static void Fe_MouseMove(object sender, MouseEventArgs e)
     {
       Point? dragStartPoint = GetDragStartPoint((DependencyObject)sender);
 
@@ -135,7 +135,7 @@
             }
     }
 
-    private static void Fe_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    private static void Fe_PreviewMouseDown(object sender, MouseButtonEventArgs e)
     {
       SetDragStartPoint((DependencyObject)sender, e.GetPosition((IInputElement)sender));
     }

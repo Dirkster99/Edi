@@ -1,23 +1,13 @@
 ﻿namespace Output.ViewModels
 {
 	using System;
-	using System.Collections.Generic;
 	using System.Collections.ObjectModel;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
 	using System.Windows;
-	using Edi.Core.Interfaces;
-	using Edi.Core.ViewModels;
-	using Edi.Core.ViewModels.Command;
 	using ICSharpCode.AvalonEdit.Document;
 	using ICSharpCode.AvalonEdit.Edi.TextBoxControl;
 	using ICSharpCode.AvalonEdit.Highlighting;
-	using UnitComboLib.Models.Unit;
-	using UnitComboLib.Models.Unit.Screen;
-	using UnitComboLib.ViewModels;
 
-	public class TextViewModel : BaseViewModel
+    public class TextViewModel : BaseViewModel
 	{
 		#region fields
 		private TextDocument mDocument;
@@ -55,19 +45,19 @@
 		/// <param name="documentViewModel"></param>
 		public TextViewModel()
 		{
-			this.SizeUnitLabel = UnitComboLib.UnitViewModeService.CreateInstance(
-                this.GenerateScreenUnitList(),
+			SizeUnitLabel = UnitComboLib.UnitViewModeService.CreateInstance(
+                GenerateScreenUnitList(),
                 new ScreenConverter(), 0);
 
-			this.TxtControl = new TextBoxController();
+			TxtControl = new TextBoxController();
 
-			this.mDocument = new TextDocument();
+			mDocument = new TextDocument();
 
-			this.TextEditorSelectionStart = 0;
-			this.TextEditorSelectionLength = 0;
+			TextEditorSelectionStart = 0;
+			TextEditorSelectionLength = 0;
 
 			// Set XML Highlighting for XML split view part of the UML document viewer
-			this.mHighlightingDefinition = HighlightingManager.Instance.GetDefinitionByExtension(".txt");
+			mHighlightingDefinition = HighlightingManager.Instance.GetDefinitionByExtension(".txt");
 		}
 		#endregion constructor
 
@@ -78,15 +68,15 @@
 		{
 			get
 			{
-				return this.mIsReadOnly;
+				return mIsReadOnly;
 			}
 
 			protected set
 			{
-				if (this.mIsReadOnly != value)
+				if (mIsReadOnly != value)
 				{
-					this.mIsReadOnly = value;
-					this.RaisePropertyChanged(() => this.IsReadOnly);
+					mIsReadOnly = value;
+					this.RaisePropertyChanged(() => IsReadOnly);
 				}
 			}
 		}
@@ -105,15 +95,15 @@
 		{
 			get
 			{
-				return this.mDocument;
+				return mDocument;
 			}
 
 			set
 			{
-				if (this.mDocument != value)
+				if (mDocument != value)
 				{
-					this.mDocument = value;
-					this.RaisePropertyChanged(() => this.Document);
+					mDocument = value;
+					this.RaisePropertyChanged(() => Document);
 				}
 			}
 		}
@@ -133,15 +123,15 @@
 		{
 			get
 			{
-				return this.mLine;
+				return mLine;
 			}
 
 			set
 			{
-				if (this.mLine != value)
+				if (mLine != value)
 				{
-					this.mLine = value;
-					this.RaisePropertyChanged(() => this.Line);
+					mLine = value;
+					this.RaisePropertyChanged(() => Line);
 				}
 			}
 		}
@@ -150,15 +140,15 @@
 		{
 			get
 			{
-				return this.mColumn;
+				return mColumn;
 			}
 
 			set
 			{
-				if (this.mColumn != value)
+				if (mColumn != value)
 				{
-					this.mColumn = value;
-					this.RaisePropertyChanged(() => this.Column);
+					mColumn = value;
+					this.RaisePropertyChanged(() => Column);
 				}
 			}
 		}
@@ -169,15 +159,15 @@
 		{
 			get
 			{
-				return this.mTxtControl;
+				return mTxtControl;
 			}
 
 			private set
 			{
-				if (this.mTxtControl != value)
+				if (mTxtControl != value)
 				{
-					this.mTxtControl = value;
-					this.RaisePropertyChanged(() => this.TxtControl);
+					mTxtControl = value;
+					this.RaisePropertyChanged(() => TxtControl);
 				}
 			}
 		}
@@ -192,15 +182,15 @@
 		{
 			get
 			{
-				return this.mTextEditorCaretOffset;
+				return mTextEditorCaretOffset;
 			}
 
 			set
 			{
-				if (this.mTextEditorCaretOffset != value)
+				if (mTextEditorCaretOffset != value)
 				{
-					this.mTextEditorCaretOffset = value;
-					this.RaisePropertyChanged(() => this.TextEditorCaretOffset);
+					mTextEditorCaretOffset = value;
+					this.RaisePropertyChanged(() => TextEditorCaretOffset);
 				}
 			}
 		}
@@ -213,15 +203,15 @@
 		{
 			get
 			{
-				return this.mTextEditorSelectionStart;
+				return mTextEditorSelectionStart;
 			}
 
 			set
 			{
-				if (this.mTextEditorSelectionStart != value)
+				if (mTextEditorSelectionStart != value)
 				{
-					this.mTextEditorSelectionStart = value;
-					this.RaisePropertyChanged(() => this.TextEditorSelectionStart);
+					mTextEditorSelectionStart = value;
+					this.RaisePropertyChanged(() => TextEditorSelectionStart);
 				}
 			}
 		}
@@ -234,15 +224,15 @@
 		{
 			get
 			{
-				return this.mTextEditorSelectionLength;
+				return mTextEditorSelectionLength;
 			}
 
 			set
 			{
-				if (this.mTextEditorSelectionLength != value)
+				if (mTextEditorSelectionLength != value)
 				{
-					this.mTextEditorSelectionLength = value;
-					this.RaisePropertyChanged(() => this.TextEditorSelectionLength);
+					mTextEditorSelectionLength = value;
+					this.RaisePropertyChanged(() => TextEditorSelectionLength);
 				}
 			}
 		}
@@ -251,15 +241,15 @@
 		{
 			get
 			{
-				return this.mTextEditorIsRectangularSelection;
+				return mTextEditorIsRectangularSelection;
 			}
 
 			set
 			{
-				if (this.mTextEditorIsRectangularSelection != value)
+				if (mTextEditorIsRectangularSelection != value)
 				{
-					this.mTextEditorIsRectangularSelection = value;
-					this.RaisePropertyChanged(() => this.TextEditorIsRectangularSelection);
+					mTextEditorIsRectangularSelection = value;
+					this.RaisePropertyChanged(() => TextEditorIsRectangularSelection);
 				}
 			}
 		}
@@ -272,15 +262,15 @@
 		{
 			get
 			{
-				return this.mTextEditorScrollOffsetX;
+				return mTextEditorScrollOffsetX;
 			}
 
 			set
 			{
-				if (this.mTextEditorScrollOffsetX != value)
+				if (mTextEditorScrollOffsetX != value)
 				{
-					this.mTextEditorScrollOffsetX = value;
-					this.RaisePropertyChanged(() => this.TextEditorScrollOffsetX);
+					mTextEditorScrollOffsetX = value;
+					this.RaisePropertyChanged(() => TextEditorScrollOffsetX);
 				}
 			}
 		}
@@ -292,15 +282,15 @@
 		{
 			get
 			{
-				return this.mTextEditorScrollOffsetY;
+				return mTextEditorScrollOffsetY;
 			}
 
 			set
 			{
-				if (this.mTextEditorScrollOffsetY != value)
+				if (mTextEditorScrollOffsetY != value)
 				{
-					this.mTextEditorScrollOffsetY = value;
-					this.RaisePropertyChanged(() => this.TextEditorScrollOffsetY);
+					mTextEditorScrollOffsetY = value;
+					this.RaisePropertyChanged(() => TextEditorScrollOffsetY);
 				}
 			}
 		}
@@ -317,21 +307,21 @@
 		{
 			get
 			{
-				lock (this.mLockThis)
+				lock (mLockThis)
 				{
-					return this.mHighlightingDefinition;
+					return mHighlightingDefinition;
 				}
 			}
 
 			set
 			{
-				lock (this.mLockThis)
+				lock (mLockThis)
 				{
-					if (this.mHighlightingDefinition != value)
+					if (mHighlightingDefinition != value)
 					{
-						this.mHighlightingDefinition = value;
+						mHighlightingDefinition = value;
 
-						this.RaisePropertyChanged(() => this.HighlightingDefinition);
+						this.RaisePropertyChanged(() => HighlightingDefinition);
 					}
 				}
 			}
@@ -341,15 +331,15 @@
 		{
 			get
 			{
-				return this.mWordWrap;
+				return mWordWrap;
 			}
 
 			set
 			{
-				if (this.mWordWrap != value)
+				if (mWordWrap != value)
 				{
-					this.mWordWrap = value;
-					this.RaisePropertyChanged(() => this.WordWrap);
+					mWordWrap = value;
+					this.RaisePropertyChanged(() => WordWrap);
 				}
 			}
 		}
@@ -358,15 +348,15 @@
 		{
 			get
 			{
-				return this.mShowLineNumbers;
+				return mShowLineNumbers;
 			}
 
 			set
 			{
-				if (this.mShowLineNumbers != value)
+				if (mShowLineNumbers != value)
 				{
-					this.mShowLineNumbers = value;
-					this.RaisePropertyChanged(() => this.ShowLineNumbers);
+					mShowLineNumbers = value;
+					this.RaisePropertyChanged(() => ShowLineNumbers);
 				}
 			}
 		}
@@ -375,15 +365,15 @@
 		{
 			get
 			{
-				return this.TextOptions.ShowEndOfLine;
+				return TextOptions.ShowEndOfLine;
 			}
 
 			set
 			{
-				if (this.TextOptions.ShowEndOfLine != value)
+				if (TextOptions.ShowEndOfLine != value)
 				{
-					this.TextOptions.ShowEndOfLine = value;
-					this.RaisePropertyChanged(() => this.ShowEndOfLine);
+					TextOptions.ShowEndOfLine = value;
+					this.RaisePropertyChanged(() => ShowEndOfLine);
 				}
 			}
 		}
@@ -392,15 +382,15 @@
 		{
 			get
 			{
-				return this.TextOptions.ShowSpaces;
+				return TextOptions.ShowSpaces;
 			}
 
 			set
 			{
-				if (this.TextOptions.ShowSpaces != value)
+				if (TextOptions.ShowSpaces != value)
 				{
-					this.TextOptions.ShowSpaces = value;
-					this.RaisePropertyChanged(() => this.ShowSpaces);
+					TextOptions.ShowSpaces = value;
+					this.RaisePropertyChanged(() => ShowSpaces);
 				}
 			}
 		}
@@ -409,15 +399,15 @@
 		{
 			get
 			{
-				return this.TextOptions.ShowTabs;
+				return TextOptions.ShowTabs;
 			}
 
 			set
 			{
-				if (this.TextOptions.ShowTabs != value)
+				if (TextOptions.ShowTabs != value)
 				{
-					this.TextOptions.ShowTabs = value;
-					this.RaisePropertyChanged(() => this.ShowTabs);
+					TextOptions.ShowTabs = value;
+					this.RaisePropertyChanged(() => ShowTabs);
 				}
 			}
 		}
@@ -426,15 +416,15 @@
 		{
 			get
 			{
-				return this.mTextOptions;
+				return mTextOptions;
 			}
 
 			set
 			{
-				if (this.mTextOptions != value)
+				if (mTextOptions != value)
 				{
-					this.mTextOptions = value;
-					this.RaisePropertyChanged(() => this.TextOptions);
+					mTextOptions = value;
+					this.RaisePropertyChanged(() => TextOptions);
 				}
 			}
 		}
@@ -448,15 +438,15 @@
 		{
 			get
 			{
-				return this.mIsDirty;
+				return mIsDirty;
 			}
 
 			set
 			{
-				if (this.mIsDirty != value)
+				if (mIsDirty != value)
 				{
-					this.mIsDirty = value;
-					this.RaisePropertyChanged(() => this.IsDirty);
+					mIsDirty = value;
+					this.RaisePropertyChanged(() => IsDirty);
 				}
 			}
 		}
@@ -473,7 +463,7 @@
 			new Action(
 			delegate
 			{
-				this.mDocument.Text = string.Empty;
+				mDocument.Text = string.Empty;
 			}
 			));
 		}
@@ -483,7 +473,7 @@
 		/// </summary>
 		public void AppendLine(string text)
 		{
-			this.Append(text + Environment.NewLine);
+			Append(text + Environment.NewLine);
 		}
 
 		/// <summary>
@@ -496,7 +486,7 @@
 					delegate
 					{
 						if (text != null)
-							this.mDocument.Insert(mDocument.TextLength, text);
+							mDocument.Insert(mDocument.TextLength, text);
 					}
 			));
 		}
@@ -508,8 +498,8 @@
 		/// <param name="defaultValue"></param>
 		public void InitScaleView(int unit, double defaultValue)
 		{
-			this.SizeUnitLabel = UnitComboLib.UnitViewModeService.CreateInstance(
-                this.GenerateScreenUnitList(),
+			SizeUnitLabel = UnitComboLib.UnitViewModeService.CreateInstance(
+                GenerateScreenUnitList(),
                 new ScreenConverter(), unit, defaultValue);
 		}
 

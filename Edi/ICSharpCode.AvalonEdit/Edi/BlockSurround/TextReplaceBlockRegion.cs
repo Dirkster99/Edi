@@ -1,11 +1,6 @@
 ﻿namespace ICSharpCode.AvalonEdit.Edi.BlockSurround
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Linq;
-  using System.Text;
-
-  /// <summary>
+    /// <summary>
   /// This class represents a surrounding text being inserted before and after
   /// a certain text block within the text displayed in the editor.
   /// 
@@ -20,10 +15,10 @@
     /// </summary>
     public TextReplaceBlockRegion(string commentStart, string commentEnd, int startOffset, int endOffset)
     {
-      this.CommentStart = commentStart;
-      this.CommentEnd = commentEnd;
-      this.StartOffset = startOffset;
-      this.EndOffset = endOffset;
+      CommentStart = commentStart;
+      CommentEnd = commentEnd;
+      StartOffset = startOffset;
+      EndOffset = endOffset;
     }
 
     #region properties
@@ -82,10 +77,10 @@
       if (other == null)
         return false;
 
-      return this.CommentStart == other.CommentStart &&
-              this.CommentEnd == other.CommentEnd &&
-              this.StartOffset == other.StartOffset &&
-              this.EndOffset == other.EndOffset;
+      return CommentStart == other.CommentStart &&
+              CommentEnd == other.CommentEnd &&
+              StartOffset == other.StartOffset &&
+              EndOffset == other.EndOffset;
     }
     #endregion methods
   }

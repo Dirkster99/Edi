@@ -16,10 +16,8 @@
         return null;
 
 
-            if (value is string)
+            if (value is string s)
             {
-                string s = value as string;
-
                 if (s == string.Empty)
                     return Visibility.Collapsed;
             }

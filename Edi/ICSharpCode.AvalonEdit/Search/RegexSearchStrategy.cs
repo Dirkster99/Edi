@@ -19,11 +19,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Documents;
 using ICSharpCode.AvalonEdit.Document;
-using ICSharpCode.NRefactory.Editor;
 
 namespace ICSharpCode.AvalonEdit.Search
 {
@@ -34,9 +32,7 @@ namespace ICSharpCode.AvalonEdit.Search
 		
 		public RegexSearchStrategy(Regex searchPattern, bool matchWholeWords)
 		{
-			if (searchPattern == null)
-				throw new ArgumentNullException("searchPattern");
-			this.searchPattern = searchPattern;
+            this.searchPattern = searchPattern ?? throw new ArgumentNullException(nameof(searchPattern));
 			this.matchWholeWords = matchWholeWords;
 		}
 		

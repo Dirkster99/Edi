@@ -3,7 +3,7 @@
 	using System.Xml.Serialization;
 	using FileSystemModels.Models;
 	using ICSharpCode.AvalonEdit;
-	using Edi.Settings.ProgramSettings;
+	using ProgramSettings;
 
 	public interface IOptions
 	{

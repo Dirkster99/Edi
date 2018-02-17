@@ -18,7 +18,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text;
 
 namespace ICSharpCode.AvalonEdit.Utils
@@ -114,7 +113,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
 		{
-			return this.GetEnumerator();
+			return GetEnumerator();
 		}
 		
 		/// <inheritdoc/>

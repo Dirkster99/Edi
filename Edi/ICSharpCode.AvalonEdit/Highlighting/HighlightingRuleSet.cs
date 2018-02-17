@@ -33,8 +33,8 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// </summary>
 		public HighlightingRuleSet()
 		{
-			this.Spans = new NullSafeCollection<HighlightingSpan>();
-			this.Rules = new NullSafeCollection<HighlightingRule>();
+			Spans = new NullSafeCollection<HighlightingSpan>();
+			Rules = new NullSafeCollection<HighlightingRule>();
 		}
 		
 		/// <summary>

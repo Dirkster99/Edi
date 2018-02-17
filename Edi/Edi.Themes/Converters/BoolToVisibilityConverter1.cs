@@ -56,10 +56,8 @@
             {
                 return Visibility.Visible;
             }
-            else
-            {
-                return Visibility.Collapsed;
-            }
+
+            return Visibility.Collapsed;
         }
     }
 }

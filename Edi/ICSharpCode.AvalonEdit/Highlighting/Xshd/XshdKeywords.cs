@@ -38,11 +38,9 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 		/// <summary>
 		/// Gets the list of key words.
 		/// </summary>
-		public IList<string> Words {
-			get { return words; }
-		}
-		
-		/// <inheritdoc/>
+		public IList<string> Words => words;
+
+	    /// <inheritdoc/>
 		public override object AcceptVisitor(IXshdVisitor visitor)
 		{
 			return visitor.VisitKeywords(this);

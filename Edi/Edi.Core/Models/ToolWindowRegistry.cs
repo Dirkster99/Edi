@@ -4,8 +4,8 @@
 	using System.Collections.Generic;
 	using System.Collections.ObjectModel;
 	using System.ComponentModel.Composition;
-	using Edi.Core.Interfaces;
-	using Edi.Core.ViewModels;
+	using Interfaces;
+	using ViewModels;
 	using EdiApp.Events;
 
 	/// <summary>
@@ -23,8 +23,8 @@
 		#region contructors
 		public ToolWindowRegistry()
 		{
-			this.mItems = new ObservableCollection<ToolViewModel>();
-			this.mTodoTools = new List<ToolViewModel>();
+			mItems = new ObservableCollection<ToolViewModel>();
+			mTodoTools = new List<ToolViewModel>();
 		}
 		#endregion contructors
 
@@ -33,7 +33,7 @@
 		{
 			get
 			{
-				return this.mItems;
+				return mItems;
 			}
 		}
 
@@ -47,12 +47,12 @@
 		/// </summary>
 		public void PublishTools()
 		{
-			foreach (var item in this.mTodoTools)
+			foreach (var item in mTodoTools)
 			{
-				this.mItems.Add(item);
+				mItems.Add(item);
 			}
 
-			this.mTodoTools.Clear();
+			mTodoTools.Clear();
 		}
 
 		/// <summary>
@@ -63,7 +63,7 @@
 		{
 			try
 			{
-				this.mTodoTools.Add(newTool);
+				mTodoTools.Add(newTool);
 
 				// Publish the fact that we have registered a new tool window instance
 				RegisterToolWindowEvent.Instance.Publish(new RegisterToolWindowEventArgs(newTool));

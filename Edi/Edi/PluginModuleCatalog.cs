@@ -1,14 +1,10 @@
-﻿using Prism.Mef.Modularity;
-using Prism.Modularity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Edi
 {
@@ -49,7 +45,7 @@ namespace Edi
 
             if (candidateAssemblyPaths.Length > 0)
             {
-                AppDomain childAppDomain = this.CreateChildAppDomain(AppDomain.CurrentDomain, expandedDirectory);
+                AppDomain childAppDomain = CreateChildAppDomain(AppDomain.CurrentDomain, expandedDirectory);
                 Type loaderType = typeof(InnerModuleInfoLoader);
 
                 try
@@ -69,7 +65,7 @@ namespace Edi
 
             foreach (string d in Directory.GetDirectories(expandedDirectory))
             {
-                this.ParseDirectory(d);
+                ParseDirectory(d);
             }
         }
 
@@ -87,7 +83,7 @@ namespace Edi
 
         public override void Initialize()
         {
-            this.fallbackCatalog.Initialize();
+            fallbackCatalog.Initialize();
             base.Initialize();
         }
 
@@ -96,19 +92,19 @@ namespace Edi
         /// </summary>
         protected override void InnerLoad()
         {
-            if (this.fallbackCatalog != null)
+            if (fallbackCatalog != null)
             {
-                foreach (ModuleInfo module in this.fallbackCatalog.Modules)
+                foreach (ModuleInfo module in fallbackCatalog.Modules)
                 {
                     this.Items.Add(module);
                 }
             }
 
-            if (!string.IsNullOrWhiteSpace(this.pluginsDirectory))
+            if (!string.IsNullOrWhiteSpace(pluginsDirectory))
             {
                 try
                 {
-                    this.ParseDirectory(this.pluginsDirectory);
+                    ParseDirectory(pluginsDirectory);
                 }
                 catch (Exception)
                 {
@@ -274,8 +270,8 @@ namespace Edi
         /// <exception cref="System.ArgumentNullException">An <see cref="System.ArgumentNullException"/> is thrown if <paramref name="collection"/> or <paramref name="items"/> is <see langword="null"/>.</exception>
         public static Collection<T> AddRange<T>(this Collection<T> collection, IEnumerable<T> items)
         {
-            if (collection == null) throw new System.ArgumentNullException("collection");
-            if (items == null) throw new System.ArgumentNullException("items");
+            if (collection == null) throw new ArgumentNullException("collection");
+            if (items == null) throw new ArgumentNullException("items");
 
             foreach (var each in items)
             {

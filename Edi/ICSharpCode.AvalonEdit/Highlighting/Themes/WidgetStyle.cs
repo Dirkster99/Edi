@@ -1,11 +1,8 @@
 ﻿namespace ICSharpCode.AvalonEdit.Highlighting.Themes
 {
-  using System.Windows;
-  using System.Windows.Media;
-  using System;
-  using System.Globalization;
+    using System.Windows.Media;
 
-  /// <summary>
+    /// <summary>
   /// Class to manage a global editor style (eg.: Default color of background and foreground)
   /// </summary>
   public class WidgetStyle
@@ -18,7 +15,7 @@
     public WidgetStyle(string name)
       : this()
     {
-      this.Name = name;
+      Name = name;
     }
 
     /// <summary>
@@ -26,11 +23,11 @@
     /// </summary>
     protected WidgetStyle()
     {
-      this.Name = string.Empty;
+      Name = string.Empty;
 
-      this.fgColor = null;
-      this.bgColor = null;
-      this.borderColor = null;
+      fgColor = null;
+      bgColor = null;
+      borderColor = null;
     }
     #endregion constructors
 

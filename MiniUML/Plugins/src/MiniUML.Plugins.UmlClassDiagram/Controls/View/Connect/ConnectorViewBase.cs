@@ -3,9 +3,8 @@
   using System.Windows.Controls;
   using System.Windows.Controls.Primitives;
   using System.Windows.Input;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Shapes;
-  using MiniUML.Plugins.UmlClassDiagram.Controls.View.Shapes.Base;
+  using Model.ViewModels.Shapes;
+  using Shapes.Base;
 
   /// <summary>
   /// Helper class that contains comman methods that can be called by all shape view controls
@@ -23,13 +22,13 @@
     {
       ContextMenu retMenu = new ContextMenu();
 
-      ConnectorViewBase.AddCopyCutPasteMenuItems(retMenu);
+      AddCopyCutPasteMenuItems(retMenu);
 
       retMenu.Items.Add(new Separator());
-      ConnectorViewBase.AddUndoRedoMenuItems(retMenu);
+      AddUndoRedoMenuItems(retMenu);
 
       retMenu.Items.Add(new Separator());
-      ConnectorViewBase.AddZOrderMenuItems(retMenu, element);
+      AddZOrderMenuItems(retMenu, element);
 
       return retMenu;
     }
@@ -47,14 +46,14 @@
         {
           menu.Items.Add(new MenuItem()
           {
-            Header = MiniUML.Framework.Local.Strings.STR_MENUITEM_BringToFront,
+            Header = Framework.Local.Strings.STR_MENUITEM_BringToFront,
             Command = element.BringToFront,
             Icon = IconImageFactory.Get(IconCommand.SendToBack)
           });
 
           menu.Items.Add(new MenuItem()
           {
-            Header = MiniUML.Framework.Local.Strings.STR_MENUITEM_SendToBack,
+            Header = Framework.Local.Strings.STR_MENUITEM_SendToBack,
             Command = element.SendToBack,
             Icon = IconImageFactory.Get(IconCommand.BringToFront)
           });

@@ -3,7 +3,7 @@
 	using System.Collections.Generic;
 	using System.Reflection;
 	using ICSharpCode.AvalonEdit.Highlighting.Themes;
-	using Edi.Themes.Interfaces;
+	using Interfaces;
 
 	public class ThemeBase
 	{
@@ -25,15 +25,15 @@
 											 string editorThemeFileName)
 			: base()
 		{
-			this.mParent = parent;
-			this.Resources = new List<string>(resources);
-			this.WPFThemeName = wpfThemeName;
+			mParent = parent;
+			Resources = new List<string>(resources);
+			WPFThemeName = wpfThemeName;
 
-			this.EditorThemeName = editorThemeName;
-			this.mPathLocation = editorThemePathLocation;
-			this.EditorThemeFileName = editorThemeFileName;
+			EditorThemeName = editorThemeName;
+			mPathLocation = editorThemePathLocation;
+			EditorThemeFileName = editorThemeFileName;
 
-			this.mStyles = null;
+			mStyles = null;
 		}
 
 		/// <summary>
@@ -42,8 +42,8 @@
 		protected ThemeBase()
 			: base()
 		{
-			this.mPathLocation = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-			this.mStyles = null;
+			mPathLocation = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+			mStyles = null;
 		}
 		#endregion constructor
 
@@ -76,8 +76,8 @@
 		{
 			get
 			{
-				return string.Format("{0}{1}", this.WPFThemeName,
-																			 this.EditorThemeName == null ? string.Empty : " (" + this.EditorThemeName + ")");
+				return string.Format("{0}{1}", WPFThemeName,
+																			 EditorThemeName == null ? string.Empty : " (" + EditorThemeName + ")");
 			}
 		}
 
@@ -90,10 +90,10 @@
 			get
 			{
 				// Lazy load this content when it is needed for the first time ever
-				if (this.mStyles == null)
-					this.mStyles = ICSharpCode.AvalonEdit.Highlighting.Themes.XML.Read.ReadXML(this.mPathLocation, this.EditorThemeFileName);
+				if (mStyles == null)
+					mStyles = ICSharpCode.AvalonEdit.Highlighting.Themes.XML.Read.ReadXML(mPathLocation, EditorThemeFileName);
 
-				return this.mStyles;
+				return mStyles;
 			}
 		}
 
@@ -104,11 +104,11 @@
 		{
 			get
 			{
-				if (this.mParent != null)
+				if (mParent != null)
 				{
-					if (this.mParent.SelectedThemeName != null)
+					if (mParent.SelectedThemeName != null)
 					{
-						return this.mParent.SelectedThemeName.Equals(this.HlThemeName);
+						return mParent.SelectedThemeName.Equals(HlThemeName);
 					}
 				}
 				return false;

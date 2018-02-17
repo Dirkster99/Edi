@@ -3,7 +3,7 @@
 	using System;
 	using System.Windows.Data;
 	using System.Windows.Markup;
-	using Edi.Documents.ViewModels.EdiDoc;
+	using ViewModels.EdiDoc;
 
 	/// <summary>
 	/// XAML mark up extension to convert a null value into a visibility value.

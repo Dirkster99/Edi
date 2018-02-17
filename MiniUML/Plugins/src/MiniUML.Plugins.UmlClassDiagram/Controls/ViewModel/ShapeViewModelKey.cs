@@ -144,34 +144,34 @@
       switch (implementingViewModel)
       {
         case ShapeViewModelKey.Undefined:
-          return ShapeViewModelKeyStrings.ShapeUndefined;
+          return ShapeUndefined;
 
         case ShapeViewModelKey.SquareShape:
-          return ShapeViewModelKeyStrings.ShapeSquare;
+          return ShapeSquare;
 
         case ShapeViewModelKey.DecisionShape:
-          return ShapeViewModelKeyStrings.ShapeDecision;
+          return ShapeDecision;
 
         case ShapeViewModelKey.PackageShape:
-          return ShapeViewModelKeyStrings.ShapePackage;
+          return ShapePackage;
 
         case ShapeViewModelKey.BoundaryShape:
-          return ShapeViewModelKeyStrings.ShapeBoundary;
+          return ShapeBoundary;
 
         case ShapeViewModelKey.NoteShape:
-          return ShapeViewModelKeyStrings.ShapeNote;
+          return ShapeNote;
 
         case ShapeViewModelKey.NodeShape:
-          return ShapeViewModelKeyStrings.ShapeNode;
+          return ShapeNode;
 
         case ShapeViewModelKey.UseCaseShape:
-          return ShapeViewModelKeyStrings.ShapeUseCase;
+          return ShapeUseCase;
 
         case ShapeViewModelKey.CanvasShape:
-          return ShapeViewModelKeyStrings.ShapeCanvas;
+          return ShapeCanvas;
 
         case ShapeViewModelKey.AssocationShape:
-          return ShapeViewModelKeyStrings.ShapeAssociation;
+          return ShapeAssociation;
 
         default:
           throw new NotImplementedException();

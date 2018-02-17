@@ -35,12 +35,8 @@ namespace ICSharpCode.AvalonEdit.Utils
 		/// </summary>
 		public ObserveAddRemoveCollection(Action<T> onAdd, Action<T> onRemove)
 		{
-			if (onAdd == null)
-				throw new ArgumentNullException("onAdd");
-			if (onRemove == null)
-				throw new ArgumentNullException("onRemove");
-			this.onAdd = onAdd;
-			this.onRemove = onRemove;
+            this.onAdd = onAdd ?? throw new ArgumentNullException(nameof(onAdd));
+			this.onRemove = onRemove ?? throw new ArgumentNullException(nameof(onRemove));
 		}
 		
 		/// <inheritdoc/>
@@ -80,7 +76,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 			} catch {
 				// When adding the new item fails, just remove the old one
 				// (we cannot keep the old item since we already successfully called onRemove for it)
-				base.RemoveAt(index);
+				RemoveAt(index);
 				throw;
 			}
 			base.SetItem(index, item);

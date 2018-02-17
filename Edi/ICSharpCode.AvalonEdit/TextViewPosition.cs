@@ -18,7 +18,6 @@
 
 using System;
 using System.Globalization;
-using ICSharpCode.NRefactory;
 using ICSharpCode.AvalonEdit.Document;
 
 namespace ICSharpCode.AvalonEdit
@@ -92,7 +91,7 @@ namespace ICSharpCode.AvalonEdit
 			this.line = line;
 			this.column = column;
 			this.visualColumn = visualColumn;
-			this.isAtEndOfLine = false;
+			isAtEndOfLine = false;
 		}
 		
 		/// <summary>
@@ -108,10 +107,10 @@ namespace ICSharpCode.AvalonEdit
 		/// </summary>
 		public TextViewPosition(TextLocation location, int visualColumn)
 		{
-			this.line = location.Line;
-			this.column = location.Column;
+			line = location.Line;
+			column = location.Column;
 			this.visualColumn = visualColumn;
-			this.isAtEndOfLine = false;
+			isAtEndOfLine = false;
 		}
 		
 		/// <summary>
@@ -127,7 +126,7 @@ namespace ICSharpCode.AvalonEdit
 		{
 			return string.Format(CultureInfo.InvariantCulture,
 			                     "[TextViewPosition Line={0} Column={1} VisualColumn={2} IsAtEndOfLine={3}]",
-			                     this.line, this.column, this.visualColumn, this.isAtEndOfLine);
+			                     line, column, visualColumn, isAtEndOfLine);
 		}
 		
 		#region Equals and GetHashCode implementation
@@ -160,7 +159,7 @@ namespace ICSharpCode.AvalonEdit
 		/// </summary>
 		public bool Equals(TextViewPosition other)
 		{
-			return this.Line == other.Line && this.Column == other.Column && this.VisualColumn == other.VisualColumn && this.IsAtEndOfLine == other.IsAtEndOfLine;
+			return Line == other.Line && Column == other.Column && VisualColumn == other.VisualColumn && IsAtEndOfLine == other.IsAtEndOfLine;
 		}
 		
 		/// <summary>
@@ -183,10 +182,10 @@ namespace ICSharpCode.AvalonEdit
 		/// <inheritdoc/>
 		public int CompareTo(TextViewPosition other)
 		{
-			int r = this.Location.CompareTo(other.Location);
+			int r = Location.CompareTo(other.Location);
 			if (r != 0)
 				return r;
-			r = this.visualColumn.CompareTo(other.visualColumn);
+			r = visualColumn.CompareTo(other.visualColumn);
 			if (r != 0)
 				return r;
 			if (isAtEndOfLine && !other.isAtEndOfLine)

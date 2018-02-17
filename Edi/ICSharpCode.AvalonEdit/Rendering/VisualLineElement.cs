@@ -43,8 +43,8 @@ namespace ICSharpCode.AvalonEdit.Rendering
 				throw new ArgumentOutOfRangeException("visualLength", visualLength, "Value must be at least 1");
 			if (documentLength < 0)
 				throw new ArgumentOutOfRangeException("documentLength", documentLength, "Value must be at least 0");
-			this.VisualLength = visualLength;
-			this.DocumentLength = documentLength;
+			VisualLength = visualLength;
+			DocumentLength = documentLength;
 		}
 		
 		/// <summary>
@@ -85,7 +85,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		
 		internal void SetTextRunProperties(VisualLineElementTextRunProperties p)
 		{
-			this.TextRunProperties = p;
+			TextRunProperties = p;
 		}
 		
 		/// <summary>
@@ -176,7 +176,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		/// </summary>
 		public virtual int GetVisualColumn(int relativeTextOffset)
 		{
-			if (relativeTextOffset >= this.RelativeTextOffset + DocumentLength)
+			if (relativeTextOffset >= RelativeTextOffset + DocumentLength)
 				return VisualColumn + VisualLength;
 			else
 				return VisualColumn;
@@ -188,7 +188,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		/// <returns>A text offset relative to the visual line start.</returns>
 		public virtual int GetRelativeOffset(int visualColumn)
 		{
-			if (visualColumn >= this.VisualColumn + VisualLength)
+			if (visualColumn >= VisualColumn + VisualLength)
 				return RelativeTextOffset + DocumentLength;
 			else
 				return RelativeTextOffset;
@@ -207,8 +207,8 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		/// </remarks>
 		public virtual int GetNextCaretPosition(int visualColumn, LogicalDirection direction, CaretPositioningMode mode)
 		{
-			int stop1 = this.VisualColumn;
-			int stop2 = this.VisualColumn + this.VisualLength;
+			int stop1 = VisualColumn;
+			int stop2 = VisualColumn + VisualLength;
 			if (direction == LogicalDirection.Backward) {
 				if (visualColumn > stop2 && mode != CaretPositioningMode.WordStart && mode != CaretPositioningMode.WordStartOrSymbol)
 					return stop2;

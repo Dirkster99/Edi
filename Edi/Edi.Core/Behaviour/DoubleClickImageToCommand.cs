@@ -15,7 +15,7 @@ namespace Edi.Core.Behaviour
 																						typeof(ICommand),
 																						typeof(DoubleClickImageToCommand),
 																						new PropertyMetadata(null,
-																						DoubleClickImageToCommand.OnClickItemCommand));
+																						OnClickItemCommand));
 
 
 
@@ -35,17 +35,12 @@ namespace Edi.Core.Behaviour
 																						typeof(ICommand),
 																						typeof(DoubleClickImageToCommand),
 																						new PropertyMetadata(null,
-																						DoubleClickImageToCommand.OnClickItemCommand));
+																						OnClickItemCommand));
 		#endregion fields
 
 		#region constructor
-		/// <summary>
-		/// Class constructor
-		/// </summary>
-		public DoubleClickImageToCommand()
-		{
-		}
-		#endregion constructor
+
+	    #endregion constructor
 
 		#region methods
 		#region attached dependency property methods
@@ -89,16 +84,15 @@ namespace Edi.Core.Behaviour
 		private static void FrameworkElement_MouseClick(object sender, MouseButtonEventArgs e)
 		{
 			// Send should be this class or a descendent of it
-			var fwElement = sender as FrameworkElement;
 
-			// Sanity check just in case this was somehow send by something else
-			if (fwElement == null)
+		    // Sanity check just in case this was somehow send by something else
+			if (!(sender is FrameworkElement fwElement))
 				return;
 
 			// Handle right mouse click event if there is a command attached for this
 			if (e.ChangedButton == MouseButton.Right)
 			{
-				ICommand clickCommand = DoubleClickImageToCommand.GetRightClickItemCommand(fwElement);
+				ICommand clickCommand = GetRightClickItemCommand(fwElement);
 
 				if (clickCommand != null)
 				{
@@ -121,7 +115,7 @@ namespace Edi.Core.Behaviour
 			// Filter for left mouse button double-click
 			if (e.ChangedButton == MouseButton.Left && e.ClickCount == 2)
 			{
-				ICommand doubleclickCommand = DoubleClickImageToCommand.GetDoubleClickItemCommand(fwElement);
+				ICommand doubleclickCommand = GetDoubleClickItemCommand(fwElement);
 
 				// There may not be a command bound to this after all
 				if (doubleclickCommand == null)

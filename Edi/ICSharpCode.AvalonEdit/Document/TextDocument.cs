@@ -25,8 +25,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using ICSharpCode.AvalonEdit.Utils;
-using ICSharpCode.NRefactory;
-using ICSharpCode.NRefactory.Editor;
 
 namespace ICSharpCode.AvalonEdit.Document
 {
@@ -105,7 +103,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		public TextDocument(IEnumerable<char> initialText)
 		{
 			if (initialText == null)
-				throw new ArgumentNullException("initialText");
+				throw new ArgumentNullException(nameof(initialText));
 			rope = new Rope<char>(initialText);
 			lineTree = new DocumentLineTree(this);
 			lineManager = new LineManager(lineTree, this);
@@ -130,7 +128,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		static IEnumerable<char> GetTextFromTextSource(ITextSource textSource)
 		{
 			if (textSource == null)
-				throw new ArgumentNullException("textSource");
+				throw new ArgumentNullException(nameof(textSource));
 
 #if NREFACTORY
 			if (textSource is ReadOnlyDocument)
@@ -157,10 +155,10 @@ namespace ICSharpCode.AvalonEdit.Document
 		void ThrowIfRangeInvalid(int offset, int length)
 		{
 			if (offset < 0 || offset > rope.Length) {
-				throw new ArgumentOutOfRangeException("offset", offset, "0 <= offset <= " + rope.Length.ToString(CultureInfo.InvariantCulture));
+				throw new ArgumentOutOfRangeException(nameof(offset), offset, "0 <= offset <= " + rope.Length.ToString(CultureInfo.InvariantCulture));
 			}
 			if (length < 0 || offset + length > rope.Length) {
-				throw new ArgumentOutOfRangeException("length", length, "0 <= length, offset(" + offset + ")+length <= " + rope.Length.ToString(CultureInfo.InvariantCulture));
+				throw new ArgumentOutOfRangeException(nameof(length), length, "0 <= length, offset(" + offset + ")+length <= " + rope.Length.ToString(CultureInfo.InvariantCulture));
 			}
 		}
 		
@@ -177,7 +175,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		public string GetText(ISegment segment)
 		{
 			if (segment == null)
-				throw new ArgumentNullException("segment");
+				throw new ArgumentNullException(nameof(segment));
 			return GetText(segment.Offset, segment.Length);
 		}
 		
@@ -241,7 +239,7 @@ namespace ICSharpCode.AvalonEdit.Document
 			set {
 				VerifyAccess();
 				if (value == null)
-					throw new ArgumentNullException("value");
+					throw new ArgumentNullException(nameof(value));
 				Replace(0, rope.Length, value);
 			}
 		}
@@ -253,8 +251,8 @@ namespace ICSharpCode.AvalonEdit.Document
 		public event EventHandler TextChanged;
 		
 		event EventHandler IDocument.ChangeCompleted {
-			add { this.TextChanged += value; }
-			remove { this.TextChanged -= value; }
+			add => TextChanged += value;
+		    remove => TextChanged -= value;
 		}
 		
 		/// <inheritdoc/>
@@ -322,8 +320,8 @@ namespace ICSharpCode.AvalonEdit.Document
 		private event EventHandler<TextChangeEventArgs> textChanging;
 		
 		event EventHandler<TextChangeEventArgs> IDocument.TextChanging {
-			add { textChanging += value; }
-			remove { textChanging -= value; }
+			add => textChanging += value;
+		    remove => textChanging -= value;
 		}
 		
 		/// <summary>
@@ -335,8 +333,8 @@ namespace ICSharpCode.AvalonEdit.Document
 		private event EventHandler<TextChangeEventArgs> textChanged;
 		
 		event EventHandler<TextChangeEventArgs> IDocument.TextChanged {
-			add { textChanged += value; }
-			remove { textChanged -= value; }
+			add => textChanged += value;
+		    remove => textChanged -= value;
 		}
 		
 		/// <summary>
@@ -378,11 +376,9 @@ namespace ICSharpCode.AvalonEdit.Document
 		#endif
 		
 		/// <inheritdoc/>
-		public ITextSourceVersion Version {
-			get { return versionProvider.CurrentVersion; }
-		}
-		
-		/// <inheritdoc/>
+		public ITextSourceVersion Version => versionProvider.CurrentVersion;
+
+	    /// <inheritdoc/>
 		public System.IO.TextReader CreateReader()
 		{
 			lock (lockObject) {
@@ -648,7 +644,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		public void Replace(ISegment segment, string text)
 		{
 			if (segment == null)
-				throw new ArgumentNullException("segment");
+				throw new ArgumentNullException(nameof(segment));
 			Replace(segment.Offset, segment.Length, new StringTextSource(text), null);
 		}
 		
@@ -658,7 +654,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		public void Replace(ISegment segment, ITextSource text)
 		{
 			if (segment == null)
-				throw new ArgumentNullException("segment");
+				throw new ArgumentNullException(nameof(segment));
 			Replace(segment.Offset, segment.Length, text, null);
 		}
 		
@@ -708,7 +704,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		public void Replace(int offset, int length, ITextSource text, OffsetChangeMappingType offsetChangeMappingType)
 		{
 			if (text == null)
-				throw new ArgumentNullException("text");
+				throw new ArgumentNullException(nameof(text));
 			// Please see OffsetChangeMappingType XML comments for details on how these modes work.
 			switch (offsetChangeMappingType) {
 				case OffsetChangeMappingType.Normal:
@@ -749,7 +745,7 @@ namespace ICSharpCode.AvalonEdit.Document
 					}
 					break;
 				default:
-					throw new ArgumentOutOfRangeException("offsetChangeMappingType", offsetChangeMappingType, "Invalid enum value");
+					throw new ArgumentOutOfRangeException(nameof(offsetChangeMappingType), offsetChangeMappingType, "Invalid enum value");
 			}
 		}
 		
@@ -791,7 +787,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		public void Replace(int offset, int length, ITextSource text, OffsetChangeMap offsetChangeMap)
 		{
 			if (text == null)
-				throw new ArgumentNullException("text");
+				throw new ArgumentNullException(nameof(text));
 			text = text.CreateSnapshot();
 			if (offsetChangeMap != null)
 				offsetChangeMap.Freeze();
@@ -913,18 +909,16 @@ namespace ICSharpCode.AvalonEdit.Document
 		/// Gets a read-only list of lines.
 		/// </summary>
 		/// <remarks><inheritdoc cref="DocumentLine"/></remarks>
-		public IList<DocumentLine> Lines {
-			get { return lineTree; }
-		}
-		
-		/// <summary>
+		public IList<DocumentLine> Lines => lineTree;
+
+	    /// <summary>
 		/// Gets a line by the line number: O(log n)
 		/// </summary>
 		public DocumentLine GetLineByNumber(int number)
 		{
 			VerifyAccess();
 			if (number < 1 || number > lineTree.LineCount)
-				throw new ArgumentOutOfRangeException("number", number, "Value must be between 1 and " + lineTree.LineCount);
+				throw new ArgumentOutOfRangeException(nameof(number), number, "Value must be between 1 and " + lineTree.LineCount);
 			return lineTree.GetByNumber(number);
 		}
 		
@@ -942,7 +936,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		{
 			VerifyAccess();
 			if (offset < 0 || offset > rope.Length) {
-				throw new ArgumentOutOfRangeException("offset", offset, "0 <= offset <= " + rope.Length.ToString());
+				throw new ArgumentOutOfRangeException(nameof(offset), offset, "0 <= offset <= " + rope.Length.ToString());
 			}
 			return lineTree.GetByOffset(offset);
 		}
@@ -1011,8 +1005,8 @@ namespace ICSharpCode.AvalonEdit.Document
 		/// </summary>
 		/// <remarks>This property can also be used to set the undo stack, e.g. for sharing a common undo stack between multiple documents.</remarks>
 		public UndoStack UndoStack {
-			get { return undoStack; }
-			set {
+			get => undoStack;
+		    set {
 				if (value == null)
 					throw new ArgumentNullException();
 				if (value != undoStack) {
@@ -1034,7 +1028,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		{
 			VerifyAccess();
 			if (offset < 0 || offset > rope.Length) {
-				throw new ArgumentOutOfRangeException("offset", offset, "0 <= offset <= " + rope.Length.ToString(CultureInfo.InvariantCulture));
+				throw new ArgumentOutOfRangeException(nameof(offset), offset, "0 <= offset <= " + rope.Length.ToString(CultureInfo.InvariantCulture));
 			}
 			return anchorTree.CreateAnchor(offset);
 		}
@@ -1121,15 +1115,13 @@ namespace ICSharpCode.AvalonEdit.Document
 			}
 			set {
 				VerifyAccess();
-				if (value == null)
-					throw new ArgumentNullException();
-				serviceProvider = value;
+                serviceProvider = value ?? throw new ArgumentNullException();
 			}
 		}
 		
 		object IServiceProvider.GetService(Type serviceType)
 		{
-			return this.ServiceProvider.GetService(serviceType);
+			return ServiceProvider.GetService(serviceType);
 		}
 		#endregion
 		
@@ -1141,15 +1133,15 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		void OnFileNameChanged(EventArgs e)
 		{
-			EventHandler handler = this.FileNameChanged;
+			EventHandler handler = FileNameChanged;
 			if (handler != null)
 				handler(this, e);
 		}
 		
 		/// <inheritdoc/>
 		public string FileName {
-			get { return fileName; }
-			set {
+			get => fileName;
+		    set {
 				if (fileName != value) {
 					fileName = value;
 					OnFileNameChanged(EventArgs.Empty);

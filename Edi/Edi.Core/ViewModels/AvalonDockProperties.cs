@@ -1,8 +1,8 @@
 ﻿namespace Edi.Core.ViewModels
 {
     using System.Windows;
-    using Edi.Core.Resources;
-    using Edi.Core.View.Pane;
+    using Resources;
+    using View.Pane;
 
     /// <summary>
     /// This class exports properties that are relevant to viewing, styling and templating
@@ -12,7 +12,7 @@
 	{
 		#region fields
 		private DataTemplate mDocumentHeaderTemplate;
-		readonly private Edi.Core.View.Pane.LayoutInitializer mLayoutInitializer;
+		readonly private LayoutInitializer mLayoutInitializer;
 		readonly private PanesStyleSelector mSelectPanesStyle;
 		readonly private PanesTemplateSelector mSelectPanesTemplate;
 		#endregion fields
@@ -23,10 +23,10 @@
 		/// </summary>
 		public AvalonDockViewProperties()
 		{
-			this.mDocumentHeaderTemplate = null;
-			this.mLayoutInitializer = new LayoutInitializer();
-			this.mSelectPanesStyle = new PanesStyleSelector();
-			this.mSelectPanesTemplate = new PanesTemplateSelector();
+			mDocumentHeaderTemplate = null;
+			mLayoutInitializer = new LayoutInitializer();
+			mSelectPanesStyle = new PanesStyleSelector();
+			mSelectPanesTemplate = new PanesTemplateSelector();
 		}
 		#endregion constructors
 
@@ -38,12 +38,12 @@
 		{
 			get
 			{
-				return this.mDocumentHeaderTemplate;
+				return mDocumentHeaderTemplate;
 			}
 
 			private set
 			{
-				this.mDocumentHeaderTemplate = value;
+				mDocumentHeaderTemplate = value;
 			}
 		}
 
@@ -51,18 +51,18 @@
 		{
 			get
 			{
-				return this.mLayoutInitializer;
+				return mLayoutInitializer;
 			}
 		}
 
 		public PanesStyleSelector SelectPanesStyle
 		{
-			get { return this.mSelectPanesStyle; }
+			get { return mSelectPanesStyle; }
 		}
 
 		public PanesTemplateSelector SelectPanesTemplate
 		{
-			get { return this.mSelectPanesTemplate; }
+			get { return mSelectPanesTemplate; }
 		}
 		#endregion properties
 
@@ -73,8 +73,8 @@
 		/// <returns></returns>
 		public AvalonDockViewProperties InitialzeInstance()
 		{
-			this.DocumentHeaderTemplate = this.LoadDocumentHeaderTemplate();
-			this.LoadPanesStyleSelector(this.SelectPanesStyle);
+			DocumentHeaderTemplate = LoadDocumentHeaderTemplate();
+			LoadPanesStyleSelector(SelectPanesStyle);
 
 			return this;
 		}

@@ -12,14 +12,7 @@
 	{
 		private static ZeroToVisibilityConverter converter;
 
-		/// <summary>
-		/// Standard Constructor
-		/// </summary>
-		public ZeroToVisibilityConverter()
-		{
-		}
-
-		/// <summary>
+	    /// <summary>
 		/// When implemented in a derived class, returns an object that is provided
 		/// as the value of the target property for this markup extension.
 		/// 

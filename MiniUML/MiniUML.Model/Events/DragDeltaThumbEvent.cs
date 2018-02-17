@@ -1,10 +1,6 @@
 ﻿namespace MiniUML.Model.Events
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Linq;
-  using System.Text;
-  using System.Windows;
+    using System.Windows;
   using System.Windows.Controls.Primitives;
 
   /// <summary>
@@ -46,8 +42,8 @@
                                VerticalAlignment va)
       : base(horizontalChange, verticalChange)
     {
-      this.HorizontalAlignment = ha;
-      this.VerticalAlignment = va;
+      HorizontalAlignment = ha;
+      VerticalAlignment = va;
     }
     #endregion constructor
 

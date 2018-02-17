@@ -14,12 +14,6 @@
     ////private DesignerItem designerItem;
     //// private DesignerCanvas designerCanvas;
 
-    public MoveThumb()
-    {
-      //// DragStarted += new DragStartedEventHandler(this.MoveThumb_DragStarted);
-      //// DragDelta += new DragDeltaEventHandler(this.MoveThumb_DragDelta);
-    }
-
 /****
     private void MoveThumb_DragStarted(object sender, DragStartedEventArgs e)
     {

@@ -2,7 +2,7 @@
 {
 	using System.Collections.ObjectModel;
 	using ICSharpCode.AvalonEdit.Highlighting.Themes;
-	using Edi.Themes.Definition;
+	using Definition;
 
 	public interface IThemesManager
 	{

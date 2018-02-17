@@ -1,15 +1,14 @@
 namespace MiniUML.Plugins.UmlClassDiagram
 {
   using System.Windows;
-  using MiniUML.Model.Model;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Document;
-  using MiniUML.Plugins.UmlClassDiagram.Converter;
+  using Model.Model;
+  using Model.ViewModels.Document;
+  using Converter;
 
   /// <summary>
   /// Manage a model for this plug-in.
   /// </summary>
-  public class PluginModel : MiniUML.Model.PluginModelBase
+  public class PluginModel : Model.PluginModelBase
   {
     #region field
     /// <summary>
@@ -19,9 +18,7 @@ namespace MiniUML.Plugins.UmlClassDiagram
     /// </summary>
     public const string ModelName = "UMLClassDiagram";
 
-    private FrameworkElement mPluginView;
-
-    private UmlTypeToStringConverter mShapeConverter = null;
+      private UmlTypeToStringConverter mShapeConverter;
     #endregion field
 
     #region constructor
@@ -31,9 +28,8 @@ namespace MiniUML.Plugins.UmlClassDiagram
     /// <param name="windowViewModel"></param>
     public PluginModel(IMiniUMLDocument windowViewModel)
     {
-      this.mShapeConverter = new UmlTypeToStringConverter();
-      this.mPluginView = new PluginView();
-      this.mPluginView.DataContext = new PluginViewModel(windowViewModel);
+      mShapeConverter = new UmlTypeToStringConverter();
+        View = new PluginView {DataContext = new PluginViewModel(windowViewModel)};
     }
     #endregion constructor
 
@@ -41,36 +37,19 @@ namespace MiniUML.Plugins.UmlClassDiagram
     /// <summary>
     /// Get a name for the plug-in model. Each plug-in must have a unique name.
     /// </summary>
-    public override string Name
-    {
-      get
-      {
-        return PluginModel.ModelName;
-      }
-    }
+    public override string Name => ModelName;
 
-    /// <summary>
+      /// <summary>
     /// Get a view for this plug-in.
     /// </summary>
-    public override FrameworkElement View
-    {
-      get
-      {
-        return this.mPluginView;
-      }
-    }
+    public override FrameworkElement View { get; }
 
-    /// <summary>
+      /// <summary>
     /// Get shape converter from unique string to shape viewmodel instance.
     /// </summary>
-    public override UmlTypeToStringConverterBase ShapeConverter
-    {
-      get
-      {
-        return this.mShapeConverter;
-      }
-    }
-    #endregion properties
+    public override UmlTypeToStringConverterBase ShapeConverter => mShapeConverter;
+
+      #endregion properties
 
     #region methods
     #endregion methods
