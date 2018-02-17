@@ -1,10 +1,9 @@
 ﻿namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.ConnectCreate
 {
   using System.Windows;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Document;
-  using MiniUML.Model.ViewModels.Shapes;
-  using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Connect;
+  using Model.ViewModels.Document;
+  using Model.ViewModels.Shapes;
+  using Connect;
   using MiniUML.View.Views;
 
   /// <summary>
@@ -36,17 +35,17 @@
     public AbstractCreateAssociationMouseHandler(AbstractDocumentViewModel viewModel,
                                                  UmlAssociationShapeViewModel association)
     {
-      this.mViewModel = viewModel;
-      this.mAssociation = association;
+      mViewModel = viewModel;
+      mAssociation = association;
 
-      this.mAssociation.Add(new AnchorViewModel(viewModel.vm_CanvasViewModel)
+      mAssociation.Add(new AnchorViewModel(viewModel.vm_CanvasViewModel)
                                 {
                                   Left = 0,
                                   Top = 0
                                   //// ,UmlShapeKey = "Anchor"
                                 });
 
-      this.mAssociation.Add(new AnchorViewModel(viewModel.vm_CanvasViewModel)
+      mAssociation.Add(new AnchorViewModel(viewModel.vm_CanvasViewModel)
                                 {
                                   Left = 0,
                                   Top = 0
@@ -63,10 +62,10 @@
     /// <param name="shape"></param>
     void ICanvasViewMouseHandler.OnShapeClick(ShapeViewModelBase shape)
     {
-      if (this.mIsDone) // return if command is already finished (successfully or cancelled)
+      if (mIsDone) // return if command is already finished (successfully or cancelled)
         return;
 
-      this.mViewModel.vm_CanvasViewModel.CancelCanvasViewMouseHandler();
+      mViewModel.vm_CanvasViewModel.CancelCanvasViewMouseHandler();
     }
 
     /// <summary>
@@ -77,38 +76,38 @@
     /// <param name="shape"></param>
     void ICanvasViewMouseHandler.OnShapeDragBegin(Point position, ShapeViewModelBase shape)
     {
-      if (this.mIsDone) // return if command is already finished (successfully or cancelled)
+      if (mIsDone) // return if command is already finished (successfully or cancelled)
         return;
 
       string idString = string.Empty;
 
       if (shape != null)
       {
-        if (this.IsValidFrom(shape) == false)
+        if (IsValidFrom(shape) == false)
         {
-          this.mViewModel.vm_CanvasViewModel.CancelCanvasViewMouseHandler();
+          mViewModel.vm_CanvasViewModel.CancelCanvasViewMouseHandler();
           return;
         }
 
         idString = shape.ID;            // Add a shape id if we begin drawing over a shape
         if (idString == string.Empty)
         {
-          idString = this.mViewModel.dm_DocumentDataModel.GetUniqueId();
+          idString = mViewModel.dm_DocumentDataModel.GetUniqueId();
           shape.ID = idString;
         }
 
-        this.mAssociation.From = idString;
+        mAssociation.From = idString;
       }
 
-      ((ShapeViewModelBase)this.mAssociation.FirstNode).Position = position;
+      ((ShapeViewModelBase)mAssociation.FirstNode).Position = position;
       ////Console.WriteLine("First position is: {0}", position);
 
       // Add the shape to the document root.
-      this.mViewModel.vm_CanvasViewModel.AddShape((ShapeViewModelBase)this.mAssociation);
-      this.mHasBeenAdded = true;
+      mViewModel.vm_CanvasViewModel.AddShape((ShapeViewModelBase)mAssociation);
+      mHasBeenAdded = true;
 
       // Set associations view element to hit test invisible to make it non-interactible with mouse
-      ((CanvasView)this.mViewModel.v_CanvasView).PresenterFromElement(this.mAssociation).IsHitTestVisible = false;
+      ((CanvasView)mViewModel.v_CanvasView).PresenterFromElement(mAssociation).IsHitTestVisible = false;
     }
 
     /// <summary>
@@ -118,10 +117,10 @@
     /// <param name="delta"></param>
     void ICanvasViewMouseHandler.OnShapeDragUpdate(Point position, Vector delta)
     {
-      if (this.mIsDone) // return if command is already finished (successfully or cancelled)
+      if (mIsDone) // return if command is already finished (successfully or cancelled)
         return;
 
-      ((ShapeViewModelBase)this.mAssociation.LastNode).Position  = position;
+      ((ShapeViewModelBase)mAssociation.LastNode).Position  = position;
     }
 
     /// <summary>
@@ -132,41 +131,41 @@
     /// <param name="shape"></param>
     void ICanvasViewMouseHandler.OnShapeDragEnd(Point position, ShapeViewModelBase shape)
     {
-      if (this.mIsDone) // return if command is already finished (successfully or cancelled)
+      if (mIsDone) // return if command is already finished (successfully or cancelled)
         return;
 
       string idString = string.Empty;
       if (shape != null)
       {
-        if (this.IsValidTo(shape) == false)
+        if (IsValidTo(shape) == false)
         {
-          this.mViewModel.vm_CanvasViewModel.CancelCanvasViewMouseHandler();
+          mViewModel.vm_CanvasViewModel.CancelCanvasViewMouseHandler();
           return;
         }
 
         idString = shape.ID;
         if (idString == string.Empty)
         {
-          idString = this.mViewModel.dm_DocumentDataModel.GetUniqueId();
+          idString = mViewModel.dm_DocumentDataModel.GetUniqueId();
           shape.ID = idString;
         }
       }
 
       // HACK: Work around for odd not-quite-updated binding problem: Remove, then re-add.
       // to (re)-fire SnapToTarget event again when the element is being removed and re-added.
-      this.mViewModel.dm_DocumentDataModel.RemoveShape(this.mAssociation);
+      mViewModel.dm_DocumentDataModel.RemoveShape(mAssociation);
 
       // (Re)-setting this property should in fact (re)-fire the snapToTarget event (but it does not?)
-      this.mAssociation.To = idString;
+      mAssociation.To = idString;
 
-      this.mViewModel.vm_CanvasViewModel.AddShape(this.mAssociation);
+      mViewModel.vm_CanvasViewModel.AddShape(mAssociation);
       ////Console.WriteLine("Last position is: {0}", position);
 
       // make newly added association view hit test visible (enables user interaction)
-      ((CanvasView)this.mViewModel.v_CanvasView).PresenterFromElement(this.mAssociation).IsHitTestVisible = true;
+      ((CanvasView)mViewModel.v_CanvasView).PresenterFromElement(mAssociation).IsHitTestVisible = true;
 
-      this.CleanUp();                                                    // indicate end of this mouse handler command
-      this.mViewModel.vm_CanvasViewModel.FinishCanvasViewMouseHandler();
+      CleanUp();                                                    // indicate end of this mouse handler command
+      mViewModel.vm_CanvasViewModel.FinishCanvasViewMouseHandler();
     }
 
     /// <summary>
@@ -176,10 +175,10 @@
     /// </summary>
     void ICanvasViewMouseHandler.OnCancelMouseHandler()
     {
-      if (this.mHasBeenAdded == true)
-        this.mAssociation.Remove();
+      if (mHasBeenAdded)
+        mAssociation.Remove();
 
-      this.CleanUp();
+      CleanUp();
     }
     #endregion ICanvasViewMouseHandler
 
@@ -205,9 +204,9 @@
     /// </summary>
     private void CleanUp()
     {
-      this.mViewModel.v_CanvasView.ForceCursor = true;
-      this.mViewModel.v_CanvasView.Cursor = null;
-      this.mIsDone = true;
+      mViewModel.v_CanvasView.ForceCursor = true;
+      mViewModel.v_CanvasView.Cursor = null;
+      mIsDone = true;
     }
     #endregion methods
   }

@@ -20,7 +20,7 @@ namespace Files.ViewModels.FileExplorer
     /// This class can be used to present file based information, such as,
     /// Size, Path etc to the user.
     /// </summary>
-    public class FileExplorerViewModel : Edi.Core.ViewModels.ToolViewModel,
+    public class FileExplorerViewModel : ToolViewModel,
 										 IRegisterableToolWindow,
 										 IExplorer
 	{
@@ -45,19 +45,19 @@ namespace Files.ViewModels.FileExplorer
 																 IFileOpenService fileOpenService)
 			: base("Explorer")
 		{
-			base.ContentId = ToolContentId;
+			ContentId = ToolContentId;
 
-			this.mFileOpenService = fileOpenService;
+			mFileOpenService = fileOpenService;
 
-			this.OnActiveDocumentChanged(null, null);
+			OnActiveDocumentChanged(null, null);
 
-			this.FolderView = new FolderListViewModel(this.FolderItemsView_OnFileOpen);
+			FolderView = new FolderListViewModel(FolderItemsView_OnFileOpen);
 
-			this.SynchronizedTreeBrowser = new BrowserViewModel();
-			this.SynchronizedTreeBrowser.SetSpecialFoldersVisibility(false);
+			SynchronizedTreeBrowser = new BrowserViewModel();
+			SynchronizedTreeBrowser.SetSpecialFoldersVisibility(false);
 
 			// This must be done before calling configure since browser viewmodel is otherwise not available
-			this.FolderView.AttachFolderBrowser(this.SynchronizedTreeBrowser);
+			FolderView.AttachFolderBrowser(SynchronizedTreeBrowser);
 
 			ExplorerSettingsModel settings = null;
 
@@ -77,8 +77,8 @@ namespace Files.ViewModels.FileExplorer
 			else
 				settings.UserProfile.SetCurrentPath(@"C:");
 
-			this.FolderView.ConfigureExplorerSettings(settings);
-			this.mFileOpenMethod = this.mFileOpenService.FileOpen;
+			FolderView.ConfigureExplorerSettings(settings);
+			mFileOpenMethod = mFileOpenService.FileOpen;
 		}
 		#endregion constructor
 
@@ -96,10 +96,10 @@ namespace Files.ViewModels.FileExplorer
 		{
 			get
 			{
-				if (this.FolderView == null)
+				if (FolderView == null)
 					return null;
 
-				return this.FolderView;
+				return FolderView;
 			}
 		}
 
@@ -113,12 +113,12 @@ namespace Files.ViewModels.FileExplorer
 		{
 			get
 			{
-				if (string.IsNullOrEmpty(this.mFilePathName) == true)
+				if (string.IsNullOrEmpty(mFilePathName))
 					return string.Empty;
 
 				try
 				{
-					return System.IO.Path.GetFileName(mFilePathName);
+					return Path.GetFileName(mFilePathName);
 				}
 				catch (Exception)
 				{
@@ -133,12 +133,12 @@ namespace Files.ViewModels.FileExplorer
 		{
 			get
 			{
-				if (string.IsNullOrEmpty(this.mFilePathName) == true)
+				if (string.IsNullOrEmpty(mFilePathName))
 					return string.Empty;
 
 				try
 				{
-					return System.IO.Path.GetDirectoryName(mFilePathName);
+					return Path.GetDirectoryName(mFilePathName);
 				}
 				catch (Exception)
 				{
@@ -166,19 +166,19 @@ namespace Files.ViewModels.FileExplorer
 		{
 			get
 			{
-				if (this.mSyncPathWithCurrentDocumentCommand == null)
-					this.mSyncPathWithCurrentDocumentCommand = new RelayCommand<object>(
-						(p) => this.SyncPathWithCurrentDocumentCommand_Executed(),
-						(p) => string.IsNullOrEmpty(this.mFilePathName) == false);
+				if (mSyncPathWithCurrentDocumentCommand == null)
+					mSyncPathWithCurrentDocumentCommand = new RelayCommand<object>(
+						(p) => SyncPathWithCurrentDocumentCommand_Executed(),
+						(p) => string.IsNullOrEmpty(mFilePathName) == false);
 
-				return this.mSyncPathWithCurrentDocumentCommand;
+				return mSyncPathWithCurrentDocumentCommand;
 			}
 		}
 		#endregion Commands
 
 		public ExplorerSettingsModel GetExplorerSettings(ExplorerSettingsModel input)
 		{
-			return this.Settings.GetExplorerSettings(input);
+			return Settings.GetExplorerSettings(input);
 		}
 
 		public override PaneLocation PreferredLocation
@@ -240,15 +240,15 @@ namespace Files.ViewModels.FileExplorer
 		public void SetDocumentParent(IDocumentParent parent)
 		{
 			if (parent != null)
-				parent.ActiveDocumentChanged -= this.OnActiveDocumentChanged;
+				parent.ActiveDocumentChanged -= OnActiveDocumentChanged;
 
-			this.mParent = parent;
+			mParent = parent;
 
 			// Check if active document is a log4net document to display data for...
-			if (this.mParent != null)
-				parent.ActiveDocumentChanged += new DocumentChangedEventHandler(this.OnActiveDocumentChanged);
+			if (mParent != null)
+				parent.ActiveDocumentChanged += new DocumentChangedEventHandler(OnActiveDocumentChanged);
 			else
-				this.OnActiveDocumentChanged(null, null);
+				OnActiveDocumentChanged(null, null);
 		}
 
 		/// <summary>
@@ -261,10 +261,10 @@ namespace Files.ViewModels.FileExplorer
 		public void SetToolWindowVisibility(IDocumentParent parent,
 																				bool isVisible = true)
 		{
-			if (IsVisible == true)
-				this.SetDocumentParent(parent);
+			if (IsVisible)
+				SetDocumentParent(parent);
 			else
-				this.SetDocumentParent(null);
+				SetDocumentParent(null);
 
 			base.SetToolWindowVisibility(isVisible);
 		}
@@ -272,7 +272,7 @@ namespace Files.ViewModels.FileExplorer
 
 		public void OnActiveDocumentChanged(object sender, DocumentChangedEventArgs e)
 		{
-			this.mFilePathName = string.Empty;
+			mFilePathName = string.Empty;
 
 			if (e != null)
 			{
@@ -283,14 +283,14 @@ namespace Files.ViewModels.FileExplorer
                     {
                         FileBaseViewModel f = e.ActiveDocument as FileBaseViewModel;
 
-                        if (File.Exists(f.FilePath) == true)
+                        if (File.Exists(f.FilePath))
                         {
                             var fi = new FileInfo(f.FilePath);
 
-                            this.mFilePathName = f.FilePath;
+                            mFilePathName = f.FilePath;
 
-                            this.RaisePropertyChanged(() => this.FileName);
-                            this.RaisePropertyChanged(() => this.FilePath);
+                            RaisePropertyChanged(() => FileName);
+                            RaisePropertyChanged(() => FilePath);
                         }
                     }
                 }
@@ -304,8 +304,8 @@ namespace Files.ViewModels.FileExplorer
 		/// <param name="e"></param>
 		public void FolderItemsView_OnFileOpen(object sender, FileSystemModels.Events.FileOpenEventArgs e)
 		{
-			if (this.mFileOpenMethod != null)
-				this.mFileOpenMethod(e.FileName);
+			if (mFileOpenMethod != null)
+				mFileOpenMethod(e.FileName);
 			else
 				MessageBox.Show("File Open (method is to null):" + e.FileName);
 		}
@@ -318,25 +318,25 @@ namespace Files.ViewModels.FileExplorer
 		{
 			try
 			{
-				if (System.IO.Directory.Exists(directoryPath) == false)
-					directoryPath = System.IO.Directory.GetParent(directoryPath).FullName;
+				if (Directory.Exists(directoryPath) == false)
+					directoryPath = Directory.GetParent(directoryPath).FullName;
 
-				if (System.IO.Directory.Exists(directoryPath) == false)
+				if (Directory.Exists(directoryPath) == false)
 					return;
 			}
 			catch
 			{
 			}
 
-			this.FolderView.NavigateToFolder(directoryPath);
+			FolderView.NavigateToFolder(directoryPath);
 		}
 
 		private void SyncPathWithCurrentDocumentCommand_Executed()
 		{
-			if (string.IsNullOrEmpty(this.mFilePathName) == true)
+			if (string.IsNullOrEmpty(mFilePathName))
 				return;
 
-			NavigateToFolder(this.mFilePathName);
+			NavigateToFolder(mFilePathName);
 		}
 		#endregion methods
 	}

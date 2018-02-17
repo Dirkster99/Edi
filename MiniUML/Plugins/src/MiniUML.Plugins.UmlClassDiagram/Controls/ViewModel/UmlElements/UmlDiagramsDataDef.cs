@@ -1,12 +1,9 @@
-﻿namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
-{
-  using System;
-  using System.Collections.Generic;
-  using System.Linq;
-  using System.Text;
-  using MiniUML.Model.ViewModels.Command;
+﻿using System.Collections.Generic;
+using MiniUML.Model.ViewModels.Command;
 
-  /// <summary>
+namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
+{
+    /// <summary>
   /// Enumerate over all types of diagrams managed in this framework
   /// </summary>
   public enum UmlDiagrams
@@ -28,11 +25,11 @@
     private class UmlDiagramsDataDef
     {
       #region fields
-      private Dictionary<UmlDiagrams, UmlTypes[]> mDiagrams = new Dictionary<UmlDiagrams, UmlTypes[]>()
+      private Dictionary<UmlDiagrams, UmlTypes[]> mDiagrams = new Dictionary<UmlDiagrams, UmlTypes[]>
       {
         {
           UmlDiagrams.Activity,
-          new UmlTypes[] {
+          new[] {
             UmlTypes.ActivityFinal,
             UmlTypes.ActivityFlowFinal,
             UmlTypes.ActivityInitial,
@@ -40,12 +37,12 @@
             UmlTypes.Event1,
             UmlTypes.Event2,
             UmlTypes.Action1,
-            UmlTypes.Action2,
+            UmlTypes.Action2
           }
         },
         {
           UmlDiagrams.Class,
-          new UmlTypes[] {
+          new[] {
             UmlTypes.Primitive,
             UmlTypes.DataType,
             UmlTypes.Signal,
@@ -58,7 +55,7 @@
         },
         {
           UmlDiagrams.Common,
-          new UmlTypes[] {
+          new[] {
             UmlTypes.Package,
             UmlTypes.Boundary,
             UmlTypes.Note
@@ -66,7 +63,7 @@
         },
         {
           UmlDiagrams.Deployment,
-          new UmlTypes[] {
+          new[] {
             UmlTypes.Component,
             UmlTypes.Node,
             UmlTypes.Device,
@@ -77,16 +74,16 @@
         },
         {
           UmlDiagrams.UseCase,
-          new UmlTypes[] {
+          new[] {
             UmlTypes.UseCase,
             UmlTypes.Collaboration,
             UmlTypes.Actor,
-            UmlTypes.Actor1,
+            UmlTypes.Actor1
           }
         },
         {
           UmlDiagrams.Connector,
-          new UmlTypes[] {
+          new[] {
             // Connection shapes
             UmlTypes.ConnectorAggregation,
             UmlTypes.ConnectorAssociation,
@@ -101,12 +98,10 @@
       {
         List<CommandModelBase> ret = new List<CommandModelBase>();
 
-        UmlTypes[] list = null;
-
-        this.mDiagrams.TryGetValue(umlDiagram, out list);
+          mDiagrams.TryGetValue(umlDiagram, out var list);
 
         foreach (var item in list)
-          ret.Add(UmlElementsManager.Instance.GetCreateUmlShapeCommandModel(viewModel, item));
+          ret.Add(Instance.GetCreateUmlShapeCommandModel(viewModel, item));
 
         return ret;
       }

@@ -23,7 +23,6 @@ using System.IO;
 using System.Linq;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Utils;
-using ICSharpCode.NRefactory.Editor;
 
 namespace ICSharpCode.AvalonEdit.Highlighting
 {
@@ -37,13 +36,11 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// </summary>
 		public HighlightedLine(IDocument document, IDocumentLine documentLine)
 		{
-			if (document == null)
-				throw new ArgumentNullException("document");
-			//if (!document.Lines.Contains(documentLine))
-			//	throw new ArgumentException("Line is null or not part of document");
-			this.Document = document;
-			this.DocumentLine = documentLine;
-			this.Sections = new NullSafeCollection<HighlightedSection>();
+            //if (!document.Lines.Contains(documentLine))
+            //	throw new ArgumentException("Line is null or not part of document");
+            Document = document ?? throw new ArgumentNullException(nameof(document));
+			DocumentLine = documentLine;
+			Sections = new NullSafeCollection<HighlightedSection>();
 		}
 		
 		/// <summary>
@@ -105,14 +102,14 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 			
 			int pos = 0;
 			Stack<int> activeSectionEndOffsets = new Stack<int>();
-			int lineEndOffset = this.DocumentLine.EndOffset;
+			int lineEndOffset = DocumentLine.EndOffset;
 			activeSectionEndOffsets.Push(lineEndOffset);
 			foreach (HighlightedSection newSection in additionalLine.Sections) {
 				int newSectionStart = newSection.Offset;
 				// Track the existing sections using the stack, up to the point where
 				// we need to insert the first part of the newSection
-				while (pos < this.Sections.Count) {
-					HighlightedSection s = this.Sections[pos];
+				while (pos < Sections.Count) {
+					HighlightedSection s = Sections[pos];
 					if (newSection.Offset < s.Offset)
 						break;
 					while (s.Offset > activeSectionEndOffsets.Peek()) {
@@ -128,8 +125,8 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 				// The stack enumerator reverses the order of the elements, so we call Reverse() to restore
 				// the original order.
 				int i;
-				for (i = pos; i < this.Sections.Count; i++) {
-					HighlightedSection s = this.Sections[i];
+				for (i = pos; i < Sections.Count; i++) {
+					HighlightedSection s = Sections[i];
 					if (newSection.Offset + newSection.Length <= s.Offset)
 						break;
 					// Insert a segment in front of s:
@@ -162,7 +159,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 				int end = insertionStack.Pop();
 				// insert the portion from newSectionStart to end
 				if (end > newSectionStart) {
-					this.Sections.Insert(pos++, new HighlightedSection {
+					Sections.Insert(pos++, new HighlightedSection {
 					                     	Offset = newSectionStart,
 					                     	Length = end - newSectionStart,
 					                     	Color = color
@@ -171,7 +168,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 				}
 			}
 			if (insertionEndPos > newSectionStart) {
-				this.Sections.Insert(pos++, new HighlightedSection {
+				Sections.Insert(pos++, new HighlightedSection {
 				                     	Offset = newSectionStart,
 				                     	Length = insertionEndPos - newSectionStart,
 				                     	Color = color
@@ -191,10 +188,10 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 			
 			public HtmlElement(int offset, int nesting, bool isEnd, HighlightingColor color)
 			{
-				this.Offset = offset;
-				this.Nesting = nesting;
-				this.IsEnd = isEnd;
-				this.Color = color;
+				Offset = offset;
+				Nesting = nesting;
+				IsEnd = isEnd;
+				Color = color;
 			}
 			
 			public int CompareTo(HtmlElement other)
@@ -221,8 +218,8 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// </summary>
 		internal void WriteTo(RichTextWriter writer)
 		{
-			int startOffset = this.DocumentLine.Offset;
-			WriteTo(writer, startOffset, startOffset + this.DocumentLine.Length);
+			int startOffset = DocumentLine.Offset;
+			WriteTo(writer, startOffset, startOffset + DocumentLine.Length);
 		}
 		
 		/// <summary>
@@ -231,18 +228,18 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		internal void WriteTo(RichTextWriter writer, int startOffset, int endOffset)
 		{
 			if (writer == null)
-				throw new ArgumentNullException("writer");
-			int documentLineStartOffset = this.DocumentLine.Offset;
-			int documentLineEndOffset = documentLineStartOffset + this.DocumentLine.Length;
+				throw new ArgumentNullException(nameof(writer));
+			int documentLineStartOffset = DocumentLine.Offset;
+			int documentLineEndOffset = documentLineStartOffset + DocumentLine.Length;
 			if (startOffset < documentLineStartOffset || startOffset > documentLineEndOffset)
-				throw new ArgumentOutOfRangeException("startOffset", startOffset, "Value must be between " + documentLineStartOffset + " and " + documentLineEndOffset);
+				throw new ArgumentOutOfRangeException(nameof(startOffset), startOffset, "Value must be between " + documentLineStartOffset + " and " + documentLineEndOffset);
 			if (endOffset < startOffset || endOffset > documentLineEndOffset)
-				throw new ArgumentOutOfRangeException("endOffset", endOffset, "Value must be between startOffset and " + documentLineEndOffset);
+				throw new ArgumentOutOfRangeException(nameof(endOffset), endOffset, "Value must be between startOffset and " + documentLineEndOffset);
 			ISegment requestedSegment = new SimpleSegment(startOffset, endOffset - startOffset);
 			
 			List<HtmlElement> elements = new List<HtmlElement>();
-			for (int i = 0; i < this.Sections.Count; i++) {
-				HighlightedSection s = this.Sections[i];
+			for (int i = 0; i < Sections.Count; i++) {
+				HighlightedSection s = Sections[i];
 				if (SimpleSegment.GetOverlap(s, requestedSegment).Length > 0) {
 					elements.Add(new HtmlElement(s.Offset, i, false, s.Color));
 					elements.Add(new HtmlElement(s.Offset + s.Length, i, true, s.Color));
@@ -250,7 +247,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 			}
 			elements.Sort();
 			
-			IDocument document = this.Document;
+			IDocument document = Document;
 			int textOffset = startOffset;
 			foreach (HtmlElement e in elements) {
 				int newOffset = Math.Min(e.Offset, endOffset);

@@ -1,11 +1,8 @@
 ﻿namespace MiniUML.View.Views.RubberBand
 {
-  using System;
-  using System.Windows;
-  using System.Windows.Controls;
-  using System.Windows.Documents;
-  using System.Windows.Input;
-  using System.Windows.Media;
+    using System.Windows;
+    using System.Windows.Documents;
+    using System.Windows.Media;
 
   /// <summary>
   /// This class implements a rubber band selection that can be used to
@@ -21,12 +18,12 @@
         DependencyProperty.Register("EndPoint",
                                     typeof(Point?),
                                     typeof(RubberbandAdorner),
-                                    new PropertyMetadata(null, RubberbandAdorner.OnChangeEndPoint));
+                                    new PropertyMetadata(null, OnChangeEndPoint));
 
-    private Point? mStartPoint = null;
-    private Point? mEndPoint = null;
+    private Point? mStartPoint;
+    private Point? mEndPoint;
     private Pen mRubberbandPen;
-    private UIElement mDesignerCanvas = null;
+    private UIElement mDesignerCanvas;
 
     private VisualCollection mVisuals;
     private RubberBandChrome mChrome;
@@ -41,17 +38,19 @@
     public RubberbandAdorner(UIElement designerCanvas, Point? dragStartPoint)
       : base(designerCanvas)
     {
-      this.mDesignerCanvas = designerCanvas;
-      this.mStartPoint = dragStartPoint;
+      mDesignerCanvas = designerCanvas;
+      mStartPoint = dragStartPoint;
 
-      this.mRubberbandPen = new Pen(Brushes.LightSlateGray, 1);
-      this.mRubberbandPen.DashStyle = new DashStyle(new double[] { 2 }, 1);
+            mRubberbandPen = new Pen(Brushes.LightSlateGray, 1)
+            {
+                DashStyle = new DashStyle(new double[] { 2 }, 1)
+            };
 
-      this.mChrome = new RubberBandChrome();
-      this.mVisuals = new VisualCollection(this);
+            mChrome = new RubberBandChrome();
+      mVisuals = new VisualCollection(this);
 
-      this.mVisuals.Add(this.mChrome);
-      this.mChrome.DataContext = designerCanvas;  // Apply data context from this object to chrome object
+      mVisuals.Add(mChrome);
+      mChrome.DataContext = designerCanvas;  // Apply data context from this object to chrome object
     }
     #endregion constructor
 
@@ -62,21 +61,16 @@
     /// </summary>
     public Point? EndPoint
     {
-      get { return (Point)GetValue(EndPointProperty); }
-      set { SetValue(EndPointProperty, value); }
+      get => (Point)GetValue(EndPointProperty);
+        set => SetValue(EndPointProperty, value);
     }
 
     /// <summary>
     /// Count the number of children hosted in this view.
     /// </summary>
-    protected override int VisualChildrenCount
-    {
-      get
-      {
-        return this.mVisuals.Count;
-      }
-    }
-    #endregion properties
+    protected override int VisualChildrenCount => mVisuals.Count;
+
+      #endregion properties
 
     #region methods
 
@@ -88,12 +82,12 @@
       // Alternative: implement a Canvas as a child of this adorner, like the ConnectionAdorner does.
       ////dc.DrawRectangle(Brushes.Transparent, null, new Rect(RenderSize));
 
-      if (this.mStartPoint.HasValue && this.mEndPoint.HasValue)
+      if (mStartPoint.HasValue && mEndPoint.HasValue)
       {
         ////dc.DrawRectangle(Brushes.Transparent, this.mRubberbandPen, new Rect(this.mStartPoint.Value, this.mEndPoint.Value));
 
-        this.mChrome.Arrange(new Rect(this.mStartPoint.Value, this.mEndPoint.Value));
-        this.mChrome.InvalidateArrange();
+        mChrome.Arrange(new Rect(mStartPoint.Value, mEndPoint.Value));
+        mChrome.InvalidateArrange();
       }
     }
 
@@ -112,7 +106,7 @@
     /// <returns></returns>
     protected override Visual GetVisualChild(int index)
     {
-      return this.mVisuals[index];
+      return mVisuals[index];
     }
 
     /// <summary>
@@ -143,9 +137,9 @@
     private void UpdateOnMouseMove(Point? endPoint)
     {
       if (endPoint.HasValue)
-        this.mEndPoint = new Point(endPoint.Value.X, endPoint.Value.Y);
+        mEndPoint = new Point(endPoint.Value.X, endPoint.Value.Y);
 
-      this.InvalidateVisual();
+      InvalidateVisual();
     }
     #endregion methods
   }

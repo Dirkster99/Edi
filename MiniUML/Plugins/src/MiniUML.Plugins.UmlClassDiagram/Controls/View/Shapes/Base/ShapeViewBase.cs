@@ -4,8 +4,8 @@
   using System.Windows.Controls;
   using System.Windows.Controls.Primitives;
   using System.Windows.Input;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Shapes;
+  using Model.ViewModels;
+  using Model.ViewModels.Shapes;
   using MiniUML.View.Controls;
   using MiniUML.View.Views;
 
@@ -69,8 +69,8 @@
 
     public void NotifySnapTargetUpdate(SnapTargetUpdateEventArgs e)
     {
-      if (this.SnapTargetUpdate != null)
-        this.SnapTargetUpdate(this, e);
+      if (SnapTargetUpdate != null)
+        SnapTargetUpdate(this, e);
     }
 
     /// <summary>
@@ -82,8 +82,8 @@
     {
       base.OnMouseDown(e);
 
-      if (this.IsFocused == false)
-        this.Focus();
+      if (IsFocused == false)
+        Focus();
 
       e.Handled = true;
     }
@@ -92,7 +92,7 @@
     {
       base.OnRenderSizeChanged(sizeInfo);
 
-      this.NotifySnapTargetUpdate(new SnapTargetUpdateEventArgs());
+      NotifySnapTargetUpdate(new SnapTargetUpdateEventArgs());
     }
 
     #region protected contextmenu creation methods
@@ -106,18 +106,18 @@
     {
       ContextMenu retMenu = new ContextMenu();
 
-      this.AddCopyCutPasteMenuItems(retMenu);
+      AddCopyCutPasteMenuItems(retMenu);
 
       retMenu.Items.Add(new Separator());
-      this.AddUndoRedoMenuItems(retMenu);
+      AddUndoRedoMenuItems(retMenu);
 
-      this.AddZOrderMenuItems(retMenu, element);
+      AddZOrderMenuItems(retMenu, element);
 
-      this.SameSizeMenuItems(retMenu, element as ShapeSizeViewModelBase);
+      SameSizeMenuItems(retMenu, element as ShapeSizeViewModelBase);
 
-      this.AlignMenuItems(retMenu, element as ShapeSizeViewModelBase);
+      AlignMenuItems(retMenu, element as ShapeSizeViewModelBase);
 
-      this.DistributeMenuItems(retMenu, element as ShapeSizeViewModelBase);
+      DistributeMenuItems(retMenu, element as ShapeSizeViewModelBase);
 
       return retMenu;
     }
@@ -160,14 +160,14 @@
 
           submenu.Items.Add(new MenuItem()
           {
-            Header = MiniUML.Framework.Local.Strings.STR_MENUITEM_BringToFront,
+            Header = Framework.Local.Strings.STR_MENUITEM_BringToFront,
             Command = element.BringToFront,
             Icon = IconImageFactory.Get(IconCommand.SendToBack)
           });
 
           submenu.Items.Add(new MenuItem()
           {
-            Header = MiniUML.Framework.Local.Strings.STR_MENUITEM_SendToBack,
+            Header = Framework.Local.Strings.STR_MENUITEM_SendToBack,
             Command = element.SendToBack,
             Icon = IconImageFactory.Get(IconCommand.BringToFront)
           });

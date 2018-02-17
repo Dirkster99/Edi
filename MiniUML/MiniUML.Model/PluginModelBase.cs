@@ -2,7 +2,7 @@
 {
   using System;
   using System.Windows;
-  using MiniUML.Model.Model;
+  using Model;
 
   /// <summary>
   /// Base class from which all plugins must derive in order to be discovered.
@@ -20,7 +20,7 @@
     /// </summary>
     public PluginModelBase()
     {
-      this.mResources = this.LoadResourceDictionary("/SharedResources.xaml");
+      mResources = LoadResourceDictionary("/SharedResources.xaml");
     }
     #endregion constructor
 
@@ -40,7 +40,7 @@
     /// </summary>
     public ResourceDictionary Resources
     {
-      get { return this.mResources; }
+      get { return mResources; }
     }
 
     /// <summary>
@@ -58,7 +58,7 @@
     private ResourceDictionary LoadResourceDictionary(string uri)
     {
       // Get a relative path to the resource dictionary.
-      string assemblyName = this.GetType().Assembly.FullName;
+      string assemblyName = GetType().Assembly.FullName;
       Uri resourceDictionaryUri = new Uri(string.Format(@"{0};component/{1}", assemblyName, uri), UriKind.Relative);
 
       // Load the resources.

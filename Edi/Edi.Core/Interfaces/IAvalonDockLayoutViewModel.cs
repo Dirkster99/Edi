@@ -2,8 +2,8 @@
 {
 	using System;
 	using System.Windows.Input;
-	using Edi.Core.Models.Enums;
-	using Edi.Core.ViewModels;
+	using Models.Enums;
+	using ViewModels;
 
 	/// <summary>
 	/// Interface defines object properties and methods required

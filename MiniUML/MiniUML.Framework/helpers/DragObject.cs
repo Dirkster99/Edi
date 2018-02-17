@@ -1,9 +1,6 @@
 ﻿namespace MiniUML.Framework.helpers
 {
-  using System;
-  using System.Windows;
-
-  /// <summary>
+    /// <summary>
   /// Wraps info of the dragged object into a class
   /// Source: http://www.codeproject.com/Articles/484616/MVVM-Diagram-Designer?msg=4413242#Drag-And-Drop-To-The-Design-Surface
   /// </summary>
@@ -14,7 +11,7 @@
     /// </summary>
     public DragObject()
     {
-      this.ObjectInstance = null;
+      ObjectInstance = null;
     }
 
     /// <summary>

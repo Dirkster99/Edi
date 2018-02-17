@@ -6,9 +6,6 @@ namespace SimpleControls.Hyperlink
     using System.Windows.Controls;
     using System.Windows.Input;
 
-    using MsgBox;
-    using CommonServiceLocator;
-
     /// <summary>
     /// Interaction logic for WebHyperlink.xaml
     /// </summary>
@@ -33,19 +30,19 @@ namespace SimpleControls.Hyperlink
             DefaultStyleKeyProperty.OverrideMetadata(typeof(WebHyperlink),
                       new FrameworkPropertyMetadata(typeof(WebHyperlink)));
 
-            WebHyperlink.mCopyUri = new RoutedCommand("CopyUri", typeof(WebHyperlink));
+            mCopyUri = new RoutedCommand("CopyUri", typeof(WebHyperlink));
 
             CommandManager.RegisterClassCommandBinding(typeof(WebHyperlink), new CommandBinding(mCopyUri, CopyHyperlinkUri));
             CommandManager.RegisterClassInputBinding(typeof(WebHyperlink), new InputBinding(mCopyUri, new KeyGesture(Key.C, ModifierKeys.Control, "Ctrl-C")));
 
-            WebHyperlink.mNavigateToUri = new RoutedCommand("NavigateToUri", typeof(WebHyperlink));
+            mNavigateToUri = new RoutedCommand("NavigateToUri", typeof(WebHyperlink));
             CommandManager.RegisterClassCommandBinding(typeof(WebHyperlink), new CommandBinding(mNavigateToUri, Hyperlink_CommandNavigateTo));
             ////CommandManager.RegisterClassInputBinding(typeof(WebHyperlink), new InputBinding(mCopyUri, new KeyGesture(Key.C, ModifierKeys.Control, "Ctrl-C")));
         }
 
         public WebHyperlink()
         {
-            this.mHypLink = null;
+            mHypLink = null;
         }
         #endregion constructor
 
@@ -54,7 +51,7 @@ namespace SimpleControls.Hyperlink
         {
             get
             {
-                return WebHyperlink.mCopyUri;
+                return mCopyUri;
             }
         }
 
@@ -62,7 +59,7 @@ namespace SimpleControls.Hyperlink
         {
             get
             {
-                return WebHyperlink.mNavigateToUri;
+                return mNavigateToUri;
             }
         }
 
@@ -72,14 +69,14 @@ namespace SimpleControls.Hyperlink
         /// </summary>
         public System.Uri NavigateUri
         {
-            get { return (System.Uri)this.GetValue(WebHyperlink.NavigateUriProperty); }
-            set { this.SetValue(WebHyperlink.NavigateUriProperty, value); }
+            get { return (System.Uri)GetValue(NavigateUriProperty); }
+            set { SetValue(NavigateUriProperty, value); }
         }
 
         public string Text
         {
-            get { return (string)this.GetValue(WebHyperlink.TextProperty); }
-            set { this.SetValue(WebHyperlink.TextProperty, value); }
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
         }
         #endregion
 
@@ -88,18 +85,18 @@ namespace SimpleControls.Hyperlink
         {
             base.OnApplyTemplate();
 
-            this.mHypLink = this.GetTemplateChild("PART_Hyperlink") as System.Windows.Documents.Hyperlink;
-            Debug.Assert(this.mHypLink != null, "No Hyperlink in ControlTemplate!");
+            mHypLink = GetTemplateChild("PART_Hyperlink") as System.Windows.Documents.Hyperlink;
+            Debug.Assert(mHypLink != null, "No Hyperlink in ControlTemplate!");
 
             // Attach hyperlink event clicked event handler to Hyperlink ControlTemplate if there is no command defined
             // Commanding allows calling commands that are external to the control (application commands) with parameters
             // that can differ from whats available in this control (using converters and what not)
             //
             // Therefore, commanding overrules the Hyperlink.Clicked event when it is defined.
-            if (this.mHypLink != null)
+            if (mHypLink != null)
             {
-                if (this.mHypLink.Command == null)
-                    this.mHypLink.RequestNavigate += this.Hyperlink_RequestNavigate;
+                if (mHypLink.Command == null)
+                    mHypLink.RequestNavigate += Hyperlink_RequestNavigate;
             }
         }
 
@@ -149,11 +146,11 @@ namespace SimpleControls.Hyperlink
 
             try
             {
-                System.Windows.Clipboard.SetText(whLink.NavigateUri.AbsoluteUri);
+                Clipboard.SetText(whLink.NavigateUri.AbsoluteUri);
             }
             catch
             {
-                System.Windows.Clipboard.SetText(whLink.NavigateUri.OriginalString);
+                Clipboard.SetText(whLink.NavigateUri.OriginalString);
             }
         }
 

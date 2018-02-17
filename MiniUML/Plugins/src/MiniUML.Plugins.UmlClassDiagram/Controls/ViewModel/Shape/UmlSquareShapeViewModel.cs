@@ -2,14 +2,13 @@
 {
   using System;
   using System.Collections.Generic;
-  using System.Globalization;
   using System.Windows;
   using System.Xml;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Shapes;
-  using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base;
-  using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements;
-  using MiniUML.Plugins.UmlClassDiagram.Converter;
+  using Model.ViewModels;
+  using Model.ViewModels.Shapes;
+  using Base;
+  using UmlElements;
+  using Converter;
 
   /// <summary>
   /// This class implements the viewmodel for Uml shapes
@@ -47,15 +46,15 @@
     {
       get
       {
-        return this.mHorizontalLine;
+        return mHorizontalLine;
       }
 
       set
       {
-        if (this.mHorizontalLine != value)
+        if (mHorizontalLine != value)
         {
-          this.mHorizontalLine = value;
-          this.NotifyPropertyChanged(() => this.HorizontalLine);
+          mHorizontalLine = value;
+          NotifyPropertyChanged(() => HorizontalLine);
         }
       }
     }
@@ -70,15 +69,15 @@
     {
       get
       {
-        return this.mShapeImageUrl;
+        return mShapeImageUrl;
       }
 
       set
       {
-        if (this.mShapeImageUrl != value)
+        if (mShapeImageUrl != value)
         {
-          this.mShapeImageUrl = value;
-          this.NotifyPropertyChanged(() => this.ShapeImageUrl);
+          mShapeImageUrl = value;
+          NotifyPropertyChanged(() => ShapeImageUrl);
         }
       }
     }
@@ -90,15 +89,15 @@
     {
       get
       {
-        return this.mStereotype;
+        return mStereotype;
       }
 
       set
       {
-        if (this.mStereotype != value)
+        if (mStereotype != value)
         {
-          this.mStereotype = value;
-          this.NotifyPropertyChanged(() => this.Stereotype);
+          mStereotype = value;
+          NotifyPropertyChanged(() => Stereotype);
         }
       }
     }
@@ -126,7 +125,7 @@
       {
         if (ret.ReadAttributes(reader.Name, reader.Value) == false)
         {
-          if (reader.Name.Trim().Length > 0 && reader.Name != UmlShapeBaseViewModel.XmlComment)
+          if (reader.Name.Trim().Length > 0 && reader.Name != XmlComment)
             throw new ArgumentException("XML node:'" + reader.Name + "' as attribute of '" + ret.XElementName + "' is not supported.");
         }
       }
@@ -142,12 +141,12 @@
     /// parameter <paramref name="writer"/> object.
     /// </summary>
     /// <param name="writer"></param>
-    public override void SaveDocument(System.Xml.XmlWriter writer,
+    public override void SaveDocument(XmlWriter writer,
                                       IEnumerable<ShapeViewModelBase> root)
     {
-      writer.WriteStartElement(this.mElementName);
+      writer.WriteStartElement(mElementName);
 
-      this.SaveAttributes(writer);
+      SaveAttributes(writer);
 
       // Save common model information (eg. comments)
       base.SaveDocument(writer);
@@ -167,22 +166,22 @@
     /// Save the attribute values of this class to XML.
     /// </summary>
     /// <param name="writer"></param>
-    protected override void SaveAttributes(System.Xml.XmlWriter writer)
+    protected override void SaveAttributes(XmlWriter writer)
     {
       base.SaveAttributes(writer);
 
-      writer.WriteAttributeString("Stereotype", string.Format("{0}", this.Stereotype));
+      writer.WriteAttributeString("Stereotype", string.Format("{0}", Stereotype));
     }
 
     protected override bool ReadAttributes(string readerName, string readerValue)
     {
-      if (base.ReadAttributes(readerName, readerValue) == true)
+      if (base.ReadAttributes(readerName, readerValue))
         return true;
 
       switch (readerName)
       {
         case "Stereotype":
-          this.Stereotype = readerValue;
+          Stereotype = readerValue;
         return true;
       }
 

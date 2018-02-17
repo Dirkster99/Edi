@@ -25,7 +25,7 @@
     {
       get
       {
-        return new ReadOnlyCollection<PluginModelBase>(PluginManager.mPluginModelColl.Values.ToArray());
+        return new ReadOnlyCollection<PluginModelBase>(mPluginModelColl.Values.ToArray());
       }
     }
 
@@ -36,7 +36,7 @@
     {
       get
       {
-        return PluginManager.mPluginResources;
+        return mPluginResources;
       }
     }
     #endregion properties
@@ -46,7 +46,7 @@
     {
       PluginModelBase o;
 
-      PluginManager.mPluginModelColl.TryGetValue(modelName, out o);
+      mPluginModelColl.TryGetValue(modelName, out o);
 
       return o;
     }
@@ -62,7 +62,7 @@
       {
         if (pluginModel != null)
         {
-          PluginManager.mPluginModelColl.Add(pluginModel.Name, pluginModel);
+          mPluginModelColl.Add(pluginModel.Name, pluginModel);
           return true;
         }
 

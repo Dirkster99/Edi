@@ -33,8 +33,8 @@ namespace ICSharpCode.AvalonEdit.Snippets
 		/// The text to be inserted.
 		/// </summary>
 		public string Text {
-			get { return text; }
-			set { text = value; }
+			get => text;
+		    set => text = value;
 		}
 		
 		/// <inheritdoc/>

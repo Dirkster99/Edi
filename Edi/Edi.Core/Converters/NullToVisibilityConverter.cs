@@ -15,13 +15,8 @@
 		#endregion field
 
 		#region constructor
-		/// <summary>
-		/// Standard Constructor
-		/// </summary>
-		public NullToVisibilityConverter()
-		{
-		}
-		#endregion constructor
+
+	    #endregion constructor
 
 		#region MarkupExtension
 		/// <summary>

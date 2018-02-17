@@ -17,7 +17,6 @@
 // DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Diagnostics;
 using System.Windows.Media.TextFormatting;
 
 namespace ICSharpCode.AvalonEdit.Rendering
@@ -35,10 +34,9 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		
 		public override TextRun GetTextRun(int textSourceCharacterIndex)
 		{
-			if (textSourceCharacterIndex < text.Length)
+		    if (textSourceCharacterIndex < text.Length)
 				return new TextCharacters(text, textSourceCharacterIndex, text.Length - textSourceCharacterIndex, properties);
-			else
-				return new TextEndOfParagraph(1);
+		    return new TextEndOfParagraph(1);
 		}
 		
 		public override int GetTextEffectCharacterIndexFromTextSourceCharacterIndex(int textSourceCharacterIndex)

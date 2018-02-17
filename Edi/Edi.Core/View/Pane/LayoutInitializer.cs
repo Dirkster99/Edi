@@ -2,8 +2,8 @@
 {
     using System;
     using System.Windows;
-    using Edi.Core.Interfaces.Enums;
-    using Edi.Core.ViewModels;
+    using Interfaces.Enums;
+    using ViewModels;
     using Xceed.Wpf.AvalonDock.Layout;
 
     /// <summary>

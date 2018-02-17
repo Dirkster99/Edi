@@ -4,9 +4,7 @@ namespace MiniUML.Model
     using System.IO;
     using System.Reflection;
     using System.Windows;
-    using MiniUML.Model.ViewModels.Document;
-    using MsgBox;
-    using CommonServiceLocator;
+    using ViewModels.Document;
 
     /// <summary>
     /// This class load MiniUML Plug-Ins at run-time from the specified folder.

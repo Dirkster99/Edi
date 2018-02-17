@@ -31,7 +31,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		private WeakLineTracker(TextDocument textDocument, ILineTracker targetTracker)
 		{
 			this.textDocument = textDocument;
-			this.targetObject = new WeakReference(targetTracker);
+			targetObject = new WeakReference(targetTracker);
 		}
 		
 		/// <summary>

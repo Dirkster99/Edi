@@ -18,15 +18,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Threading;
-using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
-using ICSharpCode.AvalonEdit.Rendering;
 
 namespace ICSharpCode.AvalonEdit.Search
 {
@@ -72,14 +66,14 @@ namespace ICSharpCode.AvalonEdit.Search
 		public SearchInputHandler(TextArea textArea)
 			: base(textArea)
 		{
-			RegisterCommands(this.CommandBindings);
+			RegisterCommands(CommandBindings);
 			panel = SearchPanel.Install(textArea);
 		}
 		
 		internal SearchInputHandler(TextArea textArea, SearchPanel panel)
 			: base(textArea)
 		{
-			RegisterCommands(this.CommandBindings);
+			RegisterCommands(CommandBindings);
 			this.panel = panel;
 		}
 		

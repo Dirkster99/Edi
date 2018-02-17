@@ -20,7 +20,7 @@
 		/// </summary>
 		public Msgs()
 		{
-			this.msgs = new List<Msg>();
+			msgs = new List<Msg>();
 		}
 
 		/// <summary>
@@ -29,7 +29,7 @@
 		/// <param name="inTMs"></param>
 		public Msgs(Msgs inTMs)
 		{
-			this.msgs = new List<Msg>(inTMs.msgs);
+			msgs = new List<Msg>(inTMs.msgs);
 		}
 
 		/// <summary>
@@ -37,7 +37,7 @@
 		/// </summary>
 		public Msgs(Msg te)
 		{
-			this.msgs.Add(te);
+			msgs.Add(te);
 		}
 		#endregion Constructors
 
@@ -49,12 +49,12 @@
 		{
 			get
 			{
-				lock (this.syncRoot)
+				lock (syncRoot)
 				{
-					if (this.msgs == null)
+					if (msgs == null)
 						return 0;
 
-					return this.msgs.Count;
+					return msgs.Count;
 				}
 			}
 		}
@@ -63,12 +63,12 @@
 		{
 			get
 			{
-				lock (this.syncRoot)
+				lock (syncRoot)
 				{
-					if (this.msgs == null)
+					if (msgs == null)
 						return new List<Msg>();
 
-					return new List<Msg>(this.msgs);
+					return new List<Msg>(msgs);
 				}
 			}
 		}
@@ -77,42 +77,42 @@
 		#region Methods
 		public void Add(Msg tm)
 		{
-			lock (this.syncRoot)
+			lock (syncRoot)
 			{
 				if (tm == null)
 					return;
 
-				if (this.msgs == null)
-					this.msgs = new List<Msg>();
+				if (msgs == null)
+					msgs = new List<Msg>();
 
-				this.msgs.Add(tm);
+				msgs.Add(tm);
 			}
 		}
 
 		public void Add(string Msg, Msg.MsgCategory cat)
 		{
-			lock (this.syncRoot)
+			lock (syncRoot)
 			{
-				if (this.msgs == null)
-					this.msgs = new List<Msg>();
+				if (msgs == null)
+					msgs = new List<Msg>();
 
-				this.msgs.Add(new Msg(Msg, cat));
+				msgs.Add(new Msg(Msg, cat));
 			}
 		}
 
 		public void Add(Msgs msgColl)
 		{
-			lock (this.syncRoot)
+			lock (syncRoot)
 			{
 				if (msgColl == null)
 					return;
 
-				if (this.msgs == null)
-					this.msgs = new List<Msg>();
+				if (msgs == null)
+					msgs = new List<Msg>();
 
 				foreach (var item in msgColl.msgs)
 				{
-					this.msgs.Add(new Msg(item));
+					msgs.Add(new Msg(item));
 				}
 			}
 		}

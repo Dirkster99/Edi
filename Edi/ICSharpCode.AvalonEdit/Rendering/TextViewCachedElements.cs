@@ -18,7 +18,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Windows.Media;
 using System.Windows.Media.TextFormatting;
 using ICSharpCode.AvalonEdit.Utils;
 

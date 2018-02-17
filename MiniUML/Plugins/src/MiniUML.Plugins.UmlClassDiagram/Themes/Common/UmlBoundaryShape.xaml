@@ -1,19 +1,9 @@
 ﻿<ResourceDictionary
-  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-
-  xmlns:d="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
-  xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-
-  xmlns:controls="clr-namespace:MiniUML.View.Controls;assembly=MiniUML.View"
-  xmlns:shapes="clr-namespace:MiniUML.Plugins.UmlClassDiagram.Controls.View.Shapes"
-  xmlns:designItem="clr-namespace:MiniUML.View.Views.ResizeAdorner;assembly=MiniUML.View"
-
-  xmlns:connect="clr-namespace:MiniUML.Plugins.UmlClassDiagram.Controls.View.Connect"
-
-  xmlns:conv="clr-namespace:MiniUML.Plugins.UmlClassDiagram.Converter"
-  xmlns:viewconv="clr-namespace:MiniUML.View.Converter;assembly=MiniUML.View"
-  >
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shapes="clr-namespace:MiniUML.Plugins.UmlClassDiagram.Controls.View.Shapes"
+    xmlns:conv="clr-namespace:MiniUML.Plugins.UmlClassDiagram.Converter"
+    xmlns:designItem="clr-namespace:MiniUML.View.Views.ResizeAdorner;assembly=MiniUML.View">
   <ResourceDictionary.MergedDictionaries>
     <ResourceDictionary Source="/MiniUML.Plugins.UmlClassDiagram;component/Themes/Brushes.xaml"  />
 

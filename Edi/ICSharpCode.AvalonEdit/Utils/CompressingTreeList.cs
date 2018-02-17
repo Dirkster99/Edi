@@ -53,7 +53,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 			{
 				this.value = value;
 				this.count = count;
-				this.totalCount = count;
+				totalCount = count;
 			}
 			
 			internal Node LeftMost {
@@ -133,8 +133,8 @@ namespace ICSharpCode.AvalonEdit.Utils
 		public CompressingTreeList(IEqualityComparer<T> equalityComparer)
 		{
 			if (equalityComparer == null)
-				throw new ArgumentNullException("equalityComparer");
-			this.comparisonFunc = equalityComparer.Equals;
+				throw new ArgumentNullException(nameof(equalityComparer));
+			comparisonFunc = equalityComparer.Equals;
 		}
 		
 		/// <summary>
@@ -144,9 +144,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		/// function returns true, a single node may be used to store the two values.</param>
 		public CompressingTreeList(Func<T, T, bool> comparisonFunc)
 		{
-			if (comparisonFunc == null)
-				throw new ArgumentNullException("comparisonFunc");
-			this.comparisonFunc = comparisonFunc;
+            this.comparisonFunc = comparisonFunc ?? throw new ArgumentNullException(nameof(comparisonFunc));
 		}
 		#endregion
 		
@@ -157,14 +155,14 @@ namespace ICSharpCode.AvalonEdit.Utils
 		/// </summary>
 		public void InsertRange(int index, int count, T item)
 		{
-			if (index < 0 || index > this.Count)
-				throw new ArgumentOutOfRangeException("index", index, "Value must be between 0 and " + this.Count);
+			if (index < 0 || index > Count)
+				throw new ArgumentOutOfRangeException(nameof(index), index, "Value must be between 0 and " + Count);
 			if (count < 0)
-				throw new ArgumentOutOfRangeException("count", count, "Value must not be negative");
+				throw new ArgumentOutOfRangeException(nameof(count), count, "Value must not be negative");
 			if (count == 0)
 				return;
 			unchecked {
-				if (this.Count + count < 0)
+				if (Count + count < 0)
 					throw new OverflowException("Cannot insert elements: total number of elements must not exceed int.MaxValue.");
 			}
 			
@@ -221,10 +219,10 @@ namespace ICSharpCode.AvalonEdit.Utils
 		/// </summary>
 		public void RemoveRange(int index, int count)
 		{
-			if (index < 0 || index > this.Count)
-				throw new ArgumentOutOfRangeException("index", index, "Value must be between 0 and " + this.Count);
-			if (count < 0 || index + count > this.Count)
-				throw new ArgumentOutOfRangeException("count", count, "0 <= length, index(" + index + ")+count <= " + this.Count);
+			if (index < 0 || index > Count)
+				throw new ArgumentOutOfRangeException(nameof(index), index, "Value must be between 0 and " + Count);
+			if (count < 0 || index + count > Count)
+				throw new ArgumentOutOfRangeException(nameof(count), count, "0 <= length, index(" + index + ")+count <= " + Count);
 			if (count == 0)
 				return;
 			
@@ -323,8 +321,8 @@ namespace ICSharpCode.AvalonEdit.Utils
 		/// </summary>
 		public T this[int index] {
 			get {
-				if (index < 0 || index >= this.Count)
-					throw new ArgumentOutOfRangeException("index", index, "Value must be between 0 and " + (this.Count - 1));
+				if (index < 0 || index >= Count)
+					throw new ArgumentOutOfRangeException(nameof(index), index, "Value must be between 0 and " + (Count - 1));
 				return GetNode(ref index).value;
 			}
 			set {
@@ -345,13 +343,9 @@ namespace ICSharpCode.AvalonEdit.Utils
 			}
 		}
 		
-		bool ICollection<T>.IsReadOnly {
-			get {
-				return false;
-			}
-		}
-		
-		/// <summary>
+		bool ICollection<T>.IsReadOnly => false;
+
+	    /// <summary>
 		/// Gets the index of the specified <paramref name="item"/>.
 		/// </summary>
 		public int IndexOf(T item)
@@ -366,7 +360,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 					n = n.Successor;
 				}
 			}
-			Debug.Assert(index == this.Count);
+			Debug.Assert(index == Count);
 			return -1;
 		}
 		
@@ -376,8 +370,8 @@ namespace ICSharpCode.AvalonEdit.Utils
 		/// </summary>
 		public int GetStartOfRun(int index)
 		{
-			if (index < 0 || index >= this.Count)
-				throw new ArgumentOutOfRangeException("index", index, "Value must be between 0 and " + (this.Count - 1));
+			if (index < 0 || index >= Count)
+				throw new ArgumentOutOfRangeException(nameof(index), index, "Value must be between 0 and " + (Count - 1));
 			int indexInRun = index;
 			GetNode(ref indexInRun);
 			return index - indexInRun;
@@ -390,8 +384,8 @@ namespace ICSharpCode.AvalonEdit.Utils
 		/// </summary>
 		public int GetEndOfRun(int index)
 		{
-			if (index < 0 || index >= this.Count)
-				throw new ArgumentOutOfRangeException("index", index, "Value must be between 0 and " + (this.Count - 1));
+			if (index < 0 || index >= Count)
+				throw new ArgumentOutOfRangeException(nameof(index), index, "Value must be between 0 and " + (Count - 1));
 			int indexInRun = index;
 			int runLength = GetNode(ref indexInRun).count;
 			return index - indexInRun + runLength;
@@ -404,8 +398,8 @@ namespace ICSharpCode.AvalonEdit.Utils
 		          "Use GetStartOfRun/GetEndOfRun instead.")]
 		public int GetRunLength(int index)
 		{
-			if (index < 0 || index >= this.Count)
-				throw new ArgumentOutOfRangeException("index", index, "Value must be between 0 and " + (this.Count - 1));
+			if (index < 0 || index >= Count)
+				throw new ArgumentOutOfRangeException(nameof(index), index, "Value must be between 0 and " + (Count - 1));
 			return GetNode(ref index).count - index;
 		}
 		
@@ -468,7 +462,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		/// </summary>
 		public void Add(T item)
 		{
-			InsertRange(this.Count, 1, item);
+			InsertRange(Count, 1, item);
 		}
 		
 		/// <summary>
@@ -493,11 +487,11 @@ namespace ICSharpCode.AvalonEdit.Utils
 		public void CopyTo(T[] array, int arrayIndex)
 		{
 			if (array == null)
-				throw new ArgumentNullException("array");
-			if (array.Length < this.Count)
-				throw new ArgumentException("The array is too small", "array");
-			if (arrayIndex < 0 || arrayIndex + this.Count > array.Length)
-				throw new ArgumentOutOfRangeException("arrayIndex", arrayIndex, "Value must be between 0 and " + (array.Length - this.Count));
+				throw new ArgumentNullException(nameof(array));
+			if (array.Length < Count)
+				throw new ArgumentException("The array is too small", nameof(array));
+			if (arrayIndex < 0 || arrayIndex + Count > array.Length)
+				throw new ArgumentOutOfRangeException(nameof(arrayIndex), arrayIndex, "Value must be between 0 and " + (array.Length - Count));
 			foreach (T v in this) {
 				array[arrayIndex++] = v;
 			}

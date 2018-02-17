@@ -200,10 +200,8 @@ namespace Edi.Documents.ViewModels.EdiDoc
 				stylesheet = new StringBuilder();
 				return result;
 			}
-			else
-			{
-				return output.ToString();
-			}
+
+		    return output.ToString();
 		}
 
 		void PrintWords(TextWriter writer, HighlightedLine line, string text)

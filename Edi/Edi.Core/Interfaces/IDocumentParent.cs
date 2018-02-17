@@ -1,6 +1,6 @@
 ﻿namespace Edi.Core.Interfaces
 {
-	using Edi.Core.ViewModels;
+	using ViewModels;
 
 	/// <summary>
 	/// A document parent is a viewmodel that holds the collection of documents

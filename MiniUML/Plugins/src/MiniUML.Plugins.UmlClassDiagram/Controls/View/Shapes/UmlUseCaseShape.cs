@@ -1,12 +1,10 @@
 ﻿namespace MiniUML.Plugins.UmlClassDiagram.Controls.View.Shapes
 {
   using System.Windows;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Shapes;
-  using MiniUML.Plugins.UmlClassDiagram.Controls.View.Shapes.Base;
-  using MiniUML.View.Controls;
+  using Model.ViewModels.Shapes;
+  using Base;
 
-  /// <summary>
+    /// <summary>
   /// Interaction logic for UmlUseCaseShape.xaml
   /// </summary>
   public partial class UmlUseCaseShape : ShapeViewBase
@@ -40,7 +38,7 @@
       base.OnApplyTemplate();
 
       // Attach a context menu when the corresponding template is loaded
-      this.ContextMenu = this.CreateContextMenu(this.DataContext as ShapeViewModelBase);
+      ContextMenu = CreateContextMenu(DataContext as ShapeViewModelBase);
     }
     #endregion methods
   }

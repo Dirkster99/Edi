@@ -38,8 +38,8 @@
     /// <param name="item">The content (usually a viewmodel).</param>
     /// <param name="container">The element to which the style will be applied.</param>
     /// <returns>Returns an application-specific style to apply; otherwise, null.</returns>
-    public override System.Windows.Style SelectStyle(object item,
-                                                     System.Windows.DependencyObject container)
+    public override Style SelectStyle(object item,
+                                                     DependencyObject container)
     {
       if (item == null)
         return null;
@@ -59,7 +59,7 @@
       // of using the direct viewmodel <-> style association.
       foreach (var vmItem in _StyleDirectory.Keys)
       {
-          if (t.IsSubclassOf(vmItem) == true)
+          if (t.IsSubclassOf(vmItem))
           {
               _StyleDirectory.TryGetValue(vmItem, out o);
               return o;

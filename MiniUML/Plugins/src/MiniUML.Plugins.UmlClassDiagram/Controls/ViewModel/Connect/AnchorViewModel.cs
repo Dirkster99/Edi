@@ -4,9 +4,9 @@
   using System.Collections.Generic;
   using System.Windows;
   using System.Xml;
-  using MiniUML.Framework;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Shapes;
+  using Framework;
+  using Model.ViewModels;
+  using Model.ViewModels.Shapes;
 
   /// <summary>
   /// This class manages an anchor which can be a thumb that can be dragged on a view.
@@ -55,7 +55,7 @@
     {
       get
       {
-        return ShapeViewModelKeyStrings.GetPresentationStringKey(this.mShapeKey);
+        return ShapeViewModelKeyStrings.GetPresentationStringKey(mShapeKey);
       }
     }
     #endregion properties
@@ -69,9 +69,9 @@
     public override void SaveDocument(XmlWriter writer,
                                       IEnumerable<ShapeViewModelBase> root)
     {
-      writer.WriteStartElement(this.XElementName);
+      writer.WriteStartElement(XElementName);
 
-      this.SaveAttributes(writer);
+      SaveAttributes(writer);
 
       if (root != null)
       {
@@ -103,12 +103,12 @@
     /// Save the attribute values of this class to XML.
     /// </summary>
     /// <param name="writer"></param>
-    private void SaveAttributes(System.Xml.XmlWriter writer)
+    private void SaveAttributes(XmlWriter writer)
     {
-      writer.WriteAttributeString("Name", string.Format("{0}", this.Name));
-      writer.WriteAttributeString("ID", string.Format("{0}", this.ID));
+      writer.WriteAttributeString("Name", string.Format("{0}", Name));
+      writer.WriteAttributeString("ID", string.Format("{0}", ID));
 
-      writer.WriteAttributeString("Position", string.Format("{0},{1}", this.Left, this.Top));
+      writer.WriteAttributeString("Position", string.Format("{0},{1}", Left, Top));
     }
 
     /// <summary>
@@ -122,16 +122,16 @@
       switch (readerName)
       {
         case "Name":
-          this.Name = readerValue;
+          Name = readerValue;
           return true;
 
         case "ID":
-          this.ID = readerValue;
+          ID = readerValue;
           return true;
 
         case "Position":
           double[] size = FrameworkUtilities.GetDoubleAttributes(readerValue, 2, new double[] { 100, 100 });
-          this.Position = new Point(size[0], size[1]);
+          Position = new Point(size[0], size[1]);
           return true;
 
         case "xmlns":

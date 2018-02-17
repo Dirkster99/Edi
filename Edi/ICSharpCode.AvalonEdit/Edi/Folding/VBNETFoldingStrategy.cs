@@ -1,13 +1,9 @@
 ﻿namespace ICSharpCode.AvalonEdit.Edi.Folding
 {
-  using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.Data;
-  using System.Linq;
-  using System.Diagnostics;
-  using ICSharpCode.AvalonEdit.Folding;
-  using ICSharpCode.AvalonEdit.Document;
+    using System.Collections.Generic;
+    using System.Linq;
+    using AvalonEdit.Folding;
+  using Document;
 
   /// <summary>
   /// Folding Strategy for Visual Basic

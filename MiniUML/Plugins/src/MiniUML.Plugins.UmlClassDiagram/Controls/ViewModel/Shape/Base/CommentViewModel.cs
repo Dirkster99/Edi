@@ -1,8 +1,10 @@
+using static System.String;
+
 namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base
 {
   using System;
   using System.Xml;
-  using MiniUML.Framework;
+  using Framework;
 
   /// <summary>
   /// This class manages text and header elements that can be used to create
@@ -26,7 +28,7 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base
     /// </summary>
     public CommentViewModel()
     {
-      this.mText = this.mTitle = string.Empty;
+      mText = mTitle = Empty;
     }
     #endregion constructor
 
@@ -36,17 +38,14 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base
     /// </summary>
     public string Text
     {
-      get
+      get => mText;
+
+        set
       {
-        return this.mText;
-      }
-      
-      set
-      {
-        if (this.mText != value)
+        if (mText != value)
         {
-          this.mText = value;
-          this.NotifyPropertyChanged(() => this.Text);
+          mText = value;
+          NotifyPropertyChanged(() => Text);
         }
       }
     }
@@ -56,17 +55,14 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base
     /// </summary>
     public string Title
     {
-      get
-      {
-        return this.mTitle;
-      }
+      get => mTitle;
 
-      set
+        set
       {
-        if (this.mTitle != value)
+        if (mTitle != value)
         {
-          this.mTitle = value;
-          this.NotifyPropertyChanged(() => this.Title);
+          mTitle = value;
+          NotifyPropertyChanged(() => Title);
         }
       }
     }
@@ -87,7 +83,7 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base
       {
         if (ret.ReadAttributes(reader.Name, reader.Value))
         {
-          if (reader.Name.Trim().Length > 0 && reader.Name != CommentViewModel.XmlComment && reader.Name != "xmlns")
+          if (reader.Name.Trim().Length > 0 && reader.Name != XmlComment && reader.Name != "xmlns")
             throw new ArgumentException("XML node:'" + reader.Name + "' as child of '" + Comment_TAG + "' is not supported.");
         }
       }
@@ -95,30 +91,29 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base
       ret.Text = reader.ReadString();
 
       // Set of comment tags is optional - so we read this only if there is content to read
-      if (string.IsNullOrEmpty(ret.Text) == true &&
-          string.IsNullOrEmpty(ret.Title) == true)
+      if (IsNullOrEmpty(ret.Text) &&
+          IsNullOrEmpty(ret.Title))
         return null;
 
       return ret;
     }
 
-    /// <summary>
-    /// Save a string in an Text Xml tag into the <paramref name="writer"/> parameter.
-    /// </summary>
-    /// <param name="writer"></param>
-    /// <param name="text"></param>
-    public void SaveDocument(System.Xml.XmlWriter writer)
+      /// <summary>
+      /// Save a string in an Text Xml tag into the <paramref name="writer"/> parameter.
+      /// </summary>
+      /// <param name="writer"></param>
+      public void SaveDocument(XmlWriter writer)
     {
       // Set of comment tags is optional - so we write this only if there is content to write
-      if (string.IsNullOrEmpty(this.mText) == true &&
-          string.IsNullOrEmpty(this.mTitle) == true)
+      if (IsNullOrEmpty(mText) &&
+          IsNullOrEmpty(mTitle))
         return;
 
       writer.WriteStartElement(Comment_TAG);
 
-      this.SaveAttributes(writer);
+      SaveAttributes(writer);
 
-      writer.WriteString(this.mText);   // Write text string as content of this tag
+      writer.WriteString(mText);   // Write text string as content of this tag
       writer.WriteEndElement();
     }
 
@@ -126,10 +121,10 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base
     /// Save the attribute values of this class to XML.
     /// </summary>
     /// <param name="writer"></param>
-    protected virtual void SaveAttributes(System.Xml.XmlWriter writer)
+    protected virtual void SaveAttributes(XmlWriter writer)
     {
-      if (string.IsNullOrEmpty(this.mTitle) == false)
-        writer.WriteAttributeString("Title", this.Title);
+      if (IsNullOrEmpty(mTitle) == false)
+        writer.WriteAttributeString("Title", Title);
     }
 
     /// <summary>
@@ -143,7 +138,7 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base
       switch (readerName)
       {
         case "Title":
-          this.mTitle = readerValue;
+          mTitle = readerValue;
           return true;
 
         case "xmlns":

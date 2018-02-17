@@ -4,7 +4,7 @@
   using System.Windows.Controls;
   using System.Windows.Documents;
   using System.Windows.Media;
-  using MiniUML.Model.Events;
+  using Model.Events;
 
   /// <summary>
   /// The resize adorner is a ContentControl that can host a number of different
@@ -30,11 +30,11 @@
                          DragDeltaThumbEventHandler dragDeltaAction_DelegateFunction = null)
       : base(designerItem)
     {
-      this.mChrome = new ResizeChrome(dragDeltaAction_DelegateFunction);
-      this.mVisuals = new VisualCollection(this);
+      mChrome = new ResizeChrome(dragDeltaAction_DelegateFunction);
+      mVisuals = new VisualCollection(this);
 
-      this.mVisuals.Add(this.mChrome);
-      this.mChrome.DataContext = designerItem;  // Apply data context from this object to chrome object
+      mVisuals.Add(mChrome);
+      mChrome.DataContext = designerItem;  // Apply data context from this object to chrome object
     }
     #endregion constructor
 
@@ -43,7 +43,7 @@
     {
       get
       {
-        return this.mVisuals.Count;
+        return mVisuals.Count;
       }
     }
     #endregion properties
@@ -65,7 +65,7 @@
     /// <returns><seealso cref="Size"/></returns>
     protected override Size ArrangeOverride(Size arrangeBounds)
     {
-      this.mChrome.Arrange(new Rect(arrangeBounds));
+      mChrome.Arrange(new Rect(arrangeBounds));
 
       return arrangeBounds;
     }
@@ -85,7 +85,7 @@
     /// <returns></returns>
     protected override Visual GetVisualChild(int index)
     {
-      return this.mVisuals[index];
+      return mVisuals[index];
     }
     #endregion methods
   }

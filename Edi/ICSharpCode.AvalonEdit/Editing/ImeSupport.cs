@@ -18,20 +18,9 @@
 
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Security;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.TextFormatting;
-using ICSharpCode.AvalonEdit;
-using ICSharpCode.AvalonEdit.Document;
-using ICSharpCode.AvalonEdit.Rendering;
 
 namespace ICSharpCode.AvalonEdit.Editing
 {
@@ -47,9 +36,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		
 		public ImeSupport(TextArea textArea)
 		{
-			if (textArea == null)
-				throw new ArgumentNullException("textArea");
-			this.textArea = textArea;
+            this.textArea = textArea ?? throw new ArgumentNullException(nameof(textArea));
 			InputMethod.SetIsInputMethodSuspended(this.textArea, textArea.Options.EnableImeSupport);
 			// We listen to CommandManager.RequerySuggested for both caret offset changes and changes to the set of read-only sections.
 			// This is because there's no dedicated event for read-only section changes; but RequerySuggested needs to be raised anyways
@@ -67,7 +54,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		void TextAreaOptionChanged(object sender, PropertyChangedEventArgs e)
 		{
 			if (e.PropertyName == "EnableImeSupport") {
-				InputMethod.SetIsInputMethodSuspended(this.textArea, textArea.Options.EnableImeSupport);
+				InputMethod.SetIsInputMethodSuspended(textArea, textArea.Options.EnableImeSupport);
 				UpdateImeEnabled();
 			}
 		}
@@ -116,17 +103,17 @@ namespace ICSharpCode.AvalonEdit.Editing
 		
 		void CreateContext()
 		{
-            if (this.textArea == null)
+            if (textArea == null)
                 return;
 
             //Dirkster99 BugFix
-            if (this.textArea.Options == null)
+            if (textArea.Options == null)
                 return;
             ////
             ////if (!textArea.Options.EnableImeSupport)
             ////    return;
 
-            hwndSource = (HwndSource)PresentationSource.FromVisual(this.textArea);
+            hwndSource = (HwndSource)PresentationSource.FromVisual(textArea);
 			if (hwndSource != null) {
 				if (isReadOnly) {
 					defaultImeWnd = IntPtr.Zero;

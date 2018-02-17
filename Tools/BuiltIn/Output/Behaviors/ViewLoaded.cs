@@ -1,11 +1,6 @@
 ﻿namespace Output.Behaviors
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
-	using System.Windows;
+    using System.Windows;
 	using System.Windows.Input;
 
 	/// <summary>
@@ -19,7 +14,7 @@
 				DependencyProperty.RegisterAttached("Command",
 				                                    typeof(ICommand),
 																						typeof(ViewLoaded),
-																						new PropertyMetadata(null, ViewLoaded.OnCommandChanged));
+																						new PropertyMetadata(null, OnCommandChanged));
 		#endregion fields
 
 		#region methods
@@ -61,7 +56,7 @@
 			if (uiElement == null)
 				return;
 
-			ICommand loadedCommand = ViewLoaded.GetCommand(uiElement);
+			ICommand loadedCommand = GetCommand(uiElement);
 
 			// There may not be a command bound to this after all
 			if (loadedCommand == null)

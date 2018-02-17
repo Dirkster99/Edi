@@ -46,7 +46,7 @@
 			{
 				try
 				{
-					window.SourceInitialized += new System.EventHandler(window_SourceInitialized);
+					window.SourceInitialized += new EventHandler(window_SourceInitialized);
 				}
 				catch
 				{
@@ -54,7 +54,7 @@
 			}
 		}
 
-		private static void window_SourceInitialized(object sender, System.EventArgs e)
+		private static void window_SourceInitialized(object sender, EventArgs e)
 		{
 			if (sender != null)
 			{

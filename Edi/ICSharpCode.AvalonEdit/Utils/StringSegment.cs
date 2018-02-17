@@ -26,24 +26,20 @@ namespace ICSharpCode.AvalonEdit.Utils
 	/// </summary>
 	public struct StringSegment : IEquatable<StringSegment>
 	{
-		readonly string text;
-		readonly int offset;
-		readonly int count;
-		
-		/// <summary>
+	    /// <summary>
 		/// Creates a new StringSegment.
 		/// </summary>
 		public StringSegment(string text, int offset, int count)
 		{
 			if (text == null)
-				throw new ArgumentNullException("text");
+				throw new ArgumentNullException(nameof(text));
 			if (offset < 0 || offset > text.Length)
-				throw new ArgumentOutOfRangeException("offset");
+				throw new ArgumentOutOfRangeException(nameof(offset));
 			if (offset + count > text.Length)
-				throw new ArgumentOutOfRangeException("count");
-			this.text = text;
-			this.offset = offset;
-			this.count = count;
+				throw new ArgumentOutOfRangeException(nameof(count));
+			this.Text = text;
+			this.Offset = offset;
+			this.Count = count;
 		}
 		
 		/// <summary>
@@ -51,35 +47,27 @@ namespace ICSharpCode.AvalonEdit.Utils
 		/// </summary>
 		public StringSegment(string text)
 		{
-			if (text == null)
-				throw new ArgumentNullException("text");
-			this.text = text;
-			this.offset = 0;
-			this.count = text.Length;
+            this.Text = text ?? throw new ArgumentNullException(nameof(text));
+			Offset = 0;
+			Count = text.Length;
 		}
 		
 		/// <summary>
 		/// Gets the string used for this segment.
 		/// </summary>
-		public string Text {
-			get { return text; }
-		}
-		
-		/// <summary>
+		public string Text { get; }
+
+	    /// <summary>
 		/// Gets the start offset of the segment with the text.
 		/// </summary>
-		public int Offset {
-			get { return offset; }
-		}
-		
-		/// <summary>
+		public int Offset { get; }
+
+	    /// <summary>
 		/// Gets the length of the segment.
 		/// </summary>
-		public int Count {
-			get { return count; }
-		}
-		
-		#region Equals and GetHashCode implementation
+		public int Count { get; }
+
+	    #region Equals and GetHashCode implementation
 		/// <inheritdoc/>
 		public override bool Equals(object obj)
 		{
@@ -93,13 +81,13 @@ namespace ICSharpCode.AvalonEdit.Utils
 		public bool Equals(StringSegment other)
 		{
 			// add comparisions for all members here
-			return object.ReferenceEquals(this.text, other.text) && offset == other.offset && count == other.count;
+			return ReferenceEquals(Text, other.Text) && Offset == other.Offset && Count == other.Count;
 		}
 		
 		/// <inheritdoc/>
 		public override int GetHashCode()
 		{
-			return text.GetHashCode() ^ offset ^ count;
+			return Text.GetHashCode() ^ Offset ^ Count;
 		}
 		
 		/// <summary>

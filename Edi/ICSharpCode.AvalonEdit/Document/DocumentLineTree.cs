@@ -113,10 +113,9 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		internal static int GetTreeHeight(int size)
 		{
-			if (size == 0)
+		    if (size == 0)
 				return 0;
-			else
-				return GetTreeHeight(size / 2) + 1;
+		    return GetTreeHeight(size / 2) + 1;
 		}
 		
 		/// <summary>
@@ -227,12 +226,9 @@ namespace ICSharpCode.AvalonEdit.Document
 		#endregion
 		
 		#region LineCount
-		public int LineCount {
-			get {
-				return root.nodeTotalCount;
-			}
-		}
-		#endregion
+		public int LineCount => root.nodeTotalCount;
+
+	    #endregion
 		
 		#region CheckProperties
 		#if DEBUG
@@ -334,10 +330,12 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		public DocumentLine InsertLineAfter(DocumentLine line, int totalLength)
 		{
-			DocumentLine newLine = new DocumentLine(document);
-			newLine.TotalLength = totalLength;
-			
-			InsertAfter(line, newLine);
+            DocumentLine newLine = new DocumentLine(document)
+            {
+                TotalLength = totalLength
+            };
+
+            InsertAfter(line, newLine);
 			return newLine;
 		}
 		
@@ -603,10 +601,9 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		static LineNode Sibling(LineNode node)
 		{
-			if (node == node.parent.left)
+		    if (node == node.parent.left)
 				return node.parent.right;
-			else
-				return node.parent.left;
+		    return node.parent.left;
 		}
 		
 		static LineNode Sibling(LineNode node, LineNode parentNode)
@@ -614,8 +611,7 @@ namespace ICSharpCode.AvalonEdit.Document
 			Debug.Assert(node == null || node.parent == parentNode);
 			if (node == parentNode.left)
 				return parentNode.right;
-			else
-				return parentNode.left;
+		    return parentNode.left;
 		}
 		
 		static bool GetColor(LineNode node)
@@ -630,9 +626,7 @@ namespace ICSharpCode.AvalonEdit.Document
 				document.VerifyAccess();
 				return GetByNumber(1 + index);
 			}
-			set {
-				throw new NotSupportedException();
-			}
+			set => throw new NotSupportedException();
 		}
 		
 		int ICollection<DocumentLine>.Count {
@@ -642,11 +636,9 @@ namespace ICSharpCode.AvalonEdit.Document
 			}
 		}
 		
-		bool ICollection<DocumentLine>.IsReadOnly {
-			get { return true; }
-		}
-		
-		int IList<DocumentLine>.IndexOf(DocumentLine item)
+		bool ICollection<DocumentLine>.IsReadOnly => true;
+
+	    int IList<DocumentLine>.IndexOf(DocumentLine item)
 		{
 			document.VerifyAccess();
 			if (item == null || item.IsDeleted)
@@ -654,8 +646,7 @@ namespace ICSharpCode.AvalonEdit.Document
 			int index = item.LineNumber - 1;
 			if (index < LineCount && GetNodeByIndex(index) == item)
 				return index;
-			else
-				return -1;
+		    return -1;
 		}
 		
 		void IList<DocumentLine>.Insert(int index, DocumentLine item)
@@ -687,11 +678,11 @@ namespace ICSharpCode.AvalonEdit.Document
 		void ICollection<DocumentLine>.CopyTo(DocumentLine[] array, int arrayIndex)
 		{
 			if (array == null)
-				throw new ArgumentNullException("array");
+				throw new ArgumentNullException(nameof(array));
 			if (array.Length < LineCount)
-				throw new ArgumentException("The array is too small", "array");
+				throw new ArgumentException("The array is too small", nameof(array));
 			if (arrayIndex < 0 || arrayIndex + LineCount > array.Length)
-				throw new ArgumentOutOfRangeException("arrayIndex", arrayIndex, "Value must be between 0 and " + (array.Length - LineCount));
+				throw new ArgumentOutOfRangeException(nameof(arrayIndex), arrayIndex, "Value must be between 0 and " + (array.Length - LineCount));
 			foreach (DocumentLine ls in this) {
 				array[arrayIndex++] = ls;
 			}
@@ -720,7 +711,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
 		{
-			return this.GetEnumerator();
+			return GetEnumerator();
 		}
 		#endregion
 	}

@@ -1,8 +1,8 @@
 ﻿namespace Edi.Settings.Interfaces
 {
-	using Edi.Settings.ProgramSettings;
-	using Edi.Settings.UserProfile;
-	using Edi.Themes.Interfaces;
+	using ProgramSettings;
+	using UserProfile;
+	using Themes.Interfaces;
 
 	public interface ISettingsManager
 	{

@@ -38,7 +38,7 @@
 			else
 				memberExpression = (MemberExpression)lambda.Body;
 
-			this.RaisePropertyChanged(memberExpression.Member.Name);
+			RaisePropertyChanged(memberExpression.Member.Name);
 		}
 	}
 }

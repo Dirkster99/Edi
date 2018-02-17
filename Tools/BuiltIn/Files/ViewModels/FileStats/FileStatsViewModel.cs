@@ -10,7 +10,7 @@ namespace Files.ViewModels.FileStats
 	/// This class can be used to present file based information, such as,
 	/// Size, Path etc to the user.
 	/// </summary>
-	public class FileStatsViewModel : Edi.Core.ViewModels.ToolViewModel, IRegisterableToolWindow
+	public class FileStatsViewModel : ToolViewModel, IRegisterableToolWindow
 	{
 		#region fields
 		public const string ToolContentId = "<FileStatsTool>";
@@ -25,11 +25,11 @@ namespace Files.ViewModels.FileStats
 		/// Class constructor
 		/// </summary>
 		public FileStatsViewModel()
-			: base(FileStatsViewModel.ToolName)
+			: base(ToolName)
 		{
-			ContentId = FileStatsViewModel.ToolContentId;
+			ContentId = ToolContentId;
 
-			this.OnActiveDocumentChanged(null, null);
+			OnActiveDocumentChanged(null, null);
 		}
 		#endregion constructor
 
@@ -73,12 +73,12 @@ namespace Files.ViewModels.FileStats
 		{
 			get
 			{
-				if (string.IsNullOrEmpty(this.mFilePathName) == true)
+				if (string.IsNullOrEmpty(mFilePathName))
 					return string.Empty;
 
 				try
 				{
-					return System.IO.Path.GetFileName(mFilePathName);
+					return Path.GetFileName(mFilePathName);
 				}
 				catch (Exception)
 				{
@@ -93,12 +93,12 @@ namespace Files.ViewModels.FileStats
 		{
 			get
 			{
-				if (string.IsNullOrEmpty(this.mFilePathName) == true)
+				if (string.IsNullOrEmpty(mFilePathName))
 					return string.Empty;
 
 				try
 				{
-					return System.IO.Path.GetDirectoryName(mFilePathName);
+					return Path.GetDirectoryName(mFilePathName);
 				}
 				catch (Exception)
 				{
@@ -133,15 +133,15 @@ namespace Files.ViewModels.FileStats
 		public void SetDocumentParent(IDocumentParent parent)
 		{
 			if (parent != null)
-				parent.ActiveDocumentChanged -= this.OnActiveDocumentChanged;
+				parent.ActiveDocumentChanged -= OnActiveDocumentChanged;
 
-			this.mParent = parent;
+			mParent = parent;
 
 			// Check if active document is a log4net document to display data for...
-			if (this.mParent != null)
-				parent.ActiveDocumentChanged += new DocumentChangedEventHandler(this.OnActiveDocumentChanged);
+			if (mParent != null)
+				parent.ActiveDocumentChanged += new DocumentChangedEventHandler(OnActiveDocumentChanged);
 			else
-				this.OnActiveDocumentChanged(null, null);
+				OnActiveDocumentChanged(null, null);
 		}
 
 		/// <summary>
@@ -154,17 +154,17 @@ namespace Files.ViewModels.FileStats
 		public void SetToolWindowVisibility(IDocumentParent parent,
 																				bool isVisible = true)
 		{
-			if (IsVisible == true)
-				this.SetDocumentParent(parent);
+			if (IsVisible)
+				SetDocumentParent(parent);
 			else
-				this.SetDocumentParent(null);
+				SetDocumentParent(null);
 
 			base.SetToolWindowVisibility(isVisible);
 		}
 
 		private void OnActiveDocumentChanged(object sender, DocumentChangedEventArgs e)
 		{
-			this.mFilePathName = string.Empty;
+			mFilePathName = string.Empty;
 			FileSize = 0;
 			LastModified = DateTime.MinValue;
 
@@ -177,14 +177,14 @@ namespace Files.ViewModels.FileStats
                     {
                         FileBaseViewModel f = e.ActiveDocument as FileBaseViewModel;
 
-                        if (File.Exists(f.FilePath) == true)
+                        if (File.Exists(f.FilePath))
                         {
                             var fi = new FileInfo(f.FilePath);
 
-                            this.mFilePathName = f.FilePath;
+                            mFilePathName = f.FilePath;
 
-                            this.RaisePropertyChanged(() => this.FileName);
-                            this.RaisePropertyChanged(() => this.FilePath);
+                            RaisePropertyChanged(() => FileName);
+                            RaisePropertyChanged(() => FilePath);
 
                             FileSize = fi.Length;
                             LastModified = fi.LastWriteTime;

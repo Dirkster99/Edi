@@ -11,46 +11,33 @@
   {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-      if (value == null)
-        return Visibility.Collapsed;
-
-      if (value is string)
-      {
-        if (value != null)
+        if (value == null)
         {
-          string s = (string)value;
+            return Visibility.Collapsed;
+        }
 
-          if (s == "true")
-            return Visibility.Visible;
-          else
-          {
+        if (value is string s)
+        {
+            if (s == "true")
+                return Visibility.Visible;
             if (s == "false")
             {
-              return Visibility.Collapsed;
+                return Visibility.Collapsed;
             }
-          }
         }
-      }
+        else if (value is bool _)
+        {
+            var b = (bool) value;
 
-      if (value is bool)
-      {
-        bool b = (bool)value;
+            return b ? Visibility.Visible : Visibility.Collapsed;
+        }
 
-        if (b == true)
-          return Visibility.Visible;
-        else
-          return Visibility.Collapsed;
-      }
-
-      return Visibility.Collapsed;
+        return Visibility.Collapsed;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-      if (value == null)
-        return string.Empty;
-
-      return value;
+        return value ?? string.Empty;
     }
   }
 }

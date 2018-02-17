@@ -19,7 +19,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -126,7 +125,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 			if (textArea != null && textArea.Document != null) {
 				args.Handled = true;
 				textArea.Caret.Offset = textArea.Document.TextLength;
-				textArea.Selection = SimpleSelection.Create(textArea, 0, textArea.Document.TextLength);
+				textArea.Selection = Selection.Create(textArea, 0, textArea.Document.TextLength);
 			}
 		}
 		

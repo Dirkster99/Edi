@@ -36,7 +36,7 @@
     public static void SetCommands(DependencyObject dependencyObject, params CommandModel[] commandModels)
     {
       if (dependencyObject == null)
-        throw new ArgumentNullException("dependencyObject");
+        throw new ArgumentNullException(nameof(dependencyObject));
 
       UIElement element = (UIElement)dependencyObject;
 
@@ -60,7 +60,7 @@
     private static void OnCommandInvalidated(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
     {
       if (dependencyObject == null)
-        throw new ArgumentNullException("dependencyObject");
+        throw new ArgumentNullException(nameof(dependencyObject));
 
       UIElement element = (UIElement)dependencyObject;
 

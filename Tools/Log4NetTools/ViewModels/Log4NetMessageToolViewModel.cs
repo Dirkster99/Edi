@@ -26,10 +26,10 @@
 			: base("Log4Net Messages")
 		{
 			// Check if active document is a log4net document to display data for...
-			this.OnActiveDocumentChanged(null, null);
+			OnActiveDocumentChanged(null, null);
 
 			////Workspace.This.ActiveDocumentChanged += new EventHandler(OnActiveDocumentChanged);
-			this.ContentId = ToolContentId;
+			ContentId = ToolContentId;
 		}
 		#endregion constructor
 
@@ -46,16 +46,16 @@
 		{
 			get
 			{
-				return this.mLog4NetVM;
+				return mLog4NetVM;
 			}
 
 			set
 			{
-				if (this.mLog4NetVM != value)
+				if (mLog4NetVM != value)
 				{
-					this.mLog4NetVM = value;
-					this.RaisePropertyChanged(() => this.Log4NetVM);
-					this.RaisePropertyChanged(() => this.IsOnline);
+					mLog4NetVM = value;
+					RaisePropertyChanged(() => Log4NetVM);
+					RaisePropertyChanged(() => IsOnline);
 				}
 			}
 		}
@@ -64,7 +64,7 @@
 		{
 			get
 			{
-				return (this.Log4NetVM != null);
+				return (Log4NetVM != null);
 			}
 		}
 
@@ -83,15 +83,15 @@
 		public void SetDocumentParent(IDocumentParent parent)
 		{
 			if (parent != null)
-				parent.ActiveDocumentChanged -= this.OnActiveDocumentChanged;
+				parent.ActiveDocumentChanged -= OnActiveDocumentChanged;
 
-			this.mParent = parent;
+			mParent = parent;
 
 			// Check if active document is a log4net document to display data for...
-			if (this.mParent != null)
-				parent.ActiveDocumentChanged += new DocumentChangedEventHandler(this.OnActiveDocumentChanged);
+			if (mParent != null)
+				parent.ActiveDocumentChanged += new DocumentChangedEventHandler(OnActiveDocumentChanged);
 			else
-				this.OnActiveDocumentChanged(null, null);
+				OnActiveDocumentChanged(null, null);
 		}
 
 		/// <summary>
@@ -104,10 +104,10 @@
 		public void SetToolWindowVisibility(IDocumentParent parent,
 																				bool isVisible = true)
 		{
-			if (IsVisible == true)
-				this.SetDocumentParent(parent);
+			if (IsVisible)
+				SetDocumentParent(parent);
 			else
-				this.SetDocumentParent(null);
+				SetDocumentParent(null);
 
 			base.SetToolWindowVisibility(isVisible);
 		}
@@ -129,15 +129,15 @@
                     if (e.ActiveDocument is Log4NetViewModel)
                     {
                         Log4NetViewModel log4NetVM = e.ActiveDocument as Log4NetViewModel;
-                        this.Log4NetVM = log4NetVM;  // There is an active Log4Net document -> display corresponding content
+                        Log4NetVM = log4NetVM;  // There is an active Log4Net document -> display corresponding content
                     }
                     else
-                        this.Log4NetVM = null;
+                        Log4NetVM = null;
                 }
 			}
 			else // There is no active document hence we do not have corresponding content to display
 			{
-				this.Log4NetVM = null;
+				Log4NetVM = null;
 			}
 		}
 		#endregion methods

@@ -6,7 +6,7 @@
 	using System.Windows.Controls;
 	using System.Windows.Input;
 	using System.Windows.Threading;
-	using Edi.Apps.Events;
+	using Events;
 	using Xceed.Wpf.AvalonDock;
 	using Xceed.Wpf.AvalonDock.Layout;
 	using Xceed.Wpf.AvalonDock.Layout.Serialization;
@@ -46,7 +46,7 @@
 		public AvalonDockView()
 		{
 			//// this.InitializeComponent();
-			this.LayoutID = Guid.NewGuid();
+			LayoutID = Guid.NewGuid();
 		}
 		#endregion constructor
 
@@ -69,7 +69,7 @@
 		{
 			get
 			{
-				if (this.mDockManager == null)
+				if (mDockManager == null)
 					return String.Empty;
 
 				string xmlLayoutString = string.Empty;
@@ -77,7 +77,7 @@
 				{
 					using (StringWriter fs = new StringWriter())
 					{
-						XmlLayoutSerializer xmlLayout = new XmlLayoutSerializer(this.mDockManager);
+						XmlLayoutSerializer xmlLayout = new XmlLayoutSerializer(mDockManager);
 
 						xmlLayout.Serialize(fs);
 
@@ -101,9 +101,9 @@
 		{
 			base.OnApplyTemplate();
 
-			this.mDockManager = this.Template.FindName("PART_DockView", this) as DockingManager;
+			mDockManager = Template.FindName("PART_DockView", this) as DockingManager;
 
-			this.SetCustomLayoutItems();
+			SetCustomLayoutItems();
 			////this.LoadXmlLayout(this.mOnLoadXmlLayout);
 		}
 
@@ -123,16 +123,16 @@
 															Guid layoutID
 															)
 		{
-			this.mLayoutItemTemplateSelector = paneSel;
-			this.mDocumentHeaderTemplate = documentHeaderTemplate;
-			this.mLayoutItemContainerStyleSelector = panesStyleSelector;
-			this.mLayoutUpdateStrategy = layoutInitializer;
-			this.LayoutID = layoutID;
+			mLayoutItemTemplateSelector = paneSel;
+			mDocumentHeaderTemplate = documentHeaderTemplate;
+			mLayoutItemContainerStyleSelector = panesStyleSelector;
+			mLayoutUpdateStrategy = layoutInitializer;
+			LayoutID = layoutID;
 
-			if (this.mDockManager == null)
+			if (mDockManager == null)
 				return;
 
-			this.SetCustomLayoutItems();
+			SetCustomLayoutItems();
 		}
 
 		#region Workspace Layout Management
@@ -149,15 +149,15 @@
 			if (args == null)
 				return;
 
-			if (string.IsNullOrEmpty(args.XmlLayout) == true)
+			if (string.IsNullOrEmpty(args.XmlLayout))
 				return;
 
-			this.mOnLoadXmlLayout = args.XmlLayout;
+			mOnLoadXmlLayout = args.XmlLayout;
 
-			if (this.mDockManager == null)
+			if (mDockManager == null)
 				return;
 
-			this.LoadXmlLayout(this.mOnLoadXmlLayout);
+			LoadXmlLayout(mOnLoadXmlLayout);
 		}
 
 		private void LoadXmlLayout(string xmlLayout)
@@ -172,8 +172,8 @@
 				{
 					try
 					{
-						layoutSerializer = new XmlLayoutSerializer(this.mDockManager);
-						layoutSerializer.LayoutSerializationCallback += this.UpdateLayout;
+						layoutSerializer = new XmlLayoutSerializer(mDockManager);
+						layoutSerializer.LayoutSerializationCallback += UpdateLayout;
 						layoutSerializer.Deserialize(sr);
 					}
 					catch (Exception exp)
@@ -202,9 +202,9 @@
 		{
 			try
 			{
-				Edi.Core.Interfaces.IViewModelResolver resolver = null;
+				Core.Interfaces.IViewModelResolver resolver = null;
 
-				resolver = this.DataContext as Edi.Core.Interfaces.IViewModelResolver;
+				resolver = DataContext as Core.Interfaces.IViewModelResolver;
 
 				if (resolver == null)
 					return;
@@ -230,20 +230,20 @@
 		/// </summary>
 		private void SetCustomLayoutItems()
 		{
-			if (this.mDockManager == null)
+			if (mDockManager == null)
 				return;
 
-			if (this.mLayoutItemTemplateSelector != null)
-				this.mDockManager.LayoutItemTemplateSelector = this.mLayoutItemTemplateSelector;
+			if (mLayoutItemTemplateSelector != null)
+				mDockManager.LayoutItemTemplateSelector = mLayoutItemTemplateSelector;
 
-			if (this.mDocumentHeaderTemplate != null)
-				this.mDockManager.DocumentHeaderTemplate = this.mDocumentHeaderTemplate;
+			if (mDocumentHeaderTemplate != null)
+				mDockManager.DocumentHeaderTemplate = mDocumentHeaderTemplate;
 
-			if (this.mLayoutItemContainerStyleSelector != null)
-				this.mDockManager.LayoutItemContainerStyleSelector = this.mLayoutItemContainerStyleSelector;
+			if (mLayoutItemContainerStyleSelector != null)
+				mDockManager.LayoutItemContainerStyleSelector = mLayoutItemContainerStyleSelector;
 
-			if (this.mLayoutUpdateStrategy != null)
-				this.mDockManager.LayoutUpdateStrategy = this.mLayoutUpdateStrategy;
+			if (mLayoutUpdateStrategy != null)
+				mDockManager.LayoutUpdateStrategy = mLayoutUpdateStrategy;
 		}
 		#endregion methods
 

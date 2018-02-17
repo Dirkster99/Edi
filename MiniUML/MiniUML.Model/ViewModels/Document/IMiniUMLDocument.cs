@@ -6,6 +6,6 @@
   /// </summary>
   public interface IMiniUMLDocument
   {
-    MiniUML.Model.ViewModels.Document.AbstractDocumentViewModel vm_DocumentViewModel { get; }
+    AbstractDocumentViewModel vm_DocumentViewModel { get; }
   }
 }

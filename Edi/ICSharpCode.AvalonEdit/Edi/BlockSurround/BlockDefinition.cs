@@ -23,13 +23,13 @@
                          System.Windows.Input.ModifierKeys modifier = 0)
       : this()
     {
-      this.TypeOfBlock = typeOfBlock;
-      this.StartBlock = blockstart;
-      this.EndBlock = blockend;
-      this.FileExtension = fileextension;
+      TypeOfBlock = typeOfBlock;
+      StartBlock = blockstart;
+      EndBlock = blockend;
+      FileExtension = fileextension;
 
-      this.Key = key;
-      this.Modifier = modifier;
+      Key = key;
+      Modifier = modifier;
     }
 
     /// <summary>
@@ -39,11 +39,11 @@
     /// <returns></returns>
     protected BlockDefinition()
     {
-      this.TypeOfBlock = BlockAt.StartAndEnd;
-      this.StartBlock = this.EndBlock = this.FileExtension = string.Empty;
+      TypeOfBlock = BlockAt.StartAndEnd;
+      StartBlock = EndBlock = FileExtension = string.Empty;
 
-      this.Key = System.Windows.Input.Key.D1;
-      this.Modifier = System.Windows.Input.ModifierKeys.Control;
+      Key = System.Windows.Input.Key.D1;
+      Modifier = System.Windows.Input.ModifierKeys.Control;
     }
     #endregion constructor
 

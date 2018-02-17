@@ -1,7 +1,5 @@
 namespace Edi.Core.Resources
 {
-    using CommonServiceLocator;
-    using MsgBox;
     using System;
     using System.Linq;
     using System.Windows;
@@ -43,11 +41,10 @@ namespace Edi.Core.Resources
                 if (string.IsNullOrEmpty(assemblyName) || string.IsNullOrEmpty(resourceFilename))
                     return default(T);
 
-                string uriPath = string.Format("/{0};component/{1}", assemblyName, resourceFilename);
+                string uriPath = $"/{assemblyName};component/{resourceFilename}";
                 Uri uri = new Uri(uriPath, UriKind.Relative);
-                ResourceDictionary resource = Application.LoadComponent(uri) as ResourceDictionary;
 
-                if (resource == null)
+                if (!(Application.LoadComponent(uri) is ResourceDictionary resource))
                     return default(T);
 
                 if (!string.IsNullOrEmpty(name))

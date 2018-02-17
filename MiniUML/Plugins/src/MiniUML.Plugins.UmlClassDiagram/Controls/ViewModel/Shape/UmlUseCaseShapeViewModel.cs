@@ -2,13 +2,12 @@
 {
   using System;
   using System.Collections.Generic;
-  using System.Globalization;
   using System.Xml;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Shapes;
-  using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base;
-  using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements;
-  using MiniUML.Plugins.UmlClassDiagram.Converter;
+  using Model.ViewModels;
+  using Model.ViewModels.Shapes;
+  using Base;
+  using UmlElements;
+  using Converter;
 
   /// <summary>
   /// This class implements the viewmodel for the Uml Use Case shape
@@ -31,8 +30,8 @@
              ShapeViewModelKey.UseCaseShape, ShapeViewModelSubKeys.None,
              umlType)
     {
-      this.MinHeight = 50;
-      this.MinWidth = 50;
+      MinHeight = 50;
+      MinWidth = 50;
     }
     #endregion constructor
 
@@ -41,15 +40,15 @@
     {
       get
       {
-        return this.mStroke;
+        return mStroke;
       }
 
       set
       {
-        if (this.mStroke != value)
+        if (mStroke != value)
         {
-          this.mStroke = value;
-          this.NotifyPropertyChanged(() => this.Stroke);
+          mStroke = value;
+          NotifyPropertyChanged(() => Stroke);
         }
       }
     }
@@ -58,15 +57,15 @@
     {
       get
       {
-        return this.mStrokeDashArray;
+        return mStrokeDashArray;
       }
 
       set
       {
-        if (this.mStrokeDashArray != value)
+        if (mStrokeDashArray != value)
         {
-          this.mStrokeDashArray = value;
-          this.NotifyPropertyChanged(() => this.StrokeDashArray);
+          mStrokeDashArray = value;
+          NotifyPropertyChanged(() => StrokeDashArray);
         }
       }
     }
@@ -93,7 +92,7 @@
       {
         if (ret.ReadAttributes(reader.Name, reader.Value) == false)
         {
-          if (reader.Name.Trim().Length > 0 && reader.Name != UmlShapeBaseViewModel.XmlComment)
+          if (reader.Name.Trim().Length > 0 && reader.Name != XmlComment)
             throw new ArgumentException("XML node:'" + reader.Name + "' as child of '" + ret.XElementName + "' is not supported.");
         }
       }
@@ -109,12 +108,12 @@
     /// parameter <paramref name="writer"/> object.
     /// </summary>
     /// <param name="writer"></param>
-    public override void SaveDocument(System.Xml.XmlWriter writer,
+    public override void SaveDocument(XmlWriter writer,
                                       IEnumerable<ShapeViewModelBase> root)
     {
-      writer.WriteStartElement(this.mElementName);
+      writer.WriteStartElement(mElementName);
 
-      this.SaveAttributes(writer);
+      SaveAttributes(writer);
 
       // Save common model information (eg. comments)
       base.SaveDocument(writer);

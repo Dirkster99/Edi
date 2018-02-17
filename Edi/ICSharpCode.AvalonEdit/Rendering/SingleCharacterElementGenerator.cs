@@ -59,16 +59,16 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		/// </summary>
 		public SingleCharacterElementGenerator()
 		{
-			this.ShowSpaces = true;
-			this.ShowTabs = true;
-			this.ShowBoxForControlCharacters = true;
+			ShowSpaces = true;
+			ShowTabs = true;
+			ShowBoxForControlCharacters = true;
 		}
 		
 		void IBuiltinElementGenerator.FetchOptions(TextEditorOptions options)
 		{
-			this.ShowSpaces = options.ShowSpaces;
-			this.ShowTabs = options.ShowTabs;
-			this.ShowBoxForControlCharacters = options.ShowBoxForControlCharacters;
+			ShowSpaces = options.ShowSpaces;
+			ShowTabs = options.ShowTabs;
+			ShowBoxForControlCharacters = options.ShowBoxForControlCharacters;
 		}
 		
 		public override int GetFirstInterestedOffset(int startOffset)
@@ -151,12 +151,12 @@ namespace ICSharpCode.AvalonEdit.Rendering
 			{
 				// the TabTextElement consists of two TextRuns:
 				// first a TabGlyphRun, then TextCharacters '\t' to let WPF handle the tab indentation
-				if (startVisualColumn == this.VisualColumn)
-					return new TabGlyphRun(this, this.TextRunProperties);
-				else if (startVisualColumn == this.VisualColumn + 1)
-					return new TextCharacters("\t", 0, 1, this.TextRunProperties);
+				if (startVisualColumn == VisualColumn)
+					return new TabGlyphRun(this, TextRunProperties);
+				else if (startVisualColumn == VisualColumn + 1)
+					return new TextCharacters("\t", 0, 1, TextRunProperties);
 				else
-					throw new ArgumentOutOfRangeException("startVisualColumn");
+					throw new ArgumentOutOfRangeException(nameof(startVisualColumn));
 			}
 			
 			public override int GetNextCaretPosition(int visualColumn, LogicalDirection direction, CaretPositioningMode mode)
@@ -176,41 +176,26 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		sealed class TabGlyphRun : TextEmbeddedObject
 		{
 			readonly TabTextElement element;
-			TextRunProperties properties;
-			
-			public TabGlyphRun(TabTextElement element, TextRunProperties properties)
+
+		    public TabGlyphRun(TabTextElement element, TextRunProperties properties)
 			{
-				if (properties == null)
-					throw new ArgumentNullException("properties");
-				this.properties = properties;
+                this.Properties = properties ?? throw new ArgumentNullException(nameof(properties));
 				this.element = element;
 			}
 			
-			public override LineBreakCondition BreakBefore {
-				get { return LineBreakCondition.BreakPossible; }
-			}
-			
-			public override LineBreakCondition BreakAfter {
-				get { return LineBreakCondition.BreakRestrained; }
-			}
-			
-			public override bool HasFixedSize {
-				get { return true; }
-			}
-			
-			public override CharacterBufferReference CharacterBufferReference {
-				get { return new CharacterBufferReference(); }
-			}
-			
-			public override int Length {
-				get { return 1; }
-			}
-			
-			public override TextRunProperties Properties {
-				get { return properties; }
-			}
-			
-			public override TextEmbeddedObjectMetrics Format(double remainingParagraphWidth)
+			public override LineBreakCondition BreakBefore => LineBreakCondition.BreakPossible;
+
+		    public override LineBreakCondition BreakAfter => LineBreakCondition.BreakRestrained;
+
+		    public override bool HasFixedSize => true;
+
+		    public override CharacterBufferReference CharacterBufferReference => new CharacterBufferReference();
+
+		    public override int Length => 1;
+
+		    public override TextRunProperties Properties { get; }
+
+		    public override TextEmbeddedObjectMetrics Format(double remainingParagraphWidth)
 			{
 				double width = Math.Min(0, element.text.WidthIncludingTrailingWhitespace - 1);
 				return new TextEmbeddedObjectMetrics(width, element.text.Height, element.text.Baseline);
@@ -237,7 +222,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 			
 			public override TextRun CreateTextRun(int startVisualColumn, ITextRunConstructionContext context)
 			{
-				return new SpecialCharacterTextRun(this, this.TextRunProperties);
+				return new SpecialCharacterTextRun(this, TextRunProperties);
 			}
 		}
 		

@@ -20,8 +20,6 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Documents;
-
-using ICSharpCode.NRefactory.Editor;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
 
@@ -53,10 +51,12 @@ namespace ICSharpCode.AvalonEdit.Utils
 		public static Block ConvertTextDocumentToBlock(IDocument document, IHighlighter highlighter)
 		{
 			if (document == null)
-				throw new ArgumentNullException("document");
-			Paragraph p = new Paragraph();
-			p.TextAlignment = TextAlignment.Left;
-			for (int lineNumber = 1; lineNumber <= document.LineCount; lineNumber++) {
+				throw new ArgumentNullException(nameof(document));
+            Paragraph p = new Paragraph
+            {
+                TextAlignment = TextAlignment.Left
+            };
+            for (int lineNumber = 1; lineNumber <= document.LineCount; lineNumber++) {
 				if (lineNumber > 1)
 					p.Inlines.Add(new LineBreak());
 				var line = document.GetLineByNumber(lineNumber);
@@ -91,7 +91,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		public static RichText ConvertTextDocumentToRichText(IDocument document, IHighlighter highlighter)
 		{
 			if (document == null)
-				throw new ArgumentNullException("document");
+				throw new ArgumentNullException(nameof(document));
 			var texts = new List<RichText>();
 			for (int lineNumber = 1; lineNumber <= document.LineCount; lineNumber++) {
 				var line = document.GetLineByNumber(lineNumber);
@@ -113,10 +113,12 @@ namespace ICSharpCode.AvalonEdit.Utils
 		public static FlowDocument CreateFlowDocumentForEditor(TextEditor editor)
 		{
 			IHighlighter highlighter = editor.TextArea.GetService(typeof(IHighlighter)) as IHighlighter;
-			FlowDocument doc = new FlowDocument(ConvertTextDocumentToBlock(editor.Document, highlighter));
-			doc.FontFamily = editor.FontFamily;
-			doc.FontSize = editor.FontSize;
-			return doc;
+            FlowDocument doc = new FlowDocument(ConvertTextDocumentToBlock(editor.Document, highlighter))
+            {
+                FontFamily = editor.FontFamily,
+                FontSize = editor.FontSize
+            };
+            return doc;
 		}
 	}
 }

@@ -5,8 +5,8 @@
 	using System.Collections.ObjectModel;
 	using System.ComponentModel.Composition;
 	using System.Linq;
-	using Edi.Core.Interfaces.DocumentTypes;
-	using Edi.Core.Utillities;
+	using Interfaces.DocumentTypes;
+	using Core.Utillities;
 
 	/// <summary>
 	/// </summary>
@@ -23,7 +23,7 @@
 		/// </summary>
 		public DocumentTypeManager()
 		{
-			this.mDocumentTypes = new SortableObservableCollection<IDocumentType>(new List<IDocumentType>());
+			mDocumentTypes = new SortableObservableCollection<IDocumentType>(new List<IDocumentType>());
 		}
 		#endregion constructors
 
@@ -33,7 +33,7 @@
 		/// </summary>
 		public ObservableCollection<IDocumentType> DocumentTypes
 		{
-			get { return this.mDocumentTypes; }
+			get { return mDocumentTypes; }
 		}	
 		#endregion properties
 
@@ -66,8 +66,8 @@
 																				 FileOpenMethod, CreateDocumentMethod,
 																				 t, sortPriority);
 
-			this.mDocumentTypes.Add(newFileType);
-			this.mDocumentTypes.Sort(i => i.SortPriority, System.ComponentModel.ListSortDirection.Ascending );
+			mDocumentTypes.Add(newFileType);
+			mDocumentTypes.Sort(i => i.SortPriority, System.ComponentModel.ListSortDirection.Ascending );
 
 			return newFileType;
 		}
@@ -86,10 +86,10 @@
 		public IDocumentType FindDocumentTypeByExtension(string fileExtension,
 		                                                 bool trimPeriod = false)
 		{
-			if (string.IsNullOrEmpty(fileExtension) == true)
+			if (string.IsNullOrEmpty(fileExtension))
 				return null;
 
-			if (trimPeriod == true)
+			if (trimPeriod)
 			{
 				int idx;
 
@@ -97,10 +97,10 @@
 					fileExtension = fileExtension.Substring(idx + 1);
 			}
 
-			if (string.IsNullOrEmpty(fileExtension) == true)
+			if (string.IsNullOrEmpty(fileExtension))
 				return null;
 
-			var ret = this.mDocumentTypes.FirstOrDefault(d => d.DefaultFilter == fileExtension);
+			var ret = mDocumentTypes.FirstOrDefault(d => d.DefaultFilter == fileExtension);
 
 			return ret;
 		}
@@ -112,10 +112,10 @@
 		/// <returns></returns>
 		public IDocumentType FindDocumentTypeByKey(string typeOfDoc)
 		{
-			if (string.IsNullOrEmpty(typeOfDoc) == true)
+			if (string.IsNullOrEmpty(typeOfDoc))
 				return null;
 
-			return this.mDocumentTypes.FirstOrDefault(d => d.Key == typeOfDoc);
+			return mDocumentTypes.FirstOrDefault(d => d.Key == typeOfDoc);
 		}
 
 		/// <summary>
@@ -129,9 +129,9 @@
 		{
 			SortedList<int, IFileFilterEntry> ret = new SortedList<int,IFileFilterEntry>();
 
-			if (this.mDocumentTypes != null)
+			if (mDocumentTypes != null)
 			{
-				foreach (var item in this.mDocumentTypes)
+				foreach (var item in mDocumentTypes)
 				{
 					if (key == string.Empty || key == item.Key)
 					{

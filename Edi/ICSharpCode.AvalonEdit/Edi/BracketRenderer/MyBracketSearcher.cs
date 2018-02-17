@@ -19,7 +19,7 @@
     /// <param name="document"></param>
     /// <param name="offset"></param>
     /// <returns></returns>
-    public BracketSearchResult SearchBracket(ICSharpCode.AvalonEdit.Document.TextDocument document, int offset)
+    public BracketSearchResult SearchBracket(Document.TextDocument document, int offset)
     {
 
 
@@ -46,7 +46,7 @@
 
     #region methods
     #region SearchBracket helper functions
-    private static int ScanLineStart(ICSharpCode.AvalonEdit.Document.TextDocument document, int offset)
+    private static int ScanLineStart(Document.TextDocument document, int offset)
     {
       for (int i = offset - 1; i > 0; --i)
       {
@@ -63,7 +63,7 @@
     /// 2 = String<br/>
     /// Block comments and multiline strings are not supported.
     /// </summary>
-    private static int GetStartType(ICSharpCode.AvalonEdit.Document.TextDocument document, int linestart, int offset)
+    private static int GetStartType(Document.TextDocument document, int linestart, int offset)
     {
       bool inString = false;
       bool inChar = false;
@@ -119,7 +119,7 @@
     #endregion
 
     #region SearchBracketBackward
-    private int SearchBracketBackward(ICSharpCode.AvalonEdit.Document.TextDocument document, int offset, char openBracket, char closingBracket)
+    private int SearchBracketBackward(Document.TextDocument document, int offset, char openBracket, char closingBracket)
     {
 
 
@@ -239,7 +239,7 @@
     #endregion
 
     #region SearchBracketForward
-    private  int SearchBracketForward(ICSharpCode.AvalonEdit.Document.TextDocument document, int offset, char openBracket, char closingBracket)
+    private  int SearchBracketForward(Document.TextDocument document, int offset, char openBracket, char closingBracket)
     {
       bool inString = false;
       bool inChar = false;
@@ -355,7 +355,7 @@
     }
     #endregion
 
-    private int QuickSearchBracketBackward(ICSharpCode.AvalonEdit.Document.TextDocument document, int offset, char openBracket, char closingBracket)
+    private int QuickSearchBracketBackward(Document.TextDocument document, int offset, char openBracket, char closingBracket)
     {
       int brackets = -1;
       // first try "quick find" - find the matching bracket if there is no string/comment in the way
@@ -388,7 +388,7 @@
       return -1;
     }
 
-    private int QuickSearchBracketForward(ICSharpCode.AvalonEdit.Document.TextDocument document, int offset, char openBracket, char closingBracket)
+    private int QuickSearchBracketForward(Document.TextDocument document, int offset, char openBracket, char closingBracket)
     {
       int brackets = 1;
       // try "quick find" - find the matching bracket if there is no string/comment in the way

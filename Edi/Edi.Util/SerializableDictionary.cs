@@ -54,16 +54,11 @@
 		#endregion
 
 		#region Private Properties
-		protected XmlSerializer ValueSerializer
-		{
-			get { return _valueSerializer ?? (_valueSerializer = new XmlSerializer(typeof(TVal))); }
-		}
+		protected XmlSerializer ValueSerializer => _valueSerializer ?? (_valueSerializer = new XmlSerializer(typeof(TVal)));
 
-		private XmlSerializer KeySerializer
-		{
-			get { return _keySerializer ?? (_keySerializer = new XmlSerializer(typeof(TKey))); }
-		}
-		#endregion
+	    private XmlSerializer KeySerializer => _keySerializer ?? (_keySerializer = new XmlSerializer(typeof(TKey)));
+
+	    #endregion
 
 		#region ISerializable Members
 		protected SerializableDictionary(SerializationInfo info, StreamingContext context)

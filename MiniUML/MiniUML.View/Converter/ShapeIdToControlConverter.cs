@@ -4,12 +4,9 @@
   using System.Globalization;
   using System.Windows;
   using System.Windows.Data;
-  using System.Xml.Linq;
-  using MiniUML.Framework;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Shapes;
-  using MiniUML.View.Controls;
-  using MiniUML.View.Views;
+  using Model.ViewModels.Shapes;
+  using Controls;
+  using Views;
 
   /// <summary>
   /// Converts a shape id into a shape control.
@@ -28,7 +25,7 @@
     public UIElement ReferenceControl
     {
       get { return (UIElement)GetValue(ReferenceControlProperty); }
-      set { this.SetValue(ReferenceControlProperty, value); }
+      set { SetValue(ReferenceControlProperty, value); }
     }
     #endregion properties
 
@@ -46,7 +43,7 @@
     /// <returns></returns>
     public object Convert(object shapeID, Type targetType, object parameter, CultureInfo culture)
     {
-      object o = this.convert(shapeID, targetType, parameter, culture);
+      object o = convert(shapeID, targetType, parameter, culture);
 
       if (o == null)
         o = AnchorPoint.InvalidSnapTarget;
@@ -80,11 +77,11 @@
       string shape = value as string;
 
       // Convert invalid shapeID into invalid snap target
-      if (shape == null || shape == string.Empty || this.ReferenceControl == null)
+      if (shape == null || shape == string.Empty || ReferenceControl == null)
         return null;
 
       // Find canvas view through reference on this converter
-      CanvasView cv = CanvasView.GetCanvasView(this.ReferenceControl);
+      CanvasView cv = CanvasView.GetCanvasView(ReferenceControl);
 
       // No canvas view found
       if (cv == null)

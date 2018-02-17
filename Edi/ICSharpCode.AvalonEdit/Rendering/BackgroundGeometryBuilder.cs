@@ -18,13 +18,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Media.TextFormatting;
-using ICSharpCode.NRefactory.Editor;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
 using ICSharpCode.AvalonEdit.Utils;
@@ -36,17 +34,12 @@ namespace ICSharpCode.AvalonEdit.Rendering
 	/// </summary>
 	public sealed class BackgroundGeometryBuilder
 	{
-		double cornerRadius;
-		
-		/// <summary>
+	    /// <summary>
 		/// Gets/sets the radius of the rounded corners.
 		/// </summary>
-		public double CornerRadius {
-			get { return cornerRadius; }
-			set { cornerRadius = value; }
-		}
-		
-		/// <summary>
+		public double CornerRadius { get; set; }
+
+	    /// <summary>
 		/// Gets/Sets whether to align to whole pixels.
 		/// 
 		/// If BorderThickness is set to 0, the geometry is aligned to whole pixels.
@@ -65,43 +58,27 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		/// Otherwise, leave the property set to the default value <c>0</c>.
 		/// </summary>
 		public double BorderThickness { get; set; }
-		
-		bool alignToMiddleOfPixels;
-		
-		/// <summary>
+
+	    /// <summary>
 		/// Gets/Sets whether to align the geometry to the middle of pixels.
 		/// </summary>
 		[Obsolete("Use the AlignToWholePixels and BorderThickness properties instead. "
 		          + "Setting AlignToWholePixels=true and setting the BorderThickness to the pixel size " 
 		          + "is equivalent to aligning the geometry to the middle of pixels.")]
-		public bool AlignToMiddleOfPixels {
-			get {
-				return alignToMiddleOfPixels;
-			}
-			set {
-				alignToMiddleOfPixels = value;
-			}
-		}
-		
-		/// <summary>
+		public bool AlignToMiddleOfPixels { get; set; }
+
+	    /// <summary>
 		/// Gets/Sets whether to extend the rectangles to full width at line end.
 		/// </summary>
 		public bool ExtendToFullWidthAtLineEnd { get; set; }
-		
-		/// <summary>
-		/// Creates a new BackgroundGeometryBuilder instance.
-		/// </summary>
-		public BackgroundGeometryBuilder()
-		{
-		}
-		
-		/// <summary>
+
+	    /// <summary>
 		/// Adds the specified segment to the geometry.
 		/// </summary>
 		public void AddSegment(TextView textView, ISegment segment)
 		{
 			if (textView == null)
-				throw new ArgumentNullException("textView");
+				throw new ArgumentNullException(nameof(textView));
 			Size pixelSize = PixelSnapHelpers.GetPixelSize(textView);
 			foreach (Rect r in GetRectsForSegment(textView, segment, ExtendToFullWidthAtLineEnd)) {
 				AddRectangle(pixelSize, r);
@@ -130,7 +107,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 				             PixelSnapHelpers.Round(r.Right + halfBorder, pixelSize.Width) - halfBorder,
 				             PixelSnapHelpers.Round(r.Bottom + halfBorder, pixelSize.Height) - halfBorder);
 				//Debug.WriteLine(r.ToString() + " -> " + new Rect(lastLeft, lastTop, lastRight-lastLeft, lastBottom-lastTop).ToString());
-			} else if (alignToMiddleOfPixels) {
+			} else if (AlignToMiddleOfPixels) {
 				AddRectangle(PixelSnapHelpers.PixelAlign(r.Left, pixelSize.Width),
 				             PixelSnapHelpers.PixelAlign(r.Top, pixelSize.Height),
 				             PixelSnapHelpers.PixelAlign(r.Right, pixelSize.Width),
@@ -148,9 +125,9 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		public static IEnumerable<Rect> GetRectsForSegment(TextView textView, ISegment segment, bool extendToFullWidthAtLineEnd = false)
 		{
 			if (textView == null)
-				throw new ArgumentNullException("textView");
+				throw new ArgumentNullException(nameof(textView));
 			if (segment == null)
-				throw new ArgumentNullException("segment");
+				throw new ArgumentNullException(nameof(segment));
 			return GetRectsForSegmentImpl(textView, segment, extendToFullWidthAtLineEnd);
 		}
 		
@@ -206,9 +183,9 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		public static IEnumerable<Rect> GetRectsFromVisualSegment(TextView textView, VisualLine line, int startVC, int endVC)
 		{
 			if (textView == null)
-				throw new ArgumentNullException("textView");
+				throw new ArgumentNullException(nameof(textView));
 			if (line == null)
-				throw new ArgumentNullException("line");
+				throw new ArgumentNullException(nameof(line));
 			return ProcessTextLines(textView, line, startVC, endVC);
 		}
 
@@ -297,47 +274,49 @@ namespace ICSharpCode.AvalonEdit.Rendering
 				CloseFigure();
 			}
 			if (figure == null) {
-				figure = new PathFigure();
-				figure.StartPoint = new Point(left, top + cornerRadius);
-				if (Math.Abs(left - right) > cornerRadius) {
-					figure.Segments.Add(MakeArc(left + cornerRadius, top, SweepDirection.Clockwise));
-					figure.Segments.Add(MakeLineSegment(right - cornerRadius, top));
-					figure.Segments.Add(MakeArc(right, top + cornerRadius, SweepDirection.Clockwise));
+                figure = new PathFigure
+                {
+                    StartPoint = new Point(left, top + CornerRadius)
+                };
+                if (Math.Abs(left - right) > CornerRadius) {
+					figure.Segments.Add(MakeArc(left + CornerRadius, top, SweepDirection.Clockwise));
+					figure.Segments.Add(MakeLineSegment(right - CornerRadius, top));
+					figure.Segments.Add(MakeArc(right, top + CornerRadius, SweepDirection.Clockwise));
 				}
-				figure.Segments.Add(MakeLineSegment(right, bottom - cornerRadius));
+				figure.Segments.Add(MakeLineSegment(right, bottom - CornerRadius));
 				insertionIndex = figure.Segments.Count;
 				//figure.Segments.Add(MakeArc(left, bottom - cornerRadius, SweepDirection.Clockwise));
 			} else {
 				if (!lastRight.IsClose(right)) {
-					double cr = right < lastRight ? -cornerRadius : cornerRadius;
+					double cr = right < lastRight ? -CornerRadius : CornerRadius;
 					SweepDirection dir1 = right < lastRight ? SweepDirection.Clockwise : SweepDirection.Counterclockwise;
 					SweepDirection dir2 = right < lastRight ? SweepDirection.Counterclockwise : SweepDirection.Clockwise;
 					figure.Segments.Insert(insertionIndex++, MakeArc(lastRight + cr, lastBottom, dir1));
 					figure.Segments.Insert(insertionIndex++, MakeLineSegment(right - cr, top));
-					figure.Segments.Insert(insertionIndex++, MakeArc(right, top + cornerRadius, dir2));
+					figure.Segments.Insert(insertionIndex++, MakeArc(right, top + CornerRadius, dir2));
 				}
-				figure.Segments.Insert(insertionIndex++, MakeLineSegment(right, bottom - cornerRadius));
-				figure.Segments.Insert(insertionIndex, MakeLineSegment(lastLeft, lastTop + cornerRadius));
+				figure.Segments.Insert(insertionIndex++, MakeLineSegment(right, bottom - CornerRadius));
+				figure.Segments.Insert(insertionIndex, MakeLineSegment(lastLeft, lastTop + CornerRadius));
 				if (!lastLeft.IsClose(left)) {
-					double cr = left < lastLeft ? cornerRadius : -cornerRadius;
+					double cr = left < lastLeft ? CornerRadius : -CornerRadius;
 					SweepDirection dir1 = left < lastLeft ? SweepDirection.Counterclockwise : SweepDirection.Clockwise;
 					SweepDirection dir2 = left < lastLeft ? SweepDirection.Clockwise : SweepDirection.Counterclockwise;
-					figure.Segments.Insert(insertionIndex, MakeArc(lastLeft, lastBottom - cornerRadius, dir1));
+					figure.Segments.Insert(insertionIndex, MakeArc(lastLeft, lastBottom - CornerRadius, dir1));
 					figure.Segments.Insert(insertionIndex, MakeLineSegment(lastLeft - cr, lastBottom));
 					figure.Segments.Insert(insertionIndex, MakeArc(left + cr, lastBottom, dir2));
 				}
 			}
-			this.lastTop = top;
-			this.lastBottom = bottom;
-			this.lastLeft = left;
-			this.lastRight = right;
+			lastTop = top;
+			lastBottom = bottom;
+			lastLeft = left;
+			lastRight = right;
 		}
 		
 		ArcSegment MakeArc(double x, double y, SweepDirection dir)
 		{
 			ArcSegment arc = new ArcSegment(
 				new Point(x, y),
-				new Size(cornerRadius, cornerRadius),
+				new Size(CornerRadius, CornerRadius),
 				0, false, dir, true);
 			arc.Freeze();
 			return arc;
@@ -356,11 +335,11 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		public void CloseFigure()
 		{
 			if (figure != null) {
-				figure.Segments.Insert(insertionIndex, MakeLineSegment(lastLeft, lastTop + cornerRadius));
-				if (Math.Abs(lastLeft - lastRight) > cornerRadius) {
-					figure.Segments.Insert(insertionIndex, MakeArc(lastLeft, lastBottom - cornerRadius, SweepDirection.Clockwise));
-					figure.Segments.Insert(insertionIndex, MakeLineSegment(lastLeft + cornerRadius, lastBottom));
-					figure.Segments.Insert(insertionIndex, MakeArc(lastRight - cornerRadius, lastBottom, SweepDirection.Clockwise));
+				figure.Segments.Insert(insertionIndex, MakeLineSegment(lastLeft, lastTop + CornerRadius));
+				if (Math.Abs(lastLeft - lastRight) > CornerRadius) {
+					figure.Segments.Insert(insertionIndex, MakeArc(lastLeft, lastBottom - CornerRadius, SweepDirection.Clockwise));
+					figure.Segments.Insert(insertionIndex, MakeLineSegment(lastLeft + CornerRadius, lastBottom));
+					figure.Segments.Insert(insertionIndex, MakeArc(lastRight - CornerRadius, lastBottom, SweepDirection.Clockwise));
 				}
 				
 				figure.IsClosed = true;
@@ -380,9 +359,9 @@ namespace ICSharpCode.AvalonEdit.Rendering
 				PathGeometry g = new PathGeometry(figures);
 				g.Freeze();
 				return g;
-			} else {
-				return null;
 			}
+
+		    return null;
 		}
 	}
 }

@@ -57,9 +57,11 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 		
 		XshdSyntaxDefinition ParseDefinition(XmlElement syntaxDefinition)
 		{
-			XshdSyntaxDefinition def = new XshdSyntaxDefinition();
-			def.Name = syntaxDefinition.GetAttributeOrNull("name");
-			if (syntaxDefinition.HasAttribute("extensions")) {
+            XshdSyntaxDefinition def = new XshdSyntaxDefinition
+            {
+                Name = syntaxDefinition.GetAttributeOrNull("name")
+            };
+            if (syntaxDefinition.HasAttribute("extensions")) {
 				def.Extensions.AddRange(syntaxDefinition.GetAttribute("extensions").Split(';', '|'));
 			}
 			
@@ -119,13 +121,12 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 			XshdColor color = GetColorFromElement(element);
 			if (color != null)
 				return new XshdReference<XshdColor>(color);
-			else
-				return new XshdReference<XshdColor>();
+		    return new XshdReference<XshdColor>();
 		}
 		
 		static HighlightingBrush ParseColor(string c)
 		{
-			if (c.StartsWith("#", StringComparison.Ordinal)) {
+		    if (c.StartsWith("#", StringComparison.Ordinal)) {
 				int a = 255;
 				int offset = 0;
 				if (c.Length > 7) {
@@ -137,21 +138,25 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 				int g = Int32.Parse(c.Substring(3 + offset,2), NumberStyles.HexNumber, CultureInfo.InvariantCulture);
 				int b = Int32.Parse(c.Substring(5 + offset,2), NumberStyles.HexNumber, CultureInfo.InvariantCulture);
 				return new SimpleHighlightingBrush(Color.FromArgb((byte)a, (byte)r, (byte)g, (byte)b));
-			} else if (c.StartsWith("SystemColors.", StringComparison.Ordinal)) {
-				return V2Loader.GetSystemColorBrush(null, c);
-			} else {
-				return new SimpleHighlightingBrush((Color)V2Loader.ColorConverter.ConvertFromInvariantString(c));
 			}
+
+		    if (c.StartsWith("SystemColors.", StringComparison.Ordinal)) {
+		        return V2Loader.GetSystemColorBrush(null, c);
+		    }
+
+		    return new SimpleHighlightingBrush((Color)V2Loader.ColorConverter.ConvertFromInvariantString(c));
 		}
 		
 		char ruleSetEscapeCharacter;
 		
 		XshdRuleSet ImportRuleSet(XmlElement element)
 		{
-			XshdRuleSet ruleSet = new XshdRuleSet();
-			ruleSet.Name = element.GetAttributeOrNull("name");
-			
-			if (element.HasAttribute("escapecharacter")) {
+            XshdRuleSet ruleSet = new XshdRuleSet
+            {
+                Name = element.GetAttributeOrNull("name")
+            };
+
+            if (element.HasAttribute("escapecharacter")) {
 				ruleSetEscapeCharacter = element.GetAttribute("escapecharacter")[0];
 			} else {
 				ruleSetEscapeCharacter = '\0';
@@ -166,11 +171,13 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 			ruleSet.IgnoreCase = element.GetBoolAttribute("ignorecase");
 			
 			foreach (XmlElement el in element.GetElementsByTagName("KeyWords")) {
-				XshdKeywords keywords = new XshdKeywords();
-				keywords.ColorReference = GetColorReference(el);
-				// we have to handle old syntax highlighting definitions that contain
-				// empty keywords or empty keyword groups
-				foreach (XmlElement node in el.GetElementsByTagName("Key")) {
+                XshdKeywords keywords = new XshdKeywords
+                {
+                    ColorReference = GetColorReference(el)
+                };
+                // we have to handle old syntax highlighting definitions that contain
+                // empty keywords or empty keyword groups
+                foreach (XmlElement node in el.GetElementsByTagName("Key")) {
 					string word = node.GetAttribute("word");
 					if (!string.IsNullOrEmpty(word))
 						keywords.Words.Add(word);

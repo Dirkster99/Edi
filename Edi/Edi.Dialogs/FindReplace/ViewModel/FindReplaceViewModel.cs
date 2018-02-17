@@ -4,10 +4,8 @@ namespace Edi.Dialogs.FindReplace.ViewModel
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
     using System.Windows.Input;
-    using Edi.Core.ViewModels.Base;
-    using Edi.Core.ViewModels.Command;
-    using MsgBox;
-    using CommonServiceLocator;
+    using Core.ViewModels.Base;
+    using Core.ViewModels.Command;
 
     public class FindReplaceViewModel : DialogViewModelBase
     {
@@ -34,7 +32,7 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         private bool mShowAsFind = true;
         private bool mIsTextToFindFocused = true;
         private bool mIsTextToFindInReplaceFocused = true;
-        private Edi.Dialogs.FindReplace.SearchScope mSearchIn = Edi.Dialogs.FindReplace.SearchScope.CurrentDocument;
+        private SearchScope mSearchIn = SearchScope.CurrentDocument;
         private bool mShowSearchIn = true;
         private List<string> mListFindHistory;
         private List<string> mListReplaceHistory;
@@ -50,8 +48,8 @@ namespace Edi.Dialogs.FindReplace.ViewModel
             : this()
         {
             // load the find/replace history from user profile
-            this.mListFindHistory = settingsManager.SessionData.FindHistoryList;
-            this.mListReplaceHistory = settingsManager.SessionData.ReplaceHistoryList;
+            mListFindHistory = settingsManager.SessionData.FindHistoryList;
+            mListReplaceHistory = settingsManager.SessionData.ReplaceHistoryList;
         }
 
         /// <summary>
@@ -61,11 +59,11 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         protected FindReplaceViewModel()
             : base()
         {
-            this.CurrentEditor = null;
+            CurrentEditor = null;
 
             // load the find/replace history from user profile
-            this.mListFindHistory = null;
-            this.mListReplaceHistory = null;
+            mListFindHistory = null;
+            mListReplaceHistory = null;
         }
         #endregion constructor
 
@@ -78,7 +76,7 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         {
             get
             {
-                return Edi.Util.Local.Strings.STR_FIND_REPLACE_CAPTION;
+                return Util.Local.Strings.STR_FIND_REPLACE_CAPTION;
             }
         }
 
@@ -89,16 +87,16 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         {
             get
             {
-                return this.mTextToFind;
+                return mTextToFind;
             }
 
             set
             {
-                if (this.mTextToFind != value)
+                if (mTextToFind != value)
                 {
-                    this.mTextToFind = value;
+                    mTextToFind = value;
 
-                    this.RaisePropertyChanged(() => this.TextToFind);
+                    RaisePropertyChanged(() => TextToFind);
                 }
             }
         }
@@ -110,16 +108,16 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         {
             get
             {
-                return this.mReplacementText;
+                return mReplacementText;
             }
 
             set
             {
-                if (this.mReplacementText != value)
+                if (mReplacementText != value)
                 {
-                    this.mReplacementText = value;
+                    mReplacementText = value;
 
-                    this.RaisePropertyChanged(() => this.ReplacementText);
+                    RaisePropertyChanged(() => ReplacementText);
                 }
             }
         }
@@ -131,16 +129,16 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         {
             get
             {
-                return this.mSearchUp;
+                return mSearchUp;
             }
 
             set
             {
-                if (this.mSearchUp != value)
+                if (mSearchUp != value)
                 {
-                    this.mSearchUp = value;
+                    mSearchUp = value;
 
-                    this.RaisePropertyChanged(() => this.SearchUp);
+                    RaisePropertyChanged(() => SearchUp);
                 }
             }
         }
@@ -152,16 +150,16 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         {
             get
             {
-                return this.mUseWildcards;
+                return mUseWildcards;
             }
 
             set
             {
-                if (this.mUseWildcards != value)
+                if (mUseWildcards != value)
                 {
-                    this.mUseWildcards = value;
+                    mUseWildcards = value;
 
-                    this.RaisePropertyChanged(() => this.UseWildcards);
+                    RaisePropertyChanged(() => UseWildcards);
                 }
             }
         }
@@ -173,16 +171,16 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         {
             get
             {
-                return this.mCaseSensitive;
+                return mCaseSensitive;
             }
 
             set
             {
-                if (this.mCaseSensitive != value)
+                if (mCaseSensitive != value)
                 {
-                    this.mCaseSensitive = value;
+                    mCaseSensitive = value;
 
-                    this.RaisePropertyChanged(() => this.CaseSensitive);
+                    RaisePropertyChanged(() => CaseSensitive);
                 }
             }
         }
@@ -194,16 +192,16 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         {
             get
             {
-                return this.mUseRegEx;
+                return mUseRegEx;
             }
 
             set
             {
-                if (this.mUseRegEx != value)
+                if (mUseRegEx != value)
                 {
-                    this.mUseRegEx = value;
+                    mUseRegEx = value;
 
-                    this.RaisePropertyChanged(() => this.UseRegEx);
+                    RaisePropertyChanged(() => UseRegEx);
                 }
             }
         }
@@ -215,16 +213,16 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         {
             get
             {
-                return this.mWholeWord;
+                return mWholeWord;
             }
 
             set
             {
-                if (this.mWholeWord != value)
+                if (mWholeWord != value)
                 {
-                    this.mWholeWord = value;
+                    mWholeWord = value;
 
-                    this.RaisePropertyChanged(() => this.WholeWord);
+                    RaisePropertyChanged(() => WholeWord);
                 }
             }
         }
@@ -237,16 +235,16 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         {
             get
             {
-                return this.mAcceptsReturn;
+                return mAcceptsReturn;
             }
 
             set
             {
-                if (this.mAcceptsReturn != value)
+                if (mAcceptsReturn != value)
                 {
-                    this.mAcceptsReturn = value;
+                    mAcceptsReturn = value;
 
-                    this.RaisePropertyChanged(() => this.AcceptsReturn);
+                    RaisePropertyChanged(() => AcceptsReturn);
                 }
             }
         }
@@ -258,16 +256,16 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         {
             get
             {
-                return this.mAllowReplace;
+                return mAllowReplace;
             }
 
             set
             {
-                if (this.mAllowReplace != value)
+                if (mAllowReplace != value)
                 {
-                    this.mAllowReplace = value;
+                    mAllowReplace = value;
 
-                    this.RaisePropertyChanged(() => this.AllowReplace);
+                    RaisePropertyChanged(() => AllowReplace);
                 }
             }
         }
@@ -280,27 +278,27 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         {
             get
             {
-                return this.mShowAsFind;
+                return mShowAsFind;
             }
 
             set
             {
-                if (this.mShowAsFind != value)
+                if (mShowAsFind != value)
                 {
-                    this.mShowAsFind = value;
+                    mShowAsFind = value;
 
-                    if (value == true)            // Focus textbox on find tab or find/replace tab
+                    if (value)            // Focus textbox on find tab or find/replace tab
                     {
-                        this.IsTextToFindFocused = true;
-                        this.IsTextToFindInReplaceFocused = false;
+                        IsTextToFindFocused = true;
+                        IsTextToFindInReplaceFocused = false;
                     }
                     else
                     {
-                        this.IsTextToFindFocused = false;
-                        this.IsTextToFindInReplaceFocused = true;
+                        IsTextToFindFocused = false;
+                        IsTextToFindInReplaceFocused = true;
                     }
 
-                    this.RaisePropertyChanged(() => this.ShowAsFind);
+                    RaisePropertyChanged(() => ShowAsFind);
                 }
             }
         }
@@ -311,16 +309,16 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         {
             get
             {
-                return this.mIsTextToFindFocused;
+                return mIsTextToFindFocused;
             }
 
             set
             {
-                if (this.mIsTextToFindFocused != value)
+                if (mIsTextToFindFocused != value)
                 {
-                    this.mIsTextToFindFocused = value;
+                    mIsTextToFindFocused = value;
 
-                    this.RaisePropertyChanged(() => this.IsTextToFindFocused);
+                    RaisePropertyChanged(() => IsTextToFindFocused);
                 }
             }
         }
@@ -331,16 +329,16 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         {
             get
             {
-                return this.mIsTextToFindInReplaceFocused;
+                return mIsTextToFindInReplaceFocused;
             }
 
             set
             {
-                if (this.mIsTextToFindInReplaceFocused != value)
+                if (mIsTextToFindInReplaceFocused != value)
                 {
-                    this.mIsTextToFindInReplaceFocused = value;
+                    mIsTextToFindInReplaceFocused = value;
 
-                    this.RaisePropertyChanged(() => this.IsTextToFindInReplaceFocused);
+                    RaisePropertyChanged(() => IsTextToFindInReplaceFocused);
                 }
             }
         }
@@ -348,20 +346,20 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         /// <summary>
         /// Get/set whether to search in current document, all open documents etc.
         /// </summary>
-        public Edi.Dialogs.FindReplace.SearchScope SearchIn
+        public SearchScope SearchIn
         {
             get
             {
-                return this.mSearchIn;
+                return mSearchIn;
             }
 
             set
             {
-                if (this.mSearchIn != value)
+                if (mSearchIn != value)
                 {
-                    this.mSearchIn = value;
+                    mSearchIn = value;
 
-                    this.RaisePropertyChanged(() => this.SearchIn);
+                    RaisePropertyChanged(() => SearchIn);
                 }
             }
         }
@@ -377,16 +375,16 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         {
             get
             {
-                return this.mShowSearchIn;
+                return mShowSearchIn;
             }
 
             private set
             {
-                if (this.mShowSearchIn != value)
+                if (mShowSearchIn != value)
                 {
-                    this.mShowSearchIn = value;
+                    mShowSearchIn = value;
 
-                    this.RaisePropertyChanged(() => this.ShowSearchIn);
+                    RaisePropertyChanged(() => ShowSearchIn);
                 }
             }
         }
@@ -399,27 +397,27 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         {
             get
             {
-                if (this.mFindCommand == null)
-                    this.mFindCommand = new RelayCommand<object>((p) =>
+                if (mFindCommand == null)
+                    mFindCommand = new RelayCommand<object>((p) =>
                     {
-                        if (this.FindNext != null)
+                        if (FindNext != null)
                         {
                             // remember the searched text into search history
-                            if (this.TextToFind.Length > 0)
+                            if (TextToFind.Length > 0)
                             {
-                                this.FindHistory.Remove(this.TextToFind);
-                                this.FindHistory.Insert(0, this.TextToFind);
-                                if (this.FindHistory.Count > MaxCountFindReplaceHistory)
+                                FindHistory.Remove(TextToFind);
+                                FindHistory.Insert(0, TextToFind);
+                                if (FindHistory.Count > MaxCountFindReplaceHistory)
                                 {
-                                    this.FindHistory.RemoveRange(MaxCountFindReplaceHistory, this.FindHistory.Count - MaxCountFindReplaceHistory);
+                                    FindHistory.RemoveRange(MaxCountFindReplaceHistory, FindHistory.Count - MaxCountFindReplaceHistory);
                                 }
                             }
 
-                            this.FindNext(this, this.mSearchUp);
+                            FindNext(this, mSearchUp);
                         }
                     });
 
-                return this.mFindCommand;
+                return mFindCommand;
             }
         }
 
@@ -427,14 +425,14 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         {
             get
             {
-                if (this.mReplaceCommand == null)
-                    this.mReplaceCommand = new RelayCommand<object>((p) =>
+                if (mReplaceCommand == null)
+                    mReplaceCommand = new RelayCommand<object>((p) =>
                     {
                         addReplaceHistory();
-                        this.Replace();
+                        Replace();
                     });
 
-                return this.mReplaceCommand;
+                return mReplaceCommand;
             }
         }
 
@@ -442,14 +440,14 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         {
             get
             {
-                if (this.mReplaceAllCommand == null)
-                    this.mReplaceAllCommand = new RelayCommand<object>((p) =>
+                if (mReplaceAllCommand == null)
+                    mReplaceAllCommand = new RelayCommand<object>((p) =>
                     {
                         addReplaceHistory();
-                        this.ReplaceAll();
+                        ReplaceAll();
                     });
 
-                return this.mReplaceAllCommand;
+                return mReplaceAllCommand;
             }
         }
 
@@ -457,7 +455,7 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         {
             get
             {
-                return this.mListFindHistory;
+                return mListFindHistory;
             }
         }
 
@@ -465,7 +463,7 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         {
             get
             {
-                return this.mListReplaceHistory;
+                return mListReplaceHistory;
             }
         }
 
@@ -475,13 +473,13 @@ namespace Edi.Dialogs.FindReplace.ViewModel
         private void addReplaceHistory()
         {
             // remember the replacement text into replace history
-            if (this.ReplacementText.Length > 0)
+            if (ReplacementText.Length > 0)
             {
-                this.ReplaceHistory.Remove(this.ReplacementText);
-                this.ReplaceHistory.Insert(0, this.ReplacementText);
-                if (this.ReplaceHistory.Count > MaxCountFindReplaceHistory)
+                ReplaceHistory.Remove(ReplacementText);
+                ReplaceHistory.Insert(0, ReplacementText);
+                if (ReplaceHistory.Count > MaxCountFindReplaceHistory)
                 {
-                    this.ReplaceHistory.RemoveRange(MaxCountFindReplaceHistory, this.ReplaceHistory.Count - MaxCountFindReplaceHistory);
+                    ReplaceHistory.RemoveRange(MaxCountFindReplaceHistory, ReplaceHistory.Count - MaxCountFindReplaceHistory);
                 }
             }
         }
@@ -528,8 +526,8 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 
         public void FindPrevious()
         {
-            if (this.FindNext != null)
-                this.FindNext(this, true);
+            if (FindNext != null)
+                FindNext(this, true);
         }
 
         public void Replace()
@@ -547,8 +545,8 @@ namespace Edi.Dialogs.FindReplace.ViewModel
                 //CE.SelectedText = ReplacementText;
             }
 
-            if (this.FindNext != null)
-                this.FindNext(this, false);
+            if (FindNext != null)
+                FindNext(this, false);
         }
 
         public void ReplaceAll(bool AskBefore = true)

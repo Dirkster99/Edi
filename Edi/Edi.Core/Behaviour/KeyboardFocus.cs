@@ -15,7 +15,7 @@
 		#region constructor
 		static KeyboardFocus()
 		{
-			KeyboardFocus.OnProperty = DependencyProperty.RegisterAttached("On",
+			OnProperty = DependencyProperty.RegisterAttached("On",
 																																		 typeof(FrameworkElement),
 																																		 typeof(KeyboardFocus),
 																																		 new PropertyMetadata(OnSetCallback));

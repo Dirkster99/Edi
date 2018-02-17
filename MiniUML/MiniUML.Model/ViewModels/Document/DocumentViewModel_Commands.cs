@@ -13,10 +13,8 @@
     using System.Windows.Shapes;
     using System.Windows.Xps.Packaging;
     using Microsoft.Win32;
-    using MiniUML.Framework;
-    using MiniUML.Model.ViewModels.Shapes;
-    using MsgBox;
-    using CommonServiceLocator;
+    using Framework;
+    using Shapes;
 
     public partial class DocumentViewModel : AbstractDocumentViewModel
     {
@@ -32,7 +30,7 @@
 
             public CommandUtility(DocumentViewModel viewModel)
             {
-                this.mViewModel = viewModel;
+                mViewModel = viewModel;
 
                 // Initialize commands.
                 viewModel.cmd_New = new NewCommandModel(viewModel);
@@ -51,7 +49,7 @@
 
             public Rectangle GetDocumentRectangle()
             {
-                FrameworkElement canvasView = this.mViewModel.v_CanvasView;
+                FrameworkElement canvasView = mViewModel.v_CanvasView;
 
                 // Create a VisualBrush representing the contents of the  document
                 // and use it to paint a rectangle of the same size as the page.
@@ -71,7 +69,7 @@
 
             public Rectangle GetDocumentRectangle(Size desiredSize)
             {
-                FrameworkElement canvasView = this.mViewModel.v_CanvasView;
+                FrameworkElement canvasView = mViewModel.v_CanvasView;
 
                 // Create a VisualBrush representing the contents of the  document.
                 VisualBrush v = new VisualBrush(canvasView) { TileMode = TileMode.None };
@@ -108,45 +106,45 @@
             public SaveCommandModel(DocumentViewModel viewModel)
                 : base(ApplicationCommands.Save)
             {
-                this.mViewModel = viewModel;
-                this.Description = MiniUML.Framework.Local.Strings.STR_CMD_SAVE_DOCUMENT;
-                this.Image = (BitmapImage)Application.Current.Resources["Style.Images.Commands.Save"];
+                mViewModel = viewModel;
+                Description = Framework.Local.Strings.STR_CMD_SAVE_DOCUMENT;
+                Image = (BitmapImage)Application.Current.Resources["Style.Images.Commands.Save"];
             }
 
             public override void OnQueryEnabled(object sender, CanExecuteRoutedEventArgs e)
             {
-                e.CanExecute = (this.mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready);
+                e.CanExecute = (mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready);
                 e.Handled = true;
             }
 
             public override void OnExecute(object sender, ExecutedRoutedEventArgs e)
             {
-                this.Execute();
+                Execute();
             }
 
             public bool Execute()
             {
-                string file = this.mViewModel.prop_DocumentFilePath;
+                string file = mViewModel.prop_DocumentFilePath;
 
                 try
                 {
                     if (File.Exists(file))
                     {
                         // Save document to the existing file.
-                        this.mViewModel.mDataModel.Save(file);
+                        mViewModel.mDataModel.Save(file);
                         return true;
                     }
                     else
                     {
                         // Execute SaveAs command.
-                        return ((SaveAsCommandModel)this.mViewModel.cmd_SaveAs).Execute();
+                        return ((SaveAsCommandModel)mViewModel.cmd_SaveAs).Execute();
                     }
                 }
                 catch (Exception ex)
                 {
                     var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                    msgBox.Show(ex, string.Format(MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG, file),
-                                MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG_CAPTION);
+                    msgBox.Show(ex, string.Format(Framework.Local.Strings.STR_SaveFILE_MSG, file),
+                                Framework.Local.Strings.STR_SaveFILE_MSG_CAPTION);
                 }
 
                 return false;
@@ -163,20 +161,20 @@
             public SaveAsCommandModel(DocumentViewModel viewModel)
                 : base(ApplicationCommands.SaveAs)
             {
-                this.mViewModel = viewModel;
-                this.Description = MiniUML.Framework.Local.Strings.STR_CMD_SAVEAS_DOCUMENT;
-                this.Image = (BitmapImage)Application.Current.Resources["Style.Images.Commands.SaveAs"];
+                mViewModel = viewModel;
+                Description = Framework.Local.Strings.STR_CMD_SAVEAS_DOCUMENT;
+                Image = (BitmapImage)Application.Current.Resources["Style.Images.Commands.SaveAs"];
             }
 
             public override void OnQueryEnabled(object sender, CanExecuteRoutedEventArgs e)
             {
-                e.CanExecute = (this.mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready);
+                e.CanExecute = (mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready);
                 e.Handled = true;
             }
 
             public override void OnExecute(object sender, ExecutedRoutedEventArgs e)
             {
-                this.Execute();
+                Execute();
             }
 
             public bool Execute()
@@ -184,7 +182,7 @@
                 // Create and configure SaveFileDialog.
                 FileDialog dlg = new SaveFileDialog()
                 {
-                    Filter = MiniUML.Framework.Local.Strings.STR_FILETYPE_FILTER_SAVE,
+                    Filter = Framework.Local.Strings.STR_FILETYPE_FILTER_SAVE,
                     AddExtension = true,
                     ValidateNames = true
                 };
@@ -196,16 +194,16 @@
                 try
                 {
                     // Save document.
-                    this.mViewModel.mDataModel.Save(dlg.FileName);
-                    this.mViewModel.prop_DocumentFilePath = dlg.FileName;
+                    mViewModel.mDataModel.Save(dlg.FileName);
+                    mViewModel.prop_DocumentFilePath = dlg.FileName;
 
                     return true;
                 }
                 catch (Exception ex)
                 {
                     var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                    msgBox.Show(ex, string.Format(MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG, dlg.FileName),
-                                MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG_CAPTION);
+                    msgBox.Show(ex, string.Format(Framework.Local.Strings.STR_SaveFILE_MSG, dlg.FileName),
+                                Framework.Local.Strings.STR_SaveFILE_MSG_CAPTION);
                 }
 
                 return false;
@@ -221,10 +219,10 @@
 
             public ExportCommandModel(DocumentViewModel viewModel)
             {
-                this.mViewModel = viewModel;
-                this.Name = MiniUML.Framework.Local.Strings.STR_CMD_Export_Command;
-                this.Description = MiniUML.Framework.Local.Strings.STR_CMD_Export_Command_DESCR;
-                this.Image = (BitmapImage)Application.Current.Resources["Style.Images.Commands.Export"];
+                mViewModel = viewModel;
+                Name = Framework.Local.Strings.STR_CMD_Export_Command;
+                Description = Framework.Local.Strings.STR_CMD_Export_Command_DESCR;
+                Image = (BitmapImage)Application.Current.Resources["Style.Images.Commands.Export"];
             }
 
             public static void ExportUMLToImage(DocumentViewModel viewModel, string defaultFileName = "")
@@ -234,7 +232,7 @@
                 {
                     ValidateNames = true,
                     AddExtension = true,
-                    Filter = MiniUML.Framework.Local.Strings.STR_FILETYPE_FILTER_EXPORT,
+                    Filter = Framework.Local.Strings.STR_FILETYPE_FILTER_EXPORT,
                     FileName = defaultFileName
                 };
 
@@ -267,20 +265,20 @@
                 catch (Exception ex)
                 {
                     var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                    msgBox.Show(ex, string.Format(MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG, dlg.FileName),
-                                MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG_CAPTION);
+                    msgBox.Show(ex, string.Format(Framework.Local.Strings.STR_SaveFILE_MSG, dlg.FileName),
+                                Framework.Local.Strings.STR_SaveFILE_MSG_CAPTION);
                 }
             }
 
             public override void OnQueryEnabled(object sender, CanExecuteRoutedEventArgs e)
             {
-                e.CanExecute = (this.mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready);
+                e.CanExecute = (mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready);
                 e.Handled = true;
             }
 
             public override void OnExecute(object sender, ExecutedRoutedEventArgs e)
             {
-                ExportUMLToImage(this.mViewModel);
+                ExportUMLToImage(mViewModel);
             }
 
             private static void saveAsXPS(string file, DocumentViewModel viewModel)
@@ -383,15 +381,15 @@
             public PrintCommandModel(DocumentViewModel viewModel)
                 : base(ApplicationCommands.Print)
             {
-                this.mViewModel = viewModel;
-                this.Description = MiniUML.Framework.Local.Strings.STR_CMD_PRINT_DESCRIPTION;
-                this.Image = (BitmapImage)Application.Current.Resources["Style.Images.Commands.Print"];
+                mViewModel = viewModel;
+                Description = Framework.Local.Strings.STR_CMD_PRINT_DESCRIPTION;
+                Image = (BitmapImage)Application.Current.Resources["Style.Images.Commands.Print"];
             }
 
             public override void OnQueryEnabled(object sender, CanExecuteRoutedEventArgs e)
             {
-                e.CanExecute = (this.mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready ||
-                                                this.mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Saving);
+                e.CanExecute = (mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready ||
+                                                mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Saving);
                 e.Handled = true;
             }
 
@@ -401,30 +399,30 @@
                 PrintDialog dlg = new PrintDialog();
 
                 // Get previously used PrintTicket.
-                if (this.mViewModel.mCommandUtility.PrintTicket != null)
-                    dlg.PrintTicket = this.mViewModel.mCommandUtility.PrintTicket;
+                if (mViewModel.mCommandUtility.PrintTicket != null)
+                    dlg.PrintTicket = mViewModel.mCommandUtility.PrintTicket;
 
                 // Get previously used PrintQueue.
-                if (this.mViewModel.mCommandUtility.PrintQueue != null)
-                    dlg.PrintQueue = this.mViewModel.mCommandUtility.PrintQueue;
+                if (mViewModel.mCommandUtility.PrintQueue != null)
+                    dlg.PrintQueue = mViewModel.mCommandUtility.PrintQueue;
 
                 // Show dialog; return if canceled.
                 if (!dlg.ShowDialog().GetValueOrDefault()) return;
 
                 // Store the PrintTicket and PrintQueue for later use.
-                this.mViewModel.mCommandUtility.PrintTicket = dlg.PrintTicket;
-                this.mViewModel.mCommandUtility.PrintQueue = dlg.PrintQueue;
+                mViewModel.mCommandUtility.PrintTicket = dlg.PrintTicket;
+                mViewModel.mCommandUtility.PrintQueue = dlg.PrintQueue;
 
                 // Deselect shapes while printing.
-                List<ShapeViewModelBase> selectedItems = new List<ShapeViewModelBase>(this.mViewModel.vm_CanvasViewModel.SelectedItem.Shapes);
-                this.mViewModel.vm_CanvasViewModel.SelectedItem.Clear();
+                List<ShapeViewModelBase> selectedItems = new List<ShapeViewModelBase>(mViewModel.vm_CanvasViewModel.SelectedItem.Shapes);
+                mViewModel.vm_CanvasViewModel.SelectedItem.Clear();
 
                 // Print the document.
-                Rectangle page = this.mViewModel.mCommandUtility.GetDocumentRectangle(new Size(dlg.PrintableAreaWidth, dlg.PrintableAreaHeight));
-                dlg.PrintVisual(page, this.mViewModel.prop_DocumentFileName);
+                Rectangle page = mViewModel.mCommandUtility.GetDocumentRectangle(new Size(dlg.PrintableAreaWidth, dlg.PrintableAreaHeight));
+                dlg.PrintVisual(page, mViewModel.prop_DocumentFileName);
 
                 // Reselect shapes.
-                this.mViewModel.vm_CanvasViewModel.SelectedItem.SelectShapes(selectedItems);
+                mViewModel.vm_CanvasViewModel.SelectedItem.SelectShapes(selectedItems);
             }
         }
 
@@ -438,23 +436,23 @@
             public UndoCommandModel(DocumentViewModel viewModel)
                 : base(ApplicationCommands.Undo)
             {
-                this.mViewModel = viewModel;
-                this.Description = MiniUML.Framework.Local.Strings.STR_CMD_UNDO_DESCRIPTION;
-                this.Image = (BitmapImage)Application.Current.Resources["Style.Images.Commands.Undo"];
+                mViewModel = viewModel;
+                Description = Framework.Local.Strings.STR_CMD_UNDO_DESCRIPTION;
+                Image = (BitmapImage)Application.Current.Resources["Style.Images.Commands.Undo"];
             }
 
             public override void OnQueryEnabled(object sender, CanExecuteRoutedEventArgs e)
             {
-                e.CanExecute = ((this.mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready ||
-                                                this.mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Invalid) &&
-                                                this.mViewModel.mDataModel.HasUndoData);
+                e.CanExecute = ((mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready ||
+                                                mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Invalid) &&
+                                                mViewModel.mDataModel.HasUndoData);
 
                 e.Handled = true;
             }
 
             public override void OnExecute(object sender, ExecutedRoutedEventArgs e)
             {
-                this.mViewModel.mDataModel.Undo(this.mViewModel.vm_CanvasViewModel);
+                mViewModel.mDataModel.Undo(mViewModel.vm_CanvasViewModel);
             }
         }
 
@@ -468,23 +466,23 @@
             public RedoCommandModel(DocumentViewModel viewModel)
                 : base(ApplicationCommands.Redo)
             {
-                this.mViewModel = viewModel;
-                this.Description = MiniUML.Framework.Local.Strings.STR_CMD_REDO_DESCRIPTION;
-                this.Image = (BitmapImage)Application.Current.Resources["Style.Images.Commands.Redo"];
+                mViewModel = viewModel;
+                Description = Framework.Local.Strings.STR_CMD_REDO_DESCRIPTION;
+                Image = (BitmapImage)Application.Current.Resources["Style.Images.Commands.Redo"];
             }
 
             public override void OnQueryEnabled(object sender, CanExecuteRoutedEventArgs e)
             {
-                e.CanExecute = ((this.mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready ||
-                                                this.mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Invalid) &&
-                                                this.mViewModel.mDataModel.HasRedoData);
+                e.CanExecute = ((mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready ||
+                                                mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Invalid) &&
+                                                mViewModel.mDataModel.HasRedoData);
 
                 e.Handled = true;
             }
 
             public override void OnExecute(object sender, ExecutedRoutedEventArgs e)
             {
-                this.mViewModel.mDataModel.Redo(this.mViewModel.vm_CanvasViewModel);
+                mViewModel.mDataModel.Redo(mViewModel.vm_CanvasViewModel);
             }
         }
 
@@ -498,16 +496,16 @@
             public NewCommandModel(DocumentViewModel viewModel)
                 : base(ApplicationCommands.New)
             {
-                this.mViewModel = viewModel;
-                this.Name = MiniUML.Framework.Local.Strings.STR_CMD_CreateNew;
-                this.Description = MiniUML.Framework.Local.Strings.STR_CMD_CreateNewDocument;
-                this.Image = (BitmapImage)Application.Current.Resources["Style.Images.Commands.New"];
+                mViewModel = viewModel;
+                Name = Framework.Local.Strings.STR_CMD_CreateNew;
+                Description = Framework.Local.Strings.STR_CMD_CreateNewDocument;
+                Image = (BitmapImage)Application.Current.Resources["Style.Images.Commands.New"];
             }
 
             public override void OnQueryEnabled(object sender, CanExecuteRoutedEventArgs e)
             {
-                e.CanExecute = (this.mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready ||
-                                                this.mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Invalid);
+                e.CanExecute = (mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready ||
+                                                mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Invalid);
 
                 e.Handled = true;
             }
@@ -515,12 +513,12 @@
             public override void OnExecute(object sender, ExecutedRoutedEventArgs e)
             {
                 // Save changes before closing current document?
-                if (this.mViewModel.QuerySaveChanges() == false)
+                if (mViewModel.QuerySaveChanges() == false)
                     return;
 
-                Size currentPageSize = this.mViewModel.dm_DocumentDataModel.PageSize;
+                Size currentPageSize = mViewModel.dm_DocumentDataModel.PageSize;
 
-                Thickness currentPageMargins = this.mViewModel.dm_DocumentDataModel.PageMargins;
+                Thickness currentPageMargins = mViewModel.dm_DocumentDataModel.PageMargins;
 
                 // Create NewDocumentWindow 
                 IFactory newDocumentWindowFactory = Application.Current.Resources["NewDocumentWindowFactory"] as IFactory;
@@ -541,9 +539,9 @@
 
                 // Create document.
                 newDocumentWindow.DataContext = null;
-                this.mViewModel.prop_DocumentFilePath = null;
-                this.mViewModel.vm_CanvasViewModel.SelectedItem.Clear();
-                this.mViewModel.mDataModel.New(newDocumentWindowViewModel);
+                mViewModel.prop_DocumentFilePath = null;
+                mViewModel.vm_CanvasViewModel.SelectedItem.Clear();
+                mViewModel.mDataModel.New(newDocumentWindowViewModel);
             }
         }
 
@@ -557,15 +555,15 @@
             public OpenCommandModel(DocumentViewModel viewModel)
                 : base(ApplicationCommands.Open)
             {
-                this.mViewModel = viewModel;
-                this.Description = MiniUML.Framework.Local.Strings.STR_CMD_OpenDocument;
-                this.Image = (BitmapImage)Application.Current.Resources["Style.Images.Commands.Open"];
+                mViewModel = viewModel;
+                Description = Framework.Local.Strings.STR_CMD_OpenDocument;
+                Image = (BitmapImage)Application.Current.Resources["Style.Images.Commands.Open"];
             }
 
             public override void OnQueryEnabled(object sender, CanExecuteRoutedEventArgs e)
             {
-                e.CanExecute = (this.mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready ||
-                                                this.mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Invalid);
+                e.CanExecute = (mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready ||
+                                                mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Invalid);
 
                 e.Handled = true;
             }
@@ -573,13 +571,13 @@
             public override void OnExecute(object sender, ExecutedRoutedEventArgs e)
             {
                 // Save changes before closing current document?
-                if (this.mViewModel.QuerySaveChanges() == false)
+                if (mViewModel.QuerySaveChanges() == false)
                     return;
 
                 // Create and configure OpenFileDialog.
                 FileDialog dlg = new OpenFileDialog()
                 {
-                    Filter = MiniUML.Framework.Local.Strings.STR_FILETYPE_FILTER,
+                    Filter = Framework.Local.Strings.STR_FILETYPE_FILTER,
                     DefaultExt = "xml",
                     AddExtension = true,
                     ValidateNames = true,
@@ -592,13 +590,13 @@
                 try
                 {
                     // Open the document.
-                    this.mViewModel.LoadFile(dlg.FileName);
+                    mViewModel.LoadFile(dlg.FileName);
                 }
                 catch (Exception ex)
                 {
                     var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                    msgBox.Show(ex, string.Format(MiniUML.Framework.Local.Strings.STR_OpenFILE_MSG, dlg.FileName),
-                                MiniUML.Framework.Local.Strings.STR_OpenFILE_MSG_CAPTION);
+                    msgBox.Show(ex, string.Format(Framework.Local.Strings.STR_OpenFILE_MSG, dlg.FileName),
+                                Framework.Local.Strings.STR_OpenFILE_MSG_CAPTION);
                 }
             }
         }

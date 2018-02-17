@@ -18,7 +18,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -54,8 +53,8 @@ namespace ICSharpCode.AvalonEdit.Folding
 		/// Gets/sets the Brush used for displaying the lines of folding markers.
 		/// </summary>
 		public Brush FoldingMarkerBrush {
-			get { return (Brush)GetValue(FoldingMarkerBrushProperty); }
-			set { SetValue(FoldingMarkerBrushProperty, value); }
+			get => (Brush)GetValue(FoldingMarkerBrushProperty);
+		    set => SetValue(FoldingMarkerBrushProperty, value);
 		}
 		
 		/// <summary>
@@ -69,8 +68,8 @@ namespace ICSharpCode.AvalonEdit.Folding
 		/// Gets/sets the Brush used for displaying the background of folding markers.
 		/// </summary>
 		public Brush FoldingMarkerBackgroundBrush {
-			get { return (Brush)GetValue(FoldingMarkerBackgroundBrushProperty); }
-			set { SetValue(FoldingMarkerBackgroundBrushProperty, value); }
+			get => (Brush)GetValue(FoldingMarkerBackgroundBrushProperty);
+		    set => SetValue(FoldingMarkerBackgroundBrushProperty, value);
 		}
 		
 		/// <summary>
@@ -85,8 +84,8 @@ namespace ICSharpCode.AvalonEdit.Folding
 		/// Gets/sets the Brush used for displaying the lines of selected folding markers.
 		/// </summary>
 		public Brush SelectedFoldingMarkerBrush {
-			get { return (Brush)GetValue(SelectedFoldingMarkerBrushProperty); }
-			set { SetValue(SelectedFoldingMarkerBrushProperty, value); }
+			get => (Brush)GetValue(SelectedFoldingMarkerBrushProperty);
+		    set => SetValue(SelectedFoldingMarkerBrushProperty, value);
 		}
 		
 		/// <summary>
@@ -101,8 +100,8 @@ namespace ICSharpCode.AvalonEdit.Folding
 		/// Gets/sets the Brush used for displaying the background of selected folding markers.
 		/// </summary>
 		public Brush SelectedFoldingMarkerBackgroundBrush {
-			get { return (Brush)GetValue(SelectedFoldingMarkerBackgroundBrushProperty); }
-			set { SetValue(SelectedFoldingMarkerBackgroundBrushProperty, value); }
+			get => (Brush)GetValue(SelectedFoldingMarkerBackgroundBrushProperty);
+		    set => SetValue(SelectedFoldingMarkerBackgroundBrushProperty, value);
 		}
 		
 		static void OnUpdateBrushes(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -192,11 +191,9 @@ namespace ICSharpCode.AvalonEdit.Folding
 		}
 		
 		/// <inheritdoc/>
-		protected override int VisualChildrenCount {
-			get { return markers.Count; }
-		}
-		
-		/// <inheritdoc/>
+		protected override int VisualChildrenCount => markers.Count;
+
+	    /// <inheritdoc/>
 		protected override Visual GetVisualChild(int index)
 		{
 			return markers[index];

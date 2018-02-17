@@ -110,7 +110,7 @@ namespace ICSharpCode.AvalonEdit.Indentation.CSharp
 				return string.Format(
 					CultureInfo.InvariantCulture,
 					"[Block StartLine={0}, LastWord='{1}', Continuation={2}, OneLineBlock={3}, PreviousOneLineBlock={4}]",
-					this.StartLine, this.LastWord, this.Continuation, this.OneLineBlock, this.PreviousOneLineBlock);
+					StartLine, LastWord, Continuation, OneLineBlock, PreviousOneLineBlock);
 			}
 		}
 		
@@ -141,17 +141,19 @@ namespace ICSharpCode.AvalonEdit.Indentation.CSharp
 		{
 			wordBuilder = new StringBuilder();
 			blocks = new Stack<Block>();
-			block = new Block();
-			block.InnerIndent = "";
-			block.OuterIndent = "";
-			block.Bracket = '{';
-			block.Continuation = false;
-			block.LastWord = "";
-			block.OneLineBlock = 0;
-			block.PreviousOneLineBlock = 0;
-			block.StartLine = 0;
-			
-			inString = false;
+            block = new Block
+            {
+                InnerIndent = "",
+                OuterIndent = "",
+                Bracket = '{',
+                Continuation = false,
+                LastWord = "",
+                OneLineBlock = 0,
+                PreviousOneLineBlock = 0,
+                StartLine = 0
+            };
+
+            inString = false;
 			inChar   = false;
 			verbatim = false;
 			escape   = false;

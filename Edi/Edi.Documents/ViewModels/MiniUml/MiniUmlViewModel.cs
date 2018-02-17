@@ -5,15 +5,13 @@ namespace Edi.Documents.ViewModels.MiniUml
 	using System.Globalization;
 	using System.IO;
 	using System.Windows.Input;
-	using Edi.Core.Interfaces;
-	using Edi.Core.Interfaces.Documents;
-	using Edi.Core.Models.Documents;
-	using Edi.Core.ViewModels.Command;
+	using Core.Interfaces;
+	using Core.Interfaces.Documents;
+	using Core.Models.Documents;
+	using Core.ViewModels.Command;
 	using MiniUML.Model.ViewModels.Document;
-	using MsgBox;
-    using CommonServiceLocator;
 
-    public class MiniUmlViewModel : Edi.Core.ViewModels.FileBaseViewModel
+    public class MiniUmlViewModel : Core.ViewModels.FileBaseViewModel
 	{
 		#region Fields
 		public const string DocumentKey = "UMLEditor";
@@ -21,12 +19,12 @@ namespace Edi.Documents.ViewModels.MiniUml
 		public const string FileFilterName = "Unified Modeling Language";
 		public const string DefaultFilter = "uml";
 
-		private MiniUML.Model.ViewModels.Document.RibbonViewModel mRibbonViewModel;
-		private MiniUML.Model.ViewModels.Document.AbstractDocumentViewModel mDocumentMiniUML;
+		private RibbonViewModel mRibbonViewModel;
+		private AbstractDocumentViewModel mDocumentMiniUML;
 
 		private static int iNewFileCounter = 1;
 		private string defaultFileType = "uml";
-		private readonly static string defaultFileName = Edi.Util.Local.Strings.STR_FILE_DEFAULTNAME;
+		private readonly static string defaultFileName = Util.Local.Strings.STR_FILE_DEFAULTNAME;
 
 		private object lockThis = new object();
 		#endregion Fields
@@ -39,8 +37,8 @@ namespace Edi.Documents.ViewModels.MiniUml
 		public MiniUmlViewModel(IDocumentModel documentModel)
 		: this ()
 		{
-			this.mDocumentModel = documentModel;
-			this.mDocumentModel.SetFileNamePath(this.FilePath, this.IsFilePathReal);
+			mDocumentModel = documentModel;
+			mDocumentModel.SetFileNamePath(FilePath, IsFilePathReal);
 		}
 
 		/// <summary>
@@ -48,48 +46,48 @@ namespace Edi.Documents.ViewModels.MiniUml
 		/// for construction from file saved on disk.
 		/// </summary>
 		protected MiniUmlViewModel()
-			: base(MiniUmlViewModel.DocumentKey)
+			: base(DocumentKey)
 		{
-			this.FilePath = string.Format(CultureInfo.InvariantCulture, "{0} {1}.{2}",
-																		MiniUmlViewModel.defaultFileName,
-																		MiniUmlViewModel.iNewFileCounter++,
-																		this.defaultFileType);
+			FilePath = string.Format(CultureInfo.InvariantCulture, "{0} {1}.{2}",
+																		defaultFileName,
+																		iNewFileCounter++,
+																		defaultFileType);
 
-			this.mRibbonViewModel = new RibbonViewModel();
+			mRibbonViewModel = new RibbonViewModel();
 
 			// The plug-in model name identifies the plug-in that takes care of this document
 			// So, the supplied string is required to be in sync with
 			//
 			// MiniUML.Plugins.UmlClassDiagram.PluginModel.ModelName
 			//
-			this.mDocumentMiniUML = new MiniUML.Model.ViewModels.Document.DocumentViewModel("UMLClassDiagram");
+			mDocumentMiniUML = new DocumentViewModel("UMLClassDiagram");
 
-			this.mDocumentMiniUML.dm_DocumentDataModel.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e)
+			mDocumentMiniUML.dm_DocumentDataModel.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e)
 			{
 				if (e.PropertyName == "HasUnsavedData")
-					this.IsDirty = this.mDocumentMiniUML.dm_DocumentDataModel.HasUnsavedData;
+					IsDirty = mDocumentMiniUML.dm_DocumentDataModel.HasUnsavedData;
 			};
 
-			this.IsDirty = false;
+			IsDirty = false;
 		}
 		#endregion constructor
 
 		#region properties
 		#region MiniUML Document ViewModel
-		public MiniUML.Model.ViewModels.Document.AbstractDocumentViewModel DocumentMiniUML
+		public AbstractDocumentViewModel DocumentMiniUML
 		{
 			get
 			{
-				return this.mDocumentMiniUML;
+				return mDocumentMiniUML;
 			}
 
 			protected set
 			{
-				if (this.mDocumentMiniUML != value)
+				if (mDocumentMiniUML != value)
 				{
-					this.mDocumentMiniUML = value;
+					mDocumentMiniUML = value;
 
-					this.RaisePropertyChanged(() => this.DocumentMiniUML);
+					RaisePropertyChanged(() => DocumentMiniUML);
 				}
 			}
 		}
@@ -100,16 +98,16 @@ namespace Edi.Documents.ViewModels.MiniUml
 		{
 			get
 			{
-				return this.mRibbonViewModel;
+				return mRibbonViewModel;
 			}
 
 			protected set
 			{
-				if (this.mRibbonViewModel != value)
+				if (mRibbonViewModel != value)
 				{
-					this.mRibbonViewModel = value;
+					mRibbonViewModel = value;
 
-					this.RaisePropertyChanged(() => this.Vm_RibbonViewModel);
+					RaisePropertyChanged(() => Vm_RibbonViewModel);
 				}
 			}
 		}
@@ -126,22 +124,22 @@ namespace Edi.Documents.ViewModels.MiniUml
 		{
 			get
 			{
-				if (this.mFilePath == null || this.mFilePath == String.Empty)
+				if (mFilePath == null || mFilePath == String.Empty)
 					return string.Format(CultureInfo.CurrentCulture, "{0}.{1}",
-															 MiniUmlViewModel.defaultFileName, this.defaultFileType);
+															 defaultFileName, defaultFileType);
 
-				return this.mFilePath;
+				return mFilePath;
 			}
 
 			protected set
 			{
-				if (this.mFilePath != value)
+				if (mFilePath != value)
 				{
-					this.mFilePath = value;
+					mFilePath = value;
 
-					this.RaisePropertyChanged(() => this.FilePath);
-					this.RaisePropertyChanged(() => this.FileName);
-					this.RaisePropertyChanged(() => this.Title);
+					RaisePropertyChanged(() => FilePath);
+					RaisePropertyChanged(() => FileName);
+					RaisePropertyChanged(() => Title);
 				}
 			}
 		}
@@ -155,7 +153,7 @@ namespace Edi.Documents.ViewModels.MiniUml
 		{
 			get
 			{
-				return this.FileName + (IsDirty == true ? "*" : string.Empty);
+				return FileName + (IsDirty ? "*" : string.Empty);
 			}
 		}
 		#endregion
@@ -175,9 +173,9 @@ namespace Edi.Documents.ViewModels.MiniUml
 				// This option should never happen - its an emergency break for those cases that never occur
 				if (FilePath == null || FilePath == String.Empty)
 					return string.Format(CultureInfo.InvariantCulture, "{0}.{1}",
-															 MiniUmlViewModel.defaultFileName, this.defaultFileType);
+															 defaultFileName, defaultFileType);
 
-				return System.IO.Path.GetFileName(FilePath);
+				return Path.GetFileName(FilePath);
 			}
 		}
 
@@ -197,15 +195,15 @@ namespace Edi.Documents.ViewModels.MiniUml
 		{
 			get
 			{
-				return this.mIsReadOnly;
+				return mIsReadOnly;
 			}
 
 			protected set
 			{
-				if (this.mIsReadOnly != value)
+				if (mIsReadOnly != value)
 				{
-					this.mIsReadOnly = value;
-					this.RaisePropertyChanged(() => this.IsReadOnly);
+					mIsReadOnly = value;
+					RaisePropertyChanged(() => IsReadOnly);
 				}
 			}
 		}
@@ -215,15 +213,15 @@ namespace Edi.Documents.ViewModels.MiniUml
 		{
 			get
 			{
-				return this.mIsReadOnlyReason;
+				return mIsReadOnlyReason;
 			}
 
 			protected set
 			{
-				if (this.mIsReadOnlyReason != value)
+				if (mIsReadOnlyReason != value)
 				{
-					this.mIsReadOnlyReason = value;
-					this.RaisePropertyChanged(() => this.IsReadOnlyReason);
+					mIsReadOnlyReason = value;
+					RaisePropertyChanged(() => IsReadOnlyReason);
 				}
 			}
 		}
@@ -249,8 +247,8 @@ namespace Edi.Documents.ViewModels.MiniUml
 				{
 					mIsDirty = value;
 
-					this.RaisePropertyChanged(() => this.IsDirty);
-					this.RaisePropertyChanged(() => this.Title);
+					RaisePropertyChanged(() => IsDirty);
+					RaisePropertyChanged(() => Title);
 				}
 			}
 		}
@@ -289,15 +287,15 @@ namespace Edi.Documents.ViewModels.MiniUml
 		{
 			try
 			{
-				this.mDocumentMiniUML.ExecuteSave(filePath);
+				mDocumentMiniUML.ExecuteSave(filePath);
 
-				if (this.mDocumentModel == null)
-					this.mDocumentModel = new DocumentModel();
+				if (mDocumentModel == null)
+					mDocumentModel = new DocumentModel();
 
-				this.mDocumentModel.SetFileNamePath(filePath, true);
-				this.FilePath = filePath;
-				this.ContentId = filePath;
-				this.IsDirty = false;
+				mDocumentModel.SetFileNamePath(filePath, true);
+				FilePath = filePath;
+				ContentId = filePath;
+				IsDirty = false;
 
 				return true;
 			}
@@ -326,8 +324,8 @@ namespace Edi.Documents.ViewModels.MiniUml
 			get
 			{
 				if (_closeCommand == null)
-					_closeCommand = new RelayCommand<object>((p) => this.OnClose(),
-																									 (p) => this.CanClose());
+					_closeCommand = new RelayCommand<object>((p) => OnClose(),
+																									 (p) => CanClose());
 
 				return _closeCommand;
 			}
@@ -356,7 +354,7 @@ namespace Edi.Documents.ViewModels.MiniUml
 		/// <returns></returns>
 		public static MiniUmlViewModel LoadFile(IDocumentModel dm, object o)
 		{
-			return MiniUmlViewModel.LoadFile(dm.FileNamePath);
+			return LoadFile(dm.FileNamePath);
 		}
 
 		/// <summary>
@@ -369,7 +367,7 @@ namespace Edi.Documents.ViewModels.MiniUml
 		{
 			MiniUmlViewModel vm = new MiniUmlViewModel();
 
-			if (vm.OpenFile(filePath) == true)
+			if (vm.OpenFile(filePath))
 				return vm;
 
 			return null;
@@ -386,15 +384,15 @@ namespace Edi.Documents.ViewModels.MiniUml
 			{
 				var isReal = File.Exists(filePath);
 
-				if (isReal == true)
+				if (isReal)
 				{
-					if (this.mDocumentModel == null)
-						this.mDocumentModel = new DocumentModel();
+					if (mDocumentModel == null)
+						mDocumentModel = new DocumentModel();
 
-					this.mDocumentModel.SetFileNamePath(filePath, isReal);
+					mDocumentModel.SetFileNamePath(filePath, isReal);
 
-					this.FilePath = filePath;
-					this.ContentId = this.mFilePath;
+					FilePath = filePath;
+					ContentId = mFilePath;
 
 					// Mark document loaded from persistence as unedited copy (display without dirty mark '*' in name)
 					IsDirty = false;
@@ -402,7 +400,7 @@ namespace Edi.Documents.ViewModels.MiniUml
 					try
 					{
 						// XXX TODO Extend log4net FileOpen method to support base.FireFileProcessingResultEvent(...);
-						this.mDocumentMiniUML.LoadFile(this.mFilePath);
+						mDocumentMiniUML.LoadFile(mFilePath);
 					}
 					catch (Exception ex)
 					{
@@ -435,8 +433,8 @@ namespace Edi.Documents.ViewModels.MiniUml
 		{
 			try
 			{
-				if (System.IO.File.Exists(this.FilePath))
-					return System.IO.Path.GetDirectoryName(this.FilePath);
+				if (File.Exists(FilePath))
+					return Path.GetDirectoryName(FilePath);
 			}
 			catch
 			{

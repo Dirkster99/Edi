@@ -9,7 +9,7 @@ namespace Log4NetTools.Views
 	{
 		public Log4NetToolView()
 		{
-			this.InitializeComponent();
+			InitializeComponent();
 		}
 	}
 }

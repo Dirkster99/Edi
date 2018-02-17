@@ -16,11 +16,9 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using ICSharpCode.NRefactory.Editor;
 
 namespace ICSharpCode.AvalonEdit.Document
 {
@@ -41,7 +39,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		internal void UpdateListOfLineTrackers()
 		{
-			this.lineTrackers = document.LineTrackers.ToArray();
+			lineTrackers = document.LineTrackers.ToArray();
 		}
 		
 		public LineManager(DocumentLineTree documentLineTree, TextDocument document)

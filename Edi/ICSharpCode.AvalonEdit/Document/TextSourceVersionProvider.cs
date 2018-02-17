@@ -37,30 +37,26 @@ namespace ICSharpCode.AvalonEdit.Document
 		/// </summary>
 		public TextSourceVersionProvider()
 		{
-			this.currentVersion = new Version(this);
+			currentVersion = new Version(this);
 		}
 		
 		/// <summary>
 		/// Gets the current version.
 		/// </summary>
-		public ITextSourceVersion CurrentVersion {
-			get { return currentVersion; }
-		}
-		
-		/// <summary>
+		public ITextSourceVersion CurrentVersion => currentVersion;
+
+	    /// <summary>
 		/// Replaces the current version with a new version.
 		/// </summary>
 		/// <param name="change">Change from current version to new version</param>
 		public void AppendChange(TextChangeEventArgs change)
 		{
-			if (change == null)
-				throw new ArgumentNullException("change");
-			currentVersion.change = change;
+            currentVersion.change = change ?? throw new ArgumentNullException(nameof(change));
 			currentVersion.next = new Version(currentVersion);
 			currentVersion = currentVersion.next;
 		}
 		
-		[DebuggerDisplay("Version #{id}")]
+		[DebuggerDisplay("Version #{" + nameof(id) + "}")]
 		sealed class Version : ITextSourceVersion
 		{
 			// Reference back to the provider.
@@ -80,8 +76,8 @@ namespace ICSharpCode.AvalonEdit.Document
 			
 			internal Version(Version prev)
 			{
-				this.provider = prev.provider;
-				this.id = unchecked( prev.id + 1 );
+				provider = prev.provider;
+				id = unchecked( prev.id + 1 );
 			}
 			
 			public bool BelongsToSameDocumentAs(ITextSourceVersion other)
@@ -93,13 +89,13 @@ namespace ICSharpCode.AvalonEdit.Document
 			public int CompareAge(ITextSourceVersion other)
 			{
 				if (other == null)
-					throw new ArgumentNullException("other");
+					throw new ArgumentNullException(nameof(other));
 				Version o = other as Version;
 				if (o == null || provider != o.provider)
 					throw new ArgumentException("Versions do not belong to the same document.");
 				// We will allow overflows, but assume that the maximum distance between checkpoints is 2^31-1.
 				// This is guaranteed on x86 because so many checkpoints don't fit into memory.
-				return Math.Sign(unchecked( this.id - o.id ));
+				return Math.Sign(unchecked( id - o.id ));
 			}
 			
 			public IEnumerable<TextChangeEventArgs> GetChangesTo(ITextSourceVersion other)

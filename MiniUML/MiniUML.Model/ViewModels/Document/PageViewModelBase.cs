@@ -7,9 +7,8 @@
   using System.Windows;
   using System.Xml;
 
-  using MiniUML.Framework;
-  using MiniUML.Model.Model;
-  using MiniUML.Model.ViewModels.Shapes;
+  using Framework;
+  using Shapes;
 
   /// <summary>
   /// Define the size of a page and contains the child elements
@@ -47,8 +46,8 @@
     /// </summary>
     public PageViewModelBase()
     {
-      this.prop_PageSize = new Size(DefaultXSize, DefaultYSize);
-      this.prop_PageMargins = new Thickness(DefaultLeftMargin, DefaultTopMargin,
+      prop_PageSize = new Size(DefaultXSize, DefaultYSize);
+      prop_PageMargins = new Thickness(DefaultLeftMargin, DefaultTopMargin,
                                             DefaultRightMargin, DefaultBottomMargin);
     }
 
@@ -63,40 +62,31 @@
         return;
 
       if (copyThis.mElements != null)
-        this.mElements = new ObservableCollection<ShapeViewModelBase>(copyThis.mElements);
+        mElements = new ObservableCollection<ShapeViewModelBase>(copyThis.mElements);
 
       if (copyThis.mPageMargins != null)
-        this.mPageMargins = new Thickness(copyThis.mPageMargins.Left, copyThis.mPageMargins.Top,
+        mPageMargins = new Thickness(copyThis.mPageMargins.Left, copyThis.mPageMargins.Top,
                                           copyThis.mPageMargins.Right, copyThis.mPageMargins.Bottom);
 
       if (copyThis.mPageSize != null)
-        this.mPageSize = new Size(copyThis.mPageSize.Width, copyThis.mPageSize.Height);
+        mPageSize = new Size(copyThis.mPageSize.Width, copyThis.mPageSize.Height);
     }
     #endregion constructor
     
     #region properties
-    public string ElementName
-    {
-      get
-      {
-        return PageViewModelBase.ShapeElementName;
-      }
-    }
+    public string ElementName => ShapeElementName;
 
-    /// <summary>
+      /// <summary>
     /// Get/set size of document page
     /// </summary>
     public Size prop_PageSize
     {
-      get
-      {
-        return this.mPageSize;
-      }
+      get => mPageSize;
 
-      set
+          set
       {
-        this.mPageSize = value;
-        this.NotifyPropertyChanged(() => this.prop_PageSize);
+        mPageSize = value;
+        NotifyPropertyChanged(() => prop_PageSize);
       }
     }
 
@@ -105,15 +95,12 @@
     /// </summary>
     public Thickness prop_PageMargins
     {
-      get
-      {
-        return this.mPageMargins;
-      }
+      get => mPageMargins;
 
-      set
+        set
       {
-        this.mPageMargins = value;
-        this.NotifyPropertyChanged(() => this.prop_PageMargins);
+        mPageMargins = value;
+        NotifyPropertyChanged(() => prop_PageMargins);
       }
     }
 
@@ -141,12 +128,14 @@
     public static string Write(PageViewModelBase root,
                                IEnumerable<ShapeViewModelBase> docRoot)
     {
-      XmlWriterSettings settings = new XmlWriterSettings();
-      settings.Indent = true;
-      settings.IndentChars = "  ";         // 2 spaces as indentation
-      settings.NewLineOnAttributes = true;
+            XmlWriterSettings settings = new XmlWriterSettings
+            {
+                Indent = true,
+                IndentChars = "  ",         // 2 spaces as indentation
+                NewLineOnAttributes = true
+            };
 
-      try
+            try
       {
         using (var sw = new StringWriter())
         {
@@ -174,12 +163,14 @@
                              PageViewModelBase root,
                              IEnumerable<ShapeViewModelBase> docRoot)
     {
-      XmlWriterSettings settings = new XmlWriterSettings();
-      settings.Indent = true;
-      settings.IndentChars = "  ";         // 2 spaces as indentation
-      settings.NewLineOnAttributes = true;
+            XmlWriterSettings settings = new XmlWriterSettings
+            {
+                Indent = true,
+                IndentChars = "  ",         // 2 spaces as indentation
+                NewLineOnAttributes = true
+            };
 
-      try
+            try
       {
         using (XmlWriter writer = XmlWriter.Create(filePathName, settings))
         {
@@ -201,7 +192,7 @@
     /// <param name="shape"></param>
     public void Add(ShapeViewModelBase shape)
     {
-      this.mElements.Add(shape);
+      mElements.Add(shape);
     }
 
     /// <summary>
@@ -215,14 +206,14 @@
       {
         foreach (var item in shapes)
         {
-          this.mElements.Add(item);
+          mElements.Add(item);
         }
       }
     }
 
     public IEnumerable<ShapeViewModelBase> Elements()
     {
-      return (IEnumerable<ShapeViewModelBase>)this.mElements;
+      return (IEnumerable<ShapeViewModelBase>)mElements;
     }
 
     /// <summary>
@@ -233,9 +224,9 @@
     public void SaveDocument(XmlWriter writer,
                              IEnumerable<ShapeViewModelBase> root)
     {
-      writer.WriteStartElement(string.Empty, this.ElementName, PageViewModelBase.NameSpace);
+      writer.WriteStartElement(string.Empty, ElementName, NameSpace);
 
-      this.SaveAttributes(writer);
+      SaveAttributes(writer);
 
       if (root != null)
       {
@@ -255,7 +246,7 @@
     /// <returns></returns>
     public string SaveDocument(IEnumerable<ShapeViewModelBase> mDocRoot)
     {
-      return PageViewModelBase.Write(this, mDocRoot);
+      return Write(this, mDocRoot);
     }
 
     /// <summary>
@@ -265,19 +256,18 @@
     /// <param name="filename"></param>
     public bool SaveDocument(string filename, ObservableCollection<ShapeViewModelBase> mDocRoot)
     {
-      return PageViewModelBase.Write(filename, this, mDocRoot);
+      return Write(filename, this, mDocRoot);
     }
 
     /// <summary>
     /// Save the attribute list for this shape or class
     /// </summary>
     /// <param name="writer"></param>
-    protected void SaveAttributes(System.Xml.XmlWriter writer)
+    protected void SaveAttributes(XmlWriter writer)
     {
       // Write documents attributes
       writer.WriteAttributeString("Size",
-                                  string.Format("{0},{1}",
-                                  this.prop_PageSize.Width, this.prop_PageSize.Height));
+          $"{prop_PageSize.Width},{prop_PageSize.Height}");
     }
     #endregion methods
   }

@@ -40,7 +40,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		public RopeTextReader(Rope<char> rope)
 		{
 			if (rope == null)
-				throw new ArgumentNullException("rope");
+				throw new ArgumentNullException(nameof(rope));
 			
 			// We force the user to iterate through a clone of the rope to keep the API contract of RopeTextReader simple
 			// (what happens when a rope is modified while iterating through it?)
@@ -109,12 +109,12 @@ namespace ICSharpCode.AvalonEdit.Utils
 				Array.Copy(currentNode.contents, indexInsideNode, buffer, index, count);
 				indexInsideNode += count;
 				return count;
-			} else {
-				// read to end of current node
-				Array.Copy(currentNode.contents, indexInsideNode, buffer, index, amountInCurrentNode);
-				GoToNextNode();
-				return amountInCurrentNode;
 			}
+
+		    // read to end of current node
+		    Array.Copy(currentNode.contents, indexInsideNode, buffer, index, amountInCurrentNode);
+		    GoToNextNode();
+		    return amountInCurrentNode;
 		}
 	}
 }

@@ -5,8 +5,7 @@
   using System.Windows;
   using System.Windows.Controls;
   using System.Windows.Media;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Shapes;
+  using Model.ViewModels.Shapes;
   using MiniUML.View.Controls;
   using MiniUML.View.Converter;
 
@@ -44,7 +43,7 @@
         "Stroke", typeof(Brush), typeof(GenericUmlAssociation),
         new FrameworkPropertyMetadata(Brushes.Black, FrameworkPropertyMetadataOptions.AffectsRender));
 
-    private ShapeIdToControlConverter shapeIdConverter = null;
+    private ShapeIdToControlConverter shapeIdConverter;
     #endregion fields
 
     #region constructor
@@ -57,13 +56,7 @@
       new FrameworkPropertyMetadata(typeof(GenericUmlAssociation)));
     }
 
-    /// <summary>
-    /// class constructor
-    /// </summary>
-    public GenericUmlAssociation()
-    {
-    }
-    #endregion constructor
+      #endregion constructor
 
     #region events
     /// <summary>
@@ -80,45 +73,47 @@
     #region Dependency properties (FromName, FromArrow, ToName, ToArrow)
     public string FromName
     {
-      get { return (string)this.GetValue(FromNameProperty); }
-      set { this.SetValue(FromNameProperty, value); }
+      get => (string)GetValue(FromNameProperty);
+        set => SetValue(FromNameProperty, value);
     }
 
     public string ToName
     {
-      get { return (string)this.GetValue(ToNameProperty); }
-      set { this.SetValue(ToNameProperty, value); }
+      get => (string)GetValue(ToNameProperty);
+        set => SetValue(ToNameProperty, value);
     }
 
     public string FromArrow
     {
-      get { return (string)this.GetValue(FromArrowProperty); }
-      set { this.SetValue(FromArrowProperty, value); }
+      get => (string)GetValue(FromArrowProperty);
+        set => SetValue(FromArrowProperty, value);
     }
 
     public string ToArrow
     {
-      get { return (string)this.GetValue(ToArrowProperty); }
-      set { this.SetValue(ToArrowProperty, value); }
+      get => (string)GetValue(ToArrowProperty);
+        set => SetValue(ToArrowProperty, value);
     }
 
     public Brush Stroke
     {
-      get { return (Brush)this.GetValue(StrokeProperty); }
-      set { this.SetValue(StrokeProperty, value); }
+      get => (Brush)GetValue(StrokeProperty);
+        set => SetValue(StrokeProperty, value);
     }
 
     public ShapeIdToControlConverter ShapeIdToControlConverter
     {
       get
       {
-        if (this.shapeIdConverter == null)
+        if (shapeIdConverter == null)
         {
-          this.shapeIdConverter = new ShapeIdToControlConverter();
-          this.shapeIdConverter.ReferenceControl = this;
-        }
+                    shapeIdConverter = new ShapeIdToControlConverter
+                    {
+                        ReferenceControl = this
+                    };
+                }
 
-        return this.shapeIdConverter;
+        return shapeIdConverter;
       }
     }
     #endregion
@@ -133,15 +128,15 @@
 
     public void NotifySnapTargetUpdate(SnapTargetUpdateEventArgs e)
     {
-      if (this.SnapTargetUpdate != null)
-        this.SnapTargetUpdate(this, e);
+      if (SnapTargetUpdate != null)
+        SnapTargetUpdate(this, e);
     }
 
     public override void OnApplyTemplate()
     {
       base.OnApplyTemplate();
 
-      this.ContextMenu = ConnectorViewBase.CreateContextMenu(this.DataContext as ShapeViewModelBase);
+      ContextMenu = ConnectorViewBase.CreateContextMenu(DataContext as ShapeViewModelBase);
     }
 
     protected override void OnInitialized(EventArgs e)
@@ -150,7 +145,7 @@
 
       try
       {
-        ShapeIdToControlConverter s = ((ShapeIdToControlConverter)this.FindResource("ShapeIdToControlConverter"));
+        ShapeIdToControlConverter s = ((ShapeIdToControlConverter)FindResource("ShapeIdToControlConverter"));
 
         if (s != null)
           s.ReferenceControl = this;
@@ -165,9 +160,9 @@
 
     private void NotifyPropertyChanged(string propertyName)
     {
-      if (this.PropertyChanged != null)
+      if (PropertyChanged != null)
       {
-        this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
       }
     }
 
@@ -175,7 +170,7 @@
 
     private void snapTargetUpdate(ISnapTarget source, SnapTargetUpdateEventArgs e)
     {
-      this.NotifySnapTargetUpdate(e);
+      NotifySnapTargetUpdate(e);
     }
     #endregion
   }

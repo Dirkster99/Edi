@@ -4,10 +4,10 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base
   using System.Collections.ObjectModel;
   using System.Globalization;
   using System.Xml;
-  using MiniUML.Framework;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Shapes;
-  using MiniUML.Plugins.UmlClassDiagram.Converter;
+  using Framework;
+  using Model.ViewModels;
+  using Model.ViewModels.Shapes;
+  using Converter;
 
   public abstract class UmlShapeBaseViewModel : ShapeSizeViewModelBase
   {
@@ -37,13 +37,13 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base
                                  UmlTypes umlType)
       : base(parent)
     {
-      this.mShapeKey = shapeKey;
-      this.mShapeViewModelSubKeys = shapeViewModelSubKeys;
-      this.mUmlType = umlType;
+      mShapeKey = shapeKey;
+      mShapeViewModelSubKeys = shapeViewModelSubKeys;
+      mUmlType = umlType;
 
-      this.mComments = new ObservableCollection<CommentViewModel>();
+      mComments = new ObservableCollection<CommentViewModel>();
 
-      this.mElementName = UmlTypeToStringConverter.Instance.Convert(umlType, umlType.GetType(), null,
+      mElementName = UmlTypeToStringConverter.Instance.Convert(umlType, umlType.GetType(), null,
                                                                     CultureInfo.InvariantCulture) as string;
     }
     #endregion constructor
@@ -56,7 +56,7 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base
     {
       get
       {
-        return this.mElementName;
+        return mElementName;
       }
     }
 
@@ -67,7 +67,7 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base
     {
       get
       {
-        return this.mShapeKey;
+        return mShapeKey;
       }
     }
 
@@ -79,7 +79,7 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base
     {
       get
       {
-        return this.mShapeViewModelSubKeys;
+        return mShapeViewModelSubKeys;
       }
     }
 
@@ -94,7 +94,7 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base
     {
       get
       {
-        return ShapeViewModelKeyStrings.GetPresentationStringKey(this.mShapeKey);
+        return ShapeViewModelKeyStrings.GetPresentationStringKey(mShapeKey);
       }
     }
 
@@ -106,7 +106,7 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base
     {
       get
       {
-        return this.mUmlType;
+        return mUmlType;
       }
     }
 
@@ -118,11 +118,11 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base
     {
       get
       {
-        object o = UmlTypeToStringConverter.Instance.Convert(this.UmlDataType, this.UmlDataType.GetType(),
+        object o = UmlTypeToStringConverter.Instance.Convert(UmlDataType, UmlDataType.GetType(),
                                                              null, CultureInfo.InvariantCulture);
 
         if ((o is string) == false)
-          throw new ArgumentException(string.Format("Node name: '{0}' is not supported.", this.UmlDataType));
+          throw new ArgumentException(string.Format("Node name: '{0}' is not supported.", UmlDataType));
 
         string umlType = o as string;
 
@@ -159,7 +159,7 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base
 
     public void AddComment(CommentViewModel c)
     {
-      this.mComments.Add(c);
+      mComments.Add(c);
     }
 
     /// <summary>
@@ -167,10 +167,10 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base
     /// parameter <paramref name="writer"/> object.
     /// </summary>
     /// <param name="writer"></param>
-    public void SaveDocument(System.Xml.XmlWriter writer)
+    public void SaveDocument(XmlWriter writer)
     {
       // persist comment information as series of optional XML tags
-      foreach (var item in this.mComments)
+      foreach (var item in mComments)
       {
         item.SaveDocument(writer);
       }
@@ -191,11 +191,11 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base
           CommentViewModel c = CommentViewModel.ReadDocument(reader.ReadSubtree());
 
           if (c != null)           // Add into list of comments
-            this.AddComment(c);
+            AddComment(c);
           return string.Empty;
 
         default:
-          return string.Format("'{0}' is not a valid sub-node of {1}", reader.Name, this.XElementName);
+          return string.Format("'{0}' is not a valid sub-node of {1}", reader.Name, XElementName);
       }
     }
 
@@ -203,13 +203,13 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base
     /// Save the attribute values of this class to XML.
     /// </summary>
     /// <param name="writer"></param>
-    protected virtual void SaveAttributes(System.Xml.XmlWriter writer)
+    protected virtual void SaveAttributes(XmlWriter writer)
     {
-      writer.WriteAttributeString("Name", string.Format("{0}", this.Name));
-      writer.WriteAttributeString("ID", string.Format("{0}", this.ID));
+      writer.WriteAttributeString("Name", string.Format("{0}", Name));
+      writer.WriteAttributeString("ID", string.Format("{0}", ID));
 
       writer.WriteAttributeString("Position", string.Format("{0},{1},{2},{3}",
-                                              this.Left, this.Top, this.Width, this.Height));
+                                              Left, Top, Width, Height));
     }
 
     /// <summary>
@@ -225,17 +225,17 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base
         case "Position":
           double[] size = FrameworkUtilities.GetDoubleAttributes(readerValue, 4,
                                                                  new double[] { 100, 100, 200, 200 });
-          this.Position = new System.Windows.Point(size[0], size[1]);
-          this.Width = size[2];
-          this.Height = size[3];
+          Position = new System.Windows.Point(size[0], size[1]);
+          Width = size[2];
+          Height = size[3];
           return true;
 
         case "ID":
-          this.ID = readerValue;
+          ID = readerValue;
           return true;
 
         case "Name":
-          this.Name = readerValue;
+          Name = readerValue;
           return true;
 
         case "xmlns":

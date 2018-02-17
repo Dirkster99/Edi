@@ -55,18 +55,14 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// <param name="options">Options that control the HTML output.</param>
 		public HtmlRichTextWriter(TextWriter htmlWriter, HtmlOptions options = null)
 		{
-			if (htmlWriter == null)
-				throw new ArgumentNullException("htmlWriter");
-			this.htmlWriter = htmlWriter;
+            this.htmlWriter = htmlWriter ?? throw new ArgumentNullException(nameof(htmlWriter));
 			this.options = options ?? new HtmlOptions();
 		}
 		
 		/// <inheritdoc/>
-		public override Encoding Encoding {
-			get { return htmlWriter.Encoding; }
-		}
-		
-		/// <inheritdoc/>
+		public override Encoding Encoding => htmlWriter.Encoding;
+
+	    /// <inheritdoc/>
 		public override void Flush()
 		{
 			FlushSpace(true); // next char potentially might be whitespace

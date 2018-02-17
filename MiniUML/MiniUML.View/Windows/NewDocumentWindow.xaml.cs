@@ -4,11 +4,9 @@ namespace MiniUML.View.Windows
     using System.Globalization;
     using System.Windows;
     using System.Windows.Markup;
-    using MiniUML.Framework;
-    using MiniUML.Model.ViewModels.Document;
-    using MiniUML.View.Converter;
-    using MsgBox;
-    using CommonServiceLocator;
+    using Framework;
+    using Model.ViewModels.Document;
+    using Converter;
 
     /// <summary>
     /// Interaction logic for NewDocumentWindow.xaml
@@ -19,9 +17,9 @@ namespace MiniUML.View.Windows
 
         public NewDocumentWindow()
         {
-            this.InitializeComponent();
-            this.Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag);
-            this.Title = (string)Application.Current.Resources["ApplicationName"];
+            InitializeComponent();
+            Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag);
+            Title = (string)Application.Current.Resources["ApplicationName"];
 
             _MsgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
         }
@@ -35,17 +33,17 @@ namespace MiniUML.View.Windows
 
             try
             {
-                double pageWidth = (double)converter.ConvertBack(this._pageWidthTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
-                double pageHeight = (double)converter.ConvertBack(this._pageHeightTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
-                double pageMarginTop = (double)converter.ConvertBack(this._pageMarginTopTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
-                double pageMarginBottom = (double)converter.ConvertBack(this._pageMarginBottomTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
-                double pageMarginLeft = (double)converter.ConvertBack(this._pageMarginLeftTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
-                double pageMarginRight = (double)converter.ConvertBack(this._pageMarginRightTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
+                double pageWidth = (double)converter.ConvertBack(_pageWidthTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
+                double pageHeight = (double)converter.ConvertBack(_pageHeightTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
+                double pageMarginTop = (double)converter.ConvertBack(_pageMarginTopTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
+                double pageMarginBottom = (double)converter.ConvertBack(_pageMarginBottomTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
+                double pageMarginLeft = (double)converter.ConvertBack(_pageMarginLeftTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
+                double pageMarginRight = (double)converter.ConvertBack(_pageMarginRightTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
 
                 if (pageWidth < 0 || pageHeight < 0)
                 {
-                    _MsgBox.Show(string.Format(MiniUML.Framework.Local.Strings.STR_MSG_PAGE_HEIGHT_WIDTH_NEGATIVE, pageWidth, pageHeight),
-                                 MiniUML.Framework.Local.Strings.STR_MSG_Warning_Caption,
+                    _MsgBox.Show(string.Format(Framework.Local.Strings.STR_MSG_PAGE_HEIGHT_WIDTH_NEGATIVE, pageWidth, pageHeight),
+                                 Framework.Local.Strings.STR_MSG_Warning_Caption,
                                  MsgBox.MsgBoxButtons.OK, MsgBox.MsgBoxImage.Warning);
 
                     return false;
@@ -53,8 +51,8 @@ namespace MiniUML.View.Windows
 
                 if (pageMarginTop < 0 || pageMarginRight < 0 || pageMarginLeft < 0 || pageMarginBottom < 0)
                 {
-                    _MsgBox.Show(string.Format(MiniUML.Framework.Local.Strings.STR_MSG_PAGE_MARGINS_NEGATIVE),
-                                 MiniUML.Framework.Local.Strings.STR_MSG_Warning_Caption,
+                    _MsgBox.Show(string.Format(Framework.Local.Strings.STR_MSG_PAGE_MARGINS_NEGATIVE),
+                                 Framework.Local.Strings.STR_MSG_Warning_Caption,
                                  MsgBox.MsgBoxButtons.OK, MsgBox.MsgBoxImage.Warning);
 
                     return false;
@@ -62,8 +60,8 @@ namespace MiniUML.View.Windows
 
                 if (pageMarginTop + pageMarginBottom > pageHeight || pageMarginLeft + pageMarginRight > pageWidth)
                 {
-                    _MsgBox.Show(string.Format(MiniUML.Framework.Local.Strings.STR_MSG_PAGE_MARGIN_LARGER_THAN_PAGESIZE),
-                                 MiniUML.Framework.Local.Strings.STR_MSG_Warning_Caption,
+                    _MsgBox.Show(string.Format(Framework.Local.Strings.STR_MSG_PAGE_MARGIN_LARGER_THAN_PAGESIZE),
+                                 Framework.Local.Strings.STR_MSG_Warning_Caption,
                                  MsgBox.MsgBoxButtons.OK, MsgBox.MsgBoxImage.Warning);
 
                     return false;
@@ -75,14 +73,14 @@ namespace MiniUML.View.Windows
             }
             catch (FormatException)
             {
-                _MsgBox.Show(string.Format(MiniUML.Framework.Local.Strings.STR_MSG_PAGE_DEFINITION_FIELD_INVALID),
-                             MiniUML.Framework.Local.Strings.STR_MSG_Warning_Caption,
+                _MsgBox.Show(string.Format(Framework.Local.Strings.STR_MSG_PAGE_DEFINITION_FIELD_INVALID),
+                             Framework.Local.Strings.STR_MSG_Warning_Caption,
                              MsgBox.MsgBoxButtons.OK, MsgBox.MsgBoxImage.Warning);
             }
             catch (OverflowException)
             {
-                _MsgBox.Show(string.Format(MiniUML.Framework.Local.Strings.STR_MSG_PAGE_DEFINITION_FIELD_INVALID),
-                             MiniUML.Framework.Local.Strings.STR_MSG_Warning_Caption,
+                _MsgBox.Show(string.Format(Framework.Local.Strings.STR_MSG_PAGE_DEFINITION_FIELD_INVALID),
+                             Framework.Local.Strings.STR_MSG_Warning_Caption,
                              MsgBox.MsgBoxButtons.OK, MsgBox.MsgBoxImage.Warning);
             }
 
@@ -95,12 +93,12 @@ namespace MiniUML.View.Windows
 
             Size pageSize;
             Thickness pageMargins;
-            if (this.getValues(out pageSize, out pageMargins))
+            if (getValues(out pageSize, out pageMargins))
             {
                 viewModel.prop_PageSize = pageSize;
                 viewModel.prop_PageMargins = pageMargins;
-                this.DialogResult = true;
-                this.Close();
+                DialogResult = true;
+                Close();
             }
         }
 
@@ -108,7 +106,7 @@ namespace MiniUML.View.Windows
         {
             Size pageSize;
             Thickness pageMargins;
-            if (this.getValues(out pageSize, out pageMargins))
+            if (getValues(out pageSize, out pageMargins))
             {
                 // TODO XXX SettingsManager.Settings["DefaultPageSize"] = pageSize;
                 // TODO XXX SettingsManager.Settings["DefaultPageMargins"] = pageMargins;

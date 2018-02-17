@@ -4,7 +4,7 @@ namespace Edi.Core.ViewModels.Base
 	using System.Collections.Generic;
 	using System.Collections.ObjectModel;
 	using System.Windows.Input;
-	using Edi.Core.ViewModels.Command;
+	using Command;
 
 	/// <summary>
 	/// ViewModel base class to support dialog based views
@@ -21,7 +21,7 @@ namespace Edi.Core.ViewModels.Base
 		private RelayCommand mCancelCommand;
 		private RelayCommand mOKCommand;
 
-		private ObservableCollection<Edi.Core.Msg> mProblems;
+		private ObservableCollection<Msg> mProblems;
 
 		private bool mFoundErrorsInLastRun = true;
 		#endregion fields
@@ -32,7 +32,7 @@ namespace Edi.Core.ViewModels.Base
 		/// </summary>
 		public DialogViewModelBase()
 		{
-			this.InitializeDialogState();
+			InitializeDialogState();
 		}
 
 		/// <summary>
@@ -43,18 +43,18 @@ namespace Edi.Core.ViewModels.Base
 		{
 			if (copyThis == null) return;
 
-			this.mDialogCloseResult = copyThis.mDialogCloseResult;
+			mDialogCloseResult = copyThis.mDialogCloseResult;
 
-			this.mShutDownInProgress = copyThis.mShutDownInProgress;
-			this.mIsReadyToClose = copyThis.mIsReadyToClose;
+			mShutDownInProgress = copyThis.mShutDownInProgress;
+			mIsReadyToClose = copyThis.mIsReadyToClose;
 
 			// Commands cannot be copied (but must be initialized again) because
 			// we otherwise end up calling the the source of the copy instead of a method in this.
-			this.mOKCommand = this.mCancelCommand = null;
+			mOKCommand = mCancelCommand = null;
 
-			this.mProblems = new ObservableCollection<Edi.Core.Msg>(copyThis.mProblems);
+			mProblems = new ObservableCollection<Msg>(copyThis.mProblems);
 
-			this.mFoundErrorsInLastRun = copyThis.mFoundErrorsInLastRun;
+			mFoundErrorsInLastRun = copyThis.mFoundErrorsInLastRun;
 		}
 		#endregion constructor
 
@@ -68,7 +68,7 @@ namespace Edi.Core.ViewModels.Base
 		/// </summary>
 		/// <param name="outMsg"></param>
 		/// <returns></returns>
-		public delegate bool EvaluateInput(out List<Edi.Core.Msg> outMsg);
+		public delegate bool EvaluateInput(out List<Msg> outMsg);
 		#endregion delegates
 
 		#region event
@@ -88,15 +88,15 @@ namespace Edi.Core.ViewModels.Base
 		{
 			get
 			{
-				return this.mDialogCloseResult;
+				return mDialogCloseResult;
 			}
 
 			private set
 			{
-				if (this.mDialogCloseResult != value)
+				if (mDialogCloseResult != value)
 				{
-					this.mDialogCloseResult = value;
-					this.RaisePropertyChanged(() => this.WindowCloseResult);
+					mDialogCloseResult = value;
+					RaisePropertyChanged(() => WindowCloseResult);
 				}
 			}
 		}
@@ -111,15 +111,15 @@ namespace Edi.Core.ViewModels.Base
 		{
 			get
 			{
-				return this.mIsReadyToClose;
+				return mIsReadyToClose;
 			}
 
 			set
 			{
-				if (this.mIsReadyToClose != value)
+				if (mIsReadyToClose != value)
 				{
-					this.mIsReadyToClose = value;
-					this.RaisePropertyChanged(() => this.IsReadyToClose);
+					mIsReadyToClose = value;
+					RaisePropertyChanged(() => IsReadyToClose);
 				}
 			}
 		}
@@ -145,13 +145,13 @@ namespace Edi.Core.ViewModels.Base
 		{
 			get
 			{
-				if (this.mCancelCommand == null)
-					this.mCancelCommand = new RelayCommand(() =>
+				if (mCancelCommand == null)
+					mCancelCommand = new RelayCommand(() =>
 					{
-						this.OnRequestClose(false);
+						OnRequestClose(false);
 					});
 
-				return this.mCancelCommand;
+				return mCancelCommand;
 			}
 		}
 
@@ -162,19 +162,19 @@ namespace Edi.Core.ViewModels.Base
 		{
 			get
 			{
-				if (this.mOKCommand == null)
-					this.mOKCommand = new RelayCommand(() =>
+				if (mOKCommand == null)
+					mOKCommand = new RelayCommand(() =>
 					{
 						// Check user input and perform exit if data input is OK
-						this.PerformInputDataEvaluation();
+						PerformInputDataEvaluation();
 
-						if (this.IsReadyToClose == true)
+						if (IsReadyToClose)
 						{
-							this.OnRequestClose(true);
+							OnRequestClose(true);
 						}
 					});
 
-				return this.mOKCommand;
+				return mOKCommand;
 			}
 		}
 
@@ -187,14 +187,14 @@ namespace Edi.Core.ViewModels.Base
 			set;
 		}
 
-		public ObservableCollection<Edi.Core.Msg> ListMessages
+		public ObservableCollection<Msg> ListMessages
 		{
 			get
 			{
-				if (this.mProblems == null)
-					this.mProblems = new ObservableCollection<Edi.Core.Msg>();
+				if (mProblems == null)
+					mProblems = new ObservableCollection<Msg>();
 
-				return this.mProblems;
+				return mProblems;
 			}
 		}
 		#endregion properties
@@ -205,17 +205,17 @@ namespace Edi.Core.ViewModels.Base
 		/// </summary>
 		public void InitializeDialogState()
 		{
-			this.ProblemCaption = Edi.Util.Local.Strings.STR_DIALOG_INPUT_PROBLEM_CAPTION;
+			ProblemCaption = Util.Local.Strings.STR_DIALOG_INPUT_PROBLEM_CAPTION;
 
-			this.EvaluateInputData = null;
+			EvaluateInputData = null;
 
-			this.mIsReadyToClose = true;
-			this.mShutDownInProgress = false;
-			this.mDialogCloseResult = null;
+			mIsReadyToClose = true;
+			mShutDownInProgress = false;
+			mDialogCloseResult = null;
 
-			this.RequestClose = null;
+			RequestClose = null;
 
-			this.mProblems = new ObservableCollection<Edi.Core.Msg>();
+			mProblems = new ObservableCollection<Msg>();
 		}
 
 		/// <summary>
@@ -225,12 +225,12 @@ namespace Edi.Core.ViewModels.Base
 		{
 			try
 			{
-				if (this.mShutDownInProgress == false)
+				if (mShutDownInProgress == false)
 				{
-					this.WindowCloseResult = setWindowCloseResult;
+					WindowCloseResult = setWindowCloseResult;
 
-					this.mShutDownInProgress = true;
-					EventHandler handler = this.RequestClose;
+					mShutDownInProgress = true;
+					EventHandler handler = RequestClose;
 
 					if (handler != null)
 						handler(this, EventArgs.Empty);
@@ -238,30 +238,30 @@ namespace Edi.Core.ViewModels.Base
 			}
 			catch (Exception exp)
 			{
-				System.Console.WriteLine("Exception occurred in OnRequestClose\n{0}", exp.ToString());
-				this.mShutDownInProgress = false;
+				Console.WriteLine("Exception occurred in OnRequestClose\n{0}", exp.ToString());
+				mShutDownInProgress = false;
 			}
 		}
 
 		public void ClearMessages()
 		{
-			if (this.mProblems == null)
-				this.mProblems = new ObservableCollection<Edi.Core.Msg>();
+			if (mProblems == null)
+				mProblems = new ObservableCollection<Msg>();
 
-			this.mProblems.Clear();
+			mProblems.Clear();
 		}
 
-		public void AddMessage(string strMessage, Edi.Core.Msg.MsgCategory categoryOfMsg = Edi.Core.Msg.MsgCategory.Error)
+		public void AddMessage(string strMessage, Msg.MsgCategory categoryOfMsg = Msg.MsgCategory.Error)
 		{
-			this.AddMessage(new Edi.Core.Msg(strMessage, categoryOfMsg));
+			AddMessage(new Msg(strMessage, categoryOfMsg));
 		}
 
-		public void AddMessage(Edi.Core.Msg inputMsg)
+		public void AddMessage(Msg inputMsg)
 		{
-			if (this.mProblems == null)
-				this.mProblems = new ObservableCollection<Edi.Core.Msg>();
+			if (mProblems == null)
+				mProblems = new ObservableCollection<Msg>();
 
-			this.mProblems.Add(new Edi.Core.Msg(inputMsg));
+			mProblems.Add(new Msg(inputMsg));
 		}
 
 		/// <summary>
@@ -272,16 +272,16 @@ namespace Edi.Core.ViewModels.Base
 		/// <param name="e"></param>
 		public void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
-			if (this.WindowCloseResult == null) // Process window close button as Cancel (IsReadyToClose is not evaluated)
+			if (WindowCloseResult == null) // Process window close button as Cancel (IsReadyToClose is not evaluated)
 				return;
 
-			if (this.WindowCloseResult == false)
+			if (WindowCloseResult == false)
 			{
 				e.Cancel = false;
 				return;
 			}
 
-			e.Cancel = !this.IsReadyToClose; // Cancel close down request if ViewModel is not ready, yet
+			e.Cancel = !IsReadyToClose; // Cancel close down request if ViewModel is not ready, yet
 		}
 
 		/// <summary>
@@ -289,44 +289,44 @@ namespace Edi.Core.ViewModels.Base
 		/// </summary>
 		private void PerformInputDataEvaluation()
 		{
-			if (this.EvaluateInputData != null)
+			if (EvaluateInputData != null)
 			{
-				List<Edi.Core.Msg> msgs;
-				bool bResult = this.EvaluateInputData(out msgs);
+				List<Msg> msgs;
+				bool bResult = EvaluateInputData(out msgs);
 				bool bFoundErrors = false;
 
 				// Copy messages from delegate method (if any)
-				this.ClearMessages();
+				ClearMessages();
 
 				if (msgs != null)
 				{
-					foreach (Edi.Core.Msg m in msgs)
+					foreach (Msg m in msgs)
 					{
-						if (m.CategoryOfMsg != Edi.Core.Msg.MsgCategory.Information && m.CategoryOfMsg != Edi.Core.Msg.MsgCategory.Warning)
+						if (m.CategoryOfMsg != Msg.MsgCategory.Information && m.CategoryOfMsg != Msg.MsgCategory.Warning)
 							bFoundErrors = true;
 
-						this.AddMessage(m);
+						AddMessage(m);
 					}
 				}
 
 				if (bFoundErrors == false)
 				{
-					if (this.mFoundErrorsInLastRun == false)
+					if (mFoundErrorsInLastRun == false)
 					{
 						// Found only Information or Warnings for the second time -> lets get over it!
-						this.IsReadyToClose = true;
+						IsReadyToClose = true;
 						return;
 					}
 					else
 					{
-						this.mFoundErrorsInLastRun = false;
-						this.IsReadyToClose = bResult;
+						mFoundErrorsInLastRun = false;
+						IsReadyToClose = bResult;
 						return;
 					}
 				}
 
-				this.mFoundErrorsInLastRun = true;
-				this.IsReadyToClose = bResult;
+				mFoundErrorsInLastRun = true;
+				IsReadyToClose = bResult;
 			}
 		}
 		#endregion methods

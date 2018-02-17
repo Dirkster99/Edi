@@ -48,7 +48,7 @@ namespace ICSharpCode.AvalonEdit.Folding
 		{
             // Dirkster99 BugFix for using foldings in AvalonDock 2.0
             this.document = document;
-            this.foldings = new TextSegmentCollection<FoldingSection>();
+            foldings = new TextSegmentCollection<FoldingSection>();
 
             if (document == null)
                 return;
@@ -259,7 +259,7 @@ namespace ICSharpCode.AvalonEdit.Folding
             if (firstErrorOffset < 0)
 				firstErrorOffset = int.MaxValue;
 			
-			var oldFoldings = this.AllFoldings.ToArray();
+			var oldFoldings = AllFoldings.ToArray();
 			int oldFoldingIndex = 0;
 			int previousStartOffset = 0;
 			// merge new foldings into old foldings so that sections keep being collapsed
@@ -278,7 +278,7 @@ namespace ICSharpCode.AvalonEdit.Folding
 				
 				// remove old foldings that were skipped
 				while (oldFoldingIndex < oldFoldings.Length && newFolding.StartOffset > oldFoldings[oldFoldingIndex].StartOffset) {
-					this.RemoveFolding(oldFoldings[oldFoldingIndex++]);
+					RemoveFolding(oldFoldings[oldFoldingIndex++]);
 				}
 				FoldingSection section;
 				// reuse current folding if its matching:
@@ -287,7 +287,7 @@ namespace ICSharpCode.AvalonEdit.Folding
 					section.Length = newFolding.EndOffset - newFolding.StartOffset;
 				} else {
 					// no matching current folding; create a new one:
-					section = this.CreateFolding(newFolding.StartOffset, newFolding.EndOffset);
+					section = CreateFolding(newFolding.StartOffset, newFolding.EndOffset);
 					// auto-close #regions only when opening the document
 					if (isFirstUpdate) {
 						section.IsFolded = newFolding.DefaultClosed;
@@ -302,7 +302,7 @@ namespace ICSharpCode.AvalonEdit.Folding
 				FoldingSection oldSection = oldFoldings[oldFoldingIndex++];
 				if (oldSection.StartOffset >= firstErrorOffset)
 					break;
-				this.RemoveFolding(oldSection);
+				RemoveFolding(oldSection);
 			}
 		}
 		#endregion

@@ -16,8 +16,8 @@ namespace Edi.Apps.Events
 		public LoadLayoutEventArgs(string xmlLayout, Guid layoutID)
 			: this()
 		{
-			this.XmlLayout = xmlLayout;
-			this.LayoutID = layoutID;
+			XmlLayout = xmlLayout;
+			LayoutID = layoutID;
 		}
 
 		/// <summary>
@@ -25,8 +25,8 @@ namespace Edi.Apps.Events
 		/// </summary>
 		public LoadLayoutEventArgs()
 		{
-			this.XmlLayout = string.Empty;
-			this.LayoutID = Guid.Empty;
+			XmlLayout = string.Empty;
+			LayoutID = Guid.Empty;
 		}
 		#endregion constructor
 

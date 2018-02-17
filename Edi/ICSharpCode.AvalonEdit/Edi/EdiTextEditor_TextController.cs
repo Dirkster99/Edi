@@ -4,12 +4,11 @@
   using System.Collections.Generic;
   using System.Windows;
 
-  using ICSharpCode.AvalonEdit;
-  using ICSharpCode.AvalonEdit.Document;
+  using AvalonEdit;
+  using Document;
   using TextBoxControl;
-  using System.Windows.Controls;
 
-  public partial class EdiTextEditor : TextEditor
+    public partial class EdiTextEditor : TextEditor
   {
     #region ITextBoxControllerFields
     private static readonly Dictionary<ITextBoxController, TextEditor> elements = new Dictionary<ITextBoxController, TextEditor>();
@@ -19,7 +18,7 @@
                               "TextBoxController",
                               typeof(ITextBoxController),
                               typeof(EdiTextEditor),
-                              new FrameworkPropertyMetadata(null, EdiTextEditor.OnTextBoxControllerChanged));
+                              new FrameworkPropertyMetadata(null, OnTextBoxControllerChanged));
     #endregion ITextBoxControllerFields
 
     #region ITextBoxController_Properties
@@ -30,7 +29,7 @@
     /// <param name="value"></param>
     public static void SetTextBoxController(UIElement element, ITextBoxController value)
     {
-      element.SetValue(EdiTextEditor.TextBoxControllerProperty, value);
+      element.SetValue(TextBoxControllerProperty, value);
     }
 
     /// <summary>
@@ -40,7 +39,7 @@
     /// <returns></returns>
     public static ITextBoxController GetTextBoxController(UIElement element)
     {
-      return (ITextBoxController)element.GetValue(EdiTextEditor.TextBoxControllerProperty);
+      return (ITextBoxController)element.GetValue(TextBoxControllerProperty);
     }
     #endregion ITextBoxController_Properties
 
@@ -70,9 +69,9 @@
                 oldController.Select -= Select;
                 oldController.ScrollToLineEvent -= ScrollToLine;
                 oldController.CurrentSelectionEvent -= CurrentSelection;
-                oldController.BeginChangeEvent -= EdiTextEditor.BeginChange;
-                oldController.EndChangeEvent -= EdiTextEditor.EndChange;
-                oldController.GetSelectedTextEvent -= EdiTextEditor.GetSelectedText;
+                oldController.BeginChangeEvent -= BeginChange;
+                oldController.EndChangeEvent -= EndChange;
+                oldController.GetSelectedTextEvent -= GetSelectedText;
             }
 
             // Add new eventhandler for each event declared in the interface declaration
@@ -83,17 +82,17 @@
                 // Sometime the newController is already there but the event handling is not working
                 // Remove controller and event handling and install a new one instead.
                 TextEditor test;
-                if (elements.TryGetValue(newController, out test) == true)
+                if (elements.TryGetValue(newController, out test))
                 {
                     elements.Remove(newController);
 
-                    newController.SelectAll -= EdiTextEditor.SelectAll;
-                    newController.Select -= EdiTextEditor.Select;
-                    newController.ScrollToLineEvent -= EdiTextEditor.ScrollToLine;
-                    newController.CurrentSelectionEvent -= EdiTextEditor.CurrentSelection;
-                    newController.BeginChangeEvent -= EdiTextEditor.BeginChange;
-                    newController.EndChangeEvent -= EdiTextEditor.EndChange;
-                    newController.GetSelectedTextEvent -= EdiTextEditor.GetSelectedText;
+                    newController.SelectAll -= SelectAll;
+                    newController.Select -= Select;
+                    newController.ScrollToLineEvent -= ScrollToLine;
+                    newController.CurrentSelectionEvent -= CurrentSelection;
+                    newController.BeginChangeEvent -= BeginChange;
+                    newController.EndChangeEvent -= EndChange;
+                    newController.GetSelectedTextEvent -= GetSelectedText;
                 }
 
                 elements.Add(newController, txtBox);
@@ -101,9 +100,9 @@
                 newController.Select += Select;
                 newController.ScrollToLineEvent += ScrollToLine;
                 newController.CurrentSelectionEvent += CurrentSelection;
-                newController.BeginChangeEvent += EdiTextEditor.BeginChange;
-                newController.EndChangeEvent += EdiTextEditor.EndChange;
-                newController.GetSelectedTextEvent += EdiTextEditor.GetSelectedText;
+                newController.BeginChangeEvent += BeginChange;
+                newController.EndChangeEvent += EndChange;
+                newController.GetSelectedTextEvent += GetSelectedText;
             }
         }
 

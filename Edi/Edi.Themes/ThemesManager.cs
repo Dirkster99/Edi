@@ -4,8 +4,8 @@ namespace Edi.Themes
     using System.Collections.ObjectModel;
     using System.Reflection;
     using ICSharpCode.AvalonEdit.Highlighting.Themes;
-    using Edi.Themes.Definition;
-    using Edi.Themes.Interfaces;
+    using Definition;
+    using Interfaces;
 
     /// <summary>
     /// This class manages a list of WPF themes (Aero, Metro etc) which
@@ -146,9 +146,9 @@ namespace Edi.Themes
         const string EditorThemeDeepBlackLocation = @"AvalonEdit\HighLighting_Themes\DeepBlack.xshd";
         #endregion Text Editor Themes
 
-        public const string DefaultThemeName = ThemesManager.MetroLightThemeName;
+        public const string DefaultThemeName = MetroLightThemeName;
 
-        protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private SortedDictionary<string, ThemeBase> mTextEditorThemes = null;
         private ObservableCollection<ThemeBase> mListOfAllThemes = null;
@@ -161,7 +161,7 @@ namespace Edi.Themes
         /// </summary>
         public ThemesManager()
         {
-            this.mSelectedThemeName = ThemesManager.DefaultThemeName;
+            mSelectedThemeName = DefaultThemeName;
         }
         #endregion constructor
 
@@ -173,7 +173,7 @@ namespace Edi.Themes
         {
             get
             {
-                return this.mSelectedThemeName;
+                return mSelectedThemeName;
             }
         }
 
@@ -184,17 +184,17 @@ namespace Edi.Themes
         {
             get
             {
-                if (this.mTextEditorThemes == null || this.mListOfAllThemes == null)
-                    this.BuildThemeCollections();
+                if (mTextEditorThemes == null || mListOfAllThemes == null)
+                    BuildThemeCollections();
 
                 ThemeBase theme;
-                this.mTextEditorThemes.TryGetValue(this.mSelectedThemeName, out theme);
+                mTextEditorThemes.TryGetValue(mSelectedThemeName, out theme);
 
                 // Fall back to default if all else fails
                 if (theme == null)
                 {
-                    this.mTextEditorThemes.TryGetValue(ThemesManager.DefaultThemeName, out theme);
-                    this.mSelectedThemeName = theme.HlThemeName;
+                    mTextEditorThemes.TryGetValue(DefaultThemeName, out theme);
+                    mSelectedThemeName = theme.HlThemeName;
                 }
 
                 return theme;
@@ -209,10 +209,10 @@ namespace Edi.Themes
         {
             get
             {
-                if (this.mTextEditorThemes == null || this.mListOfAllThemes == null)
-                    this.BuildThemeCollections();
+                if (mTextEditorThemes == null || mListOfAllThemes == null)
+                    BuildThemeCollections();
 
-                return this.mListOfAllThemes;
+                return mListOfAllThemes;
             }
         }
         #endregion properties
@@ -225,17 +225,17 @@ namespace Edi.Themes
         /// <returns>True if new theme is succesfully selected (was available), otherwise false</returns>
         public bool SetSelectedTheme(string themeName)
         {
-            if (this.mTextEditorThemes == null || this.mListOfAllThemes == null)
-                this.BuildThemeCollections();
+            if (mTextEditorThemes == null || mListOfAllThemes == null)
+                BuildThemeCollections();
 
             ThemeBase theme;
-            this.mTextEditorThemes.TryGetValue(themeName, out theme);
+            mTextEditorThemes.TryGetValue(themeName, out theme);
 
             // Fall back to default if all else fails
             if (theme == null)
                 return false;
 
-            this.mSelectedThemeName = themeName;
+            mSelectedThemeName = themeName;
 
             return true;
         }
@@ -250,7 +250,7 @@ namespace Edi.Themes
             // Is this WPF theme configured with a highlighting theme???
             ThemeBase cfg = null;
 
-            this.mTextEditorThemes.TryGetValue(themeName, out cfg);
+            mTextEditorThemes.TryGetValue(themeName, out cfg);
 
             if (cfg != null)
                 return cfg.HighlightingStyles;
@@ -263,12 +263,12 @@ namespace Edi.Themes
         /// </summary>
         private void BuildThemeCollections()
         {
-            this.mTextEditorThemes = this.BuildThemeDictionary();
-            this.mListOfAllThemes = new ObservableCollection<ThemeBase>();
+            mTextEditorThemes = BuildThemeDictionary();
+            mListOfAllThemes = new ObservableCollection<ThemeBase>();
 
-            foreach (KeyValuePair<string, ThemeBase> t in this.mTextEditorThemes)
+            foreach (KeyValuePair<string, ThemeBase> t in mTextEditorThemes)
             {
-                this.mListOfAllThemes.Add(t.Value);
+                mListOfAllThemes.Add(t.Value);
             }
         }
 

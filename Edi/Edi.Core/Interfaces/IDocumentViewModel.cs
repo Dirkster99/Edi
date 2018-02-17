@@ -2,8 +2,8 @@
 {
 	using System;
 	using System.Windows.Input;
-	using Edi.Core.Interfaces.Enums;
-	using Edi.Core.ViewModels.Events;
+	using Enums;
+	using ViewModels.Events;
 
 	/// <summary>
 	/// Inteface that is supported by document related viewmodels.

@@ -26,12 +26,12 @@
 		/// </summary>
 		public ViewPosSizeModel()
 		{
-			this.mX = 0;
-			this.mY = 0;
-			this.mWidth = 0;
-			this.mHeight = 0;
-			this.mIsMaximized = false;
-			this.DefaultConstruct = true;
+			mX = 0;
+			mY = 0;
+			mWidth = 0;
+			mHeight = 0;
+			mIsMaximized = false;
+			DefaultConstruct = true;
 		}
 
 		/// <summary>
@@ -47,12 +47,12 @@
 														double height,
 														bool isMaximized = false)
 		{
-			this.mX = x;
-			this.mY = y;
-			this.mWidth = width;
-			this.mHeight = height;
-			this.mIsMaximized = isMaximized;
-			this.DefaultConstruct = false;
+			mX = x;
+			mY = y;
+			mWidth = width;
+			mHeight = height;
+			mIsMaximized = isMaximized;
+			DefaultConstruct = false;
 		}
 		#endregion constructors
 
@@ -72,14 +72,14 @@
 		{
 			get
 			{
-				return this.mX;
+				return mX;
 			}
 
 			set
 			{
-				if (this.mX != value)
+				if (mX != value)
 				{
-					this.mX = value;
+					mX = value;
 				}
 			}
 		}
@@ -92,14 +92,14 @@
 		{
 			get
 			{
-				return this.mY;
+				return mY;
 			}
 
 			set
 			{
-				if (this.mY != value)
+				if (mY != value)
 				{
-					this.mY = value;
+					mY = value;
 				}
 			}
 		}
@@ -112,14 +112,14 @@
 		{
 			get
 			{
-				return this.mWidth;
+				return mWidth;
 			}
 
 			set
 			{
-				if (this.mWidth != value)
+				if (mWidth != value)
 				{
-					this.mWidth = value;
+					mWidth = value;
 				}
 			}
 		}
@@ -132,14 +132,14 @@
 		{
 			get
 			{
-				return this.mHeight;
+				return mHeight;
 			}
 
 			set
 			{
-				if (this.mHeight != value)
+				if (mHeight != value)
 				{
-					this.mHeight = value;
+					mHeight = value;
 				}
 			}
 		}
@@ -152,14 +152,14 @@
 		{
 			get
 			{
-				return this.mIsMaximized;
+				return mIsMaximized;
 			}
 
 			set
 			{
-				if (this.mIsMaximized != value)
+				if (mIsMaximized != value)
 				{
-					this.mIsMaximized = value;
+					mIsMaximized = value;
 				}
 			}
 		}
@@ -173,11 +173,11 @@
 														double SystemParameters_VirtualScreenTop)
 		{
 			// Restore the position with a valid position
-			if (this.X < SystemParameters_VirtualScreenLeft)
-				this.X = SystemParameters_VirtualScreenLeft;
+			if (X < SystemParameters_VirtualScreenLeft)
+				X = SystemParameters_VirtualScreenLeft;
 
-			if (this.Y < SystemParameters_VirtualScreenTop)
-				this.Y = SystemParameters_VirtualScreenTop;
+			if (Y < SystemParameters_VirtualScreenTop)
+				Y = SystemParameters_VirtualScreenTop;
 		}
 		#endregion methods
 	}

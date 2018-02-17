@@ -39,14 +39,14 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 		internal static XshdSyntaxDefinition LoadXshd(XmlReader reader, bool skipValidation)
 		{
 			if (reader == null)
-				throw new ArgumentNullException("reader");
+				throw new ArgumentNullException(nameof(reader));
 			try {
 				reader.MoveToContent();
 				if (reader.NamespaceURI == V2Loader.Namespace) {
 					return V2Loader.LoadDefinition(reader, skipValidation);
-				} else {
-					return V1Loader.LoadDefinition(reader, skipValidation);
 				}
+
+			    return V1Loader.LoadDefinition(reader, skipValidation);
 			} catch (XmlSchemaException ex) {
 				throw WrapException(ex, ex.LineNumber, ex.LinePosition);
 			} catch (XmlException ex) {
@@ -61,19 +61,20 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 		
 		internal static string FormatExceptionMessage(string message, int lineNumber, int linePosition)
 		{
-			if (lineNumber <= 0)
+		    if (lineNumber <= 0)
 				return message;
-			else
-				return "Error at position (line " + lineNumber + ", column " + linePosition + "):\n" + message;
+		    return "Error at position (line " + lineNumber + ", column " + linePosition + "):\n" + message;
 		}
 		
 		internal static XmlReader GetValidatingReader(XmlReader input, bool ignoreWhitespace, XmlSchemaSet schemaSet)
 		{
-			XmlReaderSettings settings = new XmlReaderSettings();
-			settings.CloseInput = true;
-			settings.IgnoreComments = true;
-			settings.IgnoreWhitespace = ignoreWhitespace;
-			if (schemaSet != null) {
+            XmlReaderSettings settings = new XmlReaderSettings
+            {
+                CloseInput = true,
+                IgnoreComments = true,
+                IgnoreWhitespace = ignoreWhitespace
+            };
+            if (schemaSet != null) {
 				settings.Schemas = schemaSet;
 				settings.ValidationType = ValidationType.Schema;
 			}
@@ -98,7 +99,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 		public static IHighlightingDefinition Load(XshdSyntaxDefinition syntaxDefinition, IHighlightingDefinitionReferenceResolver resolver)
 		{
 			if (syntaxDefinition == null)
-				throw new ArgumentNullException("syntaxDefinition");
+				throw new ArgumentNullException(nameof(syntaxDefinition));
 			return new XmlHighlightingDefinition(syntaxDefinition, resolver);
 		}
 		

@@ -18,27 +18,19 @@
 
 using System;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Security;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
 using System.Windows.Media.TextFormatting;
-
-using ICSharpCode.AvalonEdit;
-using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Rendering;
 using ICSharpCode.AvalonEdit.Utils;
-using Draw = System.Drawing;
 
 namespace ICSharpCode.AvalonEdit.Editing
 {
-	/// <summary>
-	/// Native API required for IME support.
-	/// </summary>
-	static class ImeNativeWrapper
+    /// <summary>
+    /// Native API required for IME support.
+    /// </summary>
+    static class ImeNativeWrapper
 	{
 		[StructLayout(LayoutKind.Sequential)]
 		struct CompositionForm
@@ -136,12 +128,14 @@ namespace ICSharpCode.AvalonEdit.Editing
 		public static bool SetCompositionWindow(HwndSource source, IntPtr hIMC, TextArea textArea)
 		{
 			if (textArea == null)
-				throw new ArgumentNullException("textArea");
+				throw new ArgumentNullException(nameof(textArea));
 			Rect textViewBounds = textArea.TextView.GetBounds(source);
 			Rect characterBounds = textArea.TextView.GetCharacterBounds(textArea.Caret.Position, source);
-			CompositionForm form = new CompositionForm();
-			form.dwStyle = 0x0020;
-			form.ptCurrentPos.x = (int)Math.Max(characterBounds.Left, textViewBounds.Left);
+            CompositionForm form = new CompositionForm
+            {
+                dwStyle = 0x0020
+            };
+            form.ptCurrentPos.x = (int)Math.Max(characterBounds.Left, textViewBounds.Left);
 			form.ptCurrentPos.y = (int)Math.Max(characterBounds.Top, textViewBounds.Top);
 			form.rcArea.left = (int)textViewBounds.Left;
 			form.rcArea.top = (int)textViewBounds.Top;
@@ -153,7 +147,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		public static bool SetCompositionFont(HwndSource source, IntPtr hIMC, TextArea textArea)
 		{
 			if (textArea == null)
-				throw new ArgumentNullException("textArea");
+				throw new ArgumentNullException(nameof(textArea));
 			LOGFONT lf = new LOGFONT();
 			Rect characterBounds = textArea.TextView.GetCharacterBounds(textArea.Caret.Position, source);
 			lf.lfFaceName = textArea.FontFamily.Source;

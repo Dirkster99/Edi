@@ -5,8 +5,8 @@
   using System.Windows;
   using System.Windows.Controls;
   using System.Windows.Controls.Primitives;
-  using MiniUML.Framework;
-  using MiniUML.View.Views;
+  using Framework;
+  using Views;
 
   /// <summary>
   /// Interaction logic for AnchorPoint.xaml
@@ -46,8 +46,8 @@
     #region constructor
     public AnchorPoint()
     {
-      this.InitializeComponent();
-      this.DragDelta += this.AnchorPoint_DragDelta;
+      InitializeComponent();
+      DragDelta += AnchorPoint_DragDelta;
     }
     #endregion constructor
 
@@ -61,7 +61,7 @@
     public ISnapTarget SnapTarget
     {
       get { return (ISnapTarget)GetValue(SnapTargetProperty); }
-      set { this.SetValue(SnapTargetProperty, value); }
+      set { SetValue(SnapTargetProperty, value); }
     }
 
     /// <summary>
@@ -70,7 +70,7 @@
     public double Left
     {
       get { return (double)GetValue(LeftProperty); }
-      set { this.SetValue(LeftProperty, value); }
+      set { SetValue(LeftProperty, value); }
     }
 
     /// <summary>
@@ -79,7 +79,7 @@
     public double Top
     {
       get { return (double)GetValue(TopProperty); }
-      set { this.SetValue(TopProperty, value); }
+      set { SetValue(TopProperty, value); }
     }
 
     /// <summary>
@@ -98,7 +98,7 @@
     {
       get
       {
-        return FrameworkUtilities.RadiansToDegrees(this.Angle);
+        return FrameworkUtilities.RadiansToDegrees(Angle);
       }
     }
 
@@ -110,7 +110,7 @@
     {
       get
       {
-        double a = this.Angle;
+        double a = Angle;
 
         if (a > Math.PI)
           a = (2 * Math.PI) - a;
@@ -167,7 +167,7 @@
     /// </summary>
     public void CoerceCoordinates()
     {
-      this.MoveTo(new Point(this.Left, this.Top));
+      MoveTo(new Point(Left, Top));
     }
 
     /// <summary>
@@ -208,27 +208,27 @@
     /// <param name="position"></param>
     private void MoveTo(Point position)
     {
-      if (this.SnapTarget != null)
+      if (SnapTarget != null)
       {
         double angle;
 
         // Determine the best position position and angle
         // for an AchorPoint to snap to the angle of the snap target line (if any).
-        this.SnapTarget.SnapPoint(ref position, out angle);
+        SnapTarget.SnapPoint(ref position, out angle);
 
-        this.setAngle(angle);
+        setAngle(angle);
       }
 
       try
       {
-        this.mInMoveTo = true;
+        mInMoveTo = true;
 
-        this.Left = position.X;
-        this.Top = position.Y;
+        Left = position.X;
+        Top = position.Y;
       }
       finally
       {
-        this.mInMoveTo = false;
+        mInMoveTo = false;
       }
     }
 
@@ -241,25 +241,25 @@
     private void snapTargetUpdate(ISnapTarget source, SnapTargetUpdateEventArgs e)
     {
       if (e.IsMoveUpdate == MoveUpdate.MoveDelta)
-        this.MoveTo(new Point(this.Left, this.Top) + e.MoveDelta);
+        MoveTo(new Point(Left, Top) + e.MoveDelta);
       else
-        this.CoerceLater();
+        CoerceLater();
     }
 
     private void setAngle(double a)
     {
       a = FrameworkUtilities.NormalizeAngle(a);
 
-      if (this.Angle == a)
+      if (Angle == a)
         return; // no change
 
-      this.Angle = a;
+      Angle = a;
 
-      if (this.PropertyChanged != null)
+      if (PropertyChanged != null)
       {
-        this.PropertyChanged(this, new PropertyChangedEventArgs("SnapOrientation"));
-        this.PropertyChanged(this, new PropertyChangedEventArgs("Angle"));
-        this.PropertyChanged(this, new PropertyChangedEventArgs("AngleInDegrees"));
+        PropertyChanged(this, new PropertyChangedEventArgs("SnapOrientation"));
+        PropertyChanged(this, new PropertyChangedEventArgs("Angle"));
+        PropertyChanged(this, new PropertyChangedEventArgs("AngleInDegrees"));
       }
     }
 
@@ -274,7 +274,7 @@
       
       // Coearce coordinates when the associated layout changes
       if (cv != null)
-        cv.NotifyOnLayoutUpdated(this.CoerceCoordinates);
+        cv.NotifyOnLayoutUpdated(CoerceCoordinates);
     }
     #endregion
 
@@ -287,7 +287,7 @@
     /// <param name="e"></param>
     private void AnchorPoint_DragDelta(object sender, DragDeltaEventArgs e)
     {
-      this.MoveTo(new Point(this.Left + e.HorizontalChange, this.Top + e.VerticalChange));
+      MoveTo(new Point(Left + e.HorizontalChange, Top + e.VerticalChange));
     }
     #endregion methods
   }

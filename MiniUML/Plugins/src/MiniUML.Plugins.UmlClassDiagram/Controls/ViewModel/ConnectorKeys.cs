@@ -70,19 +70,19 @@
       switch (implementingConnector)
       {
         case ConnectorKeys.Undefined:
-          return ConnectorKeyStrings.UmlArrows_Undefined;
+          return UmlArrows_Undefined;
 
         case ConnectorKeys.None:
           return string.Empty;
 
         case ConnectorKeys.Triangle:
-          return ConnectorKeyStrings.UmlArrows_Triangle;
+          return UmlArrows_Triangle;
 
         case ConnectorKeys.WhiteDiamond:
-          return ConnectorKeyStrings.UmlArrows_WhiteDiamond;
+          return UmlArrows_WhiteDiamond;
 
         case ConnectorKeys.BlackDiamond:
-          return ConnectorKeyStrings.UmlArrows_BlackDiamond;
+          return UmlArrows_BlackDiamond;
 
         default:
           throw new NotImplementedException();

@@ -19,7 +19,7 @@
     /// <param name="document"></param>
     /// <param name="offset"></param>
     /// <returns></returns>
-    public BracketSearchResult SearchBracket(ICSharpCode.AvalonEdit.Document.TextDocument document, int offset)
+    public BracketSearchResult SearchBracket(Document.TextDocument document, int offset)
     {
       return null;
     }

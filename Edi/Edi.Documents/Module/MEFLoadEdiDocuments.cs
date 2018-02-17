@@ -4,16 +4,14 @@
     using System.ComponentModel.Composition;
     using System.Reflection;
     using System.Windows;
-    using Edi.Core.Interfaces;
-    using Edi.Core.Interfaces.DocumentTypes;
-    using Edi.Core.Resources;
-    using Edi.Core.View.Pane;
-    using Edi.Documents.ViewModels.EdiDoc;
-    using Edi.Documents.ViewModels.MiniUml;
-    using Edi.Documents.ViewModels.StartPage;
-    using Prism.Mef.Modularity;
-    using Prism.Modularity;
-    using Edi.Settings.Interfaces;
+    using Core.Interfaces;
+    using Core.Interfaces.DocumentTypes;
+    using Core.Resources;
+    using Core.View.Pane;
+    using ViewModels.EdiDoc;
+    using ViewModels.MiniUml;
+    using ViewModels.StartPage;
+    using Settings.Interfaces;
 
     /// <summary>
     /// PRISM MEF Loader/Initializer class
@@ -50,10 +48,10 @@
                                    ISettingsManager settingsManager,
                                    IDocumentTypeManager documentTypeManager)
         {
-            this.mAvLayout = avLayout;
-            this.mToolRegistry = toolRegistry;
-            this.mSettingsManager = settingsManager;
-            this.mDocumentTypeManager = documentTypeManager;
+            mAvLayout = avLayout;
+            mToolRegistry = toolRegistry;
+            mSettingsManager = settingsManager;
+            mDocumentTypeManager = documentTypeManager;
         }
         #endregion constructors
 
@@ -63,11 +61,11 @@
         /// </summary>
         void IModule.Initialize()
         {
-            this.RegisterDataTemplates(this.mAvLayout.ViewProperties.SelectPanesTemplate);
-            this.RegisterStyles(this.mAvLayout.ViewProperties.SelectPanesStyle);
+            RegisterDataTemplates(mAvLayout.ViewProperties.SelectPanesTemplate);
+            RegisterStyles(mAvLayout.ViewProperties.SelectPanesStyle);
 
-            this.RegisterEdiTextEditor(this.mDocumentTypeManager);
-            this.RegisterMiniUml(this.mDocumentTypeManager);
+            RegisterEdiTextEditor(mDocumentTypeManager);
+            RegisterMiniUml(mDocumentTypeManager);
         }
 
         private void RegisterEdiTextEditor(IDocumentTypeManager documentTypeManager)

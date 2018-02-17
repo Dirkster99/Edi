@@ -1,9 +1,8 @@
 ﻿namespace MiniUML.Plugins.UmlClassDiagram.Controls.View.Shapes
 {
   using System.Windows;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Shapes;
-  using MiniUML.Plugins.UmlClassDiagram.Controls.View.Shapes.Base;
+  using Model.ViewModels.Shapes;
+  using Base;
 
   /// <summary>
   /// Interaction logic for UmlNodeShape.xaml
@@ -36,7 +35,7 @@
     {
       get
       {
-        return new Point((this.ActualWidth - 1 > 0 ? this.ActualWidth - 1 : this.ActualWidth), 1);
+        return new Point((ActualWidth - 1 > 0 ? ActualWidth - 1 : ActualWidth), 1);
       }
     }
 
@@ -44,8 +43,8 @@
     {
       get
       {
-        return new Point((this.ActualWidth - 1 > 0 ? this.ActualWidth - 1 : this.ActualWidth),
-                         (this.ActualHeight - UmlNodeShape.Border3DSize > 0 ? this.ActualHeight - UmlNodeShape.Border3DSize : this.ActualHeight));
+        return new Point((ActualWidth - 1 > 0 ? ActualWidth - 1 : ActualWidth),
+                         (ActualHeight - Border3DSize > 0 ? ActualHeight - Border3DSize : ActualHeight));
       }
     }
     #endregion Second Square Points
@@ -65,8 +64,8 @@
     {
       get
       {
-        return new Point((this.ActualWidth - UmlNodeShape.Border3DSize > 0 ? this.ActualWidth - UmlNodeShape.Border3DSize : this.ActualWidth),
-                         (this.ActualHeight > UmlNodeShape.Border3DSize ? UmlNodeShape.Border3DSize : this.ActualHeight));
+        return new Point((ActualWidth - Border3DSize > 0 ? ActualWidth - Border3DSize : ActualWidth),
+                         (ActualHeight > Border3DSize ? Border3DSize : ActualHeight));
       }
     }
 
@@ -74,7 +73,7 @@
     {
       get
       {
-        return new Point(1, (this.ActualHeight - 1 > 0 ? this.ActualHeight - 1 : this.ActualHeight));
+        return new Point(1, (ActualHeight - 1 > 0 ? ActualHeight - 1 : ActualHeight));
       }
     }
 
@@ -82,8 +81,8 @@
     {
       get
       {
-        return new Point((this.ActualWidth - UmlNodeShape.Border3DSize > 0 ? this.ActualWidth - UmlNodeShape.Border3DSize : this.ActualWidth),
-                         (this.ActualHeight - 1 > 0 ? this.ActualHeight - 1 : this.ActualHeight));
+        return new Point((ActualWidth - Border3DSize > 0 ? ActualWidth - Border3DSize : ActualWidth),
+                         (ActualHeight - 1 > 0 ? ActualHeight - 1 : ActualHeight));
       }
     }
     #endregion First Square properties
@@ -100,7 +99,7 @@
       base.OnApplyTemplate();
 
       // Attach a context menu when the corresponding template is loaded
-      this.ContextMenu = this.CreateContextMenu(this.DataContext as ShapeViewModelBase);
+      ContextMenu = CreateContextMenu(DataContext as ShapeViewModelBase);
     }
     #endregion methods
   }

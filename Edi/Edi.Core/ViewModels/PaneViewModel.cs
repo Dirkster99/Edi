@@ -5,7 +5,7 @@
 	/// <summary>
 	/// AvalonDock base class viewm-model to support document pane views
 	/// </summary>
-	public class PaneViewModel : Edi.Core.ViewModels.Base.ViewModelBase
+	public class PaneViewModel : Base.ViewModelBase
 	{
 		public PaneViewModel()
 		{ }

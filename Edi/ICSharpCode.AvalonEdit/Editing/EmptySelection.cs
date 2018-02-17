@@ -40,19 +40,13 @@ namespace ICSharpCode.AvalonEdit.Editing
 			return this;
 		}
 		
-		public override TextViewPosition StartPosition {
-			get { return new TextViewPosition(TextLocation.Empty); }
-		}
-		
-		public override TextViewPosition EndPosition {
-			get { return new TextViewPosition(TextLocation.Empty); }
-		}
-		
-		public override ISegment SurroundingSegment {
-			get { return null; }
-		}
-		
-		public override Selection SetEndpoint(TextViewPosition endPosition)
+		public override TextViewPosition StartPosition => new TextViewPosition(TextLocation.Empty);
+
+	    public override TextViewPosition EndPosition => new TextViewPosition(TextLocation.Empty);
+
+	    public override ISegment SurroundingSegment => null;
+
+	    public override Selection SetEndpoint(TextViewPosition endPosition)
 		{
 			throw new NotSupportedException();
 		}
@@ -65,11 +59,9 @@ namespace ICSharpCode.AvalonEdit.Editing
 			return Create(textArea, startPosition, endPosition);
 		}
 		
-		public override IEnumerable<SelectionSegment> Segments {
-			get { return Empty<SelectionSegment>.Array; }
-		}
-		
-		public override string GetText()
+		public override IEnumerable<SelectionSegment> Segments => Empty<SelectionSegment>.Array;
+
+	    public override string GetText()
 		{
 			return string.Empty;
 		}
@@ -77,7 +69,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		public override void ReplaceSelectionWithText(string newText)
 		{
 			if (newText == null)
-				throw new ArgumentNullException("newText");
+				throw new ArgumentNullException(nameof(newText));
 			newText = AddSpacesIfRequired(newText, textArea.Caret.Position, textArea.Caret.Position);
 			if (newText.Length > 0) {
                 if (textArea.ReadOnlySectionProvider.CanInsert(textArea.Caret.Offset))
@@ -106,11 +98,9 @@ namespace ICSharpCode.AvalonEdit.Editing
 			textArea.Caret.VisualColumn = -1;
 		}
 		
-		public override int Length {
-			get { return 0; }
-		}
-		
-		// Use reference equality because there's only one EmptySelection per text area.
+		public override int Length => 0;
+
+	    // Use reference equality because there's only one EmptySelection per text area.
 		public override int GetHashCode()
 		{
 			return RuntimeHelpers.GetHashCode(this);

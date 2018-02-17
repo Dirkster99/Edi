@@ -1,8 +1,8 @@
 ﻿namespace Edi.Core.Models.Documents
 {
     using System;
-    using Edi.Core.Interfaces.Documents;
-    using Edi.Core.Models.Utillities.FileSystem;
+    using Interfaces.Documents;
+    using Utillities.FileSystem;
 
     /// <summary>
     /// Class models the basic properties and behaviours of a low level file stored on harddisk.
@@ -21,7 +21,7 @@
         /// </summary>
         public DocumentModel()
         {
-            this.SetDefaultDocumentModel();
+            SetDefaultDocumentModel();
         }
 
         /// <summary>
@@ -33,9 +33,9 @@
             if (copyThis == null)
                 return;
 
-            this.IsReadonly = copyThis.IsReadonly;
-            this.IsReal = copyThis.IsReal;
-            this.mFileName = new FileName(copyThis.mFileName);
+            IsReadonly = copyThis.IsReadonly;
+            IsReal = copyThis.IsReal;
+            mFileName = new FileName(copyThis.mFileName);
         }
         #endregion constructors
 
@@ -65,10 +65,10 @@
         {
             get
             {
-                if (this.mFileName == null)
+                if (mFileName == null)
                     return null;
 
-                return this.mFileName.ToString();
+                return mFileName.ToString();
             }
         }
 
@@ -79,10 +79,10 @@
         {
             get
             {
-                if (this.mFileName == null)
+                if (mFileName == null)
                     return null;
 
-                return System.IO.Path.GetFileName(this.FileNamePath);
+                return System.IO.Path.GetFileName(FileNamePath);
             }
         }
 
@@ -93,7 +93,7 @@
         {
             get
             {
-                return System.IO.Path.GetFullPath(this.FileNamePath);
+                return System.IO.Path.GetFullPath(FileNamePath);
             }
         }
 
@@ -104,7 +104,7 @@
         {
             get
             {
-                return this.mFileName.GetExtension();
+                return mFileName.GetExtension();
             }
         }
 
@@ -112,19 +112,19 @@
         {
             get
             {
-                if (this.mFileChangeWatcher == null)
+                if (mFileChangeWatcher == null)
                     return false;
 
-                return this.mFileChangeWatcher.WasChangedExternally;
+                return mFileChangeWatcher.WasChangedExternally;
             }
 
             set
             {
-                if (this.mFileChangeWatcher == null)
+                if (mFileChangeWatcher == null)
                     return;
 
-                if (this.mFileChangeWatcher.WasChangedExternally != value)
-                    this.mFileChangeWatcher.WasChangedExternally = value;
+                if (mFileChangeWatcher.WasChangedExternally != value)
+                    mFileChangeWatcher.WasChangedExternally = value;
             }
         }
         #endregion properties
@@ -151,14 +151,14 @@
         public void SetFileNamePath(string fileNamePath, bool isReal)
         {
             if (fileNamePath != null)
-                this.mFileName = new FileName(fileNamePath);
+                mFileName = new FileName(fileNamePath);
 
-            this.IsReal = isReal;
+            IsReal = isReal;
 
-            if (this.IsReal == true && fileNamePath != null)
+            if (IsReal && fileNamePath != null)
             {
-                this.QueryFileProperies();
-                this.ChangeFileName(this.mFileName);
+                QueryFileProperies();
+                ChangeFileName(mFileName);
             }
         }
 
@@ -171,12 +171,12 @@
         /// (properties are reset to default).</param>
         public void SetIsReal(bool isReal)
         {
-            this.IsReal = isReal;
+            IsReal = isReal;
 
-            if (this.IsReal == true)
+            if (IsReal)
             {
-                if (this.mFileChangeWatcher == null)
-                    this.QueryFileProperies();
+                if (mFileChangeWatcher == null)
+                    QueryFileProperies();
             }
         }
 
@@ -187,18 +187,18 @@
         {
             try
             {
-                if (this.IsReal == true)
+                if (IsReal)
                 {
-                    System.IO.FileInfo f = new System.IO.FileInfo(this.FileNamePath);
-                    this.IsReadonly = f.IsReadOnly;
+                    System.IO.FileInfo f = new System.IO.FileInfo(FileNamePath);
+                    IsReadonly = f.IsReadOnly;
 
-                    if (this.mFileChangeWatcher != null)
+                    if (mFileChangeWatcher != null)
                     {
-                        this.mFileChangeWatcher.Dispose();
-                        this.mFileChangeWatcher = null;
+                        mFileChangeWatcher.Dispose();
+                        mFileChangeWatcher = null;
                     }
 
-                    this.mFileChangeWatcher = new FileChangeWatcher(this);
+                    mFileChangeWatcher = new FileChangeWatcher(this);
                 }
             }
             catch (Exception exp)
@@ -217,31 +217,31 @@
         {
             try
             {
-                if (isEnabled == true)
+                if (isEnabled)
                 {
                     // Enable file watcher for this file
-                    if (this.IsReal == false)
+                    if (IsReal == false)
                         return false;
 
-                    if (this.mFileChangeWatcher == null)
-                        this.QueryFileProperies();
+                    if (mFileChangeWatcher == null)
+                        QueryFileProperies();
 
-                    if (this.mFileChangeWatcher == null)
+                    if (mFileChangeWatcher == null)
                         return false;
 
-                    if (this.mFileChangeWatcher.Enabled == false)
-                        this.mFileChangeWatcher.Enabled = true;
+                    if (mFileChangeWatcher.Enabled == false)
+                        mFileChangeWatcher.Enabled = true;
 
                     return true;
                 }
                 else
                 {
                     // Disable file watcher for this file
-                    if (this.mFileChangeWatcher == null)
+                    if (mFileChangeWatcher == null)
                         return false;
 
-                    if (this.mFileChangeWatcher.Enabled == true)
-                        this.mFileChangeWatcher.Enabled = false;
+                    if (mFileChangeWatcher.Enabled)
+                        mFileChangeWatcher.Enabled = false;
 
                     return false;
                 }
@@ -257,17 +257,17 @@
         /// </summary>
         private void SetDefaultDocumentModel()
         {
-            this.IsReadonly = true;
-            this.IsReal = false;
-            this.mFileName = null;
+            IsReadonly = true;
+            IsReal = false;
+            mFileName = null;
         }
 
         public void Dispose()
         {
-            if (this.mFileChangeWatcher != null)
+            if (mFileChangeWatcher != null)
             {
-                this.mFileChangeWatcher.Dispose();
-                this.mFileChangeWatcher = null;
+                mFileChangeWatcher.Dispose();
+                mFileChangeWatcher = null;
             }
             GC.SuppressFinalize(this);
         }

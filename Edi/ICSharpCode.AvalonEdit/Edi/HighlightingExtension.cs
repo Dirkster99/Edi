@@ -6,9 +6,9 @@
   using System.Windows;
   using System.Xml;
 
-  using ICSharpCode.AvalonEdit.Highlighting;
-  using ICSharpCode.AvalonEdit.Highlighting.Themes;
-  using ICSharpCode.AvalonEdit.Highlighting.Xshd;
+  using Highlighting;
+  using Highlighting.Themes;
+  using Highlighting.Xshd;
 
   /// <summary>
   /// Class for handling file streams and association with xshd highlighting patterns and names
@@ -21,8 +21,6 @@
     /// </summary>
     public static void RegisterCustomHighlightingPatterns(HighlightingThemes hlThemes = null)
     {
-      try
-      {
         HighlightingManager.Instance.InitializeDefinitions(hlThemes);
 
         string path = Path.GetDirectoryName(Application.ResourceAssembly.Location);
@@ -30,29 +28,23 @@
 
         if (Directory.Exists(path))
         {
-          // Some HighlightingDefinitions contain 'import' statements which means that some
-          // XSHDs have to be loaded before others (an exception is thrown otherwise)
-          // Therefore, we use filenames to indicate sequence for loading xshds
-          SortedSet<string> files = new SortedSet<string>(Directory.GetFiles(path).Where(x =>
-          {
-            var extension = Path.GetExtension(x);
-            return extension != null && extension.Contains("xshd");
-          }));
-
-          foreach (var file in files)
-          {
-            try
+            // Some HighlightingDefinitions contain 'import' statements which means that some
+            // XSHDs have to be loaded before others (an exception is thrown otherwise)
+            // Therefore, we use filenames to indicate sequence for loading xshds
+            SortedSet<string> files = new SortedSet<string>(Directory.GetFiles(path).Where(x =>
             {
-              var definition = LoadXshdDefinition(file);
-              var hightlight = LoadHighlightingDefinition(file);
+                var extension = Path.GetExtension(x);
+                return extension.Contains("xshd");
+            }));
 
-              HighlightingManager.Instance.RegisterHighlighting(definition.Name, definition.Extensions.ToArray(), hightlight);
+            foreach (var file in files)
+            {
+                var definition = LoadXshdDefinition(file);
+                var hightlight = LoadHighlightingDefinition(file);
+
+                HighlightingManager.Instance.RegisterHighlighting(definition.Name, definition.Extensions.ToArray(), hightlight);
             }
-            catch{ throw; }
-          }
         }
-      }
-      catch{ throw; }
     }
 
     private static XshdSyntaxDefinition LoadXshdDefinition(string fullName)

@@ -9,7 +9,7 @@
   {
     public StatusBar()
     {
-      this.InitializeComponent();
+      InitializeComponent();
     }
   }
 }

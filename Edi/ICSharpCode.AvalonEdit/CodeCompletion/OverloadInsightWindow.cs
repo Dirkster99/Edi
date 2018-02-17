@@ -16,7 +16,6 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -37,7 +36,7 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		public OverloadInsightWindow(TextArea textArea) : base(textArea)
 		{
 			overloadViewer.Margin = new Thickness(2,0,0,0);
-			this.Content = overloadViewer;
+			Content = overloadViewer;
 		}
 		
 		/// <summary>
@@ -52,7 +51,7 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		protected override void OnKeyDown(KeyEventArgs e)
 		{
 			base.OnKeyDown(e);
-			if (!e.Handled && this.Provider != null && this.Provider.Count > 1) {
+			if (!e.Handled && Provider != null && Provider.Count > 1) {
 				switch (e.Key) {
 					case Key.Up:
 						e.Handled = true;

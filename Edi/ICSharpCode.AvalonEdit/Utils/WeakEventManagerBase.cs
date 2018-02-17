@@ -60,7 +60,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		protected sealed override void StartListening(object source)
 		{
 			if (source == null)
-				throw new ArgumentNullException("source");
+				throw new ArgumentNullException(nameof(source));
 			StartListening((TEventSource)source);
 		}
 		
@@ -68,7 +68,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		protected sealed override void StopListening(object source)
 		{
 			if (source == null)
-				throw new ArgumentNullException("source");
+				throw new ArgumentNullException(nameof(source));
 			StopListening((TEventSource)source);
 		}
 		

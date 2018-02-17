@@ -25,11 +25,9 @@
 				int val = (int)value;
 				if (val > 0)
 					return Visibility.Visible;
-				else
-					if (parameter != null && parameter is Visibility)
-						return parameter;
-					else
-						return Visibility.Hidden;        ////return Visibility.Collapsed;
+			    if (parameter != null && parameter is Visibility)
+			        return parameter;
+			    return Visibility.Hidden;        ////return Visibility.Collapsed;
 			}
 
 			throw new ArgumentException("Invalid argument/return type. Expected argument: bool and return type: Visibility");
@@ -52,8 +50,7 @@
 				Visibility val = (Visibility)value;
 				if (val == Visibility.Visible)
 					return true;
-				else
-					return false;
+			    return false;
 			}
 
 			throw new ArgumentException("Invalid argument/return type. Expected argument: Visibility and return type: bool");

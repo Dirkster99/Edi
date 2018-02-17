@@ -3,13 +3,10 @@
 	using System.Collections.Generic;
 	using System.Collections.ObjectModel;
 	using System.Linq;
-	using Edi.Core.ViewModels.Base;
+	using Core.ViewModels.Base;
 	using ICSharpCode.AvalonEdit;
 	using ICSharpCode.AvalonEdit.Edi.BlockSurround;
-	using Edi.Settings.ProgramSettings;
-	using UnitComboLib.Models.Unit.Screen;
-	using UnitComboLib.ViewModels;
-    using UnitComboLib.Models.Unit;
+	using Settings.ProgramSettings;
 
     public class ConfigViewModel : DialogViewModelBase
 	{
@@ -24,7 +21,7 @@
 		private bool mTextToHTML_TextToHTML_AlternateLineBackground = true;
 
 		private bool mHighlightOnFileNew = true;
-		private string mFileNewDefaultFileName = Edi.Util.Local.Strings.STR_FILE_DEFAULTNAME;
+		private string mFileNewDefaultFileName = Util.Local.Strings.STR_FILE_DEFAULTNAME;
 		private string mFileNewDefaultFileExtension = ".txt";
 		#endregion fields
 
@@ -36,30 +33,30 @@
 			: base()
 		{
 			// Setup default values here - real values are loaded in a specific method of this class (!)
-			this.mWordWrapText = false;
-			this.mReloadOpenFilesOnAppStart = false;
-			this.mRunSingleInstance = true;
+			mWordWrapText = false;
+			mReloadOpenFilesOnAppStart = false;
+			mRunSingleInstance = true;
 
-			this.WordWrapText = false;
+			WordWrapText = false;
 
 			// Get default list of units from settings manager
 			var unitList = new ObservableCollection<UnitComboLib.Models.ListItem>(Options.GenerateScreenUnitList());
-			this.SizeUnitLabel =
+			SizeUnitLabel =
                 UnitComboLib.UnitViewModeService.CreateInstance(
                     unitList,
                     new ScreenConverter(),
                     (int)ZoomUnit.Percentage, 100);
 
-			this.EditorTextOptions = new TextEditorOptions();
+			EditorTextOptions = new TextEditorOptions();
 
 			// Initialize localization settings
-			this.Languages = new List<LanguageCollection>(Options.GetSupportedLanguages());
+			Languages = new List<LanguageCollection>(Options.GetSupportedLanguages());
 
 			// Set default language to make sure app neutral is selected and available for sure
 			// (this is a fallback if all else fails)
 			try
 			{
-				this.LanguageSelected = this.Languages.FirstOrDefault(lang => lang.BCP47 == Options.DefaultLocal);
+				LanguageSelected = Languages.FirstOrDefault(lang => lang.BCP47 == Options.DefaultLocal);
 			}
 			catch
 			{
@@ -75,15 +72,15 @@
 		{
 			get
 			{
-				return this.mWordWrapText;
+				return mWordWrapText;
 			}
 
 			set
 			{
-				if (this.mWordWrapText != value)
+				if (mWordWrapText != value)
 				{
-					this.mWordWrapText = value;
-					this.RaisePropertyChanged(() => this.WordWrapText);
+					mWordWrapText = value;
+					RaisePropertyChanged(() => WordWrapText);
 				}
 			}
 		}
@@ -101,15 +98,15 @@
 		{
 			get
 			{
-				return this.mReloadOpenFilesOnAppStart;
+				return mReloadOpenFilesOnAppStart;
 			}
 
 			set
 			{
-				if (this.mReloadOpenFilesOnAppStart != value)
+				if (mReloadOpenFilesOnAppStart != value)
 				{
-					this.mReloadOpenFilesOnAppStart = value;
-					this.RaisePropertyChanged(() => this.ReloadOpenFilesOnAppStart);
+					mReloadOpenFilesOnAppStart = value;
+					RaisePropertyChanged(() => ReloadOpenFilesOnAppStart);
 				}
 			}
 		}
@@ -121,15 +118,15 @@
 		{
 			get
 			{
-				return this.mRunSingleInstance;
+				return mRunSingleInstance;
 			}
 
 			set
 			{
-				if (this.mRunSingleInstance != value)
+				if (mRunSingleInstance != value)
 				{
-					this.mRunSingleInstance = value;
-					this.RaisePropertyChanged(() => this.RunSingleInstance);
+					mRunSingleInstance = value;
+					RaisePropertyChanged(() => RunSingleInstance);
 				}
 			}
 		}
@@ -148,7 +145,7 @@
 		{
 			get
 			{
-				if (this.SizeUnitLabel.SelectedItem.Key == Itemkey.ScreenFontPoints)
+				if (SizeUnitLabel.SelectedItem.Key == Itemkey.ScreenFontPoints)
 					return ZoomUnit.Points;
 
 				return ZoomUnit.Percentage;
@@ -156,14 +153,14 @@
 
 			set
 			{
-				if (ConvertZoomUnit(value) != this.SizeUnitLabel.SelectedItem.Key)
+				if (ConvertZoomUnit(value) != SizeUnitLabel.SelectedItem.Key)
 				{
 					if (value == ZoomUnit.Points)
-						this.SizeUnitLabel.SetSelectedItemCommand.Execute(Itemkey.ScreenFontPoints);
+						SizeUnitLabel.SetSelectedItemCommand.Execute(Itemkey.ScreenFontPoints);
 					else
-						this.SizeUnitLabel.SetSelectedItemCommand.Execute(Itemkey.ScreenPercent);
+						SizeUnitLabel.SetSelectedItemCommand.Execute(Itemkey.ScreenPercent);
 
-					this.RaisePropertyChanged(() => this.DocumentZoomUnit);
+					RaisePropertyChanged(() => DocumentZoomUnit);
 				}
 			}
 		}
@@ -176,7 +173,7 @@
 		{
 			get
 			{
-				return Edi.Util.Local.Strings.STR_ProgramSettings_Caption;
+				return Util.Local.Strings.STR_ProgramSettings_Caption;
 			}
 		}
 		#endregion ScaleView
@@ -194,15 +191,15 @@
 		{
 			get
 			{
-				return this.mLanguageSelected;
+				return mLanguageSelected;
 			}
 
 			set
 			{
-				if (this.mLanguageSelected != value)
+				if (mLanguageSelected != value)
 				{
-					this.mLanguageSelected = value;
-					this.RaisePropertyChanged(() => this.LanguageSelected);
+					mLanguageSelected = value;
+					RaisePropertyChanged(() => LanguageSelected);
 				}
 			}
 		}
@@ -216,15 +213,15 @@
 		{
 			get
 			{
-				return this.mTextToHTML_ShowLineNumbers;
+				return mTextToHTML_ShowLineNumbers;
 			}
 
 			set
 			{
-				if (this.mTextToHTML_ShowLineNumbers != value)
+				if (mTextToHTML_ShowLineNumbers != value)
 				{
-					this.mTextToHTML_ShowLineNumbers = value;
-					this.RaisePropertyChanged(() => this.TextToHTML_ShowLineNumbers);
+					mTextToHTML_ShowLineNumbers = value;
+					RaisePropertyChanged(() => TextToHTML_ShowLineNumbers);
 				}
 			}
 		}
@@ -236,15 +233,15 @@
 		{
 			get
 			{
-				return this.mTextToHTML_TextToHTML_AlternateLineBackground;
+				return mTextToHTML_TextToHTML_AlternateLineBackground;
 			}
 
 			set
 			{
-				if (this.mTextToHTML_TextToHTML_AlternateLineBackground != value)
+				if (mTextToHTML_TextToHTML_AlternateLineBackground != value)
 				{
-					this.mTextToHTML_TextToHTML_AlternateLineBackground = value;
-					this.RaisePropertyChanged(() => this.TextToHTML_AlternateLineBackground);
+					mTextToHTML_TextToHTML_AlternateLineBackground = value;
+					RaisePropertyChanged(() => TextToHTML_AlternateLineBackground);
 				}
 			}
 		}
@@ -258,15 +255,15 @@
 		{
 			get
 			{
-				return this.mHighlightOnFileNew;
+				return mHighlightOnFileNew;
 			}
 
 			set
 			{
-				if (this.mHighlightOnFileNew != value)
+				if (mHighlightOnFileNew != value)
 				{
-					this.mHighlightOnFileNew = value;
-					this.RaisePropertyChanged(() => this.HighlightOnFileNew);
+					mHighlightOnFileNew = value;
+					RaisePropertyChanged(() => HighlightOnFileNew);
 				}
 			}
 		}
@@ -278,15 +275,15 @@
 		{
 			get
 			{
-				return this.mFileNewDefaultFileName;
+				return mFileNewDefaultFileName;
 			}
 
 			set
 			{
-				if (this.mFileNewDefaultFileName != value)
+				if (mFileNewDefaultFileName != value)
 				{
-					this.mFileNewDefaultFileName = value;
-					this.RaisePropertyChanged(() => this.FileNewDefaultFileName);
+					mFileNewDefaultFileName = value;
+					RaisePropertyChanged(() => FileNewDefaultFileName);
 				}
 			}
 		}
@@ -299,15 +296,15 @@
 		{
 			get
 			{
-				return this.mFileNewDefaultFileExtension;
+				return mFileNewDefaultFileExtension;
 			}
 
 			set
 			{
-				if (this.mFileNewDefaultFileExtension != value)
+				if (mFileNewDefaultFileExtension != value)
 				{
-					this.mFileNewDefaultFileExtension = value;
-					this.RaisePropertyChanged(() => this.FileNewDefaultFileExtension);
+					mFileNewDefaultFileExtension = value;
+					RaisePropertyChanged(() => FileNewDefaultFileExtension);
 				}
 			}
 		}
@@ -368,13 +365,13 @@
 		/// <param name="settingData"></param>
 		public void LoadOptionsFromModel(Options settingData)
 		{
-			this.ReloadOpenFilesOnAppStart = settingData.ReloadOpenFilesOnAppStart;
-			this.RunSingleInstance = settingData.RunSingleInstance;
+			ReloadOpenFilesOnAppStart = settingData.ReloadOpenFilesOnAppStart;
+			RunSingleInstance = settingData.RunSingleInstance;
 
-			this.WordWrapText = settingData.WordWarpText;
+			WordWrapText = settingData.WordWarpText;
 
-			this.EditorTextOptions = new TextEditorOptions(settingData.EditorTextOptions);
-			this.SizeUnitLabel = UnitComboLib.UnitViewModeService.CreateInstance(
+			EditorTextOptions = new TextEditorOptions(settingData.EditorTextOptions);
+			SizeUnitLabel = UnitComboLib.UnitViewModeService.CreateInstance(
                 new ObservableCollection<UnitComboLib.Models.ListItem>(
                     Options.GenerateScreenUnitList()),
 						new ScreenConverter(),
@@ -382,18 +379,18 @@
 
 			try
 			{
-				this.LanguageSelected = this.Languages.FirstOrDefault(lang => lang.BCP47 == settingData.LanguageSelected);
+				LanguageSelected = Languages.FirstOrDefault(lang => lang.BCP47 == settingData.LanguageSelected);
 			}
 			catch
 			{
 			}
 
-			this.TextToHTML_ShowLineNumbers = settingData.TextToHTML_ShowLineNumbers;
-			this.TextToHTML_AlternateLineBackground = settingData.TextToHTML_AlternateLineBackground;
+			TextToHTML_ShowLineNumbers = settingData.TextToHTML_ShowLineNumbers;
+			TextToHTML_AlternateLineBackground = settingData.TextToHTML_AlternateLineBackground;
 
-			this.HighlightOnFileNew = settingData.HighlightOnFileNew;
-			this.FileNewDefaultFileName = settingData.FileNewDefaultFileName;
-			this.FileNewDefaultFileExtension = settingData.FileNewDefaultFileExtension;
+			HighlightOnFileNew = settingData.HighlightOnFileNew;
+			FileNewDefaultFileName = settingData.FileNewDefaultFileName;
+			FileNewDefaultFileExtension = settingData.FileNewDefaultFileExtension;
 		}
 
 		/// <summary>
@@ -403,27 +400,27 @@
 		/// <param name="settingData"></param>
 		public void SaveOptionsToModel(Options settingData)
 		{
-			settingData.ReloadOpenFilesOnAppStart = this.ReloadOpenFilesOnAppStart;
-			settingData.RunSingleInstance = this.RunSingleInstance;
+			settingData.ReloadOpenFilesOnAppStart = ReloadOpenFilesOnAppStart;
+			settingData.RunSingleInstance = RunSingleInstance;
 
-			settingData.WordWarpText = this.WordWrapText;
+			settingData.WordWarpText = WordWrapText;
 
-			settingData.EditorTextOptions = new TextEditorOptions(this.EditorTextOptions);
-			if (this.SizeUnitLabel.SelectedItem.Key == UnitComboLib.Models.Unit.Itemkey.ScreenFontPoints)
+			settingData.EditorTextOptions = new TextEditorOptions(EditorTextOptions);
+			if (SizeUnitLabel.SelectedItem.Key == UnitComboLib.Models.Unit.Itemkey.ScreenFontPoints)
 				settingData.DocumentZoomUnit = ZoomUnit.Points;
 			else
 				settingData.DocumentZoomUnit = ZoomUnit.Percentage;
 
-			settingData.DocumentZoomView = (int)this.SizeUnitLabel.Value;
+			settingData.DocumentZoomView = (int)SizeUnitLabel.Value;
 
-			settingData.LanguageSelected = this.LanguageSelected.BCP47;
+			settingData.LanguageSelected = LanguageSelected.BCP47;
 
-			settingData.TextToHTML_ShowLineNumbers = this.TextToHTML_ShowLineNumbers;
-			settingData.TextToHTML_AlternateLineBackground = this.TextToHTML_AlternateLineBackground;
+			settingData.TextToHTML_ShowLineNumbers = TextToHTML_ShowLineNumbers;
+			settingData.TextToHTML_AlternateLineBackground = TextToHTML_AlternateLineBackground;
 
-			settingData.HighlightOnFileNew = this.HighlightOnFileNew;
-			settingData.FileNewDefaultFileName = this.FileNewDefaultFileName;
-			settingData.FileNewDefaultFileExtension = this.FileNewDefaultFileExtension;
+			settingData.HighlightOnFileNew = HighlightOnFileNew;
+			settingData.FileNewDefaultFileName = FileNewDefaultFileName;
+			settingData.FileNewDefaultFileExtension = FileNewDefaultFileExtension;
 
 			settingData.IsDirty = true;
 		}

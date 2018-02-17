@@ -22,7 +22,7 @@
     /// </summary>
     public SnapTargetUpdateEventArgs()
     {
-      this.IsMoveUpdate = MoveUpdate.CoerceOnNextLayoutUpdate;
+      IsMoveUpdate = MoveUpdate.CoerceOnNextLayoutUpdate;
     }
 
     /// <summary>
@@ -32,8 +32,8 @@
     /// <param name="moveDelta"></param>
     public SnapTargetUpdateEventArgs(Vector moveDelta)
     {
-      this.IsMoveUpdate = MoveUpdate.MoveDelta;
-      this.MoveDelta = moveDelta;
+      IsMoveUpdate = MoveUpdate.MoveDelta;
+      MoveDelta = moveDelta;
     }
     #endregion constructor
 

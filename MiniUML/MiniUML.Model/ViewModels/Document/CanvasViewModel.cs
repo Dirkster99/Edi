@@ -4,15 +4,13 @@ namespace MiniUML.Model.ViewModels.Document
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows;
-    using MiniUML.Framework;
-    using MiniUML.Framework.Command;
-    using MiniUML.Model.Events;
-    using MiniUML.Model.Model;
-    using MiniUML.Model.ViewModels.RubberBand;
-    using MiniUML.Model.ViewModels.Shapes;
-    using MiniUML.View.Views.RubberBand;
-    using MsgBox;
-    using CommonServiceLocator;
+    using Framework;
+    using Framework.Command;
+    using Events;
+    using Model;
+    using RubberBand;
+    using Shapes;
+    using View.Views.RubberBand;
 
     /// <summary>
     /// Interface to define interaction for drag and drop
@@ -60,11 +58,11 @@ namespace MiniUML.Model.ViewModels.Document
         {
             // Store a reference to the parent view model
             // (necessary to implement begin and end operation around undo).
-            this.DocumentViewModel = documentViewModel;
+            DocumentViewModel = documentViewModel;
 
-            this.mSelectedItem = new SelectedItems();
+            mSelectedItem = new SelectedItems();
 
-            this.mIsFocused = false;
+            mIsFocused = false;
         }
         #endregion constructor
 
@@ -77,15 +75,15 @@ namespace MiniUML.Model.ViewModels.Document
         {
             get
             {
-                return this.mIsFocused;
+                return mIsFocused;
             }
 
             set
             {
-                if (this.mIsFocused != value)
+                if (mIsFocused != value)
                 {
-                    this.mIsFocused = value;
-                    this.NotifyPropertyChanged(() => this.IsFocused);
+                    mIsFocused = value;
+                    NotifyPropertyChanged(() => IsFocused);
                 }
             }
         }
@@ -97,7 +95,7 @@ namespace MiniUML.Model.ViewModels.Document
         {
             get
             {
-                return this.mSelectedItem;
+                return mSelectedItem;
             }
         }
 
@@ -115,14 +113,14 @@ namespace MiniUML.Model.ViewModels.Document
         {
             get
             {
-                return this.mICanvasViewMouseHandler;
+                return mICanvasViewMouseHandler;
             }
 
             private set
             {
-                if (this.mICanvasViewMouseHandler != value)
+                if (mICanvasViewMouseHandler != value)
                 {
-                    this.mICanvasViewMouseHandler = value;
+                    mICanvasViewMouseHandler = value;
                 }
             }
         }
@@ -131,10 +129,10 @@ namespace MiniUML.Model.ViewModels.Document
         {
             get
             {
-                if (this.mRubberBand == null)
-                    this.mRubberBand = new RubberBandViewModel();
+                if (mRubberBand == null)
+                    mRubberBand = new RubberBandViewModel();
 
-                return this.mRubberBand;
+                return mRubberBand;
             }
         }
 
@@ -146,10 +144,10 @@ namespace MiniUML.Model.ViewModels.Document
         {
             get
             {
-                if (this.mSelectCommand == null)
-                    this.mSelectCommand = new RelayCommand<object>((p) => this.OnSelectMode_Execute(),
-                                                                   (p) => this.OnSelectMode_CanExecute());
-                return this.mSelectCommand;
+                if (mSelectCommand == null)
+                    mSelectCommand = new RelayCommand<object>((p) => OnSelectMode_Execute(),
+                                                                   (p) => OnSelectMode_CanExecute());
+                return mSelectCommand;
             }
         }
 
@@ -160,10 +158,10 @@ namespace MiniUML.Model.ViewModels.Document
         {
             get
             {
-                if (this.mDeleteCommand == null)
-                    this.mDeleteCommand = new RelayCommand<object>((p) => this.OnDeleteCommand_Executed(),
-                                                                   (p) => this.OnDeleteCutCopyCommand_CanExecute());
-                return this.mDeleteCommand;
+                if (mDeleteCommand == null)
+                    mDeleteCommand = new RelayCommand<object>((p) => OnDeleteCommand_Executed(),
+                                                                   (p) => OnDeleteCutCopyCommand_CanExecute());
+                return mDeleteCommand;
             }
         }
 
@@ -174,11 +172,11 @@ namespace MiniUML.Model.ViewModels.Document
         {
             get
             {
-                if (this.mCutCommand == null)
-                    this.mCutCommand = new RelayCommand<object>((p) => this.OnCutCommand_Executed(),
-                                                                (p) => this.OnDeleteCutCopyCommand_CanExecute());
+                if (mCutCommand == null)
+                    mCutCommand = new RelayCommand<object>((p) => OnCutCommand_Executed(),
+                                                                (p) => OnDeleteCutCopyCommand_CanExecute());
 
-                return this.mCutCommand;
+                return mCutCommand;
             }
         }
 
@@ -189,11 +187,11 @@ namespace MiniUML.Model.ViewModels.Document
         {
             get
             {
-                if (this.mCopyCommand == null)
-                    this.mCopyCommand = new RelayCommand<object>((p) => this.OnCopyCommand_Executed(),
-                                                                 (p) => this.OnDeleteCutCopyCommand_CanExecute());
+                if (mCopyCommand == null)
+                    mCopyCommand = new RelayCommand<object>((p) => OnCopyCommand_Executed(),
+                                                                 (p) => OnDeleteCutCopyCommand_CanExecute());
 
-                return this.mCopyCommand;
+                return mCopyCommand;
             }
         }
 
@@ -205,11 +203,11 @@ namespace MiniUML.Model.ViewModels.Document
         {
             get
             {
-                if (this.mPasteCommand == null)
-                    this.mPasteCommand = new RelayCommand<object>((p) => this.OnPasteCommand_Executed(),
-                                                                  (p) => this.OnPasteCommand_CanExecute());
+                if (mPasteCommand == null)
+                    mPasteCommand = new RelayCommand<object>((p) => OnPasteCommand_Executed(),
+                                                                  (p) => OnPasteCommand_CanExecute());
 
-                return this.mPasteCommand;
+                return mPasteCommand;
             }
         }
         #endregion
@@ -224,7 +222,7 @@ namespace MiniUML.Model.ViewModels.Document
         /// <param name="obj"></param>
         void IShapeParent.Remove(ShapeViewModelBase shape)
         {
-            this.DocumentViewModel.dm_DocumentDataModel.Remove(shape);
+            DocumentViewModel.dm_DocumentDataModel.Remove(shape);
         }
 
         /// <summary>
@@ -234,7 +232,7 @@ namespace MiniUML.Model.ViewModels.Document
         /// <param name="obj"></param>
         void IShapeParent.BringToFront(ShapeViewModelBase shape)
         {
-            this.DocumentViewModel.dm_DocumentDataModel.BringToFront(shape);
+            DocumentViewModel.dm_DocumentDataModel.BringToFront(shape);
         }
 
         /// <summary>
@@ -244,7 +242,7 @@ namespace MiniUML.Model.ViewModels.Document
         /// <param name="obj"></param>
         void IShapeParent.SendToBack(ShapeViewModelBase shape)
         {
-            this.DocumentViewModel.dm_DocumentDataModel.SendToBack(shape);
+            DocumentViewModel.dm_DocumentDataModel.SendToBack(shape);
         }
 
         /// <summary>
@@ -258,7 +256,7 @@ namespace MiniUML.Model.ViewModels.Document
         /// <param name="e"></param>
         void IShapeParent.ResizeSelectedShapes(DragDeltaThumbEvent e)
         {
-            if (this.SelectedItem.Shapes.Count == 0)
+            if (SelectedItem.Shapes.Count == 0)
                 return;
 
             double minLeft = double.MaxValue;
@@ -269,7 +267,7 @@ namespace MiniUML.Model.ViewModels.Document
 
             // filter for those items that contain a height property and
             // find the min of their min (Height, Width) properties
-            foreach (var item in this.SelectedItem.Shapes)
+            foreach (var item in SelectedItem.Shapes)
             {
                 ShapeSizeViewModelBase shape = item as ShapeSizeViewModelBase;
 
@@ -284,7 +282,7 @@ namespace MiniUML.Model.ViewModels.Document
             }
 
             // Resize currently selected items with regard to min height and width determined before
-            foreach (var item in this.SelectedItem.Shapes)
+            foreach (var item in SelectedItem.Shapes)
             {
                 ShapeSizeViewModelBase shape = item as ShapeSizeViewModelBase;
 
@@ -340,7 +338,7 @@ namespace MiniUML.Model.ViewModels.Document
             double XShapeCenter = shape.Left + (shape.Width / 2);
             double shapeRight = shape.Position.X + shape.Width;
 
-            foreach (var item in this.SelectedItem.Shapes.OfType<ShapeSizeViewModelBase>())
+            foreach (var item in SelectedItem.Shapes.OfType<ShapeSizeViewModelBase>())
             {
                 if (shape == item) // Adjust shape to itself is a superflous operation
                     continue;
@@ -388,15 +386,15 @@ namespace MiniUML.Model.ViewModels.Document
             switch (option)
             {
                 case SameSize.SameWidth:
-                    this.SameWidth(shape);
+                    SameWidth(shape);
                     break;
 
                 case SameSize.SameHeight:
-                    this.SameHeight(shape);
+                    SameHeight(shape);
                     break;
 
                 case SameSize.SameWidthandHeight:
-                    this.SameWidthandHeight(shape);
+                    SameWidthandHeight(shape);
                     break;
 
                 default:
@@ -414,11 +412,11 @@ namespace MiniUML.Model.ViewModels.Document
             switch (distribOption)
             {
                 case Destribute.Horizontally:
-                    this.DistributeHorizontal();
+                    DistributeHorizontal();
                     break;
 
                 case Destribute.Vertically:
-                    this.DistributeVertical();
+                    DistributeVertical();
                     break;
 
                 default:
@@ -433,7 +431,7 @@ namespace MiniUML.Model.ViewModels.Document
         /// <param name="element"></param>
         public void AddShape(ShapeViewModelBase element)
         {
-            this.DocumentViewModel.dm_DocumentDataModel.AddShape(element);
+            DocumentViewModel.dm_DocumentDataModel.AddShape(element);
         }
 
         #region Mouse handling (ICanvasViewMouseHandler)
@@ -449,15 +447,15 @@ namespace MiniUML.Model.ViewModels.Document
         /// <param name="value"></param>
         public void BeginCanvasViewMouseHandler(ICanvasViewMouseHandler value)
         {
-            if (this.CanvasViewMouseHandler == value)  // no change
+            if (CanvasViewMouseHandler == value)  // no change
                 return;
 
-            if (this.CanvasViewMouseHandler != null)
-                this.CancelCanvasViewMouseHandler();
+            if (CanvasViewMouseHandler != null)
+                CancelCanvasViewMouseHandler();
 
-            this.CanvasViewMouseHandler = value;
+            CanvasViewMouseHandler = value;
 
-            if (this.CanvasViewMouseHandler != null)
+            if (CanvasViewMouseHandler != null)
                 DocumentViewModel.dm_DocumentDataModel.BeginOperation("CanvasViewMouseHandler session");
         }
 
@@ -468,8 +466,8 @@ namespace MiniUML.Model.ViewModels.Document
         /// </summary>
         public void CancelCanvasViewMouseHandler()
         {
-            var handler = this.CanvasViewMouseHandler;
-            this.CanvasViewMouseHandler = null;
+            var handler = CanvasViewMouseHandler;
+            CanvasViewMouseHandler = null;
             try
             {
                 handler.OnCancelMouseHandler();
@@ -495,19 +493,19 @@ namespace MiniUML.Model.ViewModels.Document
 
                 // Clear existing selection since multiselection with addition is not what we want
                 if (e.Select == MouseSelection.ReducedToNewSelection)
-                    this.SelectedItem.Clear();
+                    SelectedItem.Clear();
 
                 Rect rubberBand = new Rect(e.StartPoint, e.EndPoint);
 
-                foreach (var item in this.DocumentViewModel.dm_DocumentDataModel.DocRoot.OfType<ShapeSizeViewModelBase>())
+                foreach (var item in DocumentViewModel.dm_DocumentDataModel.DocRoot.OfType<ShapeSizeViewModelBase>())
                 {
                     Rect itemBounds = new Rect(item.Position, item.EndPosition);
 
                     bool contains = rubberBand.Contains(itemBounds);
 
-                    if (contains == true)
+                    if (contains)
                     {
-                        this.SelectedItem.Add(item);
+                        SelectedItem.Add(item);
                     }
                 }
             }
@@ -519,7 +517,7 @@ namespace MiniUML.Model.ViewModels.Document
         /// </summary>
         public void FinishCanvasViewMouseHandler()
         {
-            this.CanvasViewMouseHandler = null;
+            CanvasViewMouseHandler = null;
             DocumentViewModel.dm_DocumentDataModel.EndOperation("CanvasViewMouseHandler session");
         }
 
@@ -529,8 +527,8 @@ namespace MiniUML.Model.ViewModels.Document
         /// </summary>
         public void ResetRubberBand()
         {
-            if (this.mRubberBand != null)
-                this.mRubberBand = null;
+            if (mRubberBand != null)
+                mRubberBand = null;
         }
         #endregion Mouse handling ICanvasViewMouseHandler
 
@@ -542,7 +540,7 @@ namespace MiniUML.Model.ViewModels.Document
         /// <returns></returns>
         private bool OnSelectMode_CanExecute()
         {
-            return (this.CanvasViewMouseHandler != null);
+            return (CanvasViewMouseHandler != null);
         }
 
         /// <summary>
@@ -552,7 +550,7 @@ namespace MiniUML.Model.ViewModels.Document
         /// </summary>
         private void OnSelectMode_Execute()
         {
-            this.CancelCanvasViewMouseHandler();
+            CancelCanvasViewMouseHandler();
         }
         #endregion Selection mode command
 
@@ -563,8 +561,8 @@ namespace MiniUML.Model.ViewModels.Document
         /// <returns></returns>
         private bool OnDeleteCutCopyCommand_CanExecute()
         {
-            return (this.DocumentViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready &&
-                    this.mSelectedItem.Count > 0);
+            return (DocumentViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready &&
+                    mSelectedItem.Count > 0);
         }
 
         /// <summary>
@@ -573,7 +571,7 @@ namespace MiniUML.Model.ViewModels.Document
         /// <returns></returns>
         private bool OnPasteCommand_CanExecute()
         {
-            return (this.DocumentViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready && Clipboard.ContainsText());
+            return (DocumentViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready && Clipboard.ContainsText());
         }
 
         /// <summary>
@@ -581,14 +579,14 @@ namespace MiniUML.Model.ViewModels.Document
         /// </summary>
         private void OnDeleteCommand_Executed()
         {
-            this.DocumentViewModel.dm_DocumentDataModel.BeginOperation("DeleteCommandModel.OnExecute");
+            DocumentViewModel.dm_DocumentDataModel.BeginOperation("DeleteCommandModel.OnExecute");
 
-            this.DocumentViewModel.dm_DocumentDataModel.DeleteElements(this.mSelectedItem.Shapes);
+            DocumentViewModel.dm_DocumentDataModel.DeleteElements(mSelectedItem.Shapes);
 
             // Clear selection from selected elements in canvas viewmodel
-            this.mSelectedItem.Clear();
+            mSelectedItem.Clear();
 
-            this.DocumentViewModel.dm_DocumentDataModel.EndOperation("DeleteCommandModel.OnExecute");
+            DocumentViewModel.dm_DocumentDataModel.EndOperation("DeleteCommandModel.OnExecute");
         }
 
         /// <summary>
@@ -596,19 +594,19 @@ namespace MiniUML.Model.ViewModels.Document
         /// </summary>
         private void OnCutCommand_Executed()
         {
-            this.DocumentViewModel.dm_DocumentDataModel.BeginOperation("CutCommandModel.OnExecute");
+            DocumentViewModel.dm_DocumentDataModel.BeginOperation("CutCommandModel.OnExecute");
 
             string fragment = string.Empty;
 
-            if (this.SelectedItem.Count > 0)
-                fragment = this.DocumentViewModel.dm_DocumentDataModel.GetShapesAsXmlString(this.SelectedItem.Shapes);
+            if (SelectedItem.Count > 0)
+                fragment = DocumentViewModel.dm_DocumentDataModel.GetShapesAsXmlString(SelectedItem.Shapes);
 
-            this.DocumentViewModel.dm_DocumentDataModel.DeleteElements(this.mSelectedItem.Shapes);
+            DocumentViewModel.dm_DocumentDataModel.DeleteElements(mSelectedItem.Shapes);
 
-            this.mSelectedItem.Clear();
+            mSelectedItem.Clear();
             Clipboard.SetText(fragment);
 
-            this.DocumentViewModel.dm_DocumentDataModel.EndOperation("CutCommandModel.OnExecute");
+            DocumentViewModel.dm_DocumentDataModel.EndOperation("CutCommandModel.OnExecute");
         }
 
         /// <summary>
@@ -618,8 +616,8 @@ namespace MiniUML.Model.ViewModels.Document
         {
             string fragment = string.Empty;
 
-            if (this.SelectedItem.Count > 0)
-                fragment = this.DocumentViewModel.dm_DocumentDataModel.GetShapesAsXmlString(this.SelectedItem.Shapes);
+            if (SelectedItem.Count > 0)
+                fragment = DocumentViewModel.dm_DocumentDataModel.GetShapesAsXmlString(SelectedItem.Shapes);
 
             Clipboard.SetText(fragment);
         }
@@ -633,11 +631,11 @@ namespace MiniUML.Model.ViewModels.Document
             {
                 string xmlDocument = Clipboard.GetText();
 
-                if (string.IsNullOrEmpty(xmlDocument) == true)
+                if (string.IsNullOrEmpty(xmlDocument))
                     return;
 
                 // Look-up plugin model
-                string plugin = this.DocumentViewModel.dm_DocumentDataModel.PluginModelName;
+                string plugin = DocumentViewModel.dm_DocumentDataModel.PluginModelName;
                 PluginModelBase m = PluginManager.GetPluginModel(plugin);
 
                 // Look-up shape converter
@@ -647,7 +645,7 @@ namespace MiniUML.Model.ViewModels.Document
                 List<ShapeViewModelBase> coll;
                 // Convert Xml document into a list of shapes and page definition
                 PageViewModelBase page = conv.ReadDocument(xmlDocument,
-                                                   this.DocumentViewModel.vm_CanvasViewModel, out coll);
+                                                   DocumentViewModel.vm_CanvasViewModel, out coll);
 
                 if (coll == null)
                     return;
@@ -655,23 +653,23 @@ namespace MiniUML.Model.ViewModels.Document
                 if (coll.Count == 0)
                     return;
 
-                this.DocumentViewModel.dm_DocumentDataModel.BeginOperation("PasteCommandModel.OnExecute");
+                DocumentViewModel.dm_DocumentDataModel.BeginOperation("PasteCommandModel.OnExecute");
 
-                this.mSelectedItem.Clear();
+                mSelectedItem.Clear();
                 foreach (var shape in coll)
                 {
-                    this.DocumentViewModel.dm_DocumentDataModel.AddShape(shape);
-                    this.mSelectedItem.Add(shape);
+                    DocumentViewModel.dm_DocumentDataModel.AddShape(shape);
+                    mSelectedItem.Add(shape);
                 }
 
-                this.DocumentViewModel.dm_DocumentDataModel.EndOperation("PasteCommandModel.OnExecute");
+                DocumentViewModel.dm_DocumentDataModel.EndOperation("PasteCommandModel.OnExecute");
             }
             catch
             {
                 var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
 
-                msgBox.Show(MiniUML.Framework.Local.Strings.STR_MSG_NoShapeInClipboard,
-                            MiniUML.Framework.Local.Strings.STR_UnexpectedErrorCaption,
+                msgBox.Show(Framework.Local.Strings.STR_MSG_NoShapeInClipboard,
+                            Framework.Local.Strings.STR_UnexpectedErrorCaption,
                             MsgBoxButtons.OK, MsgBoxImage.Warning);
             }
         }
@@ -684,7 +682,7 @@ namespace MiniUML.Model.ViewModels.Document
             if (shape == null)
                 return;
 
-            foreach (var item in this.SelectedItem.Shapes.OfType<ShapeSizeViewModelBase>())
+            foreach (var item in SelectedItem.Shapes.OfType<ShapeSizeViewModelBase>())
             {
                 if (shape == item) // Adjust shape to itself is a superflous operation
                     continue;
@@ -698,7 +696,7 @@ namespace MiniUML.Model.ViewModels.Document
             if (shape == null)
                 return;
 
-            foreach (var item in this.SelectedItem.Shapes.OfType<ShapeSizeViewModelBase>())
+            foreach (var item in SelectedItem.Shapes.OfType<ShapeSizeViewModelBase>())
             {
                 if (shape == item) // Adjust shape to itself is a superflous operation
                     continue;
@@ -712,7 +710,7 @@ namespace MiniUML.Model.ViewModels.Document
             if (shape == null)
                 return;
 
-            foreach (var item in this.SelectedItem.Shapes.OfType<ShapeSizeViewModelBase>())
+            foreach (var item in SelectedItem.Shapes.OfType<ShapeSizeViewModelBase>())
             {
                 if (shape == item) // Adjust shape to itself is a superflous operation
                     continue;
@@ -735,10 +733,10 @@ namespace MiniUML.Model.ViewModels.Document
         /// <param name="shape"></param>
         private void DistributeHorizontal()
         {
-            if (this.SelectedItem.Shapes.Count() <= 1)
+            if (SelectedItem.Shapes.Count() <= 1)
                 return;
 
-            var selectedItems = from item in this.SelectedItem.Shapes.OfType<ShapeSizeViewModelBase>()
+            var selectedItems = from item in SelectedItem.Shapes.OfType<ShapeSizeViewModelBase>()
                                 let itemLeft = item.Left
                                 orderby itemLeft
                                 select item;
@@ -783,10 +781,10 @@ namespace MiniUML.Model.ViewModels.Document
         /// <param name="shape"></param>
         private void DistributeVertical()
         {
-            if (this.SelectedItem.Shapes.Count() <= 1)
+            if (SelectedItem.Shapes.Count() <= 1)
                 return;
 
-            var selectedItems = from item in this.SelectedItem.Shapes.OfType<ShapeSizeViewModelBase>()
+            var selectedItems = from item in SelectedItem.Shapes.OfType<ShapeSizeViewModelBase>()
                                 let itemTop = item.Top
                                 orderby itemTop
                                 select item;

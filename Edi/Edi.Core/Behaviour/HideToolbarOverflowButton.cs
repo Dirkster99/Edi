@@ -20,7 +20,7 @@
 		#region constructor
 		static HideToolbarOverflowButton()
 		{
-			HideToolbarOverflowButton.HideGripProperty =
+			HideGripProperty =
 				DependencyProperty.RegisterAttached("HideGrip",
 																						typeof(bool),
 																						typeof(HideToolbarOverflowButton),
@@ -56,7 +56,7 @@
 			if (frameworkElement == null)
 				return;
 
-			if (target == true)
+			if (target)
 			{
 				frameworkElement.Loaded += new RoutedEventHandler(mainToolBar_Loaded);
 				frameworkElement.Unloaded += new RoutedEventHandler(frameworkElement_Unloaded);
@@ -84,7 +84,7 @@
 			frameworkElement.Unloaded -= frameworkElement_Unloaded;
 		}
 
-		private static void mainToolBar_Loaded(object sender, System.Windows.RoutedEventArgs e)
+		private static void mainToolBar_Loaded(object sender, RoutedEventArgs e)
 		{
 			if (sender == null)
 				return;

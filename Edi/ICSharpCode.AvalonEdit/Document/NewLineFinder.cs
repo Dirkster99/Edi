@@ -79,23 +79,23 @@ namespace ICSharpCode.AvalonEdit.Document
 		public static int FindNextNewLine(ITextSource text, int offset, out string newLineType)
 		{
 			if (text == null)
-				throw new ArgumentNullException("text");
+				throw new ArgumentNullException(nameof(text));
 			if (offset < 0 || offset > text.TextLength)
-				throw new ArgumentOutOfRangeException("offset", offset, "offset is outside of text source");
+				throw new ArgumentOutOfRangeException(nameof(offset), offset, "offset is outside of text source");
 			SimpleSegment s = NewLineFinder.NextNewLine(text, offset);
 			if (s == SimpleSegment.Invalid) {
 				newLineType = null;
 				return -1;
-			} else {
-				if (s.Length == 2) {
-					newLineType = "\r\n";
-				} else if (text.GetCharAt(s.Offset) == '\n') {
-					newLineType = "\n";
-				} else {
-					newLineType = "\r";
-				}
-				return s.Offset;
 			}
+
+		    if (s.Length == 2) {
+		        newLineType = "\r\n";
+		    } else if (text.GetCharAt(s.Offset) == '\n') {
+		        newLineType = "\n";
+		    } else {
+		        newLineType = "\r";
+		    }
+		    return s.Offset;
 		}
 		
 		/// <summary>

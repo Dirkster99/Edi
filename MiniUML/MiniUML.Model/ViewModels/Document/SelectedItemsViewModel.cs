@@ -6,8 +6,8 @@
   using System.Collections.Specialized;
   using System.Linq;
   using System.Windows.Input;
-  using MiniUML.Framework;
-  using MiniUML.Model.ViewModels.Shapes;
+  using Framework;
+  using Shapes;
 
   /// <summary>
   /// Viewmodel to manage selected items and exposes all
@@ -26,8 +26,8 @@
     /// </summary>
     public SelectedItems()
     {
-      this.mSelectedShapes = new ObservableCollection<ShapeViewModelBase>();
-      this.mCollectionReadOnly = new ReadOnlyObservableCollection<ShapeViewModelBase>(this.mSelectedShapes);
+      mSelectedShapes = new ObservableCollection<ShapeViewModelBase>();
+      mCollectionReadOnly = new ReadOnlyObservableCollection<ShapeViewModelBase>(mSelectedShapes);
     }
     #endregion constructor
 
@@ -41,12 +41,12 @@
     {
       get
       {
-        return this.mCollectionReadOnly;
+        return mCollectionReadOnly;
       }
 
       set
       {
-        this.SelectShapes(value);
+        SelectShapes(value);
       }
     }
 
@@ -57,7 +57,7 @@
     {
       get
       {
-        return this.mSelectedShapes.Count;
+        return mSelectedShapes.Count;
       }
     }
     #endregion properties
@@ -69,20 +69,20 @@
     /// <param name="shape"></param>
     public void SelectShape(ShapeViewModelBase shape)
     {
-      this.mSelectedShapes.CollectionChanged -= this.selectedShapes_CollectionChanged;
+      mSelectedShapes.CollectionChanged -= selectedShapes_CollectionChanged;
 
       // Reset all IsSelected properties to false
-      this.mSelectedShapes.Select(c => { c.IsSelected = false; return c; }).ToList();
-      this.mSelectedShapes.Clear();
+      mSelectedShapes.Select(c => { c.IsSelected = false; return c; }).ToList();
+      mSelectedShapes.Clear();
 
       if (shape != null)
       {
-        this.mSelectedShapes.Add(shape);
+        mSelectedShapes.Add(shape);
         shape.IsSelected = true;
       }
 
-      this.mSelectedShapes.CollectionChanged += this.selectedShapes_CollectionChanged;
-      this.selectedShapes_CollectionChanged(null, null);
+      mSelectedShapes.CollectionChanged += selectedShapes_CollectionChanged;
+      selectedShapes_CollectionChanged(null, null);
     }
 
     /// <summary>
@@ -92,23 +92,23 @@
     /// <param name="shapes"></param>
     public void SelectShapes(IEnumerable<ShapeViewModelBase> shapes)
     {
-      this.mSelectedShapes.CollectionChanged -= this.selectedShapes_CollectionChanged;
+      mSelectedShapes.CollectionChanged -= selectedShapes_CollectionChanged;
 
       // Reset all IsSelected properties to false
-      this.mSelectedShapes.Select(c => { c.IsSelected = false; return c; }).ToList();
-      this.mSelectedShapes.Clear();
+      mSelectedShapes.Select(c => { c.IsSelected = false; return c; }).ToList();
+      mSelectedShapes.Clear();
 
       if (shapes != null)
       {
         foreach (ShapeViewModelBase shape in shapes)
         {
-          this.mSelectedShapes.Add(shape);
+          mSelectedShapes.Add(shape);
           shape.IsSelected = true;
         }
       }
 
-      this.mSelectedShapes.CollectionChanged += this.selectedShapes_CollectionChanged;
-      this.selectedShapes_CollectionChanged(null, null);
+      mSelectedShapes.CollectionChanged += selectedShapes_CollectionChanged;
+      selectedShapes_CollectionChanged(null, null);
     }
 
     /// <summary>
@@ -119,7 +119,7 @@
     /// <returns></returns>
     public bool Contains(ShapeViewModelBase s)
     {
-      return this.mSelectedShapes.Contains(s);
+      return mSelectedShapes.Contains(s);
     }
 
     /// <summary>
@@ -128,10 +128,10 @@
     public void Clear()
     {
       // Reset all IsSelected properties to false
-      this.mSelectedShapes.Select(c => { c.IsSelected = false; return c; }).ToList();
+      mSelectedShapes.Select(c => { c.IsSelected = false; return c; }).ToList();
 
       // clear this collection
-      this.mSelectedShapes.Clear();
+      mSelectedShapes.Clear();
     }
 
     /// <summary>
@@ -139,7 +139,7 @@
     /// </summary>
     public void Add(ShapeViewModelBase s)
     {
-      this.mSelectedShapes.Add(s);
+      mSelectedShapes.Add(s);
       s.IsSelected = true;
     }
 
@@ -148,16 +148,16 @@
     /// </summary>
     public void Remove(ShapeViewModelBase shape)
     {
-      this.mSelectedShapes.Remove(shape);
+      mSelectedShapes.Remove(shape);
       shape.IsSelected = false;
     }
 
     private void selectedShapes_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
     {
-      this.NotifyPropertyChanged(() => this.Shapes);
+      NotifyPropertyChanged(() => Shapes);
 
-      if (this.SelectionChanged != null)
-        this.SelectionChanged(this, new EventArgs());
+      if (SelectionChanged != null)
+        SelectionChanged(this, new EventArgs());
 
       CommandManager.InvalidateRequerySuggested();
     }

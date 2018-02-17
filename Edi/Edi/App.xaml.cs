@@ -6,19 +6,15 @@ namespace Edi
     using System.Threading;
     using System.Windows;
     using System.Windows.Threading;
-    using Edi.Core.Models;
-    using Edi.Apps.ViewModels;
-    using Edi.Apps.Views.Shell;
-    using log4net;
-    using log4net.Config;
-    using MsgBox;
-    using Edi.Settings;
-    using Edi.Settings.ProgramSettings;
-    using Edi.Themes;
-    using Edi.Themes.Interfaces;
-    using Edi.Util;
-    using Edi.Util.ActivateWindow;
-    using CommonServiceLocator;
+    using Core.Models;
+    using Apps.ViewModels;
+    using Apps.Views.Shell;
+    using Settings;
+    using Settings.ProgramSettings;
+    using Themes;
+    using Themes.Interfaces;
+    using Util;
+    using Util.ActivateWindow;
 
     /// <summary>
     /// Interaction logic for App.xaml
@@ -44,15 +40,15 @@ namespace Edi
         {
 
 
-            this.InitializeComponent();
-            this.AppIsShuttingDown = false;
+            InitializeComponent();
+            AppIsShuttingDown = false;
 
-            this.SessionEnding += App_SessionEnding;
+            SessionEnding += App_SessionEnding;
         }
 
         void App_SessionEnding(object sender, SessionEndingCancelEventArgs e)
         {
-            this.AppIsShuttingDown = true;
+            AppIsShuttingDown = true;
         }
         #endregion constructor
 
@@ -75,21 +71,21 @@ namespace Edi
                 {
                     Logger.Error(string.Format(CultureInfo.InvariantCulture,
                                              "The {0} application received request to shutdown: {1}.",
-                                             Application.ResourceAssembly.GetName(), e.ReasonSessionEnding.ToString()));
+                                             ResourceAssembly.GetName(), e.ReasonSessionEnding.ToString()));
                 }
                 catch
                 {
                 }
 
-                var mainWin = App.GetMainWindow();
-                var appVM = App.GetWorkSpace();
+                var mainWin = GetMainWindow();
+                var appVM = GetWorkSpace();
 
                 if (mainWin != null && appVM != null)
                 {
                     if (mainWin.DataContext != null && appVM.Files != null)
                     {
                         // Close all open files and check whether application is ready to close
-                        if (appVM.Exit_CheckConditions(mainWin) == true)
+                        if (appVM.Exit_CheckConditions(mainWin))
                             e.Cancel = false;
                         else
                             e.Cancel = appVM.ShutDownInProgress_Cancel = true;
@@ -118,7 +114,7 @@ namespace Edi
             {
                 // Set shutdown mode here (and reset further below) to enable showing custom dialogs (messageboxes)
                 // durring start-up without shutting down application when the custom dialogs (messagebox) closes
-                this.ShutdownMode = System.Windows.ShutdownMode.OnExplicitShutdown;
+                ShutdownMode = ShutdownMode.OnExplicitShutdown;
             }
             catch
             {
@@ -134,14 +130,14 @@ namespace Edi
                 Thread.CurrentThread.CurrentCulture = new CultureInfo(options.LanguageSelected);
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(options.LanguageSelected);
 
-                if (options.RunSingleInstance == true)
+                if (options.RunSingleInstance)
                 {
-                    if (enforcer.ShouldApplicationExit() == true)
+                    if (enforcer.ShouldApplicationExit())
                     {
-                        if (this.AppIsShuttingDown == false)
+                        if (AppIsShuttingDown == false)
                         {
-                            this.AppIsShuttingDown = true;
-                            this.Shutdown();
+                            AppIsShuttingDown = true;
+                            Shutdown();
                         }
                     }
                 }
@@ -158,8 +154,8 @@ namespace Edi
 
             try
             {
-                this.mBoot = new Bootstapper(this, e, options, themesManager);
-                this.mBoot.Run();
+                mBoot = new Bootstapper(this, e, options, themesManager);
+                mBoot.Run();
             }
             catch (Exception exp)
             {
@@ -188,8 +184,8 @@ namespace Edi
                 // Cannot set shutdown mode when application is already shuttong down
                 try
                 {
-                    if (this.AppIsShuttingDown == false)
-                        this.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+                    if (AppIsShuttingDown == false)
+                        ShutdownMode = ShutdownMode.OnExplicitShutdown;
                 }
                 catch
                 {
@@ -199,17 +195,17 @@ namespace Edi
                 // 2) Application throws exception when this is set as owner of window when it
                 //    was never visible.
                 //
-                if (Application.Current.MainWindow != null)
+                if (Current.MainWindow != null)
                 {
-                    if (Application.Current.MainWindow.IsVisible == false)
-                        Application.Current.MainWindow = null;
+                    if (Current.MainWindow.IsVisible == false)
+                        Current.MainWindow = null;
                 }
 
 //                var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
 //                msgBox.Show(exp, Strings.STR_MSG_ERROR_FINDING_RESOURCE, MsgBoxButtons.OKCopy, MsgBoxImage.Error);
 
-                if (this.AppIsShuttingDown == false)
-                    this.Shutdown();
+                if (AppIsShuttingDown == false)
+                    Shutdown();
             }
         }
 
@@ -229,21 +225,21 @@ namespace Edi
                     message = string.Format(CultureInfo.CurrentCulture, "{0}\n\n{1}", e.Exception.Message, e.Exception.ToString());
                 }
                 else
-                    message = Edi.Util.Local.Strings.STR_Msg_UnknownError;
+                    message = Util.Local.Strings.STR_Msg_UnknownError;
 
                 Logger.Error(message);
 
                 var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                msgBox.Show(e.Exception, Edi.Util.Local.Strings.STR_MSG_UnknownError_Caption,
+                msgBox.Show(e.Exception, Util.Local.Strings.STR_MSG_UnknownError_Caption,
                             MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
                             AppHelpers.IssueTrackerLink, AppHelpers.IssueTrackerLink,
-                            Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                            Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
 
                 e.Handled = true;
             }
             catch (Exception exp)
             {
-                Logger.Error(Edi.Util.Local.Strings.STR_MSG_UnknownError_InErrorDispatcher, exp);
+                Logger.Error(Util.Local.Strings.STR_MSG_UnknownError_InErrorDispatcher, exp);
             }
         }
 
@@ -275,7 +271,7 @@ namespace Edi
         /// <param name="args"></param>
         public static void ProcessSecondInstance(IEnumerable<string> args)
         {
-            var dispatcher = Application.Current.Dispatcher;
+            var dispatcher = Current.Dispatcher;
             if (dispatcher.CheckAccess())
             {
                 // The current application is the first
@@ -289,7 +285,7 @@ namespace Edi
                     {
                         AppHelpers.RestoreCurrentMainWindow();
 
-                        var mainWindow = Application.Current.MainWindow as MainWindow;
+                        var mainWindow = Current.MainWindow as MainWindow;
 
                         if (mainWindow != null)
                         {
@@ -317,7 +313,7 @@ namespace Edi
                             ApplicationViewModel appVM = mainWindow.DataContext as ApplicationViewModel;
 
                             if (args != null)
-                                ProcessCmdLine(App.FilterAssemblyName(args), appVM);
+                                ProcessCmdLine(FilterAssemblyName(args), appVM);
                         }
 
                     }));
@@ -352,15 +348,15 @@ namespace Edi
 
         private static MainWindow GetMainWindow()
         {
-            return Application.Current.MainWindow as MainWindow;
+            return Current.MainWindow as MainWindow;
         }
 
         private static ApplicationViewModel GetWorkSpace()
         {
 
-            if (Application.Current.MainWindow is MainWindow)
+            if (Current.MainWindow is MainWindow)
             {
-                MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+                MainWindow mainWindow = Current.MainWindow as MainWindow;
 
                 return mainWindow.DataContext as ApplicationViewModel;
             }

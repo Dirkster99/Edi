@@ -42,18 +42,16 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		public InlineObjectElement(int documentLength, UIElement element)
 			: base(1, documentLength)
 		{
-			if (element == null)
-				throw new ArgumentNullException("element");
-			this.Element = element;
+            Element = element ?? throw new ArgumentNullException(nameof(element));
 		}
 		
 		/// <inheritdoc/>
 		public override TextRun CreateTextRun(int startVisualColumn, ITextRunConstructionContext context)
 		{
 			if (context == null)
-				throw new ArgumentNullException("context");
+				throw new ArgumentNullException(nameof(context));
 			
-			return new InlineObjectRun(1, this.TextRunProperties, this.Element);
+			return new InlineObjectRun(1, TextRunProperties, Element);
 		}
 	}
 	
@@ -62,10 +60,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 	/// </summary>
 	public class InlineObjectRun : TextEmbeddedObject
 	{
-		UIElement element;
-		int length;
-		TextRunProperties properties;
-		internal Size desiredSize;
+	    internal Size desiredSize;
 		
 		/// <summary>
 		/// Creates a new InlineObjectRun instance.
@@ -76,64 +71,45 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		public InlineObjectRun(int length, TextRunProperties properties, UIElement element)
 		{
 			if (length <= 0)
-				throw new ArgumentOutOfRangeException("length", length, "Value must be positive");
-			if (properties == null)
-				throw new ArgumentNullException("properties");
-			if (element == null)
-				throw new ArgumentNullException("element");
-			
-			this.length = length;
-			this.properties = properties;
-			this.element = element;
+				throw new ArgumentOutOfRangeException(nameof(length), length, "Value must be positive");
+            this.Length = length;
+			this.Properties = properties ?? throw new ArgumentNullException(nameof(properties));
+			this.Element = element ?? throw new ArgumentNullException(nameof(element));
 		}
 		
 		/// <summary>
 		/// Gets the element displayed by the InlineObjectRun.
 		/// </summary>
-		public UIElement Element {
-			get { return element; }
-		}
-		
-		/// <summary>
+		public UIElement Element { get; }
+
+	    /// <summary>
 		/// Gets the VisualLine that contains this object. This property is only available after the object
 		/// was added to the text view.
 		/// </summary>
 		public VisualLine VisualLine { get; internal set; }
 		
 		/// <inheritdoc/>
-		public override LineBreakCondition BreakBefore {
-			get { return LineBreakCondition.BreakDesired; }
-		}
-		
-		/// <inheritdoc/>
-		public override LineBreakCondition BreakAfter {
-			get { return LineBreakCondition.BreakDesired; }
-		}
-		
-		/// <inheritdoc/>
-		public override bool HasFixedSize {
-			get { return true; }
-		}
-		
-		/// <inheritdoc/>
-		public override CharacterBufferReference CharacterBufferReference {
-			get { return new CharacterBufferReference(); }
-		}
-		
-		/// <inheritdoc/>
-		public override int Length {
-			get { return length; }
-		}
-		
-		/// <inheritdoc/>
-		public override TextRunProperties Properties {
-			get { return properties; }
-		}
-		
-		/// <inheritdoc/>
+		public override LineBreakCondition BreakBefore => LineBreakCondition.BreakDesired;
+
+	    /// <inheritdoc/>
+		public override LineBreakCondition BreakAfter => LineBreakCondition.BreakDesired;
+
+	    /// <inheritdoc/>
+		public override bool HasFixedSize => true;
+
+	    /// <inheritdoc/>
+		public override CharacterBufferReference CharacterBufferReference => new CharacterBufferReference();
+
+	    /// <inheritdoc/>
+		public override int Length { get; }
+
+	    /// <inheritdoc/>
+		public override TextRunProperties Properties { get; }
+
+	    /// <inheritdoc/>
 		public override TextEmbeddedObjectMetrics Format(double remainingParagraphWidth)
 		{
-			double baseline = TextBlock.GetBaselineOffset(element);
+			double baseline = TextBlock.GetBaselineOffset(Element);
 			if (double.IsNaN(baseline))
 				baseline = desiredSize.Height;
 			return new TextEmbeddedObjectMetrics(desiredSize.Width, desiredSize.Height, baseline);
@@ -142,8 +118,8 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		/// <inheritdoc/>
 		public override Rect ComputeBoundingBox(bool rightToLeft, bool sideways)
 		{
-			if (this.element.IsArrangeValid) {
-				double baseline = TextBlock.GetBaselineOffset(element);
+			if (Element.IsArrangeValid) {
+				double baseline = TextBlock.GetBaselineOffset(Element);
 				if (double.IsNaN(baseline))
 					baseline = desiredSize.Height;
 				return new Rect(new Point(0, -baseline), desiredSize);

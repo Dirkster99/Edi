@@ -1,11 +1,9 @@
 ﻿namespace ICSharpCode.AvalonEdit.Edi.BlockSurround
 {
   using System;
-  using System.Collections.Generic;
   using System.Linq;
-  using System.Text;
-  using ICSharpCode.AvalonEdit.Document;
-  using ICSharpCode.AvalonEdit.Editing;
+  using Document;
+  using Editing;
 
   /// <summary>
   /// Expand selection with intro and outro text elements
@@ -22,24 +20,17 @@
     /// </summary>
     /// <param name="editor"></param>
     /// <param name="block"></param>
-    static public void SurroundSelectionWithBlockComment(EdiTextEditor editor,
+    public static void SurroundSelectionWithBlockComment(EdiTextEditor editor,
                                                          BlockDefinition block)
     {
       if (editor == null)
         return;
 
-      RectangleSelection sel = null;
-
-      // Rectangle selection is a different deal...
-      if ((editor.TextArea.Selection is RectangleSelection) == true)
+            // Rectangle selection is a different deal...
+            if ((editor.TextArea.Selection is RectangleSelection sel))
       {
-        sel = editor.TextArea.Selection as RectangleSelection;
-
-        if (sel == null)
-          return;
-
-        // Single line block selection can be treaded like normal selection
-        if (sel.IsMultiline == true)
+// Single line block selection can be treaded like normal selection
+        if (sel.IsMultiline)
         {
           SurroundRectangleSelectionWithBlockComment(editor, block, sel);
           return;
@@ -182,7 +173,7 @@
           bFoundNoMatch = false;
       }
 
-      if (bFoundNoMatch == true)
+      if (bFoundNoMatch)
       {
         for (int i = sel.Segments.Count() - 1; i >= 0; i--)
         {
@@ -281,7 +272,7 @@
       // Find start of comment in selected text.
       int commentEndOffset = -1;
 
-      int commentStartOffset = selectedText.IndexOf(commentStart);
+      int commentStartOffset = commentStart.IndexOf(selectedText);
       if (commentStartOffset >= 0)
         commentStartOffset += selectionStart;
 
@@ -295,8 +286,7 @@
         commentEndOffset += selectionStart;
 
       // Find start of comment before or partially inside the selected text.
-      int commentEndBeforeStartOffset = -1;
-      if (commentStartOffset == -1)
+        if (commentStartOffset == -1)
       {
         int offset = selectionStart + selectionLength + commentStart.Length - 1;
         if (offset > document.TextLength)
@@ -306,10 +296,10 @@
         commentStartOffset = text.LastIndexOf(commentStart);
         if (commentStartOffset >= 0)
         {
-          // Find end of comment before comment start.
-          commentEndBeforeStartOffset = text.IndexOf(commentEnd, commentStartOffset, selectionStart - commentStartOffset);
+            // Find end of comment before comment start.
+            var commentEndBeforeStartOffset = text.IndexOf(commentEnd, commentStartOffset, selectionStart - commentStartOffset);
 
-          if (commentEndBeforeStartOffset > commentStartOffset)
+            if (commentEndBeforeStartOffset > commentStartOffset)
             commentStartOffset = -1;
         }
       }

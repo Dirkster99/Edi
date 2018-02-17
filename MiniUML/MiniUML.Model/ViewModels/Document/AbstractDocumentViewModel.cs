@@ -2,13 +2,13 @@
 {
   using System.Windows;
   using System.Windows.Input;
-  using MiniUML.Model.Model;
+  using Model;
 
   /// <summary>
   /// This document viewmodel class represents a minimal interface necessary to
   /// connect the <seealso cref="DocumentViewModel"/> with the outside world.
   /// </summary>
-  public abstract class AbstractDocumentViewModel : MiniUML.Framework.BaseViewModel
+  public abstract class AbstractDocumentViewModel : Framework.BaseViewModel
   {
     #region properties
     /// <summary>

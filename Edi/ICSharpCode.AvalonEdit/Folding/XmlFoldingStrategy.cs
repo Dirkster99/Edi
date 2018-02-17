@@ -66,9 +66,11 @@ namespace ICSharpCode.AvalonEdit.Folding
 		public override IEnumerable<NewFolding> CreateNewFoldings(TextDocument document, out int firstErrorOffset)
 		{
 			try {
-				XmlTextReader reader = new XmlTextReader(document.CreateReader());
-				reader.XmlResolver = null; // don't resolve DTDs
-				return CreateNewFoldings(document, reader, out firstErrorOffset);
+                XmlTextReader reader = new XmlTextReader(document.CreateReader())
+                {
+                    XmlResolver = null // don't resolve DTDs
+                };
+                return CreateNewFoldings(document, reader, out firstErrorOffset);
 			} catch (XmlException) {
 				firstErrorOffset = 0;
 				return Enumerable.Empty<NewFolding>();
@@ -116,7 +118,7 @@ namespace ICSharpCode.AvalonEdit.Folding
 		
 		static int GetOffset(TextDocument document, XmlReader reader)
 		{
-            if (reader is IXmlLineInfo)
+		    if (reader is IXmlLineInfo)
             {
                 IXmlLineInfo info = reader as IXmlLineInfo;
 
@@ -124,16 +126,12 @@ namespace ICSharpCode.AvalonEdit.Folding
                 {
                     return document.GetOffset(info.LineNumber, info.LinePosition);
                 }
-                else
-                {
-                    throw new ArgumentException("XmlReader does not have positioning information.");
-                }
-            }
-            else
-            {
+
                 throw new ArgumentException("XmlReader does not have positioning information.");
             }
-        }
+
+		    throw new ArgumentException("XmlReader does not have positioning information.");
+		}
 		
 		/// <summary>
 		/// Creates a comment fold if the comment spans more than one line.
@@ -175,7 +173,7 @@ namespace ICSharpCode.AvalonEdit.Folding
 			newFoldStart.StartLine = lineInfo.LineNumber;
 			newFoldStart.StartOffset = document.GetOffset(newFoldStart.StartLine, lineInfo.LinePosition - 1);
 			
-			if (this.ShowAttributesWhenFolded && reader.HasAttributes) {
+			if (ShowAttributesWhenFolded && reader.HasAttributes) {
 				newFoldStart.Name = String.Concat("<", reader.Name, " ", GetAttributeFoldText(reader), ">");
 			} else {
 				newFoldStart.Name = String.Concat("<", reader.Name, ">");

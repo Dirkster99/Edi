@@ -1,7 +1,7 @@
 namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
 {
   using System.Collections.Generic;
-  using MiniUML.Model.ViewModels.Command;
+  using Model.ViewModels.Command;
 
   public partial class UmlElementsManager
   {
@@ -41,10 +41,10 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
     /// <returns></returns>
     public CommandModelBase GetCreateUmlShapeCommandModel(PluginViewModel viewModel, UmlTypes umlType)
     {
-      if (this.mUmlElementFactory == null)
-        this.mUmlElementFactory = new UmlElementDataDef();
+      if (mUmlElementFactory == null)
+        mUmlElementFactory = new UmlElementDataDef();
 
-      return this.mUmlElementFactory.GetShapeCreateCommand(viewModel, umlType);
+      return mUmlElementFactory.GetShapeCreateCommand(viewModel, umlType);
     }
 
     /// <summary>
@@ -56,10 +56,10 @@ namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements
     /// <returns></returns>
     public IEnumerable<CommandModelBase> GetUmlDiagramElements(PluginViewModel viewModel, UmlDiagrams umlDiagram)
     {
-      if (this.mUmlDiagramFactory == null)
-        this.mUmlDiagramFactory = new UmlDiagramsDataDef();
+      if (mUmlDiagramFactory == null)
+        mUmlDiagramFactory = new UmlDiagramsDataDef();
 
-      return this.mUmlDiagramFactory.GetUmlDiagramDataDef(viewModel, umlDiagram);
+      return mUmlDiagramFactory.GetUmlDiagramDataDef(viewModel, umlDiagram);
     }
     #endregion methods
 

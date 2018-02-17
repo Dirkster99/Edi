@@ -16,8 +16,6 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-using System;
-using System.ComponentModel;
 using ICSharpCode.AvalonEdit.Document;
 
 namespace ICSharpCode.AvalonEdit.Rendering
@@ -45,7 +43,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 			this.end = end;
 			#if DEBUG
 			unchecked {
-				this.ID = " #" + (nextId++);
+				ID = " #" + (nextId++);
 			}
 			#endif
 		}

@@ -1,9 +1,8 @@
 ﻿namespace Edi.Core.Interfaces
 {
 	using System;
-	using System.Windows.Input;
 
-	/// <summary>
+    /// <summary>
 	/// Interface that defines common properties
 	/// of toolwindows and document items for avlaondock content.
 	/// 

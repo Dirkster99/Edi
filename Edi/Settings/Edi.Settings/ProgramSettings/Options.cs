@@ -7,10 +7,9 @@
     using FileSystemModels.Models;
     using ICSharpCode.AvalonEdit;
     using ICSharpCode.AvalonEdit.Highlighting.Themes;
-    using Edi.Settings.Interfaces;
-    using Edi.Themes;
-    using Edi.Themes.Interfaces;
-    using UnitComboLib.Models.Unit;
+    using Interfaces;
+    using Themes;
+    using Themes.Interfaces;
 
     /// <summary>
     /// Determine whether Zoom units of the text editor
@@ -64,7 +63,7 @@
         public Options(IThemesManager themesManager)
             : this()
         {
-            this.mThemesManager = themesManager;
+            mThemesManager = themesManager;
         }
 
         /// <summary>
@@ -72,26 +71,26 @@
         /// </summary>
         protected Options()
         {
-            this.mThemesManager = null;
+            mThemesManager = null;
 
-            this.EditorTextOptions = new TextEditorOptions();
-            this.mWordWarpText = false;
+            EditorTextOptions = new TextEditorOptions();
+            mWordWarpText = false;
 
-            this.mDocumentZoomUnit = ZoomUnit.Percentage;     // Zoom View in Percent
-            this.mDocumentZoomView = 100;                     // Font Size 12 is 100 %
+            mDocumentZoomUnit = ZoomUnit.Percentage;     // Zoom View in Percent
+            mDocumentZoomView = 100;                     // Font Size 12 is 100 %
 
-            this.mReloadOpenFilesOnAppStart = true;
-            this.mRunSingleInstance = true;
-            this.mCurrentTheme = ThemesManager.DefaultThemeName;
-            this.mLanguageSelected = Options.DefaultLocal;
+            mReloadOpenFilesOnAppStart = true;
+            mRunSingleInstance = true;
+            mCurrentTheme = ThemesManager.DefaultThemeName;
+            mLanguageSelected = DefaultLocal;
 
-            this.HighlightOnFileNew = true;
-            this.FileNewDefaultFileName = Edi.Util.Local.Strings.STR_FILE_DEFAULTNAME;
-            this.FileNewDefaultFileExtension = ".txt";
+            HighlightOnFileNew = true;
+            FileNewDefaultFileName = Util.Local.Strings.STR_FILE_DEFAULTNAME;
+            FileNewDefaultFileExtension = ".txt";
 
-            this.ExplorerSettings = new ExplorerSettingsModel(true);
+            ExplorerSettings = new ExplorerSettingsModel(true);
 
-            this.mIsDirty = false;
+            mIsDirty = false;
         }
 
         /// <summary>
@@ -104,19 +103,19 @@
             if (copyThis == null)
                 return;
 
-            this.mThemesManager = copyThis.mThemesManager;
-            this.EditorTextOptions = copyThis.EditorTextOptions;
-            this.mWordWarpText = copyThis.mWordWarpText;
+            mThemesManager = copyThis.mThemesManager;
+            EditorTextOptions = copyThis.EditorTextOptions;
+            mWordWarpText = copyThis.mWordWarpText;
 
-            this.mDocumentZoomUnit = copyThis.mDocumentZoomUnit;     // Zoom View in Percent
-            this.mDocumentZoomView = copyThis.mDocumentZoomView;     // Font Size 12 is 100 %
+            mDocumentZoomUnit = copyThis.mDocumentZoomUnit;     // Zoom View in Percent
+            mDocumentZoomView = copyThis.mDocumentZoomView;     // Font Size 12 is 100 %
 
-            this.mReloadOpenFilesOnAppStart = copyThis.mReloadOpenFilesOnAppStart;
-            this.mRunSingleInstance = copyThis.mRunSingleInstance;
-            this.mCurrentTheme = copyThis.mCurrentTheme;
-            this.mLanguageSelected = copyThis.mLanguageSelected;
+            mReloadOpenFilesOnAppStart = copyThis.mReloadOpenFilesOnAppStart;
+            mRunSingleInstance = copyThis.mRunSingleInstance;
+            mCurrentTheme = copyThis.mCurrentTheme;
+            mLanguageSelected = copyThis.mLanguageSelected;
 
-            this.mIsDirty = copyThis.mIsDirty;
+            mIsDirty = copyThis.mIsDirty;
         }
         #endregion constructor
 
@@ -129,15 +128,15 @@
         {
             get
             {
-                return this.mWordWarpText;
+                return mWordWarpText;
             }
 
             set
             {
-                if (this.mWordWarpText != value)
+                if (mWordWarpText != value)
                 {
-                    this.mWordWarpText = value;
-                    this.IsDirty = true;
+                    mWordWarpText = value;
+                    IsDirty = true;
                 }
             }
         }
@@ -155,15 +154,15 @@
         {
             get
             {
-                return this.mDocumentZoomView;
+                return mDocumentZoomView;
             }
 
             set
             {
-                if (this.mDocumentZoomView != value)
+                if (mDocumentZoomView != value)
                 {
-                    this.mDocumentZoomView = value;
-                    this.IsDirty = true;
+                    mDocumentZoomView = value;
+                    IsDirty = true;
                 }
             }
         }
@@ -176,15 +175,15 @@
         {
             get
             {
-                return this.mDocumentZoomUnit;
+                return mDocumentZoomUnit;
             }
 
             set
             {
-                if (this.mDocumentZoomUnit != value)
+                if (mDocumentZoomUnit != value)
                 {
-                    this.mDocumentZoomUnit = value;
-                    this.IsDirty = true;
+                    mDocumentZoomUnit = value;
+                    IsDirty = true;
                 }
             }
         }
@@ -197,15 +196,15 @@
         {
             get
             {
-                return this.mReloadOpenFilesOnAppStart;
+                return mReloadOpenFilesOnAppStart;
             }
 
             set
             {
-                if (this.mReloadOpenFilesOnAppStart != value)
+                if (mReloadOpenFilesOnAppStart != value)
                 {
-                    this.mReloadOpenFilesOnAppStart = value;
-                    this.IsDirty = true;
+                    mReloadOpenFilesOnAppStart = value;
+                    IsDirty = true;
                 }
             }
         }
@@ -218,15 +217,15 @@
         {
             get
             {
-                return this.mRunSingleInstance;
+                return mRunSingleInstance;
             }
 
             set
             {
-                if (this.mRunSingleInstance != value)
+                if (mRunSingleInstance != value)
                 {
-                    this.mRunSingleInstance = value;
-                    this.IsDirty = true;
+                    mRunSingleInstance = value;
+                    IsDirty = true;
                 }
             }
         }
@@ -239,15 +238,15 @@
         {
             get
             {
-                return this.mCurrentTheme;
+                return mCurrentTheme;
             }
 
             set
             {
-                if (this.mCurrentTheme != value)
+                if (mCurrentTheme != value)
                 {
-                    this.mCurrentTheme = value;
-                    this.IsDirty = true;
+                    mCurrentTheme = value;
+                    IsDirty = true;
                 }
             }
         }
@@ -257,15 +256,15 @@
         {
             get
             {
-                return this.mLanguageSelected;
+                return mLanguageSelected;
             }
 
             set
             {
-                if (this.mLanguageSelected != value)
+                if (mLanguageSelected != value)
                 {
-                    this.mLanguageSelected = value;
-                    this.IsDirty = true;
+                    mLanguageSelected = value;
+                    IsDirty = true;
                 }
             }
         }
@@ -276,15 +275,15 @@
         {
             get
             {
-                return this.mTextToHTML_ShowLineNumbers;
+                return mTextToHTML_ShowLineNumbers;
             }
 
             set
             {
-                if (this.mTextToHTML_ShowLineNumbers != value)
+                if (mTextToHTML_ShowLineNumbers != value)
                 {
-                    this.mTextToHTML_ShowLineNumbers = value;
-                    this.IsDirty = true;
+                    mTextToHTML_ShowLineNumbers = value;
+                    IsDirty = true;
                 }
             }
         }
@@ -294,15 +293,15 @@
         {
             get
             {
-                return this.mTextToHTML_TextToHTML_AlternateLineBackground;
+                return mTextToHTML_TextToHTML_AlternateLineBackground;
             }
 
             set
             {
-                if (this.mTextToHTML_TextToHTML_AlternateLineBackground != value)
+                if (mTextToHTML_TextToHTML_AlternateLineBackground != value)
                 {
-                    this.mTextToHTML_TextToHTML_AlternateLineBackground = value;
-                    this.IsDirty = true;
+                    mTextToHTML_TextToHTML_AlternateLineBackground = value;
+                    IsDirty = true;
                 }
             }
         }
@@ -341,13 +340,13 @@
         {
             get
             {
-                return this.mIsDirty;
+                return mIsDirty;
             }
 
             set
             {
-                if (this.mIsDirty != value)
-                    this.mIsDirty = value;
+                if (mIsDirty != value)
+                    mIsDirty = value;
             }
         }
         #endregion properties
@@ -387,8 +386,8 @@
             var percentDefaults = new ObservableCollection<string>() { "25", "50", "75", "100", "125", "150", "175", "200", "300", "400", "500" };
             var pointsDefaults = new ObservableCollection<string>() { "3", "6", "8", "9", "10", "12", "14", "16", "18", "20", "24", "26", "32", "48", "60" };
 
-            unitList.Add(new UnitComboLib.Models.ListItem(Itemkey.ScreenPercent, Edi.Util.Local.Strings.STR_SCALE_VIEW_PERCENT, Edi.Util.Local.Strings.STR_SCALE_VIEW_PERCENT_SHORT, percentDefaults));
-            unitList.Add(new UnitComboLib.Models.ListItem(Itemkey.ScreenFontPoints, Edi.Util.Local.Strings.STR_SCALE_VIEW_POINT, Edi.Util.Local.Strings.STR_SCALE_VIEW_POINT_SHORT, pointsDefaults));
+            unitList.Add(new UnitComboLib.Models.ListItem(Itemkey.ScreenPercent, Util.Local.Strings.STR_SCALE_VIEW_PERCENT, Util.Local.Strings.STR_SCALE_VIEW_PERCENT_SHORT, percentDefaults));
+            unitList.Add(new UnitComboLib.Models.ListItem(Itemkey.ScreenFontPoints, Util.Local.Strings.STR_SCALE_VIEW_POINT, Util.Local.Strings.STR_SCALE_VIEW_POINT_SHORT, pointsDefaults));
 
             return unitList;
         }
@@ -401,7 +400,7 @@
         /// <returns>List of highlighting themes that should be applied for this WPF theme</returns>
         public HighlightingThemes FindHighlightingTheme(string hlThemeName)
         {
-            return this.mThemesManager.GetTextEditorHighlighting(hlThemeName);
+            return mThemesManager.GetTextEditorHighlighting(hlThemeName);
         }
 
         /// <summary>
@@ -410,7 +409,7 @@
         /// <param name="flag"></param>
         internal void SetDirtyFlag(bool flag)
         {
-            this.IsDirty = flag;
+            IsDirty = flag;
         }
         #endregion methods
     }

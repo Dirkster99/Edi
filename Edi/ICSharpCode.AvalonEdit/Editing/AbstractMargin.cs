@@ -46,8 +46,8 @@ namespace ICSharpCode.AvalonEdit.Editing
 		/// </summary>
 		/// <remarks>Adding a margin to <see cref="TextArea.LeftMargins"/> will automatically set this property to the text area's TextView.</remarks>
 		public TextView TextView {
-			get { return (TextView)GetValue(TextViewProperty); }
-			set { SetValue(TextViewProperty, value); }
+			get => (TextView)GetValue(TextViewProperty);
+		    set => SetValue(TextViewProperty, value);
 		}
 		
 		static void OnTextViewChanged(DependencyObject dp, DependencyPropertyChangedEventArgs e)
@@ -62,32 +62,28 @@ namespace ICSharpCode.AvalonEdit.Editing
 		
 		void ITextViewConnect.AddToTextView(TextView textView)
 		{
-			if (this.TextView == null) {
-				this.TextView = textView;
+			if (TextView == null) {
+				TextView = textView;
 				wasAutoAddedToTextView = true;
-			} else if (this.TextView != textView) {
+			} else if (TextView != textView) {
 				throw new InvalidOperationException("This margin belongs to a different TextView.");
 			}
 		}
 		
 		void ITextViewConnect.RemoveFromTextView(TextView textView)
 		{
-			if (wasAutoAddedToTextView && this.TextView == textView) {
-				this.TextView = null;
+			if (wasAutoAddedToTextView && TextView == textView) {
+				TextView = null;
 				Debug.Assert(!wasAutoAddedToTextView); // setting this.TextView should have unset this flag
 			}
 		}
-		
-		TextDocument document;
-		
-		/// <summary>
+
+	    /// <summary>
 		/// Gets the document associated with the margin.
 		/// </summary>
-		public TextDocument Document {
-			get { return document; }
-		}
-		
-		/// <summary>
+		public TextDocument Document { get; private set; }
+
+	    /// <summary>
 		/// Called when the <see cref="TextView"/> is changing.
 		/// </summary>
 		protected virtual void OnTextViewChanged(TextView oldTextView, TextView newTextView)
@@ -103,7 +99,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		
 		void TextViewDocumentChanged(object sender, EventArgs e)
 		{
-			OnDocumentChanged(document, TextView != null ? TextView.Document : null);
+			OnDocumentChanged(Document, TextView?.Document);
 		}
 		
 		/// <summary>
@@ -111,7 +107,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		/// </summary>
 		protected virtual void OnDocumentChanged(TextDocument oldDocument, TextDocument newDocument)
 		{
-			document = newDocument;
+			Document = newDocument;
 		}
 	}
 }

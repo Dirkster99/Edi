@@ -2,11 +2,11 @@
 {
   using System.Windows;
   using System.Windows.Input;
-  using MiniUML.Framework.Command;
-  using MiniUML.Framework.interfaces;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Command;
-  using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements;
+  using Framework.Command;
+  using Framework.interfaces;
+  using Model.ViewModels;
+  using Model.ViewModels.Command;
+  using UmlElements;
 
   /// <summary>
   /// Creates a command model that has the ability to create an UML Class Shape.
@@ -16,29 +16,32 @@
     #region fields
     private readonly PluginViewModel mViewModel;
     private readonly UmlTypes mUmlType;
-    private readonly string mDescription;
-    private readonly string mDisplayName;
 
-    private RelayCommand<object> mCreateShape = null;
+      private RelayCommand<object> mCreateShape;
     #endregion fields
 
     #region constructor
-    /// <summary>
-    /// Standard constructor
-    /// </summary>
-    /// <param name="viewModel"></param>
-    public CreateShapeCommandModel(PluginViewModel viewModel,
+
+      /// <summary>
+      /// Standard constructor
+      /// </summary>
+      /// <param name="viewModel"></param>
+      /// <param name="umlType"></param>
+      /// <param name="description"></param>
+      /// <param name="displayName"></param>
+      /// <param name="toolboxImageUrl"></param>
+      public CreateShapeCommandModel(PluginViewModel viewModel,
                                    UmlTypes umlType,
                                    string description,
                                    string displayName,
                                    string toolboxImageUrl)
     {
-      this.mViewModel = viewModel;
-      this.mUmlType = umlType;
+      mViewModel = viewModel;
+      mUmlType = umlType;
 
-      this.mDescription = description;
-      this.mDisplayName = displayName;
-      this.ToolBoxImageUrl = toolboxImageUrl;
+      ToolTip = description;
+      Title = displayName;
+      ToolBoxImageUrl = toolboxImageUrl;
     }
     #endregion constructor
 
@@ -50,35 +53,22 @@
     {
       get
       {
-        if (this.mCreateShape == null)
-          this.mCreateShape = new RelayCommand<object>((p) => this.OnExecute(), (p) => this.OnQueryEnabled());
-
-        return this.mCreateShape;
+          return mCreateShape ?? (mCreateShape =
+                     new RelayCommand<object>((p) => OnExecute(), (p) => OnQueryEnabled()));
       }
     }
 
     /// <summary>
     /// Get description string for this canvase item  (for display in toolbox).
     /// </summary>
-    public string ToolTip
-    {
-      get
-      {
-        return this.mDescription;
-      }
-    }
+    public string ToolTip { get; }
 
-    /// <summary>
+      /// <summary>
     /// Get title string for this canvase item (for display in toolbox).
     /// </summary>
-    public string Title
-    {
-      get
-      {
-        return this.mDisplayName;
-      }
-    }
-    #endregion constructor
+    public string Title { get; }
+
+      #endregion constructor
 
     #region methods
     /// <summary>
@@ -89,24 +79,21 @@
     /// <param name="dropPoint"></param>
     public void OnDragDropExecute(Point dropPoint)
     {
-      IShapeParent parent = this.mViewModel.mWindowViewModel.vm_DocumentViewModel.vm_CanvasViewModel;
+      IShapeParent parent = mViewModel.mWindowViewModel.vm_DocumentViewModel.vm_CanvasViewModel;
 
-      this.AddShape(this.mViewModel.mWindowViewModel.vm_DocumentViewModel.vm_CanvasViewModel,
-                    UmlElementDataDef.CreateShape(this.mUmlType, dropPoint, parent));
+      AddShape(mViewModel.mWindowViewModel.vm_DocumentViewModel.vm_CanvasViewModel,
+                    UmlElementDataDef.CreateShape(mUmlType, dropPoint, parent));
     }
 
     #region CreateShape Command
     private bool OnQueryEnabled()
     {
-      if (this.mViewModel == null)
-        return false;
-
-      return this.mViewModel.QueryEnableEditCommands();
+        return mViewModel != null && mViewModel.QueryEnableEditCommands();
     }
 
     private void OnExecute()
     {
-      this.OnDragDropExecute(new Point(100, 10));
+      OnDragDropExecute(new Point(100, 10));
     }
     #endregion CreateShape Command
     #endregion methods

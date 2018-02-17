@@ -1,6 +1,6 @@
 ﻿namespace MiniUML.Model.ViewModels.Document
 {
-  using MiniUML.Framework;
+  using Framework;
 
   public class RibbonViewModel : BaseViewModel
   {

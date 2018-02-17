@@ -4,10 +4,10 @@
 	using System.IO;
 	using System.Xml;
 	using System.Xml.Serialization;
-	using Edi.Settings.Interfaces;
-	using Edi.Settings.ProgramSettings;
-	using Edi.Settings.UserProfile;
-	using Edi.Themes.Interfaces;
+	using Interfaces;
+	using ProgramSettings;
+	using UserProfile;
+	using Themes.Interfaces;
 
 	/// <summary>
 	/// This class keeps track of program options and user profile (session) data.
@@ -32,10 +32,10 @@
 		/// </summary>
 		public SettingsManager(IThemesManager themesManager)
 		{
-			this.mThemesManager = themesManager;
+			mThemesManager = themesManager;
 
-			this.SettingData = new Options(this.mThemesManager);
-			this.SessionData = new Profile();
+			SettingData = new Options(mThemesManager);
+			SessionData = new Profile();
 		}
 		#endregion constructor
 
@@ -49,16 +49,16 @@
 		{
 			get
 			{
-				if (this.mSettingData == null)
-					this.mSettingData = new Options(this.mThemesManager);
+				if (mSettingData == null)
+					mSettingData = new Options(mThemesManager);
 
-				return this.mSettingData;
+				return mSettingData;
 			}
 
 			private set
 			{
-				if (this.mSettingData != value)
-					this.mSettingData = value;
+				if (mSettingData != value)
+					mSettingData = value;
 			}
 		}
 
@@ -72,16 +72,16 @@
 		{
 			get
 			{
-				if (this.mSessionData == null)
-					this.mSessionData = new Profile();
+				if (mSessionData == null)
+					mSessionData = new Profile();
 
-				return this.mSessionData;
+				return mSessionData;
 			}
 
 			private set
 			{
-				if (this.mSessionData != value)
-					this.mSessionData = value;
+				if (mSessionData != value)
+					mSessionData = value;
 			}
 		}
 
@@ -120,10 +120,10 @@
 			if (programSettings != null)
 				loadedModel = programSettings;
 			else                                     // Get a fresh copy from persistence
-				loadedModel = SettingsManager.LoadOptions(settingsFileName, themesManager);
+				loadedModel = LoadOptions(settingsFileName, themesManager);
 
 			loadedModel.SetDirtyFlag(false);  // Data has just been loaded from persistence (or default) so its not dirty for sure
-			this.SettingData = loadedModel;
+			SettingData = loadedModel;
 		}
 
 		/// <summary>
@@ -139,10 +139,10 @@
 
 			try
 			{
-				if (System.IO.File.Exists(settingsFileName))
+				if (File.Exists(settingsFileName))
 				{
 					// Create a new file stream for reading the XML file
-					using (FileStream readFileStream = new System.IO.FileStream(settingsFileName, FileMode.Open, FileAccess.Read, FileShare.Read))
+					using (FileStream readFileStream = new FileStream(settingsFileName, FileMode.Open, FileAccess.Read, FileShare.Read))
 					{
 						try
 						{
@@ -231,10 +231,10 @@
 
 			try
 			{
-				if (System.IO.File.Exists(sessionDataFileName))
+				if (File.Exists(sessionDataFileName))
 				{
 					// Create a new file stream for reading the XML file
-					using (FileStream readFileStream = new System.IO.FileStream(sessionDataFileName, FileMode.Open, FileAccess.Read, FileShare.Read))
+					using (FileStream readFileStream = new FileStream(sessionDataFileName, FileMode.Open, FileAccess.Read, FileShare.Read))
 					{
 						try
 						{
@@ -254,7 +254,7 @@
 					}
 				}
 
-				this.SessionData = profileDataModel;
+				SessionData = profileDataModel;
 			}
 			catch (Exception exp)
 			{

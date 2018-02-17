@@ -16,7 +16,6 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-using System;
 using System.Diagnostics;
 using System.Windows.Automation;
 using System.Windows.Automation.Peers;
@@ -41,20 +40,20 @@ namespace ICSharpCode.AvalonEdit
 		}
 		
 		private TextEditor TextEditor {
-			get { return (TextEditor)base.Owner; }
+			get { return (TextEditor)Owner; }
 		}
 		
 		void IValueProvider.SetValue(string value)
 		{
-			this.TextEditor.Text = value;
+			TextEditor.Text = value;
 		}
 		
 		string IValueProvider.Value {
-			get { return this.TextEditor.Text; }
+			get { return TextEditor.Text; }
 		}
 		
 		bool IValueProvider.IsReadOnly {
-			get { return this.TextEditor.IsReadOnly; }
+			get { return TextEditor.IsReadOnly; }
 		}
 		
 		/// <inheritdoc/>
@@ -64,9 +63,9 @@ namespace ICSharpCode.AvalonEdit
 				return this;
 			
 			if (patternInterface == PatternInterface.Scroll) {
-				ScrollViewer scrollViewer = this.TextEditor.ScrollViewer;
+				ScrollViewer scrollViewer = TextEditor.ScrollViewer;
 				if (scrollViewer != null)
-					return UIElementAutomationPeer.CreatePeerForElement(scrollViewer);
+					return CreatePeerForElement(scrollViewer);
 			}
 			
 			return base.GetPattern(patternInterface);

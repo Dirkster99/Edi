@@ -6,10 +6,9 @@ namespace Edi.Apps.ViewModels
     using System.Text.RegularExpressions;
     using System.Windows;
     using System.Windows.Threading;
-    using Edi.Dialogs.FindReplace.ViewModel;
+    using Dialogs.FindReplace.ViewModel;
     using ICSharpCode.AvalonEdit.Document;
-    using MsgBox;
-    using Edi.Documents.ViewModels.EdiDoc;
+    using Documents.ViewModels.EdiDoc;
 
     public partial class ApplicationViewModel
     {
@@ -18,15 +17,15 @@ namespace Edi.Apps.ViewModels
         {
             get
             {
-                return this.mFindReplaceVM;
+                return mFindReplaceVM;
             }
 
             protected set
             {
-                if (this.mFindReplaceVM != value)
+                if (mFindReplaceVM != value)
                 {
-                    this.mFindReplaceVM = value;
-                    this.RaisePropertyChanged(() => this.FindReplaceVM);
+                    mFindReplaceVM = value;
+                    RaisePropertyChanged(() => FindReplaceVM);
                 }
             }
         }
@@ -36,14 +35,14 @@ namespace Edi.Apps.ViewModels
                                                                     )
         {
             // There is no next open document if there is none or only one open
-            if (this.Files.Count <= 1)
+            if (Files.Count <= 1)
                 return f.GetCurrentEditor();
 
             // There is no next open document If the user wants to search the current document only
-            if (f.SearchIn == Edi.Dialogs.FindReplace.SearchScope.CurrentDocument)
+            if (f.SearchIn == Dialogs.FindReplace.SearchScope.CurrentDocument)
                 return f.GetCurrentEditor();
 
-            var l = new List<object>(this.Files.Cast<object>());
+            var l = new List<object>(Files.Cast<object>());
 
             int idxStart = l.IndexOf(f.CurrentEditor);
             int i = idxStart;
@@ -55,7 +54,7 @@ namespace Edi.Apps.ViewModels
                 bool textSearchSuccess = false;
                 do
                 {
-                    if (previous == true)                  // Get next/previous document
+                    if (previous)                  // Get next/previous document
                         i = (i < 1 ? l.Count - 1 : i - 1);
                     else
                         i = (i >= l.Count - 1 ? 0 : i + 1);
@@ -68,7 +67,7 @@ namespace Edi.Apps.ViewModels
                         EdiViewModel fTmp = l[i] as EdiViewModel;
 
                         Regex r;
-                        m = this.FindNextMatchInText(0, 0, false, fTmp.Text, ref f, out r);
+                        m = FindNextMatchInText(0, 0, false, fTmp.Text, ref f, out r);
 
                         textSearchSuccess = m.Success;
                     }
@@ -76,19 +75,19 @@ namespace Edi.Apps.ViewModels
                 while (i != idxStart && textSearchSuccess != true);
 
                 // Found a match so activate the corresponding document and select the text with scroll into view
-                if (textSearchSuccess == true && m != null)
+                if (textSearchSuccess && m != null)
                 {
                     var doc = l[i] as EdiViewModel;
 
                     if (doc != null)
-                        this.ActiveDocument = doc;
+                        ActiveDocument = doc;
 
                     // Ensure that no pending calls are in the dispatcher queue
                     // This makes sure that we are blocked until bindings are re-established
                     // Bindings are required to scroll a selection into view
                     Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.SystemIdle, (Action)delegate
                     {
-                        if (this.ActiveDocument != null && doc != null)
+                        if (ActiveDocument != null && doc != null)
                         {
                             doc.TextEditorSelectionStart = m.Index;
                             doc.TextEditorSelectionLength = m.Length;
@@ -150,7 +149,7 @@ namespace Edi.Apps.ViewModels
                 return false;
 
             Regex r;
-            Match m = this.FindNextMatchInText(CE.SelectionStart, CE.SelectionLength,
+            Match m = FindNextMatchInText(CE.SelectionStart, CE.SelectionLength,
                                                                                  InvertLeftRight, CE.Text, ref f, out r);
 
             if (m.Success)
@@ -161,7 +160,7 @@ namespace Edi.Apps.ViewModels
             }
             else
             {
-                if (f.SearchIn == Edi.Dialogs.FindReplace.SearchScope.CurrentDocument)
+                if (f.SearchIn == Dialogs.FindReplace.SearchScope.CurrentDocument)
                 {
                     _MsgBox.Show(Util.Local.Strings.STR_MSG_FIND_NO_MORE_ITEMS_FOUND);
 
@@ -173,9 +172,9 @@ namespace Edi.Apps.ViewModels
                 object OldEditor = f.CurrentEditor;
                 do
                 {
-                    if (f.SearchIn == Edi.Dialogs.FindReplace.SearchScope.AllDocuments)
+                    if (f.SearchIn == Dialogs.FindReplace.SearchScope.AllDocuments)
                     {
-                        CE = this.GetNextEditor(f, r.Options.HasFlag(RegexOptions.RightToLeft));
+                        CE = GetNextEditor(f, r.Options.HasFlag(RegexOptions.RightToLeft));
 
                         if (CE == null)
                             return false;
@@ -233,18 +232,18 @@ namespace Edi.Apps.ViewModels
         private void ShowGotoLineDialog()
         {
 
-            if (this.ActiveDocument is EdiViewModel)
+            if (ActiveDocument is EdiViewModel)
             {
-                EdiViewModel f = this.ActiveDocument as EdiViewModel;
+                EdiViewModel f = ActiveDocument as EdiViewModel;
 
                 Window dlg = null;
-                Edi.Dialogs.GotoLine.GotoLineViewModel dlgVM = null;
+                Dialogs.GotoLine.GotoLineViewModel dlgVM = null;
 
                 try
                 {
-                    int iCurrLine = ApplicationViewModel.GetCurrentEditorLine(f);
+                    int iCurrLine = GetCurrentEditorLine(f);
 
-                    dlgVM = new Edi.Dialogs.GotoLine.GotoLineViewModel(1, f.Document.LineCount, iCurrLine);
+                    dlgVM = new Dialogs.GotoLine.GotoLineViewModel(1, f.Document.LineCount, iCurrLine);
                     dlg = ViewSelector.GetDialogView((object)dlgVM, Application.Current.MainWindow);
 
                     dlg.Closing += dlgVM.OnClosing;
@@ -262,7 +261,7 @@ namespace Edi.Apps.ViewModels
                 }
                 catch (Exception exc)
                 {
-                    _MsgBox.Show(exc, Edi.Util.Local.Strings.STR_MSG_FIND_UNEXPECTED_ERROR,
+                    _MsgBox.Show(exc, Util.Local.Strings.STR_MSG_FIND_UNEXPECTED_ERROR,
                                  MsgBoxButtons.OK, MsgBoxImage.Error);
                 }
                 finally
@@ -279,22 +278,22 @@ namespace Edi.Apps.ViewModels
         private void ShowFindReplaceDialog(bool ShowFind = true)
         {
 
-            if (this.ActiveDocument is EdiViewModel)
+            if (ActiveDocument is EdiViewModel)
             {
-                EdiViewModel f = this.ActiveDocument as EdiViewModel;
+                EdiViewModel f = ActiveDocument as EdiViewModel;
                 Window dlg = null;
 
                 try
                 {
-                    if (this.FindReplaceVM == null)
+                    if (FindReplaceVM == null)
                     {
-                        this.FindReplaceVM = new Edi.Dialogs.FindReplace.ViewModel.FindReplaceViewModel(this.mSettingsManager);
+                        FindReplaceVM = new FindReplaceViewModel(mSettingsManager);
                     }
 
-                    this.FindReplaceVM.FindNext = this.FindNext;
+                    FindReplaceVM.FindNext = FindNext;
 
                     // determine whether Find or Find/Replace is to be executed
-                    this.FindReplaceVM.ShowAsFind = ShowFind;
+                    FindReplaceVM.ShowAsFind = ShowFind;
 
                     if (f.TxtControl != null)      // Search by default for currently selected text (if any)
                     {
@@ -302,27 +301,27 @@ namespace Edi.Apps.ViewModels
                         f.TxtControl.GetSelectedText(out textToFind);
 
                         if (textToFind.Length > 0)
-                            this.FindReplaceVM.TextToFind = textToFind;
+                            FindReplaceVM.TextToFind = textToFind;
                     }
 
-                    this.FindReplaceVM.CurrentEditor = f;
+                    FindReplaceVM.CurrentEditor = f;
 
-                    dlg = ViewSelector.GetDialogView((object)this.FindReplaceVM, Application.Current.MainWindow);
+                    dlg = ViewSelector.GetDialogView((object)FindReplaceVM, Application.Current.MainWindow);
 
-                    dlg.Closing += this.FindReplaceVM.OnClosing;
+                    dlg.Closing += FindReplaceVM.OnClosing;
 
                     dlg.ShowDialog();
                 }
                 catch (Exception exc)
                 {
-                    _MsgBox.Show(exc, Edi.Util.Local.Strings.STR_MSG_FIND_UNEXPECTED_ERROR,
+                    _MsgBox.Show(exc, Util.Local.Strings.STR_MSG_FIND_UNEXPECTED_ERROR,
                                  MsgBoxButtons.OK, MsgBoxImage.Error);
                 }
                 finally
                 {
                     if (dlg != null)
                     {
-                        dlg.Closing -= this.FindReplaceVM.OnClosing;
+                        dlg.Closing -= FindReplaceVM.OnClosing;
                         dlg.Close();
                     }
                 }

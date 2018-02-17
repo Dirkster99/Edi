@@ -12,9 +12,8 @@
   public class PrintPreviewDocumentViewer : DocumentViewer
   {
     #region fields
-    private PrintQueue mPrintQueue = LocalPrintServer.GetDefaultPrintQueue();
-    private PrintTicket mPrintTicket;
-    #endregion fields
+
+      #endregion fields
 
     #region constructor
     /// <summary>
@@ -31,23 +30,14 @@
     /// <summary>
     /// Gets or sets the print queue manager.
     /// </summary>
-    public PrintQueue PrintQueue
-    {
-      get { return mPrintQueue; }
+    public PrintQueue PrintQueue { get; set; } = LocalPrintServer.GetDefaultPrintQueue();
 
-      set { mPrintQueue = value; }
-    }
-
-    /// <summary>
+      /// <summary>
     /// Gets or sets the print settings for the print job.
     /// </summary>
-    public PrintTicket PrintTicket
-    {
-      get { return mPrintTicket; }
+    public PrintTicket PrintTicket { get; set; }
 
-      set { mPrintTicket = value; }
-    }
-    #endregion properties
+      #endregion properties
 
     #region methods
     /// <summary>
@@ -55,20 +45,21 @@
     /// </summary>
     protected override void OnPrintCommand()
     {
-      // get a print dialog, defaulted to default printer and default printer's preferences.
-      PrintDialog printDialog = new PrintDialog();
+            // get a print dialog, defaulted to default printer and default printer's preferences.
+            PrintDialog printDialog = new PrintDialog
+            {
+                PrintQueue = PrintQueue,
 
-      printDialog.PrintQueue = mPrintQueue;
+                PrintTicket = PrintTicket
+            };
 
-      printDialog.PrintTicket = mPrintTicket;
-
-      if (printDialog.ShowDialog() == true)
+            if (printDialog.ShowDialog() == true)
       {
-        mPrintQueue = printDialog.PrintQueue;
+        PrintQueue = printDialog.PrintQueue;
 
-        mPrintTicket = printDialog.PrintTicket;
+        PrintTicket = printDialog.PrintTicket;
 
-        printDialog.PrintDocument(this.Document.DocumentPaginator, "PrintPreviewJob");
+        printDialog.PrintDocument(Document.DocumentPaginator, "PrintPreviewJob");
       }
     }
     #endregion methods

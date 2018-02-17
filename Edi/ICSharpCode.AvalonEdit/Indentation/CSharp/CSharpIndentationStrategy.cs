@@ -39,7 +39,7 @@ namespace ICSharpCode.AvalonEdit.Indentation.CSharp
 		public CSharpIndentationStrategy(TextEditorOptions options)
 		{
             // Dirkster99 BugFix for binding options in VS2010
-            this.IndentationString = (options == null ? indentationString : options.IndentationString);
+            IndentationString = (options == null ? indentationString : options.IndentationString);
         }
 
         string indentationString = "\t";
@@ -48,8 +48,8 @@ namespace ICSharpCode.AvalonEdit.Indentation.CSharp
 		/// Gets/Sets the indentation string.
 		/// </summary>
 		public string IndentationString {
-			get { return indentationString; }
-			set {
+			get => indentationString;
+		    set {
 				if (string.IsNullOrEmpty(value))
 					throw new ArgumentException("Indentation string must not be null or empty");
 				indentationString = value;
@@ -64,12 +64,14 @@ namespace ICSharpCode.AvalonEdit.Indentation.CSharp
 		public void Indent(IDocumentAccessor document, bool keepEmptyLines)
 		{
 			if (document == null)
-				throw new ArgumentNullException("document");
-			IndentationSettings settings = new IndentationSettings();
-			settings.IndentString = this.IndentationString;
-			settings.LeaveEmptyLines = keepEmptyLines;
-			
-			IndentationReformatter r = new IndentationReformatter();
+				throw new ArgumentNullException(nameof(document));
+            IndentationSettings settings = new IndentationSettings
+            {
+                IndentString = IndentationString,
+                LeaveEmptyLines = keepEmptyLines
+            };
+
+            IndentationReformatter r = new IndentationReformatter();
 			r.Reformat(document, settings);
 		}
 		

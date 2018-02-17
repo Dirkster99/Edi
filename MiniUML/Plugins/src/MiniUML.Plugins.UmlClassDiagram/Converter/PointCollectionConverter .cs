@@ -11,11 +11,11 @@
 
     public object Convert(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
-      if (value.GetType() == typeof(ObservableCollection<Point>) && targetType == typeof(PointCollection))
+      if (value != null && (value.GetType() == typeof(ObservableCollection<Point>) && targetType == typeof(PointCollection)))
       {
         var pointCollection = new PointCollection();
 
-        foreach (var point in value as ObservableCollection<Point>)
+        foreach (var point in (ObservableCollection<Point>) value)
           pointCollection.Add(point);
 
         return pointCollection;

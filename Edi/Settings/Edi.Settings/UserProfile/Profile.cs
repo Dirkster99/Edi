@@ -1,8 +1,7 @@
 ﻿namespace Edi.Settings.UserProfile
 {
-    using Edi.Settings.Interfaces;
+    using Interfaces;
     using FileSystemModels.Models;
-    using MRULib.MRU.Models.Persist;
     using System.Collections.Generic;
     using System.Xml.Serialization;
 
@@ -35,11 +34,11 @@
         public Profile()
         {
             // Set default session data
-            this.MainWindowPosSz = new ViewPosSizeModel(100, 100, 1000, 700);
+            MainWindowPosSz = new ViewPosSizeModel(100, 100, 1000, 700);
 
-            this.IsWorkspaceAreaOptimized = false;
+            IsWorkspaceAreaOptimized = false;
 
-            this.LastActiveFile = string.Empty;
+            LastActiveFile = string.Empty;
 
             _MruList = new MRUList();
         }
@@ -76,17 +75,17 @@
         {
             get
             {
-                if (this._MruList == null)
-                    this._MruList = new MRUList();
+                if (_MruList == null)
+                    _MruList = new MRUList();
 
-                return this._MruList;
+                return _MruList;
             }
 
             set
             {
-                if (this._MruList != value)
+                if (_MruList != value)
                 {
-                    this._MruList = value;
+                    _MruList = value;
                 }
             }
         }
@@ -106,17 +105,17 @@
         {
             get
             {
-                if (this.mFindHistoryList == null)
-                    this.mFindHistoryList = new List<string>();
+                if (mFindHistoryList == null)
+                    mFindHistoryList = new List<string>();
 
-                return this.mFindHistoryList;
+                return mFindHistoryList;
             }
 
             set
             {
-                if (this.mFindHistoryList != value)
+                if (mFindHistoryList != value)
                 {
-                    this.mFindHistoryList = value;
+                    mFindHistoryList = value;
                 }
             }
         }
@@ -129,17 +128,17 @@
         {
             get
             {
-                if (this.mReplaceHistoryList == null)
-                    this.mReplaceHistoryList = new List<string>();
+                if (mReplaceHistoryList == null)
+                    mReplaceHistoryList = new List<string>();
 
-                return this.mReplaceHistoryList;
+                return mReplaceHistoryList;
             }
 
             set
             {
-                if (this.mReplaceHistoryList != value)
+                if (mReplaceHistoryList != value)
                 {
-                    this.mReplaceHistoryList = value;
+                    mReplaceHistoryList = value;
                 }
             }
         }
@@ -156,13 +155,13 @@
         public void CheckSettingsOnLoad(double SystemParameters_VirtualScreenLeft,
                                         double SystemParameters_VirtualScreenTop)
         {
-            if (this.MainWindowPosSz == null)
-                this.MainWindowPosSz = new ViewPosSizeModel(100, 100, 600, 500);
+            if (MainWindowPosSz == null)
+                MainWindowPosSz = new ViewPosSizeModel(100, 100, 600, 500);
 
-            if (this.MainWindowPosSz.DefaultConstruct == true)
-                this.MainWindowPosSz = new ViewPosSizeModel(100, 100, 600, 500);
+            if (MainWindowPosSz.DefaultConstruct)
+                MainWindowPosSz = new ViewPosSizeModel(100, 100, 600, 500);
 
-            this.MainWindowPosSz.SetValidPos(SystemParameters_VirtualScreenLeft,
+            MainWindowPosSz.SetValidPos(SystemParameters_VirtualScreenLeft,
                                              SystemParameters_VirtualScreenTop);
         }
 
@@ -174,8 +173,8 @@
         {
             try
             {
-                if (System.IO.File.Exists(this.LastActiveFile))
-                    return System.IO.Path.GetDirectoryName(this.LastActiveFile);
+                if (System.IO.File.Exists(LastActiveFile))
+                    return System.IO.Path.GetDirectoryName(LastActiveFile);
             }
             catch
             {

@@ -124,7 +124,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		public static string GetAttributeOrNull(this XmlElement element, string attributeName)
 		{
 			XmlAttribute attr = element.GetAttributeNode(attributeName);
-			return attr != null ? attr.Value : null;
+			return attr?.Value;
 		}
 		
 		/// <summary>
@@ -144,8 +144,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 			string attributeValue = reader.GetAttribute(attributeName);
 			if (attributeValue == null)
 				return null;
-			else
-				return XmlConvert.ToBoolean(attributeValue);
+		    return XmlConvert.ToBoolean(attributeValue);
 		}
 		#endregion
 		

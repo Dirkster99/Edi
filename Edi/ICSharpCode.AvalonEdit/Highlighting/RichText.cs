@@ -24,7 +24,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Documents;
 using ICSharpCode.AvalonEdit.Document;
-using ICSharpCode.AvalonEdit.Utils;
 
 namespace ICSharpCode.AvalonEdit.Highlighting
 {
@@ -37,9 +36,8 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// The empty string without any formatting information.
 		/// </summary>
 		public static readonly RichText Empty = new RichText(string.Empty);
-		
-		readonly string text;
-		internal readonly int[] stateChangeOffsets;
+
+	    internal readonly int[] stateChangeOffsets;
 		internal readonly HighlightingColor[] stateChanges;
 		
 		/// <summary>
@@ -55,9 +53,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// </param>
 		public RichText(string text, RichTextModel model = null)
 		{
-			if (text == null)
-				throw new ArgumentNullException("text");
-			this.text = text;
+            this.Text = text ?? throw new ArgumentNullException(nameof(text));
 			if (model != null) {
 				var sections = model.GetHighlightedSections(0, text.Length).ToArray();
 				stateChangeOffsets = new int[sections.Length];
@@ -74,31 +70,27 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		
 		internal RichText(string text, int[] offsets, HighlightingColor[] states)
 		{
-			this.text = text;
+			this.Text = text;
 			Debug.Assert(offsets[0] == 0);
 			Debug.Assert(offsets.Last() <= text.Length);
-			this.stateChangeOffsets = offsets;
-			this.stateChanges = states;
+			stateChangeOffsets = offsets;
+			stateChanges = states;
 		}
 		
 		/// <summary>
 		/// Gets the text.
 		/// </summary>
-		public string Text {
-			get { return text; }
-		}
-		
-		/// <summary>
+		public string Text { get; }
+
+	    /// <summary>
 		/// Gets the text length.
 		/// </summary>
-		public int Length {
-			get { return text.Length; }
-		}
-		
-		int GetIndexForOffset(int offset)
+		public int Length => Text.Length;
+
+	    int GetIndexForOffset(int offset)
 		{
-			if (offset < 0 || offset > text.Length)
-				throw new ArgumentOutOfRangeException("offset");
+			if (offset < 0 || offset > Text.Length)
+				throw new ArgumentOutOfRangeException(nameof(offset));
 			int index = Array.BinarySearch(stateChangeOffsets, offset);
 			if (index < 0) {
 				// If no color change exists directly at offset,
@@ -114,7 +106,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 			if (index + 1 < stateChangeOffsets.Length)
 				return stateChangeOffsets[index + 1];
 			else
-				return text.Length;
+				return Text.Length;
 		}
 		
 		/// <summary>
@@ -159,7 +151,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// </summary>
 		public override string ToString()
 		{
-			return text;
+			return Text;
 		}
 		
 		/// <summary>
@@ -170,8 +162,8 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 			Run[] runs = new Run[stateChanges.Length];
 			for (int i = 0; i < runs.Length; i++) {
 				int startOffset = stateChangeOffsets[i];
-				int endOffset = i + 1 < stateChangeOffsets.Length ? stateChangeOffsets[i + 1] : text.Length;
-				Run r = new Run(text.Substring(startOffset, endOffset - startOffset));
+				int endOffset = i + 1 < stateChangeOffsets.Length ? stateChangeOffsets[i + 1] : Text.Length;
+				Run r = new Run(Text.Substring(startOffset, endOffset - startOffset));
 				HighlightingColor state = stateChanges[i];
 				ApplyColorToTextElement(r, state);
 				runs[i] = r;
@@ -220,12 +212,12 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// </summary>
 		public RichText Substring(int offset, int length)
 		{
-			if (offset == 0 && length == this.Length)
+			if (offset == 0 && length == Length)
 				return this;
-			string newText = text.Substring(offset, length);
+			string newText = Text.Substring(offset, length);
 			RichTextModel model = ToRichTextModel();
 			OffsetChangeMap map = new OffsetChangeMap(2);
-			map.Add(new OffsetChangeMapEntry(offset + length, text.Length - offset - length, 0));
+			map.Add(new OffsetChangeMapEntry(offset + length, Text.Length - offset - length, 0));
 			map.Add(new OffsetChangeMapEntry(0, offset, 0));
 			model.UpdateOffsets(map);
 			return new RichText(newText, model);
@@ -240,7 +232,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 				return Empty;
 			else if (texts.Length == 1)
 				return texts[0];
-			string newText = string.Concat(texts.Select(txt => txt.text));
+			string newText = string.Concat(texts.Select(txt => txt.Text));
 			RichTextModel model = texts[0].ToRichTextModel();
 			int offset = texts[0].Length;
 			for (int i = 1; i < texts.Length; i++) {
@@ -255,7 +247,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// </summary>
 		public static RichText operator +(RichText a, RichText b)
 		{
-			return RichText.Concat(a, b);
+			return Concat(a, b);
 		}
 		
 		/// <summary>

@@ -16,7 +16,6 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -76,8 +75,8 @@ namespace ICSharpCode.AvalonEdit.Folding
 			Size pixelSize = PixelSnapHelpers.GetPixelSize(this);
 			Rect rect = new Rect(pixelSize.Width / 2,
 			                     pixelSize.Height / 2,
-			                     this.RenderSize.Width - pixelSize.Width,
-			                     this.RenderSize.Height - pixelSize.Height);
+			                     RenderSize.Width - pixelSize.Width,
+			                     RenderSize.Height - pixelSize.Height);
 			drawingContext.DrawRectangle(
 				IsMouseDirectlyOver ? margin.SelectedFoldingMarkerBackgroundBrush : margin.FoldingMarkerBackgroundBrush,
 				IsMouseDirectlyOver ? activePen : inactivePen, rect);

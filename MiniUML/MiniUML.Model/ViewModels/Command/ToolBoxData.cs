@@ -1,6 +1,6 @@
 ﻿namespace MiniUML.Framework.helpers
 {
-  using MiniUML.Model.ViewModels.Command;
+  using Model.ViewModels.Command;
 
   /// <summary>
   /// Manage data necessary to display and create a new canvas item from a toolbox item.
@@ -11,8 +11,8 @@
   {
     public ToolBoxData(string imageUrl, CommandModelBase command)
     {
-      this.ImageUrl = imageUrl;
-      this.CreateShapeCommand = command;
+      ImageUrl = imageUrl;
+      CreateShapeCommand = command;
     }
 
     public string ImageUrl { get; private set; }

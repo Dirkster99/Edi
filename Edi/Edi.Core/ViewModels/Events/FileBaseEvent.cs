@@ -42,7 +42,7 @@ namespace Edi.Core.ViewModels.Events
 		/// </summary>
 		public FileBaseEvent(FileEventType typeOfEvent)
 		{
-			this.mTypeOfEvent = typeOfEvent;
+			mTypeOfEvent = typeOfEvent;
 		}
 
 		/// <summary>
@@ -51,7 +51,7 @@ namespace Edi.Core.ViewModels.Events
 		protected FileBaseEvent()
 			: base()
 		{
-			this.mTypeOfEvent = FileEventType.Unknown;
+			mTypeOfEvent = FileEventType.Unknown;
 		}
 		#endregion constructor
 
@@ -62,7 +62,7 @@ namespace Edi.Core.ViewModels.Events
 		/// </summary>
 		public FileEventType TypeOfEvent
 		{
-			get { return this.mTypeOfEvent; }
+			get { return mTypeOfEvent; }
 		}
 		#endregion properties
 

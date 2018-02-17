@@ -18,7 +18,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace ICSharpCode.AvalonEdit.Utils
 {
@@ -145,7 +144,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
 		{
-			return this.GetEnumerator();
+			return GetEnumerator();
 		}
 		
 		bool ICollection<T>.IsReadOnly {

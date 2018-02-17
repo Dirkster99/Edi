@@ -32,7 +32,7 @@ namespace Edi.Core.View.Pane
     /// <param name="item">The data object for which to select the template.</param>
     /// <param name="container">The data-bound object.</param>
     /// <returns>Returns a System.Windows.DataTemplate or null. The default value is null.</returns>
-    public override System.Windows.DataTemplate SelectTemplate(object item, System.Windows.DependencyObject container)
+    public override DataTemplate SelectTemplate(object item, DependencyObject container)
     {
       if (item == null)
         return null;

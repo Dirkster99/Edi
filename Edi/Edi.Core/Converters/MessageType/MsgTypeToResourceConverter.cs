@@ -6,7 +6,7 @@
 	using System.Windows.Data;
 	using System.Windows.Media.Imaging;
 
-	[ValueConversion(typeof(Edi.Core.Msg.MsgCategory), typeof(System.Windows.Media.ImageSource))]
+	[ValueConversion(typeof(Msg.MsgCategory), typeof(System.Windows.Media.ImageSource))]
 	public class MsgTypeToResourceConverter : IValueConverter
 	{
 		#region IValueConverter Members
@@ -20,33 +20,33 @@
 		/// <returns> 
 		/// A converted value. If the method returns null, the valid null value is used. 
 		/// </returns> 
-		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			// Check input parameter types
 			if (value == null)
 				return Binding.DoNothing;
 
-			if (!(value is Edi.Core.Msg.MsgCategory))
+			if (!(value is Msg.MsgCategory))
 				throw new ArgumentException("Invalid argument. Expected argument: ViewModel.Base.Msg.MsgType");
 
 			if (targetType != typeof(System.Windows.Media.ImageSource))
 				throw new ArgumentException("Invalid return type. Expected return type: System.Windows.Media.ImageSource");
 
 			string resourceUri = "Images/MessageIcons/Unknown.png";
-			switch ((Edi.Core.Msg.MsgCategory)value)
+			switch ((Msg.MsgCategory)value)
 			{
-				case Edi.Core.Msg.MsgCategory.Information:
+				case Msg.MsgCategory.Information:
 					break;
-				case Edi.Core.Msg.MsgCategory.Error:
+				case Msg.MsgCategory.Error:
 					resourceUri = "Images/MessageIcons/Error.png";
 					break;
-				case Edi.Core.Msg.MsgCategory.Warning:
+				case Msg.MsgCategory.Warning:
 					resourceUri = "Images/MessageIcons/Warning.png";
 					break;
-				case Edi.Core.Msg.MsgCategory.InternalError:
+				case Msg.MsgCategory.InternalError:
 					resourceUri = "Images/MessageIcons/InternalError.png";
 					break;
-				case Edi.Core.Msg.MsgCategory.Unknown:
+				case Msg.MsgCategory.Unknown:
 				default:
 					resourceUri = "Images/MessageIcons/Unknown.png";
 					break;
@@ -78,7 +78,7 @@
 		/// <returns> 
 		/// A converted value. If the method returns null, the valid null value is used. 
 		/// </returns> 
-		public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			if (value is Visibility && targetType == typeof(bool))
 			{

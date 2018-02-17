@@ -39,9 +39,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 		/// </summary>
 		public SaveXshdVisitor(XmlWriter writer)
 		{
-			if (writer == null)
-				throw new ArgumentNullException("writer");
-			this.writer = writer;
+            this.writer = writer ?? throw new ArgumentNullException(nameof(writer));
 		}
 		
 		/// <summary>
@@ -50,7 +48,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 		public void WriteDefinition(XshdSyntaxDefinition definition)
 		{
 			if (definition == null)
-				throw new ArgumentNullException("definition");
+				throw new ArgumentNullException(nameof(definition));
 			writer.WriteStartElement("SyntaxDefinition", Namespace);
 			if (definition.Name != null)
 				writer.WriteAttributeString("name", definition.Name);

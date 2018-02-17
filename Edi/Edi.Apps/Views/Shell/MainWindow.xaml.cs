@@ -2,36 +2,35 @@ namespace Edi.Apps.Views.Shell
 {
 	using System;
 	using System.ComponentModel.Composition;
-	using Edi.Core.Interfaces;
-	using Edi.Apps.Events;
-	using Edi.Apps.Interfaces.ViewModel;
-	using Prism.Events;
+	using Core.Interfaces;
+	using Events;
+	using Interfaces.ViewModel;
 
-  /// <summary>
+    /// <summary>
   /// Interaction logic for MainWindow.xaml
   /// </summary>
  [Export]
-  public partial class MainWindow : FirstFloor.ModernUI.Windows.Controls.ModernWindow, Edi.Core.Interfaces.ILayoutableWindow
+  public partial class MainWindow : FirstFloor.ModernUI.Windows.Controls.ModernWindow, ILayoutableWindow
   {
     #region constructors
 		[ImportingConstructor]
     public MainWindow(IAvalonDockLayoutViewModel av, IApplicationViewModel appVM)
     {
-      this.InitializeComponent();
+      InitializeComponent();
 
-      this.dockView.SetTemplates(av.ViewProperties.SelectPanesTemplate,
+      dockView.SetTemplates(av.ViewProperties.SelectPanesTemplate,
 																 av.ViewProperties.DocumentHeaderTemplate,
 																 av.ViewProperties.SelectPanesStyle,
 																 av.ViewProperties.LayoutInitializer,
 																 av.LayoutID);
 
       // Register these methods to receive PRISM event notifications about load and save of avalondock layouts
-			LoadLayoutEvent.Instance.Subscribe(this.dockView.OnLoadLayout, ThreadOption.PublisherThread,
+			LoadLayoutEvent.Instance.Subscribe(dockView.OnLoadLayout, ThreadOption.PublisherThread,
 			                                   true,
                                          s => s.LayoutID == av.LayoutID);
 
 			// subscribe to close event messing to application viewmodel
-			this.Closing += appVM.OnClosing;
+			Closing += appVM.OnClosing;
 
 			// When the ViewModel asks to be closed, close the window.
 			// Source: http://msdn.microsoft.com/en-us/magazine/dd419663.aspx
@@ -53,7 +52,7 @@ namespace Edi.Apps.Views.Shell
     {
       get
       {
-        return (this.dockView != null ? this.dockView.LayoutID : Guid.Empty);
+        return (dockView != null ? dockView.LayoutID : Guid.Empty);
       }
     }
 
@@ -64,7 +63,7 @@ namespace Edi.Apps.Views.Shell
     {
       get
       {
-        return (this.dockView != null ? this.dockView.CurrentADLayout : string.Empty);
+        return (dockView != null ? dockView.CurrentADLayout : string.Empty);
       }
     }
     #endregion properties

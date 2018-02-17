@@ -61,16 +61,16 @@ namespace ICSharpCode.AvalonEdit.Document
 			get {
 				if (right != null) {
 					return right.LeftMost;
-				} else {
-					TextAnchorNode node = this;
-					TextAnchorNode oldNode;
-					do {
-						oldNode = node;
-						node = node.parent;
-						// go up until we are coming out of a left subtree
-					} while (node != null && node.right == oldNode);
-					return node;
 				}
+
+			    TextAnchorNode node = this;
+			    TextAnchorNode oldNode;
+			    do {
+			        oldNode = node;
+			        node = node.parent;
+			        // go up until we are coming out of a left subtree
+			    } while (node != null && node.right == oldNode);
+			    return node;
 			}
 		}
 		
@@ -81,16 +81,16 @@ namespace ICSharpCode.AvalonEdit.Document
 			get {
 				if (left != null) {
 					return left.RightMost;
-				} else {
-					TextAnchorNode node = this;
-					TextAnchorNode oldNode;
-					do {
-						oldNode = node;
-						node = node.parent;
-						// go up until we are coming out of a right subtree
-					} while (node != null && node.left == oldNode);
-					return node;
 				}
+
+			    TextAnchorNode node = this;
+			    TextAnchorNode oldNode;
+			    do {
+			        oldNode = node;
+			        node = node.parent;
+			        // go up until we are coming out of a right subtree
+			    } while (node != null && node.left == oldNode);
+			    return node;
 			}
 		}
 		

@@ -16,10 +16,10 @@
     public BracketSearchResult(int openingBracketOffset, int openingBracketLength,
                                int closingBracketOffset, int closingBracketLength)
     {
-      this.OpeningBracketOffset = openingBracketOffset;
-      this.OpeningBracketLength = openingBracketLength;
-      this.ClosingBracketOffset = closingBracketOffset;
-      this.ClosingBracketLength = closingBracketLength;
+      OpeningBracketOffset = openingBracketOffset;
+      OpeningBracketLength = openingBracketLength;
+      ClosingBracketOffset = closingBracketOffset;
+      ClosingBracketLength = closingBracketLength;
     }
     #endregion class constructor
 

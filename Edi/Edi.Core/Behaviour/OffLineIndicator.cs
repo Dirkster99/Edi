@@ -11,30 +11,30 @@
 		#region constructor
 		static OffLineIndicator()
 		{
-			OffLineIndicator.IsOnlineProperty =
+			IsOnlineProperty =
 							DependencyProperty.RegisterAttached("IsOnline",
 																									typeof(bool),
 																									typeof(OffLineIndicator),
-																									new UIPropertyMetadata(true, OffLineIndicator.OnSetCallback));
+																									new UIPropertyMetadata(true, OnSetCallback));
 		}
 		#endregion constructor
 
 		#region methods
 		public static bool GetIsOnline(DependencyObject obj)
 		{
-			return (bool)obj.GetValue(OffLineIndicator.IsOnlineProperty);
+			return (bool)obj.GetValue(IsOnlineProperty);
 		}
 
 		public static void SetIsOnline(DependencyObject obj, bool value)
 		{
-			obj.SetValue(OffLineIndicator.IsOnlineProperty, value);
+			obj.SetValue(IsOnlineProperty, value);
 		}
 
 		private static void OnSetCallback(DependencyObject dependencyObject,
 																			DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
 		{
 			var frameworkElement = (FrameworkElement)dependencyObject;
-			var target = OffLineIndicator.GetIsOnline(frameworkElement);
+			var target = GetIsOnline(frameworkElement);
 
 			//      if (target == null)
 			//        return;
@@ -42,7 +42,7 @@
 			if (frameworkElement == null)
 				return;
 
-			if (target == true)
+			if (target)
 				frameworkElement.Opacity = 1;
 			else
 				frameworkElement.Opacity = .5;

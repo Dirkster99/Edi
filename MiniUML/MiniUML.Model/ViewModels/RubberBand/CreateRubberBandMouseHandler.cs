@@ -2,10 +2,9 @@ namespace MiniUML.Model.ViewModels.RubberBand
 {
   using System.Windows;
   using System.Windows.Input;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Document;
-  using MiniUML.Model.ViewModels.Shapes;
-  using MiniUML.View.Views.RubberBand;
+  using Document;
+  using Shapes;
+  using View.Views.RubberBand;
 
   /// <summary>
   /// The class sets up a mouse handler for drawing and handling a rubber band
@@ -28,8 +27,8 @@ namespace MiniUML.Model.ViewModels.RubberBand
     /// <param name="rubberBand"></param>
     public CreateRubberBandMouseHandler(RubberBandViewModel rubberBand, CanvasViewModel canvasViewModel)
     {
-      this.mRubberBandViewModel = rubberBand;
-      this.mCanvasViewModel = canvasViewModel;
+      mRubberBandViewModel = rubberBand;
+      mCanvasViewModel = canvasViewModel;
     }
     #endregion constructor
 
@@ -44,63 +43,63 @@ namespace MiniUML.Model.ViewModels.RubberBand
     #region ICanvasViewMouseHandler methods
     void ICanvasViewMouseHandler.OnShapeClick(ShapeViewModelBase shape)
     {
-      if (this.mIsDone) // return if command is already finished (successfully or cancelled)
+      if (mIsDone) // return if command is already finished (successfully or cancelled)
         return;
     }
 
     void ICanvasViewMouseHandler.OnShapeDragBegin(Point position, ShapeViewModelBase shape)
     {
-      if (this.mIsDone) // return if command is already finished (successfully or cancelled)
+      if (mIsDone) // return if command is already finished (successfully or cancelled)
         return;
 
-      this.mRubberBandViewModel.IsVisible = true;
+      mRubberBandViewModel.IsVisible = true;
     }
   
     void ICanvasViewMouseHandler.OnShapeDragUpdate(Point position, Vector delta)
     {
-      if (this.mIsDone) // return if command is already finished (successfully or cancelled)
+      if (mIsDone) // return if command is already finished (successfully or cancelled)
         return;
 
-      this.mRubberBandViewModel.EndPosition = position;
+      mRubberBandViewModel.EndPosition = position;
     }
   
     void ICanvasViewMouseHandler.OnShapeDragEnd(Point position, ShapeViewModelBase element)
     {
-      if (this.mIsDone) // return if command is already finished (successfully or cancelled)
+      if (mIsDone) // return if command is already finished (successfully or cancelled)
         return;
 
       // Clear current selection if no control key is pressed on the keyboard (which would allow adding selected items)
       if ((Keyboard.IsKeyDown(Key.LeftCtrl) == false && Keyboard.IsKeyDown(Key.RightCtrl) == false))
       {
-        this.mRubberBandViewModel.Select = MouseSelection.ReducedToNewSelection;
+        mRubberBandViewModel.Select = MouseSelection.ReducedToNewSelection;
       }
       else
-        this.mRubberBandViewModel.Select = MouseSelection.AddToCurrentSelection;
+        mRubberBandViewModel.Select = MouseSelection.AddToCurrentSelection;
 
       // create an event that tells all subscribers that we have completed a new selection
-      if (this.RubberBandSelection != null)
-        this.RubberBandSelection(this, this.mRubberBandViewModel.GetSelectionEvent());
+      if (RubberBandSelection != null)
+        RubberBandSelection(this, mRubberBandViewModel.GetSelectionEvent());
 
-      this.cleanUp();
-      this.mCanvasViewModel.FinishCanvasViewMouseHandler();
+      cleanUp();
+      mCanvasViewModel.FinishCanvasViewMouseHandler();
     }
   
     void ICanvasViewMouseHandler.OnCancelMouseHandler()
     {
-      if (this.mIsDone) // return if command is already finished (successfully or cancelled)
+      if (mIsDone) // return if command is already finished (successfully or cancelled)
         return;
 
-      if (this.mRubberBandViewModel != null)
+      if (mRubberBandViewModel != null)
       {
         // Cancel selection
-        this.mRubberBandViewModel.Select = MouseSelection.CancelSelection;
+        mRubberBandViewModel.Select = MouseSelection.CancelSelection;
 
         // create an event that tells all subscribers that we have completed a new selection
-        if (this.RubberBandSelection != null)
-          this.RubberBandSelection(this, this.mRubberBandViewModel.GetSelectionEvent());
+        if (RubberBandSelection != null)
+          RubberBandSelection(this, mRubberBandViewModel.GetSelectionEvent());
       }
 
-      this.cleanUp();
+      cleanUp();
     }
     #endregion ICanvasViewMouseHandler methods
 
@@ -110,8 +109,8 @@ namespace MiniUML.Model.ViewModels.RubberBand
     /// </summary>
     private void cleanUp()
     {
-      this.mRubberBandViewModel.IsVisible = false;
-      this.mIsDone = true;
+      mRubberBandViewModel.IsVisible = false;
+      mIsDone = true;
     }
     #endregion methods
   }

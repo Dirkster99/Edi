@@ -1,7 +1,7 @@
 ﻿namespace MiniUML.View.Views.ResizeAdorner.Thumbs
 {
   using System.Windows.Controls.Primitives;
-  using MiniUML.Model.Events;
+  using Model.Events;
 
   /// <summary>
   /// A resize thumb can be used to resize a shape with user interaction.
@@ -13,7 +13,7 @@
   {
     public ResizeThumb()
     {
-      this.DragDelta += this.ResizeThumb_DragDelta;
+      DragDelta += ResizeThumb_DragDelta;
     }
 
     /// <summary>
@@ -31,9 +31,9 @@
     /// <param name="e"></param>
     private void ResizeThumb_DragDelta(object sender, DragDeltaEventArgs e)
     {
-      if (this.DragDeltaEvent != null)
-        this.DragDeltaEvent(this, new DragDeltaThumbEvent(e.HorizontalChange, e.VerticalChange,
-                                                          this.HorizontalAlignment, this.VerticalAlignment));
+      if (DragDeltaEvent != null)
+        DragDeltaEvent(this, new DragDeltaThumbEvent(e.HorizontalChange, e.VerticalChange,
+                                                          HorizontalAlignment, VerticalAlignment));
     }
   }
 }

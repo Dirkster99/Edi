@@ -17,7 +17,6 @@
 // DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Media;
 using ICSharpCode.AvalonEdit.Document;
@@ -41,9 +40,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// <param name="definition">The highlighting definition.</param>
 		public HighlightingColorizer(IHighlightingDefinition definition)
 		{
-			if (definition == null)
-				throw new ArgumentNullException("definition");
-			this.definition = definition;
+            this.definition = definition ?? throw new ArgumentNullException(nameof(definition));
 		}
 		
 		/// <summary>
@@ -54,10 +51,8 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// <param name="highlighter">The highlighter to be used.</param>
 		public HighlightingColorizer(IHighlighter highlighter)
 		{
-			if (highlighter == null)
-				throw new ArgumentNullException("highlighter");
-			this.highlighter = highlighter;
-			this.isFixedHighlighter = true;
+            this.highlighter = highlighter ?? throw new ArgumentNullException(nameof(highlighter));
+			isFixedHighlighter = true;
 		}
 		
 		/// <summary>
@@ -188,9 +183,9 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// <inheritdoc/>
 		protected override void Colorize(ITextRunConstructionContext context)
 		{
-			this.lastColorizedLine = null;
+			lastColorizedLine = null;
 			base.Colorize(context);
-			if (this.lastColorizedLine != context.VisualLine.LastDocumentLine) {
+			if (lastColorizedLine != context.VisualLine.LastDocumentLine) {
 				if (highlighter != null) {
 					// In some cases, it is possible that we didn't highlight the last document line within the visual line
 					// (e.g. when the line ends with a fold marker).
@@ -201,7 +196,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 					lineNumberBeingColorized = 0;
 				}
 			}
-			this.lastColorizedLine = null;
+			lastColorizedLine = null;
 		}
 		
 		int lineNumberBeingColorized;
@@ -220,7 +215,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 					               visualLineElement => ApplyColorToElement(visualLineElement, section.Color));
 				}
 			}
-			this.lastColorizedLine = line;
+			lastColorizedLine = line;
 		}
 		
 		/// <summary>

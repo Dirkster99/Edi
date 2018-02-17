@@ -6,8 +6,6 @@ namespace Log4NetTools.ViewModels
     using System.Windows.Input;
     using Edi.Core.Interfaces.Documents;
     using Edi.Core.ViewModels.Command;
-    using MsgBox;
-    using CommonServiceLocator;
 
     public class Log4NetViewModel : Edi.Core.ViewModels.FileBaseViewModel
     {
@@ -29,18 +27,18 @@ namespace Log4NetTools.ViewModels
         /// ViewModel Class Constructor
         /// </summary>
         public Log4NetViewModel()
-            : base(Log4NetViewModel.DocumentKey)
+            : base(DocumentKey)
         {
-            this.ScreenTip = Edi.Util.Local.Strings.STR_LOG4NET_DOCUMENTTAB_TT;
-            this.ContentId = string.Empty;
-            this.IsReadOnlyReason = Edi.Util.Local.Strings.STR_LOG4NET_READONY_REASON;
+            ScreenTip = Edi.Util.Local.Strings.STR_LOG4NET_DOCUMENTTAB_TT;
+            ContentId = string.Empty;
+            IsReadOnlyReason = Edi.Util.Local.Strings.STR_LOG4NET_READONY_REASON;
 
-            this.FilePath = string.Format(CultureInfo.InvariantCulture, "{0} {1}.{2}",
-                                          Log4NetViewModel.defaultFileName,
-                                          Log4NetViewModel.iNewFileCounter++,
-                                          this.defaultFileType);
+            FilePath = string.Format(CultureInfo.InvariantCulture, "{0} {1}.{2}",
+                                          defaultFileName,
+                                          iNewFileCounter++,
+                                          defaultFileType);
 
-            this.mYalvVM = new YalvLib.ViewModel.YalvViewModel();
+            mYalvVM = new YalvLib.ViewModel.YalvViewModel();
         }
         #endregion constructor
 
@@ -60,22 +58,22 @@ namespace Log4NetTools.ViewModels
         {
             get
             {
-                if (this.mFilePath == null || this.mFilePath == String.Empty)
+                if (mFilePath == null || mFilePath == String.Empty)
                     return string.Format(CultureInfo.CurrentCulture, "{0}.{1}",
-                                                             Log4NetViewModel.defaultFileName, this.defaultFileType);
+                                                             defaultFileName, defaultFileType);
 
-                return this.mFilePath;
+                return mFilePath;
             }
 
             protected set
             {
-                if (this.mFilePath != value)
+                if (mFilePath != value)
                 {
-                    this.mFilePath = value;
+                    mFilePath = value;
 
-                    this.RaisePropertyChanged(() => this.FilePath);
-                    this.RaisePropertyChanged(() => this.FileName);
-                    this.RaisePropertyChanged(() => this.Title);
+                    RaisePropertyChanged(() => FilePath);
+                    RaisePropertyChanged(() => FileName);
+                    RaisePropertyChanged(() => Title);
                 }
             }
         }
@@ -89,7 +87,7 @@ namespace Log4NetTools.ViewModels
         {
             get
             {
-                return this.FileName + (this.IsDirty == true ? "*" : string.Empty);
+                return FileName + (IsDirty ? "*" : string.Empty);
             }
         }
         #endregion
@@ -109,10 +107,10 @@ namespace Log4NetTools.ViewModels
                 // This option should never happen - its an emergency break for those cases that never occur
                 if (FilePath == null || FilePath == String.Empty)
                     return string.Format(CultureInfo.InvariantCulture, "{0}.{1}",
-                                                             Log4NetViewModel.defaultFileName,
-                                                             this.defaultFileType);
+                                                             defaultFileName,
+                                                             defaultFileType);
 
-                return System.IO.Path.GetFileName(FilePath);
+                return Path.GetFileName(FilePath);
             }
         }
 
@@ -176,8 +174,8 @@ namespace Log4NetTools.ViewModels
             {
                 if (_closeCommand == null)
                 {
-                    _closeCommand = new RelayCommand<object>((p) => this.OnClose(),
-                                                                                                     (p) => base.CanClose());
+                    _closeCommand = new RelayCommand<object>((p) => OnClose(),
+                                                                                                     (p) => CanClose());
                 }
 
                 return _closeCommand;
@@ -190,7 +188,7 @@ namespace Log4NetTools.ViewModels
         {
             get
             {
-                return this.mYalvVM;
+                return mYalvVM;
             }
         }
         #endregion properties
@@ -204,8 +202,8 @@ namespace Log4NetTools.ViewModels
         {
             try
             {
-                if (System.IO.File.Exists(this.FilePath))
-                    return System.IO.Path.GetDirectoryName(this.FilePath);
+                if (File.Exists(FilePath))
+                    return Path.GetDirectoryName(FilePath);
             }
             catch
             {
@@ -216,7 +214,7 @@ namespace Log4NetTools.ViewModels
 
         public static Log4NetViewModel LoadFile(IDocumentModel dm, object o)
         {
-            return Log4NetViewModel.LoadFile(dm.FileNamePath);
+            return LoadFile(dm.FileNamePath);
         }
 
         /// <summary>
@@ -241,7 +239,7 @@ namespace Log4NetTools.ViewModels
 
             Log4NetViewModel vm = new Log4NetViewModel();
 
-            if (vm.OpenFile(filePath) == true)
+            if (vm.OpenFile(filePath))
                 return vm;
 
             return null;
@@ -258,18 +256,18 @@ namespace Log4NetTools.ViewModels
             {
                 var isReal = File.Exists(filePath);
 
-                if (isReal == true)
+                if (isReal)
                 {
-                    this.mDocumentModel.SetFileNamePath(filePath, isReal);
-                    this.FilePath = filePath;
-                    this.ContentId = this.mFilePath;
+                    mDocumentModel.SetFileNamePath(filePath, isReal);
+                    FilePath = filePath;
+                    ContentId = mFilePath;
 
                     // File may be blocked by another process
                     // Try read-only shared method and set file access to read-only
                     try
                     {
                         // XXX TODO Extend log4net FileOpen method to support base.FireFileProcessingResultEvent(...);
-                        this.mYalvVM.LoadFile(filePath);
+                        mYalvVM.LoadFile(filePath);
                     }
                     catch (Exception ex)
                     {
@@ -303,7 +301,7 @@ namespace Log4NetTools.ViewModels
             {
                 base.ReOpen();
 
-                this.OpenFile(this.FilePath);
+                OpenFile(FilePath);
             }
             catch (Exception exp)
             {

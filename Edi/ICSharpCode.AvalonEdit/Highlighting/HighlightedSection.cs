@@ -16,7 +16,6 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-using System;
 #if NREFACTORY
 using ICSharpCode.NRefactory.Editor;
 #else
@@ -41,7 +40,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		public int Length { get; set; }
 		
 		int ISegment.EndOffset {
-			get { return this.Offset + this.Length; }
+			get { return Offset + Length; }
 		}
 		
 		/// <summary>

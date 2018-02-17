@@ -15,7 +15,7 @@ namespace EdiApp.Events
 		public RegisterToolWindowEventArgs(ToolViewModel tool)
 			: this()
 		{
-			this.Tool = tool;
+			Tool = tool;
 		}
 
 		/// <summary>
@@ -23,7 +23,7 @@ namespace EdiApp.Events
 		/// </summary>
 		public RegisterToolWindowEventArgs()
 		{
-			this.Tool = null;
+			Tool = null;
 		}
 		#endregion constructor
 

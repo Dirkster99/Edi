@@ -1,12 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-
-                    xmlns:selector="clr-namespace:MiniUML.Plugins.UmlClassDiagram.TemplateSelector"
-                    
                     xmlns:connect="clr-namespace:MiniUML.Plugins.UmlClassDiagram.Controls.View.Connect"
-                    xmlns:viewconv="clr-namespace:MiniUML.View.Converter;assembly=MiniUML.View"
+                    xmlns:selector="clr-namespace:MiniUML.Plugins.UmlClassDiagram.TemplateSelector"
                     xmlns:controls="clr-namespace:MiniUML.View.Controls;assembly=MiniUML.View"
-                    >
+                    xmlns:viewconv="clr-namespace:MiniUML.View.Converter;assembly=MiniUML.View">
 
   <Style TargetType="{x:Type connect:GenericUmlAssociation}"
          xmlns:views="clr-namespace:MiniUML.View.Views;assembly=MiniUML.View"

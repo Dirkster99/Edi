@@ -16,7 +16,6 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -26,7 +25,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 	{
 		internal HeightTreeLineNode(double height)
 		{
-			this.collapsedSections = null;
+			collapsedSections = null;
 			this.height = height;
 		}
 		

@@ -12,9 +12,9 @@
     /// </summary>
     public ConfigDlg()
     {
-      this.InitializeComponent();
+      InitializeComponent();
 
-      this.Loaded += ConfigDlg_Loaded;
+      Loaded += ConfigDlg_Loaded;
     }
 
     /// <summary>
@@ -26,8 +26,8 @@
     {
       // Ensure that dialog will keep its initial size no matter the
       // containing content in Tabitem (or what not) does after load
-      this.ResizeMode = System.Windows.ResizeMode.NoResize;
-      this.SizeToContent = System.Windows.SizeToContent.Manual;
+      ResizeMode = ResizeMode.NoResize;
+      SizeToContent = SizeToContent.Manual;
     }
   }
 }

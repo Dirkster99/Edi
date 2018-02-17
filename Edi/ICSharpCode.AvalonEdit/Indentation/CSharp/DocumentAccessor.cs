@@ -17,9 +17,6 @@
 // DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-
 using ICSharpCode.AvalonEdit.Document;
 
 namespace ICSharpCode.AvalonEdit.Indentation.CSharp
@@ -55,11 +52,9 @@ namespace ICSharpCode.AvalonEdit.Indentation.CSharp
 		/// </summary>
 		public TextDocumentAccessor(TextDocument document)
 		{
-			if (document == null)
-				throw new ArgumentNullException("document");
-			doc = document;
-			this.minLine = 1;
-			this.maxLine = doc.LineCount;
+            doc = document ?? throw new ArgumentNullException(nameof(document));
+			minLine = 1;
+			maxLine = doc.LineCount;
 		}
 		
 		/// <summary>
@@ -67,38 +62,27 @@ namespace ICSharpCode.AvalonEdit.Indentation.CSharp
 		/// </summary>
 		public TextDocumentAccessor(TextDocument document, int minLine, int maxLine)
 		{
-			if (document == null)
-				throw new ArgumentNullException("document");
-			doc = document;
+            doc = document ?? throw new ArgumentNullException(nameof(document));
 			this.minLine = minLine;
 			this.maxLine = maxLine;
 		}
-		
-		int num;
-		string text;
+
+	    string text;
 		DocumentLine line;
 		
 		/// <inheritdoc/>
-		public bool IsReadOnly {
-			get {
-				return num < minLine;
-			}
-		}
-		
-		/// <inheritdoc/>
-		public int LineNumber {
-			get {
-				return num;
-			}
-		}
-		
-		bool lineDirty;
+		public bool IsReadOnly => LineNumber < minLine;
+
+	    /// <inheritdoc/>
+		public int LineNumber { get; private set; }
+
+	    bool lineDirty;
 		
 		/// <inheritdoc/>
 		public string Text {
-			get { return text; }
-			set {
-				if (num < minLine) return;
+			get => text;
+		    set {
+				if (LineNumber < minLine) return;
 				text = value;
 				lineDirty = true;
 			}
@@ -111,9 +95,9 @@ namespace ICSharpCode.AvalonEdit.Indentation.CSharp
 				doc.Replace(line, text);
 				lineDirty = false;
 			}
-			++num;
-			if (num > maxLine) return false;
-			line = doc.GetLineByNumber(num);
+			++LineNumber;
+			if (LineNumber > maxLine) return false;
+			line = doc.GetLineByNumber(LineNumber);
 			text = doc.GetText(line);
 			return true;
 		}

@@ -32,8 +32,8 @@ namespace ICSharpCode.AvalonEdit.Utils
 		/// The text writer that was passed to the PlainRichTextWriter constructor.
 		/// </summary>
 		protected readonly TextWriter textWriter;
-		string indentationString = "\t";
-		int indentationLevel;
+
+	    int indentationLevel;
 		char prevChar;
 		
 		/// <summary>
@@ -41,24 +41,15 @@ namespace ICSharpCode.AvalonEdit.Utils
 		/// </summary>
 		public PlainRichTextWriter(TextWriter textWriter)
 		{
-			if (textWriter == null)
-				throw new ArgumentNullException("textWriter");
-			this.textWriter = textWriter;
+            this.textWriter = textWriter ?? throw new ArgumentNullException(nameof(textWriter));
 		}
 		
 		/// <summary>
 		/// Gets/Sets the string used to indent by one level.
 		/// </summary>
-		public string IndentationString {
-			get {
-				return indentationString;
-			}
-			set {
-				indentationString = value;
-			}
-		}
-		
-		/// <inheritdoc/>
+		public string IndentationString { get; set; } = "\t";
+
+	    /// <inheritdoc/>
 		protected override void BeginUnhandledSpan()
 		{
 		}
@@ -71,7 +62,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		void WriteIndentation()
 		{
 			for (int i = 0; i < indentationLevel; i++) {
-				textWriter.Write(indentationString);
+				textWriter.Write(IndentationString);
 			}
 		}
 		
@@ -118,23 +109,15 @@ namespace ICSharpCode.AvalonEdit.Utils
 		}
 		
 		/// <inheritdoc/>
-		public override Encoding Encoding {
-			get { return textWriter.Encoding; }
-		}
-		
-		/// <inheritdoc/>
-		public override IFormatProvider FormatProvider {
-			get { return textWriter.FormatProvider; }
-		}
-		
-		/// <inheritdoc/>
+		public override Encoding Encoding => textWriter.Encoding;
+
+	    /// <inheritdoc/>
+		public override IFormatProvider FormatProvider => textWriter.FormatProvider;
+
+	    /// <inheritdoc/>
 		public override string NewLine {
-			get {
-				return textWriter.NewLine;
-			}
-			set {
-				textWriter.NewLine = value;
-			}
-		}
+			get => textWriter.NewLine;
+	        set => textWriter.NewLine = value;
+	    }
 	}
 }

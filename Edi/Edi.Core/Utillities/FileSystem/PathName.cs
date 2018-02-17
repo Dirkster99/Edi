@@ -37,14 +37,14 @@
 				throw new ArgumentNullException("path");
 			if (path.Length == 0)
 				throw new ArgumentException("The empty string is not a valid path");
-			this.normalizedPath = PathName.NormalizePath(path);
+			normalizedPath = NormalizePath(path);
 		}
 
 		protected PathName(PathName path)
 		{
 			if (path == null)
 				throw new ArgumentNullException("path");
-			this.normalizedPath = path.normalizedPath;
+			normalizedPath = path.normalizedPath;
 		}
 
 		public static implicit operator string(PathName path)
@@ -57,7 +57,7 @@
 
 		public override string ToString()
 		{
-			return this.normalizedPath;
+			return normalizedPath;
 		}
 
 		/// <summary>
@@ -105,7 +105,7 @@
 				}
 			}
 
-			char outputSeparator = isWeb ? '/' : System.IO.Path.DirectorySeparatorChar;
+			char outputSeparator = isWeb ? '/' : Path.DirectorySeparatorChar;
 			bool isRelative;
 
 			StringBuilder result = new StringBuilder();

@@ -9,7 +9,7 @@ namespace Files.Views.FileStats
   {
     public FileStatsView()
     {
-      this.InitializeComponent();
+      InitializeComponent();
     }
   }
 }

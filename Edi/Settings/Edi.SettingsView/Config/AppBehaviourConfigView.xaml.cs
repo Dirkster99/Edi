@@ -12,7 +12,7 @@
     /// </summary>
     public AppBehaviourConfigView()
     {
-      this.InitializeComponent();
+      InitializeComponent();
     }
   }
 }

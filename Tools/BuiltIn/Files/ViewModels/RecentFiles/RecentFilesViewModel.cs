@@ -2,8 +2,6 @@ namespace Files.ViewModels.RecentFiles
 {
     using System;
     using Edi.Core.Interfaces.Enums;
-    using MRULib.MRU.Interfaces;
-    using CommonServiceLocator;
 
     public class RecentFilesViewModel : Edi.Core.ViewModels.ToolViewModel
     {
@@ -72,8 +70,8 @@ namespace Files.ViewModels.RecentFiles
         /// <param name="filePath"></param>
         public void AddNewEntryIntoMRU(string filePath)
         {
-            if (this.MruList.UpdateEntry(filePath) == true)
-                this.RaisePropertyChanged(() => this.MruList);
+            if (MruList.UpdateEntry(filePath) == true)
+                this.RaisePropertyChanged(() => MruList);
         }
         #endregion methods
     }
