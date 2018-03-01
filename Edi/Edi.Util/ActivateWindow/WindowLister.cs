@@ -35,12 +35,8 @@
 		public WindowInfo[] GetWindows(string processName = null)
 		{
 			List<WindowInfo> windows = new List<WindowInfo>();
-			Process[] allProcesses;
 
-			if (processName == null)
-				allProcesses = Process.GetProcesses();
-			else
-				allProcesses = Process.GetProcessesByName(processName);
+		    var allProcesses = processName == null ? Process.GetProcesses() : Process.GetProcessesByName(processName);
 
 			foreach (Process process in allProcesses)
 			{
@@ -75,7 +71,7 @@
 				return;
 			}
 
-			if (w != null && w.Length == 0)
+			if (w.Length == 0)
 			{
 				logger.Warn("--> Failed to activate Window (w is zero).");
 				return;

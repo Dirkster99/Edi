@@ -1,7 +1,6 @@
 ﻿namespace Edi.Core.ViewModels
 {
 	using Edi.Core.Interfaces.Enums;
-	using Edi.Core.ViewModels;
 
 	/// <summary>
 	/// AvalonDock base class viewmmodel to support tool window views.
@@ -83,12 +82,12 @@
 
 		public virtual double PreferredWidth
 		{
-			get { return 200; }
+			get { return 300; }
 		}
 
 		public virtual double PreferredHeight
 		{
-			get { return 200; }
+			get { return 300; }
 		}
 	
 		#endregion properties
