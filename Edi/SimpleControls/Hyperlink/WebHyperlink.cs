@@ -103,9 +103,7 @@ namespace SimpleControls.Hyperlink
 
             e.Handled = true;
 
-            WebHyperlink whLink = sender as WebHyperlink;
-
-            if (whLink == null) return;
+            if (!(sender is WebHyperlink whLink)) return;
 
             try
             {
@@ -131,9 +129,7 @@ namespace SimpleControls.Hyperlink
 
             e.Handled = true;
 
-            WebHyperlink whLink = sender as WebHyperlink;
-
-            if (whLink == null) return;
+            if (!(sender is WebHyperlink whLink)) return;
 
             try
             {
