@@ -16,8 +16,8 @@
 	internal class RelayCommand<T> : ICommand
 	{
 		#region Fields
-		private readonly Action<T> mExecute = null;
-		private readonly Predicate<T> mCanExecute = null;
+		private readonly Action<T> mExecute;
+		private readonly Predicate<T> mCanExecute;
 		#endregion // Fields
 
 		#region Constructors
@@ -37,11 +37,8 @@
 		/// <param name="canExecute">The execution status logic.</param>
 		public RelayCommand(Action<T> execute, Predicate<T> canExecute)
 		{
-			if (execute == null)
-				throw new ArgumentNullException("execute");
-
-			this.mExecute = execute;
-			this.mCanExecute = canExecute;
+		    mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
+			mCanExecute = canExecute;
 		}
 
 		#endregion // Constructors
@@ -54,13 +51,13 @@
 		{
 			add
 			{
-				if (this.mCanExecute != null)
+				if (mCanExecute != null)
 					CommandManager.RequerySuggested += value;
 			}
 
 			remove
 			{
-				if (this.mCanExecute != null)
+				if (mCanExecute != null)
 					CommandManager.RequerySuggested -= value;
 			}
 		}
@@ -75,7 +72,7 @@
 		[DebuggerStepThrough]
 		public bool CanExecute(object parameter)
 		{
-			return this.mCanExecute == null ? true : this.mCanExecute((T)parameter);
+			return mCanExecute == null || mCanExecute((T)parameter);
 		}
 
 		/// <summary>
@@ -84,7 +81,7 @@
 		/// <param name="parameter"></param>
 		public void Execute(object parameter)
 		{
-			this.mExecute((T)parameter);
+			mExecute((T)parameter);
 		}
 		#endregion methods
 	}
@@ -130,11 +127,8 @@
 		/// <param name="canExecute">The execution status logic.</param>
 		public RelayCommand(Action execute, Func<bool> canExecute)
 		{
-			if (execute == null)
-				throw new ArgumentNullException("execute");
-
-			this.mExecute = execute;
-			this.mCanExecute = canExecute;
+		    mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
+			mCanExecute = canExecute;
 		}
 
 		#endregion Constructors
@@ -147,13 +141,13 @@
 		{
 			add
 			{
-				if (this.mCanExecute != null)
+				if (mCanExecute != null)
 					CommandManager.RequerySuggested += value;
 			}
 
 			remove
 			{
-				if (this.mCanExecute != null)
+				if (mCanExecute != null)
 					CommandManager.RequerySuggested -= value;
 			}
 		}
@@ -169,7 +163,7 @@
 		[DebuggerStepThrough]
 		public bool CanExecute(object parameter)
 		{
-			return this.mCanExecute == null ? true : this.mCanExecute();
+			return mCanExecute == null || mCanExecute();
 		}
 
 		/// <summary>
@@ -178,7 +172,7 @@
 		/// <param name="parameter"></param>
 		public void Execute(object parameter)
 		{
-			this.mExecute();
+			mExecute();
 		}
 		#endregion Methods
 	}

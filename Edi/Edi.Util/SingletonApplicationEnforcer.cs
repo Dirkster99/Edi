@@ -65,14 +65,8 @@
 		/// <value>The arg delimeter.</value>
 		public string ArgDelimeter
 		{
-			get
-			{
-				return argDelimiter;
-			}
-			set
-			{
-				argDelimiter = value;
-			}
+			get => argDelimiter;
+		    set => argDelimiter = value;
 		}
 
 		/// <summary>
@@ -85,21 +79,9 @@
 		public SingletonApplicationEnforcer(Action<IEnumerable<string>> processArgsFunc, Action<string> processArgsFunc1,
 																				string applicationId = "DisciplesRock")
 		{
-			if (processArgsFunc == null)
-			{
-				throw new ArgumentNullException("processArgsFunc");
-			}
+		    this.processArgsFunc = processArgsFunc ?? throw new ArgumentNullException(nameof(processArgsFunc));
 
-            if (processArgsFunc != null)
-            {
-                this.processArgsFunc = processArgsFunc;
-            }
-            else
-            {
-                throw new ArgumentNullException("processArgsFunc1");
-            }
-
-			this.processActivateFunc = processArgsFunc1;
+		    processActivateFunc = processArgsFunc1;
 			this.applicationId = applicationId;
 		}
 		#endregion properties
@@ -116,10 +98,8 @@
             string argsWaitHandleName = "ArgsWaitHandle_" + applicationId;
             string memoryFileName = "ArgFile_" + applicationId;
 
-            bool createdNew;
-
-            EventWaitHandle argsWaitHandle = new EventWaitHandle(
-				false, EventResetMode.AutoReset, argsWaitHandleName, out createdNew);
+		    EventWaitHandle argsWaitHandle = new EventWaitHandle(
+				false, EventResetMode.AutoReset, argsWaitHandleName, out var createdNew);
 
 			GC.KeepAlive(argsWaitHandle);
              
@@ -151,7 +131,7 @@
                                         logger.Error("Unable to retrieve string. ", ex);
                                         continue;
                                     }
-                                    string[] argsSplit = args.Split(new string[] { argDelimiter },
+                                    string[] argsSplit = args.Split(new[] { argDelimiter },
                                                                                                     StringSplitOptions.RemoveEmptyEntries);
                                     processArgsFunc(argsSplit);
                                 }
