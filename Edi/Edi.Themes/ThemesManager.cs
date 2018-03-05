@@ -65,7 +65,20 @@ namespace Edi.Themes
       "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/DarkTheme.xaml",
 
       "/Edi.Apps;component/Themes/MetroDark.xaml",
-      "/FileListView;component/Images/MetroDarkIcons.xaml"
+
+      "/DropDownButtonLib;component/Themes/MetroDark.xaml",
+      "/WatermarkControlsLib;component/Themes/DarkBrushs.xaml",
+      "/FolderBrowser;component/Themes/MetroDark.xaml",
+      "/FileListView;component/Images/MetroDarkIcons.xaml",
+      "/HistoryControlLib;component/Themes/DarkTheme.xaml",
+
+      "/Mlib;component/Themes/DarkTheme.xaml",
+      "/MWindowLib;component/Themes/DarkTheme.xaml",
+
+////      "/BindToMLib;component/DropDownButtonLib/DarkBrushs.xaml",
+////      "/BindToMLib;component/WatermarkControlsLib/DarkLightBrushs.xaml",
+////      "/BindToMLib;component/HistoryControlLib/DarkLightBrushs.xaml",
+////      "/BindToMLib;component/MWindowLib/DarkBrushs.xaml",
     };
         #endregion Expression Dark theme resources
 
@@ -126,8 +139,21 @@ namespace Edi.Themes
       "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/LightTheme.xaml",
 
       "/Edi.Apps;component/Themes/MetroLight.xaml",
-      "/FileListView;component/Images/MetroLightIcons.xaml"
-    };
+
+      "/DropDownButtonLib;component/Themes/MetroLight.xaml",
+      "/WatermarkControlsLib;component/Themes/LightBrushs.xaml",
+      "/FolderBrowser;component/Themes/MetroLight.xaml",
+      "/FileListView;component/Images/MetroLightIcons.xaml",
+      "/HistoryControlLib;component/Themes/LightTheme.xaml",
+  
+      "/Mlib;component/Themes/LightTheme.xaml",
+      "/MWindowLib;component/Themes/LightTheme.xaml",
+
+////    "/BindToMLib;component/DropDownButtonLib/LightBrushs.xaml",
+////    "/BindToMLib;component/WatermarkControlsLib/DarkLightBrushs.xaml",
+////    "/BindToMLib;component/HistoryControlLib/DarkLightBrushs.xaml",
+////    "/BindToMLib;component/MWindowLib/LightBrushs.xaml"
+        };
         #endregion Light Metro theme resources
         #endregion WPF Themes
 
