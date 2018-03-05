@@ -72,7 +72,7 @@
 		[DebuggerStepThrough]
 		public bool CanExecute(object parameter)
 		{
-			return mCanExecute == null || mCanExecute((T)parameter);
+			return mCanExecute == null ? true : mCanExecute((T)parameter);
 		}
 
 		/// <summary>
@@ -127,7 +127,7 @@
 		/// <param name="canExecute">The execution status logic.</param>
 		public RelayCommand(Action execute, Func<bool> canExecute)
 		{
-		    mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
+      mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
 			mCanExecute = canExecute;
 		}
 
@@ -163,7 +163,7 @@
 		[DebuggerStepThrough]
 		public bool CanExecute(object parameter)
 		{
-			return mCanExecute == null || mCanExecute();
+			return mCanExecute == null ? true : mCanExecute();
 		}
 
 		/// <summary>
@@ -174,6 +174,7 @@
 		{
 			mExecute();
 		}
+
 		#endregion Methods
 	}
 }

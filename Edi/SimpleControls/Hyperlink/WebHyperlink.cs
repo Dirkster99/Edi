@@ -52,7 +52,7 @@ namespace SimpleControls.Hyperlink
         #region properties
         public static RoutedCommand CopyUri => mCopyUri;
 
-        public static RoutedCommand NavigateToUri { get; } = mNavigateToUri;
+        public static RoutedCommand NavigateToUri => mNavigateToUri;
 
         /// <summary>
         /// Declare NavigateUri property to allow a user who clicked
@@ -66,7 +66,7 @@ namespace SimpleControls.Hyperlink
 
         public string Text
         {
-            get => (string) GetValue(TextProperty);
+            get => (string)GetValue(TextProperty);
             set => SetValue(TextProperty, value);
         }
         #endregion

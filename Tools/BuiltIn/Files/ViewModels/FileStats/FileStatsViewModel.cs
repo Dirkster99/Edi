@@ -177,18 +177,26 @@ namespace Files.ViewModels.FileStats
                     {
                         FileBaseViewModel f = e.ActiveDocument as FileBaseViewModel;
 
-                        if (File.Exists(f.FilePath) == true)
+
+                        if (f.IsFilePathReal == false) // Start page or somethin...
+                            return;
+
+                        try
                         {
-                            var fi = new FileInfo(f.FilePath);
+                            if (File.Exists(f.FilePath) == true)
+                            {
+                                var fi = new FileInfo(f.FilePath);
 
-                            this.mFilePathName = f.FilePath;
+                                this.mFilePathName = f.FilePath;
 
-                            this.RaisePropertyChanged(() => this.FileName);
-                            this.RaisePropertyChanged(() => this.FilePath);
+                                this.RaisePropertyChanged(() => this.FileName);
+                                this.RaisePropertyChanged(() => this.FilePath);
 
-                            FileSize = fi.Length;
-                            LastModified = fi.LastWriteTime;
+                                FileSize = fi.Length;
+                                LastModified = fi.LastWriteTime;
+                            }
                         }
+                        catch { }
                     }
                 }
 			}

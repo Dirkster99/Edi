@@ -8,6 +8,7 @@
     using Edi.Settings.Interfaces;
     using Edi.Settings.ProgramSettings;
     using Edi.Themes.Interfaces;
+    using MLib.Interfaces;
 
     /// <summary>
     /// This interface models the viewmodel that manages the complete
@@ -79,8 +80,9 @@
 		/// Load configuration from persistence on startup of application
 		/// </summary>
 		void LoadConfigOnAppStartup(Options programSettings,
-																ISettingsManager settings,
-																IThemesManager themes);
+									ISettingsManager settings,
+									IThemesManager themes,
+                                    IAppearanceManager appeare);
 
 		/// <summary>
 		/// Save application settings when the application is being closed down

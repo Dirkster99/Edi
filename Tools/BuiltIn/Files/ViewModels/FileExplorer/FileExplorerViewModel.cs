@@ -7,23 +7,25 @@ namespace Files.ViewModels.FileExplorer
     using Edi.Core.Interfaces;
     using Edi.Core.Interfaces.Enums;
     using Edi.Core.ViewModels;
-    using FileListView.Command;
-    using FileListView.ViewModels;
-    using FileListView.ViewModels.Interfaces;
     using FileSystemModels.Interfaces;
     using FileSystemModels.Models;
-    using FolderBrowser.ViewModels;
-    using FolderBrowser.ViewModels.Interfaces;
+    using FolderBrowser.Interfaces;
     using Edi.Settings.Interfaces;
+    using Edi.Core.ViewModels.Command;
+    using FileSystemModels;
+    using System.Threading;
+    using FileSystemModels.Browse;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// This class can be used to present file based information, such as,
     /// Size, Path etc to the user.
     /// </summary>
-    public class FileExplorerViewModel : Edi.Core.ViewModels.ToolViewModel,
+    public class FileExplorerViewModel : ControllerBaseViewModel,
 										 IRegisterableToolWindow,
-										 IExplorer
-	{
+                                         IExplorer,
+                                         ITreeListControllerViewModel
+    {
 		#region fields
 		public const string ToolContentId = "<FileExplorerTool>";
 		private string mFilePathName = string.Empty;
@@ -35,14 +37,20 @@ namespace Files.ViewModels.FileExplorer
 		private IDocumentParent mParent = null;
 
 		private readonly IFileOpenService mFileOpenService;
-		#endregion fields
 
-		#region constructor
-		/// <summary>
-		/// Class constructor
-		/// </summary>
-		public FileExplorerViewModel(ISettingsManager programSettings,
-																 IFileOpenService fileOpenService)
+        private readonly SemaphoreSlim SlowStuffSemaphore;
+        private readonly object _LockObject;
+        private readonly string _InitialPath;
+
+        private string _SelectedFolder = string.Empty;
+        #endregion fields
+
+        #region constructor
+        /// <summary>
+        /// Class constructor
+        /// </summary>
+        public FileExplorerViewModel(ISettingsManager programSettings,
+									IFileOpenService fileOpenService)
 			: base("Explorer")
 		{
 			base.ContentId = ToolContentId;
@@ -51,13 +59,37 @@ namespace Files.ViewModels.FileExplorer
 
 			this.OnActiveDocumentChanged(null, null);
 
-			this.FolderView = new FolderListViewModel(this.FolderItemsView_OnFileOpen);
+            // 
+            SlowStuffSemaphore = new SemaphoreSlim(1, 1);
+            _LockObject = new object();
 
-			this.SynchronizedTreeBrowser = new BrowserViewModel();
-			this.SynchronizedTreeBrowser.SetSpecialFoldersVisibility(false);
+            FolderItemsView = FileListView.Factory.CreateFileListViewModel(new BrowseNavigation());
+            FolderTextPath = FolderControlsLib.Factory.CreateFolderComboBoxVM();
+            RecentFolders = FileSystemModels.Factory.CreateBookmarksViewModel();
+            TreeBrowser = FolderBrowser.FolderBrowserFactory.CreateBrowserViewModel(false);
 
-			// This must be done before calling configure since browser viewmodel is otherwise not available
-			this.FolderView.AttachFolderBrowser(this.SynchronizedTreeBrowser);
+            // This is fired when the user selects a new folder bookmark from the drop down button
+            RecentFolders.BrowseEvent += FolderTextPath_BrowseEvent;
+
+            // This is fired when the text path in the combobox changes to another existing folder
+            FolderTextPath.BrowseEvent += FolderTextPath_BrowseEvent;
+
+            Filters = FilterControlsLib.Factory.CreateFilterComboBoxViewModel();
+            Filters.OnFilterChanged += this.FileViewFilter_Changed;
+
+            // This is fired when the current folder in the listview changes to another existing folder
+            this.FolderItemsView.BrowseEvent += FolderTextPath_BrowseEvent;
+
+            // Event fires when the user requests to add a folder into the list of recently visited folders
+            this.FolderItemsView.BookmarkFolder.RequestEditBookmarkedFolders += this.FolderItemsView_RequestEditBookmarkedFolders;
+
+            // This event is fired when a user opens a file
+            this.FolderItemsView.OnFileOpen += this.FolderItemsView_OnFileOpen;
+
+            TreeBrowser.BrowseEvent += FolderTextPath_BrowseEvent;
+
+            // Event fires when the user requests to add a folder into the list of recently visited folders
+            TreeBrowser.BookmarkFolder.RequestEditBookmarkedFolders += this.FolderItemsView_RequestEditBookmarkedFolders;
 
 			ExplorerSettingsModel settings = null;
 
@@ -73,43 +105,26 @@ namespace Files.ViewModels.FileExplorer
 				settings = new ExplorerSettingsModel();
 
 			if (programSettings.SessionData.LastActiveExplorer != null)
-				settings.UserProfile = programSettings.SessionData.LastActiveExplorer;
+				settings.SetUserProfile(programSettings.SessionData.LastActiveExplorer);
 			else
 				settings.UserProfile.SetCurrentPath(@"C:");
 
-			this.FolderView.ConfigureExplorerSettings(settings);
-			this.mFileOpenMethod = this.mFileOpenService.FileOpen;
+            if (settings.UserProfile.CurrentPath != null)
+                _InitialPath = settings.UserProfile.CurrentPath.Path;
+
+
+            this.ConfigureExplorerSettings(settings);
+            this.mFileOpenMethod = this.mFileOpenService.FileOpen;
 		}
-		#endregion constructor
+        #endregion constructor
 
-		#region properties
-		/// <summary>
-		/// Expose a viewmodel that controls the combobox folder drop down
-		/// and the fodler/file list view.
-		/// </summary>
-		public IFolderListViewModel FolderView { get; set; }
+        #region properties
+        /// <summary>
+        /// Gets the viewmodel that drives the folder picker control.
+        /// </summary>
+        public IBrowserViewModel TreeBrowser { get; }
 
-		/// <summary>
-		/// Gets an interface instance used for setting/getting settings of the Explorer (TW).
-		/// </summary>
-		public IConfigExplorerSettings Settings
-		{
-			get
-			{
-				if (this.FolderView == null)
-					return null;
-
-				return this.FolderView;
-			}
-		}
-
-		/// <summary>
-		/// Gets the viewmodel that drives the folder picker control.
-		/// </summary>
-		public IBrowserViewModel SynchronizedTreeBrowser { get; private set; }
-
-		#region FileName
-		public string FileName
+        public string FileName
 		{
 			get
 			{
@@ -126,9 +141,7 @@ namespace Files.ViewModels.FileExplorer
 				}
 			}
 		}
-		#endregion
 
-		#region FilePath
 		public string FilePath
 		{
 			get
@@ -146,17 +159,17 @@ namespace Files.ViewModels.FileExplorer
 				}
 			}
 		}
-		#endregion
 
-		#region ToolWindow Icon
-		public override Uri IconSource
+        /// <summary>
+        /// ToolWindow Icon
+        /// </summary>
+        public override Uri IconSource
 		{
 			get
 			{
 				return new Uri("pack://application:,,,/FileListView;component/Images/Generic/Folder/folderopened_yellow_16.png", UriKind.RelativeOrAbsolute);
 			}
 		}
-		#endregion ToolWindow Icon
 
 		#region Commands
 		/// <summary>
@@ -174,14 +187,12 @@ namespace Files.ViewModels.FileExplorer
 				return this.mSyncPathWithCurrentDocumentCommand;
 			}
 		}
+
+
+
 		#endregion Commands
 
-		public ExplorerSettingsModel GetExplorerSettings(ExplorerSettingsModel input)
-		{
-			return this.Settings.GetExplorerSettings(input);
-		}
-
-		public override PaneLocation PreferredLocation
+        public override PaneLocation PreferredLocation
 		{
 			get { return PaneLocation.Right; }
 		}
@@ -195,7 +206,7 @@ namespace Files.ViewModels.FileExplorer
 		/// <param name="settingsManager"></param>
 		/// <param name="vm"></param>
 		public static void SaveSettings(ISettingsManager settingsManager,
-																		IExplorer vm)
+										IExplorer vm)
 		{
 			var settings = vm.GetExplorerSettings(settingsManager.SettingData.ExplorerSettings);
 
@@ -209,14 +220,14 @@ namespace Files.ViewModels.FileExplorer
 			else
 				settingsManager.SessionData.LastActiveExplorer = vm.GetExplorerSettings(null).UserProfile;
 		}
-
+/***
 		/// <summary>
 		/// Load Explorer (Tool Window) seetings from persistence.
 		/// </summary>
 		/// <param name="settingsManager"></param>
 		/// <param name="vm"></param>
 		public static void LoadSettings(ISettingsManager settingsManager,
-																		FileExplorerViewModel vm)
+										FileExplorerViewModel vm)
 		{
 			ExplorerSettingsModel settings = null;
 
@@ -225,12 +236,12 @@ namespace Files.ViewModels.FileExplorer
 			if (settings == null)
 				settings = new ExplorerSettingsModel();
 
-			settings.UserProfile = settingsManager.SessionData.LastActiveExplorer;
+			settings.SetUserProfile(settingsManager.SessionData.LastActiveExplorer);
 
 			// (re-)configure previous explorer settings and (re-)activate current location
-			vm.Settings.ConfigureExplorerSettings(settings);
+			vm.ConfigureExplorerSettings(settings);
 		}
-
+***/
 		#region IRegisterableToolWindow
 		/// <summary>
 		/// Set the document parent handling object to deactivation and activation
@@ -259,7 +270,7 @@ namespace Files.ViewModels.FileExplorer
 		/// <param name="parent"></param>
 		/// <param name="isVisible"></param>
 		public void SetToolWindowVisibility(IDocumentParent parent,
-																				bool isVisible = true)
+											bool isVisible = true)
 		{
 			if (IsVisible == true)
 				this.SetDocumentParent(parent);
@@ -283,14 +294,23 @@ namespace Files.ViewModels.FileExplorer
                     {
                         FileBaseViewModel f = e.ActiveDocument as FileBaseViewModel;
 
-                        if (File.Exists(f.FilePath) == true)
+                        if (f.IsFilePathReal == false) // Start page or somethin...
+                            return;
+
+                        try
                         {
-                            var fi = new FileInfo(f.FilePath);
+                            if (File.Exists(f.FilePath) == true)
+                            {
+                                var fi = new FileInfo(f.FilePath);
 
-                            this.mFilePathName = f.FilePath;
+                                this.mFilePathName = f.FilePath;
 
-                            this.RaisePropertyChanged(() => this.FileName);
-                            this.RaisePropertyChanged(() => this.FilePath);
+                                this.RaisePropertyChanged(() => this.FileName);
+                                this.RaisePropertyChanged(() => this.FilePath);
+                            }
+                        }
+                        catch
+                        {
                         }
                     }
                 }
@@ -302,7 +322,7 @@ namespace Files.ViewModels.FileExplorer
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		public void FolderItemsView_OnFileOpen(object sender, FileSystemModels.Events.FileOpenEventArgs e)
+		protected override void FolderItemsView_OnFileOpen(object sender, FileSystemModels.Events.FileOpenEventArgs e)
 		{
 			if (this.mFileOpenMethod != null)
 				this.mFileOpenMethod(e.FileName);
@@ -316,6 +336,7 @@ namespace Files.ViewModels.FileExplorer
 		/// <param name="directoryPath"></param>
 		public void NavigateToFolder(string directoryPath)
 		{
+            IPathModel location = null;
 			try
 			{
 				if (System.IO.Directory.Exists(directoryPath) == false)
@@ -323,21 +344,150 @@ namespace Files.ViewModels.FileExplorer
 
 				if (System.IO.Directory.Exists(directoryPath) == false)
 					return;
-			}
+
+                location = PathFactory.Create(directoryPath);
+            }
 			catch
 			{
 			}
 
-			this.FolderView.NavigateToFolder(directoryPath);
-		}
+            // XXX Todo Keep task reference, support cancel, and remove on end?
+            var t = NavigateToFolderAsync(location, null);
+        }
 
-		private void SyncPathWithCurrentDocumentCommand_Executed()
+        private void SyncPathWithCurrentDocumentCommand_Executed()
 		{
 			if (string.IsNullOrEmpty(this.mFilePathName) == true)
 				return;
 
 			NavigateToFolder(this.mFilePathName);
 		}
-		#endregion methods
-	}
+
+        // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+        /// <summary>
+        /// Master controller interface method to navigate all views
+        /// to the folder indicated in <paramref name="folder"/>
+        /// - updates all related viewmodels.
+        /// </summary>
+        /// <param name="itemPath"></param>
+        /// <param name="requestor"</param>
+        public override async void NavigateToFolder(IPathModel itemPath)
+        {
+            // XXX Todo Keep task reference, support cancel, and remove on end?
+            await NavigateToFolderAsync(itemPath, null);
+        }
+
+        /// <summary>
+        /// Master controler interface method to navigate all views
+        /// to the folder indicated in <paramref name="folder"/>
+        /// - updates all related viewmodels.
+        /// </summary>
+        /// <param name="itemPath"></param>
+        /// <param name="requestor"</param>
+        private async Task NavigateToFolderAsync(IPathModel itemPath, object sender)
+        {
+            // Make sure the task always processes the last input but is not started twice
+            await SlowStuffSemaphore.WaitAsync();
+            try
+            {
+                TreeBrowser.SetExternalBrowsingState(true);
+                FolderItemsView.SetExternalBrowsingState(true);
+                FolderTextPath.SetExternalBrowsingState(true);
+
+                bool? browseResult = null;
+
+                // Navigate TreeView to this file system location
+                if (TreeBrowser != sender)
+                    browseResult = await TreeBrowser.NavigateToAsync(itemPath);
+
+                // Navigate Folder ComboBox to this folder
+                if (FolderTextPath != sender && browseResult != false)
+                    browseResult = await FolderTextPath.NavigateToAsync(itemPath);
+
+                // Navigate Folder/File ListView to this folder
+                if (FolderItemsView != sender && browseResult != false)
+                    browseResult = await FolderItemsView.NavigateToAsync(itemPath);
+
+                if (browseResult == true)
+                {
+                    SelectedFolder = itemPath.Path;
+
+                    // Log location into history of recent locations
+                    NaviHistory.Forward(itemPath);
+                }
+
+            }
+            catch { }
+            finally
+            {
+                TreeBrowser.SetExternalBrowsingState(true);
+                FolderItemsView.SetExternalBrowsingState(false);
+                FolderTextPath.SetExternalBrowsingState(false);
+
+                SlowStuffSemaphore.Release();
+            }
+        }
+
+        /// <summary>
+        /// One of the controls has changed its location in the filesystem.
+        /// This method is invoked to synchronize this change with all other controls.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FolderTextPath_BrowseEvent(object sender,
+                                                FileSystemModels.Browse.BrowsingEventArgs e)
+        {
+            var location = e.Location;
+
+            SelectedFolder = location.Path;
+
+            if (e.IsBrowsing == false && e.Result == BrowseResult.Complete)
+            {
+                // XXX Todo Keep task reference, support cancel, and remove on end?
+                var t = NavigateToFolderAsync(location, sender);
+            }
+            else
+            {
+                if (e.IsBrowsing == true)
+                {
+                    // The sender has messaged: "I am chnaging location..."
+                    // So, we set this property to tell the others:
+                    // 1) Don't change your location now (eg.: Disable UI)
+                    // 2) We'll be back to tell you the location when we know it
+                    if (TreeBrowser != sender)
+                        TreeBrowser.SetExternalBrowsingState(true);
+
+                    if (FolderTextPath != sender)
+                        FolderTextPath.SetExternalBrowsingState(true);
+
+                    if (FolderItemsView != sender)
+                        FolderItemsView.SetExternalBrowsingState(true);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Initialize Explorer ViewModel as soon as view is loaded.
+        /// This is required for virtualized controls, such as, treeviews
+        /// since they won't synchronize with the viewmodel, otherwise.
+        /// </summary>
+        internal void InitialzeOnLoad()
+        {
+            try
+            {
+                if (_InitialPath != null)
+                    NavigateToFolder(_InitialPath);
+                else
+                    NavigateToFolder(@"C:\");
+            }
+            catch
+            {
+                NavigateToFolder(@"C:\");
+            }
+        }
+        #endregion methods
+    }
 }

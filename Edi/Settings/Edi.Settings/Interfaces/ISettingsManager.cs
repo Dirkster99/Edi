@@ -3,8 +3,9 @@
 	using Edi.Settings.ProgramSettings;
 	using Edi.Settings.UserProfile;
 	using Edi.Themes.Interfaces;
+    using MLib.Interfaces;
 
-	public interface ISettingsManager
+    public interface ISettingsManager
 	{
 		Options SettingData { get; }
 
@@ -31,8 +32,9 @@
 		/// <param name="settingsFileName"></param>
 		/// <returns></returns>
 		void LoadOptions(string settingsFileName,
-										 IThemesManager themesManager,
-										 Options programSettings = null);
+						 IThemesManager themesManager,
+                         IAppearanceManager appear,
+                         Options programSettings = null);
 
 		/// <summary>
 		/// Save program options into persistence.

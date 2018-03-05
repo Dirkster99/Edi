@@ -26,33 +26,6 @@ namespace Edi.Themes
     {
       "/Edi.Dialogs;component/Themes/ModernDialogEx.xaml",
 
-      // "/FirstFloor.ModernUI;component/Assets/Button.xaml",
-
-      "/FirstFloor.ModernUI;component/Assets/Calendar.xaml",
-      "/FirstFloor.ModernUI;component/Assets/CheckBox.xaml",
-
-      // For some reason these are applied in the Explorer (TW) but nowhere else(?)
-      "/FirstFloor.ModernUI;component/Assets/ComboBox.xaml",
-      // "/FirstFloor.ModernUI;component/Assets/ContextMenu.xaml",
-      "/FirstFloor.ModernUI;component/Assets/DataGrid.xaml",
-      "/FirstFloor.ModernUI;component/Assets/DatePicker.xaml",
-      "/FirstFloor.ModernUI;component/Assets/GridSplitter.xaml",
-      "/FirstFloor.ModernUI;component/Assets/Hyperlink.xaml",
-      "/FirstFloor.ModernUI;component/Assets/Label.xaml",
-      "/FirstFloor.ModernUI;component/Assets/ListBox.xaml",
-      "/FirstFloor.ModernUI;component/Assets/ListView.xaml",
-      "/FirstFloor.ModernUI;component/Assets/MenuItem.xaml",
-      "/FirstFloor.ModernUI;component/Assets/ContextMenu.xaml",
-      "/FirstFloor.ModernUI;component/Assets/PasswordBox.xaml",
-      "/FirstFloor.ModernUI;component/Assets/ProgressBar.xaml",
-      "/FirstFloor.ModernUI;component/Assets/RadioButton.xaml",
-      "/FirstFloor.ModernUI;component/Assets/ScrollBar.xaml",
-      "/FirstFloor.ModernUI;component/Assets/Slider.xaml",
-      "/FirstFloor.ModernUI;component/Assets/TextBlock.xaml",
-      "/FirstFloor.ModernUI;component/Assets/TextBox.xaml",
-      "/FirstFloor.ModernUI;component/Assets/ToolTip.xaml",
-      "/FirstFloor.ModernUI;component/Assets/TreeView.xaml",
-
       "/DropDownButtonLib;component/Themes/MetroDark.xaml",  // DropDownButtonLib theming
       "/MsgBox;component/Themes/DarkBrushes.xaml",
       "/MsgBox;component/Themes/DarkIcons.xaml",
@@ -67,7 +40,20 @@ namespace Edi.Themes
       "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/DarkTheme.xaml",
 
       "/Edi.Apps;component/Themes/MetroDark.xaml",
-      "/FileListView;component/Images/MetroDarkIcons.xaml"
+
+      "/DropDownButtonLib;component/Themes/MetroDark.xaml",
+      "/WatermarkControlsLib;component/Themes/DarkBrushs.xaml",
+      "/FolderBrowser;component/Themes/MetroDark.xaml",
+      "/FileListView;component/Images/MetroDarkIcons.xaml",
+      "/HistoryControlLib;component/Themes/DarkTheme.xaml",
+
+      "/Mlib;component/Themes/DarkTheme.xaml",
+      "/MWindowLib;component/Themes/DarkTheme.xaml",
+
+////      "/BindToMLib;component/DropDownButtonLib/DarkBrushs.xaml",
+////      "/BindToMLib;component/WatermarkControlsLib/DarkLightBrushs.xaml",
+////      "/BindToMLib;component/HistoryControlLib/DarkLightBrushs.xaml",
+////      "/BindToMLib;component/MWindowLib/DarkBrushs.xaml",
     };
         #endregion Expression Dark theme resources
 
@@ -75,7 +61,6 @@ namespace Edi.Themes
         const string GenericThemeName = "Generic";
         static readonly string[] GenericResources =
     {
-      "/FirstFloor.ModernUI;component/Assets/ModernUI.Light.xaml",
       "/Edi.Dialogs;component/Themes/ModernDialogEx.xaml",
 
       "/Edi.Themes;component/Generic/Theme.xaml",
@@ -89,32 +74,6 @@ namespace Edi.Themes
         static readonly string[] MetroResources =
     {
       "/Edi.Dialogs;component/Themes/ModernDialogEx.xaml",
-
-      // "/FirstFloor.ModernUI;component/Assets/Button.xaml",
-
-      "/FirstFloor.ModernUI;component/Assets/Calendar.xaml",
-      "/FirstFloor.ModernUI;component/Assets/CheckBox.xaml",
-      
-      // For some reason these are applied in the Explorer (TW) but nowhere else(?)
-      "/FirstFloor.ModernUI;component/Assets/ComboBox.xaml",
-      //// "/FirstFloor.ModernUI;component/Assets/ContextMenu.xaml",
-      "/FirstFloor.ModernUI;component/Assets/DataGrid.xaml",
-      "/FirstFloor.ModernUI;component/Assets/DatePicker.xaml",
-      "/FirstFloor.ModernUI;component/Assets/GridSplitter.xaml",
-      "/FirstFloor.ModernUI;component/Assets/Hyperlink.xaml",
-      "/FirstFloor.ModernUI;component/Assets/Label.xaml",
-      "/FirstFloor.ModernUI;component/Assets/ListBox.xaml",
-      "/FirstFloor.ModernUI;component/Assets/ListView.xaml",
-      //"/FirstFloor.ModernUI;component/Assets/MenuItem.xaml",
-      "/FirstFloor.ModernUI;component/Assets/PasswordBox.xaml",
-      "/FirstFloor.ModernUI;component/Assets/ProgressBar.xaml",
-      "/FirstFloor.ModernUI;component/Assets/RadioButton.xaml",
-      "/FirstFloor.ModernUI;component/Assets/ScrollBar.xaml",
-      "/FirstFloor.ModernUI;component/Assets/Slider.xaml",
-      "/FirstFloor.ModernUI;component/Assets/TextBlock.xaml",
-      "/FirstFloor.ModernUI;component/Assets/TextBox.xaml",
-      "/FirstFloor.ModernUI;component/Assets/ToolTip.xaml",
-      "/FirstFloor.ModernUI;component/Assets/TreeView.xaml",
 
       "/DropDownButtonLib;component/Themes/MetroLight.xaml",  // DropDownButtonLib theming
       "/MsgBox;component/Themes/LightBrushes.xaml",
@@ -130,8 +89,21 @@ namespace Edi.Themes
       "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/LightTheme.xaml",
 
       "/Edi.Apps;component/Themes/MetroLight.xaml",
-      "/FileListView;component/Images/MetroLightIcons.xaml"
-    };
+
+      "/DropDownButtonLib;component/Themes/MetroLight.xaml",
+      "/WatermarkControlsLib;component/Themes/LightBrushs.xaml",
+      "/FolderBrowser;component/Themes/MetroLight.xaml",
+      "/FileListView;component/Images/MetroLightIcons.xaml",
+      "/HistoryControlLib;component/Themes/LightTheme.xaml",
+  
+      "/Mlib;component/Themes/LightTheme.xaml",
+      "/MWindowLib;component/Themes/LightTheme.xaml",
+
+////    "/BindToMLib;component/DropDownButtonLib/LightBrushs.xaml",
+////    "/BindToMLib;component/WatermarkControlsLib/DarkLightBrushs.xaml",
+////    "/BindToMLib;component/HistoryControlLib/DarkLightBrushs.xaml",
+////    "/BindToMLib;component/MWindowLib/LightBrushs.xaml"
+        };
         #endregion Light Metro theme resources
         #endregion WPF Themes
 

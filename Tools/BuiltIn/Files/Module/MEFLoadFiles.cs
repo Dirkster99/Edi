@@ -1,34 +1,31 @@
 ﻿namespace Files.Module
 {
-	using System.ComponentModel.Composition;
-	using System.Reflection;
-	using System.Windows;
-	using Edi.Core.Interfaces;
-	using Edi.Core.Resources;
-	using Edi.Core.View.Pane;
-	using Files.ViewModels.RecentFiles;
-	using Files.ViewModels.FileExplorer;
-	using Files.ViewModels.FileStats;
-	using FileSystemModels.Models;
-    using Prism.Mef.Modularity;
-    using Prism.Modularity;
-	using Edi.Settings.Interfaces;
+    using System.Reflection;
+    using System.Windows;
+    using Edi.Core.Interfaces;
+    using Edi.Core.Resources;
+    using Edi.Core.View.Pane;
+    using Files.ViewModels.RecentFiles;
+    using Files.ViewModels.FileExplorer;
+    using Files.ViewModels.FileStats;
+    using FileSystemModels.Models;
+    using Edi.Settings.Interfaces;
 
-	/// <summary>
-	/// PRISM MEF Loader/Initializer class
-	/// Relevante services are injected in constructor.
-	/// 
-	/// Requires the following XML in App.config to enable PRISM MEF to pick-up contained definitions.
-	/// 
-	/// &lt;modules>
-	/// &lt;!-- Edi.Tools assembly from plugins folder and initialize it if it was present -->
-	/// &lt;module assemblyFile="Files.dll"
-	/// 				moduleType="Files.Module.Loader, EdiTools.Module.Loader, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-	/// 				moduleName="Loader"
-	/// 				startupLoaded="true" />
-	/// &lt;/modules>
-	/// </summary>
-	//[ModuleExport(typeof(MEFLoadFiles))] //// , InitializationMode = InitializationMode.WhenAvailable
+    /// <summary>
+    /// PRISM MEF Loader/Initializer class
+    /// Relevante services are injected in constructor.
+    /// 
+    /// Requires the following XML in App.config to enable PRISM MEF to pick-up contained definitions.
+    /// 
+    /// &lt;modules>
+    /// &lt;!-- Edi.Tools assembly from plugins folder and initialize it if it was present -->
+    /// &lt;module assemblyFile="Files.dll"
+    /// 				moduleType="Files.Module.Loader, EdiTools.Module.Loader, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+    /// 				moduleName="Loader"
+    /// 				startupLoaded="true" />
+    /// &lt;/modules>
+    /// </summary>
+    //[ModuleExport(typeof(MEFLoadFiles))] //// , InitializationMode = InitializationMode.WhenAvailable
     public class MEFLoadFiles //: IModule
 	{
 		#region fields
@@ -75,7 +72,7 @@
 		}
 
 		private static void RegisterFileExplorerViewModel(ISettingsManager programSettings,
-                                                        IToolWindowRegistry toolRegistry
+                                                          IToolWindowRegistry toolRegistry
                                                         , IFileOpenService fileOpenService)
 		{
 			var FileExplorer = new FileExplorerViewModel(programSettings, fileOpenService);
@@ -87,10 +84,10 @@
 			if (settings == null)
 				settings = new ExplorerSettingsModel();
 
-			settings.UserProfile = programSettings.SessionData.LastActiveExplorer;
+			settings.SetUserProfile(programSettings.SessionData.LastActiveExplorer);
 
 			// (re-)configure previous explorer settings and (re-)activate current location
-			FileExplorer.Settings.ConfigureExplorerSettings(settings);
+			FileExplorer.ConfigureExplorerSettings(settings);
 
             toolRegistry.RegisterTool(FileExplorer);
 		}

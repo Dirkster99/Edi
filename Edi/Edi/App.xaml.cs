@@ -19,6 +19,8 @@ namespace Edi
     using Edi.Util;
     using Edi.Util.ActivateWindow;
     using CommonServiceLocator;
+    using MLib.Interfaces;
+    using MLib;
 
     /// <summary>
     /// Interaction logic for App.xaml
@@ -126,10 +128,11 @@ namespace Edi
 
             Options options = null;
             IThemesManager themesManager = new ThemesManager();
+            IAppearanceManager appear = AppearanceManager.GetInstance();
 
             try
             {
-                options = SettingsManager.LoadOptions(AppHelpers.DirFileAppSettingsData, themesManager);
+                options = SettingsManager.LoadOptions(AppHelpers.DirFileAppSettingsData, themesManager, appear);
 
                 Thread.CurrentThread.CurrentCulture = new CultureInfo(options.LanguageSelected);
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(options.LanguageSelected);
@@ -158,7 +161,7 @@ namespace Edi
 
             try
             {
-                this.mBoot = new Bootstapper(this, e, options, themesManager);
+                this.mBoot = new Bootstapper(this, e, options, themesManager, appear);
                 this.mBoot.Run();
             }
             catch (Exception exp)

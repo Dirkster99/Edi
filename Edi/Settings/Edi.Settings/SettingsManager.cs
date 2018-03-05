@@ -8,14 +8,15 @@
 	using Edi.Settings.ProgramSettings;
 	using Edi.Settings.UserProfile;
 	using Edi.Themes.Interfaces;
+    using MLib.Interfaces;
 
-	/// <summary>
-	/// This class keeps track of program options and user profile (session) data.
-	/// Both data items can be added and are loaded on application start to restore
-	/// the program state of the last user session or to implement the default
-	/// application state when starting the application for the very first time.
-	/// </summary>
-	public class SettingsManager : ISettingsManager
+    /// <summary>
+    /// This class keeps track of program options and user profile (session) data.
+    /// Both data items can be added and are loaded on application start to restore
+    /// the program state of the last user session or to implement the default
+    /// application state when starting the application for the very first time.
+    /// </summary>
+    public class SettingsManager : ISettingsManager
 	{
 		#region fields
 		protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -112,15 +113,16 @@
 		/// <param name="themesManager"></param>
 		/// <returns></returns>
 		public void LoadOptions(string settingsFileName,
-														IThemesManager themesManager,
-														Options programSettings = null)
+								IThemesManager themesManager,
+                                IAppearanceManager appear,
+                                Options programSettings = null)
 		{
 			Options loadedModel = null;
 
 			if (programSettings != null)
 				loadedModel = programSettings;
 			else                                     // Get a fresh copy from persistence
-				loadedModel = SettingsManager.LoadOptions(settingsFileName, themesManager);
+				loadedModel = SettingsManager.LoadOptions(settingsFileName, themesManager, appear);
 
 			loadedModel.SetDirtyFlag(false);  // Data has just been loaded from persistence (or default) so its not dirty for sure
 			this.SettingData = loadedModel;
@@ -133,7 +135,10 @@
 		/// <param name="settingsFileName"></param>
 		/// <param name="themesManager"></param>
 		/// <returns></returns>
-		public static Options LoadOptions(string settingsFileName, IThemesManager themesManager)
+		public static Options LoadOptions(string settingsFileName
+                                        , IThemesManager themesManager
+                                        , IAppearanceManager appear
+            )
 		{
 			Options loadedModel = null;
 
