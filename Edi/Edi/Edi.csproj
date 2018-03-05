@@ -98,6 +98,9 @@
     <Reference Include="FirstFloor.ModernUI">
       <HintPath>..\..\02_Libs\00_bin\Mui\FirstFloor.ModernUI.dll</HintPath>
     </Reference>
+    <Reference Include="HistoryControlLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.HistoryControlLib.1.0.0\lib\net4\HistoryControlLib.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
@@ -312,30 +315,6 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\fsc\FileListView\FileListView.csproj">
-      <Project>{735cf8ec-a4ef-49a2-bc72-ec360a0185a4}</Project>
-      <Name>FileListView</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\fsc\FileSystemModels\FileSystemModels.csproj">
-      <Project>{391639c4-5c43-4391-9465-27686e82c33f}</Project>
-      <Name>FileSystemModels</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\fsc\FilterControlsLib\FilterControlsLib.csproj">
-      <Project>{52f61815-3ec5-461b-bce0-ab80b1c5b229}</Project>
-      <Name>FilterControlsLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\fsc\FolderBrowser\FolderBrowser.csproj">
-      <Project>{7d4bd5f8-a98e-4966-abbd-cbe202dfbef7}</Project>
-      <Name>FolderBrowser</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\fsc\FolderControlsLib\FolderControlsLib.csproj">
-      <Project>{511fa2d6-2022-4de1-9a3e-731e04e8f10c}</Project>
-      <Name>FolderControlsLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\fsc\FsCore\FsCore.csproj">
-      <Project>{8391f556-c4cb-4aa9-9874-bf665fb2b072}</Project>
-      <Name>FsCore</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\MLib\MLib\MLib.csproj">
       <Project>{87a9302d-c6a7-4507-82d5-d83a40e899e2}</Project>
       <Name>MLib</Name>

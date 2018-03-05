@@ -156,10 +156,6 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\fsc\FileListView\FileListView.csproj">
-      <Project>{735cf8ec-a4ef-49a2-bc72-ec360a0185a4}</Project>
-      <Name>FileListView</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Edi.Util\Edi.Util.csproj">
       <Project>{8dea0927-9bd3-442f-ad3b-5f0c9e3186f6}</Project>
       <Name>Edi.Util</Name>

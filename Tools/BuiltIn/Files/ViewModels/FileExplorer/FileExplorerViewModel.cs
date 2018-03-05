@@ -187,6 +187,9 @@ namespace Files.ViewModels.FileExplorer
 				return this.mSyncPathWithCurrentDocumentCommand;
 			}
 		}
+
+
+
 		#endregion Commands
 
         public override PaneLocation PreferredLocation
@@ -409,7 +412,13 @@ namespace Files.ViewModels.FileExplorer
                     browseResult = await FolderItemsView.NavigateToAsync(itemPath);
 
                 if (browseResult == true)
+                {
                     SelectedFolder = itemPath.Path;
+
+                    // Log location into history of recent locations
+                    NaviHistory.Forward(itemPath);
+                }
+
             }
             catch { }
             finally
