@@ -129,15 +129,6 @@ RMDIR /S /Q .\MiniUML\Plugins\src\MiniUML.Plugins.UmlClassDiagram\obj
 RMDIR /S /Q .\Release
 RMDIR /S /Q .\Debug
 
-RMDIR /S /Q .\FSC\FileListView\bin
-RMDIR /S /Q .\FSC\FileListView\obj
-
-RMDIR /S /Q .\FSC\FileSystemModels\bin
-RMDIR /S /Q .\FSC\FileSystemModels\obj
-
-RMDIR /S /Q .\FSC\FolderBrowser\bin
-RMDIR /S /Q .\FSC\FolderBrowser\obj
-
 PAUSE
 
 :EndOfBatch

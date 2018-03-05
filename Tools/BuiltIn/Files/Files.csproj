@@ -105,6 +105,9 @@
     <Reference Include="MsgBox, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Dirkster.MsgBox.1.4.2\lib\net451\MsgBox.dll</HintPath>
     </Reference>
+    <Reference Include="MWindowLib">
+      <HintPath>..\..\..\02_Libs\00_bin\MLib\MWindowLib.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Prism, Version=7.0.0.396, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
@@ -196,10 +199,6 @@
     <ProjectReference Include="..\..\..\Edi\SimpleControls\SimpleControls.csproj">
       <Project>{0e69be38-78c0-4662-a0e1-56c5913b5c3a}</Project>
       <Name>SimpleControls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MLib\MWindowLib\MWindowLib.csproj">
-      <Project>{be4c8126-e5c8-405e-958f-4de9f686089b}</Project>
-      <Name>MWindowLib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

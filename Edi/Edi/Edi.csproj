@@ -110,11 +110,17 @@
     <Reference Include="Microsoft.Windows.Shell">
       <HintPath>..\..\02_Libs\00_bin\Mui\Microsoft.Windows.Shell.dll</HintPath>
     </Reference>
+    <Reference Include="MLib">
+      <HintPath>..\..\02_Libs\00_bin\MLib\MLib.dll</HintPath>
+    </Reference>
     <Reference Include="MRULib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.MRULib.1.0.0\lib\net451\MRULib.dll</HintPath>
     </Reference>
     <Reference Include="MsgBox, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.MsgBox.1.4.2\lib\net451\MsgBox.dll</HintPath>
+    </Reference>
+    <Reference Include="MWindowLib">
+      <HintPath>..\..\02_Libs\00_bin\MLib\MWindowLib.dll</HintPath>
     </Reference>
     <Reference Include="NumericUpDownLib, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.NumericUpDownLib.1.0.2\lib\net4\NumericUpDownLib.dll</HintPath>
@@ -315,18 +321,6 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MLib\MLib\MLib.csproj">
-      <Project>{87a9302d-c6a7-4507-82d5-d83a40e899e2}</Project>
-      <Name>MLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MLib\MWindowInterfacesLib\MWindowInterfacesLib.csproj">
-      <Project>{37633896-6066-49c5-b76a-0e5d5d6d1d23}</Project>
-      <Name>MWindowInterfacesLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MLib\MWindowLib\MWindowLib.csproj">
-      <Project>{be4c8126-e5c8-405e-958f-4de9f686089b}</Project>
-      <Name>MWindowLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Tools\BuiltIn\Files\Files.csproj">
       <Project>{ef9b7e8d-b722-48e0-a941-e21f4f7cc2df}</Project>
       <Name>Files</Name>
