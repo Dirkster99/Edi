@@ -127,7 +127,7 @@
 		/// <param name="canExecute">The execution status logic.</param>
 		public RelayCommand(Action execute, Func<bool> canExecute)
 		{
-		    mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
+      mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
 			mCanExecute = canExecute;
 		}
 

@@ -1,4 +1,4 @@
-﻿namespace Edi.Core.View.Pane
+namespace Edi.Core.View.Pane
 {
     using System;
     using System.Collections.Generic;
