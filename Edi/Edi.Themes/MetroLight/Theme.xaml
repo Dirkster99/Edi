@@ -12,7 +12,6 @@
 
         <ResourceDictionary Source="/Edi.Themes;component/MetroLight/ModernUI.Light.xaml" />
 
-        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Controls.TabControl.xaml" />
         <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Controls.Toolbar.xaml" />
 
         <!-- This type of combobox is used in the toolbar of the MainWindow -->
