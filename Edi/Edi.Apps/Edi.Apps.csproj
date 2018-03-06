@@ -224,14 +224,6 @@
     <Resource Include="Images\DocTab\Lock-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="BindToMLib\MWindowLib\DarkBrushs.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="BindToMLib\MWindowLib\LightBrushs.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Resources\DocumentHeaderDataTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

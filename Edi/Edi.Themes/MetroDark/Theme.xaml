@@ -8,7 +8,6 @@
 
         <ResourceDictionary Source="/Mlib;component/Themes/DarkTheme.xaml" />
         <ResourceDictionary Source="/MWindowLib;component/Themes/DarkTheme.xaml" />
-        <!-- ResourceDictionary Source="/Themes;component/BindToMLib/MWindowLib/DarkBrushs.xaml" / -->
 
         <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/Controls.Toolbar.xaml" />
 

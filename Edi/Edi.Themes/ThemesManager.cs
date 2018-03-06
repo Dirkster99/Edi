@@ -50,6 +50,8 @@ namespace Edi.Themes
       "/Mlib;component/Themes/DarkTheme.xaml",
       "/MWindowLib;component/Themes/DarkTheme.xaml",
 
+      "/Edi.Themes;component/BindToMLib/MWindowLib/DarkBrushs.xaml"
+
 ////      "/BindToMLib;component/DropDownButtonLib/DarkBrushs.xaml",
 ////      "/BindToMLib;component/WatermarkControlsLib/DarkLightBrushs.xaml",
 ////      "/BindToMLib;component/HistoryControlLib/DarkLightBrushs.xaml",
@@ -98,6 +100,8 @@ namespace Edi.Themes
   
       "/Mlib;component/Themes/LightTheme.xaml",
       "/MWindowLib;component/Themes/LightTheme.xaml",
+
+      "/Edi.Themes;component/BindToMLib/MWindowLib/LightBrushs.xaml"
 
 ////    "/BindToMLib;component/DropDownButtonLib/LightBrushs.xaml",
 ////    "/BindToMLib;component/WatermarkControlsLib/DarkLightBrushs.xaml",

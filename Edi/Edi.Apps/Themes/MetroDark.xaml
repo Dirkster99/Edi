@@ -4,10 +4,6 @@
                     xmlns:avalondock="clr-namespace:Xceed.Wpf.AvalonDock.Controls;assembly=Xceed.Wpf.avalondock"
                     xmlns:local="clr-namespace:Edi.Apps.Views.Shell"
                     >
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Edi.Apps;component/BindToMLib/MWindowLib/DarkBrushs.xaml" />
-    </ResourceDictionary.MergedDictionaries>
-
     <!--
   Re-styling this in AvalonDock since the menu on the drop-down button for more documents is otherwise black
   BugFix for Issue http://avalondock.codeplex.com/workitem/15743

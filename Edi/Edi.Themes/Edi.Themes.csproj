@@ -244,6 +244,14 @@
     <Resource Include="Images\App\PinableListViewDark\NoPin16.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="BindToMLib\MWindowLib\DarkBrushs.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="BindToMLib\MWindowLib\LightBrushs.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="FileListView\Combobox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
