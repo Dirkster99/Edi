@@ -56,6 +56,7 @@ namespace Edi.Themes
         static readonly string[] GenericResources =
     {
       "/Edi.Themes;component/Generic/Theme.xaml",
+      "/Edi.Themes;component/MetroLight/EdiAvalonEdit.xaml",
       "/FileListView;component/Images/GenericIcons.xaml"
     };
         #endregion Generic theme resources
