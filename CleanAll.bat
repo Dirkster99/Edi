@@ -29,10 +29,6 @@ ECHO MiniUML.Model
 ECHO MiniUML.View
 ECHO MiniUML.Plugins.UmlClassDiagram
 ECHO.
-ECHO FSC\FileListView
-ECHO FSC\FileSystemModels
-ECHO FSC\FolderBrowser
-ECHO.
 ECHO Debug and Release folders
 ECHO.
 REM Ask the user if hes really sure to continue beyond this point XXXXXXXX

@@ -24,7 +24,8 @@ namespace Edi.Themes
         const string MetroDarkThemeName = "Metro Dark";
         static readonly string[] MetroDarkResources =
     {
-      "/Edi.Dialogs;component/Themes/ModernDialogEx.xaml",
+      "/Mlib;component/Themes/DarkTheme.xaml",
+      "/MWindowLib;component/Themes/DarkTheme.xaml",
 
       "/DropDownButtonLib;component/Themes/MetroDark.xaml",  // DropDownButtonLib theming
       "/MsgBox;component/Themes/DarkBrushes.xaml",
@@ -36,19 +37,13 @@ namespace Edi.Themes
       "/Edi.Themes;component/FileListView/Combobox.xaml",
       "/Edi.Themes;component/MetroDark/Theme.xaml",
 
-      //"/Xceed.Wpf.AvalonDock.Themes.Expression;component/DarkTheme.xaml",
-      "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/DarkTheme.xaml",
-
-      "/Edi.Apps;component/Themes/MetroDark.xaml",
-
       "/DropDownButtonLib;component/Themes/MetroDark.xaml",
       "/WatermarkControlsLib;component/Themes/DarkBrushs.xaml",
       "/FolderBrowser;component/Themes/MetroDark.xaml",
       "/FileListView;component/Images/MetroDarkIcons.xaml",
       "/HistoryControlLib;component/Themes/DarkTheme.xaml",
 
-      "/Mlib;component/Themes/DarkTheme.xaml",
-      "/MWindowLib;component/Themes/DarkTheme.xaml",
+      "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/DarkTheme.xaml",
 
       "/Edi.Themes;component/BindToMLib/MWindowLib/DarkBrushs.xaml"
 
@@ -63,10 +58,7 @@ namespace Edi.Themes
         const string GenericThemeName = "Generic";
         static readonly string[] GenericResources =
     {
-      "/Edi.Dialogs;component/Themes/ModernDialogEx.xaml",
-
       "/Edi.Themes;component/Generic/Theme.xaml",
-      "/Edi.Apps;component/Themes/MetroLight.xaml",
       "/FileListView;component/Images/GenericIcons.xaml"
     };
         #endregion Generic theme resources
@@ -75,7 +67,8 @@ namespace Edi.Themes
         const string MetroLightThemeName = "Metro Light";
         static readonly string[] MetroResources =
     {
-      "/Edi.Dialogs;component/Themes/ModernDialogEx.xaml",
+      "/Mlib;component/Themes/LightTheme.xaml",
+      "/MWindowLib;component/Themes/LightTheme.xaml",
 
       "/DropDownButtonLib;component/Themes/MetroLight.xaml",  // DropDownButtonLib theming
       "/MsgBox;component/Themes/LightBrushes.xaml",
@@ -87,19 +80,13 @@ namespace Edi.Themes
       "/Edi.Themes;component/FileListView/Combobox.xaml",
       "/Edi.Themes;component/MetroLight/Theme.xaml",
 
-      //"/Xceed.Wpf.AvalonDock.Themes.Expression;component/LightTheme.xaml",
-      "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/LightTheme.xaml",
-
-      "/Edi.Apps;component/Themes/MetroLight.xaml",
-
       "/DropDownButtonLib;component/Themes/MetroLight.xaml",
       "/WatermarkControlsLib;component/Themes/LightBrushs.xaml",
       "/FolderBrowser;component/Themes/MetroLight.xaml",
       "/FileListView;component/Images/MetroLightIcons.xaml",
       "/HistoryControlLib;component/Themes/LightTheme.xaml",
-  
-      "/Mlib;component/Themes/LightTheme.xaml",
-      "/MWindowLib;component/Themes/LightTheme.xaml",
+
+      "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/LightTheme.xaml",
 
       "/Edi.Themes;component/BindToMLib/MWindowLib/LightBrushs.xaml"
 
