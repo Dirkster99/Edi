@@ -34,7 +34,6 @@ namespace Edi.Themes
       "/NumericUpDownLib;component/Themes/DarkBrushs.xaml",
 
       // This is required to style the dropdown button and frame of the control
-      "/Edi.Themes;component/FileListView/Combobox.xaml",
       "/Edi.Themes;component/MetroDark/Theme.xaml",
 
       "/DropDownButtonLib;component/Themes/MetroDark.xaml",
@@ -77,7 +76,6 @@ namespace Edi.Themes
       "/NumericUpDownLib;component/Themes/LightBrushs.xaml",
 
       // This is required to style the dropdown button and frame of the control
-      "/Edi.Themes;component/FileListView/Combobox.xaml",
       "/Edi.Themes;component/MetroLight/Theme.xaml",
 
       "/DropDownButtonLib;component/Themes/MetroLight.xaml",
