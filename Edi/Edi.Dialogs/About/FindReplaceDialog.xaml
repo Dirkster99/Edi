@@ -1,4 +1,4 @@
-<mwl:SimpleMetroWindow x:Class="Edi.Dialogs.FindReplace.FindReplaceDialog"
+<mwl:MetroWindow x:Class="Edi.Dialogs.FindReplace.FindReplaceDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mwl="clr-namespace:MWindowLib;assembly=MWindowLib"
@@ -9,7 +9,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         mc:Ignorable="d" 
-        d:DesignHeight="250" d:DesignWidth="300"             
+        d:DesignHeight="250" d:DesignWidth="300"
 
         Title="Find And Replace"
         Height="Auto" Width="300"
@@ -28,4 +28,4 @@
         KeyDown="Window_KeyDown"
         ><!-- WindowStyle="ToolWindow" -->
     <view:FindReplaceView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-</mwl:SimpleMetroWindow >
+</mwl:MetroWindow >

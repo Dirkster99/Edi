@@ -5,8 +5,8 @@ namespace Edi.Dialogs.FindReplace
 	/// <summary>
 	/// Interaction logic for FindReplaceDialog.xaml
 	/// </summary>
-	public partial class FindReplaceDialog : FirstFloor.ModernUI.Windows.Controls.ModernWindow
-	{
+	public partial class FindReplaceDialog : MWindowLib.SimpleMetroWindow
+    {
 		public FindReplaceDialog()
 		{
 			this.InitializeComponent();

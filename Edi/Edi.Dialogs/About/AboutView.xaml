@@ -67,7 +67,8 @@
                     <Label Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Right" Content="Modules" Margin="3" />
                     <ListBox Grid.Column="1" Grid.Row="2" Margin="3"
                              ItemsSource="{Binding Modules,Mode=OneTime}"
-                             DisplayMemberPath="Value" />
+                             DisplayMemberPath="Value"
+                             />
                   </Grid>
                 </TabItem>
 

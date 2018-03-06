@@ -73,6 +73,12 @@
     <Reference Include="FirstFloor.ModernUI">
       <HintPath>..\..\02_Libs\00_bin\Mui\FirstFloor.ModernUI.dll</HintPath>
     </Reference>
+    <Reference Include="MWindowInterfacesLib">
+      <HintPath>..\..\02_Libs\00_bin\MLib\MWindowInterfacesLib.dll</HintPath>
+    </Reference>
+    <Reference Include="MWindowLib">
+      <HintPath>..\..\02_Libs\00_bin\MLib\MWindowLib.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Windows.Shell">
       <HintPath>..\..\02_Libs\00_bin\Mui\Microsoft.Windows.Shell.dll</HintPath>
     </Reference>
