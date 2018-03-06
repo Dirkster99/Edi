@@ -11,7 +11,7 @@
     <!-- Accent Color Brush Definition
        - Look for references on ControlAccentBrushKey to find where this is being set in code -->
     <Color x:Key="{ComponentResourceKey TypeInTargetAssembly={x:Type reskeys:ResourceKeys},
-                    ResourceId=ControlAccentColorKey}">Blue</Color>
+                    ResourceId=ControlAccentColorKey}">#1ba1e2</Color>
 
     <SolidColorBrush x:Key="{ComponentResourceKey TypeInTargetAssembly={x:Type reskeys:ResourceKeys},
                                 ResourceId=ControlAccentBrushKey}"

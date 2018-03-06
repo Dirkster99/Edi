@@ -5,7 +5,7 @@
     /// <summary>
     /// Interaction logic for GotoLine.xaml
     /// </summary>
-    public partial class ConfigDlg : MWindowLib.MetroWindow
+    public partial class ConfigDlg : MWindowLib.SimpleMetroWindow
     {
         /// <summary>
         /// Class constructor

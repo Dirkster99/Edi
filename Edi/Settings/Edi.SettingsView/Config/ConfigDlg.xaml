@@ -1,4 +1,4 @@
-﻿<mwl:MetroWindow x:Class="Edi.SettingsView.Config.ConfigDlg"
+﻿<mwl:SimpleMetroWindow x:Class="Edi.SettingsView.Config.ConfigDlg"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mwl="clr-namespace:MWindowLib;assembly=MWindowLib"
@@ -20,9 +20,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         mc:Ignorable="d" 
         >
-  <mwl:MetroWindow.DataContext>
+  <mwl:SimpleMetroWindow.DataContext>
     <vm:ConfigViewModel />
-  </mwl:MetroWindow.DataContext>
+  </mwl:SimpleMetroWindow.DataContext>
   <Grid Margin="9,3">
     <Grid.RowDefinitions>
       <RowDefinition Height="*" />
@@ -48,4 +48,4 @@
               Grid.Column="1" Padding="3" Margin="6" MinHeight="24" MinWidth="80"/>
     </Grid>
   </Grid>
-</mwl:MetroWindow>
+</mwl:SimpleMetroWindow>
