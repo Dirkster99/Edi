@@ -10,22 +10,9 @@
         <ResourceDictionary Source="/MWindowLib;component/Themes/DarkTheme.xaml" />
 
         <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/Controls.Toolbar.xaml" />
-
-        <!-- This type of combobox is used in the toolbar of the MainWindow -->
-        <!-- ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/ComboBox.xaml" />
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/Controls.TextBox.xaml" / -->
-
         <!-- Statusbar is white without this -->
         <ResourceDictionary Source="/Edi.Themes;component/MetroDark/Controls/StatusBar.xaml" />
-
-        <!--ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/MenuStyles.xaml" /-->
-
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/Label.xaml" />
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/Hyperlink.xaml" />
-
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/TextBlock.xaml" />
         <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/Slider.xaml" />
-
         <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/GridSplitter.xaml" />
 
         <ResourceDictionary Source="/Edi.Themes;component/MetroDark/EdiControls/DocumentViewer.xaml" />

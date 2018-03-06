@@ -13,16 +13,8 @@
         <ResourceDictionary Source="/Edi.Themes;component/MetroLight/ModernUI.Light.xaml" />
 
         <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Controls.Toolbar.xaml" />
-
-        <!-- This type of combobox is used in the toolbar of the MainWindow -->
-        <!-- ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Combobox.xaml" -->
-
         <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/GridSplitter.xaml" />
-        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Hyperlink.xaml" />
-        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Label.xaml" />
-        <!--ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/MenuStyles.xaml" /-->
         <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Slider.xaml" />
-        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Textblock.xaml" />
 
         <ResourceDictionary Source="/Edi.Themes;component/MetroLight/EdiAvalonEdit.xaml" />
 
