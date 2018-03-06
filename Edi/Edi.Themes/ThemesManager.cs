@@ -20,7 +20,7 @@ namespace Edi.Themes
     {
         #region fields
         #region WPF Themes
-        #region Expression Dark theme resources
+        #region Dark theme resources
         const string MetroDarkThemeName = "Metro Dark";
         static readonly string[] MetroDarkResources =
     {
@@ -44,14 +44,12 @@ namespace Edi.Themes
 
       "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/DarkTheme.xaml",
 
-      "/Edi.Themes;component/BindToMLib/MWindowLib/DarkBrushs.xaml"
-
-////      "/BindToMLib;component/DropDownButtonLib/DarkBrushs.xaml",
-////      "/BindToMLib;component/WatermarkControlsLib/DarkLightBrushs.xaml",
-////      "/BindToMLib;component/HistoryControlLib/DarkLightBrushs.xaml",
-////      "/BindToMLib;component/MWindowLib/DarkBrushs.xaml",
+      "/Edi.Themes;component/BindToMLib/MWindowLib/DarkBrushs.xaml",
+      "/Edi.Themes;component/BindToMLib/DropDownButtonLib_DarkLightBrushs.xaml",
+      "/Edi.Themes;component/BindToMLib/HistoryControlLib_DarkLightBrushs.xaml",
+      "/Edi.Themes;component/BindToMLib/WatermarkControlsLib_DarkLightBrushs.xaml"
     };
-        #endregion Expression Dark theme resources
+        #endregion Dark theme resources
 
         #region Generic theme resources
         const string GenericThemeName = "Generic";
@@ -86,12 +84,10 @@ namespace Edi.Themes
 
       "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/LightTheme.xaml",
 
-      "/Edi.Themes;component/BindToMLib/MWindowLib/LightBrushs.xaml"
-
-////    "/BindToMLib;component/DropDownButtonLib/LightBrushs.xaml",
-////    "/BindToMLib;component/WatermarkControlsLib/DarkLightBrushs.xaml",
-////    "/BindToMLib;component/HistoryControlLib/DarkLightBrushs.xaml",
-////    "/BindToMLib;component/MWindowLib/LightBrushs.xaml"
+      "/Edi.Themes;component/BindToMLib/MWindowLib/LightBrushs.xaml",
+      "/Edi.Themes;component/BindToMLib/DropDownButtonLib_DarkLightBrushs.xaml",
+      "/Edi.Themes;component/BindToMLib/HistoryControlLib_DarkLightBrushs.xaml",
+      "/Edi.Themes;component/BindToMLib/WatermarkControlsLib_DarkLightBrushs.xaml"
         };
         #endregion Light Metro theme resources
         #endregion WPF Themes
