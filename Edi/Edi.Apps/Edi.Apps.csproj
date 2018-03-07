@@ -161,7 +161,6 @@
     <Compile Include="Views\Shell\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Shell\MainWindowViewManager.cs" />
     <Compile Include="Views\Shell\StatusBar.xaml.cs">
       <DependentUpon>StatusBar.xaml</DependentUpon>
     </Compile>
