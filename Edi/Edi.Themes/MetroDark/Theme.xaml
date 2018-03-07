@@ -9,12 +9,6 @@
         <ResourceDictionary Source="/Mlib;component/Themes/DarkTheme.xaml" />
         <ResourceDictionary Source="/MWindowLib;component/Themes/DarkTheme.xaml" />
 
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/Controls.Toolbar.xaml" />
-        <!-- Statusbar is white without this -->
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/Controls/StatusBar.xaml" />
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/Slider.xaml" />
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/GridSplitter.xaml" />
-
         <ResourceDictionary Source="/Edi.Themes;component/MetroDark/EdiControls/DocumentViewer.xaml" />
 
         <!-- Use dark brush definitions -->

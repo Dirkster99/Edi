@@ -3,32 +3,14 @@
     >
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Edi.Themes;component/IconsLight.xaml" />
-        <!-- ResourceDictionary Source="/Edi.Themes;component/Metro/Brushes.xaml" / -->
-        <!-- ResourceDictionary Source="/Edi.Themes;component/Metro/StatusBar.xaml" / -->
-
         <ResourceDictionary Source="/Mlib;component/Themes/LightTheme.xaml" />
         <ResourceDictionary Source="/MWindowLib;component/Themes/LightTheme.xaml" />
-        <!-- ResourceDictionary Source="/Themes;component/BindToMLib/MWindowLib/LightBrushs.xaml" / -->
-
         <ResourceDictionary Source="/Edi.Themes;component/MetroLight/ModernUI.Light.xaml" />
-
-        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Controls.Toolbar.xaml" />
-        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/GridSplitter.xaml" />
-        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Styles/Slider.xaml" />
-
         <ResourceDictionary Source="/Edi.Themes;component/MetroLight/EdiAvalonEdit.xaml" />
-
         <ResourceDictionary Source="/MiniUML.View;component/SharedResources.xaml"/>
-
-        <!-- This is required to style the dropdown button and frame of the control
-             ResourceDictionary Source="/Edi.Themes;component/FileListView/Combobox.xaml" / -->
 
         <!-- MsgBox brush definitions -->
         <ResourceDictionary Source="/MsgBox;component/Themes/LightBrushes.xaml" />
         <ResourceDictionary Source="/MsgBox;component/Themes/LightIcons.xaml" />
-
-        <!-- ResourceDictionary Source="/AvalonDock.Themes.Metro;component/Theme.xaml" / -->
     </ResourceDictionary.MergedDictionaries>
-
-
 </ResourceDictionary>
