@@ -5,7 +5,6 @@
         <ResourceDictionary Source="/Edi.Themes;component/IconsLight.xaml" />
         <ResourceDictionary Source="/Mlib;component/Themes/LightTheme.xaml" />
         <ResourceDictionary Source="/MWindowLib;component/Themes/LightTheme.xaml" />
-        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/ModernUI.Light.xaml" />
         <ResourceDictionary Source="/Edi.Themes;component/MetroLight/EdiAvalonEdit.xaml" />
         <ResourceDictionary Source="/MiniUML.View;component/SharedResources.xaml"/>
 

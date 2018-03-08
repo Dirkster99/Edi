@@ -67,9 +67,6 @@
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FirstFloor.ModernUI">
-      <HintPath>..\..\..\02_Libs\00_bin\Mui\FirstFloor.ModernUI.dll</HintPath>
-    </Reference>
     <Reference Include="MWindowInterfacesLib">
       <HintPath>..\..\..\02_Libs\00_bin\MLib\MWindowInterfacesLib.dll</HintPath>
     </Reference>

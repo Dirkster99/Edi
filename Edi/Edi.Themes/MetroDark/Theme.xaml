@@ -4,7 +4,6 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Edi.Themes;component/IconsDark.xaml" />
         <ResourceDictionary Source="/Edi.Themes;component/MetroDark/Brushes.xaml" />
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/Edi.ModernUI.Dark.xaml" />
 
         <ResourceDictionary Source="/Mlib;component/Themes/DarkTheme.xaml" />
         <ResourceDictionary Source="/MWindowLib;component/Themes/DarkTheme.xaml" />

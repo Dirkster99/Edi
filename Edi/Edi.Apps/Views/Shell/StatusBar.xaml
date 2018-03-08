@@ -6,10 +6,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="500"
              
+             xmlns:MLib_reskeys="clr-namespace:MLib.Themes;assembly=MLib"
+             
              xmlns:cmdLabel="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
              xmlns:conv="clr-namespace:Edi.Core.Converters;assembly=Edi.Core"
              xmlns:adconv="clr-namespace:Edi.Documents.Converter;assembly=Edi.Documents"
-						 Visibility="{Binding IsWorkspaceAreaOptimized, Converter={conv:BoolToVisibilityConverter}, ConverterParameter=true}">
+			 Visibility="{Binding IsWorkspaceAreaOptimized, Converter={conv:BoolToVisibilityConverter}, ConverterParameter=true}">
 	<UserControl.Resources>
     <conv:BooleanToTypeModeStringConverter x:Key="DisplayTypeModeConverter" />
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
@@ -71,7 +73,7 @@
           <Path Grid.Column="4"
                 Visibility="{Binding IsNotMaximized, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}"
                 Width="12" Height="12" Margin="1" HorizontalAlignment="Right" 
-                Stroke="{DynamicResource WindowText}"
+                Stroke="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlNormalForegroundBrushKey}}"
                 StrokeThickness="1"
                 Stretch="None"
                 Data="F1 M1,10 L3,10 M5,10 L7,10 M9,10 L11,10 M2,9 L2,11 M6,9 L6,11 M10,9 L10,11 M5,6 L7,6 M9,6 L11,6 M6,5 L6,7 M10,5 L10,7 M9,2 L11,2 M10,1 L10,3" />
