@@ -93,23 +93,6 @@
     <SolidColorBrush x:Key="HyperlinkForegroundDisabled" Color="#88888888"/>
     <SolidColorBrush x:Key="HyperlinkForeground" Color="Blue"/>
 
-    <!--SolidColorBrush x:Key="PinableListViewForegroundDisabled" Color="#88888888"/ -->
-    <SolidColorBrush x:Key="ToolViewBackground" Color="White"/>
-
     <SolidColorBrush x:Key="WindowBackgroundBrush" Color="White" />
-
-    <!-- Brushes -->
-
-
-    <!-- Text Editor Brushes GENERIC does not support advanced styling - just default styles and nothing else!
-    <SolidColorBrush x:Key="EditorCurrentLineBackgroundColor" Color="#2FCCCDCE"/>
-    <SolidColorBrush x:Key="EditorBackground"                 Color="#FFFFFFFF" />
-    <SolidColorBrush x:Key="EditorForeground"                 Color="#FF000000" />
-    <SolidColorBrush x:Key="EditorLineNumbersForeground"      Color="#FFa0a0f0" />
-  
-    <SolidColorBrush x:Key="EditorSelectionBrush"  Color="#40ffc41c"/>
-    <SolidColorBrush x:Key="EditorSelectionBorder" Color="#A0ffc41c"/>
-    <SolidColorBrush x:Key="EditorSelectionForeground" Color="#FF000000"/>
-     -->
 
 </ResourceDictionary>

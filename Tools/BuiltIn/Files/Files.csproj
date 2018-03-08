@@ -99,6 +99,9 @@
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Dirkster.FilterControlsLib.3.0.2\lib\net452\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="MLib">
+      <HintPath>..\..\..\02_Libs\00_bin\MLib\MLib.dll</HintPath>
+    </Reference>
     <Reference Include="MRULib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Dirkster.MRULib.1.0.0\lib\net451\MRULib.dll</HintPath>
     </Reference>

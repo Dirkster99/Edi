@@ -6,13 +6,14 @@
   xmlns:cmd="clr-namespace:Edi.Core;assembly=Edi.Core"
   
   xmlns:cmdLabel="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
-  
+  xmlns:MLib_reskeys="clr-namespace:MLib.Themes;assembly=MLib"
+    
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
   mc:Ignorable="d" 
   d:DesignHeight="300" d:DesignWidth="300">
 
-    <Grid Background="{DynamicResource ToolViewBackground}">
+    <Grid Background="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlNormalBackgroundBrushKey}}">
 
         <Grid xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
               xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
@@ -22,7 +23,8 @@
               Margin="3,0,3,0"
           >
             <Grid.Resources>
-                <CollectionViewSource Source="{Binding MruList.Entries}" x:Key="collViewEntries"
+                <CollectionViewSource Source="{Binding MruList.Entries}"
+                                      x:Key="collViewEntries"
                                       IsLiveGroupingRequested="True"
                                       IsLiveSortingRequested="True"
                                       >
@@ -50,27 +52,12 @@
                 <conv:IntIsPinnedToVisibilityConverter ConvertZeroToVisible="False" x:Key="FalseIntIsPinnedToVisibilityConverter" />
             </Grid.Resources>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-            </Grid>
-
-            <ListView Grid.Row="0"
-                      ItemsSource="{Binding Source={StaticResource collViewEntries}}"
+            <ListView ItemsSource="{Binding Source={StaticResource collViewEntries}}"
                       SelectionMode="Single"
                       Name="list"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      VerticalAlignment="Stretch"
                       >
-                <!-- Use this for simplified testing with dark theme
-                  Background="Black"
-                  Foreground="White"
-            -->
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -245,143 +232,5 @@
                 </ListView.GroupStyle>
             </ListView>
         </Grid>
-
-        <!--Grid>
-      <Grid.Resources>
-        <Style TargetType="{x:Type hyperl:FileHyperlink}">
-          <Setter Property="SnapsToDevicePixels" Value="True"/>
-          <Setter Property="ContextMenu">
-            <Setter.Value>
-              <ContextMenu>
-                <MenuItem Header="{x:Static cmdLabel:Strings.STR_MRU_MENUITEM_COPYURL}"
-                          Command="{x:Static hyperl:FileHyperlink.CopyUri}"
-                          CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
-                          Margin="3" />
-
-                <MenuItem DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
-                          Command="cmd:AppCommand.LoadFile"                            
-                          CommandParameter="{Binding NavigateUri}"
-                          Margin="3" />
-
-                <MenuItem Header="{x:Static cmdLabel:Strings.STR_MRU_MENUITEM_OpenWithWindowsApp}"
-                          Command="{x:Static hyperl:FileHyperlink.NavigateToUri}"
-                          CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
-                          Margin="3" />
-
-                <MenuItem Header="{x:Static cmdLabel:Strings.STR_MRU_MENUITEM_OpenInContainingFolder}"
-                          Command="{x:Static hyperl:FileHyperlink.OpenContainingFolder}"
-                          CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
-                          Margin="3" />
-                <Separator />
-
-                <MenuItem Header="{x:Static cmdLabel:Strings.STR_MRU_MENUITEM_Remove}"
-                          Command="cmd:AppCommand.RemoveMruEntry"
-                          CommandParameter="{Binding}"
-                          CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
-                          Margin="3" />
-
-              </ContextMenu>
-            </Setter.Value>
-          </Setter>
-          <Setter Property="Template">
-            <Setter.Value>
-              <ControlTemplate TargetType="{x:Type hyperl:FileHyperlink}">
-                <TextBlock ToolTip="{Binding ElementName=PART_Hyperlink, Path=NavigateUri}" HorizontalAlignment="Stretch">
-                            <TextBlock.InputBindings>
-                              <KeyBinding Key="C" Modifiers="Ctrl" Command="{x:Static hyperl:FileHyperlink.CopyUri}"
-                                                                   CommandParameter="{Binding ElementName=PART_Hyperlink, Path=NavigateUri}"/>
-                            </TextBlock.InputBindings>
-                            <Hyperlink Name="PART_Hyperlink"
-                                       NavigateUri="{Binding Path=NavigateUri, RelativeSource={RelativeSource FindAncestor, AncestorType=hyperl:FileHyperlink, AncestorLevel=1}}"
-                                       Command="cmd:AppCommand.LoadFile"
-                                       CommandParameter="{Binding Path=NavigateUri, RelativeSource={RelativeSource FindAncestor, AncestorType=hyperl:FileHyperlink, AncestorLevel=1}}"
-                                       >
-                              <Hyperlink.Style>
-                                - Change resource to show underline on mouseover only -
-                                <Style TargetType="{x:Type Hyperlink}">
-                                  <Style.Triggers>
-                                    <Trigger Property="IsMouseOver"      Value="true">
-                                      <Setter Property="TextDecorations" Value="Underline" />
-                                      <Setter Property="Foreground"      Value="{DynamicResource HyperlinkForeground}" />
-                                    </Trigger>
-                                    <Trigger Property="IsEnabled"   Value="false">
-                                      <Setter Property="Foreground" Value="{DynamicResource HyperlinkForegroundDisabled}" />
-                                    </Trigger>
-                                    <Trigger Property="IsEnabled" Value="true">
-                                      <Setter Property="Cursor"   Value="Hand" />
-                                    </Trigger>
-                                  </Style.Triggers>
-                                  <Setter Property="TextBlock.TextDecorations" Value="{x:Null}" />
-                                  <Setter Property="Foreground"                Value="{DynamicResource HyperlinkForeground}" />
-                                </Style>
-                              </Hyperlink.Style>
-                              - Moved link to event handler RequestNavigate="Hyperlink_RequestNavigate" to code behind -
-                              - TextBlock Text="{Binding Path=Text, RelativeSource={RelativeSource FindAncestor, AncestorType=hyperl:FileHyperlink, AncestorLevel=1}}" / -
-                              <ellipsiedTxtBlock:PathTrimmingTextBlock Path="{Binding Text, RelativeSource={RelativeSource FindAncestor, AncestorType=hyperl:FileHyperlink, AncestorLevel=1}}" />
-                          </Hyperlink>
-                        </TextBlock>
-              </ControlTemplate>
-            </Setter.Value>
-          </Setter>
-        </Style>
-      </Grid.Resources>
-      <Grid.RowDefinitions>
-        <RowDefinition Height="*"/>
-      </Grid.RowDefinitions>
-      <pinlvw:PinableListView Margin="0"
-                              AllowDrop="False"
-                              SelectionMode="Single"
-                              HorizontalAlignment="Stretch"
-                              VerticalAlignment="Stretch"
-                              SnapsToDevicePixels="True"
-                              HorizontalContentAlignment="Stretch"
-                              BorderThickness="0"
-                              ItemsSource="{Binding MruList.ListOfMRUEntries}"
-                              pinlvw:ListViewColumns.Stretch="true"
-                              Background="Transparent"
-                              ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                              Grid.Row="1">
-        <pinlvw:PinableListView.View>
-          <GridView>
-            <GridView.ColumnHeaderContainerStyle>
-              - To hide the header of a ListView you can modify the Visibility property of the ColumnHeaderContainer by overriding the style. -
-              <Style>
-                <Setter Property="FrameworkElement.Visibility" Value="Collapsed"/>
-              </Style>
-            </GridView.ColumnHeaderContainerStyle>
-            <GridViewColumn Width="32">
-              <GridViewColumn.CellTemplate>
-                <DataTemplate>
-                  <Grid>- Pin/Unpin column -
-                    <pinlvw:PinnableCheckbox Command="cmd:AppCommand.PinUnpin"
-                                             CommandParameter="{Binding}"
-                                             IsChecked="{Binding IsPinned, Mode=OneWay}">
-                      <CheckBox.Visibility>
-                        <MultiBinding Converter="{pinlvw:BoolOrToVisibilityConverter}">
-                          <Binding Path="IsMouseOverListViewItem" RelativeSource="{RelativeSource AncestorType={x:Type pinlvw:PinableListViewItem}}" />
-                          <Binding Path="IsChecked" RelativeSource="{RelativeSource Self}" />
-                        </MultiBinding>
-                      </CheckBox.Visibility>
-                    </pinlvw:PinnableCheckbox>
-                  </Grid>
-                </DataTemplate>
-              </GridViewColumn.CellTemplate>
-            </GridViewColumn>
-            <GridViewColumn >
-              <GridViewColumn.CellTemplate>
-                <DataTemplate>
-                  <Grid>
-                    <hyperl:FileHyperlink Text="{Binding PathFileName, Mode=OneWay}"
-                                          Margin="3,3,16,3"
-                                          NavigateUri="{Binding PathFileName, Mode=OneWay}"
-                                          HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-                  </Grid>
-                </DataTemplate>
-              </GridViewColumn.CellTemplate>
-            </GridViewColumn>
-          </GridView>
-        </pinlvw:PinableListView.View>
-      </pinlvw:PinableListView>
-    </ -->
     </Grid>
 </UserControl>

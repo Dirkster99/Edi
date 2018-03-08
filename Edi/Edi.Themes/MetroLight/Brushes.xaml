@@ -129,11 +129,7 @@
     <SolidColorBrush x:Key="HyperlinkForegroundDisabled" Color="#88888888"/>
     <SolidColorBrush x:Key="HyperlinkForeground" Color="Blue"/>
 
-    <!--SolidColorBrush x:Key="PinableListViewForegroundDisabled" Color="#88888888"/ -->
-    <SolidColorBrush x:Key="ToolViewBackground" Color="White"/>
-
     <!-- Brushes -->
-
     <SolidColorBrush x:Key="GlyphBrush" Color="#FF111111" />
 
     <!-- VS 2010 Style for Combobox -->

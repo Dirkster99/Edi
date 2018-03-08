@@ -12,87 +12,80 @@
              xmlns:cmdLabel="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
 
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="600" Background="{DynamicResource ToolViewBackground}"
+             d:DesignHeight="450" d:DesignWidth="600"
+             
+             xmlns:MLib_reskeys="clr-namespace:MLib.Themes;assembly=MLib"
+             Background="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlNormalBackgroundBrushKey}}"
 
              Focusable="True"
              KeyboardNavigation.IsTabStop="True"
              Name="StartPageViewObject"
              behav:KeyboardFocus.On="{Binding ElementName=StartPageViewObject}"
-             ><!-- The KeyboardFocus attached property is necessary to support CTRL+TAB in AvalonDock -->
-  <UserControl.Resources>
-    <BitmapImage UriSource="pack://application:,,,/Edi.Themes;component/Images/App/StartPage/Edi100.png" x:Key="Logo" />
-    <BitmapImage UriSource="pack://application:,,,/Edi.Themes;component/Images/App/StartPage/File_Open64.png" x:Key="FileOpenImage" />
-    <BitmapImage UriSource="pack://application:,,,/Edi.Themes;component/Images/App/StartPage/File_New64.png" x:Key="NewFileImage" />
-  </UserControl.Resources>
-  <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="12" >
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="*" />
-    </Grid.RowDefinitions>
-
-    <!-- Project Name -->
-    <TextBlock Grid.Column="0"
-               Grid.Row="0"
-               HorizontalAlignment="Left" VerticalAlignment="Top"
-               ToolTip="{x:Static cmdLabel:Strings.STR_STARTPAGE_VISITPROJECTHOMEPAGE_TT}">
-        <Hyperlink TextDecorations="None" Command="cmd:AppCommand.BrowseURL">
-          <TextBlock Text="Edi" FontSize="48" />
-        </Hyperlink>
-    </TextBlock>
-
-    <Border Grid.Row="1"
-            SnapsToDevicePixels="True"
-            HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-            BorderBrush="{DynamicResource StartPageBorderForegroundColor}" BorderThickness="1">
-
-      <Grid Grid.Row="1" Margin="15" HorizontalAlignment="Center" Width="500">
+             >
+    <!-- The KeyboardFocus attached property is necessary to support CTRL+TAB in AvalonDock -->
+    <UserControl.Resources>
+        <BitmapImage UriSource="pack://application:,,,/Edi.Themes;component/Images/App/StartPage/Edi100.png" x:Key="Logo" />
+        <BitmapImage UriSource="pack://application:,,,/Edi.Themes;component/Images/App/StartPage/File_Open64.png" x:Key="FileOpenImage" />
+        <BitmapImage UriSource="pack://application:,,,/Edi.Themes;component/Images/App/StartPage/File_New64.png" x:Key="NewFileImage" />
+    </UserControl.Resources>
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="12" >
         <Grid.RowDefinitions>
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        <!-- Project Name -->
+        <TextBlock Grid.Column="0"
+                   Grid.Row="0"
+                   HorizontalAlignment="Left" VerticalAlignment="Top"
+                   ToolTip="{x:Static cmdLabel:Strings.STR_STARTPAGE_VISITPROJECTHOMEPAGE_TT}">
+                <Hyperlink TextDecorations="None" Command="cmd:AppCommand.BrowseURL">
+              <TextBlock Text="Edi" FontSize="48" />
+            </Hyperlink>
+        </TextBlock>
 
-        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-          </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" Margin="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-          <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-          <Hyperlink TextDecorations="None" Command="New"
-                     ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}">
-            <Image Source="{DynamicResource Image_New}" Height="64" />
-          </Hyperlink>
-          </TextBlock>
+            <Grid Grid.Column="0" Margin="12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-          <TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="9,0">
-          <Hyperlink TextDecorations="None"
-                     Command="Open"
-                     ToolTip="{x:Static cmdLabel:Strings.STR_STARTPAGE_FILEOPEN_TT}">
-            <Image Source="{DynamicResource Image_Open}" Height="64" />
-          </Hyperlink>
-          </TextBlock>
+                <TextBlock Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                    <Hyperlink TextDecorations="None" Command="New"
+                                ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}">
+                        <Image Source="{DynamicResource Image_New}" Height="64" />
+                    </Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                    <Hyperlink TextDecorations="None"
+                                Command="Open"
+                                ToolTip="{x:Static cmdLabel:Strings.STR_STARTPAGE_FILEOPEN_TT}">
+                        <Image Source="{DynamicResource Image_Open}" Height="64" />
+                    </Hyperlink>
+                </TextBlock>
+            </Grid>
+
+            <view:RecentFilesView DataContext="{Binding}"
+                                  Grid.Column="1"
+                                  MinWidth="300"
+                                  VerticalAlignment="Stretch"
+                                  Margin="12,12,120,12" />
         </Grid>
 
-        <view:RecentFilesView DataContext="{Binding}"
-                              Grid.Row="2"
-                              Grid.ColumnSpan="2"
-                              MaxWidth="500"
-                              Margin="0, 12" />
-      </Grid>
-    </Border>
-
-    <!-- Logo -->
-    <TextBlock Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Top"
-               ToolTip="{x:Static cmdLabel:Strings.STR_STARTPAGE_VISITPROJECTHOMEPAGE_TT}">
-        <Hyperlink TextDecorations="None" Command="cmd:AppCommand.BrowseURL">
+      <!-- Logo -->
+      <TextBlock Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Top"
+                   ToolTip="{x:Static cmdLabel:Strings.STR_STARTPAGE_VISITPROJECTHOMEPAGE_TT}">
+            <Hyperlink TextDecorations="None" Command="cmd:AppCommand.BrowseURL">
           <Image Source="{DynamicResource Logo}" Width="100" />
         </Hyperlink>
-    </TextBlock>
+      </TextBlock>
 
-  </Grid>
+    </Grid>
 </UserControl>

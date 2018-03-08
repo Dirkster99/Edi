@@ -17,11 +17,12 @@
              xmlns:view ="clr-namespace:UserNotification.View;assembly=UserNotification"
              xmlns:conv="clr-namespace:FolderBrowser.Converters;assembly=FolderBrowser"
              xmlns:fsconv="clr-namespace:FileSystemModels.Converters;assembly=FileSystemModels"
+             xmlns:MLib_reskeys="clr-namespace:MLib.Themes;assembly=MLib"
 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              >
-  <Grid Background="{DynamicResource ToolViewBackground}"
+    <Grid Background="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlNormalBackgroundBrushKey}}"
         xmlns:MWindow="clr-namespace:MWindowLib;assembly=MWindowLib"
         >
         <Grid.Resources>
