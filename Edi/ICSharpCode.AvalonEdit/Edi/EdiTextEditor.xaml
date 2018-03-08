@@ -10,11 +10,11 @@
   xmlns:unit="clr-namespace:UnitComboLib;assembly=UnitComboLib"
   >
 
-	<Style TargetType="{x:Type local:EdiTextEditor}">
+	<!-- Style TargetType="{x:Type local:EdiTextEditor}">
     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
     <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
     <Setter Property="FlowDirection" Value="LeftToRight"/>
-    <!-- AvalonEdit does not support RTL, so ensure we use LTR by default -->
+    - AvalonEdit does not support RTL, so ensure we use LTR by default -
     <Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type local:EdiTextEditor}">
@@ -59,12 +59,12 @@
             <Style TargetType="{x:Type rendering:TextView}">
               <Setter Property="NonPrintableCharacterBrush" Value="{DynamicResource NonPrintableCharacterBrush}" />
               <Setter Property="LinkTextForegroundBrush"    Value="{DynamicResource LinkTextForegroundBrush}" />
-              <!-- Style hyperlink displayed within text in text editor -->
+              - Style hyperlink displayed within text in text editor -
               <Setter Property="LinkTextBackgroundBrush"    Value="{DynamicResource LinkTextBackgroundBrush}" />
             </Style>
 
             <Style TargetType="{x:Type ListBoxItem}" x:Key="CompletionListBoxItem">
-              <Setter Property="Background"      Value="#FF000000" /><!-- Background of each item -->
+              <Setter Property="Background"      Value="#FF000000" />- Background of each item -
               <Setter Property="BorderThickness" Value="0" />
               <Setter Property="Template">
                 <Setter.Value>
@@ -80,7 +80,7 @@
 							                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 							                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                     </Border>
-                    <!-- Simplified triggers: don't want a gray selection background when the ListBox doesn't have focus -->
+                    - Simplified triggers: don't want a gray selection background when the ListBox doesn't have focus -
                     <ControlTemplate.Triggers>
                       <Trigger Property="IsSelected" Value="true">
                         <Setter Property="Background" Value="#FF393939"/>
@@ -93,9 +93,9 @@
             </Style>
 
             <Style TargetType="{x:Type AEComplete:CompletionList}">
-              <!-- Setter Property="BorderThickness" Value="5" / -->
-              <!-- Setter Property="BorderBrush" Value="Green" / -->
-              <!-- Setter Property="Background" Value="Red" / -->
+              - Setter Property="BorderThickness" Value="5" / -
+              - Setter Property="BorderBrush" Value="Green" / -
+              - Setter Property="Background" Value="Red" / -
               <Setter Property="Template">
                 <Setter.Value>
                   <ControlTemplate TargetType="{x:Type AEComplete:CompletionList}">
@@ -113,7 +113,7 @@
               </Setter>
             </Style>
 
-            <!-- Remove window frame fomr pop-up completion window -->
+            - Remove window frame fomr pop-up completion window -
             <Style TargetType="{x:Type AEComplete:CompletionWindowBase}">
               <Setter Property="MaxHeight" Value="600" />
               <Setter Property="MaxWidth" Value="215" />
@@ -159,7 +159,7 @@
                         <RowDefinition Height="Auto"/>
                       </Grid.RowDefinitions>
 
-                      <!-- Display TextEditor content in upper left corner -->
+                      - Display TextEditor content in upper left corner -
                       <ScrollContentPresenter Grid.Column="0" Grid.Row="0"
                                             KeyboardNavigation.DirectionalNavigation="Local"
                                             CanContentScroll="True"
@@ -168,7 +168,7 @@
 						                                Content="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:EdiTextEditor}}, Path=TextArea}"
                                             />
 
-                      <!-- Display Vertical Scrollbar to the right -->
+                      - Display Vertical Scrollbar to the right -
                       <ScrollBar Name="PART_VerticalScrollBar"
                                Grid.Column="1"
                                Value="{TemplateBinding VerticalOffset}"
@@ -176,8 +176,8 @@
                                ViewportSize="{TemplateBinding ViewportHeight}"
                                Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
 
-                      <!-- Display mini-toolbar and Horizontal scrollbar at the bottom of the view -->
-                      <!-- Using DialogBackgroundBrush since Editor can use a WPF Theme independent background color -->
+                      - Display mini-toolbar and Horizontal scrollbar at the bottom of the view -
+                      - Using DialogBackgroundBrush since Editor can use a WPF Theme independent background color -
                       <Grid Grid.Column="0" Grid.Row="1" Background="{DynamicResource DialogBackgroundBrush}">
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="Auto" />
@@ -208,7 +208,7 @@
                                    ViewportSize="{TemplateBinding ViewportWidth}"
                                    Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
                       </Grid>
-                      <!-- Using DialogBackgroundBrush since Editor can use a WPF Theme independent background color -->
+                      - Using DialogBackgroundBrush since Editor can use a WPF Theme independent background color -
                       <DockPanel Grid.Column="1" Grid.Row="1" LastChildFill="false" Background="{DynamicResource DialogBackgroundBrush}">
                         <Rectangle Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Width="1" Fill="White" DockPanel.Dock="Left" />
                         <Rectangle Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Height="1" Fill="White" DockPanel.Dock="Top" />
@@ -228,6 +228,6 @@
         </ControlTemplate>
 			</Setter.Value>
 		</Setter>
-	</Style>
+	</Style -->
 
 </ResourceDictionary>

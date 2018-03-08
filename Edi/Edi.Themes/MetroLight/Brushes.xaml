@@ -29,13 +29,6 @@
     <!-- End of Text Editor Brushes -->
 
     <!-- Brushes -->
-    <LinearGradientBrush x:Key="StartPageBorderForegroundColor"
-                         StartPoint="0,0" EndPoint="0,1">
-        <GradientStop Color="#B7CAE0" Offset="0" />
-        <GradientStop Color="#78F0FF" Offset="1" />
-    </LinearGradientBrush>
-
-    <SolidColorBrush x:Key="ToolWindowBackground" Color="Black" />
     <SolidColorBrush x:Key="DialogBackgroundBrush" Color="White" />
 
     <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888888"/>

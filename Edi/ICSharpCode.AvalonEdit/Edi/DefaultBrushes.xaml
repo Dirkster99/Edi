@@ -1,6 +1,6 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	xmlns:editing="clr-namespace:ICSharpCode.AvalonEdit.Editing">
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
   <SolidColorBrush x:Key="EditorCurrentLineBackgroundColor" Color="#2FAAADAE"/>
   <SolidColorBrush x:Key="EditorBackground" Color="#FFFFFFFF" />

@@ -28,7 +28,7 @@
 
     <!-- Text Editor Brushes -->
     <SolidColorBrush x:Key="EditorCurrentLineBackgroundColor" Color="#20FFFFFF"/>
-    <SolidColorBrush x:Key="EditorBackground"                 Color="#FF000000" />
+    <SolidColorBrush x:Key="EditorBackground"                 Color="#FF181818" />
     <SolidColorBrush x:Key="EditorForeground"                 Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="EditorLineNumbersForeground"      Color="#ff929292" />
 
@@ -51,14 +51,6 @@
     <!-- This brush is a non-editor brush that is used in the rest of the WPF application
        (eg.: selection in textbox)-->
     <SolidColorBrush x:Key="SelectionBrush" Color="#60FFFFFF"/>
-
-    <LinearGradientBrush x:Key="StartPageBorderForegroundColor"
-                         StartPoint="0,0" EndPoint="0,1">
-        <GradientStop Color="#33FFFFFF" Offset="0" />
-        <GradientStop Color="#FFFFFFFF" Offset="1" />
-    </LinearGradientBrush>
-
-    <SolidColorBrush x:Key="ToolWindowBackground" Color="Black" />
 
     <LinearGradientBrush x:Key="MouseOverBrush" StartPoint="0,0" EndPoint="0,1">
         <GradientStop Color="#00030d" Offset="0" />

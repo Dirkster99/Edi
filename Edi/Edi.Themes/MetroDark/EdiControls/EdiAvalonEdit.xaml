@@ -7,7 +7,8 @@
     xmlns:rendering="clr-namespace:ICSharpCode.AvalonEdit.Rendering;assembly=ICSharpCode.AvalonEdit"
 
     xmlns:AEComplete="clr-namespace:ICSharpCode.AvalonEdit.CodeCompletion;assembly=ICSharpCode.AvalonEdit"
-  
+    xmlns:MLib_reskeys="clr-namespace:MLib.Themes;assembly=MLib"
+
     xmlns:unit="clr-namespace:UnitComboLib;assembly=UnitComboLib"
     >
     <ResourceDictionary.MergedDictionaries>
@@ -218,9 +219,11 @@
                                                            Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
                                             </Grid>
                                             <!-- Using DialogBackgroundBrush since Editor can use a WPF Theme independent background color -->
-                                            <DockPanel Grid.Column="1" Grid.Row="1" LastChildFill="false" Background="{DynamicResource DialogBackgroundBrush}">
-                                                <Rectangle Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Width="1" Fill="#80FFFFFF" DockPanel.Dock="Left" />
-                                                <Rectangle Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Height="1" Fill="#80FFFFFF" DockPanel.Dock="Top" />
+                                            <DockPanel Grid.Column="1" Grid.Row="1"
+                                                       LastChildFill="false"
+                                                       Background="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlNormalBackgroundBrushKey}}">
+                                                <Rectangle Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Width="1" Fill="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlNormalBackgroundBrushKey}}" DockPanel.Dock="Left" />
+                                                <Rectangle Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Height="1" Fill="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlNormalBackgroundBrushKey}}" DockPanel.Dock="Top" />
                                             </DockPanel>
                                         </Grid>
                                     </Border>

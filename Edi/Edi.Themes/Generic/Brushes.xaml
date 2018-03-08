@@ -13,14 +13,6 @@
     <SolidColorBrush x:Key="FatalLevelColor" Color="Crimson" PresentationOptions:Freeze="True" />
 
     <!-- Brushes -->
-    <LinearGradientBrush x:Key="StartPageBorderForegroundColor"
-                         StartPoint="0,0" EndPoint="0,1">
-        <GradientStop Color="#30000000" Offset="0" />
-        <GradientStop Color="#FF000000" Offset="1" />
-    </LinearGradientBrush>
-
-    <SolidColorBrush x:Key="ToolWindowBackground" Color="Black" />
-
     <SolidColorBrush x:Key="StatusBarForegroundColor" Color="Black"/>
 
     <LinearGradientBrush x:Key="StatusBarBackgroundColor"
