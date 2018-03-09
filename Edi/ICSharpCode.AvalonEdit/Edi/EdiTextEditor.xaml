@@ -7,14 +7,15 @@
     xmlns:rendering="clr-namespace:ICSharpCode.AvalonEdit.Rendering"
 
     xmlns:AEComplete="clr-namespace:ICSharpCode.AvalonEdit.CodeCompletion"
-    xmlns:MLib_reskeys="clr-namespace:MLib.Themes;assembly=MLib"
-
     xmlns:unit="clr-namespace:UnitComboLib;assembly=UnitComboLib"
+
+    xmlns:MLib_reskeys="clr-namespace:MLib.Themes;assembly=MLib"
     >
     <Style TargetType="{x:Type EdiAvalonEdit:EdiTextEditor}">
         <Setter Property="Foreground"            Value="{DynamicResource EditorForeground}" />
         <Setter Property="Background"            Value="{DynamicResource EditorBackground}" />
         <Setter Property="LineNumbersForeground" Value="{DynamicResource EditorLineNumbersForeground}" />
+        <Setter Property="EditorCurrentLineBackground" Value="{DynamicResource EditorCurrentLineBackgroundColor}" />
         <Setter Property="FlowDirection" Value="LeftToRight"/>
         <!-- AvalonEdit does not support RTL, so ensure we use LTR by default -->
         <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />

@@ -264,15 +264,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MetroDark\EdiControls\YalvLib\GridStyle.xaml">
+    <Page Include="EdiControls\YalvLib\GridStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MetroDark\EdiControls\YalvLib\YalvLib.xaml">
+    <Page Include="EdiControls\YalvLib\YalvLib.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MetroDark\EdiControls\DocumentViewer.xaml">
+    <Page Include="EdiControls\DocumentViewer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

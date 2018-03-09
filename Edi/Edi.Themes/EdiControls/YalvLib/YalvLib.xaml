@@ -12,11 +12,11 @@
     xmlns:localiz="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
     >
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="../../Brushes.xaml" />
         <ResourceDictionary Source="GridStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="RoundWatermarkTextBox" TargetType="{x:Type TextBox}">
+    <Style x:Key="RoundWatermarkTextBox"
+           TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
         <!-- Setter Property="Height" Value="21" / -->
         <Setter Property="AllowDrop" Value="True" />
         <Setter Property="Background" Value="Transparent" />
@@ -39,17 +39,17 @@
                 <ControlTemplate TargetType="{x:Type TextBox}">
                     <Grid>
                         <Border x:Name="BorderBase"
-                    Background="{DynamicResource ControlBackgroundBrush}"
-                    BorderBrush="Gray"
-                    BorderThickness="1.4,1.4,1,1"
-                    CornerRadius="1">
+                                Background="{DynamicResource ControlBackgroundBrush}"
+                                BorderBrush="Gray"
+                                BorderThickness="1.4,1.4,1,1"
+                                CornerRadius="1">
 
                             <!-- FontStyle="Oblique"  -->
                             <Label x:Name="TextPrompt"
-                     Content="{TemplateBinding Tag}"
-                     Padding="5,3,3,3"
-                     Focusable="False"
-                     Visibility="Collapsed" Foreground="Aqua"/>
+                                   Content="{TemplateBinding Tag}"
+                                   Padding="5,3,3,3"
+                                   Focusable="False"
+                                   Visibility="Collapsed" Foreground="Aqua"/>
                         </Border>
 
                         <ScrollViewer x:Name="PART_ContentHost" Margin="0" Foreground="{DynamicResource OutsideFontColor}" />
@@ -102,37 +102,37 @@
                             <!-- txtSearchPanel -->
                             <Border Grid.Row="0" Grid.Column="0">
                                 <ScrollViewer HorizontalScrollBarVisibility="Hidden"
-                              VerticalScrollBarVisibility="Disabled"
-                              behav:ScrollSynchronizer.ScrollGroup="dgSync">
+                                              VerticalScrollBarVisibility="Disabled"
+                                              behav:ScrollSynchronizer.ScrollGroup="dgSync">
                                     <StackPanel Margin="3,3"
-                              Background="Transparent"
-                              Name="PART_SearchPanel"
-                              Orientation="Horizontal" />
+                                                Background="Transparent"
+                                                Name="PART_SearchPanel"
+                                                Orientation="Horizontal" />
                                 </ScrollViewer>
                             </Border>
 
                             <!-- dgItems -->
                             <DataGrid  Grid.Row="1" Grid.Column="0"
-                          Style="{StaticResource DefaultDataGridStyle}"
-                          CellStyle="{StaticResource DefaultDataGridCellStyle}"
-                          ColumnHeaderStyle="{StaticResource DefaultDataGridHeaderStyle}"
-                          RowStyle="{StaticResource LogItemDataGridRowStyle}"
+                                       Style="{StaticResource DefaultDataGridStyle}"
+                                       CellStyle="{StaticResource DefaultDataGridCellStyle}"
+                                       ColumnHeaderStyle="{StaticResource DefaultDataGridHeaderStyle}"
+                                       RowStyle="{StaticResource LogItemDataGridRowStyle}"
 
-                          Margin="3,3"
-                          IsSynchronizedWithCurrentItem="True"
-                          SelectedItem="{Binding Path=LogItems.SelectedLogItem}"
-                          ItemsSource="{Binding Path=LogItems.LogView}"
-                          behav:SelectedItem.IsBroughtIntoViewWhenSelected="True"
-                          Name="PART_DataGrid"
-                  >
+                                       Margin="3,3"
+                                       IsSynchronizedWithCurrentItem="True"
+                                       SelectedItem="{Binding Path=LogItems.SelectedLogItem}"
+                                       ItemsSource="{Binding Path=LogItems.LogView}"
+                                       behav:SelectedItem.IsBroughtIntoViewWhenSelected="True"
+                                       Name="PART_DataGrid"
+                               >
                                 <DataGrid.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="{x:Static Properties:Resources.MainWindow_GridContextMenu_CopyToClipboard}"
-                              Command="ApplicationCommands.Copy" />
+                                                  Command="ApplicationCommands.Copy" />
                                         <Separator />
                                         <MenuItem ItemsSource="{Binding Path=DataGridColumns.DataGridColumns}"
-                              Header="{x:Static localiz:Strings.STR_YALVLIb_Columns_MenuLabel}"
-                              DataContext="{Binding LogItems}">
+                                                  Header="{x:Static localiz:Strings.STR_YALVLIb_Columns_MenuLabel}"
+                                                  DataContext="{Binding LogItems}">
                                             <MenuItem.ItemContainerStyle>
                                                 <Style TargetType="{x:Type MenuItem}">
                                                     <Setter Property="IsChecked" Value="{Binding IsColumnVisible}" />

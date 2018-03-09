@@ -9,17 +9,6 @@
       xmlns:behav="clr-namespace:Edi.Themes.Behaviour"
     >
 
-  <!-- COLORS -->
-  <SolidColorBrush x:Key="DefaultForegroundColor" Color="#FF272727" PresentationOptions:Freeze="True" />
-  <SolidColorBrush x:Key="BorderColor"            Color="#777" PresentationOptions:Freeze="True" />
-
-  <LinearGradientBrush x:Key="GrayGradientBackground" EndPoint="0,1" StartPoint="0,0"
-                       PresentationOptions:Freeze="True">
-    <GradientStop Color="#AAA" Offset="0.0" />
-    <GradientStop Color="#BBB" Offset="0.5" />
-    <GradientStop Color="#BFBFBF" Offset="1.0" />
-  </LinearGradientBrush>
-
   <!-- FONT -->
   <FontFamily x:Key="DefaultFontFamily">
     <!--Arial-->
@@ -40,13 +29,6 @@
     <Setter Property="BorderThickness" Value="1" />
     <Setter Property="CornerRadius" Value="3" />
   </Style>
-
-  <!-- LEVEL COLORS -->
-  <SolidColorBrush x:Key="DebugLevelColor" Color="LightBlue" PresentationOptions:Freeze="True" />
-  <SolidColorBrush x:Key="InfoLevelColor" Color="#A0FFFFFF" PresentationOptions:Freeze="True" />
-  <SolidColorBrush x:Key="WarnLevelColor" Color="Moccasin" PresentationOptions:Freeze="True" />
-  <SolidColorBrush x:Key="ErrorLevelColor" Color="Salmon" PresentationOptions:Freeze="True" />
-  <SolidColorBrush x:Key="FatalLevelColor" Color="Crimson" PresentationOptions:Freeze="True" />
 
   <!-- DATAGRID -->
   <Style x:Key="DefaultDataGridStyle" TargetType="{x:Type DataGrid}">

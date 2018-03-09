@@ -108,7 +108,7 @@ namespace Edi.Apps.ViewModels
         /// <param name="w"></param>
         /// <param name="backupDynResources"></param>
         private void ApplyWidgetStyle(WidgetStyle w,
-                                                                    List<string> backupDynResources)
+                                      List<string> backupDynResources)
         {
             if (w == null)
                 return;

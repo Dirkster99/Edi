@@ -2,11 +2,20 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     >
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Edi.Themes;component/EdiControls/YalvLib/YalvLib.xaml" />
+        <ResourceDictionary Source="/YalvLib;component/Themes/Brushes.xaml" />
+
+        <ResourceDictionary Source="/Edi.Themes;component/EdiControls/DocumentViewer.xaml" />
+        <ResourceDictionary Source="/ICSharpCode.AvalonEdit;component/Edi/EdiTextEditor.xaml" />
+        <ResourceDictionary Source="/ICSharpCode.AvalonEdit;component/Edi/Themes/LightBrushs.xaml" />
+
         <ResourceDictionary Source="/Edi.Themes;component/IconsLight.xaml" />
         <ResourceDictionary Source="/Mlib;component/Themes/LightTheme.xaml" />
         <ResourceDictionary Source="/MWindowLib;component/Themes/LightTheme.xaml" />
-        <ResourceDictionary Source="/ICSharpCode.AvalonEdit;component/Edi/EdiTextEditor.xaml" />
         <ResourceDictionary Source="/MiniUML.View;component/SharedResources.xaml"/>
+
+        <ResourceDictionary Source="/Edi.Themes;component/IconsLight.xaml" />
+        <ResourceDictionary Source="/Edi.Themes;component/MetroLight/Brushes.xaml" />
 
         <!-- MsgBox brush definitions -->
         <ResourceDictionary Source="/MsgBox;component/Themes/LightBrushes.xaml" />

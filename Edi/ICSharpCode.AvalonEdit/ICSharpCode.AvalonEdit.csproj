@@ -490,7 +490,7 @@
   <ItemGroup>
     <Page Include="CodeCompletion\CompletionList.xaml" />
     <Page Include="CodeCompletion\InsightWindow.xaml" />
-    <Page Include="Edi\DefaultBrushes.xaml">
+    <Page Include="Edi\Themes\DefaultBrushs.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -503,6 +503,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Edi\PrintEngine\PrintPreviewDocumentViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Edi\Themes\LightBrushs.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Edi\Themes\DarkBrushs.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

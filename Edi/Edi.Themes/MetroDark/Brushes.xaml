@@ -19,34 +19,6 @@
     <!-- Source: http://stackoverflow.com/questions/17814308/treeview-shows-blue-for-selected-item      -
     <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF1888b8" PresentationOptions:Freeze="True" / -->
 
-    <!-- LEVEL COLORS -->
-    <SolidColorBrush x:Key="DebugLevelColor" Color="LightBlue" PresentationOptions:Freeze="True" />
-    <SolidColorBrush x:Key="InfoLevelColor" Color="LightGreen" PresentationOptions:Freeze="True" />
-    <SolidColorBrush x:Key="WarnLevelColor" Color="Moccasin" PresentationOptions:Freeze="True" />
-    <SolidColorBrush x:Key="ErrorLevelColor" Color="Salmon" PresentationOptions:Freeze="True" />
-    <SolidColorBrush x:Key="FatalLevelColor" Color="Crimson" PresentationOptions:Freeze="True" />
-
-    <!-- Text Editor Brushes -->
-    <SolidColorBrush x:Key="EditorCurrentLineBackgroundColor" Color="#20FFFFFF"/>
-    <SolidColorBrush x:Key="EditorBackground"                 Color="#FF181818" />
-    <SolidColorBrush x:Key="EditorForeground"                 Color="#FFFFFFFF" />
-    <SolidColorBrush x:Key="EditorLineNumbersForeground"      Color="#ff929292" />
-
-    <SolidColorBrush x:Key="EditorSelectionBrush"      Color="#30FFFFFF"/>
-    <SolidColorBrush x:Key="EditorSelectionBorder"     Color="#50ffffff"/>
-    <!-- SolidColorBrush x:Key="EditorSelectionForeground" Color="White"/ -->
-
-    <SolidColorBrush x:Key="NonPrintableCharacterBrush" Color="#2FFFFFFF"/>
-    <SolidColorBrush x:Key="LinkTextForegroundBrush"    Color="#FFAAAAFF"/>
-    <!-- Style hyperlink displayed within text in text editor -->
-    <SolidColorBrush x:Key="LinkTextBackgroundBrush"    Color="#18FFFFFF"/>
-    <!-- End of Text Editor Brushes -->
-
-    <SolidColorBrush x:Key="GroupBoxForeground" Color="#FFFFFFFF"/>
-    <SolidColorBrush x:Key="GroupBoxBackground" Color="#FF444444"/>
-    <!-- Same as ControlBackground Brush -->
-    <SolidColorBrush x:Key="GroupBoxBorderBrush" Color="Transparent"/>
-
     <!-- Brushes -->
     <!-- This brush is a non-editor brush that is used in the rest of the WPF application
        (eg.: selection in textbox)-->
@@ -254,5 +226,24 @@
 
     <SolidColorBrush x:Key="PopupWindowBackgroundBrush" Color="#000" />
     <SolidColorBrush x:Key="WindowBackgroundBrush" Color="Black" />
+
+    <!-- YalvLib Brushs -->
+    <!-- COLORS -->
+    <SolidColorBrush x:Key="DefaultForegroundColor" Color="#FF272727" PresentationOptions:Freeze="True" />
+    <SolidColorBrush x:Key="BorderColor"            Color="#777" PresentationOptions:Freeze="True" />
+
+    <LinearGradientBrush x:Key="GrayGradientBackground" EndPoint="0,1" StartPoint="0,0"
+                       PresentationOptions:Freeze="True">
+        <GradientStop Color="#AAA" Offset="0.0" />
+        <GradientStop Color="#BBB" Offset="0.5" />
+        <GradientStop Color="#BFBFBF" Offset="1.0" />
+    </LinearGradientBrush>
+
+    <!-- LEVEL COLORS -->
+    <SolidColorBrush x:Key="DebugLevelColor" Color="LightBlue" PresentationOptions:Freeze="True" />
+    <SolidColorBrush x:Key="InfoLevelColor" Color="#A0FFFFFF" PresentationOptions:Freeze="True" />
+    <SolidColorBrush x:Key="WarnLevelColor" Color="Moccasin" PresentationOptions:Freeze="True" />
+    <SolidColorBrush x:Key="ErrorLevelColor" Color="Salmon" PresentationOptions:Freeze="True" />
+    <SolidColorBrush x:Key="FatalLevelColor" Color="Crimson" PresentationOptions:Freeze="True" />
 
 </ResourceDictionary>

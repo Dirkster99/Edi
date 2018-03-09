@@ -1,0 +1,25 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:options="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+    >
+
+    <SolidColorBrush x:Key="EditorCurrentLineBackgroundColor" Color="#2FCCCDCE" options:Freeze="true" />
+
+    <SolidColorBrush x:Key="EditorBackground"                 Color="#FFFFFFFF"  options:Freeze="true" />
+
+    <SolidColorBrush x:Key="EditorForeground"                 Color="#FF000000"  options:Freeze="true" />
+
+    <SolidColorBrush x:Key="EditorLineNumbersForeground"      Color="#FFa0a0f0"  options:Freeze="true" />
+
+    <SolidColorBrush x:Key="EditorSelectionBrush"      Color="#8080C0FF"  options:Freeze="true" />
+    <SolidColorBrush x:Key="EditorSelectionBorder"     Color="#A080C0FF"  options:Freeze="true" />
+
+    <SolidColorBrush x:Key="NonPrintableCharacterBrush" Color="#3F8080FF"  options:Freeze="true" />
+
+
+    <!-- Style hyperlink displayed within text in text editor -->
+    <SolidColorBrush x:Key="LinkTextForegroundBrush"    Color="#FF4040FF"  options:Freeze="true" />
+    <SolidColorBrush x:Key="LinkTextBackgroundBrush"    Color="#00000000" options:Freeze="true" />
+
+</ResourceDictionary>

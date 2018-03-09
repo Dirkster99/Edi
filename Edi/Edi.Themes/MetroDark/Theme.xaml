@@ -2,21 +2,21 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     >
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Edi.Themes;component/IconsDark.xaml" />
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/Brushes.xaml" />
+        <ResourceDictionary Source="/Edi.Themes;component/EdiControls/YalvLib/YalvLib.xaml" />
+        <ResourceDictionary Source="/Edi.Themes;component/EdiControls/DocumentViewer.xaml" />
+        
+        <ResourceDictionary Source="/ICSharpCode.AvalonEdit;component/Edi/EdiTextEditor.xaml" />
+        <ResourceDictionary Source="/ICSharpCode.AvalonEdit;component/Edi/Themes/DarkBrushs.xaml" />
 
         <ResourceDictionary Source="/Mlib;component/Themes/DarkTheme.xaml" />
         <ResourceDictionary Source="/MWindowLib;component/Themes/DarkTheme.xaml" />
 
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/EdiControls/DocumentViewer.xaml" />
+        <ResourceDictionary Source="/Edi.Themes;component/IconsDark.xaml" />
+        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/Brushes.xaml" />
 
         <!-- Use dark brush definitions -->
         <ResourceDictionary Source="/MsgBox;component/Themes/DarkBrushes.xaml" />
         <ResourceDictionary Source="/MsgBox;component/Themes/DarkIcons.xaml" />
-
-        <ResourceDictionary Source="/ICSharpCode.AvalonEdit;component/Edi/EdiTextEditor.xaml" />
-
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/EdiControls/YalvLib/YalvLib.xaml" />
 
         <ResourceDictionary Source="/UnitComboLib;component/Themes/DarkBrushs.xaml" />
         <ResourceDictionary Source="/MRULib;component/Themes/DarkBrushes.xaml" />
