@@ -4,16 +4,16 @@
     using System.ComponentModel.Composition;
     using System.Reflection;
     using System.Windows;
-    using Edi.Core.Interfaces;
-    using Edi.Core.Interfaces.DocumentTypes;
-    using Edi.Core.Resources;
-    using Edi.Core.View.Pane;
-    using Edi.Documents.ViewModels.EdiDoc;
-    using Edi.Documents.ViewModels.MiniUml;
-    using Edi.Documents.ViewModels.StartPage;
+    using Core.Interfaces;
+    using Core.Interfaces.DocumentTypes;
+    using Core.Resources;
+    using Core.View.Pane;
+    using ViewModels.EdiDoc;
+    using ViewModels.MiniUml;
+    using ViewModels.StartPage;
     using Prism.Mef.Modularity;
     using Prism.Modularity;
-    using Edi.Settings.Interfaces;
+    using Settings.Interfaces;
 
     /// <summary>
     /// PRISM MEF Loader/Initializer class
@@ -35,7 +35,6 @@
         #region fields
         private readonly IAvalonDockLayoutViewModel mAvLayout;
         private readonly IToolWindowRegistry mToolRegistry;
-        private readonly ISettingsManager mSettingsManager;
         private readonly IDocumentTypeManager mDocumentTypeManager;
         #endregion fields
 
@@ -50,10 +49,9 @@
                                    ISettingsManager settingsManager,
                                    IDocumentTypeManager documentTypeManager)
         {
-            this.mAvLayout = avLayout;
-            this.mToolRegistry = toolRegistry;
-            this.mSettingsManager = settingsManager;
-            this.mDocumentTypeManager = documentTypeManager;
+            mAvLayout = avLayout;
+            mToolRegistry = toolRegistry;
+            mDocumentTypeManager = documentTypeManager;
         }
         #endregion constructors
 
@@ -63,11 +61,11 @@
         /// </summary>
         void IModule.Initialize()
         {
-            this.RegisterDataTemplates(this.mAvLayout.ViewProperties.SelectPanesTemplate);
-            this.RegisterStyles(this.mAvLayout.ViewProperties.SelectPanesStyle);
+            RegisterDataTemplates(mAvLayout.ViewProperties.SelectPanesTemplate);
+            RegisterStyles(mAvLayout.ViewProperties.SelectPanesStyle);
 
-            this.RegisterEdiTextEditor(this.mDocumentTypeManager);
-            this.RegisterMiniUml(this.mDocumentTypeManager);
+            RegisterEdiTextEditor(mDocumentTypeManager);
+            RegisterMiniUml(mDocumentTypeManager);
         }
 
         private void RegisterEdiTextEditor(IDocumentTypeManager documentTypeManager)
@@ -128,7 +126,7 @@
         /// </summary>
         /// <param name="paneSel"></param>
         /// <returns></returns>
-        private PanesTemplateSelector RegisterDataTemplates(PanesTemplateSelector paneSel)
+        private void RegisterDataTemplates(PanesTemplateSelector paneSel)
         {
             // StartPageView
             var template = ResourceLocator.GetResource<DataTemplate>(
@@ -153,20 +151,16 @@
                                     "MiniUMLViewDataTemplate") as DataTemplate;
 
             paneSel.RegisterDataTemplate(typeof(MiniUmlViewModel), template);
-
-            return paneSel;
         }
 
-        private PanesStyleSelector RegisterStyles(PanesStyleSelector selectPanesStyle)
+        private void RegisterStyles(PanesStyleSelector selectPanesStyle)
         {
             var newStyle = ResourceLocator.GetResource<Style>(
-                                    "Edi.Apps",
-                                    "Resources/Styles/AvalonDockStyles.xaml",
-                                    "StartPageStyle") as Style;
+                "Edi.Apps",
+                "Resources/Styles/AvalonDockStyles.xaml",
+                "StartPageStyle");
 
             selectPanesStyle.RegisterStyle(typeof(StartPageViewModel), newStyle);
-
-            return selectPanesStyle;
         }
         #endregion methods
     }

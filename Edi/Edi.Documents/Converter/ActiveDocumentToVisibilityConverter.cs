@@ -3,7 +3,7 @@
 	using System;
 	using System.Windows.Data;
 	using System.Windows.Markup;
-	using Edi.Documents.ViewModels.EdiDoc;
+	using ViewModels.EdiDoc;
 
 	/// <summary>
 	/// XAML mark up extension to convert a null value into a visibility value.
@@ -22,13 +22,8 @@
 		#endregion field
 
 		#region constructor
-		/// <summary>
-		/// Standard Constructor
-		/// </summary>
-		public ActiveDocumentToVisibilityConverter()
-		{
-		}
-		#endregion constructor
+
+	    #endregion constructor
 
 		#region MarkupExtension
 		/// <summary>
@@ -44,12 +39,7 @@
 		/// <returns></returns>
 		public override object ProvideValue(IServiceProvider serviceProvider)
 		{
-			if (converter == null)
-			{
-				converter = new ActiveDocumentToVisibilityConverter();
-			}
-
-			return converter;
+		    return converter ?? (converter = new ActiveDocumentToVisibilityConverter());
 		}
 		#endregion MarkupExtension
 
@@ -64,10 +54,7 @@
 		/// <returns></returns>
 		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
 		{
-			if (value == null)
-				return System.Windows.Visibility.Collapsed;
-
-			if (value is EdiViewModel)
+		    if (value is EdiViewModel)
 				return System.Windows.Visibility.Visible;
 
 			return System.Windows.Visibility.Collapsed;

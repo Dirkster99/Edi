@@ -21,11 +21,13 @@
              ><!-- The KeyboardFocus attached property is necessary to support CTRL+TAB in AvalonDock -->
   <UserControl.Resources>
     <BitmapImage UriSource="pack://application:,,,/Edi.Themes;component/Images/App/StartPage/Edi100.png" x:Key="Logo" />
-    <BitmapImage UriSource="pack://application:,,,/Edi.Themes;component/Images/App/StartPage/File_Open64.png" x:Key="FileOpenImage" />
-    <BitmapImage UriSource="pack://application:,,,/Edi.Themes;component/Images/App/StartPage/File_New64.png" x:Key="NewFileImage" />
   </UserControl.Resources>
   <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="12" >
-    <Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+          <ColumnDefinition />
+          <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
@@ -45,10 +47,11 @@
             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
             BorderBrush="{DynamicResource StartPageBorderForegroundColor}" BorderThickness="1">
 
-      <Grid Grid.Row="1" Margin="15" HorizontalAlignment="Center" Width="500">
+      <Grid Margin="15" HorizontalAlignment="Center" Width="500">
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto" />
           <RowDefinition Height="*" />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -80,7 +83,7 @@
 
         <view:RecentFilesView DataContext="{Binding}"
                               Grid.Row="2"
-                              Grid.ColumnSpan="2"
+                              Grid.ColumnSpan="2" Grid.Column="0"
                               MaxWidth="500"
                               Margin="0, 12" />
       </Grid>

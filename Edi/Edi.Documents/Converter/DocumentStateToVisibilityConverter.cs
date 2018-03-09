@@ -4,7 +4,7 @@
 	using System.Windows;
 	using System.Windows.Data;
 	using System.Windows.Markup;
-	using Edi.Core.Interfaces.Enums;
+	using Interfaces.Enums;
 
 	/// <summary>
 	/// XAML mark up extension to convert a null value into a visibility value.
@@ -18,13 +18,8 @@
 		#endregion field
 
 		#region constructor
-		/// <summary>
-		/// Standard Constructor
-		/// </summary>
-		public DocumentStateToVisibilityConverter()
-		{
-		}
-		#endregion constructor
+
+	    #endregion constructor
 
 		#region MarkupExtension
 		/// <summary>
@@ -40,12 +35,7 @@
 		/// <returns></returns>
 		public override object ProvideValue(IServiceProvider serviceProvider)
 		{
-			if (converter == null)
-			{
-				converter = new DocumentStateToVisibilityConverter();
-			}
-
-			return converter;
+		    return converter ?? (converter = new DocumentStateToVisibilityConverter());
 		}
 		#endregion MarkupExtension
 
@@ -61,24 +51,24 @@
 		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
 		{
 			if (value == null)
-				return System.Windows.Visibility.Hidden;
+				return Visibility.Hidden;
 
 			if ((value is DocumentState) == false)
-				return System.Windows.Visibility.Hidden;
+				return Visibility.Hidden;
 
 			DocumentState state = (DocumentState)value;
 
 			switch (state)
 			{
 				case DocumentState.IsLoading:
-					return System.Windows.Visibility.Hidden;
+					return Visibility.Hidden;
 
 				case DocumentState.IsEditing:
-					Console.WriteLine("Document is visble");
-					return System.Windows.Visibility.Visible;
+					Console.WriteLine(@"Document is visble");
+					return Visibility.Visible;
 			}
 
-			return System.Windows.Visibility.Hidden;
+			return Visibility.Hidden;
 		}
 
 		/// <summary>
