@@ -39,7 +39,6 @@ namespace Edi
         private readonly IMRUListViewModel _MruVM = null;
 
         private readonly Options mOptions = null;
-        private readonly IAppearanceManager mAppearManager = null;
         private readonly IThemesManager mThemes = null;
         private readonly ISettingsManager mProgramSettingsManager = null;
         #endregion fields
@@ -57,11 +56,9 @@ namespace Edi
         public Bootstapper(App app,
                            StartupEventArgs eventArgs,
                            Options programSettings,
-                           IThemesManager themesManager,
-                           IAppearanceManager appear)
+                           IThemesManager themesManager)
             : this()
         {
-            this.mAppearManager = appear;
             this.mThemes = themesManager;
             this.mProgramSettingsManager = new SettingsManager(this.mThemes);
 
@@ -173,7 +170,7 @@ namespace Edi
 
                 var toolWindowRegistry = this.Container.GetExportedValue<IToolWindowRegistry>();
 
-                appVM.LoadConfigOnAppStartup(this.mOptions, this.mProgramSettingsManager, this.mThemes, mAppearManager);
+                appVM.LoadConfigOnAppStartup(this.mOptions, this.mProgramSettingsManager, this.mThemes);
 
                 // Attempt to load a MiniUML plugin via the model class
                 MiniUML.Model.MiniUmlPluginLoader.LoadPlugins(appCore.AssemblyEntryLocation + @".\Plugins\MiniUML.Plugins.UmlClassDiagram\", this.AppViewModel); // discover via Plugin folder instead

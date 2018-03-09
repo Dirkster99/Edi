@@ -630,7 +630,7 @@
                                             ExecutedRoutedEventArgs e,
                                             System.Windows.Threading.Dispatcher disp)
         {
-            string oldTheme = ThemesManager.DefaultThemeName;
+            string oldTheme = Edi.Themes.Factory.DefaultThemeName;
 
             try
             {

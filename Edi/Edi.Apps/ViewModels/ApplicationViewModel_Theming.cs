@@ -157,8 +157,8 @@ namespace Edi.Apps.ViewModels
         /// <param name="NewColor"></param>
         /// <param name="backupDynResources"></param>
         private void ApplyToDynamicResource(string ResourceName,
-                                                                                SolidColorBrush NewColor,
-                                                                                List<string> backupDynResources)
+                                            SolidColorBrush NewColor,
+                                            List<string> backupDynResources)
         {
             if (Application.Current.Resources[ResourceName] != null && NewColor != null)
             {

@@ -82,7 +82,7 @@
 
             this.mReloadOpenFilesOnAppStart = true;
             this.mRunSingleInstance = true;
-            this.mCurrentTheme = ThemesManager.DefaultThemeName;
+            this.mCurrentTheme = Edi.Themes.Factory.DefaultThemeName;
             this.mLanguageSelected = Options.DefaultLocal;
 
             this.HighlightOnFileNew = true;

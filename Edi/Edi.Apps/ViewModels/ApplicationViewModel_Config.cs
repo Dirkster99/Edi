@@ -13,6 +13,7 @@
     using MRULib.MRU.Models.Persist;
     using CommonServiceLocator;
     using MLib.Interfaces;
+    using System.Windows.Media;
 
     public partial class ApplicationViewModel
     {
@@ -61,11 +62,10 @@
         /// <param name="themes"></param>
         public void LoadConfigOnAppStartup(Options programSettings,
                                             ISettingsManager settings,
-                                            IThemesManager themes,
-                                            IAppearanceManager appear)
+                                            IThemesManager themes)
         {
             // Re/Load program options and user profile session data to control global behaviour of program
-            settings.LoadOptions(this.mAppCore.DirFileAppSettingsData, themes, appear, programSettings);
+            settings.LoadOptions(this.mAppCore.DirFileAppSettingsData, themes, programSettings);
             settings.LoadSessionData(this.mAppCore.DirFileAppSessionData);
 
             settings.CheckSettingsOnLoad(SystemParameters.VirtualScreenLeft, SystemParameters.VirtualScreenTop);
@@ -75,8 +75,8 @@
             MRUEntrySerializer.ConvertToViewModel(settings.SessionData.MruList, mruVM);
 
             // Initialize skinning engine with this current skin
-            // standard skins defined in class enum
-            // plus configured skins with highlighting
+            // standard skins defined in class enum PLUS
+            // configured skins with highlighting
             themes.SetSelectedTheme(settings.SettingData.CurrentTheme);
             this.ResetTheme();                       // Initialize theme in process
         }

@@ -127,12 +127,11 @@ namespace Edi
             }
 
             Options options = null;
-            IThemesManager themesManager = new ThemesManager();
-            IAppearanceManager appear = AppearanceManager.GetInstance();
+            IThemesManager themesManager = Edi.Themes.Factory.CreateThemeManager();
 
             try
             {
-                options = SettingsManager.LoadOptions(AppHelpers.DirFileAppSettingsData, themesManager, appear);
+                options = SettingsManager.LoadOptions(AppHelpers.DirFileAppSettingsData, themesManager);
 
                 Thread.CurrentThread.CurrentCulture = new CultureInfo(options.LanguageSelected);
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(options.LanguageSelected);
@@ -161,7 +160,7 @@ namespace Edi
 
             try
             {
-                this.mBoot = new Bootstapper(this, e, options, themesManager, appear);
+                this.mBoot = new Bootstapper(this, e, options, themesManager);
                 this.mBoot.Run();
             }
             catch (Exception exp)
