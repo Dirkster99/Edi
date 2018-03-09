@@ -1,2 +1,0 @@
-AvalonDock Binary Source is here:
-https://github.com/Dirkster99/AvalonDock/releases/tag/v1.0.1
