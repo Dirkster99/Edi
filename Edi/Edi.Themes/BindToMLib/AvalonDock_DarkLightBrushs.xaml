@@ -107,4 +107,16 @@
                      Color="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlAccentColorKey}}"
                      options:Freeze="true" />
 
+    <!-- Tool Window : Tab -->
+    <SolidColorBrush x:Key="AvalonDockThemeVs2013ToolWindowTabSelectedActiveText"
+                     Color="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlAccentColorKey}}"
+                     options:Freeze="true" />
+    <SolidColorBrush x:Key="AvalonDockThemeVs2013ToolWindowTabSelectedInactiveText"
+                     Color="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlAccentColorKey}}"
+                     Opacity=".75"
+                     options:Freeze="true" />
+    <SolidColorBrush x:Key="AvalonDockThemeVs2013ToolWindowTabUnselectedHoveredText"
+                     Color="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlAccentColorKey}}"
+                     options:Freeze="true" />
+
 </ResourceDictionary>
