@@ -6,7 +6,7 @@
 	using System.Threading;
 	using System.Threading.Tasks;
 	using System.Windows.Threading;
-	using Edi.Core.ViewModels.Events;
+	using Core.ViewModels.Events;
 
 	/// <summary>
 	/// This class implements a task based log4net loader
@@ -52,9 +52,9 @@
 		/// </summary>
 		public FileLoader()
 		{
-			this.mAbortedWithErrors = this.mAbortedWithCancel = false;
-			this.mInnerException = null;
-			this.mObjColl = new Dictionary<string, object>();
+			mAbortedWithErrors = mAbortedWithCancel = false;
+			mInnerException = null;
+			mObjColl = new Dictionary<string, object>();
 		}
 		#endregion Constructor
 
@@ -64,21 +64,15 @@
 		public event EventHandler<ResultEvent> ProcessingResultEvent;
 
 		#region Properties
-		public Dictionary<string, object> ResultObjects
-		{
-			get
-			{
-				return (mObjColl == null
-										? new Dictionary<string, object>()
-										: new Dictionary<string, object>(mObjColl));
-			}
-		}
+		public Dictionary<string, object> ResultObjects => (mObjColl == null
+		    ? new Dictionary<string, object>()
+		    : new Dictionary<string, object>(mObjColl));
 
-		protected ApplicationException InnerException
+	    protected ApplicationException InnerException
 		{
-			get { return mInnerException; }
-			set { mInnerException = value; }
-		}
+			get => mInnerException;
+	        set => mInnerException = value;
+	    }
 		#endregion Properties
 
 		#region Methods
@@ -87,8 +81,7 @@
 		/// </summary>
 		public void Cancel()
 		{
-			if (this.mCancelTokenSource != null)
-				this.mCancelTokenSource.Cancel();
+		    mCancelTokenSource?.Cancel();
 		}
 
 		/// <summary>
@@ -99,7 +92,7 @@
 		internal void ExecuteAsynchronously(Action execFunc,
 																				bool async)
 		{
-			this.SaveThreadContext(async);
+			SaveThreadContext(async);
 
 			mCancelTokenSource = new CancellationTokenSource();
 			CancellationToken cancelToken = mCancelTokenSource.Token;
@@ -118,13 +111,13 @@
 						}
 						catch (OperationCanceledException exp)
 						{
-							this.mAbortedWithCancel = true;
+							mAbortedWithCancel = true;
 							processResults.Add(exp.Message);
 						}
 						catch (Exception exp)
 						{
-							this.mInnerException = new ApplicationException("Error occured", exp);
-							this.mAbortedWithErrors = true;
+							mInnerException = new ApplicationException("Error occured", exp);
+							mAbortedWithErrors = true;
 
 							processResults.Add(exp.ToString());
 						}
@@ -132,7 +125,7 @@
 						return processResults;
 						// End of async task with summary list of mResult strings
 					},
-			cancelToken).ContinueWith(ant =>
+			cancelToken, cancelToken).ContinueWith(ant =>
 																			{
 																				try
 																				{
@@ -143,10 +136,10 @@
 																					mAbortedWithErrors = true;
 																					throw new Exception(aggExp.Message, aggExp);
 																				}
-																			});
+																			}, cancelToken);
 
 			if (async == false) // Execute 'synchronously' via wait/block method
-				taskToProcess.Wait();
+				taskToProcess.Wait(cancelToken);
 		}
 
 		/// <summary>
@@ -163,10 +156,10 @@
 
 			foreach (Exception ex in agg.InnerExceptions)
 			{
-				sResult += string.Format("{0} Caught exception '{1}'", taskName, ex.Message) + Environment.NewLine;
+				sResult += $"{taskName} Caught exception '{ex.Message}'" + Environment.NewLine;
 			}
 
-			sResult += string.Format("{0} cancelled? {1}", taskName, task.IsCanceled) + Environment.NewLine;
+			sResult += $"{taskName} cancelled? {task.IsCanceled}" + Environment.NewLine;
 
 			return sResult;
 		}
@@ -182,8 +175,8 @@
 				return;
 
 			SendOrPostCallback callback = ReportTaskCompletedEvent;
-			this.mRequestingContext.Post(callback, null);
-			this.mRequestingContext = null;
+			mRequestingContext.Post(callback, null);
+			mRequestingContext = null;
 		}
 
 		/// <summary>
@@ -197,10 +190,10 @@
 			// hence completed event is not required to fire
 			if (bAsnc == false) return;
 
-			if (this.mRequestingContext != null)
+			if (mRequestingContext != null)
 				throw new InvalidOperationException("This component can handle only 1 processing request at a time");
 
-			this.mRequestingContext = (DispatcherSynchronizationContext)SynchronizationContext.Current;
+			mRequestingContext = (DispatcherSynchronizationContext)SynchronizationContext.Current;
 		}
 
 		/// <summary>

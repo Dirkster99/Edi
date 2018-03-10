@@ -4,12 +4,12 @@ namespace Edi.Documents.ViewModels.StartPage
     using System.Globalization;
     using System.Reflection;
     using System.Windows.Input;
-    using Edi.Core.ViewModels.Command;
+    using Core.ViewModels.Command;
     using MsgBox;
     using MRULib.MRU.Interfaces;
     using CommonServiceLocator;
 
-    public class StartPageViewModel : Edi.Core.ViewModels.FileBaseViewModel
+    public class StartPageViewModel : Core.ViewModels.FileBaseViewModel
     {
         #region fields
         public const string StartPageContentId = ">StartPage<";
@@ -21,30 +21,28 @@ namespace Edi.Documents.ViewModels.StartPage
         /// </summary>
         public StartPageViewModel()
         {
-            this.Title = Edi.Util.Local.Strings.STR_STARTPAGE_TITLE;
-            this.StartPageTip = Edi.Util.Local.Strings.STR_STARTPAGE_WELCOME_TT;
-            this.ContentId = StartPageViewModel.StartPageContentId;
+            Title = Util.Local.Strings.STR_STARTPAGE_TITLE;
+            StartPageTip = Util.Local.Strings.STR_STARTPAGE_WELCOME_TT;
+            ContentId = StartPageContentId;
         }
         #endregion constructor
 
         #region properties
         #region CloseCommand
-        RelayCommand<object> _closeCommand = null;
+
+        private RelayCommand<object> _closeCommand;
         public override ICommand CloseCommand
         {
             get
             {
-                if (_closeCommand == null)
-                    _closeCommand = new RelayCommand<object>((p) => this.OnClose(),
-                                                                                                     (p) => this.CanClose());
-
-                return _closeCommand;
+                return _closeCommand ?? (_closeCommand = new RelayCommand<object>((p) => OnClose(),
+                           (p) => CanClose()));
             }
         }
         #endregion
 
         #region OpenContainingFolder
-        private RelayCommand<object> _openContainingFolderCommand = null;
+        private RelayCommand<object> _openContainingFolderCommand;
 
         /// <summary>
         /// Get open containing folder command which will open
@@ -55,10 +53,8 @@ namespace Edi.Documents.ViewModels.StartPage
         {
             get
             {
-                if (_openContainingFolderCommand == null)
-                    _openContainingFolderCommand = new RelayCommand<object>((p) => this.OnOpenContainingFolderCommand());
-
-                return _openContainingFolderCommand;
+                return _openContainingFolderCommand ?? (_openContainingFolderCommand =
+                           new RelayCommand<object>((p) => OnOpenContainingFolderCommand()));
             }
         }
 
@@ -67,14 +63,14 @@ namespace Edi.Documents.ViewModels.StartPage
             try
             {
                 // combine the arguments together it doesn't matter if there is a space after ','
-                string argument = @"/select, " + this.GetAlternativePath();
+                string argument = @"/select, " + GetAlternativePath();
 
                 System.Diagnostics.Process.Start("explorer.exe", argument);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                msgBox.Show(string.Format(CultureInfo.CurrentCulture, "{0}\n'{1}'.", ex.Message, (FilePath == null ? string.Empty : this.FilePath)),
+                msgBox.Show(string.Format(CultureInfo.CurrentCulture, "{0}\n'{1}'.", ex.Message, (FilePath == null ? string.Empty : FilePath)),
                                             Util.Local.Strings.STR_FILE_FINDING_CAPTION,
                                             MsgBoxButtons.OK, MsgBoxImage.Error);
             }
@@ -82,7 +78,7 @@ namespace Edi.Documents.ViewModels.StartPage
         #endregion OpenContainingFolder
 
         #region CopyFullPathtoClipboard
-        private RelayCommand<object> _copyFullPathtoClipboard = null;
+        private RelayCommand<object> _copyFullPathtoClipboard;
 
         /// <summary>
         /// Get CopyFullPathtoClipboard command which will copy
@@ -92,10 +88,8 @@ namespace Edi.Documents.ViewModels.StartPage
         {
             get
             {
-                if (_copyFullPathtoClipboard == null)
-                    _copyFullPathtoClipboard = new RelayCommand<object>((p) => this.OnCopyFullPathtoClipboardCommand());
-
-                return _copyFullPathtoClipboard;
+                return _copyFullPathtoClipboard ?? (_copyFullPathtoClipboard =
+                           new RelayCommand<object>((p) => OnCopyFullPathtoClipboardCommand()));
             }
         }
 
@@ -103,44 +97,26 @@ namespace Edi.Documents.ViewModels.StartPage
         {
             try
             {
-                System.Windows.Clipboard.SetText(this.GetAlternativePath());
+                System.Windows.Clipboard.SetText(GetAlternativePath());
             }
             catch
             {
+                // ignored
             }
         }
         #endregion CopyFullPathtoClipboard
 
-        public override Uri IconSource
-        {
-            get
-            {
-                // This icon is visible in AvalonDock's Document Navigator window
-                return new Uri("pack://application:,,,/Edi.Themes;component/Images/Documents/document.png", UriKind.RelativeOrAbsolute);
-            }
-        }
+        public override Uri IconSource => new Uri("pack://application:,,,/Edi.Themes;component/Images/Documents/document.png", UriKind.RelativeOrAbsolute);
 
-        public IMRUListViewModel MruList
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<IMRUListViewModel>();
-            }
-        }
+        public IMRUListViewModel MruList => ServiceLocator.Current.GetInstance<IMRUListViewModel>();
 
         public string StartPageTip { get; set; }
 
-        override public bool IsDirty
+        public override bool IsDirty
         {
-            get
-            {
-                return false;
-            }
+            get => false;
 
-            set
-            {
-                throw new NotSupportedException("Start page cannot be saved therfore setting dirty cannot be useful.");
-            }
+            set => throw new NotSupportedException("Start page cannot be saved therfore setting dirty cannot be useful.");
         }
 
         /// <summary>
@@ -149,31 +125,17 @@ namespace Edi.Documents.ViewModels.StartPage
         /// data implementation if this property returns false.
         /// (this is document specific and should always be overriden by descendents)
         /// </summary>
-        override public bool CanSaveData
+        public override bool CanSaveData => false;
+
+        public override string FilePath
         {
-            get
-            {
-                return false;
-            }
+            get => ContentId;
+
+            protected set => throw new NotSupportedException();
         }
 
-        override public string FilePath
-        {
-            get
-            {
-                return this.ContentId;
-            }
+        public override string FileName => string.Empty;
 
-            protected set
-            {
-                throw new NotSupportedException();
-            }
-        }
-
-        public override string FileName
-        {
-            get { return string.Empty; }
-        }
         #endregion properties
 
         #region methods
@@ -187,16 +149,16 @@ namespace Edi.Documents.ViewModels.StartPage
             return Assembly.GetEntryAssembly().Location;
         }
 
-        override public bool CanSave() { return false; }
+        public override bool CanSave() { return false; }
 
-        override public bool CanSaveAs() { return false; }
+        public override bool CanSaveAs() { return false; }
 
-        override public bool SaveFile(string filePath)
+        public override bool SaveFile(string filePath)
         {
             throw new NotImplementedException();
         }
 
-        override public string GetFilePath()
+        public override string GetFilePath()
         {
             throw new NotSupportedException("Start Page does not have a valid file path.");
         }

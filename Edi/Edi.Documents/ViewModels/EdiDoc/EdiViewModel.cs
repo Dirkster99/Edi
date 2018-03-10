@@ -1,3 +1,5 @@
+using ICSharpCode.AvalonEdit;
+
 namespace Edi.Documents.ViewModels.EdiDoc
 {
     using System;
@@ -8,12 +10,12 @@ namespace Edi.Documents.ViewModels.EdiDoc
     using System.Windows;
     using System.Windows.Input;
     using System.Windows.Threading;
-    using Edi.Core.Interfaces;
-    using Edi.Core.Interfaces.Documents;
-    using Edi.Core.Interfaces.Enums;
-    using Edi.Core.ViewModels.Command;
-    using Edi.Core.ViewModels.Events;
-    using Edi.Documents.Process;
+    using Core.Interfaces;
+    using Core.Interfaces.Documents;
+    using Core.Interfaces.Enums;
+    using Core.ViewModels.Command;
+    using Core.ViewModels.Events;
+    using Process;
     using ICSharpCode.AvalonEdit.Document;
     using ICSharpCode.AvalonEdit.Edi.BlockSurround;
     using ICSharpCode.AvalonEdit.Edi.TextBoxControl;
@@ -21,8 +23,8 @@ namespace Edi.Documents.ViewModels.EdiDoc
     using ICSharpCode.AvalonEdit.Utils;
     using Microsoft.Win32;
     using MsgBox;
-    using Edi.Settings.Interfaces;
-    using Edi.Settings.ProgramSettings;
+    using Settings.Interfaces;
+    using Settings.ProgramSettings;
     using UnitComboLib.Models.Unit.Screen;
     using UnitComboLib.ViewModels;
     using CommonServiceLocator;
@@ -62,8 +64,8 @@ namespace Edi.Documents.ViewModels.EdiDoc
     /// This viewmodel class represents the business logic of the text editor.
     /// Each text editor document instance is associated with a <seealso cref="EdiViewModel"/> instance.
     /// </summary>
-    public class EdiViewModel : Edi.Core.ViewModels.FileBaseViewModel,
-                              Edi.Dialogs.FindReplace.ViewModel.IEditor,
+    public class EdiViewModel : Core.ViewModels.FileBaseViewModel,
+                              Dialogs.FindReplace.ViewModel.IEditor,
                                                             IDocumentEdi,
                                                             IDocumentFileWatcher
     {
@@ -73,42 +75,42 @@ namespace Edi.Documents.ViewModels.EdiDoc
         public const string FileFilterName = "All Files";
         public const string DefaultFilter = "*";
 
-        private static int iNewFileCounter = 0;
-        private string mDefaultFileName = Edi.Util.Local.Strings.STR_FILE_DEFAULTNAME;
+        private static int iNewFileCounter;
+        private string mDefaultFileName = Util.Local.Strings.STR_FILE_DEFAULTNAME;
         private string mDefaultFileType = ".txt";
 
         private TextDocument mDocument;
         private ICSharpCode.AvalonEdit.TextEditorOptions mTextOptions;
         private IHighlightingDefinition mHighlightingDefinition;
 
-        private string mFilePath = null;
-        private bool mIsDirty = false;
+        private string mFilePath;
+        private bool mIsDirty;
 
         private object lockThis = new object();
 
-        private bool mWordWrap = false;            // Toggle state command
+        private bool mWordWrap;            // Toggle state command
         private bool mShowLineNumbers = true;     // Toggle state command
         private Encoding mFileEncoding = Encoding.UTF8;
 
-        private int mLine = 0;      // These properties are used to display the current column/line
-        private int mColumn = 0;    // of the cursor in the user interface
+        private int mLine;      // These properties are used to display the current column/line
+        private int mColumn;    // of the cursor in the user interface
 
         // These properties are used to save and restore the editor state when CTRL+TABing between documents
-        private int mTextEditorCaretOffset = 0;
-        private int mTextEditorSelectionStart = 0;
-        private int mTextEditorSelectionLength = 0;
-        private bool mTextEditorIsRectangularSelection = false;
-        private double mTextEditorScrollOffsetX = 0;
-        private double mTextEditorScrollOffsetY = 0;
+        private int mTextEditorCaretOffset;
+        private int mTextEditorSelectionStart;
+        private int mTextEditorSelectionLength;
+        private bool mTextEditorIsRectangularSelection;
+        private double mTextEditorScrollOffsetX;
+        private double mTextEditorScrollOffsetY;
 
-        private TextBoxController mTxtControl = null;
+        private TextBoxController mTxtControl;
 
         private bool mIsReadOnly = true;
         private string mIsReadOnlyReason = string.Empty;
 
         private FileLoader mAsyncProcessor;
 
-        RelayCommand<object> mCloseCommand = null;
+        RelayCommand<object> mCloseCommand;
         #endregion Fields
 
         #region constructor
@@ -119,7 +121,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         public EdiViewModel(IDocumentModel documentModel)
             : this()
         {
-            this.mDocumentModel.SetFileNamePath(documentModel.FileNamePath, documentModel.IsReal);
+            mDocumentModel.SetFileNamePath(documentModel.FileNamePath, documentModel.IsReal);
         }
 
         /// <summary>
@@ -127,33 +129,33 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// for construction from file saved on disk.
         /// </summary>
         protected EdiViewModel()
-            : base(EdiViewModel.DocumentKey)
+            : base(DocumentKey)
         {
-            this.CloseOnErrorWithoutMessage = false;
+            CloseOnErrorWithoutMessage = false;
 
             // Copy text editor settings from settingsmanager by default
-            this.TextOptions = new ICSharpCode.AvalonEdit.TextEditorOptions();
-            this.WordWrap = false;
+            TextOptions = new ICSharpCode.AvalonEdit.TextEditorOptions();
+            WordWrap = false;
 
             var items = new ObservableCollection<UnitComboLib.Models.ListItem>(Options.GenerateScreenUnitList());
-            this.SizeUnitLabel =
+            SizeUnitLabel =
                 UnitComboLib.UnitViewModeService.CreateInstance(items,
                                                                 new ScreenConverter(),
                                                                 0);
 
-            this.TxtControl = new TextBoxController();
+            TxtControl = new TextBoxController();
 
-            this.FilePath = this.GetDefaultFileNewName();
+            FilePath = GetDefaultFileNewName();
 
-            this.IsDirty = false;
-            this.mHighlightingDefinition = null;
+            IsDirty = false;
+            mHighlightingDefinition = null;
 
-            this.mDocument = null; //new TextDocument();
+            mDocument = null; //new TextDocument();
 
-            this.TextEditorSelectionStart = 0;
-            this.TextEditorSelectionLength = 0;
+            TextEditorSelectionStart = 0;
+            TextEditorSelectionLength = 0;
 
-            this.InsertBlocks = null;
+            InsertBlocks = null;
         }
         #endregion constructor
 
@@ -174,23 +176,23 @@ namespace Edi.Documents.ViewModels.EdiDoc
         {
             get
             {
-                if (string.IsNullOrEmpty(this.mFilePath))
-                    return this.GetDefaultFileNewName();
+                if (string.IsNullOrEmpty(mFilePath))
+                    return GetDefaultFileNewName();
 
-                return this.mFilePath;
+                return mFilePath;
             }
 
             protected set
             {
-                if (this.mFilePath != value)
+                if (mFilePath != value)
                 {
-                    this.mFilePath = value;
+                    mFilePath = value;
 
-                    this.RaisePropertyChanged(() => this.FilePath);
-                    this.RaisePropertyChanged(() => this.FileName);
-                    this.RaisePropertyChanged(() => this.Title);
+                    RaisePropertyChanged(() => FilePath);
+                    RaisePropertyChanged(() => FileName);
+                    RaisePropertyChanged(() => Title);
 
-                    this.HighlightingDefinition = HighlightingManager.Instance.GetDefinitionByExtension(Path.GetExtension(this.mFilePath));
+                    HighlightingDefinition = HighlightingManager.Instance.GetDefinitionByExtension(Path.GetExtension(mFilePath));
                 }
             }
         }
@@ -200,13 +202,8 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// <summary>
         /// Title is the string that is usually displayed - with or without dirty mark '*' - in the docking environment
         /// </summary>
-        public override string Title
-        {
-            get
-            {
-                return this.FileName + (this.IsDirty == true ? "*" : string.Empty);
-            }
-        }
+        public override string Title => FileName + (IsDirty ? "*" : string.Empty);
+
         #endregion
 
         #region FileName
@@ -223,20 +220,14 @@ namespace Edi.Documents.ViewModels.EdiDoc
             {
                 // This option should never happen - its an emergency break for those cases that never occur
                 if (string.IsNullOrEmpty(FilePath))
-                    return this.GetDefaultFileNewName();
+                    return GetDefaultFileNewName();
 
-                return System.IO.Path.GetFileName(FilePath);
+                return Path.GetFileName(FilePath);
             }
         }
 
-        public override Uri IconSource
-        {
-            get
-            {
-                // This icon is visible in AvalonDock's Document Navigator window
-                return new Uri("pack://application:,,,/Edi.Themes;component/Images/Documents/document.png", UriKind.RelativeOrAbsolute);
-            }
-        }
+        public override Uri IconSource => new Uri("pack://application:,,,/Edi.Themes;component/Images/Documents/document.png", UriKind.RelativeOrAbsolute);
+
         #endregion FileName
 
         #region IsReadOnly
@@ -249,23 +240,23 @@ namespace Edi.Documents.ViewModels.EdiDoc
         {
             get
             {
-                lock (this.lockThis)
+                lock (lockThis)
                 {
-                    return this.mIsReadOnly;
+                    return mIsReadOnly;
                 }
             }
 
             protected set
             {
-                lock (this.lockThis)
+                lock (lockThis)
                 {
-                    if (this.mIsReadOnly != value)
+                    if (mIsReadOnly != value)
                     {
                         if (value == false)
-                            this.IsReadOnlyReason = string.Empty;
+                            IsReadOnlyReason = string.Empty;
 
-                        this.mIsReadOnly = value;
-                        this.RaisePropertyChanged(() => this.IsReadOnly);
+                        mIsReadOnly = value;
+                        RaisePropertyChanged(() => IsReadOnly);
                     }
                 }
             }
@@ -273,17 +264,14 @@ namespace Edi.Documents.ViewModels.EdiDoc
 
         public string IsReadOnlyReason
         {
-            get
-            {
-                return this.mIsReadOnlyReason;
-            }
+            get => mIsReadOnlyReason;
 
             protected set
             {
-                if (this.mIsReadOnlyReason != value)
+                if (mIsReadOnlyReason != value)
                 {
-                    this.mIsReadOnlyReason = value;
-                    this.RaisePropertyChanged(() => this.IsReadOnlyReason);
+                    mIsReadOnlyReason = value;
+                    RaisePropertyChanged(() => IsReadOnlyReason);
                 }
             }
         }
@@ -300,17 +288,14 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public TextDocument Document
         {
-            get
-            {
-                return this.mDocument;
-            }
+            get => mDocument;
 
             set
             {
-                if (this.mDocument != value)
+                if (mDocument != value)
                 {
-                    this.mDocument = value;
-                    this.RaisePropertyChanged(() => this.Document);
+                    mDocument = value;
+                    RaisePropertyChanged(() => Document);
                 }
             }
         }
@@ -321,12 +306,9 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// IsDirty indicates whether the file currently loaded
         /// in the editor was modified by the user or not.
         /// </summary>
-        override public bool IsDirty
+        public override bool IsDirty
         {
-            get
-            {
-                return mIsDirty;
-            }
+            get => mIsDirty;
 
             set
             {
@@ -334,8 +316,8 @@ namespace Edi.Documents.ViewModels.EdiDoc
                 {
                     mIsDirty = value;
 
-                    this.RaisePropertyChanged(() => this.IsDirty);
-                    this.RaisePropertyChanged(() => this.Title);
+                    RaisePropertyChanged(() => IsDirty);
+                    RaisePropertyChanged(() => Title);
                 }
             }
         }
@@ -348,13 +330,8 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// data implementation if this property returns false.
         /// (this is document specific and should always be overriden by descendents)
         /// </summary>
-        override public bool CanSaveData
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool CanSaveData => true;
+
         #endregion CanSaveData
 
         #region AvalonEdit properties
@@ -370,7 +347,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
             {
                 lock (lockThis)
                 {
-                    return this.mHighlightingDefinition;
+                    return mHighlightingDefinition;
                 }
             }
 
@@ -378,11 +355,11 @@ namespace Edi.Documents.ViewModels.EdiDoc
             {
                 lock (lockThis)
                 {
-                    if (this.mHighlightingDefinition != value)
+                    if (mHighlightingDefinition != value)
                     {
-                        this.mHighlightingDefinition = value;
+                        mHighlightingDefinition = value;
 
-                        this.RaisePropertyChanged(() => this.HighlightingDefinition);
+                        RaisePropertyChanged(() => HighlightingDefinition);
                     }
                 }
             }
@@ -393,17 +370,14 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public bool WordWrap
         {
-            get
-            {
-                return this.mWordWrap;
-            }
+            get => mWordWrap;
 
             set
             {
-                if (this.mWordWrap != value)
+                if (mWordWrap != value)
                 {
-                    this.mWordWrap = value;
-                    this.RaisePropertyChanged(() => this.WordWrap);
+                    mWordWrap = value;
+                    RaisePropertyChanged(() => WordWrap);
                 }
             }
         }
@@ -413,17 +387,14 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public bool ShowLineNumbers
         {
-            get
-            {
-                return this.mShowLineNumbers;
-            }
+            get => mShowLineNumbers;
 
             set
             {
-                if (this.mShowLineNumbers != value)
+                if (mShowLineNumbers != value)
                 {
-                    this.mShowLineNumbers = value;
-                    this.RaisePropertyChanged(() => this.ShowLineNumbers);
+                    mShowLineNumbers = value;
+                    RaisePropertyChanged(() => ShowLineNumbers);
                 }
             }
         }
@@ -433,17 +404,14 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public bool ShowEndOfLine               // Toggle state command
         {
-            get
-            {
-                return this.TextOptions.ShowEndOfLine;
-            }
+            get => TextOptions.ShowEndOfLine;
 
             set
             {
-                if (this.TextOptions.ShowEndOfLine != value)
+                if (TextOptions.ShowEndOfLine != value)
                 {
-                    this.TextOptions.ShowEndOfLine = value;
-                    this.RaisePropertyChanged(() => this.ShowEndOfLine);
+                    TextOptions.ShowEndOfLine = value;
+                    RaisePropertyChanged(() => ShowEndOfLine);
                 }
             }
         }
@@ -453,17 +421,14 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public bool ShowSpaces               // Toggle state command
         {
-            get
-            {
-                return this.TextOptions.ShowSpaces;
-            }
+            get => TextOptions.ShowSpaces;
 
             set
             {
-                if (this.TextOptions.ShowSpaces != value)
+                if (TextOptions.ShowSpaces != value)
                 {
-                    this.TextOptions.ShowSpaces = value;
-                    this.RaisePropertyChanged(() => this.ShowSpaces);
+                    TextOptions.ShowSpaces = value;
+                    RaisePropertyChanged(() => ShowSpaces);
                 }
             }
         }
@@ -473,17 +438,14 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public bool ShowTabs               // Toggle state command
         {
-            get
-            {
-                return this.TextOptions.ShowTabs;
-            }
+            get => TextOptions.ShowTabs;
 
             set
             {
-                if (this.TextOptions.ShowTabs != value)
+                if (TextOptions.ShowTabs != value)
                 {
-                    this.TextOptions.ShowTabs = value;
-                    this.RaisePropertyChanged(() => this.ShowTabs);
+                    TextOptions.ShowTabs = value;
+                    RaisePropertyChanged(() => ShowTabs);
                 }
             }
         }
@@ -491,19 +453,16 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// <summary>
         /// Get/Set texteditor options frmo <see cref="AvalonEdit"/> editor as <see cref="TextEditorOptions"/> instance.
         /// </summary>
-        public ICSharpCode.AvalonEdit.TextEditorOptions TextOptions
+        public TextEditorOptions TextOptions
         {
-            get
-            {
-                return this.mTextOptions;
-            }
+            get => mTextOptions;
 
             set
             {
-                if (this.mTextOptions != value)
+                if (mTextOptions != value)
                 {
-                    this.mTextOptions = value;
-                    this.RaisePropertyChanged(() => this.TextOptions);
+                    mTextOptions = value;
+                    RaisePropertyChanged(() => TextOptions);
                 }
             }
         }
@@ -514,9 +473,9 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// Indicate whether there is something to save in the document
         /// currently viewed in through this viewmodel.
         /// </summary>
-        override public bool CanSave()
+        public override bool CanSave()
         {
-            if (this.Document == null)
+            if (Document == null)
                 return false;
 
             return true;
@@ -526,25 +485,18 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// Write text content to disk and (re-)set associated properties
         /// </summary>
         /// <param name="filePath"></param>
-        override public bool SaveFile(string filePath)
+        public override bool SaveFile(string filePath)
         {
-            try
-            {
-                File.WriteAllText(filePath, this.Document.Text);
+            File.WriteAllText(filePath, Document.Text);
 
-                // Set new file name in viewmodel and model
-                this.FilePath = filePath;
-                this.ContentId = filePath;
-                this.mDocumentModel.SetFileNamePath(filePath, true);
+            // Set new file name in viewmodel and model
+            FilePath = filePath;
+            ContentId = filePath;
+            mDocumentModel.SetFileNamePath(filePath, true);
 
-                this.IsDirty = false;
+            IsDirty = false;
 
-                return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return true;
         }
 
         /// <summary>
@@ -552,9 +504,9 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// currently viewed in through this viewmodel.
         /// </summary>
         /// <returns></returns>
-        override public bool CanSaveAs()
+        public override bool CanSaveAs()
         {
-            return this.CanSave();
+            return CanSave();
         }
         #endregion SaveCommand SaveAsCommand
 
@@ -562,17 +514,12 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// <summary>
         /// This command cloases a single file. The binding for this is in the AvalonDock LayoutPanel Style.
         /// </summary>
-        override public ICommand CloseCommand
+        public override ICommand CloseCommand
         {
             get
             {
-                if (mCloseCommand == null)
-                {
-                    mCloseCommand = new RelayCommand<object>((p) => this.OnClose(),
-                                                                                                     (p) => this.CanClose());
-                }
-
-                return mCloseCommand;
+                return mCloseCommand ?? (mCloseCommand = new RelayCommand<object>((p) => OnClose(),
+                           (p) => CanClose()));
             }
         }
 
@@ -582,7 +529,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// <returns></returns>
         public new bool CanClose()
         {
-            if (this.State == DocumentState.IsLoading)
+            if (State == DocumentState.IsLoading)
                 return false;
 
             return base.CanClose();
@@ -595,17 +542,14 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public Encoding FileEncoding
         {
-            get
-            {
-                return this.mFileEncoding;
-            }
+            get => mFileEncoding;
 
             set
             {
-                if (this.mFileEncoding != value)
+                if (mFileEncoding != value)
                 {
-                    this.mFileEncoding = value;
-                    this.RaisePropertyChanged(() => this.mFileEncoding);
+                    mFileEncoding = value;
+                    RaisePropertyChanged(() => mFileEncoding);
                 }
             }
         }
@@ -625,17 +569,14 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public int Line
         {
-            get
-            {
-                return this.mLine;
-            }
+            get => mLine;
 
             set
             {
-                if (this.mLine != value)
+                if (mLine != value)
                 {
-                    this.mLine = value;
-                    this.RaisePropertyChanged(() => this.Line);
+                    mLine = value;
+                    RaisePropertyChanged(() => Line);
                 }
             }
         }
@@ -646,17 +587,14 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public int Column
         {
-            get
-            {
-                return this.mColumn;
-            }
+            get => mColumn;
 
             set
             {
-                if (this.mColumn != value)
+                if (mColumn != value)
                 {
-                    this.mColumn = value;
-                    this.RaisePropertyChanged(() => this.Column);
+                    mColumn = value;
+                    RaisePropertyChanged(() => Column);
                 }
             }
         }
@@ -669,17 +607,14 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public int TextEditorCaretOffset
         {
-            get
-            {
-                return this.mTextEditorCaretOffset;
-            }
+            get => mTextEditorCaretOffset;
 
             set
             {
-                if (this.mTextEditorCaretOffset != value)
+                if (mTextEditorCaretOffset != value)
                 {
-                    this.mTextEditorCaretOffset = value;
-                    this.RaisePropertyChanged(() => this.TextEditorCaretOffset);
+                    mTextEditorCaretOffset = value;
+                    RaisePropertyChanged(() => TextEditorCaretOffset);
                 }
             }
         }
@@ -690,17 +625,14 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public int TextEditorSelectionStart
         {
-            get
-            {
-                return this.mTextEditorSelectionStart;
-            }
+            get => mTextEditorSelectionStart;
 
             set
             {
-                if (this.mTextEditorSelectionStart != value)
+                if (mTextEditorSelectionStart != value)
                 {
-                    this.mTextEditorSelectionStart = value;
-                    this.RaisePropertyChanged(() => this.TextEditorSelectionStart);
+                    mTextEditorSelectionStart = value;
+                    RaisePropertyChanged(() => TextEditorSelectionStart);
                 }
             }
         }
@@ -711,34 +643,28 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public int TextEditorSelectionLength
         {
-            get
-            {
-                return this.mTextEditorSelectionLength;
-            }
+            get => mTextEditorSelectionLength;
 
             set
             {
-                if (this.mTextEditorSelectionLength != value)
+                if (mTextEditorSelectionLength != value)
                 {
-                    this.mTextEditorSelectionLength = value;
-                    this.RaisePropertyChanged(() => this.TextEditorSelectionLength);
+                    mTextEditorSelectionLength = value;
+                    RaisePropertyChanged(() => TextEditorSelectionLength);
                 }
             }
         }
 
         public bool TextEditorIsRectangularSelection
         {
-            get
-            {
-                return this.mTextEditorIsRectangularSelection;
-            }
+            get => mTextEditorIsRectangularSelection;
 
             set
             {
-                if (this.mTextEditorIsRectangularSelection != value)
+                if (mTextEditorIsRectangularSelection != value)
                 {
-                    this.mTextEditorIsRectangularSelection = value;
-                    this.RaisePropertyChanged(() => this.TextEditorIsRectangularSelection);
+                    mTextEditorIsRectangularSelection = value;
+                    RaisePropertyChanged(() => TextEditorIsRectangularSelection);
                 }
             }
         }
@@ -749,17 +675,14 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public double TextEditorScrollOffsetX
         {
-            get
-            {
-                return this.mTextEditorScrollOffsetX;
-            }
+            get => mTextEditorScrollOffsetX;
 
             set
             {
-                if (this.mTextEditorScrollOffsetX != value)
+                if (mTextEditorScrollOffsetX != value)
                 {
-                    this.mTextEditorScrollOffsetX = value;
-                    this.RaisePropertyChanged(() => this.TextEditorScrollOffsetX);
+                    mTextEditorScrollOffsetX = value;
+                    RaisePropertyChanged(() => TextEditorScrollOffsetX);
                 }
             }
         }
@@ -769,17 +692,14 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public double TextEditorScrollOffsetY
         {
-            get
-            {
-                return this.mTextEditorScrollOffsetY;
-            }
+            get => mTextEditorScrollOffsetY;
 
             set
             {
-                if (this.mTextEditorScrollOffsetY != value)
+                if (mTextEditorScrollOffsetY != value)
                 {
-                    this.mTextEditorScrollOffsetY = value;
-                    this.RaisePropertyChanged(() => this.TextEditorScrollOffsetY);
+                    mTextEditorScrollOffsetY = value;
+                    RaisePropertyChanged(() => TextEditorScrollOffsetY);
                 }
             }
         }
@@ -789,17 +709,14 @@ namespace Edi.Documents.ViewModels.EdiDoc
         #region TxtControl
         public TextBoxController TxtControl
         {
-            get
-            {
-                return this.mTxtControl;
-            }
+            get => mTxtControl;
 
             private set
             {
-                if (this.mTxtControl != value)
+                if (mTxtControl != value)
                 {
-                    this.mTxtControl = value;
-                    this.RaisePropertyChanged(() => this.TxtControl);
+                    mTxtControl = value;
+                    RaisePropertyChanged(() => TxtControl);
                 }
             }
         }
@@ -810,10 +727,10 @@ namespace Edi.Documents.ViewModels.EdiDoc
         {
             get
             {
-                if (this.Document == null)
+                if (Document == null)
                     return string.Empty;
 
-                return this.Document.Text;
+                return Document.Text;
             }
         }
 
@@ -821,11 +738,10 @@ namespace Edi.Documents.ViewModels.EdiDoc
         {
             get
             {
-                int start = 0, length = 0;
-                bool IsRectSelect = false;
+                int start = 0;
 
-                if (this.TxtControl != null)
-                    this.TxtControl.CurrentSelection(out start, out length, out IsRectSelect);
+                if (TxtControl != null)
+                    TxtControl.CurrentSelection(out start, out _, out _);
 
                 return start;
             }
@@ -835,11 +751,10 @@ namespace Edi.Documents.ViewModels.EdiDoc
         {
             get
             {
-                int start = 0, length = 0;
-                bool IsRectSelect = false;
+                int length = 0;
 
-                if (this.TxtControl != null)
-                    this.TxtControl.CurrentSelection(out start, out length, out IsRectSelect);
+                if (TxtControl != null)
+                    TxtControl.CurrentSelection(out _, out length, out _);
 
                 return length;
             }
@@ -852,14 +767,12 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// <param name="length"></param>
         public void Select(int start, int length)
         {
-            if (this.TxtControl != null)
-                this.TxtControl.SelectText(start, length);
+            TxtControl?.SelectText(start, length);
         }
 
         public void Replace(int start, int length, string ReplaceWith)
         {
-            if (this.Document != null)
-                this.Document.Replace(start, length, ReplaceWith);
+            Document?.Replace(start, length, ReplaceWith);
         }
 
         /// <summary>
@@ -867,8 +780,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public void BeginChange()
         {
-            if (this.TxtControl != null)
-                this.TxtControl.BeginChange();
+            TxtControl?.BeginChange();
         }
 
         /// <summary>
@@ -876,8 +788,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public void EndChange()
         {
-            if (this.TxtControl != null)
-                this.TxtControl.EndChange();
+            TxtControl?.EndChange();
         }
         #endregion IEditorInterface
         #endregion properties
@@ -899,13 +810,14 @@ namespace Edi.Documents.ViewModels.EdiDoc
         public static EdiViewModel LoadFile(IDocumentModel dm,
                                                                                 object o)
         {
-            return EdiViewModel.LoadFile(dm, o as ISettingsManager);
+            return LoadFile(dm, o as ISettingsManager);
         }
 
         /// <summary>
         /// Load a files contents into the viewmodel for viewing and editing.
         /// </summary>
         /// <param name="dm"></param>
+        /// <param name="settings"></param>
         /// <param name="closeOnErrorWithoutMessage"></param>
         /// <returns></returns>
         public static EdiViewModel LoadFile(IDocumentModel dm,
@@ -933,25 +845,25 @@ namespace Edi.Documents.ViewModels.EdiDoc
             try
             {
                 var isReal = File.Exists(filePath);
-                this.mDocumentModel.SetFileNamePath(filePath, isReal);
+                mDocumentModel.SetFileNamePath(filePath, isReal);
 
-                if (this.IsFilePathReal == true)
+                if (IsFilePathReal)
                 {
-                    this.mDocumentModel.SetIsReal(this.IsFilePathReal);
-                    this.FilePath = filePath;
-                    this.ContentId = this.mFilePath;
-                    this.IsDirty = false; // Mark document loaded from persistence as unedited copy (display without dirty mark '*' in name)
+                    mDocumentModel.SetIsReal(IsFilePathReal);
+                    FilePath = filePath;
+                    ContentId = mFilePath;
+                    IsDirty = false; // Mark document loaded from persistence as unedited copy (display without dirty mark '*' in name)
 
                     // Check file attributes and set to read-only if file attributes indicate that
-                    if ((System.IO.File.GetAttributes(filePath) & FileAttributes.ReadOnly) != 0)
+                    if ((File.GetAttributes(filePath) & FileAttributes.ReadOnly) != 0)
                     {
-                        this.IsReadOnly = true;
-                        this.IsReadOnlyReason = Edi.Util.Local.Strings.STR_FILE_READONLY_REASON_NO_WRITE_PERMISSION;
+                        IsReadOnly = true;
+                        IsReadOnlyReason = Util.Local.Strings.STR_FILE_READONLY_REASON_NO_WRITE_PERMISSION;
                     }
 
                     try
                     {
-                        using (FileStream fs = new FileStream(this.mFilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                        using (FileStream fs = new FileStream(mFilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
                         {
                             using (StreamReader reader = FileReader.OpenStream(fs, Encoding.UTF8))
                             {
@@ -961,27 +873,27 @@ namespace Edi.Documents.ViewModels.EdiDoc
                                             new Action(
                                                     delegate
                                                     {
-                                                        this.Document = doc;
+                                                        Document = doc;
                                                     }), DispatcherPriority.Normal);
 
-                                this.FileEncoding = reader.CurrentEncoding; // assign encoding after ReadToEnd() so that the StreamReader can autodetect the encoding
+                                FileEncoding = reader.CurrentEncoding; // assign encoding after ReadToEnd() so that the StreamReader can autodetect the encoding
                             }
                         }
 
                         // Set the correct actualy state of the model into the viewmodel
                         // to either allow editing or continue to block editing depending on what the model says
-                        this.IsReadOnly = this.mDocumentModel.IsReadonly;
+                        IsReadOnly = mDocumentModel.IsReadonly;
 
-                        this.State = DocumentState.IsEditing;
+                        State = DocumentState.IsEditing;
                     }
                     catch                 // File may be blocked by another process
                     {                    // Try read-only shared method and set file access to read-only
                         try
                         {
-                            this.IsReadOnly = true;  // Open file in readonly mode
-                            this.IsReadOnlyReason = Edi.Util.Local.Strings.STR_FILE_READONLY_REASON_USED_BY_OTHER_PROCESS;
+                            IsReadOnly = true;  // Open file in readonly mode
+                            IsReadOnlyReason = Util.Local.Strings.STR_FILE_READONLY_REASON_USED_BY_OTHER_PROCESS;
 
-                            using (FileStream fs = new FileStream(this.mFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                            using (FileStream fs = new FileStream(mFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                             {
                                 using (StreamReader reader = FileReader.OpenStream(fs, Encoding.UTF8))
                                 {
@@ -991,14 +903,14 @@ namespace Edi.Documents.ViewModels.EdiDoc
                                                 new Action(
                                                         delegate
                                                         {
-                                                            this.Document = doc;
+                                                            Document = doc;
                                                         }), DispatcherPriority.Normal);
 
-                                    this.FileEncoding = reader.CurrentEncoding; // assign encoding after ReadToEnd() so that the StreamReader can autodetect the encoding
+                                    FileEncoding = reader.CurrentEncoding; // assign encoding after ReadToEnd() so that the StreamReader can autodetect the encoding
                                 }
                             }
 
-                            this.State = DocumentState.IsEditing;
+                            State = DocumentState.IsEditing;
                         }
                         catch (Exception ex)
                         {
@@ -1027,17 +939,17 @@ namespace Edi.Documents.ViewModels.EdiDoc
         {
             if (SettingData != null)
             {
-                this.FilePath = this.GetDefaultFileNewName(SettingData.FileNewDefaultFileName,
+                FilePath = GetDefaultFileNewName(SettingData.FileNewDefaultFileName,
                                                                                                      SettingData.FileNewDefaultFileExtension);
 
-                this.TextOptions = new ICSharpCode.AvalonEdit.TextEditorOptions(SettingData.EditorTextOptions);
-                this.HighlightingDefinition = HighlightingManager.Instance.GetDefinitionByExtension(Path.GetExtension(this.mFilePath));
+                TextOptions = new ICSharpCode.AvalonEdit.TextEditorOptions(SettingData.EditorTextOptions);
+                HighlightingDefinition = HighlightingManager.Instance.GetDefinitionByExtension(Path.GetExtension(mFilePath));
             }
 
             // TODO: This should be moved into Settings project?
-            this.InsertBlocks = new ObservableCollection<BlockDefinition>(SettingsView.Config.ViewModels.ConfigViewModel.GetDefaultBlockDefinitions());
+            InsertBlocks = new ObservableCollection<BlockDefinition>(SettingsView.Config.ViewModels.ConfigViewModel.GetDefaultBlockDefinitions());
 
-            this.WordWrap = SettingData.WordWarpText;
+            if (SettingData != null) WordWrap = SettingData.WordWarpText;
         }
 
         /// <summary>
@@ -1048,7 +960,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         {
             base.ReOpen();
 
-            this.LoadFileAsync(this.FilePath);
+            LoadFileAsync(FilePath);
         }
 
         /// <summary>
@@ -1058,9 +970,9 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public void CreateNewDocument()
         {
-            this.Document = new TextDocument();
-            this.State = DocumentState.IsEditing;
-            this.IsReadOnly = false;
+            Document = new TextDocument();
+            State = DocumentState.IsEditing;
+            IsReadOnly = false;
         }
 
         /// <summary>
@@ -1069,11 +981,14 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// <param name="s"></param>
         /// <param name="e"></param>
         /// <param name="filePath"></param>
+        /// <param name="defaultFileName"></param>
+        /// <param name="showLineNumbers"></param>
+        /// <param name="alternateLineBackground"></param>
         public void ExportToHTML(string defaultFileName = "",
                                                          bool showLineNumbers = true,
                                                          bool alternateLineBackground = true)
         {
-            string ExportHTMLFileFilter = Edi.Util.Local.Strings.STR_ExportHTMLFileFilter;
+            string ExportHTMLFileFilter = Util.Local.Strings.STR_ExportHTMLFileFilter;
 
             // Create and configure SaveFileDialog.
             FileDialog dlg = new SaveFileDialog()
@@ -1090,15 +1005,15 @@ namespace Edi.Documents.ViewModels.EdiDoc
 
             defaultFileName = dlg.FileName;
 
-            IHighlightingDefinition highlightDefinition = this.HighlightingDefinition;
+            IHighlightingDefinition highlightDefinition = HighlightingDefinition;
 
             HtmlWriter w = new HtmlWriter()
             {
                 ShowLineNumbers = showLineNumbers,
                 AlternateLineBackground = alternateLineBackground
             };
-            string html = w.GenerateHtml(this.Text, highlightDefinition);
-            File.WriteAllText(defaultFileName, "<html><body>" + html + "</body></html>");
+            string html = w.GenerateHtml(Text, highlightDefinition);
+            File.WriteAllText(defaultFileName, @"<html><body>" + html + @"</body></html>");
 
             System.Diagnostics.Process.Start(defaultFileName); // view in browser
         }
@@ -1107,15 +1022,16 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// Get the path of the file or empty string if file does not exists on disk.
         /// </summary>
         /// <returns></returns>
-        override public string GetFilePath()
+        public override string GetFilePath()
         {
             try
             {
-                if (System.IO.File.Exists(this.FilePath))
-                    return System.IO.Path.GetDirectoryName(this.FilePath);
+                if (File.Exists(FilePath))
+                    return Path.GetDirectoryName(FilePath);
             }
             catch
             {
+                // ignored
             }
 
             return string.Empty;
@@ -1127,7 +1043,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public void DisableHighlighting()
         {
-            this.HighlightingDefinition = null;
+            HighlightingDefinition = null;
         }
 
         /// <summary>
@@ -1135,7 +1051,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public void IncreaseNewCounter()
         {
-            EdiViewModel.iNewFileCounter += 1;
+            iNewFileCounter += 1;
         }
 
         /// <summary>
@@ -1147,7 +1063,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         public bool EnableDocumentFileWatcher(bool IsEnabled)
         {
             // Activate file watcher for this document
-            return this.mDocumentModel.EnableDocumentFileWatcher(true);
+            return mDocumentModel.EnableDocumentFileWatcher(true);
         }
 
         #region ScaleView methods
@@ -1160,25 +1076,27 @@ namespace Edi.Documents.ViewModels.EdiDoc
         {
             var unitList = new ObservableCollection<UnitComboLib.Models.ListItem>(Options.GenerateScreenUnitList());
 
-            this.SizeUnitLabel =
+            SizeUnitLabel =
                 UnitComboLib.UnitViewModeService.CreateInstance(unitList,
                                                                 new ScreenConverter(),
                                                                 (int)unit, defaultValue);
         }
         #endregion ScaleView methods
 
+        /*
         private bool CommandCancelProcessingCanExecute(object obj)
         {
-            return (this.mAsyncProcessor != null);
+            return (mAsyncProcessor != null);
         }
 
         private object CommandCancelProcessingExecuted(object arg)
         {
-            if (this.mAsyncProcessor != null)
-                this.mAsyncProcessor.Cancel();
+            if (mAsyncProcessor != null)
+                mAsyncProcessor.Cancel();
 
             return null;
         }
+        */  
 
         /// <summary>
         /// Load a file asynchronously to display its content through this ViewModel.
@@ -1187,35 +1105,35 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// <param name="path">file path</param>
         private void LoadFileAsync(string path)
         {
-            if (this.mAsyncProcessor != null)
+            if (mAsyncProcessor != null)
             {
                 var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
                 if (msgBox.Show("An operation is currently in progress. Would you like to cancel the current process?",
                                 "Processing...",
                                 MsgBoxButtons.YesNo, MsgBoxImage.Question, MsgBoxResult.No) == MsgBoxResult.Yes)
                 {
-                    this.mAsyncProcessor.Cancel();
+                    mAsyncProcessor.Cancel();
                 }
             }
 
-            this.mAsyncProcessor = new FileLoader();
+            mAsyncProcessor = new FileLoader();
 
-            this.mAsyncProcessor.ProcessingResultEvent += FileLoaderLoadResultEvent;
+            mAsyncProcessor.ProcessingResultEvent += FileLoaderLoadResultEvent;
 
-            this.State = DocumentState.IsLoading;
+            State = DocumentState.IsLoading;
 
-            this.mAsyncProcessor.ExecuteAsynchronously(delegate
+            mAsyncProcessor.ExecuteAsynchronously(delegate
                                                                                                 {
                                                                                                     try
                                                                                                     {
-                                                                                                        this.OpenFile(path);
+                                                                                                        OpenFile(path);
 
                                                                                                     }
                                                                                                     finally
                                                                                                     {
                                                                                                         // Set this to invalid if viewmodel still things its loading...
-                                                                                                        if (this.State == DocumentState.IsLoading)
-                                                                                                            this.State = DocumentState.IsInvalid;
+                                                                                                        if (State == DocumentState.IsLoading)
+                                                                                                            State = DocumentState.IsInvalid;
                                                                                                     }
                                                                                                 },
                                                                                                 true);
@@ -1229,20 +1147,20 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// <param name="e"></param>
         private void FileLoaderLoadResultEvent(object sender, ResultEvent e)
         {
-            this.mAsyncProcessor.ProcessingResultEvent -= FileLoaderLoadResultEvent;
-            this.mAsyncProcessor = null;
+            mAsyncProcessor.ProcessingResultEvent -= FileLoaderLoadResultEvent;
+            mAsyncProcessor = null;
 
             CommandManager.InvalidateRequerySuggested();
 
             // close documents automatically without message when re-loading on startup
-            if (this.State == DocumentState.IsInvalid && this.CloseOnErrorWithoutMessage == true)
+            if (State == DocumentState.IsInvalid && CloseOnErrorWithoutMessage)
             {
-                this.OnClose();
+                OnClose();
                 return;
             }
 
             // Continue processing in parent of this viewmodel if there is any such requested
-            base.FireFileProcessingResultEvent(e, TypeOfResult.FileLoad);
+            FireFileProcessingResultEvent(e, TypeOfResult.FileLoad);
         }
 
         /// <summary>
@@ -1254,15 +1172,15 @@ namespace Edi.Documents.ViewModels.EdiDoc
                                                                                  string defaultFileExtension = null)
         {
             if (defaultFileName != null)
-                this.mDefaultFileName = defaultFileName;
+                mDefaultFileName = defaultFileName;
 
             if (defaultFileExtension != null)
-                this.mDefaultFileType = defaultFileExtension;
+                mDefaultFileType = defaultFileExtension;
 
             return string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}",
-                            this.mDefaultFileName,
-                            (EdiViewModel.iNewFileCounter == 0 ? string.Empty : " " + EdiViewModel.iNewFileCounter.ToString()),
-                            this.mDefaultFileType);
+                            mDefaultFileName,
+                            (iNewFileCounter == 0 ? string.Empty : " " + iNewFileCounter.ToString()),
+                            mDefaultFileType);
         }
         #endregion methods
     }

@@ -74,8 +74,8 @@ namespace Edi.Documents.ViewModels.EdiDoc
 		/// </summary>
 		public string StyleClassPrefix = "code";
 
-		Dictionary<string, string> stylesheetCache = new Dictionary<string, string>();
-		StringBuilder stylesheet = new StringBuilder();
+	    private Dictionary<string, string> stylesheetCache = new Dictionary<string, string>();
+	    private StringBuilder stylesheet = new StringBuilder();
 		#endregion
 		#endregion fields
 
@@ -89,7 +89,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
 			stylesheetCache.Clear();
 		}
 
-		string GetClass(string style)
+	    private string GetClass(string style)
 		{
             string className = string.Empty;
 
@@ -196,25 +196,20 @@ namespace Edi.Documents.ViewModels.EdiDoc
 			}
 			if (CreateStylesheet && stylesheet.Length > 0)
 			{
-				string result = "<style type=\"text/css\">" + stylesheet.ToString() + "</style>" + output.ToString();
+				string result = "<style type=\"text/css\">" + stylesheet + "</style>" + output;
 				stylesheet = new StringBuilder();
 				return result;
 			}
-			else
-			{
-				return output.ToString();
-			}
-		}
 
-		void PrintWords(TextWriter writer, HighlightedLine line, string text)
-		{
-			if (line != null)
-				writer.Write(line.ToHtml(new MyHtmlOptions(this)));
-			else
-				writer.Write(text);
-		}
+		    return output.ToString();
+		}   
 
-		void WriteStyle(TextWriter writer, string style)
+	    private void PrintWords(TextWriter writer, HighlightedLine line, string text)
+	    {
+	        writer.Write(line != null ? line.ToHtml(new MyHtmlOptions(this)) : text);
+	    }
+
+	    private void WriteStyle(TextWriter writer, string style)
 		{
 			if (CreateStylesheet)
 			{
@@ -234,7 +229,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
 		#region private class
 		private class MyHtmlOptions : HtmlOptions
 		{
-			readonly HtmlWriter htmlWriter;
+		    private readonly HtmlWriter htmlWriter;
 
 			internal MyHtmlOptions(HtmlWriter htmlWriter)
 			{
