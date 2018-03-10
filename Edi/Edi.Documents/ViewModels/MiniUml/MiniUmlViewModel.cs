@@ -1,17 +1,17 @@
-using Edi.Settings.Interfaces;
-
 namespace Edi.Documents.ViewModels.MiniUml
 {
-	using System;
-	using System.ComponentModel;
-	using System.Globalization;
-	using System.IO;
-	using System.Windows.Input;
-	using Core.Interfaces;
-	using Core.Interfaces.Documents;
-	using Core.Models.Documents;
-	using Core.ViewModels.Command;
-	using MiniUML.Model.ViewModels.Document;
+    using System;
+    using System.ComponentModel;
+    using System.Globalization;
+    using System.IO;
+    using System.Windows.Input;
+    using CommonServiceLocator;
+    using Core.Interfaces;
+    using Core.Interfaces.Documents;
+    using Core.Models.Documents;
+    using Core.ViewModels.Command;
+    using MiniUML.Model.ViewModels.Document;
+    using MsgBox;
 
     public class MiniUmlViewModel : Core.ViewModels.FileBaseViewModel
 	{
