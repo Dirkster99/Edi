@@ -15,6 +15,9 @@
         Height="Auto" Width="300"
         ResizeMode="NoResize"
         SizeToContent="Height"
+        ShowIcon="False"
+        ShowMaxButton="False"
+        ShowMinButton="False"
 
         ShowInTaskbar="False"
         Topmost="False"

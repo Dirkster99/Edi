@@ -10,7 +10,10 @@
 
         Title="About Edi"
         ResizeMode="NoResize"
-        SizeToContent="WidthAndHeight"
+        SizeToContent="Height"
+        ShowIcon="False"
+        ShowMaxButton="False"
+        ShowMinButton="False"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="false"
         Width="435"

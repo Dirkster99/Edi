@@ -11,6 +11,9 @@
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="false"
+        ShowIcon="False"
+        ShowMaxButton="False"
+        ShowMinButton="False"
 
         MinHeight="100"
         MinWidth="300"

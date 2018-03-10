@@ -10,8 +10,11 @@
         Title="Settings..."
         ResizeMode="NoResize"
         SizeToContent="WidthAndHeight"
-        WindowStartupLocation="CenterOwner"
         ShowInTaskbar="false"
+        ShowIcon="False"
+        ShowMaxButton="False"
+        ShowMinButton="False"
+        WindowStartupLocation="CenterOwner"
         MinWidth="300"
         
         behav:DialogCloser.DialogResult="{Binding WindowCloseResult}"
