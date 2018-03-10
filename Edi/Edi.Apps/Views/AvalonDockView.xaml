@@ -8,93 +8,93 @@
 
                     xmlns:avalonDockProperties="clr-namespace:Xceed.Wpf.AvalonDock.Properties;assembly=Xceed.Wpf.AvalonDock"
                     xmlns:cmdLabel="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
-										xmlns:cmd="clr-namespace:Edi.Core;assembly=Edi.Core"
+					xmlns:cmd="clr-namespace:Edi.Core;assembly=Edi.Core"
                    >
 
-  <Style TargetType="{x:Type local:AvalonDockView}">
-    <Setter Property="SnapsToDevicePixels" Value="True"/>
-    <Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="{x:Type local:AvalonDockView}">
-          <ControlTemplate.Resources>
-            <conv:ActiveDocumentConverter x:Key="ActiveDocumentConverter"/>
-          </ControlTemplate.Resources>
+    <Style TargetType="{x:Type local:AvalonDockView}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:AvalonDockView}">
+                    <ControlTemplate.Resources>
+                        <conv:ActiveDocumentConverter x:Key="ActiveDocumentConverter"/>
+                    </ControlTemplate.Resources>
 
-          <avalonDock:DockingManager AnchorablesSource="{Binding Tools}" Name="PART_DockView"
+                    <avalonDock:DockingManager AnchorablesSource="{Binding Tools}" Name="PART_DockView"
                                      DocumentsSource="{Binding Files}"
                                      ActiveContent="{Binding ActiveDocument, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}"
                                      behav:AvalonDockLayoutSerializer.LoadLayoutCommand="{Binding ADLayout.LoadLayoutCommand}"
 																		 behav:DropFileCommand.DropCommand="cmd:AppCommand.LoadFile"
                                      AllowDrop="True"
                                       >
-            <avalonDock:DockingManager.DocumentContextMenu>
-              <ContextMenu xmlns:AvalondockConv="clr-namespace:Xceed.Wpf.AvalonDock.Converters;assembly=Xceed.Wpf.AvalonDock"
+                        <avalonDock:DockingManager.DocumentContextMenu>
+                            <ContextMenu xmlns:AvalondockConv="clr-namespace:Xceed.Wpf.AvalonDock.Converters;assembly=Xceed.Wpf.AvalonDock"
                       >
-                <ContextMenu.Resources>
-                  <AvalondockConv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-                </ContextMenu.Resources>
-                <MenuItem Header="{x:Static cmdLabel:Strings.STR_AppCommand_SyncPathToExplorerCommand}" 
+                    <ContextMenu.Resources>
+                        <AvalondockConv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+                    </ContextMenu.Resources>
+                    <MenuItem Header="{x:Static cmdLabel:Strings.STR_AppCommand_SyncPathToExplorerCommand}" 
                       Command="{Binding Model.SyncPathToExplorerCommand}"
                       ToolTipService.ShowOnDisabled="True"
                       ToolTip="{x:Static cmdLabel:Strings.STR_AppCommand_SyncPathToExplorerCommand_TT}"
                       />
 
-                <MenuItem Header="{x:Static cmdLabel:Strings.STR_AppCommand_OpenContainingFolder}" 
+                    <MenuItem Header="{x:Static cmdLabel:Strings.STR_AppCommand_OpenContainingFolder}" 
                       Command="{Binding Model.OpenContainingFolderCommand}"
                       ToolTipService.ShowOnDisabled="True"
                       ToolTip="{x:Static cmdLabel:Strings.STR_AppCommand_OpenContainingFolder_TT}"
                       />
 
-                <MenuItem Header="{x:Static cmdLabel:Strings.STR_AppCommand_CopyFileURLToClipboard}" 
+                    <MenuItem Header="{x:Static cmdLabel:Strings.STR_AppCommand_CopyFileURLToClipboard}" 
                         Command="{Binding Model.CopyFullPathtoClipboard}"
                         ToolTipService.ShowOnDisabled="True"
                         ToolTip="{x:Static cmdLabel:Strings.STR_AppCommand_CopyFileURLToClipboard_TT}"
                       />
 
-                <Separator/>
+                    <Separator/>
 
-                <MenuItem Header="{x:Static avalonDockProperties:Resources.Document_Close}" 
+                    <MenuItem Header="{x:Static avalonDockProperties:Resources.Document_Close}" 
                       Command="{Binding Path=CloseCommand}"
                       Visibility="{Binding Path=IsEnabled, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
                     />
 
-                <MenuItem Header="{x:Static avalonDockProperties:Resources.Document_CloseAllButThis}" 
+                    <MenuItem Header="{x:Static avalonDockProperties:Resources.Document_CloseAllButThis}" 
                       Command="{Binding Path=CloseAllButThisCommand}"
                     />
 
-                <MenuItem Header="{x:Static avalonDockProperties:Resources.Document_Float}" 
+                    <MenuItem Header="{x:Static avalonDockProperties:Resources.Document_Float}" 
                       Command="{Binding Path=FloatCommand}"
                     />
 
-                <MenuItem Header="{x:Static avalonDockProperties:Resources.Document_DockAsDocument}" 
+                    <MenuItem Header="{x:Static avalonDockProperties:Resources.Document_DockAsDocument}" 
                       Command="{Binding Path=DockAsDocumentCommand}"
                     />
 
-                <MenuItem Header="{x:Static avalonDockProperties:Resources.Document_NewHorizontalTabGroup}" 
+                    <MenuItem Header="{x:Static avalonDockProperties:Resources.Document_NewHorizontalTabGroup}" 
                       Command="{Binding Path=NewHorizontalTabGroupCommand}"
                       Visibility="{Binding Path=IsEnabled, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
                     >
-                  <!-- MenuItem.Icon>
-              <Image Source="/Xceed.Wpf.AvalonDock.Themes.Aero;component/Images/HTabGroup.png" Stretch="Uniform" Width="14"/>
-            </MenuItem.Icon -->
-                </MenuItem>
-              </ContextMenu>
-            </avalonDock:DockingManager.DocumentContextMenu>
+                                <!-- MenuItem.Icon>
+                                  <Image Source="/Xceed.Wpf.AvalonDock.Themes.Aero;component/Images/HTabGroup.png" Stretch="Uniform" Width="14"/>
+                                </MenuItem.Icon -->
+                                </MenuItem>
+                            </ContextMenu>
+                        </avalonDock:DockingManager.DocumentContextMenu>
 
-            <avalonDock:LayoutRoot>
-              <avalonDock:LayoutPanel Orientation="Vertical">
-                <avalonDock:LayoutDocumentPaneGroup>
-                  <avalonDock:LayoutDocumentPane>
-                    <avalonDock:LayoutDocument IsSelected="True" ContentId=">StartPage&lt;" />
-                  </avalonDock:LayoutDocumentPane>
-                </avalonDock:LayoutDocumentPaneGroup>
-              </avalonDock:LayoutPanel>
-            </avalonDock:LayoutRoot>
+                        <avalonDock:LayoutRoot>
+                            <avalonDock:LayoutPanel Orientation="Vertical">
+                                <avalonDock:LayoutDocumentPaneGroup>
+                                    <avalonDock:LayoutDocumentPane>
+                                        <avalonDock:LayoutDocument IsSelected="True" ContentId=">StartPage&lt;" />
+                                    </avalonDock:LayoutDocumentPane>
+                                </avalonDock:LayoutDocumentPaneGroup>
+                            </avalonDock:LayoutPanel>
+                        </avalonDock:LayoutRoot>
 
-	      </avalonDock:DockingManager>
-        </ControlTemplate>
-      </Setter.Value>
-    </Setter>
-  </Style>
+                    </avalonDock:DockingManager>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 </ResourceDictionary>

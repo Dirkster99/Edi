@@ -73,20 +73,20 @@
     <Reference Include="DropDownButtonLib, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.DropDownButtonLib.1.0.4\lib\net4\DropDownButtonLib.dll</HintPath>
     </Reference>
-    <Reference Include="FirstFloor.ModernUI">
-      <HintPath>..\..\02_Libs\00_bin\Mui\FirstFloor.ModernUI.dll</HintPath>
-    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Windows.Shell">
-      <HintPath>..\..\02_Libs\00_bin\Mui\Microsoft.Windows.Shell.dll</HintPath>
+    <Reference Include="MLib">
+      <HintPath>..\..\02_Libs\00_bin\MLib\MLib.dll</HintPath>
     </Reference>
     <Reference Include="MRULib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.MRULib.1.0.0\lib\net451\MRULib.dll</HintPath>
     </Reference>
     <Reference Include="MsgBox, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.MsgBox.1.4.2\lib\net451\MsgBox.dll</HintPath>
+    </Reference>
+    <Reference Include="MWindowLib">
+      <HintPath>..\..\02_Libs\00_bin\MLib\MWindowLib.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -117,7 +117,7 @@
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="Xceed.Wpf.AvalonDock">
-      <HintPath>..\..\02_Libs\00_bin\AvalonDock\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <HintPath>..\..\02_Libs\AvalonDock\Xceed.Wpf.AvalonDock.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -155,24 +155,11 @@
     <Compile Include="Views\Shell\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Shell\MainWindowViewManager.cs" />
     <Compile Include="Views\Shell\StatusBar.xaml.cs">
       <DependentUpon>StatusBar.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MLib\MLib\MLib.csproj">
-      <Project>{87a9302d-c6a7-4507-82d5-d83a40e899e2}</Project>
-      <Name>MLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MLib\MWindowInterfacesLib\MWindowInterfacesLib.csproj">
-      <Project>{37633896-6066-49c5-b76a-0e5d5d6d1d23}</Project>
-      <Name>MWindowInterfacesLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MLib\MWindowLib\MWindowLib.csproj">
-      <Project>{be4c8126-e5c8-405e-958f-4de9f686089b}</Project>
-      <Name>MWindowLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Edi.Core\Edi.Core.csproj">
       <Project>{f17e5e06-f28c-4e91-964f-cdb9f8589bb7}</Project>
       <Name>Edi.Core</Name>
@@ -230,14 +217,6 @@
     <Resource Include="Images\DocTab\Lock-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="BindToMLib\MWindowLib\DarkBrushs.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="BindToMLib\MWindowLib\LightBrushs.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Resources\DocumentHeaderDataTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -247,14 +226,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\MetroDark.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\MetroLight.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

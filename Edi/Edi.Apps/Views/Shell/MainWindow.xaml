@@ -23,12 +23,15 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <view:MainMenu Grid.Row="0" />
         <view:MainToolbar Grid.Row="1" SnapsToDevicePixels="True" Margin="3,0" />
 
         <ADView:AvalonDockView  Grid.Row="2" x:Name="dockView" x:FieldModifier="private" />
+
+        <view:StatusBar Grid.Row="3" />
     </Grid>
 
 </mWinlib:SimpleMetroWindow>

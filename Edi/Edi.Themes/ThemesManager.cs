@@ -6,6 +6,10 @@ namespace Edi.Themes
     using ICSharpCode.AvalonEdit.Highlighting.Themes;
     using Edi.Themes.Definition;
     using Edi.Themes.Interfaces;
+    using MLib.Interfaces;
+    using System;
+    using System.Windows.Media;
+    using System.Windows;
 
     /// <summary>
     /// This class manages a list of WPF themes (Aero, Metro etc) which
@@ -16,118 +20,80 @@ namespace Edi.Themes
     /// themes, determine the currently selected theme, and set the currently selected
     /// theme.
     /// </summary>
-    public class ThemesManager : IThemesManager, IParentSelectedTheme
+    internal class ThemesManager : IThemesManager, IParentSelectedTheme
     {
         #region fields
         #region WPF Themes
-        #region Expression Dark theme resources
+        #region Dark theme resources
         const string MetroDarkThemeName = "Metro Dark";
         static readonly string[] MetroDarkResources =
-    {
-      "/Edi.Dialogs;component/Themes/ModernDialogEx.xaml",
+        {
+          "/Mlib;component/Themes/DarkTheme.xaml",
+          "/MWindowLib;component/Themes/DarkTheme.xaml",
 
-////      "/FirstFloor.ModernUI;component/Assets/Calendar.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/CheckBox.xaml",
+          "/DropDownButtonLib;component/Themes/MetroDark.xaml",  // DropDownButtonLib theming
+          "/MsgBox;component/Themes/DarkBrushes.xaml",
+          "/MsgBox;component/Themes/DarkIcons.xaml",
+          "/UnitComboLib;component/Themes/DarkBrushs.xaml",
+          "/NumericUpDownLib;component/Themes/DarkBrushs.xaml",
 
-      // For some reason these are applied in the Explorer (TW) but nowhere else(?)
-////      "/FirstFloor.ModernUI;component/Assets/ComboBox.xaml",
-      // "/FirstFloor.ModernUI;component/Assets/ContextMenu.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/DataGrid.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/DatePicker.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/GridSplitter.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/Hyperlink.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/Label.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/ListBox.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/ListView.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/MenuItem.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/ContextMenu.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/PasswordBox.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/ProgressBar.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/RadioButton.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/ScrollBar.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/Slider.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/TextBlock.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/TextBox.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/ToolTip.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/TreeView.xaml",
+          "/Edi.Themes;component/MetroDark/Theme.xaml",
 
-      "/DropDownButtonLib;component/Themes/MetroDark.xaml",  // DropDownButtonLib theming
-      "/MsgBox;component/Themes/DarkBrushes.xaml",
-      "/MsgBox;component/Themes/DarkIcons.xaml",
-      "/UnitComboLib;component/Themes/DarkBrushs.xaml",
-      "/NumericUpDownLib;component/Themes/DarkBrushs.xaml",
+          "/DropDownButtonLib;component/Themes/MetroDark.xaml",
+          "/WatermarkControlsLib;component/Themes/DarkBrushs.xaml",
+          "/FolderBrowser;component/Themes/MetroDark.xaml",
+          "/FileListView;component/Images/MetroDarkIcons.xaml",
+          "/HistoryControlLib;component/Themes/DarkTheme.xaml",
 
-      // This is required to style the dropdown button and frame of the control
-      "/Edi.Themes;component/FileListView/Combobox.xaml",
-      "/Edi.Themes;component/MetroDark/Theme.xaml",
+          "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/DarkTheme.xaml",
 
-      //"/Xceed.Wpf.AvalonDock.Themes.Expression;component/DarkTheme.xaml",
-      "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/DarkTheme.xaml",
-
-      "/Edi.Apps;component/Themes/MetroDark.xaml",
-      "/FileListView;component/Images/MetroDarkIcons.xaml"
-    };
-        #endregion Expression Dark theme resources
+          "/Edi.Themes;component/BindToMLib/MWindowLib/DarkBrushs.xaml",
+          "/Edi.Themes;component/BindToMLib/AvalonDock_DarkLightBrushs.xaml",
+          "/Edi.Themes;component/BindToMLib/DropDownButtonLib_DarkLightBrushs.xaml",
+          "/Edi.Themes;component/BindToMLib/HistoryControlLib_DarkLightBrushs.xaml",
+          "/Edi.Themes;component/BindToMLib/WatermarkControlsLib_DarkLightBrushs.xaml"
+        };
+        #endregion Dark theme resources
 
         #region Generic theme resources
         const string GenericThemeName = "Generic";
         static readonly string[] GenericResources =
-    {
-////      "/FirstFloor.ModernUI;component/Assets/ModernUI.Light.xaml",
-      "/Edi.Dialogs;component/Themes/ModernDialogEx.xaml",
-
-      "/Edi.Themes;component/Generic/Theme.xaml",
-      "/Edi.Apps;component/Themes/MetroLight.xaml",
-      "/FileListView;component/Images/GenericIcons.xaml"
-    };
+        {
+          "/Edi.Themes;component/Generic/Theme.xaml",
+          "/FileListView;component/Images/GenericIcons.xaml"
+        };
         #endregion Generic theme resources
 
         #region Light Metro theme resources
         const string MetroLightThemeName = "Metro Light";
         static readonly string[] MetroResources =
-    {
-      "/Edi.Dialogs;component/Themes/ModernDialogEx.xaml",
+        {
+          "/Mlib;component/Themes/LightTheme.xaml",
+          "/MWindowLib;component/Themes/LightTheme.xaml",
 
-////      "/FirstFloor.ModernUI;component/Assets/Calendar.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/CheckBox.xaml",
-      
-      // For some reason these are applied in the Explorer (TW) but nowhere else(?)
-////      "/FirstFloor.ModernUI;component/Assets/ComboBox.xaml",
+          "/DropDownButtonLib;component/Themes/MetroLight.xaml",  // DropDownButtonLib theming
+          "/MsgBox;component/Themes/LightBrushes.xaml",
+          "/MsgBox;component/Themes/LightIcons.xaml",
+          "/UnitComboLib;component/Themes/LightBrushs.xaml",
+          "/NumericUpDownLib;component/Themes/LightBrushs.xaml",
 
-////      "/FirstFloor.ModernUI;component/Assets/DataGrid.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/DatePicker.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/GridSplitter.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/Hyperlink.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/Label.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/ListBox.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/ListView.xaml",
+          // This is required to style the dropdown button and frame of the control
+          "/Edi.Themes;component/MetroLight/Theme.xaml",
 
-////      "/FirstFloor.ModernUI;component/Assets/PasswordBox.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/ProgressBar.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/RadioButton.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/ScrollBar.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/Slider.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/TextBlock.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/TextBox.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/ToolTip.xaml",
-////      "/FirstFloor.ModernUI;component/Assets/TreeView.xaml",
+          "/DropDownButtonLib;component/Themes/MetroLight.xaml",
+          "/WatermarkControlsLib;component/Themes/LightBrushs.xaml",
+          "/FolderBrowser;component/Themes/MetroLight.xaml",
+          "/FileListView;component/Images/MetroLightIcons.xaml",
+          "/HistoryControlLib;component/Themes/LightTheme.xaml",
 
-      "/DropDownButtonLib;component/Themes/MetroLight.xaml",  // DropDownButtonLib theming
-      "/MsgBox;component/Themes/LightBrushes.xaml",
-      "/MsgBox;component/Themes/LightIcons.xaml",
-      "/UnitComboLib;component/Themes/LightBrushs.xaml",
-      "/NumericUpDownLib;component/Themes/LightBrushs.xaml",
+          "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/LightTheme.xaml",
 
-      // This is required to style the dropdown button and frame of the control
-      "/Edi.Themes;component/FileListView/Combobox.xaml",
-      "/Edi.Themes;component/MetroLight/Theme.xaml",
-
-      //"/Xceed.Wpf.AvalonDock.Themes.Expression;component/LightTheme.xaml",
-      "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/LightTheme.xaml",
-
-      "/Edi.Apps;component/Themes/MetroLight.xaml",
-      "/FileListView;component/Images/MetroLightIcons.xaml"
-    };
+          "/Edi.Themes;component/BindToMLib/AvalonDock_DarkLightBrushs.xaml",
+          "/Edi.Themes;component/BindToMLib/MWindowLib/LightBrushs.xaml",
+          "/Edi.Themes;component/BindToMLib/DropDownButtonLib_DarkLightBrushs.xaml",
+          "/Edi.Themes;component/BindToMLib/HistoryControlLib_DarkLightBrushs.xaml",
+          "/Edi.Themes;component/BindToMLib/WatermarkControlsLib_DarkLightBrushs.xaml"
+        };
         #endregion Light Metro theme resources
         #endregion WPF Themes
 
@@ -146,9 +112,10 @@ namespace Edi.Themes
 
         protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private SortedDictionary<string, ThemeBase> mTextEditorThemes = null;
-        private ObservableCollection<ThemeBase> mListOfAllThemes = null;
-        private string mSelectedThemeName = string.Empty;
+        private readonly IAppearanceManager _AppearanceManager;
+        private readonly SortedDictionary<string, ThemeBase> _TextEditorThemes;
+        private readonly ObservableCollection<ThemeBase> _ListOfAllThemes;
+        private string _SelectedThemeName = string.Empty;
         #endregion fields
 
         #region constructor
@@ -157,7 +124,11 @@ namespace Edi.Themes
         /// </summary>
         public ThemesManager()
         {
-            this.mSelectedThemeName = ThemesManager.DefaultThemeName;
+            _SelectedThemeName = ThemesManager.DefaultThemeName;
+
+            _AppearanceManager = MLib.AppearanceManager.GetInstance();
+            _TextEditorThemes = new SortedDictionary<string, ThemeBase>();
+            _ListOfAllThemes = new ObservableCollection<ThemeBase>();
         }
         #endregion constructor
 
@@ -169,7 +140,7 @@ namespace Edi.Themes
         {
             get
             {
-                return this.mSelectedThemeName;
+                return _SelectedThemeName;
             }
         }
 
@@ -180,17 +151,18 @@ namespace Edi.Themes
         {
             get
             {
-                if (this.mTextEditorThemes == null || this.mListOfAllThemes == null)
-                    this.BuildThemeCollections();
+                // Build theme references to resources on demand
+                if (_TextEditorThemes.Count == 0 || _ListOfAllThemes.Count == 0)
+                    BuildThemeCollections();
 
                 ThemeBase theme;
-                this.mTextEditorThemes.TryGetValue(this.mSelectedThemeName, out theme);
+                _TextEditorThemes.TryGetValue(_SelectedThemeName, out theme);
 
                 // Fall back to default if all else fails
                 if (theme == null)
                 {
-                    this.mTextEditorThemes.TryGetValue(ThemesManager.DefaultThemeName, out theme);
-                    this.mSelectedThemeName = theme.HlThemeName;
+                    _TextEditorThemes.TryGetValue(ThemesManager.DefaultThemeName, out theme);
+                    _SelectedThemeName = theme.HlThemeName;
                 }
 
                 return theme;
@@ -205,10 +177,11 @@ namespace Edi.Themes
         {
             get
             {
-                if (this.mTextEditorThemes == null || this.mListOfAllThemes == null)
-                    this.BuildThemeCollections();
+                // Build theme references to resources on demand
+                if (_TextEditorThemes.Count == 0 || _ListOfAllThemes.Count == 0)
+                    BuildThemeCollections();
 
-                return this.mListOfAllThemes;
+                return _ListOfAllThemes;
             }
         }
         #endregion properties
@@ -221,20 +194,52 @@ namespace Edi.Themes
         /// <returns>True if new theme is succesfully selected (was available), otherwise false</returns>
         public bool SetSelectedTheme(string themeName)
         {
-            if (this.mTextEditorThemes == null || this.mListOfAllThemes == null)
-                this.BuildThemeCollections();
+            // Build theme references to resources on demand
+            if (_TextEditorThemes.Count == 0 || _ListOfAllThemes.Count == 0)
+                BuildThemeCollections();
 
+
+            // Lets try to get the requested theme
             ThemeBase theme;
-            this.mTextEditorThemes.TryGetValue(themeName, out theme);
+            _TextEditorThemes.TryGetValue(themeName, out theme);
 
             // Fall back to default if all else fails
             if (theme == null)
                 return false;
 
-            this.mSelectedThemeName = themeName;
+            _SelectedThemeName = themeName;
+
+            _AppearanceManager.SetAccentColor(GetCurrentAccentColor());
 
             return true;
         }
+
+        private Color GetCurrentAccentColor()  // ISettingsManager settings
+        {
+            Color AccentColor = default(Color);
+
+////            if (settings.Options.GetOptionValue<bool>("Appearance", "ApplyWindowsDefaultAccent"))
+////            {
+                try
+                {
+                    AccentColor = SystemParameters.WindowGlassColor;
+                }
+                catch
+                {
+                }
+
+                // This may be black on Windows 7 and the experience is black & white then :-(
+                if (AccentColor == default(Color) || AccentColor == Colors.Black || AccentColor.A == 0)
+                {
+                    // default blue accent color
+                    AccentColor = Color.FromRgb(0x1b, 0xa1, 0xe2);
+                }
+////            else
+////                AccentColor = settings.Options.GetOptionValue<Color>("Appearance", "AccentColor");
+
+            return AccentColor;
+        }
+
 
         /// <summary>
         /// Get a text editor highlighting theme associated with the given WPF Theme Name.
@@ -246,7 +251,7 @@ namespace Edi.Themes
             // Is this WPF theme configured with a highlighting theme???
             ThemeBase cfg = null;
 
-            this.mTextEditorThemes.TryGetValue(themeName, out cfg);
+            _TextEditorThemes.TryGetValue(themeName, out cfg);
 
             if (cfg != null)
                 return cfg.HighlightingStyles;
@@ -255,17 +260,48 @@ namespace Edi.Themes
         }
 
         /// <summary>
+        /// Resets the standard themes available through the theme settings interface.
+        /// </summary>
+        /// <param name="themes"></param>
+        public void SetDefaultThemes(IThemeInfos themes)
+        {
+            themes.RemoveAllThemeInfos();
+
+            // Add dark theme resource items
+            var resources = new List<Uri>();
+            foreach (var item in MetroDarkResources)
+                resources.Add(new Uri(item, UriKind.RelativeOrAbsolute));
+
+            themes.AddThemeInfo(MetroDarkThemeName, resources);
+
+            // Add light theme resource items
+            resources = new List<Uri>();
+            foreach (var item in ThemesManager.MetroResources)
+                resources.Add(new Uri(item, UriKind.RelativeOrAbsolute));
+
+            themes.AddThemeInfo(MetroLightThemeName, resources);
+
+            // Add generic theme resource items
+            resources = new List<Uri>();
+            foreach (var item in ThemesManager.GenericResources)
+                resources.Add(new Uri(item, UriKind.RelativeOrAbsolute));
+
+            themes.AddThemeInfo(GenericThemeName, resources);
+        }
+
+        /// <summary>
         /// Build sorted dictionary and observable collection for WPF themes.
         /// </summary>
         private void BuildThemeCollections()
         {
-            this.mTextEditorThemes = this.BuildThemeDictionary();
-            this.mListOfAllThemes = new ObservableCollection<ThemeBase>();
+            _TextEditorThemes.Clear();
+            _ListOfAllThemes.Clear();
 
-            foreach (KeyValuePair<string, ThemeBase> t in this.mTextEditorThemes)
-            {
-                this.mListOfAllThemes.Add(t.Value);
-            }
+            foreach (var item in BuildThemeDictionary())
+                _TextEditorThemes.Add(item.Key, item.Value);
+
+            foreach (KeyValuePair<string, ThemeBase> t in _TextEditorThemes)
+                _ListOfAllThemes.Add(t.Value);
         }
 
         /// <summary>

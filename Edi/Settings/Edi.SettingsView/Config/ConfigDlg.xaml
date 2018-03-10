@@ -1,7 +1,7 @@
-﻿<mui:ModernWindow x:Class="Edi.SettingsView.Config.ConfigDlg"
+﻿<mwl:SimpleMetroWindow x:Class="Edi.SettingsView.Config.ConfigDlg"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+        xmlns:mwl="clr-namespace:MWindowLib;assembly=MWindowLib"
 
         xmlns:behav="clr-namespace:Edi.Core.Behaviour;assembly=Edi.Core"
         xmlns:views="clr-namespace:Edi.SettingsView.Config"
@@ -10,21 +10,22 @@
         Title="Settings..."
         ResizeMode="NoResize"
         SizeToContent="WidthAndHeight"
-        WindowStartupLocation="CenterOwner"
         ShowInTaskbar="false"
+        ShowIcon="False"
+        ShowMaxButton="False"
+        ShowMinButton="False"
+        WindowStartupLocation="CenterOwner"
         MinWidth="300"
         
-        Style="{DynamicResource EmptyDialog}"
-
         behav:DialogCloser.DialogResult="{Binding WindowCloseResult}"
 
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         mc:Ignorable="d" 
         >
-  <mui:ModernWindow.DataContext>
+  <mwl:SimpleMetroWindow.DataContext>
     <vm:ConfigViewModel />
-  </mui:ModernWindow.DataContext>
+  </mwl:SimpleMetroWindow.DataContext>
   <Grid Margin="9,3">
     <Grid.RowDefinitions>
       <RowDefinition Height="*" />
@@ -50,4 +51,4 @@
               Grid.Column="1" Padding="3" Margin="6" MinHeight="24" MinWidth="80"/>
     </Grid>
   </Grid>
-</mui:ModernWindow>
+</mwl:SimpleMetroWindow>

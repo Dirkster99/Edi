@@ -1,26 +1,27 @@
-<UserControl x:Class="Log4NetTools.Views.Log4NetToolView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+<UserControl
+    x:Class="Log4NetTools.Views.Log4NetToolView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 
-             xmlns:behav="clr-namespace:Edi.Core.Behaviour;assembly=Edi.Core"
-             xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
-             xmlns:converters="clr-namespace:YalvLib.Common.Converters;assembly=YalvLib"
-             xmlns:Properties="clr-namespace:YalvLib.Strings;assembly=YALVLib"
-             xmlns:cult="clr-namespace:YalvLib.ViewModel;assembly=YALVLib"
+    xmlns:behav="clr-namespace:Edi.Core.Behaviour;assembly=Edi.Core"
+    xmlns:MLib_reskeys="clr-namespace:MLib.Themes;assembly=MLib"
+    xmlns:converters="clr-namespace:YalvLib.Common.Converters;assembly=YalvLib"
+    xmlns:Properties="clr-namespace:YalvLib.Strings;assembly=YALVLib"
+    xmlns:cult="clr-namespace:YalvLib.ViewModel;assembly=YALVLib"
 
-             xmlns:cmdLabel="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
+    xmlns:cmdLabel="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
 
-             mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="300">
+    mc:Ignorable="d" 
+    d:DesignHeight="500" d:DesignWidth="300">
   <UserControl.Resources>
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     <converters:LevelToSolidColorConverter x:Key="LevelToSolidColorConverter" />
     <converters:StringEmptyToVisibilityConverter x:Key="StringEmptyToVisibilityConverter" />
     <converters:BoolToOppositeVisibilityConverter x:Key="BoolToOppositeVisibilityConverter" />
   </UserControl.Resources>
-  <Grid Background="{DynamicResource ToolViewBackground}"
+    <Grid Background="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlNormalBackgroundBrushKey}}"
         behav:OffLineIndicator.IsOnline="{Binding IsOnline}"
         IsEnabled="{Binding IsOnline}">
 

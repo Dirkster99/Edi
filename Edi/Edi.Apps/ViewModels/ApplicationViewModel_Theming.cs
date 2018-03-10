@@ -108,7 +108,7 @@ namespace Edi.Apps.ViewModels
         /// <param name="w"></param>
         /// <param name="backupDynResources"></param>
         private void ApplyWidgetStyle(WidgetStyle w,
-                                                                    List<string> backupDynResources)
+                                      List<string> backupDynResources)
         {
             if (w == null)
                 return;
@@ -157,8 +157,8 @@ namespace Edi.Apps.ViewModels
         /// <param name="NewColor"></param>
         /// <param name="backupDynResources"></param>
         private void ApplyToDynamicResource(string ResourceName,
-                                                                                SolidColorBrush NewColor,
-                                                                                List<string> backupDynResources)
+                                            SolidColorBrush NewColor,
+                                            List<string> backupDynResources)
         {
             if (Application.Current.Resources[ResourceName] != null && NewColor != null)
             {

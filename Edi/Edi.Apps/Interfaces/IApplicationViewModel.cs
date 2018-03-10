@@ -81,8 +81,7 @@
 		/// </summary>
 		void LoadConfigOnAppStartup(Options programSettings,
 									ISettingsManager settings,
-									IThemesManager themes,
-                                    IAppearanceManager appeare);
+									IThemesManager themes);
 
 		/// <summary>
 		/// Save application settings when the application is being closed down

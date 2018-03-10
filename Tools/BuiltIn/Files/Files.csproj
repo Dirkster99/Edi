@@ -73,19 +73,43 @@
       <HintPath>..\..\..\packages\CommonServiceLocator.2.0.2\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
     <Reference Include="DropDownButtonLib, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Dirkster.DropDownButtonLib.1.0.4\lib\net4\DropDownButtonLib.dll</HintPath>
+      <HintPath>..\..\..\packages\Dirkster.FolderBrowser.3.0.2\lib\net452\DropDownButtonLib.dll</HintPath>
+    </Reference>
+    <Reference Include="FileListView, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Dirkster.FilterControlsLib.3.0.2\lib\net452\FileListView.dll</HintPath>
+    </Reference>
+    <Reference Include="FileSystemModels, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Dirkster.FilterControlsLib.3.0.2\lib\net452\FileSystemModels.dll</HintPath>
+    </Reference>
+    <Reference Include="FilterControlsLib, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Dirkster.FilterControlsLib.3.0.2\lib\net452\FilterControlsLib.dll</HintPath>
+    </Reference>
+    <Reference Include="FolderBrowser, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Dirkster.FolderBrowser.3.0.2\lib\net452\FolderBrowser.dll</HintPath>
+    </Reference>
+    <Reference Include="FolderControlsLib, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Dirkster.FolderControlsLib.3.0.0\lib\net452\FolderControlsLib.dll</HintPath>
+    </Reference>
+    <Reference Include="HistoryControlLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Dirkster.HistoryControlLib.1.0.0\lib\net4\HistoryControlLib.dll</HintPath>
     </Reference>
     <Reference Include="InplaceEditBoxLib, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Dirkster.InplaceEditBoxLib.1.0.0.3\lib\net4\InplaceEditBoxLib.dll</HintPath>
+      <HintPath>..\..\..\packages\Dirkster.FilterControlsLib.3.0.2\lib\net452\InplaceEditBoxLib.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Dirkster.InplaceEditBoxLib.1.0.0.3\lib\net4\log4net.dll</HintPath>
+      <HintPath>..\..\..\packages\Dirkster.FilterControlsLib.3.0.2\lib\net452\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MLib">
+      <HintPath>..\..\..\02_Libs\00_bin\MLib\MLib.dll</HintPath>
     </Reference>
     <Reference Include="MRULib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Dirkster.MRULib.1.0.0\lib\net451\MRULib.dll</HintPath>
     </Reference>
     <Reference Include="MsgBox, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Dirkster.MsgBox.1.4.2\lib\net451\MsgBox.dll</HintPath>
+    </Reference>
+    <Reference Include="MWindowLib">
+      <HintPath>..\..\..\02_Libs\00_bin\MLib\MWindowLib.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -110,8 +134,11 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="UserNotification, Version=1.3.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Dirkster.InplaceEditBoxLib.1.0.0.3\lib\net4\UserNotification.dll</HintPath>
+    <Reference Include="UserNotification, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Dirkster.FilterControlsLib.3.0.2\lib\net452\UserNotification.dll</HintPath>
+    </Reference>
+    <Reference Include="WatermarkControlsLib, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Dirkster.WatermarkControlsLib.1.0.1\lib\net4\WatermarkControlsLib.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -175,26 +202,6 @@
     <ProjectReference Include="..\..\..\Edi\SimpleControls\SimpleControls.csproj">
       <Project>{0e69be38-78c0-4662-a0e1-56c5913b5c3a}</Project>
       <Name>SimpleControls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\fsc\FileListView\FileListView.csproj">
-      <Project>{735cf8ec-a4ef-49a2-bc72-ec360a0185a4}</Project>
-      <Name>FileListView</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\fsc\FileSystemModels\FileSystemModels.csproj">
-      <Project>{c3eb23fd-78e7-4298-922c-48c254551cc9}</Project>
-      <Name>FileSystemModels</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\fsc\FilterControlsLib\FilterControlsLib.csproj">
-      <Project>{52f61815-3ec5-461b-bce0-ab80b1c5b229}</Project>
-      <Name>FilterControlsLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\fsc\FolderBrowser\FolderBrowser.csproj">
-      <Project>{0b8c3b19-940d-408d-9f6b-4afee7246642}</Project>
-      <Name>FolderBrowser</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\fsc\FolderControlsLib\FolderControlsLib.csproj">
-      <Project>{511fa2d6-2022-4de1-9a3e-731e04e8f10c}</Project>
-      <Name>FolderControlsLib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

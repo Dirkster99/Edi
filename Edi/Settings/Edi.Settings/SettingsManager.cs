@@ -97,7 +97,7 @@
 		/// settings if they appear to be invalid on current system
 		/// </summary>
 		public void CheckSettingsOnLoad(double SystemParameters_VirtualScreenLeft,
-																		double SystemParameters_VirtualScreenTop)
+									    double SystemParameters_VirtualScreenTop)
 		{
 			//// Dirkster: Not sure whether this is working correctly yet...
 			//// this.SessionData.CheckSettingsOnLoad(SystemParameters_VirtualScreenLeft,
@@ -114,7 +114,6 @@
 		/// <returns></returns>
 		public void LoadOptions(string settingsFileName,
 								IThemesManager themesManager,
-                                IAppearanceManager appear,
                                 Options programSettings = null)
 		{
 			Options loadedModel = null;
@@ -122,9 +121,10 @@
 			if (programSettings != null)
 				loadedModel = programSettings;
 			else                                     // Get a fresh copy from persistence
-				loadedModel = SettingsManager.LoadOptions(settingsFileName, themesManager, appear);
+				loadedModel = SettingsManager.LoadOptions(settingsFileName, themesManager);
 
-			loadedModel.SetDirtyFlag(false);  // Data has just been loaded from persistence (or default) so its not dirty for sure
+            // Data has just been loaded from persistence (or default) so its not dirty for sure
+            loadedModel.SetDirtyFlag(false);
 			this.SettingData = loadedModel;
 		}
 
@@ -137,7 +137,6 @@
 		/// <returns></returns>
 		public static Options LoadOptions(string settingsFileName
                                         , IThemesManager themesManager
-                                        , IAppearanceManager appear
             )
 		{
 			Options loadedModel = null;

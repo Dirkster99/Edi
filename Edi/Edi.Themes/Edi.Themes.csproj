@@ -26,7 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <IntermediateOutputPath>C:\Users\NOP\AppData\Local\Temp\vs8DB5.tmp\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\NOP\AppData\Local\Temp\vs22C1.tmp\Debug\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,7 +36,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <IntermediateOutputPath>C:\Users\NOP\AppData\Local\Temp\vs8DB5.tmp\Release\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\NOP\AppData\Local\Temp\vs22C1.tmp\Release\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -47,7 +47,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
-    <IntermediateOutputPath>C:\Users\NOP\AppData\Local\Temp\vs8DB5.tmp\x86\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\NOP\AppData\Local\Temp\vs22C1.tmp\x86\Debug\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -58,7 +58,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
-    <IntermediateOutputPath>C:\Users\NOP\AppData\Local\Temp\vs8DB5.tmp\x86\Release\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\NOP\AppData\Local\Temp\vs22C1.tmp\x86\Release\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -69,7 +69,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
-    <IntermediateOutputPath>C:\Users\NOP\AppData\Local\Temp\vs8DB5.tmp\x64\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\NOP\AppData\Local\Temp\vs22C1.tmp\x64\Debug\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -80,20 +80,35 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
-    <IntermediateOutputPath>C:\Users\NOP\AppData\Local\Temp\vs8DB5.tmp\x64\Release\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\NOP\AppData\Local\Temp\vs22C1.tmp\x64\Release\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CommonServiceLocator.2.0.2\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
-    <Reference Include="FirstFloor.ModernUI">
-      <HintPath>..\..\02_Libs\00_bin\Mui\FirstFloor.ModernUI.dll</HintPath>
+    <Reference Include="DropDownButtonLib, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.DropDownButtonLib.1.0.4\lib\net4\DropDownButtonLib.dll</HintPath>
+    </Reference>
+    <Reference Include="HistoryControlLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.HistoryControlLib.1.0.0\lib\net4\HistoryControlLib.dll</HintPath>
     </Reference>
     <Reference Include="InplaceEditBoxLib, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.InplaceEditBoxLib.1.0.0.3\lib\net4\InplaceEditBoxLib.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.InplaceEditBoxLib.1.0.0.3\lib\net4\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions">
+      <HintPath>..\..\02_Libs\00_bin\MLib\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="MLib">
+      <HintPath>..\..\02_Libs\00_bin\MLib\MLib.dll</HintPath>
+    </Reference>
+    <Reference Include="MWindowInterfacesLib">
+      <HintPath>..\..\02_Libs\00_bin\MLib\MWindowInterfacesLib.dll</HintPath>
+    </Reference>
+    <Reference Include="MWindowLib">
+      <HintPath>..\..\02_Libs\00_bin\MLib\MWindowLib.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -124,6 +139,9 @@
     <Reference Include="UserNotification, Version=1.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.InplaceEditBoxLib.1.0.0.3\lib\net4\UserNotification.dll</HintPath>
     </Reference>
+    <Reference Include="WatermarkControlsLib, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.WatermarkControlsLib.1.0.1\lib\net4\WatermarkControlsLib.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="YalvLib">
       <HintPath>..\..\02_Libs\00_bin\YalvLib\YalvLib.dll</HintPath>
@@ -132,13 +150,9 @@
   <ItemGroup>
     <Compile Include="Behaviour\MergeStyleBehaviour.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter1.cs" />
+    <Compile Include="Factory.cs" />
     <Compile Include="Itnterfaces\IParentSelectedTheme.cs" />
     <Compile Include="Itnterfaces\IThemesManager.cs" />
-    <Compile Include="MetroControls\TextboxHelper.cs" />
-    <Compile Include="MetroConverters\BackgroundToForegroundConverter.cs" />
-    <Compile Include="MetroConverters\MarkupConverter.cs" />
-    <Compile Include="MetroConverters\ThicknessToDoubleConverter.cs" />
-    <Compile Include="MetroConverters\ToUpperConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Definition\ThemeBase.cs" />
     <Compile Include="ThemesManager.cs" />
@@ -156,10 +170,6 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\fsc\FileListView\FileListView.csproj">
-      <Project>{735cf8ec-a4ef-49a2-bc72-ec360a0185a4}</Project>
-      <Name>FileListView</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Edi.Util\Edi.Util.csproj">
       <Project>{8dea0927-9bd3-442f-ad3b-5f0c9e3186f6}</Project>
       <Name>Edi.Util</Name>
@@ -235,87 +245,39 @@
     <Resource Include="Images\App\PinableListViewDark\NoPin16.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="FileListView\Combobox.xaml">
+    <Page Include="BindToMLib\AvalonDock_DarkLightBrushs.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MetroDark\EdiControls\YalvLib\GridStyle.xaml">
+    <Page Include="BindToMLib\WatermarkControlsLib_DarkLightBrushs.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MetroDark\EdiControls\YalvLib\YalvLib.xaml">
+    <Page Include="BindToMLib\HistoryControlLib_DarkLightBrushs.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MetroDark\MetroStyles\ComboBox.xaml">
+    <Page Include="BindToMLib\DropDownButtonLib_DarkLightBrushs.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MetroDark\MetroStyles\ContextMenu.xaml">
+    <Page Include="BindToMLib\MWindowLib\DarkBrushs.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MetroDark\MetroStyles\Controls.ContextMenu.xaml">
+    <Page Include="BindToMLib\MWindowLib\LightBrushs.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MetroDark\MetroStyles\Controls.GroupBox.xaml">
+    <Page Include="EdiControls\YalvLib\GridStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MetroDark\MetroStyles\Controls.ListBox.xaml">
+    <Page Include="EdiControls\YalvLib\YalvLib.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MetroDark\MetroStyles\Controls.TabControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\MetroStyles\Controls.TextBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\MetroStyles\Controls.Toolbar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\Edi.ModernUI.Dark.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\EdiControls\DocumentViewer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\MetroStyles\GridSplitter.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\MetroStyles\Hyperlink.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\MetroStyles\Label.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\MetroStyles\ContextMenuStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\MetroStyles\MenuItem.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\MetroStyles\MenuStyles.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\MetroStyles\Slider.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\MetroStyles\TextBlock.xaml">
+    <Page Include="EdiControls\DocumentViewer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -323,58 +285,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MetroLight\EdiAvalonEdit.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroLight\ModernUI.Light.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroLight\Styles\ComboBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroLight\Styles\Controls.TabControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroLight\Styles\Controls.TextBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroLight\Styles\Controls.Toolbar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroLight\Styles\GridSplitter.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroLight\Styles\Hyperlink.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroLight\Styles\Label.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroLight\Styles\MenuStyles.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroLight\Styles\Slider.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroLight\Styles\TextBlock.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Resource Include="MetroLight\StatusBar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
     <Resource Include="MetroLight\Brushes.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -391,95 +301,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MetroDark\Controls\Button.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MetroDark\Controls\ComboBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\EdiControls\EdiAvalonEdit.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\Controls\ScrollViewer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\Controls\Hyperlink.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\Controls\TextBlock.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\Controls\GroupBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\Controls\Label.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\Controls\ListBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\Controls\TabControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\Controls\ToolTip.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\Controls\ToolBar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\Controls\ListView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\Controls\ToggleButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\Controls\Slider.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\Controls\TextBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\Controls\ProgressBar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\Controls\Expander.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\Controls\Menu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MetroDark\Controls\ScrollBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MetroDark\Controls\StatusBar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="MetroDark\Theme.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MetroDark\Controls\TreeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

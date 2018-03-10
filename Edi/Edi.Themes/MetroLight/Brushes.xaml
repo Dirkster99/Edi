@@ -12,30 +12,7 @@
     <SolidColorBrush x:Key="ErrorLevelColor" Color="Salmon" PresentationOptions:Freeze="True" />
     <SolidColorBrush x:Key="FatalLevelColor" Color="Crimson" PresentationOptions:Freeze="True" />
 
-    <!-- Text Editor Brushes -->
-    <SolidColorBrush x:Key="EditorCurrentLineBackgroundColor" Color="#2FCCCDCE"/>
-    <SolidColorBrush x:Key="EditorBackground"                 Color="#FFFFFFFF" />
-    <SolidColorBrush x:Key="EditorForeground"                 Color="#FF000000" />
-    <SolidColorBrush x:Key="EditorLineNumbersForeground"      Color="#FFa0a0f0" />
-
-    <SolidColorBrush x:Key="EditorSelectionBrush"      Color="#8080C0FF"/>
-    <SolidColorBrush x:Key="EditorSelectionBorder"     Color="#A080C0FF"/>
-    <SolidColorBrush x:Key="EditorSelectionForeground" Color="#FF000000"/>
-
-    <SolidColorBrush x:Key="NonPrintableCharacterBrush" Color="#3F8080FF"/>
-    <SolidColorBrush x:Key="LinkTextForegroundBrush"    Color="#FF4040FF"/>
-    <!-- Style hyperlink displayed within text in text editor -->
-    <SolidColorBrush x:Key="LinkTextBackgroundBrush"    Color="#00000000"/>
-    <!-- End of Text Editor Brushes -->
-
     <!-- Brushes -->
-    <LinearGradientBrush x:Key="StartPageBorderForegroundColor"
-                         StartPoint="0,0" EndPoint="0,1">
-        <GradientStop Color="#B7CAE0" Offset="0" />
-        <GradientStop Color="#78F0FF" Offset="1" />
-    </LinearGradientBrush>
-
-    <SolidColorBrush x:Key="ToolWindowBackground" Color="Black" />
     <SolidColorBrush x:Key="DialogBackgroundBrush" Color="White" />
 
     <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888888"/>
@@ -129,11 +106,7 @@
     <SolidColorBrush x:Key="HyperlinkForegroundDisabled" Color="#88888888"/>
     <SolidColorBrush x:Key="HyperlinkForeground" Color="Blue"/>
 
-    <!--SolidColorBrush x:Key="PinableListViewForegroundDisabled" Color="#88888888"/ -->
-    <SolidColorBrush x:Key="ToolViewBackground" Color="White"/>
-
     <!-- Brushes -->
-
     <SolidColorBrush x:Key="GlyphBrush" Color="#FF111111" />
 
     <!-- VS 2010 Style for Combobox -->

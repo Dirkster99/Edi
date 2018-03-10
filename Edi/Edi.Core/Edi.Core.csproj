@@ -72,8 +72,11 @@
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CommonServiceLocator.2.0.2\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
+    <Reference Include="FileSystemModels, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.FileSystemModels.3.0.0\lib\net452\FileSystemModels.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <HintPath>..\..\packages\Dirkster.FileSystemModels.3.0.0\lib\net452\log4net.dll</HintPath>
     </Reference>
     <Reference Include="MsgBox, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.MsgBox.1.4.2\lib\net451\MsgBox.dll</HintPath>
@@ -106,7 +109,7 @@
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="Xceed.Wpf.AvalonDock">
-      <HintPath>..\..\02_Libs\00_bin\AvalonDock\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <HintPath>..\..\02_Libs\AvalonDock\Xceed.Wpf.AvalonDock.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -195,10 +198,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\fsc\FileSystemModels\FileSystemModels.csproj">
-      <Project>{c3eb23fd-78e7-4298-922c-48c254551cc9}</Project>
-      <Name>FileSystemModels</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Edi.Util\Edi.Util.csproj">
       <Project>{8dea0927-9bd3-442f-ad3b-5f0c9e3186f6}</Project>
       <Name>Edi.Util</Name>

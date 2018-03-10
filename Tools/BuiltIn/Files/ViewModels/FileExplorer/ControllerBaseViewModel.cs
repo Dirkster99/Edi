@@ -9,6 +9,7 @@
     using FileSystemModels.Models;
     using FilterControlsLib.Interfaces;
     using FolderControlsLib.Interfaces;
+    using HistoryControlLib.Interfaces;
     using System.Windows;
     using System.Windows.Input;
 
@@ -22,6 +23,10 @@
         #region fields
         private string _SelectedFolder = string.Empty;
         private ICommand mRefreshCommand;
+        private ICommand _UpCommand;
+        private ICommand _BackwardCommand;
+        private ICommand _ForwardCommand;
+        private ICommand _SelectionChanged;
         #endregion fields
 
         #region constructors
@@ -32,10 +37,160 @@
         public ControllerBaseViewModel(string name)
             : base(name)
         {
+            NaviHistory = HistoryControlLib.Factory<IPathModel>.CreateBrowseNavigator();
         }
         #endregion constructors
 
         #region properties
+        #region Navigate Recent History Commands
+        /// <summary>
+        /// Command executes when the user has selected
+        /// a different item in the displayed list of items.
+        /// </summary>
+        public ICommand SelectionChanged
+        {
+            get
+            {
+                if (_SelectionChanged == null)
+                {
+                    _SelectionChanged = new RelayCommand<object>((p) =>
+                    {
+                        object[] paramets = p as object[];
+
+                        if (paramets.Length == 0)
+                            return;
+
+                        if (paramets != null)
+                        {
+                            try
+                            {
+                                var item = paramets[0] as IPathModel;
+
+                                if (item == null)  // Item does not appear to be what we need
+                                    return;
+
+                                int idx = 0;       // Search the selected item in ViewModel and select it
+                                bool itemFound = false;
+                                foreach (var histItem in NaviHistory.Locations)
+                                {
+                                    if (object.Equals(histItem, item) == true)
+                                    {
+                                        itemFound = true;
+                                        break;
+                                    }
+
+                                    idx++;
+                                }
+
+                                if (itemFound == true)
+                                {
+                                    NaviHistory.SetSelectedIndex(idx);
+                                    NavigateToFolder(NaviHistory.SelectedItem);
+                                }
+                            }
+                            catch
+                            {
+                            }
+                        }
+                    });
+                }
+
+                return _SelectionChanged;
+            }
+        }
+
+        /// <summary>
+        /// Gets a command to browse forward in the available collection of items.
+        /// </summary>
+        public ICommand ForwardCommand
+        {
+            get
+            {
+                if (_ForwardCommand == null)
+                {
+                    _ForwardCommand = new RelayCommand<object>((p) =>
+                    {
+                        if (NaviHistory.CanForward == true)
+                            NaviHistory.Forward();
+                    },
+                    (p) => NaviHistory.CanForward);
+                }
+
+                return _ForwardCommand;
+            }
+        }
+
+        /// <summary>
+        /// Gets a command to browse backward in the available collection of items.
+        /// </summary>
+        public ICommand BackwardCommand
+        {
+            get
+            {
+                if (_BackwardCommand == null)
+                {
+                    _BackwardCommand = new RelayCommand<object>((p) =>
+                    {
+                        if (NaviHistory.CanBackward == true)
+                            NaviHistory.Backward();
+                    },
+                    (p) => NaviHistory.CanBackward);
+                }
+
+                return _BackwardCommand;
+            }
+        }
+
+        /// <summary>
+        /// Gets a command to browse to the parent (if any) of the current location.
+        /// </summary>
+        public ICommand UpCommand
+        {
+            get
+            {
+                if (_UpCommand == null)
+                {
+                    _UpCommand = new RelayCommand<object>((p) =>
+                    {
+                        var item = NaviHistory.SelectedItem.Path;
+                        try
+                        {
+                            var dirItem = System.IO.Directory.GetParent(item);
+
+                            if (dirItem != null)
+                                NaviHistory.Forward(PathFactory.Create(dirItem.FullName));
+                        }
+                        catch
+                        {
+                        }
+
+                    },
+                    (p) =>
+                    {
+                        if (NaviHistory.SelectedItem == null)
+                            return false;
+
+                        var item = NaviHistory.SelectedItem.Path;
+                        try
+                        {
+                            var dirItem = System.IO.Directory.GetParent(item);
+
+                            if (dirItem != null)
+                                return true;
+                        }
+                        catch
+                        {
+                        }
+
+                        return false;
+                    });
+                }
+
+                return _UpCommand;
+            }
+        }
+        #endregion Navigate Recent History Commands
+
         /// <summary>
         /// Gets the command that updates the currently viewed
         /// list of directory items (files and sub-directories).
@@ -65,12 +220,18 @@
                 if (this.RecentFolders != null)
                 {
                     if (this.RecentFolders.SelectedItem != null)
-                        return this.RecentFolders.SelectedItem.FullPath;
+                        return this.RecentFolders.SelectedItem.ItemPath;
                 }
 
                 return null;
             }
         }
+
+        /// <summary>
+        /// Gets an object that manages the list of recently visited locations and implements
+        /// forward, backward naviagtion in that history etc...
+        /// </summary>
+        public IBrowseHistory<IPathModel> NaviHistory { get; }
 
         /// <summary>
         /// Gets the viewmodel that exposes recently visited locations (bookmarked folders).
@@ -210,7 +371,7 @@
                 }
 
                 foreach (var item in this.RecentFolders.DropDownItems)
-                    settings.AddRecentFolder(item.FullPath);
+                    settings.AddRecentFolder(item.ItemPath);
 
                 if (string.IsNullOrEmpty(this.SelectedRecentLocation) == false)
                 {
@@ -277,7 +438,7 @@
 
             // Set collection of recent folder locations
             foreach (var item in srcRecentFolders.DropDownItems)
-                dstRecentFolders.AddFolder(item.FullPath);
+                dstRecentFolders.AddFolder(item.ItemPath);
         }
         #endregion Bookmarked Folders Methods
 
@@ -377,7 +538,7 @@
             switch (e.Action)
             {
                 case EditBookmarkEvent.RecentFolderAction.Remove:
-                    this.RecentFolders.RemoveFolder(e.Folder);
+                    this.RecentFolders.RemoveFolder(e.Folder.Path);
                     break;
 
                 case EditBookmarkEvent.RecentFolderAction.Add:

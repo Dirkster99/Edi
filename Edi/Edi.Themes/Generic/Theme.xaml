@@ -10,8 +10,6 @@
        <ResourceDictionary Source="/MsgBox;component/Themes/LightIcons.xaml" />
 
        <ResourceDictionary Source="/MiniUML.View;component/SharedResources.xaml"/>
-
-    <!-- ResourceDictionary Source="/AvalonDock.Themes.Aero;component/Theme.xaml" / -->
   </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

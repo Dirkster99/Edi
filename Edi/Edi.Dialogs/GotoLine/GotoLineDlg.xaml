@@ -1,7 +1,7 @@
-<mui:ModernWindow x:Class="Edi.Dialogs.GotoLine.GotoLineDlg"
+<mwl:SimpleMetroWindow x:Class="Edi.Dialogs.GotoLine.GotoLineDlg"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+        xmlns:mwl="clr-namespace:MWindowLib;assembly=MWindowLib"
 
         xmlns:behav="clr-namespace:Edi.Core.Behaviour;assembly=Edi.Core"
         xmlns:views="clr-namespace:Edi.Dialogs.GotoLine"
@@ -11,8 +11,10 @@
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="false"
+        ShowIcon="False"
+        ShowMaxButton="False"
+        ShowMinButton="False"
 
-        Style="{DynamicResource EmptyDialog}"
         MinHeight="100"
         MinWidth="300"
 
@@ -44,4 +46,4 @@
 
     </Grid>
   </Grid>
-</mui:ModernWindow >
+</mwl:SimpleMetroWindow>

@@ -3,7 +3,6 @@
 	using Edi.Settings.ProgramSettings;
 	using Edi.Settings.UserProfile;
 	using Edi.Themes.Interfaces;
-    using MLib.Interfaces;
 
     public interface ISettingsManager
 	{
@@ -33,7 +32,6 @@
 		/// <returns></returns>
 		void LoadOptions(string settingsFileName,
 						 IThemesManager themesManager,
-                         IAppearanceManager appear,
                          Options programSettings = null);
 
 		/// <summary>

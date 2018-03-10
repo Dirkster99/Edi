@@ -1,14 +1,11 @@
 
 1 Third Party Project Sources
 
-MsgBox Source Download:
-https://msgbox.codeplex.com/
-
 YalvLib download
-https://yalvlib.codeplex.com/
-
-Modern UI for WPF
-https://mui.codeplex.com/
+https://github.com/Dirkster99/YalvLib
 
 AvalonDock
-https://avalondock.codeplex.com/
+https://github.com/Dirkster99/AvalonDock
+
+MLib
+https://github.com/Dirkster99/MLib

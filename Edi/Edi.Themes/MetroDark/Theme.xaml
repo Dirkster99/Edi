@@ -2,90 +2,26 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     >
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Edi.Themes;component/IconsDark.xaml" />
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/Brushes.xaml" />
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/Edi.ModernUI.Dark.xaml" />
+        <ResourceDictionary Source="/Edi.Themes;component/EdiControls/YalvLib/YalvLib.xaml" />
+        <ResourceDictionary Source="/Edi.Themes;component/EdiControls/DocumentViewer.xaml" />
+        
+        <ResourceDictionary Source="/ICSharpCode.AvalonEdit;component/Edi/EdiTextEditor.xaml" />
+        <ResourceDictionary Source="/ICSharpCode.AvalonEdit;component/Edi/Themes/DarkBrushs.xaml" />
 
         <ResourceDictionary Source="/Mlib;component/Themes/DarkTheme.xaml" />
         <ResourceDictionary Source="/MWindowLib;component/Themes/DarkTheme.xaml" />
-        <!-- ResourceDictionary Source="/Themes;component/BindToMLib/MWindowLib/DarkBrushs.xaml" / -->
 
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/TabControl.xaml" / -->
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/Controls.TabControl.xaml" />
-
-
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/Controls.Toolbar.xaml" />
-
-        <!-- This type of combobox is used in the toolbar of the MainWindow -->
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/ComboBox.xaml" />
-
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/Controls.TextBox.xaml" />
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/ScrollViewer.xaml" / -->
-
-        <!-- Statusbar is white without this -->
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/Controls/StatusBar.xaml" />
-
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/MenuStyles.xaml" />
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/MetroStyles/MenuItem.xaml" / -->
-
-        <!-- ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/Controls.ContextMenu.xaml" / -->
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/MetroStyles/ContextMenu.xaml" / -->
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/MetroStyles/ContextMenuStyle.xaml" / -->
-
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/Menu.xaml" / -->
-
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/Label.xaml" />
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/Hyperlink.xaml" />
-
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/TextBlock.xaml" />
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/Slider.xaml" />
-
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/Controls.ListBox.xaml" />
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/Controls.GroupBox.xaml" />
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/MetroStyles/GridSplitter.xaml" />
-
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/EdiControls/DocumentViewer.xaml" />
-
-        <!-- This is required to style the dropdown button and frame of the control
-            ResourceDictionary Source="/Edi.Themes;component/FileListView/Combobox.xaml" /  -->
+        <ResourceDictionary Source="/Edi.Themes;component/IconsDark.xaml" />
+        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/Brushes.xaml" />
 
         <!-- Use dark brush definitions -->
         <ResourceDictionary Source="/MsgBox;component/Themes/DarkBrushes.xaml" />
         <ResourceDictionary Source="/MsgBox;component/Themes/DarkIcons.xaml" />
 
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/Button.xaml" />
-    <ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/ToggleButton.xaml" / -->
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/ToolBar.xaml" / -->
-
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/ScrollBar.xaml" / -->
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/Expander.xaml" / -->
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/ListView.xaml" / -->
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/ProgressBar.xaml" /  -->
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/TextBox.xaml" / -->
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/Slider.xaml" / -->
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/ToolTip.xaml" / -->
-
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/ComboBox.xaml" / -->
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/GroupBox.xaml" /-->
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/Label.xaml" / -->
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/ListBox.xaml" / -->
-
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/TreeView.xaml" / -->
-
-        <!-- MsgBox is black on black without this -->
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/TextBlock.xaml" / -->
-        <!-- ResourceDictionary Source="/Edi.Themes;component/ExpressionDark/Controls/Hyperlink.xaml" / -->
-
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/EdiControls/EdiAvalonEdit.xaml" />
-
-        <ResourceDictionary Source="/Edi.Themes;component/MetroDark/EdiControls/YalvLib/YalvLib.xaml" />
-
         <ResourceDictionary Source="/UnitComboLib;component/Themes/DarkBrushs.xaml" />
         <ResourceDictionary Source="/MRULib;component/Themes/DarkBrushes.xaml" />
         
         <ResourceDictionary Source="/MiniUML.View;component/SharedResources.xaml"/>
-
-        <!-- ResourceDictionary Source="/AvalonDock.Themes.VS2010;component/Theme.xaml" / -->
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

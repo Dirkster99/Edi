@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Open Source")]
 [assembly: AssemblyProduct("Edi")]
-[assembly: AssemblyCopyright("© 2012 - 2017")]
+[assembly: AssemblyCopyright("© 2012 - 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

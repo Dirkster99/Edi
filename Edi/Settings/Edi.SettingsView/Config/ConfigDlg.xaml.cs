@@ -1,33 +1,33 @@
 ﻿namespace Edi.SettingsView.Config
 {
-  using System.Windows;
-
-  /// <summary>
-  /// Interaction logic for GotoLine.xaml
-  /// </summary>
-  public partial class ConfigDlg : FirstFloor.ModernUI.Windows.Controls.ModernWindow
-  {
-    /// <summary>
-    /// Class constructor
-    /// </summary>
-    public ConfigDlg()
-    {
-      this.InitializeComponent();
-
-      this.Loaded += ConfigDlg_Loaded;
-    }
+    using System.Windows;
 
     /// <summary>
-    /// Standard load event fired when view becomes visible for the first time.
+    /// Interaction logic for GotoLine.xaml
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    void ConfigDlg_Loaded(object sender, RoutedEventArgs e)
+    public partial class ConfigDlg : MWindowLib.SimpleMetroWindow
     {
-      // Ensure that dialog will keep its initial size no matter the
-      // containing content in Tabitem (or what not) does after load
-      this.ResizeMode = System.Windows.ResizeMode.NoResize;
-      this.SizeToContent = System.Windows.SizeToContent.Manual;
+        /// <summary>
+        /// Class constructor
+        /// </summary>
+        public ConfigDlg()
+        {
+            this.InitializeComponent();
+
+            this.Loaded += ConfigDlg_Loaded;
+        }
+
+        /// <summary>
+        /// Standard load event fired when view becomes visible for the first time.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void ConfigDlg_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Ensure that dialog will keep its initial size no matter the
+            // containing content in Tabitem (or what not) does after load
+            this.ResizeMode = System.Windows.ResizeMode.NoResize;
+            this.SizeToContent = System.Windows.SizeToContent.Manual;
+        }
     }
-  }
 }

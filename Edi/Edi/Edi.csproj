@@ -95,8 +95,8 @@
     <Reference Include="DropDownButtonLib, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.DropDownButtonLib.1.0.4\lib\net4\DropDownButtonLib.dll</HintPath>
     </Reference>
-    <Reference Include="FirstFloor.ModernUI">
-      <HintPath>..\..\02_Libs\00_bin\Mui\FirstFloor.ModernUI.dll</HintPath>
+    <Reference Include="HistoryControlLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.HistoryControlLib.1.0.0\lib\net4\HistoryControlLib.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
@@ -104,14 +104,17 @@
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Windows.Shell">
-      <HintPath>..\..\02_Libs\00_bin\Mui\Microsoft.Windows.Shell.dll</HintPath>
+    <Reference Include="MLib">
+      <HintPath>..\..\02_Libs\00_bin\MLib\MLib.dll</HintPath>
     </Reference>
     <Reference Include="MRULib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.MRULib.1.0.0\lib\net451\MRULib.dll</HintPath>
     </Reference>
     <Reference Include="MsgBox, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.MsgBox.1.4.2\lib\net451\MsgBox.dll</HintPath>
+    </Reference>
+    <Reference Include="MWindowLib">
+      <HintPath>..\..\02_Libs\00_bin\MLib\MWindowLib.dll</HintPath>
     </Reference>
     <Reference Include="NumericUpDownLib, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.NumericUpDownLib.1.0.2\lib\net4\NumericUpDownLib.dll</HintPath>
@@ -146,10 +149,10 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="Xceed.Wpf.AvalonDock, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\02_Libs\00_bin\AvalonDock\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <HintPath>..\..\02_Libs\AvalonDock\Xceed.Wpf.AvalonDock.dll</HintPath>
     </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2013">
-      <HintPath>..\..\02_Libs\00_bin\AvalonDock\Xceed.Wpf.AvalonDock.Themes.VS2013.dll</HintPath>
+      <HintPath>..\..\02_Libs\AvalonDock\Xceed.Wpf.AvalonDock.Themes.VS2013.dll</HintPath>
     </Reference>
     <Reference Include="YalvLib">
       <HintPath>..\..\02_Libs\00_bin\YalvLib\YalvLib.dll</HintPath>
@@ -312,42 +315,6 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\fsc\FileListView\FileListView.csproj">
-      <Project>{735cf8ec-a4ef-49a2-bc72-ec360a0185a4}</Project>
-      <Name>FileListView</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\fsc\FileSystemModels\FileSystemModels.csproj">
-      <Project>{391639c4-5c43-4391-9465-27686e82c33f}</Project>
-      <Name>FileSystemModels</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\fsc\FilterControlsLib\FilterControlsLib.csproj">
-      <Project>{52f61815-3ec5-461b-bce0-ab80b1c5b229}</Project>
-      <Name>FilterControlsLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\fsc\FolderBrowser\FolderBrowser.csproj">
-      <Project>{7d4bd5f8-a98e-4966-abbd-cbe202dfbef7}</Project>
-      <Name>FolderBrowser</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\fsc\FolderControlsLib\FolderControlsLib.csproj">
-      <Project>{511fa2d6-2022-4de1-9a3e-731e04e8f10c}</Project>
-      <Name>FolderControlsLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\fsc\FsCore\FsCore.csproj">
-      <Project>{8391f556-c4cb-4aa9-9874-bf665fb2b072}</Project>
-      <Name>FsCore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MLib\MLib\MLib.csproj">
-      <Project>{87a9302d-c6a7-4507-82d5-d83a40e899e2}</Project>
-      <Name>MLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MLib\MWindowInterfacesLib\MWindowInterfacesLib.csproj">
-      <Project>{37633896-6066-49c5-b76a-0e5d5d6d1d23}</Project>
-      <Name>MWindowInterfacesLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MLib\MWindowLib\MWindowLib.csproj">
-      <Project>{be4c8126-e5c8-405e-958f-4de9f686089b}</Project>
-      <Name>MWindowLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Tools\BuiltIn\Files\Files.csproj">
       <Project>{ef9b7e8d-b722-48e0-a941-e21f4f7cc2df}</Project>
       <Name>Files</Name>

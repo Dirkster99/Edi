@@ -117,11 +117,11 @@
 		/// <param name="layoutInitializer"></param>
 		/// <param name="layoutID"></param>
 		public void SetTemplates(DataTemplateSelector paneSel,
-															DataTemplate documentHeaderTemplate,
-															StyleSelector panesStyleSelector,
-															ILayoutUpdateStrategy layoutInitializer,
-															Guid layoutID
-															)
+								 DataTemplate documentHeaderTemplate,
+								 StyleSelector panesStyleSelector,
+								 ILayoutUpdateStrategy layoutInitializer,
+								 Guid layoutID
+								)
 		{
 			this.mLayoutItemTemplateSelector = paneSel;
 			this.mDocumentHeaderTemplate = documentHeaderTemplate;
@@ -139,7 +139,7 @@
 		/// <summary>
 		/// Is executed when PRISM sends an Xml layout string notification
 		/// via a sender which could be a viewmodel that wants to receive
-		/// the load the <seealso cref="LoadLayoutEvent"/>.
+		/// the load <seealso cref="LoadLayoutEvent"/>.
 		/// 
 		/// Save layout is triggered by the containing window onClosed event.
 		/// </summary>
@@ -168,7 +168,7 @@
 
 				XmlLayoutSerializer layoutSerializer = null;
 
-				Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+				Application.Current.Dispatcher.Invoke(new Action(() =>
 				{
 					try
 					{

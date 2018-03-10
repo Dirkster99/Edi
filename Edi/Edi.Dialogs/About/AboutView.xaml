@@ -67,7 +67,8 @@
                     <Label Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Right" Content="Modules" Margin="3" />
                     <ListBox Grid.Column="1" Grid.Row="2" Margin="3"
                              ItemsSource="{Binding Modules,Mode=OneTime}"
-                             DisplayMemberPath="Value" />
+                             DisplayMemberPath="Value"
+                             />
                   </Grid>
                 </TabItem>
 
@@ -106,7 +107,7 @@
                                       HorizontalAlignment="Left" VerticalAlignment="Center" NavigateUri="https://yalv.codeplex.com/" Text="Yalv! Yet Another Log4Net Viewer" />
 
                     <hyp:WebHyperlink Grid.Column="2" Grid.Row="3" Margin="3"
-                                      HorizontalAlignment="Left" VerticalAlignment="Center" NavigateUri="https://yalvlib.codeplex.com/" Text="YalvLib" />
+                                      HorizontalAlignment="Left" VerticalAlignment="Center" NavigateUri="https://github.com/Dirkster99/YalvLib" Text="YalvLib" />
 
                     <Label Content="{x:Static cmdLabel:Strings.STR_ABOUT_CODE_COMPLETION}"
                            Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" />
@@ -118,10 +119,10 @@
                     <hyp:WebHyperlink Grid.Column="2" Grid.Row="5" Margin="3"
                                       HorizontalAlignment="Left" VerticalAlignment="Center" NavigateUri="https://miniuml.codeplex.com/" Text="Unified Modeling language (Uml)" />
 
-                    <Label Content="Modern UI (mui):"
+                    <Label Content="MLib:"
                            Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" />
                     <hyp:WebHyperlink Grid.Column="2" Grid.Row="6" Margin="3"
-                                      HorizontalAlignment="Left" VerticalAlignment="Center" NavigateUri="http://mui.codeplex.com/" Text="Modern UI (mui)" />
+                                      HorizontalAlignment="Left" VerticalAlignment="Center" NavigateUri="https://github.com/Dirkster99/MLib" Text="MLib" />
 
                     <Label Content="MsgBox:"
                            Grid.Column="0" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" />

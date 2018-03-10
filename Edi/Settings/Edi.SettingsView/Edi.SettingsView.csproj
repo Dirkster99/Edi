@@ -67,8 +67,11 @@
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FirstFloor.ModernUI">
-      <HintPath>..\..\..\02_Libs\00_bin\Mui\FirstFloor.ModernUI.dll</HintPath>
+    <Reference Include="MWindowInterfacesLib">
+      <HintPath>..\..\..\02_Libs\00_bin\MLib\MWindowInterfacesLib.dll</HintPath>
+    </Reference>
+    <Reference Include="MWindowLib">
+      <HintPath>..\..\..\02_Libs\00_bin\MLib\MWindowLib.dll</HintPath>
     </Reference>
     <Reference Include="NumericUpDownLib, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Dirkster.NumericUpDownLib.1.0.2\lib\net4\NumericUpDownLib.dll</HintPath>

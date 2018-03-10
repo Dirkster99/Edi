@@ -29,10 +29,6 @@ ECHO MiniUML.Model
 ECHO MiniUML.View
 ECHO MiniUML.Plugins.UmlClassDiagram
 ECHO.
-ECHO FSC\FileListView
-ECHO FSC\FileSystemModels
-ECHO FSC\FolderBrowser
-ECHO.
 ECHO Debug and Release folders
 ECHO.
 REM Ask the user if hes really sure to continue beyond this point XXXXXXXX
@@ -128,15 +124,6 @@ RMDIR /S /Q .\MiniUML\Plugins\src\MiniUML.Plugins.UmlClassDiagram\obj
 
 RMDIR /S /Q .\Release
 RMDIR /S /Q .\Debug
-
-RMDIR /S /Q .\FSC\FileListView\bin
-RMDIR /S /Q .\FSC\FileListView\obj
-
-RMDIR /S /Q .\FSC\FileSystemModels\bin
-RMDIR /S /Q .\FSC\FileSystemModels\obj
-
-RMDIR /S /Q .\FSC\FolderBrowser\bin
-RMDIR /S /Q .\FSC\FolderBrowser\obj
 
 PAUSE
 

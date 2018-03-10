@@ -29,7 +29,6 @@
                       EditorIsRectangleSelection="{Binding TextEditorIsRectangularSelection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       EditorScrollOffsetX="{Binding TextEditorScrollOffsetX, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       EditorScrollOffsetY="{Binding TextEditorScrollOffsetY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      EditorCurrentLineBackground="{DynamicResource EditorCurrentLineBackgroundColor}"
 
                       FontSize="{Binding Path=SizeUnitLabel.ScreenPoints, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       FontFamily="Consolas"
