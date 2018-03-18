@@ -21,8 +21,8 @@ namespace SimpleControls.Hyperlink
         private static readonly DependencyProperty TextProperty =
           DependencyProperty.Register("Text", typeof(string), typeof(WebHyperlink));
 
-        private static RoutedCommand _mCopyUri;
-        private static RoutedCommand _mNavigateToUri;
+        private static readonly RoutedCommand _mCopyUri;
+        private static readonly RoutedCommand _mNavigateToUri;
 
         private System.Windows.Documents.Hyperlink _mHypLink;
         #endregion fields
