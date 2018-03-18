@@ -16,8 +16,8 @@
 	internal class RelayCommand<T> : ICommand
 	{
 		#region Fields
-		private readonly Action<T> mExecute;
-		private readonly Predicate<T> mCanExecute;
+		private readonly Action<T> _mExecute;
+		private readonly Predicate<T> _mCanExecute;
 		#endregion // Fields
 
 		#region Constructors
@@ -37,8 +37,8 @@
 		/// <param name="canExecute">The execution status logic.</param>
 		public RelayCommand(Action<T> execute, Predicate<T> canExecute)
 		{
-		    mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
-			mCanExecute = canExecute;
+		    _mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
+			_mCanExecute = canExecute;
 		}
 
 		#endregion // Constructors
@@ -51,13 +51,13 @@
 		{
 			add
 			{
-				if (mCanExecute != null)
+				if (_mCanExecute != null)
 					CommandManager.RequerySuggested += value;
 			}
 
 			remove
 			{
-				if (mCanExecute != null)
+				if (_mCanExecute != null)
 					CommandManager.RequerySuggested -= value;
 			}
 		}
@@ -72,7 +72,7 @@
 		[DebuggerStepThrough]
 		public bool CanExecute(object parameter)
 		{
-			return mCanExecute == null ? true : mCanExecute((T)parameter);
+			return _mCanExecute == null ? true : _mCanExecute((T)parameter);
 		}
 
 		/// <summary>
@@ -81,7 +81,7 @@
 		/// <param name="parameter"></param>
 		public void Execute(object parameter)
 		{
-			mExecute((T)parameter);
+			_mExecute((T)parameter);
 		}
 		#endregion methods
 	}
@@ -96,8 +96,8 @@
 	internal class RelayCommand : ICommand
 	{
 		#region Fields
-		private readonly Action mExecute;
-		private readonly Func<bool> mCanExecute;
+		private readonly Action _mExecute;
+		private readonly Func<bool> _mCanExecute;
 		#endregion Fields
 
 		#region Constructors
@@ -114,9 +114,9 @@
 		/// <summary>
 		/// Copy constructor
 		/// </summary>
-		/// <param name="inputRC"></param>
-		public RelayCommand(RelayCommand inputRC)
-			: this(inputRC.mExecute, inputRC.mCanExecute)
+		/// <param name="inputRc"></param>
+		public RelayCommand(RelayCommand inputRc)
+			: this(inputRc._mExecute, inputRc._mCanExecute)
 		{
 		}
 
@@ -127,8 +127,8 @@
 		/// <param name="canExecute">The execution status logic.</param>
 		public RelayCommand(Action execute, Func<bool> canExecute)
 		{
-      mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
-			mCanExecute = canExecute;
+      _mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
+			_mCanExecute = canExecute;
 		}
 
 		#endregion Constructors
@@ -141,13 +141,13 @@
 		{
 			add
 			{
-				if (mCanExecute != null)
+				if (_mCanExecute != null)
 					CommandManager.RequerySuggested += value;
 			}
 
 			remove
 			{
-				if (mCanExecute != null)
+				if (_mCanExecute != null)
 					CommandManager.RequerySuggested -= value;
 			}
 		}
@@ -163,7 +163,7 @@
 		[DebuggerStepThrough]
 		public bool CanExecute(object parameter)
 		{
-			return mCanExecute == null ? true : mCanExecute();
+			return _mCanExecute == null ? true : _mCanExecute();
 		}
 
 		/// <summary>
@@ -172,7 +172,7 @@
 		/// <param name="parameter"></param>
 		public void Execute(object parameter)
 		{
-			mExecute();
+			_mExecute();
 		}
 
 		#endregion Methods
