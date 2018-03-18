@@ -83,8 +83,8 @@
     <IntermediateOutputPath>C:\Users\NOP\AppData\Local\Temp\vs22C1.tmp\x64\Release\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CommonServiceLocator.2.0.2\lib\net45\CommonServiceLocator.dll</HintPath>
+    <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CommonServiceLocator.2.0.3\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
     <Reference Include="DropDownButtonLib, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.DropDownButtonLib.1.0.4\lib\net4\DropDownButtonLib.dll</HintPath>
