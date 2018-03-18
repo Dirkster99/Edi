@@ -53,8 +53,8 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		/// </summary>
 		public LinkElementGenerator()
 		{
-			this.linkRegex = defaultLinkRegex;
-			this.RequireControlModifierForClick = true;
+			linkRegex = defaultLinkRegex;
+			RequireControlModifierForClick = true;
 		}
 		
 		/// <summary>
@@ -64,12 +64,12 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		{
 			if (regex == null)
 				throw new ArgumentNullException("regex");
-			this.linkRegex = regex;
+			linkRegex = regex;
 		}
 		
 		void IBuiltinElementGenerator.FetchOptions(TextEditorOptions options)
 		{
-			this.RequireControlModifierForClick = options.RequireControlModifierForHyperlinkClick;
+			RequireControlModifierForClick = options.RequireControlModifierForHyperlinkClick;
 		}
 		
 		Match GetMatch(int startOffset, out int matchOffset)
@@ -113,7 +113,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 				return null;
 			VisualLineLinkText linkText = new VisualLineLinkText(CurrentContext.VisualLine, m.Length);
 			linkText.NavigateUri = uri;
-			linkText.RequireControlModifierForClick = this.RequireControlModifierForClick;
+			linkText.RequireControlModifierForClick = RequireControlModifierForClick;
 			return linkText;
 		}
 		
@@ -177,9 +177,9 @@ namespace ICSharpCode.AvalonEdit.Rendering
         private const string UNCLink = @"([""][\\\\][ a-zA-Z0-9\\\.~_\-~%@()+:?&=#!]*[\\]?[ a-zA-Z0-9\\\.~_\-~%@()+:?&=#!]*)[""]";
 
         internal readonly new static Regex defaultLinkRegex = new Regex(
-                  FileLinkElementGenerator.UNCLink
-          + "|" + FileLinkElementGenerator.FileLink
-          + "|" + FileLinkElementGenerator.DriveLink
+                  UNCLink
+          + "|" + FileLink
+          + "|" + DriveLink
           );
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
         /// which can be used to match and highlight links into the Windows file system.
         /// </summary>
         public FileLinkElementGenerator()
-          : base(FileLinkElementGenerator.defaultLinkRegex)
+          : base(defaultLinkRegex)
         {
         }
 

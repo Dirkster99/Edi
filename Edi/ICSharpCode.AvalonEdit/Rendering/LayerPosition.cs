@@ -90,17 +90,17 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		
 		public LayerPosition(KnownLayer knownLayer, LayerInsertionPosition position)
 		{
-			this.KnownLayer = knownLayer;
-			this.Position = position;
+			KnownLayer = knownLayer;
+			Position = position;
 		}
 		
 		public int CompareTo(LayerPosition other)
 		{
-			int r = this.KnownLayer.CompareTo(other.KnownLayer);
+			int r = KnownLayer.CompareTo(other.KnownLayer);
 			if (r != 0)
 				return r;
 			else
-				return this.Position.CompareTo(other.Position);
+				return Position.CompareTo(other.Position);
 		}
 	}
 }

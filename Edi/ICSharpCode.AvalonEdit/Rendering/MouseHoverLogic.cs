@@ -50,7 +50,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		
 		void MouseHoverLogicMouseMove(object sender, MouseEventArgs e)
 		{
-			Vector mouseMovement = mouseHoverStartPoint - e.GetPosition(this.target);
+			Vector mouseMovement = mouseHoverStartPoint - e.GetPosition(target);
 			if (Math.Abs(mouseMovement.X) > SystemParameters.MouseHoverWidth
 			    || Math.Abs(mouseMovement.Y) > SystemParameters.MouseHoverHeight)
 			{
@@ -68,9 +68,9 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		void StartHovering(MouseEventArgs e)
 		{
 			StopHovering();
-			mouseHoverStartPoint = e.GetPosition(this.target);
+			mouseHoverStartPoint = e.GetPosition(target);
 			mouseHoverLastEventArgs = e;
-			mouseHoverTimer = new DispatcherTimer(SystemParameters.MouseHoverTime, DispatcherPriority.Background, OnMouseHoverTimerElapsed, this.target.Dispatcher);
+			mouseHoverTimer = new DispatcherTimer(SystemParameters.MouseHoverTime, DispatcherPriority.Background, OnMouseHoverTimerElapsed, target.Dispatcher);
 			mouseHoverTimer.Start();
 		}
 		
@@ -139,9 +139,9 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		public void Dispose()
 		{
 			if (!disposed) {
-				this.target.MouseLeave -= MouseHoverLogicMouseLeave;
-				this.target.MouseMove -= MouseHoverLogicMouseMove;
-				this.target.MouseEnter -= MouseHoverLogicMouseEnter;
+				target.MouseLeave -= MouseHoverLogicMouseLeave;
+				target.MouseMove -= MouseHoverLogicMouseMove;
+				target.MouseEnter -= MouseHoverLogicMouseEnter;
 			}
 			disposed = true;
 		}

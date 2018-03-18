@@ -289,7 +289,7 @@ namespace ICSharpCode.AvalonEdit
 		{
 			if (column < 1)
 				throw new ArgumentOutOfRangeException("column", column, "Value must be at least 1.");
-			int indentationSize = this.IndentationSize;
+			int indentationSize = IndentationSize;
 			if (ConvertTabsToSpaces) {
 				return new string(' ', indentationSize - ((column - 1) % indentationSize));
 			} else {
@@ -327,12 +327,12 @@ namespace ICSharpCode.AvalonEdit
         [DefaultValue(true)]
         public virtual bool IsInsertMode
         {
-            get { return this.mIsInsertMode; }
+            get { return mIsInsertMode; }
             set
             {
-                if (this.mIsInsertMode != value)
+                if (mIsInsertMode != value)
                 {
-                    this.mIsInsertMode = value;
+                    mIsInsertMode = value;
                     OnPropertyChanged("IsInsertMode");
                 }
             }
@@ -551,14 +551,14 @@ namespace ICSharpCode.AvalonEdit
         {
             get
             {
-                return this.mEnableHighlightBrackets;
+                return mEnableHighlightBrackets;
             }
 
             set
             {
-                if (this.mEnableHighlightBrackets != value)
+                if (mEnableHighlightBrackets != value)
                 {
-                    this.mEnableHighlightBrackets = value;
+                    mEnableHighlightBrackets = value;
                     OnPropertyChanged("EnableHighlightBrackets");
                 }
             }
@@ -572,12 +572,12 @@ namespace ICSharpCode.AvalonEdit
         [DefaultValue(false)]
         public virtual bool EnableCodeCompletion
         {
-            get { return this.mEnableCodeCompletion; }
+            get { return mEnableCodeCompletion; }
             set
             {
-                if (this.mEnableCodeCompletion != value)
+                if (mEnableCodeCompletion != value)
                 {
-                    this.mEnableCodeCompletion = value;
+                    mEnableCodeCompletion = value;
                     OnPropertyChanged("EnableCodeCompletion");
                 }
             }

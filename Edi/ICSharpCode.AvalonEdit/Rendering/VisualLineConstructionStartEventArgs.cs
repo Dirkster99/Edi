@@ -38,7 +38,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		{
 			if (firstLineInView == null)
 				throw new ArgumentNullException("firstLineInView");
-			this.FirstLineInView = firstLineInView;
+			FirstLineInView = firstLineInView;
 		}
 	}
 }

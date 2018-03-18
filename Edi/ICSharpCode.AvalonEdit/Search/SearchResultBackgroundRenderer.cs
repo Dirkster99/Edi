@@ -56,7 +56,7 @@ namespace ICSharpCode.AvalonEdit.Search
 		public Brush MarkerBrush {
 			get { return markerBrush; }
 			set {
-				this.markerBrush = value;
+				markerBrush = value;
 				markerPen = new Pen(markerBrush, 1);
 			}
 		}

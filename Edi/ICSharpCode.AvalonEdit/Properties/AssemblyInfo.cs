@@ -50,7 +50,7 @@ using System.Windows.Markup;
 	// app, or any theme specific resource dictionaries)
 )]
 
-[assembly: System.Runtime.InteropServices.ComVisible(false)]
+[assembly: ComVisible(false)]
 [assembly: AssemblyCompany("ic#code")]
 [assembly: AssemblyProduct("SharpDevelop")]
 [assembly: AssemblyCopyright("2000-2014 AlphaSierraPapa for the SharpDevelop Team")]

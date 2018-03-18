@@ -1,8 +1,8 @@
 ﻿namespace ICSharpCode.AvalonEdit.Edi
 {
-    using ICSharpCode.AvalonEdit.Edi.Folding;
-    using ICSharpCode.AvalonEdit.Folding;
-    using ICSharpCode.AvalonEdit.Highlighting;
+    using Folding;
+    using AvalonEdit.Folding;
+    using Highlighting;
     using System;
     using System.Windows.Input;
     using System.Windows.Threading;
@@ -32,7 +32,7 @@
             base.OnSyntaxHighlightingChanged(newValue);
 
             if (newValue != null)
-                this.SetFolding(newValue);
+                SetFolding(newValue);
         }
 
         /// <summary>
@@ -44,7 +44,7 @@
         {
             if (syntaxHighlighting == null)
             {
-                this.mFoldingStrategy = null;
+                mFoldingStrategy = null;
             }
             else
             {
@@ -53,44 +53,44 @@
                     case "XML":
                     case "HTML":
                         mFoldingStrategy = new XmlFoldingStrategy() { ShowAttributesWhenFolded = true };
-                        this.TextArea.IndentationStrategy = new ICSharpCode.AvalonEdit.Indentation.DefaultIndentationStrategy();
+                        TextArea.IndentationStrategy = new Indentation.DefaultIndentationStrategy();
                         break;
                     case "C#":
-                        this.TextArea.IndentationStrategy = new ICSharpCode.AvalonEdit.Indentation.CSharp.CSharpIndentationStrategy(this.Options);
+                        TextArea.IndentationStrategy = new Indentation.CSharp.CSharpIndentationStrategy(Options);
                         mFoldingStrategy = new CSharpBraceFoldingStrategy();
                         break;
                     case "C++":
                     case "PHP":
                     case "Java":
-                        this.TextArea.IndentationStrategy = new ICSharpCode.AvalonEdit.Indentation.CSharp.CSharpIndentationStrategy(this.Options);
+                        TextArea.IndentationStrategy = new Indentation.CSharp.CSharpIndentationStrategy(Options);
                         mFoldingStrategy = new CSharpBraceFoldingStrategy();
                         break;
                     case "VBNET":
-                        this.TextArea.IndentationStrategy = new ICSharpCode.AvalonEdit.Indentation.CSharp.CSharpIndentationStrategy(this.Options);
+                        TextArea.IndentationStrategy = new Indentation.CSharp.CSharpIndentationStrategy(Options);
                         mFoldingStrategy = new VBNetFoldingStrategy();
                         break;
                     default:
-                        this.TextArea.IndentationStrategy = new ICSharpCode.AvalonEdit.Indentation.DefaultIndentationStrategy();
+                        TextArea.IndentationStrategy = new Indentation.DefaultIndentationStrategy();
                         mFoldingStrategy = null;
                         break;
                 }
 
                 if (mFoldingStrategy != null)
                 {
-                    if (this.Document != null)
+                    if (Document != null)
                     {
                         if (mFoldingManager == null)
-                            mFoldingManager = FoldingManager.Install(this.TextArea);
+                            mFoldingManager = FoldingManager.Install(TextArea);
 
 
-                        if (this.mFoldingStrategy is AbstractFoldingStrategy)
+                        if (mFoldingStrategy is AbstractFoldingStrategy)
                         {
-                            AbstractFoldingStrategy abstractFolder = this.mFoldingStrategy as AbstractFoldingStrategy;
-                            abstractFolder.UpdateFoldings(mFoldingManager, this.Document);
+                            AbstractFoldingStrategy abstractFolder = mFoldingStrategy as AbstractFoldingStrategy;
+                            abstractFolder.UpdateFoldings(mFoldingManager, Document);
                         }
                     }
                     else
-                        this.mInstallFoldingManager = true;
+                        mInstallFoldingManager = true;
                 }
                 else
                 {
@@ -110,15 +110,15 @@
         /// <param name="e"></param>
         private void foldingUpdateTimer_Tick(object sender, EventArgs e)
         {
-            if (this.IsVisible == true)
+            if (IsVisible == true)
             {
                 if (mInstallFoldingManager == true)
                 {
-                    if (this.Document != null)
+                    if (Document != null)
                     {
                         if (mFoldingManager == null)
                         {
-                            this.mFoldingManager = FoldingManager.Install(this.TextArea);
+                            mFoldingManager = FoldingManager.Install(TextArea);
 
                             mInstallFoldingManager = false;
                         }
@@ -130,10 +130,10 @@
                 if (mFoldingStrategy != null)
                 {
 
-                    if (this.mFoldingStrategy is AbstractFoldingStrategy)
+                    if (mFoldingStrategy is AbstractFoldingStrategy)
                     {
-                        AbstractFoldingStrategy abstractFolder = this.mFoldingStrategy as AbstractFoldingStrategy;
-                        abstractFolder.UpdateFoldings(mFoldingManager, this.Document);
+                        AbstractFoldingStrategy abstractFolder = mFoldingStrategy as AbstractFoldingStrategy;
+                        abstractFolder.UpdateFoldings(mFoldingManager, Document);
                     }
                 }
             }
@@ -201,19 +201,19 @@
         /// </summary>
         private void CollapseAllTextfoldings()
         {
-            if (this.mFoldingManager == null)
+            if (mFoldingManager == null)
                 return;
 
-            if (this.mFoldingManager.AllFoldings == null)
+            if (mFoldingManager.AllFoldings == null)
                 return;
 
-            foreach (var loFolding in this.mFoldingManager.AllFoldings)
+            foreach (var loFolding in mFoldingManager.AllFoldings)
             {
                 loFolding.IsFolded = true;
             }
 
             // Unfold the first fold (if any) to give a useful overview on content
-            FoldingSection foldSection = this.mFoldingManager.GetNextFolding(0);
+            FoldingSection foldSection = mFoldingManager.GetNextFolding(0);
 
             if (foldSection != null)
                 foldSection.IsFolded = false;
@@ -225,13 +225,13 @@
         /// </summary>
         private void ExpandAllTextFoldings()
         {
-            if (this.mFoldingManager == null)
+            if (mFoldingManager == null)
                 return;
 
-            if (this.mFoldingManager.AllFoldings == null)
+            if (mFoldingManager.AllFoldings == null)
                 return;
 
-            foreach (var loFolding in this.mFoldingManager.AllFoldings)
+            foreach (var loFolding in mFoldingManager.AllFoldings)
             {
                 loFolding.IsFolded = false;
             }

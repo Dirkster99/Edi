@@ -246,7 +246,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 						// Mark the undo group with the currentDragDescriptor, if the drag
 						// is originating from the same control. This allows combining
 						// the undo groups when text is moved.
-						textArea.Document.UndoStack.StartUndoGroup(this.currentDragDescriptor);
+						textArea.Document.UndoStack.StartUndoGroup(currentDragDescriptor);
 						try {
 							if (rectangular && RectangleSelection.PerformRectangularPaste(textArea, textArea.Caret.Position, text, true)) {
 								
@@ -334,7 +334,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 				return;
 			
 			object dragDescriptor = new object();
-			this.currentDragDescriptor = dragDescriptor;
+			currentDragDescriptor = dragDescriptor;
 			
 			DragDropEffects resultEffect;
 			using (textArea.AllowCaretOutsideSelection()) {
@@ -354,7 +354,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 				}
 			}
 			
-			this.currentDragDescriptor = null;
+			currentDragDescriptor = null;
 			
 			if (deleteOnMove != null && resultEffect == DragDropEffects.Move && (allowedEffects & DragDropEffects.Move) == DragDropEffects.Move) {
 				bool draggedInsideSingleDocument = (dragDescriptor == textArea.Document.UndoStack.LastGroupDescriptor);

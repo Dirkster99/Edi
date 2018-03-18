@@ -53,8 +53,8 @@
     /// </summary>
     public void SelectAllText()
     {
-      if (this.SelectAll != null)
-        this.SelectAll(this);
+      if (SelectAll != null)
+        SelectAll(this);
     }
 
     /// <summary>
@@ -64,9 +64,9 @@
     /// <param name="length"></param>
     public void SelectText(int start, int length)
     {
-      if (this.Select != null)
+      if (Select != null)
       {
-        this.Select(this, start, length);
+        Select(this, start, length);
       }
     }
 
@@ -76,8 +76,8 @@
     /// <param name="line"></param>
     public void ScrollToLine(int line)
     {
-      if (this.ScrollToLineEvent != null)
-        this.ScrollToLineEvent(this, line);
+      if (ScrollToLineEvent != null)
+        ScrollToLineEvent(this, line);
     }
 
     /// <summary>
@@ -91,8 +91,8 @@
       start = length = 0;
       IsRectengularSelection = false;
 
-      if (this.CurrentSelectionEvent != null)
-        this.CurrentSelectionEvent(this, out start, out length, out IsRectengularSelection);
+      if (CurrentSelectionEvent != null)
+        CurrentSelectionEvent(this, out start, out length, out IsRectengularSelection);
     }
 
     /// <summary>
@@ -100,8 +100,8 @@
     /// </summary>
     public void BeginChange()
     {
-      if (this.BeginChangeEvent != null)
-        this.BeginChangeEvent(this);
+      if (BeginChangeEvent != null)
+        BeginChangeEvent(this);
     }
 
     /// <summary>
@@ -109,8 +109,8 @@
     /// </summary>
     public void EndChange()
     {
-      if (this.EndChangeEvent != null)
-        this.EndChangeEvent(this);
+      if (EndChangeEvent != null)
+        EndChangeEvent(this);
     }
 
     /// <summary>
@@ -121,8 +121,8 @@
     {
       selectedText = string.Empty;
 
-      if (this.GetSelectedTextEvent != null)
-        this.GetSelectedTextEvent(this, out selectedText);
+      if (GetSelectedTextEvent != null)
+        GetSelectedTextEvent(this, out selectedText);
     }
     #endregion methods
   }

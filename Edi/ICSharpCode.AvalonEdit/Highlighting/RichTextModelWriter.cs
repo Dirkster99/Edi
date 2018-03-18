@@ -46,7 +46,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 			if (richTextModel == null)
 				throw new ArgumentNullException("richTextModel");
 			this.richTextModel = richTextModel;
-			this.documentTextWriter = (DocumentTextWriter)base.textWriter;
+			documentTextWriter = (DocumentTextWriter)textWriter;
 			currentColor = richTextModel.GetHighlightingAt(Math.Max(0, insertionOffset - 1));
 		}
 		

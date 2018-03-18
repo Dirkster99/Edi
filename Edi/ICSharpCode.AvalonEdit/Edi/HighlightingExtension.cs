@@ -6,9 +6,9 @@
   using System.Windows;
   using System.Xml;
 
-  using ICSharpCode.AvalonEdit.Highlighting;
-  using ICSharpCode.AvalonEdit.Highlighting.Themes;
-  using ICSharpCode.AvalonEdit.Highlighting.Xshd;
+  using Highlighting;
+  using Highlighting.Themes;
+  using Highlighting.Xshd;
 
   /// <summary>
   /// Class for handling file streams and association with xshd highlighting patterns and names

@@ -8,7 +8,7 @@
   using System.Windows.Media;
   using System.Xml;
 
-  using ICSharpCode.AvalonEdit.Highlighting.Themes;
+  using Themes;
   using System.Collections.Generic;
 
   /// <summary>
@@ -21,7 +21,7 @@
     /// <summary>
     /// log4net logger
     /// </summary>
-    protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+    protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
     internal const string XMLComment = "#comment";
     internal const string XMLNameSpace = "xmlns";
@@ -59,9 +59,9 @@
         string sPathfileName = fileName;
 
         if (string.IsNullOrEmpty( path ) == false)
-          sPathfileName = System.IO.Path.Combine(path, fileName);
+          sPathfileName = Path.Combine(path, fileName);
 
-        if (System.IO.File.Exists(sPathfileName) == false)
+        if (File.Exists(sPathfileName) == false)
         {
           logger.Error(string.Format(CultureInfo.InvariantCulture,
                        "File '{0}' does not exist at '{1}' or cannot be accessed.", fileName, path));
@@ -85,16 +85,16 @@
 
         using (XmlReader reader = XmlReader.Create(sPathfileName))
         {
-          string rootTagName = Read.XMLName;
+          string rootTagName = XMLName;
 
           string name = string.Empty;
 
-          reader.ReadToNextSibling(Read.XMLName);
+          reader.ReadToNextSibling(XMLName);
           while (reader.MoveToNextAttribute())
           {
             switch (reader.Name)
             {
-              case Read.attr_name:
+              case attr_name:
                 name = reader.Value;
                 break;
 
@@ -152,7 +152,7 @@
     /// if everythings fine.</returns>
     private static List<string> TestXML(string sXML)
     {
-      string sAssembly = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+      string sAssembly = Assembly.GetExecutingAssembly().CodeBase;
 
       // Replace the information in '<>' brackets with a valid path
       // to a XSD file (that you added into your Visual Studio project)
@@ -192,7 +192,7 @@
   class ReadLexerStyles
   {
     #region Fields
-    protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+    protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
     internal const string XMLComment = "#comment";
     internal const string XMLNameSpace = "xmlns";
@@ -220,7 +220,7 @@
     /// </summary>
     internal static void ReadNode(XmlReader reader, HighlightingThemes HlThemeRoot)
     {
-      reader.ReadToNextSibling(ReadLexerStyles.XMLName);
+      reader.ReadToNextSibling(XMLName);
       while (reader.Read())
       {
         if (reader.IsStartElement() == true)
@@ -245,7 +245,7 @@
 
             default:
               if (reader.Name.Trim().Length > 0 && reader.Name != XMLComment)
-                logger.Warn("Parsing the XML child:'" + reader.Name + "' of '" + ReadLexerStyles.XMLName + "' is not implemented.");
+                logger.Warn("Parsing the XML child:'" + reader.Name + "' of '" + XMLName + "' is not implemented.");
               break;
           }
         }
@@ -260,7 +260,7 @@
   internal class ReadLexerType
   {
     #region Fields
-    protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+    protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
     internal const string XMLComment = "#comment";
     internal const string XMLNameSpace = "xmlns";
@@ -302,19 +302,19 @@
       string name = string.Empty;
       string desc = string.Empty;
 
-      reader.ReadToNextSibling(ReadLexerType.XMLName);
+      reader.ReadToNextSibling(XMLName);
       while (reader.MoveToNextAttribute())
       {
         switch (reader.Name)
         {
-          case ReadLexerType.attr_name:
+          case attr_name:
             name = reader.Value;
             break;
 
           case XMLNameSpace:
             break;
 
-          case ReadLexerType.attr_desc:
+          case attr_desc:
             desc = (reader.Value == null ? string.Empty : reader.Value);
             break;
         }
@@ -341,7 +341,7 @@
 
             default:
               if (reader.Name.Trim().Length > 0 && reader.Name != XMLComment)
-                logger.Warn("Parsing the XML child:'" + reader.Name + "' of '" + ReadLexerType.XMLName + "' is not implemented.");
+                logger.Warn("Parsing the XML child:'" + reader.Name + "' of '" + XMLName + "' is not implemented.");
               break;
           }
         }
@@ -358,7 +358,7 @@
   internal class ReadWordsStyle : ReadStyle
   {
     #region Fields
-    protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+    protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
     internal const string XMLComment = "#comment";
     internal const string XMLNameSpace = "xmlns";
@@ -421,28 +421,28 @@
       string fontWeight = string.Empty;
       string FontStyle = string.Empty;
 
-      reader.ReadToNextSibling(ReadWordsStyle.XMLName);
+      reader.ReadToNextSibling(XMLName);
       while (reader.MoveToNextAttribute())
       {
         switch (reader.Name)
         {
-          case ReadWordsStyle.attr_name:
+          case attr_name:
             name = reader.Value;
             break;
 
-          case ReadWordsStyle.attr_fgColor:
+          case attr_fgColor:
             fgColor = (reader.Value == null ? string.Empty : reader.Value);
             break;
 
-          case ReadWordsStyle.attr_bgColor:
+          case attr_bgColor:
             bgColor = (reader.Value == null ? string.Empty : reader.Value);
             break;
 
-          case ReadWordsStyle.attr_fontWeight:
+          case attr_fontWeight:
             fontWeight = (reader.Value == null ? string.Empty : reader.Value);
             break;
 
-          case ReadWordsStyle.attr_FontStyle:
+          case attr_FontStyle:
             FontStyle = (reader.Value == null ? string.Empty : reader.Value);
             break;
 
@@ -459,16 +459,16 @@
       ret = new WordsStyle(name);
 
       if (fgColor != string.Empty)
-        ret.fgColor = ReadWordsStyle.SetColorFromString(ReadWordsStyle.attr_fgColor, fgColor);
+        ret.fgColor = SetColorFromString(attr_fgColor, fgColor);
 
       if (bgColor != string.Empty)
-        ret.bgColor = ReadWordsStyle.SetColorFromString(ReadWordsStyle.attr_bgColor, bgColor);
+        ret.bgColor = SetColorFromString(attr_bgColor, bgColor);
 
       if (fontWeight != string.Empty)
-        ret.fontWeight = ParseFontWeight(ReadWordsStyle.attr_fontWeight, fontWeight, FontWeightConverter);
+        ret.fontWeight = ParseFontWeight(attr_fontWeight, fontWeight, FontWeightConverter);
 
       if (FontStyle != string.Empty)
-        ret.fontStyle = ParseFontStyle(ReadWordsStyle.attr_FontStyle, FontStyle, FontStyleConverter);
+        ret.fontStyle = ParseFontStyle(attr_FontStyle, FontStyle, FontStyleConverter);
 
       return ret;
     }
@@ -482,7 +482,7 @@
   class ReadGlobalStyles
   {
     #region Fields
-    protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+    protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
     internal const string XMLComment = "#comment";
     internal const string XMLNameSpace = "xmlns";
@@ -510,7 +510,7 @@
     /// </summary>
     internal static void ReadNode(XmlReader reader, HighlightingThemes HlThemeRoot)
     {
-      reader.ReadToNextSibling(ReadGlobalStyles.XMLName);
+      reader.ReadToNextSibling(XMLName);
       while (reader.Read())
       {
         if (reader.IsStartElement() == true)
@@ -576,7 +576,7 @@
 
             default:
               if (reader.Name.Trim().Length > 0 && reader.Name != XMLComment)
-                logger.Warn("Parsing the XML child:'" + reader.Name + "' of '" + ReadGlobalStyles.XMLName + "' is not implemented.");
+                logger.Warn("Parsing the XML child:'" + reader.Name + "' of '" + XMLName + "' is not implemented.");
               break;
           }
         }
@@ -591,7 +591,7 @@
   internal class ReadWidgetStyle : ReadStyle
   {
     #region Fields
-    protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+    protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
     internal const string XMLComment = "#comment";
     internal const string XMLNameSpace = "xmlns";
@@ -659,12 +659,12 @@
 
       string bgColor = string.Empty;
 
-      reader.ReadToNextSibling(ReadWidgetStyle.XMLName_CurrentLineBackground);
+      reader.ReadToNextSibling(XMLName_CurrentLineBackground);
       while (reader.MoveToNextAttribute())
       {
         switch (reader.Name)
         {
-          case ReadWidgetStyle.attr_bgColor:
+          case attr_bgColor:
             bgColor = (reader.Value == null ? string.Empty : reader.Value);
             break;
 
@@ -678,10 +678,10 @@
         }
       }
 
-      ret = new WidgetStyle(ReadWidgetStyle.XMLName_CurrentLineBackground);
+      ret = new WidgetStyle(XMLName_CurrentLineBackground);
 
       if (bgColor != string.Empty)
-        ret.bgColor = ReadWidgetStyle.SetColorFromString(ReadWidgetStyle.attr_bgColor, bgColor);
+        ret.bgColor = SetColorFromString(attr_bgColor, bgColor);
 
       return ret;
     }
@@ -697,7 +697,7 @@
       {
         switch (reader.Name)
         {
-          case ReadWidgetStyle.attr_fgColor:
+          case attr_fgColor:
             fgColor = (reader.Value == null ? string.Empty : reader.Value);
             break;
 
@@ -714,7 +714,7 @@
       ret = new WidgetStyle(nameOfNode);
 
       if (fgColor != string.Empty)
-        ret.fgColor = ReadWidgetStyle.SetColorFromString(ReadWidgetStyle.attr_fgColor, fgColor);
+        ret.fgColor = SetColorFromString(attr_fgColor, fgColor);
 
       return ret;
     }
@@ -727,20 +727,20 @@
       string bgColor     = string.Empty;
       string borderColor = string.Empty;
 
-      reader.ReadToNextSibling(ReadWidgetStyle.XMLName_Selection);
+      reader.ReadToNextSibling(XMLName_Selection);
       while (reader.MoveToNextAttribute())
       {
         switch (reader.Name)
         {
-          case ReadWidgetStyle.attr_fgColor:
+          case attr_fgColor:
             fgColor = (reader.Value == null ? string.Empty : reader.Value);
             break;
 
-          case ReadWidgetStyle.attr_bgColor:
+          case attr_bgColor:
             bgColor = (reader.Value == null ? string.Empty : reader.Value);
             break;
 
-          case ReadWidgetStyle.attr_borderColor:
+          case attr_borderColor:
             borderColor = (reader.Value == null ? string.Empty : reader.Value);
             break;
 
@@ -754,16 +754,16 @@
         }
       }
 
-      ret = new WidgetStyle(ReadWidgetStyle.XMLName_Selection);
+      ret = new WidgetStyle(XMLName_Selection);
 
       if (fgColor != string.Empty)
-        ret.fgColor = ReadWidgetStyle.SetColorFromString(ReadWidgetStyle.attr_fgColor, fgColor);
+        ret.fgColor = SetColorFromString(attr_fgColor, fgColor);
 
       if (bgColor != string.Empty)
-        ret.bgColor = ReadWidgetStyle.SetColorFromString(ReadWidgetStyle.attr_bgColor, bgColor);
+        ret.bgColor = SetColorFromString(attr_bgColor, bgColor);
 
       if (borderColor != string.Empty)
-        ret.borderColor = ReadWidgetStyle.SetColorFromString(ReadWidgetStyle.attr_borderColor, borderColor);
+        ret.borderColor = SetColorFromString(attr_borderColor, borderColor);
 
       return ret;
     }
@@ -780,11 +780,11 @@
       {
         switch (reader.Name)
         {
-          case ReadWidgetStyle.attr_fgColor:
+          case attr_fgColor:
             fgColor = (reader.Value == null ? string.Empty : reader.Value);
             break;
 
-          case ReadWidgetStyle.attr_bgColor:
+          case attr_bgColor:
             bgColor = (reader.Value == null ? string.Empty : reader.Value);
             break;
 
@@ -801,10 +801,10 @@
       ret = new WidgetStyle(nameOfNode);
 
       if (fgColor != string.Empty)
-        ret.fgColor = ReadWidgetStyle.SetColorFromString(ReadWidgetStyle.attr_fgColor, fgColor);
+        ret.fgColor = SetColorFromString(attr_fgColor, fgColor);
 
       if (bgColor != string.Empty)
-        ret.bgColor = ReadWidgetStyle.SetColorFromString(ReadWidgetStyle.attr_bgColor, bgColor);
+        ret.bgColor = SetColorFromString(attr_bgColor, bgColor);
 
       return ret;
     }

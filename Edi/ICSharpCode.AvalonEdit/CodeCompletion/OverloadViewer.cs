@@ -56,13 +56,13 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		{
 			base.OnApplyTemplate();
 			
-			Button upButton = (Button)this.Template.FindName("PART_UP", this);
+			Button upButton = (Button)Template.FindName("PART_UP", this);
 			upButton.Click += (sender, e) => {
 				e.Handled = true;
 				ChangeIndex(-1);
 			};
 			
-			Button downButton = (Button)this.Template.FindName("PART_DOWN", this);
+			Button downButton = (Button)Template.FindName("PART_DOWN", this);
 			downButton.Click += (sender, e) => {
 				e.Handled = true;
 				ChangeIndex(+1);
@@ -89,7 +89,7 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		/// <param name="relativeIndexChange">The relative index change - usual values are +1 or -1.</param>
 		public void ChangeIndex(int relativeIndexChange)
 		{
-			IOverloadProvider p = this.Provider;
+			IOverloadProvider p = Provider;
 			if (p != null) {
 				int newIndex = p.SelectedIndex + relativeIndexChange;
 				if (newIndex < 0)

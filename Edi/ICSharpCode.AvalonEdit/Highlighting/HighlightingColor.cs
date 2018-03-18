@@ -141,15 +141,15 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		{
 			if (info == null)
 				throw new ArgumentNullException("info");
-			this.Name = info.GetString("Name");
+			Name = info.GetString("Name");
 			if (info.GetBoolean("HasWeight"))
-				this.FontWeight = System.Windows.FontWeight.FromOpenTypeWeight(info.GetInt32("Weight"));
+				FontWeight = System.Windows.FontWeight.FromOpenTypeWeight(info.GetInt32("Weight"));
 			if (info.GetBoolean("HasStyle"))
-				this.FontStyle = (FontStyle?)new FontStyleConverter().ConvertFromInvariantString(info.GetString("Style"));
+				FontStyle = (FontStyle?)new FontStyleConverter().ConvertFromInvariantString(info.GetString("Style"));
 			if (info.GetBoolean("HasUnderline"))
-				this.Underline = info.GetBoolean("Underline");
-			this.Foreground = (HighlightingBrush)info.GetValue("Foreground", typeof(HighlightingBrush));
-			this.Background = (HighlightingBrush)info.GetValue("Background", typeof(HighlightingBrush));
+				Underline = info.GetBoolean("Underline");
+			Foreground = (HighlightingBrush)info.GetValue("Foreground", typeof(HighlightingBrush));
+			Background = (HighlightingBrush)info.GetValue("Background", typeof(HighlightingBrush));
 		}
 		
 		/// <summary>
@@ -164,18 +164,18 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		{
 			if (info == null)
 				throw new ArgumentNullException("info");
-			info.AddValue("Name", this.Name);
-			info.AddValue("HasWeight", this.FontWeight.HasValue);
-			if (this.FontWeight.HasValue)
-				info.AddValue("Weight", this.FontWeight.Value.ToOpenTypeWeight());
-			info.AddValue("HasStyle", this.FontStyle.HasValue);
-			if (this.FontStyle.HasValue)
-				info.AddValue("Style", this.FontStyle.Value.ToString());
-			info.AddValue("HasUnderline", this.Underline.HasValue);
-			if (this.Underline.HasValue)
-				info.AddValue("Underline", this.Underline.Value);
-			info.AddValue("Foreground", this.Foreground);
-			info.AddValue("Background", this.Background);
+			info.AddValue("Name", Name);
+			info.AddValue("HasWeight", FontWeight.HasValue);
+			if (FontWeight.HasValue)
+				info.AddValue("Weight", FontWeight.Value.ToOpenTypeWeight());
+			info.AddValue("HasStyle", FontStyle.HasValue);
+			if (FontStyle.HasValue)
+				info.AddValue("Style", FontStyle.Value.ToString());
+			info.AddValue("HasUnderline", Underline.HasValue);
+			if (Underline.HasValue)
+				info.AddValue("Underline", Underline.Value);
+			info.AddValue("Foreground", Foreground);
+			info.AddValue("Background", Background);
 		}
 		
 		/// <summary>
@@ -213,7 +213,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// <inheritdoc/>
 		public override string ToString()
 		{
-			return "[" + GetType().Name + " " + (string.IsNullOrEmpty(this.Name) ? ToCss() : this.Name) + "]";
+			return "[" + GetType().Name + " " + (string.IsNullOrEmpty(Name) ? ToCss() : Name) + "]";
 		}
 		
 		/// <summary>
@@ -258,9 +258,9 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		{
 			if (other == null)
 				return false;
-			return this.name == other.name && this.fontWeight == other.fontWeight
-				&& this.fontStyle == other.fontStyle && this.underline == other.underline
-				&& object.Equals(this.foreground, other.foreground) && object.Equals(this.background, other.background);
+			return name == other.name && fontWeight == other.fontWeight
+				&& fontStyle == other.fontStyle && underline == other.underline
+				&& Equals(foreground, other.foreground) && Equals(background, other.background);
 		}
 		
 		/// <inheritdoc/>
@@ -288,15 +288,15 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		{
 			FreezableHelper.ThrowIfFrozen(this);
 			if (color.fontWeight != null)
-				this.fontWeight = color.fontWeight;
+				fontWeight = color.fontWeight;
 			if (color.fontStyle != null)
-				this.fontStyle = color.fontStyle;
+				fontStyle = color.fontStyle;
 			if (color.foreground != null)
-				this.foreground = color.foreground;
+				foreground = color.foreground;
 			if (color.background != null)
-				this.background = color.background;
+				background = color.background;
 			if (color.underline != null)
-				this.underline = color.underline;
+				underline = color.underline;
 		}
 		
 		internal bool IsEmptyForMerge {

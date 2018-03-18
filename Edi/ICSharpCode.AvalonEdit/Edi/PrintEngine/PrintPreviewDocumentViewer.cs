@@ -68,7 +68,7 @@
 
         mPrintTicket = printDialog.PrintTicket;
 
-        printDialog.PrintDocument(this.Document.DocumentPaginator, "PrintPreviewJob");
+        printDialog.PrintDocument(Document.DocumentPaginator, "PrintPreviewJob");
       }
     }
     #endregion methods

@@ -42,8 +42,8 @@ namespace ICSharpCode.AvalonEdit.Editing
 		{
 			this.start = start;
 			this.end = end;
-			this.startOffset = textArea.Document.GetOffset(start.Location);
-			this.endOffset = textArea.Document.GetOffset(end.Location);
+			startOffset = textArea.Document.GetOffset(start.Location);
+			endOffset = textArea.Document.GetOffset(end.Location);
 		}
 		
 		/// <inheritdoc/>
@@ -66,7 +66,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 			if (newText == null)
 				throw new ArgumentNullException("newText");
 			using (textArea.Document.RunUpdate()) {
-				ISegment[] segmentsToDelete = textArea.GetDeletableSegments(this.SurroundingSegment);
+				ISegment[] segmentsToDelete = textArea.GetDeletableSegments(SurroundingSegment);
 				for (int i = segmentsToDelete.Length - 1; i >= 0; i--) {
 					if (i == segmentsToDelete.Length - 1) {
 						if (segmentsToDelete[i].Offset == SurroundingSegment.Offset && segmentsToDelete[i].Length == SurroundingSegment.Length) {
@@ -114,7 +114,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 				newEndOffset = e.GetNewOffset(endOffset, AnchorMovementType.Default);
 				newStartOffset = Math.Max(newEndOffset, e.GetNewOffset(startOffset, AnchorMovementType.BeforeInsertion));
 			}
-			return Selection.Create(
+			return Create(
 				textArea,
 				new TextViewPosition(textArea.Document.GetLocation(newStartOffset), start.VisualColumn),
 				new TextViewPosition(textArea.Document.GetLocation(newEndOffset), end.VisualColumn)
@@ -160,9 +160,9 @@ namespace ICSharpCode.AvalonEdit.Editing
 		{
 			SimpleSelection other = obj as SimpleSelection;
 			if (other == null) return false;
-			return this.start.Equals(other.start) && this.end.Equals(other.end)
-				&& this.startOffset == other.startOffset && this.endOffset == other.endOffset
-				&& this.textArea == other.textArea;
+			return start.Equals(other.start) && end.Equals(other.end)
+				&& startOffset == other.startOffset && endOffset == other.endOffset
+				&& textArea == other.textArea;
 		}
 		
 		/// <inheritdoc/>

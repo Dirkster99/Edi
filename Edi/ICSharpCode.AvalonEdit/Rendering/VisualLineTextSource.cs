@@ -32,7 +32,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 	{
 		public VisualLineTextSource(VisualLine visualLine)
 		{
-			this.VisualLine = visualLine;
+			VisualLine = visualLine;
 		}
 		
 		public VisualLine VisualLine { get; private set; }
@@ -136,7 +136,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 				}
 			}
 			cachedStringOffset = offset;
-			return new StringSegment(cachedString = this.Document.GetText(offset, length));
+			return new StringSegment(cachedString = Document.GetText(offset, length));
 		}
 	}
 }

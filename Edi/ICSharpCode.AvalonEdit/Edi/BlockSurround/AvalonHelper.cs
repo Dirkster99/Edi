@@ -4,8 +4,8 @@
   using System.Collections.Generic;
   using System.Linq;
   using System.Text;
-  using ICSharpCode.AvalonEdit.Document;
-  using ICSharpCode.AvalonEdit.Editing;
+  using Document;
+  using Editing;
 
   /// <summary>
   /// Expand selection with intro and outro text elements

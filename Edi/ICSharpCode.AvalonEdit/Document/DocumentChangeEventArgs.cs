@@ -49,7 +49,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		internal OffsetChangeMapEntry CreateSingleChangeMapEntry()
 		{
-			return new OffsetChangeMapEntry(this.Offset, this.RemovalLength, this.InsertionLength);
+			return new OffsetChangeMapEntry(Offset, RemovalLength, InsertionLength);
 		}
 		
 		/// <summary>
@@ -103,7 +103,7 @@ namespace ICSharpCode.AvalonEdit.Document
 			if (offsetChangeMap != null) {
 				if (!offsetChangeMap.IsFrozen)
 					throw new ArgumentException("The OffsetChangeMap must be frozen before it can be used in DocumentChangeEventArgs");
-				if (!offsetChangeMap.IsValidForDocumentChange(this.Offset, this.RemovalLength, this.InsertionLength))
+				if (!offsetChangeMap.IsValidForDocumentChange(Offset, RemovalLength, InsertionLength))
 					throw new ArgumentException("OffsetChangeMap is not valid for this document change", "offsetChangeMap");
 				this.offsetChangeMap = offsetChangeMap;
 			}
@@ -112,12 +112,12 @@ namespace ICSharpCode.AvalonEdit.Document
 		/// <inheritdoc/>
 		public override TextChangeEventArgs Invert()
 		{
-			OffsetChangeMap map = this.OffsetChangeMapOrNull;
+			OffsetChangeMap map = OffsetChangeMapOrNull;
 			if (map != null) {
 				map = map.Invert();
 				map.Freeze();
 			}
-			return new DocumentChangeEventArgs(this.Offset, this.InsertedText, this.RemovedText, map);
+			return new DocumentChangeEventArgs(Offset, InsertedText, RemovedText, map);
 		}
 	}
 }

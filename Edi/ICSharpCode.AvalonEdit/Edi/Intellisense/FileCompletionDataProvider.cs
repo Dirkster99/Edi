@@ -7,7 +7,7 @@
   using System.Windows;
   using System.Xml.Serialization;
 
-  using ICSharpCode.AvalonEdit.CodeCompletion;
+  using CodeCompletion;
 
   /// <summary>
   /// File based text completion class.
@@ -53,7 +53,7 @@
 				  var ser = new XmlSerializer(typeof(List<KeywordsFileOption>));
 				  var ops = (List<KeywordsFileOption>)ser.Deserialize(sr);
 
-          string sLocation = System.IO.Path.GetDirectoryName(Application.ResourceAssembly.Location);
+          string sLocation = Path.GetDirectoryName(Application.ResourceAssembly.Location);
 
           var filePath = Path.Combine(sLocation, "AvalonEdit\\Intellisense", "Keywords",
 					  ops

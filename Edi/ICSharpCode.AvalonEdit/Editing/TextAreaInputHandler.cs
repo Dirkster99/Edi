@@ -193,8 +193,8 @@ namespace ICSharpCode.AvalonEdit.Editing
 		/// <param name="handler">The event handler to run when the command is executed.</param>
 		public void AddBinding(ICommand command, ModifierKeys modifiers, Key key, ExecutedRoutedEventHandler handler)
 		{
-			this.CommandBindings.Add(new CommandBinding(command, handler));
-			this.InputBindings.Add(new KeyBinding(command, key, modifiers));
+			CommandBindings.Add(new CommandBinding(command, handler));
+			InputBindings.Add(new KeyBinding(command, key, modifiers));
 		}
 		#endregion
 		

@@ -199,7 +199,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// </summary>
 		public HighlightedInlineBuilder Clone()
 		{
-			return new HighlightedInlineBuilder(this.text,
+			return new HighlightedInlineBuilder(text,
 			                                    stateChangeOffsets.ToList(),
 			                                    stateChanges.Select(sc => sc.Clone()).ToList());
 		}

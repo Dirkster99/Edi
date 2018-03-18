@@ -145,7 +145,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
 		{
-			return this.GetEnumerator();
+			return GetEnumerator();
 		}
 		
 		bool ICollection<T>.IsReadOnly {

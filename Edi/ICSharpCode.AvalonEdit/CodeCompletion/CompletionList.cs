@@ -241,7 +241,7 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 			if (listBox == null)
 				ApplyTemplate();
 			
-			if (this.IsFiltering) {
+			if (IsFiltering) {
 				SelectItemFiltering(text);
 			}
 			else {
@@ -256,9 +256,9 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		void SelectItemFiltering(string query)
 		{
 			// if the user just typed one more character, don't filter all data but just filter what we are already displaying
-			var listToFilter = (this.currentList != null && (!string.IsNullOrEmpty(this.currentText)) && (!string.IsNullOrEmpty(query)) &&
-			                    query.StartsWith(this.currentText, StringComparison.Ordinal)) ?
-				this.currentList : this.completionData;
+			var listToFilter = (currentList != null && (!string.IsNullOrEmpty(currentText)) && (!string.IsNullOrEmpty(query)) &&
+			                    query.StartsWith(currentText, StringComparison.Ordinal)) ?
+				currentList : completionData;
 			
 			var matchingItems =
 				from item in listToFilter
@@ -285,7 +285,7 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 				listBoxItems.Add(matchingItem.Item);
 				i++;
 			}
-			this.currentList = listBoxItems;
+			currentList = listBoxItems;
 			listBox.ItemsSource = listBoxItems;
 			SelectIndexCentered(bestIndex);
 		}

@@ -35,7 +35,7 @@ namespace ICSharpCode.AvalonEdit.Snippets
 		/// </summary>
 		public SnippetEventArgs(DeactivateReason reason)
 		{
-			this.Reason = reason;
+			Reason = reason;
 		}
 	}
 	

@@ -34,10 +34,10 @@
     /// <param name="widgetStyle">color and brush representation (eg.: "#FF00FFFF" etc)</param>
     public void AddWordStyle(string brushName, WidgetStyle widgetStyle)
     {
-      if (this.mWidgetStyles == null)
-        this.mWidgetStyles = new Dictionary<string, WidgetStyle>();
+      if (mWidgetStyles == null)
+        mWidgetStyles = new Dictionary<string, WidgetStyle>();
 
-      this.mWidgetStyles.Add(brushName, widgetStyle);
+      mWidgetStyles.Add(brushName, widgetStyle);
     }
 
     /// <summary>
@@ -47,10 +47,10 @@
     /// <returns></returns>
     public SolidColorBrush GetFgColorBrush(string widgetStyleName)
     {
-      if (this.mWidgetStyles != null)
+      if (mWidgetStyles != null)
       {
         WidgetStyle s;
-        this.mWidgetStyles.TryGetValue(widgetStyleName, out s);
+        mWidgetStyles.TryGetValue(widgetStyleName, out s);
 
         if (s != null)
           return s.fgColor;
@@ -66,10 +66,10 @@
     /// <returns></returns>
     public WidgetStyle GetWidgetStyle(string widgetStyleName)
     {
-      if (this.mWidgetStyles != null)
+      if (mWidgetStyles != null)
       {
         WidgetStyle s;
-        this.mWidgetStyles.TryGetValue(widgetStyleName, out s);
+        mWidgetStyles.TryGetValue(widgetStyleName, out s);
 
         return s;
       }

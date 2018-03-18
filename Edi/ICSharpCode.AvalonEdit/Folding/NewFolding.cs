@@ -70,18 +70,18 @@ namespace ICSharpCode.AvalonEdit.Folding
 		{
 			if (!(start <= end))
 				throw new ArgumentException("'start' must be less than 'end'");
-			this.StartOffset = start;
-			this.EndOffset = end;
-			this.Name = null;
-			this.DefaultClosed = false;
+			StartOffset = start;
+			EndOffset = end;
+			Name = null;
+			DefaultClosed = false;
 		}
 		
 		int ISegment.Offset {
-			get { return this.StartOffset; }
+			get { return StartOffset; }
 		}
 		
 		int ISegment.Length {
-			get { return this.EndOffset - this.StartOffset; }
+			get { return EndOffset - StartOffset; }
 		}
 	}
 }

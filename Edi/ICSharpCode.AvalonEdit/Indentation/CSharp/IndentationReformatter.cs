@@ -110,7 +110,7 @@ namespace ICSharpCode.AvalonEdit.Indentation.CSharp
 				return string.Format(
 					CultureInfo.InvariantCulture,
 					"[Block StartLine={0}, LastWord='{1}', Continuation={2}, OneLineBlock={3}, PreviousOneLineBlock={4}]",
-					this.StartLine, this.LastWord, this.Continuation, this.OneLineBlock, this.PreviousOneLineBlock);
+					StartLine, LastWord, Continuation, OneLineBlock, PreviousOneLineBlock);
 			}
 		}
 		

@@ -45,7 +45,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 			this.end = end;
 			#if DEBUG
 			unchecked {
-				this.ID = " #" + (nextId++);
+				ID = " #" + (nextId++);
 			}
 			#endif
 		}

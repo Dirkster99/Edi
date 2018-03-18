@@ -54,8 +54,8 @@ namespace ICSharpCode.AvalonEdit.Utils
 			if (text == null)
 				throw new ArgumentNullException("text");
 			this.text = text;
-			this.offset = 0;
-			this.count = text.Length;
+			offset = 0;
+			count = text.Length;
 		}
 		
 		/// <summary>
@@ -93,7 +93,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		public bool Equals(StringSegment other)
 		{
 			// add comparisions for all members here
-			return object.ReferenceEquals(this.text, other.text) && offset == other.offset && count == other.count;
+			return ReferenceEquals(text, other.text) && offset == other.offset && count == other.count;
 		}
 		
 		/// <inheritdoc/>

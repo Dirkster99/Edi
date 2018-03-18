@@ -36,7 +36,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 			Debug.Assert(textView != null);
 			this.textView = textView;
 			this.knownLayer = knownLayer;
-			this.Focusable = false;
+			Focusable = false;
 		}
 		
 		protected override GeometryHitTestResult HitTestCore(GeometryHitTestParameters hitTestParameters)

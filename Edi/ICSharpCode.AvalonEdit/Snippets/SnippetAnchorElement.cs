@@ -37,7 +37,7 @@ namespace ICSharpCode.AvalonEdit.Snippets
 		/// </summary>
 		public SnippetAnchorElement(string name)
 		{
-			this.Name = name;
+			Name = name;
 		}
 		
 		/// <inheritdoc />
@@ -76,7 +76,7 @@ namespace ICSharpCode.AvalonEdit.Snippets
 		{
 			this.segment = segment;
 			this.context = context;
-			this.Name = name;
+			Name = name;
 		}
 		
 		/// <summary>

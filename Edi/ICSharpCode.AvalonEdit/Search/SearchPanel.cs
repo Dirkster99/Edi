@@ -251,9 +251,9 @@ namespace ICSharpCode.AvalonEdit.Search
 			textArea.DocumentChanged += textArea_DocumentChanged;
 			KeyDown += SearchLayerKeyDown;
 			
-			this.CommandBindings.Add(new CommandBinding(SearchCommands.FindNext, (sender, e) => FindNext()));
-			this.CommandBindings.Add(new CommandBinding(SearchCommands.FindPrevious, (sender, e) => FindPrevious()));
-			this.CommandBindings.Add(new CommandBinding(SearchCommands.CloseSearchPanel, (sender, e) => Close()));
+			CommandBindings.Add(new CommandBinding(SearchCommands.FindNext, (sender, e) => FindNext()));
+			CommandBindings.Add(new CommandBinding(SearchCommands.FindPrevious, (sender, e) => FindPrevious()));
+			CommandBindings.Add(new CommandBinding(SearchCommands.CloseSearchPanel, (sender, e) => Close()));
 			IsClosed = true;
 		}
 
@@ -408,7 +408,7 @@ namespace ICSharpCode.AvalonEdit.Search
 		/// </summary>
 		public void Close()
 		{
-			bool hasFocus = this.IsKeyboardFocusWithin;
+			bool hasFocus = IsKeyboardFocusWithin;
 			
 			var layer = AdornerLayer.GetAdornerLayer(textArea);
 			if (layer != null)
@@ -495,10 +495,10 @@ namespace ICSharpCode.AvalonEdit.Search
 		/// </summary>
 		public SearchOptionsChangedEventArgs(string searchPattern, bool matchCase, bool useRegex, bool wholeWords)
 		{
-			this.SearchPattern = searchPattern;
-			this.MatchCase = matchCase;
-			this.UseRegex = useRegex;
-			this.WholeWords = wholeWords;
+			SearchPattern = searchPattern;
+			MatchCase = matchCase;
+			UseRegex = useRegex;
+			WholeWords = wholeWords;
 		}
 	}
 	

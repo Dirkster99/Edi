@@ -956,7 +956,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		{
 			if (array == null)
 				throw new ArgumentNullException("array");
-			if (array.Length < this.Count)
+			if (array.Length < Count)
 				throw new ArgumentException("The array is too small", "array");
 			if (arrayIndex < 0 || arrayIndex + count > array.Length)
 				throw new ArgumentOutOfRangeException("arrayIndex", arrayIndex, "Value must be between 0 and " + (array.Length - count));
@@ -982,7 +982,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
 		{
-			return this.GetEnumerator();
+			return GetEnumerator();
 		}
 		#endregion
 	}

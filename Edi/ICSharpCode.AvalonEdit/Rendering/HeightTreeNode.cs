@@ -42,9 +42,9 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		internal HeightTreeNode(DocumentLine documentLine, double height)
 		{
 			this.documentLine = documentLine;
-			this.totalCount = 1;
-			this.lineNode = new HeightTreeLineNode(height);
-			this.totalHeight = height;
+			totalCount = 1;
+			lineNode = new HeightTreeLineNode(height);
+			totalHeight = height;
 		}
 		
 		internal HeightTreeNode LeftMost {
