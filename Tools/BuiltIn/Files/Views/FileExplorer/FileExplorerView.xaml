@@ -33,7 +33,8 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -363,10 +364,12 @@
                                        Grid.Column="0"
                                        Margin="3" Grid.Row="2" />
 
+        <GridSplitter Grid.Row="3" Height="3" HorizontalAlignment="Stretch" />
+
         <!-- List files and folders here -->
         <view:NotifyableContentControl DataContext="{Binding FolderItemsView}"
                                        Notification="{Binding Notification}"
-                                       Grid.Row="3" Margin="3">
+                                       Grid.Row="4" Margin="3">
 
             <ListBox xmlns:bindLocal="clr-namespace:FileListView.Views;assembly=FileListView"
                      ItemsSource="{Binding CurrentItems}"
