@@ -26,6 +26,7 @@
         xmlns:MWindow="clr-namespace:MWindowLib;assembly=MWindowLib"
         >
         <Grid.Resources>
+            <conv:UpdateBindingConverter x:Key="UpdateBindingConverter" />
             <conv:InverseBooleanConverter x:Key="inverter" />
             <fsconv:BrowseItemTypeToShellImageConverter x:Key="FolderBrowseItemTypeToShellImageConverter" />
         </Grid.Resources>
@@ -372,7 +373,6 @@
                                        Grid.Row="4" Margin="3">
 
             <ListBox xmlns:bindLocal="clr-namespace:FileListView.Views;assembly=FileListView"
-                     ItemsSource="{Binding CurrentItems}"
                      SelectedItem="{Binding SelectedItem}"
   
                      fvbehav:DoubleClickSelectorItem.DoubleClickItemCommand="{Binding Path=NavigateDownCommand}"
@@ -382,6 +382,14 @@
                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
                      ScrollViewer.VerticalScrollBarVisibility="Auto"
                    >
+                <ListBox.ItemsSource>
+                    <MultiBinding Converter="{StaticResource UpdateBindingConverter}">
+                        <!-- First & Second argument control update of binding on 3rd argument-->
+                        <Binding Path="IsLoaded"  RelativeSource="{RelativeSource Self}" />
+                        <Binding Path="IsBrowsing" UpdateSourceTrigger="PropertyChanged" Mode="OneWay" />
+                        <Binding Path="CurrentItems" UpdateSourceTrigger="PropertyChanged" Mode="OneWay" />
+                    </MultiBinding>
+                </ListBox.ItemsSource>
                 <ListBox.Resources>
                     <BooleanToVisibilityConverter x:Key="boolToVis" />
                     <bindLocal:BindingProxy  x:Key="DataContextProxy"  Data="{Binding}" />
