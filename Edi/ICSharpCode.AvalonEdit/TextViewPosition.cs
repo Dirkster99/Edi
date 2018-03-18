@@ -35,10 +35,8 @@ namespace ICSharpCode.AvalonEdit
 		/// Gets/Sets Location.
 		/// </summary>
 		public TextLocation Location {
-			get {
-				return new TextLocation(line, column);
-			}
-			set {
+			get => new TextLocation(line, column);
+		    set {
 				line = value.Line;
 				column = value.Column;
 			}
@@ -48,16 +46,16 @@ namespace ICSharpCode.AvalonEdit
 		/// Gets/Sets the line number.
 		/// </summary>
 		public int Line {
-			get { return line; }
-			set { line = value; }
+			get => line;
+		    set => line = value;
 		}
 		
 		/// <summary>
 		/// Gets/Sets the (text) column number.
 		/// </summary>
 		public int Column {
-			get { return column; }
-			set { column = value; }
+			get => column;
+		    set => column = value;
 		}
 		
 		/// <summary>
@@ -65,8 +63,8 @@ namespace ICSharpCode.AvalonEdit
 		/// Can be -1 (meaning unknown visual column).
 		/// </summary>
 		public int VisualColumn {
-			get { return visualColumn; }
-			set { visualColumn = value; }
+			get => visualColumn;
+		    set => visualColumn = value;
 		}
 		
 		/// <summary>
@@ -80,8 +78,8 @@ namespace ICSharpCode.AvalonEdit
 		/// If this position is not at such a wrapping position, the value of this property has no effect.
 		/// </summary>
 		public bool IsAtEndOfLine {
-			get { return isAtEndOfLine; }
-			set { isAtEndOfLine = value; }
+			get => isAtEndOfLine;
+		    set => isAtEndOfLine = value;
 		}
 		
 		/// <summary>
