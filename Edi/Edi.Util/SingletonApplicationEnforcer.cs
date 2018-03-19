@@ -80,10 +80,10 @@
         public SingletonApplicationEnforcer(Action<IEnumerable<string>> processArgsFunc, Action<string> processArgsFunc1,
                                                                                 string applicationId = "DisciplesRock")
         {
-            this._processArgsFunc = processArgsFunc ?? throw new ArgumentNullException(nameof(processArgsFunc));
+            _processArgsFunc = processArgsFunc ?? throw new ArgumentNullException(nameof(processArgsFunc));
 
             _processActivateFunc = processArgsFunc1;
-            this._applicationId = applicationId;
+            _applicationId = applicationId;
         }
         #endregion properties
 
@@ -158,7 +158,7 @@
                     {
                         try
                         {
-                            _processActivateFunc(this._applicationId);
+                            _processActivateFunc(_applicationId);
                         }
                         catch (Exception ex)
                         {
