@@ -4,8 +4,8 @@
                     xmlns:local="clr-namespace:Edi.Documents.Views.StartPage"
                     >
 
-  <DataTemplate x:Key="StartPageViewDataTemplate">
-    <local:StartPageView />
-  </DataTemplate>
+    <DataTemplate x:Key="StartPageViewDataTemplate">
+        <local:StartPageView />
+    </DataTemplate>
 
 </ResourceDictionary>

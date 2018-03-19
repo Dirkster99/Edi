@@ -8,8 +8,8 @@
              xmlns:ae="clr-namespace:ICSharpCode.AvalonEdit.Edi;assembly=ICSharpCode.AvalonEdit"
              xmlns:vm="clr-namespace:Edi.Documents.ViewModels.EdiDoc"
 
-             xmlns:aedit_cmd="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit"
-             xmlns:edi_cmd="clr-namespace:ICSharpCode.AvalonEdit.Edi;assembly=ICSharpCode.AvalonEdit"
+             xmlns:aeditCmd="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit"
+             xmlns:ediCmd="clr-namespace:ICSharpCode.AvalonEdit.Edi;assembly=ICSharpCode.AvalonEdit"
 
              xmlns:cmdLabel="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
 
@@ -17,9 +17,9 @@
              d:DesignHeight="100" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type=vm:EdiViewModel, IsDesignTimeCreatable=True}"
              >
-  <Grid>
-    <!-- Known problem: Options must be bound or the control will show a gray bar otherwise -->
-    <ae:EdiTextEditor Document="{Binding Document}"
+    <Grid>
+        <!-- Known problem: Options must be bound or the control will show a gray bar otherwise -->
+        <ae:EdiTextEditor Document="{Binding Document}"
                       Options="{Binding TextOptions}"
                       SyntaxHighlighting="{Binding HighlightingDefinition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                        
@@ -45,117 +45,117 @@
 
                       InsertBlocks="{Binding InsertBlocks}"
       >
-      <ae:EdiTextEditor.ContextMenu>
-        <ContextMenu>
-          <MenuItem Command="Cut" Header="{x:Static cmdLabel:Strings.STR_CmdName_Cut}"
+            <ae:EdiTextEditor.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="Cut" Header="{x:Static cmdLabel:Strings.STR_CmdName_Cut}"
                     ToolTip="{x:Static cmdLabel:Strings.STR_CmdName_Cut_TT}">
-            <MenuItem.Icon>
-              <Image Source="{DynamicResource Image_Cut}" Height="16"/>
-            </MenuItem.Icon>
-          </MenuItem>
-          <MenuItem Command="Copy" Header="{x:Static cmdLabel:Strings.STR_CmdName_Copy}"
+                        <MenuItem.Icon>
+                            <Image Source="{DynamicResource Image_Cut}" Height="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Command="Copy" Header="{x:Static cmdLabel:Strings.STR_CmdName_Copy}"
                     ToolTip="{x:Static cmdLabel:Strings.STR_CmdName_Copy_TT}">
-            <MenuItem.Icon>
-              <Image Source="{DynamicResource Image_Copy}" Height="16"/>
-            </MenuItem.Icon>
-          </MenuItem>
-          <MenuItem Command="Paste" Header="{x:Static cmdLabel:Strings.STR_CmdName_Paste}"
+                        <MenuItem.Icon>
+                            <Image Source="{DynamicResource Image_Copy}" Height="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Command="Paste" Header="{x:Static cmdLabel:Strings.STR_CmdName_Paste}"
                     ToolTip="{x:Static cmdLabel:Strings.STR_CmdName_Paste_TT}">
-            <MenuItem.Icon>
-              <Image Source="{DynamicResource Image_Paste}" Height="16"/>
-            </MenuItem.Icon>
-          </MenuItem>
-          <MenuItem Command="Delete" Header="{x:Static cmdLabel:Strings.STR_CmdName_Delete}"
+                        <MenuItem.Icon>
+                            <Image Source="{DynamicResource Image_Paste}" Height="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Command="Delete" Header="{x:Static cmdLabel:Strings.STR_CmdName_Delete}"
                     ToolTip="{x:Static cmdLabel:Strings.STR_CmdName_Delete_TT}">
-            <MenuItem.Icon>
-              <Image Source="{DynamicResource Image_Delete}" Height="16"/>
-            </MenuItem.Icon>
-          </MenuItem>
-          <Separator />
-          <MenuItem Command="SelectAll" Header="{x:Static cmdLabel:Strings.STR_CmdName_SelectAll}"
+                        <MenuItem.Icon>
+                            <Image Source="{DynamicResource Image_Delete}" Height="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Command="SelectAll" Header="{x:Static cmdLabel:Strings.STR_CmdName_SelectAll}"
                     ToolTip="{x:Static cmdLabel:Strings.STR_CmdName_SelectAll_TT}"/>
-          <Separator />
-          <MenuItem Command="Undo" Header="{x:Static cmdLabel:Strings.STR_CmdName_Undo}">
-            <MenuItem.Icon>
-              <Image Source="{DynamicResource Image_Undo}" Height="16"/>
-            </MenuItem.Icon>
-          </MenuItem>
-          <MenuItem Command="Redo" Header="{x:Static cmdLabel:Strings.STR_CmdName_Redo}"
+                    <Separator />
+                    <MenuItem Command="Undo" Header="{x:Static cmdLabel:Strings.STR_CmdName_Undo}">
+                        <MenuItem.Icon>
+                            <Image Source="{DynamicResource Image_Undo}" Height="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Command="Redo" Header="{x:Static cmdLabel:Strings.STR_CmdName_Redo}"
                     ToolTip="{x:Static cmdLabel:Strings.STR_CmdName_Redo_TT}" >
-            <MenuItem.Icon>
-              <Image Source="{DynamicResource Image_Redo}" Height="16"/>
-            </MenuItem.Icon>
-          </MenuItem>
-          <Separator />
-          <MenuItem Command="{x:Static aedit_cmd:AvalonEditCommands.DeleteLine}"
+                        <MenuItem.Icon>
+                            <Image Source="{DynamicResource Image_Redo}" Height="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Command="{x:Static aeditCmd:AvalonEditCommands.DeleteLine}"
                     Header="{x:Static cmdLabel:Strings.STR_CmdName_DeleteLine}"
                     ToolTip="{x:Static cmdLabel:Strings.STR_CmdName_DeleteLine_TT}"
                     />
 
-          <MenuItem Header="{x:Static cmdLabel:Strings.STR_Label_WhiteSpaces}">
-            <MenuItem Command="{x:Static aedit_cmd:AvalonEditCommands.RemoveLeadingWhitespace}"
+                    <MenuItem Header="{x:Static cmdLabel:Strings.STR_Label_WhiteSpaces}">
+                        <MenuItem Command="{x:Static aeditCmd:AvalonEditCommands.RemoveLeadingWhitespace}"
                       Header="{x:Static cmdLabel:Strings.STR_CMD_RemoveLeadingWhiteSpace}"
                     />
 
-            <MenuItem Command="{x:Static aedit_cmd:AvalonEditCommands.RemoveTrailingWhitespace}"
+                        <MenuItem Command="{x:Static aeditCmd:AvalonEditCommands.RemoveTrailingWhitespace}"
                     Header="{x:Static cmdLabel:Strings.STR_CMD_RemoveTrailingWhiteSpace}"
                     />
 
-            <MenuItem Command="{x:Static aedit_cmd:AvalonEditCommands.ConvertTabsToSpaces}"
+                        <MenuItem Command="{x:Static aeditCmd:AvalonEditCommands.ConvertTabsToSpaces}"
                     Header="{x:Static cmdLabel:Strings.STR_CMD_ConvertTabsToSpaces}"
                     />
 
-            <MenuItem Command="{x:Static aedit_cmd:AvalonEditCommands.ConvertSpacesToTabs}"
+                        <MenuItem Command="{x:Static aeditCmd:AvalonEditCommands.ConvertSpacesToTabs}"
                     Header="{x:Static cmdLabel:Strings.STR_CMD_ConvertSpacesToTabs}"
                     />
 
 
-            <MenuItem Command="{x:Static aedit_cmd:AvalonEditCommands.ConvertLeadingTabsToSpaces}"
+                        <MenuItem Command="{x:Static aeditCmd:AvalonEditCommands.ConvertLeadingTabsToSpaces}"
                     Header="{x:Static cmdLabel:Strings.STR_Cmd_ConvertLeadingTabsToSpaces}"
                     />
 
-            <MenuItem Command="{x:Static aedit_cmd:AvalonEditCommands.ConvertLeadingSpacesToTabs}"
+                        <MenuItem Command="{x:Static aeditCmd:AvalonEditCommands.ConvertLeadingSpacesToTabs}"
                     Header="{x:Static cmdLabel:Strings.STR_Cmd_ConvertLeadingSpaces}"
                     />
-          </MenuItem>
+                    </MenuItem>
 
-          <MenuItem Header="{x:Static cmdLabel:Strings.STR_Label_TextCase}">
-            <MenuItem Command="{x:Static aedit_cmd:AvalonEditCommands.ConvertToUppercase}"
+                    <MenuItem Header="{x:Static cmdLabel:Strings.STR_Label_TextCase}">
+                        <MenuItem Command="{x:Static aeditCmd:AvalonEditCommands.ConvertToUppercase}"
                     Header="{x:Static cmdLabel:Strings.STR_Cmd_ConvertTextToUpperCase}"
                     />
 
-            <MenuItem Command="{x:Static aedit_cmd:AvalonEditCommands.ConvertToLowercase}"
+                        <MenuItem Command="{x:Static aeditCmd:AvalonEditCommands.ConvertToLowercase}"
                     Header="{x:Static cmdLabel:Strings.STR_Cmd__ConvertTextToLowerCase}"
                     />
 
-            <MenuItem Command="{x:Static aedit_cmd:AvalonEditCommands.ConvertToTitleCase}"
+                        <MenuItem Command="{x:Static aeditCmd:AvalonEditCommands.ConvertToTitleCase}"
                     Header="{x:Static cmdLabel:Strings.STR_Cmd__ConvertTextToTitleCase}"
                     />
 
-            <MenuItem Command="{x:Static aedit_cmd:AvalonEditCommands.InvertCase}"
+                        <MenuItem Command="{x:Static aeditCmd:AvalonEditCommands.InvertCase}"
                     Header="{x:Static cmdLabel:Strings.STR_Cmd__InvertTextCase}"
                     />
-          </MenuItem>
+                    </MenuItem>
 
-          <MenuItem Command="{x:Static aedit_cmd:AvalonEditCommands.IndentSelection}"
+                    <MenuItem Command="{x:Static aeditCmd:AvalonEditCommands.IndentSelection}"
                     Header="{x:Static cmdLabel:Strings.STR_Cmd__ApplyTextIndentationStrategy}"
                     />
 
-          <MenuItem Command="{x:Static edi_cmd:EdiTextEditorCommands.FoldsCollapseAll}"
+                    <MenuItem Command="{x:Static ediCmd:EdiTextEditorCommands.FoldsCollapseAll}"
                     Header="{x:Static cmdLabel:Strings.STR_Cmd_CollapseTextFoldings}"
                     />
 
-          <MenuItem Command="{x:Static edi_cmd:EdiTextEditorCommands.FoldsExpandAll}"
+                    <MenuItem Command="{x:Static ediCmd:EdiTextEditorCommands.FoldsExpandAll}"
                     Header="{x:Static cmdLabel:Strings.STR_Cmd_ExpandTextFoldings}"
                     />
-          <Separator />
+                    <Separator />
 
-          <MenuItem Command="{x:Static edi_cmd:EdiTextEditorCommands.PrintDocument}"
+                    <MenuItem Command="{x:Static ediCmd:EdiTextEditorCommands.PrintDocument}"
                     CommandParameter="{Binding FilePath}"
                     Header="Print Preview"
                   />
-        </ContextMenu>
-      </ae:EdiTextEditor.ContextMenu>
-    </ae:EdiTextEditor>
-  </Grid>
+                </ContextMenu>
+            </ae:EdiTextEditor.ContextMenu>
+        </ae:EdiTextEditor>
+    </Grid>
 </UserControl>

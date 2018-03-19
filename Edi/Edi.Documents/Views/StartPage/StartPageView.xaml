@@ -14,8 +14,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="600"
              
-             xmlns:MLib_reskeys="clr-namespace:MLib.Themes;assembly=MLib"
-             Background="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlNormalBackgroundBrushKey}}"
+             xmlns:mLibReskeys="clr-namespace:MLib.Themes;assembly=MLib"
+             Background="{DynamicResource {x:Static mLibReskeys:ResourceKeys.ControlNormalBackgroundBrushKey}}"
 
              Focusable="True"
              KeyboardNavigation.IsTabStop="True"
@@ -29,6 +29,10 @@
         <BitmapImage UriSource="pack://application:,,,/Edi.Themes;component/Images/App/StartPage/File_New64.png" x:Key="NewFileImage" />
     </UserControl.Resources>
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="12" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />

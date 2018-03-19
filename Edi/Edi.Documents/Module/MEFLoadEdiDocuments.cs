@@ -29,29 +29,33 @@
     /// 				startupLoaded="true" />
     /// &lt;/modules>
     /// </summary>
-    [ModuleExport(typeof(MEFLoadEdiDocuments))]
-    public class MEFLoadEdiDocuments : IModule
+    [ModuleExport(typeof(MefLoadEdiDocuments))]
+    public class MefLoadEdiDocuments : IModule
     {
         #region fields
-        private readonly IAvalonDockLayoutViewModel mAvLayout;
-        private readonly IToolWindowRegistry mToolRegistry;
-        private readonly IDocumentTypeManager mDocumentTypeManager;
+        private readonly IAvalonDockLayoutViewModel _mAvLayout;
+        private readonly IToolWindowRegistry _mToolRegistry;
+        private readonly IDocumentTypeManager _mDocumentTypeManager;
         #endregion fields
 
         #region constructors
+
         /// <summary>
         /// Class constructor
         /// </summary>
         /// <param name="avLayout"></param>
+        /// <param name="toolRegistry"></param>
+        /// <param name="settingsManager"></param>
+        /// <param name="documentTypeManager"></param>
         [ImportingConstructor]
-        public MEFLoadEdiDocuments(IAvalonDockLayoutViewModel avLayout,
+        public MefLoadEdiDocuments(IAvalonDockLayoutViewModel avLayout,
                                    IToolWindowRegistry toolRegistry,
                                    ISettingsManager settingsManager,
                                    IDocumentTypeManager documentTypeManager)
         {
-            mAvLayout = avLayout;
-            mToolRegistry = toolRegistry;
-            mDocumentTypeManager = documentTypeManager;
+            _mAvLayout = avLayout;
+            _mToolRegistry = toolRegistry;
+            _mDocumentTypeManager = documentTypeManager;
         }
         #endregion constructors
 
@@ -61,11 +65,11 @@
         /// </summary>
         void IModule.Initialize()
         {
-            RegisterDataTemplates(mAvLayout.ViewProperties.SelectPanesTemplate);
-            RegisterStyles(mAvLayout.ViewProperties.SelectPanesStyle);
+            RegisterDataTemplates(_mAvLayout.ViewProperties.SelectPanesTemplate);
+            RegisterStyles(_mAvLayout.ViewProperties.SelectPanesStyle);
 
-            RegisterEdiTextEditor(mDocumentTypeManager);
-            RegisterMiniUml(mDocumentTypeManager);
+            RegisterEdiTextEditor(_mDocumentTypeManager);
+            RegisterMiniUml(_mDocumentTypeManager);
         }
 
         private void RegisterEdiTextEditor(IDocumentTypeManager documentTypeManager)

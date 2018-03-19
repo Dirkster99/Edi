@@ -4,8 +4,8 @@
                     xmlns:local="clr-namespace:Edi.Documents.Views.EdiDoc"
                     >
 
-  <DataTemplate x:Key="EdiViewDataTemplate">
-    <local:EdiView />
-  </DataTemplate>
+    <DataTemplate x:Key="EdiViewDataTemplate">
+        <local:EdiView />
+    </DataTemplate>
 
 </ResourceDictionary>
