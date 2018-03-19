@@ -46,15 +46,15 @@
     public sealed class SingletonApplicationEnforcer
     {
         #region fields
-        static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly Action<IEnumerable<string>> processArgsFunc;
-        private readonly Action<string> processActivateFunc;
-        private readonly string applicationId;
+        private readonly Action<IEnumerable<string>> _processArgsFunc;
+        private readonly Action<string> _processActivateFunc;
+        private readonly string _applicationId;
 
-        Thread thread;
-        Thread windowActivationThread;
-        string argDelimiter = "_;;_";
+        private Thread _thread;
+        private Thread _windowActivationThread;
+        private string _argDelimiter = "_;;_";
         #endregion fields
 
         #region properties
@@ -65,8 +65,8 @@
         /// <value>The arg delimeter.</value>
         public string ArgDelimeter
         {
-            get => argDelimiter;
-            set => argDelimiter = value;
+            get => _argDelimiter;
+            set => _argDelimiter = value;
         }
 
         /// <summary>
@@ -80,10 +80,10 @@
         public SingletonApplicationEnforcer(Action<IEnumerable<string>> processArgsFunc, Action<string> processArgsFunc1,
                                                                                 string applicationId = "DisciplesRock")
         {
-            this.processArgsFunc = processArgsFunc ?? throw new ArgumentNullException(nameof(processArgsFunc));
+            this._processArgsFunc = processArgsFunc ?? throw new ArgumentNullException(nameof(processArgsFunc));
 
-            processActivateFunc = processArgsFunc1;
-            this.applicationId = applicationId;
+            _processActivateFunc = processArgsFunc1;
+            this._applicationId = applicationId;
         }
         #endregion properties
 
@@ -96,8 +96,8 @@
         /// otherwise <c>false</c>.</returns>
         public bool ShouldApplicationExit()
         {
-            string argsWaitHandleName = "ArgsWaitHandle_" + applicationId;
-            string memoryFileName = "ArgFile_" + applicationId;
+            string argsWaitHandleName = "ArgsWaitHandle_" + _applicationId;
+            string memoryFileName = "ArgFile_" + _applicationId;
 
             EventWaitHandle argsWaitHandle = new EventWaitHandle(
                 false, EventResetMode.AutoReset, argsWaitHandleName, out var createdNew);
@@ -110,7 +110,7 @@
 				 * A thread is created to service the MemoryMappedFile. 
 				 * We repeatedly examine this file each time the argsWaitHandle 
 				 * is Set by a non-singleton application instance. */
-                thread = new Thread(() =>
+                _thread = new Thread(() =>
                 {
                     try
                     {
@@ -129,12 +129,12 @@
                                     }
                                     catch (Exception ex)
                                     {
-                                        logger.Error("Unable to retrieve string. ", ex);
+                                        Logger.Error("Unable to retrieve string. ", ex);
                                         continue;
                                     }
-                                    string[] argsSplit = args.Split(new[] { argDelimiter },
+                                    string[] argsSplit = args.Split(new[] { _argDelimiter },
                                                                                                     StringSplitOptions.RemoveEmptyEntries);
-                                    processArgsFunc(argsSplit);
+                                    _processArgsFunc(argsSplit);
                                 }
 
                             }
@@ -142,31 +142,31 @@
                     }
                     catch (Exception ex)
                     {
-                        logger.Error("Unable to monitor memory file. ", ex);
+                        Logger.Error("Unable to monitor memory file. ", ex);
                     }
                 })
                 {
                     IsBackground = true
                 };
-                thread.Start();
+                _thread.Start();
             }
             else
             {
                 try
                 {
-                    windowActivationThread = new Thread(() =>
+                    _windowActivationThread = new Thread(() =>
                     {
                         try
                         {
-                            processActivateFunc(this.applicationId);
+                            _processActivateFunc(this._applicationId);
                         }
                         catch (Exception ex)
                         {
-                            logger.Error("Error activating window", ex);
+                            Logger.Error("Error activating window", ex);
                         }
                     });
 
-                    windowActivationThread.Start();
+                    _windowActivationThread.Start();
 
                     /* Non singleton application instance. 
 					 * Should exit, after passing command line args to singleton process, 
@@ -177,7 +177,7 @@
                         {
                             var writer = new BinaryWriter(stream);
                             string[] args = Environment.GetCommandLineArgs();
-                            string joined = string.Join(argDelimiter, args);
+                            string joined = string.Join(_argDelimiter, args);
                             writer.Write(joined);
                         }
                     }
@@ -186,7 +186,7 @@
                 }
                 catch (Exception ex)
                 {
-                    logger.Error("Error on OpenExisting memory mapped file", ex);
+                    Logger.Error("Error on OpenExisting memory mapped file", ex);
                 }
             }
 

@@ -23,7 +23,7 @@
     public class WindowLister
     {
         #region fields
-        protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        protected static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         #endregion fields
 
         #region methods
@@ -67,13 +67,13 @@
 
             if (w == null)
             {
-                logger.Warn("--> Failed to activate Window (w is null).");
+                Logger.Warn("--> Failed to activate Window (w is null).");
                 return;
             }
 
             if (w.Length == 0)
             {
-                logger.Warn("--> Failed to activate Window (w is zero).");
+                Logger.Warn("--> Failed to activate Window (w is zero).");
                 return;
             }
 
@@ -84,7 +84,7 @@
                     bool success = NativeMethods.SetForegroundWindow(wi);
 
                     if (success == false)
-                        logger.Warn("--> Failed to activate Window (success = false).");
+                        Logger.Warn("--> Failed to activate Window (success = false).");
                 }
             }
         }
