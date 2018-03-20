@@ -21,7 +21,7 @@ namespace SimpleControls.Hyperlink
         private static readonly DependencyProperty TextProperty =
           DependencyProperty.Register("Text", typeof(string), typeof(WebHyperlink));
 
-        private static readonly RoutedCommand _mCopyUri;
+        private static readonly RoutedCommand _CopyUri;
         private static readonly RoutedCommand _mNavigateToUri;
 
         private System.Windows.Documents.Hyperlink _mHypLink;
@@ -33,10 +33,10 @@ namespace SimpleControls.Hyperlink
             DefaultStyleKeyProperty.OverrideMetadata(typeof(WebHyperlink),
                       new FrameworkPropertyMetadata(typeof(WebHyperlink)));
 
-            _mCopyUri = new RoutedCommand("CopyUri", typeof(WebHyperlink));
+            _CopyUri = new RoutedCommand("CopyUri", typeof(WebHyperlink));
 
-            CommandManager.RegisterClassCommandBinding(typeof(WebHyperlink), new CommandBinding(_mCopyUri, CopyHyperlinkUri));
-            CommandManager.RegisterClassInputBinding(typeof(WebHyperlink), new InputBinding(_mCopyUri, new KeyGesture(Key.C, ModifierKeys.Control, "Ctrl-C")));
+            CommandManager.RegisterClassCommandBinding(typeof(WebHyperlink), new CommandBinding(_CopyUri, CopyHyperlinkUri));
+            CommandManager.RegisterClassInputBinding(typeof(WebHyperlink), new InputBinding(_CopyUri, new KeyGesture(Key.C, ModifierKeys.Control, "Ctrl-C")));
 
             _mNavigateToUri = new RoutedCommand("NavigateToUri", typeof(WebHyperlink));
             CommandManager.RegisterClassCommandBinding(typeof(WebHyperlink), new CommandBinding(_mNavigateToUri, Hyperlink_CommandNavigateTo));
@@ -50,7 +50,7 @@ namespace SimpleControls.Hyperlink
         #endregion constructor
 
         #region properties
-        public static RoutedCommand CopyUri => _mCopyUri;
+        public static RoutedCommand CopyUri => _CopyUri;
 
         public static RoutedCommand NavigateToUri => _mNavigateToUri;
 
