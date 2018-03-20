@@ -79,12 +79,12 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		{
 			if (textArea == null)
 				throw new ArgumentNullException("textArea");
-			TextArea = textArea;
-			parentWindow = GetWindow(textArea);
-			Owner = parentWindow;
-			AddHandler(MouseUpEvent, new MouseButtonEventHandler(OnMouseUp), true);
+			this.TextArea = textArea;
+			parentWindow = Window.GetWindow(textArea);
+			this.Owner = parentWindow;
+			this.AddHandler(MouseUpEvent, new MouseButtonEventHandler(OnMouseUp), true);
 			
-			StartOffset = EndOffset = TextArea.Caret.Offset;
+			StartOffset = EndOffset = this.TextArea.Caret.Offset;
 			
 			AttachEvents();
 		}
@@ -92,26 +92,26 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		#region Event Handlers
 		void AttachEvents()
 		{
-			document = TextArea.Document;
+			document = this.TextArea.Document;
 			if (document != null) {
 				document.Changing += textArea_Document_Changing;
 			}
 			// LostKeyboardFocus seems to be more reliable than PreviewLostKeyboardFocus - see SD-1729
-			TextArea.LostKeyboardFocus += TextAreaLostFocus;
-			TextArea.TextView.ScrollOffsetChanged += TextViewScrollOffsetChanged;
-			TextArea.DocumentChanged += TextAreaDocumentChanged;
+			this.TextArea.LostKeyboardFocus += TextAreaLostFocus;
+			this.TextArea.TextView.ScrollOffsetChanged += TextViewScrollOffsetChanged;
+			this.TextArea.DocumentChanged += TextAreaDocumentChanged;
 			if (parentWindow != null) {
 				parentWindow.LocationChanged += parentWindow_LocationChanged;
 			}
 			
 			// close previous completion windows of same type
-			foreach (InputHandler x in TextArea.StackedInputHandlers.OfType<InputHandler>()) {
-				if (x.window.GetType() == GetType())
-					TextArea.PopStackedInputHandler(x);
+			foreach (InputHandler x in this.TextArea.StackedInputHandlers.OfType<InputHandler>()) {
+				if (x.window.GetType() == this.GetType())
+					this.TextArea.PopStackedInputHandler(x);
 			}
 			
 			myInputHandler = new InputHandler(this);
-			TextArea.PushStackedInputHandler(myInputHandler);
+			this.TextArea.PushStackedInputHandler(myInputHandler);
 		}
 		
 		/// <summary>
@@ -122,13 +122,13 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 			if (document != null) {
 				document.Changing -= textArea_Document_Changing;
 			}
-			TextArea.LostKeyboardFocus -= TextAreaLostFocus;
-			TextArea.TextView.ScrollOffsetChanged -= TextViewScrollOffsetChanged;
-			TextArea.DocumentChanged -= TextAreaDocumentChanged;
+			this.TextArea.LostKeyboardFocus -= TextAreaLostFocus;
+			this.TextArea.TextView.ScrollOffsetChanged -= TextViewScrollOffsetChanged;
+			this.TextArea.DocumentChanged -= TextAreaDocumentChanged;
 			if (parentWindow != null) {
 				parentWindow.LocationChanged -= parentWindow_LocationChanged;
 			}
-			TextArea.PopStackedInputHandler(myInputHandler);
+			this.TextArea.PopStackedInputHandler(myInputHandler);
 		}
 		
 		#region InputHandler
@@ -184,7 +184,7 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 			if (!sourceIsInitialized)
 				return;
 			
-			IScrollInfo scrollInfo = TextArea.TextView;
+			IScrollInfo scrollInfo = this.TextArea.TextView;
 			Rect visibleRect = new Rect(scrollInfo.HorizontalOffset, scrollInfo.VerticalOffset, scrollInfo.ViewportWidth, scrollInfo.ViewportHeight);
 			// close completion window when the user scrolls so far that the anchor position is leaving the visible area
 			if (visibleRect.Contains(visualLocation) || visibleRect.Contains(visualLocationTop))
@@ -260,8 +260,8 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		void CloseIfFocusLost()
 		{
 			if (CloseOnFocusLost) {
-				Debug.WriteLine("CloseIfFocusLost: this.IsActive=" + IsActive + " IsTextAreaFocused=" + IsTextAreaFocused);
-				if (!IsActive && !IsTextAreaFocused) {
+				Debug.WriteLine("CloseIfFocusLost: this.IsActive=" + this.IsActive + " IsTextAreaFocused=" + IsTextAreaFocused);
+				if (!this.IsActive && !IsTextAreaFocused) {
 					Close();
 				}
 			}
@@ -278,7 +278,7 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 			get {
 				if (parentWindow != null && !parentWindow.IsActive)
 					return false;
-				return TextArea.IsKeyboardFocused;
+				return this.TextArea.IsKeyboardFocused;
 			}
 		}
 		
@@ -289,10 +289,10 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		{
 			base.OnSourceInitialized(e);
 			
-			if (document != null && StartOffset != TextArea.Caret.Offset) {
-				SetPosition(new TextViewPosition(document.GetLocation(StartOffset)));
+			if (document != null && this.StartOffset != this.TextArea.Caret.Offset) {
+				SetPosition(new TextViewPosition(document.GetLocation(this.StartOffset)));
 			} else {
-				SetPosition(TextArea.Caret.Position);
+				SetPosition(this.TextArea.Caret.Position);
 			}
 			sourceIsInitialized = true;
 		}
@@ -321,7 +321,7 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		/// </summary>
 		protected void SetPosition(TextViewPosition position)
 		{
-			TextView textView = TextArea.TextView;
+			TextView textView = this.TextArea.TextView;
 			
 			visualLocation = textView.GetVisualPosition(position, VisualYPosition.LineBottom);
 			visualLocationTop = textView.GetVisualPosition(position, VisualYPosition.LineTop);
@@ -334,13 +334,13 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		/// </summary>
 		protected void UpdatePosition()
 		{
-			TextView textView = TextArea.TextView;
+			TextView textView = this.TextArea.TextView;
 			// PointToScreen returns device dependent units (physical pixels)
 			Point location = textView.PointToScreen(visualLocation - textView.ScrollOffset);
 			Point locationTop = textView.PointToScreen(visualLocationTop - textView.ScrollOffset);
 			
 			// Let's use device dependent units for everything
-			Size completionWindowSize = new Size(ActualWidth, ActualHeight).TransformToDevice(textView);
+			Size completionWindowSize = new Size(this.ActualWidth, this.ActualHeight).TransformToDevice(textView);
 			Rect bounds = new Rect(location, completionWindowSize);
 			Rect workingScreen = System.Windows.Forms.Screen.GetWorkingArea(location.ToSystemDrawing()).ToWpf();
 			if (!workingScreen.Contains(bounds)) {
@@ -361,8 +361,8 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 			}
 			// Convert the window bounds to device independent units
 			bounds = bounds.TransformFromDevice(textView);
-			Left = bounds.X;
-			Top = bounds.Y;
+			this.Left = bounds.X;
+			this.Top = bounds.Y;
 		}
 		
 		/// <inheritdoc/>
@@ -370,7 +370,7 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		{
 			base.OnRenderSizeChanged(sizeInfo);
 			if (sizeInfo.HeightChanged && IsUp) {
-				Top += sizeInfo.PreviousSize.Height - sizeInfo.NewSize.Height;
+				this.Top += sizeInfo.PreviousSize.Height - sizeInfo.NewSize.Height;
 			}
 		}
 		
@@ -384,13 +384,13 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		
 		void textArea_Document_Changing(object sender, DocumentChangeEventArgs e)
 		{
-			if (e.Offset + e.RemovalLength == StartOffset && e.RemovalLength > 0) {
+			if (e.Offset + e.RemovalLength == this.StartOffset && e.RemovalLength > 0) {
 				Close(); // removal immediately in front of completion segment: close the window
 				// this is necessary when pressing backspace after dot-completion
 			}
 			if (e.Offset == StartOffset && e.RemovalLength == 0 && ExpectInsertionBeforeStart) {
 				StartOffset = e.GetNewOffset(StartOffset, AnchorMovementType.AfterInsertion);
-				ExpectInsertionBeforeStart = false;
+				this.ExpectInsertionBeforeStart = false;
 			} else {
 				StartOffset = e.GetNewOffset(StartOffset, AnchorMovementType.BeforeInsertion);
 			}

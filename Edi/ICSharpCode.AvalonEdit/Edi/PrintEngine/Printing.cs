@@ -7,10 +7,10 @@
   using System.Windows.Controls;
   using System.Windows.Documents;
 
-  using Highlighting;
-  using Document;
+  using ICSharpCode.AvalonEdit.Highlighting;
+  using ICSharpCode.AvalonEdit.Document;
   using PrintEngine;
-  using AvalonEdit;
+  using ICSharpCode.AvalonEdit;
 
   /// <summary>
   /// Print support class for Edi text editor control based ib AvalonEdit class.
@@ -27,7 +27,7 @@
     /// </summary>
     public static void PrintPreviewDialog(this TextEditor textEditor)
     {
-      PrintPreviewDialog(textEditor, "");
+      Printing.PrintPreviewDialog(textEditor, "");
     }
 
     /// <summary>
@@ -35,17 +35,17 @@
     /// </summary>
     public static void PrintPreviewDialog(this TextEditor textEditor, string title)
     {
-      mDocumentTitle = title;
+      Printing.mDocumentTitle = title;
 
-      InitPageSettings();
+      Printing.InitPageSettings();
 
-      PrintPreviewDialog printPreview = new PrintPreviewDialog();
+      PrintPreviewDialog printPreview = new PrintEngine.PrintPreviewDialog();
 
       printPreview.DocumentViewer.FitToMaxPagesAcross(1);
       printPreview.DocumentViewer.PrintQueue = mPrintQueue;
 
       if (mPageSettings.Landscape)
-        mPrintTicket.PageOrientation = PageOrientation.Landscape;
+        Printing.mPrintTicket.PageOrientation = PageOrientation.Landscape;
 
       printPreview.DocumentViewer.PrintTicket = mPrintTicket;
       printPreview.DocumentViewer.PrintQueue.DefaultPrintTicket.PageOrientation = mPrintTicket.PageOrientation;
@@ -66,7 +66,7 @@
     /// </summary>
     public static void PrintDialog(this TextEditor textEditor)
     {
-      PrintDialog(textEditor, "");
+      Printing.PrintDialog(textEditor, "");
     }
 
     /// <summary>
@@ -74,25 +74,25 @@
     /// </summary>
     public static void PrintDialog(this TextEditor textEditor, string title)
     {
-      mDocumentTitle = title;
+      Printing.mDocumentTitle = title;
 
-      InitPageSettings();
+      Printing.InitPageSettings();
 
-      PrintDialog printDialog = new PrintDialog();
+      System.Windows.Controls.PrintDialog printDialog = new System.Windows.Controls.PrintDialog();
 
       printDialog.PrintQueue = mPrintQueue;
 
       if (mPageSettings.Landscape)
-        mPrintTicket.PageOrientation = PageOrientation.Landscape;
+        Printing.mPrintTicket.PageOrientation = PageOrientation.Landscape;
 
       printDialog.PrintTicket = mPrintTicket;
       printDialog.PrintQueue.DefaultPrintTicket.PageOrientation = mPrintTicket.PageOrientation;
 
       if (printDialog.ShowDialog() == true)
       {
-        mPrintQueue = printDialog.PrintQueue;
+        Printing.mPrintQueue = printDialog.PrintQueue;
 
-        mPrintTicket = printDialog.PrintTicket;
+        Printing.mPrintTicket = printDialog.PrintTicket;
 
         printDialog.PrintDocument(CreateDocumentPaginatorToPrint(textEditor), "PrintJob");
       }
@@ -103,7 +103,7 @@
     /// </summary>
     public static void PrintDirect(this TextEditor textEditor)
     {
-      PrintDirect(textEditor, "");
+      Printing.PrintDirect(textEditor, "");
     }
 
     /// <summary>
@@ -111,16 +111,16 @@
     /// </summary>
     public static void PrintDirect(this TextEditor textEditor, string title)
     {
-      mDocumentTitle = title;
+      Printing.mDocumentTitle = title;
 
-      InitPageSettings();
+      Printing.InitPageSettings();
 
-      PrintDialog printDialog = new PrintDialog();
+      System.Windows.Controls.PrintDialog printDialog = new System.Windows.Controls.PrintDialog();
 
       printDialog.PrintQueue = mPrintQueue;
 
       if (mPageSettings.Landscape)
-        mPrintTicket.PageOrientation = PageOrientation.Landscape;
+        Printing.mPrintTicket.PageOrientation = System.Printing.PageOrientation.Landscape;
 
       printDialog.PrintTicket = mPrintTicket;
       printDialog.PrintQueue.DefaultPrintTicket.PageOrientation = mPrintTicket.PageOrientation;
@@ -132,10 +132,10 @@
     /// </summary>
     static void InitPageSettings()
     {
-      if (mPageSettings == null)
+      if (Printing.mPageSettings == null)
       {
-        mPageSettings = new PageSettings();
-        mPageSettings.Margins = new Margins(40, 40, 40, 40);
+        Printing.mPageSettings = new PageSettings();
+        Printing.mPageSettings.Margins = new Margins(40, 40, 40, 40);
       }
     }
 

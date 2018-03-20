@@ -58,8 +58,8 @@ namespace ICSharpCode.AvalonEdit.Indentation.CSharp
 			if (document == null)
 				throw new ArgumentNullException("document");
 			doc = document;
-			minLine = 1;
-			maxLine = doc.LineCount;
+			this.minLine = 1;
+			this.maxLine = doc.LineCount;
 		}
 		
 		/// <summary>

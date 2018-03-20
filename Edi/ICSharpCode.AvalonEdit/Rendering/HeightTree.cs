@@ -61,7 +61,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		{
 			this.document = document;
 			weakLineTracker = WeakLineTracker.Register(document, this);
-			DefaultLineHeight = defaultLineHeight;
+			this.DefaultLineHeight = defaultLineHeight;
 			RebuildDocument();
 		}
 		
@@ -69,8 +69,8 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		{
 			if (weakLineTracker != null)
 				weakLineTracker.Deregister();
-			root = null;
-			weakLineTracker = null;
+			this.root = null;
+			this.weakLineTracker = null;
 		}
 		
 		double defaultLineHeight;

@@ -70,16 +70,16 @@ namespace ICSharpCode.AvalonEdit.Rendering
             backgroundRenderers = new ObserveAddRemoveCollection<IBackgroundRenderer>(BackgroundRenderer_Added, BackgroundRenderer_Removed);
             columnRulerRenderer = new ColumnRulerRenderer(this);
             currentLineHighlighRenderer = new CurrentLineHighlightRenderer(this);
-            Options = new TextEditorOptions();
+            this.Options = new TextEditorOptions();
 
             Debug.Assert(singleCharacterElementGenerator != null); // assert that the option change created the builtin element generators
 
             layers = new LayerCollection(this);
             InsertLayer(textLayer, KnownLayer.Text, LayerInsertionPosition.Replace);
 
-            hoverLogic = new MouseHoverLogic(this);
-            hoverLogic.MouseHover += (sender, e) => RaiseHoverEventPair(e, PreviewMouseHoverEvent, MouseHoverEvent);
-            hoverLogic.MouseHoverStopped += (sender, e) => RaiseHoverEventPair(e, PreviewMouseHoverStoppedEvent, MouseHoverStoppedEvent);
+            this.hoverLogic = new MouseHoverLogic(this);
+            this.hoverLogic.MouseHover += (sender, e) => RaiseHoverEventPair(e, PreviewMouseHoverEvent, MouseHoverEvent);
+            this.hoverLogic.MouseHoverStopped += (sender, e) => RaiseHoverEventPair(e, PreviewMouseHoverStoppedEvent, MouseHoverStoppedEvent);
         }
 
         #endregion
@@ -134,7 +134,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
                 cachedElements = null;
                 TextDocumentWeakEventManager.Changing.RemoveListener(oldValue, this);
             }
-            document = newValue;
+            this.document = newValue;
             ClearScrollData();
             ClearVisualLines();
             if (newValue != null)
@@ -312,7 +312,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 
         void UpdateBuiltinElementGeneratorsFromOptions()
         {
-            TextEditorOptions options = Options;
+            TextEditorOptions options = this.Options;
 
             // Dirkster99 BugFix for binding options in VS2010			
             if (options == null)
@@ -334,16 +334,16 @@ namespace ICSharpCode.AvalonEdit.Rendering
                 if (demand)
                 {
                     generator = new T();
-                    ElementGenerators.Add(generator);
+                    this.ElementGenerators.Add(generator);
                 }
                 else
                 {
-                    ElementGenerators.Remove(generator);
+                    this.ElementGenerators.Remove(generator);
                     generator = null;
                 }
             }
             if (generator != null)
-                generator.FetchOptions(Options);
+                generator.FetchOptions(this.Options);
         }
         #endregion
 
@@ -858,7 +858,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
         {
             if (documentLine == null)
                 throw new ArgumentNullException("documentLine");
-            if (!Document.Lines.Contains(documentLine))
+            if (!this.Document.Lines.Contains(documentLine))
                 throw new InvalidOperationException("Line belongs to wrong document");
             VerifyAccess();
 
@@ -1021,8 +1021,8 @@ namespace ICSharpCode.AvalonEdit.Rendering
             RemoveInlineObjectsNow();
 
             maxWidth += AdditionalHorizontalScrollAmount;
-            double heightTreeHeight = DocumentHeight;
-            TextEditorOptions options = Options;
+            double heightTreeHeight = this.DocumentHeight;
+            TextEditorOptions options = this.Options;
 
             // Dirkster99 BugFix for binding options in VS2010			
             if (options != null)
@@ -1228,7 +1228,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
                 {
                     paragraphProperties.firstLineInParagraph = false;
 
-                    TextEditorOptions options = Options;
+                    TextEditorOptions options = this.Options;
                     double indentation = 0;
                     if (options.InheritWordWrapIndentation)
                     {
@@ -1467,14 +1467,14 @@ namespace ICSharpCode.AvalonEdit.Rendering
 
         bool SetScrollData(Size viewport, Size extent, Vector offset)
         {
-            if (!(viewport.IsClose(scrollViewport)
-                  && extent.IsClose(scrollExtent)
-                  && offset.IsClose(scrollOffset)))
+            if (!(viewport.IsClose(this.scrollViewport)
+                  && extent.IsClose(this.scrollExtent)
+                  && offset.IsClose(this.scrollOffset)))
             {
-                scrollViewport = viewport;
-                scrollExtent = extent;
+                this.scrollViewport = viewport;
+                this.scrollExtent = extent;
                 SetScrollOffset(offset);
-                OnScrollChange();
+                this.OnScrollChange();
                 return true;
             }
             return false;
@@ -1773,7 +1773,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 
         Rect IScrollInfo.MakeVisible(Visual visual, Rect rectangle)
         {
-            if (rectangle.IsEmpty || visual == null || visual == this || !IsAncestorOf(visual))
+            if (rectangle.IsEmpty || visual == null || visual == this || !this.IsAncestorOf(visual))
             {
                 return Rect.Empty;
             }
@@ -1829,7 +1829,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
             if (!scrollOffset.IsClose(newScrollOffset))
             {
                 SetScrollOffset(newScrollOffset);
-                OnScrollChange();
+                this.OnScrollChange();
                 InvalidateMeasure(DispatcherPriority.Normal);
             }
         }
@@ -1869,7 +1869,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
             // Don't unnecessarily call Mouse.UpdateCursor() if the mouse is outside the text view.
             // Unnecessary updates may cause the mouse pointer to flicker
             // (e.g. if it is over a window border, it blinks between Resize and Normal)
-            if (IsMouseOver)
+            if (this.IsMouseOver)
                 InvalidateCursor();
         }
 
@@ -1925,7 +1925,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
             // TODO: change this method to also work outside the visible range -
             // required to make GetPosition work as expected!
             EnsureVisualLines();
-            foreach (VisualLine vl in VisualLines)
+            foreach (VisualLine vl in this.VisualLines)
             {
                 if (visualTop < vl.VisualTop)
                     continue;
@@ -1975,9 +1975,9 @@ namespace ICSharpCode.AvalonEdit.Rendering
         public Point GetVisualPosition(TextViewPosition position, VisualYPosition yPositionMode)
         {
             VerifyAccess();
-            if (Document == null)
+            if (this.Document == null)
                 throw ThrowUtil.NoDocumentAssigned();
-            DocumentLine documentLine = Document.GetLineByNumber(position.Line);
+            DocumentLine documentLine = this.Document.GetLineByNumber(position.Line);
             VisualLine visualLine = GetOrConstructVisualLine(documentLine);
             int visualColumn = position.VisualColumn;
             if (visualColumn < 0)
@@ -1998,7 +1998,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
         public TextViewPosition? GetPosition(Point visualPosition)
         {
             VerifyAccess();
-            if (Document == null)
+            if (this.Document == null)
                 throw ThrowUtil.NoDocumentAssigned();
             VisualLine line = GetVisualLineFromVisualTop(visualPosition.Y);
             if (line == null)
@@ -2016,7 +2016,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
         public TextViewPosition? GetPositionFloor(Point visualPosition)
         {
             VerifyAccess();
-            if (Document == null)
+            if (this.Document == null)
                 throw ThrowUtil.NoDocumentAssigned();
             VisualLine line = GetVisualLineFromVisualTop(visualPosition.Y);
             if (line == null)
@@ -2223,10 +2223,10 @@ namespace ICSharpCode.AvalonEdit.Rendering
                 InvalidateDefaultTextMetrics();
             }
             else if (e.Property == Control.ForegroundProperty
-                     || e.Property == NonPrintableCharacterBrushProperty
-                     || e.Property == LinkTextBackgroundBrushProperty
-                     || e.Property == LinkTextForegroundBrushProperty
-                     || e.Property == LinkTextUnderlineProperty)
+                     || e.Property == TextView.NonPrintableCharacterBrushProperty
+                     || e.Property == TextView.LinkTextBackgroundBrushProperty
+                     || e.Property == TextView.LinkTextForegroundBrushProperty
+                     || e.Property == TextView.LinkTextUnderlineProperty)
             {
                 // changing brushes requires recreating the cached elements
                 RecreateCachedElements();
@@ -2246,15 +2246,15 @@ namespace ICSharpCode.AvalonEdit.Rendering
             }
             if (e.Property == ColumnRulerPenProperty)
             {
-                columnRulerRenderer.SetRuler(Options.ColumnRulerPosition, ColumnRulerPen);
+                columnRulerRenderer.SetRuler(this.Options.ColumnRulerPosition, this.ColumnRulerPen);
             }
             if (e.Property == CurrentLineBorderProperty)
             {
-                currentLineHighlighRenderer.BorderPen = CurrentLineBorder;
+                currentLineHighlighRenderer.BorderPen = this.CurrentLineBorder;
             }
             if (e.Property == CurrentLineBackgroundProperty)
             {
-                currentLineHighlighRenderer.BackgroundBrush = CurrentLineBackground;
+                currentLineHighlighRenderer.BackgroundBrush = this.CurrentLineBackground;
             }
         }
 
@@ -2318,8 +2318,8 @@ namespace ICSharpCode.AvalonEdit.Rendering
         /// </summary>
         public int HighlightedLine
         {
-            get { return currentLineHighlighRenderer.Line; }
-            set { currentLineHighlighRenderer.Line = value; }
+            get { return this.currentLineHighlighRenderer.Line; }
+            set { this.currentLineHighlighRenderer.Line = value; }
         }
     }
 }

@@ -37,7 +37,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		/// </summary>
 		public TextSourceVersionProvider()
 		{
-			currentVersion = new Version(this);
+			this.currentVersion = new Version(this);
 		}
 		
 		/// <summary>
@@ -80,8 +80,8 @@ namespace ICSharpCode.AvalonEdit.Document
 			
 			internal Version(Version prev)
 			{
-				provider = prev.provider;
-				id = unchecked( prev.id + 1 );
+				this.provider = prev.provider;
+				this.id = unchecked( prev.id + 1 );
 			}
 			
 			public bool BelongsToSameDocumentAs(ITextSourceVersion other)
@@ -99,7 +99,7 @@ namespace ICSharpCode.AvalonEdit.Document
 					throw new ArgumentException("Versions do not belong to the same document.");
 				// We will allow overflows, but assume that the maximum distance between checkpoints is 2^31-1.
 				// This is guaranteed on x86 because so many checkpoints don't fit into memory.
-				return Math.Sign(unchecked( id - o.id ));
+				return Math.Sign(unchecked( this.id - o.id ));
 			}
 			
 			public IEnumerable<TextChangeEventArgs> GetChangesTo(ITextSourceVersion other)

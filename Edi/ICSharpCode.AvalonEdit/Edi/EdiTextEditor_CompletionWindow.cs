@@ -2,8 +2,8 @@
 {
   using System.Windows.Input;
 
-  using CodeCompletion;
-  using Intellisense;
+  using ICSharpCode.AvalonEdit.CodeCompletion;
+  using ICSharpCode.AvalonEdit.Edi.Intellisense;
 
   /// <summary>
   /// This part of the AvalonEdit externsion contains methods that
@@ -15,7 +15,7 @@
 
     void TextEditorTextAreaTextEntered(object sender, TextCompositionEventArgs e)
     {
-      ICompletionWindowResolver resolver = new CompletionWindowResolver(Text, CaretOffset, e.Text, this);
+      ICompletionWindowResolver resolver = new CompletionWindowResolver(this.Text, this.CaretOffset, e.Text, this);
       _completionWindow = resolver.Resolve();
     }
 

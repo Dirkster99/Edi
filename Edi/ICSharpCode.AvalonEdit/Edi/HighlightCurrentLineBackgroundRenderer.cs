@@ -4,8 +4,8 @@
   using System.Collections.Generic;
   using System.Linq;
   using System.Text;
-  using AvalonEdit;
-  using Rendering;
+  using ICSharpCode.AvalonEdit;
+  using ICSharpCode.AvalonEdit.Rendering;
   using System.Windows.Media;
   using System.Windows;
 
@@ -24,10 +24,10 @@
     public HighlightCurrentLineBackgroundRenderer(TextEditor editor,
                                                   SolidColorBrush highlightBackgroundColorBrush = null)
     {
-      mEditor = editor;
+      this.mEditor = editor;
 
       // Light Blue 0x100000FF
-      BackgroundColorBrush = new SolidColorBrush((highlightBackgroundColorBrush == null ? Color.FromArgb(0x10, 0x80, 0x80, 0x80) :
+      this.BackgroundColorBrush = new SolidColorBrush((highlightBackgroundColorBrush == null ? Color.FromArgb(0x10, 0x80, 0x80, 0x80) :
                                                                                                highlightBackgroundColorBrush.Color));
     }
 
@@ -51,7 +51,7 @@
     /// <param name="drawingContext"></param>
     public void Draw(TextView textView, DrawingContext drawingContext)
     {
-      if (mEditor.Document == null)
+      if (this.mEditor.Document == null)
         return;
 
       textView.EnsureVisualLines();
@@ -59,7 +59,7 @@
 
       foreach (var rect in BackgroundGeometryBuilder.GetRectsForSegment(textView, currentLine))
       {
-        drawingContext.DrawRectangle(new SolidColorBrush(BackgroundColorBrush.Color), null,
+        drawingContext.DrawRectangle(new SolidColorBrush(this.BackgroundColorBrush.Color), null,
                                      new Rect(rect.Location, new Size(textView.ActualWidth, rect.Height)));
       }
     }

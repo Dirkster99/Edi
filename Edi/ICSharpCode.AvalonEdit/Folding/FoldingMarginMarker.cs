@@ -76,8 +76,8 @@ namespace ICSharpCode.AvalonEdit.Folding
 			Size pixelSize = PixelSnapHelpers.GetPixelSize(this);
 			Rect rect = new Rect(pixelSize.Width / 2,
 			                     pixelSize.Height / 2,
-			                     RenderSize.Width - pixelSize.Width,
-			                     RenderSize.Height - pixelSize.Height);
+			                     this.RenderSize.Width - pixelSize.Width,
+			                     this.RenderSize.Height - pixelSize.Height);
 			drawingContext.DrawRectangle(
 				IsMouseDirectlyOver ? margin.SelectedFoldingMarkerBackgroundBrush : margin.FoldingMarkerBackgroundBrush,
 				IsMouseDirectlyOver ? activePen : inactivePen, rect);

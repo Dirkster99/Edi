@@ -43,7 +43,7 @@ namespace ICSharpCode.AvalonEdit.Document
 			int start = Math.Max(segment1.Offset, segment2.Offset);
 			int end = Math.Min(segment1.EndOffset, segment2.EndOffset);
 			if (end < start)
-				return Invalid;
+				return SimpleSegment.Invalid;
 			else
 				return new SimpleSegment(start, end - start);
 		}
@@ -66,15 +66,15 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		public SimpleSegment(int offset, int length)
 		{
-			Offset = offset;
-			Length = length;
+			this.Offset = offset;
+			this.Length = length;
 		}
 		
 		public SimpleSegment(ISegment segment)
 		{
 			Debug.Assert(segment != null);
-			Offset = segment.Offset;
-			Length = segment.Length;
+			this.Offset = segment.Offset;
+			this.Length = segment.Length;
 		}
 		
 		public override int GetHashCode()
@@ -91,7 +91,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		public bool Equals(SimpleSegment other)
 		{
-			return Offset == other.Offset && Length == other.Length;
+			return this.Offset == other.Offset && this.Length == other.Length;
 		}
 		
 		public static bool operator ==(SimpleSegment left, SimpleSegment right)
@@ -180,12 +180,12 @@ namespace ICSharpCode.AvalonEdit.Document
 		{
 			if (document == null)
 				throw new ArgumentNullException("document");
-			start = document.CreateAnchor(offset);
-			start.SurviveDeletion = true;
-			start.MovementType = AnchorMovementType.AfterInsertion;
-			end = document.CreateAnchor(offset + length);
-			end.SurviveDeletion = true;
-			end.MovementType = AnchorMovementType.BeforeInsertion;
+			this.start = document.CreateAnchor(offset);
+			this.start.SurviveDeletion = true;
+			this.start.MovementType = AnchorMovementType.AfterInsertion;
+			this.end = document.CreateAnchor(offset + length);
+			this.end.SurviveDeletion = true;
+			this.end.MovementType = AnchorMovementType.BeforeInsertion;
 		}
 		
 		/// <inheritdoc/>

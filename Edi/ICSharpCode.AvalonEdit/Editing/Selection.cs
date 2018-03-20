@@ -190,7 +190,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		/// </summary>
 		public virtual bool IsMultiline {
 			get {
-				ISegment surroundingSegment = SurroundingSegment;
+				ISegment surroundingSegment = this.SurroundingSegment;
 				if (surroundingSegment == null)
 					return false;
 				int start = surroundingSegment.Offset;
@@ -239,7 +239,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 			IHighlighter highlighter = textArea.GetService(typeof(IHighlighter)) as IHighlighter;
 			StringBuilder html = new StringBuilder();
 			bool first = true;
-			foreach (ISegment selectedSegment in Segments) {
+			foreach (ISegment selectedSegment in this.Segments) {
 				if (first)
 					first = false;
 				else
@@ -262,10 +262,10 @@ namespace ICSharpCode.AvalonEdit.Editing
 		/// otherwise, false.</returns>
 		public virtual bool Contains(int offset)
 		{
-			if (IsEmpty)
+			if (this.IsEmpty)
 				return false;
-			if (SurroundingSegment.Contains(offset, 0)) {
-				foreach (ISegment s in Segments) {
+			if (this.SurroundingSegment.Contains(offset, 0)) {
+				foreach (ISegment s in this.Segments) {
 					if (s.Contains(offset, 0)) {
 						return true;
 					}

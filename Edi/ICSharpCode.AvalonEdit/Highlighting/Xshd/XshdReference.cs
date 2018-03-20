@@ -60,7 +60,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 				throw new ArgumentNullException("referencedElement");
 			this.referencedDefinition = referencedDefinition;
 			this.referencedElement = referencedElement;
-			inlineElement = null;
+			this.inlineElement = null;
 		}
 		
 		/// <summary>
@@ -70,8 +70,8 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 		{
 			if (inlineElement == null)
 				throw new ArgumentNullException("inlineElement");
-			referencedDefinition = null;
-			referencedElement = null;
+			this.referencedDefinition = null;
+			this.referencedElement = null;
 			this.inlineElement = inlineElement;
 		}
 		
@@ -105,9 +105,9 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 		public bool Equals(XshdReference<T> other)
 		{
 			// add comparisions for all members here
-			return referencedDefinition == other.referencedDefinition
-				&& referencedElement == other.referencedElement
-				&& inlineElement == other.inlineElement;
+			return this.referencedDefinition == other.referencedDefinition
+				&& this.referencedElement == other.referencedElement
+				&& this.inlineElement == other.inlineElement;
 		}
 		
 		/// <inheritdoc/>

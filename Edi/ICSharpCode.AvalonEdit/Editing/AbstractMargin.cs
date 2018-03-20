@@ -62,18 +62,18 @@ namespace ICSharpCode.AvalonEdit.Editing
 		
 		void ITextViewConnect.AddToTextView(TextView textView)
 		{
-			if (TextView == null) {
-				TextView = textView;
+			if (this.TextView == null) {
+				this.TextView = textView;
 				wasAutoAddedToTextView = true;
-			} else if (TextView != textView) {
+			} else if (this.TextView != textView) {
 				throw new InvalidOperationException("This margin belongs to a different TextView.");
 			}
 		}
 		
 		void ITextViewConnect.RemoveFromTextView(TextView textView)
 		{
-			if (wasAutoAddedToTextView && TextView == textView) {
-				TextView = null;
+			if (wasAutoAddedToTextView && this.TextView == textView) {
+				this.TextView = null;
 				Debug.Assert(!wasAutoAddedToTextView); // setting this.TextView should have unset this flag
 			}
 		}

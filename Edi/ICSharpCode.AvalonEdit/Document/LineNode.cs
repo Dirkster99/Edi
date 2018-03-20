@@ -58,8 +58,8 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		internal LineNode InitLineNode()
 		{
-			nodeTotalCount = 1;
-			nodeTotalLength = TotalLength;
+			this.nodeTotalCount = 1;
+			this.nodeTotalLength = this.TotalLength;
 			return this;
 		}
 		

@@ -2,9 +2,9 @@
 {
   using System;
   using System.Windows.Media;
-  using CodeCompletion;
-  using Document;
-  using Editing;
+  using ICSharpCode.AvalonEdit.CodeCompletion;
+  using ICSharpCode.AvalonEdit.Document;
+  using ICSharpCode.AvalonEdit.Editing;
 
   /// <summary>
   /// Class to handle text completion data.

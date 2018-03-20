@@ -720,7 +720,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
 		{
-			return GetEnumerator();
+			return this.GetEnumerator();
 		}
 		#endregion
 	}

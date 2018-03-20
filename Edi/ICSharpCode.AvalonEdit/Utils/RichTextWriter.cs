@@ -93,7 +93,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		/// <summary>
 		/// Begin a highlighted span.
 		/// </summary>
-		public virtual void BeginSpan(HighlightingColor highlightingColor)
+		public virtual void BeginSpan(Highlighting.HighlightingColor highlightingColor)
 		{
 			BeginUnhandledSpan();
 		}

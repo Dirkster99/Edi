@@ -59,7 +59,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 			Line line = (Line)Create();
 			
 			line.SetBinding(
-				Shape.StrokeProperty,
+				Line.StrokeProperty,
 				new Binding("LineNumbersForeground") { Source = editor }
 			);
 			

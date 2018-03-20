@@ -76,14 +76,14 @@ namespace ICSharpCode.AvalonEdit.Search
 				DropDownContent.PlacementTarget = this;
 				DropDownContent.IsOpen = true;
 				DropDownContent.Closed += DropDownContent_Closed;
-				IsDropDownContentOpen = true;
+				this.IsDropDownContentOpen = true;
 			}
 		}
 		
 		void DropDownContent_Closed(object sender, EventArgs e)
 		{
 			((Popup)sender).Closed -= DropDownContent_Closed;
-			IsDropDownContentOpen = false;
+			this.IsDropDownContentOpen = false;
 		}
 	}
 }

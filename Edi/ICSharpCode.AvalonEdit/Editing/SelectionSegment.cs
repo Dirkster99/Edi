@@ -40,7 +40,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		{
 			this.startOffset = Math.Min(startOffset, endOffset);
 			this.endOffset = Math.Max(startOffset, endOffset);
-			startVC = endVC = -1;
+			this.startVC = this.endVC = -1;
 		}
 		
 		/// <summary>

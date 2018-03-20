@@ -1,7 +1,7 @@
 ﻿namespace ICSharpCode.AvalonEdit.Edi.Intellisense
 {
   using System.Collections.Generic;
-  using CodeCompletion;
+  using ICSharpCode.AvalonEdit.CodeCompletion;
 
   /// <summary>
   /// Data provider interface for completion window

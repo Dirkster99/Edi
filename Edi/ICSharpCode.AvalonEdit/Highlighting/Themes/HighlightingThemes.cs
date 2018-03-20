@@ -33,7 +33,7 @@
     public HighlightingThemes(string name)
       : this()
     {
-      Name = name;
+      this.Name = name;
     }
 
     /// <summary>
@@ -42,11 +42,11 @@
     /// </summary>
     protected HighlightingThemes()
     {
-      Name = string.Empty;
-      FileNamePath = string.Empty;
+      this.Name = string.Empty;
+      this.FileNamePath = string.Empty;
       
-      mHlThemes = null;
-      mGlobalStyles = null;
+      this.mHlThemes = null;
+      this.mGlobalStyles = null;
     }
     #endregion constructor
 
@@ -68,7 +68,7 @@
     {
       get
       {
-        return (mGlobalStyles != null ? mGlobalStyles.Values.AsEnumerable<WidgetStyle>()
+        return (this.mGlobalStyles != null ? this.mGlobalStyles.Values.AsEnumerable<WidgetStyle>()
                                            : new Dictionary<string, WidgetStyle>().Values.AsEnumerable());
       }
     }
@@ -183,10 +183,10 @@
     /// <param name="highlightingTheme"></param>
     public void AddTheme(string styleName, HighlightingTheme highlightingTheme)
     {
-      if (mHlThemes == null)
-        mHlThemes = new Dictionary<string, HighlightingTheme>();
+      if (this.mHlThemes == null)
+        this.mHlThemes = new Dictionary<string, HighlightingTheme>();
 
-      mHlThemes.Add(styleName, highlightingTheme);
+      this.mHlThemes.Add(styleName, highlightingTheme);
     }
 
     /// <summary>
@@ -215,10 +215,10 @@
     /// <param name="style"></param>
     public void AddWidgetStyle(string styleName, WidgetStyle style)
     {
-      if (mGlobalStyles == null)
-        mGlobalStyles = new Dictionary<string,WidgetStyle>();
+      if (this.mGlobalStyles == null)
+        this.mGlobalStyles = new Dictionary<string,WidgetStyle>();
 
-      mGlobalStyles.Add(styleName, style);
+      this.mGlobalStyles.Add(styleName, style);
     }
     #endregion methods
   }

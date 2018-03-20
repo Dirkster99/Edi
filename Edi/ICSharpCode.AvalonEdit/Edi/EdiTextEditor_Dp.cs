@@ -3,7 +3,7 @@
   using System.Collections.ObjectModel;
   using System.Windows;
   using System.Windows.Media;
-  using BlockSurround;
+  using ICSharpCode.AvalonEdit.Edi.BlockSurround;
 
   /// <summary>
   /// This part of the AvalonEdit extension contains additional
@@ -29,7 +29,7 @@
                                      typeof(SolidColorBrush),
                                      typeof(EdiTextEditor),
                                      new UIPropertyMetadata(new SolidColorBrush(Color.FromArgb(33, 33, 33, 33)),
-                                     OnCurrentLineBackgroundChanged));
+                                     EdiTextEditor.OnCurrentLineBackgroundChanged));
     #endregion EditorCurrentLineBackground
 
     #region CaretPosition
@@ -147,12 +147,12 @@
     {
       get
       {
-        return (int)GetValue(EditorSelectionStartProperty);
+        return (int)GetValue(EdiTextEditor.EditorSelectionStartProperty);
       }
 
       set
       {
-        SetValue(EditorSelectionStartProperty, value);
+        SetValue(EdiTextEditor.EditorSelectionStartProperty, value);
       }
     }
 
@@ -163,12 +163,12 @@
     {
       get
       {
-        return (int)GetValue(EditorSelectionLengthProperty);
+        return (int)GetValue(EdiTextEditor.EditorSelectionLengthProperty);
       }
 
       set
       {
-        SetValue(EditorSelectionLengthProperty, value);
+        SetValue(EdiTextEditor.EditorSelectionLengthProperty, value);
       }
     }
 
@@ -195,12 +195,12 @@
     {
       get
       {
-        return (int)GetValue(EditorCaretOffsetProperty);
+        return (int)GetValue(EdiTextEditor.EditorCaretOffsetProperty);
       }
 
       set
       {
-        SetValue(EditorCaretOffsetProperty, value);
+        SetValue(EdiTextEditor.EditorCaretOffsetProperty, value);
       }
     }
 

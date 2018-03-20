@@ -41,13 +41,13 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		{
 			if (elements == null)
 				throw new ArgumentNullException("elements");
-			if (CurrentElements != null)
+			if (this.CurrentElements != null)
 				throw new InvalidOperationException("Recursive Transform() call");
-			CurrentElements = elements;
+			this.CurrentElements = elements;
 			try {
 				Colorize(context);
 			} finally {
-				CurrentElements = null;
+				this.CurrentElements = null;
 			}
 		}
 		

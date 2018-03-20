@@ -44,8 +44,8 @@ namespace ICSharpCode.AvalonEdit.Rendering
 			if (text == null)
 				throw new ArgumentNullException("text");
 			this.text = text;
-			BreakBefore = LineBreakCondition.BreakPossible;
-			BreakAfter = LineBreakCondition.BreakPossible;
+			this.BreakBefore = LineBreakCondition.BreakPossible;
+			this.BreakAfter = LineBreakCondition.BreakPossible;
 		}
 		
 		/// <summary>
@@ -56,9 +56,9 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		{
 			if (text == null)
 				throw new ArgumentNullException("text");
-			textLine = text;
-			BreakBefore = LineBreakCondition.BreakPossible;
-			BreakAfter = LineBreakCondition.BreakPossible;
+			this.textLine = text;
+			this.BreakBefore = LineBreakCondition.BreakPossible;
+			this.BreakAfter = LineBreakCondition.BreakPossible;
 		}
 		
 		/// <summary>
@@ -69,9 +69,9 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		{
 			if (text == null)
 				throw new ArgumentNullException("text");
-			formattedText = text;
-			BreakBefore = LineBreakCondition.BreakPossible;
-			BreakAfter = LineBreakCondition.BreakPossible;
+			this.formattedText = text;
+			this.BreakBefore = LineBreakCondition.BreakPossible;
+			this.BreakAfter = LineBreakCondition.BreakPossible;
 		}
 		
 		/// <summary>
@@ -91,10 +91,10 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		{
 			if (textLine == null) {
 				var formatter = TextFormatterFactory.Create(context.TextView);
-				textLine = PrepareText(formatter, text, TextRunProperties);
-				text = null;
+				textLine = PrepareText(formatter, this.text, this.TextRunProperties);
+				this.text = null;
 			}
-			return new FormattedTextRun(this, TextRunProperties);
+			return new FormattedTextRun(this, this.TextRunProperties);
 		}
 		
 		/// <summary>

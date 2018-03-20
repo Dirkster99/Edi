@@ -24,7 +24,7 @@
     /// </summary>
     public PrintPreviewDialog()
     {
-      InitializeComponent();
+      this.InitializeComponent();
     }
     #endregion constructor
 
@@ -47,7 +47,7 @@
     {
       mDocument = document;
 
-      string temp = Path.GetTempFileName();
+      string temp = System.IO.Path.GetTempFileName();
 
       if (File.Exists(temp) == true)
         File.Delete(temp);
@@ -70,7 +70,7 @@
     {
       mDocument = document;
 
-      string temp = Path.GetTempFileName();
+      string temp = System.IO.Path.GetTempFileName();
 
       if (File.Exists(temp) == true)
         File.Delete(temp);
@@ -91,13 +91,13 @@
     /// </summary>
     public void LoadDocument(IDocumentPaginatorSource document)
     {
-      mDocument = document;
-      documentViewer.Document = (IDocumentPaginatorSource)document;
+      this.mDocument = document;
+      this.documentViewer.Document = (IDocumentPaginatorSource)document;
     }
 
     private void closeButton_Click(object sender, RoutedEventArgs e)
     {
-      Close();
+      this.Close();
     }
     #endregion methods
   }

@@ -2,8 +2,8 @@ namespace ICSharpCode.AvalonEdit.Edi.Intellisense
 {
   using System.Collections.Generic;
   using System.Linq;
-  using AvalonEdit;
-  using CodeCompletion;
+  using ICSharpCode.AvalonEdit;
+  using ICSharpCode.AvalonEdit.CodeCompletion;
 
   /// <summary>
   /// Class that manages the auto complet window

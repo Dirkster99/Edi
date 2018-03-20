@@ -253,8 +253,8 @@ namespace ICSharpCode.AvalonEdit.Document
 		public event EventHandler TextChanged;
 		
 		event EventHandler IDocument.ChangeCompleted {
-			add { TextChanged += value; }
-			remove { TextChanged -= value; }
+			add { this.TextChanged += value; }
+			remove { this.TextChanged -= value; }
 		}
 		
 		/// <inheritdoc/>
@@ -1129,7 +1129,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		object IServiceProvider.GetService(Type serviceType)
 		{
-			return ServiceProvider.GetService(serviceType);
+			return this.ServiceProvider.GetService(serviceType);
 		}
 		#endregion
 		
@@ -1141,7 +1141,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		void OnFileNameChanged(EventArgs e)
 		{
-			EventHandler handler = FileNameChanged;
+			EventHandler handler = this.FileNameChanged;
 			if (handler != null)
 				handler(this, e);
 		}

@@ -3,8 +3,8 @@
   using System;
   using System.Collections.Generic;
   using System.Windows.Media;
-  using Document;
-  using Rendering;
+  using ICSharpCode.AvalonEdit.Document;
+  using ICSharpCode.AvalonEdit.Rendering;
 
   /// <summary>
   /// Highlight opening and closing brackets when when moving the carret in the text
@@ -42,9 +42,9 @@
       if (textView == null)
         throw new ArgumentNullException("textView");
 
-      mTextView = textView;
+      this.mTextView = textView;
 
-      mTextView.BackgroundRenderers.Add(this);
+      this.mTextView.BackgroundRenderers.Add(this);
     }
     #endregion constructor
 
@@ -72,10 +72,10 @@
     /// <param name="result"></param>
     public void SetHighlight(BracketSearchResult result)
     {
-      if (mResult != result)
+      if (this.mResult != result)
       {
-        mResult = result;
-        mTextView.InvalidateLayer(Layer);
+        this.mResult = result;
+        mTextView.InvalidateLayer(this.Layer);
       }
     }
 
@@ -98,7 +98,7 @@
     /// <param name="drawingContext"></param>
     public void Draw(TextView textView, DrawingContext drawingContext)
     {
-      if (mResult == null)
+      if (this.mResult == null)
         return;
 
       BackgroundGeometryBuilder builder = new BackgroundGeometryBuilder();
@@ -123,7 +123,7 @@
       Geometry geometry = builder.CreateGeometry();
 
       if (mBorderPen == null)
-        UpdateColors(DefaultBackground, DefaultBackground);
+        this.UpdateColors(DefaultBackground, DefaultBackground);
 
       if (geometry != null)
       {
@@ -138,11 +138,11 @@
     /// <param name="foreground"></param>
     private void UpdateColors(Color background, Color foreground)
     {
-      mBorderPen = new Pen(new SolidColorBrush(foreground), 1);
-      mBorderPen.Freeze();
+      this.mBorderPen = new Pen(new SolidColorBrush(foreground), 1);
+      this.mBorderPen.Freeze();
 
-      mBackgroundBrush = new SolidColorBrush(background);
-      mBackgroundBrush.Freeze();
+      this.mBackgroundBrush = new SolidColorBrush(background);
+      this.mBackgroundBrush.Freeze();
     }
     #endregion methods
   }

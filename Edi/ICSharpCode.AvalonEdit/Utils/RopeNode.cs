@@ -35,7 +35,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 	{
 		internal const int NodeSize = 256;
 		
-		internal static readonly RopeNode<T> emptyRopeNode = new RopeNode<T> { isShared = true, contents = new T[NodeSize] };
+		internal static readonly RopeNode<T> emptyRopeNode = new RopeNode<T> { isShared = true, contents = new T[RopeNode<T>.NodeSize] };
 		
 		// Fields for pointers to sub-nodes. Only non-null for concat nodes (height>=1)
 		internal RopeNode<T> left, right;
@@ -70,7 +70,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 				Debug.Assert(contents == null);
 				Debug.Assert(length == left.length + right.length);
 				Debug.Assert(height == 1 + Math.Max(left.height, right.height));
-				Debug.Assert(Math.Abs(Balance) <= 1);
+				Debug.Assert(Math.Abs(this.Balance) <= 1);
 				
 				// this is an additional invariant that forces the tree to combine small leafs to prevent excessive memory usage:
 				Debug.Assert(length > NodeSize);
@@ -92,15 +92,15 @@ namespace ICSharpCode.AvalonEdit.Utils
 				T[] newContents = new T[NodeSize];
 				contents.CopyTo(newContents, 0);
 				return new RopeNode<T> {
-					length = length,
+					length = this.length,
 					contents = newContents
 				};
 			} else {
 				return new RopeNode<T> {
-					left = left,
-					right = right,
-					length = length,
-					height = height
+					left = this.left,
+					right = this.right,
+					length = this.length,
+					height = this.height
 				};
 			}
 		}
@@ -175,35 +175,35 @@ namespace ICSharpCode.AvalonEdit.Utils
 				return;
 			
 			// ensure we didn't miss a MergeIfPossible step
-			Debug.Assert(length > NodeSize);
+			Debug.Assert(this.length > NodeSize);
 			
 			// We need to loop until it's balanced. Rotations might cause two small leaves to combine to a larger one,
 			// which changes the height and might mean we need additional balancing steps.
-			while (Math.Abs(Balance) > 1) {
+			while (Math.Abs(this.Balance) > 1) {
 				// AVL balancing
 				// note: because we don't care about the identity of concat nodes, this works a little different than usual
 				// tree rotations: in our implementation, the "this" node will stay at the top, only its children are rearranged
-				if (Balance > 1) {
+				if (this.Balance > 1) {
 					if (right.Balance < 0) {
 						right = right.CloneIfShared();
 						right.RotateRight();
 					}
-					RotateLeft();
+					this.RotateLeft();
 					// If 'this' was unbalanced by more than 2, we've shifted some of the inbalance to the left node; so rebalance that.
-					left.Rebalance();
-				} else if (Balance < -1) {
+					this.left.Rebalance();
+				} else if (this.Balance < -1) {
 					if (left.Balance > 0) {
 						left = left.CloneIfShared();
 						left.RotateLeft();
 					}
-					RotateRight();
+					this.RotateRight();
 					// If 'this' was unbalanced by more than 2, we've shifted some of the inbalance to the right node; so rebalance that.
-					right.Rebalance();
+					this.right.Rebalance();
 				}
 			}
 			
-			Debug.Assert(Math.Abs(Balance) <= 1);
-			height = (byte)(1 + Math.Max(left.height, right.height));
+			Debug.Assert(Math.Abs(this.Balance) <= 1);
+			this.height = (byte)(1 + Math.Max(left.height, right.height));
 		}
 		
 		void RotateLeft()
@@ -222,14 +222,14 @@ namespace ICSharpCode.AvalonEdit.Utils
 			RopeNode<T> b = right.left;
 			RopeNode<T> c = right.right;
 			// reuse right concat node, if possible
-			left = right.isShared ? new RopeNode<T>() : right;
-			left.left = a;
-			left.right = b;
-			left.length = a.length + b.length;
-			left.height = (byte)(1 + Math.Max(a.height, b.height));
-			right = c;
+			this.left = right.isShared ? new RopeNode<T>() : right;
+			this.left.left = a;
+			this.left.right = b;
+			this.left.length = a.length + b.length;
+			this.left.height = (byte)(1 + Math.Max(a.height, b.height));
+			this.right = c;
 			
-			left.MergeIfPossible();
+			this.left.MergeIfPossible();
 		}
 		
 		void RotateRight()
@@ -248,43 +248,43 @@ namespace ICSharpCode.AvalonEdit.Utils
 			RopeNode<T> b = left.right;
 			RopeNode<T> c = right;
 			// reuse left concat node, if possible
-			right = left.isShared ? new RopeNode<T>() : left;
-			right.left = b;
-			right.right = c;
-			right.length = b.length + c.length;
-			right.height = (byte)(1 + Math.Max(b.height, c.height));
-			left = a;
+			this.right = left.isShared ? new RopeNode<T>() : left;
+			this.right.left = b;
+			this.right.right = c;
+			this.right.length = b.length + c.length;
+			this.right.height = (byte)(1 + Math.Max(b.height, c.height));
+			this.left = a;
 			
-			right.MergeIfPossible();
+			this.right.MergeIfPossible();
 		}
 		
 		void MergeIfPossible()
 		{
 			Debug.Assert(!isShared);
 			
-			if (length <= NodeSize) {
+			if (this.length <= NodeSize) {
 				// Convert this concat node to leaf node.
 				// We know left and right cannot be concat nodes (they would have merged already),
 				// but they could be function nodes.
-				height = 0;
-				int lengthOnLeftSide = left.length;
-				if (left.isShared) {
-					contents = new T[NodeSize];
-					left.CopyTo(0, contents, 0, lengthOnLeftSide);
+				this.height = 0;
+				int lengthOnLeftSide = this.left.length;
+				if (this.left.isShared) {
+					this.contents = new T[NodeSize];
+					left.CopyTo(0, this.contents, 0, lengthOnLeftSide);
 				} else {
 					// must be a leaf node: function nodes are always marked shared
-					Debug.Assert(left.contents != null);
+					Debug.Assert(this.left.contents != null);
 					// steal buffer from left side
-					contents = left.contents;
+					this.contents = this.left.contents;
 					#if DEBUG
 					// In debug builds, explicitly mark left node as 'damaged' - but no one else should be using it
 					// because it's not shared.
-					left.contents = Empty<T>.Array;
+					this.left.contents = Empty<T>.Array;
 					#endif
 				}
-				left = null;
-				right.CopyTo(0, contents, lengthOnLeftSide, right.length);
-				right = null;
+				this.left = null;
+				right.CopyTo(0, this.contents, lengthOnLeftSide, this.right.length);
+				this.right = null;
 			}
 		}
 		
@@ -293,7 +293,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		/// </summary>
 		internal RopeNode<T> StoreElements(int index, T[] array, int arrayIndex, int count)
 		{
-			RopeNode<T> result = CloneIfShared();
+			RopeNode<T> result = this.CloneIfShared();
 			// result cannot be function node after a call to Clone()
 			if (result.height == 0) {
 				// leaf node:
@@ -302,7 +302,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 				// concat node:
 				if (index + count <= result.left.length) {
 					result.left = result.left.StoreElements(index, array, arrayIndex, count);
-				} else if (index >= left.length) {
+				} else if (index >= this.left.length) {
 					result.right = result.right.StoreElements(index - result.left.length, array, arrayIndex, count);
 				} else {
 					int amountInLeft = result.left.length - index;
@@ -320,23 +320,23 @@ namespace ICSharpCode.AvalonEdit.Utils
 		internal void CopyTo(int index, T[] array, int arrayIndex, int count)
 		{
 			if (height == 0) {
-				if (contents == null) {
+				if (this.contents == null) {
 					// function node
-					GetContentNode().CopyTo(index, array, arrayIndex, count);
+					this.GetContentNode().CopyTo(index, array, arrayIndex, count);
 				} else {
 					// leaf node
-					Array.Copy(contents, index, array, arrayIndex, count);
+					Array.Copy(this.contents, index, array, arrayIndex, count);
 				}
 			} else {
 				// concat node
-				if (index + count <= left.length) {
-					left.CopyTo(index, array, arrayIndex, count);
-				} else if (index >= left.length) {
-					right.CopyTo(index - left.length, array, arrayIndex, count);
+				if (index + count <= this.left.length) {
+					this.left.CopyTo(index, array, arrayIndex, count);
+				} else if (index >= this.left.length) {
+					this.right.CopyTo(index - this.left.length, array, arrayIndex, count);
 				} else {
-					int amountInLeft = left.length - index;
-					left.CopyTo(index, array, arrayIndex, amountInLeft);
-					right.CopyTo(0, array, arrayIndex + amountInLeft, count - amountInLeft);
+					int amountInLeft = this.left.length - index;
+					this.left.CopyTo(index, array, arrayIndex, amountInLeft);
+					this.right.CopyTo(0, array, arrayIndex + amountInLeft, count - amountInLeft);
 				}
 			}
 		}
@@ -391,9 +391,9 @@ namespace ICSharpCode.AvalonEdit.Utils
 			Debug.Assert(!isShared && height == 0 && contents != null);
 			RopeNode<T> newPart = new RopeNode<T>();
 			newPart.contents = new T[NodeSize];
-			newPart.length = length - offset;
-			Array.Copy(contents, offset, newPart.contents, 0, newPart.length);
-			length = offset;
+			newPart.length = this.length - offset;
+			Array.Copy(this.contents, offset, newPart.contents, 0, newPart.length);
+			this.length = offset;
 			return newPart;
 		}
 		
@@ -401,7 +401,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		{
 			if (offset == 0) {
 				return Concat(newElements, this);
-			} else if (offset == length) {
+			} else if (offset == this.length) {
 				return Concat(this, newElements);
 			}
 			
@@ -429,7 +429,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		{
 			Debug.Assert(count > 0);
 			
-			if (length + count < RopeNode<char>.NodeSize) {
+			if (this.length + count < RopeNode<char>.NodeSize) {
 				RopeNode<T> result = CloneIfShared();
 				// result must be leaf node (Clone never returns function nodes, too short for concat node)
 				int lengthAfterOffset = result.length - offset;
@@ -462,7 +462,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 			Debug.Assert(count > 0);
 			
 			// produce empty node when one node is deleted completely
-			if (index == 0 && count == length)
+			if (index == 0 && count == this.length)
 				return emptyRopeNode;
 			
 			int endIndex = index + count;
@@ -526,7 +526,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 				else
 					return "[Leaf length=" + length + ", isShared=" + isShared + "\"]";
 			} else {
-				return "[Concat length=" + length + ", isShared=" + isShared + ", height=" + height + ", Balance=" + Balance + "]";
+				return "[Concat length=" + length + ", isShared=" + isShared + ", height=" + height + ", Balance=" + this.Balance + "]";
 			}
 		}
 		
@@ -564,34 +564,34 @@ namespace ICSharpCode.AvalonEdit.Utils
 			this.initializer = initializer;
 			// Function nodes are immediately shared, but cannot be cloned.
 			// This ensures we evaluate every initializer only once.
-			isShared = true;
+			this.isShared = true;
 		}
 		
 		internal override RopeNode<T> GetContentNode()
 		{
 			lock (this) {
-				if (cachedResults == null) {
-					if (initializer == null)
+				if (this.cachedResults == null) {
+					if (this.initializer == null)
 						throw new InvalidOperationException("Trying to load this node recursively; or: a previous call to a rope initializer failed.");
-					Func<Rope<T>> initializerCopy = initializer;
-					initializer = null;
+					Func<Rope<T>> initializerCopy = this.initializer;
+					this.initializer = null;
 					Rope<T> resultRope = initializerCopy();
 					if (resultRope == null)
 						throw new InvalidOperationException("Rope initializer returned null.");
 					RopeNode<T> resultNode = resultRope.root;
 					resultNode.Publish(); // result is shared between returned rope and the rope containing this function node
-					if (resultNode.length != length)
+					if (resultNode.length != this.length)
 						throw new InvalidOperationException("Rope initializer returned rope with incorrect length.");
 					if (resultNode.height == 0 && resultNode.contents == null) {
 						// ResultNode is another function node.
 						// We want to guarantee that GetContentNode() never returns function nodes, so we have to
 						// go down further in the tree.
-						cachedResults = resultNode.GetContentNode();
+						this.cachedResults = resultNode.GetContentNode();
 					} else {
-						cachedResults = resultNode;
+						this.cachedResults = resultNode;
 					}
 				}
-				return cachedResults;
+				return this.cachedResults;
 			}
 		}
 		

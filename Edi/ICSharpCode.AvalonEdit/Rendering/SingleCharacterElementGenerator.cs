@@ -59,16 +59,16 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		/// </summary>
 		public SingleCharacterElementGenerator()
 		{
-			ShowSpaces = true;
-			ShowTabs = true;
-			ShowBoxForControlCharacters = true;
+			this.ShowSpaces = true;
+			this.ShowTabs = true;
+			this.ShowBoxForControlCharacters = true;
 		}
 		
 		void IBuiltinElementGenerator.FetchOptions(TextEditorOptions options)
 		{
-			ShowSpaces = options.ShowSpaces;
-			ShowTabs = options.ShowTabs;
-			ShowBoxForControlCharacters = options.ShowBoxForControlCharacters;
+			this.ShowSpaces = options.ShowSpaces;
+			this.ShowTabs = options.ShowTabs;
+			this.ShowBoxForControlCharacters = options.ShowBoxForControlCharacters;
 		}
 		
 		public override int GetFirstInterestedOffset(int startOffset)
@@ -151,10 +151,10 @@ namespace ICSharpCode.AvalonEdit.Rendering
 			{
 				// the TabTextElement consists of two TextRuns:
 				// first a TabGlyphRun, then TextCharacters '\t' to let WPF handle the tab indentation
-				if (startVisualColumn == VisualColumn)
-					return new TabGlyphRun(this, TextRunProperties);
-				else if (startVisualColumn == VisualColumn + 1)
-					return new TextCharacters("\t", 0, 1, TextRunProperties);
+				if (startVisualColumn == this.VisualColumn)
+					return new TabGlyphRun(this, this.TextRunProperties);
+				else if (startVisualColumn == this.VisualColumn + 1)
+					return new TextCharacters("\t", 0, 1, this.TextRunProperties);
 				else
 					throw new ArgumentOutOfRangeException("startVisualColumn");
 			}
@@ -237,7 +237,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 			
 			public override TextRun CreateTextRun(int startVisualColumn, ITextRunConstructionContext context)
 			{
-				return new SpecialCharacterTextRun(this, TextRunProperties);
+				return new SpecialCharacterTextRun(this, this.TextRunProperties);
 			}
 		}
 		

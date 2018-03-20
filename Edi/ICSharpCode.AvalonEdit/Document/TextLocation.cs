@@ -79,7 +79,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		/// </summary>
 		public override string ToString()
 		{
-			return string.Format(CultureInfo.InvariantCulture, "(Line {1}, Col {0})", column, line);
+			return string.Format(CultureInfo.InvariantCulture, "(Line {1}, Col {0})", this.column, this.line);
 		}
 		
 		/// <summary>

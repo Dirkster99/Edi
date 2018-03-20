@@ -20,10 +20,10 @@
     /// </summary>
     public TextReplaceBlockRegion(string commentStart, string commentEnd, int startOffset, int endOffset)
     {
-      CommentStart = commentStart;
-      CommentEnd = commentEnd;
-      StartOffset = startOffset;
-      EndOffset = endOffset;
+      this.CommentStart = commentStart;
+      this.CommentEnd = commentEnd;
+      this.StartOffset = startOffset;
+      this.EndOffset = endOffset;
     }
 
     #region properties
@@ -82,10 +82,10 @@
       if (other == null)
         return false;
 
-      return CommentStart == other.CommentStart &&
-              CommentEnd == other.CommentEnd &&
-              StartOffset == other.StartOffset &&
-              EndOffset == other.EndOffset;
+      return this.CommentStart == other.CommentStart &&
+              this.CommentEnd == other.CommentEnd &&
+              this.StartOffset == other.StartOffset &&
+              this.EndOffset == other.EndOffset;
     }
     #endregion methods
   }

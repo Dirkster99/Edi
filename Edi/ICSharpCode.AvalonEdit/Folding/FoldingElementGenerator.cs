@@ -162,7 +162,7 @@ namespace ICSharpCode.AvalonEdit.Folding
 			
 			public override TextRun CreateTextRun(int startVisualColumn, ITextRunConstructionContext context)
 			{
-				return new FoldingLineTextRun(this, TextRunProperties) { textBrush = textBrush };
+				return new FoldingLineTextRun(this, this.TextRunProperties) { textBrush = textBrush };
 			}
 			
 			protected internal override void OnMouseDown(MouseButtonEventArgs e)

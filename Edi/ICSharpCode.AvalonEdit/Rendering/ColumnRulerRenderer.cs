@@ -41,8 +41,8 @@ namespace ICSharpCode.AvalonEdit.Rendering
 			if (textView == null)
 				throw new ArgumentNullException("textView");
 			
-			pen = new Pen(new SolidColorBrush(DefaultForeground), 1);
-			pen.Freeze();
+			this.pen = new Pen(new SolidColorBrush(DefaultForeground), 1);
+			this.pen.Freeze();
 			this.textView = textView;
 			this.textView.BackgroundRenderers.Add(this);
 		}
@@ -55,15 +55,15 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		{
 			if (this.column != column) {
 				this.column = column;
-				textView.InvalidateLayer(Layer);
+				textView.InvalidateLayer(this.Layer);
 			}
 			if (this.pen != pen) {
 				this.pen = pen;
-				textView.InvalidateLayer(Layer);
+				textView.InvalidateLayer(this.Layer);
 			}
 		}
 		
-		public void Draw(TextView textView, DrawingContext drawingContext)
+		public void Draw(TextView textView, System.Windows.Media.DrawingContext drawingContext)
 		{
 			if (column < 1) return;
 			double offset = textView.WideSpaceWidth * column;

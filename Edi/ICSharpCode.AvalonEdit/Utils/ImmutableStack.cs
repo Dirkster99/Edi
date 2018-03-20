@@ -114,7 +114,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
 		{
-			return GetEnumerator();
+			return this.GetEnumerator();
 		}
 		
 		/// <inheritdoc/>

@@ -37,7 +37,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		{
 			if (context == null)
 				throw new ArgumentNullException("context");
-			CurrentContext = context;
+			this.CurrentContext = context;
 		}
 		
 		/// <summary>
@@ -45,7 +45,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		/// </summary>
 		public virtual void FinishGeneration()
 		{
-			CurrentContext = null;
+			this.CurrentContext = null;
 		}
 		
 		/// <summary>

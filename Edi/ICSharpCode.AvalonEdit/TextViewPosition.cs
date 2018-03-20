@@ -90,7 +90,7 @@ namespace ICSharpCode.AvalonEdit
 			this.line = line;
 			this.column = column;
 			this.visualColumn = visualColumn;
-			isAtEndOfLine = false;
+			this.isAtEndOfLine = false;
 		}
 		
 		/// <summary>
@@ -106,10 +106,10 @@ namespace ICSharpCode.AvalonEdit
 		/// </summary>
 		public TextViewPosition(TextLocation location, int visualColumn)
 		{
-			line = location.Line;
-			column = location.Column;
+			this.line = location.Line;
+			this.column = location.Column;
 			this.visualColumn = visualColumn;
-			isAtEndOfLine = false;
+			this.isAtEndOfLine = false;
 		}
 		
 		/// <summary>
@@ -125,7 +125,7 @@ namespace ICSharpCode.AvalonEdit
 		{
 			return string.Format(CultureInfo.InvariantCulture,
 			                     "[TextViewPosition Line={0} Column={1} VisualColumn={2} IsAtEndOfLine={3}]",
-			                     line, column, visualColumn, isAtEndOfLine);
+			                     this.line, this.column, this.visualColumn, this.isAtEndOfLine);
 		}
 		
 		#region Equals and GetHashCode implementation
@@ -158,7 +158,7 @@ namespace ICSharpCode.AvalonEdit
 		/// </summary>
 		public bool Equals(TextViewPosition other)
 		{
-			return Line == other.Line && Column == other.Column && VisualColumn == other.VisualColumn && IsAtEndOfLine == other.IsAtEndOfLine;
+			return this.Line == other.Line && this.Column == other.Column && this.VisualColumn == other.VisualColumn && this.IsAtEndOfLine == other.IsAtEndOfLine;
 		}
 		
 		/// <summary>
@@ -181,10 +181,10 @@ namespace ICSharpCode.AvalonEdit
 		/// <inheritdoc/>
 		public int CompareTo(TextViewPosition other)
 		{
-			int r = Location.CompareTo(other.Location);
+			int r = this.Location.CompareTo(other.Location);
 			if (r != 0)
 				return r;
-			r = visualColumn.CompareTo(other.visualColumn);
+			r = this.visualColumn.CompareTo(other.visualColumn);
 			if (r != 0)
 				return r;
 			if (isAtEndOfLine && !other.isAtEndOfLine)

@@ -99,7 +99,7 @@ namespace ICSharpCode.AvalonEdit.Document
 			get {
 				document.DebugVerifyAccess();
 				
-				TextAnchorNode n = node;
+				TextAnchorNode n = this.node;
 				if (n == null)
 					throw new InvalidOperationException();
 				
@@ -124,7 +124,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		/// <exception cref="InvalidOperationException">Thrown when trying to get the Offset from a deleted anchor.</exception>
 		public int Line {
 			get {
-				return document.GetLineByOffset(Offset).LineNumber;
+				return document.GetLineByOffset(this.Offset).LineNumber;
 			}
 		}
 		
@@ -134,7 +134,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		/// <exception cref="InvalidOperationException">Thrown when trying to get the Offset from a deleted anchor.</exception>
 		public int Column {
 			get {
-				int offset = Offset;
+				int offset = this.Offset;
 				return offset - document.GetLineByOffset(offset).Offset + 1;
 			}
 		}
@@ -145,7 +145,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		/// <exception cref="InvalidOperationException">Thrown when trying to get the Offset from a deleted anchor.</exception>
 		public TextLocation Location {
 			get {
-				return document.GetLocation(Offset);
+				return document.GetLocation(this.Offset);
 			}
 		}
 		

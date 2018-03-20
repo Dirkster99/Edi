@@ -103,7 +103,7 @@ namespace ICSharpCode.AvalonEdit.Folding
 			set {
 				if (title != value) {
 					title = value;
-					if (IsFolded)
+					if (this.IsFolded)
 						manager.Redraw(this);
 				}
 			}
@@ -185,8 +185,8 @@ namespace ICSharpCode.AvalonEdit.Folding
 		{
 			Debug.Assert(manager != null);
 			this.manager = manager;
-			StartOffset = startOffset;
-			Length = endOffset - startOffset;
+			this.StartOffset = startOffset;
+			this.Length = endOffset - startOffset;
 		}
 		
 		void RemoveCollapsedLineSection()

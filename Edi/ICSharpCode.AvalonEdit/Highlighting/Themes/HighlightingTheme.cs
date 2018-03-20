@@ -22,8 +22,8 @@
     public HighlightingTheme(string hlName, string description = "")
       : this()
     {
-      HlName = hlName;
-      HlDesc = description;
+      this.HlName = hlName;
+      this.HlDesc = description;
     }
 
     /// <summary>
@@ -32,7 +32,7 @@
     /// </summary>
     protected HighlightingTheme()
     {
-      HlDesc = HlName = string.Empty;
+      this.HlDesc = this.HlName = string.Empty;
     }
     #endregion constructor
 
@@ -57,10 +57,10 @@
     /// <param name="wordStyle">color and brush representation (eg.: "#FF00FFFF" etc)</param>
     public void AddWordStyle(string brushName, WordsStyle wordStyle)
     {
-      if (mHlThemes == null)
-        mHlThemes = new Dictionary<string, WordsStyle>();
+      if (this.mHlThemes == null)
+        this.mHlThemes = new Dictionary<string, WordsStyle>();
 
-      mHlThemes.Add(brushName, wordStyle);
+      this.mHlThemes.Add(brushName, wordStyle);
     }
 
     /// <summary>
@@ -70,10 +70,10 @@
     /// <returns></returns>
     public SolidColorBrush GetFgColorBrush(string wordStyleName)
     {
-      if (mHlThemes != null)
+      if (this.mHlThemes != null)
       {
         WordsStyle s;
-        mHlThemes.TryGetValue(wordStyleName, out s);
+        this.mHlThemes.TryGetValue(wordStyleName, out s);
 
         if (s != null)
           return s.fgColor;
@@ -89,10 +89,10 @@
     /// <returns></returns>
     public WordsStyle GetWordsStyle(string BrushName)
     {
-      if (mHlThemes != null)
+      if (this.mHlThemes != null)
       {
         WordsStyle s;
-        mHlThemes.TryGetValue(BrushName, out s);
+        this.mHlThemes.TryGetValue(BrushName, out s);
 
         return s;
       }

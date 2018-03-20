@@ -6,8 +6,8 @@
   using System.Data;
   using System.Linq;
   using System.Diagnostics;
-  using AvalonEdit.Folding;
-  using Document;
+  using ICSharpCode.AvalonEdit.Folding;
+  using ICSharpCode.AvalonEdit.Document;
 
   /// <summary>
   /// Folding Strategy for Visual Basic

@@ -80,7 +80,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 			} catch {
 				// When adding the new item fails, just remove the old one
 				// (we cannot keep the old item since we already successfully called onRemove for it)
-				RemoveAt(index);
+				base.RemoveAt(index);
 				throw;
 			}
 			base.SetItem(index, item);

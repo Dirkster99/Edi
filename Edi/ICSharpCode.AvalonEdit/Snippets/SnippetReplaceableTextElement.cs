@@ -107,7 +107,7 @@ namespace ICSharpCode.AvalonEdit.Snippets
 			context.TextArea.Caret.PositionChanged += Caret_PositionChanged;
 			Caret_PositionChanged(null, null);
 			
-			Text = GetText();
+			this.Text = GetText();
 		}
 
 		public void Deactivate(SnippetEventArgs e)
@@ -122,7 +122,7 @@ namespace ICSharpCode.AvalonEdit.Snippets
 		
 		void Caret_PositionChanged(object sender, EventArgs e)
 		{
-			ISegment s = Segment;
+			ISegment s = this.Segment;
 			if (s != null) {
 				bool newIsCaretInside = s.Contains(context.TextArea.Caret.Offset, 0);
 				if (newIsCaretInside != isCaretInside) {
@@ -150,8 +150,8 @@ namespace ICSharpCode.AvalonEdit.Snippets
 		{
 			if (managerType == typeof(TextDocumentWeakEventManager.TextChanged)) {
 				string newText = GetText();
-				if (Text != newText) {
-					Text = newText;
+				if (this.Text != newText) {
+					this.Text = newText;
 					if (TextChanged != null)
 						TextChanged(this, e);
 				}
@@ -198,7 +198,7 @@ namespace ICSharpCode.AvalonEdit.Snippets
 			
 			public KnownLayer Layer { get; set; }
 			
-			public void Draw(TextView textView, DrawingContext drawingContext)
+			public void Draw(TextView textView, System.Windows.Media.DrawingContext drawingContext)
 			{
 				ISegment s = element.Segment;
 				if (s != null) {

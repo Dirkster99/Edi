@@ -41,20 +41,20 @@ namespace ICSharpCode.AvalonEdit
 		}
 		
 		private TextEditor TextEditor {
-			get { return (TextEditor)Owner; }
+			get { return (TextEditor)base.Owner; }
 		}
 		
 		void IValueProvider.SetValue(string value)
 		{
-			TextEditor.Text = value;
+			this.TextEditor.Text = value;
 		}
 		
 		string IValueProvider.Value {
-			get { return TextEditor.Text; }
+			get { return this.TextEditor.Text; }
 		}
 		
 		bool IValueProvider.IsReadOnly {
-			get { return TextEditor.IsReadOnly; }
+			get { return this.TextEditor.IsReadOnly; }
 		}
 		
 		/// <inheritdoc/>
@@ -64,9 +64,9 @@ namespace ICSharpCode.AvalonEdit
 				return this;
 			
 			if (patternInterface == PatternInterface.Scroll) {
-				ScrollViewer scrollViewer = TextEditor.ScrollViewer;
+				ScrollViewer scrollViewer = this.TextEditor.ScrollViewer;
 				if (scrollViewer != null)
-					return CreatePeerForElement(scrollViewer);
+					return UIElementAutomationPeer.CreatePeerForElement(scrollViewer);
 			}
 			
 			return base.GetPattern(patternInterface);

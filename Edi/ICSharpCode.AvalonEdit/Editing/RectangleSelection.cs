@@ -111,13 +111,13 @@ namespace ICSharpCode.AvalonEdit.Editing
 			: base(textArea)
 		{
 			InitDocument();
-			startLine = start.Line;
-			endLine = end.Line;
-			startXPos = GetXPos(textArea, start);
-			endXPos = GetXPos(textArea, end);
+			this.startLine = start.Line;
+			this.endLine = end.Line;
+			this.startXPos = GetXPos(textArea, start);
+			this.endXPos = GetXPos(textArea, end);
 			CalculateSegments();
-			topLeftOffset = segments.First().StartOffset;
-			bottomRightOffset = segments.Last().EndOffset;
+			this.topLeftOffset = this.segments.First().StartOffset;
+			this.bottomRightOffset = this.segments.Last().EndOffset;
 			
 			this.start = start;
 			this.end = end;
@@ -128,14 +128,14 @@ namespace ICSharpCode.AvalonEdit.Editing
 		{
 			InitDocument();
 			this.startLine = startLine;
-			endLine = end.Line;
+			this.endLine = end.Line;
 			this.startXPos = startXPos;
-			endXPos = GetXPos(textArea, end);
+			this.endXPos = GetXPos(textArea, end);
 			CalculateSegments();
-			topLeftOffset = segments.First().StartOffset;
-			bottomRightOffset = segments.Last().EndOffset;
+			this.topLeftOffset = this.segments.First().StartOffset;
+			this.bottomRightOffset = this.segments.Last().EndOffset;
 			
-			start = GetStart();
+			this.start = GetStart();
 			this.end = end;
 		}
 		
@@ -143,16 +143,16 @@ namespace ICSharpCode.AvalonEdit.Editing
 			: base(textArea)
 		{
 			InitDocument();
-			startLine = start.Line;
+			this.startLine = start.Line;
 			this.endLine = endLine;
-			startXPos = GetXPos(textArea, start);
+			this.startXPos = GetXPos(textArea, start);
 			this.endXPos = endXPos;
 			CalculateSegments();
-			topLeftOffset = segments.First().StartOffset;
-			bottomRightOffset = segments.Last().EndOffset;
+			this.topLeftOffset = this.segments.First().StartOffset;
+			this.bottomRightOffset = this.segments.Last().EndOffset;
 			
 			this.start = start;
-			end = GetEnd();
+			this.end = GetEnd();
 		}
 		
 		void InitDocument()
@@ -213,7 +213,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		public override string GetText()
 		{
 			StringBuilder b = new StringBuilder();
-			foreach (ISegment s in Segments) {
+			foreach (ISegment s in this.Segments) {
 				if (b.Length > 0)
 					b.AppendLine();
 				b.Append(document.GetText(s));
@@ -230,7 +230,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		/// <inheritdoc/>
 		public override int Length {
 			get {
-				return Segments.Sum(s => s.Length);
+				return this.Segments.Sum(s => s.Length);
 			}
 		}
 		
@@ -265,10 +265,10 @@ namespace ICSharpCode.AvalonEdit.Editing
 		public override bool Equals(object obj)
 		{
 			RectangleSelection r = obj as RectangleSelection;
-			return r != null && r.textArea == textArea
-				&& r.topLeftOffset == topLeftOffset && r.bottomRightOffset == bottomRightOffset
-				&& r.startLine == startLine && r.endLine == endLine
-				&& r.startXPos == startXPos && r.endXPos == endXPos;
+			return r != null && r.textArea == this.textArea
+				&& r.topLeftOffset == this.topLeftOffset && r.bottomRightOffset == this.bottomRightOffset
+				&& r.startLine == this.startLine && r.endLine == this.endLine
+				&& r.startXPos == this.startXPos && r.endXPos == this.endXPos;
 		}
 		
 		/// <inheritdoc/>
@@ -315,7 +315,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 				TextViewPosition pos;
 				if (NewLineFinder.NextNewLine(newText, 0) == SimpleSegment.Invalid) {
 					// insert same text into every line
-					foreach (SelectionSegment lineSegment in Segments.Reverse()) {
+					foreach (SelectionSegment lineSegment in this.Segments.Reverse()) {
 						ReplaceSingleLineText(textArea, lineSegment, newText, out insertionLength);
 						totalInsertionLength += insertionLength;
 						firstInsertionLength = insertionLength;
@@ -394,7 +394,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		public const string RectangularSelectionDataType = "AvalonEditRectangularSelection";
 		
 		/// <inheritdoc/>
-		public override DataObject CreateDataObject(TextArea textArea)
+		public override System.Windows.DataObject CreateDataObject(TextArea textArea)
 		{
 			var data = base.CreateDataObject(textArea);
 			

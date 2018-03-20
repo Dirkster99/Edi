@@ -34,7 +34,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 		
 		public XmlHighlightingDefinition(XshdSyntaxDefinition xshd, IHighlightingDefinitionReferenceResolver resolver)
 		{
-			Name = xshd.Name;
+			this.Name = xshd.Name;
 			// Create HighlightingRuleSet instances
 			var rnev = new RegisterNamedElementsVisitor(this);
 			xshd.AcceptElements(rnev);
@@ -420,7 +420,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting.Xshd
 		
 		public override string ToString()
 		{
-			return Name;
+			return this.Name;
 		}
 		
 		public IDictionary<string, string> Properties {

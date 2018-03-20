@@ -175,7 +175,7 @@ namespace ICSharpCode.AvalonEdit.Folding
 			newFoldStart.StartLine = lineInfo.LineNumber;
 			newFoldStart.StartOffset = document.GetOffset(newFoldStart.StartLine, lineInfo.LinePosition - 1);
 			
-			if (ShowAttributesWhenFolded && reader.HasAttributes) {
+			if (this.ShowAttributesWhenFolded && reader.HasAttributes) {
 				newFoldStart.Name = String.Concat("<", reader.Name, " ", GetAttributeFoldText(reader), ">");
 			} else {
 				newFoldStart.Name = String.Concat("<", reader.Name, ">");

@@ -46,7 +46,7 @@ namespace ICSharpCode.AvalonEdit.Document
 			if (line.DelimiterLength == 0)
 				line = line.PreviousLine;
 			if (line != null)
-				NewLine = document.GetText(line.EndOffset, line.DelimiterLength);
+				this.NewLine = document.GetText(line.EndOffset, line.DelimiterLength);
 		}
 		
 		/// <summary>

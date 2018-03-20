@@ -8,11 +8,11 @@
   using System.Windows.Input;
   using System.Windows.Media;
   using System.Windows.Threading;
-  using BracketRenderer;
-  using BlockSurround;
-  using Editing;
-  using Rendering;
-  using Utils;
+  using ICSharpCode.AvalonEdit.BracketRenderer;
+  using ICSharpCode.AvalonEdit.Edi.BlockSurround;
+  using ICSharpCode.AvalonEdit.Editing;
+  using ICSharpCode.AvalonEdit.Rendering;
+  using ICSharpCode.AvalonEdit.Utils;
 
   /// <summary>
   /// </summary>
@@ -36,9 +36,9 @@
       DefaultStyleKeyProperty.OverrideMetadata(typeof(EdiTextEditor), new FrameworkPropertyMetadata(typeof(EdiTextEditor)));
       FocusableProperty.OverrideMetadata(typeof(EdiTextEditor), new FrameworkPropertyMetadata(Boxes.True));
 
-      CmdBindings.Add(new CommandBinding(EdiTextEditorCommands.FoldsCollapseAll, FoldsCollapseAll, FoldsColapseExpandCanExecute));
-      CmdBindings.Add(new CommandBinding(EdiTextEditorCommands.FoldsExpandAll, FoldsExpandAll, FoldsColapseExpandCanExecute));
-      CmdBindings.Add(new CommandBinding(EdiTextEditorCommands.PrintDocument, PrintDocument, PrintDocumentCanExecute));
+      CmdBindings.Add(new CommandBinding(EdiTextEditorCommands.FoldsCollapseAll, EdiTextEditor.FoldsCollapseAll, EdiTextEditor.FoldsColapseExpandCanExecute));
+      CmdBindings.Add(new CommandBinding(EdiTextEditorCommands.FoldsExpandAll, EdiTextEditor.FoldsExpandAll, EdiTextEditor.FoldsColapseExpandCanExecute));
+      CmdBindings.Add(new CommandBinding(EdiTextEditorCommands.PrintDocument, EdiTextEditor.PrintDocument, EdiTextEditor.PrintDocumentCanExecute));
     }
 
     /// <summary>
@@ -51,7 +51,7 @@
       // This is default list of viewing scales that is bound by the default XAML skin in EdiTextEditor.xaml
       // Consumers can use other lists by binding to their viewmodel when re-styling the control in the
       // applications resource dictionary (therefore, this list is not localized)
-      ScaleList = new ObservableCollection<string>(){ "20 %",
+      this.ScaleList = new ObservableCollection<string>(){ "20 %",
                                                            "50 %",
                                                            "75 %",
                                                            "100 %",
@@ -63,7 +63,7 @@
                                                            "400 %"};
 
       // Copy static collection of commands to collection of commands of this instance
-      CommandBindings.AddRange(CmdBindings);      
+      this.CommandBindings.AddRange(EdiTextEditor.CmdBindings);      
     }
     #endregion constructor
 
@@ -88,14 +88,14 @@
     {
       base.OnApplyTemplate();
 
-      Loaded += new RoutedEventHandler(OnLoaded);
-      Unloaded += new RoutedEventHandler(OnUnloaded);
+      this.Loaded += new RoutedEventHandler(this.OnLoaded);
+      this.Unloaded += new RoutedEventHandler(this.OnUnloaded);
 
       // Highlight current line in editor (even if editor is not focused) via themable dp-property
-      AdjustCurrentLineBackground(EditorCurrentLineBackground);
+      this.AdjustCurrentLineBackground(this.EditorCurrentLineBackground);
 
       // Update highlighting of current line when caret position is changed
-      TextArea.Caret.PositionChanged += Caret_PositionChanged;
+      this.TextArea.Caret.PositionChanged += Caret_PositionChanged;
     }
 
     /// <summary>
@@ -107,18 +107,18 @@
     private void OnLoaded(object obj, RoutedEventArgs args)
     {
       // Call folding once upon loading so that first run is executed right away
-      foldingUpdateTimer_Tick(null, null);
+      this.foldingUpdateTimer_Tick(null, null);
 
-      mFoldingUpdateTimer = new DispatcherTimer();
-      mFoldingUpdateTimer.Interval = TimeSpan.FromSeconds(2);
-      mFoldingUpdateTimer.Tick += foldingUpdateTimer_Tick;
-      mFoldingUpdateTimer.Start();
+      this.mFoldingUpdateTimer = new DispatcherTimer();
+      this.mFoldingUpdateTimer.Interval = TimeSpan.FromSeconds(2);
+      this.mFoldingUpdateTimer.Tick += this.foldingUpdateTimer_Tick;
+      this.mFoldingUpdateTimer.Start();
 
       // Connect CompletionWindow Listners
       try
       {
-        EdiTextEditor_OptionChanged(null, null);
-        OptionChanged += EdiTextEditor_OptionChanged;
+        this.EdiTextEditor_OptionChanged(null, null);
+        this.OptionChanged += EdiTextEditor_OptionChanged;
       }
       catch
       {
@@ -126,12 +126,12 @@
 
       try
       {
-        Focus();
-        ForceCursor = true;
+        this.Focus();
+        this.ForceCursor = true;
 
         // Restore cusor position for CTRL-TAB Support http://avalondock.codeplex.com/workitem/15079
-        ScrollToHorizontalOffset(EditorScrollOffsetX);
-        ScrollToVerticalOffset(EditorScrollOffsetY);
+        this.ScrollToHorizontalOffset(this.EditorScrollOffsetX);
+        this.ScrollToVerticalOffset(this.EditorScrollOffsetY);
       }
       catch
       {
@@ -139,25 +139,25 @@
 
       try
       {
-        if (EditorIsRectangleSelection == true)
+        if (this.EditorIsRectangleSelection == true)
         {
-          CaretOffset = EditorCaretOffset;
+          this.CaretOffset = this.EditorCaretOffset;
 
-          SelectionStart = EditorSelectionStart;
-          SelectionLength = EditorSelectionLength;
+          this.SelectionStart = this.EditorSelectionStart;
+          this.SelectionLength = this.EditorSelectionLength;
 
           // See OnMouseCaretBoxSelection in Editing\CaretNavigationCommandHandler.cs
           // Convert normal selection to rectangle selection
-          TextArea.Selection = new RectangleSelection(TextArea,
-                                                                                          TextArea.Selection.StartPosition,
-                                                                                          TextArea.Selection.EndPosition);
+          this.TextArea.Selection = new ICSharpCode.AvalonEdit.Editing.RectangleSelection(this.TextArea,
+                                                                                          this.TextArea.Selection.StartPosition,
+                                                                                          this.TextArea.Selection.EndPosition);
         }
         else
         {
-          CaretOffset = EditorCaretOffset;
+          this.CaretOffset = this.EditorCaretOffset;
 
           // http://www.codeproject.com/Articles/42490/Using-AvalonEdit-WPF-Text-Editor?msg=4388281#xx4388281xx
-          Select(EditorSelectionStart, EditorSelectionLength);
+          this.Select(this.EditorSelectionStart, this.EditorSelectionLength);
         }
       }
       catch
@@ -165,8 +165,8 @@
       }
 
       // Attach mouse wheel CTRL-key zoom support
-      PreviewMouseWheel += new MouseWheelEventHandler(textEditor_PreviewMouseWheel);
-      KeyDown += new KeyEventHandler(textEditor_KeyDown);
+      this.PreviewMouseWheel += new System.Windows.Input.MouseWheelEventHandler(textEditor_PreviewMouseWheel);
+      this.KeyDown += new KeyEventHandler(this.textEditor_KeyDown);
     }
 
     /// <summary>
@@ -176,15 +176,15 @@
     /// <param name="e"></param>
     private void EdiTextEditor_OptionChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
-      if (Options != null)
+      if (this.Options != null)
       {
-        TextArea.TextEntering -= TextEditorTextAreaTextEntering;
-        TextArea.TextEntered -= TextEditorTextAreaTextEntered;
+        this.TextArea.TextEntering -= TextEditorTextAreaTextEntering;
+        this.TextArea.TextEntered -= TextEditorTextAreaTextEntered;
 
-        if (Options.EnableCodeCompletion == true)
+        if (this.Options.EnableCodeCompletion == true)
         {
-          TextArea.TextEntering += TextEditorTextAreaTextEntering;
-          TextArea.TextEntered += TextEditorTextAreaTextEntered;
+          this.TextArea.TextEntering += TextEditorTextAreaTextEntering;
+          this.TextArea.TextEntered += TextEditorTextAreaTextEntered;
         }
       }
     }
@@ -196,11 +196,11 @@
     /// <param name="e"></param>
     private void textEditor_KeyDown(object sender, KeyEventArgs e)
     {
-      ModifierKeys mod = Keyboard.Modifiers;
+      ModifierKeys mod = System.Windows.Input.Keyboard.Modifiers;
 
-      if (InsertBlocks != null)
+      if (this.InsertBlocks != null)
       {
-        IEnumerable<BlockDefinition> sel = InsertBlocks.Where(i => i.Key == e.Key && e.KeyboardDevice.Modifiers == i.Modifier);
+        IEnumerable<BlockDefinition> sel = this.InsertBlocks.Where(i => i.Key == e.Key && e.KeyboardDevice.Modifiers == i.Modifier);
       
         if (sel == null)
           return;
@@ -214,7 +214,7 @@
             try
             {
               // Make sure that this change is in one UNDO/Redo step
-              BeginChange();
+              this.BeginChange();
               AvalonHelper.SurroundSelectionWithBlockComment(this, item);
             }
             catch (Exception exp)
@@ -224,7 +224,7 @@
             finally
             {
               // Make sure that this change is in one UNDO/Redo step
-              EndChange();
+              this.EndChange();
               e.Handled = true;
             }
 
@@ -242,25 +242,25 @@
     /// <param name="args"></param>
     private void OnUnloaded(object obj, RoutedEventArgs args)
     {
-      if (mFoldingUpdateTimer != null)
-        mFoldingUpdateTimer = null;
+      if (this.mFoldingUpdateTimer != null)
+        this.mFoldingUpdateTimer = null;
 
-      TextArea.TextEntering -= TextEditorTextAreaTextEntering;
-      TextArea.TextEntered -= TextEditorTextAreaTextEntered;
+      this.TextArea.TextEntering -= TextEditorTextAreaTextEntering;
+      this.TextArea.TextEntered -= TextEditorTextAreaTextEntered;
 
       // Save cusor position for CTRL-TAB Support http://avalondock.codeplex.com/workitem/15079
-      EditorCaretOffset = CaretOffset;
-      EditorSelectionStart = SelectionStart;
-      EditorSelectionLength = SelectionLength;
-      EditorIsRectangleSelection = TextArea.Selection is RectangleSelection;
+      this.EditorCaretOffset = this.CaretOffset;
+      this.EditorSelectionStart = this.SelectionStart;
+      this.EditorSelectionLength = this.SelectionLength;
+      this.EditorIsRectangleSelection = this.TextArea.Selection is RectangleSelection;
 
       // http://stackoverflow.com/questions/11863273/avalonedit-how-to-get-the-top-visible-line
-      EditorScrollOffsetX = TextArea.TextView.ScrollOffset.X;
-      EditorScrollOffsetY = TextArea.TextView.ScrollOffset.Y;
+      this.EditorScrollOffsetX = this.TextArea.TextView.ScrollOffset.X;
+      this.EditorScrollOffsetY = this.TextArea.TextView.ScrollOffset.Y;
 
       // Detach mouse wheel CTRL-key zoom support
       // This does not work when doing mouse zoom and CTRL-TAB between two documents and trying to do mouse zoom???
-      PreviewMouseWheel -= textEditor_PreviewMouseWheel;
+      this.PreviewMouseWheel -= textEditor_PreviewMouseWheel;
     }
 
     /// <summary>
@@ -275,7 +275,7 @@
 
         // Make sure there is only one of this type of background renderer
         // Otherwise, we might keep adding and WPF keeps drawing them on top of each other
-        foreach (var item in TextArea.TextView.BackgroundRenderers)
+        foreach (var item in this.TextArea.TextView.BackgroundRenderers)
         {
           if (item != null)
           {
@@ -286,19 +286,19 @@
           }
         }
 
-        TextArea.TextView.BackgroundRenderers.Remove(oldRenderer);
+        this.TextArea.TextView.BackgroundRenderers.Remove(oldRenderer);
 
-        TextArea.TextView.BackgroundRenderers.Add(new HighlightCurrentLineBackgroundRenderer(this, newValue.Clone()));
+        this.TextArea.TextView.BackgroundRenderers.Add(new HighlightCurrentLineBackgroundRenderer(this, newValue.Clone()));
 
         // Remove reference to old background renderer instance (if any) and construct BracketRenderer from scratch
-        if (mBracketRenderer != null)
+        if (this.mBracketRenderer != null)
         {
-          TextArea.TextView.BackgroundRenderers.Remove(mBracketRenderer);
-          mBracketRenderer = null;
+          this.TextArea.TextView.BackgroundRenderers.Remove(this.mBracketRenderer);
+          this.mBracketRenderer = null;
         }
 
-        mBracketRenderer = new BracketHighlightRenderer(TextArea.TextView);
-        TextArea.TextView.BackgroundRenderers.Add(mBracketRenderer);
+        this.mBracketRenderer = new BracketHighlightRenderer(this.TextArea.TextView);
+        this.TextArea.TextView.BackgroundRenderers.Add(this.mBracketRenderer);
       }
     }
 
@@ -318,15 +318,15 @@
       {
       }
 
-      TextArea.TextView.InvalidateLayer(KnownLayer.Background); //Update current line highlighting
+      this.TextArea.TextView.InvalidateLayer(KnownLayer.Background); //Update current line highlighting
 
-      if (TextArea != null)
+      if (this.TextArea != null)
       {
-        Column = TextArea.Caret.Column;
-        Line = TextArea.Caret.Line;
+        this.Column = this.TextArea.Caret.Column;
+        this.Line = this.TextArea.Caret.Line;
       }
       else
-        Column = Line = 0;
+        this.Column = this.Line = 0;
     }
 
     /// <summary>
@@ -334,17 +334,17 @@
     /// </summary>
     private void HighlightBrackets(object sender, EventArgs e)
     {
-      if (TextArea.Options.EnableHighlightBrackets == true)
+      if (this.TextArea.Options.EnableHighlightBrackets == true)
       {
-        if (FindBrackets == null)
-          FindBrackets = new EdiBracketSearcher();
+        if (this.FindBrackets == null)
+          this.FindBrackets = new EdiBracketSearcher();
 
-        var bracketSearchResult = FindBrackets.SearchBracket(Document, TextArea.Caret.Offset);
-        mBracketRenderer.SetHighlight(bracketSearchResult);
+        var bracketSearchResult = FindBrackets.SearchBracket(this.Document, this.TextArea.Caret.Offset);
+        this.mBracketRenderer.SetHighlight(bracketSearchResult);
       }
       else
       {
-        mBracketRenderer.SetHighlight(null);
+        this.mBracketRenderer.SetHighlight(null);
       }
     }
 
@@ -354,20 +354,20 @@
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void textEditor_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+    private void textEditor_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
     {
       if (Keyboard.Modifiers == ModifierKeys.Control)
       {
-        double fontSize = FontSize + e.Delta / 25.0;
+        double fontSize = this.FontSize + e.Delta / 25.0;
 
         if (fontSize < 6)
-          FontSize = 6;
+          this.FontSize = 6;
         else
         {
           if (fontSize > 200)
-            FontSize = 200;
+            this.FontSize = 200;
           else
-            FontSize = fontSize;
+            this.FontSize = fontSize;
         }
 
         e.Handled = true;

@@ -48,15 +48,15 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		public CompletionWindow(TextArea textArea) : base(textArea)
 		{
 			// keep height automatic
-			CloseAutomatically = true;
-			SizeToContent = SizeToContent.Height;
-			MaxHeight = 300;
-			Width = 175;
-			Content = completionList;
+			this.CloseAutomatically = true;
+			this.SizeToContent = SizeToContent.Height;
+			this.MaxHeight = 300;
+			this.Width = 175;
+			this.Content = completionList;
 			// prevent user from resizing window to 0x0
-			MinHeight = 15;
-			MinWidth = 30;
-            Background = new SolidColorBrush(Color.FromArgb(0x00, 0x00, 0x00, 0x00)); //Dirkster99
+			this.MinHeight = 15;
+			this.MinWidth = 30;
+            this.Background = new SolidColorBrush(Color.FromArgb(0x00, 0x00, 0x00, 0x00)); //Dirkster99
 
             toolTip.PlacementTarget = this;
 			toolTip.Placement = PlacementMode.Right;
@@ -109,26 +109,26 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 			// If the Complete callback pushes stacked input handlers, we don't want to pop those when the CC window closes.
 			var item = completionList.SelectedItem;
 			if (item != null)
-				item.Complete(TextArea, new AnchorSegment(TextArea.Document, StartOffset, EndOffset - StartOffset), e);
+				item.Complete(this.TextArea, new AnchorSegment(this.TextArea.Document, this.StartOffset, this.EndOffset - this.StartOffset), e);
 		}
 		
 		void AttachEvents()
 		{
-			completionList.InsertionRequested += completionList_InsertionRequested;
-			completionList.SelectionChanged += completionList_SelectionChanged;
-			TextArea.Caret.PositionChanged += CaretPositionChanged;
-			TextArea.MouseWheel += textArea_MouseWheel;
-			TextArea.PreviewTextInput += textArea_PreviewTextInput;
+			this.completionList.InsertionRequested += completionList_InsertionRequested;
+			this.completionList.SelectionChanged += completionList_SelectionChanged;
+			this.TextArea.Caret.PositionChanged += CaretPositionChanged;
+			this.TextArea.MouseWheel += textArea_MouseWheel;
+			this.TextArea.PreviewTextInput += textArea_PreviewTextInput;
 		}
 		
 		/// <inheritdoc/>
 		protected override void DetachEvents()
 		{
-			completionList.InsertionRequested -= completionList_InsertionRequested;
-			completionList.SelectionChanged -= completionList_SelectionChanged;
-			TextArea.Caret.PositionChanged -= CaretPositionChanged;
-			TextArea.MouseWheel -= textArea_MouseWheel;
-			TextArea.PreviewTextInput -= textArea_PreviewTextInput;
+			this.completionList.InsertionRequested -= completionList_InsertionRequested;
+			this.completionList.SelectionChanged -= completionList_SelectionChanged;
+			this.TextArea.Caret.PositionChanged -= CaretPositionChanged;
+			this.TextArea.MouseWheel -= textArea_MouseWheel;
+			this.TextArea.PreviewTextInput -= textArea_PreviewTextInput;
 			base.DetachEvents();
 		}
 		
@@ -179,7 +179,7 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		
 		/// <inheritdoc/>
 		protected override bool CloseOnFocusLost {
-			get { return CloseAutomatically; }
+			get { return this.CloseAutomatically; }
 		}
 		
 		/// <summary>
@@ -192,8 +192,8 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		
 		void CaretPositionChanged(object sender, EventArgs e)
 		{
-			int offset = TextArea.Caret.Offset;
-			if (offset == StartOffset) {
+			int offset = this.TextArea.Caret.Offset;
+			if (offset == this.StartOffset) {
 				if (CloseAutomatically && CloseWhenCaretAtBeginning) {
 					Close();
 				} else {
@@ -201,14 +201,14 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 				}
 				return;
 			}
-			if (offset < StartOffset || offset > EndOffset) {
+			if (offset < this.StartOffset || offset > this.EndOffset) {
 				if (CloseAutomatically) {
 					Close();
 				}
 			} else {
-				TextDocument document = TextArea.Document;
+				TextDocument document = this.TextArea.Document;
 				if (document != null) {
-					completionList.SelectItem(document.GetText(StartOffset, offset - StartOffset));
+					completionList.SelectItem(document.GetText(this.StartOffset, offset - this.StartOffset));
 				}
 			}
 		}

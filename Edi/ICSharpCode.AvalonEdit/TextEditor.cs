@@ -22,7 +22,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
-using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
@@ -98,7 +97,7 @@ namespace ICSharpCode.AvalonEdit
 		{
 			base.OnGotKeyboardFocus(e);
 			if (e.NewFocus == this) {
-				Keyboard.Focus(TextArea);
+				Keyboard.Focus(this.TextArea);
 				e.Handled = true;
 			}
 		}
@@ -231,7 +230,7 @@ namespace ICSharpCode.AvalonEdit
 		[Localizability(LocalizationCategory.Text), DefaultValue("")]
 		public string Text {
 			get {
-				TextDocument document = Document;
+				TextDocument document = this.Document;
 				return document != null ? document.Text : string.Empty;
 			}
 			set {
@@ -239,14 +238,14 @@ namespace ICSharpCode.AvalonEdit
 				document.Text = value ?? string.Empty;
 				// after replacing the full text, the caret is positioned at the end of the document
 				// - reset it to the beginning.
-				CaretOffset = 0;
+				this.CaretOffset = 0;
 				document.UndoStack.ClearAll();
 			}
 		}
 		
 		TextDocument GetDocument()
 		{
-			TextDocument document = Document;
+			TextDocument document = this.Document;
 			if (document == null)
 				throw ThrowUtil.NoDocumentAssigned();
 			return document;
@@ -300,7 +299,7 @@ namespace ICSharpCode.AvalonEdit
 		
 		bool CanExecute(RoutedUICommand command)
 		{
-			TextArea textArea = TextArea;
+			TextArea textArea = this.TextArea;
 			if (textArea == null)
 				return false;
 			else
@@ -309,7 +308,7 @@ namespace ICSharpCode.AvalonEdit
 		
 		void Execute(RoutedUICommand command)
 		{
-			TextArea textArea = TextArea;
+			TextArea textArea = this.TextArea;
 			if (textArea != null)
 				command.Execute(null, textArea);
 		}
@@ -347,13 +346,13 @@ namespace ICSharpCode.AvalonEdit
         protected virtual void OnSyntaxHighlightingChanged(IHighlightingDefinition newValue)
 		{
 			if (colorizer != null) {
-				TextArea.TextView.LineTransformers.Remove(colorizer);
+				this.TextArea.TextView.LineTransformers.Remove(colorizer);
 				colorizer = null;
 			}
 			if (newValue != null) {
 				colorizer = CreateColorizer(newValue);
 				if (colorizer != null)
-					TextArea.TextView.LineTransformers.Insert(0, colorizer);
+					this.TextArea.TextView.LineTransformers.Insert(0, colorizer);
 			}
 		}
 		
@@ -419,9 +418,9 @@ namespace ICSharpCode.AvalonEdit
                 else
                     editor.TextArea.ReadOnlySectionProvider = NoReadOnlySections.Instance;
 
-                if (UIElementAutomationPeer.FromElement(editor) is TextEditorAutomationPeer)
+                if (TextEditorAutomationPeer.FromElement(editor) is TextEditorAutomationPeer)
                 {
-                    TextEditorAutomationPeer peer = UIElementAutomationPeer.FromElement(editor) as TextEditorAutomationPeer;
+                    TextEditorAutomationPeer peer = TextEditorAutomationPeer.FromElement(editor) as TextEditorAutomationPeer;
                     peer.RaiseIsReadOnlyChanged((bool)e.OldValue, (bool)e.NewValue);
                 }
             }
@@ -470,7 +469,7 @@ namespace ICSharpCode.AvalonEdit
 		bool HandleIsOriginalChanged(PropertyChangedEventArgs e)
 		{
 			if (e.PropertyName == "IsOriginalFile") {
-				TextDocument document = Document;
+				TextDocument document = this.Document;
 				if (document != null) {
 					SetCurrentValue(IsModifiedProperty, Boxes.Box(!document.UndoStack.IsOriginalFile));
 				}
@@ -507,8 +506,8 @@ namespace ICSharpCode.AvalonEdit
 				leftMargins.Insert(0, lineNumbers);
 				leftMargins.Insert(1, line);
 				var lineNumbersForeground = new Binding("LineNumbersForeground") { Source = editor };
-				line.SetBinding(Shape.StrokeProperty, lineNumbersForeground);
-				lineNumbers.SetBinding(ForegroundProperty, lineNumbersForeground);
+				line.SetBinding(Line.StrokeProperty, lineNumbersForeground);
+				lineNumbers.SetBinding(Control.ForegroundProperty, lineNumbersForeground);
 			} else {
 				for (int i = 0; i < leftMargins.Count; i++) {
 					if (leftMargins[i] is LineNumberMargin) {
@@ -545,7 +544,7 @@ namespace ICSharpCode.AvalonEdit
 			var lineNumberMargin = editor.TextArea.LeftMargins.FirstOrDefault(margin => margin is LineNumberMargin) as LineNumberMargin;;
 			
 			if (lineNumberMargin != null) {
-				lineNumberMargin.SetValue(ForegroundProperty, e.NewValue);
+				lineNumberMargin.SetValue(Control.ForegroundProperty, e.NewValue);
 			}
 		}
 		#endregion
@@ -831,7 +830,7 @@ namespace ICSharpCode.AvalonEdit
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public string SelectedText {
 			get {
-				TextArea textArea = TextArea;
+				TextArea textArea = this.TextArea;
 				// We'll get the text from the whole surrounding segment.
 				// This is done to ensure that SelectedText.Length == SelectionLength.
 				if (textArea != null && textArea.Document != null && !textArea.Selection.IsEmpty)
@@ -842,13 +841,13 @@ namespace ICSharpCode.AvalonEdit
 			set {
 				if (value == null)
 					throw new ArgumentNullException("value");
-				TextArea textArea = TextArea;
+				TextArea textArea = this.TextArea;
 				if (textArea != null && textArea.Document != null) {
-					int offset = SelectionStart;
-					int length = SelectionLength;
+					int offset = this.SelectionStart;
+					int length = this.SelectionLength;
 					textArea.Document.Replace(offset, length, value);
 					// keep inserted text selected
-					textArea.Selection = Selection.Create(textArea, offset, offset + value.Length);
+					textArea.Selection = SimpleSelection.Create(textArea, offset, offset + value.Length);
 				}
 			}
 		}
@@ -859,14 +858,14 @@ namespace ICSharpCode.AvalonEdit
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public int CaretOffset {
 			get {
-				TextArea textArea = TextArea;
+				TextArea textArea = this.TextArea;
 				if (textArea != null)
 					return textArea.Caret.Offset;
 				else
 					return 0;
 			}
 			set {
-				TextArea textArea = TextArea;
+				TextArea textArea = this.TextArea;
 				if (textArea != null)
 					textArea.Caret.Offset = value;
 			}
@@ -878,7 +877,7 @@ namespace ICSharpCode.AvalonEdit
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public int SelectionStart {
 			get {
-				TextArea textArea = TextArea;
+				TextArea textArea = this.TextArea;
 				if (textArea != null) {
 					if (textArea.Selection.IsEmpty)
 						return textArea.Caret.Offset;
@@ -899,7 +898,7 @@ namespace ICSharpCode.AvalonEdit
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public int SelectionLength {
 			get {
-				TextArea textArea = TextArea;
+				TextArea textArea = this.TextArea;
 				if (textArea != null && !textArea.Selection.IsEmpty)
 					return textArea.Selection.SurroundingSegment.Length;
 				else
@@ -927,7 +926,7 @@ namespace ICSharpCode.AvalonEdit
                 return;
             ////throw new ArgumentOutOfRangeException("length", length, "Value must be between 0 and " + (documentLength - length));
 
-			textArea.Selection = Selection.Create(textArea, start, start + length);
+			textArea.Selection = SimpleSelection.Create(textArea, start, start + length);
 			textArea.Caret.Offset = start + length;
 		}
 		
@@ -937,7 +936,7 @@ namespace ICSharpCode.AvalonEdit
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public int LineCount {
 			get {
-				TextDocument document = Document;
+				TextDocument document = this.Document;
 				if (document != null)
 					return document.LineCount;
 				else
@@ -950,7 +949,7 @@ namespace ICSharpCode.AvalonEdit
 		/// </summary>
 		public void Clear()
 		{
-			Text = string.Empty;
+			this.Text = string.Empty;
 		}
 		#endregion
 		
@@ -963,8 +962,8 @@ namespace ICSharpCode.AvalonEdit
 		/// </remarks>
 		public void Load(Stream stream)
 		{
-			using (StreamReader reader = FileReader.OpenStream(stream, Encoding ?? Encoding.UTF8)) {
-				Text = reader.ReadToEnd();
+			using (StreamReader reader = FileReader.OpenStream(stream, this.Encoding ?? Encoding.UTF8)) {
+				this.Text = reader.ReadToEnd();
 				SetCurrentValue(EncodingProperty, reader.CurrentEncoding); // assign encoding after ReadToEnd() so that the StreamReader can autodetect the encoding
 			}
 			SetCurrentValue(IsModifiedProperty, Boxes.False);
@@ -1011,8 +1010,8 @@ namespace ICSharpCode.AvalonEdit
 		{
 			if (stream == null)
 				throw new ArgumentNullException("stream");
-			var encoding = Encoding;
-			var document = Document;
+			var encoding = this.Encoding;
+			var document = this.Document;
 			StreamWriter writer = encoding != null ? new StreamWriter(stream, encoding) : new StreamWriter(stream);
 			if (document != null)
 				document.WriteTextTo(writer);
@@ -1135,9 +1134,9 @@ namespace ICSharpCode.AvalonEdit
 		/// <returns>The text view position, or null if the point is outside the document.</returns>
 		public TextViewPosition? GetPositionFromPoint(Point point)
 		{
-			if (Document == null)
+			if (this.Document == null)
 				return null;
-			TextView textView = TextArea.TextView;
+			TextView textView = this.TextArea.TextView;
 			return textView.GetPosition(TranslatePoint(point, textView) + textView.ScrollOffset);
 		}
 		

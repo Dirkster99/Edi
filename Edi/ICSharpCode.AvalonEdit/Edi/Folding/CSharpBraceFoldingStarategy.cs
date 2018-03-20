@@ -20,8 +20,8 @@ namespace ICSharpCode.AvalonEdit.Edi.Folding
 {
   using System.Collections.Generic;
   using System.Text.RegularExpressions;
-  using Document;
-  using AvalonEdit.Folding;
+  using ICSharpCode.AvalonEdit.Document;
+  using ICSharpCode.AvalonEdit.Folding;
 
   /// <summary>
   /// Allows producing foldings from a document based on braces.
@@ -43,8 +43,8 @@ namespace ICSharpCode.AvalonEdit.Edi.Folding
     /// </summary>
     public CSharpBraceFoldingStrategy()
     {
-      OpeningBrace = '{';
-      ClosingBrace = '}';
+      this.OpeningBrace = '{';
+      this.ClosingBrace = '}';
     }
 
     /// <summary>
@@ -79,8 +79,8 @@ namespace ICSharpCode.AvalonEdit.Edi.Folding
       Stack<int> startOffsets = new Stack<int>();
       int lastNewLineOffset = 0;
 
-      char openingBrace = OpeningBrace;
-      char closingBrace = ClosingBrace;
+      char openingBrace = this.OpeningBrace;
+      char closingBrace = this.ClosingBrace;
 
       for (int i = 0; i < document.TextLength; i++)
       {

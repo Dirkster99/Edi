@@ -42,15 +42,15 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		/// </summary>
 		public InsightWindow(TextArea textArea) : base(textArea)
 		{
-			CloseAutomatically = true;
+			this.CloseAutomatically = true;
 			AttachEvents();
 		}
 		
 		/// <inheritdoc/>
 		protected override void OnSourceInitialized(EventArgs e)
 		{
-			Rect caret = TextArea.Caret.CalculateCaretRectangle();
-			Point pointOnScreen = TextArea.TextView.PointToScreen(caret.Location - TextArea.TextView.ScrollOffset);
+			Rect caret = this.TextArea.Caret.CalculateCaretRectangle();
+			Point pointOnScreen = this.TextArea.TextView.PointToScreen(caret.Location - this.TextArea.TextView.ScrollOffset);
 			Rect workingArea = System.Windows.Forms.Screen.FromPoint(pointOnScreen.ToSystemDrawing()).WorkingArea.ToWpf().TransformFromDevice(this);
 			
 			MaxHeight = workingArea.Height;
@@ -67,26 +67,26 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
 		
 		/// <inheritdoc/>
 		protected override bool CloseOnFocusLost {
-			get { return CloseAutomatically; }
+			get { return this.CloseAutomatically; }
 		}
 		
 		void AttachEvents()
 		{
-			TextArea.Caret.PositionChanged += CaretPositionChanged;
+			this.TextArea.Caret.PositionChanged += CaretPositionChanged;
 		}
 		
 		/// <inheritdoc/>
 		protected override void DetachEvents()
 		{
-			TextArea.Caret.PositionChanged -= CaretPositionChanged;
+			this.TextArea.Caret.PositionChanged -= CaretPositionChanged;
 			base.DetachEvents();
 		}
 		
 		void CaretPositionChanged(object sender, EventArgs e)
 		{
-			if (CloseAutomatically) {
-				int offset = TextArea.Caret.Offset;
-				if (offset < StartOffset || offset > EndOffset) {
+			if (this.CloseAutomatically) {
+				int offset = this.TextArea.Caret.Offset;
+				if (offset < this.StartOffset || offset > this.EndOffset) {
 					Close();
 				}
 			}

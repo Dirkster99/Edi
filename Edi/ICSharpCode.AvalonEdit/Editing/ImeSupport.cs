@@ -67,7 +67,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		void TextAreaOptionChanged(object sender, PropertyChangedEventArgs e)
 		{
 			if (e.PropertyName == "EnableImeSupport") {
-				InputMethod.SetIsInputMethodSuspended(textArea, textArea.Options.EnableImeSupport);
+				InputMethod.SetIsInputMethodSuspended(this.textArea, textArea.Options.EnableImeSupport);
 				UpdateImeEnabled();
 			}
 		}
@@ -116,17 +116,17 @@ namespace ICSharpCode.AvalonEdit.Editing
 		
 		void CreateContext()
 		{
-            if (textArea == null)
+            if (this.textArea == null)
                 return;
 
             //Dirkster99 BugFix
-            if (textArea.Options == null)
+            if (this.textArea.Options == null)
                 return;
             ////
             ////if (!textArea.Options.EnableImeSupport)
             ////    return;
 
-            hwndSource = (HwndSource)PresentationSource.FromVisual(textArea);
+            hwndSource = (HwndSource)PresentationSource.FromVisual(this.textArea);
 			if (hwndSource != null) {
 				if (isReadOnly) {
 					defaultImeWnd = IntPtr.Zero;

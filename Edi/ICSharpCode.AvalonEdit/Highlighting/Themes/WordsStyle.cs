@@ -18,7 +18,7 @@
     public WordsStyle(string name)
       : this()
     {
-      Name = name;
+      this.Name = name;
     }
 
     /// <summary>
@@ -26,13 +26,13 @@
     /// </summary>
     protected WordsStyle()
     {
-      Name = string.Empty;
+      this.Name = string.Empty;
 
-      fgColor = null;
-      bgColor = null;
+      this.fgColor = null;
+      this.bgColor = null;
 
-      fontWeight = null;
-      fontStyle = null;
+      this.fontWeight = null;
+      this.fontStyle = null;
     }
     #endregion constructors
 

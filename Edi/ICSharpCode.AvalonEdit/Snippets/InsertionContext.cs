@@ -48,18 +48,18 @@ namespace ICSharpCode.AvalonEdit.Snippets
 		{
 			if (textArea == null)
 				throw new ArgumentNullException("textArea");
-			TextArea = textArea;
-			Document = textArea.Document;
-			SelectedText = textArea.Selection.GetText();
-			InsertionPosition = insertionPosition;
-			startPosition = insertionPosition;
+			this.TextArea = textArea;
+			this.Document = textArea.Document;
+			this.SelectedText = textArea.Selection.GetText();
+			this.InsertionPosition = insertionPosition;
+			this.startPosition = insertionPosition;
 			
-			DocumentLine startLine = Document.GetLineByOffset(insertionPosition);
-			ISegment indentation = TextUtilities.GetWhitespaceAfter(Document, startLine.Offset);
-			Indentation = Document.GetText(indentation.Offset, Math.Min(indentation.EndOffset, insertionPosition) - indentation.Offset);
-			Tab = textArea.Options.IndentationString;
+			DocumentLine startLine = this.Document.GetLineByOffset(insertionPosition);
+			ISegment indentation = TextUtilities.GetWhitespaceAfter(this.Document, startLine.Offset);
+			this.Indentation = Document.GetText(indentation.Offset, Math.Min(indentation.EndOffset, insertionPosition) - indentation.Offset);
+			this.Tab = textArea.Options.IndentationString;
 			
-			LineTerminator = TextUtilities.GetNewLineFromDocument(Document, startLine.LineNumber);
+			this.LineTerminator = TextUtilities.GetNewLineFromDocument(this.Document, startLine.LineNumber);
 		}
 		
 		/// <summary>
@@ -70,7 +70,7 @@ namespace ICSharpCode.AvalonEdit.Snippets
 		/// <summary>
 		/// Gets the text document.
 		/// </summary>
-		public TextDocument Document { get; private set; }
+		public ICSharpCode.AvalonEdit.Document.TextDocument Document { get; private set; }
 		
 		/// <summary>
 		/// Gets the text that was selected before the insertion of the snippet.
@@ -98,7 +98,7 @@ namespace ICSharpCode.AvalonEdit.Snippets
 		public int InsertionPosition { get; set; }
 		
 		readonly int startPosition;
-		AnchorSegment wholeSnippetAnchor;
+		ICSharpCode.AvalonEdit.Document.AnchorSegment wholeSnippetAnchor;
 		bool deactivateIfSnippetEmpty;
 		
 		/// <summary>
@@ -125,21 +125,21 @@ namespace ICSharpCode.AvalonEdit.Snippets
 			if (currentStatus != Status.Insertion)
 				throw new InvalidOperationException();
 			
-			text = text.Replace("\t", Tab);
+			text = text.Replace("\t", this.Tab);
 			
-			using (Document.RunUpdate()) {
+			using (this.Document.RunUpdate()) {
 				int textOffset = 0;
 				SimpleSegment segment;
 				while ((segment = NewLineFinder.NextNewLine(text, textOffset)) != SimpleSegment.Invalid) {
 					string insertString = text.Substring(textOffset, segment.Offset - textOffset)
-						+ LineTerminator + Indentation;
-					Document.Insert(InsertionPosition, insertString);
-					InsertionPosition += insertString.Length;
+						+ this.LineTerminator + this.Indentation;
+					this.Document.Insert(InsertionPosition, insertString);
+					this.InsertionPosition += insertString.Length;
 					textOffset = segment.EndOffset;
 				}
 				string remainingInsertString = text.Substring(textOffset);
-				Document.Insert(InsertionPosition, remainingInsertString);
-				InsertionPosition += remainingInsertString.Length;
+				this.Document.Insert(InsertionPosition, remainingInsertString);
+				this.InsertionPosition += remainingInsertString.Length;
 			}
 		}
 		
@@ -200,8 +200,8 @@ namespace ICSharpCode.AvalonEdit.Snippets
 				e = EventArgs.Empty;
 			
 			currentStatus = Status.RaisingInsertionCompleted;
-			int endPosition = InsertionPosition;
-			wholeSnippetAnchor = new AnchorSegment(Document, startPosition, endPosition - startPosition);
+			int endPosition = this.InsertionPosition;
+			this.wholeSnippetAnchor = new AnchorSegment(Document, startPosition, endPosition - startPosition);
 			TextDocumentWeakEventManager.UpdateFinished.AddListener(Document, this);
 			deactivateIfSnippetEmpty = (endPosition != startPosition);
 			

@@ -38,7 +38,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// storedSpanStacks[0] = state at beginning of document
 		/// storedSpanStacks[i] = state after line i
 		/// </summary>
-		readonly CompressingTreeList<SpanStack> storedSpanStacks = new CompressingTreeList<SpanStack>(ReferenceEquals);
+		readonly CompressingTreeList<SpanStack> storedSpanStacks = new CompressingTreeList<SpanStack>(object.ReferenceEquals);
 		readonly CompressingTreeList<bool> isValid = new CompressingTreeList<bool>((a, b) => a == b);
 		readonly IDocument document;
 		readonly IHighlightingDefinition definition;
@@ -66,7 +66,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 				throw new ArgumentNullException("definition");
 			this.document = document;
 			this.definition = definition;
-			engine = new HighlightingEngine(definition.MainRuleSet);
+			this.engine = new HighlightingEngine(definition.MainRuleSet);
 			document.VerifyAccess();
 			weakLineTracker = WeakLineTracker.Register(document, this);
 			InvalidateSpanStacks();

@@ -18,7 +18,7 @@
     public WidgetStyle(string name)
       : this()
     {
-      Name = name;
+      this.Name = name;
     }
 
     /// <summary>
@@ -26,11 +26,11 @@
     /// </summary>
     protected WidgetStyle()
     {
-      Name = string.Empty;
+      this.Name = string.Empty;
 
-      fgColor = null;
-      bgColor = null;
-      borderColor = null;
+      this.fgColor = null;
+      this.bgColor = null;
+      this.borderColor = null;
     }
     #endregion constructors
 

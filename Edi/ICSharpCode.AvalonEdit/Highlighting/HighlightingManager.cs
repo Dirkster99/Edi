@@ -47,7 +47,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 
             public DelayLoadedHighlightingDefinition()
             {
-                BackupDynResources = null;
+                this.BackupDynResources = null;
             }
 
             public DelayLoadedHighlightingDefinition(string name, Func<IHighlightingDefinition> lazyLoadingFunction)
@@ -84,9 +84,9 @@ namespace ICSharpCode.AvalonEdit.Highlighting
                 Func<IHighlightingDefinition> func;
                 lock (lockObj)
                 {
-                    if (definition != null)
-                        return definition;
-                    func = lazyLoadingFunction;
+                    if (this.definition != null)
+                        return this.definition;
+                    func = this.lazyLoadingFunction;
                 }
                 Exception exception = null;
                 IHighlightingDefinition def = null;
@@ -107,15 +107,15 @@ namespace ICSharpCode.AvalonEdit.Highlighting
                 }
                 lock (lockObj)
                 {
-                    lazyLoadingFunction = null;
-                    if (definition == null && storedException == null)
+                    this.lazyLoadingFunction = null;
+                    if (this.definition == null && this.storedException == null)
                     {
-                        definition = def;
-                        storedException = exception;
+                        this.definition = def;
+                        this.storedException = exception;
                     }
-                    if (storedException != null)
-                        throw new HighlightingDefinitionInvalidException("Error delay-loading highlighting definition", storedException);
-                    return definition;
+                    if (this.storedException != null)
+                        throw new HighlightingDefinitionInvalidException("Error delay-loading highlighting definition", this.storedException);
+                    return this.definition;
                 }
             }
 
@@ -147,7 +147,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 
             public override string ToString()
             {
-                return Name;
+                return this.Name;
             }
 
             public IDictionary<string, string> Properties
@@ -220,7 +220,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
             {
                 lock (lockObj)
                 {
-                    return listHighlightingsByName;
+                    return this.listHighlightingsByName;
                 }
             }
         }
@@ -235,7 +235,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
             {
                 lock (lockObj)
                 {
-                    return new List<string>(sortedHighlightingsByName.Keys);
+                    return new List<string>(this.sortedHighlightingsByName.Keys);
                 }
             }
         }
@@ -249,7 +249,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
             {
                 lock (lockObj)
                 {
-                    return mHlThemes;
+                    return this.mHlThemes;
                 }
             }
 
@@ -257,9 +257,9 @@ namespace ICSharpCode.AvalonEdit.Highlighting
             {
                 lock (lockObj)
                 {
-                    if (mHlThemes != value)
+                    if (this.mHlThemes != value)
                     {
-                        mHlThemes = value;
+                        this.mHlThemes = value;
                     }
                 }
             }
@@ -286,8 +286,8 @@ namespace ICSharpCode.AvalonEdit.Highlighting
             highlightingsByExtension = new SortedDictionary<string, IHighlightingDefinition>(StringComparer.OrdinalIgnoreCase);
             allHighlightings = new List<IHighlightingDefinition>();
 
-            mHlThemes = null;
-            BackupDynResources = null;
+            this.mHlThemes = null;
+            this.BackupDynResources = null;
         }
 
         /// <summary>
@@ -298,13 +298,13 @@ namespace ICSharpCode.AvalonEdit.Highlighting
         {
             lock (lockObj)
             {
-                sortedHighlightingsByName.Clear();
+                this.sortedHighlightingsByName.Clear();
 
-                listHighlightingsByName.Clear();
-                highlightingsByExtension.Clear();
-                allHighlightings.Clear();
+                this.listHighlightingsByName.Clear();
+                this.highlightingsByExtension.Clear();
+                this.allHighlightings.Clear();
 
-                mHlThemes = hlThemes;
+                this.mHlThemes = hlThemes;
             }
         }
 
@@ -339,13 +339,13 @@ namespace ICSharpCode.AvalonEdit.Highlighting
             {
                 ////HighlightingThemes.PrintThemeToHTML(highlighting, this.mHlThemes);  // Debug/Document highlighting themes with HTML output
 
-                HighlightingThemes.ApplyHighlightingTheme(highlighting, mHlThemes);
+                HighlightingThemes.ApplyHighlightingTheme(highlighting, this.mHlThemes);
 
                 allHighlightings.Add(highlighting);
                 if (name != null)
                 {
-                    sortedHighlightingsByName[name] = highlighting;
-                    listHighlightingsByName.Insert(sortedHighlightingsByName.IndexOfKey(name), highlighting);
+                    this.sortedHighlightingsByName[name] = highlighting;
+                    this.listHighlightingsByName.Insert(this.sortedHighlightingsByName.IndexOfKey(name), highlighting);
                     highlightingsByName[name] = highlighting;
                 }
                 if (extensions != null)

@@ -26,7 +26,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 	{
 		internal HeightTreeLineNode(double height)
 		{
-			collapsedSections = null;
+			this.collapsedSections = null;
 			this.height = height;
 		}
 		

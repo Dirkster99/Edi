@@ -77,8 +77,8 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 			this.text = text;
 			Debug.Assert(offsets[0] == 0);
 			Debug.Assert(offsets.Last() <= text.Length);
-			stateChangeOffsets = offsets;
-			stateChanges = states;
+			this.stateChangeOffsets = offsets;
+			this.stateChanges = states;
 		}
 		
 		/// <summary>
@@ -220,7 +220,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// </summary>
 		public RichText Substring(int offset, int length)
 		{
-			if (offset == 0 && length == Length)
+			if (offset == 0 && length == this.Length)
 				return this;
 			string newText = text.Substring(offset, length);
 			RichTextModel model = ToRichTextModel();
@@ -255,7 +255,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
 		/// </summary>
 		public static RichText operator +(RichText a, RichText b)
 		{
-			return Concat(a, b);
+			return RichText.Concat(a, b);
 		}
 		
 		/// <summary>

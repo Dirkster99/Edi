@@ -31,7 +31,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		
 		public SelectionLayer(TextArea textArea) : base(textArea.TextView, KnownLayer.Selection)
 		{
-			IsHitTestVisible = false;
+			this.IsHitTestVisible = false;
 			
 			this.textArea = textArea;
 			TextViewWeakEventManager.VisualLinesChanged.AddListener(textView, this);

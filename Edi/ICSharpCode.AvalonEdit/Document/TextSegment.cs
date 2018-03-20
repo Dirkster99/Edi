@@ -128,7 +128,7 @@ namespace ICSharpCode.AvalonEdit.Document
 			set {
 				if (value < 0)
 					throw new ArgumentOutOfRangeException("value", "Offset must not be negative");
-				if (StartOffset != value) {
+				if (this.StartOffset != value) {
 					// need a copy of the variable because ownerTree.Remove() sets this.ownerTree to null
 					ISegmentTree ownerTree = this.ownerTree;
 					if (ownerTree != null) {

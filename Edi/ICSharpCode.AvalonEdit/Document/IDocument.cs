@@ -319,13 +319,13 @@ namespace ICSharpCode.AvalonEdit.Document
 		/// </summary>
 		public virtual int GetNewOffset(int offset, AnchorMovementType movementType = AnchorMovementType.Default)
 		{
-			if (offset >= Offset && offset <= Offset + RemovalLength) {
+			if (offset >= this.Offset && offset <= this.Offset + this.RemovalLength) {
 				if (movementType == AnchorMovementType.BeforeInsertion)
-					return Offset;
+					return this.Offset;
 				else
-					return Offset + InsertionLength;
-			} else if (offset > Offset) {
-				return offset + InsertionLength - RemovalLength;
+					return this.Offset + this.InsertionLength;
+			} else if (offset > this.Offset) {
+				return offset + this.InsertionLength - this.RemovalLength;
 			} else {
 				return offset;
 			}

@@ -43,7 +43,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		{
 			if (context == null)
 				throw new ArgumentNullException("context");
-			CurrentContext = context;
+			this.CurrentContext = context;
 			
 			currentDocumentLine = context.VisualLine.FirstDocumentLine;
 			firstLineStart = currentDocumentLineStartOffset = currentDocumentLine.Offset;
@@ -67,7 +67,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 				}
 			}
 			currentDocumentLine = null;
-			CurrentContext = null;
+			this.CurrentContext = null;
 		}
 		
 		/// <summary>
@@ -87,7 +87,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 				throw new ArgumentOutOfRangeException("startOffset", startOffset, "Value must be between " + currentDocumentLineStartOffset + " and " + currentDocumentLineEndOffset);
 			if (endOffset < startOffset || endOffset > currentDocumentLineEndOffset)
 				throw new ArgumentOutOfRangeException("endOffset", endOffset, "Value must be between " + startOffset + " and " + currentDocumentLineEndOffset);
-			VisualLine vl = CurrentContext.VisualLine;
+			VisualLine vl = this.CurrentContext.VisualLine;
 			int visualStart = vl.GetVisualColumn(startOffset - firstLineStart);
 			int visualEnd = vl.GetVisualColumn(endOffset - firstLineStart);
 			if (visualStart < visualEnd) {

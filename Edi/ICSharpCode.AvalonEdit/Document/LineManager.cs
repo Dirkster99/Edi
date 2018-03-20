@@ -41,7 +41,7 @@ namespace ICSharpCode.AvalonEdit.Document
 		
 		internal void UpdateListOfLineTrackers()
 		{
-			lineTrackers = document.LineTrackers.ToArray();
+			this.lineTrackers = document.LineTrackers.ToArray();
 		}
 		
 		public LineManager(DocumentLineTree documentLineTree, TextDocument document)
