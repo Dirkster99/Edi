@@ -2,7 +2,7 @@ namespace Edi.Dialogs.GotoLine
 {
 	using System.Collections.Generic;
 	using System.Globalization;
-	using Edi.Core.ViewModels.Base;
+	using Core.ViewModels.Base;
 
 	/// <summary>
 	/// This viewmodel organizes the backend of a goto line (dialog) functionality
@@ -14,9 +14,11 @@ namespace Edi.Dialogs.GotoLine
 	public class GotoLineViewModel : DialogViewModelBase
 	{
 		#region fields
-		private int mMin, mMax, iCurrentLine;
-		private string mSelectedText = string.Empty;
-		private string mLineNumberInput;
+		private readonly int _mMin;
+		private readonly int _mMax;
+		private int _iCurrentLine;
+		private string _mSelectedText = string.Empty;
+		private string _mLineNumberInput;
 		#endregion fields
 
 		#region constructor
@@ -28,13 +30,13 @@ namespace Edi.Dialogs.GotoLine
 		/// <param name="iCurrentLine"></param>
 		public GotoLineViewModel(int iMin, int iMax, int iCurrentLine)
 		{
-			this.mMin = iMin;
-			this.mMax = iMax;
-			this.iCurrentLine = iCurrentLine;
+			_mMin = iMin;
+			_mMax = iMax;
+			_iCurrentLine = iCurrentLine;
 
-			this.mLineNumberInput = iCurrentLine.ToString();
+			_mLineNumberInput = iCurrentLine.ToString();
 
-			this.EvaluateInputData = this.ValidateData;
+			EvaluateInputData = ValidateData;
 		}
 		#endregion constructor
 
@@ -43,31 +45,22 @@ namespace Edi.Dialogs.GotoLine
 		/// Get the title string of the view - to be displayed in the associated view
 		/// (e.g. as dialog title)
 		/// </summary>
-		public string WindowTitle
-		{
-			get
-			{
-				return Edi.Util.Local.Strings.STR_GOTO_LINE_CAPTION;
-			}
-		}
+		public string WindowTitle => Util.Local.Strings.STR_GOTO_LINE_CAPTION;
 
 		/// <summary>
 		/// Get/set string representing the input line number.
 		/// </summary>
 		public string LineNumberInput
 		{
-			get
-			{
-				return (mLineNumberInput ?? string.Empty);
-			}
+			get => (_mLineNumberInput ?? string.Empty);
 
 			set
 			{
-				if (this.mLineNumberInput != value)
+				if (_mLineNumberInput != value)
 				{
-					this.mLineNumberInput = value;
+					_mLineNumberInput = value;
 
-					this.RaisePropertyChanged(() => this.LineNumberInput);
+					RaisePropertyChanged(() => LineNumberInput);
 				}
 			}
 		}
@@ -83,10 +76,11 @@ namespace Edi.Dialogs.GotoLine
 
 				try
 				{
-					iNumber = int.Parse(this.mLineNumberInput);
+					iNumber = int.Parse(_mLineNumberInput);
 				}
 				catch
 				{
+					// ignored
 				}
 
 				return iNumber;
@@ -96,27 +90,18 @@ namespace Edi.Dialogs.GotoLine
 		/// <summary>
 		/// Get avalaiable range of line numbers that a user can choose from.
 		/// </summary>
-		public string MinMaxRange
-		{
-			get
-			{
-				return "(" + this.mMin.ToString() + " - " + this.mMax.ToString() + ")";
-			}
-		}
+		public string MinMaxRange => "(" + _mMin.ToString() + " - " + _mMax.ToString() + ")";
 
 		public string SelectedText
 		{
-			get
-			{
-				return this.mSelectedText;
-			}
+			get => _mSelectedText;
 
 			set
 			{
-				if (this.mSelectedText != value)
+				if (_mSelectedText != value)
 				{
-					this.mSelectedText = value;
-					this.RaisePropertyChanged(() => this.SelectedText);
+					_mSelectedText = value;
+					RaisePropertyChanged(() => SelectedText);
 				}
 			}
 		}
@@ -129,40 +114,40 @@ namespace Edi.Dialogs.GotoLine
 		/// </summary>
 		/// <param name="listMsgs"></param>
 		/// <returns></returns>
-		private bool ValidateData(out List<Edi.Core.Msg> listMsgs)
+		private bool ValidateData(out List<Core.Msg> listMsgs)
 		{
-			bool Error = true;
-			listMsgs = new List<Edi.Core.Msg>();
+			bool error = true;
+			listMsgs = new List<Core.Msg>();
 
 			try
 			{
 				int iNumber = 0;
 				try
 				{
-					iNumber = int.Parse(this.mLineNumberInput);
+					iNumber = int.Parse(_mLineNumberInput);
 				}
 				catch
 				{
-					listMsgs.Add(new Edi.Core.Msg(string.Format(CultureInfo.CurrentCulture, "The entered number '{0}' is not valid. Enter a valid number.", this.mLineNumberInput),
-																				Edi.Core.Msg.MsgCategory.Error));
+					listMsgs.Add(new Core.Msg(string.Format(CultureInfo.CurrentCulture, "The entered number '{0}' is not valid. Enter a valid number.", _mLineNumberInput),
+																				Core.Msg.MsgCategory.Error));
 
-					Error = !(listMsgs.Count > 0);
-					return Error;
+					error = !(listMsgs.Count > 0);
+					return error;
 				}
 
-				if (iNumber < this.mMin || iNumber > this.mMax)
-					listMsgs.Add(new Edi.Core.Msg(string.Format(CultureInfo.CurrentCulture, "The entered number '{0}' is not within expected range ({1} - {2}).", iNumber, this.mMin, this.mMax),
-																				Edi.Core.Msg.MsgCategory.Error));
+				if (iNumber < _mMin || iNumber > _mMax)
+					listMsgs.Add(new Core.Msg(string.Format(CultureInfo.CurrentCulture, "The entered number '{0}' is not within expected range ({1} - {2}).", iNumber, _mMin, _mMax),
+																				Core.Msg.MsgCategory.Error));
 
-				Error = !(listMsgs.Count > 0);
+				error = !(listMsgs.Count > 0);
 			}
 			finally
 			{
-				if (Error == false)                          // Select complete text on error such that user can re-type string from scratch
-					this.SelectedText = this.LineNumberInput;
+				if (error == false)                          // Select complete text on error such that user can re-type string from scratch
+					SelectedText = LineNumberInput;
 			}
 
-			return Error;
+			return error;
 		}
 		#endregion methods
 	}

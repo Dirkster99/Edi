@@ -13,7 +13,7 @@ namespace Edi.Dialogs.GotoLine
 		/// <summary>
 		/// Link to required <seealso cref="TextBox"/> input control
 		/// </summary>
-		private TextBox mTxtLineNumber;
+		private TextBox _mTxtLineNumber;
 
 		/// <summary>
 		/// Style key for look-less control
@@ -28,7 +28,7 @@ namespace Edi.Dialogs.GotoLine
 		/// </summary>
 		public GotoLineView()
 		{
-			this.mTxtLineNumber = null;
+			_mTxtLineNumber = null;
 		}
 
 		/// <summary>
@@ -40,22 +40,22 @@ namespace Edi.Dialogs.GotoLine
 
 			try
 			{
-				this.mTxtLineNumber = this.GetTemplateChild("PART_TxtLineNumber") as TextBox;
+				_mTxtLineNumber = GetTemplateChild("PART_TxtLineNumber") as TextBox;
 
-				if (this.mTxtLineNumber != null)
+				if (_mTxtLineNumber != null)
 				{
-					this.mTxtLineNumber.Loaded += (s, e) =>  // Set textbox to be intially focussed
+					_mTxtLineNumber.Loaded += (s, e) =>  // Set textbox to be intially focussed
 					{
-						this.mTxtLineNumber.Focus();
+						_mTxtLineNumber.Focus();
 					};
 
-					this.mTxtLineNumber.GotKeyboardFocus += (s, e) =>
+					_mTxtLineNumber.GotKeyboardFocus += (s, e) =>
 					{
-						this.mTxtLineNumber.SelectAll();
+						_mTxtLineNumber.SelectAll();
 					};
 				}
 			}
-			catch (System.Exception e)
+			catch (Exception e)
 			{
 				Console.WriteLine(e.ToString());
 			}
@@ -69,8 +69,8 @@ namespace Edi.Dialogs.GotoLine
 		{
 			base.OnRender(drawingContext);
 
-			if (this.mTxtLineNumber != null)
-				this.mTxtLineNumber.SelectAll();
+			if (_mTxtLineNumber != null)
+				_mTxtLineNumber.SelectAll();
 		}
 	}
 }

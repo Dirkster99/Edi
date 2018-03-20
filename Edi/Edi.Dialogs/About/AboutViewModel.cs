@@ -1,7 +1,7 @@
 namespace Edi.Dialogs.About
 {
 	using System.Reflection;
-	using Edi.Core.ViewModels.Base;
+	using Core.ViewModels.Base;
 	using System.Collections.Generic;
 
 	/// <summary>
@@ -25,32 +25,14 @@ namespace Edi.Dialogs.About
 		/// Get the title string of the view - to be displayed in the associated view
 		/// (e.g. as dialog title)
 		/// </summary>
-		public string WindowTitle
-		{
-			get
-			{
-				return "About Edi";
-			}
-		}
+		public string WindowTitle => "About Edi";
 
 		/// <summary>
 		/// Get title of application for display in About view.
 		/// </summary>
-		public string AppTitle
-		{
-			get
-			{
-				return Assembly.GetEntryAssembly().GetName().Name;
-			}
-		}
+		public string AppTitle => Assembly.GetEntryAssembly().GetName().Name;
 
-		public string SubTitle
-		{
-			get
-			{
-				return Edi.Util.Local.Strings.STR_ABOUT_MSG;
-			}
-		}
+		public string SubTitle => Util.Local.Strings.STR_ABOUT_MSG;
 
 		/// <summary>
 		/// Gets the assembly copyright.
@@ -75,46 +57,22 @@ namespace Edi.Dialogs.About
 		/// <summary>
 		/// Get URL of application for reference of source and display in About view.
 		/// </summary>
-		public string AppUrl
-		{
-			get
-			{
-				return "https://github.com/Dirkster99/Edi";
-			}
-		}
+		public string AppUrl => "https://github.com/Dirkster99/Edi";
 
 		/// <summary>
 		/// Get URL string to display for reference of source and display in About view.
 		/// </summary>
-		public string AppUrlDisplayString
-		{
-			get
-			{
-				return "https://github.com/Dirkster99/Edi";
-			}
-		}
+		public string AppUrlDisplayString => "https://github.com/Dirkster99/Edi";
 
 		/// <summary>
 		/// Get application version for display in About view.
 		/// </summary>
-		public string AppVersion
-		{
-			get
-			{
-				return Assembly.GetEntryAssembly().GetName().Version.ToString();
-			}
-		}
+		public string AppVersion => Assembly.GetEntryAssembly().GetName().Version.ToString();
 
 		/// <summary>
 		/// Get version of runtime for display in About view.
 		/// </summary>
-		public string RunTimeVersion
-		{
-			get
-			{
-				return Assembly.GetEntryAssembly().ImageRuntimeVersion;
-			}
-		}
+		public string RunTimeVersion => Assembly.GetEntryAssembly().ImageRuntimeVersion;
 
 		/// <summary>
 		/// Get list of modules (referenced from EntryAssembly) and their version for display in About view.
@@ -135,7 +93,7 @@ namespace Edi.Dialogs.About
 
                         if (l.TryGetValue(assembly.Name, out val) == false)
                             l.Add(assembly.Name, string.Format("{0}, {1}={2}", assembly.Name,
-                                                        Edi.Util.Local.Strings.STR_ABOUT_Version,
+                                                        Util.Local.Strings.STR_ABOUT_Version,
                                                         assembly.Version));
                     }
 					catch (System.Exception)

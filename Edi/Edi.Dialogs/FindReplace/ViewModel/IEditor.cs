@@ -19,7 +19,7 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 		/// <param name="start"></param>
 		/// <param name="length"></param>
 		void Select(int start, int length);
-		void Replace(int start, int length, string ReplaceWith);
+		void Replace(int start, int length, string replaceWith);
 
 		/// <summary>
 		/// This method is called before a replace all operation.
