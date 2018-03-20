@@ -13,7 +13,7 @@ namespace Edi.Dialogs.FindReplace.Converter
 
 		object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			return (Edi.Dialogs.FindReplace.SearchScope)value;
+			return (SearchScope)value;
 		}
 	}
 }

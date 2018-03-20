@@ -144,7 +144,7 @@ namespace Edi
 
             // These module register services (e.g.: file open) and are required for other plug-ins to work
 ////            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(MEFLoadFiles).Assembly));
-            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(MEFLoadEdiDocuments).Assembly));
+            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(MefLoadEdiDocuments).Assembly));
 
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(IAppCoreModel).Assembly));
 

@@ -1,180 +1,180 @@
 ﻿namespace SimpleControls.Command
 {
-	using System;
-	using System.Diagnostics;
-	using System.Windows.Input;
+    using System;
+    using System.Diagnostics;
+    using System.Windows.Input;
 
-	/// <summary>
-	/// A command whose sole purpose is to 
-	/// relay its functionality to other
-	/// objects by invoking delegates. The
-	/// default return value for the CanExecute
-	/// method is 'true'.
-	/// 
-	/// Source: http://www.codeproject.com/Articles/31837/Creating-an-Internationalized-Wizard-in-WPF
-	/// </summary>
-	internal class RelayCommand<T> : ICommand
-	{
-		#region Fields
-		private readonly Action<T> mExecute;
-		private readonly Predicate<T> mCanExecute;
-		#endregion // Fields
+    /// <summary>
+    /// A command whose sole purpose is to 
+    /// relay its functionality to other
+    /// objects by invoking delegates. The
+    /// default return value for the CanExecute
+    /// method is 'true'.
+    /// 
+    /// Source: http://www.codeproject.com/Articles/31837/Creating-an-Internationalized-Wizard-in-WPF
+    /// </summary>
+    internal class RelayCommand<T> : ICommand
+    {
+        #region Fields
+        private readonly Action<T> _mExecute;
+        private readonly Predicate<T> _mCanExecute;
+        #endregion // Fields
 
-		#region Constructors
-		/// <summary>
-		/// Class constructor
-		/// </summary>
-		/// <param name="execute"></param>
-		public RelayCommand(Action<T> execute)
-			: this(execute, null)
-		{
-		}
+        #region Constructors
+        /// <summary>
+        /// Class constructor
+        /// </summary>
+        /// <param name="execute"></param>
+        public RelayCommand(Action<T> execute)
+            : this(execute, null)
+        {
+        }
 
-		/// <summary>
-		/// Creates a new command.
-		/// </summary>
-		/// <param name="execute">The execution logic.</param>
-		/// <param name="canExecute">The execution status logic.</param>
-		public RelayCommand(Action<T> execute, Predicate<T> canExecute)
-		{
-		    mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
-			mCanExecute = canExecute;
-		}
+        /// <summary>
+        /// Creates a new command.
+        /// </summary>
+        /// <param name="execute">The execution logic.</param>
+        /// <param name="canExecute">The execution status logic.</param>
+        public RelayCommand(Action<T> execute, Predicate<T> canExecute)
+        {
+            _mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _mCanExecute = canExecute;
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region events
-		/// <summary>
-		/// Eventhandler to re-evaluate whether this command can execute or not
-		/// </summary>
-		public event EventHandler CanExecuteChanged
-		{
-			add
-			{
-				if (mCanExecute != null)
-					CommandManager.RequerySuggested += value;
-			}
+        #region events
+        /// <summary>
+        /// Eventhandler to re-evaluate whether this command can execute or not
+        /// </summary>
+        public event EventHandler CanExecuteChanged
+        {
+            add
+            {
+                if (_mCanExecute != null)
+                    CommandManager.RequerySuggested += value;
+            }
 
-			remove
-			{
-				if (mCanExecute != null)
-					CommandManager.RequerySuggested -= value;
-			}
-		}
-		#endregion
+            remove
+            {
+                if (_mCanExecute != null)
+                    CommandManager.RequerySuggested -= value;
+            }
+        }
+        #endregion
 
-		#region methods
-		/// <summary>
-		/// Determine whether this pre-requisites to execute this command are given or not.
-		/// </summary>
-		/// <param name="parameter"></param>
-		/// <returns></returns>
-		[DebuggerStepThrough]
-		public bool CanExecute(object parameter)
-		{
-			return mCanExecute == null ? true : mCanExecute((T)parameter);
-		}
+        #region methods
+        /// <summary>
+        /// Determine whether this pre-requisites to execute this command are given or not.
+        /// </summary>
+        /// <param name="parameter"></param>
+        /// <returns></returns>
+        [DebuggerStepThrough]
+        public bool CanExecute(object parameter)
+        {
+            return _mCanExecute?.Invoke((T)parameter) ?? true;
+        }
 
-		/// <summary>
-		/// Execute the command method managed in this class.
-		/// </summary>
-		/// <param name="parameter"></param>
-		public void Execute(object parameter)
-		{
-			mExecute((T)parameter);
-		}
-		#endregion methods
-	}
+        /// <summary>
+        /// Execute the command method managed in this class.
+        /// </summary>
+        /// <param name="parameter"></param>
+        public void Execute(object parameter)
+        {
+            _mExecute((T)parameter);
+        }
+        #endregion methods
+    }
 
-	/// <summary>
-	/// A command whose sole purpose is to 
-	/// relay its functionality to other
-	/// objects by invoking delegates. The
-	/// default return value for the CanExecute
-	/// method is 'true'.
-	/// </summary>
-	internal class RelayCommand : ICommand
-	{
-		#region Fields
-		private readonly Action mExecute;
-		private readonly Func<bool> mCanExecute;
-		#endregion Fields
+    /// <summary>
+    /// A command whose sole purpose is to 
+    /// relay its functionality to other
+    /// objects by invoking delegates. The
+    /// default return value for the CanExecute
+    /// method is 'true'.
+    /// </summary>
+    internal class RelayCommand : ICommand
+    {
+        #region Fields
+        private readonly Action _mExecute;
+        private readonly Func<bool> _mCanExecute;
+        #endregion Fields
 
-		#region Constructors
+        #region Constructors
 
-		/// <summary>
-		/// Creates a new command that can always execute.
-		/// </summary>
-		/// <param name="execute">The execution logic.</param>
-		public RelayCommand(Action execute)
-			: this(execute, null)
-		{
-		}
+        /// <summary>
+        /// Creates a new command that can always execute.
+        /// </summary>
+        /// <param name="execute">The execution logic.</param>
+        public RelayCommand(Action execute)
+            : this(execute, null)
+        {
+        }
 
-		/// <summary>
-		/// Copy constructor
-		/// </summary>
-		/// <param name="inputRC"></param>
-		public RelayCommand(RelayCommand inputRC)
-			: this(inputRC.mExecute, inputRC.mCanExecute)
-		{
-		}
+        /// <summary>
+        /// Copy constructor
+        /// </summary>
+        /// <param name="inputRc"></param>
+        public RelayCommand(RelayCommand inputRc)
+            : this(inputRc._mExecute, inputRc._mCanExecute)
+        {
+        }
 
-		/// <summary>
-		/// Creates a new command.
-		/// </summary>
-		/// <param name="execute">The execution logic.</param>
-		/// <param name="canExecute">The execution status logic.</param>
-		public RelayCommand(Action execute, Func<bool> canExecute)
-		{
-      mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
-			mCanExecute = canExecute;
-		}
+        /// <summary>
+        /// Creates a new command.
+        /// </summary>
+        /// <param name="execute">The execution logic.</param>
+        /// <param name="canExecute">The execution status logic.</param>
+        public RelayCommand(Action execute, Func<bool> canExecute)
+        {
+            _mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _mCanExecute = canExecute;
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Events
-		/// <summary>
-		/// Eventhandler to re-evaluate whether this command can execute or not
-		/// </summary>
-		public event EventHandler CanExecuteChanged
-		{
-			add
-			{
-				if (mCanExecute != null)
-					CommandManager.RequerySuggested += value;
-			}
+        #region Events
+        /// <summary>
+        /// Eventhandler to re-evaluate whether this command can execute or not
+        /// </summary>
+        public event EventHandler CanExecuteChanged
+        {
+            add
+            {
+                if (_mCanExecute != null)
+                    CommandManager.RequerySuggested += value;
+            }
 
-			remove
-			{
-				if (mCanExecute != null)
-					CommandManager.RequerySuggested -= value;
-			}
-		}
-		#endregion Events
+            remove
+            {
+                if (_mCanExecute != null)
+                    CommandManager.RequerySuggested -= value;
+            }
+        }
+        #endregion Events
 
-		#region Methods
-		/// <summary>
-		/// Execute the attached CanExecute methode delegate (or always return true)
-		/// to determine whether the command managed in this object can execute or not.
-		/// </summary>
-		/// <param name="parameter"></param>
-		/// <returns></returns>
-		[DebuggerStepThrough]
-		public bool CanExecute(object parameter)
-		{
-			return mCanExecute == null ? true : mCanExecute();
-		}
+        #region Methods
+        /// <summary>
+        /// Execute the attached CanExecute methode delegate (or always return true)
+        /// to determine whether the command managed in this object can execute or not.
+        /// </summary>
+        /// <param name="parameter"></param>
+        /// <returns></returns>
+        [DebuggerStepThrough]
+        public bool CanExecute(object parameter)
+        {
+            return _mCanExecute?.Invoke() ?? true;
+        }
 
-		/// <summary>
-		/// Return the attached delegate method.
-		/// </summary>
-		/// <param name="parameter"></param>
-		public void Execute(object parameter)
-		{
-			mExecute();
-		}
+        /// <summary>
+        /// Return the attached delegate method.
+        /// </summary>
+        /// <param name="parameter"></param>
+        public void Execute(object parameter)
+        {
+            _mExecute();
+        }
 
-		#endregion Methods
-	}
+        #endregion Methods
+    }
 }

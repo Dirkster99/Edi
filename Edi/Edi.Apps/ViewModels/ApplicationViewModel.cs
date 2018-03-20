@@ -308,7 +308,7 @@ namespace Edi.Apps.ViewModels
                 {
                     MiniUmlViewModel vm = this.mActiveDocument as MiniUmlViewModel;
 
-                    return vm.DocumentMiniUML as MiniUML.Model.ViewModels.Document.AbstractDocumentViewModel;
+                    return vm.DocumentMiniUml as MiniUML.Model.ViewModels.Document.AbstractDocumentViewModel;
                 }
 
                 return null;

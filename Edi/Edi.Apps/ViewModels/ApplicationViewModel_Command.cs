@@ -439,7 +439,7 @@
                 try
                 {
                     if (this.ActiveEdiDocument != null)
-                        this.ActiveEdiDocument.ExportToHTML(this.ActiveDocument.FileName + ".html",
+                        this.ActiveEdiDocument.ExportToHtml(this.ActiveDocument.FileName + ".html",
                                                                                                 this.mSettingsManager.SettingData.TextToHTML_ShowLineNumbers,
                                                                                                 this.mSettingsManager.SettingData.TextToHTML_AlternateLineBackground);
                 }

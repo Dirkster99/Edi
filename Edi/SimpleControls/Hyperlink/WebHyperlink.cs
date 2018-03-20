@@ -21,10 +21,10 @@ namespace SimpleControls.Hyperlink
         private static readonly DependencyProperty TextProperty =
           DependencyProperty.Register("Text", typeof(string), typeof(WebHyperlink));
 
-        private static RoutedCommand mCopyUri;
-        private static RoutedCommand mNavigateToUri;
+        private static readonly RoutedCommand _CopyUri;
+        private static readonly RoutedCommand _mNavigateToUri;
 
-        private System.Windows.Documents.Hyperlink mHypLink;
+        private System.Windows.Documents.Hyperlink _mHypLink;
         #endregion fields
 
         #region constructor
@@ -33,26 +33,26 @@ namespace SimpleControls.Hyperlink
             DefaultStyleKeyProperty.OverrideMetadata(typeof(WebHyperlink),
                       new FrameworkPropertyMetadata(typeof(WebHyperlink)));
 
-            mCopyUri = new RoutedCommand("CopyUri", typeof(WebHyperlink));
+            _CopyUri = new RoutedCommand("CopyUri", typeof(WebHyperlink));
 
-            CommandManager.RegisterClassCommandBinding(typeof(WebHyperlink), new CommandBinding(mCopyUri, CopyHyperlinkUri));
-            CommandManager.RegisterClassInputBinding(typeof(WebHyperlink), new InputBinding(mCopyUri, new KeyGesture(Key.C, ModifierKeys.Control, "Ctrl-C")));
+            CommandManager.RegisterClassCommandBinding(typeof(WebHyperlink), new CommandBinding(_CopyUri, CopyHyperlinkUri));
+            CommandManager.RegisterClassInputBinding(typeof(WebHyperlink), new InputBinding(_CopyUri, new KeyGesture(Key.C, ModifierKeys.Control, "Ctrl-C")));
 
-            mNavigateToUri = new RoutedCommand("NavigateToUri", typeof(WebHyperlink));
-            CommandManager.RegisterClassCommandBinding(typeof(WebHyperlink), new CommandBinding(mNavigateToUri, Hyperlink_CommandNavigateTo));
+            _mNavigateToUri = new RoutedCommand("NavigateToUri", typeof(WebHyperlink));
+            CommandManager.RegisterClassCommandBinding(typeof(WebHyperlink), new CommandBinding(_mNavigateToUri, Hyperlink_CommandNavigateTo));
             ////CommandManager.RegisterClassInputBinding(typeof(WebHyperlink), new InputBinding(mCopyUri, new KeyGesture(Key.C, ModifierKeys.Control, "Ctrl-C")));
         }
 
         public WebHyperlink()
         {
-            mHypLink = null;
+            _mHypLink = null;
         }
         #endregion constructor
 
         #region properties
-        public static RoutedCommand CopyUri => mCopyUri;
+        public static RoutedCommand CopyUri => _CopyUri;
 
-        public static RoutedCommand NavigateToUri => mNavigateToUri;
+        public static RoutedCommand NavigateToUri => _mNavigateToUri;
 
         /// <summary>
         /// Declare NavigateUri property to allow a user who clicked
@@ -76,18 +76,18 @@ namespace SimpleControls.Hyperlink
         {
             base.OnApplyTemplate();
 
-            mHypLink = GetTemplateChild("PART_Hyperlink") as System.Windows.Documents.Hyperlink;
-            Debug.Assert(mHypLink != null, "No Hyperlink in ControlTemplate!");
+            _mHypLink = GetTemplateChild("PART_Hyperlink") as System.Windows.Documents.Hyperlink;
+            Debug.Assert(_mHypLink != null, "No Hyperlink in ControlTemplate!");
 
             // Attach hyperlink event clicked event handler to Hyperlink ControlTemplate if there is no command defined
             // Commanding allows calling commands that are external to the control (application commands) with parameters
             // that can differ from whats available in this control (using converters and what not)
             //
             // Therefore, commanding overrules the Hyperlink.Clicked event when it is defined.
-            if (mHypLink != null)
+            if (_mHypLink != null)
             {
-                if (mHypLink.Command == null)
-                    mHypLink.RequestNavigate += Hyperlink_RequestNavigate;
+                if (_mHypLink.Command == null)
+                    _mHypLink.RequestNavigate += Hyperlink_RequestNavigate;
             }
         }
 

@@ -27,26 +27,26 @@
         mc:Ignorable="d"
         >
     <mwl:SimpleMetroWindow.DataContext>
-    <vm:AboutViewModel />
-  </mwl:SimpleMetroWindow.DataContext>
-  <Grid Margin="9,3">
-    <Grid.RowDefinitions>
-      <RowDefinition Height="*" />
-      <RowDefinition Height="Auto" />
-    </Grid.RowDefinitions>
+        <vm:AboutViewModel />
+    </mwl:SimpleMetroWindow.DataContext>
+    <Grid Margin="9,3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-    <views:AboutView Grid.Row="0" />
+        <views:AboutView Grid.Row="0" />
 
-    <Grid Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.IsSharedSizeScope="True">
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="Auto" SharedSizeGroup="StandardButtons"/>
-      </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.IsSharedSizeScope="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="StandardButtons"/>
+            </Grid.ColumnDefinitions>
 
-      <Button Content="{x:Static cmdLabel:Strings.STR_ABOUT_OK_BUTTON}"
+            <Button Content="{x:Static cmdLabel:Strings.STR_ABOUT_OK_BUTTON}"
             Command="{Binding OKCommand}"
             IsDefault="True"
             IsCancel="True"
             Grid.Column="1" Padding="3" Margin="6" MinHeight="24" MinWidth="80"/>
+        </Grid>
     </Grid>
-  </Grid>
 </mwl:SimpleMetroWindow>

@@ -3,16 +3,16 @@ namespace Edi.Dialogs.FindReplace
 	using System;
 	using System.Windows;
 	using System.Windows.Controls;
-	using Edi.Core.Utillities;
+	using Core.Utillities;
 
 	/// <summary>
 	/// Implement a view that supports text Find/Replace functionality in an editor
 	/// </summary>
 	public class FindReplaceView : Control
 	{
-		private ComboBox mTxtFind = null;
-		private ComboBox mTxtFind2 = null;
-		private ComboBox mTxtReplace = null;
+		private ComboBox _mTxtFind = null;
+		private ComboBox _mTxtFind2 = null;
+		private ComboBox _mTxtReplace = null;
 
 		static FindReplaceView()
 		{
@@ -25,15 +25,15 @@ namespace Edi.Dialogs.FindReplace
 
 			try
 			{
-				this.mTxtFind = this.GetTemplateChild("PART_TxtFind") as ComboBox;
-				this.mTxtFind2 = this.GetTemplateChild("PART_TxtFind2") as ComboBox;
-				this.mTxtReplace = this.GetTemplateChild("PART_TxtReplace") as ComboBox;
+				_mTxtFind = GetTemplateChild("PART_TxtFind") as ComboBox;
+				_mTxtFind2 = GetTemplateChild("PART_TxtFind2") as ComboBox;
+				_mTxtReplace = GetTemplateChild("PART_TxtReplace") as ComboBox;
 
 				// Setting focus into each textbox control is controlled via viewmodel and attached property
 				// Each textbox selects all content (by default) when it aquires the focus
-				FocusEditableComboBox(this.mTxtFind);
-				FocusEditableComboBox(this.mTxtFind2);
-				FocusEditableComboBox(this.mTxtReplace);
+				FocusEditableComboBox(_mTxtFind);
+				FocusEditableComboBox(_mTxtFind2);
+				FocusEditableComboBox(_mTxtReplace);
 			}
 			catch (Exception e)
 			{

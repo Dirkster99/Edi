@@ -74,8 +74,8 @@ namespace Edi.Documents.ViewModels.EdiDoc
 		/// </summary>
 		public string StyleClassPrefix = "code";
 
-	    private Dictionary<string, string> stylesheetCache = new Dictionary<string, string>();
-	    private StringBuilder stylesheet = new StringBuilder();
+	    private readonly Dictionary<string, string> _stylesheetCache = new Dictionary<string, string>();
+	    private StringBuilder _stylesheet = new StringBuilder();
 		#endregion
 		#endregion fields
 
@@ -86,22 +86,20 @@ namespace Edi.Documents.ViewModels.EdiDoc
 		/// </summary>
 		public void ResetStylesheetCache()
 		{
-			stylesheetCache.Clear();
+			_stylesheetCache.Clear();
 		}
 
 	    private string GetClass(string style)
 		{
-            string className = string.Empty;
-
-            if (!stylesheetCache.TryGetValue(style, out className))
+		    if (!_stylesheetCache.TryGetValue(style, out var className))
             {
-                className = StyleClassPrefix + stylesheetCache.Count;
-                stylesheet.Append('.');
-                stylesheet.Append(className);
-                stylesheet.Append(" { ");
-                stylesheet.Append(style);
-                stylesheet.AppendLine(" }");
-                stylesheetCache[style] = className;
+                className = StyleClassPrefix + _stylesheetCache.Count;
+                _stylesheet.Append('.');
+                _stylesheet.Append(className);
+                _stylesheet.Append(" { ");
+                _stylesheet.Append(style);
+                _stylesheet.AppendLine(" }");
+                _stylesheetCache[style] = className;
             }
             return className;
 		}
@@ -126,7 +124,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
 		public string GenerateHtml(TextDocument document, IHighlighter highlighter)
 		{
 			string myMainStyle = MainStyle;
-			string LineNumberStyle = "color: #606060;";
+			string lineNumberStyle = "color: #606060;";
 
 			DocumentLine docline = null;
 			string textLine = null;
@@ -169,7 +167,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
 					if (ShowLineNumbers)
 					{
 						output.Write("<span");
-						WriteStyle(output, LineNumberStyle);
+						WriteStyle(output, lineNumberStyle);
 						output.Write('>');
 						output.Write(lineNumber.ToString().PadLeft(longestNumberLength));
 						output.Write(":  ");
@@ -194,10 +192,10 @@ namespace Edi.Documents.ViewModels.EdiDoc
 				}
 				output.WriteLine("</pre>");
 			}
-			if (CreateStylesheet && stylesheet.Length > 0)
+			if (CreateStylesheet && _stylesheet.Length > 0)
 			{
-				string result = "<style type=\"text/css\">" + stylesheet + "</style>" + output;
-				stylesheet = new StringBuilder();
+				string result = "<style type=\"text/css\">" + _stylesheet + "</style>" + output;
+				_stylesheet = new StringBuilder();
 				return result;
 			}
 
@@ -229,16 +227,16 @@ namespace Edi.Documents.ViewModels.EdiDoc
 		#region private class
 		private class MyHtmlOptions : HtmlOptions
 		{
-		    private readonly HtmlWriter htmlWriter;
+		    private readonly HtmlWriter _htmlWriter;
 
 			internal MyHtmlOptions(HtmlWriter htmlWriter)
 			{
-				this.htmlWriter = htmlWriter;
+				this._htmlWriter = htmlWriter;
 			}
 
 			public override void WriteStyleAttributeForColor(TextWriter writer, HighlightingColor color)
 			{
-				htmlWriter.WriteStyle(writer, color.ToCss());
+				_htmlWriter.WriteStyle(writer, color.ToCss());
 			}
 		}
 		#endregion private class

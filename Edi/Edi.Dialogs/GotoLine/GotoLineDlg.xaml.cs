@@ -9,7 +9,7 @@ namespace Edi.Dialogs.GotoLine
     {
     public GotoLineDlg()
     {
-      this.InitializeComponent();
+      InitializeComponent();
     }
   }
 }

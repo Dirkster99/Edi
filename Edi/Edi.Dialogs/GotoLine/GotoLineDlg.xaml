@@ -20,30 +20,30 @@
 
         behav:DialogCloser.DialogResult="{Binding WindowCloseResult}"
         >
-  <Grid Margin="9,3">
-    <Grid.RowDefinitions>
-      <RowDefinition Height="*" />
-      <RowDefinition Height="Auto" />
-    </Grid.RowDefinitions>
+    <Grid Margin="9,3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-    <views:GotoLineView Grid.Row="0" />
+        <views:GotoLineView Grid.Row="0" />
 
-    <Grid Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.IsSharedSizeScope="True">
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="Auto" SharedSizeGroup="StandardButtons" />
-        <ColumnDefinition Width="Auto" SharedSizeGroup="StandardButtons"/>
-      </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.IsSharedSizeScope="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="StandardButtons" />
+                <ColumnDefinition Width="Auto" SharedSizeGroup="StandardButtons"/>
+            </Grid.ColumnDefinitions>
 
-      <Button Content="{x:Static cmdLabel:Strings.STR_GOTOLINE_OK_BUTTON}"
+            <Button Content="{x:Static cmdLabel:Strings.STR_GOTOLINE_OK_BUTTON}"
               Command="{Binding OKCommand}"
               IsDefault="True"
               Grid.Column="0" Padding="3" Margin="6" MinHeight="24" MinWidth="80"/>
 
-      <Button Content="{x:Static cmdLabel:Strings.STR_GOTOLINE_CANCEL_BUTTON}"
+            <Button Content="{x:Static cmdLabel:Strings.STR_GOTOLINE_CANCEL_BUTTON}"
               Command="{Binding CancelCommand}"
               IsCancel="True"
               Grid.Column="1" Padding="3" Margin="6" MinHeight="24" MinWidth="80"/>
 
+        </Grid>
     </Grid>
-  </Grid>
 </mwl:SimpleMetroWindow>

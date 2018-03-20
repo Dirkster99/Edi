@@ -5,20 +5,20 @@
                     xmlns:behav="clr-namespace:Edi.Core.Behaviour;assembly=Edi.Core"
                     >
 
-  <DataTemplate x:Key="MiniUMLViewDataTemplate">
-    <Grid Focusable="True"
+    <DataTemplate x:Key="MiniUMLViewDataTemplate">
+        <Grid Focusable="True"
                     KeyboardNavigation.IsTabStop="True"
                     Name="MiniUmlView"
                     behav:KeyboardFocus.On="{Binding ElementName=MiniUmlView}"
                     >
-      <Grid.RowDefinitions>
-        <RowDefinition Height="Auto" />
-        <RowDefinition Height="*" />
-      </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-      <MiniUMLViews:RibbonView DataContext="{Binding vm_RibbonViewModel}" Grid.Row="0"/>
-      <MiniUMLViews:DocumentView DataContext="{Binding DocumentMiniUML}" Grid.Row="1" />
-    </Grid>
-  </DataTemplate>
+            <MiniUMLViews:RibbonView DataContext="{Binding vm_RibbonViewModel}" Grid.Row="0"/>
+            <MiniUMLViews:DocumentView DataContext="{Binding DocumentMiniUML}" Grid.Row="1" />
+        </Grid>
+    </DataTemplate>
 
 </ResourceDictionary>

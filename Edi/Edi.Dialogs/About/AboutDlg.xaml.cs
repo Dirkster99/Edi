@@ -10,7 +10,7 @@ namespace Edi.Dialogs.About
     {
     public AboutDlg()
     {
-      this.InitializeComponent();
+      InitializeComponent();
     }
   }
 }

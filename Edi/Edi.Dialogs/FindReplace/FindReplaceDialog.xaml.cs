@@ -9,7 +9,7 @@ namespace Edi.Dialogs.FindReplace
     {
 		public FindReplaceDialog()
 		{
-			this.InitializeComponent();
+			InitializeComponent();
 		}
 
 		/// <summary>
