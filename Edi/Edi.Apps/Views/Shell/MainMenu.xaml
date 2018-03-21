@@ -34,7 +34,7 @@
 
                     <MenuItem Header="{x:Static cmdLabel:Strings.STR_CmdName_New_UML}"
                               Command="New"
-                              CommandParameter="{x:Static vm:TypeOfDocument.UMLEditor}"
+                              CommandParameter="{x:Static vm:TypeOfDocument.UmlEditor}"
                               ToolTip="{x:Static cmdLabel:Strings.STR_CmdName_New_UML_TT}" />
                 </MenuItem>
 

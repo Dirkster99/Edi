@@ -1,7 +1,7 @@
-﻿namespace Edi.Apps.Views
-{
-	using System.Windows;
+﻿using System.Windows;
 
+namespace Edi.Apps.Views
+{
 	/// <summary>
 	/// Implements an XAML proxy which can be used to bind items (TreeViewItem, ListViewItem etc)
 	/// with a viewmodel that manages the collecrions.
@@ -20,8 +20,8 @@
 		/// </summary>
 		public object Data
 		{
-			get { return (object)this.GetValue(DataProperty); }
-			set { this.SetValue(DataProperty, value); }
+			get => GetValue(DataProperty);
+			set { SetValue(DataProperty, value); }
 		}
 
 		/// <summary>

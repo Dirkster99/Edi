@@ -1,33 +1,36 @@
-﻿namespace Edi.Apps.Views
-{
-	using System;
-	using System.IO;
-	using System.Windows;
-	using System.Windows.Controls;
-	using System.Windows.Input;
-	using System.Windows.Threading;
-	using Edi.Apps.Events;
-	using Xceed.Wpf.AvalonDock;
-	using Xceed.Wpf.AvalonDock.Layout;
-	using Xceed.Wpf.AvalonDock.Layout.Serialization;
+﻿using System;
+using System.IO;
+using System.Reflection;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Threading;
+using Edi.Apps.Events;
+using Edi.Core.Interfaces;
+using log4net;
+using Xceed.Wpf.AvalonDock;
+using Xceed.Wpf.AvalonDock.Layout;
+using Xceed.Wpf.AvalonDock.Layout.Serialization;
 
+namespace Edi.Apps.Views
+{
 	/// <summary>
 	/// Interaction logic for AvalonDockView.xaml
 	/// </summary>
-	[TemplatePartAttribute(Name = "PART_DockView", Type = typeof(DockingManager))]
-	public partial class AvalonDockView : UserControl
+	[TemplatePart(Name = "PART_DockView", Type = typeof(DockingManager))]
+	public class AvalonDockView : UserControl
 	{
 		#region fields
-		protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+		protected static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-		private DockingManager mDockManager = null;
+		private DockingManager _mDockManager;
 
-		private DataTemplateSelector mLayoutItemTemplateSelector = null;
-		private DataTemplate mDocumentHeaderTemplate = null;
-		private StyleSelector mLayoutItemContainerStyleSelector = null;
-		private ILayoutUpdateStrategy mLayoutUpdateStrategy = null;
+		private DataTemplateSelector _mLayoutItemTemplateSelector;
+		private DataTemplate _mDocumentHeaderTemplate;
+		private StyleSelector _mLayoutItemContainerStyleSelector;
+		private ILayoutUpdateStrategy _mLayoutUpdateStrategy;
 
-		private string mOnLoadXmlLayout = null;
+		private string _mOnLoadXmlLayout;
 		#endregion fields
 
 		#region constructor
@@ -46,7 +49,7 @@
 		public AvalonDockView()
 		{
 			//// this.InitializeComponent();
-			this.LayoutID = Guid.NewGuid();
+			LayoutId = Guid.NewGuid();
 		}
 		#endregion constructor
 
@@ -56,7 +59,7 @@
 		/// the positions and layout of documents and tool windows within the AvalonDock
 		/// view.
 		/// </summary>
-		public Guid LayoutID
+		public Guid LayoutId
 		{
 			get;
 			private set;
@@ -65,11 +68,11 @@
 		/// <summary>
 		/// Gets the current AvalonDockManager Xml layout and returns it as a string.
 		/// </summary>
-		public string CurrentADLayout
+		public string CurrentAdLayout
 		{
 			get
 			{
-				if (this.mDockManager == null)
+				if (_mDockManager == null)
 					return String.Empty;
 
 				string xmlLayoutString = string.Empty;
@@ -77,7 +80,7 @@
 				{
 					using (StringWriter fs = new StringWriter())
 					{
-						XmlLayoutSerializer xmlLayout = new XmlLayoutSerializer(this.mDockManager);
+						XmlLayoutSerializer xmlLayout = new XmlLayoutSerializer(_mDockManager);
 
 						xmlLayout.Serialize(fs);
 
@@ -101,9 +104,9 @@
 		{
 			base.OnApplyTemplate();
 
-			this.mDockManager = this.Template.FindName("PART_DockView", this) as DockingManager;
+			_mDockManager = Template.FindName("PART_DockView", this) as DockingManager;
 
-			this.SetCustomLayoutItems();
+			SetCustomLayoutItems();
 			////this.LoadXmlLayout(this.mOnLoadXmlLayout);
 		}
 
@@ -115,24 +118,24 @@
 		/// <param name="documentHeaderTemplate"></param>
 		/// <param name="panesStyleSelector"></param>
 		/// <param name="layoutInitializer"></param>
-		/// <param name="layoutID"></param>
+		/// <param name="layoutId"></param>
 		public void SetTemplates(DataTemplateSelector paneSel,
 								 DataTemplate documentHeaderTemplate,
 								 StyleSelector panesStyleSelector,
 								 ILayoutUpdateStrategy layoutInitializer,
-								 Guid layoutID
+								 Guid layoutId
 								)
 		{
-			this.mLayoutItemTemplateSelector = paneSel;
-			this.mDocumentHeaderTemplate = documentHeaderTemplate;
-			this.mLayoutItemContainerStyleSelector = panesStyleSelector;
-			this.mLayoutUpdateStrategy = layoutInitializer;
-			this.LayoutID = layoutID;
+			_mLayoutItemTemplateSelector = paneSel;
+			_mDocumentHeaderTemplate = documentHeaderTemplate;
+			_mLayoutItemContainerStyleSelector = panesStyleSelector;
+			_mLayoutUpdateStrategy = layoutInitializer;
+			LayoutId = layoutId;
 
-			if (this.mDockManager == null)
+			if (_mDockManager == null)
 				return;
 
-			this.SetCustomLayoutItems();
+			SetCustomLayoutItems();
 		}
 
 		#region Workspace Layout Management
@@ -149,15 +152,15 @@
 			if (args == null)
 				return;
 
-			if (string.IsNullOrEmpty(args.XmlLayout) == true)
+			if (string.IsNullOrEmpty(args.XmlLayout))
 				return;
 
-			this.mOnLoadXmlLayout = args.XmlLayout;
+			_mOnLoadXmlLayout = args.XmlLayout;
 
-			if (this.mDockManager == null)
+			if (_mDockManager == null)
 				return;
 
-			this.LoadXmlLayout(this.mOnLoadXmlLayout);
+			LoadXmlLayout(_mOnLoadXmlLayout);
 		}
 
 		private void LoadXmlLayout(string xmlLayout)
@@ -168,24 +171,24 @@
 
 				XmlLayoutSerializer layoutSerializer = null;
 
-				Application.Current.Dispatcher.Invoke(new Action(() =>
+				Application.Current.Dispatcher.Invoke(() =>
 				{
 					try
 					{
-						layoutSerializer = new XmlLayoutSerializer(this.mDockManager);
-						layoutSerializer.LayoutSerializationCallback += this.UpdateLayout;
+						layoutSerializer = new XmlLayoutSerializer(_mDockManager);
+						layoutSerializer.LayoutSerializationCallback += UpdateLayout;
 						layoutSerializer.Deserialize(sr);
 					}
 					catch (Exception exp)
 					{
-						logger.ErrorFormat("Error Loading Layout: {0}\n\n{1}", exp.Message, xmlLayout);
+						Logger.ErrorFormat("Error Loading Layout: {0}\n\n{1}", exp.Message, xmlLayout);
 					}
 
-				}), DispatcherPriority.Background);
+				}, DispatcherPriority.Background);
 			}
 			catch (Exception exp)
 			{
-				logger.ErrorFormat("Error Loading Layout: {0}\n\n{1}", exp.Message, xmlLayout);
+				Logger.ErrorFormat("Error Loading Layout: {0}\n\n{1}", exp.Message, xmlLayout);
 			}
 		}
 
@@ -202,21 +205,21 @@
 		{
 			try
 			{
-				Edi.Core.Interfaces.IViewModelResolver resolver = null;
+				IViewModelResolver resolver = null;
 
-				resolver = this.DataContext as Edi.Core.Interfaces.IViewModelResolver;
+				resolver = DataContext as IViewModelResolver;
 
 				if (resolver == null)
 					return;
 
 				// Get a matching viewmodel for a view through DataContext of this view
-				var content_view_model = resolver.ContentViewModelFromID(args.Model.ContentId);
+				var contentViewModel = resolver.ContentViewModelFromID(args.Model.ContentId);
 
-				if (content_view_model == null)
+				if (contentViewModel == null)
 					args.Cancel = true;
 
 				// found a match - return it
-				args.Content = content_view_model;
+				args.Content = contentViewModel;
 			}
 			catch (Exception exp)
 			{
@@ -230,20 +233,20 @@
 		/// </summary>
 		private void SetCustomLayoutItems()
 		{
-			if (this.mDockManager == null)
+			if (_mDockManager == null)
 				return;
 
-			if (this.mLayoutItemTemplateSelector != null)
-				this.mDockManager.LayoutItemTemplateSelector = this.mLayoutItemTemplateSelector;
+			if (_mLayoutItemTemplateSelector != null)
+				_mDockManager.LayoutItemTemplateSelector = _mLayoutItemTemplateSelector;
 
-			if (this.mDocumentHeaderTemplate != null)
-				this.mDockManager.DocumentHeaderTemplate = this.mDocumentHeaderTemplate;
+			if (_mDocumentHeaderTemplate != null)
+				_mDockManager.DocumentHeaderTemplate = _mDocumentHeaderTemplate;
 
-			if (this.mLayoutItemContainerStyleSelector != null)
-				this.mDockManager.LayoutItemContainerStyleSelector = this.mLayoutItemContainerStyleSelector;
+			if (_mLayoutItemContainerStyleSelector != null)
+				_mDockManager.LayoutItemContainerStyleSelector = _mLayoutItemContainerStyleSelector;
 
-			if (this.mLayoutUpdateStrategy != null)
-				this.mDockManager.LayoutUpdateStrategy = this.mLayoutUpdateStrategy;
+			if (_mLayoutUpdateStrategy != null)
+				_mDockManager.LayoutUpdateStrategy = _mLayoutUpdateStrategy;
 		}
 		#endregion methods
 

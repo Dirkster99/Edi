@@ -1,21 +1,21 @@
-﻿namespace Edi.Apps.ViewModels
-{
-    using System;
-    using System.Windows;
-    using Edi.Core.Interfaces;
-    using Files.ViewModels.FileExplorer;
-    using MsgBox;
-    using Edi.Settings.Interfaces;
-    using Edi.Settings.ProgramSettings;
-    using Edi.Settings.UserProfile;
-    using Edi.Themes.Interfaces;
-    using MRULib.MRU.Interfaces;
-    using MRULib.MRU.Models.Persist;
-    using CommonServiceLocator;
-    using MLib.Interfaces;
-    using System.Windows.Media;
+﻿using System;
+using System.ComponentModel;
+using System.Windows;
+using CommonServiceLocator;
+using Edi.Core.Interfaces;
+using Edi.Settings.Interfaces;
+using Edi.Settings.ProgramSettings;
+using Edi.Settings.UserProfile;
+using Edi.Themes.Interfaces;
+using Edi.Util.Local;
+using Files.ViewModels.FileExplorer;
+using MRULib.MRU.Interfaces;
+using MRULib.MRU.Models.Persist;
+using MsgBox;
 
-    public partial class ApplicationViewModel
+namespace Edi.Apps.ViewModels
+{
+	public partial class ApplicationViewModel
     {
         /// <summary>
         /// Save application settings when the application is being closed down
@@ -24,33 +24,33 @@
         {
             try
             {
-                this.mAppCore.CreateAppDataFolder();
+                _mAppCore.CreateAppDataFolder();
 
                 // Save current explorer settings and user profile data
                 // Query for an explorer tool window and return it
                 // Query for an explorer tool window and return it
-                var explorerTW = this.GetToolWindowVM<IExplorer>();
+                var explorerTw = GetToolWindowVm<IExplorer>();
 
-                if (explorerTW != null)
-                    FileExplorerViewModel.SaveSettings(this.mSettingsManager, explorerTW);
+                if (explorerTw != null)
+                    FileExplorerViewModel.SaveSettings(_mSettingsManager, explorerTw);
 
                 // Save program options only if there are un-saved changes that need persistence
                 // This can be caused when WPF theme was changed or something else
                 // but should normally not occur as often as saving session data
-                if (this.mSettingsManager.SettingData.IsDirty == true)
+                if (_mSettingsManager.SettingData.IsDirty)
                 {
-                    this.mSettingsManager.SaveOptions(this.mAppCore.DirFileAppSettingsData, this.mSettingsManager.SettingData);
+                    _mSettingsManager.SaveOptions(_mAppCore.DirFileAppSettingsData, _mSettingsManager.SettingData);
                 }
 
                 // Convert viewmodel data into model for persistance layer...
-                var mruVM = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
-                MRUEntrySerializer.ConvertToModel(mruVM, this.mSettingsManager.SessionData.MruList);
+                var mruVm = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
+                MRUEntrySerializer.ConvertToModel(mruVm, _mSettingsManager.SessionData.MruList);
 
-                this.mSettingsManager.SaveSessionData(this.mAppCore.DirFileAppSessionData, this.mSettingsManager.SessionData);
+                _mSettingsManager.SaveSessionData(_mAppCore.DirFileAppSessionData, _mSettingsManager.SessionData);
             }
             catch (Exception exp)
             {
-                _MsgBox.Show(exp, "Unhandled Exception", MsgBoxButtons.OK, MsgBoxImage.Error);
+                _msgBox.Show(exp, "Unhandled Exception", MsgBoxButtons.OK, MsgBoxImage.Error);
             }
         }
 
@@ -65,20 +65,20 @@
                                             IThemesManager themes)
         {
             // Re/Load program options and user profile session data to control global behaviour of program
-            settings.LoadOptions(this.mAppCore.DirFileAppSettingsData, themes, programSettings);
-            settings.LoadSessionData(this.mAppCore.DirFileAppSessionData);
+            settings.LoadOptions(_mAppCore.DirFileAppSettingsData, themes, programSettings);
+            settings.LoadSessionData(_mAppCore.DirFileAppSessionData);
 
             settings.CheckSettingsOnLoad(SystemParameters.VirtualScreenLeft, SystemParameters.VirtualScreenTop);
 
             // Convert Session model into viewmodel instance
-            var mruVM = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
-            MRUEntrySerializer.ConvertToViewModel(settings.SessionData.MruList, mruVM);
+            var mruVm = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
+            MRUEntrySerializer.ConvertToViewModel(settings.SessionData.MruList, mruVm);
 
             // Initialize skinning engine with this current skin
             // standard skins defined in class enum PLUS
             // configured skins with highlighting
             themes.SetSelectedTheme(settings.SettingData.CurrentTheme);
-            this.ResetTheme();                       // Initialize theme in process
+            ResetTheme();                       // Initialize theme in process
         }
 
         /// <summary>
@@ -86,55 +86,56 @@
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        public void OnClosing(object sender, CancelEventArgs e)
         {
             try
             {
-                if (this.Exit_CheckConditions(sender) == true)      // Close all open files and check whether application is ready to close
+                if (Exit_CheckConditions(sender))      // Close all open files and check whether application is ready to close
                 {
-                    this.OnRequestClose();                          // (other than exception and error handling)
+                    OnRequestClose();                          // (other than exception and error handling)
 
                     e.Cancel = false;
                     //if (wsVM != null)
                     //  wsVM.SaveConfigOnAppClosed(); // Save application layout
                 }
                 else
-                    e.Cancel = this.ShutDownInProgress_Cancel = true;
+                    e.Cancel = ShutDownInProgressCancel = true;
             }
             catch (Exception exp)
             {
-                logger.Error(exp);
+                Logger.Error(exp);
             }
         }
 
-        /// <summary>
-        /// Execute closing function and persist session data to be reloaded on next restart
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void OnClosed(Window win)
+	    /// <summary>
+	    /// Execute closing function and persist session data to be reloaded on next restart
+	    /// </summary>
+	    /// <param name="sender"></param>
+	    /// <param name="e"></param>
+	    /// <param name="win"></param>
+	    public void OnClosed(Window win)
         {
             try
             {
-                this.EnableMainWindowActivated(false);
+                EnableMainWindowActivated(false);
 
                 // Persist window position, width and height from this session
-                this.mSettingsManager.SessionData.MainWindowPosSz =
+                _mSettingsManager.SessionData.MainWindowPosSz =
                     new ViewPosSizeModel(win.Left, win.Top, win.Width, win.Height,
                                                              (win.WindowState == WindowState.Maximized ? true : false));
 
-                this.mSettingsManager.SessionData.IsWorkspaceAreaOptimized = this.IsWorkspaceAreaOptimized;
+                _mSettingsManager.SessionData.IsWorkspaceAreaOptimized = IsWorkspaceAreaOptimized;
 
                 // Save/initialize program options that determine global programm behaviour
-                this.SaveConfigOnAppClosed();
+                SaveConfigOnAppClosed();
 
-                this.DisposeResources();
+                DisposeResources();
             }
             catch (Exception exp)
             {
-                logger.Error(exp);
-                _MsgBox.Show(exp.ToString(),
-                             Util.Local.Strings.STR_MSG_UnknownError_InShutDownProcess,
+                Logger.Error(exp);
+                _msgBox.Show(exp.ToString(),
+                             Strings.STR_MSG_UnknownError_InShutDownProcess,
                              MsgBoxButtons.OK, MsgBoxImage.Error);
             }
         }
@@ -146,7 +147,7 @@
         {
             try
             {
-                foreach (var item in this.Files)
+                foreach (var item in Files)
                 {
                     try
                     {
@@ -154,14 +155,14 @@
                     }
                     catch (Exception exp)
                     {
-                        logger.ErrorFormat("Error disposing file; {0}", item.FileName);
-                        logger.Error(exp);
+                        Logger.ErrorFormat("Error disposing file; {0}", item.FileName);
+                        Logger.Error(exp);
                     }
                 }
             }
             catch (Exception exp)
             {
-                logger.Error(exp);
+                Logger.Error(exp);
             }
         }
     }

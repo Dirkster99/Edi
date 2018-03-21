@@ -1,7 +1,9 @@
-﻿namespace Edi.Apps.Behaviors
+﻿using System.Windows;
+using System.Windows.Input;
+using Xceed.Wpf.AvalonDock;
+
+namespace Edi.Apps.Behaviors
 {
-	using System.Windows;
-	using System.Windows.Input;
 //// using Xceed.Wpf.AvalonDock;
 
 	/// <summary>
@@ -42,7 +44,7 @@
 				DependencyProperty.RegisterAttached("LoadLayoutCommand",
 				typeof(ICommand),
 				typeof(AvalonDockLayoutSerializer),
-				new PropertyMetadata(null, AvalonDockLayoutSerializer.OnLoadLayoutCommandChanged));
+				new PropertyMetadata(null, OnLoadLayoutCommandChanged));
 		#endregion fields
 
 		#region methods
@@ -75,17 +77,17 @@
 		/// <param name="e"></param>
 		private static void OnLoadLayoutCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-			FrameworkElement framworkElement = d as FrameworkElement; // Remove the handler if it exist to avoid memory leaks
-			framworkElement.Loaded -= OnFrameworkElement_Loaded;
+			if (d is FrameworkElement framworkElement)
+			{
+				framworkElement.Loaded -= OnFrameworkElement_Loaded;
 
-            if (e.NewValue is ICommand)
-            {
-                ICommand command = e.NewValue as ICommand;
-
-                // the property is attached so we attach the Drop event handler
-                framworkElement.Loaded += OnFrameworkElement_Loaded;
-            }
-        }
+				if (e.NewValue is ICommand)
+				{
+					// the property is attached so we attach the Drop event handler
+					framworkElement.Loaded += OnFrameworkElement_Loaded;
+				}
+			}
+		}
 
 		/// <summary>
 		/// This method is executed when a AvalonDock <seealso cref="DockingManager"/> instance fires the
@@ -95,13 +97,11 @@
 		/// <param name="e"></param>
 		private static void OnFrameworkElement_Loaded(object sender, RoutedEventArgs e)
 		{
-			FrameworkElement frameworkElement = sender as FrameworkElement;
-
 			// Sanity check just in case this was somehow send by something else
-			if (frameworkElement == null)
+			if (!(sender is FrameworkElement frameworkElement))
 				return;
 
-			ICommand loadLayoutCommand = AvalonDockLayoutSerializer.GetLoadLayoutCommand(frameworkElement);
+			ICommand loadLayoutCommand = GetLoadLayoutCommand(frameworkElement);
 
 			// There may not be a command bound to this after all
 			if (loadLayoutCommand == null)

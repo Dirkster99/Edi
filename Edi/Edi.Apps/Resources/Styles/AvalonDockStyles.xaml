@@ -4,41 +4,41 @@
                     xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
                     >
 
-  <!-- Style for tool windows displayed in AvalonDock -->
-  <!--
+    <!-- Style for tool windows displayed in AvalonDock -->
+    <!--
     Check whether this style is applied correctly:
     1) If Tool Window icon does not show or
     2) if Tool Window visibility is not as expected
   -->
-  <Style TargetType="{x:Type avalonDock:LayoutAnchorableItem}" x:Key="ToolStyle">
-    <Style.Resources>
-      <avalonDock:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-    </Style.Resources>
+    <Style TargetType="{x:Type avalonDock:LayoutAnchorableItem}" x:Key="ToolStyle">
+        <Style.Resources>
+            <avalonDock:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        </Style.Resources>
 
-    <Setter Property="Title" Value="{Binding Model.Title}"/>
-    <Setter Property="IconSource" Value="{Binding Model.IconSource}"/>
-    <Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}"/>
-    <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
-    <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}"/>
-    <Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}"/>
-		<Setter Property="CanHide" Value="{Binding Model.CanHide, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-  </Style>
+        <Setter Property="Title" Value="{Binding Model.Title}"/>
+        <Setter Property="IconSource" Value="{Binding Model.IconSource}"/>
+        <Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}"/>
+        <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
+        <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}"/>
+        <Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}"/>
+        <Setter Property="CanHide" Value="{Binding Model.CanHide, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+    </Style>
 
-  <!-- TextEditor MiniUML File Style -->
-  <Style TargetType="{x:Type avalonDock:LayoutItem}" x:Key="FileStyle">
-    <Setter Property="Title" Value="{Binding Model.Title}"/>
-    <Setter Property="ToolTip" Value="{Binding Model.FilePath}"/>
-    <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}"/>
-    <Setter Property="IconSource" Value="{Binding Model.IconSource}"/>
-    <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
-  </Style>
+    <!-- TextEditor MiniUML File Style -->
+    <Style TargetType="{x:Type avalonDock:LayoutItem}" x:Key="FileStyle">
+        <Setter Property="Title" Value="{Binding Model.Title}"/>
+        <Setter Property="ToolTip" Value="{Binding Model.FilePath}"/>
+        <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}"/>
+        <Setter Property="IconSource" Value="{Binding Model.IconSource}"/>
+        <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
+    </Style>
 
-  <Style TargetType="{x:Type avalonDock:LayoutItem}" x:Key="StartPageStyle">
-    <Setter Property="Title" Value="{Binding Model.Title}"/>
-    <Setter Property="ToolTip" Value="{Binding Model.StartPageTip}"/>
-    <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}"/>
-    <Setter Property="IconSource" Value="{Binding Model.IconSource}"/>
-    <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
-  </Style>
+    <Style TargetType="{x:Type avalonDock:LayoutItem}" x:Key="StartPageStyle">
+        <Setter Property="Title" Value="{Binding Model.Title}"/>
+        <Setter Property="ToolTip" Value="{Binding Model.StartPageTip}"/>
+        <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}"/>
+        <Setter Property="IconSource" Value="{Binding Model.IconSource}"/>
+        <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
+    </Style>
 
 </ResourceDictionary>

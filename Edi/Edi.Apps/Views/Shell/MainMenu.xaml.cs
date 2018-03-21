@@ -1,16 +1,15 @@
-﻿namespace Edi.Apps.Views.Shell
-{
-  using System.Windows.Controls;
-	using System.Windows.Input;
+﻿using System.Windows.Controls;
 
-  /// <summary>
+namespace Edi.Apps.Views.Shell
+{
+	/// <summary>
   /// Interaction logic for MainMenu.xaml
   /// </summary>
   public partial class MainMenu : UserControl
   {
     public MainMenu()
     {
-      this.InitializeComponent();
+      InitializeComponent();
     }
   }
 }

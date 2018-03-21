@@ -1,8 +1,9 @@
-﻿namespace Edi.Apps.Behaviors
-{
-	using System.Windows.Input;
-	using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Input;
 
+namespace Edi.Apps.Behaviors
+{
 	/// <summary>
 	/// Attached behaviour to implement the activated event
 	/// via delegate command binding or routed commands.
@@ -17,7 +18,7 @@
 				"Command",
 				typeof(ICommand),
 				typeof(ActivatedCommand),
-				new PropertyMetadata(null, ActivatedCommand.OnCommandChange));
+				new PropertyMetadata(null, OnCommandChange));
 
 		/// <summary>
 		/// <seealso cref="object"/> field for CommandParameter binding if user wants to
@@ -59,7 +60,7 @@
 		/// <param name="obj"></param>
 		public static object GetCommandParameter(DependencyObject obj)
 		{
-			return (object)obj.GetValue(CommandParameterProperty);
+			return obj.GetValue(CommandParameterProperty);
 		}
 
 		/// <summary>
@@ -72,6 +73,7 @@
 		{
 			obj.SetValue(CommandParameterProperty, value);
 		}
+
     #endregion CoammandPArameter
 
 		/// <summary>
@@ -83,17 +85,18 @@
 		/// <param name="e"></param>
 		private static void OnCommandChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-			var uiElement = d as Window;	  // Remove the handler if it exist to avoid memory leaks
-			uiElement.Activated -= UiElement_Activated;
+			if (d is Window uiElement)
+			{
+				uiElement.Activated -= UiElement_Activated;
 
-            if (e.NewValue is ICommand)
-            {
-                ICommand command = e.NewValue as ICommand;
-
-                // the property is attached so we attach the Drop event handler
-                uiElement.Activated += UiElement_Activated;
-            }
-        }
+				if (e.NewValue is ICommand)
+				{
+					// the property is attached so we attach the Drop event handler
+					uiElement.Activated += UiElement_Activated;
+				}
+			}
+		}
+		
 
 		/// <summary>
 		/// This method is called when the Activated event occurs. The sender should be the control
@@ -107,32 +110,30 @@
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private static void UiElement_Activated(object sender, System.EventArgs e)
+		private static void UiElement_Activated(object sender, EventArgs e)
 		{
-			var uiElement = sender as Window;
-
 			// Sanity check just in case this was somehow send by something else
-			if (uiElement == null)
+			if (!(sender is Window uiElement))
 				return;
 
-			ICommand Command = ActivatedCommand.GetCommand(uiElement);
+			ICommand command = GetCommand(uiElement);
 
-			object CommandParameter = ActivatedCommand.GetCommandParameter(uiElement);
+			object commandParameter = GetCommandParameter(uiElement);
 
 			// There may not be a command bound to this after all
-			if (Command == null)
+			if (command == null)
 				return;
 
 			// Check whether this attached behaviour is bound to a RoutedCommand
-			if (Command is RoutedCommand)
+			if (command is RoutedCommand)
 			{
 				// Execute the routed command
-				(Command as RoutedCommand).Execute(CommandParameter, uiElement);
+				(command as RoutedCommand).Execute(commandParameter, uiElement);
 			}
 			else
 			{
 				// Execute the Command as bound delegate
-				Command.Execute(CommandParameter);
+				command.Execute(commandParameter);
 			}
 		}
 		#endregion methods
