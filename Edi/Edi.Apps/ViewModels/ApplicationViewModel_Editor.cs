@@ -2,7 +2,6 @@ namespace Edi.Apps.ViewModels
 {
 	using System;
 	using System.Collections.Generic;
-	using System.Linq;
 	using System.Text.RegularExpressions;
 	using System.Windows;
 	using System.Windows.Threading;
@@ -40,7 +39,7 @@ namespace Edi.Apps.ViewModels
 			if (f.SearchIn == Dialogs.FindReplace.SearchScope.CurrentDocument)
 				return f.GetCurrentEditor();
 
-			var l = new List<object>(Files.Cast<object>());
+			var l = new List<object>(Files);
 
 			int idxStart = l.IndexOf(f.CurrentEditor);
 			int i = idxStart;
@@ -60,10 +59,8 @@ namespace Edi.Apps.ViewModels
 					//// i = (i + (previous ? l.Count - 1 : +1)) % l.Count;
 
 					// Search text in document
-					if (l[i] is EdiViewModel)
+					if (l[i] is EdiViewModel fTmp)
 					{
-						EdiViewModel fTmp = l[i] as EdiViewModel;
-
 						m = FindNextMatchInText(0, 0, false, fTmp.Text, ref f, out _);
 
 						textSearchSuccess = m.Success;
@@ -72,9 +69,9 @@ namespace Edi.Apps.ViewModels
 				while (i != idxStart && textSearchSuccess != true);
 
 				// Found a match so activate the corresponding document and select the text with scroll into view
-				if (textSearchSuccess && m != null)
+				if (textSearchSuccess)
 				{
-					var doc = l[i] as EdiViewModel;
+					var doc = (EdiViewModel) l[i];
 
 					ActiveDocument = doc;
 

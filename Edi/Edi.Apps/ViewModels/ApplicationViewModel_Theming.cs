@@ -163,20 +163,19 @@ namespace Edi.Apps.ViewModels
                 // Re-coloring works with SolidColorBrushs linked as DynamicResource
                 if (Application.Current.Resources[resourceName] is SolidColorBrush)
                 {
-                    var oldBrush = Application.Current.Resources[resourceName] as SolidColorBrush;
-                    backupDynResources.Add(resourceName);
+	                backupDynResources.Add(resourceName);
 
                     Application.Current.Resources[resourceName] = newColor.Clone();
                 }
             }
         }
 
-        /// <summary>
-        /// Attempt to switch to the theme stated in <paramref name="nextThemeToSwitchTo"/>.
-        /// The given name must map into the <seealso cref="Edi.Themes.ThemesVM.EnTheme"/> enumeration.
-        /// </summary>
-        /// <param name="nextThemeToSwitchTo"></param>
-        private bool SwitchToSelectedTheme(ThemeBase nextThemeToSwitchTo)
+	    /// <summary>
+	    /// Attempt to switch to the theme stated in <paramref name="nextThemeToSwitchTo"/>.
+	    /// The given name must map into the <seealso cref="Edi.Themes.ThemesVM.EnTheme"/> enumeration.
+	    /// </summary>
+	    /// <param name="nextThemeToSwitchTo"></param>
+	    private void SwitchToSelectedTheme(ThemeBase nextThemeToSwitchTo)
         {
             const string themesModul = "Edi.Themes.dll";
 
@@ -196,16 +195,16 @@ namespace Edi.Apps.ViewModels
 
                     themesPathFileName = System.IO.Path.GetDirectoryName(themesPathFileName);
                     themesPathFileName = System.IO.Path.Combine(themesPathFileName, themesModul);
-                    Assembly assembly = Assembly.LoadFrom(themesPathFileName);
+                    Assembly.LoadFrom(themesPathFileName);
 
                     if (System.IO.File.Exists(themesPathFileName) == false)
                     {
-                        _msgBox.Show(string.Format(CultureInfo.CurrentCulture,
+	                    _msgBox.Show(string.Format(CultureInfo.CurrentCulture,
                                         Util.Local.Strings.STR_THEMING_MSG_CANNOT_FIND_PATH, themesModul),
                                         Util.Local.Strings.STR_THEMING_CAPTION,
                                         MsgBoxButtons.OK, MsgBoxImage.Error);
 
-                        return false;
+	                    return;
                     }
 
                     foreach (var item in theme.Resources)
@@ -231,10 +230,8 @@ namespace Edi.Apps.ViewModels
             }
             catch (Exception exp)
             {
-                _msgBox.Show(exp, Util.Local.Strings.STR_THEMING_CAPTION,
+	            _msgBox.Show(exp, Util.Local.Strings.STR_THEMING_CAPTION,
                              MsgBoxButtons.OK, MsgBoxImage.Error);
-
-                return false;
             }
             finally
             {
@@ -242,8 +239,6 @@ namespace Edi.Apps.ViewModels
                 if (nextThemeToSwitchTo.WPFThemeName != "Generic")
                     _msgBox.Style = MsgBoxStyle.WPFThemed;
             }
-
-            return true;
         }
     }
 }

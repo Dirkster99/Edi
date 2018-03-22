@@ -88,13 +88,11 @@ namespace Edi.Apps.ViewModels
 	            {
 		            try
 		            {
-			            DockingManager docManager = p as DockingManager;
-
-			            if (docManager == null)
+			            if (!(p is DockingManager docManager))
 				            return;
 
 			            _mMessageManager.Output.AppendLine("Loading document and tool window layout...");
-			            LoadDockingManagerLayout(docManager);
+			            LoadDockingManagerLayout();
 		            }
 		            catch (Exception exp)
 		            {
@@ -125,9 +123,7 @@ namespace Edi.Apps.ViewModels
             {
 	            return _mSaveLayoutCommand ?? (_mSaveLayoutCommand = new RelayCommand<object>((p) =>
 	            {
-		            string xmlLayout = p as string;
-
-		            if (xmlLayout == null)
+		            if (!(p is string xmlLayout))
 			            return;
 
 		            SaveDockingManagerLayout(xmlLayout);
@@ -139,13 +135,13 @@ namespace Edi.Apps.ViewModels
 
         #region methods
         #region LoadLayout
-        /// <summary>
-        /// Loads the layout of a particular docking manager instance from persistence
-        /// and checks whether a file should really be reloaded (some files may no longer
-        /// be available).
-        /// </summary>
-        /// <param name="docManager"></param>
-        private void LoadDockingManagerLayout(DockingManager docManager)
+
+	    /// <summary>
+	    /// Loads the layout of a particular docking manager instance from persistence
+	    /// and checks whether a file should really be reloaded (some files may no longer
+	    /// be available).
+	    /// </summary>
+	    private void LoadDockingManagerLayout()
         {
             LoadDockingManagerLayout(LayoutID);
         }
@@ -159,7 +155,7 @@ namespace Edi.Apps.ViewModels
         {
             try
             {
-	            Task.Factory.StartNew<string>((stateObj) =>
+	            Task.Factory.StartNew((stateObj) =>
                 {
 	                // Begin Aysnc Task
 	                string layoutFileName = Path.Combine(_mAppDir, _mLayoutFileName);
