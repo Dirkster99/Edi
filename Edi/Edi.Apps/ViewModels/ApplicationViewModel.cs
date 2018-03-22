@@ -58,12 +58,14 @@ namespace Edi.Apps.ViewModels
         public const string MiniUmlFileExtension = "uml";
         public static readonly string UmlFileFilter = Util.Local.Strings.STR_FileType_FileFilter_UML;
 
+/*
         private static string _ediTextEditorFileFilter =
                                     Util.Local.Strings.STR_FileType_FileFilter_AllFiles +
                                     "|" + Util.Local.Strings.STR_FileType_FileFilter_TextFiles +
                                     "|" + Util.Local.Strings.STR_FileType_FileFilter_CSharp +
                                     "|" + Util.Local.Strings.STR_FileType_FileFilter_HTML +
                                     "|" + Util.Local.Strings.STR_FileType_FileFilter_SQL;
+*/
 
         protected static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -276,13 +278,12 @@ namespace Edi.Apps.ViewModels
         /// 
         /// This particular property is also required to load MiniUML Plugins.
         /// </summary>
-        public MiniUML.Model.ViewModels.Document.AbstractDocumentViewModel vm_DocumentViewModel
+        public AbstractDocumentViewModel vm_DocumentViewModel
         {
             get
             {
 	            MiniUmlViewModel vm = _mActiveDocument as MiniUmlViewModel;
-
-	            return vm?.DocumentMiniUml as AbstractDocumentViewModel;
+	            return vm?.DocumentMiniUml;
             }
         }
         #endregion
@@ -293,11 +294,9 @@ namespace Edi.Apps.ViewModels
 
 	        private set
             {
-                if (_mSelectedOpenDocumentType != value)
-                {
-                    _mSelectedOpenDocumentType = value;
-                    RaisePropertyChanged(() => SelectedOpenDocumentType);
-                }
+	            if (_mSelectedOpenDocumentType == value) return;
+	            _mSelectedOpenDocumentType = value;
+	            RaisePropertyChanged(() => SelectedOpenDocumentType);
             }
         }
 
@@ -306,18 +305,9 @@ namespace Edi.Apps.ViewModels
 	    /// <summary>
         /// Principable data source for collection of documents managed in the the document manager (of AvalonDock).
         /// </summary>
-        public ReadOnlyObservableCollection<IFileBaseViewModel> Files
-        {
-            get
-            {
-                if (_mReadonyFiles == null)
-                    _mReadonyFiles = new ReadOnlyObservableCollection<IFileBaseViewModel>(_mFiles);
+        public ReadOnlyObservableCollection<IFileBaseViewModel> Files => _mReadonyFiles ?? (_mReadonyFiles = new ReadOnlyObservableCollection<IFileBaseViewModel>(_mFiles));
 
-                return _mReadonyFiles;
-            }
-        }
-
-        /// <summary>
+	    /// <summary>
         /// Principable data source for collection of tool window viewmodels
         /// whos view templating is managed in the the document manager of AvalonDock.
         /// </summary>
@@ -410,14 +400,13 @@ namespace Edi.Apps.ViewModels
             dm.SetFileNamePath(filePath, true);
 
             // 1st try to find a document type handler based on the supplied extension
-            var docType = _mDocumentTypeManager.FindDocumentTypeByExtension(dm.FileExtension, true);
+            var docType = _mDocumentTypeManager.FindDocumentTypeByExtension(dm.FileExtension, true) ??
+                          _mDocumentTypeManager.FindDocumentTypeByKey(typeOfDoc);
 
             // 2nd try to find a document type handler based on the name of the prefered viewer
             // (Defaults to EdiTextEditor if no name is given)
-            if (docType == null)
-                docType = _mDocumentTypeManager.FindDocumentTypeByKey(typeOfDoc);
 
-            if (docType != null)
+	        if (docType != null)
             {
                 fileViewModel = docType.FileOpenMethod(dm, _mSettingsManager);
             }
@@ -629,11 +618,9 @@ namespace Edi.Apps.ViewModels
         {
             try
             {
-                if (Closing_CanExecute())
-                {
-                    _mShutDownInProgressCancel = false;
-                    OnRequestClose();
-                }
+	            if (!Closing_CanExecute()) return;
+	            _mShutDownInProgressCancel = false;
+	            OnRequestClose();
             }
             catch (Exception exp)
             {
@@ -660,13 +647,11 @@ namespace Edi.Apps.ViewModels
 
                 dlg.ShowDialog();
 
-                if (dlgVm.WindowCloseResult == true)
-                {
-                    dlgVm.SaveOptionsToModel(_mSettingsManager.SettingData);
+	            if (dlgVm.WindowCloseResult != true) return;
+	            dlgVm.SaveOptionsToModel(_mSettingsManager.SettingData);
 
-                    if (_mSettingsManager.SettingData.IsDirty)
-                        _mSettingsManager.SaveOptions(_mAppCore.DirFileAppSettingsData, _mSettingsManager.SettingData);
-                }
+	            if (_mSettingsManager.SettingData.IsDirty)
+		            _mSettingsManager.SaveOptions(_mAppCore.DirFileAppSettingsData, _mSettingsManager.SettingData);
             }
             catch (Exception exp)
             {
@@ -788,26 +773,24 @@ namespace Edi.Apps.ViewModels
         {
             try
             {
-                if (_mShutDownInProgress == false)
-                {
-                    if (DialogCloseResult == null)
-                        DialogCloseResult = true;      // Execute Close event via attached property
+	            if (_mShutDownInProgress) return;
+	            if (DialogCloseResult == null)
+		            DialogCloseResult = true;      // Execute Close event via attached property
 
-                    if (_mShutDownInProgressCancel)
-                    {
-                        _mShutDownInProgress = false;
-                        _mShutDownInProgressCancel = false;
-                        DialogCloseResult = null;
-                    }
-                    else
-                    {
-                        _mShutDownInProgress = true;
+	            if (_mShutDownInProgressCancel)
+	            {
+		            _mShutDownInProgress = false;
+		            _mShutDownInProgressCancel = false;
+		            DialogCloseResult = null;
+	            }
+	            else
+	            {
+		            _mShutDownInProgress = true;
 
-                        CommandManager.InvalidateRequerySuggested();
+		            CommandManager.InvalidateRequerySuggested();
 
-                        RequestClose?.Invoke(this, EventArgs.Empty);
-                    }
-                }
+		            RequestClose?.Invoke(this, EventArgs.Empty);
+	            }
             }
             catch (Exception exp)
             {
@@ -939,35 +922,32 @@ namespace Edi.Apps.ViewModels
             if (doc == null)
                 return false;
 
-            if (doc.CanSaveData)
-            {
-                var defaultFilter = GetDefaultFileFilter(doc, _mDocumentTypeManager);
+	        if (!doc.CanSaveData)
+		        throw new NotSupportedException(
+			        doc.ToString());
+	        var defaultFilter = GetDefaultFileFilter(doc, _mDocumentTypeManager);
 
-                return OnSaveDocumentFile(doc, saveAsFlag, defaultFilter);
-            }
+	        return OnSaveDocumentFile(doc, saveAsFlag, defaultFilter);
 
-            throw new NotSupportedException((doc != null ? doc.ToString() : Util.Local.Strings.STR_MSG_UnknownDocumentType));
         }
 
-        /// <summary>
-        /// Returns the default file extension filter strings
-        /// that can be used for each corresponding document
-        /// type (viewmodel), or an empty string if no document
-        /// type (viewmodel) was matched.
-        /// </summary>
-        /// <param name="f"></param>
-        /// <returns></returns>
-        internal static string GetDefaultFileFilter(IFileBaseViewModel f, IDocumentTypeManager docManager)
+	    /// <summary>
+	    /// Returns the default file extension filter strings
+	    /// that can be used for each corresponding document
+	    /// type (viewmodel), or an empty string if no document
+	    /// type (viewmodel) was matched.
+	    /// </summary>
+	    /// <param name="f"></param>
+	    /// <param name="docManager"></param>
+	    /// <returns></returns>
+	    internal static string GetDefaultFileFilter(IFileBaseViewModel f, IDocumentTypeManager docManager)
         {
             if (f == null)
                 return string.Empty;
 
             var filefilter = docManager.GetFileFilterEntries(f.DocumentTypeKey);
 
-            if (filefilter != null)
-                return filefilter.GetFilterString();
-
-            return string.Empty;
+            return filefilter != null ? filefilter.GetFilterString() : string.Empty;
         }
 
         internal bool OnSaveDocumentFile(IFileBaseViewModel fileToSave,
@@ -1010,22 +990,19 @@ namespace Edi.Apps.ViewModels
                         return false;
                 }
                 else                                                  // Execute Save function
-                    fileToSave.SaveFile(filePath);
+                {
+	                fileToSave?.SaveFile(filePath);
+                }
 
-                GetToolWindowVm<RecentFilesViewModel>().AddNewEntryIntoMRU(filePath);
+	            GetToolWindowVm<RecentFilesViewModel>().AddNewEntryIntoMRU(filePath);
 
                 return true;
             }
             catch (Exception exp)
             {
-                string sMsg = Util.Local.Strings.STR_MSG_ErrorSavingFile;
+	            var sMsg = filePath.Length > 0 ? string.Format(CultureInfo.CurrentCulture, Util.Local.Strings.STR_MSG_ErrorWhileSavingFileX, exp.Message, filePath) : string.Format(CultureInfo.CurrentCulture, Util.Local.Strings.STR_MSG_ErrorWhileSavingAFile, exp.Message);
 
-                if (filePath.Length > 0)
-                    sMsg = string.Format(CultureInfo.CurrentCulture, Util.Local.Strings.STR_MSG_ErrorWhileSavingFileX, exp.Message, filePath);
-                else
-                    sMsg = string.Format(CultureInfo.CurrentCulture, Util.Local.Strings.STR_MSG_ErrorWhileSavingAFile, exp.Message);
-
-                _msgBox.Show(exp, sMsg, Util.Local.Strings.STR_MSG_ErrorSavingFile, MsgBoxButtons.OK);
+	            _msgBox.Show(exp, sMsg, Util.Local.Strings.STR_MSG_ErrorSavingFile);
             }
 
             return false;
@@ -1144,11 +1121,9 @@ namespace Edi.Apps.ViewModels
 
 	        private set
             {
-                if (_mDialogCloseResult != value)
-                {
-                    _mDialogCloseResult = value;
-                    RaisePropertyChanged(() => DialogCloseResult);
-                }
+	            if (_mDialogCloseResult == value) return;
+	            _mDialogCloseResult = value;
+	            RaisePropertyChanged(() => DialogCloseResult);
             }
         }
 
@@ -1162,11 +1137,9 @@ namespace Edi.Apps.ViewModels
 
 	        set
             {
-                if (_mIsNotMaximized != value)
-                {
-                    _mIsNotMaximized = value;
-                    RaisePropertyChanged(() => IsNotMaximized);
-                }
+	            if (_mIsNotMaximized == value) return;
+	            _mIsNotMaximized = value;
+	            RaisePropertyChanged(() => IsNotMaximized);
             }
         }
 
@@ -1181,11 +1154,9 @@ namespace Edi.Apps.ViewModels
 
 	        set
             {
-                if (_mIsWorkspaceAreaOptimized != value)
-                {
-                    _mIsWorkspaceAreaOptimized = value;
-                    RaisePropertyChanged(() => IsWorkspaceAreaOptimized);
-                }
+	            if (_mIsWorkspaceAreaOptimized == value) return;
+	            _mIsWorkspaceAreaOptimized = value;
+	            RaisePropertyChanged(() => IsWorkspaceAreaOptimized);
             }
         }
 
@@ -1206,11 +1177,9 @@ namespace Edi.Apps.ViewModels
 	                // If there are any: Ask user if edits should be saved
 	                foreach (var f in Files)
 	                {
-		                if (OnCloseSaveDirtyFile(f) == false)
-		                {
-			                _mShutDownInProgress = false;
-			                return false;               // Cancel shutdown process (return false) if user cancels saving edits
-		                }
+		                if (OnCloseSaveDirtyFile(f)) continue;
+		                _mShutDownInProgress = false;
+		                return false;               // Cancel shutdown process (return false) if user cancels saving edits
 	                }
                 }
 
@@ -1283,23 +1252,17 @@ namespace Edi.Apps.ViewModels
         {
             List<StartPageViewModel> l = _mFiles.OfType<StartPageViewModel>().ToList();
 
-            if (l.Count == 0)
-            {
-                if (createNewViewModelIfNecessary == false)
-                    return null;
-                else
-                {
-                    var s = new StartPageViewModel();
+	        if (l.Count != 0) return l[0];
+	        if (createNewViewModelIfNecessary == false)
+		        return null;
+	        var s = new StartPageViewModel();
 
-                    s.DocumentEvent += ProcessDocumentEvent;
+	        s.DocumentEvent += ProcessDocumentEvent;
 
-                    _mFiles.Add(s);
+	        _mFiles.Add(s);
 
-                    return s;
-                }
-            }
+	        return s;
 
-            return l[0];
         }
 
         /// <summary>
@@ -1335,17 +1298,15 @@ namespace Edi.Apps.ViewModels
 
         private void CloseDocument(FileBaseViewModel f)
         {
-            if (f != null)
-            {
-                // Detach EdiViewModel specific events
-                if (f is EdiViewModel)
-                {
-                    EdiViewModel eVm = f as EdiViewModel;
-                    eVm.ProcessingResultEvent -= Vm_ProcessingResultEvent;
-                }
+	        if (f == null) return;
+	        // Detach EdiViewModel specific events
+	        if (f is EdiViewModel)
+	        {
+		        EdiViewModel eVm = f as EdiViewModel;
+		        eVm.ProcessingResultEvent -= Vm_ProcessingResultEvent;
+	        }
 
-                Close(f);
-            }
+	        Close(f);
         }
 
         /// <summary>
@@ -1356,70 +1317,70 @@ namespace Edi.Apps.ViewModels
         /// <param name="e"></param>
         private void Vm_ProcessingResultEvent(object sender, ProcessResultEvent e)
         {
+	        if (!(sender is IDocumentFileWatcher)) return;
+	        IDocumentFileWatcher watcher = sender as IDocumentFileWatcher;
 
-            if (sender is IDocumentFileWatcher)
-            {
-                IDocumentFileWatcher watcher = sender as IDocumentFileWatcher;
+	        try
+	        {
+		        // Activate file watcher for this document
+		        watcher.EnableDocumentFileWatcher(true);
+	        }
+	        catch (Exception ex)
+	        {
+		        _msgBox.Show(ex, "An unexpected error occured", MsgBoxButtons.OK, MsgBoxImage.Alert);
+	        }
 
-                try
-                {
-                    // Activate file watcher for this document
-                    watcher.EnableDocumentFileWatcher(true);
-                }
-                catch (Exception ex)
-                {
-                    _msgBox.Show(ex, "An unexpected error occured", MsgBoxButtons.OK, MsgBoxImage.Alert);
-                }
+	        var vm = sender as EdiViewModel;
 
-                var vm = sender as EdiViewModel;
+	        try
+	        {
+		        switch (e.TypeOfResult)
+		        {
+			        case TypeOfResult.FileLoad:      // Process an EdiViewModel file load event mResult
+				        if (e.InnerException != null)
+				        {
+					        if (vm != null)
+					        {
+						        Exception error = vm.GetInnerMostException(e.InnerException);
 
-                try
-                {
-                    switch (e.TypeOfResult)
-                    {
-                        case TypeOfResult.FileLoad:      // Process an EdiViewModel file load event mResult
-                            if (e.InnerException != null)
-                            {
-                                Exception error = vm.GetInnerMostException(e.InnerException);
+						        string filePath = vm.FilePath;
+						        CloseDocument(vm);
+/*
+						        vm = null;
+*/
 
-                                string filePath = vm.FilePath;
-                                CloseDocument(vm);
-                                vm = null;
+						        if (error != null && filePath != null)
+						        {
+							        if (error is FileNotFoundException)
+							        {
+								        var mruList = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
+								        if (mruList.FindEntry(filePath) == null) return;
+								        if (_msgBox.Show(string.Format(Util.Local.Strings.STR_ERROR_LOADING_FILE_MSG, filePath),
+									            Util.Local.Strings.STR_ERROR_LOADING_FILE_CAPTION, MsgBoxButtons.YesNo) == MsgBoxResult.Yes)
+								        {
+									        mruList.RemoveEntry(filePath);
+								        }
 
-                                if (error != null && filePath != null)
-                                {
-                                    if (error is FileNotFoundException)
-                                    {
-                                        var mruList = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
-                                        if (mruList.FindEntry(filePath) != null)
-                                        {
-                                            if (_msgBox.Show(string.Format(Util.Local.Strings.STR_ERROR_LOADING_FILE_MSG, filePath),
-                                                             Util.Local.Strings.STR_ERROR_LOADING_FILE_CAPTION, MsgBoxButtons.YesNo) == MsgBoxResult.Yes)
-                                            {
-                                                mruList.RemoveEntry(filePath);
-                                            }
-                                        }
+								        return;
+							        }
+						        }
+					        }
 
-                                        return;
-                                    }
-                                }
+					        _msgBox.Show(e.InnerException, "An unexpected error occured",
+						        MsgBoxButtons.OK, MsgBoxImage.Alert);
+				        }
+				        break;
 
-                                _msgBox.Show(e.InnerException, "An unexpected error occured",
-                                             MsgBoxButtons.OK, MsgBoxImage.Alert);
-                            }
-                            break;
+			        default:
+				        throw new NotImplementedException(e.TypeOfResult.ToString());
+		        }
+	        }
+	        catch (Exception exp)
+	        {
+		        Logger.Error(exp);
 
-                        default:
-                            throw new NotImplementedException(e.TypeOfResult.ToString());
-                    }
-                }
-                catch (Exception exp)
-                {
-                    Logger.Error(exp);
-
-                    _msgBox.Show(exp, "An unexpected error occured", MsgBoxButtons.OK, MsgBoxImage.Alert);
-                }
-            }
+		        _msgBox.Show(exp, "An unexpected error occured", MsgBoxButtons.OK, MsgBoxImage.Alert);
+	        }
         }
 
         /// <summary>
@@ -1451,7 +1412,7 @@ namespace Edi.Apps.ViewModels
 	                            $"Warning: Cannot resolve tool window or document page: '{path}'.");
 
                             _mMessageManager.Output.AppendLine(
-                                string.Format("Check the current program configuration to make that it is present.", path));
+                                "Check the current program configuration to make that it is present.");
 
                             return null;
                         }
