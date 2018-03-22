@@ -328,21 +328,17 @@ namespace Edi.Apps.ViewModels
         public IAvalonDockLayoutViewModel AdLayout { get; }
 
 	    public bool ShutDownInProgressCancel
-        {
-            get => _mShutDownInProgressCancel;
+		{
+			get => _mShutDownInProgressCancel;
 
-		    set
-            {
-                if (_mShutDownInProgressCancel != value)
-                    _mShutDownInProgressCancel = value;
-            }
-        }
+			set => _mShutDownInProgressCancel = value;
+		}
 
-        #region ApplicationName
-        /// <summary>
-        /// Get the name of this application in a human read-able fashion
-        /// </summary>
-        public string ApplicationTitle => _mAppCore.AssemblyTitle;
+		#region ApplicationName
+		/// <summary>
+		/// Get the name of this application in a human read-able fashion
+		/// </summary>
+		public string ApplicationTitle => _mAppCore.AssemblyTitle;
 
 	    #endregion ApplicationName
 
@@ -454,10 +450,9 @@ namespace Edi.Apps.ViewModels
 
             // reset viewmodel options in accordance to current program settings
 
-            if (fileViewModel is IDocumentEdi)
+            if (fileViewModel is IDocumentEdi ediVm)
             {
-                IDocumentEdi ediVm = fileViewModel as IDocumentEdi;
-                SetActiveDocumentOnNewFileOrOpenFile(ediVm);
+	            SetActiveDocumentOnNewFileOrOpenFile(ediVm);
             }
             else
             {
@@ -743,9 +738,7 @@ namespace Edi.Apps.ViewModels
         {
             try
             {
-                var cmdParam = o as IMRUEntryViewModel;
-
-                if (cmdParam == null)
+	            if (!(o is IMRUEntryViewModel cmdParam))
                     return;
 
                 if (e != null)
@@ -1049,11 +1042,9 @@ namespace Edi.Apps.ViewModels
                     doc.DocumentEvent -= ProcessDocumentEvent;
                     doc.ProcessingResultEvent -= Vm_ProcessingResultEvent;
 
-                    if (doc is IDocumentEdi)
+                    if (doc is IDocumentEdi ediDoc)
                     {
-                        var ediDoc = doc as IDocumentEdi;
-
-                        ediDoc.ProcessingResultEvent -= Vm_ProcessingResultEvent;
+	                    ediDoc.ProcessingResultEvent -= Vm_ProcessingResultEvent;
                     }
 
                     int idx = _mFiles.IndexOf(doc);
@@ -1298,13 +1289,16 @@ namespace Edi.Apps.ViewModels
 
         private void CloseDocument(FileBaseViewModel f)
         {
-	        if (f == null) return;
-	        // Detach EdiViewModel specific events
-	        if (f is EdiViewModel)
+	        switch (f)
 	        {
-		        EdiViewModel eVm = f as EdiViewModel;
-		        eVm.ProcessingResultEvent -= Vm_ProcessingResultEvent;
+		        case null:
+			        return;
+		        case EdiViewModel _:
+			        if (f is EdiViewModel eVm)
+						eVm.ProcessingResultEvent -= Vm_ProcessingResultEvent;
+			        break;
 	        }
+	        // Detach EdiViewModel specific events
 
 	        Close(f);
         }
@@ -1318,7 +1312,7 @@ namespace Edi.Apps.ViewModels
         private void Vm_ProcessingResultEvent(object sender, ProcessResultEvent e)
         {
 	        if (!(sender is IDocumentFileWatcher)) return;
-	        IDocumentFileWatcher watcher = sender as IDocumentFileWatcher;
+	        IDocumentFileWatcher watcher = (IDocumentFileWatcher) sender;
 
 	        try
 	        {
@@ -1394,36 +1388,38 @@ namespace Edi.Apps.ViewModels
         {
             IFileBaseViewModel ret = null;
 
-            if (!string.IsNullOrWhiteSpace(path))
-            {
-                switch (path)
-                {
-                    case StartPageViewModel.StartPageContentId: // Re-create start page content
-                        if (GetStartPage(false) == null)
-                        {
-                            ret = GetStartPage(true);
-                        }
-                        break;
+	        if (string.IsNullOrWhiteSpace(path))
+			{
+				return null;
+			}
 
-                    default:
-                        if (path.Contains("<") && path.Contains(">"))
-                        {
-                            _mMessageManager.Output.AppendLine(
-	                            $"Warning: Cannot resolve tool window or document page: '{path}'.");
+			switch (path)
+	        {
+		        case StartPageViewModel.StartPageContentId: // Re-create start page content
+			        if (GetStartPage(false) == null)
+			        {
+				        ret = GetStartPage(true);
+			        }
+			        break;
 
-                            _mMessageManager.Output.AppendLine(
-                                "Check the current program configuration to make that it is present.");
+		        default:
+			        if (path.Contains("<") && path.Contains(">"))
+			        {
+				        _mMessageManager.Output.AppendLine(
+					        $"Warning: Cannot resolve tool window or document page: '{path}'.");
 
-                            return null;
-                        }
+				        _mMessageManager.Output.AppendLine(
+					        "Check the current program configuration to make that it is present.");
 
-                        // Re-create Edi document (text file or log4net document) content
-                        ret = Open(path, CloseDocOnError.WithoutUserNotification);
-                        break;
-                }
-            }
+				        return null;
+			        }
 
-            return ret;
+			        // Re-create Edi document (text file or log4net document) content
+			        ret = Open(path, CloseDocOnError.WithoutUserNotification);
+			        break;
+	        }
+
+	        return ret;
         }
 
         /// <summary>
