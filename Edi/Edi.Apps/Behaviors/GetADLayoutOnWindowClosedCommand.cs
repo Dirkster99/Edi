@@ -49,7 +49,7 @@ namespace Edi.Apps.Behaviors
 		/// <param name="e"></param>
 		private static void OnSendLayoutCommandChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-			var win = d as Edi.Core.Interfaces.ILayoutableWindow;
+			var win = d as Core.Interfaces.ILayoutableWindow;
 
 			// Remove the handler if it exist to avoid memory leaks
 			win.Closed -= uiElement_Closed;
@@ -77,7 +77,7 @@ namespace Edi.Apps.Behaviors
 		/// <param name="e"></param>
 		static void uiElement_Closed(object sender, System.EventArgs e)
 		{
-			var layoutableElement = sender as Edi.Core.Interfaces.ILayoutableWindow;
+			var layoutableElement = sender as Core.Interfaces.ILayoutableWindow;
 			FrameworkElement fwElement = sender as FrameworkElement;
 
 			// Sanity check just in case this was somehow send by something else
@@ -86,7 +86,7 @@ namespace Edi.Apps.Behaviors
 
 			string xmlLayout = layoutableElement.CurrentADLayout;
 
-			ICommand sendLayoutCommand = GetAdLayoutOnWindowClosedCommand.GetSendLayoutCommand(fwElement);
+			ICommand sendLayoutCommand = GetSendLayoutCommand(fwElement);
 
 			// There may not be a command bound to this after all
 			if (sendLayoutCommand == null)

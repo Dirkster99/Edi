@@ -80,7 +80,7 @@
 			if (uiElement == null)
 				return;
 
-			ICommand dropCommand = DropFileCommand.GetDropCommand(uiElement);
+			ICommand dropCommand = GetDropCommand(uiElement);
 
 			// There may not be a command bound to this after all
 			if (dropCommand == null)

@@ -20,8 +20,8 @@ namespace Edi.Apps.Events
 		/// </summary>
 		static SynchronousEvent()
 		{
-			SynchronousEvent<TPayload>.EventAggregator = new EventAggregator();
-			SynchronousEvent<TPayload>.Instance = EventAggregator.GetEvent<SynchronousEvent<TPayload>>();
+			EventAggregator = new EventAggregator();
+			Instance = EventAggregator.GetEvent<SynchronousEvent<TPayload>>();
 		}
 
 		/// <summary>

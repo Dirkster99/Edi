@@ -2,9 +2,9 @@ namespace Edi.Apps.Views.Shell
 {
     using System;
     using System.ComponentModel.Composition;
-    using Edi.Core.Interfaces;
-    using Edi.Apps.Events;
-    using Edi.Apps.Interfaces.ViewModel;
+    using Core.Interfaces;
+    using Events;
+    using Interfaces.ViewModel;
     using Prism.Events;
     using MWindowLib;
 
@@ -12,28 +12,28 @@ namespace Edi.Apps.Views.Shell
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     [Export]
-    public partial class MainWindow : SimpleMetroWindow, Edi.Core.Interfaces.ILayoutableWindow
+    public partial class MainWindow : SimpleMetroWindow, ILayoutableWindow
     {
         #region constructors
         [ImportingConstructor]
         public MainWindow(IAvalonDockLayoutViewModel av,
                           IApplicationViewModel appVm)
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
-            this.dockView.SetTemplates(av.ViewProperties.SelectPanesTemplate,
+            dockView.SetTemplates(av.ViewProperties.SelectPanesTemplate,
                                         av.ViewProperties.DocumentHeaderTemplate,
                                         av.ViewProperties.SelectPanesStyle,
                                         av.ViewProperties.LayoutInitializer,
                                         av.LayoutID);
 
             // Register these methods to receive PRISM event notifications about load and save of avalondock layouts
-            LoadLayoutEvent.Instance.Subscribe(this.dockView.OnLoadLayout, ThreadOption.PublisherThread,
+            LoadLayoutEvent.Instance.Subscribe(dockView.OnLoadLayout, ThreadOption.PublisherThread,
                                                true,
                                          s => s.LayoutId == av.LayoutID);
 
             // subscribe to close event messing to application viewmodel
-            this.Closing += appVm.OnClosing;
+            Closing += appVm.OnClosing;
 
             // When the ViewModel asks to be closed, close the window.
             // Source: http://msdn.microsoft.com/en-us/magazine/dd419663.aspx
@@ -51,12 +51,12 @@ namespace Edi.Apps.Views.Shell
         /// the positions and layout of documents and tool windows within the AvalonDock
         /// view.
         /// </summary>
-        public Guid LayoutId => (this.dockView != null ? this.dockView.LayoutId : Guid.Empty);
+        public Guid LayoutId => (dockView != null ? dockView.LayoutId : Guid.Empty);
 
 	    /// <summary>
         /// Gets the current AvalonDockManager Xml layout and returns it as a string.
         /// </summary>
-        public string CurrentADLayout => (this.dockView != null ? this.dockView.CurrentAdLayout : string.Empty);
+        public string CurrentADLayout => (dockView != null ? dockView.CurrentAdLayout : string.Empty);
 
 	    #endregion properties
     }

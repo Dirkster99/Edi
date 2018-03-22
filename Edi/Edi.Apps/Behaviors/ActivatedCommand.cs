@@ -17,7 +17,7 @@
 				"Command",
 				typeof(ICommand),
 				typeof(ActivatedCommand),
-				new PropertyMetadata(null, ActivatedCommand.OnCommandChange));
+				new PropertyMetadata(null, OnCommandChange));
 
 		/// <summary>
 		/// <seealso cref="object"/> field for CommandParameter binding if user wants to
@@ -115,9 +115,9 @@
 			if (uiElement == null)
 				return;
 
-			ICommand command = ActivatedCommand.GetCommand(uiElement);
+			ICommand command = GetCommand(uiElement);
 
-			object commandParameter = ActivatedCommand.GetCommandParameter(uiElement);
+			object commandParameter = GetCommandParameter(uiElement);
 
 			// There may not be a command bound to this after all
 			if (command == null)

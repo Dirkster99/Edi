@@ -4,7 +4,7 @@ namespace Edi.Apps.Converters
 {
 	using System;
 	using System.Windows.Data;
-	using Edi.Core.Interfaces;
+	using Core.Interfaces;
 
 	/// <summary>
 	/// This converter is invoked when a new ActiveDocument (ActiveContent) is being selected and breught into view.

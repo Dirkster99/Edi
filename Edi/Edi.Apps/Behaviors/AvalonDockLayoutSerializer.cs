@@ -44,7 +44,7 @@ namespace Edi.Apps.Behaviors
 				DependencyProperty.RegisterAttached("LoadLayoutCommand",
 				typeof(ICommand),
 				typeof(AvalonDockLayoutSerializer),
-				new PropertyMetadata(null, AvalonDockLayoutSerializer.OnLoadLayoutCommandChanged));
+				new PropertyMetadata(null, OnLoadLayoutCommandChanged));
 		#endregion fields
 
 		#region methods
@@ -103,7 +103,7 @@ namespace Edi.Apps.Behaviors
 			if (frameworkElement == null)
 				return;
 
-			ICommand loadLayoutCommand = AvalonDockLayoutSerializer.GetLoadLayoutCommand(frameworkElement);
+			ICommand loadLayoutCommand = GetLoadLayoutCommand(frameworkElement);
 
 			// There may not be a command bound to this after all
 			if (loadLayoutCommand == null)

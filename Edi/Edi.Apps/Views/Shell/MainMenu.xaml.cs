@@ -10,7 +10,7 @@
   {
     public MainMenu()
     {
-      this.InitializeComponent();
+      InitializeComponent();
     }
   }
 }

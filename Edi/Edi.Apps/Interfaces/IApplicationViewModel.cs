@@ -2,12 +2,12 @@
 {
     using System;
     using System.Windows;
-    using Edi.Core.Interfaces;
-    using Edi.Apps.Enums;
+    using Core.Interfaces;
+    using Enums;
     using MiniUML.Model.ViewModels.Document;
-    using Edi.Settings.Interfaces;
-    using Edi.Settings.ProgramSettings;
-    using Edi.Themes.Interfaces;
+    using Settings.Interfaces;
+    using Settings.ProgramSettings;
+    using Themes.Interfaces;
     using MLib.Interfaces;
 
     /// <summary>
