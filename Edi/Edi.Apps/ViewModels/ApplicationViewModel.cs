@@ -1,3 +1,5 @@
+using MiniUML.Model.ViewModels.Document;
+
 namespace Edi.Apps.ViewModels
 {
     using CommonServiceLocator;
@@ -78,8 +80,7 @@ namespace Edi.Apps.ViewModels
         private IFileBaseViewModel _mActiveDocument;
         private RelayCommand<object> _mMainWindowActivated;
 
-        private readonly IModuleManager _mModuleManager;
-        private readonly IAppCoreModel _mAppCore;
+	    private readonly IAppCoreModel _mAppCore;
 	    private readonly IToolWindowRegistry _mToolRegistry;
         private readonly ISettingsManager _mSettingsManager;
 	    private readonly IMessageManager _mMessageManager;
@@ -105,24 +106,18 @@ namespace Edi.Apps.ViewModels
                                     IDocumentTypeManager documentTypeManager)
             : this()
         {
-            _mAppCore = appCore;
+	        _mAppCore = appCore;
             AdLayout = avLayout;
-            _mModuleManager = moduleManager;
 
-            _mMessageManager = messageManager;
-            if (messageManager.MessageBox != null)   // reset messagebox service
-                _msgBox = messageManager.MessageBox;
-            else
-            {
-                _msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-            }
+	        _mMessageManager = messageManager;
+            _msgBox = messageManager.MessageBox ?? ServiceLocator.Current.GetInstance<IMessageBoxService>();
 
             _mToolRegistry = toolRegistry;
             _mSettingsManager = programSettings;
             ApplicationThemes = themesManager;
             _mDocumentTypeManager = documentTypeManager;
 
-            _mModuleManager.LoadModuleCompleted += ModuleManager_LoadModuleCompleted;
+            moduleManager.LoadModuleCompleted += ModuleManager_LoadModuleCompleted;
         }
 
         public ApplicationViewModel()
@@ -176,56 +171,54 @@ namespace Edi.Apps.ViewModels
         {
             get
             {
-                if (_mMainWindowActivated == null)
-                    _mMainWindowActivated = new RelayCommand<object>((p) =>
-                    {
-                        // Is processing of this event currently enabled?
-                        if (_mIsMainWindowActivationProcessingEnabled == false)
-                            return;
+	            return _mMainWindowActivated ?? (_mMainWindowActivated = new RelayCommand<object>((p) =>
+	            {
+		            // Is processing of this event currently enabled?
+		            if (_mIsMainWindowActivationProcessingEnabled == false)
+			            return;
 
-                        // Is this event already currently being processed?
-                        if (_mIsMainWindowActivationProcessed)
-                            return;
+		            // Is this event already currently being processed?
+		            if (_mIsMainWindowActivationProcessed)
+			            return;
 
-                        lock (_mLock)
-                        {
-                            try
-                            {
-                                if (_mIsMainWindowActivationProcessed)
-                                    return;
+		            lock (_mLock)
+		            {
+			            try
+			            {
+				            if (_mIsMainWindowActivationProcessed)
+					            return;
 
-                                _mIsMainWindowActivationProcessed = true;
+				            _mIsMainWindowActivationProcessed = true;
 
-                                foreach (var item in Files)
-                                {
-                                    if (item.WasChangedExternally)
-                                    {
-                                        var result = _msgBox.Show(
-	                                        $"File '{item.FileName}' was changed externally. Click OK to reload or Cancel to keep current content.",
-                                                                  "File changed externally", MsgBoxButtons.OKCancel);
+				            foreach (var item in Files)
+				            {
+					            if (item.WasChangedExternally)
+					            {
+						            var result = _msgBox.Show(
+							            $"File '{item.FileName}' was changed externally. Click OK to reload or Cancel to keep current content.",
+							            "File changed externally", MsgBoxButtons.OKCancel);
 
-                                        if (result == MsgBoxResult.OK)
-                                        {
-                                            item.ReOpen();
-                                        }
-                                    }
-                                }
-                            }
-                            catch (Exception exp)
-                            {
-                                Logger.Error(exp.Message, exp);
-                                _msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                                             _mAppCore.IssueTrackerLink, _mAppCore.IssueTrackerLink,
-                                             Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
-                            }
-                            finally
-                            {
-                                _mIsMainWindowActivationProcessed = false;
-                            }
-                        }
-                    });
-
-                return _mMainWindowActivated;
+						            if (result == MsgBoxResult.OK)
+						            {
+							            item.ReOpen();
+						            }
+					            }
+				            }
+			            }
+			            catch (Exception exp)
+			            {
+				            Logger.Error(exp.Message, exp);
+				            _msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error,
+					            MsgBoxResult.NoDefaultButton,
+					            _mAppCore.IssueTrackerLink, _mAppCore.IssueTrackerLink,
+					            Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+			            }
+			            finally
+			            {
+				            _mIsMainWindowActivationProcessed = false;
+			            }
+		            }
+	            }));
             }
         }
 
@@ -277,9 +270,9 @@ namespace Edi.Apps.ViewModels
 
 	    /// <summary>
         /// This is a type safe ActiveDocument property that is used to bind
-        /// to an ActiveDocument of type <seealso cref="MiniUML.Model.ViewModels.DocumentViewModel"/>.
+        /// to an ActiveDocument of type <seealso cref="DocumentViewModel"/>.
         /// This property returns null (thus avoiding binding errors) if the
-        /// ActiveDocument is not of <seealso cref="MiniUML.Model.ViewModels.DocumentViewModel"/> type.
+        /// ActiveDocument is not of <seealso cref="DocumentViewModel"/> type.
         /// 
         /// This particular property is also required to load MiniUML Plugins.
         /// </summary>
@@ -287,15 +280,9 @@ namespace Edi.Apps.ViewModels
         {
             get
             {
+	            MiniUmlViewModel vm = _mActiveDocument as MiniUmlViewModel;
 
-                if (_mActiveDocument is MiniUmlViewModel)
-                {
-                    MiniUmlViewModel vm = _mActiveDocument as MiniUmlViewModel;
-
-                    return vm.DocumentMiniUml as MiniUML.Model.ViewModels.Document.AbstractDocumentViewModel;
-                }
-
-                return null;
+	            return vm?.DocumentMiniUml as AbstractDocumentViewModel;
             }
         }
         #endregion
@@ -341,7 +328,6 @@ namespace Edi.Apps.ViewModels
             get
             {
                 var ret = GetToolWindowVm<RecentFilesViewModel>();
-
                 return ret;
             }
         }
@@ -394,13 +380,15 @@ namespace Edi.Apps.ViewModels
             return true;
         }
 
-        /// <summary>
-        /// Open a file supplied in <paramref name="filePath"/> (without displaying a file open dialog).
-        /// </summary>
-        /// <param name="filePath">file to open</param>
-        /// <param name="addIntoMru">indicate whether file is to be added into MRU or not</param>
-        /// <returns></returns>
-        public IFileBaseViewModel Open(string filePath,
+	    /// <summary>
+	    /// Open a file supplied in <paramref name="filePath"/> (without displaying a file open dialog).
+	    /// </summary>
+	    /// <param name="filePath">file to open</param>
+	    /// <param name="closeDocumentWithoutMessageOnError"></param>
+	    /// <param name="addIntoMru">indicate whether file is to be added into MRU or not</param>
+	    /// <param name="typeOfDoc"></param>
+	    /// <returns></returns>
+	    public IFileBaseViewModel Open(string filePath,
                                         CloseDocOnError closeDocumentWithoutMessageOnError = CloseDocOnError.WithUserNotification,
                                         bool addIntoMru = true,
                                         string typeOfDoc = "EdiTextEditor")
@@ -441,10 +429,7 @@ namespace Edi.Apps.ViewModels
                 ////}
                 ////else
                 ////{
-                bool closeOnErrorWithoutMessage = false;
-
-                if (closeDocumentWithoutMessageOnError == CloseDocOnError.WithoutUserNotification)
-                    closeOnErrorWithoutMessage = true;
+                bool closeOnErrorWithoutMessage = closeDocumentWithoutMessageOnError == CloseDocOnError.WithoutUserNotification;
 
                 // try to load a standard text file from the file system as a fallback method
                 fileViewModel = EdiViewModel.LoadFile(dm, _mSettingsManager, closeOnErrorWithoutMessage);
@@ -597,11 +582,10 @@ namespace Edi.Apps.ViewModels
             try
             {
                 var dlg = new OpenFileDialog();
-                IFileFilterEntries fileEntries = null;
 
-                // Get filter strings for document specific filters or all filters
+	            // Get filter strings for document specific filters or all filters
                 // depending on whether type of document is set to a key or not.
-                fileEntries = _mDocumentTypeManager.GetFileFilterEntries(typeOfDocument);
+                var fileEntries = _mDocumentTypeManager.GetFileFilterEntries(typeOfDocument);
                 dlg.Filter = fileEntries.GetFilterString();
 
                 dlg.Multiselect = true;
@@ -730,9 +714,7 @@ namespace Edi.Apps.ViewModels
                 if (e != null)
                     e.Handled = true;
 
-                var isPinnedParam = false;    // Pin this if it was not pinned before or
-                if (cmdParam.IsPinned == 0)  // Vice Versa
-                    isPinnedParam = true;
+                bool isPinnedParam = cmdParam.IsPinned == 0;    // Pin this if it was not pinned before or
 
                 GetToolWindowVm<RecentFilesViewModel>().MruList.PinUnpinEntry(isPinnedParam, cmdParam);
             }
@@ -1006,22 +988,23 @@ namespace Edi.Apps.ViewModels
 
                     try
                     {
-                        dlg.FileName = Path.GetFileName(filePath);
+                        dlg.FileName = Path.GetFileName(filePath) ?? throw new InvalidOperationException();
                     }
-                    catch
-                    {
-                    }
+	                catch
+	                {
+		                // ignored
+	                }
 
-                    dlg.InitialDirectory = GetDefaultPath();
+	                dlg.InitialDirectory = GetDefaultPath();
 
                     if (string.IsNullOrEmpty(fileExtensionFilter) == false)
                         dlg.Filter = fileExtensionFilter;
 
                     if (dlg.ShowDialog().GetValueOrDefault())     // SaveAs file if user OK'ed it so
                     {
-                        filePath = dlg.FileName;
+	                    filePath = dlg.FileName;
 
-                        fileToSave.SaveFile(filePath);
+	                    fileToSave?.SaveFile(filePath);
                     }
                     else
                         return false;
@@ -1071,14 +1054,14 @@ namespace Edi.Apps.ViewModels
             return true;
         }
 
-        /// <summary>
-        /// Close the currently active file and set the file with the lowest index as active document.
-        /// 
-        /// TODO: The last active document that was active before the document being closed should be activated next.
-        /// </summary>
-        /// <param name="fileToClose"></param>
-        /// <returns></returns>
-        internal bool Close(IFileBaseViewModel doc)
+	    /// <summary>
+	    /// Close the currently active file and set the file with the lowest index as active document.
+	    /// 
+	    /// TODO: The last active document that was active before the document being closed should be activated next.
+	    /// </summary>
+	    /// <param name="doc"></param>
+	    /// <returns></returns>
+	    internal bool Close(IFileBaseViewModel doc)
         {
             try
             {
@@ -1219,17 +1202,16 @@ namespace Edi.Apps.ViewModels
             try
             {
                 if (_mFiles != null)               // Close all open files and make sure there are no unsaved edits
-                {                                     // If there are any: Ask user if edits should be saved
-                    for (int i = 0; i < Files.Count; i++)
-                    {
-                        IFileBaseViewModel f = Files[i];
-
-                        if (OnCloseSaveDirtyFile(f) == false)
-                        {
-                            _mShutDownInProgress = false;
-                            return false;               // Cancel shutdown process (return false) if user cancels saving edits
-                        }
-                    }
+                {
+	                // If there are any: Ask user if edits should be saved
+	                foreach (var f in Files)
+	                {
+		                if (OnCloseSaveDirtyFile(f) == false)
+		                {
+			                _mShutDownInProgress = false;
+			                return false;               // Cancel shutdown process (return false) if user cancels saving edits
+		                }
+	                }
                 }
 
                 // Do layout serialization after saving/closing files
@@ -1239,9 +1221,10 @@ namespace Edi.Apps.ViewModels
                     _mAppCore.CreateAppDataFolder();
                     ////this.SerializeLayout(sender);            // Store the current layout for later retrieval
                 }
-                catch
-                {
-                }
+	            catch
+	            {
+		            // ignored
+	            }
             }
             catch (Exception exp)
             {
@@ -1344,12 +1327,8 @@ namespace Edi.Apps.ViewModels
                         // Query for an explorer tool window and return it
                         var eplorerTw = GetToolWindowVm<IExplorer>();
 
-                        if (eplorerTw != null)
-                            eplorerTw.NavigateToFolder(f.GetAlternativePath());
+	                    eplorerTw?.NavigateToFolder(f.GetAlternativePath());
                     }
-                    break;
-
-                default:
                     break;
             }
         }
@@ -1440,10 +1419,6 @@ namespace Edi.Apps.ViewModels
 
                     _msgBox.Show(exp, "An unexpected error occured", MsgBoxButtons.OK, MsgBoxImage.Alert);
                 }
-                finally
-                {
-
-                }
             }
         }
 
@@ -1498,7 +1473,7 @@ namespace Edi.Apps.ViewModels
         private T GetToolWindowVm<T>() where T : class
         {
             // Query for a RecentFiles tool window and return it
-            return Tools.FirstOrDefault(d => d as T != null) as T;
+            return Tools.FirstOrDefault(d => d is T) as T;
         }
 
         /// <summary>
@@ -1509,14 +1484,11 @@ namespace Edi.Apps.ViewModels
         /// <param name="args"></param>
         private void OnRegisterToolWindow(RegisterToolWindowEventArgs args)
         {
-            if (args != null)
-            {
-                // This particular event is needed since the build in RecentFiles
-                // property is otherwise without content since it may be queried
-                // for the menu entry - before the tool window is registered
-                if (args.Tool is RecentFilesViewModel)
-                    RaisePropertyChanged(() => RecentFiles);
-            }
+	        // This particular event is needed since the build in RecentFiles
+	        // property is otherwise without content since it may be queried
+	        // for the menu entry - before the tool window is registered
+	        if (args?.Tool is RecentFilesViewModel)
+		        RaisePropertyChanged(() => RecentFiles);
         }
 
         /// <summary>
@@ -1527,14 +1499,11 @@ namespace Edi.Apps.ViewModels
         /// <param name="e"></param>
         private void ModuleManager_LoadModuleCompleted(object sender, LoadModuleCompletedEventArgs e)
         {
-            if (_mMessageManager.Output != null)
-            {
-                _mMessageManager.Output.AppendLine(
-	                $"Loading MEF Module: {e.ModuleInfo.ModuleName},\n" +
-	                $"                    Type: {e.ModuleInfo.ModuleType},\n" +
-	                $"     Initialization Mode: {e.ModuleInfo.InitializationMode},\n" +
-	                $"                   State: {e.ModuleInfo.State}, Ref: '{e.ModuleInfo.Ref}'\n");
-            }
+	        _mMessageManager.Output?.AppendLine(
+		        $"Loading MEF Module: {e.ModuleInfo.ModuleName},\n" +
+		        $"                    Type: {e.ModuleInfo.ModuleType},\n" +
+		        $"     Initialization Mode: {e.ModuleInfo.InitializationMode},\n" +
+		        $"                   State: {e.ModuleInfo.State}, Ref: '{e.ModuleInfo.Ref}'\n");
         }
         #endregion methods
     }
