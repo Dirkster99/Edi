@@ -8,9 +8,8 @@
     using Settings.Interfaces;
     using Settings.ProgramSettings;
     using Themes.Interfaces;
-    using MLib.Interfaces;
 
-    /// <summary>
+	/// <summary>
     /// This interface models the viewmodel that manages the complete
     /// application life cyle from start to end. It publishes the methodes,
     /// properties, and events necessary to integrate the application into

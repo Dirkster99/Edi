@@ -65,29 +65,29 @@ namespace Edi.Apps.ViewModels
 
         protected static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private bool? _mDialogCloseResult = null;
-        private bool? _mIsNotMaximized = null;
-        private bool _mIsWorkspaceAreaOptimized = false;
+        private bool? _mDialogCloseResult;
+        private bool? _mIsNotMaximized;
+        private bool _mIsWorkspaceAreaOptimized;
 
-        private bool _mShutDownInProgress = false;
-        private bool _mShutDownInProgressCancel = false;
+        private bool _mShutDownInProgress;
+        private bool _mShutDownInProgressCancel;
 
-        private readonly ObservableCollection<IFileBaseViewModel> _mFiles = null;
-        private ReadOnlyObservableCollection<IFileBaseViewModel> _mReadonyFiles = null;
+        private readonly ObservableCollection<IFileBaseViewModel> _mFiles;
+        private ReadOnlyObservableCollection<IFileBaseViewModel> _mReadonyFiles;
 
-        private IFileBaseViewModel _mActiveDocument = null;
-        private RelayCommand<object> _mMainWindowActivated = null;
+        private IFileBaseViewModel _mActiveDocument;
+        private RelayCommand<object> _mMainWindowActivated;
 
-        private readonly IModuleManager _mModuleManager = null;
-        private readonly IAppCoreModel _mAppCore = null;
-	    private readonly IToolWindowRegistry _mToolRegistry = null;
-        private readonly ISettingsManager _mSettingsManager = null;
-	    private readonly IMessageManager _mMessageManager = null;
+        private readonly IModuleManager _mModuleManager;
+        private readonly IAppCoreModel _mAppCore;
+	    private readonly IToolWindowRegistry _mToolRegistry;
+        private readonly ISettingsManager _mSettingsManager;
+	    private readonly IMessageManager _mMessageManager;
 
         private readonly IDocumentTypeManager _mDocumentTypeManager;
-        private IDocumentType _mSelectedOpenDocumentType = null;
+        private IDocumentType _mSelectedOpenDocumentType;
 
-        private readonly IMessageBoxService _msgBox = null;
+        private readonly IMessageBoxService _msgBox;
         #endregion fields
 
         #region constructor
@@ -152,11 +152,11 @@ namespace Edi.Apps.ViewModels
         /// <summary>
         /// Gets an instance of the current application theme manager.
         /// </summary>
-        public IThemesManager ApplicationThemes { get; } = null;
+        public IThemesManager ApplicationThemes { get; }
 
 	    private readonly object _mLock = new object();
-        private bool _mIsMainWindowActivationProcessed = false;
-        private bool _mIsMainWindowActivationProcessingEnabled = false;
+        private bool _mIsMainWindowActivationProcessed;
+        private bool _mIsMainWindowActivationProcessingEnabled;
 
         /// <summary>
         /// Activates/deactivates processing of the mainwindow activated event.
@@ -349,7 +349,7 @@ namespace Edi.Apps.ViewModels
         /// <summary>
         /// Expose command to load/save AvalonDock layout on application startup and shut-down.
         /// </summary>
-        public IAvalonDockLayoutViewModel AdLayout { get; } = null;
+        public IAvalonDockLayoutViewModel AdLayout { get; }
 
 	    public bool ShutDownInProgressCancel
         {

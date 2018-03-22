@@ -20,14 +20,14 @@
 		#region fields
 		protected static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-		private DockingManager _mDockManager = null;
+		private DockingManager _mDockManager;
 
-		private DataTemplateSelector _mLayoutItemTemplateSelector = null;
-		private DataTemplate _mDocumentHeaderTemplate = null;
-		private StyleSelector _mLayoutItemContainerStyleSelector = null;
-		private ILayoutUpdateStrategy _mLayoutUpdateStrategy = null;
+		private DataTemplateSelector _mLayoutItemTemplateSelector;
+		private DataTemplate _mDocumentHeaderTemplate;
+		private StyleSelector _mLayoutItemContainerStyleSelector;
+		private ILayoutUpdateStrategy _mLayoutUpdateStrategy;
 
-		private string _mOnLoadXmlLayout = null;
+		private string _mOnLoadXmlLayout;
 		#endregion fields
 
 		#region constructor

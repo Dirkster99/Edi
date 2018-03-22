@@ -12,10 +12,8 @@
     using MRULib.MRU.Interfaces;
     using MRULib.MRU.Models.Persist;
     using CommonServiceLocator;
-    using MLib.Interfaces;
-    using System.Windows.Media;
 
-    public partial class ApplicationViewModel
+	public partial class ApplicationViewModel
     {
         /// <summary>
         /// Save application settings when the application is being closed down
@@ -107,12 +105,13 @@
             }
         }
 
-        /// <summary>
-        /// Execute closing function and persist session data to be reloaded on next restart
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void OnClosed(Window win)
+	    /// <summary>
+	    /// Execute closing function and persist session data to be reloaded on next restart
+	    /// </summary>
+	    /// <param name="sender"></param>
+	    /// <param name="e"></param>
+	    /// <param name="win"></param>
+	    public void OnClosed(Window win)
         {
             try
             {

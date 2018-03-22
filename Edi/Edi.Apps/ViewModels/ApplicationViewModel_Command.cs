@@ -867,7 +867,7 @@
         }
 
         #region ToggleEditorOptionCommand
-        RelayCommand<ToggleEditorOption> _toggleEditorOptionCommand = null;
+        RelayCommand<ToggleEditorOption> _toggleEditorOptionCommand;
         public ICommand ToggleEditorOptionCommand
         {
             get

@@ -39,6 +39,7 @@ namespace Edi.Apps.ViewModels
                 }
                 catch
                 {
+	                // ignored
                 }
                 finally
                 {
@@ -57,10 +58,7 @@ namespace Edi.Apps.ViewModels
             {
                 if (f != null)
                 {
-                    if (f.HighlightingDefinition != null)
-                        hlNames.Add(f.HighlightingDefinition.Name);
-                    else
-                        hlNames.Add(null);
+	                hlNames.Add(f.HighlightingDefinition?.Name);
                 }
             }
 
