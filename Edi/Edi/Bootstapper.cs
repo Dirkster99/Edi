@@ -1,7 +1,8 @@
+using Edi.Apps.Interfaces;
+
 namespace Edi
 {
-    using Edi.Apps.Interfaces.ViewModel;
-    using Edi.Apps.ViewModels;
+	using Edi.Apps.ViewModels;
     using Edi.Apps.Views.Shell;
     using Edi.Core;
     using Edi.Core.Interfaces;

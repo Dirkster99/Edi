@@ -48,17 +48,17 @@
 		/// <param name="e"></param>
 		private static void OnDropCommandChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-			UIElement uiElement = d as UIElement;	  // Remove the handler if it exist to avoid memory leaks
-			uiElement.Drop -= UIElement_Drop;
+			if (d is UIElement uiElement)
+			{
+				uiElement.Drop -= UIElement_Drop;
 
-            if (e.NewValue is ICommand)
-            {
-                ICommand command = e.NewValue as ICommand;
-
-                // the property is attached so we attach the Drop event handler
-                uiElement.Drop += UIElement_Drop;
-            }
-        }
+				if (e.NewValue is ICommand)
+				{
+					// the property is attached so we attach the Drop event handler
+					uiElement.Drop += UIElement_Drop;
+				}
+			}
+		}
 
 		/// <summary>
 		/// This method is called when the Drop event occurs. The sender should be the control
@@ -88,23 +88,21 @@
 
 			if (e.Data.GetDataPresent(DataFormats.FileDrop))
 			{
-				string[] droppedFilePaths =
-				e.Data.GetData(DataFormats.FileDrop, true) as string[];
-
-				foreach (string droppedFilePath in droppedFilePaths)
-				{
-					// Check whether this attached behaviour is bound to a RoutedCommand
-					if (dropCommand is RoutedCommand)
+				if (e.Data.GetData(DataFormats.FileDrop, true) is string[] droppedFilePaths)
+					foreach (string droppedFilePath in droppedFilePaths)
 					{
-						// Execute the routed command
-						(dropCommand as RoutedCommand).Execute(droppedFilePath, uiElement);
+						// Check whether this attached behaviour is bound to a RoutedCommand
+						if (dropCommand is RoutedCommand)
+						{
+							// Execute the routed command
+							(dropCommand as RoutedCommand).Execute(droppedFilePath, uiElement);
+						}
+						else
+						{
+							// Execute the Command as bound delegate
+							dropCommand.Execute(droppedFilePath);
+						}
 					}
-					else
-					{
-						// Execute the Command as bound delegate
-						dropCommand.Execute(droppedFilePath);
-					}
-				}
 			}
 		}
 	}

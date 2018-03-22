@@ -1,10 +1,11 @@
+using Edi.Apps.Interfaces;
+
 namespace Edi.Apps.Views.Shell
 {
     using System;
     using System.ComponentModel.Composition;
     using Core.Interfaces;
     using Events;
-    using Interfaces.ViewModel;
     using Prism.Events;
     using MWindowLib;
 

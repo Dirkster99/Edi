@@ -1,14 +1,14 @@
-﻿namespace Edi.Apps.Interfaces.ViewModel
-{
-    using System;
-    using System.Windows;
-    using Core.Interfaces;
-    using Enums;
-    using MiniUML.Model.ViewModels.Document;
-    using Settings.Interfaces;
-    using Settings.ProgramSettings;
-    using Themes.Interfaces;
+﻿using System;
+using System.Windows;
+using Edi.Apps.Enums;
+using Edi.Core.Interfaces;
+using Edi.Settings.Interfaces;
+using Edi.Settings.ProgramSettings;
+using Edi.Themes.Interfaces;
+using MiniUML.Model.ViewModels.Document;
 
+namespace Edi.Apps.Interfaces
+{
 	/// <summary>
     /// This interface models the viewmodel that manages the complete
     /// application life cyle from start to end. It publishes the methodes,
@@ -64,8 +64,6 @@
 		/// <summary>
 		/// Execute closing function and persist session data to be reloaded on next restart
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
 		/// <param name="win"></param>
 		void OnClosed(Window win);
 

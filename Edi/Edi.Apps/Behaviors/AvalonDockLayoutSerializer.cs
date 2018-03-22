@@ -77,17 +77,17 @@ namespace Edi.Apps.Behaviors
 		/// <param name="e"></param>
 		private static void OnLoadLayoutCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-			FrameworkElement framworkElement = d as FrameworkElement; // Remove the handler if it exist to avoid memory leaks
-			framworkElement.Loaded -= OnFrameworkElement_Loaded;
+			if (d is FrameworkElement framworkElement)
+			{
+				framworkElement.Loaded -= OnFrameworkElement_Loaded;
 
-            if (e.NewValue is ICommand)
-            {
-                ICommand command = e.NewValue as ICommand;
-
-                // the property is attached so we attach the Drop event handler
-                framworkElement.Loaded += OnFrameworkElement_Loaded;
-            }
-        }
+				if (e.NewValue is ICommand)
+				{
+					// the property is attached so we attach the Drop event handler
+					framworkElement.Loaded += OnFrameworkElement_Loaded;
+				}
+			}
+		}
 
 		/// <summary>
 		/// This method is executed when a AvalonDock <seealso cref="DockingManager"/> instance fires the

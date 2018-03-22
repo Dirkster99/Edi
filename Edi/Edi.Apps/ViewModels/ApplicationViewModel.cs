@@ -4,7 +4,6 @@ namespace Edi.Apps.ViewModels
 {
     using CommonServiceLocator;
     using Enums;
-    using Interfaces.ViewModel;
     using Core.Interfaces;
     using Core.Interfaces.Documents;
     using Core.Interfaces.DocumentTypes;
@@ -43,11 +42,11 @@ namespace Edi.Apps.ViewModels
     /// It publishes the methodes, properties, and events necessary to integrate
     /// the application into a given shell (BootStrapper, App.xaml.cs etc).
     /// </summary>
-    [Export(typeof(IApplicationViewModel))]
+    [Export(typeof(Interfaces.IApplicationViewModel))]
     [Export(typeof(IFileOpenService))]
     public partial class ApplicationViewModel : ViewModelBase,
                                                 IViewModelResolver,
-                                                IApplicationViewModel,
+                                                Interfaces.IApplicationViewModel,
                                                 IDocumentParent,
                                                 IFileOpenService
     {
