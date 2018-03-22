@@ -1,21 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Reflection;
-using System.Windows;
-using System.Windows.Media;
-using Edi.Documents.ViewModels.EdiDoc;
-using Edi.Themes.Definition;
-using Edi.Util.Local;
-using ICSharpCode.AvalonEdit.Edi;
-using ICSharpCode.AvalonEdit.Highlighting;
-using ICSharpCode.AvalonEdit.Highlighting.Themes;
-using MsgBox;
-
 namespace Edi.Apps.ViewModels
 {
-	public partial class ApplicationViewModel
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Windows;
+    using System.Windows.Media;
+    using Edi.Documents.ViewModels.EdiDoc;
+    using ICSharpCode.AvalonEdit.Edi;
+    using ICSharpCode.AvalonEdit.Highlighting;
+    using ICSharpCode.AvalonEdit.Highlighting.Themes;
+    using MsgBox;
+    using Edi.Themes.Definition;
+
+    public partial class ApplicationViewModel
     {
         /// <summary>
         /// Change WPF theme.
@@ -41,7 +39,6 @@ namespace Edi.Apps.ViewModels
                 }
                 catch
                 {
-	                // ignored
                 }
                 finally
                 {
@@ -50,17 +47,20 @@ namespace Edi.Apps.ViewModels
             }
 
             // Get WPF Theme definition from Themes Assembly
-            ThemeBase nextThemeToSwitchTo = ApplicationThemes.SelectedTheme;
-            SwitchToSelectedTheme(nextThemeToSwitchTo);
+            ThemeBase nextThemeToSwitchTo = this.mThemesManager.SelectedTheme;
+            this.SwitchToSelectedTheme(nextThemeToSwitchTo);
 
             // Backup highlighting names (if any) and restore highlighting associations after reloading highlighting definitions
-            var hlNames = new List<string>();
+            var HlNames = new List<string>();
 
-            foreach (EdiViewModel f in Documents)
+            foreach (EdiViewModel f in this.Documents)
             {
                 if (f != null)
                 {
-	                hlNames.Add(f.HighlightingDefinition?.Name);
+                    if (f.HighlightingDefinition != null)
+                        HlNames.Add(f.HighlightingDefinition.Name);
+                    else
+                        HlNames.Add(null);
                 }
             }
 
@@ -72,15 +72,15 @@ namespace Edi.Apps.ViewModels
             HighlightingExtension.RegisterCustomHighlightingPatterns(hlThemes);
 
             //Re-apply highlightings after resetting highlighting manager
-            List<EdiViewModel> l = Documents;
+            List<EdiViewModel> l = this.Documents;
             for (int i = 0; i < l.Count; i++)
             {
                 if (l[i] != null)
                 {
-                    if (hlNames[i] == null) // The highlighting is null if highlighting is switched off for this file(!)
+                    if (HlNames[i] == null) // The highlighting is null if highlighting is switched off for this file(!)
                         continue;
 
-                    IHighlightingDefinition hdef = HighlightingManager.Instance.GetDefinition(hlNames[i]);
+                    IHighlightingDefinition hdef = HighlightingManager.Instance.GetDefinition(HlNames[i]);
 
                     if (hdef != null)
                         l[i].HighlightingDefinition = hdef;
@@ -144,7 +144,7 @@ namespace Edi.Apps.ViewModels
                     break;
 
                 default:
-                    Logger.WarnFormat("WidgetStyle named '{0}' is not supported.", w.Name);
+                    logger.WarnFormat("WidgetStyle named '{0}' is not supported.", w.Name);
                     break;
             }
         }
@@ -153,22 +153,22 @@ namespace Edi.Apps.ViewModels
         /// Re-define an existing <seealso cref="SolidColorBrush"/> and backup the originial color
         /// as it was before the application of the custom coloring.
         /// </summary>
-        /// <param name="resourceName"></param>
-        /// <param name="newColor"></param>
+        /// <param name="ResourceName"></param>
+        /// <param name="NewColor"></param>
         /// <param name="backupDynResources"></param>
-        private void ApplyToDynamicResource(string resourceName,
-                                            SolidColorBrush newColor,
+        private void ApplyToDynamicResource(string ResourceName,
+                                            SolidColorBrush NewColor,
                                             List<string> backupDynResources)
         {
-            if (Application.Current.Resources[resourceName] != null && newColor != null)
+            if (Application.Current.Resources[ResourceName] != null && NewColor != null)
             {
                 // Re-coloring works with SolidColorBrushs linked as DynamicResource
-                if (Application.Current.Resources[resourceName] is SolidColorBrush)
+                if (Application.Current.Resources[ResourceName] is SolidColorBrush)
                 {
-                    var oldBrush = Application.Current.Resources[resourceName] as SolidColorBrush;
-                    backupDynResources.Add(resourceName);
+                    var oldBrush = Application.Current.Resources[ResourceName] as SolidColorBrush;
+                    backupDynResources.Add(ResourceName);
 
-                    Application.Current.Resources[resourceName] = newColor.Clone();
+                    Application.Current.Resources[ResourceName] = NewColor.Clone();
                 }
             }
         }
@@ -185,26 +185,26 @@ namespace Edi.Apps.ViewModels
             try
             {
                 // set the style of the message box display in back-end system.
-                _msgBox.Style = MsgBoxStyle.System;
+                _MsgBox.Style = MsgBoxStyle.System;
 
                 // Get WPF Theme definition from Themes Assembly
-                ThemeBase theme = ApplicationThemes.SelectedTheme;
+                ThemeBase theme = this.mThemesManager.SelectedTheme;
 
                 if (theme != null)
                 {
                     Application.Current.Resources.MergedDictionaries.Clear();
 
-                    string themesPathFileName = Assembly.GetEntryAssembly().Location;
+                    string ThemesPathFileName = Assembly.GetEntryAssembly().Location;
 
-                    themesPathFileName = Path.GetDirectoryName(themesPathFileName);
-                    themesPathFileName = Path.Combine(themesPathFileName, themesModul);
-                    Assembly assembly = Assembly.LoadFrom(themesPathFileName);
+                    ThemesPathFileName = System.IO.Path.GetDirectoryName(ThemesPathFileName);
+                    ThemesPathFileName = System.IO.Path.Combine(ThemesPathFileName, themesModul);
+                    Assembly assembly = Assembly.LoadFrom(ThemesPathFileName);
 
-                    if (File.Exists(themesPathFileName) == false)
+                    if (System.IO.File.Exists(ThemesPathFileName) == false)
                     {
-                        _msgBox.Show(string.Format(CultureInfo.CurrentCulture,
-                                        Strings.STR_THEMING_MSG_CANNOT_FIND_PATH, themesModul),
-                                        Strings.STR_THEMING_CAPTION,
+                        _MsgBox.Show(string.Format(CultureInfo.CurrentCulture,
+                                        Util.Local.Strings.STR_THEMING_MSG_CANNOT_FIND_PATH, themesModul),
+                                        Util.Local.Strings.STR_THEMING_CAPTION,
                                         MsgBoxButtons.OK, MsgBoxImage.Error);
 
                         return false;
@@ -214,26 +214,26 @@ namespace Edi.Apps.ViewModels
                     {
                         try
                         {
-                            var res = new Uri(item, UriKind.Relative);
+                            var Res = new Uri(item, UriKind.Relative);
 
 
-                            if (Application.LoadComponent(res) is ResourceDictionary)
+                            if (Application.LoadComponent(Res) is ResourceDictionary)
                             {
-                                ResourceDictionary dictionary = Application.LoadComponent(res) as ResourceDictionary;
+                                ResourceDictionary dictionary = Application.LoadComponent(Res) as ResourceDictionary;
 
                                 Application.Current.Resources.MergedDictionaries.Add(dictionary);
                             }
                         }
-                        catch (Exception exp)
+                        catch (Exception Exp)
                         {
-                            _msgBox.Show(exp, string.Format(CultureInfo.CurrentCulture, "'{0}'", item), MsgBoxButtons.OK, MsgBoxImage.Error);
+                            _MsgBox.Show(Exp, string.Format(CultureInfo.CurrentCulture, "'{0}'", item), MsgBoxButtons.OK, MsgBoxImage.Error);
                         }
                     }
                 }
             }
             catch (Exception exp)
             {
-                _msgBox.Show(exp, Strings.STR_THEMING_CAPTION,
+                _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_THEMING_CAPTION,
                              MsgBoxButtons.OK, MsgBoxImage.Error);
 
                 return false;
@@ -242,7 +242,7 @@ namespace Edi.Apps.ViewModels
             {
                 // set the style of the message box display in back-end system.
                 if (nextThemeToSwitchTo.WPFThemeName != "Generic")
-                    _msgBox.Style = MsgBoxStyle.WPFThemed;
+                    _MsgBox.Style = MsgBoxStyle.WPFThemed;
             }
 
             return true;

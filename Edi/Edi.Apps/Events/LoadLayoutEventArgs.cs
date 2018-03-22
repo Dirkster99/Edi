@@ -1,7 +1,7 @@
-using System;
-
 namespace Edi.Apps.Events
 {
+	using System;
+
 	/// <summary>
 	/// Class implements ...
 	/// </summary>
@@ -12,12 +12,12 @@ namespace Edi.Apps.Events
 		/// Class constructor from default parameters.
 		/// </summary>
 		/// <param name="xmlLayout"></param>
-		/// <param name="layoutId"></param>
-		public LoadLayoutEventArgs(string xmlLayout, Guid layoutId)
+		/// <param name="layoutID"></param>
+		public LoadLayoutEventArgs(string xmlLayout, Guid layoutID)
 			: this()
 		{
-			XmlLayout = xmlLayout;
-			LayoutId = layoutId;
+			this.XmlLayout = xmlLayout;
+			this.LayoutID = layoutID;
 		}
 
 		/// <summary>
@@ -25,15 +25,15 @@ namespace Edi.Apps.Events
 		/// </summary>
 		public LoadLayoutEventArgs()
 		{
-			XmlLayout = string.Empty;
-			LayoutId = Guid.Empty;
+			this.XmlLayout = string.Empty;
+			this.LayoutID = Guid.Empty;
 		}
 		#endregion constructor
 
 		#region properties
 		public string XmlLayout { get; set; }
 
-		public Guid LayoutId { get; private set; }
+		public Guid LayoutID { get; private set; }
 		#endregion properties
 	}
 }

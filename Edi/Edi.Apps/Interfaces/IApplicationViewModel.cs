@@ -1,16 +1,16 @@
-﻿using System;
-using System.ComponentModel;
-using System.Windows;
-using Edi.Apps.Enums;
-using Edi.Core.Interfaces;
-using Edi.Settings.Interfaces;
-using Edi.Settings.ProgramSettings;
-using Edi.Themes.Interfaces;
-using MiniUML.Model.ViewModels.Document;
-
-namespace Edi.Apps.Interfaces.ViewModel
+﻿namespace Edi.Apps.Interfaces.ViewModel
 {
-	/// <summary>
+    using System;
+    using System.Windows;
+    using Edi.Core.Interfaces;
+    using Edi.Apps.Enums;
+    using MiniUML.Model.ViewModels.Document;
+    using Edi.Settings.Interfaces;
+    using Edi.Settings.ProgramSettings;
+    using Edi.Themes.Interfaces;
+    using MLib.Interfaces;
+
+    /// <summary>
     /// This interface models the viewmodel that manages the complete
     /// application life cyle from start to end. It publishes the methodes,
     /// properties, and events necessary to integrate the application into
@@ -41,12 +41,12 @@ namespace Edi.Apps.Interfaces.ViewModel
 		/// Gets/sets whether the current application shut down process
 		/// is cancelled or not.
 		/// </summary>
-		bool ShutDownInProgressCancel { get; set; }
+		bool ShutDownInProgress_Cancel { get; set; }
 
 		/// <summary>
 		/// Expose command to load/save AvalonDock layout on application startup and shut-down.
 		/// </summary>
-		IAvalonDockLayoutViewModel AdLayout { get; }
+		IAvalonDockLayoutViewModel ADLayout { get; }
 		#endregion properties
 
 		#region methods
@@ -60,7 +60,7 @@ namespace Edi.Apps.Interfaces.ViewModel
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		void OnClosing(object sender, CancelEventArgs e);
+		void OnClosing(object sender, System.ComponentModel.CancelEventArgs e);
 
 		/// <summary>
 		/// Execute closing function and persist session data to be reloaded on next restart
@@ -98,13 +98,11 @@ namespace Edi.Apps.Interfaces.ViewModel
 		/// Open a file supplied in <paramref name="filePath"/> (without displaying a file open dialog).
 		/// </summary>
 		/// <param name="filePath">file to open</param>
-		/// <param name="closeDocumentWithoutMessageOnError"></param>
-		/// <param name="addIntoMru">indicate whether file is to be added into MRU or not</param>
-		/// <param name="typeOfDocument"></param>
+		/// <param name="AddIntoMRU">indicate whether file is to be added into MRU or not</param>
 		/// <returns></returns>
 		IFileBaseViewModel Open(string filePath,
 										CloseDocOnError closeDocumentWithoutMessageOnError = CloseDocOnError.WithUserNotification,
-										bool addIntoMru = true,
+										bool AddIntoMRU = true,
 										string typeOfDocument = "EdiTextEditor");
 
 		/// <summary>

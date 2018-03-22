@@ -1,14 +1,8 @@
-﻿using System;
-using System.Windows;
-using Edi.Dialogs.About;
-using Edi.Dialogs.FindReplace;
-using Edi.Dialogs.FindReplace.ViewModel;
-using Edi.Dialogs.GotoLine;
-using Edi.SettingsView.Config;
-using Edi.SettingsView.Config.ViewModels;
-
-namespace Edi.Apps.ViewModels
+﻿namespace Edi.Apps.ViewModels
 {
+	using System;
+	using System.Windows;
+
 	/// <summary>
 	/// This class matches a viewmodel type with its corresponding dialog view.
 	/// </summary>
@@ -25,17 +19,17 @@ namespace Edi.Apps.ViewModels
 
 			Window win = null;
 
-			if (viewModel is ConfigViewModel) // Return programm settings dialog instance
-				win = new ConfigDlg { Title = "Settings..." };
+			if (viewModel is SettingsView.Config.ViewModels.ConfigViewModel) // Return programm settings dialog instance
+				win = new SettingsView.Config.ConfigDlg() { Title = "Settings..." };
 			else
-				if (viewModel is AboutViewModel)             // Return about programm dialog instance
-					win = new AboutDlg();
+				if (viewModel is Edi.Dialogs.About.AboutViewModel)             // Return about programm dialog instance
+					win = new Edi.Dialogs.About.AboutDlg();
 				else
-					if (viewModel is GotoLineViewModel)       // Return goto line dialog instance
-						win = new GotoLineDlg();
+					if (viewModel is Edi.Dialogs.GotoLine.GotoLineViewModel)       // Return goto line dialog instance
+						win = new Edi.Dialogs.GotoLine.GotoLineDlg();
 					else
-						if (viewModel is FindReplaceViewModel) // Return find replace dialog instance
-							win = new FindReplaceDialog();
+						if (viewModel is Edi.Dialogs.FindReplace.ViewModel.FindReplaceViewModel) // Return find replace dialog instance
+							win = new Edi.Dialogs.FindReplace.FindReplaceDialog();
 
 			if (win != null)
 			{

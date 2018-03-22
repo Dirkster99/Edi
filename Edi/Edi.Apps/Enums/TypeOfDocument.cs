@@ -5,6 +5,6 @@
 	{
 		EdiTextEditor = 0,
 		Log4NetView = 1,
-		UmlEditor = 2
+		UMLEditor = 2,
 	}
 }

@@ -1,10 +1,8 @@
-using System;
-using System.Windows;
-using System.Windows.Input;
-using Edi.Core.Interfaces;
-
 namespace Edi.Apps.Behaviors
 {
+	using System.Windows;
+	using System.Windows.Input;
+
 	/// <summary>
 	/// Source:
 	/// http://stackoverflow.com/questions/1034374/drag-and-drop-in-mvvm-with-scatterview
@@ -12,14 +10,14 @@ namespace Edi.Apps.Behaviors
 	/// 
 	/// Attached behaviour to implement the Closed event via delegate command binding or routed commands.
 	/// </summary>
-	public static class GetAdLayoutOnWindowClosedCommand
+	public static class GetADLayoutOnWindowClosedCommand
 	{
 		// Field of attached ICommand property
 		private static readonly DependencyProperty SendLayoutCommandProperty =
 			 DependencyProperty.RegisterAttached(
 													"SendLayoutCommand",
 													typeof(ICommand),
-													typeof(GetAdLayoutOnWindowClosedCommand),
+													typeof(GetADLayoutOnWindowClosedCommand),
 													new PropertyMetadata(null, OnSendLayoutCommandChange));
 
 		/// <summary>
@@ -51,18 +49,19 @@ namespace Edi.Apps.Behaviors
 		/// <param name="e"></param>
 		private static void OnSendLayoutCommandChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-			// Remove the handler if it exist to avoid memory leaks
-			if (d is ILayoutableWindow win)
-			{
-				win.Closed -= uiElement_Closed;
+			var win = d as Edi.Core.Interfaces.ILayoutableWindow;
 
-				if (e.NewValue is ICommand)
-				{
-					// the property is attached so we attach the closed event handler
-					win.Closed += uiElement_Closed;
-				}
-			}
-		}
+			// Remove the handler if it exist to avoid memory leaks
+			win.Closed -= uiElement_Closed;
+
+            if (e.NewValue is ICommand)
+            {
+                ICommand command = e.NewValue as ICommand;
+
+                // the property is attached so we attach the closed event handler
+                win.Closed += uiElement_Closed;
+            }
+        }
 
 		/// <summary>
 		/// This method is called when the closed event occurs. The sender should be the control
@@ -76,15 +75,18 @@ namespace Edi.Apps.Behaviors
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		static void uiElement_Closed(object sender, EventArgs e)
+		static void uiElement_Closed(object sender, System.EventArgs e)
 		{
+			var layoutableElement = sender as Edi.Core.Interfaces.ILayoutableWindow;
+			FrameworkElement fwElement = sender as FrameworkElement;
+
 			// Sanity check just in case this was somehow send by something else
-			if (!(sender is ILayoutableWindow layoutableElement) || !(sender is FrameworkElement fwElement))
+			if (layoutableElement == null || fwElement == null)
 				return;
 
 			string xmlLayout = layoutableElement.CurrentADLayout;
 
-			ICommand sendLayoutCommand = GetSendLayoutCommand(fwElement);
+			ICommand sendLayoutCommand = GetADLayoutOnWindowClosedCommand.GetSendLayoutCommand(fwElement);
 
 			// There may not be a command bound to this after all
 			if (sendLayoutCommand == null)

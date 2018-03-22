@@ -1,8 +1,8 @@
-using System;
-using Prism.Events;
-
 namespace Edi.Apps.Events
 {
+	using System;
+	using Prism.Events;
+
 	/// <summary>
 	/// Class implements a simple PRISM LoadLayout string event
 	/// 
@@ -13,21 +13,25 @@ namespace Edi.Apps.Events
 	/// <typeparam name="TPayload"></typeparam>
 	public class SynchronousEvent<TPayload> : PubSubEvent<TPayload>
 	{
-		private static readonly EventAggregator EventAggregator;
+		private static readonly EventAggregator _eventAggregator;
+		private static readonly SynchronousEvent<TPayload> _event;
 
 		/// <summary>
 		/// Static class constructor
 		/// </summary>
 		static SynchronousEvent()
 		{
-			EventAggregator = new EventAggregator();
-			Instance = EventAggregator.GetEvent<SynchronousEvent<TPayload>>();
+			SynchronousEvent<TPayload>._eventAggregator = new EventAggregator();
+			SynchronousEvent<TPayload>._event = _eventAggregator.GetEvent<SynchronousEvent<TPayload>>();
 		}
 
 		/// <summary>
 		/// Gets static instance of this class type
 		/// </summary>
-		public static SynchronousEvent<TPayload> Instance { get; }
+		public static SynchronousEvent<TPayload> Instance
+		{
+			get { return _event; }
+		}
 
 		/// <summary>
 		/// Override subscription method to enforce that thread option is the publishers option.

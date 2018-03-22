@@ -1,22 +1,20 @@
-using System;
-using System.ComponentModel.Composition;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Edi.Apps.Behaviors;
-using Edi.Apps.Events;
-using Edi.Core.Interfaces;
-using Edi.Core.Models.Enums;
-using Edi.Core.ViewModels;
-using Edi.Core.ViewModels.Command;
-using Edi.Settings.Interfaces;
-using ICSharpCode.AvalonEdit.Utils;
-using Xceed.Wpf.AvalonDock;
-
 namespace Edi.Apps.ViewModels
 {
-	/// <summary>
+    using System;
+    using System.ComponentModel.Composition;
+    using System.IO;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Windows.Input;
+    using Edi.Core.Interfaces;
+    using Edi.Core.Models.Enums;
+    using Edi.Core.ViewModels;
+    using Edi.Core.ViewModels.Command;
+    using Edi.Apps.Events;
+    using Edi.Settings.Interfaces;
+    using Xceed.Wpf.AvalonDock;
+
+    /// <summary>
     /// Class implements a viewmodel to support the
     /// <seealso cref="AvalonDockLayoutSerializer"/>
     /// attached behavior which is used to implement
@@ -27,13 +25,15 @@ namespace Edi.Apps.ViewModels
     public class AvalonDockLayoutViewModel : IAvalonDockLayoutViewModel
     {
         #region fields
-        private RelayCommand<object> _mLoadLayoutCommand;
-        private RelayCommand<object> _mSaveLayoutCommand;
+        private RelayCommand<object> mLoadLayoutCommand;
+        private RelayCommand<object> mSaveLayoutCommand;
 
-	    private readonly string _mLayoutFileName;
-        private readonly string _mAppDir;
+        private readonly Guid mLayoutID;
+        private string mLayoutFileName;
+        private string mAppDir;
 
-	    private readonly IMessageManager _mMessageManager;
+        private readonly ISettingsManager mProgramSettings;
+        private IMessageManager mMessageManager;
         #endregion fields
 
         #region constructors
@@ -44,17 +44,17 @@ namespace Edi.Apps.ViewModels
         public AvalonDockLayoutViewModel(ISettingsManager programSettings,
                                          IMessageManager messageManager)
         {
-	        LayoutSoure = LayoutLoaded.FromDefault;
+            this.LayoutSoure = LayoutLoaded.FromDefault;
 
-            var mProgramSettings = programSettings;
-            _mMessageManager = messageManager;
+            this.mProgramSettings = programSettings;
+            this.mMessageManager = messageManager;
 
-            _mAppDir = mProgramSettings.AppDir;
-            _mLayoutFileName = mProgramSettings.LayoutFileName;
+            this.mAppDir = this.mProgramSettings.AppDir;
+            this.mLayoutFileName = this.mProgramSettings.LayoutFileName;
 
-            LayoutID = Guid.NewGuid();
-            ViewProperties = new AvalonDockViewProperties();
-            ViewProperties.InitialzeInstance();
+            this.mLayoutID = Guid.NewGuid();
+            this.ViewProperties = new AvalonDockViewProperties();
+            this.ViewProperties.InitialzeInstance();
         }
         #endregion constructors
 
@@ -64,9 +64,15 @@ namespace Edi.Apps.ViewModels
         /// This layout id is a form of identification between viewmodel and view to identify whether
         /// a given event aggregated message is for a given recipient or not.
         /// </summary>
-        public Guid LayoutID { get; }
+        public Guid LayoutID
+        {
+            get
+            {
+                return this.mLayoutID;
+            }
+        }
 
-	    public AvalonDockViewProperties ViewProperties { get; set; }
+        public AvalonDockViewProperties ViewProperties { get; set; }
 
         public LayoutLoaded LayoutSoure { get; private set; }
 
@@ -84,23 +90,30 @@ namespace Edi.Apps.ViewModels
         {
             get
             {
-	            return _mLoadLayoutCommand ?? (_mLoadLayoutCommand = new RelayCommand<object>(p =>
-	            {
-		            try
-		            {
-			            if (!(p is DockingManager docManager))
-				            return;
+                if (this.mLoadLayoutCommand == null)
+                {
+                    this.mLoadLayoutCommand = new RelayCommand<object>((p) =>
+                    {
+                        try
+                        {
+                            DockingManager docManager = p as DockingManager;
 
-			            _mMessageManager.Output.AppendLine("Loading document and tool window layout...");
-			            LoadDockingManagerLayout(docManager);
-		            }
-		            catch (Exception exp)
-		            {
-			            var wrt = _mMessageManager.Output.Writer;
-			            wrt.WriteLine("Error when loading layout in AvalonDockLayoutViewModel:");
-			            wrt.WriteLine(exp.Message);
-		            }
-	            }));
+                            if (docManager == null)
+                                return;
+
+                            this.mMessageManager.Output.AppendLine("Loading document and tool window layout...");
+                            this.LoadDockingManagerLayout(docManager);
+                        }
+                        catch (Exception exp)
+                        {
+                            var wrt = mMessageManager.Output.Writer;
+                            wrt.WriteLine("Error when loading layout in AvalonDockLayoutViewModel:");
+                            wrt.WriteLine(exp.Message);
+                        }
+                    });
+                }
+
+                return this.mLoadLayoutCommand;
             }
         }
 
@@ -121,13 +134,20 @@ namespace Edi.Apps.ViewModels
         {
             get
             {
-	            return _mSaveLayoutCommand ?? (_mSaveLayoutCommand = new RelayCommand<object>(p =>
-	            {
-		            if (!(p is string xmlLayout))
-			            return;
+                if (this.mSaveLayoutCommand == null)
+                {
+                    this.mSaveLayoutCommand = new RelayCommand<object>((p) =>
+                    {
+                        string xmlLayout = p as string;
 
-		            SaveDockingManagerLayout(xmlLayout);
-	            }));
+                        if (xmlLayout == null)
+                            return;
+
+                        this.SaveDockingManagerLayout(xmlLayout);
+                    });
+                }
+
+                return this.mSaveLayoutCommand;
             }
         }
         #endregion command properties
@@ -143,7 +163,7 @@ namespace Edi.Apps.ViewModels
         /// <param name="docManager"></param>
         private void LoadDockingManagerLayout(DockingManager docManager)
         {
-            LoadDockingManagerLayout(LayoutID);
+            this.LoadDockingManagerLayout(this.LayoutID);
         }
 
         /// <summary>
@@ -151,58 +171,60 @@ namespace Edi.Apps.ViewModels
         /// and checks whether a file should really be reloaded (some files may no longer
         /// be available).
         /// </summary>
-        private void LoadDockingManagerLayout(Guid layoutId)
+        private void LoadDockingManagerLayout(Guid layoutID)
         {
             try
             {
-	            Task.Factory.StartNew(stateObj =>
+                string sTaskError = string.Empty;
+
+                Task taskToProcess = null;
+                taskToProcess = Task.Factory.StartNew<string>((stateObj) =>
                 {
-	                // Begin Aysnc Task
-	                string layoutFileName = Path.Combine(_mAppDir, _mLayoutFileName);
-	                string xmlWorkspaces = string.Empty;
+                    // Begin Aysnc Task
+                    string layoutFileName = System.IO.Path.Combine(this.mAppDir, this.mLayoutFileName);
+                    string xmlWorkspaces = string.Empty;
 
-	                try
-	                {
-		                try
-		                {
-			                if (File.Exists(layoutFileName))
-			                {
-				                _mMessageManager.Output.AppendLine($" from file: '{layoutFileName}'");
+                    try
+                    {
+                        try
+                        {
+                            if (System.IO.File.Exists(layoutFileName) == true)
+                            {
+                                this.mMessageManager.Output.AppendLine(string.Format(" from file: '{0}'", layoutFileName));
 
-				                using (FileStream fs = new FileStream(layoutFileName, FileMode.Open, FileAccess.Read, FileShare.Read))
-				                {
-					                using (StreamReader reader = FileReader.OpenStream(fs, Encoding.Default))
-					                {
-						                xmlWorkspaces = reader.ReadToEnd();
-					                }
-				                }
-			                }
-		                }
-		                catch
-		                {
-			                // ignored
-		                }
+                                using (FileStream fs = new FileStream(layoutFileName, FileMode.Open, FileAccess.Read, FileShare.Read))
+                                {
+                                    using (StreamReader reader = ICSharpCode.AvalonEdit.Utils.FileReader.OpenStream(fs, Encoding.Default))
+                                    {
+                                        xmlWorkspaces = reader.ReadToEnd();
+                                    }
+                                }
+                            }
+                        }
+                        catch
+                        {
+                        }
 
-		                if (string.IsNullOrEmpty(xmlWorkspaces) == false)
-		                {
-			                LayoutSoure = LayoutLoaded.FromStorage;
-			                LoadLayoutEvent.Instance.Publish(new LoadLayoutEventArgs(xmlWorkspaces, layoutId));
-		                }
-	                }
-	                catch (OperationCanceledException exp)
-	                {
-		                throw exp;
-	                }
-	                catch (Exception except)
-	                {
-		                throw except;
-	                }
-	                finally
-	                {
-		                _mMessageManager.Output.AppendLine("Loading layout done.\n");
-	                }
+                        if (string.IsNullOrEmpty(xmlWorkspaces) == false)
+                        {
+                            this.LayoutSoure = LayoutLoaded.FromStorage;
+                            LoadLayoutEvent.Instance.Publish(new LoadLayoutEventArgs(xmlWorkspaces, layoutID));
+                        }
+                    }
+                    catch (OperationCanceledException exp)
+                    {
+                        throw exp;
+                    }
+                    catch (Exception except)
+                    {
+                        throw except;
+                    }
+                    finally
+                    {
+                        this.mMessageManager.Output.AppendLine("Loading layout done.\n");
+                    }
 
-	                return xmlWorkspaces;                     // End of async task
+                    return xmlWorkspaces;                     // End of async task
 
                 }, null);
             }
@@ -212,16 +234,15 @@ namespace Edi.Apps.ViewModels
             }
         }
 
-	    /// <summary>
-	    /// Source: http://stackoverflow.com/questions/2820384/reading-embedded-xml-file-c-sharps
-	    /// </summary>
-	    /// <param name="assemblyNameSpace"></param>
-	    /// <param name="filename"></param>
-	    /// <returns></returns>
-	    public string GetResourceTextFile(string assemblyNameSpace, string filename)
+        /// <summary>
+        /// Source: http://stackoverflow.com/questions/2820384/reading-embedded-xml-file-c-sharps
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        public string GetResourceTextFile(string assemblyNameSpace, string filename)
         {
             string result = string.Empty;
-            _mMessageManager.Output.AppendLine($"Layout from Resource '{assemblyNameSpace}', '{filename}'");
+            this.mMessageManager.Output.AppendLine(string.Format("Layout from Resource '{0}', '{1}'", assemblyNameSpace, filename));
 
             ////using (Stream stream = this.GetType().Assembly.
             ////			 GetManifestResourceStream(assemblyNameSpace + filename))
@@ -243,7 +264,7 @@ namespace Edi.Apps.ViewModels
             if (xmlLayout == null)
                 return;
 
-            string fileName = Path.Combine(_mAppDir, _mLayoutFileName);
+            string fileName = System.IO.Path.Combine(this.mAppDir, this.mLayoutFileName);
 
             File.WriteAllText(fileName, xmlLayout);
         }
