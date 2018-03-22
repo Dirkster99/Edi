@@ -67,6 +67,7 @@
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
+		/// <param name="win"></param>
 		void OnClosed(Window win);
 
 		/// <summary>
@@ -98,7 +99,9 @@
 		/// Open a file supplied in <paramref name="filePath"/> (without displaying a file open dialog).
 		/// </summary>
 		/// <param name="filePath">file to open</param>
+		/// <param name="closeDocumentWithoutMessageOnError"></param>
 		/// <param name="addIntoMru">indicate whether file is to be added into MRU or not</param>
+		/// <param name="typeOfDocument"></param>
 		/// <returns></returns>
 		IFileBaseViewModel Open(string filePath,
 										CloseDocOnError closeDocumentWithoutMessageOnError = CloseDocOnError.WithUserNotification,

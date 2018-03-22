@@ -13,15 +13,13 @@ namespace Edi.Apps.Events
 	/// <typeparam name="TPayload"></typeparam>
 	public class SynchronousEvent<TPayload> : PubSubEvent<TPayload>
 	{
-		private static readonly EventAggregator EventAggregator;
-
 		/// <summary>
 		/// Static class constructor
 		/// </summary>
 		static SynchronousEvent()
 		{
-			EventAggregator = new EventAggregator();
-			Instance = EventAggregator.GetEvent<SynchronousEvent<TPayload>>();
+			var eventAggregator = new EventAggregator();
+			Instance = eventAggregator.GetEvent<SynchronousEvent<TPayload>>();
 		}
 
 		/// <summary>

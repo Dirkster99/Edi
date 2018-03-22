@@ -242,7 +242,7 @@ namespace Edi.Apps.ViewModels
                     int iCurrLine = GetCurrentEditorLine(f);
 
                     dlgVm = new Dialogs.GotoLine.GotoLineViewModel(1, f.Document.LineCount, iCurrLine);
-                    dlg = ViewSelector.GetDialogView((object)dlgVm, Application.Current.MainWindow);
+                    dlg = ViewSelector.GetDialogView(dlgVm, Application.Current.MainWindow);
 
                     dlg.Closing += dlgVm.OnClosing;
 
@@ -304,7 +304,7 @@ namespace Edi.Apps.ViewModels
 
                     FindReplaceVm.CurrentEditor = f;
 
-                    dlg = ViewSelector.GetDialogView((object)FindReplaceVm, Application.Current.MainWindow);
+                    dlg = ViewSelector.GetDialogView(FindReplaceVm, Application.Current.MainWindow);
 
                     dlg.Closing += FindReplaceVm.OnClosing;
 

@@ -4,27 +4,27 @@
                     xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
                     >
 
-  <DataTemplate x:Key="AvalonDock_DocumentHeader">
-    <DataTemplate.Resources>
-      <avalonDock:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    <DataTemplate x:Key="AvalonDock_DocumentHeader">
+        <DataTemplate.Resources>
+            <avalonDock:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 
-    </DataTemplate.Resources>
-    <StackPanel Orientation="Horizontal">
-      <TextBlock Text="{Binding Title}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
-      <!-- Show IsReadOnly Icon in document tab if that properties' present and true -->
-      <Image Source="{DynamicResource Image_DocTabReadOnly}" Margin="3,0,0,0" VerticalAlignment="Center">
-        <Image.Visibility>
-          <PriorityBinding FallbackValue="Collapsed">
-            <Binding Path="Content.IsReadOnly" Mode="OneWay" Converter="{StaticResource BoolToVisibilityConverter}" />
-          </PriorityBinding>
-        </Image.Visibility>
-        <Image.ToolTip>
-          <PriorityBinding FallbackValue="">
-            <Binding Path="Content.IsReadOnlyReason" Mode="OneWay" />
-          </PriorityBinding>
-        </Image.ToolTip>
-      </Image>
-    </StackPanel>
-  </DataTemplate>
+        </DataTemplate.Resources>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding Title}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+            <!-- Show IsReadOnly Icon in document tab if that properties' present and true -->
+            <Image Source="{DynamicResource Image_DocTabReadOnly}" Margin="3,0,0,0" VerticalAlignment="Center">
+                <Image.Visibility>
+                    <PriorityBinding FallbackValue="Collapsed">
+                        <Binding Path="Content.IsReadOnly" Mode="OneWay" Converter="{StaticResource BoolToVisibilityConverter}" />
+                    </PriorityBinding>
+                </Image.Visibility>
+                <Image.ToolTip>
+                    <PriorityBinding FallbackValue="">
+                        <Binding Path="Content.IsReadOnlyReason" Mode="OneWay" />
+                    </PriorityBinding>
+                </Image.ToolTip>
+            </Image>
+        </StackPanel>
+    </DataTemplate>
 
 </ResourceDictionary>

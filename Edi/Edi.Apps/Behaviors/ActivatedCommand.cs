@@ -59,7 +59,7 @@
 		/// <param name="obj"></param>
 		public static object GetCommandParameter(DependencyObject obj)
 		{
-			return (object)obj.GetValue(CommandParameterProperty);
+			return obj.GetValue(CommandParameterProperty);
 		}
 
 		/// <summary>
