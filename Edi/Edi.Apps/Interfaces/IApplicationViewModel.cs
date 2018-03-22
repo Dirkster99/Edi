@@ -41,12 +41,12 @@
 		/// Gets/sets whether the current application shut down process
 		/// is cancelled or not.
 		/// </summary>
-		bool ShutDownInProgress_Cancel { get; set; }
+		bool ShutDownInProgressCancel { get; set; }
 
 		/// <summary>
 		/// Expose command to load/save AvalonDock layout on application startup and shut-down.
 		/// </summary>
-		IAvalonDockLayoutViewModel ADLayout { get; }
+		IAvalonDockLayoutViewModel AdLayout { get; }
 		#endregion properties
 
 		#region methods
@@ -98,11 +98,11 @@
 		/// Open a file supplied in <paramref name="filePath"/> (without displaying a file open dialog).
 		/// </summary>
 		/// <param name="filePath">file to open</param>
-		/// <param name="AddIntoMRU">indicate whether file is to be added into MRU or not</param>
+		/// <param name="addIntoMru">indicate whether file is to be added into MRU or not</param>
 		/// <returns></returns>
 		IFileBaseViewModel Open(string filePath,
 										CloseDocOnError closeDocumentWithoutMessageOnError = CloseDocOnError.WithUserNotification,
-										bool AddIntoMRU = true,
+										bool addIntoMru = true,
 										string typeOfDocument = "EdiTextEditor");
 
 		/// <summary>

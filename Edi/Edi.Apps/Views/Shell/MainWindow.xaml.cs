@@ -17,7 +17,7 @@ namespace Edi.Apps.Views.Shell
         #region constructors
         [ImportingConstructor]
         public MainWindow(IAvalonDockLayoutViewModel av,
-                          IApplicationViewModel appVM)
+                          IApplicationViewModel appVm)
         {
             this.InitializeComponent();
 
@@ -30,17 +30,17 @@ namespace Edi.Apps.Views.Shell
             // Register these methods to receive PRISM event notifications about load and save of avalondock layouts
             LoadLayoutEvent.Instance.Subscribe(this.dockView.OnLoadLayout, ThreadOption.PublisherThread,
                                                true,
-                                         s => s.LayoutID == av.LayoutID);
+                                         s => s.LayoutId == av.LayoutID);
 
             // subscribe to close event messing to application viewmodel
-            this.Closing += appVM.OnClosing;
+            this.Closing += appVm.OnClosing;
 
             // When the ViewModel asks to be closed, close the window.
             // Source: http://msdn.microsoft.com/en-us/magazine/dd419663.aspx
-            appVM.RequestClose += delegate
+            appVm.RequestClose += delegate
             {
                 // Save session data and close application
-                appVM.OnClosed(this);
+                appVm.OnClosed(this);
             };
         }
         #endregion constructors
@@ -51,11 +51,11 @@ namespace Edi.Apps.Views.Shell
         /// the positions and layout of documents and tool windows within the AvalonDock
         /// view.
         /// </summary>
-        public Guid LayoutID
+        public Guid LayoutId
         {
             get
             {
-                return (this.dockView != null ? this.dockView.LayoutID : Guid.Empty);
+                return (this.dockView != null ? this.dockView.LayoutId : Guid.Empty);
             }
         }
 
@@ -66,7 +66,7 @@ namespace Edi.Apps.Views.Shell
         {
             get
             {
-                return (this.dockView != null ? this.dockView.CurrentADLayout : string.Empty);
+                return (this.dockView != null ? this.dockView.CurrentAdLayout : string.Empty);
             }
         }
         #endregion properties

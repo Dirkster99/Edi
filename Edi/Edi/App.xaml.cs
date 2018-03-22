@@ -94,7 +94,7 @@ namespace Edi
                         if (appVM.Exit_CheckConditions(mainWin) == true)
                             e.Cancel = false;
                         else
-                            e.Cancel = appVM.ShutDownInProgress_Cancel = true;
+                            e.Cancel = appVM.ShutDownInProgressCancel = true;
                     }
                 }
             }

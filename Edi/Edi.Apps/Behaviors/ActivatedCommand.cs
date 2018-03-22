@@ -72,7 +72,7 @@
 		{
 			obj.SetValue(CommandParameterProperty, value);
 		}
-    #endregion CoammandPArameter
+		#endregion CoammandPArameter
 
 		/// <summary>
 		/// This method is hooked in the definition of the <seealso cref="CommandProperty"/>.
@@ -83,17 +83,17 @@
 		/// <param name="e"></param>
 		private static void OnCommandChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-			var uiElement = d as Window;	  // Remove the handler if it exist to avoid memory leaks
+			var uiElement = d as Window;      // Remove the handler if it exist to avoid memory leaks
 			uiElement.Activated -= UiElement_Activated;
 
-            if (e.NewValue is ICommand)
-            {
-                ICommand command = e.NewValue as ICommand;
+			if (e.NewValue is ICommand)
+			{
+				ICommand command = e.NewValue as ICommand;
 
-                // the property is attached so we attach the Drop event handler
-                uiElement.Activated += UiElement_Activated;
-            }
-        }
+				// the property is attached so we attach the Drop event handler
+				uiElement.Activated += UiElement_Activated;
+			}
+		}
 
 		/// <summary>
 		/// This method is called when the Activated event occurs. The sender should be the control
@@ -115,24 +115,24 @@
 			if (uiElement == null)
 				return;
 
-			ICommand Command = ActivatedCommand.GetCommand(uiElement);
+			ICommand command = ActivatedCommand.GetCommand(uiElement);
 
-			object CommandParameter = ActivatedCommand.GetCommandParameter(uiElement);
+			object commandParameter = ActivatedCommand.GetCommandParameter(uiElement);
 
 			// There may not be a command bound to this after all
-			if (Command == null)
+			if (command == null)
 				return;
 
 			// Check whether this attached behaviour is bound to a RoutedCommand
-			if (Command is RoutedCommand)
+			if (command is RoutedCommand)
 			{
 				// Execute the routed command
-				(Command as RoutedCommand).Execute(CommandParameter, uiElement);
+				(command as RoutedCommand).Execute(commandParameter, uiElement);
 			}
 			else
 			{
 				// Execute the Command as bound delegate
-				Command.Execute(CommandParameter);
+				command.Execute(commandParameter);
 			}
 		}
 		#endregion methods

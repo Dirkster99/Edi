@@ -13,16 +13,16 @@ namespace Edi.Apps.Events
 	/// <typeparam name="TPayload"></typeparam>
 	public class SynchronousEvent<TPayload> : PubSubEvent<TPayload>
 	{
-		private static readonly EventAggregator _eventAggregator;
-		private static readonly SynchronousEvent<TPayload> _event;
+		private static readonly EventAggregator EventAggregator;
+		private static readonly SynchronousEvent<TPayload> Event;
 
 		/// <summary>
 		/// Static class constructor
 		/// </summary>
 		static SynchronousEvent()
 		{
-			SynchronousEvent<TPayload>._eventAggregator = new EventAggregator();
-			SynchronousEvent<TPayload>._event = _eventAggregator.GetEvent<SynchronousEvent<TPayload>>();
+			SynchronousEvent<TPayload>.EventAggregator = new EventAggregator();
+			SynchronousEvent<TPayload>.Event = EventAggregator.GetEvent<SynchronousEvent<TPayload>>();
 		}
 
 		/// <summary>
@@ -30,7 +30,7 @@ namespace Edi.Apps.Events
 		/// </summary>
 		public static SynchronousEvent<TPayload> Instance
 		{
-			get { return _event; }
+			get { return Event; }
 		}
 
 		/// <summary>

@@ -12,12 +12,12 @@ namespace Edi.Apps.Events
 		/// Class constructor from default parameters.
 		/// </summary>
 		/// <param name="xmlLayout"></param>
-		/// <param name="layoutID"></param>
-		public LoadLayoutEventArgs(string xmlLayout, Guid layoutID)
+		/// <param name="layoutId"></param>
+		public LoadLayoutEventArgs(string xmlLayout, Guid layoutId)
 			: this()
 		{
 			this.XmlLayout = xmlLayout;
-			this.LayoutID = layoutID;
+			this.LayoutId = layoutId;
 		}
 
 		/// <summary>
@@ -26,14 +26,14 @@ namespace Edi.Apps.Events
 		public LoadLayoutEventArgs()
 		{
 			this.XmlLayout = string.Empty;
-			this.LayoutID = Guid.Empty;
+			this.LayoutId = Guid.Empty;
 		}
 		#endregion constructor
 
 		#region properties
 		public string XmlLayout { get; set; }
 
-		public Guid LayoutID { get; private set; }
+		public Guid LayoutId { get; private set; }
 		#endregion properties
 	}
 }

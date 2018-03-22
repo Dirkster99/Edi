@@ -10,14 +10,14 @@ namespace Edi.Apps.Behaviors
 	/// 
 	/// Attached behaviour to implement the Closed event via delegate command binding or routed commands.
 	/// </summary>
-	public static class GetADLayoutOnWindowClosedCommand
+	public static class GetAdLayoutOnWindowClosedCommand
 	{
 		// Field of attached ICommand property
 		private static readonly DependencyProperty SendLayoutCommandProperty =
 			 DependencyProperty.RegisterAttached(
 													"SendLayoutCommand",
 													typeof(ICommand),
-													typeof(GetADLayoutOnWindowClosedCommand),
+													typeof(GetAdLayoutOnWindowClosedCommand),
 													new PropertyMetadata(null, OnSendLayoutCommandChange));
 
 		/// <summary>
@@ -86,7 +86,7 @@ namespace Edi.Apps.Behaviors
 
 			string xmlLayout = layoutableElement.CurrentADLayout;
 
-			ICommand sendLayoutCommand = GetADLayoutOnWindowClosedCommand.GetSendLayoutCommand(fwElement);
+			ICommand sendLayoutCommand = GetAdLayoutOnWindowClosedCommand.GetSendLayoutCommand(fwElement);
 
 			// There may not be a command bound to this after all
 			if (sendLayoutCommand == null)

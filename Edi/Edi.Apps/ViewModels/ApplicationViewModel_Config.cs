@@ -24,33 +24,33 @@
         {
             try
             {
-                this.mAppCore.CreateAppDataFolder();
+                this._mAppCore.CreateAppDataFolder();
 
                 // Save current explorer settings and user profile data
                 // Query for an explorer tool window and return it
                 // Query for an explorer tool window and return it
-                var explorerTW = this.GetToolWindowVM<IExplorer>();
+                var explorerTw = this.GetToolWindowVm<IExplorer>();
 
-                if (explorerTW != null)
-                    FileExplorerViewModel.SaveSettings(this.mSettingsManager, explorerTW);
+                if (explorerTw != null)
+                    FileExplorerViewModel.SaveSettings(this._mSettingsManager, explorerTw);
 
                 // Save program options only if there are un-saved changes that need persistence
                 // This can be caused when WPF theme was changed or something else
                 // but should normally not occur as often as saving session data
-                if (this.mSettingsManager.SettingData.IsDirty == true)
+                if (this._mSettingsManager.SettingData.IsDirty == true)
                 {
-                    this.mSettingsManager.SaveOptions(this.mAppCore.DirFileAppSettingsData, this.mSettingsManager.SettingData);
+                    this._mSettingsManager.SaveOptions(this._mAppCore.DirFileAppSettingsData, this._mSettingsManager.SettingData);
                 }
 
                 // Convert viewmodel data into model for persistance layer...
-                var mruVM = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
-                MRUEntrySerializer.ConvertToModel(mruVM, this.mSettingsManager.SessionData.MruList);
+                var mruVm = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
+                MRUEntrySerializer.ConvertToModel(mruVm, this._mSettingsManager.SessionData.MruList);
 
-                this.mSettingsManager.SaveSessionData(this.mAppCore.DirFileAppSessionData, this.mSettingsManager.SessionData);
+                this._mSettingsManager.SaveSessionData(this._mAppCore.DirFileAppSessionData, this._mSettingsManager.SessionData);
             }
             catch (Exception exp)
             {
-                _MsgBox.Show(exp, "Unhandled Exception", MsgBoxButtons.OK, MsgBoxImage.Error);
+                _msgBox.Show(exp, "Unhandled Exception", MsgBoxButtons.OK, MsgBoxImage.Error);
             }
         }
 
@@ -65,14 +65,14 @@
                                             IThemesManager themes)
         {
             // Re/Load program options and user profile session data to control global behaviour of program
-            settings.LoadOptions(this.mAppCore.DirFileAppSettingsData, themes, programSettings);
-            settings.LoadSessionData(this.mAppCore.DirFileAppSessionData);
+            settings.LoadOptions(this._mAppCore.DirFileAppSettingsData, themes, programSettings);
+            settings.LoadSessionData(this._mAppCore.DirFileAppSessionData);
 
             settings.CheckSettingsOnLoad(SystemParameters.VirtualScreenLeft, SystemParameters.VirtualScreenTop);
 
             // Convert Session model into viewmodel instance
-            var mruVM = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
-            MRUEntrySerializer.ConvertToViewModel(settings.SessionData.MruList, mruVM);
+            var mruVm = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
+            MRUEntrySerializer.ConvertToViewModel(settings.SessionData.MruList, mruVm);
 
             // Initialize skinning engine with this current skin
             // standard skins defined in class enum PLUS
@@ -99,11 +99,11 @@
                     //  wsVM.SaveConfigOnAppClosed(); // Save application layout
                 }
                 else
-                    e.Cancel = this.ShutDownInProgress_Cancel = true;
+                    e.Cancel = this.ShutDownInProgressCancel = true;
             }
             catch (Exception exp)
             {
-                logger.Error(exp);
+                Logger.Error(exp);
             }
         }
 
@@ -119,11 +119,11 @@
                 this.EnableMainWindowActivated(false);
 
                 // Persist window position, width and height from this session
-                this.mSettingsManager.SessionData.MainWindowPosSz =
+                this._mSettingsManager.SessionData.MainWindowPosSz =
                     new ViewPosSizeModel(win.Left, win.Top, win.Width, win.Height,
                                                              (win.WindowState == WindowState.Maximized ? true : false));
 
-                this.mSettingsManager.SessionData.IsWorkspaceAreaOptimized = this.IsWorkspaceAreaOptimized;
+                this._mSettingsManager.SessionData.IsWorkspaceAreaOptimized = this.IsWorkspaceAreaOptimized;
 
                 // Save/initialize program options that determine global programm behaviour
                 this.SaveConfigOnAppClosed();
@@ -132,8 +132,8 @@
             }
             catch (Exception exp)
             {
-                logger.Error(exp);
-                _MsgBox.Show(exp.ToString(),
+                Logger.Error(exp);
+                _msgBox.Show(exp.ToString(),
                              Util.Local.Strings.STR_MSG_UnknownError_InShutDownProcess,
                              MsgBoxButtons.OK, MsgBoxImage.Error);
             }
@@ -154,14 +154,14 @@
                     }
                     catch (Exception exp)
                     {
-                        logger.ErrorFormat("Error disposing file; {0}", item.FileName);
-                        logger.Error(exp);
+                        Logger.ErrorFormat("Error disposing file; {0}", item.FileName);
+                        Logger.Error(exp);
                     }
                 }
             }
             catch (Exception exp)
             {
-                logger.Error(exp);
+                Logger.Error(exp);
             }
         }
     }

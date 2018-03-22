@@ -25,15 +25,15 @@ namespace Edi.Apps.ViewModels
     public class AvalonDockLayoutViewModel : IAvalonDockLayoutViewModel
     {
         #region fields
-        private RelayCommand<object> mLoadLayoutCommand;
-        private RelayCommand<object> mSaveLayoutCommand;
+        private RelayCommand<object> _mLoadLayoutCommand;
+        private RelayCommand<object> _mSaveLayoutCommand;
 
-        private readonly Guid mLayoutID;
-        private string mLayoutFileName;
-        private string mAppDir;
+        private readonly Guid _mLayoutId;
+        private string _mLayoutFileName;
+        private string _mAppDir;
 
-        private readonly ISettingsManager mProgramSettings;
-        private IMessageManager mMessageManager;
+        private readonly ISettingsManager _mProgramSettings;
+        private IMessageManager _mMessageManager;
         #endregion fields
 
         #region constructors
@@ -46,13 +46,13 @@ namespace Edi.Apps.ViewModels
         {
             this.LayoutSoure = LayoutLoaded.FromDefault;
 
-            this.mProgramSettings = programSettings;
-            this.mMessageManager = messageManager;
+            this._mProgramSettings = programSettings;
+            this._mMessageManager = messageManager;
 
-            this.mAppDir = this.mProgramSettings.AppDir;
-            this.mLayoutFileName = this.mProgramSettings.LayoutFileName;
+            this._mAppDir = this._mProgramSettings.AppDir;
+            this._mLayoutFileName = this._mProgramSettings.LayoutFileName;
 
-            this.mLayoutID = Guid.NewGuid();
+            this._mLayoutId = Guid.NewGuid();
             this.ViewProperties = new AvalonDockViewProperties();
             this.ViewProperties.InitialzeInstance();
         }
@@ -68,7 +68,7 @@ namespace Edi.Apps.ViewModels
         {
             get
             {
-                return this.mLayoutID;
+                return this._mLayoutId;
             }
         }
 
@@ -90,9 +90,9 @@ namespace Edi.Apps.ViewModels
         {
             get
             {
-                if (this.mLoadLayoutCommand == null)
+                if (this._mLoadLayoutCommand == null)
                 {
-                    this.mLoadLayoutCommand = new RelayCommand<object>((p) =>
+                    this._mLoadLayoutCommand = new RelayCommand<object>((p) =>
                     {
                         try
                         {
@@ -101,19 +101,19 @@ namespace Edi.Apps.ViewModels
                             if (docManager == null)
                                 return;
 
-                            this.mMessageManager.Output.AppendLine("Loading document and tool window layout...");
+                            this._mMessageManager.Output.AppendLine("Loading document and tool window layout...");
                             this.LoadDockingManagerLayout(docManager);
                         }
                         catch (Exception exp)
                         {
-                            var wrt = mMessageManager.Output.Writer;
+                            var wrt = _mMessageManager.Output.Writer;
                             wrt.WriteLine("Error when loading layout in AvalonDockLayoutViewModel:");
                             wrt.WriteLine(exp.Message);
                         }
                     });
                 }
 
-                return this.mLoadLayoutCommand;
+                return this._mLoadLayoutCommand;
             }
         }
 
@@ -134,9 +134,9 @@ namespace Edi.Apps.ViewModels
         {
             get
             {
-                if (this.mSaveLayoutCommand == null)
+                if (this._mSaveLayoutCommand == null)
                 {
-                    this.mSaveLayoutCommand = new RelayCommand<object>((p) =>
+                    this._mSaveLayoutCommand = new RelayCommand<object>((p) =>
                     {
                         string xmlLayout = p as string;
 
@@ -147,7 +147,7 @@ namespace Edi.Apps.ViewModels
                     });
                 }
 
-                return this.mSaveLayoutCommand;
+                return this._mSaveLayoutCommand;
             }
         }
         #endregion command properties
@@ -171,7 +171,7 @@ namespace Edi.Apps.ViewModels
         /// and checks whether a file should really be reloaded (some files may no longer
         /// be available).
         /// </summary>
-        private void LoadDockingManagerLayout(Guid layoutID)
+        private void LoadDockingManagerLayout(Guid layoutId)
         {
             try
             {
@@ -181,7 +181,7 @@ namespace Edi.Apps.ViewModels
                 taskToProcess = Task.Factory.StartNew<string>((stateObj) =>
                 {
                     // Begin Aysnc Task
-                    string layoutFileName = System.IO.Path.Combine(this.mAppDir, this.mLayoutFileName);
+                    string layoutFileName = System.IO.Path.Combine(this._mAppDir, this._mLayoutFileName);
                     string xmlWorkspaces = string.Empty;
 
                     try
@@ -190,7 +190,7 @@ namespace Edi.Apps.ViewModels
                         {
                             if (System.IO.File.Exists(layoutFileName) == true)
                             {
-                                this.mMessageManager.Output.AppendLine(string.Format(" from file: '{0}'", layoutFileName));
+                                this._mMessageManager.Output.AppendLine(string.Format(" from file: '{0}'", layoutFileName));
 
                                 using (FileStream fs = new FileStream(layoutFileName, FileMode.Open, FileAccess.Read, FileShare.Read))
                                 {
@@ -208,7 +208,7 @@ namespace Edi.Apps.ViewModels
                         if (string.IsNullOrEmpty(xmlWorkspaces) == false)
                         {
                             this.LayoutSoure = LayoutLoaded.FromStorage;
-                            LoadLayoutEvent.Instance.Publish(new LoadLayoutEventArgs(xmlWorkspaces, layoutID));
+                            LoadLayoutEvent.Instance.Publish(new LoadLayoutEventArgs(xmlWorkspaces, layoutId));
                         }
                     }
                     catch (OperationCanceledException exp)
@@ -221,7 +221,7 @@ namespace Edi.Apps.ViewModels
                     }
                     finally
                     {
-                        this.mMessageManager.Output.AppendLine("Loading layout done.\n");
+                        this._mMessageManager.Output.AppendLine("Loading layout done.\n");
                     }
 
                     return xmlWorkspaces;                     // End of async task
@@ -242,7 +242,7 @@ namespace Edi.Apps.ViewModels
         public string GetResourceTextFile(string assemblyNameSpace, string filename)
         {
             string result = string.Empty;
-            this.mMessageManager.Output.AppendLine(string.Format("Layout from Resource '{0}', '{1}'", assemblyNameSpace, filename));
+            this._mMessageManager.Output.AppendLine(string.Format("Layout from Resource '{0}', '{1}'", assemblyNameSpace, filename));
 
             ////using (Stream stream = this.GetType().Assembly.
             ////			 GetManifestResourceStream(assemblyNameSpace + filename))
@@ -264,7 +264,7 @@ namespace Edi.Apps.ViewModels
             if (xmlLayout == null)
                 return;
 
-            string fileName = System.IO.Path.Combine(this.mAppDir, this.mLayoutFileName);
+            string fileName = System.IO.Path.Combine(this._mAppDir, this._mLayoutFileName);
 
             File.WriteAllText(fileName, xmlLayout);
         }
