@@ -108,8 +108,6 @@
 	    /// <summary>
 	    /// Execute closing function and persist session data to be reloaded on next restart
 	    /// </summary>
-	    /// <param name="sender"></param>
-	    /// <param name="e"></param>
 	    /// <param name="win"></param>
 	    public void OnClosed(Window win)
         {
@@ -120,7 +118,7 @@
                 // Persist window position, width and height from this session
                 _mSettingsManager.SessionData.MainWindowPosSz =
                     new ViewPosSizeModel(win.Left, win.Top, win.Width, win.Height,
-                                                             (win.WindowState == WindowState.Maximized ? true : false));
+                                                             (win.WindowState == WindowState.Maximized));
 
                 _mSettingsManager.SessionData.IsWorkspaceAreaOptimized = IsWorkspaceAreaOptimized;
 
