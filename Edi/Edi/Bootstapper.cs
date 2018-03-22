@@ -2,15 +2,15 @@ using Edi.Apps.Interfaces;
 
 namespace Edi
 {
-	using Edi.Apps.ViewModels;
-    using Edi.Apps.Views.Shell;
-    using Edi.Core;
-    using Edi.Core.Interfaces;
-    using Edi.Documents.Module;
-    using Edi.Settings;
-    using Edi.Settings.Interfaces;
-    using Edi.Settings.ProgramSettings;
-    using Edi.Themes.Interfaces;
+	using Apps.ViewModels;
+    using Apps.Views.Shell;
+    using Core;
+    using Core.Interfaces;
+    using Documents.Module;
+    using Settings;
+    using Settings.Interfaces;
+    using Settings.ProgramSettings;
+    using Themes.Interfaces;
     using Files.Module;
     using MLib.Interfaces;
     using MRULib.MRU.Interfaces;
@@ -36,7 +36,7 @@ namespace Edi
         private readonly StartupEventArgs mEventArgs;
         private readonly App mApp = null;
 
-        private readonly MsgBox.IMessageBoxService _MsgBox = null;
+        private readonly IMessageBoxService _MsgBox = null;
         private readonly IMRUListViewModel _MruVM = null;
 
         private readonly Options mOptions = null;
@@ -60,12 +60,12 @@ namespace Edi
                            IThemesManager themesManager)
             : this()
         {
-            this.mThemes = themesManager;
-            this.mProgramSettingsManager = new SettingsManager(this.mThemes);
+            mThemes = themesManager;
+            mProgramSettingsManager = new SettingsManager(mThemes);
 
-            this.mEventArgs = eventArgs;
-            this.mApp = app;
-            this.mOptions = programSettings;
+            mEventArgs = eventArgs;
+            mApp = app;
+            mOptions = programSettings;
         }
 
         protected Bootstapper()
@@ -81,7 +81,7 @@ namespace Edi
         {
             get
             {
-                return this.appVM;
+                return appVM;
             }
         }
 
@@ -89,7 +89,7 @@ namespace Edi
         {
             get
             {
-                return this.MainWindow;
+                return MainWindow;
             }
         }
         #endregion properties
@@ -107,10 +107,10 @@ namespace Edi
                 base.Run(runWithDefaultConfiguration);
 
                 // Register imported tool window definitions with Avalondock
-                var toolWindowRegistry = this.Container.GetExportedValue<IToolWindowRegistry>();
+                var toolWindowRegistry = Container.GetExportedValue<IToolWindowRegistry>();
 
-                MEFLoadFiles.Initialize(this.appVM.AdLayout,
-                                        this.mProgramSettingsManager,
+                MEFLoadFiles.Initialize(appVM.AdLayout,
+                                        mProgramSettingsManager,
                                         toolWindowRegistry,
                                         appVM as IFileOpenService);
 
@@ -119,17 +119,17 @@ namespace Edi
 
                 // Show the startpage if application starts for the very first time
                 // (This requires that command binding was succesfully done before this line)
-                if (this.appVM.AdLayout.LayoutSoure == Core.Models.Enums.LayoutLoaded.FromDefault)
+                if (appVM.AdLayout.LayoutSoure == Core.Models.Enums.LayoutLoaded.FromDefault)
                     AppCommand.ShowStartPage.Execute(null, null);
 
-                if (this.mEventArgs != null)
-                    ProcessCmdLine(this.mEventArgs.Args, this.appVM);
+                if (mEventArgs != null)
+                    ProcessCmdLine(mEventArgs.Args, appVM);
 
                 // PRISM modules (and everything else) have been initialized if we got here
-                var output = this.Container.GetExportedValue<IMessageManager>();
+                var output = Container.GetExportedValue<IMessageManager>();
                 output.Output.AppendLine("Get involved at: https://github.com/Dirkster99/Edi");
 
-                this.appVM.EnableMainWindowActivated(true);
+                appVM.EnableMainWindowActivated(true);
             }
             catch (Exception exp)
             {
@@ -141,16 +141,16 @@ namespace Edi
         {
             // Loading these items is equivalent to using static construction, except MEF runs the
             // decorated class and method to initialize each module
-            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(IOutputView).Assembly));
+            AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(IOutputView).Assembly));
 
             // These module register services (e.g.: file open) and are required for other plug-ins to work
 ////            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(MEFLoadFiles).Assembly));
-            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(MefLoadEdiDocuments).Assembly));
+            AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(MefLoadEdiDocuments).Assembly));
 
-            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(IAppCoreModel).Assembly));
+            AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(IAppCoreModel).Assembly));
 
-            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(AvalonDockLayoutViewModel).Assembly));
-            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(Bootstapper).Assembly));
+            AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(AvalonDockLayoutViewModel).Assembly));
+            AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(Bootstapper).Assembly));
 
             ////this.AggregateCatalog.Catalogs.Add(new PluginModuleCatalog(@".\Plugins"));
 
@@ -160,32 +160,32 @@ namespace Edi
         {
             try
             {
-                var appCore = this.Container.GetExportedValue<IAppCoreModel>();
+                var appCore = Container.GetExportedValue<IAppCoreModel>();
 
                 // Setup localtion of config files
-                this.mProgramSettingsManager.AppDir = appCore.DirAppData;
-                this.mProgramSettingsManager.LayoutFileName = appCore.LayoutFileName;
+                mProgramSettingsManager.AppDir = appCore.DirAppData;
+                mProgramSettingsManager.LayoutFileName = appCore.LayoutFileName;
 
-                var avLayout = this.Container.GetExportedValue<IAvalonDockLayoutViewModel>();
-                this.appVM = this.Container.GetExportedValue<IApplicationViewModel>();
+                var avLayout = Container.GetExportedValue<IAvalonDockLayoutViewModel>();
+                appVM = Container.GetExportedValue<IApplicationViewModel>();
 
-                var toolWindowRegistry = this.Container.GetExportedValue<IToolWindowRegistry>();
+                var toolWindowRegistry = Container.GetExportedValue<IToolWindowRegistry>();
 
-                appVM.LoadConfigOnAppStartup(this.mOptions, this.mProgramSettingsManager, this.mThemes);
+                appVM.LoadConfigOnAppStartup(mOptions, mProgramSettingsManager, mThemes);
 
                 // Attempt to load a MiniUML plugin via the model class
-                MiniUML.Model.MiniUmlPluginLoader.LoadPlugins(appCore.AssemblyEntryLocation + @".\Plugins\MiniUML.Plugins.UmlClassDiagram\", this.AppViewModel); // discover via Plugin folder instead
+                MiniUML.Model.MiniUmlPluginLoader.LoadPlugins(appCore.AssemblyEntryLocation + @".\Plugins\MiniUML.Plugins.UmlClassDiagram\", AppViewModel); // discover via Plugin folder instead
 
-                this.mMainWin = this.Container.GetExportedValue<MainWindow>();
+                mMainWin = Container.GetExportedValue<MainWindow>();
 
                 appCore.CreateAppDataFolder();
 
-                if (this.mMainWin != null)
+                if (mMainWin != null)
                 {
-                    this.ConstructMainWindowSession(this.appVM, this.mMainWin, this.mProgramSettingsManager);
+                    ConstructMainWindowSession(appVM, mMainWin, mProgramSettingsManager);
 
-                    if (this.mApp.AppIsShuttingDown == false)
-                        this.mApp.ShutdownMode = System.Windows.ShutdownMode.OnLastWindowClose;
+                    if (mApp.AppIsShuttingDown == false)
+                        mApp.ShutdownMode = ShutdownMode.OnLastWindowClose;
                     ////this.mMainWin.Show();
                 }
                 else
@@ -198,8 +198,8 @@ namespace Edi
                 try
                 {
                     // Cannot set shutdown mode when application is already shuttong down
-                    if (this.mApp.AppIsShuttingDown == false)
-                        this.mApp.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+                    if (mApp.AppIsShuttingDown == false)
+                        mApp.ShutdownMode = ShutdownMode.OnExplicitShutdown;
                 }
                 catch (Exception exp1)
                 {
@@ -226,18 +226,18 @@ namespace Edi
                 _MsgBox.Show(exp, Strings.STR_MSG_ERROR_FINDING_RESOURCE
                            , MsgBoxButtons.OKCopy, MsgBoxImage.Error);
 
-                if (this.mApp.AppIsShuttingDown == false)
-                    this.mApp.Shutdown();
+                if (mApp.AppIsShuttingDown == false)
+                    mApp.Shutdown();
             }
 
-            return this.mMainWin;
+            return mMainWin;
         }
 
         protected override void InitializeShell()
         {
             base.InitializeShell();
 
-            Application.Current.MainWindow = (MainWindow)this.Shell;
+            Application.Current.MainWindow = (MainWindow)Shell;
             Application.Current.MainWindow.Show();
         }
 
@@ -268,17 +268,17 @@ namespace Edi
             // Register MessageBox Service for usage in other modules
             // use the following statement to resolve queries towards the IMessageBoxService
             // var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-            this.Container.ComposeExportedValue<IMessageBoxService>(_MsgBox);
+            Container.ComposeExportedValue<IMessageBoxService>(_MsgBox);
 
-            this.Container.ComposeExportedValue<IMRUListViewModel>(_MruVM);
+            Container.ComposeExportedValue<IMRUListViewModel>(_MruVM);
 
             // Because we created the SettingsManager and it needs to be used immediately
             // we compose it to satisfy any imports it has.
             //
             // http://msdn.microsoft.com/en-us/library/ff921140%28v=pandp.40%29.aspx
             //
-            this.Container.ComposeExportedValue<ISettingsManager>(this.mProgramSettingsManager);
-            this.Container.ComposeExportedValue<IThemesManager>(this.mThemes);
+            Container.ComposeExportedValue<ISettingsManager>(mProgramSettingsManager);
+            Container.ComposeExportedValue<IThemesManager>(mThemes);
         }
         #endregion Methods
 

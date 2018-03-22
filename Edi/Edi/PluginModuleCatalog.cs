@@ -7,25 +7,23 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Edi
 {
     public class PluginModuleCatalog : ModuleCatalog
     {
-        private readonly string pluginsDirectory = string.Empty;
+        private readonly string _pluginsDirectory = string.Empty;
 
-        private readonly IModuleCatalog fallbackCatalog;
+        private readonly IModuleCatalog _fallbackCatalog;
 
         public PluginModuleCatalog(string pluginsDirectory, IModuleCatalog fallbackCatalog)
         {
             if (Directory.Exists(pluginsDirectory))
             {
-                this.pluginsDirectory = pluginsDirectory;
+                _pluginsDirectory = pluginsDirectory;
             }
 
-            this.fallbackCatalog = fallbackCatalog;
+            _fallbackCatalog = fallbackCatalog;
         }
 
         private AppDomain CreateChildAppDomain(AppDomain parentDomain, string baseDirectory)
@@ -49,13 +47,13 @@ namespace Edi
 
             if (candidateAssemblyPaths.Length > 0)
             {
-                AppDomain childAppDomain = this.CreateChildAppDomain(AppDomain.CurrentDomain, expandedDirectory);
+                AppDomain childAppDomain = CreateChildAppDomain(AppDomain.CurrentDomain, expandedDirectory);
                 Type loaderType = typeof(InnerModuleInfoLoader);
 
                 try
                 {
-                    InnerModuleInfoLoader loader = (InnerModuleInfoLoader)childAppDomain.CreateInstanceFrom(loaderType.Assembly.Location, loaderType.FullName).Unwrap();
-                    this.Items.AddRange(loader.LoadModules(candidateAssemblyPaths));
+                    InnerModuleInfoLoader loader = (InnerModuleInfoLoader)childAppDomain.CreateInstanceFrom(loaderType.Assembly.Location, loaderType.FullName ?? throw new InvalidOperationException()).Unwrap();
+                    Items.AddRange(loader.LoadModules(candidateAssemblyPaths));
                 }
                 catch (FileNotFoundException)
                 {
@@ -69,10 +67,11 @@ namespace Edi
 
             foreach (string d in Directory.GetDirectories(expandedDirectory))
             {
-                this.ParseDirectory(d);
+                ParseDirectory(d);
             }
         }
 
+/*		************ UNUSED METHOD ***********
         private Assembly ChildAppDomain_ReflectionOnlyAssemblyResolve(object sender, ResolveEventArgs args)
         {
             try
@@ -84,10 +83,11 @@ namespace Edi
                 return null;
             }
         }
+*/
 
         public override void Initialize()
         {
-            this.fallbackCatalog.Initialize();
+            _fallbackCatalog.Initialize();
             base.Initialize();
         }
 
@@ -96,19 +96,19 @@ namespace Edi
         /// </summary>
         protected override void InnerLoad()
         {
-            if (this.fallbackCatalog != null)
+            if (_fallbackCatalog != null)
             {
-                foreach (ModuleInfo module in this.fallbackCatalog.Modules)
+                foreach (ModuleInfo module in _fallbackCatalog.Modules)
                 {
-                    this.Items.Add(module);
+                    Items.Add(module);
                 }
             }
 
-            if (!string.IsNullOrWhiteSpace(this.pluginsDirectory))
+            if (!string.IsNullOrWhiteSpace(_pluginsDirectory))
             {
                 try
                 {
-                    this.ParseDirectory(this.pluginsDirectory);
+                    ParseDirectory(_pluginsDirectory);
                 }
                 catch (Exception)
                 {
@@ -133,32 +133,34 @@ namespace Edi
                 string path = Uri.UnescapeDataString(uri.Path);
 
                 DirectoryInfo directory = new DirectoryInfo(Path.GetDirectoryName(path));
-                if (directory != null)
-                {
-                    AssemblyName assemblyName = new AssemblyName(args.Name);
-                    string dependentAssemblyFilename = Path.Combine(directory.FullName, assemblyName.Name + ".dll");
-                    if (File.Exists(dependentAssemblyFilename))
-                    {
-                        return Assembly.ReflectionOnlyLoadFrom(dependentAssemblyFilename);
-                    }
-                }
+	            {
+		            AssemblyName assemblyName = new AssemblyName(args.Name);
+		            string dependentAssemblyFilename = Path.Combine(directory.FullName, assemblyName.Name + ".dll");
+		            if (File.Exists(dependentAssemblyFilename))
+		            {
+			            return Assembly.ReflectionOnlyLoadFrom(dependentAssemblyFilename);
+		            }
+	            }
 
-                return Assembly.ReflectionOnlyLoad(args.Name);
+	            return Assembly.ReflectionOnlyLoad(args.Name);
             }
 
             internal ModuleInfo[] LoadModules(string[] assemblies)
             {
                 IList<ModuleInfo> moduleList = new List<ModuleInfo>();
 
-                ResolveEventHandler resolveEventHandler = delegate (object sender, ResolveEventArgs args) { return OnReflectionOnlyResolve(args); };
+	            Assembly ResolveEventHandler(object sender, ResolveEventArgs args)
+	            {
+		            return OnReflectionOnlyResolve(args);
+	            }
 
-                try
+	            try
                 {
-                    AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += resolveEventHandler;
+                    AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += ResolveEventHandler;
 
                     Assembly moduleReflectionOnlyAssembly = Assembly.ReflectionOnlyLoad(typeof(ModuleExportAttribute).Assembly.FullName);
 
-                    Type ModuleExportAttributeType = moduleReflectionOnlyAssembly.GetType(typeof(ModuleExportAttribute).FullName);
+                    Type moduleExportAttributeType = moduleReflectionOnlyAssembly.GetType(typeof(ModuleExportAttribute).FullName ?? throw new InvalidOperationException());
 
                     foreach (string assemblyPath in assemblies)
                     {
@@ -171,7 +173,7 @@ namespace Edi
                             {
                                 foreach (CustomAttributeData attributeData in type.GetCustomAttributesData())
                                 {
-                                    if (attributeData.AttributeType == ModuleExportAttributeType)
+                                    if (attributeData.AttributeType == moduleExportAttributeType)
                                     {
                                         if (!type.IsAbstract)
                                         {
@@ -195,7 +197,7 @@ namespace Edi
                 }
                 finally
                 {
-                    AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve -= resolveEventHandler;
+                    AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve -= ResolveEventHandler;
                 }
 
                 int modulesCount = moduleList.Count;
@@ -274,8 +276,8 @@ namespace Edi
         /// <exception cref="System.ArgumentNullException">An <see cref="System.ArgumentNullException"/> is thrown if <paramref name="collection"/> or <paramref name="items"/> is <see langword="null"/>.</exception>
         public static Collection<T> AddRange<T>(this Collection<T> collection, IEnumerable<T> items)
         {
-            if (collection == null) throw new System.ArgumentNullException("collection");
-            if (items == null) throw new System.ArgumentNullException("items");
+            if (collection == null) throw new ArgumentNullException("collection");
+            if (items == null) throw new ArgumentNullException("items");
 
             foreach (var each in items)
             {
