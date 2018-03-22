@@ -25,13 +25,10 @@
 	{
 		private bool Closing_CanExecute()
 		{
-			if (_mShutDownInProgress)
-				return false;
+			return !_mShutDownInProgress;
 
 			// Check if conditions within the WorkspaceViewModel are suitable to close the application
 			// eg.: Prompt to Cancel long running background tasks such as Search - Replace in Files (if any)
-
-			return true;
 		}
 
 		/// <summary>
@@ -66,9 +63,7 @@
 			win.CommandBindings.Add(new CommandBinding(AppCommand.ShowToolWindow,
 			(s, e) =>
 			{
-				var toolwindowviewmodel = e?.Parameter as IToolWindow;
-
-				if (toolwindowviewmodel == null)
+				if (!(e?.Parameter is IToolWindow toolwindowviewmodel))
 					return;
 
 
@@ -94,8 +89,8 @@
 				{
 					e.Handled = true;
 
-					if (e.Parameter is TypeOfDocument)
-						t = (TypeOfDocument)e.Parameter;
+					if (e.Parameter is TypeOfDocument document)
+						t = document;
 				}
 
 				OnNew(t);
@@ -108,14 +103,11 @@
 			{
 				string t = string.Empty;
 
-				if (e?.Parameter != null)
-				{
-					if (e.Parameter is string)
-						t = (string)e.Parameter;
-				}
+				if (e?.Parameter is string)
+					t = (string)e.Parameter;
 
 				OnOpen(t);
-				e.Handled = true;
+				if (e != null) e.Handled = true;
 			}
 			));
 
@@ -156,26 +148,18 @@
 			{
 				try
 				{
-					if (e != null)
+					if (e == null) return;
+					e.Handled = true;
+					e.CanExecute = false;
+
+					e.Handled = true;
+
+					if (e.Parameter is EdiViewModel f)
+						e.CanExecute = f.CanClose();
+					else
 					{
-						e.Handled = true;
-						e.CanExecute = false;
-
-						EdiViewModel f = null;
-
-						if (e != null)
-						{
-							e.Handled = true;
-							f = e.Parameter as EdiViewModel;
-						}
-
-						if (f != null)
-							e.CanExecute = f.CanClose();
-						else
-						{
-							if (ActiveDocument != null)
-								e.CanExecute = ActiveDocument.CanClose();
-						}
+						if (ActiveDocument != null)
+							e.CanExecute = ActiveDocument.CanClose();
 					}
 				}
 				catch (Exception exp)
@@ -190,7 +174,7 @@
 
 			// Change the WPF/TextEditor highlighting theme currently used in the application
 			win.CommandBindings.Add(new CommandBinding(AppCommand.ViewTheme,
-															(s, e) => ChangeThemeCmd_Executed(s, e, win.Dispatcher)));
+															(s, e) => ChangeThemeCmd_Executed(e, win.Dispatcher)));
 
 			win.CommandBindings.Add(new CommandBinding(AppCommand.BrowseURL,
 			(s, e) =>
@@ -203,18 +187,16 @@
 			{
 				StartPageViewModel spage = GetStartPage(true);
 
-				if (spage != null)
-				{
-					Logger.InfoFormat("TRACE Before setting startpage as ActiveDocument");
-					ActiveDocument = spage;
-					Logger.InfoFormat("TRACE After setting startpage as ActiveDocument");
-				}
+				if (spage == null) return;
+				Logger.InfoFormat("TRACE Before setting startpage as ActiveDocument");
+				ActiveDocument = spage;
+				Logger.InfoFormat("TRACE After setting startpage as ActiveDocument");
 			}));
 
 			win.CommandBindings.Add(new CommandBinding(AppCommand.ToggleOptimizeWorkspace,
 			(s, e) =>
 			{
-				Logger.InfoFormat("TRACE AppCommand.ToggleOptimizeWorkspace parameter is {0}.", (e == null ? "(null)" : e.ToString()));
+				Logger.InfoFormat("TRACE AppCommand.ToggleOptimizeWorkspace parameter is {0}.", e?.ToString() ?? "(null)");
 
 				try
 				{
@@ -237,9 +219,7 @@
 				{
 					Logger.InfoFormat("TRACE AppCommand.LoadFile parameter is {0}.", e?.ToString() ?? "(null)");
 
-					string filename = e?.Parameter as string;
-
-					if (filename == null)
+					if (!(e?.Parameter is string filename))
 						return;
 
 					Logger.InfoFormat("TRACE AppCommand.LoadFile with: '{0}'", filename);
@@ -264,7 +244,7 @@
 						e.Handled = true;
 
 					if (ActiveDocument != null)
-						OnSave(ActiveDocument, false);
+						OnSave(ActiveDocument);
 				}
 				catch (Exception exp)
 				{
@@ -277,13 +257,11 @@
 			},
 			(s, e) =>
 			{
-				if (e != null)
-				{
-					e.Handled = true;
+				if (e == null) return;
+				e.Handled = true;
 
-					if (ActiveDocument != null)
-						e.CanExecute = ActiveDocument.CanSave();
-				}
+				if (ActiveDocument != null)
+					e.CanExecute = ActiveDocument.CanSave();
 			}));
 
 			win.CommandBindings.Add(new CommandBinding(ApplicationCommands.SaveAs,
@@ -294,15 +272,11 @@
 					if (e != null)
 						e.Handled = true;
 
-					if (ActiveDocument != null)
-					{
-						if (OnSave(ActiveDocument, true))
-						{
-							var mruList = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
-							mruList.UpdateEntry(ActiveDocument.FilePath);
-							_mSettingsManager.SessionData.LastActiveFile = ActiveDocument.FilePath;
-						}
-					}
+					if (ActiveDocument == null) return;
+					if (!OnSave(ActiveDocument, true)) return;
+					var mruList = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
+					mruList.UpdateEntry(ActiveDocument.FilePath);
+					_mSettingsManager.SessionData.LastActiveFile = ActiveDocument.FilePath;
 				}
 				catch (Exception exp)
 				{
@@ -350,18 +324,12 @@
 
 						try
 						{
-							for (int i = 0; i < Files.Count; i++)
+							foreach (var f in Files)
 							{
-								IFileBaseViewModel f = Files[i];
-
-								if (f != null)
-								{
-									if (f.IsDirty && f.CanSaveData)
-									{
-										ActiveDocument = f;
-										OnSave(f);
-									}
-								}
+								if (f == null) continue;
+								if (!f.IsDirty || !f.CanSaveData) continue;
+								ActiveDocument = f;
+								OnSave(f);
 							}
 						}
 						catch (Exception exp)
@@ -438,28 +406,23 @@
 			},
 			(s, e) =>  // Execute this command only if a Text document is currently active
 			{
-				if (ActiveEdiDocument != null)
-					e.CanExecute = true;
-				else
-					e.CanExecute = false;
+				e.CanExecute = ActiveEdiDocument != null;
 			}
 			));
 
 
-			/// <summary>
-			/// Removes ALL MRU entries (even pinned entries) from the current list of entries.
-			/// </summary>
+			// Removes ALL MRU entries (even pinned entries) from the current list of entries.
 			win.CommandBindings.Add(new CommandBinding(AppCommand.ClearAllMruItemsCommand,
 			(s, e) =>
 			{
 				GetToolWindowVm<RecentFilesViewModel>().MruList.Clear();
 			}));
 
-			/// <summary>
+			// <summary>
 			/// Gets a command that removes all items that are older
 			/// than a given <see cref="GroupType"/>.
-			/// Eg.: Remove all MRU entries older than yesterday.
-			/// </summary>
+			// Eg.: Remove all MRU entries older than yesterday.
+			// </summary>
 			win.CommandBindings.Add(new CommandBinding(AppCommand.RemoveItemsOlderThanThisCommand,
 			(s, e) =>
 			{
@@ -487,7 +450,7 @@
 				if (e.Parameter is IMRUEntryViewModel == false)
 					return;
 
-				var param = e.Parameter as IMRUEntryViewModel;
+				var param = (IMRUEntryViewModel)e.Parameter;
 
 				GetToolWindowVm<RecentFilesViewModel>().MruList.MovePinnedEntry(MoveMRUItem.Up, param);
 			},
@@ -499,7 +462,7 @@
 					return;
 				}
 
-				if (((IMRUEntryViewModel) e.Parameter).IsPinned == 0)  //Make sure it is pinned
+				if (((IMRUEntryViewModel)e.Parameter).IsPinned == 0)  //Make sure it is pinned
 				{
 					e.CanExecute = false;
 					return;
@@ -514,7 +477,7 @@
 				if (e.Parameter is IMRUEntryViewModel == false)
 					return;
 
-				var param = e.Parameter as IMRUEntryViewModel;
+				var param = (IMRUEntryViewModel)e.Parameter;
 
 				GetToolWindowVm<RecentFilesViewModel>().MruList.MovePinnedEntry(MoveMRUItem.Down, param);
 			},
@@ -526,7 +489,7 @@
 					return;
 				}
 
-				if ((e.Parameter as IMRUEntryViewModel).IsPinned == 0)  //Make sure it is pinned
+				if (((IMRUEntryViewModel)e.Parameter).IsPinned == 0)  //Make sure it is pinned
 				{
 					e.CanExecute = false;
 					return;
@@ -548,7 +511,7 @@
 					return;
 				}
 
-				if ((e.Parameter as IMRUEntryViewModel).IsPinned == 0)  //Make sure it is pinned
+				if (((IMRUEntryViewModel)e.Parameter).IsPinned == 0)  //Make sure it is pinned
 				{
 					e.CanExecute = true;
 					return;
@@ -563,9 +526,7 @@
 				if (e.Parameter is IMRUEntryViewModel == false)
 					return;
 
-				var param = e.Parameter as IMRUEntryViewModel;
-
-				GetToolWindowVm<RecentFilesViewModel>().MruList.PinUnpinEntry(false, e.Parameter as IMRUEntryViewModel);
+				GetToolWindowVm<RecentFilesViewModel>().MruList.PinUnpinEntry(false, (IMRUEntryViewModel) e.Parameter);
 			},
 			(s, e) =>
 			{
@@ -575,7 +536,7 @@
 					return;
 				}
 
-				if ((e.Parameter as IMRUEntryViewModel).IsPinned == 0)  //Make sure it is pinned
+				if (((IMRUEntryViewModel)e.Parameter).IsPinned == 0)  //Make sure it is pinned
 				{
 					e.CanExecute = false;
 					return;
@@ -607,53 +568,43 @@
 		/// This procedure changes the current WPF Application Theme into another theme
 		/// while the application is running (re-boot should not be required).
 		/// </summary>
-		/// <param name="s"></param>
 		/// <param name="e"></param>
 		/// <param name="disp"></param>
-		private void ChangeThemeCmd_Executed(object s,
-											ExecutedRoutedEventArgs e,
+		private void ChangeThemeCmd_Executed(ExecutedRoutedEventArgs e,
 											Dispatcher disp)
 		{
 			string oldTheme = Factory.DefaultThemeName;
 
 			try
 			{
-				string newThemeName = e?.Parameter as string;
-
 				// Check if request is available
-				if (newThemeName == null)
+				if (!(e?.Parameter is string newThemeName))
 					return;
 
 				oldTheme = _mSettingsManager.SettingData.CurrentTheme;
 
 				// The Work to perform on another thread
-				ThreadStart start = delegate
+				void Start()
 				{
 					// This works in the UI tread using the dispatcher with highest Priority
-					disp.Invoke(DispatcherPriority.Send,
-					(Action)(() =>
-					{
-						try
-						{
-							if (ApplicationThemes.SetSelectedTheme(newThemeName))
-							{
-								_mSettingsManager.SettingData.CurrentTheme = newThemeName;
-								ResetTheme();                        // Initialize theme in process
-							}
-						}
-						catch (Exception exp)
-						{
-							Logger.Error(exp.Message, exp);
-							_msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-										 _mAppCore.IssueTrackerLink,
-										 _mAppCore.IssueTrackerLink,
-										 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
-						}
-					}));
-				};
+					disp.Invoke(DispatcherPriority.Send, (Action)(() =>
+				   {
+					   try
+					   {
+						   if (!ApplicationThemes.SetSelectedTheme(newThemeName)) return;
+						   _mSettingsManager.SettingData.CurrentTheme = newThemeName;
+						   ResetTheme(); // Initialize theme in process
+					   }
+					   catch (Exception exp)
+					   {
+						   Logger.Error(exp.Message, exp);
+						   _msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton, _mAppCore.IssueTrackerLink, _mAppCore.IssueTrackerLink, Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+					   }
+				   }));
+				}
 
 				// Create the thread and kick it started!
-				Thread thread = new Thread(start);
+				Thread thread = new Thread(Start);
 
 				thread.Start();
 			}
@@ -682,12 +633,9 @@
 			{
 				try
 				{
-
-					if (ActiveDocument is EdiViewModel)
-					{
-						EdiViewModel f = ActiveDocument as EdiViewModel;
-						f.DisableHighlighting();
-					}
+					if (!(ActiveDocument is EdiViewModel)) return;
+					EdiViewModel f = (EdiViewModel)ActiveDocument;
+					f.DisableHighlighting();
 				}
 				catch (Exception exp)
 				{
@@ -700,16 +648,12 @@
 			},
 			(s, e) =>
 			{
+				EdiViewModel f = ActiveDocument as EdiViewModel;
 
-				if (ActiveDocument is EdiViewModel)
+				if (f?.HighlightingDefinition != null)
 				{
-					EdiViewModel f = ActiveDocument as EdiViewModel;
-
-					if (f.HighlightingDefinition != null)
-					{
-						e.CanExecute = true;
-						return;
-					}
+					e.CanExecute = true;
+					return;
 				}
 
 				e.CanExecute = false;
@@ -764,18 +708,14 @@
 					e.Handled = true;
 
 
-					if (ActiveDocument is EdiViewModel)
+					if (!(ActiveDocument is EdiViewModel)) return;
+					if (FindReplaceVm != null)
 					{
-						EdiViewModel f = ActiveDocument as EdiViewModel;
-
-						if (FindReplaceVm != null)
-						{
-							FindReplaceVm.FindNext(FindReplaceVm, true);
-						}
-						else
-						{
-							ShowFindReplaceDialog();
-						}
+						FindReplaceVm.FindNext(FindReplaceVm, true);
+					}
+					else
+					{
+						ShowFindReplaceDialog();
 					}
 				}
 				catch (Exception exp)
@@ -797,18 +737,15 @@
 					e.Handled = true;
 
 
-					if (ActiveDocument is EdiViewModel)
-					{
-						EdiViewModel f = ActiveDocument as EdiViewModel;
+					if (!(ActiveDocument is EdiViewModel)) return;
 
-						if (FindReplaceVm != null)
-						{
-							FindReplaceVm.FindNext(FindReplaceVm, false);
-						}
-						else
-						{
-							ShowFindReplaceDialog();
-						}
+					if (FindReplaceVm != null)
+					{
+						FindReplaceVm.FindNext(FindReplaceVm, false);
+					}
+					else
+					{
+						ShowFindReplaceDialog();
 					}
 				}
 				catch (Exception exp)
@@ -850,22 +787,15 @@
 		{
 			get
 			{
-				if (_toggleEditorOptionCommand == null)
-				{
-					_toggleEditorOptionCommand = new RelayCommand<ToggleEditorOption>
-										((p) => OnToggleEditorOption(p),
-										 (p) => CanExecuteIfActiveDocumentIsEdiViewModel());
-				}
-
-				return _toggleEditorOptionCommand;
+				return _toggleEditorOptionCommand ?? (_toggleEditorOptionCommand = new RelayCommand<ToggleEditorOption>
+					   ((p) => OnToggleEditorOption(p),
+						   (p) => CanExecuteIfActiveDocumentIsEdiViewModel()));
 			}
 		}
 
 		private void OnToggleEditorOption(object parameter)
 		{
-			EdiViewModel f = ActiveDocument as EdiViewModel;
-
-			if (f == null)
+			if (!(ActiveDocument is EdiViewModel f))
 				return;
 
 			if (parameter == null)
@@ -907,7 +837,6 @@
 			if (ActiveDocument is EdiViewModel)
 			{
 				//EdiViewModel f = this.ActiveDocument as EdiViewModel;
-
 				return true;
 			}
 
