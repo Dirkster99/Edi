@@ -25,7 +25,7 @@
     {
         private bool Closing_CanExecute()
         {
-            if (_mShutDownInProgress == true)
+            if (_mShutDownInProgress)
                 return false;
 
             // Check if conditions within the WorkspaceViewModel are suitable to close the application
@@ -368,7 +368,7 @@
 
                                 if (f != null)
                                 {
-                                    if (f.IsDirty == true && f.CanSaveData == true)
+                                    if (f.IsDirty && f.CanSaveData)
                                     {
                                         ActiveDocument = f;
                                         OnSave(f);
@@ -408,7 +408,7 @@
                 {
                     if (vm_DocumentViewModel != null)
                     {
-                        if ((vm_DocumentViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready) == true)
+                        if ((vm_DocumentViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready))
                         {
                             vm_DocumentViewModel.ExecuteExport(s, e, ActiveDocument.FileName + ".png");
                         }
@@ -657,7 +657,7 @@
                     {
                         try
                         {
-                            if (ApplicationThemes.SetSelectedTheme(newThemeName) == true)
+                            if (ApplicationThemes.SetSelectedTheme(newThemeName))
                             {
                                 _mSettingsManager.SettingData.CurrentTheme = newThemeName;
                                 ResetTheme();                        // Initialize theme in process

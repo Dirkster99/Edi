@@ -37,7 +37,7 @@
                 // Save program options only if there are un-saved changes that need persistence
                 // This can be caused when WPF theme was changed or something else
                 // but should normally not occur as often as saving session data
-                if (_mSettingsManager.SettingData.IsDirty == true)
+                if (_mSettingsManager.SettingData.IsDirty)
                 {
                     _mSettingsManager.SaveOptions(_mAppCore.DirFileAppSettingsData, _mSettingsManager.SettingData);
                 }
@@ -90,7 +90,7 @@
         {
             try
             {
-                if (Exit_CheckConditions(sender) == true)      // Close all open files and check whether application is ready to close
+                if (Exit_CheckConditions(sender))      // Close all open files and check whether application is ready to close
                 {
                     OnRequestClose();                          // (other than exception and error handling)
 

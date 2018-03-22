@@ -72,7 +72,7 @@ namespace Edi.Apps.ViewModels
         private bool _mShutDownInProgress = false;
         private bool _mShutDownInProgressCancel = false;
 
-        private ObservableCollection<IFileBaseViewModel> _mFiles = null;
+        private readonly ObservableCollection<IFileBaseViewModel> _mFiles = null;
         private ReadOnlyObservableCollection<IFileBaseViewModel> _mReadonyFiles = null;
 
         private IFileBaseViewModel _mActiveDocument = null;
@@ -154,7 +154,7 @@ namespace Edi.Apps.ViewModels
         /// </summary>
         public IThemesManager ApplicationThemes { get; } = null;
 
-	    private object _mLock = new object();
+	    private readonly object _mLock = new object();
         private bool _mIsMainWindowActivationProcessed = false;
         private bool _mIsMainWindowActivationProcessingEnabled = false;
 
@@ -184,23 +184,24 @@ namespace Edi.Apps.ViewModels
                             return;
 
                         // Is this event already currently being processed?
-                        if (_mIsMainWindowActivationProcessed == true)
+                        if (_mIsMainWindowActivationProcessed)
                             return;
 
                         lock (_mLock)
                         {
                             try
                             {
-                                if (_mIsMainWindowActivationProcessed == true)
+                                if (_mIsMainWindowActivationProcessed)
                                     return;
 
                                 _mIsMainWindowActivationProcessed = true;
 
                                 foreach (var item in Files)
                                 {
-                                    if (item.WasChangedExternally == true)
+                                    if (item.WasChangedExternally)
                                     {
-                                        var result = _msgBox.Show(string.Format("File '{0}' was changed externally. Click OK to reload or Cancel to keep current content.", item.FileName),
+                                        var result = _msgBox.Show(
+	                                        $"File '{item.FileName}' was changed externally. Click OK to reload or Cancel to keep current content.",
                                                                   "File changed externally", MsgBoxButtons.OKCancel);
 
                                         if (result == MsgBoxResult.OK)
@@ -257,7 +258,7 @@ namespace Edi.Apps.ViewModels
 
                             if (value != null && _mShutDownInProgress == false)
                             {
-                                if (value.IsFilePathReal == true)
+                                if (value.IsFilePathReal)
                                     _mSettingsManager.SessionData.LastActiveFile = value.FilePath;
                             }
                         }
@@ -489,7 +490,7 @@ namespace Edi.Apps.ViewModels
                 SetActiveFileBaseDocument(fileViewModel);
             }
 
-            if (addIntoMru == true)
+            if (addIntoMru)
                 GetToolWindowVm<RecentFilesViewModel>().AddNewEntryIntoMRU(filePath);
 
             return fileViewModel;
@@ -518,7 +519,7 @@ namespace Edi.Apps.ViewModels
                 return anchorableVm;
 
             // Query for a matching document and return it
-            if (_mSettingsManager.SettingData.ReloadOpenFilesOnAppStart == true)
+            if (_mSettingsManager.SettingData.ReloadOpenFilesOnAppStart)
                 return ReloadDocument(contentId);
 
             return null;
@@ -555,7 +556,7 @@ namespace Edi.Apps.ViewModels
                             SetActiveDocumentOnNewFileOrOpenFile(ediVm);
                         }
                         else
-                            throw new NotSupportedException(string.Format("Creating Documents of type: '{0}'", t.ToString()));
+                            throw new NotSupportedException($"Creating Documents of type: '{t.ToString()}'");
                     }
                     else
                     {
@@ -569,7 +570,7 @@ namespace Edi.Apps.ViewModels
                             SetActiveFileBaseDocument(umlVm);
                         }
                         else
-                            throw new NotSupportedException(string.Format("Creating Documents of type: '{0}'", t.ToString()));
+                            throw new NotSupportedException($"Creating Documents of type: '{t.ToString()}'");
                     }
                 }
             }
@@ -644,7 +645,7 @@ namespace Edi.Apps.ViewModels
         {
             try
             {
-                if (Closing_CanExecute() == true)
+                if (Closing_CanExecute())
                 {
                     _mShutDownInProgressCancel = false;
                     OnRequestClose();
@@ -679,7 +680,7 @@ namespace Edi.Apps.ViewModels
                 {
                     dlgVm.SaveOptionsToModel(_mSettingsManager.SettingData);
 
-                    if (_mSettingsManager.SettingData.IsDirty == true)
+                    if (_mSettingsManager.SettingData.IsDirty)
                         _mSettingsManager.SaveOptions(_mAppCore.DirFileAppSettingsData, _mSettingsManager.SettingData);
                 }
             }
@@ -810,7 +811,7 @@ namespace Edi.Apps.ViewModels
                     if (DialogCloseResult == null)
                         DialogCloseResult = true;      // Execute Close event via attached property
 
-                    if (_mShutDownInProgressCancel == true)
+                    if (_mShutDownInProgressCancel)
                     {
                         _mShutDownInProgress = false;
                         _mShutDownInProgressCancel = false;
@@ -956,7 +957,7 @@ namespace Edi.Apps.ViewModels
             if (doc == null)
                 return false;
 
-            if (doc.CanSaveData == true)
+            if (doc.CanSaveData)
             {
                 var defaultFilter = GetDefaultFileFilter(doc, _mDocumentTypeManager);
 
@@ -999,7 +1000,7 @@ namespace Edi.Apps.ViewModels
 
             try
             {
-                if (filePath == string.Empty || saveAsFlag == true)   // Execute SaveAs function
+                if (filePath == string.Empty || saveAsFlag)   // Execute SaveAs function
                 {
                     var dlg = new SaveFileDialog();
 
@@ -1016,7 +1017,7 @@ namespace Edi.Apps.ViewModels
                     if (string.IsNullOrEmpty(fileExtensionFilter) == false)
                         dlg.Filter = fileExtensionFilter;
 
-                    if (dlg.ShowDialog().GetValueOrDefault() == true)     // SaveAs file if user OK'ed it so
+                    if (dlg.ShowDialog().GetValueOrDefault())     // SaveAs file if user OK'ed it so
                     {
                         filePath = dlg.FileName;
 
@@ -1049,8 +1050,8 @@ namespace Edi.Apps.ViewModels
 
         internal bool OnCloseSaveDirtyFile(IFileBaseViewModel fileToClose)
         {
-            if (fileToClose.IsDirty == true &&
-                    fileToClose.CanSaveData == true)
+            if (fileToClose.IsDirty &&
+                    fileToClose.CanSaveData)
             {
                 var res = _msgBox.Show(string.Format(CultureInfo.CurrentCulture, Util.Local.Strings.STR_MSG_SaveChangesForFile, fileToClose.FileName),
                                        ApplicationTitle,
@@ -1212,7 +1213,7 @@ namespace Edi.Apps.ViewModels
         /// <returns>true if application is OK to proceed closing with closed, otherwise false.</returns>
         public bool Exit_CheckConditions(object sender)
         {
-            if (_mShutDownInProgress == true)
+            if (_mShutDownInProgress)
                 return true;
 
             try
@@ -1469,10 +1470,10 @@ namespace Edi.Apps.ViewModels
                         break;
 
                     default:
-                        if (path.Contains("<") == true && path.Contains(">") == true)
+                        if (path.Contains("<") && path.Contains(">"))
                         {
                             _mMessageManager.Output.AppendLine(
-                                string.Format("Warning: Cannot resolve tool window or document page: '{0}'.", path));
+	                            $"Warning: Cannot resolve tool window or document page: '{path}'.");
 
                             _mMessageManager.Output.AppendLine(
                                 string.Format("Check the current program configuration to make that it is present.", path));
@@ -1529,14 +1530,10 @@ namespace Edi.Apps.ViewModels
             if (_mMessageManager.Output != null)
             {
                 _mMessageManager.Output.AppendLine(
-                string.Format("Loading MEF Module: {0},\n" +
-                                            "                    Type: {1},\n" +
-                                            "     Initialization Mode: {2},\n" +
-                                            "                   State: {3}, Ref: '{4}'\n", e.ModuleInfo.ModuleName,
-                                                                                                                                         e.ModuleInfo.ModuleType,
-                                                                                                                                         e.ModuleInfo.InitializationMode,
-                                                                                                                                         e.ModuleInfo.State,
-                                                                                                                                         e.ModuleInfo.Ref));
+	                $"Loading MEF Module: {e.ModuleInfo.ModuleName},\n" +
+	                $"                    Type: {e.ModuleInfo.ModuleType},\n" +
+	                $"     Initialization Mode: {e.ModuleInfo.InitializationMode},\n" +
+	                $"                   State: {e.ModuleInfo.State}, Ref: '{e.ModuleInfo.Ref}'\n");
             }
         }
         #endregion methods

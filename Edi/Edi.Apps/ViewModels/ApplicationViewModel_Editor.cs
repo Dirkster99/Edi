@@ -52,7 +52,7 @@ namespace Edi.Apps.ViewModels
                 bool textSearchSuccess = false;
                 do
                 {
-                    if (previous == true)                  // Get next/previous document
+                    if (previous)                  // Get next/previous document
                         i = (i < 1 ? l.Count - 1 : i - 1);
                     else
                         i = (i >= l.Count - 1 ? 0 : i + 1);
@@ -73,7 +73,7 @@ namespace Edi.Apps.ViewModels
                 while (i != idxStart && textSearchSuccess != true);
 
                 // Found a match so activate the corresponding document and select the text with scroll into view
-                if (textSearchSuccess == true && m != null)
+                if (textSearchSuccess && m != null)
                 {
                     var doc = l[i] as EdiViewModel;
 

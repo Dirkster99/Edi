@@ -1,38 +1,39 @@
+using Edi.Apps.Behaviors;
+
 namespace Edi.Apps.ViewModels
 {
-    using System;
-    using System.ComponentModel.Composition;
-    using System.IO;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Windows.Input;
-    using Core.Interfaces;
-    using Core.Models.Enums;
-    using Core.ViewModels;
-    using Core.ViewModels.Command;
-    using Events;
-    using Settings.Interfaces;
-    using Xceed.Wpf.AvalonDock;
+	using System;
+	using System.ComponentModel.Composition;
+	using System.IO;
+	using System.Text;
+	using System.Threading.Tasks;
+	using System.Windows.Input;
+	using Core.Interfaces;
+	using Core.Models.Enums;
+	using Core.ViewModels;
+	using Core.ViewModels.Command;
+	using Events;
+	using Settings.Interfaces;
+	using Xceed.Wpf.AvalonDock;
 
-    /// <summary>
-    /// Class implements a viewmodel to support the
-    /// <seealso cref="AvalonDockLayoutSerializer"/>
-    /// attached behavior which is used to implement
-    /// load/save of layout information on application
-    /// start and shut-down.
-    /// </summary>
-    [Export(typeof(IAvalonDockLayoutViewModel))]
+	/// <summary>
+	/// Class implements a viewmodel to support the
+	/// <seealso cref="AvalonDockLayoutSerializer"/>
+	/// attached behavior which is used to implement
+	/// load/save of layout information on application
+	/// start and shut-down.
+	/// </summary>
+	[Export(typeof(IAvalonDockLayoutViewModel))]
     public class AvalonDockLayoutViewModel : IAvalonDockLayoutViewModel
     {
         #region fields
         private RelayCommand<object> _mLoadLayoutCommand;
         private RelayCommand<object> _mSaveLayoutCommand;
 
-	    private string _mLayoutFileName;
-        private string _mAppDir;
+	    private readonly string _mLayoutFileName;
+        private readonly string _mAppDir;
 
-        private readonly ISettingsManager _mProgramSettings;
-        private IMessageManager _mMessageManager;
+	    private readonly IMessageManager _mMessageManager;
         #endregion fields
 
         #region constructors
@@ -43,13 +44,13 @@ namespace Edi.Apps.ViewModels
         public AvalonDockLayoutViewModel(ISettingsManager programSettings,
                                          IMessageManager messageManager)
         {
-            LayoutSoure = LayoutLoaded.FromDefault;
+	        LayoutSoure = LayoutLoaded.FromDefault;
 
-            _mProgramSettings = programSettings;
+            var mProgramSettings = programSettings;
             _mMessageManager = messageManager;
 
-            _mAppDir = _mProgramSettings.AppDir;
-            _mLayoutFileName = _mProgramSettings.LayoutFileName;
+            _mAppDir = mProgramSettings.AppDir;
+            _mLayoutFileName = mProgramSettings.LayoutFileName;
 
             LayoutID = Guid.NewGuid();
             ViewProperties = new AvalonDockViewProperties();
@@ -83,30 +84,25 @@ namespace Edi.Apps.ViewModels
         {
             get
             {
-                if (_mLoadLayoutCommand == null)
-                {
-                    _mLoadLayoutCommand = new RelayCommand<object>((p) =>
-                    {
-                        try
-                        {
-                            DockingManager docManager = p as DockingManager;
+	            return _mLoadLayoutCommand ?? (_mLoadLayoutCommand = new RelayCommand<object>((p) =>
+	            {
+		            try
+		            {
+			            DockingManager docManager = p as DockingManager;
 
-                            if (docManager == null)
-                                return;
+			            if (docManager == null)
+				            return;
 
-                            _mMessageManager.Output.AppendLine("Loading document and tool window layout...");
-                            LoadDockingManagerLayout(docManager);
-                        }
-                        catch (Exception exp)
-                        {
-                            var wrt = _mMessageManager.Output.Writer;
-                            wrt.WriteLine("Error when loading layout in AvalonDockLayoutViewModel:");
-                            wrt.WriteLine(exp.Message);
-                        }
-                    });
-                }
-
-                return _mLoadLayoutCommand;
+			            _mMessageManager.Output.AppendLine("Loading document and tool window layout...");
+			            LoadDockingManagerLayout(docManager);
+		            }
+		            catch (Exception exp)
+		            {
+			            var wrt = _mMessageManager.Output.Writer;
+			            wrt.WriteLine("Error when loading layout in AvalonDockLayoutViewModel:");
+			            wrt.WriteLine(exp.Message);
+		            }
+	            }));
             }
         }
 
@@ -127,20 +123,15 @@ namespace Edi.Apps.ViewModels
         {
             get
             {
-                if (_mSaveLayoutCommand == null)
-                {
-                    _mSaveLayoutCommand = new RelayCommand<object>((p) =>
-                    {
-                        string xmlLayout = p as string;
+	            return _mSaveLayoutCommand ?? (_mSaveLayoutCommand = new RelayCommand<object>((p) =>
+	            {
+		            string xmlLayout = p as string;
 
-                        if (xmlLayout == null)
-                            return;
+		            if (xmlLayout == null)
+			            return;
 
-                        SaveDockingManagerLayout(xmlLayout);
-                    });
-                }
-
-                return _mSaveLayoutCommand;
+		            SaveDockingManagerLayout(xmlLayout);
+	            }));
             }
         }
         #endregion command properties
@@ -168,56 +159,54 @@ namespace Edi.Apps.ViewModels
         {
             try
             {
-                string sTaskError = string.Empty;
-
-                Task taskToProcess = null;
-                taskToProcess = Task.Factory.StartNew<string>((stateObj) =>
+	            Task.Factory.StartNew<string>((stateObj) =>
                 {
-                    // Begin Aysnc Task
-                    string layoutFileName = Path.Combine(_mAppDir, _mLayoutFileName);
-                    string xmlWorkspaces = string.Empty;
+	                // Begin Aysnc Task
+	                string layoutFileName = Path.Combine(_mAppDir, _mLayoutFileName);
+	                string xmlWorkspaces = string.Empty;
 
-                    try
-                    {
-                        try
-                        {
-                            if (File.Exists(layoutFileName) == true)
-                            {
-                                _mMessageManager.Output.AppendLine(string.Format(" from file: '{0}'", layoutFileName));
+	                try
+	                {
+		                try
+		                {
+			                if (File.Exists(layoutFileName))
+			                {
+				                _mMessageManager.Output.AppendLine($" from file: '{layoutFileName}'");
 
-                                using (FileStream fs = new FileStream(layoutFileName, FileMode.Open, FileAccess.Read, FileShare.Read))
-                                {
-                                    using (StreamReader reader = ICSharpCode.AvalonEdit.Utils.FileReader.OpenStream(fs, Encoding.Default))
-                                    {
-                                        xmlWorkspaces = reader.ReadToEnd();
-                                    }
-                                }
-                            }
-                        }
-                        catch
-                        {
-                        }
+				                using (FileStream fs = new FileStream(layoutFileName, FileMode.Open, FileAccess.Read, FileShare.Read))
+				                {
+					                using (StreamReader reader = ICSharpCode.AvalonEdit.Utils.FileReader.OpenStream(fs, Encoding.Default))
+					                {
+						                xmlWorkspaces = reader.ReadToEnd();
+					                }
+				                }
+			                }
+		                }
+		                catch
+		                {
+			                // ignored
+		                }
 
-                        if (string.IsNullOrEmpty(xmlWorkspaces) == false)
-                        {
-                            LayoutSoure = LayoutLoaded.FromStorage;
-                            LoadLayoutEvent.Instance.Publish(new LoadLayoutEventArgs(xmlWorkspaces, layoutId));
-                        }
-                    }
-                    catch (OperationCanceledException exp)
-                    {
-                        throw exp;
-                    }
-                    catch (Exception except)
-                    {
-                        throw except;
-                    }
-                    finally
-                    {
-                        _mMessageManager.Output.AppendLine("Loading layout done.\n");
-                    }
+		                if (string.IsNullOrEmpty(xmlWorkspaces) == false)
+		                {
+			                LayoutSoure = LayoutLoaded.FromStorage;
+			                LoadLayoutEvent.Instance.Publish(new LoadLayoutEventArgs(xmlWorkspaces, layoutId));
+		                }
+	                }
+	                catch (OperationCanceledException exp)
+	                {
+		                throw exp;
+	                }
+	                catch (Exception except)
+	                {
+		                throw except;
+	                }
+	                finally
+	                {
+		                _mMessageManager.Output.AppendLine("Loading layout done.\n");
+	                }
 
-                    return xmlWorkspaces;                     // End of async task
+	                return xmlWorkspaces;                     // End of async task
 
                 }, null);
             }
@@ -227,15 +216,16 @@ namespace Edi.Apps.ViewModels
             }
         }
 
-        /// <summary>
-        /// Source: http://stackoverflow.com/questions/2820384/reading-embedded-xml-file-c-sharps
-        /// </summary>
-        /// <param name="filename"></param>
-        /// <returns></returns>
-        public string GetResourceTextFile(string assemblyNameSpace, string filename)
+	    /// <summary>
+	    /// Source: http://stackoverflow.com/questions/2820384/reading-embedded-xml-file-c-sharps
+	    /// </summary>
+	    /// <param name="assemblyNameSpace"></param>
+	    /// <param name="filename"></param>
+	    /// <returns></returns>
+	    public string GetResourceTextFile(string assemblyNameSpace, string filename)
         {
             string result = string.Empty;
-            _mMessageManager.Output.AppendLine(string.Format("Layout from Resource '{0}', '{1}'", assemblyNameSpace, filename));
+            _mMessageManager.Output.AppendLine($"Layout from Resource '{assemblyNameSpace}', '{filename}'");
 
             ////using (Stream stream = this.GetType().Assembly.
             ////			 GetManifestResourceStream(assemblyNameSpace + filename))

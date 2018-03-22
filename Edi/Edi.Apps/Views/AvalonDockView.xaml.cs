@@ -149,7 +149,7 @@
 			if (args == null)
 				return;
 
-			if (string.IsNullOrEmpty(args.XmlLayout) == true)
+			if (string.IsNullOrEmpty(args.XmlLayout))
 				return;
 
 			_mOnLoadXmlLayout = args.XmlLayout;

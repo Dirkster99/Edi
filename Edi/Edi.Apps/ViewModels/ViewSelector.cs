@@ -23,13 +23,13 @@
 				win = new SettingsView.Config.ConfigDlg() { Title = "Settings..." };
 			else
 				if (viewModel is Dialogs.About.AboutViewModel)             // Return about programm dialog instance
-					win = new Dialogs.About.AboutDlg();
-				else
+				win = new Dialogs.About.AboutDlg();
+			else
 					if (viewModel is Dialogs.GotoLine.GotoLineViewModel)       // Return goto line dialog instance
-						win = new Dialogs.GotoLine.GotoLineDlg();
-					else
+				win = new Dialogs.GotoLine.GotoLineDlg();
+			else
 						if (viewModel is Dialogs.FindReplace.ViewModel.FindReplaceViewModel) // Return find replace dialog instance
-							win = new Dialogs.FindReplace.FindReplaceDialog();
+				win = new Dialogs.FindReplace.FindReplaceDialog();
 
 			if (win != null)
 			{
