@@ -8,7 +8,6 @@ namespace Edi.Apps.Events
 	public class LoadLayoutEvent : PubSubEvent<LoadLayoutEventArgs>
 	{
 		private static readonly EventAggregator EventAggregator;
-		private static readonly LoadLayoutEvent Event;
 
 		/// <summary>
 		/// Static Class Constructor
@@ -16,12 +15,9 @@ namespace Edi.Apps.Events
 		static LoadLayoutEvent()
 		{
 			EventAggregator = new EventAggregator();
-			Event = EventAggregator.GetEvent<LoadLayoutEvent>();
+			Instance = EventAggregator.GetEvent<LoadLayoutEvent>();
 		}
 
-		public static LoadLayoutEvent Instance
-		{
-			get { return Event; }
-		}
+		public static LoadLayoutEvent Instance { get; }
 	}
 }

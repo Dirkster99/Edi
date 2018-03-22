@@ -80,11 +80,9 @@ namespace Edi.Apps.ViewModels
 
         private readonly IModuleManager _mModuleManager = null;
         private readonly IAppCoreModel _mAppCore = null;
-        private readonly IAvalonDockLayoutViewModel _mAvLayout = null;
-        private readonly IToolWindowRegistry _mToolRegistry = null;
+	    private readonly IToolWindowRegistry _mToolRegistry = null;
         private readonly ISettingsManager _mSettingsManager = null;
-        private readonly IThemesManager _mThemesManager = null;
-        private readonly IMessageManager _mMessageManager = null;
+	    private readonly IMessageManager _mMessageManager = null;
 
         private readonly IDocumentTypeManager _mDocumentTypeManager;
         private IDocumentType _mSelectedOpenDocumentType = null;
@@ -108,7 +106,7 @@ namespace Edi.Apps.ViewModels
             : this()
         {
             this._mAppCore = appCore;
-            this._mAvLayout = avLayout;
+            this.AdLayout = avLayout;
             this._mModuleManager = moduleManager;
 
             this._mMessageManager = messageManager;
@@ -121,7 +119,7 @@ namespace Edi.Apps.ViewModels
 
             this._mToolRegistry = toolRegistry;
             this._mSettingsManager = programSettings;
-            this._mThemesManager = themesManager;
+            this.ApplicationThemes = themesManager;
             this._mDocumentTypeManager = documentTypeManager;
 
             this._mModuleManager.LoadModuleCompleted += this.ModuleManager_LoadModuleCompleted;
@@ -129,7 +127,7 @@ namespace Edi.Apps.ViewModels
 
         public ApplicationViewModel()
         {
-            this._mAvLayout = null;
+            this.AdLayout = null;
             this._mFiles = new ObservableCollection<IFileBaseViewModel>();
 
             // Subscribe to publsihers who relay the fact that a new tool window has been registered
@@ -154,15 +152,9 @@ namespace Edi.Apps.ViewModels
         /// <summary>
         /// Gets an instance of the current application theme manager.
         /// </summary>
-        public IThemesManager ApplicationThemes
-        {
-            get
-            {
-                return this._mThemesManager;
-            }
-        }
+        public IThemesManager ApplicationThemes { get; } = null;
 
-        private object _mLock = new object();
+	    private object _mLock = new object();
         private bool _mIsMainWindowActivationProcessed = false;
         private bool _mIsMainWindowActivationProcessingEnabled = false;
 
@@ -242,12 +234,9 @@ namespace Edi.Apps.ViewModels
         /// </summary>
         public IFileBaseViewModel ActiveDocument
         {
-            get
-            {
-                return this._mActiveDocument;
-            }
+            get => this._mActiveDocument;
 
-            set
+	        set
             {
                 if (this._mActiveDocument != value)
                 {
@@ -283,15 +272,9 @@ namespace Edi.Apps.ViewModels
         /// This property returns null (thus avoiding binding errors) if the
         /// ActiveDocument is not of <seealso cref="EdiViewModel"/> type.
         /// </summary>
-        public EdiViewModel ActiveEdiDocument
-        {
-            get
-            {
-                return this._mActiveDocument as EdiViewModel;
-            }
-        }
+        public EdiViewModel ActiveEdiDocument => this._mActiveDocument as EdiViewModel;
 
-        /// <summary>
+	    /// <summary>
         /// This is a type safe ActiveDocument property that is used to bind
         /// to an ActiveDocument of type <seealso cref="MiniUML.Model.ViewModels.DocumentViewModel"/>.
         /// This property returns null (thus avoiding binding errors) if the
@@ -318,12 +301,9 @@ namespace Edi.Apps.ViewModels
 
         public IDocumentType SelectedOpenDocumentType
         {
-            get
-            {
-                return this._mSelectedOpenDocumentType;
-            }
+            get => this._mSelectedOpenDocumentType;
 
-            private set
+	        private set
             {
                 if (this._mSelectedOpenDocumentType != value)
                 {
@@ -333,15 +313,9 @@ namespace Edi.Apps.ViewModels
             }
         }
 
-        public ObservableCollection<IDocumentType> DocumentTypes
-        {
-            get
-            {
-                return this._mDocumentTypeManager.DocumentTypes;
-            }
-        }
+        public ObservableCollection<IDocumentType> DocumentTypes => this._mDocumentTypeManager.DocumentTypes;
 
-        /// <summary>
+	    /// <summary>
         /// Principable data source for collection of documents managed in the the document manager (of AvalonDock).
         /// </summary>
         public ReadOnlyObservableCollection<IFileBaseViewModel> Files
@@ -359,15 +333,9 @@ namespace Edi.Apps.ViewModels
         /// Principable data source for collection of tool window viewmodels
         /// whos view templating is managed in the the document manager of AvalonDock.
         /// </summary>
-        public ObservableCollection<ToolViewModel> Tools
-        {
-            get
-            {
-                return this._mToolRegistry.Tools;
-            }
-        }
+        public ObservableCollection<ToolViewModel> Tools => this._mToolRegistry.Tools;
 
-        public RecentFilesViewModel RecentFiles
+	    public RecentFilesViewModel RecentFiles
         {
             get
             {
@@ -380,22 +348,13 @@ namespace Edi.Apps.ViewModels
         /// <summary>
         /// Expose command to load/save AvalonDock layout on application startup and shut-down.
         /// </summary>
-        public IAvalonDockLayoutViewModel AdLayout
-        {
-            get
-            {
-                return this._mAvLayout;
-            }
-        }
+        public IAvalonDockLayoutViewModel AdLayout { get; } = null;
 
-        public bool ShutDownInProgressCancel
+	    public bool ShutDownInProgressCancel
         {
-            get
-            {
-                return this._mShutDownInProgressCancel;
-            }
+            get => this._mShutDownInProgressCancel;
 
-            set
+		    set
             {
                 if (this._mShutDownInProgressCancel != value)
                     this._mShutDownInProgressCancel = value;
@@ -406,14 +365,9 @@ namespace Edi.Apps.ViewModels
         /// <summary>
         /// Get the name of this application in a human read-able fashion
         /// </summary>
-        public string ApplicationTitle
-        {
-            get
-            {
-                return this._mAppCore.AssemblyTitle;
-            }
-        }
-        #endregion ApplicationName
+        public string ApplicationTitle => this._mAppCore.AssemblyTitle;
+
+	    #endregion ApplicationName
 
         /// <summary>
         /// Convienance property to filter (cast) documents that represent
@@ -422,14 +376,9 @@ namespace Edi.Apps.ViewModels
         /// Items such as start page or program settings are not considered
         /// documents in this collection.
         /// </summary>
-        private List<EdiViewModel> Documents
-        {
-            get
-            {
-                return this._mFiles.OfType<EdiViewModel>().ToList();
-            }
-        }
-        #endregion Properties
+        private List<EdiViewModel> Documents => this._mFiles.OfType<EdiViewModel>().ToList();
+
+	    #endregion Properties
 
         #region methods
         /// <summary>
@@ -1207,12 +1156,9 @@ namespace Edi.Apps.ViewModels
         /// </summary>
         public bool? DialogCloseResult
         {
-            get
-            {
-                return this._mDialogCloseResult;
-            }
+            get => this._mDialogCloseResult;
 
-            private set
+	        private set
             {
                 if (this._mDialogCloseResult != value)
                 {
@@ -1228,12 +1174,9 @@ namespace Edi.Apps.ViewModels
         /// </summary>
         public bool? IsNotMaximized
         {
-            get
-            {
-                return this._mIsNotMaximized;
-            }
+            get => this._mIsNotMaximized;
 
-            set
+	        set
             {
                 if (this._mIsNotMaximized != value)
                 {
@@ -1250,12 +1193,9 @@ namespace Edi.Apps.ViewModels
         /// </summary>
         public bool IsWorkspaceAreaOptimized
         {
-            get
-            {
-                return this._mIsWorkspaceAreaOptimized;
-            }
+            get => this._mIsWorkspaceAreaOptimized;
 
-            set
+	        set
             {
                 if (this._mIsWorkspaceAreaOptimized != value)
                 {

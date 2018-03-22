@@ -47,7 +47,7 @@ namespace Edi.Apps.ViewModels
             }
 
             // Get WPF Theme definition from Themes Assembly
-            ThemeBase nextThemeToSwitchTo = this._mThemesManager.SelectedTheme;
+            ThemeBase nextThemeToSwitchTo = this.ApplicationThemes.SelectedTheme;
             this.SwitchToSelectedTheme(nextThemeToSwitchTo);
 
             // Backup highlighting names (if any) and restore highlighting associations after reloading highlighting definitions
@@ -188,7 +188,7 @@ namespace Edi.Apps.ViewModels
                 _msgBox.Style = MsgBoxStyle.System;
 
                 // Get WPF Theme definition from Themes Assembly
-                ThemeBase theme = this._mThemesManager.SelectedTheme;
+                ThemeBase theme = this.ApplicationThemes.SelectedTheme;
 
                 if (theme != null)
                 {

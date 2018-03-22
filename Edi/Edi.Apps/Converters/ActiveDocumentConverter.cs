@@ -1,3 +1,5 @@
+using Edi.Apps.ViewModels;
+
 namespace Edi.Apps.Converters
 {
 	using System;

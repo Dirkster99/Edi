@@ -51,24 +51,13 @@ namespace Edi.Apps.Views.Shell
         /// the positions and layout of documents and tool windows within the AvalonDock
         /// view.
         /// </summary>
-        public Guid LayoutId
-        {
-            get
-            {
-                return (this.dockView != null ? this.dockView.LayoutId : Guid.Empty);
-            }
-        }
+        public Guid LayoutId => (this.dockView != null ? this.dockView.LayoutId : Guid.Empty);
 
-        /// <summary>
+	    /// <summary>
         /// Gets the current AvalonDockManager Xml layout and returns it as a string.
         /// </summary>
-        public string CurrentADLayout
-        {
-            get
-            {
-                return (this.dockView != null ? this.dockView.CurrentAdLayout : string.Empty);
-            }
-        }
-        #endregion properties
+        public string CurrentADLayout => (this.dockView != null ? this.dockView.CurrentAdLayout : string.Empty);
+
+	    #endregion properties
     }
 }

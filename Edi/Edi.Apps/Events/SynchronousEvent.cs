@@ -14,7 +14,6 @@ namespace Edi.Apps.Events
 	public class SynchronousEvent<TPayload> : PubSubEvent<TPayload>
 	{
 		private static readonly EventAggregator EventAggregator;
-		private static readonly SynchronousEvent<TPayload> Event;
 
 		/// <summary>
 		/// Static class constructor
@@ -22,16 +21,13 @@ namespace Edi.Apps.Events
 		static SynchronousEvent()
 		{
 			SynchronousEvent<TPayload>.EventAggregator = new EventAggregator();
-			SynchronousEvent<TPayload>.Event = EventAggregator.GetEvent<SynchronousEvent<TPayload>>();
+			SynchronousEvent<TPayload>.Instance = EventAggregator.GetEvent<SynchronousEvent<TPayload>>();
 		}
 
 		/// <summary>
 		/// Gets static instance of this class type
 		/// </summary>
-		public static SynchronousEvent<TPayload> Instance
-		{
-			get { return Event; }
-		}
+		public static SynchronousEvent<TPayload> Instance { get; }
 
 		/// <summary>
 		/// Override subscription method to enforce that thread option is the publishers option.

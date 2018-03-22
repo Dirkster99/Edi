@@ -20,7 +20,7 @@
 		/// </summary>
 		public object Data
 		{
-			get { return (object)this.GetValue(DataProperty); }
+			get => (object)this.GetValue(DataProperty);
 			set { this.SetValue(DataProperty, value); }
 		}
 

@@ -28,8 +28,7 @@ namespace Edi.Apps.ViewModels
         private RelayCommand<object> _mLoadLayoutCommand;
         private RelayCommand<object> _mSaveLayoutCommand;
 
-        private readonly Guid _mLayoutId;
-        private string _mLayoutFileName;
+	    private string _mLayoutFileName;
         private string _mAppDir;
 
         private readonly ISettingsManager _mProgramSettings;
@@ -52,7 +51,7 @@ namespace Edi.Apps.ViewModels
             this._mAppDir = this._mProgramSettings.AppDir;
             this._mLayoutFileName = this._mProgramSettings.LayoutFileName;
 
-            this._mLayoutId = Guid.NewGuid();
+            this.LayoutID = Guid.NewGuid();
             this.ViewProperties = new AvalonDockViewProperties();
             this.ViewProperties.InitialzeInstance();
         }
@@ -64,15 +63,9 @@ namespace Edi.Apps.ViewModels
         /// This layout id is a form of identification between viewmodel and view to identify whether
         /// a given event aggregated message is for a given recipient or not.
         /// </summary>
-        public Guid LayoutID
-        {
-            get
-            {
-                return this._mLayoutId;
-            }
-        }
+        public Guid LayoutID { get; }
 
-        public AvalonDockViewProperties ViewProperties { get; set; }
+	    public AvalonDockViewProperties ViewProperties { get; set; }
 
         public LayoutLoaded LayoutSoure { get; private set; }
 

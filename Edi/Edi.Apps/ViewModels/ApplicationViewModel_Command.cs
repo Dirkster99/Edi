@@ -657,7 +657,7 @@
                     {
                         try
                         {
-                            if (this._mThemesManager.SetSelectedTheme(newThemeName) == true)
+                            if (this.ApplicationThemes.SetSelectedTheme(newThemeName) == true)
                             {
                                 this._mSettingsManager.SettingData.CurrentTheme = newThemeName;
                                 this.ResetTheme();                        // Initialize theme in process

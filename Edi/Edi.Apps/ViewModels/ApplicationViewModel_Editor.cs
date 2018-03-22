@@ -16,12 +16,9 @@ namespace Edi.Apps.ViewModels
         private FindReplaceViewModel _mFindReplaceVm = null;
         public FindReplaceViewModel FindReplaceVm
         {
-            get
-            {
-                return this._mFindReplaceVm;
-            }
+            get => this._mFindReplaceVm;
 
-            protected set
+	        protected set
             {
                 if (this._mFindReplaceVm != value)
                 {

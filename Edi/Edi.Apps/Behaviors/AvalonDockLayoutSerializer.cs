@@ -1,4 +1,6 @@
-﻿namespace Edi.Apps.Behaviors
+﻿using Xceed.Wpf.AvalonDock;
+
+namespace Edi.Apps.Behaviors
 {
 	using System.Windows;
 	using System.Windows.Input;
