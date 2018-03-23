@@ -1,7 +1,8 @@
-﻿namespace Edi.Core.Behaviour
-{
-	using System.Windows;
+﻿using System;
+using System.Windows;
 
+namespace Edi.Core.Behaviour
+{
 	/// <summary>
 	/// Implements a behavour that binds to a viewmodel property
 	/// and updates its boolean value when the maximized window state changes.
@@ -37,24 +38,16 @@
 			{
 				window.StateChanged += window_StateChanged;
 
-				if (window.WindowState == WindowState.Maximized)
-					WindowMaximized.SetIsNotMaximized(window, false);
-				else
-					WindowMaximized.SetIsNotMaximized(window, true);
+				SetIsNotMaximized(window, window.WindowState != WindowState.Maximized);
 			}
 		}
 
-		static void window_StateChanged(object sender, System.EventArgs e)
+		static void window_StateChanged(object sender, EventArgs e)
 		{
 
-            if (sender is Window)
+            if (sender is Window w)
             {
-                Window w = sender as Window;
-
-                if (w.WindowState == WindowState.Maximized)
-                    WindowMaximized.SetIsNotMaximized(w, false);
-                else
-                    WindowMaximized.SetIsNotMaximized(w, true);
+	            SetIsNotMaximized(w, w.WindowState != WindowState.Maximized);
             }
         }
 	}

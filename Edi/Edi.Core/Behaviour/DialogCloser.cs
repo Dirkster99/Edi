@@ -1,7 +1,7 @@
-﻿namespace Edi.Core.Behaviour
-{
-	using System.Windows;
+﻿using System.Windows;
 
+namespace Edi.Core.Behaviour
+{
 	public static class DialogCloser
 	{
 		/// <summary>
@@ -30,29 +30,23 @@
 		{
 			var window = d as Window;
 
-			if (e != null)                  // The bound value can be set to null in the ViewModel
-			{                              // If a shutdown request was cancelled.
-				if (e.NewValue == null)     // Do not react on this ([re-]initialization) event.
-					return;
-			}
+			// If a shutdown request was cancelled.
+			if (e.NewValue == null)     // Do not react on this ([re-]initialization) event.
+				return;
 
-			if (window != null)
+			if (window?.Visibility != Visibility.Visible) return;
+			// Setting the DialogResult property invokes the close method of the corresponding dialog
+			//// window.DialogResult = e.NewValue as bool?;
+
+			// Dialog mResult cannot be set on windows that are no shown as dialogs.
+			// Therefore, we close directly via calling the corresponding close method of the view
+			try
 			{
-				if (window.Visibility == Visibility.Visible)
-				{
-					// Setting the DialogResult property invokes the close method of the corresponding dialog
-					//// window.DialogResult = e.NewValue as bool?;
-
-					// Dialog mResult cannot be set on windows that are no shown as dialogs.
-					// Therefore, we close directly via calling the corresponding close method of the view
-					try
-					{
-						window.Close();
-					}
-					catch
-					{
-					}
-				}
+				window.Close();
+			}
+			catch
+			{
+				// ignored
 			}
 		}
 	}

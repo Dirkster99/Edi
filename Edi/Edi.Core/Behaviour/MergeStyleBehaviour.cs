@@ -1,10 +1,10 @@
+using System;
+using System.Globalization;
+using System.Windows;
+using System.Windows.Controls;
+
 namespace Edi.Core.Behaviour
 {
-	using System;
-	using System.Windows;
-	using System.Windows.Controls;
-	using System.Globalization;
-
 	/// <summary>
 	/// This class can be used to adjust styles that are BasedOn another style when
 	/// changing a theme at run-time. Normally, styles are not merged. This class
@@ -23,16 +23,16 @@ namespace Edi.Core.Behaviour
 		/// </summary>
 		public static readonly DependencyProperty AutoMergeStyleProperty =
 		DependencyProperty.RegisterAttached("AutoMergeStyle", typeof(bool), typeof(MergeStyleBehaviour),
-				new FrameworkPropertyMetadata((bool)false,
-						new PropertyChangedCallback(OnAutoMergeStyleChanged)));
+				new FrameworkPropertyMetadata(false,
+						OnAutoMergeStyleChanged));
 
 		/// <summary>
 		/// BaseOnStyle
 		/// </summary>
 		public static readonly DependencyProperty BaseOnStyleProperty =
 				DependencyProperty.RegisterAttached("BaseOnStyle", typeof(Style), typeof(MergeStyleBehaviour),
-						new FrameworkPropertyMetadata((Style)null,
-								new PropertyChangedCallback(OnBaseOnStyleChanged)));
+						new FrameworkPropertyMetadata(null,
+								OnBaseOnStyleChanged));
 
 		/// <summary>
 		/// OriginalStyle
@@ -168,8 +168,7 @@ namespace Edi.Core.Behaviour
 					return;
 				}
 
-				Control control = d as Control;
-				if (control == null)
+				if (!(d is Control control))
 				{
 					throw new NotSupportedException("AutoMergeStyle can only be used in a Control.");
 				}
@@ -177,11 +176,11 @@ namespace Edi.Core.Behaviour
 				if ((bool)e.NewValue)
 				{
 					Type type = d.GetType();
-					control.SetResourceReference(MergeStyleBehaviour.BaseOnStyleProperty, type);
+					control.SetResourceReference(BaseOnStyleProperty, type);
 				}
 				else
 				{
-					control.ClearValue(MergeStyleBehaviour.BaseOnStyleProperty);
+					control.ClearValue(BaseOnStyleProperty);
 				}
 			}
 			catch (Exception exp)
@@ -198,13 +197,10 @@ namespace Edi.Core.Behaviour
 		private static void OnBaseOnStyleChanged(DependencyObject d,
 																						 DependencyPropertyChangedEventArgs e)
 		{
-			if (e == null) return;
-
 			if (d == null) return;
 
 			//// if (e.OldValue == null) return;
 
-			Control control = null;
 			try
 			{
 				if (e.OldValue == e.NewValue)
@@ -212,8 +208,7 @@ namespace Edi.Core.Behaviour
 					return;
 				}
 
-				control = d as Control;
-				if (control == null)
+				if (!(d is Control control))
 				{
 					throw new NotSupportedException("BaseOnStyle can only be used in a Control.");
 				}
@@ -261,9 +256,9 @@ namespace Edi.Core.Behaviour
 				catch (Exception exp)
 				{
 					string sInfo = string.Format(CultureInfo.CurrentCulture, "newStyle: {0}", (newStyle != null ? newStyle.TargetType.FullName : "(null)"));
-					sInfo += string.Format(CultureInfo.CurrentCulture, "DependencyObject d: {0}", (d != null ? d.ToString() : "(null)"));
+					sInfo += string.Format(CultureInfo.CurrentCulture, "DependencyObject d: {0}", (d.ToString()));
 
-					Console.WriteLine(exp.ToString() + Environment.NewLine + Environment.NewLine + sInfo);
+					Console.WriteLine(exp + Environment.NewLine + Environment.NewLine + sInfo);
 				}
 			}
 			catch (Exception exp)
@@ -272,5 +267,5 @@ namespace Edi.Core.Behaviour
 			}
 		}
 	}
-		#endregion private static methods
+	#endregion private static methods
 }

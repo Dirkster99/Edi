@@ -1,10 +1,10 @@
-﻿namespace Edi.Core.Behaviour
-{
-	using System.Windows;
-	using System.Runtime.InteropServices;
-	using System;
-	using System.Windows.Interop;
+﻿using System;
+using System.Runtime.InteropServices;
+using System.Windows;
+using System.Windows.Interop;
 
+namespace Edi.Core.Behaviour
+{
 	/// <summary>
 	/// Remove window icon from window chrome/title bar
 	/// </summary>
@@ -36,35 +36,30 @@
 		{
 			var window = d as Window;
 
-			if (e != null)                  // The bound value can be set to null in the ViewModel
-			{                              // If a shutdown request was cancelled.
-				if (e.NewValue == null)     // Do not react on this ([re-]initialization) event.
-					return;
-			}
+			
+			// If a shutdown request was cancelled.
+			if (e.NewValue == null)     // Do not react on this ([re-]initialization) event.
+				return;
 
 			if (window != null)
 			{
 				try
 				{
-					window.SourceInitialized += new System.EventHandler(window_SourceInitialized);
+					window.SourceInitialized += window_SourceInitialized;
 				}
 				catch
 				{
+					// ignored
 				}
 			}
 		}
 
-		private static void window_SourceInitialized(object sender, System.EventArgs e)
+		private static void window_SourceInitialized(object sender, EventArgs e)
 		{
-			if (sender != null)
+			if (sender is Window win)
 			{
-
-                if (sender is Window)
-                {
-                    Window win = sender as Window;
-                    IconHelper.RemoveIcon(win);
-                }
-            }
+				IconHelper.RemoveIcon(win);
+			}
 		}
 	}
 
@@ -75,13 +70,13 @@
 	internal static class IconHelper
 	{
 		#region const
-		private const int GwlEXSTYLE = -20;
+		private const int GwlExstyle = -20;
 		private const int WsExDlgModalFrame = 0x0001;
-		private const int SwpNOSIZE = 0x0001;
-		private const int SwpNOMOVE = 0x0002;
-		private const int SwpNOZORDER = 0x0004;
-		private const int SwpFRAMECHANGED = 0x0020;
-		private const uint WmSETICON = 0x0080;
+		private const int SwpNosize = 0x0001;
+		private const int SwpNomove = 0x0002;
+		private const int SwpNozorder = 0x0004;
+		private const int SwpFramechanged = 0x0020;
+		private const uint WmSeticon = 0x0080;
 		#endregion const
 
 		#region Methods
@@ -96,12 +91,12 @@
 			IntPtr hwnd = new WindowInteropHelper(window).Handle;
 
 			// Change the extended window style to not show a window icon
-			int extendedStyle = GetWindowLong(hwnd, GwlEXSTYLE);
-			SetWindowLong(hwnd, GwlEXSTYLE, extendedStyle | WsExDlgModalFrame);
+			int extendedStyle = GetWindowLong(hwnd, GwlExstyle);
+			SetWindowLong(hwnd, GwlExstyle, extendedStyle | WsExDlgModalFrame);
 
 			// Update the window's non-client area to reflect the changes
-			SetWindowPos(hwnd, IntPtr.Zero, 0, 0, 0, 0, SwpNOMOVE |
-									 SwpNOSIZE | SwpNOZORDER | SwpFRAMECHANGED);
+			SetWindowPos(hwnd, IntPtr.Zero, 0, 0, 0, 0, SwpNomove |
+									 SwpNosize | SwpNozorder | SwpFramechanged);
 		}
 
 		#region External Methods

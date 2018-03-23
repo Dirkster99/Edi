@@ -1,8 +1,8 @@
-﻿namespace Edi.Core.Behaviour
-{
-	using System.Windows;
-	using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
+namespace Edi.Core.Behaviour
+{
 	/// <summary>
 	/// This behaviour hides the overflow toolbar button on a ToolBar.
 	/// 
@@ -20,7 +20,7 @@
 		#region constructor
 		static HideToolbarOverflowButton()
 		{
-			HideToolbarOverflowButton.HideGripProperty =
+			HideGripProperty =
 				DependencyProperty.RegisterAttached("HideGrip",
 																						typeof(bool),
 																						typeof(HideToolbarOverflowButton),
@@ -56,10 +56,10 @@
 			if (frameworkElement == null)
 				return;
 
-			if (target == true)
+			if (target)
 			{
-				frameworkElement.Loaded += new RoutedEventHandler(mainToolBar_Loaded);
-				frameworkElement.Unloaded += new RoutedEventHandler(frameworkElement_Unloaded);
+				frameworkElement.Loaded += mainToolBar_Loaded;
+				frameworkElement.Unloaded += frameworkElement_Unloaded;
 			}
 			else
 			{
@@ -75,23 +75,16 @@
 		/// <param name="e"></param>
 		static void frameworkElement_Unloaded(object sender, RoutedEventArgs e)
 		{
-			ToolBar frameworkElement = sender as ToolBar;
-
-			if (frameworkElement == null)
+			if (!(sender is ToolBar frameworkElement))
 				return;
 
 			frameworkElement.Loaded -= mainToolBar_Loaded;
 			frameworkElement.Unloaded -= frameworkElement_Unloaded;
 		}
 
-		private static void mainToolBar_Loaded(object sender, System.Windows.RoutedEventArgs e)
+		private static void mainToolBar_Loaded(object sender, RoutedEventArgs e)
 		{
-			if (sender == null)
-				return;
-
-			ToolBar mainToolBar = sender as ToolBar;
-
-			if (mainToolBar == null)
+			if (!(sender is ToolBar mainToolBar))
 				return;
 
             ////      // mainToolBar – instance of toolbar defined in XAML view
@@ -101,13 +94,10 @@
             ////      }
             ////
 
-            if (mainToolBar.Template.FindName("OverflowGrid", mainToolBar) is FrameworkElement)
-            {
-                FrameworkElement overflowGrid = mainToolBar.Template.FindName("OverflowGrid", mainToolBar) as FrameworkElement;
-                overflowGrid.Visibility = Visibility.Collapsed;
-            }
-        }
+			if (!(mainToolBar.Template.FindName("OverflowGrid", mainToolBar) is FrameworkElement)) return;
+			FrameworkElement overflowGrid = mainToolBar.Template.FindName("OverflowGrid", mainToolBar) as FrameworkElement;
+			if (overflowGrid != null) overflowGrid.Visibility = Visibility.Collapsed;
+		}
 		#endregion methods
 	}
 }
-

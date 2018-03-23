@@ -1,8 +1,8 @@
+using System.Windows;
+using System.Windows.Input;
+
 namespace Edi.Core.Behaviour
 {
-	using System.Windows;
-	using System.Windows.Input;
-
 	/// <summary>
 	/// Class implements a <seealso cref="FrameworkElement"/> double click
 	/// to command binding attached behaviour.
@@ -15,7 +15,7 @@ namespace Edi.Core.Behaviour
 																						typeof(ICommand),
 																						typeof(DoubleClickImageToCommand),
 																						new PropertyMetadata(null,
-																						DoubleClickImageToCommand.OnClickItemCommand));
+																						OnClickItemCommand));
 
 
 
@@ -35,16 +35,10 @@ namespace Edi.Core.Behaviour
 																						typeof(ICommand),
 																						typeof(DoubleClickImageToCommand),
 																						new PropertyMetadata(null,
-																						DoubleClickImageToCommand.OnClickItemCommand));
+																						OnClickItemCommand));
 		#endregion fields
 
 		#region constructor
-		/// <summary>
-		/// Class constructor
-		/// </summary>
-		public DoubleClickImageToCommand()
-		{
-		}
 		#endregion constructor
 
 		#region methods
@@ -78,69 +72,68 @@ namespace Edi.Core.Behaviour
 			if (fwElement != null)
 				fwElement.MouseDown -= FrameworkElement_MouseClick;
 
-            if (e.NewValue is ICommand)
-            {
-                ICommand command = e.NewValue as ICommand;
-                // the property is attached so we attach the Drop event handler
-                fwElement.MouseDown += FrameworkElement_MouseClick;
-            }
-        }
+			if (!(e.NewValue is ICommand)) return;
+			// the property is attached so we attach the Drop event handler
+			if (fwElement != null) fwElement.MouseDown += FrameworkElement_MouseClick;
+		}
 
 		private static void FrameworkElement_MouseClick(object sender, MouseButtonEventArgs e)
 		{
 			// Send should be this class or a descendent of it
-			var fwElement = sender as FrameworkElement;
 
 			// Sanity check just in case this was somehow send by something else
-			if (fwElement == null)
+			if (!(sender is FrameworkElement fwElement))
 				return;
 
 			// Handle right mouse click event if there is a command attached for this
-			if (e.ChangedButton == MouseButton.Right)
+			switch (e.ChangedButton)
 			{
-				ICommand clickCommand = DoubleClickImageToCommand.GetRightClickItemCommand(fwElement);
+				case MouseButton.Right:
+					ICommand clickCommand = GetRightClickItemCommand(fwElement);
 
-				if (clickCommand != null)
-				{
+					if (clickCommand != null)
+					{
+						// Check whether this attached behaviour is bound to a RoutedCommand
+						if (clickCommand is RoutedCommand)
+						{
+							// Execute the routed command
+							(clickCommand as RoutedCommand).Execute(fwElement, fwElement);
+							e.Handled = true;
+						}
+						else
+						{
+							// Execute the Command as bound delegate
+							clickCommand.Execute(fwElement);
+							e.Handled = true;
+						}
+					}
+
+					break;
+				case MouseButton.Left when e.ClickCount == 2:
+					ICommand doubleclickCommand = GetDoubleClickItemCommand(fwElement);
+
+					// There may not be a command bound to this after all
+					switch (doubleclickCommand)
+					{
+						case null:
+							return;
+						case RoutedCommand _:
+							// Execute the routed command
+							((RoutedCommand) doubleclickCommand).Execute(fwElement, fwElement);
+							e.Handled = true;
+							break;
+						default:
+							// Execute the Command as bound delegate
+							doubleclickCommand.Execute(fwElement);
+							e.Handled = true;
+							break;
+					}
+
 					// Check whether this attached behaviour is bound to a RoutedCommand
-					if (clickCommand is RoutedCommand)
-					{
-						// Execute the routed command
-						(clickCommand as RoutedCommand).Execute(fwElement, fwElement);
-						e.Handled = true;
-					}
-					else
-					{
-						// Execute the Command as bound delegate
-						clickCommand.Execute(fwElement);
-						e.Handled = true;
-					}
-				}
-			}
 
+					break;
+			}
 			// Filter for left mouse button double-click
-			if (e.ChangedButton == MouseButton.Left && e.ClickCount == 2)
-			{
-				ICommand doubleclickCommand = DoubleClickImageToCommand.GetDoubleClickItemCommand(fwElement);
-
-				// There may not be a command bound to this after all
-				if (doubleclickCommand == null)
-					return;
-
-				// Check whether this attached behaviour is bound to a RoutedCommand
-				if (doubleclickCommand is RoutedCommand)
-				{
-					// Execute the routed command
-					(doubleclickCommand as RoutedCommand).Execute(fwElement, fwElement);
-					e.Handled = true;
-				}
-				else
-				{
-					// Execute the Command as bound delegate
-					doubleclickCommand.Execute(fwElement);
-					e.Handled = true;
-				}
-			}
 		}
 		#endregion methods
 	}
