@@ -1,9 +1,9 @@
-﻿namespace Edi.Core.ViewModels.Command
-{
-	using System;
-	using System.Diagnostics;
-	using System.Windows.Input;
+﻿using System;
+using System.Diagnostics;
+using System.Windows.Input;
 
+namespace Edi.Core.ViewModels.Command
+{
 	/// <summary>
 	/// A command whose sole purpose is to 
 	/// relay its functionality to other
@@ -16,8 +16,8 @@
 	public class RelayCommand<T> : ICommand
 	{
 		#region Fields
-		private readonly Action<T> mExecute = null;
-		private readonly Predicate<T> mCanExecute = null;
+		private readonly Action<T> _mExecute;
+		private readonly Predicate<T> _mCanExecute;
 		#endregion // Fields
 
 		#region Constructors
@@ -40,8 +40,8 @@
 			if (execute == null)
 				throw new ArgumentNullException("execute");
 
-			this.mExecute = execute;
-			this.mCanExecute = canExecute;
+			_mExecute = execute;
+			_mCanExecute = canExecute;
 		}
 
 		#endregion // Constructors
@@ -54,13 +54,13 @@
 		{
 			add
 			{
-				if (this.mCanExecute != null)
+				if (_mCanExecute != null)
 					CommandManager.RequerySuggested += value;
 			}
 
 			remove
 			{
-				if (this.mCanExecute != null)
+				if (_mCanExecute != null)
 					CommandManager.RequerySuggested -= value;
 			}
 		}
@@ -75,7 +75,7 @@
 		[DebuggerStepThrough]
 		public bool CanExecute(object parameter)
 		{
-			return this.mCanExecute == null ? true : this.mCanExecute((T)parameter);
+			return _mCanExecute == null ? true : _mCanExecute((T)parameter);
 		}
 
 		/// <summary>
@@ -84,7 +84,7 @@
 		/// <param name="parameter"></param>
 		public void Execute(object parameter)
 		{
-			this.mExecute((T)parameter);
+			_mExecute((T)parameter);
 		}
 		#endregion methods
 	}
@@ -99,8 +99,8 @@
 	public class RelayCommand : ICommand
 	{
 		#region Fields
-		private readonly Action mExecute;
-		private readonly Func<bool> mCanExecute;
+		private readonly Action _mExecute;
+		private readonly Func<bool> _mCanExecute;
 		#endregion Fields
 
 		#region Constructors
@@ -117,9 +117,9 @@
 		/// <summary>
 		/// Copy constructor
 		/// </summary>
-		/// <param name="inputRC"></param>
-		public RelayCommand(RelayCommand inputRC)
-			: this(inputRC.mExecute, inputRC.mCanExecute)
+		/// <param name="inputRc"></param>
+		public RelayCommand(RelayCommand inputRc)
+			: this(inputRc._mExecute, inputRc._mCanExecute)
 		{
 		}
 
@@ -133,8 +133,8 @@
 			if (execute == null)
 				throw new ArgumentNullException("execute");
 
-			this.mExecute = execute;
-			this.mCanExecute = canExecute;
+			_mExecute = execute;
+			_mCanExecute = canExecute;
 		}
 
 		#endregion Constructors
@@ -147,13 +147,13 @@
 		{
 			add
 			{
-				if (this.mCanExecute != null)
+				if (_mCanExecute != null)
 					CommandManager.RequerySuggested += value;
 			}
 
 			remove
 			{
-				if (this.mCanExecute != null)
+				if (_mCanExecute != null)
 					CommandManager.RequerySuggested -= value;
 			}
 		}
@@ -169,7 +169,7 @@
 		[DebuggerStepThrough]
 		public bool CanExecute(object parameter)
 		{
-			return this.mCanExecute == null ? true : this.mCanExecute();
+			return _mCanExecute == null ? true : _mCanExecute();
 		}
 
 		/// <summary>
@@ -178,7 +178,7 @@
 		/// <param name="parameter"></param>
 		public void Execute(object parameter)
 		{
-			this.mExecute();
+			_mExecute();
 		}
 		#endregion Methods
 	}

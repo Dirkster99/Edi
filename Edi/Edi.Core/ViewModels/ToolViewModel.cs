@@ -1,15 +1,15 @@
-﻿namespace Edi.Core.ViewModels
-{
-	using Edi.Core.Interfaces.Enums;
+﻿using Edi.Core.Interfaces.Enums;
 
+namespace Edi.Core.ViewModels
+{
 	/// <summary>
 	/// AvalonDock base class viewmmodel to support tool window views.
 	/// </summary>
 	public abstract class ToolViewModel : PaneViewModel, IToolWindow
 	{
 		#region fields
-		private bool mIsVisible = true;
-		private bool mCanHide = true;
+		private bool _mIsVisible = true;
+		private bool _mCanHide = true;
 		#endregion fields
 
 		#region constructors
@@ -41,19 +41,19 @@
 		{
 			get
 			{
-				return this.mIsVisible;
+				return _mIsVisible;
 			}
 
 			set
 			{
-				if (this.mIsVisible != value)
+				if (_mIsVisible != value)
 				{
-					this.mIsVisible = value;
+					_mIsVisible = value;
 
-					if (value == true)         // Switching visibility on should switch hide mode off
-						this.mCanHide = false;
+					if (value)         // Switching visibility on should switch hide mode off
+						_mCanHide = false;
 
-					RaisePropertyChanged(() => this.IsVisible);
+					RaisePropertyChanged(() => IsVisible);
 				}
 			}
 		}
@@ -65,15 +65,15 @@
 		{
 			get
 			{
-				return this.mCanHide;
+				return _mCanHide;
 			}
 
 			set
 			{
-				if (this.mCanHide != value)
+				if (_mCanHide != value)
 				{
-					this.mCanHide = value;
-					RaisePropertyChanged(() => this.CanHide);
+					_mCanHide = value;
+					RaisePropertyChanged(() => CanHide);
 				}
 			}
 		}
@@ -99,7 +99,7 @@
 		/// <param name="isVisible"></param>
 		public virtual void SetToolWindowVisibility(bool isVisible = true)
 		{
-			this.IsVisible = isVisible;
+			IsVisible = isVisible;
 		}
 		#endregion methods
 	}

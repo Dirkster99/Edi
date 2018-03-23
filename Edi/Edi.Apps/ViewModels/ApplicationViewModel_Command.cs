@@ -176,7 +176,7 @@
 			win.CommandBindings.Add(new CommandBinding(AppCommand.ViewTheme,
 															(s, e) => ChangeThemeCmd_Executed(e, win.Dispatcher)));
 
-			win.CommandBindings.Add(new CommandBinding(AppCommand.BrowseURL,
+			win.CommandBindings.Add(new CommandBinding(AppCommand.BrowseUrl,
 			(s, e) =>
 			{
 				Process.Start(new ProcessStartInfo("https://github.com/Dirkster99/Edi"));
@@ -357,7 +357,7 @@
 			}));
 
 			// Execute a command to export UML editor content as image
-			win.CommandBindings.Add(new CommandBinding(AppCommand.ExportUMLToImage,
+			win.CommandBindings.Add(new CommandBinding(AppCommand.ExportUmlToImage,
 			(s, e) =>
 			{
 				try
@@ -386,7 +386,7 @@
 			));
 
 			// Execute a command to export Text editor content as highlighted image content
-			win.CommandBindings.Add(new CommandBinding(AppCommand.ExportTextToHTML,
+			win.CommandBindings.Add(new CommandBinding(AppCommand.ExportTextToHtml,
 			(s, e) =>
 			{
 				try
@@ -444,7 +444,7 @@
 				e.CanExecute = true;
 			}));
 
-			win.CommandBindings.Add(new CommandBinding(AppCommand.MovePinnedMruItemUPCommand,
+			win.CommandBindings.Add(new CommandBinding(AppCommand.MovePinnedMruItemUpCommand,
 			(s, e) =>
 			{
 				if (e.Parameter is IMRUEntryViewModel == false)

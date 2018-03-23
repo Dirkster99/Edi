@@ -1,9 +1,9 @@
-﻿namespace Edi.Core.Models.Utillities.FileSystem
-{
-	using System;
-	using System.ComponentModel;
-	using System.Globalization;
+﻿using System;
+using System.ComponentModel;
+using System.Globalization;
 
+namespace Edi.Core.Models.Utillities.FileSystem
+{
 	public class DirectoryNameConverter : TypeConverter
 	{
 		public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)

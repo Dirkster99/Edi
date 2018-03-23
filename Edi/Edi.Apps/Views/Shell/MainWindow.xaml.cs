@@ -26,12 +26,12 @@ namespace Edi.Apps.Views.Shell
                                         av.ViewProperties.DocumentHeaderTemplate,
                                         av.ViewProperties.SelectPanesStyle,
                                         av.ViewProperties.LayoutInitializer,
-                                        av.LayoutID);
+                                        av.LayoutId);
 
             // Register these methods to receive PRISM event notifications about load and save of avalondock layouts
             LoadLayoutEvent.Instance.Subscribe(dockView.OnLoadLayout, ThreadOption.PublisherThread,
                                                true,
-                                         s => s.LayoutId == av.LayoutID);
+                                         s => s.LayoutId == av.LayoutId);
 
             // subscribe to close event messing to application viewmodel
             Closing += appVm.OnClosing;
@@ -57,7 +57,7 @@ namespace Edi.Apps.Views.Shell
 	    /// <summary>
         /// Gets the current AvalonDockManager Xml layout and returns it as a string.
         /// </summary>
-        public string CurrentADLayout => (dockView != null ? dockView.CurrentAdLayout : string.Empty);
+        public string CurrentAdLayout => (dockView != null ? dockView.CurrentAdLayout : string.Empty);
 
 	    #endregion properties
     }

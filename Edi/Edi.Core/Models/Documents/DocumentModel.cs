@@ -1,18 +1,19 @@
-﻿namespace Edi.Core.Models.Documents
-{
-    using System;
-    using Edi.Core.Interfaces.Documents;
-    using Edi.Core.Models.Utillities.FileSystem;
+﻿using System;
+using System.IO;
+using Edi.Core.Interfaces.Documents;
+using Edi.Core.Models.Utillities.FileSystem;
 
-    /// <summary>
+namespace Edi.Core.Models.Documents
+{
+	/// <summary>
     /// Class models the basic properties and behaviours of a low level file stored on harddisk.
     /// </summary>
     public class DocumentModel : IDocumentModel, IDisposable
     {
         #region fields
-        private FileName mFileName;
+        private FileName _mFileName;
 
-        private FileChangeWatcher mFileChangeWatcher = null;
+        private FileChangeWatcher _mFileChangeWatcher;
         #endregion fields
 
         #region constructors
@@ -21,7 +22,7 @@
         /// </summary>
         public DocumentModel()
         {
-            this.SetDefaultDocumentModel();
+            SetDefaultDocumentModel();
         }
 
         /// <summary>
@@ -33,9 +34,9 @@
             if (copyThis == null)
                 return;
 
-            this.IsReadonly = copyThis.IsReadonly;
-            this.IsReal = copyThis.IsReal;
-            this.mFileName = new FileName(copyThis.mFileName);
+            IsReadonly = copyThis.IsReadonly;
+            IsReal = copyThis.IsReal;
+            _mFileName = new FileName(copyThis._mFileName);
         }
         #endregion constructors
 
@@ -65,10 +66,10 @@
         {
             get
             {
-                if (this.mFileName == null)
+                if (_mFileName == null)
                     return null;
 
-                return this.mFileName.ToString();
+                return _mFileName.ToString();
             }
         }
 
@@ -79,10 +80,10 @@
         {
             get
             {
-                if (this.mFileName == null)
+                if (_mFileName == null)
                     return null;
 
-                return System.IO.Path.GetFileName(this.FileNamePath);
+                return System.IO.Path.GetFileName(FileNamePath);
             }
         }
 
@@ -93,7 +94,7 @@
         {
             get
             {
-                return System.IO.Path.GetFullPath(this.FileNamePath);
+                return System.IO.Path.GetFullPath(FileNamePath);
             }
         }
 
@@ -104,7 +105,7 @@
         {
             get
             {
-                return this.mFileName.GetExtension();
+                return _mFileName.GetExtension();
             }
         }
 
@@ -112,19 +113,19 @@
         {
             get
             {
-                if (this.mFileChangeWatcher == null)
+                if (_mFileChangeWatcher == null)
                     return false;
 
-                return this.mFileChangeWatcher.WasChangedExternally;
+                return _mFileChangeWatcher.WasChangedExternally;
             }
 
             set
             {
-                if (this.mFileChangeWatcher == null)
+                if (_mFileChangeWatcher == null)
                     return;
 
-                if (this.mFileChangeWatcher.WasChangedExternally != value)
-                    this.mFileChangeWatcher.WasChangedExternally = value;
+                if (_mFileChangeWatcher.WasChangedExternally != value)
+                    _mFileChangeWatcher.WasChangedExternally = value;
             }
         }
         #endregion properties
@@ -151,14 +152,14 @@
         public void SetFileNamePath(string fileNamePath, bool isReal)
         {
             if (fileNamePath != null)
-                this.mFileName = new FileName(fileNamePath);
+                _mFileName = new FileName(fileNamePath);
 
-            this.IsReal = isReal;
+            IsReal = isReal;
 
-            if (this.IsReal == true && fileNamePath != null)
+            if (IsReal && fileNamePath != null)
             {
-                this.QueryFileProperies();
-                this.ChangeFileName(this.mFileName);
+                QueryFileProperies();
+                ChangeFileName(_mFileName);
             }
         }
 
@@ -171,12 +172,12 @@
         /// (properties are reset to default).</param>
         public void SetIsReal(bool isReal)
         {
-            this.IsReal = isReal;
+            IsReal = isReal;
 
-            if (this.IsReal == true)
+            if (IsReal)
             {
-                if (this.mFileChangeWatcher == null)
-                    this.QueryFileProperies();
+                if (_mFileChangeWatcher == null)
+                    QueryFileProperies();
             }
         }
 
@@ -187,18 +188,18 @@
         {
             try
             {
-                if (this.IsReal == true)
+                if (IsReal)
                 {
-                    System.IO.FileInfo f = new System.IO.FileInfo(this.FileNamePath);
-                    this.IsReadonly = f.IsReadOnly;
+                    FileInfo f = new FileInfo(FileNamePath);
+                    IsReadonly = f.IsReadOnly;
 
-                    if (this.mFileChangeWatcher != null)
+                    if (_mFileChangeWatcher != null)
                     {
-                        this.mFileChangeWatcher.Dispose();
-                        this.mFileChangeWatcher = null;
+                        _mFileChangeWatcher.Dispose();
+                        _mFileChangeWatcher = null;
                     }
 
-                    this.mFileChangeWatcher = new FileChangeWatcher(this);
+                    _mFileChangeWatcher = new FileChangeWatcher(this);
                 }
             }
             catch (Exception exp)
@@ -217,34 +218,32 @@
         {
             try
             {
-                if (isEnabled == true)
+                if (isEnabled)
                 {
                     // Enable file watcher for this file
-                    if (this.IsReal == false)
+                    if (IsReal == false)
                         return false;
 
-                    if (this.mFileChangeWatcher == null)
-                        this.QueryFileProperies();
+                    if (_mFileChangeWatcher == null)
+                        QueryFileProperies();
 
-                    if (this.mFileChangeWatcher == null)
+                    if (_mFileChangeWatcher == null)
                         return false;
 
-                    if (this.mFileChangeWatcher.Enabled == false)
-                        this.mFileChangeWatcher.Enabled = true;
+                    if (_mFileChangeWatcher.Enabled == false)
+                        _mFileChangeWatcher.Enabled = true;
 
                     return true;
                 }
-                else
-                {
-                    // Disable file watcher for this file
-                    if (this.mFileChangeWatcher == null)
-                        return false;
 
-                    if (this.mFileChangeWatcher.Enabled == true)
-                        this.mFileChangeWatcher.Enabled = false;
+	            // Disable file watcher for this file
+	            if (_mFileChangeWatcher == null)
+		            return false;
 
-                    return false;
-                }
+	            if (_mFileChangeWatcher.Enabled)
+		            _mFileChangeWatcher.Enabled = false;
+
+	            return false;
             }
             catch (Exception)
             {
@@ -257,17 +256,17 @@
         /// </summary>
         private void SetDefaultDocumentModel()
         {
-            this.IsReadonly = true;
-            this.IsReal = false;
-            this.mFileName = null;
+            IsReadonly = true;
+            IsReal = false;
+            _mFileName = null;
         }
 
         public void Dispose()
         {
-            if (this.mFileChangeWatcher != null)
+            if (_mFileChangeWatcher != null)
             {
-                this.mFileChangeWatcher.Dispose();
-                this.mFileChangeWatcher = null;
+                _mFileChangeWatcher.Dispose();
+                _mFileChangeWatcher = null;
             }
             GC.SuppressFinalize(this);
         }

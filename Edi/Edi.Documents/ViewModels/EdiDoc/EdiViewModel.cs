@@ -121,7 +121,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         public EdiViewModel(IDocumentModel documentModel)
             : this()
         {
-            mDocumentModel.SetFileNamePath(documentModel.FileNamePath, documentModel.IsReal);
+            MDocumentModel.SetFileNamePath(documentModel.FileNamePath, documentModel.IsReal);
         }
 
         /// <summary>
@@ -492,7 +492,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
             // Set new file name in viewmodel and model
             FilePath = filePath;
             ContentId = filePath;
-            mDocumentModel.SetFileNamePath(filePath, true);
+            MDocumentModel.SetFileNamePath(filePath, true);
 
             IsDirty = false;
 
@@ -845,11 +845,11 @@ namespace Edi.Documents.ViewModels.EdiDoc
             try
             {
                 var isReal = File.Exists(filePath);
-                mDocumentModel.SetFileNamePath(filePath, isReal);
+                MDocumentModel.SetFileNamePath(filePath, isReal);
 
                 if (IsFilePathReal)
                 {
-                    mDocumentModel.SetIsReal(IsFilePathReal);
+                    MDocumentModel.SetIsReal(IsFilePathReal);
                     FilePath = filePath;
                     ContentId = _mFilePath;
                     IsDirty = false; // Mark document loaded from persistence as unedited copy (display without dirty mark '*' in name)
@@ -882,7 +882,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
 
                         // Set the correct actualy state of the model into the viewmodel
                         // to either allow editing or continue to block editing depending on what the model says
-                        IsReadOnly = mDocumentModel.IsReadonly;
+                        IsReadOnly = MDocumentModel.IsReadonly;
 
                         State = DocumentState.IsEditing;
                     }
@@ -1064,7 +1064,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         public bool EnableDocumentFileWatcher(bool isEnabled)
         {
             // Activate file watcher for this document
-            return mDocumentModel.EnableDocumentFileWatcher(true);
+            return MDocumentModel.EnableDocumentFileWatcher(true);
         }
 
         #region ScaleView methods

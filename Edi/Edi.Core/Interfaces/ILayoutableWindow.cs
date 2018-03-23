@@ -1,7 +1,7 @@
-﻿namespace Edi.Core.Interfaces
-{
-	using System;
+﻿using System;
 
+namespace Edi.Core.Interfaces
+{
 	public interface ILayoutableWindow
 	{
 		/// <summary>
@@ -12,6 +12,6 @@
 		/// <summary>
 		/// Gets the current AvalonDockManager Xml layout and returns it as a string.
 		/// </summary>
-		string CurrentADLayout { get; }
+		string CurrentAdLayout { get; }
 	}
 }

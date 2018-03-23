@@ -1,20 +1,21 @@
-﻿namespace Edi.Core.Models.DocumentTypes
-{
-	using System;
-	using System.Collections.Generic;
-	using System.Collections.ObjectModel;
-	using System.ComponentModel.Composition;
-	using System.Linq;
-	using Edi.Core.Interfaces.DocumentTypes;
-	using Edi.Core.Utillities;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.ComponentModel.Composition;
+using System.Linq;
+using Edi.Core.Interfaces.DocumentTypes;
+using Edi.Core.Utillities;
 
+namespace Edi.Core.Models.DocumentTypes
+{
 	/// <summary>
 	/// </summary>
 	[Export(typeof(IDocumentTypeManager))]
 	public class DocumentTypeManager : IDocumentTypeManager
 	{
 		#region fields
-		private readonly SortableObservableCollection<IDocumentType> mDocumentTypes = null;
+		private readonly SortableObservableCollection<IDocumentType> _mDocumentTypes;
 		#endregion fields
 
 		#region constructors
@@ -23,7 +24,7 @@
 		/// </summary>
 		public DocumentTypeManager()
 		{
-			this.mDocumentTypes = new SortableObservableCollection<IDocumentType>(new List<IDocumentType>());
+			_mDocumentTypes = new SortableObservableCollection<IDocumentType>(new List<IDocumentType>());
 		}
 		#endregion constructors
 
@@ -33,7 +34,7 @@
 		/// </summary>
 		public ObservableCollection<IDocumentType> DocumentTypes
 		{
-			get { return this.mDocumentTypes; }
+			get { return _mDocumentTypes; }
 		}	
 		#endregion properties
 
@@ -44,30 +45,30 @@
 		/// object and a <seealso cref="RegisterDocumentTypeEvent"/> event to inform listers about the new
 		/// arrival of the new document type.
 		/// </summary>
-		/// <param name="Key"></param>
-		/// <param name="Description"></param>
-		/// <param name="FileFilterName"></param>
-		/// <param name="DefaultFilter"></param>
-		/// <param name="FileOpenMethod"></param>
-		/// <param name="CreateDocumentMethod"></param>
+		/// <param name="key"></param>
+		/// <param name="description"></param>
+		/// <param name="fileFilterName"></param>
+		/// <param name="defaultFilter"></param>
+		/// <param name="fileOpenMethod"></param>
+		/// <param name="createDocumentMethod"></param>
 		/// <param name="t"></param>
 		/// <param name="sortPriority"></param>
 		/// <returns></returns>
-		public IDocumentType RegisterDocumentType(string Key,
-																							 string Description,
-																							 string FileFilterName,
-																							 string DefaultFilter,
-																							 FileOpenDelegate FileOpenMethod,
-																							 CreateNewDocumentDelegate CreateDocumentMethod,
+		public IDocumentType RegisterDocumentType(string key,
+																							 string description,
+																							 string fileFilterName,
+																							 string defaultFilter,
+																							 FileOpenDelegate fileOpenMethod,
+																							 CreateNewDocumentDelegate createDocumentMethod,
 																							 Type t,
 																							 int sortPriority = 0)
 		{
-			var newFileType = new DocumentType(Key, Description, FileFilterName, DefaultFilter,
-																				 FileOpenMethod, CreateDocumentMethod,
+			var newFileType = new DocumentType(key, description, fileFilterName, defaultFilter,
+																				 fileOpenMethod, createDocumentMethod,
 																				 t, sortPriority);
 
-			this.mDocumentTypes.Add(newFileType);
-			this.mDocumentTypes.Sort(i => i.SortPriority, System.ComponentModel.ListSortDirection.Ascending );
+			_mDocumentTypes.Add(newFileType);
+			_mDocumentTypes.Sort(i => i.SortPriority, ListSortDirection.Ascending );
 
 			return newFileType;
 		}
@@ -86,10 +87,10 @@
 		public IDocumentType FindDocumentTypeByExtension(string fileExtension,
 		                                                 bool trimPeriod = false)
 		{
-			if (string.IsNullOrEmpty(fileExtension) == true)
+			if (string.IsNullOrEmpty(fileExtension))
 				return null;
 
-			if (trimPeriod == true)
+			if (trimPeriod)
 			{
 				int idx;
 
@@ -97,10 +98,10 @@
 					fileExtension = fileExtension.Substring(idx + 1);
 			}
 
-			if (string.IsNullOrEmpty(fileExtension) == true)
+			if (string.IsNullOrEmpty(fileExtension))
 				return null;
 
-			var ret = this.mDocumentTypes.FirstOrDefault(d => d.DefaultFilter == fileExtension);
+			var ret = _mDocumentTypes.FirstOrDefault(d => d.DefaultFilter == fileExtension);
 
 			return ret;
 		}
@@ -112,10 +113,10 @@
 		/// <returns></returns>
 		public IDocumentType FindDocumentTypeByKey(string typeOfDoc)
 		{
-			if (string.IsNullOrEmpty(typeOfDoc) == true)
+			if (string.IsNullOrEmpty(typeOfDoc))
 				return null;
 
-			return this.mDocumentTypes.FirstOrDefault(d => d.Key == typeOfDoc);
+			return _mDocumentTypes.FirstOrDefault(d => d.Key == typeOfDoc);
 		}
 
 		/// <summary>
@@ -129,9 +130,9 @@
 		{
 			SortedList<int, IFileFilterEntry> ret = new SortedList<int,IFileFilterEntry>();
 
-			if (this.mDocumentTypes != null)
+			if (_mDocumentTypes != null)
 			{
-				foreach (var item in this.mDocumentTypes)
+				foreach (var item in _mDocumentTypes)
 				{
 					if (key == string.Empty || key == item.Key)
 					{

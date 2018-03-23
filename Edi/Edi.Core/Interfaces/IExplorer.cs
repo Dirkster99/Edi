@@ -1,7 +1,7 @@
-﻿namespace Edi.Core.Interfaces
-{
-	using FileSystemModels.Models;
+﻿using FileSystemModels.Models;
 
+namespace Edi.Core.Interfaces
+{
 	public interface IExplorer
 	{
 		/// <summary>

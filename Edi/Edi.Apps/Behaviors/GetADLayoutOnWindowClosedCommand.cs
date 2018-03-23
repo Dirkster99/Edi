@@ -82,7 +82,7 @@ namespace Edi.Apps.Behaviors
 			if (!(sender is ILayoutableWindow layoutableElement) || !(sender is FrameworkElement fwElement))
 				return;
 
-			string xmlLayout = layoutableElement.CurrentADLayout;
+			string xmlLayout = layoutableElement.CurrentAdLayout;
 
 			ICommand sendLayoutCommand = GetSendLayoutCommand(fwElement);
 

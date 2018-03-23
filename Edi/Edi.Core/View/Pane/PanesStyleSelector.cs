@@ -1,11 +1,11 @@
+using System;
+using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Controls;
+
 namespace Edi.Core.View.Pane
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Windows;
-    using System.Windows.Controls;
-
-    /// <summary>
+	/// <summary>
     /// Select a tool window style for an instance of its view.
     /// 
     /// 1) Call RegisterStyle() method to initialize a new association
@@ -18,7 +18,7 @@ namespace Edi.Core.View.Pane
     public class PanesStyleSelector : StyleSelector
     {
         #region fields
-        private readonly Dictionary<Type, Style> _StyleDirectory = null;
+        private readonly Dictionary<Type, Style> _styleDirectory;
         #endregion fields
 
         #region constructor
@@ -27,7 +27,7 @@ namespace Edi.Core.View.Pane
         /// </summary>
         public PanesStyleSelector()
         {
-            _StyleDirectory = new Dictionary<Type, Style>();
+            _styleDirectory = new Dictionary<Type, Style>();
         }
         #endregion constructor
 
@@ -38,10 +38,10 @@ namespace Edi.Core.View.Pane
         /// <param name="item">The content (usually a viewmodel).</param>
         /// <param name="container">The element to which the style will be applied.</param>
         /// <returns>Returns an application-specific style to apply; otherwise, null.</returns>
-        public override System.Windows.Style SelectStyle(object item,
-                                                     System.Windows.DependencyObject container)
+        public override Style SelectStyle(object item,
+                                                     DependencyObject container)
         {
-            if (_StyleDirectory == null)
+            if (_styleDirectory == null)
                 return null;
 
             if (item == null)
@@ -49,7 +49,7 @@ namespace Edi.Core.View.Pane
 
             Style o;
             Type t = item.GetType();
-            _StyleDirectory.TryGetValue(t, out o);
+            _styleDirectory.TryGetValue(t, out o);
 
             if (o != null)
                 return o;
@@ -60,11 +60,11 @@ namespace Edi.Core.View.Pane
             // Lets use .net to check up the inheritance chain to determine
             // if we can return a style for an inheritated viewmodel instead
             // of using the direct viewmodel <-> style association.
-            foreach (var vmItem in _StyleDirectory.Keys)
+            foreach (var vmItem in _styleDirectory.Keys)
             {
-                if (t.IsSubclassOf(vmItem) == true)
+                if (t.IsSubclassOf(vmItem))
                 {
-                    _StyleDirectory.TryGetValue(vmItem, out o);
+                    _styleDirectory.TryGetValue(vmItem, out o);
                     return o;
                 }
             }
@@ -79,7 +79,7 @@ namespace Edi.Core.View.Pane
         /// <param name="styleOfView"></param>
         public void RegisterStyle(Type typeOfViewmodel, Style styleOfView)
         {
-            _StyleDirectory.Add(typeOfViewmodel, styleOfView);
+            _styleDirectory.Add(typeOfViewmodel, styleOfView);
         }
         #endregion methods
     }

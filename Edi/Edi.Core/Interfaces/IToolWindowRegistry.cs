@@ -1,8 +1,8 @@
-﻿namespace Edi.Core.Interfaces
-{
-	using System.Collections.ObjectModel;
-	using Edi.Core.ViewModels;
+﻿using System.Collections.ObjectModel;
+using Edi.Core.ViewModels;
 
+namespace Edi.Core.Interfaces
+{
 	/// <summary>
 	/// Defines an interface for a class that can register
 	/// and manage tool window viemodels.

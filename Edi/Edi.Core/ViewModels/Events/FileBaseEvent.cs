@@ -1,7 +1,7 @@
+using System;
+
 namespace Edi.Core.ViewModels.Events
 {
-	using System;
-
 	/// <summary>
 	/// Identifies a document event by a typed collection of enumerators.
 	/// Receivers of the <seealso cref="FileBaseEvent"/> need to switch
@@ -33,7 +33,7 @@ namespace Edi.Core.ViewModels.Events
 	public class FileBaseEvent : EventArgs
 	{
 		#region fields
-		private FileEventType mTypeOfEvent;
+		private FileEventType _mTypeOfEvent;
 		#endregion fields
 
 		#region constructor
@@ -42,16 +42,15 @@ namespace Edi.Core.ViewModels.Events
 		/// </summary>
 		public FileBaseEvent(FileEventType typeOfEvent)
 		{
-			this.mTypeOfEvent = typeOfEvent;
+			_mTypeOfEvent = typeOfEvent;
 		}
 
 		/// <summary>
 		/// Class constructor
 		/// </summary>
 		protected FileBaseEvent()
-			: base()
 		{
-			this.mTypeOfEvent = FileEventType.Unknown;
+			_mTypeOfEvent = FileEventType.Unknown;
 		}
 		#endregion constructor
 
@@ -62,7 +61,7 @@ namespace Edi.Core.ViewModels.Events
 		/// </summary>
 		public FileEventType TypeOfEvent
 		{
-			get { return this.mTypeOfEvent; }
+			get { return _mTypeOfEvent; }
 		}
 		#endregion properties
 

@@ -1,4 +1,6 @@
-﻿using Edi.Core.Interfaces;
+﻿using System;
+using Edi.Core.Interfaces;
+
 namespace Edi.Core.ViewModels
 {
 	public delegate void DocumentChangedEventHandler(object sender, DocumentChangedEventArgs e);
@@ -9,16 +11,16 @@ namespace Edi.Core.ViewModels
 	/// The initial design follows this article:
 	/// http://www.codeproject.com/Articles/5043/Step-by-Step-Event-handling-in-C
 	/// </summary>
-	public class DocumentChangedEventArgs : System.EventArgs
+	public class DocumentChangedEventArgs : EventArgs
 	{
 		#region fields
-		private IFileBaseViewModel mActiveDocument;
+		private IFileBaseViewModel _mActiveDocument;
 		#endregion fields
 
 		#region constrcutor
 		public DocumentChangedEventArgs(IFileBaseViewModel activeDocument)
 		{
-			this.mActiveDocument = activeDocument;
+			_mActiveDocument = activeDocument;
 		}
 		#endregion constrcutor
 
@@ -30,7 +32,7 @@ namespace Edi.Core.ViewModels
 		{
 			get
 			{
-				return this.mActiveDocument;
+				return _mActiveDocument;
 			}
 		}
 		#endregion methods

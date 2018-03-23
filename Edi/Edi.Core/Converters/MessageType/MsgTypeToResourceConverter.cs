@@ -1,15 +1,17 @@
-﻿namespace Edi.Core.Converters.MessageType
-{
-	using System;
-	using System.Globalization;
-	using System.Windows;
-	using System.Windows.Data;
-	using System.Windows.Media.Imaging;
+﻿using System;
+using System.Globalization;
+using System.Windows;
+using System.Windows.Data;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
-	[ValueConversion(typeof(Edi.Core.Msg.MsgCategory), typeof(System.Windows.Media.ImageSource))]
+namespace Edi.Core.Converters.MessageType
+{
+	[ValueConversion(typeof(Msg.MsgCategory), typeof(ImageSource))]
 	public class MsgTypeToResourceConverter : IValueConverter
 	{
 		#region IValueConverter Members
+
 		/// <summary> 
 		/// Converts a value. 
 		/// </summary> 
@@ -20,33 +22,32 @@
 		/// <returns> 
 		/// A converted value. If the method returns null, the valid null value is used. 
 		/// </returns> 
-		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			// Check input parameter types
 			if (value == null)
 				return Binding.DoNothing;
 
-			if (!(value is Edi.Core.Msg.MsgCategory))
+			if (!(value is Msg.MsgCategory))
 				throw new ArgumentException("Invalid argument. Expected argument: ViewModel.Base.Msg.MsgType");
 
-			if (targetType != typeof(System.Windows.Media.ImageSource))
+			if (targetType != typeof(ImageSource))
 				throw new ArgumentException("Invalid return type. Expected return type: System.Windows.Media.ImageSource");
 
 			string resourceUri = "Images/MessageIcons/Unknown.png";
-			switch ((Edi.Core.Msg.MsgCategory)value)
+			switch ((Msg.MsgCategory) value)
 			{
-				case Edi.Core.Msg.MsgCategory.Information:
+				case Msg.MsgCategory.Information:
 					break;
-				case Edi.Core.Msg.MsgCategory.Error:
+				case Msg.MsgCategory.Error:
 					resourceUri = "Images/MessageIcons/Error.png";
 					break;
-				case Edi.Core.Msg.MsgCategory.Warning:
+				case Msg.MsgCategory.Warning:
 					resourceUri = "Images/MessageIcons/Warning.png";
 					break;
-				case Edi.Core.Msg.MsgCategory.InternalError:
+				case Msg.MsgCategory.InternalError:
 					resourceUri = "Images/MessageIcons/InternalError.png";
 					break;
-				case Edi.Core.Msg.MsgCategory.Unknown:
 				default:
 					resourceUri = "Images/MessageIcons/Unknown.png";
 					break;
@@ -57,7 +58,8 @@
 			try
 			{
 				icon.BeginInit();
-				icon.UriSource = new Uri(string.Format(CultureInfo.InvariantCulture, "pack://application:,,,/{0};component/{1}", "Themes", resourceUri));
+				icon.UriSource = new Uri(string.Format(CultureInfo.InvariantCulture, "pack://application:,,,/{0};component/{1}",
+					"Themes", resourceUri));
 				icon.EndInit();
 			}
 			catch
@@ -78,19 +80,16 @@
 		/// <returns> 
 		/// A converted value. If the method returns null, the valid null value is used. 
 		/// </returns> 
-		public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			if (value is Visibility && targetType == typeof(bool))
+			if (value is Visibility val && targetType == typeof(bool))
 			{
-				Visibility val = (Visibility)value;
-				if (val == Visibility.Visible)
-					return true;
-				else
-					return false;
+				return val == Visibility.Visible;
 			}
 
 			throw new ArgumentException("Invalid argument/return type. Expected argument: Visibility and return type: bool");
 		}
+
 		#endregion
 	}
 }

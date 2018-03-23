@@ -1,47 +1,47 @@
-﻿namespace Edi.Core
-{
-	using System.Windows.Input;
-	using Edi.Util.Local;
+﻿using System.Windows.Input;
+using Edi.Util.Local;
 
+namespace Edi.Core
+{
 	public class AppCommand
 	{
 		#region CommandFramework Fields
-		private static RoutedUICommand exit;
-		private static RoutedUICommand about;
-		private static RoutedUICommand programSettings;
-		private static RoutedUICommand showToolWindow;
+		private static RoutedUICommand _exit;
+		private static RoutedUICommand _about;
+		private static RoutedUICommand _programSettings;
+		private static RoutedUICommand _showToolWindow;
 
-		private static RoutedUICommand loadFile;
-		private static RoutedUICommand saveAll;
-		private static RoutedUICommand exportUMLToImage;
-		private static RoutedUICommand exportTextToHTML;
+		private static RoutedUICommand _loadFile;
+		private static RoutedUICommand _saveAll;
+		private static RoutedUICommand _exportUmlToImage;
+		private static RoutedUICommand _exportTextToHtml;
 
-        private static RoutedUICommand clearAllMruItemsCommand;
-        private static RoutedUICommand removeItemsOlderThanThisCommand;
-        private static RoutedUICommand movePinnedMruItemUPCommand;
-        private static RoutedUICommand movePinnedMruItemDownCommand;
-        private static RoutedUICommand pinItemCommand;
-        private static RoutedUICommand unPinItemCommand;
-        private static RoutedUICommand pinUnpin;
-		private static RoutedUICommand addMruEntry;
-		private static RoutedUICommand removeMruEntry;
+        private static RoutedUICommand _clearAllMruItemsCommand;
+        private static RoutedUICommand _removeItemsOlderThanThisCommand;
+        private static RoutedUICommand _movePinnedMruItemUpCommand;
+        private static RoutedUICommand _movePinnedMruItemDownCommand;
+        private static RoutedUICommand _pinItemCommand;
+        private static RoutedUICommand _unPinItemCommand;
+        private static RoutedUICommand _pinUnpin;
+		private static RoutedUICommand _addMruEntry;
+		private static RoutedUICommand _removeMruEntry;
 
-		private static RoutedUICommand closeFile;
-		private static RoutedUICommand viewTheme;
+		private static RoutedUICommand _closeFile;
+		private static RoutedUICommand _viewTheme;
 
-		private static RoutedUICommand browseURL;
-		private static RoutedUICommand showStartPage;
+		private static RoutedUICommand _browseUrl;
+		private static RoutedUICommand _showStartPage;
 
-		private static RoutedUICommand toggleOptimizeWorkspace;
+		private static RoutedUICommand _toggleOptimizeWorkspace;
 
 		#region Text Edit Commands
-		private static RoutedUICommand gotoLine;
-		private static RoutedUICommand findText;
-		private static RoutedUICommand findNextText;
-		private static RoutedUICommand findPreviousText;
-		private static RoutedUICommand replaceText;
+		private static RoutedUICommand _gotoLine;
+		private static RoutedUICommand _findText;
+		private static RoutedUICommand _findNextText;
+		private static RoutedUICommand _findPreviousText;
+		private static RoutedUICommand _replaceText;
 
-		private static RoutedUICommand disableHighlighting;
+		private static RoutedUICommand _disableHighlighting;
 
 		#endregion Text Edit Commands
 		#endregion CommandFramework Fields
@@ -57,106 +57,106 @@
 			// Initialize the exit command
 			inputs = new InputGestureCollection();
 			inputs.Add(new KeyGesture(Key.F4, ModifierKeys.Alt, "Alt+F4"));
-			AppCommand.exit = new RoutedUICommand(Strings.CMD_App_Exit_Describtion, "Exit", typeof(AppCommand), inputs);
+			_exit = new RoutedUICommand(Strings.CMD_App_Exit_Describtion, "Exit", typeof(AppCommand), inputs);
 
 			inputs = new InputGestureCollection();
-			AppCommand.about = new RoutedUICommand(Strings.CMD_APP_About_Description, "About", typeof(AppCommand), inputs);
+			_about = new RoutedUICommand(Strings.CMD_APP_About_Description, "About", typeof(AppCommand), inputs);
 
 			inputs = new InputGestureCollection();
-			AppCommand.programSettings = new RoutedUICommand("Edit or Review your program settings", "ProgramSettings", typeof(AppCommand), inputs);
+			_programSettings = new RoutedUICommand("Edit or Review your program settings", "ProgramSettings", typeof(AppCommand), inputs);
 
 			inputs = new InputGestureCollection();
-			AppCommand.showToolWindow = new RoutedUICommand("Hide or display toolwindow", "ShowToolWindow", typeof(AppCommand), inputs);
+			_showToolWindow = new RoutedUICommand("Hide or display toolwindow", "ShowToolWindow", typeof(AppCommand), inputs);
 
 			// Execute file open command (without user interaction)
 			inputs = new InputGestureCollection();
-			AppCommand.loadFile = new RoutedUICommand(Strings.CMD_APP_Open_Description, "LoadFile", typeof(AppCommand), inputs);
+			_loadFile = new RoutedUICommand(Strings.CMD_APP_Open_Description, "LoadFile", typeof(AppCommand), inputs);
 
 			inputs = new InputGestureCollection();
-			AppCommand.saveAll = new RoutedUICommand(Strings.CMD_APP_SaveAll_Description, "SaveAll", typeof(AppCommand), inputs);
+			_saveAll = new RoutedUICommand(Strings.CMD_APP_SaveAll_Description, "SaveAll", typeof(AppCommand), inputs);
 
 			inputs = new InputGestureCollection();
-			AppCommand.exportUMLToImage = new RoutedUICommand(Strings.CMD_APP_ExportUMLToImage_Description, "ExportUMLToImage", typeof(AppCommand), inputs);
+			_exportUmlToImage = new RoutedUICommand(Strings.CMD_APP_ExportUMLToImage_Description, "ExportUMLToImage", typeof(AppCommand), inputs);
 
 			inputs = new InputGestureCollection();
-			AppCommand.exportTextToHTML = new RoutedUICommand(Strings.CMD_APP_ExportTextToHTML_Description, "ExportTextToHTML", typeof(AppCommand), inputs);
+			_exportTextToHtml = new RoutedUICommand(Strings.CMD_APP_ExportTextToHTML_Description, "ExportTextToHTML", typeof(AppCommand), inputs);
 
             // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
             // MRU Commands
             inputs = new InputGestureCollection();
-            clearAllMruItemsCommand = new RoutedUICommand(string.Empty, "Remove All MRU Entries", typeof(AppCommand), inputs);
+            _clearAllMruItemsCommand = new RoutedUICommand(string.Empty, "Remove All MRU Entries", typeof(AppCommand), inputs);
 
             inputs = new InputGestureCollection();
-            removeItemsOlderThanThisCommand = new RoutedUICommand(string.Empty, "Remove Entries older than this", typeof(AppCommand), inputs);
+            _removeItemsOlderThanThisCommand = new RoutedUICommand(string.Empty, "Remove Entries older than this", typeof(AppCommand), inputs);
 
             inputs = new InputGestureCollection();
-            movePinnedMruItemUPCommand = new RoutedUICommand(string.Empty, "Move Up", typeof(AppCommand), inputs);
+            _movePinnedMruItemUpCommand = new RoutedUICommand(string.Empty, "Move Up", typeof(AppCommand), inputs);
 
             inputs = new InputGestureCollection();
-            movePinnedMruItemDownCommand = new RoutedUICommand(string.Empty, "Move Down", typeof(AppCommand), inputs);
+            _movePinnedMruItemDownCommand = new RoutedUICommand(string.Empty, "Move Down", typeof(AppCommand), inputs);
 
             inputs = new InputGestureCollection();
-            pinItemCommand = new RoutedUICommand(string.Empty, "Pin to this list", typeof(AppCommand), inputs);
+            _pinItemCommand = new RoutedUICommand(string.Empty, "Pin to this list", typeof(AppCommand), inputs);
 
             inputs = new InputGestureCollection();
-            unPinItemCommand = new RoutedUICommand(string.Empty, "Unpin from this list", typeof(AppCommand), inputs);
+            _unPinItemCommand = new RoutedUICommand(string.Empty, "Unpin from this list", typeof(AppCommand), inputs);
 
             // Initialize pin command (to set or unset a pin in MRU and re-sort list accordingly)
             inputs = new InputGestureCollection();
-			AppCommand.pinUnpin = new RoutedUICommand(Strings.CMD_MRU_Pin_Description, "Pin", typeof(AppCommand), inputs);
+			_pinUnpin = new RoutedUICommand(Strings.CMD_MRU_Pin_Description, "Pin", typeof(AppCommand), inputs);
 
 			// Execute add recent files list etnry pin command (to add another MRU entry into the list)
 			inputs = new InputGestureCollection();
-			AppCommand.addMruEntry = new RoutedUICommand(Strings.CMD_MRU_AddEntry_Description, "AddEntry", typeof(AppCommand), inputs);
+			_addMruEntry = new RoutedUICommand(Strings.CMD_MRU_AddEntry_Description, "AddEntry", typeof(AppCommand), inputs);
 
 			// Execute remove pin command (remove a pin from a recent files list entry)
 			inputs = new InputGestureCollection();
-			AppCommand.removeMruEntry = new RoutedUICommand(Strings.CMD_MRU_RemoveEntry_Description, "RemoveEntry", typeof(AppCommand), inputs);
+			_removeMruEntry = new RoutedUICommand(Strings.CMD_MRU_RemoveEntry_Description, "RemoveEntry", typeof(AppCommand), inputs);
 
             // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
             // Window Close Command
 			inputs = new InputGestureCollection();
 			inputs.Add(new KeyGesture(Key.F4, ModifierKeys.Control, "Ctrl+F4"));
 			inputs.Add(new KeyGesture(Key.W, ModifierKeys.Control, "Ctrl+W"));
-			AppCommand.closeFile = new RoutedUICommand(Strings.CMD_APP_CloseDoc_Description, "Close", typeof(AppCommand), inputs);
+			_closeFile = new RoutedUICommand(Strings.CMD_APP_CloseDoc_Description, "Close", typeof(AppCommand), inputs);
 
 			// Initialize the viewTheme command
 			inputs = new InputGestureCollection();
-			AppCommand.viewTheme = new RoutedUICommand(Strings.CMD_APP_ViewTheme_Description, "ViewTheme", typeof(AppCommand), inputs);
+			_viewTheme = new RoutedUICommand(Strings.CMD_APP_ViewTheme_Description, "ViewTheme", typeof(AppCommand), inputs);
 
 			// Execute browse Internt URL (without user interaction)
 			inputs = new InputGestureCollection();
-			AppCommand.browseURL = new RoutedUICommand(Strings.CMD_APP_OpenURL_Description, "OpenURL", typeof(AppCommand), inputs);
+			_browseUrl = new RoutedUICommand(Strings.CMD_APP_OpenURL_Description, "OpenURL", typeof(AppCommand), inputs);
 
 			inputs = new InputGestureCollection();
-			AppCommand.showStartPage = new RoutedUICommand(Strings.CMD_APP_ShowStartPage_Description, "StartPage", typeof(AppCommand), inputs);
+			_showStartPage = new RoutedUICommand(Strings.CMD_APP_ShowStartPage_Description, "StartPage", typeof(AppCommand), inputs);
 
 			inputs = new InputGestureCollection();
-			AppCommand.toggleOptimizeWorkspace = new RoutedUICommand(Strings.CMD_APP_ToggleOptimizeWorkspace_Description, "ToggleOptimizeWorkspace", typeof(AppCommand), inputs);
+			_toggleOptimizeWorkspace = new RoutedUICommand(Strings.CMD_APP_ToggleOptimizeWorkspace_Description, "ToggleOptimizeWorkspace", typeof(AppCommand), inputs);
 
 			#region Text Edit Commands
 			inputs = new InputGestureCollection();
-			AppCommand.disableHighlighting = new RoutedUICommand(Strings.CMD_TXT_DisableHighlighting_Description, "DisableHighlighting", typeof(AppCommand), inputs);
+			_disableHighlighting = new RoutedUICommand(Strings.CMD_TXT_DisableHighlighting_Description, "DisableHighlighting", typeof(AppCommand), inputs);
 
 			inputs = new InputGestureCollection();                                     // Goto Line n in the current document
 			inputs.Add(new KeyGesture(Key.G, ModifierKeys.Control, "Ctrl+G"));
-			AppCommand.gotoLine = new RoutedUICommand(Strings.CMD_TXT_GotoLine_Description, "GotoLine", typeof(AppCommand), inputs);
+			_gotoLine = new RoutedUICommand(Strings.CMD_TXT_GotoLine_Description, "GotoLine", typeof(AppCommand), inputs);
 
 			inputs = new InputGestureCollection();
 			inputs.Add(new KeyGesture(Key.F, ModifierKeys.Control, "Ctrl+F"));
-			AppCommand.findText = new RoutedUICommand(Strings.CMD_TXT_FindNext_Description, "FindText", typeof(AppCommand), inputs);
+			_findText = new RoutedUICommand(Strings.CMD_TXT_FindNext_Description, "FindText", typeof(AppCommand), inputs);
 
 			inputs = new InputGestureCollection();
 			inputs.Add(new KeyGesture(Key.F3, ModifierKeys.None, "F3"));
-			AppCommand.findNextText = new RoutedUICommand(Strings.CMD_TXT_FindNextText_Description, "FindNextText", typeof(AppCommand), inputs);
+			_findNextText = new RoutedUICommand(Strings.CMD_TXT_FindNextText_Description, "FindNextText", typeof(AppCommand), inputs);
 
 			inputs = new InputGestureCollection();
 			inputs.Add(new KeyGesture(Key.F3, ModifierKeys.Shift, "Shift+F3"));
-			AppCommand.findPreviousText = new RoutedUICommand(Strings.CMD_TXT_FindPreviousText_Description, "FindPreviousText", typeof(AppCommand), inputs);
+			_findPreviousText = new RoutedUICommand(Strings.CMD_TXT_FindPreviousText_Description, "FindPreviousText", typeof(AppCommand), inputs);
 
 			inputs = new InputGestureCollection();
 			inputs.Add(new KeyGesture(Key.H, ModifierKeys.Control, "Ctrl+H"));
-			AppCommand.replaceText = new RoutedUICommand(Strings.CMD_TXT_FindReplaceText_Description, "FindReplaceText", typeof(AppCommand), inputs);
+			_replaceText = new RoutedUICommand(Strings.CMD_TXT_FindReplaceText_Description, "FindReplaceText", typeof(AppCommand), inputs);
 			#endregion Text Edit Commands
 		}
 		#endregion Static Constructor
@@ -167,19 +167,19 @@
 		/// </summary>
 		public static RoutedUICommand Exit
 		{
-			get { return AppCommand.exit; }
+			get { return _exit; }
 		}
 
 		public static RoutedUICommand About
 		{
-			get { return AppCommand.about; }
+			get { return _about; }
 		}
 
 		public static RoutedUICommand ProgramSettings
 		{
 			get
 			{
-				return AppCommand.programSettings;
+				return _programSettings;
 			}
 		}
 
@@ -187,7 +187,7 @@
 		{
 			get
 			{
-				return AppCommand.showToolWindow;
+				return _showToolWindow;
 			}
 		}
 
@@ -196,7 +196,7 @@
 		/// </summary>
 		public static RoutedUICommand LoadFile
 		{
-			get { return AppCommand.loadFile; }
+			get { return _loadFile; }
 		}
 
 		/// <summary>
@@ -204,57 +204,57 @@
 		/// </summary>
 		public static RoutedUICommand SaveAll
 		{
-			get { return AppCommand.saveAll; }
+			get { return _saveAll; }
 		}
 
 		/// <summary>
 		/// Execute a command to export the currently loaded UML Diagram (XML based data)
 		/// into an image based data format (png, jpeg, wmf)
 		/// </summary>
-		public static RoutedUICommand ExportUMLToImage
+		public static RoutedUICommand ExportUmlToImage
 		{
-			get { return AppCommand.exportUMLToImage; }
+			get { return _exportUmlToImage; }
 		}
 
 		/// <summary>
 		/// Execute a command to export the currently loaded and highlighted text (XML, C# ...)
 		/// into an HTML data format (*.htm, *.html ...)
 		/// </summary>
-		public static RoutedUICommand ExportTextToHTML
+		public static RoutedUICommand ExportTextToHtml
 		{
-			get { return AppCommand.exportTextToHTML; }
+			get { return _exportTextToHtml; }
 		}
 
 
         public static RoutedUICommand ClearAllMruItemsCommand
         {
-            get { return AppCommand.clearAllMruItemsCommand; }
+            get { return _clearAllMruItemsCommand; }
         }
 
 
         public static RoutedUICommand RemoveItemsOlderThanThisCommand
         {
-            get { return AppCommand.removeItemsOlderThanThisCommand; }
+            get { return _removeItemsOlderThanThisCommand; }
         }
 
-        public static RoutedUICommand MovePinnedMruItemUPCommand
+        public static RoutedUICommand MovePinnedMruItemUpCommand
         {
-            get { return AppCommand.movePinnedMruItemUPCommand; }
+            get { return _movePinnedMruItemUpCommand; }
         }
 
         public static RoutedUICommand MovePinnedMruItemDownCommand
         {
-            get { return AppCommand.movePinnedMruItemDownCommand; }
+            get { return _movePinnedMruItemDownCommand; }
         }
 
         public static RoutedUICommand PinItemCommand
         {
-            get { return AppCommand.pinItemCommand; }
+            get { return _pinItemCommand; }
         }
 
         public static RoutedUICommand UnPinItemCommand
         {
-            get { return AppCommand.unPinItemCommand; }
+            get { return _unPinItemCommand; }
         }
 
 
@@ -263,7 +263,7 @@
         /// </summary>
         public static RoutedUICommand PinUnpin
 		{
-			get { return AppCommand.pinUnpin; }
+			get { return _pinUnpin; }
 		}
 
 		/// <summary>
@@ -271,7 +271,7 @@
 		/// </summary>
 		public static RoutedUICommand AddMruEntry
 		{
-			get { return AppCommand.addMruEntry; }
+			get { return _addMruEntry; }
 		}
 
 		/// <summary>
@@ -279,12 +279,12 @@
 		/// </summary>
 		public static RoutedUICommand RemoveMruEntry
 		{
-			get { return AppCommand.removeMruEntry; }
+			get { return _removeMruEntry; }
 		}
 
 		public static RoutedUICommand CloseFile
 		{
-			get { return AppCommand.closeFile; }
+			get { return _closeFile; }
 		}
 
 		/// <summary>
@@ -292,15 +292,15 @@
 		/// </summary>
 		public static RoutedUICommand ViewTheme
 		{
-			get { return AppCommand.viewTheme; }
+			get { return _viewTheme; }
 		}
 
 		/// <summary>
 		/// Browse to an Internet URL via default web browser configured in Windows
 		/// </summary>
-		public static RoutedUICommand BrowseURL
+		public static RoutedUICommand BrowseUrl
 		{
-			get { return AppCommand.browseURL; }
+			get { return _browseUrl; }
 		}
 
 		/// <summary>
@@ -308,7 +308,7 @@
 		/// </summary>
 		public static RoutedUICommand ShowStartPage
 		{
-			get { return AppCommand.showStartPage; }
+			get { return _showStartPage; }
 		}
 
 		/// <summary>
@@ -316,7 +316,7 @@
 		/// </summary>
 		public static RoutedUICommand ToggleOptimizeWorkspace
 		{
-			get { return AppCommand.toggleOptimizeWorkspace; }
+			get { return _toggleOptimizeWorkspace; }
 		}
 
 		#region Text Edit Commands
@@ -325,7 +325,7 @@
 		/// </summary>
 		public static RoutedUICommand GotoLine
 		{
-			get { return AppCommand.gotoLine; }
+			get { return _gotoLine; }
 		}
 
 		/// <summary>
@@ -333,17 +333,17 @@
 		/// </summary>
 		public static RoutedUICommand FindText
 		{
-			get { return AppCommand.findText; }
+			get { return _findText; }
 		}
 
 		public static RoutedUICommand FindNextText
 		{
-			get { return AppCommand.findNextText; }
+			get { return _findNextText; }
 		}
 
 		public static RoutedUICommand FindPreviousText
 		{
-			get { return AppCommand.findPreviousText; }
+			get { return _findPreviousText; }
 		}
 
 		/// <summary>
@@ -351,12 +351,12 @@
 		/// </summary>
 		public static RoutedUICommand ReplaceText
 		{
-			get { return AppCommand.replaceText; }
+			get { return _replaceText; }
 		}
 
 		public static RoutedUICommand DisableHighlighting
 		{
-			get { return AppCommand.disableHighlighting; }
+			get { return _disableHighlighting; }
 		}
 		#endregion Text Edit Commands
 		#endregion CommandFramwork_Properties

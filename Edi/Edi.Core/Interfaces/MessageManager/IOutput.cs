@@ -1,7 +1,7 @@
-﻿namespace Edi.Core.Interfaces
+﻿using System.IO;
+
+namespace Edi.Core.Interfaces
 {
-	using System.IO;
-	
 	public interface IOutput
 	{
 		TextWriter Writer { get; }

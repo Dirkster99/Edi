@@ -1,4 +1,8 @@
-﻿namespace Edi.Core.Models.Utillities.FileSystem
+﻿using System;
+using System.IO;
+using System.Text;
+
+namespace Edi.Core.Models.Utillities.FileSystem
 {
 	// Copyright (c) 2014 AlphaSierraPapa for the SharpDevelop Team
 	// 
@@ -17,11 +21,6 @@
 	// FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 	// DEALINGS IN THE SOFTWARE.
-
-	using System;
-	using System.IO;
-	using System.Text;
-
 	/// <summary>
 	/// Source:
 	/// https://github.com/icsharpcode/SharpDevelop/blob/master/src/Main/Core/Project/Src/Services/FileUtility/PathName.cs
@@ -29,7 +28,7 @@
 	/// </summary>
 	public abstract class PathName
 	{
-		protected readonly string normalizedPath;
+		protected readonly string NormalizedPath;
 
 		protected PathName(string path)
 		{
@@ -37,27 +36,26 @@
 				throw new ArgumentNullException("path");
 			if (path.Length == 0)
 				throw new ArgumentException("The empty string is not a valid path");
-			this.normalizedPath = PathName.NormalizePath(path);
+			NormalizedPath = NormalizePath(path);
 		}
 
 		protected PathName(PathName path)
 		{
 			if (path == null)
 				throw new ArgumentNullException("path");
-			this.normalizedPath = path.normalizedPath;
+			NormalizedPath = path.NormalizedPath;
 		}
 
 		public static implicit operator string(PathName path)
 		{
 			if (path != null)
-				return path.normalizedPath;
-			else
-				return null;
+				return path.NormalizedPath;
+			return null;
 		}
 
 		public override string ToString()
 		{
-			return this.normalizedPath;
+			return NormalizedPath;
 		}
 
 		/// <summary>
@@ -65,7 +63,7 @@
 		/// </summary>
 		public bool IsRelative
 		{
-			get { return !Path.IsPathRooted(normalizedPath); }
+			get { return !Path.IsPathRooted(NormalizedPath); }
 		}
 
 		/// <summary>
@@ -76,10 +74,9 @@
 		/// </remarks>
 		public DirectoryName GetParentDirectory()
 		{
-			if (normalizedPath.Length < 2 || normalizedPath[1] != ':')
-				return DirectoryName.Create(Path.Combine(normalizedPath, ".."));
-			else
-				return DirectoryName.Create(Path.GetDirectoryName(normalizedPath));
+			if (NormalizedPath.Length < 2 || NormalizedPath[1] != ':')
+				return DirectoryName.Create(Path.Combine(NormalizedPath, ".."));
+			return DirectoryName.Create(Path.GetDirectoryName(NormalizedPath));
 		}
 
 		/// <summary>
@@ -105,7 +102,7 @@
 				}
 			}
 
-			char outputSeparator = isWeb ? '/' : System.IO.Path.DirectorySeparatorChar;
+			char outputSeparator = isWeb ? '/' : Path.DirectorySeparatorChar;
 			bool isRelative;
 
 			StringBuilder result = new StringBuilder();

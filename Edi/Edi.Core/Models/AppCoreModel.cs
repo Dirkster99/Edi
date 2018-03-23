@@ -1,9 +1,12 @@
-﻿namespace Edi.Core.Models
-{
-	using System;
-	using System.ComponentModel.Composition;
-	using Edi.Core.Interfaces;
+﻿using System;
+using System.ComponentModel.Composition;
+using System.IO;
+using System.Reflection;
+using Edi.Core.Interfaces;
+using log4net;
 
+namespace Edi.Core.Models
+{
 	/// <summary>
 	/// Class maintains and helps access to core facts of this application.
 	/// Core facts are installation directory, name of application etc.
@@ -11,7 +14,7 @@
 	[Export(typeof(IAppCoreModel))]
 	public class AppCoreModel : IAppCoreModel
 	{
-		protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+		protected static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
 		#region constructors
 		/// <summary>
@@ -141,12 +144,12 @@
 		{
 			try
 			{
-				if (System.IO.Directory.Exists(this.DirAppData) == false)
-					System.IO.Directory.CreateDirectory(this.DirAppData);
+				if (Directory.Exists(DirAppData) == false)
+					Directory.CreateDirectory(DirAppData);
 			}
 			catch (Exception exp)
 			{
-				logger.Error(exp);
+				Logger.Error(exp);
 				return false;
 			}
 

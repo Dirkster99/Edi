@@ -1,8 +1,8 @@
-﻿namespace Edi.Core.ViewModels.Events
-{
-	using System;
-	using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace Edi.Core.ViewModels.Events
+{
 	public enum TypeOfResult
 	{
 		FileLoad
@@ -15,12 +15,12 @@
 	public class ProcessResultEvent : EventArgs
 	{
 		#region Fields
-		private readonly bool mCancel;
-		private readonly bool mError;
-		private readonly TypeOfResult mTypeOfResult;
-		private readonly ApplicationException mInnerException;
-		private readonly string mMessage;
-		private readonly Dictionary<string, object> mObjColl;
+		private readonly bool _mCancel;
+		private readonly bool _mError;
+		private readonly TypeOfResult _mTypeOfResult;
+		private readonly ApplicationException _mInnerException;
+		private readonly string _mMessage;
+		private readonly Dictionary<string, object> _mObjColl;
 		#endregion Fields
 
 		#region Constructors
@@ -41,12 +41,12 @@
 															 Dictionary<string, object> objColl = null,
 															 ApplicationException innerException = null)
 		{
-			this.mMessage = sMessage;
-			this.mError = bError;
-			this.mTypeOfResult = processResult;
-			this.mCancel = bCancel;
-			this.mInnerException = innerException;
-			this.mObjColl = (objColl == null ? null : new Dictionary<string, object>(objColl));
+			_mMessage = sMessage;
+			_mError = bError;
+			_mTypeOfResult = processResult;
+			_mCancel = bCancel;
+			_mInnerException = innerException;
+			_mObjColl = (objColl == null ? null : new Dictionary<string, object>(objColl));
 		}
 
 		/// <summary>
@@ -56,10 +56,10 @@
 		/// <param name="message"></param>
 		public ProcessResultEvent(string message)
 		{
-			this.mMessage = message;
-			this.mError = false;
-			this.mCancel = false;
-			this.mInnerException = null;
+			_mMessage = message;
+			_mError = false;
+			_mCancel = false;
+			_mInnerException = null;
 		}
 		#endregion Constructors
 
@@ -69,7 +69,7 @@
 		/// </summary>
 		public bool Error
 		{
-			get { return this.mError; }
+			get { return _mError; }
 		}
 
 		/// <summary>
@@ -77,12 +77,12 @@
 		/// </summary>
 		public bool Cancel
 		{
-			get { return this.mCancel; }
+			get { return _mCancel; }
 		}
 
 		public TypeOfResult TypeOfResult
 		{
-			get { return this.mTypeOfResult; }
+			get { return _mTypeOfResult; }
 		}
 
 		/// <summary>
@@ -91,7 +91,7 @@
 		/// </summary>
 		public ApplicationException InnerException
 		{
-			get { return this.mInnerException; }
+			get { return _mInnerException; }
 		}
 
 		/// <summary>
@@ -100,7 +100,7 @@
 		/// </summary>
 		public string Message
 		{
-			get { return this.mMessage; }
+			get { return _mMessage; }
 		}
 
 		/// <summary>
@@ -110,9 +110,9 @@
 		{
 			get
 			{
-				return (this.mObjColl == null
+				return (_mObjColl == null
 										? new Dictionary<string, object>()
-										: new Dictionary<string, object>(mObjColl));
+										: new Dictionary<string, object>(_mObjColl));
 			}
 		}
 		#endregion Properties

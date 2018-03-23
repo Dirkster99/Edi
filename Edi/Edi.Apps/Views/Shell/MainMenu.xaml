@@ -87,8 +87,8 @@
                           ToolTip="{x:Static cmdLabel:Strings.STR_CmdName_Export_TT}"
                           >
 
-                <MenuItem Command="cmd:AppCommand.ExportUMLToImage" />
-                <MenuItem Command="cmd:AppCommand.ExportTextToHTML" />
+                <MenuItem Command="cmd:AppCommand.ExportUmlToImage" />
+                <MenuItem Command="cmd:AppCommand.ExportTextToHtml" />
 
                 </MenuItem>
                 <Separator/>

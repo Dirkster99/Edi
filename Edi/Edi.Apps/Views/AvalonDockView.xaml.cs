@@ -210,7 +210,7 @@
 					return;
 
 				// Get a matching viewmodel for a view through DataContext of this view
-				var contentViewModel = resolver.ContentViewModelFromID(args.Model.ContentId);
+				var contentViewModel = resolver.ContentViewModelFromId(args.Model.ContentId);
 
 				if (contentViewModel == null)
 					args.Cancel = true;

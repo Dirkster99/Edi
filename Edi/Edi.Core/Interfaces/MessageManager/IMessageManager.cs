@@ -1,4 +1,6 @@
-﻿namespace Edi.Core.Interfaces
+﻿using MsgBox;
+
+namespace Edi.Core.Interfaces
 {
     /// <summary>
     /// Defines an interface to register and manage output stream channels:
@@ -13,7 +15,7 @@
         /// This service should be used if user interaction is required
         /// (e.g. user is requested to click ok or yes, no etc...).
         /// </summary>
-        MsgBox.IMessageBoxService MessageBox { get; }
+        IMessageBoxService MessageBox { get; }
 
         /// <summary>
         /// Gets a reference to the output message servive implementation.

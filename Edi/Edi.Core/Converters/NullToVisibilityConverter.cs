@@ -1,9 +1,11 @@
-﻿namespace Edi.Core.Converters
-{
-	using System;
-	using System.Windows.Data;
-	using System.Windows.Markup;
+﻿using System;
+using System.Globalization;
+using System.Windows;
+using System.Windows.Data;
+using System.Windows.Markup;
 
+namespace Edi.Core.Converters
+{
 	/// <summary>
 	/// XAML mark up extension to convert a null value into a visibility value.
 	/// </summary>
@@ -11,16 +13,11 @@
 	public class NullToVisibilityConverter : MarkupExtension, IValueConverter
 	{
 		#region field
-		private static NullToVisibilityConverter converter;
+		private static NullToVisibilityConverter _converter;
 		#endregion field
 
 		#region constructor
-		/// <summary>
-		/// Standard Constructor
-		/// </summary>
-		public NullToVisibilityConverter()
-		{
-		}
+
 		#endregion constructor
 
 		#region MarkupExtension
@@ -37,12 +34,7 @@
 		/// <returns></returns>
 		public override object ProvideValue(IServiceProvider serviceProvider)
 		{
-			if (converter == null)
-			{
-				converter = new NullToVisibilityConverter();
-			}
-
-			return converter;
+			return _converter ?? (_converter = new NullToVisibilityConverter());
 		}
 		#endregion MarkupExtension
 
@@ -55,12 +47,9 @@
 		/// <param name="parameter"></param>
 		/// <param name="culture"></param>
 		/// <returns></returns>
-		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			if (value == null)
-				return System.Windows.Visibility.Collapsed;
-
-			return System.Windows.Visibility.Visible;
+			return value == null ? Visibility.Collapsed : Visibility.Visible;
 		}
 
 		/// <summary>
@@ -71,7 +60,7 @@
 		/// <param name="parameter"></param>
 		/// <param name="culture"></param>
 		/// <returns></returns>
-		public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			return Binding.DoNothing;
 		}

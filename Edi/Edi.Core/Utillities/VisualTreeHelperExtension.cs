@@ -1,8 +1,8 @@
+using System.Windows;
+using System.Windows.Media;
+
 namespace Edi.Core.Utillities
 {
-	using System.Windows;
-	using System.Windows.Media;
-
 	/// <summary>
 	/// Helper class to find a child item of a given item in the Visual Tree of WPF 
 	/// </summary>

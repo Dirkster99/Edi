@@ -1,4 +1,8 @@
-﻿namespace Edi.Core.Models.Utillities.FileSystem
+﻿using System;
+using System.IO;
+using Edi.Core.Interfaces.Documents;
+
+namespace Edi.Core.Models.Utillities.FileSystem
 {
 	// Copyright (c) 2014 AlphaSierraPapa for the SharpDevelop Team
 	// 
@@ -17,12 +21,6 @@
 	// FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 	// DEALINGS IN THE SOFTWARE.
-	
-	using System;
-	using System.Collections.Generic;
-	using System.IO;
-	using Edi.Core.Interfaces.Documents;
-
 	/// <summary>
 	/// Based on:
 	/// https://github.com/icsharpcode/SharpDevelop/blob/master/src/Main/Base/Project/Workbench/FileChangeWatcher.cs
@@ -33,11 +31,11 @@
 		////static HashSet<FileChangeWatcher> activeWatchers = new HashSet<FileChangeWatcher>();
 		////static int globalDisableCount;
 
-		private FileSystemWatcher mWatcher = null;
-		private bool mWasChangedExternally = false;
-		private bool mEnabled = false;
+		private FileSystemWatcher _mWatcher;
+		private bool _mWasChangedExternally;
+		private bool _mEnabled;
 
-		private IDocumentModel mFile = null;
+		private IDocumentModel _mFile;
 		#endregion fields
 
 		#region constructors
@@ -50,11 +48,11 @@
 			if (file == null)
 				throw new ArgumentNullException("file");
 
-			this.mFile = file;
+			_mFile = file;
 
 			////SD.Workbench.MainWindow.Activated += MainForm_Activated;
 
-			this.mFile.FileNameChanged += file_FileNameChanged;
+			_mFile.FileNameChanged += file_FileNameChanged;
 			////FileChangeWatcher.activeWatchers.Add(this);
 			
 			////Bugfix: Watching files by default can cause application file load deadlock situations(?)
@@ -85,11 +83,11 @@
 
 		public bool Enabled
 		{
-			get { return mEnabled; }
+			get { return _mEnabled; }
 			set
 			{
-				this.mEnabled = value;
-				this.SetWatcher();
+				_mEnabled = value;
+				SetWatcher();
 			}
 		}
 
@@ -102,12 +100,12 @@
 		{
 			get
 			{
-				return this.mWasChangedExternally;
+				return _mWasChangedExternally;
 			}
 
 			set
 			{
-				this.mWasChangedExternally = value;
+				_mWasChangedExternally = value;
 			}
 		}
 		#endregion properties
@@ -145,21 +143,21 @@
 			////SD.MainThread.VerifyAccess();
 			////activeWatchers.Remove(this);
 
-			if (this.mFile != null)
+			if (_mFile != null)
 			{
 				////SD.Workbench.MainWindow.Activated -= MainForm_Activated;
-				this.mFile.FileNameChanged -= file_FileNameChanged;
-				this.mFile = null;
+				_mFile.FileNameChanged -= file_FileNameChanged;
+				_mFile = null;
 			}
 
-			if (this.mWatcher != null)
+			if (_mWatcher != null)
 			{
-				this.mWatcher.Changed -= OnFileChangedEvent;
-				this.mWatcher.Created -= OnFileChangedEvent;
-				this.mWatcher.Renamed -= OnFileChangedEvent;
+				_mWatcher.Changed -= OnFileChangedEvent;
+				_mWatcher.Created -= OnFileChangedEvent;
+				_mWatcher.Renamed -= OnFileChangedEvent;
 
-				this.mWatcher.Dispose();
-				this.mWatcher = null;
+				_mWatcher.Dispose();
+				_mWatcher = null;
 			}
 		}
 
@@ -167,25 +165,25 @@
 		{
 			////SD.MainThread.VerifyAccess();
 
-			if (this.mWatcher != null)
+			if (_mWatcher != null)
 			{
-				this.mWatcher.EnableRaisingEvents = false;
+				_mWatcher.EnableRaisingEvents = false;
 			}
 
-			if (this.mEnabled == false)
+			if (_mEnabled == false)
 				return;
 
 			////if (globalDisableCount > 0)
 			////	return;
 
-			if (FileChangeWatcher.DetectExternalChangesOption == false)
+			if (DetectExternalChangesOption == false)
 				return;
 
-			string fileName = mFile.FileNamePath;
+			string fileName = _mFile.FileNamePath;
 			if (string.IsNullOrEmpty(fileName))
 				return;
 
-			if (this.mFile.IsReal == false)
+			if (_mFile.IsReal == false)
 				return;
 
 			if (!Path.IsPathRooted(fileName))
@@ -193,49 +191,49 @@
 
 			try
 			{
-				if (this.mWatcher == null)
+				if (_mWatcher == null)
 				{
-					this.mWatcher = new FileSystemWatcher();
+					_mWatcher = new FileSystemWatcher();
 
 					////watcher.SynchronizingObject = SD.MainThread.SynchronizingObject;
 
-					this.mWatcher.Changed += OnFileChangedEvent;
-					this.mWatcher.Created += OnFileChangedEvent;
-					this.mWatcher.Renamed += OnFileChangedEvent;
+					_mWatcher.Changed += OnFileChangedEvent;
+					_mWatcher.Created += OnFileChangedEvent;
+					_mWatcher.Renamed += OnFileChangedEvent;
 				}
 
-				this.mWatcher.Path = Path.GetDirectoryName(fileName);
-				this.mWatcher.Filter = Path.GetFileName(fileName);
-				this.mWatcher.EnableRaisingEvents = true;
+				_mWatcher.Path = Path.GetDirectoryName(fileName);
+				_mWatcher.Filter = Path.GetFileName(fileName);
+				_mWatcher.EnableRaisingEvents = true;
 			}
 			catch (PlatformNotSupportedException)
 			{
-				if (mWatcher != null)
-					this.mWatcher.Dispose();
+				if (_mWatcher != null)
+					_mWatcher.Dispose();
 
-				this.mWatcher = null;
+				_mWatcher = null;
 			}
 			catch (FileNotFoundException)
 			{
 				// can occur if directory was deleted externally
-				if (this.mWatcher != null)
-					this.mWatcher.Dispose();
+				if (_mWatcher != null)
+					_mWatcher.Dispose();
 
-				mWatcher = null;
+				_mWatcher = null;
 			}
 			catch (ArgumentException)
 			{
 				// can occur if parent directory was deleted externally
-				if (this.mWatcher != null)
-					this.mWatcher.Dispose();
+				if (_mWatcher != null)
+					_mWatcher.Dispose();
 
-				this.mWatcher = null;
+				_mWatcher = null;
 			}
 		}
 
 		private void file_FileNameChanged(object sender, EventArgs e)
 		{
-			this.SetWatcher();
+			SetWatcher();
 		}
 		
 		/// <summary>
@@ -245,14 +243,14 @@
 		/// <param name="e"></param>
 		void OnFileChangedEvent(object sender, FileSystemEventArgs e)
 		{
-			if (this.mFile == null)
+			if (_mFile == null)
 				return;
 
 			////LoggingService.Debug("File " + file.FileName + " was changed externally: " + e.ChangeType);
 
-			if (this.mWasChangedExternally == false)
+			if (_mWasChangedExternally == false)
 			{
-				this.mWasChangedExternally = true;
+				_mWasChangedExternally = true;
 
 				//// if (SD.Workbench.IsActiveWindow)
 				//// {

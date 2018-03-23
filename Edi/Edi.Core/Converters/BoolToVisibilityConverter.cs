@@ -1,11 +1,11 @@
-﻿namespace Edi.Core.Converters
-{
-	using System;
-	using System.Globalization;
-	using System.Windows;
-	using System.Windows.Data;
-	using System.Windows.Markup;
+﻿using System;
+using System.Globalization;
+using System.Windows;
+using System.Windows.Data;
+using System.Windows.Markup;
 
+namespace Edi.Core.Converters
+{
 	/// <summary>
 	/// Source: http://stackoverflow.com/questions/534575/how-do-i-invert-booleantovisibilityconverter
 	/// 
@@ -17,7 +17,7 @@
 	public sealed class BoolToVisibilityConverter : MarkupExtension, IValueConverter
 	{
 		#region fields
-		private static BoolToVisibilityConverter mConverter;
+		private static BoolToVisibilityConverter _mConverter;
 		#endregion fields
 
 		/// <summary>
@@ -33,10 +33,7 @@
 		/// <returns></returns>
 		public override object ProvideValue(IServiceProvider serviceProvider)
 		{
-			if (BoolToVisibilityConverter.mConverter == null)
-				BoolToVisibilityConverter.mConverter = new BoolToVisibilityConverter();
-
-			return BoolToVisibilityConverter.mConverter;
+			return _mConverter ?? (_mConverter = new BoolToVisibilityConverter());
 		}
 
 		/// <summary>
@@ -51,15 +48,11 @@
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			var flag = false;
-			if (value is bool)
+			if (value is bool b)
 			{
-				flag = (bool)value;
+				flag = b;
 			}
-			else if (value is bool?)
-			{
-				var nullable = (bool?)value;
-				flag = nullable.GetValueOrDefault();
-			}
+
 			if (parameter != null)
 			{
 				if (bool.Parse((string)parameter))
@@ -67,14 +60,7 @@
 					flag = !flag;
 				}
 			}
-			if (flag)
-			{
-				return Visibility.Visible;
-			}
-			else
-			{
-				return Visibility.Collapsed;
-			}
+			return flag ? Visibility.Visible : Visibility.Collapsed;
 		}
 
 		/// <summary>
@@ -88,14 +74,12 @@
 		/// <returns></returns>
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			var back = ((value is Visibility) && (((Visibility)value) == Visibility.Visible));
+			var back = ((value is Visibility visibility) && (visibility == Visibility.Visible));
 
-			if (parameter != null)
+			if (parameter == null) return back;
+			if ((bool)parameter)
 			{
-				if ((bool)parameter)
-				{
-					back = !back;
-				}
+				back = !back;
 			}
 			return back;
 		}

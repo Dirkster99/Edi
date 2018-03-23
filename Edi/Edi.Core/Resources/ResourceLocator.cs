@@ -1,12 +1,14 @@
+using System;
+using System.Linq;
+using System.Reflection;
+using System.Windows;
+using CommonServiceLocator;
+using log4net;
+using MsgBox;
+
 namespace Edi.Core.Resources
 {
-    using CommonServiceLocator;
-    using MsgBox;
-    using System;
-    using System.Linq;
-    using System.Windows;
-
-    /// <summary>
+	/// <summary>
     /// Locate resources ín any assembly and return their reference.
     /// This class can, for example, be used to load a DataTemplate instance from an XAML reference.
     /// That is, the XAML is referenced as URI string (and the XAML itself can live in an extra assembly).
@@ -14,7 +16,7 @@ namespace Edi.Core.Resources
     /// </summary>
     public static class ResourceLocator
     {
-        private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// Gets the first matching resource of the type.
@@ -62,10 +64,10 @@ namespace Edi.Core.Resources
             }
             catch (Exception exp)
             {
-                logger.Error(string.Format("Error Loading resource '{0}': {1}", "Exception:", exp.Message, exp));
+                Logger.Error(string.Format("Error Loading resource '{0}': {1}", "Exception:", exp.Message, exp));
 
                 var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                msgBox.Show(exp, "Error loading internal resource.", MsgBox.MsgBoxButtons.OK, MsgBoxImage.Error);
+                msgBox.Show(exp, "Error loading internal resource.", MsgBoxButtons.OK, MsgBoxImage.Error);
             }
 
             return default(T);

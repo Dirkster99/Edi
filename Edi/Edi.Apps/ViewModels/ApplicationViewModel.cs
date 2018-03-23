@@ -470,7 +470,7 @@ namespace Edi.Apps.ViewModels
         /// </summary>
         /// <param name="contentId"></param>
         /// <returns></returns>
-        public object ContentViewModelFromID(string contentId)
+        public object ContentViewModelFromId(string contentId)
         {
             // Query for a tool window and return it
             var anchorableVm = Tools.FirstOrDefault(d => d.ContentId == contentId);

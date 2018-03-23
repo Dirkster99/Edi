@@ -1,10 +1,10 @@
-﻿namespace Edi.Core.Interfaces.DocumentTypes
-{
-	using System;
-	using System.Collections.ObjectModel;
-	using Edi.Core.Interfaces.Documents;
-	using Edi.Core.ViewModels;
+﻿using System;
+using System.Collections.ObjectModel;
+using Edi.Core.Interfaces.Documents;
+using Edi.Core.ViewModels;
 
+namespace Edi.Core.Interfaces.DocumentTypes
+{
 	/// <summary>
 	/// Delegates the file open method to a method that can be registered in a module.
 	/// The registered methid should return a viewmodel which in turn has registered a
@@ -39,19 +39,19 @@
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="Key"></param>
-		/// <param name="FileFilterName"></param>
-		/// <param name="DefaultFilter"></param>
-		/// <param name="FileOpenMethod">Is a static method that returns <seealso cref="FileBaseViewModel"/>
+		/// <param name="key"></param>
+		/// <param name="fileFilterName"></param>
+		/// <param name="defaultFilter"></param>
+		/// <param name="fileOpenMethod">Is a static method that returns <seealso cref="FileBaseViewModel"/>
 		/// and takes a string (path) and ISettingsManager as parameter.</param>
 		/// <param name="t"></param>
 		/// <returns></returns>
-		IDocumentType RegisterDocumentType(string Key,
-																			 string Name,
-																			 string FileFilterName,
-																			 string DefaultFilter,               // eg: 'log4j'
-																			 FileOpenDelegate FileOpenMethod,
-																			 CreateNewDocumentDelegate CreateDocumentMethod,
+		IDocumentType RegisterDocumentType(string key,
+																			 string name,
+																			 string fileFilterName,
+																			 string defaultFilter,               // eg: 'log4j'
+																			 FileOpenDelegate fileOpenMethod,
+																			 CreateNewDocumentDelegate createDocumentMethod,
 																			 Type t,
 																			 int sortPriority = 0
 																			 );

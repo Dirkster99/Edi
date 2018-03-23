@@ -1,7 +1,7 @@
-﻿namespace Edi.Core.Interfaces.DocumentTypes
-{
-	using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace Edi.Core.Interfaces.DocumentTypes
+{
 	/// <summary>
 	/// This interface specifies the data items necessary to descripe a document type
 	/// in terms of prefered filters, a human readable short description etc.

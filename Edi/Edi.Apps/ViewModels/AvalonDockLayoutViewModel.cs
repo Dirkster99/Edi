@@ -52,7 +52,7 @@ namespace Edi.Apps.ViewModels
             _mAppDir = mProgramSettings.AppDir;
             _mLayoutFileName = mProgramSettings.LayoutFileName;
 
-            LayoutID = Guid.NewGuid();
+            LayoutId = Guid.NewGuid();
             ViewProperties = new AvalonDockViewProperties();
             ViewProperties.InitialzeInstance();
         }
@@ -64,7 +64,7 @@ namespace Edi.Apps.ViewModels
         /// This layout id is a form of identification between viewmodel and view to identify whether
         /// a given event aggregated message is for a given recipient or not.
         /// </summary>
-        public Guid LayoutID { get; }
+        public Guid LayoutId { get; }
 
 	    public AvalonDockViewProperties ViewProperties { get; set; }
 
@@ -143,7 +143,7 @@ namespace Edi.Apps.ViewModels
 	    /// </summary>
 	    private void LoadDockingManagerLayout()
         {
-            LoadDockingManagerLayout(LayoutID);
+            LoadDockingManagerLayout(LayoutId);
         }
 
         /// <summary>

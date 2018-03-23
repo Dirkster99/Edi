@@ -1,10 +1,10 @@
-﻿namespace Edi.Core.Interfaces
-{
-	using System;
-	using System.Windows.Input;
-	using Edi.Core.Interfaces.Enums;
-	using Edi.Core.ViewModels.Events;
+﻿using System;
+using System.Windows.Input;
+using Edi.Core.Interfaces.Enums;
+using Edi.Core.ViewModels.Events;
 
+namespace Edi.Core.Interfaces
+{
 	/// <summary>
 	/// Inteface that is supported by document related viewmodels.
 	/// </summary>

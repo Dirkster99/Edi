@@ -1,9 +1,9 @@
-﻿namespace Edi.Core.ViewModels.Base
-{
-	using System;
-	using System.ComponentModel;
-	using System.Linq.Expressions;
+﻿using System;
+using System.ComponentModel;
+using System.Linq.Expressions;
 
+namespace Edi.Core.ViewModels.Base
+{
 	public class ViewModelBase : INotifyPropertyChanged
 	{
 
@@ -38,7 +38,7 @@
 			else
 				memberExpression = (MemberExpression)lambda.Body;
 
-			this.RaisePropertyChanged(memberExpression.Member.Name);
+			RaisePropertyChanged(memberExpression.Member.Name);
 		}
 	}
 }

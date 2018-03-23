@@ -10,8 +10,8 @@
 		/// Set a file specific value to determine whether file
 		/// watching is enabled/disabled for this file.
 		/// </summary>
-		/// <param name="IsEnabled"></param>
+		/// <param name="isEnabled"></param>
 		/// <returns></returns>
-		bool EnableDocumentFileWatcher(bool IsEnabled);
+		bool EnableDocumentFileWatcher(bool isEnabled);
 	}
 }

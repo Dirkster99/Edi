@@ -1,10 +1,12 @@
-﻿namespace Edi.Core.Models
-{
-	using System;
-	using System.Globalization;
-	using System.Reflection;
-	using System.Windows;
+﻿using System;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
+using System.Windows;
+using log4net;
 
+namespace Edi.Core.Models
+{
 	/// <summary>
 	/// Class maintains and helps access to core facts of this application.
 	/// Core facts are installation directory, name of application etc.
@@ -21,7 +23,7 @@
 		/// </summary>
 		public const string IssueTrackerLink = "https://github.com/Dirkster99/Edi/issues";
 
-		protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+		protected static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
 		#region properties
 		/// <summary>
@@ -33,8 +35,8 @@
 			get
 			{
 				return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-																				 System.IO.Path.DirectorySeparatorChar +
-																				 AppHelpers.Company;
+																				 Path.DirectorySeparatorChar +
+																				 Company;
 			}
 		}
 
@@ -73,7 +75,7 @@
 		{
 			get
 			{
-				return System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+				return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 			}
 		}
 
@@ -92,9 +94,9 @@
 		{
 			get
 			{
-				return System.IO.Path.Combine(AppHelpers.DirAppData,
+				return Path.Combine(DirAppData,
 																			string.Format(CultureInfo.InvariantCulture, "{0}.App.session",
-																										AppHelpers.AssemblyTitle));
+																										AssemblyTitle));
 			}
 		}
 
@@ -105,9 +107,9 @@
 		{
 			get
 			{
-				return System.IO.Path.Combine(AppHelpers.DirAppData,
+				return Path.Combine(DirAppData,
 																			string.Format(CultureInfo.InvariantCulture, "{0}.App.settings",
-																										AppHelpers.AssemblyTitle));
+																										AssemblyTitle));
 			}
 		}
 		#endregion properties
@@ -120,7 +122,7 @@
 		/// </summary>
 		public static void RestoreCurrentMainWindow()
 		{
-			if (System.Windows.Application.Current != null)
+			if (Application.Current != null)
 			{
 				if (Application.Current.MainWindow != null)
 				{

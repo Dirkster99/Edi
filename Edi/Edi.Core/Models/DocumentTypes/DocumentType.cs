@@ -1,9 +1,9 @@
-﻿namespace Edi.Core.Models.DocumentTypes
-{
-	using System;
-	using System.Collections.Generic;
-	using Edi.Core.Interfaces.DocumentTypes;
+﻿using System;
+using System.Collections.Generic;
+using Edi.Core.Interfaces.DocumentTypes;
 
+namespace Edi.Core.Models.DocumentTypes
+{
 	/// <summary>
 	/// This class manages document specific data items. Such as, filter for file open dialog,
 	/// a FileOpenMethod that returns the correct viewmodel etc.
@@ -33,16 +33,16 @@
 										 Type classType,
 										 int sortPriority = 0)
 		{
-			this.Key = key;
-			this.Description = description;
-			this.FileFilterName = fileFilterName;
-			this.SortPriority = sortPriority;
-			this.DefaultFilter = defaultFilter;
-			this.FileOpenMethod = fileOpenMethod;
-			this.CreateDocumentMethod = createDocumentMethod;
-			this.ClassType = classType;
+			Key = key;
+			Description = description;
+			FileFilterName = fileFilterName;
+			SortPriority = sortPriority;
+			DefaultFilter = defaultFilter;
+			FileOpenMethod = fileOpenMethod;
+			CreateDocumentMethod = createDocumentMethod;
+			ClassType = classType;
 
-			this.FileTypeExtensions = null;
+			FileTypeExtensions = null;
 		}
 		#endregion constructors
 
@@ -112,20 +112,20 @@
 
 		public void RegisterFileTypeItem(IDocumentTypeItem fileType)
 		{
-			if (this.FileTypeExtensions == null)
-				this.FileTypeExtensions = new List<IDocumentTypeItem>();
+			if (FileTypeExtensions == null)
+				FileTypeExtensions = new List<IDocumentTypeItem>();
 
-			this.FileTypeExtensions.Add(fileType);
+			FileTypeExtensions.Add(fileType);
 		}
 
 		public string GetFileOpenFilter()
 		{
 			string ret = string.Empty;
 
-			if (this.FileTypeExtensions == null)
+			if (FileTypeExtensions == null)
 				return ret;
 
-			foreach (var item in this.FileTypeExtensions)
+			foreach (var item in FileTypeExtensions)
 			{
 				string ext = string.Empty, ext1 = string.Empty;
 
@@ -155,7 +155,7 @@
 
 		public void GetFileFilterEntries(SortedList<int, IFileFilterEntry> ret, FileOpenDelegate fileOpenMethod)
 		{
-			foreach (var item in this.FileTypeExtensions)
+			foreach (var item in FileTypeExtensions)
 			{
 				string ext = string.Empty, ext1 = string.Empty;
 

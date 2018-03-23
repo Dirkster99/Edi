@@ -1,8 +1,9 @@
-﻿namespace Edi.Core.Models
-{
-	using System.ComponentModel.Composition;
-	using Edi.Core.Interfaces;
+﻿using System.ComponentModel.Composition;
+using Edi.Core.Interfaces;
+using MsgBox;
 
+namespace Edi.Core.Models
+{
 	/// <summary>
 	/// Class registers and manages output stream channels:
 	/// - MessageBox Service
@@ -13,8 +14,8 @@
 	public class MessageManager : IMessageManager
 	{
 		#region fields
-		MsgBox.IMessageBoxService _MessageBox = null;
-		IOutput mOutput = null;
+		IMessageBoxService _messageBox;
+		IOutput _mOutput;
 		#endregion fields
 
 		#region constructors
@@ -23,7 +24,7 @@
 		/// </summary>
 		public MessageManager()
 		{
-            this._MessageBox = new MsgBox.MessageBoxService();
+            _messageBox = new MessageBoxService();
 		}
 		#endregion constructors
 
@@ -33,9 +34,9 @@
         /// This service should be used if user interaction is required
         /// (e.g. user is requested to click ok or yes, no etc...).
         /// </summary>
-		public MsgBox.IMessageBoxService MessageBox
+		public IMessageBoxService MessageBox
         {
-			get { return this._MessageBox; }
+			get { return _messageBox; }
 		}
 
         /// <summary>
@@ -45,7 +46,7 @@
         /// </summary>
 		public IOutput Output
 		{
-			get { return this.mOutput; }
+			get { return _mOutput; }
 		}
 		#endregion properties
 
@@ -57,7 +58,7 @@
         /// <param name="output"></param>
 		public void RegisterOutputStream(IOutput output)
 		{
-			this.mOutput = output;
+			_mOutput = output;
 		}
 		#endregion Methods
 	}

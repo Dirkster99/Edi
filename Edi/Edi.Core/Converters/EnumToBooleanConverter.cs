@@ -1,9 +1,9 @@
-﻿namespace Edi.Core.Converters
-{
-	using System.Windows.Data;
-	using System.Globalization;
-	using System;
+﻿using System;
+using System.Globalization;
+using System.Windows.Data;
 
+namespace Edi.Core.Converters
+{
 	/// <summary>
 	/// This class can be used to databind a (group of) radio button control(s)
 	/// with an enumeration in a ViewModel.

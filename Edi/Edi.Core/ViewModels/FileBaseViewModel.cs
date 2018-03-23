@@ -1,18 +1,22 @@
+using System;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Windows;
+using System.Windows.Input;
+using CommonServiceLocator;
+using Edi.Core.Interfaces;
+using Edi.Core.Interfaces.Documents;
+using Edi.Core.Interfaces.Enums;
+using Edi.Core.Models.Documents;
+using Edi.Core.ViewModels.Command;
+using Edi.Core.ViewModels.Events;
+using Edi.Util.Local;
+using MsgBox;
+
 namespace Edi.Core.ViewModels
 {
-    using System;
-    using System.Globalization;
-    using System.Windows.Input;
-    using Edi.Core.Interfaces;
-    using Edi.Core.Interfaces.Documents;
-    using Edi.Core.Interfaces.Enums;
-    using Edi.Core.Models.Documents;
-    using Edi.Core.ViewModels.Command;
-    using Edi.Core.ViewModels.Events;
-    using MsgBox;
-    using CommonServiceLocator;
-
-    /// <summary>
+	/// <summary>
     /// Base class that shares common properties, methods, and intefaces
     /// among viewmodels that represent documents in Edi
     /// (text file edits, Start Page, Program Settings).
@@ -20,17 +24,17 @@ namespace Edi.Core.ViewModels
     public abstract class FileBaseViewModel : PaneViewModel, IFileBaseViewModel
     {
         #region Fields
-        private object lockObject = new object();
+        private object _lockObject = new object();
 
-        private DocumentState mState = DocumentState.IsLoading;
+        private DocumentState _mState = DocumentState.IsLoading;
 
-        private RelayCommand<object> mOpenContainingFolderCommand = null;
-        private RelayCommand<object> mCopyFullPathtoClipboard = null;
-        private RelayCommand<object> mSyncPathToExplorerCommand = null;
+        private RelayCommand<object> _mOpenContainingFolderCommand;
+        private RelayCommand<object> _mCopyFullPathtoClipboard;
+        private RelayCommand<object> _mSyncPathToExplorerCommand;
 
-        private readonly string mDocumentTypeKey = string.Empty;
+        private readonly string _mDocumentTypeKey = string.Empty;
 
-        protected IDocumentModel mDocumentModel = null;
+        protected IDocumentModel MDocumentModel;
         #endregion Fields
 
         #region Constructors
@@ -41,8 +45,8 @@ namespace Edi.Core.ViewModels
         public FileBaseViewModel(string documentTypeKey)
             : this()
         {
-            this.mDocumentModel = new DocumentModel();
-            this.mDocumentTypeKey = documentTypeKey;
+            MDocumentModel = new DocumentModel();
+            _mDocumentTypeKey = documentTypeKey;
         }
 
         /// <summary>
@@ -58,7 +62,7 @@ namespace Edi.Core.ViewModels
         /// This event is fired when a document tells the framework that is wants to be closed.
         /// The framework can then close it and clean-up whatever is left to clean-up.
         /// </summary>
-        virtual public event EventHandler<FileBaseEvent> DocumentEvent;
+        public virtual event EventHandler<FileBaseEvent> DocumentEvent;
 
         /// <summary>
         /// Supports asynchrone processing by implementing a result event when processing is done.
@@ -76,7 +80,7 @@ namespace Edi.Core.ViewModels
         {
             get
             {
-                return this.mDocumentTypeKey;
+                return _mDocumentTypeKey;
             }
         }
 
@@ -90,8 +94,8 @@ namespace Edi.Core.ViewModels
         {
             get
             {
-                if (this.mDocumentModel != null)
-                    return this.mDocumentModel.IsReal;
+                if (MDocumentModel != null)
+                    return MDocumentModel.IsReal;
 
                 return false;
             }
@@ -110,21 +114,21 @@ namespace Edi.Core.ViewModels
         {
             get
             {
-                lock (this.lockObject)
+                lock (_lockObject)
                 {
-                    return this.mState;
+                    return _mState;
                 }
             }
 
             protected set
             {
-                lock (this.lockObject)
+                lock (_lockObject)
                 {
-                    if (this.mState != value)
+                    if (_mState != value)
                     {
-                        this.mState = value;
+                        _mState = value;
 
-                        this.RaisePropertyChanged(() => this.State);
+                        RaisePropertyChanged(() => State);
                     }
                 }
             }
@@ -140,14 +144,14 @@ namespace Edi.Core.ViewModels
         /// Note the absense of the dirty mark '*'. Use the Title property if you want to display the file
         /// name with or without dirty mark when the user has edited content.
         /// </summary>
-        abstract public string FileName { get; }
+        public abstract string FileName { get; }
         #endregion FileName
 
         #region IsDirty
         /// <summary>
         /// Get whether the current information was edit and needs to be saved or not.
         /// </summary>
-        abstract public bool IsDirty { get; set; }
+        public abstract bool IsDirty { get; set; }
         #endregion IsDirty
 
         #region CanSaveData
@@ -157,14 +161,14 @@ namespace Edi.Core.ViewModels
         /// data implementation if this property returns false.
         /// (this is document specific and should always be overriden by descendents)
         /// </summary>
-        abstract public bool CanSaveData { get; }
+        public abstract bool CanSaveData { get; }
         #endregion CanSaveData
 
         #region Commands
         /// <summary>
         /// This command cloases a single file. The binding for this is in the AvalonDock LayoutPanel Style.
         /// </summary>
-        abstract public ICommand CloseCommand
+        public abstract ICommand CloseCommand
         {
             get;
         }
@@ -178,10 +182,10 @@ namespace Edi.Core.ViewModels
         {
             get
             {
-                if (mOpenContainingFolderCommand == null)
-                    mOpenContainingFolderCommand = new RelayCommand<object>((p) => this.OnOpenContainingFolderCommand());
+                if (_mOpenContainingFolderCommand == null)
+                    _mOpenContainingFolderCommand = new RelayCommand<object>(p => OnOpenContainingFolderCommand());
 
-                return mOpenContainingFolderCommand;
+                return _mOpenContainingFolderCommand;
             }
         }
 
@@ -194,10 +198,10 @@ namespace Edi.Core.ViewModels
         {
             get
             {
-                if (mCopyFullPathtoClipboard == null)
-                    mCopyFullPathtoClipboard = new RelayCommand<object>((p) => this.OnCopyFullPathtoClipboardCommand());
+                if (_mCopyFullPathtoClipboard == null)
+                    _mCopyFullPathtoClipboard = new RelayCommand<object>(p => OnCopyFullPathtoClipboardCommand());
 
-                return mCopyFullPathtoClipboard;
+                return _mCopyFullPathtoClipboard;
             }
         }
 
@@ -208,10 +212,10 @@ namespace Edi.Core.ViewModels
         {
             get
             {
-                if (this.mSyncPathToExplorerCommand == null)
-                    this.mSyncPathToExplorerCommand = new RelayCommand<object>((p) => this.OnSyncPathToExplorerCommand());
+                if (_mSyncPathToExplorerCommand == null)
+                    _mSyncPathToExplorerCommand = new RelayCommand<object>(p => OnSyncPathToExplorerCommand());
 
-                return this.mSyncPathToExplorerCommand;
+                return _mSyncPathToExplorerCommand;
             }
         }
         #endregion commands
@@ -227,19 +231,19 @@ namespace Edi.Core.ViewModels
         {
             get
             {
-                if (this.mDocumentModel == null)
+                if (MDocumentModel == null)
                     return false;
 
-                return this.mDocumentModel.WasChangedExternally;
+                return MDocumentModel.WasChangedExternally;
             }
 
             private set
             {
-                if (this.mDocumentModel == null)
+                if (MDocumentModel == null)
                     return;
 
-                if (this.mDocumentModel.WasChangedExternally != value)
-                    this.mDocumentModel.WasChangedExternally = value;
+                if (MDocumentModel.WasChangedExternally != value)
+                    MDocumentModel.WasChangedExternally = value;
             }
         }
         #endregion properties
@@ -250,34 +254,34 @@ namespace Edi.Core.ViewModels
         /// Indicate whether document can be saved in the currennt state.
         /// </summary>
         /// <returns></returns>
-        abstract public bool CanSave();
+        public abstract bool CanSave();
 
         /// <summary>
         /// Indicate whether document can be saved as.
         /// </summary>
         /// <returns></returns>
-        abstract public bool CanSaveAs();
+        public abstract bool CanSaveAs();
 
         /// <summary>
         /// Save this document as.
         /// </summary>
         /// <returns></returns>
-        abstract public bool SaveFile(string filePath);
+        public abstract bool SaveFile(string filePath);
 
         /// <summary>
         /// Return the path of the file representation (if any).
         /// </summary>
         /// <returns></returns>
-        abstract public string GetFilePath();
+        public abstract string GetFilePath();
         #endregion abstract methods
 
         /// <summary>
         /// Is executed when the user wants to refresh/re-load
         /// the current content with the currently stored inforamtion.
         /// </summary>
-        virtual public void ReOpen()
+        public virtual void ReOpen()
         {
-            this.WasChangedExternally = false;
+            WasChangedExternally = false;
         }
 
         /// <summary>
@@ -307,7 +311,7 @@ namespace Edi.Core.ViewModels
         /// <returns></returns>
         public string GetAlternativePath()
         {
-            return this.FilePath;
+            return FilePath;
         }
 
         /// <summary>
@@ -315,7 +319,7 @@ namespace Edi.Core.ViewModels
         /// </summary>
         protected virtual void OnClose()
         {
-            this.DocumentEvent?.Invoke(this, new FileBaseEvent(FileEventType.CloseDocument));
+            DocumentEvent?.Invoke(this, new FileBaseEvent(FileEventType.CloseDocument));
         }
 
         /// <summary>
@@ -324,14 +328,14 @@ namespace Edi.Core.ViewModels
         /// <returns></returns>
         public virtual bool CanClose()
         {
-            return (this.DocumentEvent != null);
+            return (DocumentEvent != null);
         }
 
         private void OnCopyFullPathtoClipboardCommand()
         {
             try
             {
-                System.Windows.Clipboard.SetText(this.FilePath);
+                Clipboard.SetText(FilePath);
             }
             catch
             {
@@ -347,33 +351,33 @@ namespace Edi.Core.ViewModels
 
             try
             {
-                if (System.IO.File.Exists(this.FilePath) == true)
+                if (File.Exists(FilePath))
                 {
                     // combine the arguments together it doesn't matter if there is a space after ','
-                    string argument = @"/select, " + this.FilePath;
+                    string argument = @"/select, " + FilePath;
 
-                    System.Diagnostics.Process.Start("explorer.exe", argument);
+                    Process.Start("explorer.exe", argument);
                 }
                 else
                 {
-                    string parentDir = System.IO.Directory.GetParent(this.FilePath).FullName;
+                    string parentDir = Directory.GetParent(FilePath).FullName;
 
-                    if (System.IO.Directory.Exists(parentDir) == false)
-                        msgBox.Show(string.Format(CultureInfo.CurrentCulture, Edi.Util.Local.Strings.STR_ACCESS_DIRECTORY_ERROR, parentDir),
-                                    Edi.Util.Local.Strings.STR_FILE_FINDING_CAPTION,
+                    if (Directory.Exists(parentDir) == false)
+                        msgBox.Show(string.Format(CultureInfo.CurrentCulture, Strings.STR_ACCESS_DIRECTORY_ERROR, parentDir),
+                                    Strings.STR_FILE_FINDING_CAPTION,
                                     MsgBoxButtons.OK, MsgBoxImage.Error);
                     else
                     {
                         string argument = @"/select, " + parentDir;
 
-                        System.Diagnostics.Process.Start("EXPLORER.EXE", argument);
+                        Process.Start("EXPLORER.EXE", argument);
                     }
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                msgBox.Show(string.Format(CultureInfo.CurrentCulture, "{0}\n'{1}'.", ex.Message, (this.FilePath ?? string.Empty)),
-                            Edi.Util.Local.Strings.STR_FILE_FINDING_CAPTION,
+                msgBox.Show(string.Format(CultureInfo.CurrentCulture, "{0}\n'{1}'.", ex.Message, (FilePath ?? string.Empty)),
+                            Strings.STR_FILE_FINDING_CAPTION,
                             MsgBoxButtons.OK, MsgBoxImage.Error);
             }
         }
@@ -396,9 +400,9 @@ namespace Edi.Core.ViewModels
         public bool FireFileProcessingResultEvent(ResultEvent e, TypeOfResult typeOfResult)
         {
             // Continue processing in parent of this viewmodel if there is any such requested
-            if (this.ProcessingResultEvent != null)
+            if (ProcessingResultEvent != null)
             {
-                this.ProcessingResultEvent(this, new ProcessResultEvent(e.Message, e.Error, e.Cancel, typeOfResult,
+                ProcessingResultEvent(this, new ProcessResultEvent(e.Message, e.Error, e.Cancel, typeOfResult,
                                                                                                                                 e.ResultObjects, e.InnerException));
 
                 return true;
@@ -409,10 +413,10 @@ namespace Edi.Core.ViewModels
 
         public void Dispose()
         {
-            if (this.mDocumentModel != null)
+            if (MDocumentModel != null)
             {
-                this.mDocumentModel.Dispose();
-                this.mDocumentModel = null;
+                MDocumentModel.Dispose();
+                MDocumentModel = null;
             }
         }
         #endregion methods
