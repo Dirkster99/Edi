@@ -33,28 +33,33 @@ namespace Edi.Core.Interfaces.DocumentTypes
 	public interface IDocumentTypeManager
 	{
 		#region properties
+
 		ObservableCollection<IDocumentType> DocumentTypes { get; }
+
 		#endregion properties
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="key"></param>
+		/// <param name="name"></param>
 		/// <param name="fileFilterName"></param>
 		/// <param name="defaultFilter"></param>
 		/// <param name="fileOpenMethod">Is a static method that returns <seealso cref="FileBaseViewModel"/>
 		/// and takes a string (path) and ISettingsManager as parameter.</param>
+		/// <param name="createDocumentMethod"></param>
 		/// <param name="t"></param>
+		/// <param name="sortPriority"></param>
 		/// <returns></returns>
 		IDocumentType RegisterDocumentType(string key,
-																			 string name,
-																			 string fileFilterName,
-																			 string defaultFilter,               // eg: 'log4j'
-																			 FileOpenDelegate fileOpenMethod,
-																			 CreateNewDocumentDelegate createDocumentMethod,
-																			 Type t,
-																			 int sortPriority = 0
-																			 );
+			string name,
+			string fileFilterName,
+			string defaultFilter, // eg: 'log4j'
+			FileOpenDelegate fileOpenMethod,
+			CreateNewDocumentDelegate createDocumentMethod,
+			Type t,
+			int sortPriority = 0
+		);
 
 		/// <summary>
 		/// Finds a document type that can handle a file
@@ -68,7 +73,7 @@ namespace Edi.Core.Interfaces.DocumentTypes
 		/// from the given extension string or not.</param>
 		/// <returns></returns>
 		IDocumentType FindDocumentTypeByExtension(string fileExtension,
-																							bool trimPeriod = false);
+			bool trimPeriod = false);
 
 		IDocumentType FindDocumentTypeByKey(string typeOfDoc);
 
