@@ -31,7 +31,6 @@ namespace Edi.Core.ViewModels
 		public string Name
 		{
 			get;
-			private set;
 		}
 
 		/// <summary>
@@ -39,10 +38,7 @@ namespace Edi.Core.ViewModels
 		/// </summary>
 		public bool IsVisible
 		{
-			get
-			{
-				return _mIsVisible;
-			}
+			get => _mIsVisible;
 
 			set
 			{
@@ -63,10 +59,7 @@ namespace Edi.Core.ViewModels
 		/// </summary>
 		public bool CanHide
 		{
-			get
-			{
-				return _mCanHide;
-			}
+			get => _mCanHide;
 
 			set
 			{
@@ -80,16 +73,10 @@ namespace Edi.Core.ViewModels
 
 		public abstract PaneLocation PreferredLocation { get; }
 
-		public virtual double PreferredWidth
-		{
-			get { return 300; }
-		}
+		public virtual double PreferredWidth => 300;
 
-		public virtual double PreferredHeight
-		{
-			get { return 300; }
-		}
-	
+		public virtual double PreferredHeight => 300;
+
 		#endregion properties
 
 		#region methods

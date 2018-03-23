@@ -28,7 +28,7 @@ namespace EdiApp.Events
 		#endregion constructor
 
 		#region properties
-		public ToolViewModel Tool { get; private set; }
+		public ToolViewModel Tool { get; }
 		#endregion properties
 	}
 }

@@ -18,9 +18,9 @@ namespace Edi.Core.Models.DocumentTypes
 		#endregion constructors
 
 		#region properties
-		public string FileFilter { get; private set; }
+		public string FileFilter { get; }
 
-		public FileOpenDelegate FileOpenMethod { get; private set; }
+		public FileOpenDelegate FileOpenMethod { get; }
 		#endregion properties
 	}
 }

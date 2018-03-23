@@ -38,7 +38,7 @@ namespace Edi.Core.ViewModels.Command
 		public RelayCommand(Action<T> execute, Predicate<T> canExecute)
 		{
 			if (execute == null)
-				throw new ArgumentNullException("execute");
+				throw new ArgumentNullException(nameof(execute));
 
 			_mExecute = execute;
 			_mCanExecute = canExecute;
@@ -131,7 +131,7 @@ namespace Edi.Core.ViewModels.Command
 		public RelayCommand(Action execute, Func<bool> canExecute)
 		{
 			if (execute == null)
-				throw new ArgumentNullException("execute");
+				throw new ArgumentNullException(nameof(execute));
 
 			_mExecute = execute;
 			_mCanExecute = canExecute;

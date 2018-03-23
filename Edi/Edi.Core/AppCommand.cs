@@ -165,199 +165,110 @@ namespace Edi.Core
 		/// <summary>
 		/// Static property of the correspondong <seealso cref="System.Windows.Input.RoutedUICommand"/>
 		/// </summary>
-		public static RoutedUICommand Exit
-		{
-			get { return _exit; }
-		}
+		public static RoutedUICommand Exit => _exit;
 
-		public static RoutedUICommand About
-		{
-			get { return _about; }
-		}
+		public static RoutedUICommand About => _about;
 
-		public static RoutedUICommand ProgramSettings
-		{
-			get
-			{
-				return _programSettings;
-			}
-		}
+		public static RoutedUICommand ProgramSettings => _programSettings;
 
-		public static RoutedUICommand ShowToolWindow
-		{
-			get
-			{
-				return _showToolWindow;
-			}
-		}
+		public static RoutedUICommand ShowToolWindow => _showToolWindow;
 
 		/// <summary>
 		/// Execute file open command (without user interaction)
 		/// </summary>
-		public static RoutedUICommand LoadFile
-		{
-			get { return _loadFile; }
-		}
+		public static RoutedUICommand LoadFile => _loadFile;
 
 		/// <summary>
 		/// Execute a command to save all edited files and current program settings
 		/// </summary>
-		public static RoutedUICommand SaveAll
-		{
-			get { return _saveAll; }
-		}
+		public static RoutedUICommand SaveAll => _saveAll;
 
 		/// <summary>
 		/// Execute a command to export the currently loaded UML Diagram (XML based data)
 		/// into an image based data format (png, jpeg, wmf)
 		/// </summary>
-		public static RoutedUICommand ExportUmlToImage
-		{
-			get { return _exportUmlToImage; }
-		}
+		public static RoutedUICommand ExportUmlToImage => _exportUmlToImage;
 
 		/// <summary>
 		/// Execute a command to export the currently loaded and highlighted text (XML, C# ...)
 		/// into an HTML data format (*.htm, *.html ...)
 		/// </summary>
-		public static RoutedUICommand ExportTextToHtml
-		{
-			get { return _exportTextToHtml; }
-		}
+		public static RoutedUICommand ExportTextToHtml => _exportTextToHtml;
 
 
-        public static RoutedUICommand ClearAllMruItemsCommand
-        {
-            get { return _clearAllMruItemsCommand; }
-        }
+		public static RoutedUICommand ClearAllMruItemsCommand => _clearAllMruItemsCommand;
 
 
-        public static RoutedUICommand RemoveItemsOlderThanThisCommand
-        {
-            get { return _removeItemsOlderThanThisCommand; }
-        }
+		public static RoutedUICommand RemoveItemsOlderThanThisCommand => _removeItemsOlderThanThisCommand;
 
-        public static RoutedUICommand MovePinnedMruItemUpCommand
-        {
-            get { return _movePinnedMruItemUpCommand; }
-        }
+		public static RoutedUICommand MovePinnedMruItemUpCommand => _movePinnedMruItemUpCommand;
 
-        public static RoutedUICommand MovePinnedMruItemDownCommand
-        {
-            get { return _movePinnedMruItemDownCommand; }
-        }
+		public static RoutedUICommand MovePinnedMruItemDownCommand => _movePinnedMruItemDownCommand;
 
-        public static RoutedUICommand PinItemCommand
-        {
-            get { return _pinItemCommand; }
-        }
+		public static RoutedUICommand PinItemCommand => _pinItemCommand;
 
-        public static RoutedUICommand UnPinItemCommand
-        {
-            get { return _unPinItemCommand; }
-        }
+		public static RoutedUICommand UnPinItemCommand => _unPinItemCommand;
 
 
-        /// <summary>
+		/// <summary>
         /// Execute pin/unpin command (to set or unset a pin in MRU and re-sort list accordingly)
         /// </summary>
-        public static RoutedUICommand PinUnpin
-		{
-			get { return _pinUnpin; }
-		}
+        public static RoutedUICommand PinUnpin => _pinUnpin;
 
 		/// <summary>
 		/// Execute add recent files list etnry pin command (to add another MRU entry into the list)
 		/// </summary>
-		public static RoutedUICommand AddMruEntry
-		{
-			get { return _addMruEntry; }
-		}
+		public static RoutedUICommand AddMruEntry => _addMruEntry;
 
 		/// <summary>
 		/// Execute remove pin command (remove a pin from a recent files list entry)
 		/// </summary>
-		public static RoutedUICommand RemoveMruEntry
-		{
-			get { return _removeMruEntry; }
-		}
+		public static RoutedUICommand RemoveMruEntry => _removeMruEntry;
 
-		public static RoutedUICommand CloseFile
-		{
-			get { return _closeFile; }
-		}
+		public static RoutedUICommand CloseFile => _closeFile;
 
 		/// <summary>
 		/// Static property of the correspondong <seealso cref="System.Windows.Input.RoutedUICommand"/>
 		/// </summary>
-		public static RoutedUICommand ViewTheme
-		{
-			get { return _viewTheme; }
-		}
+		public static RoutedUICommand ViewTheme => _viewTheme;
 
 		/// <summary>
 		/// Browse to an Internet URL via default web browser configured in Windows
 		/// </summary>
-		public static RoutedUICommand BrowseUrl
-		{
-			get { return _browseUrl; }
-		}
+		public static RoutedUICommand BrowseUrl => _browseUrl;
 
 		/// <summary>
 		/// Static property of the correspondong <seealso cref="System.Windows.Input.RoutedUICommand"/>
 		/// </summary>
-		public static RoutedUICommand ShowStartPage
-		{
-			get { return _showStartPage; }
-		}
+		public static RoutedUICommand ShowStartPage => _showStartPage;
 
 		/// <summary>
 		/// Static property of the correspondong <seealso cref="System.Windows.Input.RoutedUICommand"/>
 		/// </summary>
-		public static RoutedUICommand ToggleOptimizeWorkspace
-		{
-			get { return _toggleOptimizeWorkspace; }
-		}
+		public static RoutedUICommand ToggleOptimizeWorkspace => _toggleOptimizeWorkspace;
 
 		#region Text Edit Commands
 		/// <summary>
 		/// Goto line n in a given document
 		/// </summary>
-		public static RoutedUICommand GotoLine
-		{
-			get { return _gotoLine; }
-		}
+		public static RoutedUICommand GotoLine => _gotoLine;
 
 		/// <summary>
 		/// Find text in a given document
 		/// </summary>
-		public static RoutedUICommand FindText
-		{
-			get { return _findText; }
-		}
+		public static RoutedUICommand FindText => _findText;
 
-		public static RoutedUICommand FindNextText
-		{
-			get { return _findNextText; }
-		}
+		public static RoutedUICommand FindNextText => _findNextText;
 
-		public static RoutedUICommand FindPreviousText
-		{
-			get { return _findPreviousText; }
-		}
+		public static RoutedUICommand FindPreviousText => _findPreviousText;
 
 		/// <summary>
 		/// Find and replace text in a given document
 		/// </summary>
-		public static RoutedUICommand ReplaceText
-		{
-			get { return _replaceText; }
-		}
+		public static RoutedUICommand ReplaceText => _replaceText;
 
-		public static RoutedUICommand DisableHighlighting
-		{
-			get { return _disableHighlighting; }
-		}
+		public static RoutedUICommand DisableHighlighting => _disableHighlighting;
+
 		#endregion Text Edit Commands
 		#endregion CommandFramwork_Properties
 	}

@@ -80,12 +80,12 @@
 		/// <summary>
 		/// Get property with a string representation that can be displayed to the user
 		/// </summary>
-		public string Message { get; private set; }
+		public string Message { get; }
 
 		/// <summary>
 		/// Get <seealso cref="MsgCategory"/> property to tag this message with a category.
 		/// </summary>
-		public MsgCategory CategoryOfMsg { get; private set; }
+		public MsgCategory CategoryOfMsg { get; }
 
 		public string MessageType
 		{

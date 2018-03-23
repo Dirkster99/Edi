@@ -45,10 +45,7 @@ namespace Edi.Core.Models.Utillities.FileSystem
 		/// <param name="file"></param>
 		public FileChangeWatcher(IDocumentModel file)
 		{
-			if (file == null)
-				throw new ArgumentNullException("file");
-
-			_mFile = file;
+			_mFile = file ?? throw new ArgumentNullException(nameof(file));
 
 			////SD.Workbench.MainWindow.Activated += MainForm_Activated;
 
@@ -63,11 +60,7 @@ namespace Edi.Core.Models.Utillities.FileSystem
 		#region properties
 		public static bool DetectExternalChangesOption
 		{
-			get
-			{
-				return true;
-				////return PropertyService.Get("SharpDevelop.FileChangeWatcher.DetectExternalChanges", true);
-			}
+			get => true;
 
 			set
 			{
@@ -83,7 +76,7 @@ namespace Edi.Core.Models.Utillities.FileSystem
 
 		public bool Enabled
 		{
-			get { return _mEnabled; }
+			get => _mEnabled;
 			set
 			{
 				_mEnabled = value;
@@ -98,15 +91,9 @@ namespace Edi.Core.Models.Utillities.FileSystem
 
 		public bool WasChangedExternally
 		{
-			get
-			{
-				return _mWasChangedExternally;
-			}
+			get => _mWasChangedExternally;
 
-			set
-			{
-				_mWasChangedExternally = value;
-			}
+			set => _mWasChangedExternally = value;
 		}
 		#endregion properties
 

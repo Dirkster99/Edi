@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using Edi.Core.Models.Enums;
 using Edi.Core.ViewModels;
+using Xceed.Wpf.AvalonDock;
 
 namespace Edi.Core.Interfaces
 {

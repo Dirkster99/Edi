@@ -29,13 +29,7 @@ namespace Edi.Core.Models
 		#endregion contructors
 
 		#region properties
-		public ObservableCollection<ToolViewModel> Tools
-		{
-			get
-			{
-				return _mItems;
-			}
-		}
+		public ObservableCollection<ToolViewModel> Tools => _mItems;
 
 		public IOutput Output { get; set; }
 		#endregion properties

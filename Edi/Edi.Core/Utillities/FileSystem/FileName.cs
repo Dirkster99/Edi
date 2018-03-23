@@ -81,7 +81,7 @@ namespace Edi.Core.Models.Utillities.FileSystem
 		public bool HasExtension(string extension)
 		{
 			if (extension == null)
-				throw new ArgumentNullException("extension");
+				throw new ArgumentNullException(nameof(extension));
 
 			if (extension.Length == 0 || extension[0] != '.')
 				throw new ArgumentException("extension must start with '.'");

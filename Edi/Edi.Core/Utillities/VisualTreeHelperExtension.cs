@@ -23,8 +23,7 @@ namespace Edi.Core.Utillities
 
 			DependencyObject result = null;
 
-			if (frameworkElement != null)
-				frameworkElement.ApplyTemplate();
+			frameworkElement?.ApplyTemplate();
 
 			int childrenCount = VisualTreeHelper.GetChildrenCount(parent);
 			for (int i = 0; i < childrenCount; i++)
@@ -47,15 +46,14 @@ namespace Edi.Core.Utillities
 			// confirm parent is valid.
 			if (parent == null)
 				return null;
-			if (parent is T)
-				return parent as T;
+			if (parent is T variable)
+				return variable;
 
 			DependencyObject foundChild = null;
 
-            if (parent is FrameworkElement)
+            if (parent is FrameworkElement frameworkElement)
             {
-                FrameworkElement frameworkElement = parent as FrameworkElement;
-                frameworkElement.ApplyTemplate();
+	            frameworkElement.ApplyTemplate();
             }
 
             int childrenCount = VisualTreeHelper.GetChildrenCount(parent);
@@ -67,7 +65,7 @@ namespace Edi.Core.Utillities
 					break;
 			}
 
-			return foundChild as T;
+			return (T) foundChild;
 		}
 	}
 }

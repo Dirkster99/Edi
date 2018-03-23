@@ -34,20 +34,15 @@ namespace Edi.Core.Models
         /// This service should be used if user interaction is required
         /// (e.g. user is requested to click ok or yes, no etc...).
         /// </summary>
-		public IMessageBoxService MessageBox
-        {
-			get { return _messageBox; }
-		}
+		public IMessageBoxService MessageBox => _messageBox;
 
-        /// <summary>
+		/// <summary>
         /// Gets a reference to the output message servive implementation.
         /// This service can be used to output warnings or imformation
         /// that does not require user interaction.
         /// </summary>
-		public IOutput Output
-		{
-			get { return _mOutput; }
-		}
+		public IOutput Output => _mOutput;
+
 		#endregion properties
 
 		#region Methods

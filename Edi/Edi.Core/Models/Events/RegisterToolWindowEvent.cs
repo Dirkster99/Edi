@@ -7,21 +7,15 @@ namespace EdiApp.Events
 	/// </summary>
 	public class RegisterToolWindowEvent : PubSubEvent<RegisterToolWindowEventArgs>
 	{
-		private static readonly EventAggregator EventAggregator;
-		private static readonly RegisterToolWindowEvent Event;
-
 		/// <summary>
 		/// Static Class Constructor
 		/// </summary>
 		static RegisterToolWindowEvent()
 		{
-			EventAggregator = new EventAggregator();
-			Event = EventAggregator.GetEvent<RegisterToolWindowEvent>();
+			var eventAggregator = new EventAggregator();
+			Instance = eventAggregator.GetEvent<RegisterToolWindowEvent>();
 		}
 
-		public static RegisterToolWindowEvent Instance
-		{
-			get { return Event; }
-		}
+		public static RegisterToolWindowEvent Instance { get; }
 	}
 }

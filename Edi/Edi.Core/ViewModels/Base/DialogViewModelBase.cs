@@ -88,10 +88,7 @@ namespace Edi.Core.ViewModels.Base
 		/// </summary>
 		public bool? WindowCloseResult
 		{
-			get
-			{
-				return _mDialogCloseResult;
-			}
+			get => _mDialogCloseResult;
 
 			private set
 			{
@@ -111,10 +108,7 @@ namespace Edi.Core.ViewModels.Base
 		/// </summary>
 		public bool IsReadyToClose
 		{
-			get
-			{
-				return _mIsReadyToClose;
-			}
+			get => _mIsReadyToClose;
 
 			set
 			{

@@ -31,58 +31,28 @@ namespace Edi.Core.Models
 		/// Gets a string that denotes an internet link to
 		/// a web site where users can enter their issues.
 		/// </summary>
-		public string IssueTrackerLink
-		{
-			get
-			{
-				return AppHelpers.IssueTrackerLink;
-			}
-		}
+		public string IssueTrackerLink => AppHelpers.IssueTrackerLink;
 
 		/// <summary>
 		/// Gets the file name of the layout file that is useful for AvalonDock.
 		/// </summary>
-		public string LayoutFileName
-		{
-			get
-			{
-				return "Layout.config";
-			}
-		}
+		public string LayoutFileName => "Layout.config";
 
 		/// <summary>
 		/// Get a path to the directory where the application
 		/// can persist/load user data on session exit and re-start.
 		/// </summary>
-		public string DirAppData
-		{
-			get
-			{
-				return AppHelpers.DirAppData;
-			}
-		}
+		public string DirAppData => AppHelpers.DirAppData;
 
 		/// <summary>
 		/// Get a path to the directory where the user store his documents
 		/// </summary>
-		public string MyDocumentsUserDir
-		{
-			get
-			{
-				return AppHelpers.MyDocumentsUserDir;
-			}
-		}
+		public string MyDocumentsUserDir => AppHelpers.MyDocumentsUserDir;
 
 		/// <summary>
 		/// Get the name of the executing assembly (usually name of *.exe file)
 		/// </summary>
-		public string AssemblyTitle
-		{
-			get
-			{
-				return AppHelpers.AssemblyTitle;
-			}
-		}
+		public string AssemblyTitle => AppHelpers.AssemblyTitle;
 
 		//
 		// Summary:
@@ -93,46 +63,23 @@ namespace Edi.Core.Models
 		//     file was shadow-copied, the location is that of the file after being shadow-copied.
 		//     If the assembly is loaded from a byte array, such as when using the System.Reflection.Assembly.Load(System.Byte[])
 		//     method overload, the value returned is an empty string ("").
-		public string AssemblyEntryLocation
-		{
-			get
-			{
-				return AppHelpers.AssemblyEntryLocation;
-			}
-		}
+		public string AssemblyEntryLocation => AppHelpers.AssemblyEntryLocation;
 
 		/// <summary>
 		/// Gets the company string of this application.
 		/// </summary>
-		public string Company
-		{
-			get
-			{
-				return AppHelpers.Company;
-			}
-		}
+		public string Company => AppHelpers.Company;
 
 		/// <summary>
 		/// Get path and file name to application specific session file
 		/// </summary>
-		public string DirFileAppSessionData
-		{
-			get
-			{
-				return AppHelpers.DirFileAppSessionData;
-			}
-		}
+		public string DirFileAppSessionData => AppHelpers.DirFileAppSessionData;
 
 		/// <summary>
 		/// Get path and file name to application specific settings file
 		/// </summary>
-		public string DirFileAppSettingsData
-		{
-			get
-			{
-				return AppHelpers.DirFileAppSettingsData;
-			}
-		}
+		public string DirFileAppSettingsData => AppHelpers.DirFileAppSettingsData;
+
 		#endregion properties
 
 		#region methods

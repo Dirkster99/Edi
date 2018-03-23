@@ -76,15 +76,9 @@ namespace Edi.Core.ViewModels
         /// This key is relevant for the framework to implement the correct
         /// file open/save filter settings etc...
         /// </summary>
-        public string DocumentTypeKey
-        {
-            get
-            {
-                return _mDocumentTypeKey;
-            }
-        }
+        public string DocumentTypeKey => _mDocumentTypeKey;
 
-        /// <summary>
+	    /// <summary>
         /// Get/set whether a given file path is a real existing path or not.
         /// 
         /// This is used to identify files that have never been saved and can

@@ -32,10 +32,8 @@ namespace Edi.Core.Models.DocumentTypes
 		/// <summary>
 		/// Gets a collection of document types that are supported by this application.
 		/// </summary>
-		public ObservableCollection<IDocumentType> DocumentTypes
-		{
-			get { return _mDocumentTypes; }
-		}	
+		public ObservableCollection<IDocumentType> DocumentTypes => _mDocumentTypes;
+
 		#endregion properties
 
 		#region Methods
@@ -94,7 +92,7 @@ namespace Edi.Core.Models.DocumentTypes
 			{
 				int idx;
 
-				if ((idx = fileExtension.LastIndexOf(".")) >= 0)
+				if ((idx = fileExtension.LastIndexOf(".", StringComparison.Ordinal)) >= 0)
 					fileExtension = fileExtension.Substring(idx + 1);
 			}
 
@@ -137,8 +135,7 @@ namespace Edi.Core.Models.DocumentTypes
 					if (key == string.Empty || key == item.Key)
 					{
 						// format filter entry like "Structured Query Language (*.sql) |*.sql"
-						var s = new FileFilterEntry(string.Format("{0} (*.{1}) |*.{2}",
-																											item.FileFilterName, item.DefaultFilter, item.DefaultFilter),
+						var s = new FileFilterEntry($"{item.FileFilterName} (*.{item.DefaultFilter}) |*.{item.DefaultFilter}",
 																											item.FileOpenMethod);
 
 						ret.Add(item.SortPriority, s);

@@ -13,7 +13,7 @@ namespace Edi.Core.ViewModels
 		private string _title;
 		public virtual string Title
 		{
-			get { return _title; }
+			get => _title;
 			set
 			{
 				if (_title != value)
@@ -37,7 +37,7 @@ namespace Edi.Core.ViewModels
 		private string _contentId;
 		public string ContentId
 		{
-			get { return _contentId; }
+			get => _contentId;
 			set
 			{
 				if (_contentId != value)
@@ -54,7 +54,7 @@ namespace Edi.Core.ViewModels
 		private bool _isSelected;
 		public bool IsSelected
 		{
-			get { return _isSelected; }
+			get => _isSelected;
 			set
 			{
 				if (_isSelected != value)
@@ -72,7 +72,7 @@ namespace Edi.Core.ViewModels
 		private bool _isActive;
 		public bool IsActive
 		{
-			get { return _isActive; }
+			get => _isActive;
 			set
 			{
 				if (_isActive != value)

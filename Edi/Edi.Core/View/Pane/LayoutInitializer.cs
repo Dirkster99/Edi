@@ -26,13 +26,11 @@ namespace Edi.Core.View.Pane
 		/// <returns></returns>
 		public bool BeforeInsertAnchorable(LayoutRoot layout, LayoutAnchorable anchorableToShow, ILayoutContainer destinationContainer)
 		{
-            if (anchorableToShow.Content is IToolWindow)
+            if (anchorableToShow.Content is IToolWindow tool)
             {
-                IToolWindow tool = anchorableToShow.Content as IToolWindow;
+	            var preferredLocation = tool.PreferredLocation;
 
-                var preferredLocation = tool.PreferredLocation;
-
-                LayoutAnchorGroup layoutGroup = null;
+                LayoutAnchorGroup layoutGroup;
 
                 switch (preferredLocation)
                 {
@@ -52,13 +50,10 @@ namespace Edi.Core.View.Pane
                         throw new ArgumentOutOfRangeException();
                 }
 
-                if (layoutGroup != null)
-                {
-                    ////group.InsertChildAt(0, anchorableToShow);
-                    layoutGroup.Children.Add(anchorableToShow);
-                }
+	            ////group.InsertChildAt(0, anchorableToShow);
+	            layoutGroup?.Children.Add(anchorableToShow);
 
-                return true;
+	            return true;
             }
 
             return false;
@@ -69,7 +64,7 @@ namespace Edi.Core.View.Pane
 		{
 			try
 			{
-				LayoutAnchorSide panelGroupParent = null;
+				LayoutAnchorSide panelGroupParent;
 
 				switch (location)
 				{
@@ -112,29 +107,25 @@ namespace Edi.Core.View.Pane
 		public void AfterInsertAnchorable(LayoutRoot layout, LayoutAnchorable anchorableShown)
 		{
             // If this is the first anchorable added to this pane, then use the preferred size.
-            if (anchorableShown.Content is IToolWindow)
+            if (anchorableShown.Content is IToolWindow tool)
             {
-                IToolWindow tool = anchorableShown.Content as IToolWindow;
-                if (anchorableShown.Parent is LayoutAnchorablePane)
-                {
-                    LayoutAnchorablePane anchorablePane = anchorableShown.Parent as LayoutAnchorablePane;
+	            LayoutAnchorablePane anchorablePane = anchorableShown.Parent as LayoutAnchorablePane;
 
-                    if (anchorablePane.ChildrenCount == 1)
-                    {
-                        switch (tool.PreferredLocation)
-                        {
-                            case PaneLocation.Left:
-                            case PaneLocation.Right:
-                                anchorablePane.DockWidth = new GridLength(tool.PreferredWidth, GridUnitType.Pixel);
-                                break;
-                            case PaneLocation.Bottom:
-                                anchorablePane.DockHeight = new GridLength(tool.PreferredHeight, GridUnitType.Pixel);
-                                break;
-                            default:
-                                throw new ArgumentOutOfRangeException();
-                        }
-                    }
-                }
+	            if (anchorablePane?.ChildrenCount == 1)
+	            {
+		            switch (tool.PreferredLocation)
+		            {
+			            case PaneLocation.Left:
+			            case PaneLocation.Right:
+				            anchorablePane.DockWidth = new GridLength(tool.PreferredWidth, GridUnitType.Pixel);
+				            break;
+			            case PaneLocation.Bottom:
+				            anchorablePane.DockHeight = new GridLength(tool.PreferredHeight, GridUnitType.Pixel);
+				            break;
+			            default:
+				            throw new ArgumentOutOfRangeException();
+		            }
+	            }
             }
         }
 

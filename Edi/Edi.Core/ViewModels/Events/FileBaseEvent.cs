@@ -59,10 +59,8 @@ namespace Edi.Core.ViewModels.Events
 		/// Gets the type of event <seealso cref="FileBaseEvent"/>
 		/// that this object represents.
 		/// </summary>
-		public FileEventType TypeOfEvent
-		{
-			get { return _mTypeOfEvent; }
-		}
+		public FileEventType TypeOfEvent => _mTypeOfEvent;
+
 		#endregion properties
 
 		#region methods

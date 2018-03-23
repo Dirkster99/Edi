@@ -176,7 +176,7 @@ namespace Edi.Core.Models.Utillities.FileSystem
 		public static bool IsUrl(string path)
 		{
 			if (path == null)
-				throw new ArgumentNullException("path");
+				throw new ArgumentNullException(nameof(path));
 
 			return path.IndexOf("://", StringComparison.Ordinal) > 0;
 		}

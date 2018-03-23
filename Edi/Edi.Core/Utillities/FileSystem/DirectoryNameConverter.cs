@@ -18,9 +18,9 @@ namespace Edi.Core.Models.Utillities.FileSystem
 
 		public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
 		{
-			if (value is string)
+			if (value is string s)
 			{
-				return DirectoryName.Create((string)value);
+				return DirectoryName.Create(s);
 			}
 			return base.ConvertFrom(context, culture, value);
 		}

@@ -36,34 +36,17 @@ namespace Edi.Core.ViewModels
 		/// </summary>
 		public DataTemplate DocumentHeaderTemplate
 		{
-			get
-			{
-				return _mDocumentHeaderTemplate;
-			}
+			get => _mDocumentHeaderTemplate;
 
-			private set
-			{
-				_mDocumentHeaderTemplate = value;
-			}
+			private set => _mDocumentHeaderTemplate = value;
 		}
 
-		public LayoutInitializer LayoutInitializer
-		{
-			get
-			{
-				return _mLayoutInitializer;
-			}
-		}
+		public LayoutInitializer LayoutInitializer => _mLayoutInitializer;
 
-		public PanesStyleSelector SelectPanesStyle
-		{
-			get { return _mSelectPanesStyle; }
-		}
+		public PanesStyleSelector SelectPanesStyle => _mSelectPanesStyle;
 
-		public PanesTemplateSelector SelectPanesTemplate
-		{
-			get { return _mSelectPanesTemplate; }
-		}
+		public PanesTemplateSelector SelectPanesTemplate => _mSelectPanesTemplate;
+
 		#endregion properties
 
 		#region methods

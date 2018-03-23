@@ -47,9 +47,8 @@ namespace Edi.Core.View.Pane
             if (item == null)
                 return null;
 
-            Style o;
-            Type t = item.GetType();
-            _styleDirectory.TryGetValue(t, out o);
+	        Type t = item.GetType();
+            _styleDirectory.TryGetValue(t, out var o);
 
             if (o != null)
                 return o;

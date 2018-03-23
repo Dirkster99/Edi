@@ -21,11 +21,11 @@ namespace Edi.Core.Models.DocumentTypes
 		#endregion constructors
 
 		#region properties
-		public List<string> DocFileTypeExtensions { get; private set; }
+		public List<string> DocFileTypeExtensions { get; }
 
-		public string Description { get; private set; }
+		public string Description { get; }
 
-		public int SortPriority { get; private set; }
+		public int SortPriority { get; }
 		#endregion properties
 
 		#region methods

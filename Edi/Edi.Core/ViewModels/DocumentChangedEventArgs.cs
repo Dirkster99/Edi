@@ -28,13 +28,8 @@ namespace Edi.Core.ViewModels
 		/// <summary>
 		/// Get the active document that is active now (as of this event).
 		/// </summary>
-		public IFileBaseViewModel ActiveDocument
-		{
-			get
-			{
-				return _mActiveDocument;
-			}
-		}
+		public IFileBaseViewModel ActiveDocument => _mActiveDocument;
+
 		#endregion methods
 	}
 }

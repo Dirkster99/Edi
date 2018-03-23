@@ -33,7 +33,7 @@ namespace Edi.Core.Models.Utillities.FileSystem
 		protected PathName(string path)
 		{
 			if (path == null)
-				throw new ArgumentNullException("path");
+				throw new ArgumentNullException(nameof(path));
 			if (path.Length == 0)
 				throw new ArgumentException("The empty string is not a valid path");
 			NormalizedPath = NormalizePath(path);
@@ -42,15 +42,13 @@ namespace Edi.Core.Models.Utillities.FileSystem
 		protected PathName(PathName path)
 		{
 			if (path == null)
-				throw new ArgumentNullException("path");
+				throw new ArgumentNullException(nameof(path));
 			NormalizedPath = path.NormalizedPath;
 		}
 
 		public static implicit operator string(PathName path)
 		{
-			if (path != null)
-				return path.NormalizedPath;
-			return null;
+			return path?.NormalizedPath;
 		}
 
 		public override string ToString()
@@ -61,10 +59,7 @@ namespace Edi.Core.Models.Utillities.FileSystem
 		/// <summary>
 		/// Gets whether this path is relative.
 		/// </summary>
-		public bool IsRelative
-		{
-			get { return !Path.IsPathRooted(NormalizedPath); }
-		}
+		public bool IsRelative => !Path.IsPathRooted(NormalizedPath);
 
 		/// <summary>
 		/// Gets the directory name.
@@ -147,7 +142,10 @@ namespace Edi.Core.Models.Utillities.FileSystem
 							{
 								// remove previous segment
 								int j;
-								for (j = result.Length - 1; j >= 0 && result[j] != outputSeparator; j--) ;
+								for (j = result.Length - 1; j >= 0 && result[j] != outputSeparator; j--)
+								{
+								}
+
 								if (j > 0)
 								{
 									result.Length = j;

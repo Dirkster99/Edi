@@ -8,7 +8,7 @@ namespace Edi.Core.Models.Documents
 	/// <summary>
     /// Class models the basic properties and behaviours of a low level file stored on harddisk.
     /// </summary>
-    public class DocumentModel : IDocumentModel, IDisposable
+    public class DocumentModel : IDocumentModel
     {
         #region fields
         private FileName _mFileName;
@@ -90,26 +90,14 @@ namespace Edi.Core.Models.Documents
         /// <summary>
         /// Gets the path of a file.
         /// </summary>
-        public string Path
-        {
-            get
-            {
-                return System.IO.Path.GetFullPath(FileNamePath);
-            }
-        }
+        public string Path => System.IO.Path.GetFullPath(FileNamePath);
 
-        /// <summary>
+	    /// <summary>
         /// Gets the file extension of the document represented by this path.
         /// </summary>
-        public string FileExtension
-        {
-            get
-            {
-                return _mFileName.GetExtension();
-            }
-        }
+        public string FileExtension => _mFileName.GetExtension();
 
-        public bool WasChangedExternally
+	    public bool WasChangedExternally
         {
             get
             {
@@ -163,14 +151,11 @@ namespace Edi.Core.Models.Documents
             }
         }
 
-        /// <summary>
-        /// Resets the IsReal property to adjust model when a new document has been saved
-        /// for the very first time.
-        /// </summary>
-        /// <param name="IsReal">Determines whether file exists on disk
-        /// (file open -> properties are refreshed from persistence) or not
-        /// (properties are reset to default).</param>
-        public void SetIsReal(bool isReal)
+	    /// <summary>
+	    /// Resets the IsReal property to adjust model when a new document has been saved
+	    /// for the very first time.
+	    /// </summary>
+	    public void SetIsReal(bool isReal)
         {
             IsReal = isReal;
 

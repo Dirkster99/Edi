@@ -59,49 +59,32 @@ namespace Edi.Core.ViewModels.Events
 		/// <summary>
 		/// Get an error message if processing task aborted with errors
 		/// </summary>
-		public bool Error
-		{
-			get { return _mError; }
-		}
+		public bool Error => _mError;
 
 		/// <summary>
 		/// Get property to determine whether processing was cancelled or not.
 		/// </summary>
-		public bool Cancel
-		{
-			get { return _mCancel; }
-		}
+		public bool Cancel => _mCancel;
 
 		/// <summary>
 		/// Get property to determine whether there is an innerException to
 		/// document an abortion with errors.
 		/// </summary>
-		public ApplicationException InnerException
-		{
-			get { return _mInnerException; }
-		}
+		public ApplicationException InnerException => _mInnerException;
 
 		/// <summary>
 		/// Get current message describing the current step being proceesed
 		/// 
 		/// </summary>
-		public string Message
-		{
-			get { return _mMessage; }
-		}
+		public string Message => _mMessage;
 
 		/// <summary>
 		/// Dictionary of mResult objects from executing process
 		/// </summary>
-		public Dictionary<string, object> ResultObjects
-		{
-			get
-			{
-				return (_mObjColl == null
-										? new Dictionary<string, object>()
-										: new Dictionary<string, object>(_mObjColl));
-			}
-		}
+		public Dictionary<string, object> ResultObjects => (_mObjColl == null
+			? new Dictionary<string, object>()
+			: new Dictionary<string, object>(_mObjColl));
+
 		#endregion Properties
 	}
 }

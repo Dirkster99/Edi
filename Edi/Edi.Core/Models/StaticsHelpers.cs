@@ -30,37 +30,19 @@ namespace Edi.Core.Models
 		/// Get a path to the directory where the application
 		/// can persist/load user data on session exit and re-start.
 		/// </summary>
-		public static string DirAppData
-		{
-			get
-			{
-				return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-																				 Path.DirectorySeparatorChar +
-																				 Company;
-			}
-		}
+		public static string DirAppData => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+		                                   Path.DirectorySeparatorChar +
+		                                   Company;
 
 		/// <summary>
 		/// Get a path to the directory where the user store his documents
 		/// </summary>
-		public static string MyDocumentsUserDir
-		{
-			get
-			{
-				return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-			}
-		}
+		public static string MyDocumentsUserDir => Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
 		/// <summary>
 		/// Get the name of the executing assembly (usually name of *.exe file)
 		/// </summary>
-		public static string AssemblyTitle
-		{
-			get
-			{
-				return Assembly.GetEntryAssembly().GetName().Name;
-			}
-		}
+		public static string AssemblyTitle => Assembly.GetEntryAssembly().GetName().Name;
 
 		//
 		// Summary:
@@ -71,47 +53,24 @@ namespace Edi.Core.Models
 		//     file was shadow-copied, the location is that of the file after being shadow-copied.
 		//     If the assembly is loaded from a byte array, such as when using the System.Reflection.Assembly.Load(System.Byte[])
 		//     method overload, the value returned is an empty string ("").
-		public static string AssemblyEntryLocation
-		{
-			get
-			{
-				return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-			}
-		}
+		public static string AssemblyEntryLocation => Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 
-		public static string Company
-		{
-			get
-			{
-				return "Edi";
-			}
-		}
+		public static string Company => "Edi";
 
 		/// <summary>
 		/// Get path and file name to application specific session file
 		/// </summary>
-		public static string DirFileAppSessionData
-		{
-			get
-			{
-				return Path.Combine(DirAppData,
-																			string.Format(CultureInfo.InvariantCulture, "{0}.App.session",
-																										AssemblyTitle));
-			}
-		}
+		public static string DirFileAppSessionData => Path.Combine(DirAppData,
+			string.Format(CultureInfo.InvariantCulture, "{0}.App.session",
+				AssemblyTitle));
 
 		/// <summary>
 		/// Get path and file name to application specific settings file
 		/// </summary>
-		public static string DirFileAppSettingsData
-		{
-			get
-			{
-				return Path.Combine(DirAppData,
-																			string.Format(CultureInfo.InvariantCulture, "{0}.App.settings",
-																										AssemblyTitle));
-			}
-		}
+		public static string DirFileAppSettingsData => Path.Combine(DirAppData,
+			string.Format(CultureInfo.InvariantCulture, "{0}.App.settings",
+				AssemblyTitle));
+
 		#endregion properties
 
 		#region methods
