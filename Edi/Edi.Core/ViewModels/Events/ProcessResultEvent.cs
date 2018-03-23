@@ -15,15 +15,12 @@ namespace Edi.Core.ViewModels.Events
 	public class ProcessResultEvent : EventArgs
 	{
 		#region Fields
-		private readonly bool _mCancel;
-		private readonly bool _mError;
-		private readonly TypeOfResult _mTypeOfResult;
-		private readonly ApplicationException _mInnerException;
-		private readonly string _mMessage;
+
 		private readonly Dictionary<string, object> _mObjColl;
 		#endregion Fields
 
 		#region Constructors
+
 		/// <summary>
 		/// Convinience constructor to produce simple message for communicating when
 		/// batch run was abborted incompletely (bCancel can be set to true or bError
@@ -32,6 +29,7 @@ namespace Edi.Core.ViewModels.Events
 		/// <param name="sMessage"></param>
 		/// <param name="bError"></param>
 		/// <param name="bCancel"></param>
+		/// <param name="processResult"></param>
 		/// <param name="objColl"></param>
 		/// <param name="innerException"></param>
 		public ProcessResultEvent(string sMessage,
@@ -41,11 +39,11 @@ namespace Edi.Core.ViewModels.Events
 															 Dictionary<string, object> objColl = null,
 															 ApplicationException innerException = null)
 		{
-			_mMessage = sMessage;
-			_mError = bError;
-			_mTypeOfResult = processResult;
-			_mCancel = bCancel;
-			_mInnerException = innerException;
+			Message = sMessage;
+			Error = bError;
+			TypeOfResult = processResult;
+			Cancel = bCancel;
+			InnerException = innerException;
 			_mObjColl = (objColl == null ? null : new Dictionary<string, object>(objColl));
 		}
 
@@ -56,10 +54,10 @@ namespace Edi.Core.ViewModels.Events
 		/// <param name="message"></param>
 		public ProcessResultEvent(string message)
 		{
-			_mMessage = message;
-			_mError = false;
-			_mCancel = false;
-			_mInnerException = null;
+			Message = message;
+			Error = false;
+			Cancel = false;
+			InnerException = null;
 		}
 		#endregion Constructors
 
@@ -67,26 +65,26 @@ namespace Edi.Core.ViewModels.Events
 		/// <summary>
 		/// Get an error message if processing task aborted with errors
 		/// </summary>
-		public bool Error => _mError;
+		public bool Error { get; }
 
 		/// <summary>
 		/// Get property to determine whether processing was cancelled or not.
 		/// </summary>
-		public bool Cancel => _mCancel;
+		public bool Cancel { get; }
 
-		public TypeOfResult TypeOfResult => _mTypeOfResult;
+		public TypeOfResult TypeOfResult { get; }
 
 		/// <summary>
 		/// Get property to determine whether there is an innerException to
 		/// document an abortion with errors.
 		/// </summary>
-		public ApplicationException InnerException => _mInnerException;
+		public ApplicationException InnerException { get; }
 
 		/// <summary>
 		/// Get current message describing the current step being proceesed
 		/// 
 		/// </summary>
-		public string Message => _mMessage;
+		public string Message { get; }
 
 		/// <summary>
 		/// Dictionary of mResult objects from executing process

@@ -140,15 +140,7 @@ namespace Edi.Core.ViewModels.Base
 		public ICommand CancelCommand
 		{
 			get
-			{
-				if (_mCancelCommand == null)
-					_mCancelCommand = new RelayCommand(() =>
-					{
-						OnRequestClose(false);
-					});
-
-				return _mCancelCommand;
-			}
+			{ return _mCancelCommand ?? (_mCancelCommand = new RelayCommand(() => { OnRequestClose(false); })); }
 		}
 
 		/// <summary>
@@ -158,19 +150,16 @@ namespace Edi.Core.ViewModels.Base
 		{
 			get
 			{
-				if (_mOkCommand == null)
-					_mOkCommand = new RelayCommand(() =>
+				return _mOkCommand ?? (_mOkCommand = new RelayCommand(() =>
+				{
+					// Check user input and perform exit if data input is OK
+					PerformInputDataEvaluation();
+
+					if (IsReadyToClose)
 					{
-						// Check user input and perform exit if data input is OK
-						PerformInputDataEvaluation();
-
-						if (IsReadyToClose)
-						{
-							OnRequestClose(true);
-						}
-					});
-
-				return _mOkCommand;
+						OnRequestClose(true);
+					}
+				}));
 			}
 		}
 
@@ -183,16 +172,8 @@ namespace Edi.Core.ViewModels.Base
 			set;
 		}
 
-		public ObservableCollection<Msg> ListMessages
-		{
-			get
-			{
-				if (_mProblems == null)
-					_mProblems = new ObservableCollection<Msg>();
+		public ObservableCollection<Msg> ListMessages => _mProblems ?? (_mProblems = new ObservableCollection<Msg>());
 
-				return _mProblems;
-			}
-		}
 		#endregion properties
 
 		#region methods
@@ -228,13 +209,13 @@ namespace Edi.Core.ViewModels.Base
 					_mShutDownInProgress = true;
 					EventHandler handler = RequestClose;
 
-					if (handler != null)
-						handler(this, EventArgs.Empty);
+					handler?.Invoke(this, EventArgs.Empty);
 				}
 			}
 			catch (Exception exp)
 			{
-				Console.WriteLine("Exception occurred in OnRequestClose\n{0}", exp);
+				Console.WriteLine(@"Exception occurred in OnRequestClose
+{0}", exp);
 				_mShutDownInProgress = false;
 			}
 		}
@@ -287,8 +268,7 @@ namespace Edi.Core.ViewModels.Base
 		{
 			if (EvaluateInputData != null)
 			{
-				List<Msg> msgs;
-				bool bResult = EvaluateInputData(out msgs);
+				bool bResult = EvaluateInputData(out var msgs);
 				bool bFoundErrors = false;
 
 				// Copy messages from delegate method (if any)

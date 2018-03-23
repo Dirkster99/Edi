@@ -23,7 +23,7 @@
 		public Msg(string strMsg, MsgCategory type = MsgCategory.Error)
 			: this()
 		{
-			Message = ((strMsg == null ? string.Empty : strMsg).Length == 0 ? "<Unknown Internal Problem>" : strMsg);
+			Message = ((strMsg ?? string.Empty).Length == 0 ? "<Unknown Internal Problem>" : strMsg);
 			CategoryOfMsg = type;
 		}
 
@@ -101,7 +101,6 @@
 						return "Warning";
 					case MsgCategory.InternalError:
 						return "Internal Error";
-					case MsgCategory.Unknown:
 					default:
 						return "Unknown Error";
 				}

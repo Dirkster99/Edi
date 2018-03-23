@@ -14,8 +14,7 @@ namespace Edi.Core.Models
 	public class MessageManager : IMessageManager
 	{
 		#region fields
-		IMessageBoxService _messageBox;
-		IOutput _mOutput;
+
 		#endregion fields
 
 		#region constructors
@@ -24,7 +23,7 @@ namespace Edi.Core.Models
 		/// </summary>
 		public MessageManager()
 		{
-            _messageBox = new MessageBoxService();
+            MessageBox = new MessageBoxService();
 		}
 		#endregion constructors
 
@@ -34,14 +33,14 @@ namespace Edi.Core.Models
         /// This service should be used if user interaction is required
         /// (e.g. user is requested to click ok or yes, no etc...).
         /// </summary>
-		public IMessageBoxService MessageBox => _messageBox;
+		public IMessageBoxService MessageBox { get; }
 
 		/// <summary>
         /// Gets a reference to the output message servive implementation.
         /// This service can be used to output warnings or imformation
         /// that does not require user interaction.
         /// </summary>
-		public IOutput Output => _mOutput;
+		public IOutput Output { get; private set; }
 
 		#endregion properties
 
@@ -53,7 +52,7 @@ namespace Edi.Core.Models
         /// <param name="output"></param>
 		public void RegisterOutputStream(IOutput output)
 		{
-			_mOutput = output;
+			Output = output;
 		}
 		#endregion Methods
 	}

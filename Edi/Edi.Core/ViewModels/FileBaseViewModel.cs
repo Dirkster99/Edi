@@ -24,7 +24,7 @@ namespace Edi.Core.ViewModels
     public abstract class FileBaseViewModel : PaneViewModel, IFileBaseViewModel
     {
         #region Fields
-        private object _lockObject = new object();
+        private readonly object _lockObject = new object();
 
         private DocumentState _mState = DocumentState.IsLoading;
 
@@ -32,9 +32,7 @@ namespace Edi.Core.ViewModels
         private RelayCommand<object> _mCopyFullPathtoClipboard;
         private RelayCommand<object> _mSyncPathToExplorerCommand;
 
-        private readonly string _mDocumentTypeKey = string.Empty;
-
-        protected IDocumentModel MDocumentModel;
+	    protected IDocumentModel MDocumentModel;
         #endregion Fields
 
         #region Constructors
@@ -46,7 +44,7 @@ namespace Edi.Core.ViewModels
             : this()
         {
             MDocumentModel = new DocumentModel();
-            _mDocumentTypeKey = documentTypeKey;
+            DocumentTypeKey = documentTypeKey;
         }
 
         /// <summary>
@@ -76,7 +74,7 @@ namespace Edi.Core.ViewModels
         /// This key is relevant for the framework to implement the correct
         /// file open/save filter settings etc...
         /// </summary>
-        public string DocumentTypeKey => _mDocumentTypeKey;
+        public string DocumentTypeKey { get; } = string.Empty;
 
 	    /// <summary>
         /// Get/set whether a given file path is a real existing path or not.

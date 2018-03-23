@@ -17,7 +17,7 @@ namespace Edi.Core.ViewModels
 		/// Base constructor from nam of tool window item
 		/// </summary>
 		/// <param name="name">Name of tool window displayed in GUI</param>
-		public ToolViewModel(string name)
+		protected ToolViewModel(string name)
 		{
 			Name = name;
 			Title = name;

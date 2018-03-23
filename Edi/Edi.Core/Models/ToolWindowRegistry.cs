@@ -15,7 +15,6 @@ namespace Edi.Core.Models
 	public class ToolWindowRegistry : IToolWindowRegistry
 	{
 		#region fields
-		private readonly ObservableCollection<ToolViewModel> _mItems;
 
 		private readonly List<ToolViewModel> _mTodoTools;
 		#endregion fields
@@ -23,13 +22,13 @@ namespace Edi.Core.Models
 		#region contructors
 		public ToolWindowRegistry()
 		{
-			_mItems = new ObservableCollection<ToolViewModel>();
+			Tools = new ObservableCollection<ToolViewModel>();
 			_mTodoTools = new List<ToolViewModel>();
 		}
 		#endregion contructors
 
 		#region properties
-		public ObservableCollection<ToolViewModel> Tools => _mItems;
+		public ObservableCollection<ToolViewModel> Tools { get; }
 
 		public IOutput Output { get; set; }
 		#endregion properties
@@ -43,7 +42,7 @@ namespace Edi.Core.Models
 		{
 			foreach (var item in _mTodoTools)
 			{
-				_mItems.Add(item);
+				Tools.Add(item);
 			}
 
 			_mTodoTools.Clear();

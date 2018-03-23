@@ -37,10 +37,7 @@ namespace Edi.Core.ViewModels.Command
 		/// <param name="canExecute">The execution status logic.</param>
 		public RelayCommand(Action<T> execute, Predicate<T> canExecute)
 		{
-			if (execute == null)
-				throw new ArgumentNullException(nameof(execute));
-
-			_mExecute = execute;
+			_mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
 			_mCanExecute = canExecute;
 		}
 
@@ -130,10 +127,7 @@ namespace Edi.Core.ViewModels.Command
 		/// <param name="canExecute">The execution status logic.</param>
 		public RelayCommand(Action execute, Func<bool> canExecute)
 		{
-			if (execute == null)
-				throw new ArgumentNullException(nameof(execute));
-
-			_mExecute = execute;
+			_mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
 			_mCanExecute = canExecute;
 		}
 
@@ -169,7 +163,7 @@ namespace Edi.Core.ViewModels.Command
 		[DebuggerStepThrough]
 		public bool CanExecute(object parameter)
 		{
-			return _mCanExecute == null ? true : _mCanExecute();
+			return _mCanExecute?.Invoke() ?? true;
 		}
 
 		/// <summary>

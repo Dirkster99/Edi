@@ -32,7 +32,6 @@ namespace Edi.Core.Models.Utillities.FileSystem
 		////static int globalDisableCount;
 
 		private FileSystemWatcher _mWatcher;
-		private bool _mWasChangedExternally;
 		private bool _mEnabled;
 
 		private IDocumentModel _mFile;
@@ -89,12 +88,8 @@ namespace Edi.Core.Models.Utillities.FileSystem
 		////	get { return globalDisableCount > 0; }
 		////}
 
-		public bool WasChangedExternally
-		{
-			get => _mWasChangedExternally;
+		public bool WasChangedExternally { get; set; }
 
-			set => _mWasChangedExternally = value;
-		}
 		#endregion properties
 
 		#region methods
@@ -235,9 +230,9 @@ namespace Edi.Core.Models.Utillities.FileSystem
 
 			////LoggingService.Debug("File " + file.FileName + " was changed externally: " + e.ChangeType);
 
-			if (_mWasChangedExternally == false)
+			if (WasChangedExternally == false)
 			{
-				_mWasChangedExternally = true;
+				WasChangedExternally = true;
 
 				//// if (SD.Workbench.IsActiveWindow)
 				//// {

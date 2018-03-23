@@ -14,13 +14,13 @@ namespace Edi.Core.ViewModels
 	public class DocumentChangedEventArgs : EventArgs
 	{
 		#region fields
-		private IFileBaseViewModel _mActiveDocument;
+
 		#endregion fields
 
 		#region constrcutor
 		public DocumentChangedEventArgs(IFileBaseViewModel activeDocument)
 		{
-			_mActiveDocument = activeDocument;
+			ActiveDocument = activeDocument;
 		}
 		#endregion constrcutor
 
@@ -28,7 +28,7 @@ namespace Edi.Core.ViewModels
 		/// <summary>
 		/// Get the active document that is active now (as of this event).
 		/// </summary>
-		public IFileBaseViewModel ActiveDocument => _mActiveDocument;
+		public IFileBaseViewModel ActiveDocument { get; }
 
 		#endregion methods
 	}

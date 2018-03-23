@@ -11,10 +11,7 @@ namespace Edi.Core.ViewModels
     public class AvalonDockViewProperties
 	{
 		#region fields
-		private DataTemplate _mDocumentHeaderTemplate;
-		private readonly LayoutInitializer _mLayoutInitializer;
-		private readonly PanesStyleSelector _mSelectPanesStyle;
-		private readonly PanesTemplateSelector _mSelectPanesTemplate;
+
 		#endregion fields
 
 		#region constructors
@@ -23,10 +20,10 @@ namespace Edi.Core.ViewModels
 		/// </summary>
 		public AvalonDockViewProperties()
 		{
-			_mDocumentHeaderTemplate = null;
-			_mLayoutInitializer = new LayoutInitializer();
-			_mSelectPanesStyle = new PanesStyleSelector();
-			_mSelectPanesTemplate = new PanesTemplateSelector();
+			DocumentHeaderTemplate = null;
+			LayoutInitializer = new LayoutInitializer();
+			SelectPanesStyle = new PanesStyleSelector();
+			SelectPanesTemplate = new PanesTemplateSelector();
 		}
 		#endregion constructors
 
@@ -34,18 +31,13 @@ namespace Edi.Core.ViewModels
 		/// <summary>
 		/// Gets the AvalonDock DocumentHeaderTemplate from resource definitions.
 		/// </summary>
-		public DataTemplate DocumentHeaderTemplate
-		{
-			get => _mDocumentHeaderTemplate;
+		public DataTemplate DocumentHeaderTemplate { get; private set; }
 
-			private set => _mDocumentHeaderTemplate = value;
-		}
+		public LayoutInitializer LayoutInitializer { get; }
 
-		public LayoutInitializer LayoutInitializer => _mLayoutInitializer;
+		public PanesStyleSelector SelectPanesStyle { get; }
 
-		public PanesStyleSelector SelectPanesStyle => _mSelectPanesStyle;
-
-		public PanesTemplateSelector SelectPanesTemplate => _mSelectPanesTemplate;
+		public PanesTemplateSelector SelectPanesTemplate { get; }
 
 		#endregion properties
 
@@ -79,7 +71,7 @@ namespace Edi.Core.ViewModels
 		/// Load an PanestayleSelector with initial styles from resources.
 		/// </summary>
 		/// <returns></returns>
-		private PanesStyleSelector LoadPanesStyleSelector(PanesStyleSelector panesStyleSelector)
+		private void LoadPanesStyleSelector(PanesStyleSelector panesStyleSelector)
 		{
 			var newStyle = ResourceLocator.GetResource<Style>(
 				"Edi.Apps",
@@ -94,8 +86,6 @@ namespace Edi.Core.ViewModels
 				"ToolStyle");
 
 			panesStyleSelector.RegisterStyle(typeof(ToolViewModel), newStyle);
-
-			return panesStyleSelector;
 		}
 		#endregion methods
 	}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using MsgBox.Internal.ViewModel.Base;
 
 namespace Edi.Core.ViewModels.Base
 {
@@ -9,8 +10,7 @@ namespace Edi.Core.ViewModels.Base
 
 		protected virtual void RaisePropertyChanged(string propertyName)
 		{
-			if (PropertyChanged != null)
-				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
 
@@ -30,9 +30,8 @@ namespace Edi.Core.ViewModels.Base
 			var lambda = (LambdaExpression)property;
 			MemberExpression memberExpression;
 
-			if (lambda.Body is UnaryExpression)
+			if (lambda.Body is UnaryExpression unaryExpression)
 			{
-				var unaryExpression = (UnaryExpression)lambda.Body;
 				memberExpression = (MemberExpression)unaryExpression.Operand;
 			}
 			else
