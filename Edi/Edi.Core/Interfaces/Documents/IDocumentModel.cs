@@ -1,12 +1,12 @@
-using System;
-
 namespace Edi.Core.Interfaces.Documents
 {
-	/// <summary>
-	/// Interface defines properties and methods of a base class for modelling
-	/// file access on persistent storage.
-	/// </summary>
-	public interface IDocumentModel : IDisposable
+    using System;
+
+    /// <summary>
+    /// Interface defines properties and methods of a base class for modelling
+    /// file access on persistent storage.
+    /// </summary>
+    public interface IDocumentModel : IDisposable
 	{
 		/// <summary>
 		/// Occurs when the file name has changed.

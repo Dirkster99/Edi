@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-
-namespace Edi.Core.Utillities
+﻿namespace Edi.Core.Utillities
 {
-	/// <summary>
-	/// http://elegantcode.com/2009/05/14/write-a-sortable-observablecollection-for-wpf/
-	/// 
-	/// sort ascending
-  /// MySortableList.Sort(x => x.Name, ListSortDirection.Ascending);
-	/// </summary>
-	/// <typeparam name="T"></typeparam>
-	public class SortableObservableCollection<T> : ObservableCollection<T>
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Linq;
+
+    /// <summary>
+    /// http://elegantcode.com/2009/05/14/write-a-sortable-observablecollection-for-wpf/
+    /// 
+    /// sort ascending
+    /// MySortableList.Sort(x => x.Name, ListSortDirection.Ascending);
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class SortableObservableCollection<T> : ObservableCollection<T>
 	{
 		public SortableObservableCollection(List<T> list)
 			: base(list)

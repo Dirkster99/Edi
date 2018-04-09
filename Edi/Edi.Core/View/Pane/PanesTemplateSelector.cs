@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
-
 namespace Edi.Core.View.Pane
 {
-	/// <summary>
+    using System;
+    using System.Collections.Generic;
+    using System.Windows;
+    using System.Windows.Controls;
+
+    /// <summary>
     /// Data template selector that can be used to select a <seealso cref="DataTemplate"/>
     /// for view instance based on a viewmodel (class) type.
     /// </summary>

@@ -1,15 +1,15 @@
-﻿using System;
-using System.Windows;
-using Edi.Apps.Enums;
-using Edi.Core.Interfaces;
-using Edi.Settings.Interfaces;
-using Edi.Settings.ProgramSettings;
-using Edi.Themes.Interfaces;
-using MiniUML.Model.ViewModels.Document;
-
-namespace Edi.Apps.Interfaces
+﻿namespace Edi.Apps.Interfaces
 {
-	/// <summary>
+    using System;
+    using System.Windows;
+    using Edi.Apps.Enums;
+    using Edi.Core.Interfaces;
+    using Edi.Settings.Interfaces;
+    using Edi.Settings.ProgramSettings;
+    using Edi.Themes.Interfaces;
+    using MiniUML.Model.ViewModels.Document;
+
+    /// <summary>
     /// This interface models the viewmodel that manages the complete
     /// application life cyle from start to end. It publishes the methodes,
     /// properties, and events necessary to integrate the application into

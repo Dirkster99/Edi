@@ -1,11 +1,11 @@
-﻿using System;
-using System.Globalization;
-using System.Windows;
-using System.Windows.Data;
-
-namespace Edi.Core.Converters.MessageType
+﻿namespace Edi.Core.Converters.MessageType
 {
-	[ValueConversion(typeof(int), typeof(Visibility))]
+    using System;
+    using System.Globalization;
+    using System.Windows;
+    using System.Windows.Data;
+
+    [ValueConversion(typeof(int), typeof(Visibility))]
 	public class CountToVisibilityHiddenConverter : IValueConverter
 	{
 		#region IValueConverter Members

@@ -1,18 +1,18 @@
-﻿using System;
-using System.Globalization;
-using System.Windows;
-using System.Windows.Data;
-using System.Windows.Markup;
-
-namespace Edi.Core.Converters
+﻿namespace Edi.Core.Converters
 {
-	/// <summary>
-	/// Source: http://stackoverflow.com/questions/534575/how-do-i-invert-booleantovisibilityconverter
-	/// 
-	/// Implements a Boolean to Visibility converter
-	/// Use ConverterParameter=true to negate the visibility - boolean interpretation.
-	/// </summary>
-	[ValueConversion(typeof(Boolean), typeof(Visibility))]
+    using System;
+    using System.Globalization;
+    using System.Windows;
+    using System.Windows.Data;
+    using System.Windows.Markup;
+
+    /// <summary>
+    /// Source: http://stackoverflow.com/questions/534575/how-do-i-invert-booleantovisibilityconverter
+    /// 
+    /// Implements a Boolean to Visibility converter
+    /// Use ConverterParameter=true to negate the visibility - boolean interpretation.
+    /// </summary>
+    [ValueConversion(typeof(Boolean), typeof(Visibility))]
 	[MarkupExtensionReturnType(typeof(IValueConverter))]
 	public sealed class BoolToVisibilityConverter : MarkupExtension, IValueConverter
 	{

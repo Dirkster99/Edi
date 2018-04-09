@@ -1,16 +1,16 @@
-﻿using System.ComponentModel.Composition;
-using Edi.Core.Interfaces;
-using MsgBox;
-
-namespace Edi.Core.Models
+﻿namespace Edi.Core.Models
 {
-	/// <summary>
-	/// Class registers and manages output stream channels:
-	/// - MessageBox Service
-	/// - Ouptput text service
-	/// - (Todo) Classified (error, warning, information) message output service.
-	/// </summary>
-	[Export(typeof(IMessageManager))]
+    using System.ComponentModel.Composition;
+    using Edi.Core.Interfaces;
+    using MsgBox;
+
+    /// <summary>
+    /// Class registers and manages output stream channels:
+    /// - MessageBox Service
+    /// - Ouptput text service
+    /// - (Todo) Classified (error, warning, information) message output service.
+    /// </summary>
+    [Export(typeof(IMessageManager))]
 	public class MessageManager : IMessageManager
 	{
 		#region fields

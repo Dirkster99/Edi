@@ -1,13 +1,13 @@
-﻿using System;
-using System.Windows;
-
-namespace Edi.Core.Behaviour
+﻿namespace Edi.Core.Behaviour
 {
-	/// <summary>
-	/// Implements a behavour that binds to a viewmodel property
-	/// and updates its boolean value when the maximized window state changes.
-	/// </summary>
-	public static class WindowMaximized
+    using System;
+    using System.Windows;
+
+    /// <summary>
+    /// Implements a behavour that binds to a viewmodel property
+    /// and updates its boolean value when the maximized window state changes.
+    /// </summary>
+    public static class WindowMaximized
 	{
 		// Using a DependencyProperty as the backing store for IsMaximized.  This enables animation, styling, binding, etc...
 		public static readonly DependencyProperty IsNotMaximizedProperty =

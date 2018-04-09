@@ -1,13 +1,13 @@
-using System;
-
 namespace Edi.Core.ViewModels.Events
 {
-	/// <summary>
-	/// Identifies a document event by a typed collection of enumerators.
-	/// Receivers of the <seealso cref="FileBaseEvent"/> need to switch
-	/// through this enumeration to determine the type of event that was received.
-	/// </summary>
-	public enum FileEventType
+    using System;
+
+    /// <summary>
+    /// Identifies a document event by a typed collection of enumerators.
+    /// Receivers of the <seealso cref="FileBaseEvent"/> need to switch
+    /// through this enumeration to determine the type of event that was received.
+    /// </summary>
+    public enum FileEventType
 	{
 		/// <summary>
 		/// Identifies an event that was probably not fully initialized.

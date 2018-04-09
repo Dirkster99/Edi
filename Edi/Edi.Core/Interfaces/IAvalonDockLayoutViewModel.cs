@@ -1,16 +1,15 @@
-﻿using System;
-using System.Windows.Input;
-using Edi.Core.Models.Enums;
-using Edi.Core.ViewModels;
-using Xceed.Wpf.AvalonDock;
-
-namespace Edi.Core.Interfaces
+﻿namespace Edi.Core.Interfaces
 {
-	/// <summary>
-	/// Interface defines object properties and methods required
-	/// to manage avalondock workspaces and properties (TemplateSelectors etc...).
-	/// </summary>
-	public interface IAvalonDockLayoutViewModel
+    using System;
+    using System.Windows.Input;
+    using Edi.Core.Models.Enums;
+    using Edi.Core.ViewModels;
+
+    /// <summary>
+    /// Interface defines object properties and methods required
+    /// to manage avalondock workspaces and properties (TemplateSelectors etc...).
+    /// </summary>
+    public interface IAvalonDockLayoutViewModel
 	{
 		/// <summary>
 		/// Gets the layout id for the AvalonDock Layout that is associated with this viewmodel.

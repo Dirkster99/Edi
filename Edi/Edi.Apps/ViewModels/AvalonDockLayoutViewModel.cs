@@ -1,5 +1,3 @@
-using Edi.Apps.Behaviors;
-
 namespace Edi.Apps.ViewModels
 {
 	using System;
@@ -16,14 +14,14 @@ namespace Edi.Apps.ViewModels
 	using Settings.Interfaces;
 	using Xceed.Wpf.AvalonDock;
 
-	/// <summary>
-	/// Class implements a viewmodel to support the
-	/// <seealso cref="AvalonDockLayoutSerializer"/>
-	/// attached behavior which is used to implement
-	/// load/save of layout information on application
-	/// start and shut-down.
-	/// </summary>
-	[Export(typeof(IAvalonDockLayoutViewModel))]
+    /// <summary>
+    /// Class implements a viewmodel to support the
+    /// <seealso cref="AvalonDockLayoutSerializer"/>
+    /// attached behavior which is used to implement
+    /// load/save of layout information on application
+    /// start and shut-down.
+    /// </summary>
+    [Export(typeof(IAvalonDockLayoutViewModel))]
     public class AvalonDockLayoutViewModel : IAvalonDockLayoutViewModel
     {
         #region fields

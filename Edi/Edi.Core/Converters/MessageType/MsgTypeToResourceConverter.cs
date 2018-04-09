@@ -1,13 +1,13 @@
-﻿using System;
-using System.Globalization;
-using System.Windows;
-using System.Windows.Data;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-
-namespace Edi.Core.Converters.MessageType
+﻿namespace Edi.Core.Converters.MessageType
 {
-	[ValueConversion(typeof(Msg.MsgCategory), typeof(ImageSource))]
+    using System;
+    using System.Globalization;
+    using System.Windows;
+    using System.Windows.Data;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+
+    [ValueConversion(typeof(Msg.MsgCategory), typeof(ImageSource))]
 	public class MsgTypeToResourceConverter : IValueConverter
 	{
 		#region IValueConverter Members

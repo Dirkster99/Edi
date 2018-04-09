@@ -1,12 +1,12 @@
-﻿using System;
-using Edi.Core.ViewModels.Base;
-
-namespace Edi.Core.ViewModels
+﻿namespace Edi.Core.ViewModels
 {
-	/// <summary>
-	/// AvalonDock base class viewm-model to support document pane views
-	/// </summary>
-	public class PaneViewModel : ViewModelBase
+    using System;
+    using Edi.Core.ViewModels.Base;
+
+    /// <summary>
+    /// AvalonDock base class viewm-model to support document pane views
+    /// </summary>
+    public class PaneViewModel : ViewModelBase
 	{
 		#region Title
 

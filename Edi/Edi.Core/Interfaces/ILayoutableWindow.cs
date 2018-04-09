@@ -1,8 +1,8 @@
-﻿using System;
-
-namespace Edi.Core.Interfaces
+﻿namespace Edi.Core.Interfaces
 {
-	public interface ILayoutableWindow
+    using System;
+
+    public interface ILayoutableWindow
 	{
 		/// <summary>
 		/// Standard Closed Window event.

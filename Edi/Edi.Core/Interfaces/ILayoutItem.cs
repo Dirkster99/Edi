@@ -1,15 +1,15 @@
-﻿using System;
-
-namespace Edi.Core.Interfaces
+﻿namespace Edi.Core.Interfaces
 {
-	/// <summary>
-	/// Interface that defines common properties
-	/// of toolwindows and document items for avlaondock content.
-	/// 
-	/// Based on Gemini:
-	/// https://github.com/tgjones/gemini/blob/master/src/Gemini/Framework/ILayoutItem.cs
-	/// </summary>
-	public interface ILayoutItem
+    using System;
+
+    /// <summary>
+    /// Interface that defines common properties
+    /// of toolwindows and document items for avlaondock content.
+    /// 
+    /// Based on Gemini:
+    /// https://github.com/tgjones/gemini/blob/master/src/Gemini/Framework/ILayoutItem.cs
+    /// </summary>
+    public interface ILayoutItem
 	{
 		////Guid Id { get; }
 		string ContentId { get; }

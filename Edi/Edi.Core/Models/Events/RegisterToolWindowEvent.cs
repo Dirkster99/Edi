@@ -1,11 +1,11 @@
-using Prism.Events;
-
 namespace EdiApp.Events
 {
-	/// <summary>
-	/// Class implements a PRISM tool window registration event
-	/// </summary>
-	public class RegisterToolWindowEvent : PubSubEvent<RegisterToolWindowEventArgs>
+    using Prism.Events;
+
+    /// <summary>
+    /// Class implements a PRISM tool window registration event
+    /// </summary>
+    public class RegisterToolWindowEvent : PubSubEvent<RegisterToolWindowEventArgs>
 	{
 		/// <summary>
 		/// Static Class Constructor

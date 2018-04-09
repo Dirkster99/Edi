@@ -1,13 +1,13 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Threading;
-
-namespace Edi.Core.Behaviour
+﻿namespace Edi.Core.Behaviour
 {
-	/// <summary>
-	/// Source: http://csharpbestpractices.blogspot.de/2011/09/mvvm-textbox-focus.html
-	/// </summary>
-	public static class FocusExtension
+    using System;
+    using System.Windows;
+    using System.Windows.Threading;
+
+    /// <summary>
+    /// Source: http://csharpbestpractices.blogspot.de/2011/09/mvvm-textbox-focus.html
+    /// </summary>
+    public static class FocusExtension
 	{
 
 		private static readonly DependencyProperty IsFocusedProperty =

@@ -1,22 +1,22 @@
-using System;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Windows;
-using System.Windows.Input;
-using CommonServiceLocator;
-using Edi.Core.Interfaces;
-using Edi.Core.Interfaces.Documents;
-using Edi.Core.Interfaces.Enums;
-using Edi.Core.Models.Documents;
-using Edi.Core.ViewModels.Command;
-using Edi.Core.ViewModels.Events;
-using Edi.Util.Local;
-using MsgBox;
-
 namespace Edi.Core.ViewModels
 {
-	/// <summary>
+    using System;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Windows;
+    using System.Windows.Input;
+    using CommonServiceLocator;
+    using Edi.Core.Interfaces;
+    using Edi.Core.Interfaces.Documents;
+    using Edi.Core.Interfaces.Enums;
+    using Edi.Core.Models.Documents;
+    using Edi.Core.ViewModels.Command;
+    using Edi.Core.ViewModels.Events;
+    using Edi.Util.Local;
+    using MsgBox;
+
+    /// <summary>
     /// Base class that shares common properties, methods, and intefaces
     /// among viewmodels that represent documents in Edi
     /// (text file edits, Start Page, Program Settings).

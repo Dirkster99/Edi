@@ -1,8 +1,8 @@
-﻿using System.IO;
-
-namespace Edi.Core.Interfaces
+﻿namespace Edi.Core.Interfaces
 {
-	public interface IOutput
+    using System.IO;
+
+    public interface IOutput
 	{
 		TextWriter Writer { get; }
 		void AppendLine(string text);

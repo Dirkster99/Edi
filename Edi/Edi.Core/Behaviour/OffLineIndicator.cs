@@ -1,8 +1,8 @@
-﻿using System.Windows;
-
-namespace Edi.Core.Behaviour
+﻿namespace Edi.Core.Behaviour
 {
-	public class OffLineIndicator
+    using System.Windows;
+
+    public class OffLineIndicator
 	{
 		#region fields
 		private static readonly DependencyProperty IsOnlineProperty;

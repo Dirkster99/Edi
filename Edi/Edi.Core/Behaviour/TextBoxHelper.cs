@@ -1,9 +1,9 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-
-namespace Edi.Core.Behaviour
+﻿namespace Edi.Core.Behaviour
 {
-	public static class TextBoxSelect
+    using System.Windows;
+    using System.Windows.Controls;
+
+    public static class TextBoxSelect
 	{
 		private static readonly DependencyProperty SelectedTextProperty =
 			DependencyProperty.RegisterAttached(

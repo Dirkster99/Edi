@@ -1,12 +1,12 @@
-using System.Windows;
-using System.Windows.Media;
-
 namespace Edi.Core.Utillities
 {
-	/// <summary>
-	/// Helper class to find a child item of a given item in the Visual Tree of WPF 
-	/// </summary>
-	public static class VisualTreeHelperExtension
+    using System.Windows;
+    using System.Windows.Media;
+
+    /// <summary>
+    /// Helper class to find a child item of a given item in the Visual Tree of WPF 
+    /// </summary>
+    public static class VisualTreeHelperExtension
 	{
 		/// <summary>
 		/// Looks for a child control within a parent by name

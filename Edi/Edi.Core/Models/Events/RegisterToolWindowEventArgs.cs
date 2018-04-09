@@ -1,11 +1,11 @@
-using Edi.Core.ViewModels;
-
 namespace EdiApp.Events
 {
-	/// <summary>
-	/// Class implements ...
-	/// </summary>
-	public class RegisterToolWindowEventArgs
+    using Edi.Core.ViewModels;
+
+    /// <summary>
+    /// Class implements ...
+    /// </summary>
+    public class RegisterToolWindowEventArgs
 	{
 		#region constructor
 		/// <summary>

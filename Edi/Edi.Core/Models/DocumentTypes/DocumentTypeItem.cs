@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using Edi.Core.Interfaces.DocumentTypes;
-
-namespace Edi.Core.Models.DocumentTypes
+﻿namespace Edi.Core.Models.DocumentTypes
 {
-	internal class DocumentTypeItem : IDocumentTypeItem
+    using System.Collections.Generic;
+    using Edi.Core.Interfaces.DocumentTypes;
+
+    internal class DocumentTypeItem : IDocumentTypeItem
 	{
 		#region fields
 		#endregion fields

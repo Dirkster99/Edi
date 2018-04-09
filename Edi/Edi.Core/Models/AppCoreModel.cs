@@ -1,17 +1,17 @@
-﻿using System;
-using System.ComponentModel.Composition;
-using System.IO;
-using System.Reflection;
-using Edi.Core.Interfaces;
-using log4net;
-
-namespace Edi.Core.Models
+﻿namespace Edi.Core.Models
 {
-	/// <summary>
-	/// Class maintains and helps access to core facts of this application.
-	/// Core facts are installation directory, name of application etc.
-	/// </summary>
-	[Export(typeof(IAppCoreModel))]
+    using System;
+    using System.ComponentModel.Composition;
+    using System.IO;
+    using System.Reflection;
+    using Edi.Core.Interfaces;
+    using log4net;
+
+    /// <summary>
+    /// Class maintains and helps access to core facts of this application.
+    /// Core facts are installation directory, name of application etc.
+    /// </summary>
+    [Export(typeof(IAppCoreModel))]
 	public class AppCoreModel : IAppCoreModel
 	{
 		protected static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

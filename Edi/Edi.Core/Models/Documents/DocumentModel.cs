@@ -1,11 +1,11 @@
-﻿using System;
-using System.IO;
-using Edi.Core.Interfaces.Documents;
-using Edi.Core.Models.Utillities.FileSystem;
-
-namespace Edi.Core.Models.Documents
+﻿namespace Edi.Core.Models.Documents
 {
-	/// <summary>
+    using System;
+    using System.IO;
+    using Edi.Core.Interfaces.Documents;
+    using Edi.Core.Models.Utillities.FileSystem;
+
+    /// <summary>
     /// Class models the basic properties and behaviours of a low level file stored on harddisk.
     /// </summary>
     public class DocumentModel : IDocumentModel

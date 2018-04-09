@@ -1,8 +1,8 @@
-﻿using Edi.Core.Interfaces.DocumentTypes;
-
-namespace Edi.Core.Models.DocumentTypes
+﻿namespace Edi.Core.Models.DocumentTypes
 {
-	internal class FileFilterEntry : IFileFilterEntry
+    using Edi.Core.Interfaces.DocumentTypes;
+
+    internal class FileFilterEntry : IFileFilterEntry
 	{
 		#region constructors
 		/// <summary>

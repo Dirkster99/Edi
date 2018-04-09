@@ -1,15 +1,15 @@
-﻿using System;
-using System.Globalization;
-using System.Windows;
-using System.Windows.Data;
-using System.Windows.Markup;
-
-namespace Edi.Core.Converters
+﻿namespace Edi.Core.Converters
 {
-	/// <summary>
-	/// XAML mark up extension to convert a null value into a visibility value.
-	/// </summary>
-	[MarkupExtensionReturnType(typeof(IValueConverter))]
+    using System;
+    using System.Globalization;
+    using System.Windows;
+    using System.Windows.Data;
+    using System.Windows.Markup;
+
+    /// <summary>
+    /// XAML mark up extension to convert a null value into a visibility value.
+    /// </summary>
+    [MarkupExtensionReturnType(typeof(IValueConverter))]
 	public class NullToVisibilityConverter : MarkupExtension, IValueConverter
 	{
 		#region field

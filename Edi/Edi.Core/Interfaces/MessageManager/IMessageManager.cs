@@ -1,7 +1,7 @@
-﻿using MsgBox;
-
-namespace Edi.Core.Interfaces
+﻿namespace Edi.Core.Interfaces
 {
+    using MsgBox;
+
     /// <summary>
     /// Defines an interface to register and manage output stream channels:
     /// - MessageBox Service

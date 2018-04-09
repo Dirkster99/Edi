@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using Edi.Core.Interfaces.DocumentTypes;
-
-namespace Edi.Core.Models.DocumentTypes
+﻿namespace Edi.Core.Models.DocumentTypes
 {
-	/// <summary>
-	/// This class manages document specific data items. Such as, filter for file open dialog,
-	/// a FileOpenMethod that returns the correct viewmodel etc.
-	/// 
-	/// Moduls can use this class to register new document types via the <seealso cref="IDocumentType"/>
-	/// interface using the <seealso cref="IDocumentTypeManager"/> service.
-	/// </summary>
-	internal class DocumentType : IDocumentType
+    using System;
+    using System.Collections.Generic;
+    using Edi.Core.Interfaces.DocumentTypes;
+
+    /// <summary>
+    /// This class manages document specific data items. Such as, filter for file open dialog,
+    /// a FileOpenMethod that returns the correct viewmodel etc.
+    /// 
+    /// Moduls can use this class to register new document types via the <seealso cref="IDocumentType"/>
+    /// interface using the <seealso cref="IDocumentTypeManager"/> service.
+    /// </summary>
+    internal class DocumentType : IDocumentType
 	{
 		#region constructors
 

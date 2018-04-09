@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
-
 namespace Edi.Core.View.Pane
 {
-	/// <summary>
+    using System;
+    using System.Collections.Generic;
+    using System.Windows;
+    using System.Windows.Controls;
+
+    /// <summary>
     /// Select a tool window style for an instance of its view.
     /// 
     /// 1) Call RegisterStyle() method to initialize a new association

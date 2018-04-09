@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Edi.Core.ViewModels.Events
+﻿namespace Edi.Core.ViewModels.Events
 {
-	public enum TypeOfResult
+    using System;
+    using System.Collections.Generic;
+
+    public enum TypeOfResult
 	{
 		FileLoad
 	}

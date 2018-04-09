@@ -1,13 +1,13 @@
-using System;
-using System.Globalization;
-using System.Windows.Data;
-using Edi.Util.Local;
-
 namespace Edi.Core.Converters
 {
-	/// <summary>
-	/// </summary>
-	[ValueConversion(typeof(bool), typeof(string))]
+    using System;
+    using System.Globalization;
+    using System.Windows.Data;
+    using Edi.Util.Local;
+
+    /// <summary>
+    /// </summary>
+    [ValueConversion(typeof(bool), typeof(string))]
 	public class BooleanToTypeModeStringConverter : IValueConverter
 	{
 		public static readonly string TypeOver = Strings.STR_EDIT_MODE_TYPEOVER;

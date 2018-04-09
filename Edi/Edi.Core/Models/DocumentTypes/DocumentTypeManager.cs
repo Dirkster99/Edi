@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.ComponentModel.Composition;
-using System.Linq;
-using Edi.Core.Interfaces.DocumentTypes;
-using Edi.Core.Utillities;
-
-namespace Edi.Core.Models.DocumentTypes
+﻿namespace Edi.Core.Models.DocumentTypes
 {
-	/// <summary>
-	/// </summary>
-	[Export(typeof(IDocumentTypeManager))]
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.ComponentModel.Composition;
+    using System.Linq;
+    using Edi.Core.Interfaces.DocumentTypes;
+    using Edi.Core.Utillities;
+
+    /// <summary>
+    /// </summary>
+    [Export(typeof(IDocumentTypeManager))]
 	public class DocumentTypeManager : IDocumentTypeManager
 	{
 		#region fields

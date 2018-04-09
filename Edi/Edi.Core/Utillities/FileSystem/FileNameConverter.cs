@@ -1,10 +1,10 @@
-﻿using System;
-using System.ComponentModel;
-using System.Globalization;
-
-namespace Edi.Core.Models.Utillities.FileSystem
+﻿namespace Edi.Core.Models.Utillities.FileSystem
 {
-	public class FileNameConverter : TypeConverter
+    using System;
+    using System.ComponentModel;
+    using System.Globalization;
+
+    public class FileNameConverter : TypeConverter
 	{
 		public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
 		{

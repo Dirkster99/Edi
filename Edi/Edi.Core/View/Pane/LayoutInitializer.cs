@@ -1,14 +1,14 @@
-﻿using System;
-using System.Reflection;
-using System.Windows;
-using Edi.Core.Interfaces.Enums;
-using Edi.Core.ViewModels;
-using log4net;
-using Xceed.Wpf.AvalonDock.Layout;
-
-namespace Edi.Core.View.Pane
+﻿namespace Edi.Core.View.Pane
 {
-	/// <summary>
+    using System;
+    using System.Reflection;
+    using System.Windows;
+    using Edi.Core.Interfaces.Enums;
+    using Edi.Core.ViewModels;
+    using log4net;
+    using Xceed.Wpf.AvalonDock.Layout;
+
+    /// <summary>
     /// Initialize the AvalonDock Layout. Methods in this class
     /// are called before and after the layout is changed.
     /// </summary>

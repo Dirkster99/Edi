@@ -1,5 +1,3 @@
-using MiniUML.Model.ViewModels.Document;
-
 namespace Edi.Apps.ViewModels
 {
     using CommonServiceLocator;
@@ -23,6 +21,7 @@ namespace Edi.Apps.ViewModels
     using Files.ViewModels.RecentFiles;
     using Microsoft.Win32;
     using MRULib.MRU.Interfaces;
+    using MiniUML.Model.ViewModels.Document;
     using MsgBox;
     using Prism.Events;
     using Prism.Modularity;

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using Edi.Core.Interfaces.DocumentTypes;
-
-namespace Edi.Core.Models.DocumentTypes
+﻿namespace Edi.Core.Models.DocumentTypes
 {
-	internal class FileFilterEntries : IFileFilterEntries
+    using System.Collections.Generic;
+    using Edi.Core.Interfaces.DocumentTypes;
+
+    internal class FileFilterEntries : IFileFilterEntries
 	{
 		#region fields
 		private readonly List<IFileFilterEntry> _mEntries;

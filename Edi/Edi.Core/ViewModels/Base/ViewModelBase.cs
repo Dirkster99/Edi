@@ -1,11 +1,11 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq.Expressions;
-using MsgBox.Internal.ViewModel.Base;
-
-namespace Edi.Core.ViewModels.Base
+﻿namespace Edi.Core.ViewModels.Base
 {
-	public class ViewModelBase : INotifyPropertyChanged
+    using System;
+    using System.ComponentModel;
+    using System.Linq.Expressions;
+    using MsgBox.Internal.ViewModel.Base;
+
+    public class ViewModelBase : INotifyPropertyChanged
 	{
 
 		protected virtual void RaisePropertyChanged(string propertyName)

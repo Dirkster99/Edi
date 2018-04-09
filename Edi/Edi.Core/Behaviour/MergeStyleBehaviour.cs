@@ -1,21 +1,21 @@
-using System;
-using System.Globalization;
-using System.Windows;
-using System.Windows.Controls;
-
 namespace Edi.Core.Behaviour
 {
-	/// <summary>
-	/// This class can be used to adjust styles that are BasedOn another style when
-	/// changing a theme at run-time. Normally, styles are not merged. This class
-	/// however enables merging of existing partial style definitions in Window/control
-	/// XAML with theme specific XAML.
-	/// 
-	/// Sample
-	/// Usage: http://social.msdn.microsoft.com/Forums/da-DK/wpf/thread/63696841-0358-4f7a-abe1-e6062518e3d6
-	/// Source: http://stackoverflow.com/questions/5223133/merge-control-style-with-global-style-set-by-another-project-dynamically
-	/// </summary>
-	public class MergeStyleBehaviour
+    using System;
+    using System.Globalization;
+    using System.Windows;
+    using System.Windows.Controls;
+
+    /// <summary>
+    /// This class can be used to adjust styles that are BasedOn another style when
+    /// changing a theme at run-time. Normally, styles are not merged. This class
+    /// however enables merging of existing partial style definitions in Window/control
+    /// XAML with theme specific XAML.
+    /// 
+    /// Sample
+    /// Usage: http://social.msdn.microsoft.com/Forums/da-DK/wpf/thread/63696841-0358-4f7a-abe1-e6062518e3d6
+    /// Source: http://stackoverflow.com/questions/5223133/merge-control-style-with-global-style-set-by-another-project-dynamically
+    /// </summary>
+    public class MergeStyleBehaviour
 	{
 		#region fields
 		/// <summary>

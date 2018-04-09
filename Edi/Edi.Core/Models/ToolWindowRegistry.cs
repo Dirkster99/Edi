@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.Composition;
-using Edi.Core.Interfaces;
-using Edi.Core.ViewModels;
-using EdiApp.Events;
-
-namespace Edi.Core.Models
+﻿namespace Edi.Core.Models
 {
-	/// <summary>
-	/// Class to register and manage all tool windows in one common place.
-	/// </summary>
-	[Export(typeof(IToolWindowRegistry))]
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel.Composition;
+    using Edi.Core.Interfaces;
+    using Edi.Core.ViewModels;
+    using EdiApp.Events;
+
+    /// <summary>
+    /// Class to register and manage all tool windows in one common place.
+    /// </summary>
+    [Export(typeof(IToolWindowRegistry))]
 	public class ToolWindowRegistry : IToolWindowRegistry
 	{
 		#region fields

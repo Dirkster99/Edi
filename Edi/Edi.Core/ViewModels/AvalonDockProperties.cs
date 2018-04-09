@@ -1,10 +1,10 @@
-﻿using System.Windows;
-using Edi.Core.Resources;
-using Edi.Core.View.Pane;
-
-namespace Edi.Core.ViewModels
+﻿namespace Edi.Core.ViewModels
 {
-	/// <summary>
+    using System.Windows;
+    using Edi.Core.Resources;
+    using Edi.Core.View.Pane;
+
+    /// <summary>
     /// This class exports properties that are relevant to viewing, styling and templating
     /// of document and tool winodw items managed by AvalonDock.
     /// </summary>

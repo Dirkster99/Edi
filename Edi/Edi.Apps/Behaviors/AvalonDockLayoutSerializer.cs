@@ -1,10 +1,7 @@
-﻿using Xceed.Wpf.AvalonDock;
-
-namespace Edi.Apps.Behaviors
+﻿namespace Edi.Apps.Behaviors
 {
 	using System.Windows;
 	using System.Windows.Input;
-//// using Xceed.Wpf.AvalonDock;
 
 	/// <summary>
 	/// Class implements an attached behavior to load/save a layout for AvalonDock manager.

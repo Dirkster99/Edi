@@ -1,8 +1,7 @@
-using Edi.Core.Interfaces;
-
 namespace Edi.Apps.Behaviors
 {
-	using System.Windows;
+    using Edi.Core.Interfaces;
+    using System.Windows;
 	using System.Windows.Input;
 
 	/// <summary>

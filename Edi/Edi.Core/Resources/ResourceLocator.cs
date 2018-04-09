@@ -1,14 +1,14 @@
-using System;
-using System.Linq;
-using System.Reflection;
-using System.Windows;
-using CommonServiceLocator;
-using log4net;
-using MsgBox;
-
 namespace Edi.Core.Resources
 {
-	/// <summary>
+    using System;
+    using System.Linq;
+    using System.Reflection;
+    using System.Windows;
+    using CommonServiceLocator;
+    using log4net;
+    using MsgBox;
+
+    /// <summary>
     /// Locate resources ín any assembly and return their reference.
     /// This class can, for example, be used to load a DataTemplate instance from an XAML reference.
     /// That is, the XAML is referenced as URI string (and the XAML itself can live in an extra assembly).

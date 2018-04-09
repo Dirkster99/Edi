@@ -1,14 +1,14 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using System.Windows;
-using System.Windows.Interop;
-
-namespace Edi.Core.Behaviour
+﻿namespace Edi.Core.Behaviour
 {
-	/// <summary>
-	/// Remove window icon from window chrome/title bar
-	/// </summary>
-	public static class RemoveIcon
+    using System;
+    using System.Runtime.InteropServices;
+    using System.Windows;
+    using System.Windows.Interop;
+
+    /// <summary>
+    /// Remove window icon from window chrome/title bar
+    /// </summary>
+    public static class RemoveIcon
 	{
 		/// <summary>
 		/// Dependency property for attached behaviour in NON-dialog windows.

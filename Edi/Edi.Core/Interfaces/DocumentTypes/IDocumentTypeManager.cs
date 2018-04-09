@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using Edi.Core.Interfaces.Documents;
-using Edi.Core.ViewModels;
-
-namespace Edi.Core.Interfaces.DocumentTypes
+﻿namespace Edi.Core.Interfaces.DocumentTypes
 {
-	/// <summary>
-	/// Delegates the file open method to a method that can be registered in a module.
-	/// The registered methid should return a viewmodel which in turn has registered a
-	/// view and/or tool window viewmodels and views...
-	/// </summary>
-	/// <param name="fileModel"></param>
-	/// <param name="settingsManager"></param>
-	/// <returns></returns>
-	public delegate IFileBaseViewModel FileOpenDelegate(IDocumentModel fileModel, object settingsManager);
+    using System;
+    using System.Collections.ObjectModel;
+    using Edi.Core.Interfaces.Documents;
+
+    /// <summary>
+    /// Delegates the file open method to a method that can be registered in a module.
+    /// The registered methid should return a viewmodel which in turn has registered a
+    /// view and/or tool window viewmodels and views...
+    /// </summary>
+    /// <param name="fileModel"></param>
+    /// <param name="settingsManager"></param>
+    /// <returns></returns>
+    public delegate IFileBaseViewModel FileOpenDelegate(IDocumentModel fileModel, object settingsManager);
 
 	/// <summary>
 	/// Delegates the file new method to a method that can be registered in a module.

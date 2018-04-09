@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Edi.Core.Interfaces.DocumentTypes
+﻿namespace Edi.Core.Interfaces.DocumentTypes
 {
-	public interface IDocumentType
+    using System;
+    using System.Collections.Generic;
+
+    public interface IDocumentType
 	{
 		#region properties
 		/// <summary>

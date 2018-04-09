@@ -1,8 +1,8 @@
-﻿using System.Windows;
-
-namespace Edi.Core.Behaviour
+﻿namespace Edi.Core.Behaviour
 {
-	public static class DialogCloser
+    using System.Windows;
+
+    public static class DialogCloser
 	{
 		/// <summary>
 		/// Dependency property for attached behaviour in NON-dialog windows.

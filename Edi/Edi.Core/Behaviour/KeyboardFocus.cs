@@ -1,12 +1,12 @@
-﻿using System.Windows;
-using System.Windows.Input;
-
-namespace Edi.Core.Behaviour
+﻿namespace Edi.Core.Behaviour
 {
-	/// <summary>
-	/// http://www.juanagui.com/blog/?p=107
-	/// </summary>
-	public static class KeyboardFocus
+    using System.Windows;
+    using System.Windows.Input;
+
+    /// <summary>
+    /// http://www.juanagui.com/blog/?p=107
+    /// </summary>
+    public static class KeyboardFocus
 	{
 		#region fields
 		public static readonly DependencyProperty OnProperty;

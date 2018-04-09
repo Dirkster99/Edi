@@ -1,9 +1,9 @@
-﻿using System.Windows.Input;
-using Edi.Util.Local;
-
-namespace Edi.Core
+﻿namespace Edi.Core
 {
-	public class AppCommand
+    using System.Windows.Input;
+    using Edi.Util.Local;
+
+    public class AppCommand
 	{
 		#region CommandFramework Fields
 

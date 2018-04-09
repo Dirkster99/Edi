@@ -1,22 +1,22 @@
-﻿using System;
-using System.Globalization;
-using System.IO;
-using System.Reflection;
-using System.Windows;
-using log4net;
-
-namespace Edi.Core.Models
+﻿namespace Edi.Core.Models
 {
-	/// <summary>
-	/// Class maintains and helps access to core facts of this application.
-	/// Core facts are installation directory, name of application etc.
-	/// 
-	/// This class should not be used directly unless it is realy necessary.
-	/// Use the <seealso cref="AppCoreModel"/> through its interface and
-	/// constructor dependency injection to avoid unnecessary dependencies
-	/// and problems when refactoring later on.
-	/// </summary>
-	public class AppHelpers
+    using System;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Windows;
+    using log4net;
+
+    /// <summary>
+    /// Class maintains and helps access to core facts of this application.
+    /// Core facts are installation directory, name of application etc.
+    /// 
+    /// This class should not be used directly unless it is realy necessary.
+    /// Use the <seealso cref="AppCoreModel"/> through its interface and
+    /// constructor dependency injection to avoid unnecessary dependencies
+    /// and problems when refactoring later on.
+    /// </summary>
+    public class AppHelpers
 	{
 		/// <summary>
 		/// Link to public site where issues can be reported.

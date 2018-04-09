@@ -1,9 +1,9 @@
-﻿using System;
-using Edi.Core.Interfaces;
-
-namespace Edi.Core.ViewModels
+﻿namespace Edi.Core.ViewModels
 {
-	public delegate void DocumentChangedEventHandler(object sender, DocumentChangedEventArgs e);
+    using System;
+    using Edi.Core.Interfaces;
+
+    public delegate void DocumentChangedEventHandler(object sender, DocumentChangedEventArgs e);
 
 	/// <summary>
 	/// This kind of event should be fired by the document container when a new document becomes active.

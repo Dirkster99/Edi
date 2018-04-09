@@ -1,17 +1,17 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-
-namespace Edi.Core.Behaviour
+﻿namespace Edi.Core.Behaviour
 {
-	/// <summary>
-	/// This behaviour hides the overflow toolbar button on a ToolBar.
-	/// 
-	/// Known Issue:
-	/// The Toolbar Grip appears when changing themes at run-time.
-	/// This is because the gripper style is reset but the FramworkElement is not reloaded,
-	/// Therfore, this Behaviour attached to the Loaded event is not fired again.
-	/// </summary>
-	public class HideToolbarOverflowButton
+    using System.Windows;
+    using System.Windows.Controls;
+
+    /// <summary>
+    /// This behaviour hides the overflow toolbar button on a ToolBar.
+    /// 
+    /// Known Issue:
+    /// The Toolbar Grip appears when changing themes at run-time.
+    /// This is because the gripper style is reset but the FramworkElement is not reloaded,
+    /// Therfore, this Behaviour attached to the Loaded event is not fired again.
+    /// </summary>
+    public class HideToolbarOverflowButton
 	{
 		#region fields
 		private static readonly DependencyProperty HideGripProperty;

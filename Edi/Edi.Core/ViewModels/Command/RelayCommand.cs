@@ -1,19 +1,19 @@
-﻿using System;
-using System.Diagnostics;
-using System.Windows.Input;
-
-namespace Edi.Core.ViewModels.Command
+﻿namespace Edi.Core.ViewModels.Command
 {
-	/// <summary>
-	/// A command whose sole purpose is to 
-	/// relay its functionality to other
-	/// objects by invoking delegates. The
-	/// default return value for the CanExecute
-	/// method is 'true'.
-	/// 
-	/// Source: http://www.codeproject.com/Articles/31837/Creating-an-Internationalized-Wizard-in-WPF
-	/// </summary>
-	public class RelayCommand<T> : ICommand
+    using System;
+    using System.Diagnostics;
+    using System.Windows.Input;
+
+    /// <summary>
+    /// A command whose sole purpose is to 
+    /// relay its functionality to other
+    /// objects by invoking delegates. The
+    /// default return value for the CanExecute
+    /// method is 'true'.
+    /// 
+    /// Source: http://www.codeproject.com/Articles/31837/Creating-an-Internationalized-Wizard-in-WPF
+    /// </summary>
+    public class RelayCommand<T> : ICommand
 	{
 		#region Fields
 		private readonly Action<T> _mExecute;

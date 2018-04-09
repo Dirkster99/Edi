@@ -1,11 +1,11 @@
-﻿using Edi.Core.Interfaces.Enums;
-
-namespace Edi.Core.ViewModels
+﻿namespace Edi.Core.ViewModels
 {
-	/// <summary>
-	/// AvalonDock base class viewmmodel to support tool window views.
-	/// </summary>
-	public abstract class ToolViewModel : PaneViewModel, IToolWindow
+    using Edi.Core.Interfaces.Enums;
+
+    /// <summary>
+    /// AvalonDock base class viewmmodel to support tool window views.
+    /// </summary>
+    public abstract class ToolViewModel : PaneViewModel, IToolWindow
 	{
 		#region fields
 		private bool _mIsVisible = true;

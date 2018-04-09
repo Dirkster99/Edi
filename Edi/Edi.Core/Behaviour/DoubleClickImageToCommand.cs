@@ -1,13 +1,13 @@
-using System.Windows;
-using System.Windows.Input;
-
 namespace Edi.Core.Behaviour
 {
-	/// <summary>
-	/// Class implements a <seealso cref="FrameworkElement"/> double click
-	/// to command binding attached behaviour.
-	/// </summary>
-	public class DoubleClickImageToCommand
+    using System.Windows;
+    using System.Windows.Input;
+
+    /// <summary>
+    /// Class implements a <seealso cref="FrameworkElement"/> double click
+    /// to command binding attached behaviour.
+    /// </summary>
+    public class DoubleClickImageToCommand
 	{
 		#region fields
 		private static readonly DependencyProperty DoubleClickItemCommandProperty =

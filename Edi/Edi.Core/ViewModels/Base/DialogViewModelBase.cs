@@ -1,18 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows.Input;
-using Edi.Core.ViewModels.Command;
-using Edi.Util.Local;
-
 namespace Edi.Core.ViewModels.Base
 {
-	/// <summary>
-	/// ViewModel base class to support dialog based views
-	/// (or views in general that support OK/Cancel functions)
-	/// </summary>
-	public class DialogViewModelBase : ViewModelBase
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Windows.Input;
+    using Edi.Core.ViewModels.Command;
+    using Edi.Util.Local;
+
+    /// <summary>
+    /// ViewModel base class to support dialog based views
+    /// (or views in general that support OK/Cancel functions)
+    /// </summary>
+    public class DialogViewModelBase : ViewModelBase
 	{
 		#region fields
 		private bool? _mDialogCloseResult;

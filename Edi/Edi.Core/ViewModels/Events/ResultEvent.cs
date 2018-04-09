@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Edi.Core.ViewModels.Events
+﻿namespace Edi.Core.ViewModels.Events
 {
-	/// <summary>
-	/// Stores information about the result of an asynchron task processing.
-	/// If an error occurs, Error is set to true and an exception may be stored in InnerException.
-	/// </summary>
-	public class ResultEvent : EventArgs
+    using System;
+    using System.Collections.Generic;
+
+    /// <summary>
+    /// Stores information about the result of an asynchron task processing.
+    /// If an error occurs, Error is set to true and an exception may be stored in InnerException.
+    /// </summary>
+    public class ResultEvent : EventArgs
 	{
 		#region Fields
 
