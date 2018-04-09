@@ -56,12 +56,14 @@ namespace Edi.Apps.ViewModels
 					else
 						i = (i >= l.Count - 1 ? 0 : i + 1);
 
-					//// i = (i + (previous ? l.Count - 1 : +1)) % l.Count;
+                    //// i = (i + (previous ? l.Count - 1 : +1)) % l.Count;
 
-					// Search text in document
-					if (l[i] is EdiViewModel fTmp)
-					{
-						m = FindNextMatchInText(0, 0, false, fTmp.Text, ref f, out _);
+                    // Search text in document
+                    if (l[i] is EdiViewModel)
+                    {
+                        EdiViewModel fTmp = l[i] as EdiViewModel;
+
+                        m = FindNextMatchInText(0, 0, false, fTmp.Text, ref f, out _);
 
 						textSearchSuccess = m.Success;
 					}

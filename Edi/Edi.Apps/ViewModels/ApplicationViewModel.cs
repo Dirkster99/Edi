@@ -611,7 +611,9 @@ namespace Edi.Apps.ViewModels
         {
             try
             {
-	            if (!Closing_CanExecute()) return;
+                if (Closing_CanExecute() == false)
+                    return;
+
 	            _mShutDownInProgressCancel = false;
 	            OnRequestClose();
             }
@@ -1040,9 +1042,11 @@ namespace Edi.Apps.ViewModels
                     doc.DocumentEvent -= ProcessDocumentEvent;
                     doc.ProcessingResultEvent -= Vm_ProcessingResultEvent;
 
-                    if (doc is IDocumentEdi ediDoc)
+                    if (doc is IDocumentEdi)
                     {
-	                    ediDoc.ProcessingResultEvent -= Vm_ProcessingResultEvent;
+                        var ediDoc = doc as IDocumentEdi;
+
+                        ediDoc.ProcessingResultEvent -= Vm_ProcessingResultEvent;
                     }
 
                     int idx = _mFiles.IndexOf(doc);
