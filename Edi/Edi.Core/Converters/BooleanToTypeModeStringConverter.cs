@@ -1,16 +1,17 @@
 namespace Edi.Core.Converters
 {
-	using System;
-	using System.Globalization;
-	using System.Windows.Data;
+    using System;
+    using System.Globalization;
+    using System.Windows.Data;
+    using Edi.Util.Local;
 
-	/// <summary>
-	/// </summary>
-	[ValueConversion(typeof(bool), typeof(string))]
+    /// <summary>
+    /// </summary>
+    [ValueConversion(typeof(bool), typeof(string))]
 	public class BooleanToTypeModeStringConverter : IValueConverter
 	{
-		public readonly static string TypeOver = Edi.Util.Local.Strings.STR_EDIT_MODE_TYPEOVER;
-		public readonly static string TypeToInsert = Edi.Util.Local.Strings.STR_EDIT_MODE_INSERT;
+		public static readonly string TypeOver = Strings.STR_EDIT_MODE_TYPEOVER;
+		public static readonly string TypeToInsert = Strings.STR_EDIT_MODE_INSERT;
 
 		/// <summary>
 		/// Enum to Boolean Converter method
@@ -25,15 +26,9 @@ namespace Edi.Core.Converters
 			if ((value is bool) == false)
 				throw new ArgumentException("Invalid argument/return type. Expected argument: bool (return type: string).");
 
-			if (value == null)
-				return BooleanToTypeModeStringConverter.TypeToInsert;
-
 			bool bRet = (bool)value;
 
-			if (bRet == true)
-				return (object)BooleanToTypeModeStringConverter.TypeToInsert;
-			else
-				return (object)BooleanToTypeModeStringConverter.TypeOver;
+			return bRet ? TypeToInsert : TypeOver;
 		}
 
 		/// <summary>

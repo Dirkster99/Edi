@@ -1,16 +1,16 @@
 ﻿namespace Edi.Core.ViewModels.Base
 {
-	using System;
-	using System.ComponentModel;
-	using System.Linq.Expressions;
+    using System;
+    using System.ComponentModel;
+    using System.Linq.Expressions;
+    using MsgBox.Internal.ViewModel.Base;
 
-	public class ViewModelBase : INotifyPropertyChanged
+    public class ViewModelBase : INotifyPropertyChanged
 	{
 
 		protected virtual void RaisePropertyChanged(string propertyName)
 		{
-			if (PropertyChanged != null)
-				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
 
@@ -30,15 +30,14 @@
 			var lambda = (LambdaExpression)property;
 			MemberExpression memberExpression;
 
-			if (lambda.Body is UnaryExpression)
+			if (lambda.Body is UnaryExpression unaryExpression)
 			{
-				var unaryExpression = (UnaryExpression)lambda.Body;
 				memberExpression = (MemberExpression)unaryExpression.Operand;
 			}
 			else
 				memberExpression = (MemberExpression)lambda.Body;
 
-			this.RaisePropertyChanged(memberExpression.Member.Name);
+			RaisePropertyChanged(memberExpression.Member.Name);
 		}
 	}
 }

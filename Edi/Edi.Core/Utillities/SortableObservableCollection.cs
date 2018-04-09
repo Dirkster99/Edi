@@ -1,18 +1,19 @@
 ﻿namespace Edi.Core.Utillities
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Collections.ObjectModel;
-	using System.Linq;
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Linq;
 
-	/// <summary>
-	/// http://elegantcode.com/2009/05/14/write-a-sortable-observablecollection-for-wpf/
-	/// 
-	/// sort ascending
-  /// MySortableList.Sort(x => x.Name, ListSortDirection.Ascending);
-	/// </summary>
-	/// <typeparam name="T"></typeparam>
-	public class SortableObservableCollection<T> : ObservableCollection<T>
+    /// <summary>
+    /// http://elegantcode.com/2009/05/14/write-a-sortable-observablecollection-for-wpf/
+    /// 
+    /// sort ascending
+    /// MySortableList.Sort(x => x.Name, ListSortDirection.Ascending);
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class SortableObservableCollection<T> : ObservableCollection<T>
 	{
 		public SortableObservableCollection(List<T> list)
 			: base(list)
@@ -24,16 +25,16 @@
 		{
 		}
 
-		public void Sort<TKey>(Func<T, TKey> keySelector, System.ComponentModel.ListSortDirection direction)
+		public void Sort<TKey>(Func<T, TKey> keySelector, ListSortDirection direction)
 		{
 			switch (direction)
 			{
-				case System.ComponentModel.ListSortDirection.Ascending:
+				case ListSortDirection.Ascending:
 					{
 						ApplySort(Items.OrderBy(keySelector));
 						break;
 					}
-				case System.ComponentModel.ListSortDirection.Descending:
+				case ListSortDirection.Descending:
 					{
 						ApplySort(Items.OrderByDescending(keySelector));
 						break;

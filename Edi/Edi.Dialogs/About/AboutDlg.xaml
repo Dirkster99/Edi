@@ -43,7 +43,7 @@
             </Grid.ColumnDefinitions>
 
             <Button Content="{x:Static cmdLabel:Strings.STR_ABOUT_OK_BUTTON}"
-            Command="{Binding OKCommand}"
+            Command="{Binding OkCommand}"
             IsDefault="True"
             IsCancel="True"
             Grid.Column="1" Padding="3" Margin="6" MinHeight="24" MinWidth="80"/>

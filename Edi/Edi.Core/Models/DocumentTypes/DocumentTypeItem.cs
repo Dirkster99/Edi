@@ -1,9 +1,9 @@
 ﻿namespace Edi.Core.Models.DocumentTypes
 {
-	using System.Collections.Generic;
-	using Edi.Core.Interfaces.DocumentTypes;
+    using System.Collections.Generic;
+    using Edi.Core.Interfaces.DocumentTypes;
 
-	internal class DocumentTypeItem : IDocumentTypeItem
+    internal class DocumentTypeItem : IDocumentTypeItem
 	{
 		#region fields
 		#endregion fields
@@ -14,18 +14,18 @@
 		/// </summary>
 		public DocumentTypeItem(string description, List<string> extensions, int sortPriority = 0)
 		{
-			this.Description = description;
-			this.DocFileTypeExtensions = extensions;
-			this.SortPriority = sortPriority;
+			Description = description;
+			DocFileTypeExtensions = extensions;
+			SortPriority = sortPriority;
 		}
 		#endregion constructors
 
 		#region properties
-		public List<string> DocFileTypeExtensions { get; private set; }
+		public List<string> DocFileTypeExtensions { get; }
 
-		public string Description { get; private set; }
+		public string Description { get; }
 
-		public int SortPriority { get; private set; }
+		public int SortPriority { get; }
 		#endregion properties
 
 		#region methods

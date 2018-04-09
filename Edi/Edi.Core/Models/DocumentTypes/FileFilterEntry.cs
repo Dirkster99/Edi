@@ -1,9 +1,8 @@
 ﻿namespace Edi.Core.Models.DocumentTypes
 {
-	using System;
-	using Edi.Core.Interfaces.DocumentTypes;
+    using Edi.Core.Interfaces.DocumentTypes;
 
-	internal class FileFilterEntry : IFileFilterEntry
+    internal class FileFilterEntry : IFileFilterEntry
 	{
 		#region constructors
 		/// <summary>
@@ -13,15 +12,15 @@
 		/// <param name="fileOpenMethod"></param>
 		public FileFilterEntry(string fileFilter, FileOpenDelegate fileOpenMethod)
 		{
-			this.FileFilter = fileFilter;
-			this.FileOpenMethod = fileOpenMethod;
+			FileFilter = fileFilter;
+			FileOpenMethod = fileOpenMethod;
 		}
 		#endregion constructors
 
 		#region properties
-		public string FileFilter { get; private set; }
+		public string FileFilter { get; }
 
-		public FileOpenDelegate FileOpenMethod { get; private set; }
+		public FileOpenDelegate FileOpenMethod { get; }
 		#endregion properties
 	}
 }

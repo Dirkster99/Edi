@@ -1,21 +1,19 @@
 ﻿namespace Edi.Core.ViewModels
 {
-	using System;
+    using System;
+    using Edi.Core.ViewModels.Base;
 
-	/// <summary>
-	/// AvalonDock base class viewm-model to support document pane views
-	/// </summary>
-	public class PaneViewModel : Edi.Core.ViewModels.Base.ViewModelBase
+    /// <summary>
+    /// AvalonDock base class viewm-model to support document pane views
+    /// </summary>
+    public class PaneViewModel : ViewModelBase
 	{
-		public PaneViewModel()
-		{ }
-
 		#region Title
 
-		private string _title = null;
+		private string _title;
 		public virtual string Title
 		{
-			get { return _title; }
+			get => _title;
 			set
 			{
 				if (_title != value)
@@ -36,10 +34,10 @@
 
 		#region ContentId
 
-		private string _contentId = null;
+		private string _contentId;
 		public string ContentId
 		{
-			get { return _contentId; }
+			get => _contentId;
 			set
 			{
 				if (_contentId != value)
@@ -53,10 +51,10 @@
 
 		#region IsSelected
 
-		private bool _isSelected = false;
+		private bool _isSelected;
 		public bool IsSelected
 		{
-			get { return _isSelected; }
+			get => _isSelected;
 			set
 			{
 				if (_isSelected != value)
@@ -71,10 +69,10 @@
 
 		#region IsActive
 
-		private bool _isActive = false;
+		private bool _isActive;
 		public bool IsActive
 		{
-			get { return _isActive; }
+			get => _isActive;
 			set
 			{
 				if (_isActive != value)

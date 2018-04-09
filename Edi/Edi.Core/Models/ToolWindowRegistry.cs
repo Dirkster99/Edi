@@ -1,41 +1,34 @@
 ﻿namespace Edi.Core.Models
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Collections.ObjectModel;
-	using System.ComponentModel.Composition;
-	using Edi.Core.Interfaces;
-	using Edi.Core.ViewModels;
-	using EdiApp.Events;
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel.Composition;
+    using Edi.Core.Interfaces;
+    using Edi.Core.ViewModels;
+    using EdiApp.Events;
 
-	/// <summary>
-	/// Class to register and manage all tool windows in one common place.
-	/// </summary>
-	[Export(typeof(IToolWindowRegistry))]
+    /// <summary>
+    /// Class to register and manage all tool windows in one common place.
+    /// </summary>
+    [Export(typeof(IToolWindowRegistry))]
 	public class ToolWindowRegistry : IToolWindowRegistry
 	{
 		#region fields
-		private readonly ObservableCollection<ToolViewModel> mItems = null;
 
-		private readonly List<ToolViewModel> mTodoTools = null;
+		private readonly List<ToolViewModel> _mTodoTools;
 		#endregion fields
 
 		#region contructors
 		public ToolWindowRegistry()
 		{
-			this.mItems = new ObservableCollection<ToolViewModel>();
-			this.mTodoTools = new List<ToolViewModel>();
+			Tools = new ObservableCollection<ToolViewModel>();
+			_mTodoTools = new List<ToolViewModel>();
 		}
 		#endregion contructors
 
 		#region properties
-		public ObservableCollection<ToolViewModel> Tools
-		{
-			get
-			{
-				return this.mItems;
-			}
-		}
+		public ObservableCollection<ToolViewModel> Tools { get; }
 
 		public IOutput Output { get; set; }
 		#endregion properties
@@ -47,12 +40,12 @@
 		/// </summary>
 		public void PublishTools()
 		{
-			foreach (var item in this.mTodoTools)
+			foreach (var item in _mTodoTools)
 			{
-				this.mItems.Add(item);
+				Tools.Add(item);
 			}
 
-			this.mTodoTools.Clear();
+			_mTodoTools.Clear();
 		}
 
 		/// <summary>
@@ -63,7 +56,7 @@
 		{
 			try
 			{
-				this.mTodoTools.Add(newTool);
+				_mTodoTools.Add(newTool);
 
 				// Publish the fact that we have registered a new tool window instance
 				RegisterToolWindowEvent.Instance.Publish(new RegisterToolWindowEventArgs(newTool));

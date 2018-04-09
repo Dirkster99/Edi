@@ -11,8 +11,8 @@ namespace Edi.Core.Interfaces
 		/// <summary>
 		/// Get a matching viewmodel for a view through its content_id.
 		/// </summary>
-		/// <param name="content_id"></param>
+		/// <param name="contentId"></param>
 		/// <returns>viewmodel for a content_id or null</returns>
-		object ContentViewModelFromID(string content_id);
+		object ContentViewModelFromId(string contentId);
 	}
 }

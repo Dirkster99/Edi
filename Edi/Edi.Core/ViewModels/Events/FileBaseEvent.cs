@@ -1,13 +1,13 @@
 namespace Edi.Core.ViewModels.Events
 {
-	using System;
+    using System;
 
-	/// <summary>
-	/// Identifies a document event by a typed collection of enumerators.
-	/// Receivers of the <seealso cref="FileBaseEvent"/> need to switch
-	/// through this enumeration to determine the type of event that was received.
-	/// </summary>
-	public enum FileEventType
+    /// <summary>
+    /// Identifies a document event by a typed collection of enumerators.
+    /// Receivers of the <seealso cref="FileBaseEvent"/> need to switch
+    /// through this enumeration to determine the type of event that was received.
+    /// </summary>
+    public enum FileEventType
 	{
 		/// <summary>
 		/// Identifies an event that was probably not fully initialized.
@@ -33,7 +33,7 @@ namespace Edi.Core.ViewModels.Events
 	public class FileBaseEvent : EventArgs
 	{
 		#region fields
-		private FileEventType mTypeOfEvent;
+
 		#endregion fields
 
 		#region constructor
@@ -42,16 +42,15 @@ namespace Edi.Core.ViewModels.Events
 		/// </summary>
 		public FileBaseEvent(FileEventType typeOfEvent)
 		{
-			this.mTypeOfEvent = typeOfEvent;
+			TypeOfEvent = typeOfEvent;
 		}
 
 		/// <summary>
 		/// Class constructor
 		/// </summary>
 		protected FileBaseEvent()
-			: base()
 		{
-			this.mTypeOfEvent = FileEventType.Unknown;
+			TypeOfEvent = FileEventType.Unknown;
 		}
 		#endregion constructor
 
@@ -60,10 +59,8 @@ namespace Edi.Core.ViewModels.Events
 		/// Gets the type of event <seealso cref="FileBaseEvent"/>
 		/// that this object represents.
 		/// </summary>
-		public FileEventType TypeOfEvent
-		{
-			get { return this.mTypeOfEvent; }
-		}
+		public FileEventType TypeOfEvent { get; }
+
 		#endregion properties
 
 		#region methods

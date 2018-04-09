@@ -1,12 +1,12 @@
 namespace Edi.Core.Interfaces.Documents
 {
-	using System;
+    using System;
 
-	/// <summary>
-	/// Interface defines properties and methods of a base class for modelling
-	/// file access on persistent storage.
-	/// </summary>
-	public interface IDocumentModel : IDisposable
+    /// <summary>
+    /// Interface defines properties and methods of a base class for modelling
+    /// file access on persistent storage.
+    /// </summary>
+    public interface IDocumentModel : IDisposable
 	{
 		/// <summary>
 		/// Occurs when the file name has changed.
@@ -81,9 +81,9 @@ namespace Edi.Core.Interfaces.Documents
 		/// Set a file specific value to determine whether file
 		/// watching is enabled/disabled for this file.
 		/// </summary>
-		/// <param name="IsEnabled"></param>
+		/// <param name="isEnabled"></param>
 		/// <returns></returns>
-		bool EnableDocumentFileWatcher(bool IsEnabled);
+		bool EnableDocumentFileWatcher(bool isEnabled);
 		#endregion methods
 	}
 }

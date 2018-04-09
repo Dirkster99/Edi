@@ -11,10 +11,7 @@
     public class AvalonDockViewProperties
 	{
 		#region fields
-		private DataTemplate mDocumentHeaderTemplate;
-		readonly private Edi.Core.View.Pane.LayoutInitializer mLayoutInitializer;
-		readonly private PanesStyleSelector mSelectPanesStyle;
-		readonly private PanesTemplateSelector mSelectPanesTemplate;
+
 		#endregion fields
 
 		#region constructors
@@ -23,10 +20,10 @@
 		/// </summary>
 		public AvalonDockViewProperties()
 		{
-			this.mDocumentHeaderTemplate = null;
-			this.mLayoutInitializer = new LayoutInitializer();
-			this.mSelectPanesStyle = new PanesStyleSelector();
-			this.mSelectPanesTemplate = new PanesTemplateSelector();
+			DocumentHeaderTemplate = null;
+			LayoutInitializer = new LayoutInitializer();
+			SelectPanesStyle = new PanesStyleSelector();
+			SelectPanesTemplate = new PanesTemplateSelector();
 		}
 		#endregion constructors
 
@@ -34,36 +31,14 @@
 		/// <summary>
 		/// Gets the AvalonDock DocumentHeaderTemplate from resource definitions.
 		/// </summary>
-		public DataTemplate DocumentHeaderTemplate
-		{
-			get
-			{
-				return this.mDocumentHeaderTemplate;
-			}
+		public DataTemplate DocumentHeaderTemplate { get; private set; }
 
-			private set
-			{
-				this.mDocumentHeaderTemplate = value;
-			}
-		}
+		public LayoutInitializer LayoutInitializer { get; }
 
-		public LayoutInitializer LayoutInitializer
-		{
-			get
-			{
-				return this.mLayoutInitializer;
-			}
-		}
+		public PanesStyleSelector SelectPanesStyle { get; }
 
-		public PanesStyleSelector SelectPanesStyle
-		{
-			get { return this.mSelectPanesStyle; }
-		}
+		public PanesTemplateSelector SelectPanesTemplate { get; }
 
-		public PanesTemplateSelector SelectPanesTemplate
-		{
-			get { return this.mSelectPanesTemplate; }
-		}
 		#endregion properties
 
 		#region methods
@@ -73,8 +48,8 @@
 		/// <returns></returns>
 		public AvalonDockViewProperties InitialzeInstance()
 		{
-			this.DocumentHeaderTemplate = this.LoadDocumentHeaderTemplate();
-			this.LoadPanesStyleSelector(this.SelectPanesStyle);
+			DocumentHeaderTemplate = LoadDocumentHeaderTemplate();
+			LoadPanesStyleSelector(SelectPanesStyle);
 
 			return this;
 		}
@@ -89,30 +64,28 @@
 				ResourceLocator.GetResource<DataTemplate>(
 					"Edi.Apps",
 					"Resources/DocumentHeaderDataTemplate.xaml",
-					"AvalonDock_DocumentHeader") as DataTemplate;
+					"AvalonDock_DocumentHeader");
 		}
 
 		/// <summary>
 		/// Load an PanestayleSelector with initial styles from resources.
 		/// </summary>
 		/// <returns></returns>
-		private PanesStyleSelector LoadPanesStyleSelector(PanesStyleSelector panesStyleSelector)
+		private void LoadPanesStyleSelector(PanesStyleSelector panesStyleSelector)
 		{
 			var newStyle = ResourceLocator.GetResource<Style>(
-										 "Edi.Apps",
-										 "Resources/Styles/AvalonDockStyles.xaml",
-										 "FileStyle") as Style;
+				"Edi.Apps",
+				"Resources/Styles/AvalonDockStyles.xaml",
+				"FileStyle");
 
 			panesStyleSelector.RegisterStyle(typeof(FileBaseViewModel), newStyle);
 
 			newStyle = ResourceLocator.GetResource<Style>(
-									"Edi.Apps",
-									"Resources/Styles/AvalonDockStyles.xaml",
-									"ToolStyle") as Style;
+				"Edi.Apps",
+				"Resources/Styles/AvalonDockStyles.xaml",
+				"ToolStyle");
 
 			panesStyleSelector.RegisterStyle(typeof(ToolViewModel), newStyle);
-
-			return panesStyleSelector;
 		}
 		#endregion methods
 	}

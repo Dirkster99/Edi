@@ -12,7 +12,7 @@ namespace Edi.Core.View.Pane
     public class PanesTemplateSelector : DataTemplateSelector
     {
         #region fields
-        private readonly Dictionary<Type, DataTemplate> _TemplateDirectory = null;
+        private readonly Dictionary<Type, DataTemplate> _templateDirectory;
         #endregion fields
 
         #region constructor
@@ -21,7 +21,7 @@ namespace Edi.Core.View.Pane
         /// </summary>
         public PanesTemplateSelector()
         {
-            _TemplateDirectory = new Dictionary<Type, DataTemplate>();
+            _templateDirectory = new Dictionary<Type, DataTemplate>();
         }
         #endregion constructor
 
@@ -32,21 +32,18 @@ namespace Edi.Core.View.Pane
         /// <param name="item">The data object for which to select the template.</param>
         /// <param name="container">The data-bound object.</param>
         /// <returns>Returns a System.Windows.DataTemplate or null. The default value is null.</returns>
-        public override System.Windows.DataTemplate SelectTemplate(object item, System.Windows.DependencyObject container)
+        public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            if (_TemplateDirectory == null)
+            if (_templateDirectory == null)
                 return null;
 
             if (item == null)
                 return null;
 
             DataTemplate o;
-            _TemplateDirectory.TryGetValue(item.GetType(), out o);
+            _templateDirectory.TryGetValue(item.GetType(), out o);
 
-            if (o != null)
-                return o;
-
-            return base.SelectTemplate(item, container);
+            return o ?? base.SelectTemplate(item, container);
         }
 
         /// <summary>
@@ -56,7 +53,7 @@ namespace Edi.Core.View.Pane
         /// <param name="view"></param>
         public void RegisterDataTemplate(Type typeOfViewmodel, DataTemplate view)
         {
-            _TemplateDirectory.Add(typeOfViewmodel, view);
+            _templateDirectory.Add(typeOfViewmodel, view);
         }
         #endregion methods
     }

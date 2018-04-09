@@ -1,22 +1,22 @@
 ﻿namespace Edi.Core.Interfaces
 {
-	using System;
-	using System.Windows.Input;
-	using Edi.Core.Models.Enums;
-	using Edi.Core.ViewModels;
+    using System;
+    using System.Windows.Input;
+    using Edi.Core.Models.Enums;
+    using Edi.Core.ViewModels;
 
-	/// <summary>
-	/// Interface defines object properties and methods required
-	/// to manage avalondock workspaces and properties (TemplateSelectors etc...).
-	/// </summary>
-	public interface IAvalonDockLayoutViewModel
+    /// <summary>
+    /// Interface defines object properties and methods required
+    /// to manage avalondock workspaces and properties (TemplateSelectors etc...).
+    /// </summary>
+    public interface IAvalonDockLayoutViewModel
 	{
 		/// <summary>
 		/// Gets the layout id for the AvalonDock Layout that is associated with this viewmodel.
 		/// This layout id is a form of identification between viewmodel and view to identify whether
 		/// a given event aggregated message is for a given recipient or not.
 		/// </summary>
-		Guid LayoutID { get; }
+		Guid LayoutId { get; }
 
 		AvalonDockViewProperties ViewProperties { get; set; }
 

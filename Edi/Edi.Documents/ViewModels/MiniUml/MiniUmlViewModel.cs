@@ -38,8 +38,8 @@ namespace Edi.Documents.ViewModels.MiniUml
 		public MiniUmlViewModel(IDocumentModel documentModel)
 		: this ()
 		{
-			mDocumentModel = documentModel;
-			mDocumentModel.SetFileNamePath(FilePath, IsFilePathReal);
+			MDocumentModel = documentModel;
+			MDocumentModel.SetFileNamePath(FilePath, IsFilePathReal);
 		}
 
 		/// <summary>
@@ -257,10 +257,10 @@ namespace Edi.Documents.ViewModels.MiniUml
 		{
 		    _mDocumentMiniUml.ExecuteSave(filePath);
 
-		    if (mDocumentModel == null)
-		        mDocumentModel = new DocumentModel();
+		    if (MDocumentModel == null)
+		        MDocumentModel = new DocumentModel();
 
-		    mDocumentModel.SetFileNamePath(filePath, true);
+		    MDocumentModel.SetFileNamePath(filePath, true);
 		    FilePath = filePath;
 		    ContentId = filePath;
 		    IsDirty = false;
@@ -347,10 +347,10 @@ namespace Edi.Documents.ViewModels.MiniUml
 
 				if (isReal == true)
 				{
-					if (mDocumentModel == null)
-						mDocumentModel = new DocumentModel();
+					if (MDocumentModel == null)
+						MDocumentModel = new DocumentModel();
 
-					mDocumentModel.SetFileNamePath(filePath, isReal);
+					MDocumentModel.SetFileNamePath(filePath, isReal);
 
 					FilePath = filePath;
 					ContentId = _mFilePath;

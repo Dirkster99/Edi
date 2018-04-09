@@ -1,23 +1,23 @@
 ﻿namespace Edi.Core.ViewModels.Command
 {
-	using System;
-	using System.Diagnostics;
-	using System.Windows.Input;
+    using System;
+    using System.Diagnostics;
+    using System.Windows.Input;
 
-	/// <summary>
-	/// A command whose sole purpose is to 
-	/// relay its functionality to other
-	/// objects by invoking delegates. The
-	/// default return value for the CanExecute
-	/// method is 'true'.
-	/// 
-	/// Source: http://www.codeproject.com/Articles/31837/Creating-an-Internationalized-Wizard-in-WPF
-	/// </summary>
-	public class RelayCommand<T> : ICommand
+    /// <summary>
+    /// A command whose sole purpose is to 
+    /// relay its functionality to other
+    /// objects by invoking delegates. The
+    /// default return value for the CanExecute
+    /// method is 'true'.
+    /// 
+    /// Source: http://www.codeproject.com/Articles/31837/Creating-an-Internationalized-Wizard-in-WPF
+    /// </summary>
+    public class RelayCommand<T> : ICommand
 	{
 		#region Fields
-		private readonly Action<T> mExecute = null;
-		private readonly Predicate<T> mCanExecute = null;
+		private readonly Action<T> _mExecute;
+		private readonly Predicate<T> _mCanExecute;
 		#endregion // Fields
 
 		#region Constructors
@@ -37,11 +37,8 @@
 		/// <param name="canExecute">The execution status logic.</param>
 		public RelayCommand(Action<T> execute, Predicate<T> canExecute)
 		{
-			if (execute == null)
-				throw new ArgumentNullException("execute");
-
-			this.mExecute = execute;
-			this.mCanExecute = canExecute;
+			_mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
+			_mCanExecute = canExecute;
 		}
 
 		#endregion // Constructors
@@ -54,13 +51,13 @@
 		{
 			add
 			{
-				if (this.mCanExecute != null)
+				if (_mCanExecute != null)
 					CommandManager.RequerySuggested += value;
 			}
 
 			remove
 			{
-				if (this.mCanExecute != null)
+				if (_mCanExecute != null)
 					CommandManager.RequerySuggested -= value;
 			}
 		}
@@ -75,7 +72,7 @@
 		[DebuggerStepThrough]
 		public bool CanExecute(object parameter)
 		{
-			return this.mCanExecute == null ? true : this.mCanExecute((T)parameter);
+			return _mCanExecute == null ? true : _mCanExecute((T)parameter);
 		}
 
 		/// <summary>
@@ -84,7 +81,7 @@
 		/// <param name="parameter"></param>
 		public void Execute(object parameter)
 		{
-			this.mExecute((T)parameter);
+			_mExecute((T)parameter);
 		}
 		#endregion methods
 	}
@@ -99,8 +96,8 @@
 	public class RelayCommand : ICommand
 	{
 		#region Fields
-		private readonly Action mExecute;
-		private readonly Func<bool> mCanExecute;
+		private readonly Action _mExecute;
+		private readonly Func<bool> _mCanExecute;
 		#endregion Fields
 
 		#region Constructors
@@ -117,9 +114,9 @@
 		/// <summary>
 		/// Copy constructor
 		/// </summary>
-		/// <param name="inputRC"></param>
-		public RelayCommand(RelayCommand inputRC)
-			: this(inputRC.mExecute, inputRC.mCanExecute)
+		/// <param name="inputRc"></param>
+		public RelayCommand(RelayCommand inputRc)
+			: this(inputRc._mExecute, inputRc._mCanExecute)
 		{
 		}
 
@@ -130,11 +127,8 @@
 		/// <param name="canExecute">The execution status logic.</param>
 		public RelayCommand(Action execute, Func<bool> canExecute)
 		{
-			if (execute == null)
-				throw new ArgumentNullException("execute");
-
-			this.mExecute = execute;
-			this.mCanExecute = canExecute;
+			_mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
+			_mCanExecute = canExecute;
 		}
 
 		#endregion Constructors
@@ -147,13 +141,13 @@
 		{
 			add
 			{
-				if (this.mCanExecute != null)
+				if (_mCanExecute != null)
 					CommandManager.RequerySuggested += value;
 			}
 
 			remove
 			{
-				if (this.mCanExecute != null)
+				if (_mCanExecute != null)
 					CommandManager.RequerySuggested -= value;
 			}
 		}
@@ -169,7 +163,7 @@
 		[DebuggerStepThrough]
 		public bool CanExecute(object parameter)
 		{
-			return this.mCanExecute == null ? true : this.mCanExecute();
+			return _mCanExecute?.Invoke() ?? true;
 		}
 
 		/// <summary>
@@ -178,7 +172,7 @@
 		/// <param name="parameter"></param>
 		public void Execute(object parameter)
 		{
-			this.mExecute();
+			_mExecute();
 		}
 		#endregion Methods
 	}

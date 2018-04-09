@@ -1,14 +1,14 @@
 ﻿namespace Edi.Core.Interfaces
 {
-	using System;
-	using System.Windows.Input;
-	using Edi.Core.Interfaces.Enums;
-	using Edi.Core.ViewModels.Events;
+    using System;
+    using System.Windows.Input;
+    using Edi.Core.Interfaces.Enums;
+    using Edi.Core.ViewModels.Events;
 
-	/// <summary>
-	/// Inteface that is supported by document related viewmodels.
-	/// </summary>
-	public interface IFileBaseViewModel : ILayoutItem, IDisposable
+    /// <summary>
+    /// Inteface that is supported by document related viewmodels.
+    /// </summary>
+    public interface IFileBaseViewModel : ILayoutItem, IDisposable
 	{
 		#region events
 		/// <summary>

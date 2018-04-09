@@ -1,20 +1,17 @@
 ﻿namespace Edi.Core.ViewModels.Events
 {
-	using System;
-	using System.Collections.Generic;
+    using System;
+    using System.Collections.Generic;
 
-	/// <summary>
-	/// Stores information about the result of an asynchron task processing.
-	/// If an error occurs, Error is set to true and an exception may be stored in InnerException.
-	/// </summary>
-	public class ResultEvent : EventArgs
+    /// <summary>
+    /// Stores information about the result of an asynchron task processing.
+    /// If an error occurs, Error is set to true and an exception may be stored in InnerException.
+    /// </summary>
+    public class ResultEvent : EventArgs
 	{
 		#region Fields
-		private readonly bool mCancel;
-		private readonly bool mError;
-		private readonly ApplicationException mInnerException;
-		private readonly string mMessage;
-		private readonly Dictionary<string, object> mObjColl;
+
+		private readonly Dictionary<string, object> _mObjColl;
 		#endregion Fields
 
 		#region Constructors
@@ -34,11 +31,11 @@
 											 Dictionary<string, object> objColl = null,
 											 ApplicationException innerException = null)
 		{
-			this.mMessage = sMessage;
-			this.mError = bError;
-			this.mCancel = bCancel;
-			this.mInnerException = innerException;
-			this.mObjColl = (objColl == null ? null : new Dictionary<string, object>(objColl));
+			Message = sMessage;
+			Error = bError;
+			Cancel = bCancel;
+			InnerException = innerException;
+			_mObjColl = (objColl == null ? null : new Dictionary<string, object>(objColl));
 		}
 
 		/// <summary>
@@ -48,10 +45,10 @@
 		/// <param name="message"></param>
 		public ResultEvent(string message)
 		{
-			this.mMessage = message;
-			this.mError = false;
-			this.mCancel = false;
-			this.mInnerException = null;
+			Message = message;
+			Error = false;
+			Cancel = false;
+			InnerException = null;
 		}
 		#endregion Constructors
 
@@ -59,49 +56,32 @@
 		/// <summary>
 		/// Get an error message if processing task aborted with errors
 		/// </summary>
-		public bool Error
-		{
-			get { return this.mError; }
-		}
+		public bool Error { get; }
 
 		/// <summary>
 		/// Get property to determine whether processing was cancelled or not.
 		/// </summary>
-		public bool Cancel
-		{
-			get { return this.mCancel; }
-		}
+		public bool Cancel { get; }
 
 		/// <summary>
 		/// Get property to determine whether there is an innerException to
 		/// document an abortion with errors.
 		/// </summary>
-		public ApplicationException InnerException
-		{
-			get { return this.mInnerException; }
-		}
+		public ApplicationException InnerException { get; }
 
 		/// <summary>
 		/// Get current message describing the current step being proceesed
 		/// 
 		/// </summary>
-		public string Message
-		{
-			get { return this.mMessage; }
-		}
+		public string Message { get; }
 
 		/// <summary>
 		/// Dictionary of mResult objects from executing process
 		/// </summary>
-		public Dictionary<string, object> ResultObjects
-		{
-			get
-			{
-				return (this.mObjColl == null
-										? new Dictionary<string, object>()
-										: new Dictionary<string, object>(mObjColl));
-			}
-		}
+		public Dictionary<string, object> ResultObjects => (_mObjColl == null
+			? new Dictionary<string, object>()
+			: new Dictionary<string, object>(_mObjColl));
+
 		#endregion Properties
 	}
 }

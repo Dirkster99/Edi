@@ -1,10 +1,12 @@
 namespace Edi.Core.Resources
 {
-    using CommonServiceLocator;
-    using MsgBox;
     using System;
     using System.Linq;
+    using System.Reflection;
     using System.Windows;
+    using CommonServiceLocator;
+    using log4net;
+    using MsgBox;
 
     /// <summary>
     /// Locate resources ín any assembly and return their reference.
@@ -14,7 +16,7 @@ namespace Edi.Core.Resources
     /// </summary>
     public static class ResourceLocator
     {
-        private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// Gets the first matching resource of the type.
@@ -43,11 +45,10 @@ namespace Edi.Core.Resources
                 if (string.IsNullOrEmpty(assemblyName) || string.IsNullOrEmpty(resourceFilename))
                     return default(T);
 
-                string uriPath = string.Format("/{0};component/{1}", assemblyName, resourceFilename);
+                string uriPath = $"/{assemblyName};component/{resourceFilename}";
                 Uri uri = new Uri(uriPath, UriKind.Relative);
-                ResourceDictionary resource = Application.LoadComponent(uri) as ResourceDictionary;
 
-                if (resource == null)
+	            if (!(Application.LoadComponent(uri) is ResourceDictionary resource))
                     return default(T);
 
                 if (!string.IsNullOrEmpty(name))
@@ -62,10 +63,10 @@ namespace Edi.Core.Resources
             }
             catch (Exception exp)
             {
-                logger.Error(string.Format("Error Loading resource '{0}': {1}", "Exception:", exp.Message, exp));
+                Logger.Error($"Error Loading resource \'Exception:\': {exp.Message}");
 
                 var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                msgBox.Show(exp, "Error loading internal resource.", MsgBox.MsgBoxButtons.OK, MsgBoxImage.Error);
+                msgBox.Show(exp, "Error loading internal resource.", MsgBoxButtons.OK, MsgBoxImage.Error);
             }
 
             return default(T);

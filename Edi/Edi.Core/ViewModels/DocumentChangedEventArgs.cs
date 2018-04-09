@@ -1,7 +1,9 @@
-﻿using Edi.Core.Interfaces;
-namespace Edi.Core.ViewModels
+﻿namespace Edi.Core.ViewModels
 {
-	public delegate void DocumentChangedEventHandler(object sender, DocumentChangedEventArgs e);
+    using System;
+    using Edi.Core.Interfaces;
+
+    public delegate void DocumentChangedEventHandler(object sender, DocumentChangedEventArgs e);
 
 	/// <summary>
 	/// This kind of event should be fired by the document container when a new document becomes active.
@@ -9,16 +11,16 @@ namespace Edi.Core.ViewModels
 	/// The initial design follows this article:
 	/// http://www.codeproject.com/Articles/5043/Step-by-Step-Event-handling-in-C
 	/// </summary>
-	public class DocumentChangedEventArgs : System.EventArgs
+	public class DocumentChangedEventArgs : EventArgs
 	{
 		#region fields
-		private IFileBaseViewModel mActiveDocument;
+
 		#endregion fields
 
 		#region constrcutor
 		public DocumentChangedEventArgs(IFileBaseViewModel activeDocument)
 		{
-			this.mActiveDocument = activeDocument;
+			ActiveDocument = activeDocument;
 		}
 		#endregion constrcutor
 
@@ -26,13 +28,8 @@ namespace Edi.Core.ViewModels
 		/// <summary>
 		/// Get the active document that is active now (as of this event).
 		/// </summary>
-		public IFileBaseViewModel ActiveDocument
-		{
-			get
-			{
-				return this.mActiveDocument;
-			}
-		}
+		public IFileBaseViewModel ActiveDocument { get; }
+
 		#endregion methods
 	}
 }

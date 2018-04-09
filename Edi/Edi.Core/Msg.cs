@@ -11,8 +11,8 @@
 		/// </summary>
 		public Msg()
 		{
-			this.Message = string.Empty;
-			this.CategoryOfMsg = MsgCategory.Error;
+			Message = string.Empty;
+			CategoryOfMsg = MsgCategory.Error;
 		}
 
 		/// <summary>
@@ -23,8 +23,8 @@
 		public Msg(string strMsg, MsgCategory type = MsgCategory.Error)
 			: this()
 		{
-			this.Message = ((strMsg == null ? string.Empty : strMsg).Length == 0 ? "<Unknown Internal Problem>" : strMsg);
-			this.CategoryOfMsg = type;
+			Message = ((strMsg ?? string.Empty).Length == 0 ? "<Unknown Internal Problem>" : strMsg);
+			CategoryOfMsg = type;
 		}
 
 		/// <summary>
@@ -35,8 +35,8 @@
 		{
 			if (copyThis == null) return;
 
-			this.CategoryOfMsg = copyThis.CategoryOfMsg;
-			this.Message = copyThis.Message;
+			CategoryOfMsg = copyThis.CategoryOfMsg;
+			Message = copyThis.Message;
 		}
 		#endregion constructor
 
@@ -80,18 +80,18 @@
 		/// <summary>
 		/// Get property with a string representation that can be displayed to the user
 		/// </summary>
-		public string Message { get; private set; }
+		public string Message { get; }
 
 		/// <summary>
 		/// Get <seealso cref="MsgCategory"/> property to tag this message with a category.
 		/// </summary>
-		public MsgCategory CategoryOfMsg { get; private set; }
+		public MsgCategory CategoryOfMsg { get; }
 
 		public string MessageType
 		{
 			get
 			{
-				switch (this.CategoryOfMsg)
+				switch (CategoryOfMsg)
 				{
 					case MsgCategory.Information:
 						return "Information";
@@ -101,7 +101,6 @@
 						return "Warning";
 					case MsgCategory.InternalError:
 						return "Internal Error";
-					case MsgCategory.Unknown:
 					default:
 						return "Unknown Error";
 				}

@@ -1,27 +1,27 @@
 namespace Edi.Apps.ViewModels
 {
     using CommonServiceLocator;
-    using Edi.Apps.Enums;
-    using Edi.Apps.Interfaces.ViewModel;
-    using Edi.Core.Interfaces;
-    using Edi.Core.Interfaces.Documents;
-    using Edi.Core.Interfaces.DocumentTypes;
-    using Edi.Core.Models.Documents;
-    using Edi.Core.ViewModels;
-    using Edi.Core.ViewModels.Base;
-    using Edi.Core.ViewModels.Command;
-    using Edi.Core.ViewModels.Events;
-    using Edi.Dialogs.About;
-    using Edi.Documents.ViewModels.EdiDoc;
-    using Edi.Documents.ViewModels.MiniUml;
-    using Edi.Documents.ViewModels.StartPage;
-    using Edi.Settings.Interfaces;
-    using Edi.SettingsView.Config.ViewModels;
-    using Edi.Themes.Interfaces;
+    using Enums;
+    using Core.Interfaces;
+    using Core.Interfaces.Documents;
+    using Core.Interfaces.DocumentTypes;
+    using Core.Models.Documents;
+    using Core.ViewModels;
+    using Core.ViewModels.Base;
+    using Core.ViewModels.Command;
+    using Core.ViewModels.Events;
+    using Dialogs.About;
+    using Documents.ViewModels.EdiDoc;
+    using Documents.ViewModels.MiniUml;
+    using Documents.ViewModels.StartPage;
+    using Settings.Interfaces;
+    using SettingsView.Config.ViewModels;
+    using Themes.Interfaces;
     using EdiApp.Events;   // XXX TODO Implementation in Edi.Core should have a different namespace
     using Files.ViewModels.RecentFiles;
     using Microsoft.Win32;
     using MRULib.MRU.Interfaces;
+    using MiniUML.Model.ViewModels.Document;
     using MsgBox;
     using Prism.Events;
     using Prism.Modularity;
@@ -41,55 +41,54 @@ namespace Edi.Apps.ViewModels
     /// It publishes the methodes, properties, and events necessary to integrate
     /// the application into a given shell (BootStrapper, App.xaml.cs etc).
     /// </summary>
-    [Export(typeof(IApplicationViewModel))]
+    [Export(typeof(Interfaces.IApplicationViewModel))]
     [Export(typeof(IFileOpenService))]
     public partial class ApplicationViewModel : ViewModelBase,
                                                 IViewModelResolver,
-                                                IApplicationViewModel,
+                                                Interfaces.IApplicationViewModel,
                                                 IDocumentParent,
                                                 IFileOpenService
     {
         #region fields
-        public const string Log4netFileExtension = "log4j";
-        public static readonly string Log4netFileFilter = Edi.Util.Local.Strings.STR_FileType_FileFilter_Log4j;
+        public const string Log4NetFileExtension = "log4j";
+        public static readonly string Log4NetFileFilter = Util.Local.Strings.STR_FileType_FileFilter_Log4j;
 
-        public const string MiniUMLFileExtension = "uml";
-        public static readonly string UMLFileFilter = Edi.Util.Local.Strings.STR_FileType_FileFilter_UML;
+        public const string MiniUmlFileExtension = "uml";
+        public static readonly string UmlFileFilter = Util.Local.Strings.STR_FileType_FileFilter_UML;
 
-        private static string EdiTextEditorFileFilter =
-                                    Edi.Util.Local.Strings.STR_FileType_FileFilter_AllFiles +
-                                    "|" + Edi.Util.Local.Strings.STR_FileType_FileFilter_TextFiles +
-                                    "|" + Edi.Util.Local.Strings.STR_FileType_FileFilter_CSharp +
-                                    "|" + Edi.Util.Local.Strings.STR_FileType_FileFilter_HTML +
-                                    "|" + Edi.Util.Local.Strings.STR_FileType_FileFilter_SQL;
+/*
+        private static string _ediTextEditorFileFilter =
+                                    Util.Local.Strings.STR_FileType_FileFilter_AllFiles +
+                                    "|" + Util.Local.Strings.STR_FileType_FileFilter_TextFiles +
+                                    "|" + Util.Local.Strings.STR_FileType_FileFilter_CSharp +
+                                    "|" + Util.Local.Strings.STR_FileType_FileFilter_HTML +
+                                    "|" + Util.Local.Strings.STR_FileType_FileFilter_SQL;
+*/
 
-        protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        protected static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private bool? mDialogCloseResult = null;
-        private bool? mIsNotMaximized = null;
-        private bool mIsWorkspaceAreaOptimized = false;
+        private bool? _mDialogCloseResult;
+        private bool? _mIsNotMaximized;
+        private bool _mIsWorkspaceAreaOptimized;
 
-        private bool mShutDownInProgress = false;
-        private bool mShutDownInProgress_Cancel = false;
+        private bool _mShutDownInProgress;
+        private bool _mShutDownInProgressCancel;
 
-        private ObservableCollection<IFileBaseViewModel> mFiles = null;
-        private ReadOnlyObservableCollection<IFileBaseViewModel> mReadonyFiles = null;
+        private readonly ObservableCollection<IFileBaseViewModel> _mFiles;
+        private ReadOnlyObservableCollection<IFileBaseViewModel> _mReadonyFiles;
 
-        private IFileBaseViewModel mActiveDocument = null;
-        private RelayCommand<object> mMainWindowActivated = null;
+        private IFileBaseViewModel _mActiveDocument;
+        private RelayCommand<object> _mMainWindowActivated;
 
-        private readonly IModuleManager mModuleManager = null;
-        private readonly IAppCoreModel mAppCore = null;
-        private readonly IAvalonDockLayoutViewModel mAVLayout = null;
-        private readonly IToolWindowRegistry mToolRegistry = null;
-        private readonly ISettingsManager mSettingsManager = null;
-        private readonly IThemesManager mThemesManager = null;
-        private readonly IMessageManager mMessageManager = null;
+	    private readonly IAppCoreModel _mAppCore;
+	    private readonly IToolWindowRegistry _mToolRegistry;
+        private readonly ISettingsManager _mSettingsManager;
+	    private readonly IMessageManager _mMessageManager;
 
-        private readonly IDocumentTypeManager mDocumentTypeManager;
-        private IDocumentType mSelectedOpenDocumentType = null;
+        private readonly IDocumentTypeManager _mDocumentTypeManager;
+        private IDocumentType _mSelectedOpenDocumentType;
 
-        private readonly IMessageBoxService _MsgBox = null;
+        private readonly IMessageBoxService _msgBox;
         #endregion fields
 
         #region constructor
@@ -107,34 +106,28 @@ namespace Edi.Apps.ViewModels
                                     IDocumentTypeManager documentTypeManager)
             : this()
         {
-            this.mAppCore = appCore;
-            this.mAVLayout = avLayout;
-            this.mModuleManager = moduleManager;
+	        _mAppCore = appCore;
+            AdLayout = avLayout;
 
-            this.mMessageManager = messageManager;
-            if (messageManager.MessageBox != null)   // reset messagebox service
-                _MsgBox = messageManager.MessageBox;
-            else
-            {
-                _MsgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-            }
+	        _mMessageManager = messageManager;
+            _msgBox = messageManager.MessageBox ?? ServiceLocator.Current.GetInstance<IMessageBoxService>();
 
-            this.mToolRegistry = toolRegistry;
-            this.mSettingsManager = programSettings;
-            this.mThemesManager = themesManager;
-            this.mDocumentTypeManager = documentTypeManager;
+            _mToolRegistry = toolRegistry;
+            _mSettingsManager = programSettings;
+            ApplicationThemes = themesManager;
+            _mDocumentTypeManager = documentTypeManager;
 
-            this.mModuleManager.LoadModuleCompleted += this.ModuleManager_LoadModuleCompleted;
+            moduleManager.LoadModuleCompleted += ModuleManager_LoadModuleCompleted;
         }
 
         public ApplicationViewModel()
         {
-            this.mAVLayout = null;
-            this.mFiles = new ObservableCollection<IFileBaseViewModel>();
+            AdLayout = null;
+            _mFiles = new ObservableCollection<IFileBaseViewModel>();
 
             // Subscribe to publsihers who relay the fact that a new tool window has been registered
             // Register this methods to receive PRISM event notifications
-            RegisterToolWindowEvent.Instance.Subscribe(this.OnRegisterToolWindow, ThreadOption.BackgroundThread);
+            RegisterToolWindowEvent.Instance.Subscribe(OnRegisterToolWindow, ThreadOption.BackgroundThread);
         }
         #endregion constructor
 
@@ -154,17 +147,11 @@ namespace Edi.Apps.ViewModels
         /// <summary>
         /// Gets an instance of the current application theme manager.
         /// </summary>
-        public IThemesManager ApplicationThemes
-        {
-            get
-            {
-                return this.mThemesManager;
-            }
-        }
+        public IThemesManager ApplicationThemes { get; }
 
-        private object mLock = new object();
-        private bool mIsMainWindowActivationProcessed = false;
-        private bool mIsMainWindowActivationProcessingEnabled = false;
+	    private readonly object _mLock = new object();
+        private bool _mIsMainWindowActivationProcessed;
+        private bool _mIsMainWindowActivationProcessingEnabled;
 
         /// <summary>
         /// Activates/deactivates processing of the mainwindow activated event.
@@ -172,7 +159,7 @@ namespace Edi.Apps.ViewModels
         /// <param name="bActivate"></param>
         public void EnableMainWindowActivated(bool bActivate)
         {
-            this.mIsMainWindowActivationProcessingEnabled = bActivate;
+            _mIsMainWindowActivationProcessingEnabled = bActivate;
         }
 
         /// <summary>
@@ -184,55 +171,54 @@ namespace Edi.Apps.ViewModels
         {
             get
             {
-                if (this.mMainWindowActivated == null)
-                    this.mMainWindowActivated = new RelayCommand<object>((p) =>
-                    {
-                        // Is processing of this event currently enabled?
-                        if (this.mIsMainWindowActivationProcessingEnabled == false)
-                            return;
+	            return _mMainWindowActivated ?? (_mMainWindowActivated = new RelayCommand<object>((p) =>
+	            {
+		            // Is processing of this event currently enabled?
+		            if (_mIsMainWindowActivationProcessingEnabled == false)
+			            return;
 
-                        // Is this event already currently being processed?
-                        if (this.mIsMainWindowActivationProcessed == true)
-                            return;
+		            // Is this event already currently being processed?
+		            if (_mIsMainWindowActivationProcessed)
+			            return;
 
-                        lock (this.mLock)
-                        {
-                            try
-                            {
-                                if (this.mIsMainWindowActivationProcessed == true)
-                                    return;
+		            lock (_mLock)
+		            {
+			            try
+			            {
+				            if (_mIsMainWindowActivationProcessed)
+					            return;
 
-                                this.mIsMainWindowActivationProcessed = true;
+				            _mIsMainWindowActivationProcessed = true;
 
-                                foreach (var item in this.Files)
-                                {
-                                    if (item.WasChangedExternally == true)
-                                    {
-                                        var result = _MsgBox.Show(string.Format("File '{0}' was changed externally. Click OK to reload or Cancel to keep current content.", item.FileName),
-                                                                  "File changed externally", MsgBoxButtons.OKCancel);
+				            foreach (var item in Files)
+				            {
+					            if (item.WasChangedExternally)
+					            {
+						            var result = _msgBox.Show(
+							            $"File '{item.FileName}' was changed externally. Click OK to reload or Cancel to keep current content.",
+							            "File changed externally", MsgBoxButtons.OKCancel);
 
-                                        if (result == MsgBoxResult.OK)
-                                        {
-                                            item.ReOpen();
-                                        }
-                                    }
-                                }
-                            }
-                            catch (Exception exp)
-                            {
-                                logger.Error(exp.Message, exp);
-                                _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                                             this.mAppCore.IssueTrackerLink, this.mAppCore.IssueTrackerLink,
-                                             Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
-                            }
-                            finally
-                            {
-                                this.mIsMainWindowActivationProcessed = false;
-                            }
-                        }
-                    });
-
-                return this.mMainWindowActivated;
+						            if (result == MsgBoxResult.OK)
+						            {
+							            item.ReOpen();
+						            }
+					            }
+				            }
+			            }
+			            catch (Exception exp)
+			            {
+				            Logger.Error(exp.Message, exp);
+				            _msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error,
+					            MsgBoxResult.NoDefaultButton,
+					            _mAppCore.IssueTrackerLink, _mAppCore.IssueTrackerLink,
+					            Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+			            }
+			            finally
+			            {
+				            _mIsMainWindowActivationProcessed = false;
+			            }
+		            }
+	            }));
             }
         }
 
@@ -242,20 +228,17 @@ namespace Edi.Apps.ViewModels
         /// </summary>
         public IFileBaseViewModel ActiveDocument
         {
-            get
-            {
-                return this.mActiveDocument;
-            }
+            get => _mActiveDocument;
 
-            set
+	        set
             {
-                if (this.mActiveDocument != value)
+                if (_mActiveDocument != value)
                 {
-                    this.mActiveDocument = value;
+                    _mActiveDocument = value;
 
-                    this.RaisePropertyChanged(() => this.ActiveDocument);
-                    this.RaisePropertyChanged(() => this.ActiveEdiDocument);
-                    this.RaisePropertyChanged(() => this.vm_DocumentViewModel);
+                    RaisePropertyChanged(() => ActiveDocument);
+                    RaisePropertyChanged(() => ActiveEdiDocument);
+                    RaisePropertyChanged(() => vm_DocumentViewModel);
 
                     // Ensure that no pending calls are in the dispatcher queue
                     // This makes sure that we are blocked until bindings are re-established
@@ -264,12 +247,12 @@ namespace Edi.Apps.ViewModels
                     {
                         if (ActiveDocumentChanged != null)
                         {
-                            ActiveDocumentChanged(this, new DocumentChangedEventArgs(this.mActiveDocument)); //this.ActiveDocument
+                            ActiveDocumentChanged(this, new DocumentChangedEventArgs(_mActiveDocument)); //this.ActiveDocument
 
-                            if (value != null && this.mShutDownInProgress == false)
+                            if (value != null && _mShutDownInProgress == false)
                             {
-                                if (value.IsFilePathReal == true)
-                                    this.mSettingsManager.SessionData.LastActiveFile = value.FilePath;
+                                if (value.IsFilePathReal)
+                                    _mSettingsManager.SessionData.LastActiveFile = value.FilePath;
                             }
                         }
                     });
@@ -283,96 +266,56 @@ namespace Edi.Apps.ViewModels
         /// This property returns null (thus avoiding binding errors) if the
         /// ActiveDocument is not of <seealso cref="EdiViewModel"/> type.
         /// </summary>
-        public EdiViewModel ActiveEdiDocument
-        {
-            get
-            {
-                return this.mActiveDocument as EdiViewModel;
-            }
-        }
+        public EdiViewModel ActiveEdiDocument => _mActiveDocument as EdiViewModel;
 
-        /// <summary>
+	    /// <summary>
         /// This is a type safe ActiveDocument property that is used to bind
-        /// to an ActiveDocument of type <seealso cref="MiniUML.Model.ViewModels.DocumentViewModel"/>.
+        /// to an ActiveDocument of type <seealso cref="DocumentViewModel"/>.
         /// This property returns null (thus avoiding binding errors) if the
-        /// ActiveDocument is not of <seealso cref="MiniUML.Model.ViewModels.DocumentViewModel"/> type.
+        /// ActiveDocument is not of <seealso cref="DocumentViewModel"/> type.
         /// 
         /// This particular property is also required to load MiniUML Plugins.
         /// </summary>
-        public MiniUML.Model.ViewModels.Document.AbstractDocumentViewModel vm_DocumentViewModel
+        public AbstractDocumentViewModel vm_DocumentViewModel
         {
             get
             {
-
-                if (this.mActiveDocument is MiniUmlViewModel)
-                {
-                    MiniUmlViewModel vm = this.mActiveDocument as MiniUmlViewModel;
-
-                    return vm.DocumentMiniUml as MiniUML.Model.ViewModels.Document.AbstractDocumentViewModel;
-                }
-
-                return null;
+	            MiniUmlViewModel vm = _mActiveDocument as MiniUmlViewModel;
+	            return vm?.DocumentMiniUml;
             }
         }
         #endregion
 
         public IDocumentType SelectedOpenDocumentType
         {
-            get
-            {
-                return this.mSelectedOpenDocumentType;
-            }
+            get => _mSelectedOpenDocumentType;
 
-            private set
+	        private set
             {
-                if (this.mSelectedOpenDocumentType != value)
-                {
-                    this.mSelectedOpenDocumentType = value;
-                    this.RaisePropertyChanged(() => this.SelectedOpenDocumentType);
-                }
+	            if (_mSelectedOpenDocumentType == value) return;
+	            _mSelectedOpenDocumentType = value;
+	            RaisePropertyChanged(() => SelectedOpenDocumentType);
             }
         }
 
-        public ObservableCollection<IDocumentType> DocumentTypes
-        {
-            get
-            {
-                return this.mDocumentTypeManager.DocumentTypes;
-            }
-        }
+        public ObservableCollection<IDocumentType> DocumentTypes => _mDocumentTypeManager.DocumentTypes;
 
-        /// <summary>
+	    /// <summary>
         /// Principable data source for collection of documents managed in the the document manager (of AvalonDock).
         /// </summary>
-        public ReadOnlyObservableCollection<IFileBaseViewModel> Files
-        {
-            get
-            {
-                if (mReadonyFiles == null)
-                    mReadonyFiles = new ReadOnlyObservableCollection<IFileBaseViewModel>(this.mFiles);
+        public ReadOnlyObservableCollection<IFileBaseViewModel> Files => _mReadonyFiles ?? (_mReadonyFiles = new ReadOnlyObservableCollection<IFileBaseViewModel>(_mFiles));
 
-                return mReadonyFiles;
-            }
-        }
-
-        /// <summary>
+	    /// <summary>
         /// Principable data source for collection of tool window viewmodels
         /// whos view templating is managed in the the document manager of AvalonDock.
         /// </summary>
-        public ObservableCollection<ToolViewModel> Tools
+        public ObservableCollection<ToolViewModel> Tools => _mToolRegistry.Tools;
+
+	    public RecentFilesViewModel RecentFiles
         {
             get
             {
-                return this.mToolRegistry.Tools;
-            }
-        }
-
-        public RecentFilesViewModel RecentFiles
-        {
-            get
-            {
-                var ret = this.GetToolWindowVM<RecentFilesViewModel>();
-
+                var ret = GetToolWindowVm<RecentFilesViewModel>();
                 return ret;
             }
         }
@@ -380,40 +323,22 @@ namespace Edi.Apps.ViewModels
         /// <summary>
         /// Expose command to load/save AvalonDock layout on application startup and shut-down.
         /// </summary>
-        public IAvalonDockLayoutViewModel ADLayout
-        {
-            get
-            {
-                return this.mAVLayout;
-            }
-        }
+        public IAvalonDockLayoutViewModel AdLayout { get; }
 
-        public bool ShutDownInProgress_Cancel
-        {
-            get
-            {
-                return this.mShutDownInProgress_Cancel;
-            }
+	    public bool ShutDownInProgressCancel
+		{
+			get => _mShutDownInProgressCancel;
 
-            set
-            {
-                if (this.mShutDownInProgress_Cancel != value)
-                    this.mShutDownInProgress_Cancel = value;
-            }
-        }
+			set => _mShutDownInProgressCancel = value;
+		}
 
-        #region ApplicationName
-        /// <summary>
-        /// Get the name of this application in a human read-able fashion
-        /// </summary>
-        public string ApplicationTitle
-        {
-            get
-            {
-                return this.mAppCore.AssemblyTitle;
-            }
-        }
-        #endregion ApplicationName
+		#region ApplicationName
+		/// <summary>
+		/// Get the name of this application in a human read-able fashion
+		/// </summary>
+		public string ApplicationTitle => _mAppCore.AssemblyTitle;
+
+	    #endregion ApplicationName
 
         /// <summary>
         /// Convienance property to filter (cast) documents that represent
@@ -422,14 +347,9 @@ namespace Edi.Apps.ViewModels
         /// Items such as start page or program settings are not considered
         /// documents in this collection.
         /// </summary>
-        private List<EdiViewModel> Documents
-        {
-            get
-            {
-                return this.mFiles.OfType<EdiViewModel>().ToList();
-            }
-        }
-        #endregion Properties
+        private List<EdiViewModel> Documents => _mFiles.OfType<EdiViewModel>().ToList();
+
+	    #endregion Properties
 
         #region methods
         /// <summary>
@@ -440,31 +360,33 @@ namespace Edi.Apps.ViewModels
         /// <returns></returns>
         public bool FileOpen(string file)
         {
-            this.Open(file);
+            Open(file);
             return true;
         }
 
-        /// <summary>
-        /// Open a file supplied in <paramref name="filePath"/> (without displaying a file open dialog).
-        /// </summary>
-        /// <param name="filePath">file to open</param>
-        /// <param name="AddIntoMRU">indicate whether file is to be added into MRU or not</param>
-        /// <returns></returns>
-        public IFileBaseViewModel Open(string filePath,
+	    /// <summary>
+	    /// Open a file supplied in <paramref name="filePath"/> (without displaying a file open dialog).
+	    /// </summary>
+	    /// <param name="filePath">file to open</param>
+	    /// <param name="closeDocumentWithoutMessageOnError"></param>
+	    /// <param name="addIntoMru">indicate whether file is to be added into MRU or not</param>
+	    /// <param name="typeOfDoc"></param>
+	    /// <returns></returns>
+	    public IFileBaseViewModel Open(string filePath,
                                         CloseDocOnError closeDocumentWithoutMessageOnError = CloseDocOnError.WithUserNotification,
-                                        bool AddIntoMRU = true,
+                                        bool addIntoMru = true,
                                         string typeOfDoc = "EdiTextEditor")
         {
-            logger.InfoFormat("TRACE EdiViewModel.Open param: '{0}', AddIntoMRU {1}", filePath, AddIntoMRU);
+            Logger.InfoFormat("TRACE EdiViewModel.Open param: '{0}', AddIntoMRU {1}", filePath, addIntoMru);
 
-            this.SelectedOpenDocumentType = this.DocumentTypes[0];
+            SelectedOpenDocumentType = DocumentTypes[0];
 
             // Verify whether file is already open in editor, and if so, show it
-            IFileBaseViewModel fileViewModel = this.Documents.FirstOrDefault(fm => fm.FilePath == filePath);
+            IFileBaseViewModel fileViewModel = Documents.FirstOrDefault(fm => fm.FilePath == filePath);
 
             if (fileViewModel != null) // File is already open so show it to the user
             {
-                this.ActiveDocument = fileViewModel;
+                ActiveDocument = fileViewModel;
                 return fileViewModel;
             }
 
@@ -472,16 +394,15 @@ namespace Edi.Apps.ViewModels
             dm.SetFileNamePath(filePath, true);
 
             // 1st try to find a document type handler based on the supplied extension
-            var docType = this.mDocumentTypeManager.FindDocumentTypeByExtension(dm.FileExtension, true);
+            var docType = _mDocumentTypeManager.FindDocumentTypeByExtension(dm.FileExtension, true) ??
+                          _mDocumentTypeManager.FindDocumentTypeByKey(typeOfDoc);
 
             // 2nd try to find a document type handler based on the name of the prefered viewer
             // (Defaults to EdiTextEditor if no name is given)
-            if (docType == null)
-                docType = this.mDocumentTypeManager.FindDocumentTypeByKey(typeOfDoc);
 
-            if (docType != null)
+	        if (docType != null)
             {
-                fileViewModel = docType.FileOpenMethod(dm, this.mSettingsManager);
+                fileViewModel = docType.FileOpenMethod(dm, _mSettingsManager);
             }
             else
             {
@@ -491,22 +412,19 @@ namespace Edi.Apps.ViewModels
                 ////}
                 ////else
                 ////{
-                bool closeOnErrorWithoutMessage = false;
-
-                if (closeDocumentWithoutMessageOnError == CloseDocOnError.WithoutUserNotification)
-                    closeOnErrorWithoutMessage = true;
+                bool closeOnErrorWithoutMessage = closeDocumentWithoutMessageOnError == CloseDocOnError.WithoutUserNotification;
 
                 // try to load a standard text file from the file system as a fallback method
-                fileViewModel = EdiViewModel.LoadFile(dm, this.mSettingsManager, closeOnErrorWithoutMessage);
+                fileViewModel = EdiViewModel.LoadFile(dm, _mSettingsManager, closeOnErrorWithoutMessage);
                 ////}
             }
 
-            return IntegrateDocumentVM(fileViewModel, filePath, AddIntoMRU);
+            return IntegrateDocumentVm(fileViewModel, filePath, addIntoMru);
         }
 
-        private IFileBaseViewModel IntegrateDocumentVM(IFileBaseViewModel fileViewModel,
+        private IFileBaseViewModel IntegrateDocumentVm(IFileBaseViewModel fileViewModel,
                                                         string filePath,
-                                                        bool AddIntoMRU)
+                                                        bool addIntoMru)
         {
             if (fileViewModel == null)
             {
@@ -514,8 +432,8 @@ namespace Edi.Apps.ViewModels
 
                 if (mruList.FindEntry(filePath) != null)
                 {
-                    if (_MsgBox.Show(string.Format(Edi.Util.Local.Strings.STR_ERROR_LOADING_FILE_MSG, filePath),
-                                                   Edi.Util.Local.Strings.STR_ERROR_LOADING_FILE_CAPTION, MsgBoxButtons.YesNo) == MsgBoxResult.Yes)
+                    if (_msgBox.Show(string.Format(Util.Local.Strings.STR_ERROR_LOADING_FILE_MSG, filePath),
+                                                   Util.Local.Strings.STR_ERROR_LOADING_FILE_CAPTION, MsgBoxButtons.YesNo) == MsgBoxResult.Yes)
                     {
                         mruList.RemoveEntry(filePath);
                     }
@@ -524,24 +442,23 @@ namespace Edi.Apps.ViewModels
                 return null;
             }
 
-            fileViewModel.DocumentEvent += this.ProcessDocumentEvent;
-            fileViewModel.ProcessingResultEvent += this.Vm_ProcessingResultEvent;
-            this.mFiles.Add(fileViewModel);
+            fileViewModel.DocumentEvent += ProcessDocumentEvent;
+            fileViewModel.ProcessingResultEvent += Vm_ProcessingResultEvent;
+            _mFiles.Add(fileViewModel);
 
             // reset viewmodel options in accordance to current program settings
 
-            if (fileViewModel is IDocumentEdi)
+            if (fileViewModel is IDocumentEdi ediVm)
             {
-                IDocumentEdi ediVM = fileViewModel as IDocumentEdi;
-                this.SetActiveDocumentOnNewFileOrOpenFile(ediVM);
+	            SetActiveDocumentOnNewFileOrOpenFile(ediVm);
             }
             else
             {
-                this.SetActiveFileBaseDocument(fileViewModel);
+                SetActiveFileBaseDocument(fileViewModel);
             }
 
-            if (AddIntoMRU == true)
-                this.GetToolWindowVM<RecentFilesViewModel>().AddNewEntryIntoMRU(filePath);
+            if (addIntoMru)
+                GetToolWindowVm<RecentFilesViewModel>().AddNewEntryIntoMRU(filePath);
 
             return fileViewModel;
         }
@@ -550,27 +467,27 @@ namespace Edi.Apps.ViewModels
         /// <seealso cref="IViewModelResolver"/> method for resolving
         /// AvalonDock contentid's against a specific viewmodel.
         /// </summary>
-        /// <param name="content_id"></param>
+        /// <param name="contentId"></param>
         /// <returns></returns>
-        public object ContentViewModelFromID(string content_id)
+        public object ContentViewModelFromId(string contentId)
         {
             // Query for a tool window and return it
-            var anchorable_vm = this.Tools.FirstOrDefault(d => d.ContentId == content_id);
+            var anchorableVm = Tools.FirstOrDefault(d => d.ContentId == contentId);
 
 
-            if (anchorable_vm is IRegisterableToolWindow)
+            if (anchorableVm is IRegisterableToolWindow)
             {
-                IRegisterableToolWindow registerTW = anchorable_vm as IRegisterableToolWindow;
+                IRegisterableToolWindow registerTw = anchorableVm as IRegisterableToolWindow;
 
-                registerTW.SetDocumentParent(this);
+                registerTw.SetDocumentParent(this);
             }
 
-            if (anchorable_vm != null)
-                return anchorable_vm;
+            if (anchorableVm != null)
+                return anchorableVm;
 
             // Query for a matching document and return it
-            if (this.mSettingsManager.SettingData.ReloadOpenFilesOnAppStart == true)
-                return this.ReloadDocument(content_id);
+            if (_mSettingsManager.SettingData.ReloadOpenFilesOnAppStart)
+                return ReloadDocument(contentId);
 
             return null;
         }
@@ -580,7 +497,7 @@ namespace Edi.Apps.ViewModels
         {
             try
             {
-                var typeOfDocKey = this.mDocumentTypeManager.FindDocumentTypeByKey(t.ToString());
+                var typeOfDocKey = _mDocumentTypeManager.FindDocumentTypeByKey(t.ToString());
                 if (typeOfDocKey != null)
                 {
                     var dm = new DocumentModel();
@@ -592,46 +509,46 @@ namespace Edi.Apps.ViewModels
 
                         if (vm is IDocumentEdi)              // Process Edi ViewModel specific items
                         {
-                            var ediVM = vm as IDocumentEdi;
+                            var ediVm = vm as IDocumentEdi;
 
-                            ediVM.InitInstance(this.mSettingsManager.SettingData);
+                            ediVm.InitInstance(_mSettingsManager.SettingData);
 
-                            ediVM.IncreaseNewCounter();
-                            ediVM.DocumentEvent += this.ProcessDocumentEvent;
+                            ediVm.IncreaseNewCounter();
+                            ediVm.DocumentEvent += ProcessDocumentEvent;
 
-                            ediVM.ProcessingResultEvent += Vm_ProcessingResultEvent;
-                            ediVM.CreateNewDocument();
+                            ediVm.ProcessingResultEvent += Vm_ProcessingResultEvent;
+                            ediVm.CreateNewDocument();
 
-                            this.mFiles.Add(ediVM);
-                            this.SetActiveDocumentOnNewFileOrOpenFile(ediVM);
+                            _mFiles.Add(ediVm);
+                            SetActiveDocumentOnNewFileOrOpenFile(ediVm);
                         }
                         else
-                            throw new NotSupportedException(string.Format("Creating Documents of type: '{0}'", t.ToString()));
+                            throw new NotSupportedException($"Creating Documents of type: '{t.ToString()}'");
                     }
                     else
                     {
                         // Modul registration with PRISM is missing here
-                        if (t == TypeOfDocument.UMLEditor)
+                        if (t == TypeOfDocument.UmlEditor)
                         {
-                            var umlVM = new MiniUmlViewModel(dm);
+                            var umlVm = new MiniUmlViewModel(dm);
 
-                            umlVM.DocumentEvent += this.ProcessDocumentEvent;
-                            this.mFiles.Add(umlVM);
-                            this.SetActiveFileBaseDocument(umlVM);
+                            umlVm.DocumentEvent += ProcessDocumentEvent;
+                            _mFiles.Add(umlVm);
+                            SetActiveFileBaseDocument(umlVm);
                         }
                         else
-                            throw new NotSupportedException(string.Format("Creating Documents of type: '{0}'", t.ToString()));
+                            throw new NotSupportedException($"Creating Documents of type: '{t.ToString()}'");
                     }
                 }
             }
             catch (Exception exp)
             {
-                logger.Error(exp.Message, exp);
-                _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_UnknownError_Caption,
+                Logger.Error(exp.Message, exp);
+                _msgBox.Show(exp, Util.Local.Strings.STR_MSG_UnknownError_Caption,
                              MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                             this.mAppCore.IssueTrackerLink,
-                             this.mAppCore.IssueTrackerLink,
-                             Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                             _mAppCore.IssueTrackerLink,
+                             _mAppCore.IssueTrackerLink,
+                             Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
             }
         }
         #endregion NewCommand
@@ -647,15 +564,14 @@ namespace Edi.Apps.ViewModels
             try
             {
                 var dlg = new OpenFileDialog();
-                IFileFilterEntries fileEntries = null;
 
-                // Get filter strings for document specific filters or all filters
+	            // Get filter strings for document specific filters or all filters
                 // depending on whether type of document is set to a key or not.
-                fileEntries = this.mDocumentTypeManager.GetFileFilterEntries(typeOfDocument);
+                var fileEntries = _mDocumentTypeManager.GetFileFilterEntries(typeOfDocument);
                 dlg.Filter = fileEntries.GetFilterString();
 
                 dlg.Multiselect = true;
-                dlg.InitialDirectory = this.GetDefaultPath();
+                dlg.InitialDirectory = GetDefaultPath();
 
                 if (dlg.ShowDialog().GetValueOrDefault())
                 {
@@ -668,24 +584,24 @@ namespace Edi.Apps.ViewModels
                         dm.SetFileNamePath(fileName, true);
 
                         // Execute file open method from delegate and integrate new viewmodel instance
-                        var vm = fo(dm, this.mSettingsManager);
+                        var vm = fo(dm, _mSettingsManager);
 
-                        IntegrateDocumentVM(vm, fileName, true);
+                        IntegrateDocumentVm(vm, fileName, true);
                     }
 
                     // Pre-select this document type in collection of document types that can be opened and viewed
-                    var typeOfDocKey = this.mDocumentTypeManager.FindDocumentTypeByKey(typeOfDocument);
+                    var typeOfDocKey = _mDocumentTypeManager.FindDocumentTypeByKey(typeOfDocument);
                     if (typeOfDocKey != null)
-                        this.SelectedOpenDocumentType = typeOfDocKey;
+                        SelectedOpenDocumentType = typeOfDocKey;
                 }
             }
             catch (Exception exp)
             {
-                logger.Error(exp.Message, exp);
-                _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                             this.mAppCore.IssueTrackerLink,
-                             this.mAppCore.IssueTrackerLink,
-                             Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                Logger.Error(exp.Message, exp);
+                _msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                             _mAppCore.IssueTrackerLink,
+                             _mAppCore.IssueTrackerLink,
+                             Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
             }
         }
         #endregion OnOpen
@@ -695,20 +611,20 @@ namespace Edi.Apps.ViewModels
         {
             try
             {
-                if (this.Closing_CanExecute() == true)
-                {
-                    this.mShutDownInProgress_Cancel = false;
-                    this.OnRequestClose();
-                }
+                if (Closing_CanExecute() == false)
+                    return;
+
+	            _mShutDownInProgressCancel = false;
+	            OnRequestClose();
             }
             catch (Exception exp)
             {
-                logger.Error(exp.Message, exp);
-                _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_UnknownError_Caption,
+                Logger.Error(exp.Message, exp);
+                _msgBox.Show(exp, Util.Local.Strings.STR_MSG_UnknownError_Caption,
                              MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                             this.mAppCore.IssueTrackerLink,
-                             this.mAppCore.IssueTrackerLink,
-                             Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                             _mAppCore.IssueTrackerLink,
+                             _mAppCore.IssueTrackerLink,
+                             Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
             }
         }
         #endregion Application_Exit_Command
@@ -718,30 +634,28 @@ namespace Edi.Apps.ViewModels
             try
             {
                 // Initialize view model for editing settings
-                ConfigViewModel dlgVM = new ConfigViewModel();
-                dlgVM.LoadOptionsFromModel(this.mSettingsManager.SettingData);
+                ConfigViewModel dlgVm = new ConfigViewModel();
+                dlgVm.LoadOptionsFromModel(_mSettingsManager.SettingData);
 
                 // Create dialog and attach viewmodel to view datacontext
-                Window dlg = ViewSelector.GetDialogView(dlgVM, Application.Current.MainWindow);
+                Window dlg = ViewSelector.GetDialogView(dlgVm, Application.Current.MainWindow);
 
                 dlg.ShowDialog();
 
-                if (dlgVM.WindowCloseResult == true)
-                {
-                    dlgVM.SaveOptionsToModel(this.mSettingsManager.SettingData);
+	            if (dlgVm.WindowCloseResult != true) return;
+	            dlgVm.SaveOptionsToModel(_mSettingsManager.SettingData);
 
-                    if (this.mSettingsManager.SettingData.IsDirty == true)
-                        this.mSettingsManager.SaveOptions(this.mAppCore.DirFileAppSettingsData, this.mSettingsManager.SettingData);
-                }
+	            if (_mSettingsManager.SettingData.IsDirty)
+		            _mSettingsManager.SaveOptions(_mAppCore.DirFileAppSettingsData, _mSettingsManager.SettingData);
             }
             catch (Exception exp)
             {
-                logger.Error(exp.Message, exp);
-                _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_UnknownError_Caption,
+                Logger.Error(exp.Message, exp);
+                _msgBox.Show(exp, Util.Local.Strings.STR_MSG_UnknownError_Caption,
                              MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                             this.mAppCore.IssueTrackerLink,
-                             this.mAppCore.IssueTrackerLink,
-                             Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                             _mAppCore.IssueTrackerLink,
+                             _mAppCore.IssueTrackerLink,
+                             Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
             }
         }
 
@@ -757,12 +671,12 @@ namespace Edi.Apps.ViewModels
             }
             catch (Exception exp)
             {
-                logger.Error(exp.Message, exp);
-                _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_UnknownError_Caption,
+                Logger.Error(exp.Message, exp);
+                _msgBox.Show(exp, Util.Local.Strings.STR_MSG_UnknownError_Caption,
                              MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                             this.mAppCore.IssueTrackerLink,
-                             this.mAppCore.IssueTrackerLink,
-                             Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                             _mAppCore.IssueTrackerLink,
+                             _mAppCore.IssueTrackerLink,
+                             Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
             }
         }
         #endregion Application_About_Command
@@ -780,20 +694,18 @@ namespace Edi.Apps.ViewModels
                 if (e != null)
                     e.Handled = true;
 
-                var isPinnedParam = false;    // Pin this if it was not pinned before or
-                if (cmdParam.IsPinned == 0)  // Vice Versa
-                    isPinnedParam = true;
+                bool isPinnedParam = cmdParam.IsPinned == 0;    // Pin this if it was not pinned before or
 
-                this.GetToolWindowVM<RecentFilesViewModel>().MruList.PinUnpinEntry(isPinnedParam, cmdParam);
+                GetToolWindowVm<RecentFilesViewModel>().MruList.PinUnpinEntry(isPinnedParam, cmdParam);
             }
             catch (Exception exp)
             {
-                logger.Error(exp.Message, exp);
-                _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_UnknownError_Caption,
+                Logger.Error(exp.Message, exp);
+                _msgBox.Show(exp, Util.Local.Strings.STR_MSG_UnknownError_Caption,
                              MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                             this.mAppCore.IssueTrackerLink,
-                             this.mAppCore.IssueTrackerLink,
-                             Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                             _mAppCore.IssueTrackerLink,
+                             _mAppCore.IssueTrackerLink,
+                             Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
             }
         }
 
@@ -809,16 +721,16 @@ namespace Edi.Apps.ViewModels
                 if (e != null)
                     e.Handled = true;
 
-                this.GetToolWindowVM<RecentFilesViewModel>().MruList.UpdateEntry(cmdParam);
+                GetToolWindowVm<RecentFilesViewModel>().MruList.UpdateEntry(cmdParam);
             }
             catch (Exception exp)
             {
-                logger.Error(exp.Message, exp);
-                _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_UnknownError_Caption,
+                Logger.Error(exp.Message, exp);
+                _msgBox.Show(exp, Util.Local.Strings.STR_MSG_UnknownError_Caption,
                              MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                             this.mAppCore.IssueTrackerLink,
-                             this.mAppCore.IssueTrackerLink,
-                             Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                             _mAppCore.IssueTrackerLink,
+                             _mAppCore.IssueTrackerLink,
+                             Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
             }
         }
 
@@ -826,24 +738,22 @@ namespace Edi.Apps.ViewModels
         {
             try
             {
-                var cmdParam = o as IMRUEntryViewModel;
-
-                if (cmdParam == null)
+	            if (!(o is IMRUEntryViewModel cmdParam))
                     return;
 
                 if (e != null)
                     e.Handled = true;
 
-                this.GetToolWindowVM<RecentFilesViewModel>().MruList.RemoveEntry(cmdParam);
+                GetToolWindowVm<RecentFilesViewModel>().MruList.RemoveEntry(cmdParam);
             }
             catch (Exception exp)
             {
-                logger.Error(exp.Message, exp);
-                _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_UnknownError_Caption,
+                Logger.Error(exp.Message, exp);
+                _msgBox.Show(exp, Util.Local.Strings.STR_MSG_UnknownError_Caption,
                              MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                             this.mAppCore.IssueTrackerLink,
-                             this.mAppCore.IssueTrackerLink,
-                             Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                             _mAppCore.IssueTrackerLink,
+                             _mAppCore.IssueTrackerLink,
+                             Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
             }
         }
         #endregion Recent File List Pin Unpin Commands
@@ -856,37 +766,35 @@ namespace Edi.Apps.ViewModels
         {
             try
             {
-                if (this.mShutDownInProgress == false)
-                {
-                    if (this.DialogCloseResult == null)
-                        this.DialogCloseResult = true;      // Execute Close event via attached property
+	            if (_mShutDownInProgress) return;
+	            if (DialogCloseResult == null)
+		            DialogCloseResult = true;      // Execute Close event via attached property
 
-                    if (this.mShutDownInProgress_Cancel == true)
-                    {
-                        this.mShutDownInProgress = false;
-                        this.mShutDownInProgress_Cancel = false;
-                        this.DialogCloseResult = null;
-                    }
-                    else
-                    {
-                        this.mShutDownInProgress = true;
+	            if (_mShutDownInProgressCancel)
+	            {
+		            _mShutDownInProgress = false;
+		            _mShutDownInProgressCancel = false;
+		            DialogCloseResult = null;
+	            }
+	            else
+	            {
+		            _mShutDownInProgress = true;
 
-                        CommandManager.InvalidateRequerySuggested();
+		            CommandManager.InvalidateRequerySuggested();
 
-                        this.RequestClose?.Invoke(this, EventArgs.Empty);
-                    }
-                }
+		            RequestClose?.Invoke(this, EventArgs.Empty);
+	            }
             }
             catch (Exception exp)
             {
-                this.mShutDownInProgress = false;
+                _mShutDownInProgress = false;
 
-                logger.Error(exp.Message, exp);
-                _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_UnknownError_Caption,
+                Logger.Error(exp.Message, exp);
+                _msgBox.Show(exp, Util.Local.Strings.STR_MSG_UnknownError_Caption,
                              MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                             this.mAppCore.IssueTrackerLink,
-                             this.mAppCore.IssueTrackerLink,
-                             Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                             _mAppCore.IssueTrackerLink,
+                             _mAppCore.IssueTrackerLink,
+                             Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
             }
         }
         #endregion // RequestClose [event]
@@ -895,16 +803,16 @@ namespace Edi.Apps.ViewModels
         {
             try
             {
-                this.ActiveDocument = vm;
+                ActiveDocument = vm;
             }
             catch (Exception exp)
             {
-                logger.Error(exp.Message, exp);
-                _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_UnknownError_Caption,
+                Logger.Error(exp.Message, exp);
+                _msgBox.Show(exp, Util.Local.Strings.STR_MSG_UnknownError_Caption,
                              MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                             this.mAppCore.IssueTrackerLink,
-                             this.mAppCore.IssueTrackerLink,
-                             Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                             _mAppCore.IssueTrackerLink,
+                             _mAppCore.IssueTrackerLink,
+                             Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
             }
         }
 
@@ -918,19 +826,19 @@ namespace Edi.Apps.ViewModels
             try
             {
                 // Set scale factor in default size of text font
-                vm.InitScaleView(this.mSettingsManager.SettingData.DocumentZoomUnit,
-                                                 this.mSettingsManager.SettingData.DocumentZoomView);
+                vm.InitScaleView(_mSettingsManager.SettingData.DocumentZoomUnit,
+                                                 _mSettingsManager.SettingData.DocumentZoomView);
 
-                this.ActiveDocument = vm;
+                ActiveDocument = vm;
             }
             catch (Exception exp)
             {
-                logger.Error(exp.Message, exp);
-                _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_UnknownError_Caption,
+                Logger.Error(exp.Message, exp);
+                _msgBox.Show(exp, Util.Local.Strings.STR_MSG_UnknownError_Caption,
                              MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                             this.mAppCore.IssueTrackerLink,
-                             this.mAppCore.IssueTrackerLink,
-                             Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                             _mAppCore.IssueTrackerLink,
+                             _mAppCore.IssueTrackerLink,
+                             Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
             }
         }
 
@@ -960,35 +868,35 @@ namespace Edi.Apps.ViewModels
             try
             {
                 // Generate a default path from cuurently or last active document
-                if (this.ActiveEdiDocument != null)
-                    sPath = this.ActiveEdiDocument.GetFilePath();
+                if (ActiveEdiDocument != null)
+                    sPath = ActiveEdiDocument.GetFilePath();
 
                 if (sPath == string.Empty)
-                    sPath = this.mSettingsManager.SessionData.GetLastActivePath();
+                    sPath = _mSettingsManager.SessionData.GetLastActivePath();
 
                 if (sPath == string.Empty)
-                    sPath = this.mAppCore.MyDocumentsUserDir;
+                    sPath = _mAppCore.MyDocumentsUserDir;
                 else
                 {
                     try
                     {
-                        if (System.IO.Directory.Exists(sPath) == false)
-                            sPath = this.mAppCore.MyDocumentsUserDir;
+                        if (Directory.Exists(sPath) == false)
+                            sPath = _mAppCore.MyDocumentsUserDir;
                     }
                     catch
                     {
-                        sPath = this.mAppCore.MyDocumentsUserDir;
+                        sPath = _mAppCore.MyDocumentsUserDir;
                     }
                 }
             }
             catch (Exception exp)
             {
-                logger.Error(exp.Message, exp);
-                _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_UnknownError_Caption,
+                Logger.Error(exp.Message, exp);
+                _msgBox.Show(exp, Util.Local.Strings.STR_MSG_UnknownError_Caption,
                              MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                             this.mAppCore.IssueTrackerLink,
-                             this.mAppCore.IssueTrackerLink,
-                             Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                             _mAppCore.IssueTrackerLink,
+                             _mAppCore.IssueTrackerLink,
+                             Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
             }
 
             return sPath;
@@ -1007,40 +915,37 @@ namespace Edi.Apps.ViewModels
             if (doc == null)
                 return false;
 
-            if (doc.CanSaveData == true)
-            {
-                var defaultFilter = ApplicationViewModel.GetDefaultFileFilter(doc, this.mDocumentTypeManager);
+	        if (!doc.CanSaveData)
+		        throw new NotSupportedException(
+			        doc.ToString());
+	        var defaultFilter = GetDefaultFileFilter(doc, _mDocumentTypeManager);
 
-                return this.OnSaveDocumentFile(doc, saveAsFlag, defaultFilter);
-            }
+	        return OnSaveDocumentFile(doc, saveAsFlag, defaultFilter);
 
-            throw new NotSupportedException((doc != null ? doc.ToString() : Edi.Util.Local.Strings.STR_MSG_UnknownDocumentType));
         }
 
-        /// <summary>
-        /// Returns the default file extension filter strings
-        /// that can be used for each corresponding document
-        /// type (viewmodel), or an empty string if no document
-        /// type (viewmodel) was matched.
-        /// </summary>
-        /// <param name="f"></param>
-        /// <returns></returns>
-        internal static string GetDefaultFileFilter(IFileBaseViewModel f, IDocumentTypeManager docManager)
+	    /// <summary>
+	    /// Returns the default file extension filter strings
+	    /// that can be used for each corresponding document
+	    /// type (viewmodel), or an empty string if no document
+	    /// type (viewmodel) was matched.
+	    /// </summary>
+	    /// <param name="f"></param>
+	    /// <param name="docManager"></param>
+	    /// <returns></returns>
+	    internal static string GetDefaultFileFilter(IFileBaseViewModel f, IDocumentTypeManager docManager)
         {
             if (f == null)
                 return string.Empty;
 
             var filefilter = docManager.GetFileFilterEntries(f.DocumentTypeKey);
 
-            if (filefilter != null)
-                return filefilter.GetFilterString();
-
-            return string.Empty;
+            return filefilter != null ? filefilter.GetFilterString() : string.Empty;
         }
 
         internal bool OnSaveDocumentFile(IFileBaseViewModel fileToSave,
                                                                          bool saveAsFlag = false,
-                                                                         string FileExtensionFilter = "")
+                                                                         string fileExtensionFilter = "")
         {
             string filePath = (fileToSave == null ? string.Empty : fileToSave.FilePath);
 
@@ -1050,49 +955,47 @@ namespace Edi.Apps.ViewModels
 
             try
             {
-                if (filePath == string.Empty || saveAsFlag == true)   // Execute SaveAs function
+                if (filePath == string.Empty || saveAsFlag)   // Execute SaveAs function
                 {
                     var dlg = new SaveFileDialog();
 
                     try
                     {
-                        dlg.FileName = System.IO.Path.GetFileName(filePath);
+                        dlg.FileName = Path.GetFileName(filePath) ?? throw new InvalidOperationException();
                     }
-                    catch
+	                catch
+	                {
+		                // ignored
+	                }
+
+	                dlg.InitialDirectory = GetDefaultPath();
+
+                    if (string.IsNullOrEmpty(fileExtensionFilter) == false)
+                        dlg.Filter = fileExtensionFilter;
+
+                    if (dlg.ShowDialog().GetValueOrDefault())     // SaveAs file if user OK'ed it so
                     {
-                    }
+	                    filePath = dlg.FileName;
 
-                    dlg.InitialDirectory = this.GetDefaultPath();
-
-                    if (string.IsNullOrEmpty(FileExtensionFilter) == false)
-                        dlg.Filter = FileExtensionFilter;
-
-                    if (dlg.ShowDialog().GetValueOrDefault() == true)     // SaveAs file if user OK'ed it so
-                    {
-                        filePath = dlg.FileName;
-
-                        fileToSave.SaveFile(filePath);
+	                    fileToSave?.SaveFile(filePath);
                     }
                     else
                         return false;
                 }
                 else                                                  // Execute Save function
-                    fileToSave.SaveFile(filePath);
+                {
+	                fileToSave?.SaveFile(filePath);
+                }
 
-                this.GetToolWindowVM<RecentFilesViewModel>().AddNewEntryIntoMRU(filePath);
+	            GetToolWindowVm<RecentFilesViewModel>().AddNewEntryIntoMRU(filePath);
 
                 return true;
             }
-            catch (Exception Exp)
+            catch (Exception exp)
             {
-                string sMsg = Edi.Util.Local.Strings.STR_MSG_ErrorSavingFile;
+	            var sMsg = filePath.Length > 0 ? string.Format(CultureInfo.CurrentCulture, Util.Local.Strings.STR_MSG_ErrorWhileSavingFileX, exp.Message, filePath) : string.Format(CultureInfo.CurrentCulture, Util.Local.Strings.STR_MSG_ErrorWhileSavingAFile, exp.Message);
 
-                if (filePath.Length > 0)
-                    sMsg = string.Format(CultureInfo.CurrentCulture, Edi.Util.Local.Strings.STR_MSG_ErrorWhileSavingFileX, Exp.Message, filePath);
-                else
-                    sMsg = string.Format(CultureInfo.CurrentCulture, Edi.Util.Local.Strings.STR_MSG_ErrorWhileSavingAFile, Exp.Message);
-
-                _MsgBox.Show(Exp, sMsg, Edi.Util.Local.Strings.STR_MSG_ErrorSavingFile, MsgBoxButtons.OK);
+	            _msgBox.Show(exp, sMsg, Util.Local.Strings.STR_MSG_ErrorSavingFile);
             }
 
             return false;
@@ -1100,11 +1003,11 @@ namespace Edi.Apps.ViewModels
 
         internal bool OnCloseSaveDirtyFile(IFileBaseViewModel fileToClose)
         {
-            if (fileToClose.IsDirty == true &&
-                    fileToClose.CanSaveData == true)
+            if (fileToClose.IsDirty &&
+                    fileToClose.CanSaveData)
             {
-                var res = _MsgBox.Show(string.Format(CultureInfo.CurrentCulture, Edi.Util.Local.Strings.STR_MSG_SaveChangesForFile, fileToClose.FileName),
-                                       this.ApplicationTitle,
+                var res = _msgBox.Show(string.Format(CultureInfo.CurrentCulture, Util.Local.Strings.STR_MSG_SaveChangesForFile, fileToClose.FileName),
+                                       ApplicationTitle,
                                        MsgBoxButtons.YesNoCancel, MsgBoxImage.Question,
                                        MsgBoxResult.Yes, false,
                                        MsgBoxResult.Yes);
@@ -1121,46 +1024,46 @@ namespace Edi.Apps.ViewModels
             return true;
         }
 
-        /// <summary>
-        /// Close the currently active file and set the file with the lowest index as active document.
-        /// 
-        /// TODO: The last active document that was active before the document being closed should be activated next.
-        /// </summary>
-        /// <param name="fileToClose"></param>
-        /// <returns></returns>
-        internal bool Close(IFileBaseViewModel doc)
+	    /// <summary>
+	    /// Close the currently active file and set the file with the lowest index as active document.
+	    /// 
+	    /// TODO: The last active document that was active before the document being closed should be activated next.
+	    /// </summary>
+	    /// <param name="doc"></param>
+	    /// <returns></returns>
+	    internal bool Close(IFileBaseViewModel doc)
         {
             try
             {
                 {
-                    if (this.OnCloseSaveDirtyFile(doc) == false)
+                    if (OnCloseSaveDirtyFile(doc) == false)
                         return false;
 
-                    doc.DocumentEvent -= this.ProcessDocumentEvent;
-                    doc.ProcessingResultEvent -= this.Vm_ProcessingResultEvent;
+                    doc.DocumentEvent -= ProcessDocumentEvent;
+                    doc.ProcessingResultEvent -= Vm_ProcessingResultEvent;
 
                     if (doc is IDocumentEdi)
                     {
                         var ediDoc = doc as IDocumentEdi;
 
-                        ediDoc.ProcessingResultEvent -= this.Vm_ProcessingResultEvent;
+                        ediDoc.ProcessingResultEvent -= Vm_ProcessingResultEvent;
                     }
 
-                    int idx = this.mFiles.IndexOf(doc);
+                    int idx = _mFiles.IndexOf(doc);
 
-                    this.mFiles.Remove(doc);
+                    _mFiles.Remove(doc);
                     doc.Dispose();
 
-                    if (this.Documents.Count > idx)
-                        this.ActiveDocument = this.mFiles[idx];
+                    if (Documents.Count > idx)
+                        ActiveDocument = _mFiles[idx];
                     else
-                        if (this.Documents.Count > 1 && this.Documents.Count == idx)
-                        this.ActiveDocument = this.mFiles[idx - 1];
+                        if (Documents.Count > 1 && Documents.Count == idx)
+                        ActiveDocument = _mFiles[idx - 1];
                     else
-                            if (this.Documents.Count == 0)
-                        this.ActiveDocument = null;
+                            if (Documents.Count == 0)
+                        ActiveDocument = null;
                     else
-                        this.ActiveDocument = this.mFiles[0];
+                        ActiveDocument = _mFiles[0];
 
                     return true;
                 }
@@ -1188,12 +1091,12 @@ namespace Edi.Apps.ViewModels
             }
             catch (Exception exp)
             {
-                logger.Error(exp.Message, exp);
-                _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_UnknownError_Caption,
+                Logger.Error(exp.Message, exp);
+                _msgBox.Show(exp, Util.Local.Strings.STR_MSG_UnknownError_Caption,
                              MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                             this.mAppCore.IssueTrackerLink,
-                             this.mAppCore.IssueTrackerLink,
-                             Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                             _mAppCore.IssueTrackerLink,
+                             _mAppCore.IssueTrackerLink,
+                             Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
             }
 
             // Throw an exception if this method does not know how the input document type is to be closed
@@ -1207,18 +1110,13 @@ namespace Edi.Apps.ViewModels
         /// </summary>
         public bool? DialogCloseResult
         {
-            get
-            {
-                return this.mDialogCloseResult;
-            }
+            get => _mDialogCloseResult;
 
-            private set
+	        private set
             {
-                if (this.mDialogCloseResult != value)
-                {
-                    this.mDialogCloseResult = value;
-                    this.RaisePropertyChanged(() => this.DialogCloseResult);
-                }
+	            if (_mDialogCloseResult == value) return;
+	            _mDialogCloseResult = value;
+	            RaisePropertyChanged(() => DialogCloseResult);
             }
         }
 
@@ -1228,18 +1126,13 @@ namespace Edi.Apps.ViewModels
         /// </summary>
         public bool? IsNotMaximized
         {
-            get
-            {
-                return this.mIsNotMaximized;
-            }
+            get => _mIsNotMaximized;
 
-            set
+	        set
             {
-                if (this.mIsNotMaximized != value)
-                {
-                    this.mIsNotMaximized = value;
-                    this.RaisePropertyChanged(() => this.IsNotMaximized);
-                }
+	            if (_mIsNotMaximized == value) return;
+	            _mIsNotMaximized = value;
+	            RaisePropertyChanged(() => IsNotMaximized);
             }
         }
 
@@ -1250,18 +1143,13 @@ namespace Edi.Apps.ViewModels
         /// </summary>
         public bool IsWorkspaceAreaOptimized
         {
-            get
-            {
-                return this.mIsWorkspaceAreaOptimized;
-            }
+            get => _mIsWorkspaceAreaOptimized;
 
-            set
+	        set
             {
-                if (this.mIsWorkspaceAreaOptimized != value)
-                {
-                    this.mIsWorkspaceAreaOptimized = value;
-                    this.RaisePropertyChanged(() => this.IsWorkspaceAreaOptimized);
-                }
+	            if (_mIsWorkspaceAreaOptimized == value) return;
+	            _mIsWorkspaceAreaOptimized = value;
+	            RaisePropertyChanged(() => IsWorkspaceAreaOptimized);
             }
         }
 
@@ -1272,44 +1160,42 @@ namespace Edi.Apps.ViewModels
         /// <returns>true if application is OK to proceed closing with closed, otherwise false.</returns>
         public bool Exit_CheckConditions(object sender)
         {
-            if (this.mShutDownInProgress == true)
+            if (_mShutDownInProgress)
                 return true;
 
             try
             {
-                if (this.mFiles != null)               // Close all open files and make sure there are no unsaved edits
-                {                                     // If there are any: Ask user if edits should be saved
-                    for (int i = 0; i < this.Files.Count; i++)
-                    {
-                        IFileBaseViewModel f = this.Files[i];
-
-                        if (this.OnCloseSaveDirtyFile(f) == false)
-                        {
-                            this.mShutDownInProgress = false;
-                            return false;               // Cancel shutdown process (return false) if user cancels saving edits
-                        }
-                    }
+                if (_mFiles != null)               // Close all open files and make sure there are no unsaved edits
+                {
+	                // If there are any: Ask user if edits should be saved
+	                foreach (var f in Files)
+	                {
+		                if (OnCloseSaveDirtyFile(f)) continue;
+		                _mShutDownInProgress = false;
+		                return false;               // Cancel shutdown process (return false) if user cancels saving edits
+	                }
                 }
 
                 // Do layout serialization after saving/closing files
                 // since changes implemented by shut-down process are otherwise lost
                 try
                 {
-                    this.mAppCore.CreateAppDataFolder();
+                    _mAppCore.CreateAppDataFolder();
                     ////this.SerializeLayout(sender);            // Store the current layout for later retrieval
                 }
-                catch
-                {
-                }
+	            catch
+	            {
+		            // ignored
+	            }
             }
             catch (Exception exp)
             {
-                logger.Error(exp.Message, exp);
-                _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_UnknownError_Caption,
+                Logger.Error(exp.Message, exp);
+                _msgBox.Show(exp, Util.Local.Strings.STR_MSG_UnknownError_Caption,
                              MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                             this.mAppCore.IssueTrackerLink,
-                             this.mAppCore.IssueTrackerLink,
-                             Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                             _mAppCore.IssueTrackerLink,
+                             _mAppCore.IssueTrackerLink,
+                             Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
             }
 
             return true;
@@ -1324,25 +1210,25 @@ namespace Edi.Apps.ViewModels
         {
             try
             {
-                if (this.Files.Count >= 0)
+                if (Files.Count >= 0)
                 {
-                    EdiViewModel fi = this.Documents.SingleOrDefault(f => f.FilePath == fileNamePath);
+                    EdiViewModel fi = Documents.SingleOrDefault(f => f.FilePath == fileNamePath);
 
                     if (fi != null)
                     {
-                        this.ActiveDocument = fi;
+                        ActiveDocument = fi;
                         return true;
                     }
                 }
             }
             catch (Exception exp)
             {
-                logger.Error(exp.Message, exp);
-                _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_UnknownError_Caption,
+                Logger.Error(exp.Message, exp);
+                _msgBox.Show(exp, Util.Local.Strings.STR_MSG_UnknownError_Caption,
                              MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                             this.mAppCore.IssueTrackerLink,
-                             this.mAppCore.IssueTrackerLink,
-                             Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                             _mAppCore.IssueTrackerLink,
+                             _mAppCore.IssueTrackerLink,
+                             Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
             }
 
             return false;
@@ -1353,29 +1239,23 @@ namespace Edi.Apps.ViewModels
         /// list of documents, if none is already present, otherwise return already
         /// present <seealso cref="StartPageViewModel"/> from internal document collection.
         /// </summary>
-        /// <param name="CreateNewViewModelIfNecessary"></param>
+        /// <param name="createNewViewModelIfNecessary"></param>
         /// <returns></returns>
-        internal StartPageViewModel GetStartPage(bool CreateNewViewModelIfNecessary)
+        internal StartPageViewModel GetStartPage(bool createNewViewModelIfNecessary)
         {
-            List<StartPageViewModel> l = this.mFiles.OfType<StartPageViewModel>().ToList();
+            List<StartPageViewModel> l = _mFiles.OfType<StartPageViewModel>().ToList();
 
-            if (l.Count == 0)
-            {
-                if (CreateNewViewModelIfNecessary == false)
-                    return null;
-                else
-                {
-                    var s = new StartPageViewModel();
+	        if (l.Count != 0) return l[0];
+	        if (createNewViewModelIfNecessary == false)
+		        return null;
+	        var s = new StartPageViewModel();
 
-                    s.DocumentEvent += ProcessDocumentEvent;
+	        s.DocumentEvent += ProcessDocumentEvent;
 
-                    this.mFiles.Add(s);
+	        _mFiles.Add(s);
 
-                    return s;
-                }
-            }
+	        return s;
 
-            return l[0];
         }
 
         /// <summary>
@@ -1394,38 +1274,35 @@ namespace Edi.Apps.ViewModels
 
                 case FileEventType.CloseDocument:
                     if (f != null)
-                        this.CloseDocument(f);
+                        CloseDocument(f);
                     break;
 
                 case FileEventType.AdjustCurrentPath:
                     if (f != null)
                     {
                         // Query for an explorer tool window and return it
-                        var eplorerTW = this.GetToolWindowVM<IExplorer>();
+                        var eplorerTw = GetToolWindowVm<IExplorer>();
 
-                        if (eplorerTW != null)
-                            eplorerTW.NavigateToFolder(f.GetAlternativePath());
+	                    eplorerTw?.NavigateToFolder(f.GetAlternativePath());
                     }
-                    break;
-
-                default:
                     break;
             }
         }
 
         private void CloseDocument(FileBaseViewModel f)
         {
-            if (f != null)
-            {
-                // Detach EdiViewModel specific events
-                if (f is EdiViewModel)
-                {
-                    EdiViewModel eVM = f as EdiViewModel;
-                    eVM.ProcessingResultEvent -= Vm_ProcessingResultEvent;
-                }
+	        switch (f)
+	        {
+		        case null:
+			        return;
+		        case EdiViewModel _:
+			        if (f is EdiViewModel eVm)
+						eVm.ProcessingResultEvent -= Vm_ProcessingResultEvent;
+			        break;
+	        }
+	        // Detach EdiViewModel specific events
 
-                this.Close(f);
-            }
+	        Close(f);
         }
 
         /// <summary>
@@ -1436,74 +1313,70 @@ namespace Edi.Apps.ViewModels
         /// <param name="e"></param>
         private void Vm_ProcessingResultEvent(object sender, ProcessResultEvent e)
         {
+	        if (!(sender is IDocumentFileWatcher)) return;
+	        IDocumentFileWatcher watcher = (IDocumentFileWatcher) sender;
 
-            if (sender is IDocumentFileWatcher)
-            {
-                IDocumentFileWatcher watcher = sender as IDocumentFileWatcher;
+	        try
+	        {
+		        // Activate file watcher for this document
+		        watcher.EnableDocumentFileWatcher(true);
+	        }
+	        catch (Exception ex)
+	        {
+		        _msgBox.Show(ex, "An unexpected error occured", MsgBoxButtons.OK, MsgBoxImage.Alert);
+	        }
 
-                try
-                {
-                    // Activate file watcher for this document
-                    watcher.EnableDocumentFileWatcher(true);
-                }
-                catch (Exception ex)
-                {
-                    _MsgBox.Show(ex, "An unexpected error occured", MsgBoxButtons.OK, MsgBoxImage.Alert);
-                }
+	        var vm = sender as EdiViewModel;
 
-                var vm = sender as EdiViewModel;
+	        try
+	        {
+		        switch (e.TypeOfResult)
+		        {
+			        case TypeOfResult.FileLoad:      // Process an EdiViewModel file load event mResult
+				        if (e.InnerException != null)
+				        {
+					        if (vm != null)
+					        {
+						        Exception error = vm.GetInnerMostException(e.InnerException);
 
-                try
-                {
-                    switch (e.TypeOfResult)
-                    {
-                        case TypeOfResult.FileLoad:      // Process an EdiViewModel file load event mResult
-                            if (e.InnerException != null)
-                            {
-                                Exception error = vm.GetInnerMostException(e.InnerException);
+						        string filePath = vm.FilePath;
+						        CloseDocument(vm);
+/*
+						        vm = null;
+*/
 
-                                string filePath = vm.FilePath;
-                                this.CloseDocument(vm);
-                                vm = null;
+						        if (error != null && filePath != null)
+						        {
+							        if (error is FileNotFoundException)
+							        {
+								        var mruList = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
+								        if (mruList.FindEntry(filePath) == null) return;
+								        if (_msgBox.Show(string.Format(Util.Local.Strings.STR_ERROR_LOADING_FILE_MSG, filePath),
+									            Util.Local.Strings.STR_ERROR_LOADING_FILE_CAPTION, MsgBoxButtons.YesNo) == MsgBoxResult.Yes)
+								        {
+									        mruList.RemoveEntry(filePath);
+								        }
 
-                                if (error != null && filePath != null)
-                                {
-                                    if (error is FileNotFoundException)
-                                    {
-                                        var mruList = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
-                                        if (mruList.FindEntry(filePath) != null)
-                                        {
-                                            if (_MsgBox.Show(string.Format(Edi.Util.Local.Strings.STR_ERROR_LOADING_FILE_MSG, filePath),
-                                                             Edi.Util.Local.Strings.STR_ERROR_LOADING_FILE_CAPTION, MsgBoxButtons.YesNo) == MsgBoxResult.Yes)
-                                            {
-                                                mruList.RemoveEntry(filePath);
-                                            }
-                                        }
+								        return;
+							        }
+						        }
+					        }
 
-                                        return;
-                                    }
-                                }
+					        _msgBox.Show(e.InnerException, "An unexpected error occured",
+						        MsgBoxButtons.OK, MsgBoxImage.Alert);
+				        }
+				        break;
 
-                                _MsgBox.Show(e.InnerException, "An unexpected error occured",
-                                             MsgBoxButtons.OK, MsgBoxImage.Alert);
-                            }
-                            break;
+			        default:
+				        throw new NotImplementedException(e.TypeOfResult.ToString());
+		        }
+	        }
+	        catch (Exception exp)
+	        {
+		        Logger.Error(exp);
 
-                        default:
-                            throw new NotImplementedException(e.TypeOfResult.ToString());
-                    }
-                }
-                catch (Exception exp)
-                {
-                    logger.Error(exp);
-
-                    _MsgBox.Show(exp, "An unexpected error occured", MsgBoxButtons.OK, MsgBoxImage.Alert);
-                }
-                finally
-                {
-
-                }
-            }
+		        _msgBox.Show(exp, "An unexpected error occured", MsgBoxButtons.OK, MsgBoxImage.Alert);
+	        }
         }
 
         /// <summary>
@@ -1517,36 +1390,38 @@ namespace Edi.Apps.ViewModels
         {
             IFileBaseViewModel ret = null;
 
-            if (!string.IsNullOrWhiteSpace(path))
-            {
-                switch (path)
-                {
-                    case StartPageViewModel.StartPageContentId: // Re-create start page content
-                        if (this.GetStartPage(false) == null)
-                        {
-                            ret = this.GetStartPage(true);
-                        }
-                        break;
+	        if (string.IsNullOrWhiteSpace(path))
+			{
+				return null;
+			}
 
-                    default:
-                        if (path.Contains("<") == true && path.Contains(">") == true)
-                        {
-                            this.mMessageManager.Output.AppendLine(
-                                string.Format("Warning: Cannot resolve tool window or document page: '{0}'.", path));
+			switch (path)
+	        {
+		        case StartPageViewModel.StartPageContentId: // Re-create start page content
+			        if (GetStartPage(false) == null)
+			        {
+				        ret = GetStartPage(true);
+			        }
+			        break;
 
-                            this.mMessageManager.Output.AppendLine(
-                                string.Format("Check the current program configuration to make that it is present.", path));
+		        default:
+			        if (path.Contains("<") && path.Contains(">"))
+			        {
+				        _mMessageManager.Output.AppendLine(
+					        $"Warning: Cannot resolve tool window or document page: '{path}'.");
 
-                            return null;
-                        }
+				        _mMessageManager.Output.AppendLine(
+					        "Check the current program configuration to make that it is present.");
 
-                        // Re-create Edi document (text file or log4net document) content
-                        ret = this.Open(path, CloseDocOnError.WithoutUserNotification);
-                        break;
-                }
-            }
+				        return null;
+			        }
 
-            return ret;
+			        // Re-create Edi document (text file or log4net document) content
+			        ret = Open(path, CloseDocOnError.WithoutUserNotification);
+			        break;
+	        }
+
+	        return ret;
         }
 
         /// <summary>
@@ -1554,10 +1429,10 @@ namespace Edi.Apps.ViewModels
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        private T GetToolWindowVM<T>() where T : class
+        private T GetToolWindowVm<T>() where T : class
         {
             // Query for a RecentFiles tool window and return it
-            return this.Tools.FirstOrDefault(d => d as T != null) as T;
+            return Tools.FirstOrDefault(d => d is T) as T;
         }
 
         /// <summary>
@@ -1568,14 +1443,11 @@ namespace Edi.Apps.ViewModels
         /// <param name="args"></param>
         private void OnRegisterToolWindow(RegisterToolWindowEventArgs args)
         {
-            if (args != null)
-            {
-                // This particular event is needed since the build in RecentFiles
-                // property is otherwise without content since it may be queried
-                // for the menu entry - before the tool window is registered
-                if (args.Tool is RecentFilesViewModel)
-                    this.RaisePropertyChanged(() => this.RecentFiles);
-            }
+	        // This particular event is needed since the build in RecentFiles
+	        // property is otherwise without content since it may be queried
+	        // for the menu entry - before the tool window is registered
+	        if (args?.Tool is RecentFilesViewModel)
+		        RaisePropertyChanged(() => RecentFiles);
         }
 
         /// <summary>
@@ -1586,18 +1458,11 @@ namespace Edi.Apps.ViewModels
         /// <param name="e"></param>
         private void ModuleManager_LoadModuleCompleted(object sender, LoadModuleCompletedEventArgs e)
         {
-            if (this.mMessageManager.Output != null)
-            {
-                this.mMessageManager.Output.AppendLine(
-                string.Format("Loading MEF Module: {0},\n" +
-                                            "                    Type: {1},\n" +
-                                            "     Initialization Mode: {2},\n" +
-                                            "                   State: {3}, Ref: '{4}'\n", e.ModuleInfo.ModuleName,
-                                                                                                                                         e.ModuleInfo.ModuleType,
-                                                                                                                                         e.ModuleInfo.InitializationMode,
-                                                                                                                                         e.ModuleInfo.State,
-                                                                                                                                         e.ModuleInfo.Ref));
-            }
+	        _mMessageManager.Output?.AppendLine(
+		        $"Loading MEF Module: {e.ModuleInfo.ModuleName},\n" +
+		        $"                    Type: {e.ModuleInfo.ModuleType},\n" +
+		        $"     Initialization Mode: {e.ModuleInfo.InitializationMode},\n" +
+		        $"                   State: {e.ModuleInfo.State}, Ref: '{e.ModuleInfo.Ref}'\n");
         }
         #endregion methods
     }

@@ -1,19 +1,18 @@
 ﻿namespace Edi.Core.Interfaces.DocumentTypes
 {
-	using System;
-	using System.Collections.ObjectModel;
-	using Edi.Core.Interfaces.Documents;
-	using Edi.Core.ViewModels;
+    using System;
+    using System.Collections.ObjectModel;
+    using Edi.Core.Interfaces.Documents;
 
-	/// <summary>
-	/// Delegates the file open method to a method that can be registered in a module.
-	/// The registered methid should return a viewmodel which in turn has registered a
-	/// view and/or tool window viewmodels and views...
-	/// </summary>
-	/// <param name="fileModel"></param>
-	/// <param name="settingsManager"></param>
-	/// <returns></returns>
-	public delegate IFileBaseViewModel FileOpenDelegate(IDocumentModel fileModel, object settingsManager);
+    /// <summary>
+    /// Delegates the file open method to a method that can be registered in a module.
+    /// The registered methid should return a viewmodel which in turn has registered a
+    /// view and/or tool window viewmodels and views...
+    /// </summary>
+    /// <param name="fileModel"></param>
+    /// <param name="settingsManager"></param>
+    /// <returns></returns>
+    public delegate IFileBaseViewModel FileOpenDelegate(IDocumentModel fileModel, object settingsManager);
 
 	/// <summary>
 	/// Delegates the file new method to a method that can be registered in a module.
@@ -33,28 +32,33 @@
 	public interface IDocumentTypeManager
 	{
 		#region properties
+
 		ObservableCollection<IDocumentType> DocumentTypes { get; }
+
 		#endregion properties
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="Key"></param>
-		/// <param name="FileFilterName"></param>
-		/// <param name="DefaultFilter"></param>
-		/// <param name="FileOpenMethod">Is a static method that returns <seealso cref="FileBaseViewModel"/>
+		/// <param name="key"></param>
+		/// <param name="name"></param>
+		/// <param name="fileFilterName"></param>
+		/// <param name="defaultFilter"></param>
+		/// <param name="fileOpenMethod">Is a static method that returns <seealso cref="FileBaseViewModel"/>
 		/// and takes a string (path) and ISettingsManager as parameter.</param>
+		/// <param name="createDocumentMethod"></param>
 		/// <param name="t"></param>
+		/// <param name="sortPriority"></param>
 		/// <returns></returns>
-		IDocumentType RegisterDocumentType(string Key,
-																			 string Name,
-																			 string FileFilterName,
-																			 string DefaultFilter,               // eg: 'log4j'
-																			 FileOpenDelegate FileOpenMethod,
-																			 CreateNewDocumentDelegate CreateDocumentMethod,
-																			 Type t,
-																			 int sortPriority = 0
-																			 );
+		IDocumentType RegisterDocumentType(string key,
+			string name,
+			string fileFilterName,
+			string defaultFilter, // eg: 'log4j'
+			FileOpenDelegate fileOpenMethod,
+			CreateNewDocumentDelegate createDocumentMethod,
+			Type t,
+			int sortPriority = 0
+		);
 
 		/// <summary>
 		/// Finds a document type that can handle a file
@@ -68,7 +72,7 @@
 		/// from the given extension string or not.</param>
 		/// <returns></returns>
 		IDocumentType FindDocumentTypeByExtension(string fileExtension,
-																							bool trimPeriod = false);
+			bool trimPeriod = false);
 
 		IDocumentType FindDocumentTypeByKey(string typeOfDoc);
 

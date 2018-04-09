@@ -1,11 +1,13 @@
 ﻿namespace Edi.Core.Behaviour
 {
-	using System.Windows;
+    using System;
+    using System.Windows;
+    using System.Windows.Threading;
 
-	/// <summary>
-	/// Source: http://csharpbestpractices.blogspot.de/2011/09/mvvm-textbox-focus.html
-	/// </summary>
-	public static class FocusExtension
+    /// <summary>
+    /// Source: http://csharpbestpractices.blogspot.de/2011/09/mvvm-textbox-focus.html
+    /// </summary>
+    public static class FocusExtension
 	{
 
 		private static readonly DependencyProperty IsFocusedProperty =
@@ -32,20 +34,18 @@
 																									 DependencyPropertyChangedEventArgs e)
 		{
 			var uie = (UIElement)d;
-			if ((bool)e.NewValue)
-			{
-				// Delay the call to allow the current batch of processing to finish before we shift focus.
-				uie.Dispatcher.BeginInvoke(
-				(System.Action)(() =>
+			if (!(bool) e.NewValue) return;
+			// Delay the call to allow the current batch of processing to finish before we shift focus.
+			uie.Dispatcher.BeginInvoke(
+				(Action)(() =>
 				{
 					if (uie.Focusable)
 					{
 						uie.Focus();
 					}
-				}), System.Windows.Threading.DispatcherPriority.Input);
+				}), DispatcherPriority.Input);
 
-				uie.Focus(); // Don't care about false values.
-			}
+			uie.Focus(); // Don't care about false values.
 		}
 	}
 }

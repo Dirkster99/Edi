@@ -43,7 +43,7 @@
                    Grid.Row="0"
                    HorizontalAlignment="Left" VerticalAlignment="Top"
                    ToolTip="{x:Static cmdLabel:Strings.STR_STARTPAGE_VISITPROJECTHOMEPAGE_TT}">
-                <Hyperlink TextDecorations="None" Command="cmd:AppCommand.BrowseURL">
+                <Hyperlink TextDecorations="None" Command="cmd:AppCommand.BrowseUrl">
               <TextBlock Text="Edi" FontSize="48" />
             </Hyperlink>
         </TextBlock>
@@ -86,7 +86,7 @@
       <!-- Logo -->
       <TextBlock Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Top"
                    ToolTip="{x:Static cmdLabel:Strings.STR_STARTPAGE_VISITPROJECTHOMEPAGE_TT}">
-            <Hyperlink TextDecorations="None" Command="cmd:AppCommand.BrowseURL">
+            <Hyperlink TextDecorations="None" Command="cmd:AppCommand.BrowseUrl">
           <Image Source="{DynamicResource Logo}" Width="100" />
         </Hyperlink>
       </TextBlock>

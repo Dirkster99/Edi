@@ -22,14 +22,14 @@
 			if (viewModel is SettingsView.Config.ViewModels.ConfigViewModel) // Return programm settings dialog instance
 				win = new SettingsView.Config.ConfigDlg() { Title = "Settings..." };
 			else
-				if (viewModel is Edi.Dialogs.About.AboutViewModel)             // Return about programm dialog instance
-					win = new Edi.Dialogs.About.AboutDlg();
-				else
-					if (viewModel is Edi.Dialogs.GotoLine.GotoLineViewModel)       // Return goto line dialog instance
-						win = new Edi.Dialogs.GotoLine.GotoLineDlg();
-					else
-						if (viewModel is Edi.Dialogs.FindReplace.ViewModel.FindReplaceViewModel) // Return find replace dialog instance
-							win = new Edi.Dialogs.FindReplace.FindReplaceDialog();
+				if (viewModel is Dialogs.About.AboutViewModel)             // Return about programm dialog instance
+				win = new Dialogs.About.AboutDlg();
+			else
+					if (viewModel is Dialogs.GotoLine.GotoLineViewModel)       // Return goto line dialog instance
+				win = new Dialogs.GotoLine.GotoLineDlg();
+			else
+						if (viewModel is Dialogs.FindReplace.ViewModel.FindReplaceViewModel) // Return find replace dialog instance
+				win = new Dialogs.FindReplace.FindReplaceDialog();
 
 			if (win != null)
 			{

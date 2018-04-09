@@ -1,12 +1,12 @@
 ﻿namespace Edi.Core.Behaviour
 {
-	using System.Windows;
-	using System.Windows.Input;
+    using System.Windows;
+    using System.Windows.Input;
 
-	/// <summary>
-	/// http://www.juanagui.com/blog/?p=107
-	/// </summary>
-	public static class KeyboardFocus
+    /// <summary>
+    /// http://www.juanagui.com/blog/?p=107
+    /// </summary>
+    public static class KeyboardFocus
 	{
 		#region fields
 		public static readonly DependencyProperty OnProperty;
@@ -15,7 +15,7 @@
 		#region constructor
 		static KeyboardFocus()
 		{
-			KeyboardFocus.OnProperty = DependencyProperty.RegisterAttached("On",
+			OnProperty = DependencyProperty.RegisterAttached("On",
 																																		 typeof(FrameworkElement),
 																																		 typeof(KeyboardFocus),
 																																		 new PropertyMetadata(OnSetCallback));
@@ -36,10 +36,7 @@
 		private static void OnSetCallback(DependencyObject dependencyObject,
 																			DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
 		{
-			if (dependencyObject == null)
-				return;
-
-			var frameworkElement = (FrameworkElement)dependencyObject;
+			var frameworkElement = (FrameworkElement) dependencyObject;
 
 			if (frameworkElement == null)
 				return;
@@ -55,6 +52,7 @@
 			}
 			catch
 			{
+				// ignored
 			}
 		}
 		#endregion methods

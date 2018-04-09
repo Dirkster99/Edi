@@ -1,98 +1,98 @@
 ﻿namespace Edi.Core.Behaviour
 {
-	using System.Windows;
-	using System.Windows.Controls;
+    using System.Windows;
+    using System.Windows.Controls;
 
-	/// <summary>
-	/// This behaviour hides the overflow toolbar button on a ToolBar.
-	/// 
-	/// Known Issue:
-	/// The Toolbar Grip appears when changing themes at run-time.
-	/// This is because the gripper style is reset but the FramworkElement is not reloaded,
-	/// Therfore, this Behaviour attached to the Loaded event is not fired again.
-	/// </summary>
-	public class HideToolbarOverflowButton
-	{
-		#region fields
-		private static readonly DependencyProperty HideGripProperty;
-		#endregion fields
+    /// <summary>
+    /// This behaviour hides the overflow toolbar button on a ToolBar.
+    /// 
+    /// Known Issue:
+    /// The Toolbar Grip appears when changing themes at run-time.
+    /// This is because the gripper style is reset but the FramworkElement is not reloaded,
+    /// Therfore, this Behaviour attached to the Loaded event is not fired again.
+    /// </summary>
+    public class HideToolbarOverflowButton
+    {
+        #region fields
+        private static readonly DependencyProperty HideGripProperty;
+        #endregion fields
 
-		#region constructor
-		static HideToolbarOverflowButton()
-		{
-			HideToolbarOverflowButton.HideGripProperty =
-				DependencyProperty.RegisterAttached("HideGrip",
-																						typeof(bool),
-																						typeof(HideToolbarOverflowButton),
-																						new UIPropertyMetadata(false, OnSetCallback));
-		}
-		#endregion constructor
+        #region constructor
+        static HideToolbarOverflowButton()
+        {
+            HideToolbarOverflowButton.HideGripProperty =
+                DependencyProperty.RegisterAttached("HideGrip",
+                                                    typeof(bool),
+                                                    typeof(HideToolbarOverflowButton),
+                                                    new UIPropertyMetadata(false, OnSetCallback));
+        }
+        #endregion constructor
 
-		#region methods
-		public static bool GetHideGrip(DependencyObject obj)
-		{
-			return (bool)obj.GetValue(HideGripProperty);
-		}
+        #region methods
+        public static bool GetHideGrip(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(HideGripProperty);
+        }
 
-		public static void SetHideGrip(DependencyObject obj, bool value)
-		{
-			obj.SetValue(HideGripProperty, value);
-		}
+        public static void SetHideGrip(DependencyObject obj, bool value)
+        {
+            obj.SetValue(HideGripProperty, value);
+        }
 
-		/// <summary>
-		/// Connect or Disconnect EventHandlers when attached value has changed.
-		/// </summary>
-		/// <param name="dependencyObject"></param>
-		/// <param name="dependencyPropertyChangedEventArgs"></param>
-		private static void OnSetCallback(DependencyObject dependencyObject,
-																			DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
-		{
-			var frameworkElement = (FrameworkElement)dependencyObject;
-			var target = OffLineIndicator.GetIsOnline(frameworkElement);
+        /// <summary>
+        /// Connect or Disconnect EventHandlers when attached value has changed.
+        /// </summary>
+        /// <param name="dependencyObject"></param>
+        /// <param name="dependencyPropertyChangedEventArgs"></param>
+        private static void OnSetCallback(DependencyObject dependencyObject,
+                                                                            DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            var frameworkElement = (FrameworkElement)dependencyObject;
+            var target = OffLineIndicator.GetIsOnline(frameworkElement);
 
-			//      if (target == null)
-			//        return;
+            //      if (target == null)
+            //        return;
 
-			if (frameworkElement == null)
-				return;
+            if (frameworkElement == null)
+                return;
 
-			if (target == true)
-			{
-				frameworkElement.Loaded += new RoutedEventHandler(mainToolBar_Loaded);
-				frameworkElement.Unloaded += new RoutedEventHandler(frameworkElement_Unloaded);
-			}
-			else
-			{
-				frameworkElement.Loaded -= mainToolBar_Loaded;
-				frameworkElement.Unloaded -= frameworkElement_Unloaded;
-			}
-		}
+            if (target == true)
+            {
+                frameworkElement.Loaded += new RoutedEventHandler(mainToolBar_Loaded);
+                frameworkElement.Unloaded += new RoutedEventHandler(frameworkElement_Unloaded);
+            }
+            else
+            {
+                frameworkElement.Loaded -= mainToolBar_Loaded;
+                frameworkElement.Unloaded -= frameworkElement_Unloaded;
+            }
+        }
 
-		/// <summary>
-		/// Disconnect EventHandlers on Unload
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		static void frameworkElement_Unloaded(object sender, RoutedEventArgs e)
-		{
-			ToolBar frameworkElement = sender as ToolBar;
+        /// <summary>
+        /// Disconnect EventHandlers on Unload
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        static void frameworkElement_Unloaded(object sender, RoutedEventArgs e)
+        {
+            ToolBar frameworkElement = sender as ToolBar;
 
-			if (frameworkElement == null)
-				return;
+            if (frameworkElement == null)
+                return;
 
-			frameworkElement.Loaded -= mainToolBar_Loaded;
-			frameworkElement.Unloaded -= frameworkElement_Unloaded;
-		}
+            frameworkElement.Loaded -= mainToolBar_Loaded;
+            frameworkElement.Unloaded -= frameworkElement_Unloaded;
+        }
 
-		private static void mainToolBar_Loaded(object sender, System.Windows.RoutedEventArgs e)
-		{
-			if (sender == null)
-				return;
+        private static void mainToolBar_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (sender == null)
+                return;
 
-			ToolBar mainToolBar = sender as ToolBar;
+            ToolBar mainToolBar = sender as ToolBar;
 
-			if (mainToolBar == null)
-				return;
+            if (mainToolBar == null)
+                return;
 
             ////      // mainToolBar – instance of toolbar defined in XAML view
             ////      foreach (FrameworkElement a in mainToolBar.Items)
@@ -107,7 +107,6 @@
                 overflowGrid.Visibility = Visibility.Collapsed;
             }
         }
-		#endregion methods
-	}
+        #endregion methods
+    }
 }
-

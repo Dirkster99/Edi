@@ -1,23 +1,18 @@
 ﻿namespace Edi.Core.Converters
 {
-	using System;
-	using System.Windows.Data;
-	using System.Windows.Markup;
+    using System;
+    using System.Globalization;
+    using System.Windows;
+    using System.Windows.Data;
+    using System.Windows.Markup;
 
-	/// <summary>
-	/// XAML mark up extension to convert a null value into a visibility value.
-	/// </summary>
-	[MarkupExtensionReturnType(typeof(IValueConverter))]
+    /// <summary>
+    /// XAML mark up extension to convert a null value into a visibility value.
+    /// </summary>
+    [MarkupExtensionReturnType(typeof(IValueConverter))]
 	public class ZeroToVisibilityConverter : MarkupExtension, IValueConverter
 	{
-		private static ZeroToVisibilityConverter converter;
-
-		/// <summary>
-		/// Standard Constructor
-		/// </summary>
-		public ZeroToVisibilityConverter()
-		{
-		}
+		private static ZeroToVisibilityConverter _converter;
 
 		/// <summary>
 		/// When implemented in a derived class, returns an object that is provided
@@ -32,12 +27,7 @@
 		/// <returns></returns>
 		public override object ProvideValue(IServiceProvider serviceProvider)
 		{
-			if (converter == null)
-			{
-				converter = new ZeroToVisibilityConverter();
-			}
-
-			return converter;
+			return _converter ?? (_converter = new ZeroToVisibilityConverter());
 		}
 
 		#region IValueConverter
@@ -49,18 +39,18 @@
 		/// <param name="parameter"></param>
 		/// <param name="culture"></param>
 		/// <returns></returns>
-		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			if (value == null)
-				return System.Windows.Visibility.Collapsed;
-
-			if (value is int)
+			switch (value)
 			{
-				if ((int)value == 0)
-					return System.Windows.Visibility.Collapsed;
+				case null:
+					return Visibility.Collapsed;
+				case int i:
+					if (i == 0)
+						return Visibility.Collapsed;
+					break;
 			}
-
-			return System.Windows.Visibility.Visible;
+			return Visibility.Visible;
 		}
 
 		/// <summary>
@@ -71,7 +61,7 @@
 		/// <param name="parameter"></param>
 		/// <param name="culture"></param>
 		/// <returns></returns>
-		public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			throw new NotSupportedException();
 		}

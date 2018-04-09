@@ -1,8 +1,8 @@
 ﻿namespace Edi.Core.Interfaces
 {
-	using System;
+    using System;
 
-	public interface ILayoutableWindow
+    public interface ILayoutableWindow
 	{
 		/// <summary>
 		/// Standard Closed Window event.
@@ -12,6 +12,6 @@
 		/// <summary>
 		/// Gets the current AvalonDockManager Xml layout and returns it as a string.
 		/// </summary>
-		string CurrentADLayout { get; }
+		string CurrentAdLayout { get; }
 	}
 }

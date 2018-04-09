@@ -1,20 +1,20 @@
 ﻿namespace Edi.Core.Models
 {
-	using System.ComponentModel.Composition;
-	using Edi.Core.Interfaces;
+    using System.ComponentModel.Composition;
+    using Edi.Core.Interfaces;
+    using MsgBox;
 
-	/// <summary>
-	/// Class registers and manages output stream channels:
-	/// - MessageBox Service
-	/// - Ouptput text service
-	/// - (Todo) Classified (error, warning, information) message output service.
-	/// </summary>
-	[Export(typeof(IMessageManager))]
+    /// <summary>
+    /// Class registers and manages output stream channels:
+    /// - MessageBox Service
+    /// - Ouptput text service
+    /// - (Todo) Classified (error, warning, information) message output service.
+    /// </summary>
+    [Export(typeof(IMessageManager))]
 	public class MessageManager : IMessageManager
 	{
 		#region fields
-		MsgBox.IMessageBoxService _MessageBox = null;
-		IOutput mOutput = null;
+
 		#endregion fields
 
 		#region constructors
@@ -23,7 +23,7 @@
 		/// </summary>
 		public MessageManager()
 		{
-            this._MessageBox = new MsgBox.MessageBoxService();
+            MessageBox = new MessageBoxService();
 		}
 		#endregion constructors
 
@@ -33,20 +33,15 @@
         /// This service should be used if user interaction is required
         /// (e.g. user is requested to click ok or yes, no etc...).
         /// </summary>
-		public MsgBox.IMessageBoxService MessageBox
-        {
-			get { return this._MessageBox; }
-		}
+		public IMessageBoxService MessageBox { get; }
 
-        /// <summary>
+		/// <summary>
         /// Gets a reference to the output message servive implementation.
         /// This service can be used to output warnings or imformation
         /// that does not require user interaction.
         /// </summary>
-		public IOutput Output
-		{
-			get { return this.mOutput; }
-		}
+		public IOutput Output { get; private set; }
+
 		#endregion properties
 
 		#region Methods
@@ -57,7 +52,7 @@
         /// <param name="output"></param>
 		public void RegisterOutputStream(IOutput output)
 		{
-			this.mOutput = output;
+			Output = output;
 		}
 		#endregion Methods
 	}

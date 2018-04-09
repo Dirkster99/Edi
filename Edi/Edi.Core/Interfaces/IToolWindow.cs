@@ -1,9 +1,9 @@
 ﻿namespace Edi.Core.ViewModels
 {
-	using Edi.Core.Interfaces;
-	using Edi.Core.Interfaces.Enums;
+    using Edi.Core.Interfaces;
+    using Edi.Core.Interfaces.Enums;
 
-	public interface IToolWindow : ILayoutItem
+    public interface IToolWindow : ILayoutItem
 	{
 		#region properties
 		string Name	{ get; }

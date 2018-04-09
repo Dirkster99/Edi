@@ -1,15 +1,15 @@
 ﻿namespace Edi.Core.ViewModels
 {
-	using Edi.Core.Interfaces.Enums;
+    using Edi.Core.Interfaces.Enums;
 
-	/// <summary>
-	/// AvalonDock base class viewmmodel to support tool window views.
-	/// </summary>
-	public abstract class ToolViewModel : PaneViewModel, IToolWindow
+    /// <summary>
+    /// AvalonDock base class viewmmodel to support tool window views.
+    /// </summary>
+    public abstract class ToolViewModel : PaneViewModel, IToolWindow
 	{
 		#region fields
-		private bool mIsVisible = true;
-		private bool mCanHide = true;
+		private bool _mIsVisible = true;
+		private bool _mCanHide = true;
 		#endregion fields
 
 		#region constructors
@@ -17,7 +17,7 @@
 		/// Base constructor from nam of tool window item
 		/// </summary>
 		/// <param name="name">Name of tool window displayed in GUI</param>
-		public ToolViewModel(string name)
+		protected ToolViewModel(string name)
 		{
 			Name = name;
 			Title = name;
@@ -31,7 +31,6 @@
 		public string Name
 		{
 			get;
-			private set;
 		}
 
 		/// <summary>
@@ -39,21 +38,18 @@
 		/// </summary>
 		public bool IsVisible
 		{
-			get
-			{
-				return this.mIsVisible;
-			}
+			get => _mIsVisible;
 
 			set
 			{
-				if (this.mIsVisible != value)
+				if (_mIsVisible != value)
 				{
-					this.mIsVisible = value;
+					_mIsVisible = value;
 
-					if (value == true)         // Switching visibility on should switch hide mode off
-						this.mCanHide = false;
+					if (value)         // Switching visibility on should switch hide mode off
+						_mCanHide = false;
 
-					RaisePropertyChanged(() => this.IsVisible);
+					RaisePropertyChanged(() => IsVisible);
 				}
 			}
 		}
@@ -63,33 +59,24 @@
 		/// </summary>
 		public bool CanHide
 		{
-			get
-			{
-				return this.mCanHide;
-			}
+			get => _mCanHide;
 
 			set
 			{
-				if (this.mCanHide != value)
+				if (_mCanHide != value)
 				{
-					this.mCanHide = value;
-					RaisePropertyChanged(() => this.CanHide);
+					_mCanHide = value;
+					RaisePropertyChanged(() => CanHide);
 				}
 			}
 		}
 
 		public abstract PaneLocation PreferredLocation { get; }
 
-		public virtual double PreferredWidth
-		{
-			get { return 300; }
-		}
+		public virtual double PreferredWidth => 300;
 
-		public virtual double PreferredHeight
-		{
-			get { return 300; }
-		}
-	
+		public virtual double PreferredHeight => 300;
+
 		#endregion properties
 
 		#region methods
@@ -99,7 +86,7 @@
 		/// <param name="isVisible"></param>
 		public virtual void SetToolWindowVisibility(bool isVisible = true)
 		{
-			this.IsVisible = isVisible;
+			IsVisible = isVisible;
 		}
 		#endregion methods
 	}

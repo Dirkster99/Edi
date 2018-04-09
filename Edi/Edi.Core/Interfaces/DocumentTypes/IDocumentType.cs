@@ -1,9 +1,9 @@
 ﻿namespace Edi.Core.Interfaces.DocumentTypes
 {
-	using System;
-	using System.Collections.Generic;
+    using System;
+    using System.Collections.Generic;
 
-	public interface IDocumentType
+    public interface IDocumentType
 	{
 		#region properties
 		/// <summary>
@@ -66,7 +66,7 @@
 		/// <param name="description"></param>
 		/// <param name="extensions"></param>
 		/// <returns></returns>
-		IDocumentTypeItem CreateItem(string description, List<string> extensions, int SortPriority=0);
+		IDocumentTypeItem CreateItem(string description, List<string> extensions, int sortPriority=0);
 
 		string GetFileOpenFilter();
 

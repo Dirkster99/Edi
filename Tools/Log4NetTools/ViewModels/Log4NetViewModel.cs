@@ -260,7 +260,7 @@ namespace Log4NetTools.ViewModels
 
                 if (isReal == true)
                 {
-                    this.mDocumentModel.SetFileNamePath(filePath, isReal);
+                    this.MDocumentModel.SetFileNamePath(filePath, isReal);
                     this.FilePath = filePath;
                     this.ContentId = this.mFilePath;
 

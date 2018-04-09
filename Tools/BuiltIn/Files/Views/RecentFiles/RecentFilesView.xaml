@@ -91,7 +91,7 @@
                                                 <ctrl:PathTrimmingFileHyperlink.ContextMenu>
                                                     <ContextMenu>
                                                         <MenuItem Header="{x:Static cmdLabel:Strings.CMD_MRU_MovePinnedMruItemUPCommand}"
-                                                                  Command="cmd:AppCommand.MovePinnedMruItemUPCommand"
+                                                                  Command="cmd:AppCommand.MovePinnedMruItemUpCommand"
                                                                   CommandParameter="{Binding}"/>
                                                         <MenuItem Header="{x:Static cmdLabel:Strings.CMD_MRU_MovePinnedMruItemDownCommand}"
                                                                   Command="cmd:AppCommand.MovePinnedMruItemDownCommand"

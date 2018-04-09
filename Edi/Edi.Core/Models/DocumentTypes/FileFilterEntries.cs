@@ -1,12 +1,12 @@
 ﻿namespace Edi.Core.Models.DocumentTypes
 {
-	using System.Collections.Generic;
-	using Edi.Core.Interfaces.DocumentTypes;
+    using System.Collections.Generic;
+    using Edi.Core.Interfaces.DocumentTypes;
 
-	internal class FileFilterEntries : IFileFilterEntries
+    internal class FileFilterEntries : IFileFilterEntries
 	{
 		#region fields
-		private readonly List<IFileFilterEntry> mEntries;
+		private readonly List<IFileFilterEntry> _mEntries;
 		#endregion fields
 
 		#region contructors
@@ -15,7 +15,7 @@
 		/// </summary>
 		public FileFilterEntries(List<IFileFilterEntry> entries)
 		{
-			this.mEntries = entries;
+			_mEntries = entries;
 		}
 		#endregion contructors
 
@@ -31,7 +31,7 @@
 		{
 			string s = string.Empty;
 			string d = string.Empty;
-			foreach (var item in this.mEntries)
+			foreach (var item in _mEntries)
 			{
 				s = s + d + item.FileFilter;
 				d = "|";
@@ -48,7 +48,7 @@
 		/// <returns></returns>
 		public FileOpenDelegate GetFileOpenMethod(int idx)
 		{
-			return this.mEntries[idx].FileOpenMethod;
+			return _mEntries[idx].FileOpenMethod;
 		}
 		#endregion methods
 	}

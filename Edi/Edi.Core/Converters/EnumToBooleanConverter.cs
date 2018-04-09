@@ -1,16 +1,16 @@
 ﻿namespace Edi.Core.Converters
 {
-	using System.Windows.Data;
-	using System.Globalization;
-	using System;
+    using System;
+    using System.Globalization;
+    using System.Windows.Data;
 
-	/// <summary>
-	/// This class can be used to databind a (group of) radio button control(s)
-	/// with an enumeration in a ViewModel.
-	/// 
-	/// Source: http://www.wpftutorial.net/RadioButton.html
-	/// </summary>
-	public class EnumToBooleanConverter : IValueConverter
+    /// <summary>
+    /// This class can be used to databind a (group of) radio button control(s)
+    /// with an enumeration in a ViewModel.
+    /// 
+    /// Source: http://www.wpftutorial.net/RadioButton.html
+    /// </summary>
+    public class EnumToBooleanConverter : IValueConverter
 	{
 		/// <summary>
 		/// Enum to Boolean Converter method

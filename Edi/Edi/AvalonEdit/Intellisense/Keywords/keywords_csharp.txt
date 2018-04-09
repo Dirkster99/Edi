@@ -2,6 +2,8 @@
 add
 alias
 as
+async
+await
 ascending
 base
 bool

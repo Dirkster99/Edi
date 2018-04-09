@@ -1,10 +1,10 @@
 ﻿namespace Edi.Core.Models.Utillities.FileSystem
 {
-	using System;
-	using System.ComponentModel;
-	using System.Globalization;
+    using System;
+    using System.ComponentModel;
+    using System.Globalization;
 
-	public class FileNameConverter : TypeConverter
+    public class FileNameConverter : TypeConverter
 	{
 		public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
 		{
@@ -18,9 +18,9 @@
 
 		public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
 		{
-			if (value is string)
+			if (value is string s)
 			{
-				return FileName.Create((string)value);
+				return FileName.Create(s);
 			}
 			return base.ConvertFrom(context, culture, value);
 		}

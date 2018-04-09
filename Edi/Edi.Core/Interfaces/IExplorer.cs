@@ -1,8 +1,8 @@
 ﻿namespace Edi.Core.Interfaces
 {
-	using FileSystemModels.Models;
+    using FileSystemModels.Models;
 
-	public interface IExplorer
+    public interface IExplorer
 	{
 		/// <summary>
 		/// Gets an interface instance used for setting/getting settings of the Explorer (TW).
