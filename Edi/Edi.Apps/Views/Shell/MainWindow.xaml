@@ -15,7 +15,7 @@
         Icon="/Edi;component/EdiLogo.ico"
         behav:DialogCloser.DialogResult="{Binding DialogCloseResult}"        
         behav:WindowMaximized.IsNotMaximized="{Binding IsNotMaximized,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-        ADBehav:GetADLayoutOnWindowClosedCommand.SendLayoutCommand="{Binding ADLayout.SaveLayoutCommand}"
+        ADBehav:GetADLayoutOnWindowClosedCommand.SendLayoutCommand="{Binding AdLayout.SaveLayoutCommand}"
         ADBehav:ActivatedCommand.Command="{Binding MainWindowActivated}"
         >
     <Grid>

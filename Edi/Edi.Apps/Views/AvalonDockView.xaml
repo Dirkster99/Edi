@@ -23,7 +23,7 @@
                     <avalonDock:DockingManager AnchorablesSource="{Binding Tools}" Name="PART_DockView"
                                      DocumentsSource="{Binding Files}"
                                      ActiveContent="{Binding ActiveDocument, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}"
-                                     behav:AvalonDockLayoutSerializer.LoadLayoutCommand="{Binding ADLayout.LoadLayoutCommand}"
+                                     behav:AvalonDockLayoutSerializer.LoadLayoutCommand="{Binding AdLayout.LoadLayoutCommand}"
 																		 behav:DropFileCommand.DropCommand="cmd:AppCommand.LoadFile"
                                      AllowDrop="True"
                                       >
