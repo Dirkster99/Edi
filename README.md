@@ -36,6 +36,7 @@ See https://github.com/Dirkster99/Edi-Setup/ for more details on building the x8
 
 * [Visual Studio 2017 Community](http://www.visualstudio.com) - Visual Studio IDE
 * [.Net Framework](https://www.microsoft.com/net) - Net Framework 4
+* or get the latest Release build from [Comtinues Integration](https://ci.appveyor.com/project/Dirkster99/edi/build/artifacts)
 
 ## Contributing
 
