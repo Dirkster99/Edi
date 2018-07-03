@@ -65,8 +65,8 @@
         /// <value>The arg delimeter.</value>
         public string ArgDelimeter
         {
-            get => _argDelimiter;
-            set => _argDelimiter = value;
+            get { return _argDelimiter; }
+            set { _argDelimiter = value; }
         }
 
         /// <summary>
@@ -77,10 +77,23 @@
         /// <param name="processArgsFunc1"></param>
         /// <param name="applicationId">The application id used 
         /// for naming the <seealso cref="EventWaitHandle"/>.</param>
-        public SingletonApplicationEnforcer(Action<IEnumerable<string>> processArgsFunc, Action<string> processArgsFunc1,
-                                                                                string applicationId = "DisciplesRock")
+        public SingletonApplicationEnforcer(Action<IEnumerable<string>> processArgsFunc,
+                                            Action<string> processArgsFunc1,
+                                            string applicationId = "DisciplesRock")
         {
-            _processArgsFunc = processArgsFunc ?? throw new ArgumentNullException(nameof(processArgsFunc));
+            if (processArgsFunc == null)
+            {
+                throw new ArgumentNullException("processArgsFunc");
+            }
+
+            if (processArgsFunc != null)
+            {
+                _processArgsFunc = processArgsFunc;
+            }
+            else
+            {
+                throw new ArgumentNullException("processArgsFunc1");
+            }
 
             _processActivateFunc = processArgsFunc1;
             _applicationId = applicationId;
@@ -99,8 +112,10 @@
             string argsWaitHandleName = "ArgsWaitHandle_" + _applicationId;
             string memoryFileName = "ArgFile_" + _applicationId;
 
+            bool createdNew;
+
             EventWaitHandle argsWaitHandle = new EventWaitHandle(
-                false, EventResetMode.AutoReset, argsWaitHandleName, out var createdNew);
+                false, EventResetMode.AutoReset, argsWaitHandleName, out createdNew);
 
             GC.KeepAlive(argsWaitHandle);
 
