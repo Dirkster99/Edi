@@ -60,14 +60,14 @@ namespace SimpleControls.Hyperlink
         /// </summary>
         public System.Uri NavigateUri
         {
-            get => (System.Uri)GetValue(NavigateUriProperty);
-            set => SetValue(NavigateUriProperty, value);
+            get { return (System.Uri)GetValue(NavigateUriProperty); }
+            set { SetValue(NavigateUriProperty, value); }
         }
 
         public string Text
         {
-            get => (string)GetValue(TextProperty);
-            set => SetValue(TextProperty, value);
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
         }
         #endregion
 
@@ -103,7 +103,9 @@ namespace SimpleControls.Hyperlink
 
             e.Handled = true;
 
-            if (!(sender is WebHyperlink whLink)) return;
+            WebHyperlink whLink = sender as WebHyperlink;
+
+            if (whLink == null) return;
 
             try
             {
@@ -129,15 +131,17 @@ namespace SimpleControls.Hyperlink
 
             e.Handled = true;
 
-            if (!(sender is WebHyperlink whLink)) return;
+            WebHyperlink whLink = sender as WebHyperlink;
+
+            if (whLink == null) return;
 
             try
             {
-                Clipboard.SetText(whLink.NavigateUri.AbsoluteUri);
+                System.Windows.Clipboard.SetText(whLink.NavigateUri.AbsoluteUri);
             }
             catch
             {
-                Clipboard.SetText(whLink.NavigateUri.OriginalString);
+                System.Windows.Clipboard.SetText(whLink.NavigateUri.OriginalString);
             }
         }
 

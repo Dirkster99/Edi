@@ -37,7 +37,10 @@
         /// <param name="canExecute">The execution status logic.</param>
         public RelayCommand(Action<T> execute, Predicate<T> canExecute)
         {
-            _mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
+            if (execute == null)
+                throw new ArgumentNullException("execute");
+
+            _mExecute = execute;
             _mCanExecute = canExecute;
         }
 
@@ -127,7 +130,10 @@
         /// <param name="canExecute">The execution status logic.</param>
         public RelayCommand(Action execute, Func<bool> canExecute)
         {
-            _mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
+            if (execute == null)
+                throw new ArgumentNullException("execute");
+
+            _mExecute = execute;
             _mCanExecute = canExecute;
         }
 
