@@ -47,13 +47,13 @@ namespace Edi
 
             if (candidateAssemblyPaths.Length > 0)
             {
-                AppDomain childAppDomain = CreateChildAppDomain(AppDomain.CurrentDomain, expandedDirectory);
+                AppDomain childAppDomain = this.CreateChildAppDomain(AppDomain.CurrentDomain, expandedDirectory);
                 Type loaderType = typeof(InnerModuleInfoLoader);
 
                 try
                 {
-                    InnerModuleInfoLoader loader = (InnerModuleInfoLoader)childAppDomain.CreateInstanceFrom(loaderType.Assembly.Location, loaderType.FullName ?? throw new InvalidOperationException()).Unwrap();
-                    Items.AddRange(loader.LoadModules(candidateAssemblyPaths));
+                    InnerModuleInfoLoader loader = (InnerModuleInfoLoader)childAppDomain.CreateInstanceFrom(loaderType.Assembly.Location, loaderType.FullName).Unwrap();
+                    this.Items.AddRange(loader.LoadModules(candidateAssemblyPaths));
                 }
                 catch (FileNotFoundException)
                 {
@@ -149,18 +149,19 @@ namespace Edi
             {
                 IList<ModuleInfo> moduleList = new List<ModuleInfo>();
 
-	            Assembly ResolveEventHandler(object sender, ResolveEventArgs args)
-	            {
-		            return OnReflectionOnlyResolve(args);
-	            }
+                ResolveEventHandler resolveEventHandler =
+                    delegate (object sender, ResolveEventArgs args)
+                    {
+                        return OnReflectionOnlyResolve(args);
+                    };        
 
-	            try
+                try
                 {
-                    AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += ResolveEventHandler;
+                    AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += resolveEventHandler;
 
                     Assembly moduleReflectionOnlyAssembly = Assembly.ReflectionOnlyLoad(typeof(ModuleExportAttribute).Assembly.FullName);
 
-                    Type moduleExportAttributeType = moduleReflectionOnlyAssembly.GetType(typeof(ModuleExportAttribute).FullName ?? throw new InvalidOperationException());
+                    Type ModuleExportAttributeType = moduleReflectionOnlyAssembly.GetType(typeof(ModuleExportAttribute).FullName);
 
                     foreach (string assemblyPath in assemblies)
                     {
@@ -173,7 +174,7 @@ namespace Edi
                             {
                                 foreach (CustomAttributeData attributeData in type.GetCustomAttributesData())
                                 {
-                                    if (attributeData.AttributeType == moduleExportAttributeType)
+                                    if (attributeData.AttributeType == ModuleExportAttributeType)
                                     {
                                         if (!type.IsAbstract)
                                         {
@@ -197,7 +198,7 @@ namespace Edi
                 }
                 finally
                 {
-                    AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve -= ResolveEventHandler;
+                    AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve -= resolveEventHandler;
                 }
 
                 int modulesCount = moduleList.Count;
