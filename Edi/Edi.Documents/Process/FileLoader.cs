@@ -70,8 +70,8 @@
 
         protected ApplicationException InnerException
         {
-            get => _mInnerException;
-            set => _mInnerException = value;
+            get { return _mInnerException;  }
+            set { _mInnerException = value; }
         }
         #endregion Properties
 

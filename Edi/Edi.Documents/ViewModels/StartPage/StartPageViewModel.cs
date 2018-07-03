@@ -114,9 +114,12 @@ namespace Edi.Documents.ViewModels.StartPage
 
         public override bool IsDirty
         {
-            get => false;
+            get { return false; }
 
-            set => throw new NotSupportedException("Start page cannot be saved therfore setting dirty cannot be useful.");
+            set
+            {
+                throw new NotSupportedException("Start page cannot be saved therfore setting dirty cannot be useful.");
+            }
         }
 
         /// <summary>
@@ -129,9 +132,9 @@ namespace Edi.Documents.ViewModels.StartPage
 
         public override string FilePath
         {
-            get => ContentId;
+            get { return ContentId; }
 
-            protected set => throw new NotSupportedException();
+            protected set { throw new NotSupportedException(); }
         }
 
         public override string FileName => string.Empty;

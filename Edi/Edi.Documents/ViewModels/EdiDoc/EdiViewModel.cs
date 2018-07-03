@@ -264,7 +264,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
 
         public string IsReadOnlyReason
         {
-            get => _mIsReadOnlyReason;
+            get { return _mIsReadOnlyReason; }
 
             protected set
             {
@@ -288,7 +288,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public TextDocument Document
         {
-            get => _mDocument;
+            get { return _mDocument; }
 
             set
             {
@@ -308,7 +308,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public override bool IsDirty
         {
-            get => _mIsDirty;
+            get { return _mIsDirty; }
 
             set
             {
@@ -370,7 +370,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public bool WordWrap
         {
-            get => _mWordWrap;
+            get { return _mWordWrap; }
 
             set
             {
@@ -387,7 +387,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public bool ShowLineNumbers
         {
-            get => _mShowLineNumbers;
+            get { return _mShowLineNumbers; }
 
             set
             {
@@ -404,7 +404,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public bool ShowEndOfLine               // Toggle state command
         {
-            get => TextOptions.ShowEndOfLine;
+            get { return TextOptions.ShowEndOfLine; }
 
             set
             {
@@ -421,7 +421,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public bool ShowSpaces               // Toggle state command
         {
-            get => TextOptions.ShowSpaces;
+            get { return TextOptions.ShowSpaces; }
 
             set
             {
@@ -438,7 +438,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public bool ShowTabs               // Toggle state command
         {
-            get => TextOptions.ShowTabs;
+            get { return TextOptions.ShowTabs; }
 
             set
             {
@@ -455,7 +455,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public TextEditorOptions TextOptions
         {
-            get => _mTextOptions;
+            get { return _mTextOptions; }
 
             set
             {
@@ -542,7 +542,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public Encoding FileEncoding
         {
-            get => _mFileEncoding;
+            get { return _mFileEncoding; }
 
             set
             {
@@ -569,7 +569,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public int Line
         {
-            get => _mLine;
+            get { return _mLine; }
 
             set
             {
@@ -587,7 +587,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public int Column
         {
-            get => _mColumn;
+            get { return _mColumn; }
 
             set
             {
@@ -607,7 +607,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public int TextEditorCaretOffset
         {
-            get => _mTextEditorCaretOffset;
+            get { return _mTextEditorCaretOffset; }
 
             set
             {
@@ -625,7 +625,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public int TextEditorSelectionStart
         {
-            get => _mTextEditorSelectionStart;
+            get { return _mTextEditorSelectionStart; }
 
             set
             {
@@ -643,7 +643,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public int TextEditorSelectionLength
         {
-            get => _mTextEditorSelectionLength;
+            get { return _mTextEditorSelectionLength; }
 
             set
             {
@@ -657,7 +657,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
 
         public bool TextEditorIsRectangularSelection
         {
-            get => _mTextEditorIsRectangularSelection;
+            get { return _mTextEditorIsRectangularSelection; }
 
             set
             {
@@ -675,7 +675,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public double TextEditorScrollOffsetX
         {
-            get => _mTextEditorScrollOffsetX;
+            get { return _mTextEditorScrollOffsetX; }
 
             set
             {
@@ -692,7 +692,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// </summary>
         public double TextEditorScrollOffsetY
         {
-            get => _mTextEditorScrollOffsetY;
+            get { return _mTextEditorScrollOffsetY; }
 
             set
             {
@@ -709,7 +709,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         #region TxtControl
         public TextBoxController TxtControl
         {
-            get => _mTxtControl;
+            get { return _mTxtControl; }
 
             private set
             {
@@ -738,10 +738,11 @@ namespace Edi.Documents.ViewModels.EdiDoc
         {
             get
             {
-                int start = 0;
+                int start = 0, length = 0;
+                bool IsRectSelect = false;
 
                 if (TxtControl != null)
-                    TxtControl.CurrentSelection(out start, out _, out _);
+                    TxtControl.CurrentSelection(out start, out length, out IsRectSelect);
 
                 return start;
             }
@@ -751,10 +752,11 @@ namespace Edi.Documents.ViewModels.EdiDoc
         {
             get
             {
-                int length = 0;
+                int start = 0, length = 0;
+                bool IsRectSelect = false;
 
                 if (TxtControl != null)
-                    TxtControl.CurrentSelection(out _, out length, out _);
+                    TxtControl.CurrentSelection(out start, out length, out IsRectSelect);
 
                 return length;
             }

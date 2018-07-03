@@ -176,8 +176,8 @@ namespace Edi.Documents.ViewModels.MiniUml
 		#region IsReadOnly
 		private bool _mIsReadOnly;
 		public bool IsReadOnly
-		{
-			get => _mIsReadOnly;
+        {
+            get { return _mIsReadOnly; }
 
 		    protected set
 			{
@@ -192,7 +192,7 @@ namespace Edi.Documents.ViewModels.MiniUml
 		private string _mIsReadOnlyReason = string.Empty;
 		public string IsReadOnlyReason
 		{
-			get => _mIsReadOnlyReason;
+			get { return _mIsReadOnlyReason; }
 
 		    protected set
 			{
@@ -213,8 +213,8 @@ namespace Edi.Documents.ViewModels.MiniUml
 		/// in the editor was modified by the user or not.
 		/// </summary>
 		public override bool IsDirty
-		{
-			get => _mIsDirty;
+        {
+            get { return _mIsDirty; }
 
 		    set
 			{

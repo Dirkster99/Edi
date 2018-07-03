@@ -91,7 +91,9 @@ namespace Edi.Documents.ViewModels.EdiDoc
 
 	    private string GetClass(string style)
 		{
-		    if (!_stylesheetCache.TryGetValue(style, out var className))
+            string className = string.Empty;
+
+            if (!_stylesheetCache.TryGetValue(style, out className))
             {
                 className = StyleClassPrefix + _stylesheetCache.Count;
                 _stylesheet.Append('.');
