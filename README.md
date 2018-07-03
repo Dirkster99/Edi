@@ -11,6 +11,7 @@ Edi - The open source integrated development environment (IDE) based on <a href=
 
 ![screenshot](https://raw.githubusercontent.com/Dirkster99/Docu/master/Edi/2018/Edi_Explorer_Dark.png)
 ![screenshot](https://raw.githubusercontent.com/Dirkster99/Docu/master/Edi/2018/Edi_Explorer_Light.png)
+![screenshot](https://raw.githubusercontent.com/Dirkster99/Docu/master/Edi/2018/EdiUmlEditor.png)
 
 ![screenshot](https://github.com/Dirkster99/Docu/blob/master/Edi/MetroDark_DeepBlack.png?raw=true)
 ![screenshot](https://github.com/Dirkster99/Docu/blob/master/Edi/Edi_MRU_ContextMenu.png?raw=true)
