@@ -52,7 +52,7 @@ namespace Edi.Dialogs.GotoLine
 		/// </summary>
 		public string LineNumberInput
 		{
-			get => (_mLineNumberInput ?? string.Empty);
+			get { return (_mLineNumberInput ?? string.Empty); }
 
 			set
 			{
@@ -93,8 +93,8 @@ namespace Edi.Dialogs.GotoLine
 		public string MinMaxRange => "(" + _mMin.ToString() + " - " + _mMax.ToString() + ")";
 
 		public string SelectedText
-		{
-			get => _mSelectedText;
+        {
+            get { return _mSelectedText; }
 
 			set
 			{

@@ -80,7 +80,7 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 		/// </summary>
 		public string TextToFind
 		{
-			get => _mTextToFind;
+			get { return _mTextToFind; }
 
 			set
 			{
@@ -97,8 +97,8 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 		/// Get/set text to replace via find/replace
 		/// </summary>
 		public string ReplacementText
-		{
-			get => _mReplacementText;
+        {
+            get { return _mReplacementText; }
 
 			set
 			{
@@ -115,8 +115,8 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 		/// Get/set whether the search is upward in text or downwards.
 		/// </summary>
 		public bool SearchUp
-		{
-			get => _mSearchUp;
+        {
+            get { return _mSearchUp; }
 
 			set
 			{
@@ -133,8 +133,8 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 		/// Get/set whether to do a wildcard based search or not.
 		/// </summary>
 		public bool UseWildcards
-		{
-			get => _mUseWildcards;
+        {
+            get { return _mUseWildcards; }
 
 			set
 			{
@@ -151,8 +151,8 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 		/// Get/set whether to search case sensitive or not.
 		/// </summary>
 		public bool CaseSensitive
-		{
-			get => _mCaseSensitive;
+        {
+            get { return _mCaseSensitive; }
 
 			set
 			{
@@ -169,8 +169,8 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 		/// Get/set whether to search text with regular expressions or not.
 		/// </summary>
 		public bool UseRegEx
-		{
-			get => _mUseRegEx;
+        {
+            get { return _mUseRegEx; }
 
 			set
 			{
@@ -187,8 +187,8 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 		/// Get/set whether to search for a whole word occurrance or not.
 		/// </summary>
 		public bool WholeWord
-		{
-			get => _mWholeWord;
+        {
+            get { return _mWholeWord; }
 
 			set
 			{
@@ -206,8 +206,8 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 		/// support multiline input or not.
 		/// </summary>
 		public bool AcceptsReturn
-		{
-			get => _mAcceptsReturn;
+        {
+            get { return _mAcceptsReturn; }
 
 			set
 			{
@@ -224,8 +224,8 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 		/// Get/set whether replace is to be displayed and used in view or not.
 		/// </summary>
 		public bool AllowReplace
-		{
-			get => _mAllowReplace;
+        {
+            get { return _mAllowReplace; }
 
 			set
 			{
@@ -243,8 +243,8 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 		/// or whether it should show Find/Replace UI elements (false).
 		/// </summary>
 		public bool ShowAsFind
-		{
-			get => _mShowAsFind;
+        {
+            get { return _mShowAsFind; }
 
 			set
 			{
@@ -271,8 +271,8 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 		/// <summary>
 		/// </summary>
 		public bool IsTextToFindFocused
-		{
-			get => _mIsTextToFindFocused;
+        {
+            get { return _mIsTextToFindFocused; }
 
 			set
 			{
@@ -288,8 +288,8 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 		/// <summary>
 		/// </summary>
 		public bool IsTextToFindInReplaceFocused
-		{
-			get => _mIsTextToFindInReplaceFocused;
+        {
+            get { return _mIsTextToFindInReplaceFocused; }
 
 			set
 			{
@@ -306,8 +306,8 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 		/// Get/set whether to search in current document, all open documents etc.
 		/// </summary>
 		public SearchScope SearchIn
-		{
-			get => _mSearchIn;
+        {
+            get { return _mSearchIn; }
 
 			set
 			{
@@ -328,8 +328,8 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 		/// 2> In all open documents
 		/// </summary>
 		public bool ShowSearchIn
-		{
-			get => _mShowSearchIn;
+        {
+            get { return _mShowSearchIn; }
 
 			private set
 			{
