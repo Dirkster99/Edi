@@ -41,27 +41,27 @@
 		/// <returns></returns>
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			switch (value)
-			{
-				case null:
-					return Visibility.Collapsed;
-				case int i:
-					if (i == 0)
-						return Visibility.Collapsed;
-					break;
-			}
-			return Visibility.Visible;
-		}
+            if (value == null)
+                return System.Windows.Visibility.Collapsed;
 
-		/// <summary>
-		/// Visibility to Zero conversion method (is disabled and will throw an exception when invoked)
-		/// </summary>
-		/// <param name="value"></param>
-		/// <param name="targetType"></param>
-		/// <param name="parameter"></param>
-		/// <param name="culture"></param>
-		/// <returns></returns>
-		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+            if (value is int)
+            {
+                if ((int)value == 0)
+                    return System.Windows.Visibility.Collapsed;
+            }
+
+            return System.Windows.Visibility.Visible;
+        }
+
+        /// <summary>
+        /// Visibility to Zero conversion method (is disabled and will throw an exception when invoked)
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			throw new NotSupportedException();
 		}

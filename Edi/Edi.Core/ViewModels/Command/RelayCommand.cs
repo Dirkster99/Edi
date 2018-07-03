@@ -37,17 +37,20 @@
 		/// <param name="canExecute">The execution status logic.</param>
 		public RelayCommand(Action<T> execute, Predicate<T> canExecute)
 		{
-			_mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
-			_mCanExecute = canExecute;
-		}
+            if (execute == null)
+                throw new ArgumentNullException("execute");
 
-		#endregion // Constructors
+            _mExecute = execute;
+            _mCanExecute = canExecute;
+        }
 
-		#region events
-		/// <summary>
-		/// Eventhandler to re-evaluate whether this command can execute or not
-		/// </summary>
-		public event EventHandler CanExecuteChanged
+        #endregion // Constructors
+
+        #region events
+        /// <summary>
+        /// Eventhandler to re-evaluate whether this command can execute or not
+        /// </summary>
+        public event EventHandler CanExecuteChanged
 		{
 			add
 			{
@@ -127,17 +130,20 @@
 		/// <param name="canExecute">The execution status logic.</param>
 		public RelayCommand(Action execute, Func<bool> canExecute)
 		{
-			_mExecute = execute ?? throw new ArgumentNullException(nameof(execute));
-			_mCanExecute = canExecute;
-		}
+            if (execute == null)
+                throw new ArgumentNullException("execute");
 
-		#endregion Constructors
+            _mExecute = execute;
+            _mCanExecute = canExecute;
+        }
 
-		#region Events
-		/// <summary>
-		/// Eventhandler to re-evaluate whether this command can execute or not
-		/// </summary>
-		public event EventHandler CanExecuteChanged
+        #endregion Constructors
+
+        #region Events
+        /// <summary>
+        /// Eventhandler to re-evaluate whether this command can execute or not
+        /// </summary>
+        public event EventHandler CanExecuteChanged
 		{
 			add
 			{

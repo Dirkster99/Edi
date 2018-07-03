@@ -37,8 +37,8 @@
 		/// Gets/sets property to determine whether this item is visible or not.
 		/// </summary>
 		public bool IsVisible
-		{
-			get => _mIsVisible;
+        {
+            get { return _mIsVisible; }
 
 			set
 			{
@@ -58,8 +58,8 @@
 		/// Gets/sets whether this item can hide or not.
 		/// </summary>
 		public bool CanHide
-		{
-			get => _mCanHide;
+        {
+            get { return _mCanHide; }
 
 			set
 			{

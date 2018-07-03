@@ -87,8 +87,8 @@ namespace Edi.Core.ViewModels.Base
 		/// Source: http://stackoverflow.com/questions/501886/wpf-mvvm-newbie-how-should-the-viewmodel-close-the-form
 		/// </summary>
 		public bool? WindowCloseResult
-		{
-			get => _mDialogCloseResult;
+        {
+            get { return _mDialogCloseResult; }
 
 			private set
 			{
@@ -107,8 +107,8 @@ namespace Edi.Core.ViewModels.Base
 		/// a corresponding method call that manages/overrides the properties' value).
 		/// </summary>
 		public bool IsReadyToClose
-		{
-			get => _mIsReadyToClose;
+        {
+            get { return _mIsReadyToClose; }
 
 			set
 			{
@@ -266,43 +266,46 @@ namespace Edi.Core.ViewModels.Base
 		/// </summary>
 		private void PerformInputDataEvaluation()
 		{
-			if (EvaluateInputData != null)
-			{
-				bool bResult = EvaluateInputData(out var msgs);
-				bool bFoundErrors = false;
+            if (this.EvaluateInputData != null)
+            {
+                List<Edi.Core.Msg> msgs;
+                bool bResult = this.EvaluateInputData(out msgs);
+                bool bFoundErrors = false;
 
-				// Copy messages from delegate method (if any)
-				ClearMessages();
+                // Copy messages from delegate method (if any)
+                this.ClearMessages();
 
-				if (msgs != null)
-				{
-					foreach (Msg m in msgs)
-					{
-						if (m.CategoryOfMsg != Msg.MsgCategory.Information && m.CategoryOfMsg != Msg.MsgCategory.Warning)
-							bFoundErrors = true;
+                if (msgs != null)
+                {
+                    foreach (Edi.Core.Msg m in msgs)
+                    {
+                        if (m.CategoryOfMsg != Edi.Core.Msg.MsgCategory.Information && m.CategoryOfMsg != Edi.Core.Msg.MsgCategory.Warning)
+                            bFoundErrors = true;
 
-						AddMessage(m);
-					}
-				}
+                        this.AddMessage(m);
+                    }
+                }
 
-				if (bFoundErrors == false)
-				{
-					if (_mFoundErrorsInLastRun == false)
-					{
-						// Found only Information or Warnings for the second time -> lets get over it!
-						IsReadyToClose = true;
-						return;
-					}
+                if (bFoundErrors == false)
+                {
+                    if (_mFoundErrorsInLastRun == false)
+                    {
+                        // Found only Information or Warnings for the second time -> lets get over it!
+                        IsReadyToClose = true;
+                        return;
+                    }
+                    else
+                    {
+                        _mFoundErrorsInLastRun = false;
+                        IsReadyToClose = bResult;
+                        return;
+                    }
+                }
 
-					_mFoundErrorsInLastRun = false;
-					IsReadyToClose = bResult;
-					return;
-				}
-
-				_mFoundErrorsInLastRun = true;
-				IsReadyToClose = bResult;
-			}
-		}
-		#endregion methods
-	}
+                _mFoundErrorsInLastRun = true;
+                IsReadyToClose = bResult;
+            }
+        }
+        #endregion methods
+    }
 }

@@ -82,14 +82,17 @@
 		/// </returns> 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			if (value is Visibility val && targetType == typeof(bool))
-			{
-				return val == Visibility.Visible;
-			}
+            if (value is Visibility && targetType == typeof(bool))
+            {
+                Visibility val = (Visibility)value;
+                if (val == Visibility.Visible)
+                    return true;
+                else
+                    return false;
+            }
 
-			throw new ArgumentException("Invalid argument/return type. Expected argument: Visibility and return type: bool");
-		}
-
-		#endregion
-	}
+            throw new ArgumentException("Invalid argument/return type. Expected argument: Visibility and return type: bool");
+        }
+        #endregion
+    }
 }

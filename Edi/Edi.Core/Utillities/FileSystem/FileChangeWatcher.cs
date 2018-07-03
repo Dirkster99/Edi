@@ -44,22 +44,25 @@
 		/// <param name="file"></param>
 		public FileChangeWatcher(IDocumentModel file)
 		{
-			_mFile = file ?? throw new ArgumentNullException(nameof(file));
+            if (file == null)
+                throw new ArgumentNullException("file");
 
-			////SD.Workbench.MainWindow.Activated += MainForm_Activated;
+            _mFile = file;
 
-			_mFile.FileNameChanged += file_FileNameChanged;
-			////FileChangeWatcher.activeWatchers.Add(this);
-			
-			////Bugfix: Watching files by default can cause application file load deadlock situations(?)
-			////this.SetWatcher();
-		}
-		#endregion constructors
+            ////SD.Workbench.MainWindow.Activated += MainForm_Activated;
 
-		#region properties
-		public static bool DetectExternalChangesOption
-		{
-			get => true;
+            _mFile.FileNameChanged += file_FileNameChanged;
+            ////FileChangeWatcher.activeWatchers.Add(this);
+
+            ////Bugfix: Watching files by default can cause application file load deadlock situations(?)
+            ////this.SetWatcher();
+        }
+        #endregion constructors
+
+        #region properties
+        public static bool DetectExternalChangesOption
+        {
+            get { return true; }
 
 			set
 			{
@@ -74,8 +77,8 @@
 		}
 
 		public bool Enabled
-		{
-			get => _mEnabled;
+        {
+            get { return _mEnabled;  }
 			set
 			{
 				_mEnabled = value;

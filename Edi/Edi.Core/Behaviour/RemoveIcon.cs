@@ -56,11 +56,15 @@
 
 		private static void window_SourceInitialized(object sender, EventArgs e)
 		{
-			if (sender is Window win)
-			{
-				IconHelper.RemoveIcon(win);
-			}
-		}
+            if (sender != null)
+            {
+                if (sender is Window)
+                {
+                    Window win = sender as Window;
+                    IconHelper.RemoveIcon(win);
+                }
+            }
+        }
 	}
 
 	/// <summary>

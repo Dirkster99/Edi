@@ -18,20 +18,22 @@
 
 		public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
 		{
-			if (value is string s)
-			{
-				return DirectoryName.Create(s);
-			}
-			return base.ConvertFrom(context, culture, value);
-		}
+            if (value is string)
+            {
+                return DirectoryName.Create((string)value);
+            }
 
-		public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture,
+            return base.ConvertFrom(context, culture, value);
+        }
+
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture,
 																		 object value, Type destinationType)
 		{
 			if (destinationType == typeof(string))
 			{
 				return value.ToString();
 			}
+
 			return base.ConvertTo(context, culture, value, destinationType);
 		}
 	}

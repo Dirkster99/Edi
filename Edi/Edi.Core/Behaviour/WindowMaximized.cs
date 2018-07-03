@@ -42,13 +42,18 @@
 			}
 		}
 
-		static void window_StateChanged(object sender, EventArgs e)
-		{
+        static void window_StateChanged(object sender, System.EventArgs e)
+        {
 
-            if (sender is Window w)
+            if (sender is Window)
             {
-	            SetIsNotMaximized(w, w.WindowState != WindowState.Maximized);
+                Window w = sender as Window;
+
+                if (w.WindowState == WindowState.Maximized)
+                    WindowMaximized.SetIsNotMaximized(w, false);
+                else
+                    WindowMaximized.SetIsNotMaximized(w, true);
             }
         }
-	}
+    }
 }

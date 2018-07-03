@@ -79,62 +79,60 @@ namespace Edi.Core.Behaviour
 
 		private static void FrameworkElement_MouseClick(object sender, MouseButtonEventArgs e)
 		{
-			// Send should be this class or a descendent of it
+            // Send should be this class or a descendent of it
+            var fwElement = sender as FrameworkElement;
 
-			// Sanity check just in case this was somehow send by something else
-			if (!(sender is FrameworkElement fwElement))
-				return;
+            // Sanity check just in case this was somehow send by something else
+            if (fwElement == null)
+                return;
 
-			// Handle right mouse click event if there is a command attached for this
-			switch (e.ChangedButton)
-			{
-				case MouseButton.Right:
-					ICommand clickCommand = GetRightClickItemCommand(fwElement);
+            // Handle right mouse click event if there is a command attached for this
+            if (e.ChangedButton == MouseButton.Right)
+            {
+                ICommand clickCommand = DoubleClickImageToCommand.GetRightClickItemCommand(fwElement);
 
-					if (clickCommand != null)
-					{
-						// Check whether this attached behaviour is bound to a RoutedCommand
-						if (clickCommand is RoutedCommand)
-						{
-							// Execute the routed command
-							(clickCommand as RoutedCommand).Execute(fwElement, fwElement);
-							e.Handled = true;
-						}
-						else
-						{
-							// Execute the Command as bound delegate
-							clickCommand.Execute(fwElement);
-							e.Handled = true;
-						}
-					}
+                if (clickCommand != null)
+                {
+                    // Check whether this attached behaviour is bound to a RoutedCommand
+                    if (clickCommand is RoutedCommand)
+                    {
+                        // Execute the routed command
+                        (clickCommand as RoutedCommand).Execute(fwElement, fwElement);
+                        e.Handled = true;
+                    }
+                    else
+                    {
+                        // Execute the Command as bound delegate
+                        clickCommand.Execute(fwElement);
+                        e.Handled = true;
+                    }
+                }
+            }
 
-					break;
-				case MouseButton.Left when e.ClickCount == 2:
-					ICommand doubleclickCommand = GetDoubleClickItemCommand(fwElement);
+            // Filter for left mouse button double-click
+            if (e.ChangedButton == MouseButton.Left && e.ClickCount == 2)
+            {
+                ICommand doubleclickCommand = DoubleClickImageToCommand.GetDoubleClickItemCommand(fwElement);
 
-					// There may not be a command bound to this after all
-					switch (doubleclickCommand)
-					{
-						case null:
-							return;
-						case RoutedCommand _:
-							// Execute the routed command
-							((RoutedCommand) doubleclickCommand).Execute(fwElement, fwElement);
-							e.Handled = true;
-							break;
-						default:
-							// Execute the Command as bound delegate
-							doubleclickCommand.Execute(fwElement);
-							e.Handled = true;
-							break;
-					}
+                // There may not be a command bound to this after all
+                if (doubleclickCommand == null)
+                    return;
 
-					// Check whether this attached behaviour is bound to a RoutedCommand
-
-					break;
-			}
-			// Filter for left mouse button double-click
-		}
-		#endregion methods
-	}
+                // Check whether this attached behaviour is bound to a RoutedCommand
+                if (doubleclickCommand is RoutedCommand)
+                {
+                    // Execute the routed command
+                    (doubleclickCommand as RoutedCommand).Execute(fwElement, fwElement);
+                    e.Handled = true;
+                }
+                else
+                {
+                    // Execute the Command as bound delegate
+                    doubleclickCommand.Execute(fwElement);
+                    e.Handled = true;
+                }
+            }
+        }
+        #endregion methods
+    }
 }

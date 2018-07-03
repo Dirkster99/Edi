@@ -12,8 +12,8 @@
 
 		private string _title;
 		public virtual string Title
-		{
-			get => _title;
+        {
+            get { return _title; }
 			set
 			{
 				if (_title != value)
@@ -36,8 +36,8 @@
 
 		private string _contentId;
 		public string ContentId
-		{
-			get => _contentId;
+        {
+            get { return _contentId; }
 			set
 			{
 				if (_contentId != value)
@@ -53,8 +53,8 @@
 
 		private bool _isSelected;
 		public bool IsSelected
-		{
-			get => _isSelected;
+        {
+            get { return _isSelected; }
 			set
 			{
 				if (_isSelected != value)
@@ -71,8 +71,8 @@
 
 		private bool _isActive;
 		public bool IsActive
-		{
-			get => _isActive;
+        {
+            get { return _isActive; }
 			set
 			{
 				if (_isActive != value)

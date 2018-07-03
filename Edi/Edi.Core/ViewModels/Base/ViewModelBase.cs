@@ -27,17 +27,18 @@
 		/// <param name="property"></param>
 		public void RaisePropertyChanged<TProperty>(Expression<Func<TProperty>> property)
 		{
-			var lambda = (LambdaExpression)property;
-			MemberExpression memberExpression;
+            var lambda = (LambdaExpression)property;
+            MemberExpression memberExpression;
 
-			if (lambda.Body is UnaryExpression unaryExpression)
-			{
-				memberExpression = (MemberExpression)unaryExpression.Operand;
-			}
-			else
-				memberExpression = (MemberExpression)lambda.Body;
+            if (lambda.Body is UnaryExpression)
+            {
+                var unaryExpression = (UnaryExpression)lambda.Body;
+                memberExpression = (MemberExpression)unaryExpression.Operand;
+            }
+            else
+                memberExpression = (MemberExpression)lambda.Body;
 
-			RaisePropertyChanged(memberExpression.Member.Name);
-		}
-	}
+            this.RaisePropertyChanged(memberExpression.Member.Name);
+        }
+    }
 }

@@ -39,7 +39,7 @@ namespace Edi.Core.View.Pane
         /// <param name="container">The element to which the style will be applied.</param>
         /// <returns>Returns an application-specific style to apply; otherwise, null.</returns>
         public override Style SelectStyle(object item,
-                                                     DependencyObject container)
+                                          DependencyObject container)
         {
             if (_styleDirectory == null)
                 return null;
@@ -47,8 +47,9 @@ namespace Edi.Core.View.Pane
             if (item == null)
                 return null;
 
-	        Type t = item.GetType();
-            _styleDirectory.TryGetValue(t, out var o);
+            Style o;
+            Type t = item.GetType();
+            _styleDirectory.TryGetValue(t, out o);
 
             if (o != null)
                 return o;

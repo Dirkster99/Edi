@@ -45,10 +45,11 @@ namespace Edi.Core.Resources
                 if (string.IsNullOrEmpty(assemblyName) || string.IsNullOrEmpty(resourceFilename))
                     return default(T);
 
-                string uriPath = $"/{assemblyName};component/{resourceFilename}";
+                string uriPath = string.Format("/{0};component/{1}", assemblyName, resourceFilename);
                 Uri uri = new Uri(uriPath, UriKind.Relative);
+                ResourceDictionary resource = Application.LoadComponent(uri) as ResourceDictionary;
 
-	            if (!(Application.LoadComponent(uri) is ResourceDictionary resource))
+                if (resource == null)
                     return default(T);
 
                 if (!string.IsNullOrEmpty(name))
