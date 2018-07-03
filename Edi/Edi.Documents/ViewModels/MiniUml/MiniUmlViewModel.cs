@@ -16,7 +16,7 @@ namespace Edi.Documents.ViewModels.MiniUml
     public class MiniUmlViewModel : Core.ViewModels.FileBaseViewModel
 	{
 		#region Fields
-		public const string DocumentKey = "UMLEditor";
+		public const string DocumentKey = "UmlEditor";
 		public const string Description = "Unified Modeling Language (UML)";
 		public const string FileFilterName = "Unified Modeling Language";
 		public const string DefaultFilter = "uml";
@@ -77,7 +77,7 @@ namespace Edi.Documents.ViewModels.MiniUml
 		#region MiniUML Document ViewModel
 		public AbstractDocumentViewModel DocumentMiniUml
 		{
-			get => _mDocumentMiniUml;
+			get { return _mDocumentMiniUml; }
 
 		    protected set
 			{
@@ -92,9 +92,9 @@ namespace Edi.Documents.ViewModels.MiniUml
 		#endregion MiniUML Document ViewModel
 
 		#region MiniUML RibbonViewModel
-		public RibbonViewModel VmRibbonViewModel
+		public RibbonViewModel vm_RibbonViewModel
 		{
-			get => _mRibbonViewModel;
+			get { return _mRibbonViewModel; }
 
 		    protected set
 			{
@@ -102,7 +102,7 @@ namespace Edi.Documents.ViewModels.MiniUml
 				{
 					_mRibbonViewModel = value;
 
-					RaisePropertyChanged(() => VmRibbonViewModel);
+					RaisePropertyChanged(() => vm_RibbonViewModel);
 				}
 			}
 		}

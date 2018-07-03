@@ -17,7 +17,7 @@
             </Grid.RowDefinitions>
 
             <MiniUMLViews:RibbonView DataContext="{Binding vm_RibbonViewModel}" Grid.Row="0"/>
-            <MiniUMLViews:DocumentView DataContext="{Binding DocumentMiniUML}" Grid.Row="1" />
+            <MiniUMLViews:DocumentView DataContext="{Binding DocumentMiniUml}" Grid.Row="1" />
         </Grid>
     </DataTemplate>
 
