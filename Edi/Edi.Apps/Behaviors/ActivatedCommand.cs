@@ -83,17 +83,17 @@
 		/// <param name="e"></param>
 		private static void OnCommandChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-			if (d is Window uiElement)
-			{
-				uiElement.Activated -= UiElement_Activated;
+            var uiElement = d as Window;      // Remove the handler if it exist to avoid memory leaks
+            uiElement.Activated -= UiElement_Activated;
 
-				if (e.NewValue is ICommand)
-				{
-					// the property is attached so we attach the Drop event handler
-					uiElement.Activated += UiElement_Activated;
-				}
-			}
-		}
+            if (e.NewValue is ICommand)
+            {
+                ICommand command = e.NewValue as ICommand;
+
+                // the property is attached so we attach the Drop event handler
+                uiElement.Activated += UiElement_Activated;
+            }
+        }
 
 		/// <summary>
 		/// This method is called when the Activated event occurs. The sender should be the control

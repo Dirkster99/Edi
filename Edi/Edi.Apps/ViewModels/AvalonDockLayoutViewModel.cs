@@ -82,23 +82,30 @@ namespace Edi.Apps.ViewModels
         {
             get
             {
-	            return _mLoadLayoutCommand ?? (_mLoadLayoutCommand = new RelayCommand<object>((p) =>
-	            {
-		            try
-		            {
-			            if (!(p is DockingManager docManager))
-				            return;
+                if (_mLoadLayoutCommand == null)
+                {
+                    _mLoadLayoutCommand = new RelayCommand<object>((p) =>
+                    {
+                        try
+                        {
+                            DockingManager docManager = p as DockingManager;
 
-			            _mMessageManager.Output.AppendLine("Loading document and tool window layout...");
-			            LoadDockingManagerLayout();
-		            }
-		            catch (Exception exp)
-		            {
-			            var wrt = _mMessageManager.Output.Writer;
-			            wrt.WriteLine("Error when loading layout in AvalonDockLayoutViewModel:");
-			            wrt.WriteLine(exp.Message);
-		            }
-	            }));
+                            if (docManager == null)
+                                return;
+
+                            _mMessageManager.Output.AppendLine("Loading document and tool window layout...");
+                            LoadDockingManagerLayout();
+                        }
+                        catch (Exception exp)
+                        {
+                            var wrt = _mMessageManager.Output.Writer;
+                            wrt.WriteLine("Error when loading layout in AvalonDockLayoutViewModel:");
+                            wrt.WriteLine(exp.Message);
+                        }
+                    });
+                }
+
+                return _mLoadLayoutCommand;
             }
         }
 
@@ -119,13 +126,20 @@ namespace Edi.Apps.ViewModels
         {
             get
             {
-	            return _mSaveLayoutCommand ?? (_mSaveLayoutCommand = new RelayCommand<object>((p) =>
-	            {
-		            if (!(p is string xmlLayout))
-			            return;
+                if (_mSaveLayoutCommand == null)
+                {
+                    _mSaveLayoutCommand = new RelayCommand<object>((p) =>
+                    {
+                        string xmlLayout = p as string;
 
-		            SaveDockingManagerLayout(xmlLayout);
-	            }));
+                        if (xmlLayout == null)
+                            return;
+
+                        this.SaveDockingManagerLayout(xmlLayout);
+                    });
+                }
+
+                return _mSaveLayoutCommand;
             }
         }
         #endregion command properties

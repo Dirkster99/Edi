@@ -47,63 +47,65 @@
 		/// <param name="d"></param>
 		/// <param name="e"></param>
 		private static void OnDropCommandChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
-		{
-			if (d is UIElement uiElement)
-			{
-				uiElement.Drop -= UIElement_Drop;
+        {
+            UIElement uiElement = d as UIElement;     // Remove the handler if it exist to avoid memory leaks
+            uiElement.Drop -= UIElement_Drop;
 
-				if (e.NewValue is ICommand)
-				{
-					// the property is attached so we attach the Drop event handler
-					uiElement.Drop += UIElement_Drop;
-				}
-			}
-		}
+            if (e.NewValue is ICommand)
+            {
+                ICommand command = e.NewValue as ICommand;
 
-		/// <summary>
-		/// This method is called when the Drop event occurs. The sender should be the control
-		/// on which this behaviour is attached - so we convert the sender into a <seealso cref="UIElement"/>
-		/// and receive the Command through the <seealso cref="GetDropCommand"/> getter listed above.
-		/// 
-		/// The <paramref name="e"/> parameter contains the standard <seealso cref="DragEventArgs"/> data,
-		/// which is unpacked and reales upon the bound command.
-		/// 
-		/// This implementation supports binding of delegate commands and routed commands.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private static void UIElement_Drop(object sender, DragEventArgs e)
-		{
-			UIElement uiElement = sender as UIElement;
+                // the property is attached so we attach the Drop event handler
+                uiElement.Drop += UIElement_Drop;
+            }
+        }
 
-			// Sanity check just in case this was somehow send by something else
-			if (uiElement == null)
-				return;
+        /// <summary>
+        /// This method is called when the Drop event occurs. The sender should be the control
+        /// on which this behaviour is attached - so we convert the sender into a <seealso cref="UIElement"/>
+        /// and receive the Command through the <seealso cref="GetDropCommand"/> getter listed above.
+        /// 
+        /// The <paramref name="e"/> parameter contains the standard <seealso cref="DragEventArgs"/> data,
+        /// which is unpacked and reales upon the bound command.
+        /// 
+        /// This implementation supports binding of delegate commands and routed commands.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void UIElement_Drop(object sender, DragEventArgs e)
+        {
+            UIElement uiElement = sender as UIElement;
 
-			ICommand dropCommand = GetDropCommand(uiElement);
+            // Sanity check just in case this was somehow send by something else
+            if (uiElement == null)
+                return;
 
-			// There may not be a command bound to this after all
-			if (dropCommand == null)
-				return;
+            ICommand dropCommand = DropFileCommand.GetDropCommand(uiElement);
 
-			if (e.Data.GetDataPresent(DataFormats.FileDrop))
-			{
-				if (e.Data.GetData(DataFormats.FileDrop, true) is string[] droppedFilePaths)
-					foreach (string droppedFilePath in droppedFilePaths)
-					{
-						// Check whether this attached behaviour is bound to a RoutedCommand
-						if (dropCommand is RoutedCommand)
-						{
-							// Execute the routed command
-							(dropCommand as RoutedCommand).Execute(droppedFilePath, uiElement);
-						}
-						else
-						{
-							// Execute the Command as bound delegate
-							dropCommand.Execute(droppedFilePath);
-						}
-					}
-			}
-		}
-	}
+            // There may not be a command bound to this after all
+            if (dropCommand == null)
+                return;
+
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] droppedFilePaths =
+                e.Data.GetData(DataFormats.FileDrop, true) as string[];
+
+                foreach (string droppedFilePath in droppedFilePaths)
+                {
+                    // Check whether this attached behaviour is bound to a RoutedCommand
+                    if (dropCommand is RoutedCommand)
+                    {
+                        // Execute the routed command
+                        (dropCommand as RoutedCommand).Execute(droppedFilePath, uiElement);
+                    }
+                    else
+                    {
+                        // Execute the Command as bound delegate
+                        dropCommand.Execute(droppedFilePath);
+                    }
+                }
+            }
+        }
+    }
 }

@@ -20,8 +20,8 @@
 		/// </summary>
 		public object Data
 		{
-			get => GetValue(DataProperty);
-			set => SetValue(DataProperty, value);
+			get { return GetValue(DataProperty); }
+			set { SetValue(DataProperty, value); }
 		}
 
 		/// <summary>

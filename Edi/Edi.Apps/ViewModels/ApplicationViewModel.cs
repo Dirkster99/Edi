@@ -228,7 +228,7 @@ namespace Edi.Apps.ViewModels
         /// </summary>
         public IFileBaseViewModel ActiveDocument
         {
-            get => _mActiveDocument;
+            get { return _mActiveDocument; }
 
 	        set
             {
@@ -288,7 +288,7 @@ namespace Edi.Apps.ViewModels
 
         public IDocumentType SelectedOpenDocumentType
         {
-            get => _mSelectedOpenDocumentType;
+            get { return _mSelectedOpenDocumentType; }
 
 	        private set
             {
@@ -327,9 +327,9 @@ namespace Edi.Apps.ViewModels
 
 	    public bool ShutDownInProgressCancel
 		{
-			get => _mShutDownInProgressCancel;
+			get { return _mShutDownInProgressCancel; }
 
-			set => _mShutDownInProgressCancel = value;
+			set { _mShutDownInProgressCancel = value; }
 		}
 
 		#region ApplicationName
@@ -432,8 +432,8 @@ namespace Edi.Apps.ViewModels
 
                 if (mruList.FindEntry(filePath) != null)
                 {
-                    if (_msgBox.Show(string.Format(Util.Local.Strings.STR_ERROR_LOADING_FILE_MSG, filePath),
-                                                   Util.Local.Strings.STR_ERROR_LOADING_FILE_CAPTION, MsgBoxButtons.YesNo) == MsgBoxResult.Yes)
+                    if (_msgBox.Show(string.Format(Edi.Util.Local.Strings.STR_ERROR_LOADING_FILE_MSG, filePath),
+                                                   Edi.Util.Local.Strings.STR_ERROR_LOADING_FILE_CAPTION, MsgBoxButtons.YesNo) == MsgBoxResult.Yes)
                     {
                         mruList.RemoveEntry(filePath);
                     }
@@ -442,23 +442,24 @@ namespace Edi.Apps.ViewModels
                 return null;
             }
 
-            fileViewModel.DocumentEvent += ProcessDocumentEvent;
-            fileViewModel.ProcessingResultEvent += Vm_ProcessingResultEvent;
+            fileViewModel.DocumentEvent += this.ProcessDocumentEvent;
+            fileViewModel.ProcessingResultEvent += this.Vm_ProcessingResultEvent;
             _mFiles.Add(fileViewModel);
 
             // reset viewmodel options in accordance to current program settings
 
-            if (fileViewModel is IDocumentEdi ediVm)
+            if (fileViewModel is IDocumentEdi)
             {
-	            SetActiveDocumentOnNewFileOrOpenFile(ediVm);
+                IDocumentEdi ediVM = fileViewModel as IDocumentEdi;
+                this.SetActiveDocumentOnNewFileOrOpenFile(ediVM);
             }
             else
             {
-                SetActiveFileBaseDocument(fileViewModel);
+                this.SetActiveFileBaseDocument(fileViewModel);
             }
 
-            if (addIntoMru)
-                GetToolWindowVm<RecentFilesViewModel>().AddNewEntryIntoMRU(filePath);
+            if (addIntoMru == true)
+                this.GetToolWindowVm<RecentFilesViewModel>().AddNewEntryIntoMRU(filePath);
 
             return fileViewModel;
         }
@@ -738,13 +739,15 @@ namespace Edi.Apps.ViewModels
         {
             try
             {
-	            if (!(o is IMRUEntryViewModel cmdParam))
+                var cmdParam = o as IMRUEntryViewModel;
+
+                if (cmdParam == null)
                     return;
 
                 if (e != null)
                     e.Handled = true;
 
-                GetToolWindowVm<RecentFilesViewModel>().MruList.RemoveEntry(cmdParam);
+                this.GetToolWindowVm<RecentFilesViewModel>().MruList.RemoveEntry(cmdParam);
             }
             catch (Exception exp)
             {
@@ -944,8 +947,8 @@ namespace Edi.Apps.ViewModels
         }
 
         internal bool OnSaveDocumentFile(IFileBaseViewModel fileToSave,
-                                                                         bool saveAsFlag = false,
-                                                                         string fileExtensionFilter = "")
+                                         bool saveAsFlag = false,
+                                         string fileExtensionFilter = "")
         {
             string filePath = (fileToSave == null ? string.Empty : fileToSave.FilePath);
 
@@ -955,47 +958,49 @@ namespace Edi.Apps.ViewModels
 
             try
             {
-                if (filePath == string.Empty || saveAsFlag)   // Execute SaveAs function
+                if (filePath == string.Empty || saveAsFlag == true)   // Execute SaveAs function
                 {
                     var dlg = new SaveFileDialog();
 
                     try
                     {
-                        dlg.FileName = Path.GetFileName(filePath) ?? throw new InvalidOperationException();
+                        dlg.FileName = System.IO.Path.GetFileName(filePath);
                     }
-	                catch
-	                {
-		                // ignored
-	                }
+                    catch
+                    {
+                    }
 
-	                dlg.InitialDirectory = GetDefaultPath();
+                    dlg.InitialDirectory = this.GetDefaultPath();
 
                     if (string.IsNullOrEmpty(fileExtensionFilter) == false)
                         dlg.Filter = fileExtensionFilter;
 
-                    if (dlg.ShowDialog().GetValueOrDefault())     // SaveAs file if user OK'ed it so
+                    if (dlg.ShowDialog().GetValueOrDefault() == true)     // SaveAs file if user OK'ed it so
                     {
-	                    filePath = dlg.FileName;
+                        filePath = dlg.FileName;
 
-	                    fileToSave?.SaveFile(filePath);
+                        fileToSave.SaveFile(filePath);
                     }
                     else
                         return false;
                 }
                 else                                                  // Execute Save function
-                {
-	                fileToSave?.SaveFile(filePath);
-                }
+                    fileToSave.SaveFile(filePath);
 
-	            GetToolWindowVm<RecentFilesViewModel>().AddNewEntryIntoMRU(filePath);
+                this.GetToolWindowVm<RecentFilesViewModel>().AddNewEntryIntoMRU(filePath);
 
                 return true;
             }
-            catch (Exception exp)
+            catch (Exception Exp)
             {
-	            var sMsg = filePath.Length > 0 ? string.Format(CultureInfo.CurrentCulture, Util.Local.Strings.STR_MSG_ErrorWhileSavingFileX, exp.Message, filePath) : string.Format(CultureInfo.CurrentCulture, Util.Local.Strings.STR_MSG_ErrorWhileSavingAFile, exp.Message);
+                string sMsg = Edi.Util.Local.Strings.STR_MSG_ErrorSavingFile;
 
-	            _msgBox.Show(exp, sMsg, Util.Local.Strings.STR_MSG_ErrorSavingFile);
+                if (filePath.Length > 0)
+                    sMsg = string.Format(CultureInfo.CurrentCulture, Edi.Util.Local.Strings.STR_MSG_ErrorWhileSavingFileX, Exp.Message, filePath);
+                else
+                    sMsg = string.Format(CultureInfo.CurrentCulture, Edi.Util.Local.Strings.STR_MSG_ErrorWhileSavingAFile, Exp.Message);
+
+                _msgBox.Show(Exp, sMsg, Edi.Util.Local.Strings.STR_MSG_ErrorSavingFile, MsgBoxButtons.OK);
             }
 
             return false;
@@ -1110,7 +1115,7 @@ namespace Edi.Apps.ViewModels
         /// </summary>
         public bool? DialogCloseResult
         {
-            get => _mDialogCloseResult;
+            get { return _mDialogCloseResult; }
 
 	        private set
             {
@@ -1126,7 +1131,7 @@ namespace Edi.Apps.ViewModels
         /// </summary>
         public bool? IsNotMaximized
         {
-            get => _mIsNotMaximized;
+            get { return _mIsNotMaximized; }
 
 	        set
             {
@@ -1143,7 +1148,7 @@ namespace Edi.Apps.ViewModels
         /// </summary>
         public bool IsWorkspaceAreaOptimized
         {
-            get => _mIsWorkspaceAreaOptimized;
+            get { return _mIsWorkspaceAreaOptimized; }
 
 	        set
             {
@@ -1291,18 +1296,17 @@ namespace Edi.Apps.ViewModels
 
         private void CloseDocument(FileBaseViewModel f)
         {
-	        switch (f)
-	        {
-		        case null:
-			        return;
-		        case EdiViewModel _:
-			        if (f is EdiViewModel eVm)
-						eVm.ProcessingResultEvent -= Vm_ProcessingResultEvent;
-			        break;
-	        }
-	        // Detach EdiViewModel specific events
+            if (f != null)
+            {
+                // Detach EdiViewModel specific events
+                if (f is EdiViewModel)
+                {
+                    EdiViewModel eVM = f as EdiViewModel;
+                    eVM.ProcessingResultEvent -= Vm_ProcessingResultEvent;
+                }
 
-	        Close(f);
+                this.Close(f);
+            }
         }
 
         /// <summary>

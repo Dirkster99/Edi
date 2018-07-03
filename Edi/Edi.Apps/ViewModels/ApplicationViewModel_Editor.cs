@@ -9,13 +9,14 @@ namespace Edi.Apps.ViewModels
 	using ICSharpCode.AvalonEdit.Document;
 	using MsgBox;
 	using Documents.ViewModels.EdiDoc;
+    using System.Linq;
 
-	public partial class ApplicationViewModel
+    public partial class ApplicationViewModel
 	{
 		private FindReplaceViewModel _mFindReplaceVm;
 		public FindReplaceViewModel FindReplaceVm
 		{
-			get => _mFindReplaceVm;
+			get { return _mFindReplaceVm; }
 
 			protected set
 			{
@@ -27,34 +28,34 @@ namespace Edi.Apps.ViewModels
 			}
 		}
 
-		private IEditor GetNextEditor(FindReplaceViewModel f,
-																	bool previous = false
-																	)
-		{
-			// There is no next open document if there is none or only one open
-			if (Files.Count <= 1)
-				return f.GetCurrentEditor();
+        private IEditor GetNextEditor(FindReplaceViewModel f,
+                                                                    bool previous = false
+                                                                    )
+        {
+            // There is no next open document if there is none or only one open
+            if (this.Files.Count <= 1)
+                return f.GetCurrentEditor();
 
-			// There is no next open document If the user wants to search the current document only
-			if (f.SearchIn == Dialogs.FindReplace.SearchScope.CurrentDocument)
-				return f.GetCurrentEditor();
+            // There is no next open document If the user wants to search the current document only
+            if (f.SearchIn == Edi.Dialogs.FindReplace.SearchScope.CurrentDocument)
+                return f.GetCurrentEditor();
 
-			var l = new List<object>(Files);
+            var l = new List<object>(this.Files.Cast<object>());
 
-			int idxStart = l.IndexOf(f.CurrentEditor);
-			int i = idxStart;
+            int idxStart = l.IndexOf(f.CurrentEditor);
+            int i = idxStart;
 
-			if (i >= 0)
-			{
-				Match m = null;
+            if (i >= 0)
+            {
+                Match m = null;
 
-				bool textSearchSuccess = false;
-				do
-				{
-					if (previous)                  // Get next/previous document
-						i = (i < 1 ? l.Count - 1 : i - 1);
-					else
-						i = (i >= l.Count - 1 ? 0 : i + 1);
+                bool textSearchSuccess = false;
+                do
+                {
+                    if (previous == true)                  // Get next/previous document
+                        i = (i < 1 ? l.Count - 1 : i - 1);
+                    else
+                        i = (i >= l.Count - 1 ? 0 : i + 1);
 
                     //// i = (i + (previous ? l.Count - 1 : +1)) % l.Count;
 
@@ -63,60 +64,63 @@ namespace Edi.Apps.ViewModels
                     {
                         EdiViewModel fTmp = l[i] as EdiViewModel;
 
-                        m = FindNextMatchInText(0, 0, false, fTmp.Text, ref f, out _);
+                        Regex r;
+                        m = this.FindNextMatchInText(0, 0, false, fTmp.Text, ref f, out r);
 
-						textSearchSuccess = m.Success;
-					}
-				}
-				while (i != idxStart && textSearchSuccess != true);
+                        textSearchSuccess = m.Success;
+                    }
+                }
+                while (i != idxStart && textSearchSuccess != true);
 
-				// Found a match so activate the corresponding document and select the text with scroll into view
-				if (textSearchSuccess)
-				{
-					var doc = (EdiViewModel) l[i];
+                // Found a match so activate the corresponding document and select the text with scroll into view
+                if (textSearchSuccess == true && m != null)
+                {
+                    var doc = l[i] as EdiViewModel;
 
-					ActiveDocument = doc;
+                    if (doc != null)
+                        this.ActiveDocument = doc;
 
-					// Ensure that no pending calls are in the dispatcher queue
-					// This makes sure that we are blocked until bindings are re-established
-					// Bindings are required to scroll a selection into view
-					Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.SystemIdle, (Action)delegate
-					{
-						if (ActiveDocument != null && doc != null)
-						{
-							doc.TextEditorSelectionStart = m.Index;
-							doc.TextEditorSelectionLength = m.Length;
+                    // Ensure that no pending calls are in the dispatcher queue
+                    // This makes sure that we are blocked until bindings are re-established
+                    // Bindings are required to scroll a selection into view
+                    Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.SystemIdle, (Action)delegate
+                    {
+                        if (this.ActiveDocument != null && doc != null)
+                        {
+                            doc.TextEditorSelectionStart = m.Index;
+                            doc.TextEditorSelectionLength = m.Length;
 
-							// Reset cursor position to make sure we search a document from its beginning
-							doc.TxtControl.SelectText(m.Index, m.Length);
+                            // Reset cursor position to make sure we search a document from its beginning
+                            doc.TxtControl.SelectText(m.Index, m.Length);
 
-							f.CurrentEditor = l[i] as IEditor;
+                            f.CurrentEditor = l[i] as IEditor;
 
-							IEditor edi = f.GetCurrentEditor();
+                            IEditor edi = f.GetCurrentEditor();
 
-							edi?.Select(m.Index, m.Length);
+                            if (edi != null)
+                                edi.Select(m.Index, m.Length);
 
-						}
-					});
+                        }
+                    });
 
-					return f.GetCurrentEditor();
-				}
-			}
+                    return f.GetCurrentEditor();
+                }
+            }
 
-			return null;
-		}
+            return null;
+        }
 
-		/// <summary>
-		/// Find a match in a given peace of string
-		/// </summary>
-		/// <param name="selectionStart"></param>
-		/// <param name="selectionLength"></param>
-		/// <param name="invertLeftRight"></param>
-		/// <param name="text"></param>
-		/// <param name="f"></param>
-		/// <param name="r"></param>
-		/// <returns></returns>
-		Match FindNextMatchInText(int selectionStart,             // CE.SelectionStart
+        /// <summary>
+        /// Find a match in a given peace of string
+        /// </summary>
+        /// <param name="selectionStart"></param>
+        /// <param name="selectionLength"></param>
+        /// <param name="invertLeftRight"></param>
+        /// <param name="text"></param>
+        /// <param name="f"></param>
+        /// <param name="r"></param>
+        /// <returns></returns>
+        Match FindNextMatchInText(int selectionStart,             // CE.SelectionStart
 															int selectionLength,           // CE.SelectionLength
 															bool invertLeftRight,         // CE.Text
 															string text,                 // InvertLeftRight
@@ -136,15 +140,16 @@ namespace Edi.Apps.ViewModels
 		}
 
 		private bool FindNext(FindReplaceViewModel f,
-													bool invertLeftRight = false)
+                              bool invertLeftRight = false)
 		{
 			IEditor ce = f.GetCurrentEditor();
 
 			if (ce == null)
 				return false;
 
-			Match m = FindNextMatchInText(ce.SelectionStart, ce.SelectionLength,
-																				 invertLeftRight, ce.Text, ref f, out var r);
+            Regex r;
+            Match m = FindNextMatchInText(ce.SelectionStart, ce.SelectionLength,
+                                          invertLeftRight, ce.Text, ref f, out r);
 
 			if (m.Success)
 			{
@@ -207,9 +212,12 @@ namespace Edi.Apps.ViewModels
 
 			try
 			{
-				f.TxtControl.CurrentSelection(out var start, out _, out _);
+                int start, length;
+                bool IsRectangularSelection = false;
 
-				iCurrLine = f.Document.GetLineByOffset(start).LineNumber;
+                f.TxtControl.CurrentSelection(out start, out length, out IsRectangularSelection);
+
+                iCurrLine = f.Document.GetLineByOffset(start).LineNumber;
 			}
 			catch (Exception)
 			{
@@ -287,9 +295,10 @@ namespace Edi.Apps.ViewModels
 
 					if (f.TxtControl != null)      // Search by default for currently selected text (if any)
 					{
-						f.TxtControl.GetSelectedText(out var textToFind);
+                        string textToFind;
+                        f.TxtControl.GetSelectedText(out textToFind);
 
-						if (textToFind.Length > 0)
+                        if (textToFind.Length > 0)
 							FindReplaceVm.TextToFind = textToFind;
 					}
 

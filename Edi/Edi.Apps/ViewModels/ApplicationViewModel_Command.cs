@@ -60,45 +60,53 @@
 				e.Handled = true;
 			}));
 
-			win.CommandBindings.Add(new CommandBinding(AppCommand.ShowToolWindow,
-			(s, e) =>
-			{
-				if (!(e?.Parameter is IToolWindow toolwindowviewmodel))
-					return;
+            win.CommandBindings.Add(new CommandBinding(AppCommand.ShowToolWindow,
+            (s, e) =>
+            {
+                if (e == null)
+                    return;
+
+                var toolwindowviewmodel = e.Parameter as IToolWindow;
+
+                if (toolwindowviewmodel == null)
+                    return;
 
 
-				if (toolwindowviewmodel is IRegisterableToolWindow)
-				{
-					IRegisterableToolWindow registerTw = toolwindowviewmodel as IRegisterableToolWindow;
+                if (toolwindowviewmodel is IRegisterableToolWindow)
+                {
+                    IRegisterableToolWindow registerTW = toolwindowviewmodel as IRegisterableToolWindow;
 
-					registerTw.SetToolWindowVisibility(this, !toolwindowviewmodel.IsVisible);
-				}
-				else
-					toolwindowviewmodel.SetToolWindowVisibility(!toolwindowviewmodel.IsVisible);
+                    registerTW.SetToolWindowVisibility(this, !toolwindowviewmodel.IsVisible);
+                }
+                else
+                    toolwindowviewmodel.SetToolWindowVisibility(!toolwindowviewmodel.IsVisible);
 
-				e.Handled = true;
-			}));
+                e.Handled = true;
+            }));
 
-			// Standard File New command binding via ApplicationCommands enumeration
-			win.CommandBindings.Add(new CommandBinding(ApplicationCommands.New,
-			(s, e) =>
-			{
-				TypeOfDocument t = TypeOfDocument.EdiTextEditor;
+            // Standard File New command binding via ApplicationCommands enumeration
+            win.CommandBindings.Add(new CommandBinding(ApplicationCommands.New,
+            (s, e) =>
+            {
+                TypeOfDocument t = TypeOfDocument.EdiTextEditor;
 
-				if (e != null)
-				{
-					e.Handled = true;
+                if (e != null)
+                {
+                    e.Handled = true;
 
-					if (e.Parameter is TypeOfDocument document)
-						t = document;
-				}
+                    if (e.Parameter != null)
+                    {
+                        if (e.Parameter is TypeOfDocument)
+                            t = (TypeOfDocument)e.Parameter;
+                    }
+                }
 
-				OnNew(t);
-			}
-			));
+                this.OnNew(t);
+            }
+            ));
 
-			// Standard File Open command binding via ApplicationCommands enumeration
-			win.CommandBindings.Add(new CommandBinding(ApplicationCommands.Open,
+            // Standard File Open command binding via ApplicationCommands enumeration
+            win.CommandBindings.Add(new CommandBinding(ApplicationCommands.Open,
 			(s, e) =>
 			{
 				string t = string.Empty;
@@ -148,21 +156,29 @@
 			{
 				try
 				{
-					if (e == null) return;
-					e.Handled = true;
-					e.CanExecute = false;
+                    if (e != null)
+                    {
+                        e.Handled = true;
+                        e.CanExecute = false;
 
-					e.Handled = true;
+                        EdiViewModel f = null;
 
-					if (e.Parameter is EdiViewModel f)
-						e.CanExecute = f.CanClose();
-					else
-					{
-						if (ActiveDocument != null)
-							e.CanExecute = ActiveDocument.CanClose();
-					}
-				}
-				catch (Exception exp)
+                        if (e != null)
+                        {
+                            e.Handled = true;
+                            f = e.Parameter as EdiViewModel;
+                        }
+
+                        if (f != null)
+                            e.CanExecute = f.CanClose();
+                        else
+                        {
+                            if (this.ActiveDocument != null)
+                                e.CanExecute = this.ActiveDocument.CanClose();
+                        }
+                    }
+                }
+                catch (Exception exp)
 				{
 					Logger.Error(exp.Message, exp);
 					_msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
@@ -174,9 +190,9 @@
 
 			// Change the WPF/TextEditor highlighting theme currently used in the application
 			win.CommandBindings.Add(new CommandBinding(AppCommand.ViewTheme,
-															(s, e) => ChangeThemeCmd_Executed(e, win.Dispatcher)));
+            (s, e) => this.ChangeThemeCmd_Executed(s, e, win.Dispatcher)));
 
-			win.CommandBindings.Add(new CommandBinding(AppCommand.BrowseUrl,
+            win.CommandBindings.Add(new CommandBinding(AppCommand.BrowseUrl,
 			(s, e) =>
 			{
 				Process.Start(new ProcessStartInfo("https://github.com/Dirkster99/Edi"));
@@ -217,14 +233,19 @@
 			{
 				try
 				{
-					Logger.InfoFormat("TRACE AppCommand.LoadFile parameter is {0}.", e?.ToString() ?? "(null)");
+                    Logger.InfoFormat("TRACE AppCommand.LoadFile parameter is {0}.", (e == null ? "(null)" : e.ToString()));
 
-					if (!(e?.Parameter is string filename))
-						return;
+                    if (e == null)
+                        return;
 
-					Logger.InfoFormat("TRACE AppCommand.LoadFile with: '{0}'", filename);
+                    string filename = e.Parameter as string;
 
-					Open(filename);
+                    if (filename == null)
+                        return;
+
+                    Logger.InfoFormat("TRACE AppCommand.LoadFile with: '{0}'", filename);
+
+                    this.Open(filename);
 				}
 				catch (Exception exp)
 				{
@@ -564,69 +585,84 @@
 			}));
 		}
 
-		/// <summary>
-		/// This procedure changes the current WPF Application Theme into another theme
-		/// while the application is running (re-boot should not be required).
-		/// </summary>
-		/// <param name="e"></param>
-		/// <param name="disp"></param>
-		private void ChangeThemeCmd_Executed(ExecutedRoutedEventArgs e,
-											Dispatcher disp)
-		{
-			string oldTheme = Factory.DefaultThemeName;
+        /// <summary>
+        /// This procedure changes the current WPF Application Theme into another theme
+        /// while the application is running (re-boot should not be required).
+        /// </summary>
+        /// <param name="e"></param>
+        /// <param name="disp"></param>
+        private void ChangeThemeCmd_Executed(object s,
+                                            ExecutedRoutedEventArgs e,
+                                            System.Windows.Threading.Dispatcher disp)
+        {
+            string oldTheme = Factory.DefaultThemeName;
 
-			try
-			{
-				// Check if request is available
-				if (!(e?.Parameter is string newThemeName))
-					return;
+            try
+            {
+                if (e == null)
+                    return;
 
-				oldTheme = _mSettingsManager.SettingData.CurrentTheme;
+                if (e.Parameter == null)
+                    return;
 
-				// The Work to perform on another thread
-				void Start()
-				{
-					// This works in the UI tread using the dispatcher with highest Priority
-					disp.Invoke(DispatcherPriority.Send, (Action)(() =>
-				   {
-					   try
-					   {
-						   if (!ApplicationThemes.SetSelectedTheme(newThemeName)) return;
-						   _mSettingsManager.SettingData.CurrentTheme = newThemeName;
-						   ResetTheme(); // Initialize theme in process
-					   }
-					   catch (Exception exp)
-					   {
-						   Logger.Error(exp.Message, exp);
-						   _msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton, _mAppCore.IssueTrackerLink, _mAppCore.IssueTrackerLink, Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
-					   }
-				   }));
-				}
+                string newThemeName = e.Parameter as string;
 
-				// Create the thread and kick it started!
-				Thread thread = new Thread(Start);
+                // Check if request is available
+                if (newThemeName == null)
+                    return;
 
-				thread.Start();
-			}
-			catch (Exception exp)
-			{
-				_mSettingsManager.SettingData.CurrentTheme = oldTheme;
+                oldTheme = _mSettingsManager.SettingData.CurrentTheme;
 
-				Logger.Error(exp.Message, exp);
-				_msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-							 _mAppCore.IssueTrackerLink,
-							 _mAppCore.IssueTrackerLink,
-							 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
-			}
-		}
+                // The Work to perform on another thread
+                ThreadStart start = delegate
+                {
+                    // This works in the UI tread using the dispatcher with highest Priority
+                    disp.Invoke(DispatcherPriority.Send,
+                    (Action)(() =>
+                    {
+                        try
+                        {
+                            if (ApplicationThemes.SetSelectedTheme(newThemeName) == false)
+                                return;
 
-		#region EditorCommands
+                            _mSettingsManager.SettingData.CurrentTheme = newThemeName;
+                            ResetTheme();                        // Initialize theme in process
+                        }
+                        catch (Exception exp)
+                        {
+                            Logger.Error(exp.Message, exp);
+                            _msgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                                         _mAppCore.IssueTrackerLink,
+                                         _mAppCore.IssueTrackerLink,
+                                         Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+                        }
+                    }));
+                };
 
-		/// <summary>
-		/// Set command bindings necessary to perform copy/cut/paste operations
-		/// </summary>
-		/// <param name="win"></param>
-		public void InitEditCommandBinding(Window win)
+                // Create the thread and kick it started!
+                Thread thread = new Thread(start);
+
+                thread.Start();
+            }
+            catch (Exception exp)
+            {
+                _mSettingsManager.SettingData.CurrentTheme = oldTheme;
+
+                Logger.Error(exp.Message, exp);
+                _msgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                             _mAppCore.IssueTrackerLink,
+                             _mAppCore.IssueTrackerLink,
+                             Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+            }
+        }
+
+        #region EditorCommands
+
+        /// <summary>
+        /// Set command bindings necessary to perform copy/cut/paste operations
+        /// </summary>
+        /// <param name="win"></param>
+        public void InitEditCommandBinding(Window win)
 		{
 			win.CommandBindings.Add(new CommandBinding(AppCommand.DisableHighlighting,    // Select all text in a document
 			(s, e) =>
@@ -795,43 +831,51 @@
 
 		private void OnToggleEditorOption(object parameter)
 		{
-			if (!(ActiveDocument is EdiViewModel f))
-				return;
+            EdiViewModel f = this.ActiveDocument as EdiViewModel;
 
-			if (parameter == null)
-				return;
+            if (f == null)
+                return;
 
-			if ((parameter is ToggleEditorOption) == false)
-				return;
+            if (parameter == null)
+                return;
 
-			ToggleEditorOption t = (ToggleEditorOption)parameter;
+            if ((parameter is ToggleEditorOption) == false)
+                return;
 
-			switch (t)
-			{
-				case ToggleEditorOption.WordWrap:
-					f.WordWrap = !f.WordWrap;
-					break;
+            ToggleEditorOption t = (ToggleEditorOption)parameter;
 
-				case ToggleEditorOption.ShowLineNumber:
-					f.ShowLineNumbers = !f.ShowLineNumbers;
-					break;
+            if (f != null)
+            {
+                switch (t)
+                {
+                    case ToggleEditorOption.WordWrap:
+                        f.WordWrap = !f.WordWrap;
+                        break;
 
-				case ToggleEditorOption.ShowSpaces:
-					f.TextOptions.ShowSpaces = !f.TextOptions.ShowSpaces;
-					break;
+                    case ToggleEditorOption.ShowLineNumber:
+                        f.ShowLineNumbers = !f.ShowLineNumbers;
+                        break;
 
-				case ToggleEditorOption.ShowTabs:
-					f.TextOptions.ShowTabs = !f.TextOptions.ShowTabs;
-					break;
+                    case ToggleEditorOption.ShowSpaces:
+                        f.TextOptions.ShowSpaces = !f.TextOptions.ShowSpaces;
+                        break;
 
-				case ToggleEditorOption.ShowEndOfLine:
-					f.TextOptions.ShowEndOfLine = !f.TextOptions.ShowEndOfLine;
-					break;
-			}
-		}
-		#endregion ToggleEditorOptionCommand
+                    case ToggleEditorOption.ShowTabs:
+                        f.TextOptions.ShowTabs = !f.TextOptions.ShowTabs;
+                        break;
 
-		private bool CanExecuteIfActiveDocumentIsEdiViewModel()
+                    case ToggleEditorOption.ShowEndOfLine:
+                        f.TextOptions.ShowEndOfLine = !f.TextOptions.ShowEndOfLine;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
+        #endregion ToggleEditorOptionCommand
+
+        private bool CanExecuteIfActiveDocumentIsEdiViewModel()
 		{
 
 			if (ActiveDocument is EdiViewModel)
