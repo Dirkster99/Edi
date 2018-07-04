@@ -329,13 +329,13 @@ http://wpfknowledge.blogspot.de/2012/05/note-this-is-not-original-work.html
     <LexerType name="MarkDown" desc="Color definitions for XML file highlighting pattern">
 
       <WordsStyle name="Heading"        fgColor="#FFFF0000" />
-      <!-- WordsStyle name="Emphasis"   />
+      <WordsStyle name="Emphasis"   />
       <WordsStyle name="StrongEmphasis" />
-      <WordsStyle name="Code"           /-->
+      <WordsStyle name="Code"           />
       <WordsStyle name="BlockQuote"     fgColor="#FF0000FF" />
       <WordsStyle name="Link"           fgColor="#FF0000FF" />
       <WordsStyle name="Image"          fgColor="#FF0000FF" />
-      <!-- WordsStyle name="LineBreak"      fgColor="#FF222222" /-->
+      <WordsStyle name="LineBreak"      fgColor="#FF222222" />
     </LexerType>
 
     <LexerType name = "Pascal" desc="Syntax highlighting color definitions for the Pascal programming language">

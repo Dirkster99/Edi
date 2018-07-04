@@ -30,8 +30,8 @@
     </UserControl.Resources>
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="12" >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition  Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -78,9 +78,9 @@
 
             <view:RecentFilesView DataContext="{Binding}"
                                   Grid.Column="1"
-                                  MinWidth="300"
+                                  MinWidth="100"
                                   VerticalAlignment="Stretch"
-                                  Margin="12,12,120,12" />
+                                  Margin="12" />
         </Grid>
 
       <!-- Logo -->
