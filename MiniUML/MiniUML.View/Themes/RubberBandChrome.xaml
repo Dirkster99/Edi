@@ -1,0 +1,51 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:rub="clr-namespace:MiniUML.View.Views.RubberBand"
+                    xmlns:reskeys="clr-namespace:MiniUML.View.Themes"
+    >
+
+    <!-- Style the rubber band selection on the canvas with a standard style -->
+    <Style TargetType="{x:Type rub:RubberBandChrome}">
+        <Style.Resources>
+            <BooleanToVisibilityConverter x:Key="visConvi" />
+        </Style.Resources>
+        <Setter Property="Visibility" Value="{Binding DataContext.RubberBand.IsVisible, Converter={StaticResource visConvi}}"/>
+        <Setter Property="Width" Value="{Binding Width}" />
+        <Setter Property="Height" Value="{Binding Height}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type rub:RubberBandChrome}">
+                    <Grid DataContext="{Binding DataContext.RubberBand}">
+
+                        <Border BorderBrush="{DynamicResource {x:Static reskeys:ResourceKeys.Rubberband_OuterBorderBrushKey}}"
+                                BorderThickness="1"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch">
+                            <Border BorderBrush="{DynamicResource {x:Static reskeys:ResourceKeys.Rubberband_InnerBorderBrushKey}}"
+                                    BorderThickness="1"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch">
+                                <Border Background="{DynamicResource {x:Static reskeys:ResourceKeys.Rubberband_BackgroundBrushKey}}" />
+                            </Border>
+                        </Border>
+
+                        <!-- Display Horizonat Width of Rubber Band inside the Rubber band -->
+                        <TextBlock Grid.Column="0" Grid.Row="0"  Foreground="Black"
+                                   HorizontalAlignment="Center" VerticalAlignment="Top"
+                                   Text="{Binding Width, Mode=OneWay, StringFormat={}{0:0.##}}" />
+
+                        <!-- Display Vertical Height of Rubber Band inside the Rubber band -->
+                        <TextBlock Grid.Column="0" Grid.Row="1" Foreground="Black"
+                                   HorizontalAlignment="Left" VerticalAlignment="Center"
+                                   Text="{Binding Height, Mode=OneWay, StringFormat={}{0:0.##}}">
+                            <TextBlock.LayoutTransform>
+                                <RotateTransform Angle="90" CenterX="1" CenterY="0.5"/>
+                            </TextBlock.LayoutTransform>
+                        </TextBlock>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

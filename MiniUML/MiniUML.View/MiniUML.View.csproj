@@ -167,7 +167,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\CanvasView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\LightBrushs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -178,6 +186,10 @@
     <Page Include="Themes\ResizeAdorner\ResizeChrome.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\RubberBandChrome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DocumentView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -234,6 +246,7 @@
       <DependentUpon>AnchorPoint.xaml</DependentUpon>
     </Compile>
     <Compile Include="TemplateSelector\ShapeTemplateSelector.cs" />
+    <Compile Include="Themes\ResourceKeys.cs" />
     <Compile Include="Views\CanvasView.cs" />
     <Compile Include="Views\DocumentView.xaml.cs">
       <DependentUpon>DocumentView.xaml</DependentUpon>

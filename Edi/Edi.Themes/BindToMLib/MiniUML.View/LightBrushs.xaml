@@ -1,0 +1,40 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:reskeys="clr-namespace:MiniUML.View.Themes;assembly=MiniUML.View"
+                    xmlns:options="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+                    
+                    xmlns:MLib_reskeys="clr-namespace:MLib.Themes;assembly=MLib"                  
+                    >
+
+    <!-- Accent Color Brush Definition
+         - Look for references on ControlAccentBrushKey to find where this is being set in code -->
+    <Color x:Key="{x:Static reskeys:ResourceKeys.ControlAccentColorKey}">#1ba1e2</Color>
+
+    <SolidColorBrush x:Key="{x:Static reskeys:ResourceKeys.ControlAccentBrushKey}"
+                     Color="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlAccentColorKey}}"
+                     options:Freeze="true"/>
+
+    <!-- RubberBand -->
+    <SolidColorBrush x:Key="{x:Static reskeys:ResourceKeys.Rubberband_OuterBorderBrushKey}"
+                     Color="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlAccentColorKey}}"
+                     options:Freeze="true"/>
+
+    <SolidColorBrush x:Key="{x:Static reskeys:ResourceKeys.Rubberband_InnerBorderBrushKey}"
+                     Color="White" options:Freeze="true"/>
+
+    <SolidColorBrush x:Key="{x:Static reskeys:ResourceKeys.Rubberband_BackgroundBrushKey}"
+                     Color="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlAccentColorKey}}"
+                     Opacity="0.05"
+                     options:Freeze="true"/>
+
+    <!-- Anchor Point Movable Thumb at Start and End of Line -->
+    <SolidColorBrush x:Key="{x:Static reskeys:ResourceKeys.AchorPoint_BorderBrushKey}"
+                     Color="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlAccentColorKey}}"
+                     options:Freeze="true"/>
+
+    <SolidColorBrush x:Key="{x:Static reskeys:ResourceKeys.AchorPoint_BackgroundBrushKey}"
+                     Color="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlAccentColorKey}}"
+                     Opacity="0.5"
+                     options:Freeze="true"/>
+
+</ResourceDictionary>

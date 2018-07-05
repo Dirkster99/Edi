@@ -47,6 +47,7 @@ namespace Edi.Themes
 
           "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/DarkTheme.xaml",
 
+          "/Edi.Themes;component/BindToMLib/MiniUML.View/LightBrushs.xaml",
           "/Edi.Themes;component/BindToMLib/MWindowLib/DarkBrushs.xaml",
           "/Edi.Themes;component/BindToMLib/AvalonDock_DarkLightBrushs.xaml",
           "/Edi.Themes;component/BindToMLib/DropDownButtonLib_DarkLightBrushs.xaml",
@@ -88,6 +89,7 @@ namespace Edi.Themes
 
           "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/LightTheme.xaml",
 
+          "/Edi.Themes;component/BindToMLib/MiniUML.View/LightBrushs.xaml",
           "/Edi.Themes;component/BindToMLib/AvalonDock_DarkLightBrushs.xaml",
           "/Edi.Themes;component/BindToMLib/MWindowLib/LightBrushs.xaml",
           "/Edi.Themes;component/BindToMLib/DropDownButtonLib_DarkLightBrushs.xaml",
