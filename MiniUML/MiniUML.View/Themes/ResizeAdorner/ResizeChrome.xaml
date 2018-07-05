@@ -1,28 +1,21 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:s="clr-namespace:MiniUML.View.Views.ResizeAdorner.Adorners"
-                    xmlns:thumbs="clr-namespace:MiniUML.View.Views.ResizeAdorner.Thumbs"
-                    >
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="clr-namespace:MiniUML.View.Views.ResizeAdorner.Adorners"
+    xmlns:thumbs="clr-namespace:MiniUML.View.Views.ResizeAdorner.Thumbs"
+    xmlns:reskeys="clr-namespace:MiniUML.View.Themes"
+    >
 
-  <Style TargetType="{x:Type Shape}" x:Key="ThumbCorner">
-    <Setter Property="SnapsToDevicePixels" Value="true" />
-    <Setter Property="Stroke" Value="LightSlateGray" />
-    <Setter Property="StrokeThickness" Value=".5" />
-    <Setter Property="Width" Value="7" />
-    <Setter Property="Height" Value="7" />
-    <Setter Property="Margin" Value="-2" />
-    <Setter Property="Fill">
-      <Setter.Value>
-        <RadialGradientBrush Center="0.3, 0.3"
-                             GradientOrigin="0.3, 0.3"
-                             RadiusX="0.7"
-                             RadiusY="0.7">
-          <GradientStop Color="White" Offset="0" />
-          <GradientStop Color="DarkSlateGray" Offset="0.9" />
-        </RadialGradientBrush>
-      </Setter.Value>
-    </Setter>
-  </Style>
+    <!-- Style for Corner Thumbs of ResizeChrome -->
+    <!--Style TargetType="{x:Type Shape}" x:Key="ThumbCorner">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="Stroke" Value="{DynamicResource {x:Static reskeys:ResourceKeys.ThumbCorner_BorderBrushKey}}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="Width" Value="3.5" />
+        <Setter Property="Height" Value="3.5" />
+        <Setter Property="Margin" Value="-2" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static reskeys:ResourceKeys.ThumbCorner_BackgroundBrushKey}}" />
+    </Style-->
 
   <Style TargetType="{x:Type s:ResizeChrome}">
     <Setter Property="Template">
@@ -40,20 +33,17 @@
               <thumbs:ResizeThumb x:Name="PART_BottomLeftRSThumb" Width="7" Height="7" Margin="-2" Cursor="SizeNESW" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
               <thumbs:ResizeThumb x:Name="PART_BottomRightRSThumb" Width="7" Height="7" Margin="-2" Cursor="SizeNWSE" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
             </Grid>
-            <Grid IsHitTestVisible="False" Opacity="1" Margin="-3">
-              <Rectangle SnapsToDevicePixels="True" StrokeThickness="1" Margin="1">
-                <Rectangle.Stroke>
-                  <LinearGradientBrush StartPoint="0, 0" EndPoint="1, .3" Opacity=".7">
-                    <GradientStop Color="SlateGray" Offset="0" />
-                    <GradientStop Color="LightGray" Offset=".5" />
-                    <GradientStop Color="SlateGray" Offset="1" />
-                  </LinearGradientBrush>
-                </Rectangle.Stroke>
-              </Rectangle>
-              <Ellipse Style="{StaticResource ThumbCorner}" HorizontalAlignment="Left" VerticalAlignment="Top" />
-              <Ellipse Style="{StaticResource ThumbCorner}" HorizontalAlignment="Right" VerticalAlignment="Top" />
-              <Ellipse Style="{StaticResource ThumbCorner}" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
-              <Ellipse Style="{StaticResource ThumbCorner}" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+            <Grid IsHitTestVisible="False" Opacity="1" Margin="-3" SnapsToDevicePixels="True">
+                <!-- Frame around resized/moved item -->
+                <Rectangle Stroke="{DynamicResource {x:Static reskeys:ResourceKeys.ResizeChrome_BorderBrushKey}}"
+                           StrokeThickness="1"
+                           Margin="1"/>
+                
+                <!-- Corner Thumbs -->
+                <!--Rectangle Style="{StaticResource ThumbCorner}" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <Rectangle Style="{StaticResource ThumbCorner}" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                <Rectangle Style="{StaticResource ThumbCorner}" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                <Rectangle Style="{StaticResource ThumbCorner}" HorizontalAlignment="Right" VerticalAlignment="Bottom" /-->
             </Grid>
           </Grid>
         </ControlTemplate>

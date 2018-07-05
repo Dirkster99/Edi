@@ -37,4 +37,18 @@
                      Opacity="0.5"
                      options:Freeze="true"/>
 
+    <!-- ResizeChrome in DesignItem -->
+    <SolidColorBrush x:Key="{x:Static reskeys:ResourceKeys.ThumbCorner_BorderBrushKey}"
+                     Color="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlAccentColorKey}}"
+                     options:Freeze="true"/>
+
+    <SolidColorBrush x:Key="{x:Static reskeys:ResourceKeys.ThumbCorner_BackgroundBrushKey}"
+                     Color="{DynamicResource {x:Static reskeys:ResourceKeys.ControlAccentColorKey}}"
+                     Opacity="0.5"
+                     options:Freeze="true"/>
+
+    <SolidColorBrush x:Key="{x:Static reskeys:ResourceKeys.ResizeChrome_BorderBrushKey}"
+                     Color="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlAccentColorKey}}"
+                     options:Freeze="true"/>
+
 </ResourceDictionary>

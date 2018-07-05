@@ -33,6 +33,13 @@
         public static readonly ComponentResourceKey AchorPoint_BorderBrushKey = new ComponentResourceKey(typeof(ResourceKeys), "AchorPoint_BorderBrushKey");
         public static readonly ComponentResourceKey AchorPoint_BackgroundBrushKey = new ComponentResourceKey(typeof(ResourceKeys), "AchorPoint_BackgroundBrushKey");
         #endregion Anchor Point Movable Thumb at Start and End of Line
+
+        #region ResizeChrome in DesignItem
+        public static readonly ComponentResourceKey ThumbCorner_BorderBrushKey = new ComponentResourceKey(typeof(ResourceKeys), "ThumbCorner_BorderBrushKey");
+        public static readonly ComponentResourceKey ThumbCorner_BackgroundBrushKey = new ComponentResourceKey(typeof(ResourceKeys), "ThumbCorner_BackgroundBrushKey");
+
+        public static readonly ComponentResourceKey ResizeChrome_BorderBrushKey = new ComponentResourceKey(typeof(ResourceKeys), "ResizeChrome_BorderBrushKey");
+        #endregion ResizeChrome in DesignItem
         #endregion Brush Keys
     }
 }
