@@ -2,38 +2,32 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:framwork="clr-namespace:MiniUML.Model;assembly=MiniUML.Model"
-             xmlns:local="clr-namespace:MiniUML.View.Views"
+
              MinHeight="50" MinWidth="50">
 
-  <UserControl.Resources>
-    <ResourceDictionary>
-      <!-- BorderStyle -->
-      <Style x:Key="BorderStyle" TargetType="{x:Type Border}">
-        <Setter Property="Padding" Value="1,1,1,1"/>
-        <!-- Setter Property="Background" Value="{DynamicResource Style.Brushes.RibbonView.PanelBackground}"/ -->
-      </Style>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <!-- RibbonStyle -->
+            <Style x:Key="RibbonStyle" TargetType="{x:Type TabControl}">
+                <Style.Resources>
+                    <!-- ControlTemplate -->
+                    <ControlTemplate x:Key="ControlTemplate" TargetType="{x:Type TabControl}">
+                        <Grid KeyboardNavigation.TabNavigation="Local">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
 
-      <!-- RibbonStyle -->
-      <Style x:Key="RibbonStyle" TargetType="{x:Type TabControl}">
-        <Style.Resources>
-          <!-- ControlTemplate -->
-          <ControlTemplate x:Key="ControlTemplate" TargetType="{x:Type TabControl}">
-            <Grid KeyboardNavigation.TabNavigation="Local">
-              <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-              </Grid.RowDefinitions>
-
-              <!-- Tab area -->
-              <TabPanel x:Name="HeaderPanel"
+                            <!-- Tab area -->
+                            <TabPanel x:Name="HeaderPanel"
                         Grid.Row="0"
                         Margin="0,0,0,0"
                         Panel.ZIndex="1"
                         KeyboardNavigation.TabIndex="1"
                         IsItemsHost="true" />
 
-              <!-- Content area -->
-              <Border x:Name="ContentBorder"
+                            <!-- Content area -->
+                            <Border x:Name="ContentBorder"
                       Grid.Row="1"
                       Panel.ZIndex="0"
                       SnapsToDevicePixels="True"
@@ -44,119 +38,121 @@
                       KeyboardNavigation.DirectionalNavigation="Contained"
                       KeyboardNavigation.TabNavigation="Local"
                       KeyboardNavigation.TabIndex="2">
-                <!-- Background="{DynamicResource Style.Brushes.RibbonView.ContentBackground}" -->
+                                <!-- Background="{DynamicResource Style.Brushes.RibbonView.ContentBackground}" -->
 
-                <!-- The implementation switches the content. This control must be named PART_SelectedContentHost. -->
-                <ContentPresenter x:Name="PART_SelectedContentHost"
+                                <!-- The implementation switches the content. This control must be named PART_SelectedContentHost. -->
+                                <ContentPresenter x:Name="PART_SelectedContentHost"
                                   Margin="2,2,2,1"
                                   ContentSource="SelectedContent">
 
-                  <ContentPresenter.ContentTemplate>
-                    <DataTemplate>
-                      <ContentPresenter Content="{Binding Path=View}"/><!-- This is the top ribbon in the document -->
-                    </DataTemplate>
-                  </ContentPresenter.ContentTemplate>
-                </ContentPresenter>
-              </Border>
-            </Grid>
-          </ControlTemplate>
+                                    <ContentPresenter.ContentTemplate>
+                                        <DataTemplate>
+                                            <ContentPresenter Content="{Binding Path=View}"/>
+                                            <!-- This is the top ribbon in the document -->
+                                        </DataTemplate>
+                                    </ContentPresenter.ContentTemplate>
+                                </ContentPresenter>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
 
-          <!-- ItemContainerStyle -->
-          <Style x:Key="ItemContainerStyle" TargetType="{x:Type TabItem}">
-            <Style.Resources>
-              <Storyboard x:Key="MouseEnterTabStoryboard" FillBehavior="HoldEnd">
-                <DoubleAnimation Storyboard.TargetName="TabItemBorder"
+                    <!-- ItemContainerStyle -->
+                    <Style x:Key="ItemContainerStyle" TargetType="{x:Type TabItem}">
+                        <Style.Resources>
+                            <Storyboard x:Key="MouseEnterTabStoryboard" FillBehavior="HoldEnd">
+                                <DoubleAnimation Storyboard.TargetName="TabItemBorder"
                                   Storyboard.TargetProperty="Opacity"
                                   From="0.15" To="0.4" Duration="0:0:0.4"/>
-              </Storyboard>
+                            </Storyboard>
 
-              <Storyboard x:Key="MouseLeaveTabStoryboard" FillBehavior="HoldEnd">
-                <DoubleAnimation Storyboard.TargetName="TabItemBorder"
+                            <Storyboard x:Key="MouseLeaveTabStoryboard" FillBehavior="HoldEnd">
+                                <DoubleAnimation Storyboard.TargetName="TabItemBorder"
                                   Storyboard.TargetProperty="Opacity"
                                   From="0.2" To="0.0" Duration="0:0:0.4"/>
-              </Storyboard>
+                            </Storyboard>
 
-              <Storyboard x:Key="SelectTabStoryboard" FillBehavior="HoldEnd">
-                <DoubleAnimation Storyboard.TargetName="TabItemBorder"
+                            <Storyboard x:Key="SelectTabStoryboard" FillBehavior="HoldEnd">
+                                <DoubleAnimation Storyboard.TargetName="TabItemBorder"
                                 Storyboard.TargetProperty="Opacity"
                                 From="0.8" To="1.0" Duration="0:0:0.2"/>
-              </Storyboard>
+                            </Storyboard>
 
-              <Storyboard x:Key="DeselectTabStoryboard" FillBehavior="Stop">
-                <DoubleAnimation Storyboard.TargetName="TabItemBorder"
+                            <Storyboard x:Key="DeselectTabStoryboard" FillBehavior="Stop">
+                                <DoubleAnimation Storyboard.TargetName="TabItemBorder"
                                   Storyboard.TargetProperty="Opacity"
                                   From="0.4" To="0.0" Duration="0:0:0.4"/>
-              </Storyboard>
+                            </Storyboard>
 
-              <!-- TabItemTemplate -->
-              <ControlTemplate x:Key="TabItemTemplate" TargetType="{x:Type TabItem}">
-                <Grid Margin="3,0,3,-1">
-                  <Border x:Name="TabItemBorder"
+                            <!-- TabItemTemplate -->
+                            <ControlTemplate x:Key="TabItemTemplate" TargetType="{x:Type TabItem}">
+                                <Grid Margin="3,0,3,-1">
+                                    <Border x:Name="TabItemBorder"
                                             SnapsToDevicePixels="True"
                                             BorderThickness="1,1,1,0"
                                             CornerRadius="3,3,0,0"
                                             Opacity="0.0"
                                             BorderBrush="{DynamicResource Style.Brushes.RibbonView.Border}"
-                                            /><!-- Background="{DynamicResource Style.Brushes.RibbonView.TabBackground}" -->
+                                            />
+                                    <!-- Background="{DynamicResource Style.Brushes.RibbonView.TabBackground}" -->
 
-                  <ContentPresenter Margin="10,3,10,3"
-                                                      HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center"
-                                                      Content="{Binding Path=Name}"/>
-                </Grid>
+                                    <ContentPresenter Margin="10,3,10,3"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Content="{Binding Path=Name}"/>
+                                </Grid>
 
-                <ControlTemplate.Triggers>
+                                <ControlTemplate.Triggers>
 
-                  <!-- MouseOver animation -->
-                  <MultiTrigger>
-                    <MultiTrigger.Conditions>
-                      <Condition Property="IsSelected" Value="False"/>
-                      <Condition Property="IsMouseOver" Value="True"/>
-                    </MultiTrigger.Conditions>
+                                    <!-- MouseOver animation -->
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsSelected" Value="False"/>
+                                            <Condition Property="IsMouseOver" Value="True"/>
+                                        </MultiTrigger.Conditions>
 
-                    <MultiTrigger.EnterActions>
-                      <BeginStoryboard Storyboard="{StaticResource MouseEnterTabStoryboard}"/>
-                    </MultiTrigger.EnterActions>
+                                        <MultiTrigger.EnterActions>
+                                            <BeginStoryboard Storyboard="{StaticResource MouseEnterTabStoryboard}"/>
+                                        </MultiTrigger.EnterActions>
 
-                    <MultiTrigger.ExitActions>
-                      <BeginStoryboard Storyboard="{StaticResource MouseLeaveTabStoryboard}"/>
-                    </MultiTrigger.ExitActions>
-                  </MultiTrigger>
+                                        <MultiTrigger.ExitActions>
+                                            <BeginStoryboard Storyboard="{StaticResource MouseLeaveTabStoryboard}"/>
+                                        </MultiTrigger.ExitActions>
+                                    </MultiTrigger>
 
-                  <!-- Select/Deselect animation -->
-                  <Trigger Property="IsSelected" Value="True">
-                    <Trigger.EnterActions>
-                      <BeginStoryboard Storyboard="{StaticResource SelectTabStoryboard}"/>
-                    </Trigger.EnterActions>
+                                    <!-- Select/Deselect animation -->
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard Storyboard="{StaticResource SelectTabStoryboard}"/>
+                                        </Trigger.EnterActions>
 
-                    <Trigger.ExitActions>
-                      <BeginStoryboard Storyboard="{StaticResource DeselectTabStoryboard}"/>
-                    </Trigger.ExitActions>
-                  </Trigger>
-                </ControlTemplate.Triggers>
-              </ControlTemplate>
-            </Style.Resources>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard Storyboard="{StaticResource DeselectTabStoryboard}"/>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Style.Resources>
 
-            <Setter Property="Template" Value="{StaticResource TabItemTemplate}"/>
-            <!-- Setter Property="Foreground" Value="{DynamicResource Style.Brushes.RibbonView.Foreground}"/ -->
-            <!-- Setter Property="FontSize" Value="11"/ -->
+                        <Setter Property="Template" Value="{StaticResource TabItemTemplate}"/>
+                        <!-- Setter Property="Foreground" Value="{DynamicResource Style.Brushes.RibbonView.Foreground}"/ -->
+                        <!-- Setter Property="FontSize" Value="11"/ -->
 
-          </Style>
+                    </Style>
 
-        </Style.Resources>
+                </Style.Resources>
 
-        <Setter Property="Template" Value="{StaticResource ControlTemplate}"/>
-        <Setter Property="ItemContainerStyle" Value="{StaticResource ItemContainerStyle}"/>
-        <Setter Property="BitmapEffect">
+                <Setter Property="Template" Value="{StaticResource ControlTemplate}"/>
+                <Setter Property="ItemContainerStyle" Value="{StaticResource ItemContainerStyle}"/>
+                <!-- Setter Property="BitmapEffect">
           <Setter.Value>
             <OuterGlowBitmapEffect GlowColor="Black" GlowSize="2" Opacity="0.1"/>
           </Setter.Value>
-        </Setter>
-      </Style>
-    </ResourceDictionary>
-  </UserControl.Resources>
+        </Setter-->
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
 
     <TabControl Style="{StaticResource RibbonStyle}"
-                ItemsSource="{Binding Source={x:Static framwork:PluginManager.PluginModels}}" />
+              ItemsSource="{Binding Source={x:Static framwork:PluginManager.PluginModels}}" />
 
 </UserControl>

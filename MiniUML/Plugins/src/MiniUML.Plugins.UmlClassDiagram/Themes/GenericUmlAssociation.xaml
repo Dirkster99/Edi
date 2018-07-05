@@ -14,6 +14,7 @@
     <Setter Property="Focusable" Value="True" />
     <Setter Property="SnapsToDevicePixels" Value="True"/>
     <Setter Property="views:CanvasView.CustomDrag" Value="True"/>
+
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type connect:GenericUmlAssociation}"
@@ -50,14 +51,12 @@
                                       
                                     Canvas.Top="0"
                                    />
-            <!-- SnapTargetUpdate="snapTargetUpdate"
-                                    
-    -->
+            <!-- SnapTargetUpdate="snapTargetUpdate" -->
 
             <!-- Line Stroke="Red"
-          StrokeThickness="2"
-          X1="{Binding Path='FirstNode.Left'}" Y1="{Binding Path='FirstNode.Top'}"
-          X2="{Binding Path='LastNode.Left'}"  Y2="{Binding Path='LastNode.Top'}">
+                 StrokeThickness="2"
+                 X1="{Binding Path='FirstNode.Left'}" Y1="{Binding Path='FirstNode.Top'}"
+                 X2="{Binding Path='LastNode.Left'}"  Y2="{Binding Path='LastNode.Top'}">
           </Line -->
 
             <ContentControl ContentTemplateSelector="{StaticResource ArrowTemplateSelector}"
@@ -75,7 +74,7 @@
               <ContentControl.RenderTransform>
                 <RotateTransform x:Name="ToAngleInDegrees" Angle="{Binding ElementName=tpl, Path=ToAngleInDegrees}"/>
               </ContentControl.RenderTransform>
-              <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="ToArrow"/>
+                <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="ToArrow"/>
             </ContentControl>
 
             <controls:AnchorPoint x:Name="FromAnchor"
