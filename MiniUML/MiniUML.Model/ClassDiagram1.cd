@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MiniUML.Model.behaviour.DragAndDropProps" Collapsed="true">
+    <Position X="29.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAIIAAAAAACAAAAABAAQAAAAAQACAAAIAAEAAAAA=</HashCode>
+      <FileName>behaviour\DragAndDropProps.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniUML.Model.Events.DragDeltaThumbEvent" Collapsed="true">
+    <Position X="22.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Events\DragDeltaThumbEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniUML.View.Views.RubberBand.RubberBandSelectionEventArgs" Collapsed="true">
+    <Position X="26.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAQAAAAAAAIAAAACACAQAAAAAg=</HashCode>
+      <FileName>Events\RubberBandSelectionEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniUML.Model.MiniUmlPluginLoader" Collapsed="true">
+    <Position X="26.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MiniUmlPluginLoader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniUML.Model.PluginManager" Collapsed="true">
+    <Position X="29.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAACAAAAAAAAACAAAAAAAKAAAAEA=</HashCode>
+      <FileName>PluginManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniUML.Model.PluginModelBase" Collapsed="true">
+    <Position X="22.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAIAAAAAAAAAAAAAQAEIABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PluginModelBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniUML.Model.Model.DocumentDataModel">
+    <Position X="12.5" Y="4.75" Width="3" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="MiniUML.Model.Model.DocumentDataModel.InsertPosition" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Model\DocumentDataModel.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Struct Name="MiniUML.Model.Model.DocumentDataModel.UndoState" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Model\DocumentDataModel.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>CgUAsMAFAAAQRDEQGQgQhAAFEAIQAEAAAAggnAAEAMI=</HashCode>
+      <FileName>Model\DocumentDataModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniUML.Model.Model.UmlTypeToStringConverterBase" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="24.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAEAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\UmlTypeToStringConverterBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MiniUML.Model.ViewModels.Command.CommandModelBase" Collapsed="true">
+    <Position X="24.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAIAAAAAAABAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\Command\CommandModelBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniUML.Framework.helpers.ToolBoxData" Collapsed="true">
+    <Position X="22.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\Command\ToolBoxData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniUML.Model.ViewModels.Document.AbstractDocumentViewModel">
+    <Position X="5.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAARAAAAAAEBAAAAAABAA=</HashCode>
+      <FileName>ViewModels\Document\AbstractDocumentViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniUML.Model.ViewModels.Document.CanvasViewModel" BaseTypeListCollapsed="true">
+    <Position X="16" Y="0.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>CABEJNAIg+ABAIVAAACiBAAAIgjkIAAUABhJAIACQAI=</HashCode>
+      <FileName>ViewModels\Document\CanvasViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MiniUML.Model.ViewModels.Document.DocumentViewModel">
+    <Position X="8.25" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="MiniUML.Model.ViewModels.Document.DocumentViewModel.CommandUtility" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ViewModels\Document\DocumentViewModel_Commands.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="MiniUML.Model.ViewModels.Document.DocumentViewModel.ExportCommandModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ViewModels\Document\DocumentViewModel_Commands.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="MiniUML.Model.ViewModels.Document.DocumentViewModel.OpenCommandModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ViewModels\Document\DocumentViewModel_Commands.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="MiniUML.Model.ViewModels.Document.DocumentViewModel.SaveAsCommandModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ViewModels\Document\DocumentViewModel_Commands.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="MiniUML.Model.ViewModels.Document.DocumentViewModel.RedoCommandModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ViewModels\Document\DocumentViewModel_Commands.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="MiniUML.Model.ViewModels.Document.DocumentViewModel.UndoCommandModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ViewModels\Document\DocumentViewModel_Commands.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="MiniUML.Model.ViewModels.Document.DocumentViewModel.NewCommandModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ViewModels\Document\DocumentViewModel_Commands.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="MiniUML.Model.ViewModels.Document.DocumentViewModel.SaveCommandModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ViewModels\Document\DocumentViewModel_Commands.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="MiniUML.Model.ViewModels.Document.DocumentViewModel.PrintCommandModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ViewModels\Document\DocumentViewModel_Commands.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <AssociationLine Name="vm_CanvasViewModel" Type="MiniUML.Model.ViewModels.Document.CanvasViewModel" FixedToPoint="true">
+      <Path>
+        <Point X="10.25" Y="2.312" />
+        <Point X="16" Y="2.312" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="1.545" Y="0.082" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>QAICCgAAAAYEAAAABBSEgCAAAVAAAAQAEBCEAAAABAA=</HashCode>
+      <FileName>ViewModels\Document\DocumentViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="dm_DocumentDataModel" />
+      <Property Name="vm_CanvasViewModel" />
+      <Property Name="vm_XmlViewModel" />
+      <Property Name="v_CanvasView" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MiniUML.Model.ViewModels.Document.ExportDocumentWindowViewModel" Collapsed="true">
+    <Position X="24.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIgAAAAAAABAAAAAAAAAAAAAAACAAAAEAIAAAAAAA=</HashCode>
+      <FileName>ViewModels\Document\ExportDocumentWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniUML.Model.ViewModels.Document.PageViewModelBase" Collapsed="true">
+    <Position X="28" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAoBAAQABAAQAAAAAQASAAAAABAIgQACAYIBAAEICQA=</HashCode>
+      <FileName>ViewModels\Document\PageViewModelBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniUML.Model.ViewModels.Document.RibbonViewModel" Collapsed="true">
+    <Position X="24.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\Document\RibbonViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniUML.Model.ViewModels.Document.SelectedItems" Collapsed="true">
+    <Position X="29.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIEACAAAAAABAAAAAAABAQAQAAAAAAAAAAAQABQAAQ=</HashCode>
+      <FileName>ViewModels\Document\SelectedItemsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniUML.Model.ViewModels.Document.XmlViewModel">
+    <Position X="8.25" Y="6" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AJAMCcAAAYIQQoAUAIHRDdAwQgQEg0DSgEARgBAJBwA=</HashCode>
+      <FileName>ViewModels\Document\XmlViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniUML.Model.ViewModels.RubberBand.CreateRubberBandMouseHandler" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAABABAAAAAAAAAAAAQAAABEBACAAAAAAEAAAEAAAAA=</HashCode>
+      <FileName>ViewModels\RubberBand\CreateRubberBandMouseHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MiniUML.Model.ViewModels.RubberBand.RubberBandViewModel" Collapsed="true">
+    <Position X="28" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AggAAAAQDAAAFAggAAACAEAAAAAIAAAACAAAQAAAAAI=</HashCode>
+      <FileName>ViewModels\RubberBand\RubberBandViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniUML.Model.ViewModels.Shapes.AnchorBaseViewModel" Collapsed="true">
+    <Position X="2.75" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\Shapes\AnchorBaseViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniUML.Model.ViewModels.Shapes.ShapeSizeViewModelBase" Collapsed="true">
+    <Position X="0.5" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAASAgQFAAABAAIIAAAAEACAQAIUCACAAgQAAAAAEI=</HashCode>
+      <FileName>ViewModels\Shapes\ShapeSizeViewModelBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniUML.Model.ViewModels.Shapes.ShapeViewModelBase" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>EgIAGAMAGEAQkAQkEYAQRAQAAACICAAACQgAgAAAAAA=</HashCode>
+      <FileName>ViewModels\Shapes\ShapeViewModelBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Windows.FrameworkElement">
+    <Position X="4.5" Y="4" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Events" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="MiniUML.Model.ViewModels.Document.IMiniUMLDocument" Collapsed="true">
+    <Position X="24.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\Document\IMiniUMLDocument.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MiniUML.Model.ViewModels.IShapeParent">
+    <Position X="19" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAEAAEBAACAAAAACAAAAAAgAAAAAA=</HashCode>
+      <FileName>ViewModels\IShapeParent.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="MiniUML.View.Views.RubberBand.MouseSelection" Collapsed="true">
+    <Position X="26.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Events\RubberBandSelectionEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MiniUML.Model.ViewModels.SameSize" Collapsed="true">
+    <Position X="28" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAgIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\IShapeParent.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MiniUML.Model.ViewModels.AlignShapes" Collapsed="true">
+    <Position X="22.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAQAAAAAAIIAAAACACAAAAAAAA=</HashCode>
+      <FileName>ViewModels\IShapeParent.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MiniUML.Model.ViewModels.Destribute" Collapsed="true">
+    <Position X="24.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\IShapeParent.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="MiniUML.Model.Events.DragDeltaThumbEventHandler" Collapsed="true">
+    <Position X="22.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Events\DragDeltaThumbEvent.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="MiniUML.View.Views.RubberBand.RubberBandSelectionEventHandler" Collapsed="true">
+    <Position X="24.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Events\RubberBandSelectionEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

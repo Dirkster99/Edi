@@ -133,7 +133,7 @@
                     if (File.Exists(file))
                     {
                         // Save document to the existing file.
-                        this.mViewModel.mDataModel.Save(file);
+                        this.mViewModel._DataModel.Save(file);
                         return true;
                     }
                     else
@@ -196,7 +196,7 @@
                 try
                 {
                     // Save document.
-                    this.mViewModel.mDataModel.Save(dlg.FileName);
+                    this.mViewModel._DataModel.Save(dlg.FileName);
                     this.mViewModel.prop_DocumentFilePath = dlg.FileName;
 
                     return true;
@@ -227,6 +227,11 @@
                 this.Image = (BitmapImage)Application.Current.Resources["Style.Images.Commands.Export"];
             }
 
+            /// <summary>
+            /// Save an exported image document (eg: png) into the file system.
+            /// </summary>
+            /// <param name="viewModel"></param>
+            /// <param name="defaultFileName"></param>
             public static void ExportUMLToImage(DocumentViewModel viewModel, string defaultFileName = "")
             {
                 // Create and configure SaveFileDialog.
@@ -290,7 +295,7 @@
                 viewModel.vm_CanvasViewModel.SelectedItem.Clear();
 
                 // Get a rectangle representing the page.
-                Rectangle page = viewModel.mCommandUtility.GetDocumentRectangle();
+                Rectangle page = viewModel._CommandUtility.GetDocumentRectangle();
 
                 try
                 {
@@ -312,9 +317,9 @@
             }
 
             private static void saveAsBitmap(string file,
-                                                                                BitmapEncoder encoder,
-                                                                                bool enableTransparentBackground,
-                                                                                DocumentViewModel viewModel)
+                                             BitmapEncoder encoder,
+                                             bool enableTransparentBackground,
+                                             DocumentViewModel viewModel)
             {
                 // Create and configure ExportDocumentWindowViewModel.
                 ExportDocumentWindowViewModel windowViewModel = new ExportDocumentWindowViewModel()
@@ -342,7 +347,7 @@
                 viewModel.vm_CanvasViewModel.SelectedItem.Clear();
 
                 // Get a rectangle representing the page and wrap it in a border to allow a background color to be set.
-                Border page = new Border() { Child = viewModel.mCommandUtility.GetDocumentRectangle() };
+                Border page = new Border() { Child = viewModel._CommandUtility.GetDocumentRectangle() };
 
                 // Use transparent or white background?
                 if (!windowViewModel.prop_TransparentBackground)
@@ -358,8 +363,10 @@
                     using (FileStream fs = new FileStream(file, FileMode.Create))
                     {
                         double scaleFactor = windowViewModel.prop_Resolution / 96;
+
                         RenderTargetBitmap bmp = new RenderTargetBitmap((int)(page.ActualWidth * scaleFactor), (int)(page.ActualHeight * scaleFactor),
                                 windowViewModel.prop_Resolution, windowViewModel.prop_Resolution, PixelFormats.Pbgra32);
+
                         bmp.Render(page);
                         encoder.Frames.Add(BitmapFrame.Create(bmp));
                         encoder.Save(fs);
@@ -401,26 +408,26 @@
                 PrintDialog dlg = new PrintDialog();
 
                 // Get previously used PrintTicket.
-                if (this.mViewModel.mCommandUtility.PrintTicket != null)
-                    dlg.PrintTicket = this.mViewModel.mCommandUtility.PrintTicket;
+                if (this.mViewModel._CommandUtility.PrintTicket != null)
+                    dlg.PrintTicket = this.mViewModel._CommandUtility.PrintTicket;
 
                 // Get previously used PrintQueue.
-                if (this.mViewModel.mCommandUtility.PrintQueue != null)
-                    dlg.PrintQueue = this.mViewModel.mCommandUtility.PrintQueue;
+                if (this.mViewModel._CommandUtility.PrintQueue != null)
+                    dlg.PrintQueue = this.mViewModel._CommandUtility.PrintQueue;
 
                 // Show dialog; return if canceled.
                 if (!dlg.ShowDialog().GetValueOrDefault()) return;
 
                 // Store the PrintTicket and PrintQueue for later use.
-                this.mViewModel.mCommandUtility.PrintTicket = dlg.PrintTicket;
-                this.mViewModel.mCommandUtility.PrintQueue = dlg.PrintQueue;
+                this.mViewModel._CommandUtility.PrintTicket = dlg.PrintTicket;
+                this.mViewModel._CommandUtility.PrintQueue = dlg.PrintQueue;
 
                 // Deselect shapes while printing.
                 List<ShapeViewModelBase> selectedItems = new List<ShapeViewModelBase>(this.mViewModel.vm_CanvasViewModel.SelectedItem.Shapes);
                 this.mViewModel.vm_CanvasViewModel.SelectedItem.Clear();
 
                 // Print the document.
-                Rectangle page = this.mViewModel.mCommandUtility.GetDocumentRectangle(new Size(dlg.PrintableAreaWidth, dlg.PrintableAreaHeight));
+                Rectangle page = this.mViewModel._CommandUtility.GetDocumentRectangle(new Size(dlg.PrintableAreaWidth, dlg.PrintableAreaHeight));
                 dlg.PrintVisual(page, this.mViewModel.prop_DocumentFileName);
 
                 // Reselect shapes.
@@ -447,14 +454,14 @@
             {
                 e.CanExecute = ((this.mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready ||
                                                 this.mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Invalid) &&
-                                                this.mViewModel.mDataModel.HasUndoData);
+                                                this.mViewModel._DataModel.HasUndoData);
 
                 e.Handled = true;
             }
 
             public override void OnExecute(object sender, ExecutedRoutedEventArgs e)
             {
-                this.mViewModel.mDataModel.Undo(this.mViewModel.vm_CanvasViewModel);
+                this.mViewModel._DataModel.Undo(this.mViewModel.vm_CanvasViewModel);
             }
         }
 
@@ -477,14 +484,14 @@
             {
                 e.CanExecute = ((this.mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready ||
                                                 this.mViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Invalid) &&
-                                                this.mViewModel.mDataModel.HasRedoData);
+                                                this.mViewModel._DataModel.HasRedoData);
 
                 e.Handled = true;
             }
 
             public override void OnExecute(object sender, ExecutedRoutedEventArgs e)
             {
-                this.mViewModel.mDataModel.Redo(this.mViewModel.vm_CanvasViewModel);
+                this.mViewModel._DataModel.Redo(this.mViewModel.vm_CanvasViewModel);
             }
         }
 
@@ -543,7 +550,7 @@
                 newDocumentWindow.DataContext = null;
                 this.mViewModel.prop_DocumentFilePath = null;
                 this.mViewModel.vm_CanvasViewModel.SelectedItem.Clear();
-                this.mViewModel.mDataModel.New(newDocumentWindowViewModel);
+                this.mViewModel._DataModel.New(newDocumentWindowViewModel);
             }
         }
 

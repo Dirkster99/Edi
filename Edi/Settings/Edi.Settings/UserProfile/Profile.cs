@@ -76,17 +76,17 @@
         {
             get
             {
-                if (this._MruList == null)
-                    this._MruList = new MRUList();
+                if (_MruList == null)
+                    _MruList = new MRUList();
 
-                return this._MruList;
+                return _MruList;
             }
 
             set
             {
-                if (this._MruList != value)
+                if (_MruList != value)
                 {
-                    this._MruList = value;
+                    _MruList = value;
                 }
             }
         }

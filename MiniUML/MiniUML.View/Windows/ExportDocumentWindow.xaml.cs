@@ -16,16 +16,16 @@ namespace MiniUML.View.Windows
     {
         public ExportDocumentWindow()
         {
-            this.InitializeComponent();
-            this.Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag);
-            this.Title = (string)Application.Current.Resources["ApplicationName"];
+            InitializeComponent();
+            Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag);
+            Title = (string)Application.Current.Resources["ApplicationName"];
         }
 
         private void okButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                double resolution = double.Parse(this._dpiTextBox.Text,
+                double resolution = double.Parse(_dpiTextBox.Text,
                        NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite | NumberStyles.AllowDecimalPoint,
                        CultureInfo.CurrentCulture);
 

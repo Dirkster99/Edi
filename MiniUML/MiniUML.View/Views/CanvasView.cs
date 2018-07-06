@@ -19,6 +19,7 @@
     using MiniUML.View.Views.RubberBand;
     using MsgBox;
     using CommonServiceLocator;
+    using MiniUML.Model.ViewModels.Interfaces;
 
     public delegate void LayoutUpdatedHandler();
 
@@ -527,8 +528,8 @@
             }
 
             /* HACK: Work-around for bug 4
-            this._CanvasViewModel.DocumentViewModel.dm_DocumentDataModel.Undo();
-            this._CanvasViewModel.DocumentViewModel.dm_DocumentDataModel.Redo();
+            _CanvasViewModel.DocumentViewModel.dm_DocumentDataModel.Undo();
+            _CanvasViewModel.DocumentViewModel.dm_DocumentDataModel.Redo();
              * */
         }
 

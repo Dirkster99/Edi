@@ -35,12 +35,12 @@ namespace MiniUML.View.Windows
 
             try
             {
-                double pageWidth = (double)converter.ConvertBack(this._pageWidthTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
-                double pageHeight = (double)converter.ConvertBack(this._pageHeightTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
-                double pageMarginTop = (double)converter.ConvertBack(this._pageMarginTopTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
-                double pageMarginBottom = (double)converter.ConvertBack(this._pageMarginBottomTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
-                double pageMarginLeft = (double)converter.ConvertBack(this._pageMarginLeftTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
-                double pageMarginRight = (double)converter.ConvertBack(this._pageMarginRightTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
+                double pageWidth = (double)converter.ConvertBack(_pageWidthTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
+                double pageHeight = (double)converter.ConvertBack(_pageHeightTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
+                double pageMarginTop = (double)converter.ConvertBack(_pageMarginTopTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
+                double pageMarginBottom = (double)converter.ConvertBack(_pageMarginBottomTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
+                double pageMarginLeft = (double)converter.ConvertBack(_pageMarginLeftTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
+                double pageMarginRight = (double)converter.ConvertBack(_pageMarginRightTextBox.Text, typeof(bool), null, CultureInfo.CurrentCulture);
 
                 if (pageWidth < 0 || pageHeight < 0)
                 {

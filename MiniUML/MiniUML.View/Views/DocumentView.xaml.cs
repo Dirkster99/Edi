@@ -24,15 +24,15 @@ namespace MiniUML.View.Views
           return;
         
         // Pass a reference to the Visual representing the document to the view model.
-        viewModel.v_CanvasView = this._documentVisual;
+        viewModel.v_CanvasView = _documentVisual;
       };
 
       // setup zoom support via mouse wheel
-      this._scrollViewer.PreviewMouseWheel += delegate(object sender, MouseWheelEventArgs e)
+      _scrollViewer.PreviewMouseWheel += delegate(object sender, MouseWheelEventArgs e)
       {
         if (Keyboard.Modifiers == ModifierKeys.Control)
         {
-          this._zoomSlider.Value += e.Delta / 1000.0;
+          _zoomSlider.Value += e.Delta / 1000.0;
           e.Handled = true;
         }
       };
@@ -48,9 +48,9 @@ namespace MiniUML.View.Views
     private void _zoomSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
     {
       if (Math.Abs(e.NewValue - 1) < 0.09)
-        this._zoomSlider.Value = 1;
+        _zoomSlider.Value = 1;
 
-      this._zoomTextBlock.Text = (int)(this._zoomSlider.Value * 100) + MiniUML.Framework.Local.Strings.STR_ZOOMSlider_PercentCharacter;
+      _zoomTextBlock.Text = (int)(_zoomSlider.Value * 100) + MiniUML.Framework.Local.Strings.STR_ZOOMSlider_PercentCharacter;
     }
 
     /// <summary>
@@ -66,7 +66,7 @@ namespace MiniUML.View.Views
             {
                 DocumentViewModel d = this.DataContext as DocumentViewModel;
 
-                d.GridSplitter_DragDelta(e.VerticalChange, this._scrollViewer.ActualHeight);
+                d.GridSplitter_DragDelta(e.VerticalChange, _scrollViewer.ActualHeight);
                 e.Handled = true;
             }
         }

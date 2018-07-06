@@ -14,13 +14,13 @@ namespace MiniUML.Model.ViewModels.Document
     public partial class DocumentViewModel : AbstractDocumentViewModel
     {
         #region fields
-        private readonly DocumentDataModel mDataModel;
+        private readonly DocumentDataModel _DataModel;
 
-        private string mFileName = MiniUML.Framework.Local.Strings.STR_Default_FileName;
-        private string mFilePath = null;
-        private FrameworkElement mDesignSurface;
-        private CanvasViewModel mCanvasViewModel = null;
-        private CommandUtility mCommandUtility;
+        private string _FileName = MiniUML.Framework.Local.Strings.STR_Default_FileName;
+        private string _FilePath = null;
+        private FrameworkElement _DesignSurface;
+        private CanvasViewModel _CanvasViewModel = null;
+        private CommandUtility _CommandUtility;
         #endregion fields
 
         #region constructor
@@ -30,12 +30,12 @@ namespace MiniUML.Model.ViewModels.Document
         public DocumentViewModel(string pluginModelName)
         {
             // Create and initialize the data model.
-            this.mDataModel = new DocumentDataModel(pluginModelName);
+            _DataModel = new DocumentDataModel(pluginModelName);
 
             // TODO XXX _dataModel.New((Size)SettingsManager.Settings["DefaultPageSize"], (Thickness)SettingsManager.Settings["DefaultPageMargins"]);
-            this.mDataModel.New(new PageViewModelBase());
+            _DataModel.New(new PageViewModelBase());
 
-            this.mDataModel.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
+            _DataModel.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
             {
                 // Suggest to WPF to refresh commands when the DocumentDataModel changes state.
                 if (e.PropertyName == "State")
@@ -43,10 +43,10 @@ namespace MiniUML.Model.ViewModels.Document
             };
 
             // Create the commands in this view model.
-            this.mCommandUtility = new CommandUtility(this);
+            _CommandUtility = new CommandUtility(this);
 
             // Create the view models.
-            this.mCanvasViewModel = new CanvasViewModel(this);
+            _CanvasViewModel = new CanvasViewModel(this);
             this.vm_XmlViewModel = new XmlViewModel(this);
         }
         #endregion constructor
@@ -56,18 +56,18 @@ namespace MiniUML.Model.ViewModels.Document
         {
             get
             {
-                return this.mFilePath;
+                return _FilePath;
             }
 
             private set
             {
-                this.mFilePath = value;
+                _FilePath = value;
 
                 // If the current document is associated with a file, show the file name as part of the window title.
-                if (!string.IsNullOrEmpty(this.mFilePath))
-                    this.mFileName = System.IO.Path.GetFileName(this.mFilePath);
+                if (!string.IsNullOrEmpty(_FilePath))
+                    _FileName = System.IO.Path.GetFileName(_FilePath);
                 else
-                    this.mFileName = MiniUML.Framework.Local.Strings.STR_Default_FileName;
+                    _FileName = MiniUML.Framework.Local.Strings.STR_Default_FileName;
 
                 this.NotifyPropertyChanged(() => this.prop_DocumentFilePath);
                 this.NotifyPropertyChanged(() => this.prop_DocumentFileName);
@@ -76,19 +76,19 @@ namespace MiniUML.Model.ViewModels.Document
 
         public string prop_DocumentFileName
         {
-            get { return this.mFileName; }
+            get { return _FileName; }
         }
 
         public override FrameworkElement v_CanvasView
         {
             get
             {
-                return this.mDesignSurface;
+                return _DesignSurface;
             }
 
             set
             {
-                this.mDesignSurface = value;
+                _DesignSurface = value;
                 this.NotifyPropertyChanged(() => this.v_CanvasView);
             }
         }
@@ -96,7 +96,7 @@ namespace MiniUML.Model.ViewModels.Document
         #region Data models
         public override DocumentDataModel dm_DocumentDataModel
         {
-            get { return this.mDataModel; }
+            get { return _DataModel; }
         }
         #endregion
 
@@ -105,7 +105,7 @@ namespace MiniUML.Model.ViewModels.Document
         {
             get
             {
-                return this.mCanvasViewModel;
+                return _CanvasViewModel;
             }
         }
 
@@ -155,8 +155,8 @@ namespace MiniUML.Model.ViewModels.Document
                 return true;
 
             MessageBoxResult result = MessageBox.Show(string.Format(MiniUML.Framework.Local.Strings.STR_QUERY_SAVE_CHANGES, this.prop_DocumentFileName),
-                                                                                                MiniUML.Framework.Local.Strings.STR_QUERY_SAVE_CHANGES_CAPTION,
-                                                                                                MessageBoxButton.YesNoCancel, MessageBoxImage.Question, MessageBoxResult.Yes);
+                                                      MiniUML.Framework.Local.Strings.STR_QUERY_SAVE_CHANGES_CAPTION,
+                                                      MessageBoxButton.YesNoCancel, MessageBoxImage.Question, MessageBoxResult.Yes);
 
             switch (result)
             {
@@ -187,15 +187,14 @@ namespace MiniUML.Model.ViewModels.Document
 
             // Convert Xml document into a list of shapes and page definition
             List<ShapeViewModelBase> coll;
-            PageViewModelBase page = conv.LoadDocument(filename, this.mCanvasViewModel, out coll);
+            PageViewModelBase page = conv.LoadDocument(filename, _CanvasViewModel, out coll);
 
             // Apply new page and shape definitions to data model
-            this.mDataModel.LoadFileFromCollection(page, coll);
+            _DataModel.LoadFileFromCollection(page, coll);
 
             this.prop_DocumentFilePath = filename;
             this.vm_CanvasViewModel.SelectedItem.Clear();
         }
-
         #region Command implementations
 
         /// <summary>
@@ -210,7 +209,7 @@ namespace MiniUML.Model.ViewModels.Document
             try
             {
                 // Save document to the existing file.
-                this.mDataModel.Save(filePath);
+                _DataModel.Save(filePath);
                 return true;
             }
             catch (Exception ex)
@@ -224,7 +223,7 @@ namespace MiniUML.Model.ViewModels.Document
         }
 
         /// <summary>
-        /// Save a document into the file system.
+        /// Save an exported image document (eg: png) into the file system.
         /// </summary>
         /// <param name="viewModel"></param>
         /// <returns></returns>
@@ -235,7 +234,6 @@ namespace MiniUML.Model.ViewModels.Document
             return true;
         }
         #endregion
-
         #endregion methods
     }
 }

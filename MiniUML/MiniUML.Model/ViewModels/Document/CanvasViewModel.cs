@@ -13,42 +13,25 @@ namespace MiniUML.Model.ViewModels.Document
     using MiniUML.View.Views.RubberBand;
     using MsgBox;
     using CommonServiceLocator;
-
-    /// <summary>
-    /// Interface to define interaction for drag and drop
-    /// mouse gestures when adding new connection lines,
-    /// selecting and resizing shapes, and so for.
-    /// </summary>
-    public interface ICanvasViewMouseHandler
-    {
-        void OnShapeClick(ShapeViewModelBase shape);
-
-        void OnShapeDragBegin(Point position, ShapeViewModelBase shape);
-
-        void OnShapeDragUpdate(Point position, Vector delta);
-
-        void OnShapeDragEnd(Point position, ShapeViewModelBase shape);
-
-        void OnCancelMouseHandler();
-    }
+    using MiniUML.Model.ViewModels.Interfaces;
 
     public class CanvasViewModel : BaseViewModel, IShapeParent
     {
         #region fields
-        private bool mIsFocused;
+        private bool _IsFocused;
 
-        private SelectedItems mSelectedItem;
+        private SelectedItems _SelectedItem;
 
-        private RelayCommand<object> mSelectCommand = null;
+        private RelayCommand<object> _SelectCommand = null;
 
-        private RelayCommand<object> mDeleteCommand = null;
-        private RelayCommand<object> mCutCommand = null;
-        private RelayCommand<object> mCopyCommand = null;
-        private RelayCommand<object> mPasteCommand = null;
+        private RelayCommand<object> _DeleteCommand = null;
+        private RelayCommand<object> _CutCommand = null;
+        private RelayCommand<object> _CopyCommand = null;
+        private RelayCommand<object> _PasteCommand = null;
 
-        private ICanvasViewMouseHandler mICanvasViewMouseHandler = null;
+        private ICanvasViewMouseHandler _ICanvasViewMouseHandler = null;
 
-        private RubberBandViewModel mRubberBand = null;
+        private RubberBandViewModel _RubberBand = null;
         #endregion fields
 
         #region constructor
@@ -57,14 +40,23 @@ namespace MiniUML.Model.ViewModels.Document
         /// </summary>
         /// <param name="documentViewModel"></param>
         public CanvasViewModel(DocumentViewModel documentViewModel)
+            : this()
         {
             // Store a reference to the parent view model
             // (necessary to implement begin and end operation around undo).
-            this.DocumentViewModel = documentViewModel;
+            DocumentViewModel = documentViewModel;
 
-            this.mSelectedItem = new SelectedItems();
+            _SelectedItem = new SelectedItems();
 
-            this.mIsFocused = false;
+            _IsFocused = false;
+        }
+
+        /// <summary>
+        /// Hidden parameterless constructor
+        /// </summary>
+        protected CanvasViewModel()
+        {
+
         }
         #endregion constructor
 
@@ -77,15 +69,15 @@ namespace MiniUML.Model.ViewModels.Document
         {
             get
             {
-                return this.mIsFocused;
+                return _IsFocused;
             }
 
             set
             {
-                if (this.mIsFocused != value)
+                if (_IsFocused != value)
                 {
-                    this.mIsFocused = value;
-                    this.NotifyPropertyChanged(() => this.IsFocused);
+                    _IsFocused = value;
+                    NotifyPropertyChanged(() => this.IsFocused);
                 }
             }
         }
@@ -97,14 +89,14 @@ namespace MiniUML.Model.ViewModels.Document
         {
             get
             {
-                return this.mSelectedItem;
+                return _SelectedItem;
             }
         }
 
         /// <summary>
         /// Viewmodel to the document represented by this canvas.
         /// </summary>
-        public DocumentViewModel DocumentViewModel { get; private set; }
+        public DocumentViewModel DocumentViewModel { get; }
 
         /// <summary>
         /// Get canvas view model mouse handler which is used to draw
@@ -115,14 +107,14 @@ namespace MiniUML.Model.ViewModels.Document
         {
             get
             {
-                return this.mICanvasViewMouseHandler;
+                return _ICanvasViewMouseHandler;
             }
 
             private set
             {
-                if (this.mICanvasViewMouseHandler != value)
+                if (_ICanvasViewMouseHandler != value)
                 {
-                    this.mICanvasViewMouseHandler = value;
+                    _ICanvasViewMouseHandler = value;
                 }
             }
         }
@@ -131,10 +123,10 @@ namespace MiniUML.Model.ViewModels.Document
         {
             get
             {
-                if (this.mRubberBand == null)
-                    this.mRubberBand = new RubberBandViewModel();
+                if (_RubberBand == null)
+                    _RubberBand = new RubberBandViewModel();
 
-                return this.mRubberBand;
+                return _RubberBand;
             }
         }
 
@@ -146,10 +138,12 @@ namespace MiniUML.Model.ViewModels.Document
         {
             get
             {
-                if (this.mSelectCommand == null)
-                    this.mSelectCommand = new RelayCommand<object>((p) => this.OnSelectMode_Execute(),
-                                                                   (p) => this.OnSelectMode_CanExecute());
-                return this.mSelectCommand;
+                if (_SelectCommand == null)
+                    _SelectCommand = new RelayCommand<object>(
+                        (p) => this.OnSelectMode_Execute(),
+                        (p) => this.OnSelectMode_CanExecute());
+
+                return _SelectCommand;
             }
         }
 
@@ -160,10 +154,12 @@ namespace MiniUML.Model.ViewModels.Document
         {
             get
             {
-                if (this.mDeleteCommand == null)
-                    this.mDeleteCommand = new RelayCommand<object>((p) => this.OnDeleteCommand_Executed(),
-                                                                   (p) => this.OnDeleteCutCopyCommand_CanExecute());
-                return this.mDeleteCommand;
+                if (_DeleteCommand == null)
+                    _DeleteCommand = new RelayCommand<object>(
+                        (p) => this.OnDeleteCommand_Executed(),
+                        (p) => this.OnDeleteCutCopyCommand_CanExecute());
+
+                return _DeleteCommand;
             }
         }
 
@@ -174,11 +170,12 @@ namespace MiniUML.Model.ViewModels.Document
         {
             get
             {
-                if (this.mCutCommand == null)
-                    this.mCutCommand = new RelayCommand<object>((p) => this.OnCutCommand_Executed(),
-                                                                (p) => this.OnDeleteCutCopyCommand_CanExecute());
+                if (_CutCommand == null)
+                    _CutCommand = new RelayCommand<object>(
+                        (p) => this.OnCutCommand_Executed(),
+                        (p) => this.OnDeleteCutCopyCommand_CanExecute());
 
-                return this.mCutCommand;
+                return _CutCommand;
             }
         }
 
@@ -189,11 +186,12 @@ namespace MiniUML.Model.ViewModels.Document
         {
             get
             {
-                if (this.mCopyCommand == null)
-                    this.mCopyCommand = new RelayCommand<object>((p) => this.OnCopyCommand_Executed(),
-                                                                 (p) => this.OnDeleteCutCopyCommand_CanExecute());
+                if (_CopyCommand == null)
+                    _CopyCommand = new RelayCommand<object>(
+                        (p) => this.OnCopyCommand_Executed(),
+                        (p) => this.OnDeleteCutCopyCommand_CanExecute());
 
-                return this.mCopyCommand;
+                return _CopyCommand;
             }
         }
 
@@ -205,11 +203,12 @@ namespace MiniUML.Model.ViewModels.Document
         {
             get
             {
-                if (this.mPasteCommand == null)
-                    this.mPasteCommand = new RelayCommand<object>((p) => this.OnPasteCommand_Executed(),
-                                                                  (p) => this.OnPasteCommand_CanExecute());
+                if (_PasteCommand == null)
+                    _PasteCommand = new RelayCommand<object>(
+                        (p) => this.OnPasteCommand_Executed(),
+                        (p) => this.OnPasteCommand_CanExecute());
 
-                return this.mPasteCommand;
+                return _PasteCommand;
             }
         }
         #endregion
@@ -258,7 +257,7 @@ namespace MiniUML.Model.ViewModels.Document
         /// <param name="e"></param>
         void IShapeParent.ResizeSelectedShapes(DragDeltaThumbEvent e)
         {
-            if (this.SelectedItem.Shapes.Count == 0)
+            if (SelectedItem.Shapes.Count == 0)
                 return;
 
             double minLeft = double.MaxValue;
@@ -529,8 +528,8 @@ namespace MiniUML.Model.ViewModels.Document
         /// </summary>
         public void ResetRubberBand()
         {
-            if (this.mRubberBand != null)
-                this.mRubberBand = null;
+            if (_RubberBand != null)
+                _RubberBand = null;
         }
         #endregion Mouse handling ICanvasViewMouseHandler
 
@@ -564,7 +563,7 @@ namespace MiniUML.Model.ViewModels.Document
         private bool OnDeleteCutCopyCommand_CanExecute()
         {
             return (this.DocumentViewModel.dm_DocumentDataModel.State == DataModel.ModelState.Ready &&
-                    this.mSelectedItem.Count > 0);
+                    _SelectedItem.Count > 0);
         }
 
         /// <summary>
@@ -583,10 +582,10 @@ namespace MiniUML.Model.ViewModels.Document
         {
             this.DocumentViewModel.dm_DocumentDataModel.BeginOperation("DeleteCommandModel.OnExecute");
 
-            this.DocumentViewModel.dm_DocumentDataModel.DeleteElements(this.mSelectedItem.Shapes);
+            this.DocumentViewModel.dm_DocumentDataModel.DeleteElements(_SelectedItem.Shapes);
 
             // Clear selection from selected elements in canvas viewmodel
-            this.mSelectedItem.Clear();
+            _SelectedItem.Clear();
 
             this.DocumentViewModel.dm_DocumentDataModel.EndOperation("DeleteCommandModel.OnExecute");
         }
@@ -603,9 +602,9 @@ namespace MiniUML.Model.ViewModels.Document
             if (this.SelectedItem.Count > 0)
                 fragment = this.DocumentViewModel.dm_DocumentDataModel.GetShapesAsXmlString(this.SelectedItem.Shapes);
 
-            this.DocumentViewModel.dm_DocumentDataModel.DeleteElements(this.mSelectedItem.Shapes);
+            this.DocumentViewModel.dm_DocumentDataModel.DeleteElements(_SelectedItem.Shapes);
 
-            this.mSelectedItem.Clear();
+            _SelectedItem.Clear();
             Clipboard.SetText(fragment);
 
             this.DocumentViewModel.dm_DocumentDataModel.EndOperation("CutCommandModel.OnExecute");
@@ -657,11 +656,11 @@ namespace MiniUML.Model.ViewModels.Document
 
                 this.DocumentViewModel.dm_DocumentDataModel.BeginOperation("PasteCommandModel.OnExecute");
 
-                this.mSelectedItem.Clear();
+                _SelectedItem.Clear();
                 foreach (var shape in coll)
                 {
                     this.DocumentViewModel.dm_DocumentDataModel.AddShape(shape);
-                    this.mSelectedItem.Add(shape);
+                    _SelectedItem.Add(shape);
                 }
 
                 this.DocumentViewModel.dm_DocumentDataModel.EndOperation("PasteCommandModel.OnExecute");
