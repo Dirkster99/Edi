@@ -1,22 +1,21 @@
 ﻿namespace MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Globalization;
-  using System.Xml;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Shapes;
-  using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base;
-  using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements;
-  using MiniUML.Plugins.UmlClassDiagram.Converter;
+    using System;
+    using System.Collections.Generic;
+    using System.Xml;
+    using MiniUML.Model.ViewModels;
+    using MiniUML.Model.ViewModels.Shapes;
+    using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape.Base;
+    using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements;
+    using MiniUML.Plugins.UmlClassDiagram.Converter;
 
-  /// <summary>
-  /// This class implements the viewmodel for Uml shapes
-  /// with a square or rectangulare shape that users can
-  /// draw on a UML canvas. Typically, these are class or
-  /// table shapes or other items.
-  /// </summary>
-  public class UmlNoteShapeViewModel : UmlShapeBaseViewModel
+    /// <summary>
+    /// This class implements the viewmodel for Uml shapes
+    /// with a square or rectangulare shape that users can
+    /// draw on a UML canvas. Typically, these are class or
+    /// table shapes or other items.
+    /// </summary>
+    public class UmlNoteShapeViewModel : UmlShapeBaseViewModel
   {
     #region fields
     private const string Text_TAG = "Text";

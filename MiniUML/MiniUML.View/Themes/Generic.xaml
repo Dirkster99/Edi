@@ -3,6 +3,6 @@
         <ResourceDictionary Source="/MiniUML.View;component/Themes/LightBrushs.xaml" />
         <ResourceDictionary Source="/MiniUML.View;component/Themes/ResizeAdorner/DesignerItem.xaml" />
         <ResourceDictionary Source="/MiniUML.View;component/Themes/RubberBandChrome.xaml" />
-        <ResourceDictionary Source="/MiniUML.View;component/Themes/CanvasView.xaml" />
+        <ResourceDictionary Source="/MiniUML.View;component/Views/CanvasView.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -9,21 +9,24 @@
     using MiniUML.Framework;
     using MiniUML.Model.ViewModels;
     using MiniUML.Model.ViewModels.Document;
+    using MiniUML.Model.ViewModels.Interfaces;
     using MiniUML.Model.ViewModels.Shapes;
 
     public class DocumentDataModel : DataModel
     {
         #region fields
-        // name of plug-in model that is associated with this document
+        /// <summary>
+        /// /name of plug-in model that is associated with this document
+        /// </summary>
         private readonly string _PluginModelName = string.Empty;
 
         private PageViewModelBase _Root;
         private ObservableCollection<ShapeViewModelBase> _DocRoot;
 
         #region Undo
-        private int mOperationLevel = 0;
+        private int _OperationLevel = 0;
 
-        private bool mHasUnsavedData;
+        private bool _HasUnsavedData;
 
         /// <summary>
         /// Take a snapshot of all data to compare thise snapshot with changed data version.
@@ -34,12 +37,12 @@
         /// <summary>
         /// List of undo states to implement UNDO when user executes the undo command.
         /// </summary>
-        private LinkedList<UndoState> mUndoList = new LinkedList<UndoState>();
+        private LinkedList<UndoState> _UndoList = new LinkedList<UndoState>();
 
         /// <summary>
         /// List of redo states to implement REDO when user executes the undo command.
         /// </summary>
-        private LinkedList<UndoState> mRedoList = new LinkedList<UndoState>();
+        private LinkedList<UndoState> _RedoList = new LinkedList<UndoState>();
         #endregion Undo
 
         /// <summary>
@@ -88,8 +91,8 @@
         {
             get
             {
-                this.VerifyAccess();
-                return (this.mUndoList.Count > 0);
+                VerifyAccess();
+                return (_UndoList.Count > 0);
             }
         }
 
@@ -101,8 +104,8 @@
         {
             get
             {
-                this.VerifyAccess();
-                return (this.mRedoList.Count > 0);
+                VerifyAccess();
+                return (_RedoList.Count > 0);
             }
         }
 
@@ -115,7 +118,7 @@
             get
             {
                 this.VerifyAccess();
-                return (this.mHasUnsavedData);
+                return (this._HasUnsavedData);
             }
         }
 
@@ -126,10 +129,10 @@
         {
             get
             {
-                this.VerifyAccess();
+                VerifyAccess();
 
                 if (_DocRoot == null)
-                    this.setCreateRoot();
+                    setCreateRoot();
 
                 return _DocRoot;
             }
@@ -186,6 +189,51 @@
         #endregion properties
 
         #region methods
+        /// <summary>
+        /// Gets the maximum bounds of all items being displayed on the canvas.
+        /// </summary>
+        /// <param name="margin"></param>
+        /// <returns></returns>
+        public Rect GetMaxBounds(Rect margin = default(Rect))
+        {
+            Rect bounds = default(Rect); // Compute the maximum bounding rectangle
+
+            foreach (var item in this.DocRoot)
+            {
+                if ((item is IShapeSizeViewModelBase) == false)
+                {
+                    Console.WriteLine("--> Not a IShapeSizeViewModelBase {0}", item);
+                }
+                else
+                {
+                    var szItem = item as IShapeSizeViewModelBase;
+
+                    if (bounds == default(Rect))
+                        bounds = new Rect(0, 0, szItem.Left + szItem.Width,
+                                                szItem.Top + szItem.Height);
+                    else
+                    {
+                        if (bounds.Width < (szItem.Left + szItem.Width))
+                            bounds.Width = szItem.Left + szItem.Width;
+
+                        if ((bounds.Height) < (szItem.Top + szItem.Height))
+                            bounds.Height = szItem.Top + szItem.Height;
+                    }
+                }
+            }
+
+            if (margin != default(Rect))
+            {
+                bounds.X = bounds.X - margin.X;
+                bounds.Y = bounds.Y - margin.Y;
+
+                bounds.Width = bounds.Width + margin.Width;
+                bounds.Height = bounds.Height + margin.Height;
+            }
+
+            return bounds;
+        }
+
         public string GetShapesAsXmlString(IEnumerable<ShapeViewModelBase> coll)
         {
             return _Root.SaveDocument(coll);
@@ -208,7 +256,7 @@
 
             this.ClearUndoRedo();
             this.mMaxId = 0;
-            this.mHasUnsavedData = false;
+            this._HasUnsavedData = false;
 
             this.State = ModelState.Ready;
 
@@ -236,7 +284,7 @@
                     this.SetDocRoot(newDocumentRoot, coll);
 
                 this.ClearUndoRedo();
-                this.mHasUnsavedData = false;
+                this._HasUnsavedData = false;
                 this.mMaxId = 0;
 
                 this.State = ModelState.Ready;
@@ -253,26 +301,23 @@
         /// </summary>
         public void Save(string filename)
         {
-            this.VerifyAccess();
-
-            this.VerifyState(ModelState.Ready);
-
-            this.State = ModelState.Saving;
+            VerifyAccess();
+            VerifyState(ModelState.Ready);
+            State = ModelState.Saving;
 
             try
             {
                 PageViewModelBase docRoot = this.GetXmlElementDocRoot();
-
                 docRoot.SaveDocument(filename, _DocRoot);
 
-                this.mHasUnsavedData = false;
+                _HasUnsavedData = false;
             }
             finally
             {
-                this.State = ModelState.Ready;
+                State = ModelState.Ready;
             }
 
-            this.SendPropertyChanged("HasUnsavedData");
+            NotifyPropertyChanged(() => HasUnsavedData);
         }
 
         /// <summary>
@@ -281,30 +326,32 @@
         /// <param name="parentOfShapes">Is necessary to create shapes with references to their parent.</param>
         public void Undo(IShapeParent parentOfShapes)
         {
-            this.VerifyAccess();
+            VerifyAccess();
 
-            this.VerifyState(ModelState.Ready, ModelState.Invalid);
+            VerifyState(ModelState.Ready, ModelState.Invalid);
 
-            if (this.HasUndoData == true)
+            if (HasUndoData == true)
             {
-                UndoState undoState = this.mUndoList.First.Value;
+                UndoState undoState = _UndoList.First.Value;
 
                 string fragment = string.Empty;
 
                 if (_DocRoot.Count > 0)
                     fragment = this.GetShapesAsXmlString(_DocRoot);
 
-                this.mRedoList.AddFirst(new UndoState(fragment, this.mHasUnsavedData));
-                this.mUndoList.RemoveFirst();
+                _RedoList.AddFirst(new UndoState(fragment, this._HasUnsavedData));
+                _UndoList.RemoveFirst();
 
                 // Reload shape collection from this Xml formated (persistence) undo state
-                this.RecreateShapeCollectionFromXml(parentOfShapes, undoState.DocRoot);
+                RecreateShapeCollectionFromXml(parentOfShapes, undoState.DocRoot);
 
-                this.mHasUnsavedData = undoState.HasUnsavedData;
+                _HasUnsavedData = undoState.HasUnsavedData;
 
-                this.State = ModelState.Ready;
+                State = ModelState.Ready;
 
-                this.SendPropertyChanged("HasUndoData", "HasRedoData", "HasUnsavedData");
+                NotifyPropertyChanged(() => HasUndoData);
+                NotifyPropertyChanged(() => HasRedoData);
+                NotifyPropertyChanged(() => HasUnsavedData);
             }
         }
 
@@ -316,30 +363,32 @@
         /// <param name="parentOfShapes">Is necessary to create shapes with references to their parent.</param>
         public void Redo(IShapeParent parentOfShapes)
         {
-            this.VerifyAccess();
+            VerifyAccess();
 
-            this.VerifyState(ModelState.Ready, ModelState.Invalid);
+            VerifyState(ModelState.Ready, ModelState.Invalid);
 
-            if (this.HasRedoData)
+            if (HasRedoData)
             {
-                UndoState undoState = this.mRedoList.First.Value;
+                UndoState undoState = this._RedoList.First.Value;
 
                 string fragment = string.Empty;
 
                 if (_DocRoot.Count > 0)
                     fragment = this.GetShapesAsXmlString(_DocRoot);
 
-                this.mUndoList.AddFirst(new UndoState(fragment, this.mHasUnsavedData));
-                this.mRedoList.RemoveFirst();
+                _UndoList.AddFirst(new UndoState(fragment, this._HasUnsavedData));
+                _RedoList.RemoveFirst();
 
                 // Reload shape collection from this Xml formated (persistence) undo state
-                this.RecreateShapeCollectionFromXml(parentOfShapes, undoState.DocRoot);
+                RecreateShapeCollectionFromXml(parentOfShapes, undoState.DocRoot);
 
-                this.mHasUnsavedData = undoState.HasUnsavedData;
+                _HasUnsavedData = undoState.HasUnsavedData;
 
-                this.State = ModelState.Ready;
+                State = ModelState.Ready;
 
-                this.SendPropertyChanged("HasUndoData", "HasRedoData", "HasUnsavedData");
+                NotifyPropertyChanged(() => HasUndoData);
+                NotifyPropertyChanged(() => HasRedoData);
+                NotifyPropertyChanged(() => HasUnsavedData);
             }
         }
 
@@ -348,19 +397,19 @@
         /// </summary>
         public void BeginOperation(string operationName)
         {
-            this.VerifyAccess();
+            VerifyAccess();
 
             //// Debug.WriteLine("Begin operation #" + (_operationLevel + 1) + ": " + operationName);
 
-            if (this.mOperationLevel++ == 0)
+            if (_OperationLevel++ == 0)
             {
-                this.VerifyState(ModelState.Ready, ModelState.Invalid);
+                VerifyState(ModelState.Ready, ModelState.Invalid);
 
-                this.setPendingUndoState();
-                this.State = ModelState.Busy;
+                setPendingUndoState();
+                State = ModelState.Busy;
             }
             else
-                this.VerifyState(ModelState.Busy);
+                VerifyState(ModelState.Busy);
         }
 
         /// <summary>
@@ -383,7 +432,7 @@
 
             this.VerifyState(ModelState.Busy);
 
-            if (--this.mOperationLevel == 0)
+            if (--this._OperationLevel == 0)
                 this.State = ModelState.Ready;
         }
 
@@ -396,7 +445,7 @@
         {
             try
             {
-                this.BeginOperation("Remove Shapes");
+                BeginOperation("Remove Shapes");
 
                 foreach (var item in coll)
                 {
@@ -405,7 +454,7 @@
             }
             finally
             {
-                this.EndOperation("Remove Shapes");
+                EndOperation("Remove Shapes");
             }
         }
 
@@ -467,7 +516,7 @@
 
         public string SaveDocument()
         {
-            this.VerifyAccess();
+            VerifyAccess();
 
             return _Root.SaveDocument(_DocRoot);
         }
@@ -494,7 +543,7 @@
         /// Also assigns a unique ID to the shape, if the existing ID is taken.
         /// </summary>
         internal void AddShape(ShapeViewModelBase shape,
-                             InsertPosition pos = InsertPosition.Last)
+                               InsertPosition pos = InsertPosition.Last)
         {
             this.VerifyState(ModelState.Ready, ModelState.Busy);
 
@@ -506,7 +555,7 @@
             // Add new shape inside Undo/Redo pattern
             try
             {
-                this.BeginOperation(string.Format("AddShape ID: {0}", idString));
+                BeginOperation(string.Format("AddShape ID: {0}", idString));
 
                 if (pos == InsertPosition.First)
                     this.DocRoot.Insert(0, shape);   // Insert shape at bottom of virtual Z-axis
@@ -515,7 +564,7 @@
             }
             finally
             {
-                this.EndOperation(string.Format("AddShape ID: {0}", idString));
+                EndOperation(string.Format("AddShape ID: {0}", idString));
             }
         }
 
@@ -527,9 +576,15 @@
         /// <param name="obj"></param>
         internal void Remove(ShapeViewModelBase obj)
         {
-            this.BeginOperation("SendToBack");
-            _DocRoot.Remove(obj);
-            this.EndOperation("SendToBack");
+            try
+            {
+                BeginOperation("SendToBack");
+                _DocRoot.Remove(obj);
+            }
+            finally
+            {
+                EndOperation("SendToBack");
+            }
         }
 
         /// <summary>
@@ -539,10 +594,16 @@
         /// <param name="obj"></param>
         internal void BringToFront(ShapeViewModelBase obj)
         {
-            this.BeginOperation("BringToFront");
-            _DocRoot.Remove(obj);
-            this.AddShape(obj, InsertPosition.Last);
-            this.EndOperation("BringToFront");
+            try
+            {
+                BeginOperation("BringToFront");
+                _DocRoot.Remove(obj);
+                AddShape(obj, InsertPosition.Last);
+            }
+            finally
+            {
+                EndOperation("BringToFront");
+            }
         }
 
         /// <summary>
@@ -552,10 +613,16 @@
         /// <param name="obj"></param>
         internal void SendToBack(ShapeViewModelBase obj)
         {
-            this.BeginOperation("SendToBack");
-            _DocRoot.Remove(obj);
-            this.AddShape(obj, InsertPosition.First);
-            this.EndOperation("SendToBack");
+            try
+            {
+                BeginOperation("SendToBack");
+                _DocRoot.Remove(obj);
+                AddShape(obj, InsertPosition.First);
+            }
+            finally
+            {
+                EndOperation("SendToBack");
+            }
         }
         #endregion IShapeParent methods
 
@@ -579,7 +646,7 @@
             if (_DocRoot.Count > 0)
                 fragment = this.GetShapesAsXmlString(_DocRoot);
 
-            this.mPendingUndoState = new UndoState(fragment, this.mHasUnsavedData);
+            this.mPendingUndoState = new UndoState(fragment, this._HasUnsavedData);
         }
 
         /// <summary>
@@ -595,11 +662,11 @@
             if (this.mPendingUndoState.DocumentRootXml == this.SaveDocument())
                 return;
 
-            if (this.mUndoList.First == null || this.mUndoList.First.Value.DocumentRootXml != this.mPendingUndoState.DocumentRootXml)
+            if (this._UndoList.First == null || this._UndoList.First.Value.DocumentRootXml != this.mPendingUndoState.DocumentRootXml)
             {
-                this.mUndoList.AddFirst(this.mPendingUndoState);
-                this.mRedoList.Clear();
-                this.mHasUnsavedData = true;
+                this._UndoList.AddFirst(this.mPendingUndoState);
+                this._RedoList.Clear();
+                this._HasUnsavedData = true;
 
                 this.SendPropertyChanged("HasUndoData", "HasRedoData", "HasUnsavedData");
             }
@@ -607,8 +674,8 @@
 
         private void ClearUndoRedo()
         {
-            this.mUndoList.Clear();
-            this.mRedoList.Clear();
+            this._UndoList.Clear();
+            this._RedoList.Clear();
         }
 
         private void SetDocRoot(PageViewModelBase newDocumentRoot,

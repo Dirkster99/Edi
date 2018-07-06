@@ -580,14 +580,19 @@ namespace MiniUML.Model.ViewModels.Document
         /// </summary>
         private void OnDeleteCommand_Executed()
         {
-            this.DocumentViewModel.dm_DocumentDataModel.BeginOperation("DeleteCommandModel.OnExecute");
+            try
+            {
+                DocumentViewModel.dm_DocumentDataModel.BeginOperation("DeleteCommandModel.OnExecute");
 
-            this.DocumentViewModel.dm_DocumentDataModel.DeleteElements(_SelectedItem.Shapes);
+                DocumentViewModel.dm_DocumentDataModel.DeleteElements(_SelectedItem.Shapes);
 
-            // Clear selection from selected elements in canvas viewmodel
-            _SelectedItem.Clear();
-
-            this.DocumentViewModel.dm_DocumentDataModel.EndOperation("DeleteCommandModel.OnExecute");
+                // Clear selection from selected elements in canvas viewmodel
+                _SelectedItem.Clear();
+            }
+            finally
+            {
+                DocumentViewModel.dm_DocumentDataModel.EndOperation("DeleteCommandModel.OnExecute");
+            }
         }
 
         /// <summary>

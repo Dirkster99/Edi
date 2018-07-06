@@ -27,7 +27,37 @@
     <Setter Property="SnapsToDevicePixels" Value="True"/>
     <Setter Property="Width" Value="{Binding Width}" />
     <Setter Property="Height" Value="{Binding Height}" />
-    <Setter Property="Template">
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <Grid Margin="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Position:" HorizontalAlignment="Right" Margin="0,0,12,0" />
+                    <TextBlock HorizontalAlignment="Left" Grid.Column="1">
+                        <TextBlock Text="{Binding Left, Mode=OneWay, StringFormat={}{0:0.##}}" />,
+                        <TextBlock Text="{Binding Top, Mode=OneWay, StringFormat={}{0:0.##}}" />,
+                        <TextBlock Text="{Binding Width, Mode=OneWay, StringFormat={}{0:0.##}}" />,
+                        <TextBlock Text="{Binding Height, Mode=OneWay, StringFormat={}{0:0.##}}" />
+                    </TextBlock>
+
+                    <TextBlock Text="Stereotype:" HorizontalAlignment="Right" Grid.Row="1" Margin="0,0,12,0" />
+                    <TextBlock Text="{Binding Path=Stereotype}" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" />
+
+                    <TextBlock Text="Shape:" HorizontalAlignment="Right" Grid.Row="2" Margin="0,0,12,0" />
+                    <TextBlock HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2">UmlDecisionShape</TextBlock>
+                </Grid>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type shapes:UmlDecisionShape}">
 

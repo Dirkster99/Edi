@@ -152,6 +152,8 @@
     <Compile Include="ViewModels\Document\AbstractDocumentViewModel.cs" />
     <Compile Include="ViewModels\Document\DocumentViewModel_Commands.cs" />
     <Compile Include="ViewModels\Interfaces\ICanvasViewMouseHandler.cs" />
+    <Compile Include="ViewModels\Interfaces\IShapeSizeViewModelBase.cs" />
+    <Compile Include="ViewModels\Interfaces\IShapeViewModelBase.cs" />
     <Compile Include="ViewModels\Shapes\AnchorBaseViewModel.cs" />
     <Compile Include="ViewModels\Document\CanvasViewModel.cs" />
     <Compile Include="ViewModels\Command\CommandModelBase.cs" />

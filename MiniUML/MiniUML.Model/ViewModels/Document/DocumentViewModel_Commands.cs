@@ -17,6 +17,7 @@
     using MiniUML.Model.ViewModels.Shapes;
     using MsgBox;
     using CommonServiceLocator;
+    using System.Reflection;
 
     public partial class DocumentViewModel : AbstractDocumentViewModel
     {
@@ -49,22 +50,28 @@
 
             public PrintQueue PrintQueue { get; set; }
 
-            public Rectangle GetDocumentRectangle()
+            public Rectangle GetDocumentRectangle(Rect maxBounds = default(Rect))
             {
                 FrameworkElement canvasView = this.mViewModel.v_CanvasView;
+                Size size = default(Size);
 
                 // Create a VisualBrush representing the contents of the  document
                 // and use it to paint a rectangle of the same size as the page.
+                if (maxBounds == default(Rect))
+                    size = new Size(canvasView.ActualWidth, canvasView.ActualHeight);
+                else
+                    size = new Size(maxBounds.Width, maxBounds.Height);
+
                 Rectangle rect = new Rectangle()
                 {
-                    Width = canvasView.ActualWidth,
-                    Height = canvasView.ActualHeight,
+                    Width = size.Width,
+                    Height = size.Height,
                     Fill = new VisualBrush(canvasView) { TileMode = TileMode.None }
                 };
 
                 // Measure and arrange.
                 rect.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-                rect.Arrange(new Rect(new Size(canvasView.ActualWidth, canvasView.ActualHeight)));
+                rect.Arrange(new Rect(new Size(size.Width, size.Height)));
 
                 return rect;
             }
@@ -322,12 +329,8 @@
                                              DocumentViewModel viewModel)
             {
                 // Create and configure ExportDocumentWindowViewModel.
-                ExportDocumentWindowViewModel windowViewModel = new ExportDocumentWindowViewModel()
-                {
-                    prop_Resolution = 96,
-                    prop_EnableTransparentBackground = enableTransparentBackground,
-                    prop_TransparentBackground = true
-                };
+                ExportDocumentWindowViewModel windowViewModel =
+                    new ExportDocumentWindowViewModel(96,enableTransparentBackground, true);
 
                 //// TODO XXX FIXME
                 ////        // Create and configure ExportDocumentWindow.
@@ -347,7 +350,8 @@
                 viewModel.vm_CanvasViewModel.SelectedItem.Clear();
 
                 // Get a rectangle representing the page and wrap it in a border to allow a background color to be set.
-                Border page = new Border() { Child = viewModel._CommandUtility.GetDocumentRectangle() };
+                var visual = viewModel._CommandUtility.GetDocumentRectangle(default(Rect));
+                Border page = new Border() { Child = visual };
 
                 // Use transparent or white background?
                 if (!windowViewModel.prop_TransparentBackground)
@@ -357,15 +361,19 @@
                 page.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                 page.Arrange(new Rect(page.DesiredSize));
 
+                // Clip to this region of visible content
+                var bounds = viewModel.GetMaxBounds(new Rect(0,0,12,12));
+
                 try
                 {
                     // Save the document.
                     using (FileStream fs = new FileStream(file, FileMode.Create))
                     {
-                        double scaleFactor = windowViewModel.prop_Resolution / 96;
-
-                        RenderTargetBitmap bmp = new RenderTargetBitmap((int)(page.ActualWidth * scaleFactor), (int)(page.ActualHeight * scaleFactor),
-                                windowViewModel.prop_Resolution, windowViewModel.prop_Resolution, PixelFormats.Pbgra32);
+                        RenderTargetBitmap bmp = new RenderTargetBitmap(
+                            (int)(bounds.Width),
+                            (int)(bounds.Height),
+                                windowViewModel.prop_Resolution,
+                                windowViewModel.prop_Resolution, PixelFormats.Pbgra32);
 
                         bmp.Render(page);
                         encoder.Frames.Add(BitmapFrame.Create(bmp));

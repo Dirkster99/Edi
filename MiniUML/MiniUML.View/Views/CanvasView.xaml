@@ -12,10 +12,10 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type views:CanvasView}">
                     <ItemsControl x:Name="Part_ItemsControl"
-                        Focusable="False"
-                        Background="White"
-                        ItemsSource="{Binding Path=DocumentViewModel.dm_DocumentDataModel.DocRoot}"
-                        AllowDrop="True">
+                                  Focusable="False"
+                                  Background="White"
+                                  ItemsSource="{Binding Path=DocumentViewModel.dm_DocumentDataModel.DocRoot}"
+                                  AllowDrop="True">
                         <ItemsControl.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Command="Cut">

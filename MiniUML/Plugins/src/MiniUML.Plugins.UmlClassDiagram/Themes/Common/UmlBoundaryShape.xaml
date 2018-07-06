@@ -6,45 +6,76 @@
   xmlns:designItem="clr-namespace:MiniUML.View.Views.ResizeAdorner;assembly=MiniUML.View"
   xmlns:conv="clr-namespace:MiniUML.Plugins.UmlClassDiagram.Converter"
   >
-  <ResourceDictionary.MergedDictionaries>
-    <ResourceDictionary Source="/MiniUML.Plugins.UmlClassDiagram;component/Themes/Brushes.xaml"  />
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/MiniUML.Plugins.UmlClassDiagram;component/Themes/Brushes.xaml"  />
 
-    <ResourceDictionary Source="/MiniUML.Plugins.UmlClassDiagram;component/Themes/UmlTextBox.xaml"  />
-  </ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/MiniUML.Plugins.UmlClassDiagram;component/Themes/UmlTextBox.xaml"  />
+    </ResourceDictionary.MergedDictionaries>
 
-  <Style TargetType="{x:Type shapes:UmlBoundaryShape}">
-    <Setter Property="SnapsToDevicePixels" Value="True"/>
-    <Setter Property="Width" Value="{Binding Width}" />
-    <Setter Property="Height" Value="{Binding Height}" />
-    <Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="{x:Type shapes:UmlBoundaryShape}">
+    <Style TargetType="{x:Type shapes:UmlBoundaryShape}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Width" Value="{Binding Width}" />
+        <Setter Property="Height" Value="{Binding Height}" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <Grid Margin="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-          <designItem:DesignerItem IsSelected="{Binding Path=IsSelected}"
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Position:" HorizontalAlignment="Right" Margin="0,0,12,0" />
+                    <TextBlock HorizontalAlignment="Left" Grid.Column="1">
+                        <TextBlock Text="{Binding Left, Mode=OneWay, StringFormat={}{0:0.##}}" />,
+                        <TextBlock Text="{Binding Top, Mode=OneWay, StringFormat={}{0:0.##}}" />,
+                        <TextBlock Text="{Binding Width, Mode=OneWay, StringFormat={}{0:0.##}}" />,
+                        <TextBlock Text="{Binding Height, Mode=OneWay, StringFormat={}{0:0.##}}" />
+                    </TextBlock>
+
+                    <TextBlock Text="Stereotype:" HorizontalAlignment="Right" Grid.Row="1" Margin="0,0,12,0" />
+                    <TextBlock Text="{Binding Path=Stereotype}" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" />
+
+                    <TextBlock Text="Shape:" HorizontalAlignment="Right" Grid.Row="2" Margin="0,0,12,0" />
+                    <TextBlock HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2">UmlBoundaryShape</TextBlock>
+                </Grid>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type shapes:UmlBoundaryShape}">
+
+                    <designItem:DesignerItem IsSelected="{Binding Path=IsSelected}"
                                    ResizeSelectedShapes="{Binding ResizeSelectedShapesCommand}"
-                                   Background="{x:Null}" ><!-- Background=null makes inner part hittest invisible -->
-            <designItem:DesignerItem.Content>
+                                   Background="{x:Null}" >
+                        <!-- Background=null makes inner part hittest invisible -->
+                        <designItem:DesignerItem.Content>
 
-              <Grid>
-                <Grid.Resources>
-                  <BooleanToVisibilityConverter x:Key="boolToVisConverter" />
-                  <conv:EmptyStringToNullConverter x:Key="emptystringToNullConverter" />
-                  <conv:EmptyStringToVisibilityConverter x:Key="emptystringToVisibilityConverter" />
-                  <conv:StringBoolToVisibilityConverter x:Key="boolToVisibilityConverter" />
-                </Grid.Resources>
-                <Grid.RowDefinitions>
-                  <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+                            <Grid>
+                                <Grid.Resources>
+                                    <BooleanToVisibilityConverter x:Key="boolToVisConverter" />
+                                    <conv:EmptyStringToNullConverter x:Key="emptystringToNullConverter" />
+                                    <conv:EmptyStringToVisibilityConverter x:Key="emptystringToVisibilityConverter" />
+                                    <conv:StringBoolToVisibilityConverter x:Key="boolToVisibilityConverter" />
+                                </Grid.Resources>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
 
-                <!--Visibility="{Binding Path=HorizontalLine, Converter={StaticResource boolToVisibilityConverter}}"-->
-                <Border Grid.Row="0"
+                                <!--Visibility="{Binding Path=HorizontalLine, Converter={StaticResource boolToVisibilityConverter}}"-->
+                                <Border Grid.Row="0"
                       Background="{x:Null}"
                       BorderThickness="1"
                       BorderBrush="Black"
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" />
-                <!-- Stroke="Black" StrokeThickness="1" -->
+                                <!-- Stroke="Black" StrokeThickness="1" -->
 
-                <TextBox Grid.Row="0"
+                                <TextBox Grid.Row="0"
                      BorderThickness="0"
                      FontFamily="Consola"
                      Margin="3,3"
@@ -59,19 +90,19 @@
                      VerticalAlignment="Top"
                   />
 
-              </Grid>
+                            </Grid>
 
-            </designItem:DesignerItem.Content>
-          </designItem:DesignerItem>
+                        </designItem:DesignerItem.Content>
+                    </designItem:DesignerItem>
 
-          <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-              <Setter Property="Cursor" Value="Hand"/>
-            </Trigger>
-          </ControlTemplate.Triggers>
-        </ControlTemplate>
-      </Setter.Value>
-    </Setter>
-  </Style>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 </ResourceDictionary>

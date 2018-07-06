@@ -134,6 +134,16 @@ namespace MiniUML.Model.ViewModels.Document
 
         #region methods
         /// <summary>
+        /// Get region of visible content
+        /// </summary>
+        /// <param name="margin"></param>
+        /// <returns></returns>
+        public Rect GetMaxBounds(Rect margin = default(Rect))
+        {
+            return _DataModel.GetMaxBounds(margin);
+        }
+
+        /// <summary>
         /// Process the event in which the user drags the grid splitter between
         /// canvas view (that displays the actual shapes) and XML editor.
         /// </summary>
