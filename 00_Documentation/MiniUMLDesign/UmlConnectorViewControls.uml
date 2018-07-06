@@ -4,31 +4,31 @@
   <Class
     Name="System.Windows.Controls.UserControl"
     ID="auto_3"
-    Position="532.666304489301,116.255895059108,320,75"
+    Position="641.270833333333,138.166666666667,320,75"
     Stereotype="" />
   <Class
     Name="GenericUmlAssociation"
     ID="auto_4"
-    Position="143.066304489301,94.0558950591086,160,75"
+    Position="109.270833333333,71.1666666666666,160,75"
     Stereotype="" />
   <Boundary
     Name="MiniUML.Plugins.UmlClassDiagram.Controls.View.Connect"
     ID=""
-    Position="111.4663044893,37.0558950591086,388.600000000006,438" />
+    Position="19.2708333333333,14.1666666666666,489,438" />
   <Class
     Name="ThreePieceLine"
     ID="auto_0"
-    Position="145.066304489301,194.055895059109,160,75"
+    Position="111.270833333333,171.166666666667,160,75"
     Stereotype="" />
   <Interface
     Name="INotifyPropertyChanged"
     ID="auto_1"
-    Position="318.066304489301,303.055895059109,160,75"
+    Position="284.270833333333,280.166666666667,160,75"
     Stereotype="«interface»" />
   <Interface
     Name="ISnapTarget"
     ID="auto_2"
-    Position="145.066304489301,303.055895059109,160,75"
+    Position="111.270833333333,280.166666666667,160,75"
     Stereotype="«interface»" />
   <Association
     Name=""
@@ -41,11 +41,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="305.066304489301,251.215895059109" />
+      Position="271.270833333333,228.326666666667" />
     <Anchor
       Name=""
       ID=""
-      Position="397.066304489301,303.055895059109" />
+      Position="363.270833333333,280.166666666667" />
   </Association>
   <Association
     Name=""
@@ -58,11 +58,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="220.066304489301,269.255895059109" />
+      Position="186.270833333333,246.166666666667" />
     <Anchor
       Name=""
       ID=""
-      Position="220.066304489301,303.055895059109" />
+      Position="186.270833333333,280.166666666667" />
   </Association>
   <Inheritance
     Name=""
@@ -75,11 +75,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="305.066304489301,231.215895059109" />
+      Position="271.270833333333,208.326666666667" />
     <Anchor
       Name=""
       ID=""
-      Position="532.666304489301,158.415895059108" />
+      Position="641.270833333333,180.326666666667" />
   </Inheritance>
   <Inheritance
     Name=""
@@ -92,16 +92,16 @@
     <Anchor
       Name=""
       ID=""
-      Position="303.066304489301,135.215895059109" />
+      Position="269.270833333333,112.326666666667" />
     <Anchor
       Name=""
       ID=""
-      Position="532.666304489301,135.415895059108" />
+      Position="641.270833333333,157.326666666667" />
   </Inheritance>
   <Note
     Name=""
     ID=""
-    Position="522.666304489301,213.055895059108,408,216">
+    Position="553.270833333333,236.166666666667,408,216">
     <Text>This diagram shows the MiniUML connector controls that
 are responsible for displaying connecting (e.g. arrows) elements
 between the shapes of a diagram.

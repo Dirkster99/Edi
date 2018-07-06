@@ -4,12 +4,12 @@
   <Class
     Name="IsNotPresent"
     ID="auto_0"
-    Position="92,124,95,75"
+    Position="13.9999999999999,90,95,75"
     Stereotype="" />
   <Class
     Name="IsLoading"
     ID="auto_1"
-    Position="301,119,95,75"
+    Position="223,85,95,75"
     Stereotype="" />
   <Inheritance
     Name=""
@@ -22,16 +22,16 @@
     <Anchor
       Name=""
       ID=""
-      Position="187,168" />
+      Position="109,134" />
     <Anchor
       Name=""
       ID=""
-      Position="301,168" />
+      Position="223,134" />
   </Inheritance>
   <Class
     Name="IsPresent"
     ID="auto_2"
-    Position="426,224,95,75"
+    Position="348,190,95,75"
     Stereotype="" />
   <Inheritance
     Name=""
@@ -44,16 +44,16 @@
     <Anchor
       Name=""
       ID=""
-      Position="396,164" />
+      Position="318,130" />
     <Anchor
       Name=""
       ID=""
-      Position="446,224" />
+      Position="368,190" />
   </Inheritance>
   <Note
     Name=""
     ID=""
-    Position="81,27,608,75">
+    Position="1.33333333333333,0,608,75">
     <Text>See also DocumentState in
 http://edi.codeplex.com/SourceControl/latest#EdiDocuments/ViewModels/EdiDoc/EdiViewModel.cs</Text>
   </Note>
@@ -68,11 +68,11 @@ http://edi.codeplex.com/SourceControl/latest#EdiDocuments/ViewModels/EdiDoc/EdiV
     <Anchor
       Name=""
       ID=""
-      Position="468,224" />
+      Position="390,190" />
     <Anchor
       Name=""
       ID=""
-      Position="396,132" />
+      Position="318,98" />
   </Inheritance>
   <Inheritance
     Name=""
@@ -85,11 +85,11 @@ http://edi.codeplex.com/SourceControl/latest#EdiDocuments/ViewModels/EdiDoc/EdiV
     <Anchor
       Name=""
       ID=""
-      Position="426,287" />
+      Position="348,253" />
     <Anchor
       Name=""
       ID=""
-      Position="118,199" />
+      Position="39.9999999999999,165" />
   </Inheritance>
   <Inheritance
     Name=""
@@ -102,10 +102,10 @@ http://edi.codeplex.com/SourceControl/latest#EdiDocuments/ViewModels/EdiDoc/EdiV
     <Anchor
       Name=""
       ID=""
-      Position="301,155" />
+      Position="223,121" />
     <Anchor
       Name=""
       ID=""
-      Position="187,155" />
+      Position="109,121" />
   </Inheritance>
 </Document>

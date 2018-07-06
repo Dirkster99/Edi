@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document
+  Size="1793.79,1793.79" xmlns="MiniUml">
+  <Component
+    Name="MiniUML.Model"
+    ID="auto_6"
+    Position="550.787462537464,375.336413586415,165,75"
+    Stereotype="" />
+  <Component
+    Name="MiniUML.Framework"
+    ID="auto_0"
+    Position="549.6510989011,14.7032967032967,165,75"
+    Stereotype="" />
+  <Component
+    Name="MiniUML.View"
+    ID="auto_9"
+    Position="312.615384615385,184.846153846154,125,75"
+    Stereotype="" />
+  <Component
+    Name="MiniUML.Plugins.UmlClassDiagram"
+    ID="auto_B"
+    Position="21.4335664335665,16.3006993006987,249,75"
+    Stereotype="" />
+  <Component
+    Name="Prism"
+    ID="auto_1"
+    Position="623.433566433567,187.8006993007,125,75"
+    Stereotype="" />
+  <Component
+    Name="Prism.Mef.Wpf"
+    ID="auto_2"
+    Position="788.433566433567,187.8006993007,125,75"
+    Stereotype="" />
+  <Component
+    Name="Prism.Wpf"
+    ID="auto_3"
+    Position="953.433566433565,187.8006993007,125,75"
+    Stereotype="" />
+  <Component
+    Name="UserNotification"
+    ID="auto_5"
+    Position="1310.43356643357,187.8006993007,125,75"
+    Stereotype="" />
+  <Component
+    Name="MsgBox"
+    ID="auto_4"
+    Position="1159.43356643357,187.8006993007,125,75"
+    Stereotype="" />
+  <Boundary
+    Name="NuGet"
+    ID=""
+    Position="610.254995004995,151.907842157833,1065.89285714285,140.821428571454" />
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_0"
+    FromArrow=""
+    To="auto_1"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="680.258241758242,89.7032967032967" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="680.004995004995,187.8006993007" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_0"
+    FromArrow=""
+    To="auto_2"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="703.043956043957,89.7032967032967" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="809.397852147852,187.8006993007" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_0"
+    FromArrow=""
+    To="auto_3"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="714.6510989011,84.2390109890107" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="1011.64785214786,187.8006993007" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_0"
+    FromArrow=""
+    To="auto_4"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="714.6510989011,71.3818681318668" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="1235.754995005,187.8006993007" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_0"
+    FromArrow=""
+    To="auto_5"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="714.6510989011,60.3461538461527" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="1387.54070929071,187.8006993007" />
+  </Inheritance>
+  <Component
+    Name="UnitComboLib"
+    ID="auto_7"
+    Position="1477.71928071929,188.586413586414,125,75"
+    Stereotype="" />
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_6"
+    FromArrow=""
+    To="auto_1"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="680.358891108892,375.336413586415" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="680.793956043956,262.8006993007" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_6"
+    FromArrow=""
+    To="auto_2"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="703.246921996924,375.336413586415" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="808.826423576424,262.8006993007" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_6"
+    FromArrow=""
+    To="auto_3"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="715.787462537464,392.300699300702" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="1017.89785214786,262.8006993007" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_6"
+    FromArrow=""
+    To="auto_4"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="715.787462537464,406.729270729269" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="1213.43356643357,262.8006993007" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_6"
+    FromArrow=""
+    To="auto_5"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="715.787462537464,419.943556443558" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="1366.11213786214,262.8006993007" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_6"
+    FromArrow=""
+    To="auto_7"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="715.787462537464,431.229270729269" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="1547.36213786214,263.586413586414" />
+  </Inheritance>
+  <Component
+    Name="AvalonEdit"
+    ID="auto_8"
+    Position="349.433566433567,339.391608391609,161,75"
+    Stereotype="" />
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_6"
+    FromArrow=""
+    To="auto_8"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="550.787462537464,394.518231768234" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="510.433566433567,394.164335664339" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_6"
+    FromArrow=""
+    To="auto_0"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="583.787462537464,375.336413586415" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="583.615384615385,89.7032967032967" />
+  </Inheritance>
+  <Component
+    Name="Edi.Util"
+    ID="auto_A"
+    Position="117.615384615385,185.846153846154,125,75"
+    Stereotype="" />
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_9"
+    FromArrow=""
+    To="auto_A"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="312.615384615385,225.846153846154" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="242.615384615385,225.846153846154" />
+  </Inheritance>
+  <Note
+    Name=""
+    ID=""
+    Position="1370.32415501169,443.623397435897,296.590909090883,75">
+    <Text>Frage: Warum werden die Referenzen auf Prism, MsgBox und UserNotification hier gebraucht`?</Text>
+  </Note>
+  <Note
+    Name=""
+    ID=""
+    Position="112.615384615385,270.846153846154,327,51">
+    <Text>Wozu wird Referenz auf Edi.Util gebraucht?</Text>
+  </Note>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_9"
+    FromArrow=""
+    To="auto_0"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="437.615384615385,205.846153846154" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="564.6510989011,89.7032967032967" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_9"
+    FromArrow=""
+    To="auto_6"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="437.615384615385,223.846153846154" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="560.787462537464,375.336413586415" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_9"
+    FromArrow=""
+    To="auto_8"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="437.615384615385,238.846153846154" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="486.719280719278,339.391608391609" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_B"
+    FromArrow=""
+    To="auto_0"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="270.433566433567,63.3006993006987" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="549.6510989011,63.3396603396608" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_B"
+    FromArrow=""
+    To="auto_6"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="96.7517482517464,91.3006993006987" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="550.787462537464,437.700049950051" />
+  </Inheritance>
+  <Inheritance
+    Name=""
+    ID=""
+    Position="0,0"
+    From="auto_B"
+    FromArrow=""
+    To="auto_9"
+    ToArrow="Uml.Arrows.Triangle">
+    <Anchor
+      Name=""
+      ID=""
+      Position="270.433566433567,77.3916083916077" />
+    <Anchor
+      Name=""
+      ID=""
+      Position="331.888111888113,184.846153846154" />
+  </Inheritance>
+</Document>

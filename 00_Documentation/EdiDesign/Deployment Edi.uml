@@ -4,42 +4,42 @@
   <Component
     Name="EdiViews"
     ID="auto_1"
-    Position="451,87,174,75"
+    Position="31.2083333333335,24.5000000000001,174,75"
     Stereotype="" />
   <Component
     Name="Util"
     ID="auto_5"
-    Position="707,469,125,75"
+    Position="287.208333333333,406.5,125,75"
     Stereotype="" />
   <Component
     Name="UnitCombobox"
     ID="auto_7"
-    Position="844,191,125,75"
+    Position="424.208333333333,128.5,125,75"
     Stereotype="" />
   <Component
     Name="ICSharpCode.AvalonEdit"
     ID="auto_3"
-    Position="700,85,182,75"
+    Position="280.208333333333,22.5000000000001,182,75"
     Stereotype="" />
   <Component
     Name="MsgBox"
     ID="auto_4"
-    Position="844,278,125,75"
+    Position="424.208333333333,215.5,125,75"
     Stereotype="" />
   <Component
     Name="Themes"
     ID="auto_6"
-    Position="845,361,125,75"
+    Position="425.208333333333,298.5,125,75"
     Stereotype="" />
   <Component
     Name="SimpleControls"
     ID="auto_2"
-    Position="508,466,125,75"
+    Position="88.2083333333335,403.5,125,75"
     Stereotype="" />
   <Component
     Name="Edi"
     ID="auto_0"
-    Position="506,276,125,75"
+    Position="86.2083333333335,213.5,125,75"
     Stereotype="" />
   <Association
     Name=""
@@ -52,11 +52,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="594,276" />
+      Position="174.208333333333,213.5" />
     <Anchor
       Name=""
       ID=""
-      Position="594,162" />
+      Position="174.208333333333,99.5000000000001" />
   </Association>
   <Association
     Name=""
@@ -69,11 +69,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="590,466" />
+      Position="170.208333333333,403.5" />
     <Anchor
       Name=""
       ID=""
-      Position="591,351" />
+      Position="171.208333333333,288.5" />
   </Association>
   <Association
     Name=""
@@ -86,11 +86,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="612,276" />
+      Position="192.208333333333,213.5" />
     <Anchor
       Name=""
       ID=""
-      Position="714,160" />
+      Position="294.208333333334,97.5000000000001" />
   </Association>
   <Association
     Name=""
@@ -103,11 +103,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="631,311.16" />
+      Position="211.208333333333,248.66" />
     <Anchor
       Name=""
       ID=""
-      Position="844,311.16" />
+      Position="424.208333333333,248.66" />
   </Association>
   <Association
     Name=""
@@ -120,11 +120,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="610,351" />
+      Position="190.208333333333,288.5" />
     <Anchor
       Name=""
       ID=""
-      Position="725,469" />
+      Position="305.208333333333,406.5" />
   </Association>
   <Association
     Name=""
@@ -137,11 +137,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="631,330.16" />
+      Position="211.208333333333,267.66" />
     <Anchor
       Name=""
       ID=""
-      Position="845,396.16" />
+      Position="425.208333333333,333.66" />
   </Association>
   <Association
     Name=""
@@ -154,10 +154,10 @@
     <Anchor
       Name=""
       ID=""
-      Position="631,289.16" />
+      Position="211.208333333333,226.66" />
     <Anchor
       Name=""
       ID=""
-      Position="844,230.16" />
+      Position="424.208333333333,167.66" />
   </Association>
 </Document>

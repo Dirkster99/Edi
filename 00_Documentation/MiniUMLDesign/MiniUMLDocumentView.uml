@@ -4,16 +4,16 @@
   <Boundary
     Name="MiniUML.View"
     ID=""
-    Position="85,58,200,593.818181818182" />
+    Position="33.7179487179487,21.461538461539,200,593.818181818182" />
   <Class
     Name="DocumentView"
     ID="auto_1"
-    Position="138,225,95,75"
+    Position="86.7179487179487,188.461538461539,95,75"
     Stereotype="" />
   <Class
     Name="XmlView"
     ID="auto_0"
-    Position="137,93,95,75"
+    Position="85.7179487179487,56.461538461539,95,75"
     Stereotype="">
     <Comment>
     This class is used to display the XML editor as split view inside of the document.
@@ -30,16 +30,16 @@
     <Anchor
       Name=""
       ID=""
-      Position="183,168" />
+      Position="131.717948717949,131.461538461539" />
     <Anchor
       Name=""
       ID=""
-      Position="183,225" />
+      Position="131.717948717949,188.461538461539" />
   </Aggregation>
   <Class
     Name="CanvasView"
     ID="auto_2"
-    Position="141,363,95,75"
+    Position="89.7179487179487,326.461538461539,95,75"
     Stereotype="" />
   <Aggregation
     Name=""
@@ -52,20 +52,20 @@
     <Anchor
       Name=""
       ID=""
-      Position="189,363" />
+      Position="137.717948717949,326.461538461539" />
     <Anchor
       Name=""
       ID=""
-      Position="189,300" />
+      Position="137.717948717949,263.461538461539" />
   </Aggregation>
   <Boundary
     Name="MiniUML.Model"
     ID=""
-    Position="373,58,700,593.818181818182" />
+    Position="321.717948717949,21.461538461539,700,593.818181818182" />
   <Class
     Name="XmlViewModel"
     ID="auto_3"
-    Position="423,91,150,75"
+    Position="371.717948717949,54.461538461539,150,75"
     Stereotype="">
     <Comment>
     This class is used to implement the viewmodel
@@ -76,17 +76,17 @@
   <Class
     Name="DocumentViewModel"
     ID="auto_4"
-    Position="419,225,150,75"
+    Position="367.717948717949,188.461538461539,150,75"
     Stereotype="" />
   <Class
     Name="DocumentDataModel"
     ID="auto_44"
-    Position="600,225,150,75"
+    Position="548.717948717949,188.461538461539,150,75"
     Stereotype="" />
   <Class
     Name="CanvasViewModel"
     ID="auto_5"
-    Position="422,354,150,75"
+    Position="370.717948717949,317.461538461539,150,75"
     Stereotype="" />
   <Association
     Name=""
@@ -99,11 +99,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="232,130.16" />
+      Position="180.717948717949,93.621538461539" />
     <Anchor
       Name=""
       ID=""
-      Position="423,130.16" />
+      Position="371.717948717949,93.621538461539" />
   </Association>
   <Association
     Name=""
@@ -116,11 +116,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="233,259.16" />
+      Position="181.717948717949,222.621538461539" />
     <Anchor
       Name=""
       ID=""
-      Position="419,259.16" />
+      Position="367.717948717949,222.621538461539" />
   </Association>
   <Association
     Name=""
@@ -133,11 +133,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="236,396.16" />
+      Position="184.717948717949,359.621538461539" />
     <Anchor
       Name=""
       ID=""
-      Position="422,396.16" />
+      Position="370.717948717949,359.621538461539" />
   </Association>
   <Aggregation
     Name=""
@@ -150,11 +150,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="493,225" />
+      Position="441.717948717949,188.461538461539" />
     <Anchor
       Name=""
       ID=""
-      Position="492.961538461538,166" />
+      Position="441.679487179487,129.461538461539" />
   </Aggregation>
   <Aggregation
     Name=""
@@ -167,11 +167,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="492,300" />
+      Position="440.717948717949,263.461538461539" />
     <Anchor
       Name=""
       ID=""
-      Position="491.923076923077,354" />
+      Position="440.641025641026,317.461538461539" />
   </Aggregation>
   <Aggregation
     Name=""
@@ -184,11 +184,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="569,259.567567567567" />
+      Position="517.717948717949,223.029106029106" />
     <Anchor
       Name=""
       ID=""
-      Position="600,259.567567567567" />
+      Position="548.717948717949,223.029106029106" />
   </Aggregation>
   <Aggregation
     Name=""
@@ -201,16 +201,16 @@
     <Anchor
       Name=""
       ID=""
-      Position="528,354" />
+      Position="476.717948717949,317.461538461539" />
     <Anchor
       Name=""
       ID=""
-      Position="528,300" />
+      Position="476.717948717949,263.461538461539" />
   </Aggregation>
   <Interface
     Name="IParent"
     ID="auto_45"
-    Position="480,446,95,75"
+    Position="428.717948717949,409.461538461539,95,75"
     Stereotype="«interface»" />
   <Association
     Name=""
@@ -223,16 +223,16 @@
     <Anchor
       Name=""
       ID=""
-      Position="525,429" />
+      Position="473.717948717949,392.461538461539" />
     <Anchor
       Name=""
       ID=""
-      Position="525,446" />
+      Position="473.717948717949,409.461538461539" />
   </Association>
   <Class
     Name="AbstractDocumentViewModel"
     ID="auto_46"
-    Position="848.318181818182,175.681818181818,195,75"
+    Position="797.036130536131,139.143356643357,195,75"
     Stereotype="" />
   <Aggregation
     Name=""
@@ -245,11 +245,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="861.318181818182,250.681818181818" />
+      Position="810.036130536131,214.143356643357" />
     <Anchor
       Name=""
       ID=""
-      Position="572,376.16" />
+      Position="520.717948717949,339.621538461539" />
   </Aggregation>
   <Aggregation
     Name=""
@@ -262,16 +262,16 @@
     <Anchor
       Name=""
       ID=""
-      Position="848.318181818182,217.227272727273" />
+      Position="797.036130536131,180.688811188812" />
     <Anchor
       Name=""
       ID=""
-      Position="750,264.954545454545" />
+      Position="698.717948717949,228.416083916084" />
   </Aggregation>
   <Interface
     Name="IMiniUMLDocument"
     ID="auto_47"
-    Position="890.090909090909,302.5,150,75"
+    Position="838.808857808858,265.961538461539,150,75"
     Stereotype="«interface»" />
   <Aggregation
     Name=""
@@ -284,25 +284,25 @@
     <Anchor
       Name=""
       ID=""
-      Position="942.045454545455,302.5" />
+      Position="890.763403263404,265.961538461539" />
     <Anchor
       Name=""
       ID=""
-      Position="942.045454545455,250.681818181818" />
+      Position="890.763403263404,214.143356643357" />
   </Aggregation>
   <Class
     Name="PluginModelBase"
     ID="auto_48"
-    Position="860,415,195,75"
+    Position="808.717948717949,378.461538461539,195,75"
     Stereotype="" />
   <Boundary
     Name="MiniUML.Plugins.UmlClassDiagram"
     ID=""
-    Position="1111.36363636364,58,252,593.818181818182" />
+    Position="1060.08158508159,21.461538461539,252,593.818181818182" />
   <Class
     Name="PluginModel"
     ID="auto_49"
-    Position="1150,415,195,75"
+    Position="1098.71794871795,378.461538461539,195,75"
     Stereotype="" />
   <Inheritance
     Name=""
@@ -315,11 +315,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="1055,457" />
+      Position="1003.71794871795,420.461538461539" />
     <Anchor
       Name=""
       ID=""
-      Position="1150,457" />
+      Position="1098.71794871795,420.461538461539" />
   </Inheritance>
   <Inheritance
     Name=""
@@ -332,11 +332,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="559.090909090909,225" />
+      Position="507.808857808858,188.461538461539" />
     <Anchor
       Name=""
       ID=""
-      Position="848.318181818182,193.363636363636" />
+      Position="797.036130536131,156.825174825175" />
   </Inheritance>
   <Aggregation
     Name=""
@@ -349,16 +349,16 @@
     <Anchor
       Name=""
       ID=""
-      Position="1170.53571428571,415" />
+      Position="1119.25366300366,378.461538461539" />
     <Anchor
       Name=""
       ID=""
-      Position="1040.09090909091,334.964285714286" />
+      Position="988.808857808858,298.425824175825" />
   </Aggregation>
   <Class
     Name="PluginManager"
     ID="auto_4A"
-    Position="860,530.909090909091,195,75"
+    Position="808.717948717949,494.37062937063,195,75"
     Stereotype="" />
   <Aggregation
     Name=""
@@ -371,16 +371,16 @@
     <Anchor
       Name=""
       ID=""
-      Position="953.409090909091,530.909090909091" />
+      Position="902.12703962704,494.37062937063" />
     <Anchor
       Name=""
       ID=""
-      Position="953.493635659097,490" />
+      Position="902.211584377046,453.461538461539" />
   </Aggregation>
   <Note
     Name=""
     ID=""
-    Position="584,520,268,105">
+    Position="532.717948717949,483.461538461539,268,120">
     <Text>Each MiniUml plugin has a name
 which can be used to retrieve the
 model and its associated properties

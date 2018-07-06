@@ -4,30 +4,30 @@
   <Boundary
     Name="MiniUML.Model.ViewModels.Shapes"
     ID=""
-    Position="661,18,225,500" />
+    Position="566,19.6666666666667,225,500" />
   <Class
     Name="ShapeViewModelBase"
     ID="auto_3"
-    Position="681,97,182,75"
+    Position="586,98.6666666666667,182,75"
     Stereotype="" />
   <Class
     Name="ShapeSizeViewModelBase"
     ID="auto_4"
-    Position="683,196,182,75"
+    Position="588,197.666666666667,182,75"
     Stereotype="" />
   <Class
     Name="AnchorBaseViewModel"
     ID="auto_1"
-    Position="686,330,182,75"
+    Position="591,331.666666666667,182,75"
     Stereotype="" />
   <Boundary
     Name="MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Connect"
     ID=""
-    Position="897,18,361,500" />
+    Position="802,19.6666666666667,361,500" />
   <Class
     Name="AnchorViewModel"
     ID="auto_0"
-    Position="946,330,257,75"
+    Position="851,331.666666666667,257,75"
     Stereotype="" />
   <Inheritance
     Name=""
@@ -40,16 +40,16 @@
     <Anchor
       Name=""
       ID=""
-      Position="946,370.16" />
+      Position="851,371.826666666667" />
     <Anchor
       Name=""
       ID=""
-      Position="868,370.16" />
+      Position="773,371.826666666667" />
   </Inheritance>
   <Class
     Name="UmlAssociationShapeViewModel"
     ID="auto_2"
-    Position="946,97,257,75"
+    Position="851,98.6666666666667,257,75"
     Stereotype="" />
   <Aggregation
     Name=""
@@ -62,11 +62,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="1084,172" />
+      Position="989,173.666666666667" />
     <Anchor
       Name=""
       ID=""
-      Position="1084,330" />
+      Position="989,331.666666666667" />
   </Aggregation>
   <Inheritance
     Name=""
@@ -79,11 +79,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="946,137.16" />
+      Position="851,138.826666666667" />
     <Anchor
       Name=""
       ID=""
-      Position="863,137.16" />
+      Position="768,138.826666666667" />
   </Inheritance>
   <Inheritance
     Name=""
@@ -96,20 +96,20 @@
     <Anchor
       Name=""
       ID=""
-      Position="773,196" />
+      Position="678,197.666666666667" />
     <Anchor
       Name=""
       ID=""
-      Position="774,172" />
+      Position="679,173.666666666667" />
   </Inheritance>
   <Boundary
     Name="MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.Shape"
     ID=""
-    Position="123,18,531,714.684210526316" />
+    Position="28,19.6666666666667,531,714.684210526316" />
   <Class
     Name="Base.UmlShapeBaseViewModel"
     ID="auto_5"
-    Position="399.272727272727,187,188,75"
+    Position="304.272727272727,188.666666666667,188,75"
     Stereotype="" />
   <Inheritance
     Name=""
@@ -122,16 +122,16 @@
     <Anchor
       Name=""
       ID=""
-      Position="587.272727272727,229.16" />
+      Position="492.272727272727,230.826666666667" />
     <Anchor
       Name=""
       ID=""
-      Position="683,229.16" />
+      Position="588,230.826666666667" />
   </Inheritance>
   <Class
     Name="Base.CommentViewModel"
     ID="auto_6"
-    Position="401,50,188,75"
+    Position="306,51.6666666666667,188,75"
     Stereotype="" />
   <Aggregation
     Name=""
@@ -144,51 +144,51 @@
     <Anchor
       Name=""
       ID=""
-      Position="500.272727272727,187" />
+      Position="405.272727272727,188.666666666667" />
     <Anchor
       Name=""
       ID=""
-      Position="500.373134328358,125" />
+      Position="405.373134328358,126.666666666667" />
   </Aggregation>
   <Class
     Name="UmlNodeShapeViewModel"
     ID="auto_7"
-    Position="133.354838709677,339.640762463343,188,75"
+    Position="38.354838709677,341.30742913001,188,75"
     Stereotype="" />
   <Class
     Name="UmlDecisionShapeViewModel"
     ID="auto_8"
-    Position="133.354838709677,249.965786901271,188,75"
+    Position="38.354838709677,251.632453567938,188,75"
     Stereotype="" />
   <Class
     Name="UmlCanvasShapeViewModel"
     ID="auto_9"
-    Position="132.548387096774,156.258553274683,188,75"
+    Position="37.548387096774,157.92521994135,188,75"
     Stereotype="" />
   <Class
     Name="UmlBoundaryShapeViewModel"
     ID="auto_A"
-    Position="135.774193548387,52.0674486803525,188,75"
+    Position="40.774193548387,53.7341153470192,188,75"
     Stereotype="" />
   <Class
     Name="UmlPackageShapeViewModel"
     ID="auto_B"
-    Position="133.354838709677,426.896383186706,188,75"
+    Position="38.354838709677,428.563049853373,188,75"
     Stereotype="" />
   <Class
     Name="UmlNoteShapeViewModel"
     ID="auto_C"
-    Position="133.354838709677,514.649560117301,188,75"
+    Position="38.354838709677,516.316226783968,188,75"
     Stereotype="" />
   <Class
     Name="UmlUseCaseShapeViewModel"
     ID="auto_D"
-    Position="132.615835777127,599.794721407624,188,75"
+    Position="37.615835777127,601.461388074291,188,75"
     Stereotype="" />
   <Class
     Name="UmlSquareShapeViewModel"
     ID="auto_E"
-    Position="447.202346041055,619.568914956012,188,75"
+    Position="352.202346041055,621.235581622679,188,75"
     Stereotype="" />
   <Inheritance
     Name=""
@@ -201,11 +201,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="323.774193548387,88.7729032258065" />
+      Position="228.774193548387,90.4395698924732" />
     <Anchor
       Name=""
       ID=""
-      Position="399.272727272727,191.676129032258" />
+      Position="304.272727272727,193.342795698925" />
   </Inheritance>
   <Inheritance
     Name=""
@@ -218,11 +218,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="320.548387096774,214.298697125643" />
+      Position="225.548387096774,215.96536379231" />
     <Anchor
       Name=""
       ID=""
-      Position="399.272727272727,214.41935483871" />
+      Position="304.272727272727,216.086021505377" />
   </Inheritance>
   <Inheritance
     Name=""
@@ -235,11 +235,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="321.354838709677,287.095483870968" />
+      Position="226.354838709677,288.762150537635" />
     <Anchor
       Name=""
       ID=""
-      Position="425,262" />
+      Position="330,263.666666666667" />
   </Inheritance>
   <Inheritance
     Name=""
@@ -252,11 +252,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="321.354838709677,385.482580645161" />
+      Position="226.354838709677,387.149247311828" />
     <Anchor
       Name=""
       ID=""
-      Position="452,262" />
+      Position="357,263.666666666667" />
   </Inheritance>
   <Inheritance
     Name=""
@@ -269,11 +269,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="321.354838709677,473.450322580645" />
+      Position="226.354838709677,475.116989247312" />
     <Anchor
       Name=""
       ID=""
-      Position="467,262" />
+      Position="372,263.666666666667" />
   </Inheritance>
   <Inheritance
     Name=""
@@ -286,11 +286,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="321.354838709677,554.915620723362" />
+      Position="226.354838709677,556.582287390029" />
     <Anchor
       Name=""
       ID=""
-      Position="485,262" />
+      Position="390,263.666666666667" />
   </Inheritance>
   <Inheritance
     Name=""
@@ -303,11 +303,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="320.615835777127,602.772903225806" />
+      Position="225.615835777127,604.439569892473" />
     <Anchor
       Name=""
       ID=""
-      Position="518,262" />
+      Position="423,263.666666666667" />
   </Inheritance>
   <Inheritance
     Name=""
@@ -320,16 +320,16 @@
     <Anchor
       Name=""
       ID=""
-      Position="552.838709677419,619.568914956012" />
+      Position="457.838709677419,621.235581622679" />
     <Anchor
       Name=""
       ID=""
-      Position="551,262" />
+      Position="456,263.666666666667" />
   </Inheritance>
   <Note
     Name=""
     ID=""
-    Position="653,518,621,218">
+    Position="558,519.666666666667,621,218">
     <Text>This diagram gives a summary on all viewmodels that can be used to control view shapes that are displayed
 on the canvas.
 

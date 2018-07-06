@@ -4,51 +4,51 @@
   <Boundary
     Name="MiniUML.Plugins.UmlClassDiagram.Controls.View.Shapes"
     ID=""
-    Position="384.025974025974,25.2272727272725,507.954545454546,728.409090909091" />
+    Position="332.359307359307,18.560606060606,507.954545454546,728.409090909091" />
   <Class
     Name="Base.ShapeViewBase"
     ID="auto_1"
-    Position="405.727272727273,158.818181818182,147,75"
+    Position="354.060606060606,152.151515151516,147,75"
     Stereotype="" />
   <Class
     Name="UmlUseCaseShape"
     ID="auto_0"
-    Position="676.727272727272,45.818181818182,178,75"
+    Position="625.060606060605,39.1515151515155,178,75"
     Stereotype="" />
   <Class
     Name="UmlSquareShape"
     ID="auto_2"
-    Position="677.727272727272,139.984848484849,178,75"
+    Position="626.060606060605,133.318181818183,178,75"
     Stereotype="" />
   <Class
     Name="UmlPackageShape"
     ID="auto_3"
-    Position="677.727272727272,234.151515151515,178,75"
+    Position="626.060606060605,227.484848484849,178,75"
     Stereotype="" />
   <Class
     Name="UmlNodeShape"
     ID="auto_4"
-    Position="679.727272727272,328.318181818182,178,75"
+    Position="628.060606060605,321.651515151515,178,75"
     Stereotype="" />
   <Class
     Name="UmlDecisionShape"
     ID="auto_5"
-    Position="681.727272727272,422.484848484849,178,75"
+    Position="630.060606060605,415.818181818183,178,75"
     Stereotype="" />
   <Class
     Name="UmlCommentShape"
     ID="auto_6"
-    Position="682.727272727272,516.651515151514,178,75"
+    Position="631.060606060605,509.984848484847,178,75"
     Stereotype="" />
   <Class
     Name="UmlCanvasShape"
     ID="auto_7"
-    Position="683.727272727272,610.818181818181,178,75"
+    Position="632.060606060605,604.151515151514,178,75"
     Stereotype="" />
   <Class
     Name="UmlBoundaryShape"
     ID="auto_8"
-    Position="404.200956937799,663.658755980859,178,75"
+    Position="352.534290271132,656.992089314193,178,75"
     Stereotype="" />
   <Inheritance
     Name=""
@@ -61,11 +61,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="676.727272727272,87.978181818182" />
+      Position="625.060606060605,81.3115151515155" />
     <Anchor
       Name=""
       ID=""
-      Position="552.727272727273,168.083444976077" />
+      Position="501.060606060606,161.41677830941" />
   </Inheritance>
   <Inheritance
     Name=""
@@ -78,11 +78,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="677.727272727272,185.978181818182" />
+      Position="626.060606060605,179.311515151515" />
     <Anchor
       Name=""
       ID=""
-      Position="552.727272727273,186.017655502393" />
+      Position="501.060606060606,179.350988835727" />
   </Inheritance>
   <Inheritance
     Name=""
@@ -95,11 +95,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="677.727272727272,274.978181818182" />
+      Position="626.060606060605,268.311515151515" />
     <Anchor
       Name=""
       ID=""
-      Position="552.727272727273,207.502392344498" />
+      Position="501.060606060606,200.835725677831" />
   </Inheritance>
   <Inheritance
     Name=""
@@ -112,11 +112,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="679.727272727272,366.978181818182" />
+      Position="628.060606060605,360.311515151515" />
     <Anchor
       Name=""
       ID=""
-      Position="544.727272727272,233.818181818182" />
+      Position="493.060606060605,227.151515151516" />
   </Inheritance>
   <Inheritance
     Name=""
@@ -129,11 +129,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="681.727272727272,464.978181818182" />
+      Position="630.060606060605,458.311515151515" />
     <Anchor
       Name=""
       ID=""
-      Position="516.727272727272,233.818181818182" />
+      Position="465.060606060605,227.151515151516" />
   </Inheritance>
   <Inheritance
     Name=""
@@ -146,11 +146,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="682.727272727272,558.978181818181" />
+      Position="631.060606060605,552.311515151515" />
     <Anchor
       Name=""
       ID=""
-      Position="490.727272727272,233.818181818182" />
+      Position="439.060606060605,227.151515151516" />
   </Inheritance>
   <Inheritance
     Name=""
@@ -163,11 +163,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="683.727272727272,629.609760765549" />
+      Position="632.060606060605,622.943094098883" />
     <Anchor
       Name=""
       ID=""
-      Position="466.727272727272,233.818181818182" />
+      Position="415.060606060605,227.151515151516" />
   </Inheritance>
   <Inheritance
     Name=""
@@ -180,16 +180,16 @@
     <Anchor
       Name=""
       ID=""
-      Position="443.690752856167,663.658755980859" />
+      Position="392.0240861895,656.992089314193" />
     <Anchor
       Name=""
       ID=""
-      Position="443.727272727273,233.818181818182" />
+      Position="392.060606060606,227.151515151516" />
   </Inheritance>
   <Note
     Name=""
     ID=""
-    Position="67,26.8181818181818,307,89">
+    Position="15.333333333333,20.1515151515153,307,89">
     <Text>This diagram shows the view control classes
 that are responsible for displaying shapes on
 the canvas.</Text>
@@ -197,7 +197,7 @@ the canvas.</Text>
   <Class
     Name="System.Windows.Controls.Control"
     ID="auto_9"
-    Position="151.181818181818,158.818181818182,210.636363636364,75"
+    Position="99.515151515151,152.151515151516,210.636363636364,75"
     Stereotype="" />
   <Inheritance
     Name=""
@@ -210,16 +210,16 @@ the canvas.</Text>
     <Anchor
       Name=""
       ID=""
-      Position="405.727272727273,198.136363636364" />
+      Position="354.060606060606,191.469696969697" />
     <Anchor
       Name=""
       ID=""
-      Position="361.818181818182,198.136363636364" />
+      Position="310.181818181818,191.469696969697" />
   </Inheritance>
   <Interface
     Name="ISnapTarget"
     ID="auto_A"
-    Position="405.727272727273,48.8636363636363,147,75"
+    Position="354.060606060606,42.1969696969698,147,75"
     Stereotype="«interface»" />
   <Association
     Name=""
@@ -232,10 +232,10 @@ the canvas.</Text>
     <Anchor
       Name=""
       ID=""
-      Position="479.318181818182,158.818181818182" />
+      Position="427.651515151515,152.151515151516" />
     <Anchor
       Name=""
       ID=""
-      Position="479.268774703557,123.863636363636" />
+      Position="427.60210803689,117.19696969697" />
   </Association>
 </Document>

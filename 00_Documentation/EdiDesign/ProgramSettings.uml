@@ -4,12 +4,12 @@
   <Class
     Name="ConfigViewModel"
     ID="auto_0"
-    Position="167,125,195,69"
+    Position="20.6666666666667,23.6666666666667,195,69"
     Stereotype="" />
   <Class
     Name="DialogViewModelBase"
     ID="auto_1"
-    Position="406,123,195,69"
+    Position="259.666666666667,21.6666666666667,195,69"
     Stereotype="" />
   <Inheritance
     Name=""
@@ -22,10 +22,10 @@
     <Anchor
       Name=""
       ID=""
-      Position="362,162" />
+      Position="215.666666666667,60.6666666666667" />
     <Anchor
       Name=""
       ID=""
-      Position="406,162" />
+      Position="259.666666666667,60.6666666666667" />
   </Inheritance>
 </Document>

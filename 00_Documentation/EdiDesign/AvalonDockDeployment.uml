@@ -4,36 +4,36 @@
   <Boundary
     Name="AvalonDock"
     ID=""
-    Position="202.482546120287,13,639.697674418604,420" />
+    Position="6.02782701110561,9.93039501391922,639.697674418604,420" />
   <Component
     Name="AvalonDock.Themes.ExpressionDark"
     ID="auto_4"
-    Position="237,63,229.06976744186,75"
+    Position="40.5452808908186,59.9303950139192,229.06976744186,75"
     Stereotype="" />
   <Component
     Name="AvalonDock"
     ID="auto_0"
-    Position="241,184,125,75"
+    Position="44.5452808908186,180.930395013919,125,75"
     Stereotype="" />
   <Component
     Name="AvalonDock.Themes.Metro"
     ID="auto_5"
-    Position="244,333,223.255813953488,75"
+    Position="47.5452808908186,329.930395013919,223.255813953488,75"
     Stereotype="" />
   <Component
     Name="AvalonDock.Themes.VS2010"
     ID="auto_1"
-    Position="576.744186046512,114.511627906977,223.837209302326,75"
+    Position="380.289466937331,111.442022920896,223.837209302326,75"
     Stereotype="" />
   <Component
     Name="AvalonDock.Themes.Expression"
     ID="auto_2"
-    Position="577.325581395349,197.348837209302,224.418604651163,75"
+    Position="380.870862286168,194.279232223221,224.418604651163,75"
     Stereotype="" />
   <Component
     Name="AvalonDock.Themes.Aero"
     ID="auto_3"
-    Position="574.418604651163,282.604651162791,226.162790697674,75"
+    Position="377.963885541982,279.53504617671,226.162790697674,75"
     Stereotype="" />
   <Association
     Name=""
@@ -46,11 +46,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="366,220.16" />
+      Position="169.545280890819,217.090395013919" />
     <Anchor
       Name=""
       ID=""
-      Position="576.744186046512,157.671627906977" />
+      Position="380.289466937331,154.602022920896" />
   </Association>
   <Association
     Name=""
@@ -63,11 +63,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="366,227.16" />
+      Position="169.545280890819,224.090395013919" />
     <Anchor
       Name=""
       ID=""
-      Position="577.325581395349,227.304878048781" />
+      Position="380.870862286168,224.2352730627" />
   </Association>
   <Association
     Name=""
@@ -80,11 +80,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="366,248.136744186046" />
+      Position="169.545280890819,245.067139199965" />
     <Anchor
       Name=""
       ID=""
-      Position="574.418604651163,320.764651162791" />
+      Position="377.963885541982,317.69504617671" />
   </Association>
   <Association
     Name=""
@@ -97,11 +97,11 @@
     <Anchor
       Name=""
       ID=""
-      Position="299.335644502462,184" />
+      Position="102.880925393281,180.930395013919" />
     <Anchor
       Name=""
       ID=""
-      Position="299.335644502462,138" />
+      Position="102.880925393281,134.930395013919" />
   </Association>
   <Association
     Name=""
@@ -114,10 +114,10 @@
     <Anchor
       Name=""
       ID=""
-      Position="299.335644502462,259" />
+      Position="102.880925393281,255.930395013919" />
     <Anchor
       Name=""
       ID=""
-      Position="299.314857362773,333" />
+      Position="102.860138253592,329.930395013919" />
   </Association>
 </Document>
