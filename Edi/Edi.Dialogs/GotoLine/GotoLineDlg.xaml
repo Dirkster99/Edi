@@ -35,7 +35,7 @@
             </Grid.ColumnDefinitions>
 
             <Button Content="{x:Static cmdLabel:Strings.STR_GOTOLINE_OK_BUTTON}"
-              Command="{Binding OKCommand}"
+              Command="{Binding OkCommand}"
               IsDefault="True"
               Grid.Column="0" Padding="3" Margin="6" MinHeight="24" MinWidth="80"/>
 
