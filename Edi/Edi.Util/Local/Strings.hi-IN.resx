@@ -413,6 +413,12 @@
   <data name="STR_AppCommand_CopyFileURLToClipboard_TT" xml:space="preserve">
     <value>इस दस्तावेज़ का पथ Windows क्लिपबोर्ड में प्रतिलिपि बनाएँ</value>
   </data>
+  <data name="STR_AppCommand_CommandLineHere" xml:space="preserve">
+    <value>कमान रेखा यहाँ</value>
+  </data>
+  <data name="STR_AppCommand_CommandLineHere_TT" xml:space="preserve">
+    <value>इस स्थान पर एक कमांड लाइन खोलें</value>
+  </data>
   <data name="STR_AppCommand_OpenContainingFolder" xml:space="preserve">
     <value>युक्त फ़ोल्डर खोलें...</value>
   </data>

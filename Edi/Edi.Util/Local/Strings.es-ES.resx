@@ -413,6 +413,12 @@ y una declaración sobre la función/flujo de trabajo que estaba utilizando. Adj
   <data name="STR_AppCommand_CopyFileURLToClipboard_TT" xml:space="preserve">
     <value>La trayectoria de este documento de copia en el portapapeles de Windows</value>
   </data>
+  <data name="STR_AppCommand_CommandLineHere" xml:space="preserve">
+    <value>Línea de comando aquí</value>
+  </data>
+  <data name="STR_AppCommand_CommandLineHere_TT" xml:space="preserve">
+    <value>Abra una línea de comando en esta ubicación</value>
+  </data>
   <data name="STR_AppCommand_OpenContainingFolder" xml:space="preserve">
     <value>Abra la carpeta que contienen...</value>
   </data>

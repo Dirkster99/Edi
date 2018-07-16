@@ -490,6 +490,12 @@ and a statement about the function/workflow you were using. Attach screenshots o
   <data name="STR_AppCommand_CopyFileURLToClipboard_TT" xml:space="preserve">
     <value>Copy the path of this document into the Windows Clipboard</value>
   </data>
+  <data name="STR_AppCommand_CommandLineHere" xml:space="preserve">
+    <value>Command Line Here</value>
+  </data>
+  <data name="STR_AppCommand_CommandLineHere_TT" xml:space="preserve">
+    <value>Open a Command Line at this location</value>
+  </data>
   <data name="STR_AppCommand_OpenContainingFolder" xml:space="preserve">
     <value>Open Containing folder...</value>
   </data>

@@ -460,4 +460,10 @@ Semua berkas (*.*)|*.*</value>
   <data name="STR_Settings_Editor_CharacterSizeInPoints" xml:space="preserve">
     <value>Point</value>
   </data>
+  <data name="STR_AppCommand_CommandLineHere" xml:space="preserve">
+    <value>Baris Perintah Di Sini</value>
+  </data>
+  <data name="STR_AppCommand_CommandLineHere_TT" xml:space="preserve">
+    <value>Buka Command Line di lokasi ini</value>
+  </data>
 </root>

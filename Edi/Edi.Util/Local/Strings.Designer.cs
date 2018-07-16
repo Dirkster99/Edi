@@ -19,7 +19,7 @@ namespace Edi.Util.Local {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Strings {
@@ -471,6 +471,24 @@ namespace Edi.Util.Local {
         public static string STR_ACCESS_DIRECTORY_ERROR {
             get {
                 return ResourceManager.GetString("STR_ACCESS_DIRECTORY_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Command Line Here.
+        /// </summary>
+        public static string STR_AppCommand_CommandLineHere {
+            get {
+                return ResourceManager.GetString("STR_AppCommand_CommandLineHere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open a Command Line at this location.
+        /// </summary>
+        public static string STR_AppCommand_CommandLineHere_TT {
+            get {
+                return ResourceManager.GetString("STR_AppCommand_CommandLineHere_TT", resourceCulture);
             }
         }
         

@@ -28,9 +28,10 @@ namespace Edi.Core.ViewModels
 
         private DocumentState _mState = DocumentState.IsLoading;
 
-        private RelayCommand<object> _mOpenContainingFolderCommand;
-        private RelayCommand<object> _mCopyFullPathtoClipboard;
-        private RelayCommand<object> _mSyncPathToExplorerCommand;
+        private RelayCommand<object> _OpenContainingFolderCommand;
+        private RelayCommand<object> _CopyFullPathtoClipboard;
+        private RelayCommand<object> _CommandLineHereCommand;
+        private RelayCommand<object> _SyncPathToExplorerCommand;
 
 	    protected IDocumentModel MDocumentModel;
         #endregion Fields
@@ -174,10 +175,10 @@ namespace Edi.Core.ViewModels
         {
             get
             {
-                if (_mOpenContainingFolderCommand == null)
-                    _mOpenContainingFolderCommand = new RelayCommand<object>(p => OnOpenContainingFolderCommand());
+                if (_OpenContainingFolderCommand == null)
+                    _OpenContainingFolderCommand = new RelayCommand<object>(p => OnOpenContainingFolderCommand());
 
-                return _mOpenContainingFolderCommand;
+                return _OpenContainingFolderCommand;
             }
         }
 
@@ -190,10 +191,24 @@ namespace Edi.Core.ViewModels
         {
             get
             {
-                if (_mCopyFullPathtoClipboard == null)
-                    _mCopyFullPathtoClipboard = new RelayCommand<object>(p => OnCopyFullPathtoClipboardCommand());
+                if (_CopyFullPathtoClipboard == null)
+                    _CopyFullPathtoClipboard = new RelayCommand<object>(p => OnCopyFullPathtoClipboardCommand());
 
-                return _mCopyFullPathtoClipboard;
+                return _CopyFullPathtoClipboard;
+            }
+        }
+
+        /// <summary>
+        /// Gets a command that starts a command line in a specific file->folder location.
+        /// </summary>
+        public ICommand CommandLineHereCommand
+        {
+            get
+            {
+                if (_CommandLineHereCommand == null)
+                    _CommandLineHereCommand = new RelayCommand<object>(p => On_CommandLineHereCommand());
+
+                return _CommandLineHereCommand;
             }
         }
 
@@ -204,10 +219,10 @@ namespace Edi.Core.ViewModels
         {
             get
             {
-                if (_mSyncPathToExplorerCommand == null)
-                    _mSyncPathToExplorerCommand = new RelayCommand<object>(p => OnSyncPathToExplorerCommand());
+                if (_SyncPathToExplorerCommand == null)
+                    _SyncPathToExplorerCommand = new RelayCommand<object>(p => OnSyncPathToExplorerCommand());
 
-                return _mSyncPathToExplorerCommand;
+                return _SyncPathToExplorerCommand;
             }
         }
         #endregion commands
@@ -333,6 +348,26 @@ namespace Edi.Core.ViewModels
             {
             }
         }
+
+        /// <summary>
+        /// Starts a command line in a specific file->folder location.
+        /// </summary>
+        private void On_CommandLineHereCommand()
+        {
+            try
+            {
+                var directory = System.IO.Path.GetDirectoryName(FilePath);
+                Process p = new Process();
+                p.StartInfo.FileName = "cmd.exe";
+                p.StartInfo.WorkingDirectory = directory;
+                p.StartInfo.UseShellExecute = false;
+                p.Start();
+            }
+            catch
+            {
+            }
+        }
+
 
         /// <summary>
         /// Opens the folder in which this document is stored in the Windows Explorer.

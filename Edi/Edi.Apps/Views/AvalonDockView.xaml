@@ -51,6 +51,12 @@
                         ToolTip="{x:Static cmdLabel:Strings.STR_AppCommand_CopyFileURLToClipboard_TT}"
                       />
 
+                    <MenuItem Header="{x:Static cmdLabel:Strings.STR_AppCommand_CommandLineHere}" 
+                        Command="{Binding Model.CommandLineHereCommand}"
+                        ToolTipService.ShowOnDisabled="True"
+                        ToolTip="{x:Static cmdLabel:Strings.STR_AppCommand_CommandLineHere_TT}"
+                      />
+
                     <Separator/>
 
                     <MenuItem Header="{x:Static avalonDockProperties:Resources.Document_Close}" 

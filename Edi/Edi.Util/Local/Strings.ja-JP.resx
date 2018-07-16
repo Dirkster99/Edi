@@ -413,6 +413,12 @@
   <data name="STR_AppCommand_CopyFileURLToClipboard_TT" xml:space="preserve">
     <value>このドキュメントのパスを Windows クリップボードにコピーします。</value>
   </data>
+  <data name="STR_AppCommand_CommandLineHere" xml:space="preserve">
+    <value>ここのコマンドライン</value>
+  </data>
+  <data name="STR_AppCommand_CommandLineHere_TT" xml:space="preserve">
+    <value>この場所でコマンドラインを開く</value>
+  </data>
   <data name="STR_AppCommand_OpenContainingFolder" xml:space="preserve">
     <value>含むフォルダーを開く.</value>
   </data>

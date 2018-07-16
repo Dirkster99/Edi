@@ -434,6 +434,12 @@ Bitte fügen Sie Screenshots hinzu wenn das hilfreich ist.</value>
   <data name="STR_AppCommand_CopyFileURLToClipboard_TT" xml:space="preserve">
     <value>Kopiert den Pfad des aktuellen Dokuments in die Windows Zwischenablage</value>
   </data>
+  <data name="STR_AppCommand_CommandLineHere" xml:space="preserve">
+    <value>Befehlszeile hier öffnen</value>
+  </data>
+  <data name="STR_AppCommand_CommandLineHere_TT" xml:space="preserve">
+    <value>Öffnet die Befehlszeile am aktuellen Ort</value>
+  </data>
   <data name="STR_AppCommand_OpenContainingFolder" xml:space="preserve">
     <value>Order öffnen...</value>
   </data>

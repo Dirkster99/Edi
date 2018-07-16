@@ -413,6 +413,12 @@ e una dichiarazione circa la funzione/flusso di lavoro che si stava utilizzando.
   <data name="STR_AppCommand_CopyFileURLToClipboard_TT" xml:space="preserve">
     <value>Copiare il percorso di questo documento nella Clipboard di Windows</value>
   </data>
+  <data name="STR_AppCommand_CommandLineHere" xml:space="preserve">
+    <value>Riga di comando qui</value>
+  </data>
+  <data name="STR_AppCommand_CommandLineHere_TT" xml:space="preserve">
+    <value>Apri una riga di comando in questa posizione</value>
+  </data>
   <data name="STR_AppCommand_OpenContainingFolder" xml:space="preserve">
     <value>Aprire la cartella contenente...</value>
   </data>
