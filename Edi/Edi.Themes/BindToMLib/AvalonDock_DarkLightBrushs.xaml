@@ -31,6 +31,12 @@
     <SolidColorBrush x:Key="AvalonDockThemeVs2013DocumentWellTabSelectedActiveBackground"
                      Color="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlAccentColorKey}}"
                      options:Freeze="true" />
+
+    <!-- Selected Document Highlight Header Text color -->
+    <SolidColorBrush x:Key="AvalonDockThemeVs2013DocumentWellTabSelectedActiveText"
+                     Color="White"
+                     options:Freeze="true" />
+
     <!--AccentColor -->
     <SolidColorBrush x:Key="AvalonDockThemeVs2013DocumentWellTabUnselectedHoveredBackground"
                      Color="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlAccentColorKey}}"
