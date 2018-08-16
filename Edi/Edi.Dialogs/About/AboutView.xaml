@@ -93,7 +93,7 @@
                                         <Label Content="{x:Static cmdLabel:Strings.STR_ABOUT_DOCKING_LAYOUT}"
                                                Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" />
                                         <hyp:WebHyperlink Grid.Column="1" Grid.Row="0" Margin="3"
-                                                          HorizontalAlignment="Left" VerticalAlignment="Center" NavigateUri="https://avalondock.codeplex.com/" Text="AvalonDock" />
+                                                          HorizontalAlignment="Left" VerticalAlignment="Center" NavigateUri="https://github.com/Dirkster99/AvalonDock" Text="AvalonDock" />
 
                                         <Label Content="{x:Static cmdLabel:Strings.STR_ABOUT_TextEditor}"
                                                Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" />
