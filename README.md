@@ -9,6 +9,7 @@ Edi - The open source integrated development environment (IDE) based on <a href=
 * [Log4Net Document Viewer](https://github.com/Dirkster99/Edi/wiki/Log4Net-Document-Viewer)
 * [UML Editor](https://github.com/Dirkster99/Edi/wiki/UML-Diagram-Editor)
 
+![screenshot](https://raw.githubusercontent.com/Dirkster99/Docu/master/Edi/2018/RestyledOverlayButtons.png)
 ![screenshot](https://raw.githubusercontent.com/Dirkster99/Docu/master/Edi/2018/Edi_Explorer_Dark.png)
 ![screenshot](https://raw.githubusercontent.com/Dirkster99/Docu/master/Edi/2018/Edi_Explorer_Light.png)
 ![screenshot](https://raw.githubusercontent.com/Dirkster99/Docu/master/Edi/2018/EdiUmlEditor.png)
