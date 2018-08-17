@@ -76,8 +76,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\CommonServiceLocator.2.0.3\lib\net45\CommonServiceLocator.dll</HintPath>
+    <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\CommonServiceLocator.2.0.4\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
     <Reference Include="FileSystemModels, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Dirkster.FileSystemModels.3.1.0\lib\net452\FileSystemModels.dll</HintPath>
@@ -85,8 +85,8 @@
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Dirkster.FileSystemModels.3.1.0\lib\net452\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="MLib, Version=1.0.4.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Dirkster.MLib.1.0.4.2\lib\net4\MLib.dll</HintPath>
+    <Reference Include="MLib, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Dirkster.MLib.1.0.6\lib\net4\MLib.dll</HintPath>
     </Reference>
     <Reference Include="MRULib, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Dirkster.MRULib.1.0.1\lib\net451\MRULib.dll</HintPath>

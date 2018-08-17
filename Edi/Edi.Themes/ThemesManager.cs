@@ -52,7 +52,8 @@ namespace Edi.Themes
           "/Edi.Themes;component/BindToMLib/AvalonDock_DarkLightBrushs.xaml",
           "/Edi.Themes;component/BindToMLib/DropDownButtonLib_DarkLightBrushs.xaml",
           "/Edi.Themes;component/BindToMLib/HistoryControlLib_DarkLightBrushs.xaml",
-          "/Edi.Themes;component/BindToMLib/WatermarkControlsLib_DarkLightBrushs.xaml"
+          "/Edi.Themes;component/BindToMLib/WatermarkControlsLib_DarkLightBrushs.xaml",
+          "/Edi.Themes;component/BindToMLib/NumericUpDownLib_DarkLightBrushs.xaml"
         };
         #endregion Dark theme resources
 
@@ -94,7 +95,9 @@ namespace Edi.Themes
           "/Edi.Themes;component/BindToMLib/MWindowLib/LightBrushs.xaml",
           "/Edi.Themes;component/BindToMLib/DropDownButtonLib_DarkLightBrushs.xaml",
           "/Edi.Themes;component/BindToMLib/HistoryControlLib_DarkLightBrushs.xaml",
-          "/Edi.Themes;component/BindToMLib/WatermarkControlsLib_DarkLightBrushs.xaml"
+          "/Edi.Themes;component/BindToMLib/WatermarkControlsLib_DarkLightBrushs.xaml",
+          "/Edi.Themes;component/BindToMLib/NumericUpDownLib_DarkLightBrushs.xaml"
+
         };
         #endregion Light Metro theme resources
         #endregion WPF Themes
