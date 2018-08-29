@@ -285,7 +285,7 @@ namespace Edi.Apps.ViewModels
 				{
 					if (FindReplaceVm == null)
 					{
-						FindReplaceVm = new FindReplaceViewModel(_mSettingsManager);
+						FindReplaceVm = new FindReplaceViewModel(_SettingsManager);
 					}
 
 					FindReplaceVm.FindNext = FindNext;

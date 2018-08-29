@@ -82,7 +82,7 @@ namespace Edi.Apps.ViewModels
 
 	    private readonly IAppCoreModel _mAppCore;
 	    private readonly IToolWindowRegistry _mToolRegistry;
-        private readonly ISettingsManager _mSettingsManager;
+        private readonly ISettingsManager _SettingsManager;
 	    private readonly IMessageManager _mMessageManager;
 
         private readonly IDocumentTypeManager _mDocumentTypeManager;
@@ -113,7 +113,7 @@ namespace Edi.Apps.ViewModels
             _msgBox = messageManager.MessageBox ?? ServiceLocator.Current.GetInstance<IMessageBoxService>();
 
             _mToolRegistry = toolRegistry;
-            _mSettingsManager = programSettings;
+            _SettingsManager = programSettings;
             ApplicationThemes = themesManager;
             _mDocumentTypeManager = documentTypeManager;
 
@@ -252,7 +252,7 @@ namespace Edi.Apps.ViewModels
                             if (value != null && _mShutDownInProgress == false)
                             {
                                 if (value.IsFilePathReal)
-                                    _mSettingsManager.SessionData.LastActiveFile = value.FilePath;
+                                    _SettingsManager.SessionData.LastActiveFile = value.FilePath;
                             }
                         }
                     });
@@ -349,9 +349,72 @@ namespace Edi.Apps.ViewModels
         /// </summary>
         private List<EdiViewModel> Documents => _mFiles.OfType<EdiViewModel>().ToList();
 
-	    #endregion Properties
+        #endregion Properties
 
         #region methods
+        #region OpenCommand
+        /// <summary>
+        /// Open a type of document from file persistence with dialog and user interaction.
+        /// 
+        /// So user select file(s) in a standard open file dialog and
+        /// Edi opens all the files in one go.
+        /// </summary>
+        /// <param name="typeOfDocument"></param>
+        private void OnOpen(string typeOfDocument = "")
+        {
+            try
+            {
+                var dlg = new OpenFileDialog();
+
+                // Get filter strings for document specific filters or all filters
+                // depending on whether type of document is set to a key or not.
+                var fileEntries = _mDocumentTypeManager.GetFileFilterEntries(typeOfDocument);
+                dlg.Filter = fileEntries.GetFilterString();
+
+                dlg.Multiselect = true;
+                dlg.InitialDirectory = GetDefaultPath();
+
+                if (dlg.ShowDialog().GetValueOrDefault())
+                {
+                    // Smallest value in filterindex is 1
+                    var fo = fileEntries.GetFileOpenMethod(dlg.FilterIndex - 1);
+
+                    foreach (string fileName in dlg.FileNames)
+                    {
+                        // Verify whether file is already open in editor, and if so, show it
+                        IFileBaseViewModel fileViewModel = Documents.FirstOrDefault(fm => fm.FilePath == fileName);
+
+                        if (fileViewModel != null) // File is already open so show it to the user
+                        {
+                            ActiveDocument = fileViewModel;
+                            continue;
+                        }
+
+                        var dm = new DocumentModel();
+                        dm.SetFileNamePath(fileName, true);
+
+                        // Execute file open method from delegate and integrate new viewmodel instance
+                        var vm = fo(dm, _SettingsManager);
+
+                        IntegrateDocumentVm(vm, fileName, true);
+                    }
+
+                    // Pre-select this document type in collection of document types that can be opened and viewed
+                    var typeOfDocKey = _mDocumentTypeManager.FindDocumentTypeByKey(typeOfDocument);
+                    if (typeOfDocKey != null)
+                        SelectedOpenDocumentType = typeOfDocKey;
+                }
+            }
+            catch (Exception exp)
+            {
+                Logger.Error(exp.Message, exp);
+                _msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                             _mAppCore.IssueTrackerLink,
+                             _mAppCore.IssueTrackerLink,
+                             Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
+            }
+        }
+
         /// <summary>
         /// Wrapper method for file open
         /// - is executed when a file open is requested from external party such as tool window.
@@ -360,8 +423,7 @@ namespace Edi.Apps.ViewModels
         /// <returns></returns>
         public bool FileOpen(string file)
         {
-            Open(file);
-            return true;
+            return (Open(file) != null);
         }
 
 	    /// <summary>
@@ -402,7 +464,7 @@ namespace Edi.Apps.ViewModels
 
 	        if (docType != null)
             {
-                fileViewModel = docType.FileOpenMethod(dm, _mSettingsManager);
+                fileViewModel = docType.FileOpenMethod(dm, _SettingsManager);
             }
             else
             {
@@ -415,7 +477,7 @@ namespace Edi.Apps.ViewModels
                 bool closeOnErrorWithoutMessage = closeDocumentWithoutMessageOnError == CloseDocOnError.WithoutUserNotification;
 
                 // try to load a standard text file from the file system as a fallback method
-                fileViewModel = EdiViewModel.LoadFile(dm, _mSettingsManager, closeOnErrorWithoutMessage);
+                fileViewModel = EdiViewModel.LoadFile(dm, _SettingsManager, closeOnErrorWithoutMessage);
                 ////}
             }
 
@@ -487,11 +549,12 @@ namespace Edi.Apps.ViewModels
                 return anchorableVm;
 
             // Query for a matching document and return it
-            if (_mSettingsManager.SettingData.ReloadOpenFilesOnAppStart)
+            if (_SettingsManager.SettingData.ReloadOpenFilesOnAppStart)
                 return ReloadDocument(contentId);
 
             return null;
         }
+        #endregion OnOpen
 
         #region NewCommand
         private void OnNew(TypeOfDocument t = TypeOfDocument.EdiTextEditor)
@@ -512,7 +575,7 @@ namespace Edi.Apps.ViewModels
                         {
                             var ediVm = vm as IDocumentEdi;
 
-                            ediVm.InitInstance(_mSettingsManager.SettingData);
+                            ediVm.InitInstance(_SettingsManager.SettingData);
 
                             ediVm.IncreaseNewCounter();
                             ediVm.DocumentEvent += ProcessDocumentEvent;
@@ -554,68 +617,6 @@ namespace Edi.Apps.ViewModels
         }
         #endregion NewCommand
 
-        #region OpenCommand
-        /// <summary>
-        /// Open a type of document from file persistence with dialog
-        /// and user interaction.
-        /// </summary>
-        /// <param name="typeOfDocument"></param>
-        private void OnOpen(string typeOfDocument = "")
-        {
-            try
-            {
-                var dlg = new OpenFileDialog();
-
-	            // Get filter strings for document specific filters or all filters
-                // depending on whether type of document is set to a key or not.
-                var fileEntries = _mDocumentTypeManager.GetFileFilterEntries(typeOfDocument);
-                dlg.Filter = fileEntries.GetFilterString();
-
-                dlg.Multiselect = true;
-                dlg.InitialDirectory = GetDefaultPath();
-
-                if (dlg.ShowDialog().GetValueOrDefault())
-                {
-                    // Smallest value in filterindex is 1
-                    FileOpenDelegate fo = fileEntries.GetFileOpenMethod(dlg.FilterIndex - 1);
-
-                    foreach (string fileName in dlg.FileNames)
-                    {
-                        // Verify whether file is already open in editor, and if so, show it
-                        IFileBaseViewModel fileViewModel = Documents.FirstOrDefault(fm => fm.FilePath == fileName);
-
-                        if (fileViewModel != null) // File is already open so show it to the user
-                        {
-                            ActiveDocument = fileViewModel;
-                            continue;
-                        }
-
-                        var dm = new DocumentModel();
-                        dm.SetFileNamePath(fileName, true);
-
-                        // Execute file open method from delegate and integrate new viewmodel instance
-                        var vm = fo(dm, _mSettingsManager);
-
-                        IntegrateDocumentVm(vm, fileName, true);
-                    }
-
-                    // Pre-select this document type in collection of document types that can be opened and viewed
-                    var typeOfDocKey = _mDocumentTypeManager.FindDocumentTypeByKey(typeOfDocument);
-                    if (typeOfDocKey != null)
-                        SelectedOpenDocumentType = typeOfDocKey;
-                }
-            }
-            catch (Exception exp)
-            {
-                Logger.Error(exp.Message, exp);
-                _msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                             _mAppCore.IssueTrackerLink,
-                             _mAppCore.IssueTrackerLink,
-                             Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
-            }
-        }
-        #endregion OnOpen
-
         #region Application_Exit_Command
         private void AppExit_CommandExecuted()
         {
@@ -645,7 +646,7 @@ namespace Edi.Apps.ViewModels
             {
                 // Initialize view model for editing settings
                 ConfigViewModel dlgVm = new ConfigViewModel();
-                dlgVm.LoadOptionsFromModel(_mSettingsManager.SettingData);
+                dlgVm.LoadOptionsFromModel(_SettingsManager.SettingData);
 
                 // Create dialog and attach viewmodel to view datacontext
                 Window dlg = ViewSelector.GetDialogView(dlgVm, Application.Current.MainWindow);
@@ -653,10 +654,10 @@ namespace Edi.Apps.ViewModels
                 dlg.ShowDialog();
 
 	            if (dlgVm.WindowCloseResult != true) return;
-	            dlgVm.SaveOptionsToModel(_mSettingsManager.SettingData);
+	            dlgVm.SaveOptionsToModel(_SettingsManager.SettingData);
 
-	            if (_mSettingsManager.SettingData.IsDirty)
-		            _mSettingsManager.SaveOptions(_mAppCore.DirFileAppSettingsData, _mSettingsManager.SettingData);
+	            if (_SettingsManager.SettingData.IsDirty)
+		            _SettingsManager.SaveOptions(_mAppCore.DirFileAppSettingsData, _SettingsManager.SettingData);
             }
             catch (Exception exp)
             {
@@ -838,8 +839,8 @@ namespace Edi.Apps.ViewModels
             try
             {
                 // Set scale factor in default size of text font
-                vm.InitScaleView(_mSettingsManager.SettingData.DocumentZoomUnit,
-                                                 _mSettingsManager.SettingData.DocumentZoomView);
+                vm.InitScaleView(_SettingsManager.SettingData.DocumentZoomUnit,
+                                                 _SettingsManager.SettingData.DocumentZoomView);
 
                 ActiveDocument = vm;
             }
@@ -884,7 +885,7 @@ namespace Edi.Apps.ViewModels
                     sPath = ActiveEdiDocument.GetFilePath();
 
                 if (sPath == string.Empty)
-                    sPath = _mSettingsManager.SessionData.GetLastActivePath();
+                    sPath = _SettingsManager.SessionData.GetLastActivePath();
 
                 if (sPath == string.Empty)
                     sPath = _mAppCore.MyDocumentsUserDir;

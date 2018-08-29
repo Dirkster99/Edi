@@ -30,21 +30,21 @@
                 var explorerTw = GetToolWindowVm<IExplorer>();
 
                 if (explorerTw != null)
-                    FileExplorerViewModel.SaveSettings(_mSettingsManager, explorerTw);
+                    FileExplorerViewModel.SaveSettings(_SettingsManager, explorerTw);
 
                 // Save program options only if there are un-saved changes that need persistence
                 // This can be caused when WPF theme was changed or something else
                 // but should normally not occur as often as saving session data
-                if (_mSettingsManager.SettingData.IsDirty)
+                if (_SettingsManager.SettingData.IsDirty)
                 {
-                    _mSettingsManager.SaveOptions(_mAppCore.DirFileAppSettingsData, _mSettingsManager.SettingData);
+                    _SettingsManager.SaveOptions(_mAppCore.DirFileAppSettingsData, _SettingsManager.SettingData);
                 }
 
                 // Convert viewmodel data into model for persistance layer...
                 var mruVm = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
-                MRUEntrySerializer.ConvertToModel(mruVm, _mSettingsManager.SessionData.MruList);
+                MRUEntrySerializer.ConvertToModel(mruVm, _SettingsManager.SessionData.MruList);
 
-                _mSettingsManager.SaveSessionData(_mAppCore.DirFileAppSessionData, _mSettingsManager.SessionData);
+                _SettingsManager.SaveSessionData(_mAppCore.DirFileAppSessionData, _SettingsManager.SessionData);
             }
             catch (Exception exp)
             {
@@ -116,11 +116,11 @@
                 EnableMainWindowActivated(false);
 
                 // Persist window position, width and height from this session
-                _mSettingsManager.SessionData.MainWindowPosSz =
+                _SettingsManager.SessionData.MainWindowPosSz =
                     new ViewPosSizeModel(win.Left, win.Top, win.Width, win.Height,
                                                              (win.WindowState == WindowState.Maximized));
 
-                _mSettingsManager.SessionData.IsWorkspaceAreaOptimized = IsWorkspaceAreaOptimized;
+                _SettingsManager.SessionData.IsWorkspaceAreaOptimized = IsWorkspaceAreaOptimized;
 
                 // Save/initialize program options that determine global programm behaviour
                 SaveConfigOnAppClosed();

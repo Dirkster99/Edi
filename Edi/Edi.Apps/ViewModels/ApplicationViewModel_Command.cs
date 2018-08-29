@@ -297,7 +297,7 @@
 					if (!OnSave(ActiveDocument, true)) return;
 					var mruList = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
 					mruList.UpdateEntry(ActiveDocument.FilePath);
-					_mSettingsManager.SessionData.LastActiveFile = ActiveDocument.FilePath;
+					_SettingsManager.SessionData.LastActiveFile = ActiveDocument.FilePath;
 				}
 				catch (Exception exp)
 				{
@@ -413,8 +413,8 @@
 				try
 				{
 					ActiveEdiDocument?.ExportToHtml(ActiveDocument.FileName + ".html",
-						_mSettingsManager.SettingData.TextToHTML_ShowLineNumbers,
-						_mSettingsManager.SettingData.TextToHTML_AlternateLineBackground);
+						_SettingsManager.SettingData.TextToHTML_ShowLineNumbers,
+						_SettingsManager.SettingData.TextToHTML_AlternateLineBackground);
 				}
 				catch (Exception exp)
 				{
@@ -611,7 +611,7 @@
                 if (newThemeName == null)
                     return;
 
-                oldTheme = _mSettingsManager.SettingData.CurrentTheme;
+                oldTheme = _SettingsManager.SettingData.CurrentTheme;
 
                 // The Work to perform on another thread
                 ThreadStart start = delegate
@@ -625,7 +625,7 @@
                             if (ApplicationThemes.SetSelectedTheme(newThemeName) == false)
                                 return;
 
-                            _mSettingsManager.SettingData.CurrentTheme = newThemeName;
+                            _SettingsManager.SettingData.CurrentTheme = newThemeName;
                             ResetTheme();                        // Initialize theme in process
                         }
                         catch (Exception exp)
@@ -646,7 +646,7 @@
             }
             catch (Exception exp)
             {
-                _mSettingsManager.SettingData.CurrentTheme = oldTheme;
+                _SettingsManager.SettingData.CurrentTheme = oldTheme;
 
                 Logger.Error(exp.Message, exp);
                 _msgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
