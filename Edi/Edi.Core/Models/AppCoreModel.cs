@@ -34,17 +34,6 @@
 		public string IssueTrackerLink => AppHelpers.IssueTrackerLink;
 
 		/// <summary>
-		/// Gets the file name of the layout file that is useful for AvalonDock.
-		/// </summary>
-		public string LayoutFileName => "Layout.config";
-
-		/// <summary>
-		/// Get a path to the directory where the application
-		/// can persist/load user data on session exit and re-start.
-		/// </summary>
-		public string DirAppData => AppHelpers.DirAppData;
-
-		/// <summary>
 		/// Get a path to the directory where the user store his documents
 		/// </summary>
 		public string MyDocumentsUserDir => AppHelpers.MyDocumentsUserDir;
@@ -79,7 +68,6 @@
 		/// Get path and file name to application specific settings file
 		/// </summary>
 		public string DirFileAppSettingsData => AppHelpers.DirFileAppSettingsData;
-
 		#endregion properties
 
 		#region methods
@@ -91,8 +79,10 @@
 		{
 			try
 			{
-				if (Directory.Exists(DirAppData) == false)
-					Directory.CreateDirectory(DirAppData);
+                var path = AppHelpers.DirAppData;
+
+                if (Directory.Exists(path) == false)
+					Directory.CreateDirectory(path);
 			}
 			catch (Exception exp)
 			{

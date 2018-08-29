@@ -214,7 +214,7 @@ namespace Files.ViewModels.FileExplorer
 		/// <param name="settingsManager"></param>
 		/// <param name="vm"></param>
 		public static void SaveSettings(ISettingsManager settingsManager,
-										IExplorer vm)
+								        IExplorer vm)
 		{
 			var settings = vm.GetExplorerSettings(settingsManager.SettingData.ExplorerSettings);
 
@@ -228,28 +228,7 @@ namespace Files.ViewModels.FileExplorer
 			else
 				settingsManager.SessionData.LastActiveExplorer = vm.GetExplorerSettings(null).UserProfile;
 		}
-/***
-		/// <summary>
-		/// Load Explorer (Tool Window) seetings from persistence.
-		/// </summary>
-		/// <param name="settingsManager"></param>
-		/// <param name="vm"></param>
-		public static void LoadSettings(ISettingsManager settingsManager,
-										FileExplorerViewModel vm)
-		{
-			ExplorerSettingsModel settings = null;
 
-			settings = settingsManager.SettingData.ExplorerSettings;
-
-			if (settings == null)
-				settings = new ExplorerSettingsModel();
-
-			settings.SetUserProfile(settingsManager.SessionData.LastActiveExplorer);
-
-			// (re-)configure previous explorer settings and (re-)activate current location
-			vm.ConfigureExplorerSettings(settings);
-		}
-***/
 		#region IRegisterableToolWindow
 		/// <summary>
 		/// Set the document parent handling object to deactivation and activation

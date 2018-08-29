@@ -9,11 +9,47 @@
              d:DesignHeight="300" d:DesignWidth="300">
   <Grid>
     <StackPanel Orientation="Vertical" >
-      <TextBlock Text="{Binding FileName}" Margin="3" ToolTip="{x:Static cmdLabel:Strings.STR_FILESTATES_FileName}"/>
-      <TextBlock Text="{Binding FilePath}" Margin="3" ToolTip="{x:Static cmdLabel:Strings.STR_FILESTATES_FilePath}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-      <TextBlock Text="{Binding FileSize}" Margin="3" ToolTip="{x:Static cmdLabel:Strings.STR_FILESTATES_FileSize}"/>
-      <TextBlock Text="{Binding LastModified}" Margin="3" ToolTip="{x:Static cmdLabel:Strings.STR_FILESTATES_LASTMODIFICATION}"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0"
+                       Content="{x:Static cmdLabel:Strings.STR_FILESTATES_FileName}"
+                       HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" Grid.Row="0"
+                           Text="{Binding FileName}" Margin="3"
+                           ToolTip="{x:Static cmdLabel:Strings.STR_FILESTATES_FileName}"/>
+
+                <Label Grid.Column="0" Grid.Row="1"
+                       Content="{x:Static cmdLabel:Strings.STR_FILESTATES_FilePath}"
+                       HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" Grid.Row="1"
+                           Text="{Binding FilePath}"
+                           Margin="3" ToolTip="{x:Static cmdLabel:Strings.STR_FILESTATES_FilePath}"/>
+
+                <Label Grid.Column="0" Grid.Row="2"
+                       Content="{x:Static cmdLabel:Strings.STR_FILESTATES_FileSize}"
+                       HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" Grid.Row="2"
+                           Text="{Binding FileSize}" Margin="3"
+                           ToolTip="{x:Static cmdLabel:Strings.STR_FILESTATES_FileSize}"/>
+
+                <Label Grid.Column="0" Grid.Row="3"
+                       Content="Last Update"
+                       HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" Grid.Row="3"
+                           Text="{Binding LastModified}" Margin="3"
+                           ToolTip="{x:Static cmdLabel:Strings.STR_FILESTATES_LASTMODIFICATION}"/>
+            </Grid>
     </StackPanel>
   </Grid>
 </UserControl>

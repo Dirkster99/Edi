@@ -10,14 +10,6 @@
 		#region properties
 		string IssueTrackerLink { get; }
 
-		string LayoutFileName { get; }
-
-		/// <summary>
-		/// Get a path to the directory where the application
-		/// can persist/load user data on session exit and re-start.
-		/// </summary>
-		string DirAppData { get; }
-
 		/// <summary>
 		/// Get a path to the directory where the user store his documents
 		/// </summary>

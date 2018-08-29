@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using System.Xml;
     using System.Xml.Serialization;
+    using Edi.Core.Models;
     using Edi.Settings.Interfaces;
     using Edi.Settings.ProgramSettings;
     using Edi.Settings.UserProfile;
@@ -74,9 +75,18 @@
 			}
 		}
 
-		public string LayoutFileName { get; set; }
+        /// <summary>
+        /// Gets a string that denotes an internet link to
+        /// a web site where users can enter their issues.
+        /// </summary>
+        public string LayoutFileName { get { return "Layout.config"; } }
 
-		public string AppDir { get; set; }
+
+        /// <summary>
+        /// Get a path to the directory where the application
+        /// can persist/load user data on session exit and re-start.
+        /// </summary>
+        public string AppDir { get { return AppHelpers.DirAppData; } }
 		#endregion properties
 
 		#region methods

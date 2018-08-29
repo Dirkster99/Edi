@@ -1,6 +1,5 @@
 ﻿namespace Edi.Settings.Interfaces
 {
-    using Edi.Settings.UserProfile;
     using Edi.Themes.Interfaces;
     using System.Threading.Tasks;
 
@@ -13,9 +12,17 @@
 
 		IProfile SessionData { get; }
 
-		string LayoutFileName { get; set; }
+        /// <summary>
+        /// Gets a string that denotes an internet link to
+        /// a web site where users can enter their issues.
+        /// </summary>
+        string LayoutFileName { get; }
 
-		string AppDir { get; set; }
+        /// <summary>
+        /// Get a path to the directory where the application
+        /// can persist/load user data on session exit and re-start.
+        /// </summary>
+        string AppDir { get; }
 
 		#region methods
 		/// <summary>

@@ -10,14 +10,17 @@ namespace Files.ViewModels.FileStats
 	/// This class can be used to present file based information, such as,
 	/// Size, Path etc to the user.
 	/// </summary>
-	public class FileStatsViewModel : Edi.Core.ViewModels.ToolViewModel, IRegisterableToolWindow
+	internal class FileStatsViewModel : Edi.Core.ViewModels.ToolViewModel, IRegisterableToolWindow
 	{
 		#region fields
 		public const string ToolContentId = "<FileStatsTool>";
 		public const string ToolName = "File Info";
-		private string mFilePathName;
+		private string _FilePathName;
+        private DateTime _lastModified;
+        private string _FilePath;
+        private long _FileSize;
 
-		private IDocumentParent mParent = null;
+        private IDocumentParent mParent = null;
 		#endregion fields
 
 		#region constructor
@@ -30,34 +33,36 @@ namespace Files.ViewModels.FileStats
 			ContentId = FileStatsViewModel.ToolContentId;
 
 			this.OnActiveDocumentChanged(null, null);
-		}
+
+            _FilePath = string.Empty;
+        }
 		#endregion constructor
 
 		#region properties
-		#region FileSize
-
-		private long _fileSize;
+        /// <summary>
+        /// Gets the size of the file in bytes.
+        /// </summary>
 		public long FileSize
 		{
-			get { return _fileSize; }
-			set
+			get { return _FileSize; }
+			private set
 			{
-				if (_fileSize != value)
+				if (_FileSize != value)
 				{
-					_fileSize = value;
+					_FileSize = value;
 					RaisePropertyChanged("FileSize");
 				}
 			}
 		}
 
-		#endregion
-
-		#region LastModified
-		private DateTime _lastModified;
-		public DateTime LastModified
+        /// <summary>
+        /// Gets the date and time of the time when the displayed
+        /// file was modified on storage space.
+        /// </summary>
+        public DateTime LastModified
 		{
 			get { return _lastModified; }
-			set
+			private set
 			{
 				if (_lastModified != value)
 				{
@@ -66,58 +71,59 @@ namespace Files.ViewModels.FileStats
 				}
 			}
 		}
-		#endregion
 
-		#region FileName
-		public string FileName
-		{
-			get
-			{
-				if (string.IsNullOrEmpty(this.mFilePathName) == true)
-					return string.Empty;
+        /// <summary>
+        /// Gets the file name for the currently displayed file infornation.
+        /// </summary>
+        public string FileName
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_FilePathName) == true)
+                    return string.Empty;
 
-				try
-				{
-					return System.IO.Path.GetFileName(mFilePathName);
-				}
-				catch (Exception)
-				{
-					return string.Empty;
-				}
-			}
-		}
-		#endregion
+                try
+                {
+                    return System.IO.Path.GetFileName(_FilePathName);
+                }
+                catch (Exception)
+                {
+                    return string.Empty;
+                }
+            }
+        }
 
-		#region FilePath
-		public string FilePath
-		{
-			get
-			{
-				if (string.IsNullOrEmpty(this.mFilePathName) == true)
-					return string.Empty;
+        /// <summary>
+        /// Gets the full directory for the currently displayed file infornation.
+        /// </summary>
+        public string FilePath
+        {
+            get { return _FilePath; }
+            private set
+            {
+                if (_FilePath != value)
+                {
+                    _FilePath = value;
+                    RaisePropertyChanged(() => FilePath);
+                }
+            }
+        }
 
-				try
-				{
-					return System.IO.Path.GetDirectoryName(mFilePathName);
-				}
-				catch (Exception)
-				{
-					return string.Empty;
-				}
-			}
-		}
-		#endregion
-
-		#region ToolWindow Icon
-		public override Uri IconSource
+        /// <summary>
+        /// Gets the Uri of the Icon Resource for this tool window.
+        /// </summary>
+        public override Uri IconSource
 		{
 			get
 			{
 				return new Uri("pack://application:,,,/Edi.Themes;component/Images/property-blue.png", UriKind.RelativeOrAbsolute);
 			}
 		}
-		#endregion ToolWindow Icon
 
+        /// <summary>
+        /// Gets the preferred location of the tool window
+        /// (for positioning it for the very first time).
+        /// </summary>
 		public override PaneLocation PreferredLocation
 		{
 			get { return PaneLocation.Right; }
@@ -162,9 +168,14 @@ namespace Files.ViewModels.FileStats
 			base.SetToolWindowVisibility(isVisible);
 		}
 
+        /// <summary>
+        /// Method executes when (user in) AvalonDock has (loaded) selected another document.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 		private void OnActiveDocumentChanged(object sender, DocumentChangedEventArgs e)
 		{
-			this.mFilePathName = string.Empty;
+			_FilePathName = string.Empty;
 			FileSize = 0;
 			LastModified = DateTime.MinValue;
 
@@ -172,10 +183,9 @@ namespace Files.ViewModels.FileStats
 			{
 				if (e.ActiveDocument != null)
 				{
-
-                    if (e.ActiveDocument is FileBaseViewModel)
+                    if (e.ActiveDocument is IFileBaseViewModel)
                     {
-                        FileBaseViewModel f = e.ActiveDocument as FileBaseViewModel;
+                        IFileBaseViewModel f = e.ActiveDocument as IFileBaseViewModel;
 
 
                         if (f.IsFilePathReal == false) // Start page or somethin...
@@ -187,13 +197,14 @@ namespace Files.ViewModels.FileStats
                             {
                                 var fi = new FileInfo(f.FilePath);
 
-                                this.mFilePathName = f.FilePath;
+                                _FilePathName = f.FilePath;
 
                                 this.RaisePropertyChanged(() => this.FileName);
-                                this.RaisePropertyChanged(() => this.FilePath);
 
                                 FileSize = fi.Length;
                                 LastModified = fi.LastWriteTime;
+
+                                FilePath = fi.DirectoryName;
                             }
                         }
                         catch { }

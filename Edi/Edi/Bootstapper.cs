@@ -1,13 +1,11 @@
-using Edi.Apps.Interfaces;
-
 namespace Edi
 {
+    using Edi.Apps.Interfaces;
     using Apps.ViewModels;
     using Apps.Views.Shell;
     using Core;
     using Core.Interfaces;
     using Documents.Module;
-    using Settings;
     using Settings.Interfaces;
     using Themes.Interfaces;
     using Files.Module;
@@ -43,6 +41,7 @@ namespace Edi
         private readonly ISettingsManager _ProgramSettingsManager;
         #endregion fields
 
+        #region constructors
         /// <summary>
         /// Initializes static members of the <see cref="Bootstapper"/> class.
         /// This constructor will be called before MEF begins to take over.
@@ -52,7 +51,6 @@ namespace Edi
             System.IO.Directory.CreateDirectory(@".\Plugins");
         }
 
-        #region constructors
         /// <summary>
         /// Class constructor
         /// </summary>
@@ -164,7 +162,6 @@ namespace Edi
             AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(Bootstapper).Assembly));
 
             ////this.AggregateCatalog.Catalogs.Add(new PluginModuleCatalog(@".\Plugins"));
-
         }
 
         protected override DependencyObject CreateShell()
@@ -172,10 +169,6 @@ namespace Edi
             try
             {
                 var appCore = Container.GetExportedValue<IAppCoreModel>();
-
-                // Setup localtion of config files
-                _ProgramSettingsManager.AppDir = appCore.DirAppData;
-                _ProgramSettingsManager.LayoutFileName = appCore.LayoutFileName;
 
                 var avLayout = Container.GetExportedValue<IAvalonDockLayoutViewModel>();
                 _AppVM = Container.GetExportedValue<IApplicationViewModel>();
