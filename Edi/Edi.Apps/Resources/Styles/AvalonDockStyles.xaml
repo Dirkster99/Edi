@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     
                     xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
+                    xmlns:conv="clr-namespace:Edi.Apps.Converters"
                     >
 
     <!-- Style for tool windows displayed in AvalonDock -->
@@ -26,7 +27,10 @@
 
     <!-- TextEditor MiniUML File Style -->
     <Style TargetType="{x:Type avalonDock:LayoutItem}" x:Key="FileStyle">
-        <Setter Property="Title" Value="{Binding Model.Title}"/>
+        <Style.Resources>
+            <conv:TruncateMiddleConverter x:Key="TruncateMiddleConverter"/>
+        </Style.Resources>
+        <Setter Property="Title" Value="{Binding Model.Title, Mode=OneWay, Converter={StaticResource TruncateMiddleConverter}}" />
         <Setter Property="ToolTip" Value="{Binding Model.FilePath}"/>
         <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}"/>
         <Setter Property="IconSource" Value="{Binding Model.IconSource}"/>

@@ -133,6 +133,7 @@
     <Compile Include="Behaviors\DropFileCommand.cs" />
     <Compile Include="Behaviors\GetADLayoutOnWindowClosedCommand.cs" />
     <Compile Include="Converters\ActiveDocumentConverter.cs" />
+    <Compile Include="Converters\TruncateMiddleConverter.cs" />
     <Compile Include="Enums\CloseDocOnError.cs" />
     <Compile Include="Enums\ToggleEditorOption.cs" />
     <Compile Include="Enums\TypeOfDocument.cs" />
@@ -152,7 +153,7 @@
     <Compile Include="Views\AvalonDockView.xaml.cs">
       <DependentUpon>AvalonDockView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\BindingProxy .cs" />
+    <Compile Include="Views\BindingProxy.cs" />
     <Compile Include="Views\Shell\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
