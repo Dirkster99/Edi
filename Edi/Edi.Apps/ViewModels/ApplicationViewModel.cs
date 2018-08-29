@@ -165,7 +165,7 @@ namespace Edi.Apps.ViewModels
         /// <summary>
         /// Gets a property to a <seealso cref="ICommand"/> that executes
         /// when the user activates the mainwindow (eg: does ALT+TAB between applications).
-        /// This event is used to check whether a file has chnaged in the meantime or not.
+        /// This event is used to check whether a file has changed in the meantime or not.
         /// </summary>
         public ICommand MainWindowActivated
         {
@@ -581,6 +581,15 @@ namespace Edi.Apps.ViewModels
 
                     foreach (string fileName in dlg.FileNames)
                     {
+                        // Verify whether file is already open in editor, and if so, show it
+                        IFileBaseViewModel fileViewModel = Documents.FirstOrDefault(fm => fm.FilePath == fileName);
+
+                        if (fileViewModel != null) // File is already open so show it to the user
+                        {
+                            ActiveDocument = fileViewModel;
+                            continue;
+                        }
+
                         var dm = new DocumentModel();
                         dm.SetFileNamePath(fileName, true);
 
