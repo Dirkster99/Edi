@@ -16,13 +16,13 @@
     /// the program state of the last user session or to implement the default
     /// application state when starting the application for the very first time.
     /// </summary>
-    public class SettingsManager : ISettingsManager
+    internal class SettingsManagerImpl : ISettingsManager
 	{
 		#region fields
 		protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 		private IOptions _SettingData = null;
-		private Profile mSessionData = null;
+		private IProfile _SessionData = null;
 
 		private readonly IThemesManager _ThemesManager = null;
 		#endregion fields
@@ -31,12 +31,12 @@
 		/// <summary>
 		/// Class constructor
 		/// </summary>
-		public SettingsManager(IThemesManager themesManager)
+		public SettingsManagerImpl(IThemesManager themesManager)
 		{
 			_ThemesManager = themesManager;
 
-			SettingData = new Options(_ThemesManager);
-			SessionData = new Profile();
+			_SettingData = new Options(_ThemesManager);
+			_SessionData = new Profile();
 		}
 		#endregion constructor
 
@@ -46,7 +46,7 @@
 		/// Program options are user specific settings that are rarelly
 		/// changed and can be customized per user.
 		/// </summary>
-		public IOptions SettingData
+		IOptions ISettingsManager.SettingData
 		{
 			get
 			{
@@ -54,12 +54,6 @@
 					_SettingData = new Options(_ThemesManager);
 
 				return _SettingData;
-			}
-
-			private set
-			{
-				if (_SettingData != value)
-					_SettingData = value;
 			}
 		}
 
@@ -69,20 +63,14 @@
 		/// and shuts it down. Typically, window position, recent files list,
 		/// and such things are stored in here.
 		/// </summary>
-		public Profile SessionData
+		IProfile ISettingsManager.SessionData
 		{
 			get
 			{
-				if (this.mSessionData == null)
-					this.mSessionData = new Profile();
+				if (_SessionData == null)
+					_SessionData = new Profile();
 
-				return this.mSessionData;
-			}
-
-			private set
-			{
-				if (this.mSessionData != value)
-					this.mSessionData = value;
+				return _SessionData;
 			}
 		}
 
@@ -96,8 +84,8 @@
 		/// Determine whether program options are valid and corrext
 		/// settings if they appear to be invalid on current system
 		/// </summary>
-		public void CheckSettingsOnLoad(double SystemParameters_VirtualScreenLeft,
-									    double SystemParameters_VirtualScreenTop)
+		void ISettingsManager.CheckSettingsOnLoad(double SystemParameters_VirtualScreenLeft,
+									             double SystemParameters_VirtualScreenTop)
 		{
 			//// Dirkster: Not sure whether this is working correctly yet...
 			//// this.SessionData.CheckSettingsOnLoad(SystemParameters_VirtualScreenLeft,
@@ -112,90 +100,12 @@
         /// <param name="settingsFileName"></param>
         /// <param name="themesManager"></param>
         /// <returns></returns>
-        public Task<IOptions> LoadOptionsAsync(string settingsFileName,
-                                               IThemesManager themesManager,
-                                               IOptions programSettings = null)
+        Task<IOptions> ISettingsManager.LoadOptionsAsync(string settingsFileName,
+                                                         IThemesManager themesManager,
+                                                         IOptions programSettings = null)
         {
             return Task.Run(() => { return LoadOptions(settingsFileName, themesManager, programSettings); });
         }
-
-        /// <summary>
-        /// Load program options from persistence.
-        /// See <seealso cref="SaveOptions"/> to save program options on program end.
-        /// </summary>
-        /// <param name="settingsFileName"></param>
-        /// <param name="themesManager"></param>
-        /// <returns></returns>
-        private IOptions LoadOptions(string settingsFileName,
-								 IThemesManager themesManager,
-                                 IOptions programSettings = null)
-		{
-			IOptions loadedModel = null;
-
-			if (programSettings != null)
-				loadedModel = programSettings;
-			else                                     // Get a fresh copy from persistence
-				loadedModel = LoadOptionsImpl(settingsFileName, themesManager);
-
-            // Data has just been loaded from persistence (or default) so its not dirty for sure
-            loadedModel.SetDirtyFlag(false);
-			SettingData = loadedModel;
-
-            return loadedModel;
-        }
-
-        /// <summary>
-        /// Load program options from persistence.
-        /// See <seealso cref="SaveOptions"/> to save program options on program end.
-        /// </summary>
-        /// <param name="settingsFileName"></param>
-        /// <param name="themesManager"></param>
-        /// <returns></returns>
-        private IOptions LoadOptionsImpl(string settingsFileName
-                                       , IThemesManager themesManager)
-		{
-			Options loadedModel = null;
-
-			try
-			{
-				if (System.IO.File.Exists(settingsFileName))
-				{
-					// Create a new file stream for reading the XML file
-					using (FileStream readFileStream = new System.IO.FileStream(settingsFileName, FileMode.Open, FileAccess.Read, FileShare.Read))
-					{
-						try
-						{
-							// Create a new XmlSerializer instance with the type of the test class
-							XmlSerializer serializerObj = new XmlSerializer(typeof(Options));
-
-							// Load the object saved above by using the Deserialize function
-							loadedModel = (Options)serializerObj.Deserialize(readFileStream);
-						}
-						catch (Exception e)
-						{
-							logger.Error(e);
-						}
-
-						// Cleanup
-						readFileStream.Close();
-					}
-				}
-			}
-			catch (Exception exp)
-			{
-				logger.Error(exp);
-			}
-			finally
-			{
-				// Just get the defaults if serilization wasn't working here...
-				if (loadedModel == null)
-					loadedModel = new Options(themesManager);
-			}
-
-			loadedModel.SetDirtyFlag(false);  // Data has just been loaded from persistence (or default) so its not dirty for sure
-
-			return loadedModel;
-		}
 
         /// <summary>
         /// Save program options into persistence.
@@ -204,7 +114,7 @@
         /// <param name="settingsFileName"></param>
         /// <param name="optionsModel"></param>
         /// <returns></returns>
-        public bool SaveOptions(string settingsFileName, IOptions optionsModel)
+        bool ISettingsManager.SaveOptions(string settingsFileName, IOptions optionsModel)
 		{
 			try
 			{
@@ -225,10 +135,9 @@
 					serializerObj.Serialize(xw, optionsModel);
 
 					optionsModel.SetDirtyFlag(false);
-
-
 				}
-					return true;
+
+				return true;
 			}
 			catch
 			{
@@ -244,7 +153,7 @@
 		/// </summary>
 		/// <param name="sessionDataFileName"></param>
 		/// <returns></returns>
-		public void LoadSessionData(string sessionDataFileName)
+		void ISettingsManager.LoadSessionData(string sessionDataFileName)
 		{
 			Profile profileDataModel = null;
 
@@ -273,7 +182,7 @@
 					}
 				}
 
-				this.SessionData = profileDataModel;
+				_SessionData = profileDataModel;
 			}
 			catch (Exception exp)
 			{
@@ -293,7 +202,7 @@
         /// <param name="sessionDataFileName"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool SaveSessionData(string sessionDataFileName, Profile model)
+        bool ISettingsManager.SaveSessionData(string sessionDataFileName, IProfile model)
 		{
 			try
 			{
@@ -323,7 +232,82 @@
 				throw;
 			}
 		}
-		#endregion Load Save UserSessionData
-		#endregion methods
-	}
+        #endregion Load Save UserSessionData
+
+        #region Load Options methods
+        /// <summary>
+        /// Load program options from persistence.
+        /// See <seealso cref="SaveOptions"/> to save program options on program end.
+        /// </summary>
+        /// <param name="settingsFileName"></param>
+        /// <param name="themesManager"></param>
+        /// <returns></returns>
+        private IOptions LoadOptions(string settingsFileName,
+                                     IThemesManager themesManager,
+                                     IOptions programSettings = null)
+        {
+            if (programSettings != null)
+                _SettingData = programSettings;
+            else                                     // Get a fresh copy from persistence
+                _SettingData = LoadOptionsImpl(settingsFileName, themesManager);
+
+            return _SettingData;
+        }
+
+        /// <summary>
+        /// Load program options from persistence.
+        /// See <seealso cref="SaveOptions"/> to save program options on program end.
+        /// </summary>
+        /// <param name="settingsFileName"></param>
+        /// <param name="themesManager"></param>
+        /// <returns></returns>
+        private IOptions LoadOptionsImpl(string settingsFileName
+                                       , IThemesManager themesManager)
+        {
+            Options loadedModel = null;
+
+            try
+            {
+                if (System.IO.File.Exists(settingsFileName))
+                {
+                    // Create a new file stream for reading the XML file
+                    using (FileStream readFileStream = new System.IO.FileStream(settingsFileName, FileMode.Open, FileAccess.Read, FileShare.Read))
+                    {
+                        try
+                        {
+                            // Create a new XmlSerializer instance with the type of the test class
+                            XmlSerializer serializerObj = new XmlSerializer(typeof(Options));
+
+                            // Load the object saved above by using the Deserialize function
+                            loadedModel = (Options)serializerObj.Deserialize(readFileStream);
+                        }
+                        catch (Exception e)
+                        {
+                            logger.Error(e);
+                        }
+
+                        // Cleanup
+                        readFileStream.Close();
+                    }
+                }
+            }
+            catch (Exception exp)
+            {
+                logger.Error(exp);
+            }
+            finally
+            {
+                // Just get the defaults if serilization wasn't working here...
+                if (loadedModel == null)
+                    loadedModel = new Options(themesManager);
+            }
+
+            // Data has just been loaded from persistence (or default) so its not dirty for sure
+            loadedModel.SetDirtyFlag(false);
+
+            return loadedModel;
+        }
+        #endregion Load Options methods
+        #endregion methods
+    }
 }

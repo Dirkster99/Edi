@@ -1,6 +1,7 @@
 ﻿namespace Edi.Settings.UserProfile
 {
-	using System;
+    using Edi.Settings.Interfaces;
+    using System;
 	using System.Xml.Serialization;
 
 	/// <summary>
@@ -13,27 +14,14 @@
 	/// </summary>
 	[Serializable]
 	[XmlRoot(ElementName = "ControlPos", IsNullable = true)]
-	public class ViewPosSizeModel
-	{
+	public class ViewPosSizeModel : IViewPosSizeModel
+    {
 		#region fields
-		private double mX, mY, mWidth, mHeight;
-		private bool mIsMaximized;
+		private double _X, _Y, _Width, _Height;
+		private bool _IsMaximized;
 		#endregion fields
 
 		#region constructors
-		/// <summary>
-		/// Standard class constructor
-		/// </summary>
-		public ViewPosSizeModel()
-		{
-			this.mX = 0;
-			this.mY = 0;
-			this.mWidth = 0;
-			this.mHeight = 0;
-			this.mIsMaximized = false;
-			this.DefaultConstruct = true;
-		}
-
 		/// <summary>
 		/// Class cosntructor from coordinates of control
 		/// </summary>
@@ -41,125 +29,138 @@
 		/// <param name="y"></param>
 		/// <param name="width"></param>
 		/// <param name="height"></param>
-		public ViewPosSizeModel(double x,
-														double y,
-														double width,
-														double height,
-														bool isMaximized = false)
+		internal ViewPosSizeModel(double x,
+			                      double y,
+			                      double width,
+			                      double height,
+			                      bool isMaximized = false)
 		{
-			this.mX = x;
-			this.mY = y;
-			this.mWidth = width;
-			this.mHeight = height;
-			this.mIsMaximized = isMaximized;
-			this.DefaultConstruct = false;
+			_X = x;
+			_Y = y;
+			_Width = width;
+			_Height = height;
+			_IsMaximized = isMaximized;
+			DefaultConstruct = false;
 		}
-		#endregion constructors
 
-		#region properties
-		/// <summary>
-		/// Get whetehr this object was created through the default constructor or not
-		/// (default data values can be easily overwritten by actual data).
-		/// </summary>
-		[XmlIgnore]
+        /// <summary>
+        /// Standard class constructor
+        /// </summary>
+        public ViewPosSizeModel()
+        {
+            _X = 0;
+            _Y = 0;
+            _Width = 0;
+            _Height = 0;
+            _IsMaximized = false;
+            this.DefaultConstruct = true;
+        }
+        #endregion constructors
+
+        #region properties
+        /// <summary>
+        /// Gets whether this object was created through the default constructor or not
+        /// (default data values can be easily overwritten by actual data).
+        /// </summary>
+        [XmlIgnore]
 		public bool DefaultConstruct { get; private set; }
 
-		/// <summary>
-		/// Get/set X coordinate of control
-		/// </summary>
-		[XmlAttribute(AttributeName = "X")]
-		public double X
-		{
-			get
-			{
-				return this.mX;
-			}
+        /// <summary>
+        /// Get/set X coordinate of control
+        /// </summary>
+        [XmlAttribute(AttributeName = "X")]
+        public double X
+        {
+            get
+            {
+                return _X;
+            }
 
-			set
-			{
-				if (this.mX != value)
-				{
-					this.mX = value;
-				}
-			}
-		}
+            set
+            {
+                if (_X != value)
+                {
+                    _X = value;
+                }
+            }
+        }
 
-		/// <summary>
-		/// Get/set Y coordinate of control
-		/// </summary>
-		[XmlAttribute(AttributeName = "Y")]
-		public double Y
-		{
-			get
-			{
-				return this.mY;
-			}
+        /// <summary>
+        /// Get/set Y coordinate of control
+        /// </summary>
+        [XmlAttribute(AttributeName = "Y")]
+        public double Y
+        {
+            get
+            {
+                return _Y;
+            }
 
-			set
-			{
-				if (this.mY != value)
-				{
-					this.mY = value;
-				}
-			}
-		}
+            set
+            {
+                if (_Y != value)
+                {
+                    _Y = value;
+                }
+            }
+        }
 
-		/// <summary>
-		/// Get/set width of control
-		/// </summary>
-		[XmlAttribute(AttributeName = "Width")]
-		public double Width
-		{
-			get
-			{
-				return this.mWidth;
-			}
+        /// <summary>
+        /// Get/set width of control
+        /// </summary>
+        [XmlAttribute(AttributeName = "Width")]
+        public double Width
+        {
+            get
+            {
+                return _Width;
+            }
 
-			set
-			{
-				if (this.mWidth != value)
-				{
-					this.mWidth = value;
-				}
-			}
-		}
+            set
+            {
+                if (_Width != value)
+                {
+                    _Width = value;
+                }
+            }
+        }
 
-		/// <summary>
-		/// Get/set height of control
-		/// </summary>
-		[XmlAttribute(AttributeName = "Height")]
-		public double Height
-		{
-			get
-			{
-				return this.mHeight;
-			}
+        /// <summary>
+        /// Get/set height of control
+        /// </summary>
+        [XmlAttribute(AttributeName = "Height")]
+        public double Height
+        {
+            get
+            {
+                return _Height;
+            }
 
-			set
-			{
-				if (this.mHeight != value)
-				{
-					this.mHeight = value;
-				}
-			}
-		}
+            set
+            {
+                if (_Height != value)
+                {
+                    _Height = value;
+                }
+            }
+        }
 
-		/// <summary>
-		/// Get/set whether view is amximized or not
-		/// </summary>
-		[XmlAttribute(AttributeName = "IsMaximized")]
+        /// <summary>
+        /// Get/set whether view is amximized or not
+        /// </summary>
+        [XmlAttribute(AttributeName = "IsMaximized")]
 		public bool IsMaximized
 		{
 			get
 			{
-				return this.mIsMaximized;
+				return _IsMaximized;
 			}
 
 			set
 			{
-				if (this.mIsMaximized != value)
+				if (_IsMaximized != value)
 				{
-					this.mIsMaximized = value;
+					_IsMaximized = value;
 				}
 			}
 		}

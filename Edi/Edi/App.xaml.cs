@@ -130,7 +130,7 @@ namespace Edi
 
             IOptions options = null;
             IThemesManager themesManager = Factory.CreateThemeManager();
-            ISettingsManager settingsManager = new SettingsManager(themesManager);
+            ISettingsManager settingsManager = SettingsFactory.CreateSettingsManager(themesManager);
 
             try
             {

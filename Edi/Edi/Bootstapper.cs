@@ -7,6 +7,7 @@ namespace Edi
     using Core;
     using Core.Interfaces;
     using Documents.Module;
+    using Settings;
     using Settings.Interfaces;
     using Themes.Interfaces;
     using Files.Module;

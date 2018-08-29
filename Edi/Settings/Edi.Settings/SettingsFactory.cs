@@ -2,6 +2,7 @@
 {
     using Edi.Settings.Interfaces;
     using Edi.Settings.ProgramSettings;
+    using Edi.Settings.UserProfile;
     using Edi.Themes.Interfaces;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -16,24 +17,41 @@
         }
 
         /// <summary>
+        /// Class cosntructor from coordinates of control
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="isMaximized"></param>
+        public static ViewPosSizeModel GetViewPosition(double x,
+                                                       double y,
+                                                       double width,
+                                                       double height,
+                                                       bool isMaximized = false)
+        {
+            return new ViewPosSizeModel(x, y, width, height, isMaximized);
+        }
+
+        /// <summary>
         /// Get a list of all supported languages in Edi.
         /// </summary>
         /// <returns></returns>
-        public static IEnumerable<LanguageCollection> GetSupportedLanguages()
+        public static IEnumerable<ILang> GetSupportedLanguages()
         {
-            List<LanguageCollection> ret = new List<LanguageCollection>();
+            List<Lang> ret = new List<Lang>();
 
-            ret.Add(new LanguageCollection() { Language = "de", Locale = "DE", Name = "Deutsch (German)" });
-            ret.Add(new LanguageCollection() { Language = "en", Locale = "US", Name = "English (English)" });
-            ret.Add(new LanguageCollection() { Language = "es", Locale = "ES", Name = "Español (Spanish)" });
-            ret.Add(new LanguageCollection() { Language = "fr", Locale = "FR", Name = "Français (French)" });
-            ret.Add(new LanguageCollection() { Language = "it", Locale = "IT", Name = "Italiano (Italian)" });
-            ret.Add(new LanguageCollection() { Language = "ru", Locale = "RU", Name = "Русский (Russian)" });
-            ret.Add(new LanguageCollection() { Language = "id", Locale = "ID", Name = "Bahasa Indonesia(Indonesian)" });
-            ret.Add(new LanguageCollection() { Language = "ja", Locale = "JP", Name = "日本語 (Japanese)" });
-            ret.Add(new LanguageCollection() { Language = "zh-Hans", Locale = "", Name = "简体中文 (Simplified)" });
-            ret.Add(new LanguageCollection() { Language = "pt", Locale = "PT", Name = "Português (Portuguese)" });
-            ret.Add(new LanguageCollection() { Language = "hi", Locale = "IN", Name = "हिंदी (Hindi)" });
+            ret.Add(new Lang("de", "DE", "Deutsch (German)"));
+            ret.Add(new Lang("en", "US", "English (English)" ));
+            ret.Add(new Lang("es", "ES", "Español (Spanish)" ));
+            ret.Add(new Lang("fr", "FR", "Français (French)" ));
+            ret.Add(new Lang("it", "IT", "Italiano (Italian)" ));
+            ret.Add(new Lang("ru", "RU", "Русский (Russian)" ));
+            ret.Add(new Lang("id", "ID", "Bahasa Indonesia(Indonesian)" ));
+            ret.Add(new Lang("ja", "JP", "日本語 (Japanese)" ));
+            ret.Add(new Lang("zh-Hans", "", "简体中文 (Simplified)" ));
+            ret.Add(new Lang("pt", "PT", "Português (Portuguese)" ));
+            ret.Add(new Lang("hi", "IN", "हिंदी (Hindi)" ));
 
             return ret;
         }
@@ -61,9 +79,9 @@
         /// </summary>
         /// <param name="themesManager"></param>
         /// <returns></returns>
-        ISettingsManager CreateSettingsManager(IThemesManager themesManager)
+        public static ISettingsManager CreateSettingsManager(IThemesManager themesManager)
         {
-            return new SettingsManager(themesManager);
+            return new SettingsManagerImpl(themesManager);
         }
     }
 }

@@ -16,18 +16,18 @@
     public class ConfigViewModel : DialogViewModelBase
 	{
 		#region fields
-		private bool mWordWrapText;
-		private bool mReloadOpenFilesOnAppStart;
-		private bool mRunSingleInstance;
+		private bool _WordWrapText;
+		private bool _ReloadOpenFilesOnAppStart;
+		private bool _RunSingleInstance;
 
-		private LanguageCollection mLanguageSelected;
+		private ILang _LanguageSelected;
 
-		private bool mTextToHTML_ShowLineNumbers = true;
-		private bool mTextToHTML_TextToHTML_AlternateLineBackground = true;
+		private bool _TextToHTML_ShowLineNumbers = true;
+		private bool _TextToHTML_TextToHTML_AlternateLineBackground = true;
 
-		private bool mHighlightOnFileNew = true;
-		private string mFileNewDefaultFileName = Edi.Util.Local.Strings.STR_FILE_DEFAULTNAME;
-		private string mFileNewDefaultFileExtension = ".txt";
+		private bool _HighlightOnFileNew = true;
+		private string _FileNewDefaultFileName = Edi.Util.Local.Strings.STR_FILE_DEFAULTNAME;
+		private string _FileNewDefaultFileExtension = ".txt";
 		#endregion fields
 
 		#region constructor
@@ -38,9 +38,9 @@
 			: base()
 		{
 			// Setup default values here - real values are loaded in a specific method of this class (!)
-			this.mWordWrapText = false;
-			this.mReloadOpenFilesOnAppStart = false;
-			this.mRunSingleInstance = true;
+			_WordWrapText = false;
+			_ReloadOpenFilesOnAppStart = false;
+			_RunSingleInstance = true;
 
 			this.WordWrapText = false;
 
@@ -55,7 +55,7 @@
 			this.EditorTextOptions = new TextEditorOptions();
 
 			// Initialize localization settings
-			this.Languages = new List<LanguageCollection>(SettingsFactory.GetSupportedLanguages());
+			Languages = new List<ILang>(SettingsFactory.GetSupportedLanguages());
 
 			// Set default language to make sure app neutral is selected and available for sure
 			// (this is a fallback if all else fails)
@@ -77,14 +77,14 @@
 		{
 			get
 			{
-				return this.mWordWrapText;
+				return _WordWrapText;
 			}
 
 			set
 			{
-				if (this.mWordWrapText != value)
+				if (_WordWrapText != value)
 				{
-					this.mWordWrapText = value;
+					_WordWrapText = value;
 					this.RaisePropertyChanged(() => this.WordWrapText);
 				}
 			}
@@ -103,14 +103,14 @@
 		{
 			get
 			{
-				return this.mReloadOpenFilesOnAppStart;
+				return _ReloadOpenFilesOnAppStart;
 			}
 
 			set
 			{
-				if (this.mReloadOpenFilesOnAppStart != value)
+				if (_ReloadOpenFilesOnAppStart != value)
 				{
-					this.mReloadOpenFilesOnAppStart = value;
+					_ReloadOpenFilesOnAppStart = value;
 					this.RaisePropertyChanged(() => this.ReloadOpenFilesOnAppStart);
 				}
 			}
@@ -123,14 +123,14 @@
 		{
 			get
 			{
-				return this.mRunSingleInstance;
+				return _RunSingleInstance;
 			}
 
 			set
 			{
-				if (this.mRunSingleInstance != value)
+				if (_RunSingleInstance != value)
 				{
-					this.mRunSingleInstance = value;
+					_RunSingleInstance = value;
 					this.RaisePropertyChanged(() => this.RunSingleInstance);
 				}
 			}
@@ -187,23 +187,23 @@
 		/// <summary>
 		/// Get list of GUI languages supported in this application.
 		/// </summary>
-		public List<LanguageCollection> Languages { get; private set; }
+		public List<ILang> Languages { get; private set; }
 
 		/// <summary>
 		/// Get/set language of message box buttons for display in localized form.
 		/// </summary>
-		public LanguageCollection LanguageSelected
+		public ILang LanguageSelected
 		{
 			get
 			{
-				return this.mLanguageSelected;
+				return _LanguageSelected;
 			}
 
 			set
 			{
-				if (this.mLanguageSelected != value)
+				if (_LanguageSelected != value)
 				{
-					this.mLanguageSelected = value;
+					_LanguageSelected = value;
 					this.RaisePropertyChanged(() => this.LanguageSelected);
 				}
 			}
@@ -218,14 +218,14 @@
 		{
 			get
 			{
-				return this.mTextToHTML_ShowLineNumbers;
+				return _TextToHTML_ShowLineNumbers;
 			}
 
 			set
 			{
-				if (this.mTextToHTML_ShowLineNumbers != value)
+				if (_TextToHTML_ShowLineNumbers != value)
 				{
-					this.mTextToHTML_ShowLineNumbers = value;
+					_TextToHTML_ShowLineNumbers = value;
 					this.RaisePropertyChanged(() => this.TextToHTML_ShowLineNumbers);
 				}
 			}
@@ -238,14 +238,14 @@
 		{
 			get
 			{
-				return this.mTextToHTML_TextToHTML_AlternateLineBackground;
+				return _TextToHTML_TextToHTML_AlternateLineBackground;
 			}
 
 			set
 			{
-				if (this.mTextToHTML_TextToHTML_AlternateLineBackground != value)
+				if (_TextToHTML_TextToHTML_AlternateLineBackground != value)
 				{
-					this.mTextToHTML_TextToHTML_AlternateLineBackground = value;
+					_TextToHTML_TextToHTML_AlternateLineBackground = value;
 					this.RaisePropertyChanged(() => this.TextToHTML_AlternateLineBackground);
 				}
 			}
@@ -260,14 +260,14 @@
 		{
 			get
 			{
-				return this.mHighlightOnFileNew;
+				return _HighlightOnFileNew;
 			}
 
 			set
 			{
-				if (this.mHighlightOnFileNew != value)
+				if (_HighlightOnFileNew != value)
 				{
-					this.mHighlightOnFileNew = value;
+					_HighlightOnFileNew = value;
 					this.RaisePropertyChanged(() => this.HighlightOnFileNew);
 				}
 			}
@@ -280,14 +280,14 @@
 		{
 			get
 			{
-				return this.mFileNewDefaultFileName;
+				return _FileNewDefaultFileName;
 			}
 
 			set
 			{
-				if (this.mFileNewDefaultFileName != value)
+				if (_FileNewDefaultFileName != value)
 				{
-					this.mFileNewDefaultFileName = value;
+					_FileNewDefaultFileName = value;
 					this.RaisePropertyChanged(() => this.FileNewDefaultFileName);
 				}
 			}
@@ -301,14 +301,14 @@
 		{
 			get
 			{
-				return this.mFileNewDefaultFileExtension;
+				return _FileNewDefaultFileExtension;
 			}
 
 			set
 			{
-				if (this.mFileNewDefaultFileExtension != value)
+				if (_FileNewDefaultFileExtension != value)
 				{
-					this.mFileNewDefaultFileExtension = value;
+					_FileNewDefaultFileExtension = value;
 					this.RaisePropertyChanged(() => this.FileNewDefaultFileExtension);
 				}
 			}

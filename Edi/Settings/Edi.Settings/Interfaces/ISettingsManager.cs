@@ -11,7 +11,7 @@
         /// </summary>
 		IOptions SettingData { get; }
 
-		Profile SessionData { get; }
+		IProfile SessionData { get; }
 
 		string LayoutFileName { get; set; }
 
@@ -44,7 +44,7 @@
         /// <param name="sessionDataFileName"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        bool SaveSessionData(string sessionDataFileName, Profile model);
+        bool SaveSessionData(string sessionDataFileName, IProfile model);
 
 		/// <summary>
 		/// Save program options into persistence.

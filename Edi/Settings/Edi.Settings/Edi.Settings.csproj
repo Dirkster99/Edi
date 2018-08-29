@@ -122,11 +122,13 @@
     <Compile Include="Interfaces\IOptions.cs" />
     <Compile Include="Interfaces\IProfile.cs" />
     <Compile Include="Interfaces\ISettingsManager.cs" />
-    <Compile Include="ProgramSettings\LanguageCollection.cs" />
+    <Compile Include="Interfaces\ILang.cs" />
+    <Compile Include="ProgramSettings\Lang.cs" />
     <Compile Include="SettingsFactory.cs" />
-    <Compile Include="SettingsManager.cs" />
+    <Compile Include="SettingsManagerImpl.cs" />
     <Compile Include="ProgramSettings\Options.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Interfaces\IViewPosSizeModel.cs" />
     <Compile Include="UserProfile\Profile.cs" />
     <Compile Include="UserProfile\ViewPosSizeModel.cs" />
   </ItemGroup>

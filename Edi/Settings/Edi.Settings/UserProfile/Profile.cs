@@ -22,8 +22,8 @@
         #region fields
         private MRUList _MruList;
 
-        private List<string> mFindHistoryList;
-        private List<string> mReplaceHistoryList;
+        private List<string> _FindHistoryList;
+        private List<string> _ReplaceHistoryList;
 
         protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         #endregion fields
@@ -35,11 +35,11 @@
         public Profile()
         {
             // Set default session data
-            this.MainWindowPosSz = new ViewPosSizeModel(100, 100, 1000, 700);
+            MainWindowPosSz = new ViewPosSizeModel(100, 100, 1000, 700);
 
-            this.IsWorkspaceAreaOptimized = false;
+            IsWorkspaceAreaOptimized = false;
 
-            this.LastActiveFile = string.Empty;
+            LastActiveFile = string.Empty;
 
             _MruList = new MRUList();
         }
@@ -106,18 +106,16 @@
         {
             get
             {
-                if (this.mFindHistoryList == null)
-                    this.mFindHistoryList = new List<string>();
+                if (_FindHistoryList == null)
+                    _FindHistoryList = new List<string>();
 
-                return this.mFindHistoryList;
+                return _FindHistoryList;
             }
 
             set
             {
-                if (this.mFindHistoryList != value)
-                {
-                    this.mFindHistoryList = value;
-                }
+                if (_FindHistoryList != value)
+                    _FindHistoryList = value;
             }
         }
 
@@ -129,18 +127,16 @@
         {
             get
             {
-                if (this.mReplaceHistoryList == null)
-                    this.mReplaceHistoryList = new List<string>();
+                if (_ReplaceHistoryList == null)
+                    _ReplaceHistoryList = new List<string>();
 
-                return this.mReplaceHistoryList;
+                return _ReplaceHistoryList;
             }
 
             set
             {
-                if (this.mReplaceHistoryList != value)
-                {
-                    this.mReplaceHistoryList = value;
-                }
+                if (_ReplaceHistoryList != value)
+                    _ReplaceHistoryList = value;
             }
         }
         #endregion Find and Replace
@@ -156,26 +152,27 @@
         public void CheckSettingsOnLoad(double SystemParameters_VirtualScreenLeft,
                                         double SystemParameters_VirtualScreenTop)
         {
-            if (this.MainWindowPosSz == null)
-                this.MainWindowPosSz = new ViewPosSizeModel(100, 100, 600, 500);
+            if (MainWindowPosSz == null)
+                MainWindowPosSz = new ViewPosSizeModel(100, 100, 600, 500);
 
-            if (this.MainWindowPosSz.DefaultConstruct == true)
-                this.MainWindowPosSz = new ViewPosSizeModel(100, 100, 600, 500);
+            if (MainWindowPosSz.DefaultConstruct == true)
+                MainWindowPosSz = new ViewPosSizeModel(100, 100, 600, 500);
 
-            this.MainWindowPosSz.SetValidPos(SystemParameters_VirtualScreenLeft,
-                                             SystemParameters_VirtualScreenTop);
+            MainWindowPosSz.SetValidPos(SystemParameters_VirtualScreenLeft,
+                                        SystemParameters_VirtualScreenTop);
         }
 
         /// <summary>
-        /// Get the path of the file or empty string if file does not exists on disk.
+        /// Get the path of the last active file or empty string
+        /// if file does not exists on disk.
         /// </summary>
         /// <returns></returns>
         public string GetLastActivePath()
         {
             try
             {
-                if (System.IO.File.Exists(this.LastActiveFile))
-                    return System.IO.Path.GetDirectoryName(this.LastActiveFile);
+                if (System.IO.File.Exists(LastActiveFile))
+                    return System.IO.Path.GetDirectoryName(LastActiveFile);
             }
             catch
             {
