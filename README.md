@@ -1,5 +1,5 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/7r06lm7v5o9xq7xj?svg=true)](https://ci.appveyor.com/project/Dirkster99/edi)
-[![Release](https://img.shields.io/github/release/Dirkster99/Edi.svg)](https://github.com/Dirkster99/Edi/releases/latest)  [Comtinues Integration](https://ci.appveyor.com/project/Dirkster99/edi/build/artifacts)
+[![Release](https://img.shields.io/github/release/Dirkster99/Edi.svg)](https://github.com/Dirkster99/Edi/releases/latest)  [Continues Integration](https://ci.appveyor.com/project/Dirkster99/edi/build/artifacts)
 # Edi
 
 Edi - The open source integrated development environment (IDE) based on <a href="https://github.com/Dirkster99/AvalonDock">AvalonDock</a> and AvalonEdit
@@ -39,7 +39,7 @@ See https://github.com/Dirkster99/Edi-Setup/ for more details on building the x8
 
 * [Visual Studio 2017 Community](http://www.visualstudio.com) - Visual Studio IDE
 * [.Net Framework](https://www.microsoft.com/net) - Net Framework 4
-* or get the latest Release build from [Comtinues Integration](https://ci.appveyor.com/project/Dirkster99/edi/build/artifacts)
+* or get the latest Release build from [Continues Integration](https://ci.appveyor.com/project/Dirkster99/edi/build/artifacts)
 
 ## Contributing
 
