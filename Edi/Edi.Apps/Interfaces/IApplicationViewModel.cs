@@ -1,11 +1,11 @@
 ﻿namespace Edi.Apps.Interfaces
 {
     using System;
+    using System.Threading.Tasks;
     using System.Windows;
     using Edi.Apps.Enums;
     using Edi.Core.Interfaces;
     using Edi.Settings.Interfaces;
-    using Edi.Settings.ProgramSettings;
     using Edi.Themes.Interfaces;
     using MiniUML.Model.ViewModels.Document;
 
@@ -74,12 +74,12 @@
 		/// <returns>true if application is OK to proceed closing with closed, otherwise false.</returns>
 		bool Exit_CheckConditions(object sender);
 
-		/// <summary>
-		/// Load configuration from persistence on startup of application
-		/// </summary>
-		void LoadConfigOnAppStartup(Options programSettings,
-									ISettingsManager settings,
-									IThemesManager themes);
+        /// <summary>
+        /// Load configuration from persistence on startup of application
+        /// </summary>
+        Task<IOptions> LoadConfigOnAppStartupAsync(IOptions programSettings,
+									               ISettingsManager settings,
+									               IThemesManager themes);
 
 		/// <summary>
 		/// Save application settings when the application is being closed down
@@ -101,9 +101,9 @@
 		/// <param name="typeOfDocument"></param>
 		/// <returns></returns>
 		IFileBaseViewModel Open(string filePath,
-										CloseDocOnError closeDocumentWithoutMessageOnError = CloseDocOnError.WithUserNotification,
-										bool addIntoMru = true,
-										string typeOfDocument = "EdiTextEditor");
+								CloseDocOnError closeDocumentWithoutMessageOnError = CloseDocOnError.WithUserNotification,
+								bool addIntoMru = true,
+								string typeOfDocument = "EdiTextEditor");
 
 		/// <summary>
 		/// Activates/deactivates processing of the mainwindow activated event.

@@ -6,14 +6,14 @@
     using Files.ViewModels.FileExplorer;
     using MsgBox;
     using Settings.Interfaces;
-    using Settings.ProgramSettings;
     using Settings.UserProfile;
     using Themes.Interfaces;
     using MRULib.MRU.Interfaces;
     using MRULib.MRU.Models.Persist;
     using CommonServiceLocator;
+    using System.Threading.Tasks;
 
-	public partial class ApplicationViewModel
+    public partial class ApplicationViewModel
     {
         /// <summary>
         /// Save application settings when the application is being closed down
@@ -58,25 +58,27 @@
         /// <param name="programSettings"></param>
         /// <param name="settings"></param>
         /// <param name="themes"></param>
-        public void LoadConfigOnAppStartup(Options programSettings,
-                                            ISettingsManager settings,
-                                            IThemesManager themes)
+        public async Task<IOptions> LoadConfigOnAppStartupAsync(IOptions programSettings,
+                                                                ISettingsManager settings,
+                                                                IThemesManager themes)
         {
             // Re/Load program options and user profile session data to control global behaviour of program
-            settings.LoadOptions(_mAppCore.DirFileAppSettingsData, themes, programSettings);
+            await settings.LoadOptionsAsync(_mAppCore.DirFileAppSettingsData, themes, programSettings);
             settings.LoadSessionData(_mAppCore.DirFileAppSessionData);
 
             settings.CheckSettingsOnLoad(SystemParameters.VirtualScreenLeft, SystemParameters.VirtualScreenTop);
-
-            // Convert Session model into viewmodel instance
-            var mruVm = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
-            MRUEntrySerializer.ConvertToViewModel(settings.SessionData.MruList, mruVm);
 
             // Initialize skinning engine with this current skin
             // standard skins defined in class enum PLUS
             // configured skins with highlighting
             themes.SetSelectedTheme(settings.SettingData.CurrentTheme);
             ResetTheme();                       // Initialize theme in process
+
+            // Convert Session model into viewmodel instance
+            var mruVm = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
+            MRUEntrySerializer.ConvertToViewModel(settings.SessionData.MruList, mruVm);
+
+            return programSettings;
         }
 
         /// <summary>

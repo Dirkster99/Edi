@@ -1,14 +1,14 @@
 ﻿namespace Edi.Settings
 {
-	using System;
-	using System.IO;
-	using System.Xml;
-	using System.Xml.Serialization;
-	using Edi.Settings.Interfaces;
-	using Edi.Settings.ProgramSettings;
-	using Edi.Settings.UserProfile;
-	using Edi.Themes.Interfaces;
-    using MLib.Interfaces;
+    using System;
+    using System.IO;
+    using System.Threading.Tasks;
+    using System.Xml;
+    using System.Xml.Serialization;
+    using Edi.Settings.Interfaces;
+    using Edi.Settings.ProgramSettings;
+    using Edi.Settings.UserProfile;
+    using Edi.Themes.Interfaces;
 
     /// <summary>
     /// This class keeps track of program options and user profile (session) data.
@@ -21,7 +21,7 @@
 		#region fields
 		protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-		private Options mSettingData = null;
+		private IOptions _SettingData = null;
 		private Profile mSessionData = null;
 
 		private readonly IThemesManager mThemesManager = null;
@@ -46,20 +46,20 @@
 		/// Program options are user specific settings that are rarelly
 		/// changed and can be customized per user.
 		/// </summary>
-		public Options SettingData
+		public IOptions SettingData
 		{
 			get
 			{
-				if (this.mSettingData == null)
-					this.mSettingData = new Options(this.mThemesManager);
+				if (this._SettingData == null)
+					this._SettingData = new Options(this.mThemesManager);
 
-				return this.mSettingData;
+				return this._SettingData;
 			}
 
 			private set
 			{
-				if (this.mSettingData != value)
-					this.mSettingData = value;
+				if (this._SettingData != value)
+					this._SettingData = value;
 			}
 		}
 
@@ -106,17 +106,17 @@
 
 		#region Load Save ProgramOptions
 		/// <summary>
-		/// Save program options into persistence.
+		/// Load program options from persistence.
 		/// See <seealso cref="SaveOptions"/> to save program options on program end.
 		/// </summary>
 		/// <param name="settingsFileName"></param>
 		/// <param name="themesManager"></param>
 		/// <returns></returns>
-		public void LoadOptions(string settingsFileName,
-								IThemesManager themesManager,
-                                Options programSettings = null)
+		private void LoadOptions(string settingsFileName,
+								 IThemesManager themesManager,
+                                 IOptions programSettings = null)
 		{
-			Options loadedModel = null;
+			IOptions loadedModel = null;
 
 			if (programSettings != null)
 				loadedModel = programSettings;
@@ -128,16 +128,29 @@
 			this.SettingData = loadedModel;
 		}
 
-		/// <summary>
-		/// Save program options into persistence.
-		/// See <seealso cref="SaveOptions"/> to save program options on program end.
-		/// </summary>
-		/// <param name="settingsFileName"></param>
-		/// <param name="themesManager"></param>
-		/// <returns></returns>
-		public static Options LoadOptions(string settingsFileName
-                                        , IThemesManager themesManager
-            )
+        /// <summary>
+        /// Async method to load program options from persistence (without blocking UI thread).
+        /// See <seealso cref="SaveOptions"/> to load program options on program start.
+        /// </summary>
+        /// <param name="settingsFileName"></param>
+        /// <param name="themesManager"></param>
+        /// <returns></returns>
+        public Task LoadOptionsAsync(string settingsFileName,
+                                     IThemesManager themesManager,
+                                     IOptions programSettings = null)
+        {
+            return Task.Run(() => { LoadOptions(settingsFileName, themesManager, programSettings); });
+        }
+
+        /// <summary>
+        /// Load program options from persistence.
+        /// See <seealso cref="SaveOptions"/> to save program options on program end.
+        /// </summary>
+        /// <param name="settingsFileName"></param>
+        /// <param name="themesManager"></param>
+        /// <returns></returns>
+        public static IOptions LoadOptions(string settingsFileName
+                                        , IThemesManager themesManager)
 		{
 			Options loadedModel = null;
 
@@ -182,14 +195,27 @@
 			return loadedModel;
 		}
 
-		/// <summary>
-		/// Save program options into persistence.
-		/// See <seealso cref="LoadOptions"/> to load program options on program start.
-		/// </summary>
-		/// <param name="settingsFileName"></param>
-		/// <param name="optionsModel"></param>
-		/// <returns></returns>
-		public bool SaveOptions(string settingsFileName, Options optionsModel)
+        /// <summary>
+        /// Async method to load program options from persistence (avoids blocking the UI thread).
+        /// See <seealso cref="SaveOptions"/> to save program options on program end.
+        /// </summary>
+        /// <param name="settingsFileName"></param>
+        /// <param name="themesManager"></param>
+        /// <returns></returns>
+		public static async Task<IOptions> LoadOptionsAsync(string settingsFileName
+                                                         , IThemesManager themesManager)
+        {
+            return await Task.Run(() => { return LoadOptions(settingsFileName, themesManager); });
+        }
+
+        /// <summary>
+        /// Save program options into persistence.
+        /// See <seealso cref="LoadOptionsAsync"/> to load program options on program start.
+        /// </summary>
+        /// <param name="settingsFileName"></param>
+        /// <param name="optionsModel"></param>
+        /// <returns></returns>
+        public bool SaveOptions(string settingsFileName, IOptions optionsModel)
 		{
 			try
 			{
@@ -271,14 +297,14 @@
 			}
 		}
 
-		/// <summary>
-		/// Save program options into persistence.
-		/// See <seealso cref="LoadOptions"/> to load program options on program start.
-		/// </summary>
-		/// <param name="sessionDataFileName"></param>
-		/// <param name="model"></param>
-		/// <returns></returns>
-		public bool SaveSessionData(string sessionDataFileName, Profile model)
+        /// <summary>
+        /// Save program options into persistence.
+        /// See <seealso cref="LoadOptionsAsync"/> to load program options on program start.
+        /// </summary>
+        /// <param name="sessionDataFileName"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool SaveSessionData(string sessionDataFileName, Profile model)
 		{
 			try
 			{

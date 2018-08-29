@@ -2,17 +2,15 @@ using Edi.Apps.Interfaces;
 
 namespace Edi
 {
-	using Apps.ViewModels;
+    using Apps.ViewModels;
     using Apps.Views.Shell;
     using Core;
     using Core.Interfaces;
     using Documents.Module;
     using Settings;
     using Settings.Interfaces;
-    using Settings.ProgramSettings;
     using Themes.Interfaces;
     using Files.Module;
-    using MLib.Interfaces;
     using MRULib.MRU.Interfaces;
     using MsgBox;
     using Output.Views;
@@ -24,13 +22,14 @@ namespace Edi
     using System.ComponentModel.Composition;
     using System.ComponentModel.Composition.Hosting;
     using System.Windows;
+    using System.Threading.Tasks;
 
     public class Bootstapper : MefBootstrapper
     {
         #region fields
         protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private MainWindow mMainWin = null;
+        private MainWindow _MainWin = null;
         private IApplicationViewModel appVM = null;
 
         private readonly StartupEventArgs mEventArgs;
@@ -39,7 +38,7 @@ namespace Edi
         private readonly IMessageBoxService _MsgBox = null;
         private readonly IMRUListViewModel _MruVM = null;
 
-        private readonly Options mOptions = null;
+        private readonly IOptions mOptions = null;
         private readonly IThemesManager mThemes = null;
         private readonly ISettingsManager mProgramSettingsManager = null;
         #endregion fields
@@ -56,7 +55,7 @@ namespace Edi
         #region constructors
         public Bootstapper(App app,
                            StartupEventArgs eventArgs,
-                           Options programSettings,
+                           IOptions programSettings,
                            IThemesManager themesManager)
             : this()
         {
@@ -171,18 +170,21 @@ namespace Edi
 
                 var toolWindowRegistry = Container.GetExportedValue<IToolWindowRegistry>();
 
-                appVM.LoadConfigOnAppStartup(mOptions, mProgramSettingsManager, mThemes);
+                var task = Task.Run(async () => // Off Loading Load Programm Settings to non-UI thread
+                {
+                    await appVM.LoadConfigOnAppStartupAsync(mOptions, mProgramSettingsManager, mThemes);
+                });
+                task.Wait(); // Block this to ensure that results are usable in MainWindow construction
 
                 // Attempt to load a MiniUML plugin via the model class
                 MiniUML.Model.MiniUmlPluginLoader.LoadPlugins(appCore.AssemblyEntryLocation + @".\Plugins\MiniUML.Plugins.UmlClassDiagram\", AppViewModel); // discover via Plugin folder instead
 
-                mMainWin = Container.GetExportedValue<MainWindow>();
-
+                _MainWin = Container.GetExportedValue<MainWindow>();
                 appCore.CreateAppDataFolder();
 
-                if (mMainWin != null)
+                if (_MainWin != null)
                 {
-                    ConstructMainWindowSession(appVM, mMainWin, mProgramSettingsManager);
+                    ConstructMainWindowSession(appVM, _MainWin, mProgramSettingsManager);
 
                     if (mApp.AppIsShuttingDown == false)
                         mApp.ShutdownMode = ShutdownMode.OnLastWindowClose;
@@ -230,7 +232,7 @@ namespace Edi
                     mApp.Shutdown();
             }
 
-            return mMainWin;
+            return _MainWin;
         }
 
         protected override void InitializeShell()

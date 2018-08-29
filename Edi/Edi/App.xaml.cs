@@ -21,6 +21,7 @@ namespace Edi
     using CommonServiceLocator;
     using MLib.Interfaces;
     using MLib;
+    using Edi.Settings.Interfaces;
 
     /// <summary>
     /// Interaction logic for App.xaml
@@ -126,7 +127,7 @@ namespace Edi
             {
             }
 
-            Options options = null;
+            IOptions options = null;
             IThemesManager themesManager = Factory.CreateThemeManager();
 
             try

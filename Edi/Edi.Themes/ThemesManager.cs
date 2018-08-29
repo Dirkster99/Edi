@@ -31,13 +31,14 @@ namespace Edi.Themes
           "/Mlib;component/Themes/DarkTheme.xaml",
           "/MWindowLib;component/Themes/DarkTheme.xaml",
 
+          "/Edi.Themes;component/MetroDark/Theme.xaml",
+          "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/DarkTheme.xaml",
+
           "/DropDownButtonLib;component/Themes/MetroDark.xaml",  // DropDownButtonLib theming
           "/MsgBox;component/Themes/DarkBrushes.xaml",
           "/MsgBox;component/Themes/DarkIcons.xaml",
           "/UnitComboLib;component/Themes/DarkBrushs.xaml",
           "/NumericUpDownLib;component/Themes/DarkBrushs.xaml",
-
-          "/Edi.Themes;component/MetroDark/Theme.xaml",
 
           "/DropDownButtonLib;component/Themes/MetroDark.xaml",
           "/WatermarkControlsLib;component/Themes/DarkBrushs.xaml",
@@ -45,9 +46,8 @@ namespace Edi.Themes
           "/FileListView;component/Images/MetroDarkIcons.xaml",
           "/HistoryControlLib;component/Themes/DarkTheme.xaml",
 
-          "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/DarkTheme.xaml",
-
           "/Edi.Themes;component/BindToMLib/MiniUML.View/LightBrushs.xaml",
+
           "/Edi.Themes;component/BindToMLib/MWindowLib/DarkBrushs.xaml",
           "/Edi.Themes;component/BindToMLib/AvalonDock_DarkLightBrushs.xaml",
           "/Edi.Themes;component/BindToMLib/DropDownButtonLib_DarkLightBrushs.xaml",
@@ -74,14 +74,15 @@ namespace Edi.Themes
           "/Mlib;component/Themes/LightTheme.xaml",
           "/MWindowLib;component/Themes/LightTheme.xaml",
 
+          // This is required to style the dropdown button and frame of the control
+          "/Edi.Themes;component/MetroLight/Theme.xaml",
+          "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/LightTheme.xaml",
+
           "/DropDownButtonLib;component/Themes/MetroLight.xaml",  // DropDownButtonLib theming
           "/MsgBox;component/Themes/LightBrushes.xaml",
           "/MsgBox;component/Themes/LightIcons.xaml",
           "/UnitComboLib;component/Themes/LightBrushs.xaml",
           "/NumericUpDownLib;component/Themes/LightBrushs.xaml",
-
-          // This is required to style the dropdown button and frame of the control
-          "/Edi.Themes;component/MetroLight/Theme.xaml",
 
           "/DropDownButtonLib;component/Themes/MetroLight.xaml",
           "/WatermarkControlsLib;component/Themes/LightBrushs.xaml",
@@ -89,11 +90,10 @@ namespace Edi.Themes
           "/FileListView;component/Images/MetroLightIcons.xaml",
           "/HistoryControlLib;component/Themes/LightTheme.xaml",
 
-          "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/LightTheme.xaml",
-
           "/Edi.Themes;component/BindToMLib/MiniUML.View/LightBrushs.xaml",
-          "/Edi.Themes;component/BindToMLib/AvalonDock_DarkLightBrushs.xaml",
+
           "/Edi.Themes;component/BindToMLib/MWindowLib/LightBrushs.xaml",
+          "/Edi.Themes;component/BindToMLib/AvalonDock_DarkLightBrushs.xaml",
           "/Edi.Themes;component/BindToMLib/DropDownButtonLib_DarkLightBrushs.xaml",
           "/Edi.Themes;component/BindToMLib/HistoryControlLib_DarkLightBrushs.xaml",
           "/Edi.Themes;component/BindToMLib/WatermarkControlsLib_DarkLightBrushs.xaml",

@@ -28,6 +28,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
     using UnitComboLib.Models.Unit.Screen;
     using UnitComboLib.ViewModels;
     using CommonServiceLocator;
+    using Edi.Settings;
 
     public interface IDocumentEdi : IFileBaseViewModel
     {
@@ -37,7 +38,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// but is usually necessary after creating default object.
         /// </summary>
         /// <param name="settingData"></param>
-        void InitInstance(Options settingData);
+        void InitInstance(IOptions settingData);
 
         /// <summary>
         /// Increase the document counter for new documents created via New command.
@@ -137,7 +138,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
             TextOptions = new ICSharpCode.AvalonEdit.TextEditorOptions();
             WordWrap = false;
 
-            var items = new ObservableCollection<UnitComboLib.Models.ListItem>(Options.GenerateScreenUnitList());
+            var items = new ObservableCollection<UnitComboLib.Models.ListItem>(SettingsFactory.GenerateScreenUnitList());
             SizeUnitLabel =
                 UnitComboLib.UnitViewModeService.CreateInstance(items,
                                                                 new ScreenConverter(),
@@ -809,8 +810,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// <param name="dm"></param>
         /// <param name="o">Should point to a <seealso cref="ISettingsManager"/> instance.</param>
         /// <returns></returns>
-        public static EdiViewModel LoadFile(IDocumentModel dm,
-                                                                                object o)
+        public static EdiViewModel LoadFile(IDocumentModel dm, object o)
         {
             return LoadFile(dm, o as ISettingsManager);
         }
@@ -823,8 +823,8 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// <param name="closeOnErrorWithoutMessage"></param>
         /// <returns></returns>
         public static EdiViewModel LoadFile(IDocumentModel dm,
-                                                                                ISettingsManager settings,
-                                                                                bool closeOnErrorWithoutMessage = false)
+                                            ISettingsManager settings,
+                                            bool closeOnErrorWithoutMessage = false)
         {
             EdiViewModel vm = new EdiViewModel();
             vm.InitInstance(settings.SettingData);
@@ -938,12 +938,12 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// but is usually necessary after creating default object.
         /// </summary>
         /// <param name="settingData"></param>
-        public void InitInstance(Options settingData)
+        public void InitInstance(IOptions settingData)
         {
             if (settingData != null)
             {
                 FilePath = GetDefaultFileNewName(settingData.FileNewDefaultFileName,
-                                                                                                     settingData.FileNewDefaultFileExtension);
+                                                 settingData.FileNewDefaultFileExtension);
 
                 TextOptions = new ICSharpCode.AvalonEdit.TextEditorOptions(settingData.EditorTextOptions);
                 HighlightingDefinition = HighlightingManager.Instance.GetDefinitionByExtension(Path.GetExtension(_mFilePath));
@@ -1077,7 +1077,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
         /// <param name="defaultValue"></param>
         public void InitScaleView(ZoomUnit unit, double defaultValue)
         {
-            var unitList = new ObservableCollection<UnitComboLib.Models.ListItem>(Options.GenerateScreenUnitList());
+            var unitList = new ObservableCollection<UnitComboLib.Models.ListItem>(SettingsFactory.GenerateScreenUnitList());
 
             SizeUnitLabel =
                 UnitComboLib.UnitViewModeService.CreateInstance(unitList,

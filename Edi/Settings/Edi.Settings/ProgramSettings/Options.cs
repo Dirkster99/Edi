@@ -1,16 +1,12 @@
 ﻿namespace Edi.Settings.ProgramSettings
 {
     using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.Xml.Serialization;
     using FileSystemModels.Models;
     using ICSharpCode.AvalonEdit;
     using ICSharpCode.AvalonEdit.Highlighting.Themes;
     using Edi.Settings.Interfaces;
-    using Edi.Themes;
     using Edi.Themes.Interfaces;
-    using UnitComboLib.Models.Unit;
 
     /// <summary>
     /// Determine whether Zoom units of the text editor
@@ -34,26 +30,24 @@
     public class Options : IOptions
     {
         #region fields
-        public const string DefaultLocal = "en-US";
-
         protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private bool mWordWarpText;
-        private int mDocumentZoomView;
-        private ZoomUnit mDocumentZoomUnit;
+        private bool _WordWarpText;
+        private int _DocumentZoomView;
+        private ZoomUnit _DocumentZoomUnit;
 
-        private bool mReloadOpenFilesOnAppStart;
-        private bool mRunSingleInstance;
+        private bool _ReloadOpenFilesOnAppStart;
+        private bool _RunSingleInstance;
 
-        private string mCurrentTheme;
+        private string _CurrentTheme;
 
-        private string mLanguageSelected;
-        private bool mIsDirty = false;
+        private string _LanguageSelected;
+        private bool _IsDirty = false;
 
-        private bool mTextToHTML_ShowLineNumbers = true;                        // Text to HTML export
-        private bool mTextToHTML_TextToHTML_AlternateLineBackground = true;
+        private bool _TextToHTML_ShowLineNumbers = true;                        // Text to HTML export
+        private bool _TextToHTML_TextToHTML_AlternateLineBackground = true;
 
-        private readonly IThemesManager mThemesManager = null;
+        private readonly IThemesManager _ThemesManager = null;
         #endregion fields
 
         #region constructor
@@ -64,7 +58,7 @@
         public Options(IThemesManager themesManager)
             : this()
         {
-            this.mThemesManager = themesManager;
+            this._ThemesManager = themesManager;
         }
 
         /// <summary>
@@ -72,18 +66,18 @@
         /// </summary>
         protected Options()
         {
-            this.mThemesManager = null;
+            this._ThemesManager = null;
 
             this.EditorTextOptions = new TextEditorOptions();
-            this.mWordWarpText = false;
+            this._WordWarpText = false;
 
-            this.mDocumentZoomUnit = ZoomUnit.Percentage;     // Zoom View in Percent
-            this.mDocumentZoomView = 100;                     // Font Size 12 is 100 %
+            this._DocumentZoomUnit = ZoomUnit.Percentage;     // Zoom View in Percent
+            this._DocumentZoomView = 100;                     // Font Size 12 is 100 %
 
-            this.mReloadOpenFilesOnAppStart = true;
-            this.mRunSingleInstance = true;
-            this.mCurrentTheme = Edi.Themes.Factory.DefaultThemeName;
-            this.mLanguageSelected = Options.DefaultLocal;
+            this._ReloadOpenFilesOnAppStart = true;
+            this._RunSingleInstance = true;
+            this._CurrentTheme = Edi.Themes.Factory.DefaultThemeName;
+            this._LanguageSelected = SettingsFactory.DefaultLocal;
 
             this.HighlightOnFileNew = true;
             this.FileNewDefaultFileName = Edi.Util.Local.Strings.STR_FILE_DEFAULTNAME;
@@ -91,7 +85,7 @@
 
             this.ExplorerSettings = new ExplorerSettingsModel(true);
 
-            this.mIsDirty = false;
+            this._IsDirty = false;
         }
 
         /// <summary>
@@ -104,19 +98,19 @@
             if (copyThis == null)
                 return;
 
-            this.mThemesManager = copyThis.mThemesManager;
+            this._ThemesManager = copyThis._ThemesManager;
             this.EditorTextOptions = copyThis.EditorTextOptions;
-            this.mWordWarpText = copyThis.mWordWarpText;
+            this._WordWarpText = copyThis._WordWarpText;
 
-            this.mDocumentZoomUnit = copyThis.mDocumentZoomUnit;     // Zoom View in Percent
-            this.mDocumentZoomView = copyThis.mDocumentZoomView;     // Font Size 12 is 100 %
+            this._DocumentZoomUnit = copyThis._DocumentZoomUnit;     // Zoom View in Percent
+            this._DocumentZoomView = copyThis._DocumentZoomView;     // Font Size 12 is 100 %
 
-            this.mReloadOpenFilesOnAppStart = copyThis.mReloadOpenFilesOnAppStart;
-            this.mRunSingleInstance = copyThis.mRunSingleInstance;
-            this.mCurrentTheme = copyThis.mCurrentTheme;
-            this.mLanguageSelected = copyThis.mLanguageSelected;
+            this._ReloadOpenFilesOnAppStart = copyThis._ReloadOpenFilesOnAppStart;
+            this._RunSingleInstance = copyThis._RunSingleInstance;
+            this._CurrentTheme = copyThis._CurrentTheme;
+            this._LanguageSelected = copyThis._LanguageSelected;
 
-            this.mIsDirty = copyThis.mIsDirty;
+            this._IsDirty = copyThis._IsDirty;
         }
         #endregion constructor
 
@@ -129,14 +123,14 @@
         {
             get
             {
-                return this.mWordWarpText;
+                return this._WordWarpText;
             }
 
             set
             {
-                if (this.mWordWarpText != value)
+                if (this._WordWarpText != value)
                 {
-                    this.mWordWarpText = value;
+                    this._WordWarpText = value;
                     this.IsDirty = true;
                 }
             }
@@ -155,14 +149,14 @@
         {
             get
             {
-                return this.mDocumentZoomView;
+                return this._DocumentZoomView;
             }
 
             set
             {
-                if (this.mDocumentZoomView != value)
+                if (this._DocumentZoomView != value)
                 {
-                    this.mDocumentZoomView = value;
+                    this._DocumentZoomView = value;
                     this.IsDirty = true;
                 }
             }
@@ -176,14 +170,14 @@
         {
             get
             {
-                return this.mDocumentZoomUnit;
+                return this._DocumentZoomUnit;
             }
 
             set
             {
-                if (this.mDocumentZoomUnit != value)
+                if (this._DocumentZoomUnit != value)
                 {
-                    this.mDocumentZoomUnit = value;
+                    this._DocumentZoomUnit = value;
                     this.IsDirty = true;
                 }
             }
@@ -197,14 +191,14 @@
         {
             get
             {
-                return this.mReloadOpenFilesOnAppStart;
+                return this._ReloadOpenFilesOnAppStart;
             }
 
             set
             {
-                if (this.mReloadOpenFilesOnAppStart != value)
+                if (this._ReloadOpenFilesOnAppStart != value)
                 {
-                    this.mReloadOpenFilesOnAppStart = value;
+                    this._ReloadOpenFilesOnAppStart = value;
                     this.IsDirty = true;
                 }
             }
@@ -218,14 +212,14 @@
         {
             get
             {
-                return this.mRunSingleInstance;
+                return this._RunSingleInstance;
             }
 
             set
             {
-                if (this.mRunSingleInstance != value)
+                if (this._RunSingleInstance != value)
                 {
-                    this.mRunSingleInstance = value;
+                    this._RunSingleInstance = value;
                     this.IsDirty = true;
                 }
             }
@@ -239,14 +233,14 @@
         {
             get
             {
-                return this.mCurrentTheme;
+                return this._CurrentTheme;
             }
 
             set
             {
-                if (this.mCurrentTheme != value)
+                if (this._CurrentTheme != value)
                 {
-                    this.mCurrentTheme = value;
+                    this._CurrentTheme = value;
                     this.IsDirty = true;
                 }
             }
@@ -257,14 +251,14 @@
         {
             get
             {
-                return this.mLanguageSelected;
+                return this._LanguageSelected;
             }
 
             set
             {
-                if (this.mLanguageSelected != value)
+                if (this._LanguageSelected != value)
                 {
-                    this.mLanguageSelected = value;
+                    this._LanguageSelected = value;
                     this.IsDirty = true;
                 }
             }
@@ -276,14 +270,14 @@
         {
             get
             {
-                return this.mTextToHTML_ShowLineNumbers;
+                return this._TextToHTML_ShowLineNumbers;
             }
 
             set
             {
-                if (this.mTextToHTML_ShowLineNumbers != value)
+                if (this._TextToHTML_ShowLineNumbers != value)
                 {
-                    this.mTextToHTML_ShowLineNumbers = value;
+                    this._TextToHTML_ShowLineNumbers = value;
                     this.IsDirty = true;
                 }
             }
@@ -294,14 +288,14 @@
         {
             get
             {
-                return this.mTextToHTML_TextToHTML_AlternateLineBackground;
+                return this._TextToHTML_TextToHTML_AlternateLineBackground;
             }
 
             set
             {
-                if (this.mTextToHTML_TextToHTML_AlternateLineBackground != value)
+                if (this._TextToHTML_TextToHTML_AlternateLineBackground != value)
                 {
-                    this.mTextToHTML_TextToHTML_AlternateLineBackground = value;
+                    this._TextToHTML_TextToHTML_AlternateLineBackground = value;
                     this.IsDirty = true;
                 }
             }
@@ -341,58 +335,18 @@
         {
             get
             {
-                return this.mIsDirty;
+                return this._IsDirty;
             }
 
             set
             {
-                if (this.mIsDirty != value)
-                    this.mIsDirty = value;
+                if (this._IsDirty != value)
+                    this._IsDirty = value;
             }
         }
         #endregion properties
 
         #region methods
-        /// <summary>
-        /// Get a list of all supported languages in Edi.
-        /// </summary>
-        /// <returns></returns>
-        public static IEnumerable<LanguageCollection> GetSupportedLanguages()
-        {
-            List<LanguageCollection> ret = new List<LanguageCollection>();
-
-            ret.Add(new LanguageCollection() { Language = "de", Locale = "DE", Name = "Deutsch (German)" });
-            ret.Add(new LanguageCollection() { Language = "en", Locale = "US", Name = "English (English)" });
-            ret.Add(new LanguageCollection() { Language = "es", Locale = "ES", Name = "Español (Spanish)" });
-            ret.Add(new LanguageCollection() { Language = "fr", Locale = "FR", Name = "Français (French)" });
-            ret.Add(new LanguageCollection() { Language = "it", Locale = "IT", Name = "Italiano (Italian)" });
-            ret.Add(new LanguageCollection() { Language = "ru", Locale = "RU", Name = "Русский (Russian)" });
-            ret.Add(new LanguageCollection() { Language = "id", Locale = "ID", Name = "Bahasa Indonesia(Indonesian)" });
-            ret.Add(new LanguageCollection() { Language = "ja", Locale = "JP", Name = "日本語 (Japanese)" });
-            ret.Add(new LanguageCollection() { Language = "zh-Hans", Locale = "", Name = "简体中文 (Simplified)" });
-            ret.Add(new LanguageCollection() { Language = "pt", Locale = "PT", Name = "Português (Portuguese)" });
-            ret.Add(new LanguageCollection() { Language = "hi", Locale = "IN", Name = "हिंदी (Hindi)" });
-
-            return ret;
-        }
-
-        /// <summary>
-        /// Initialize Scale View with useful units in percent and font point size
-        /// </summary>
-        /// <returns></returns>
-        public static IEnumerable<UnitComboLib.Models.ListItem> GenerateScreenUnitList()
-        {
-            List<UnitComboLib.Models.ListItem> unitList = new List<UnitComboLib.Models.ListItem>();
-
-            var percentDefaults = new ObservableCollection<string>() { "25", "50", "75", "100", "125", "150", "175", "200", "300", "400", "500" };
-            var pointsDefaults = new ObservableCollection<string>() { "3", "6", "8", "9", "10", "12", "14", "16", "18", "20", "24", "26", "32", "48", "60" };
-
-            unitList.Add(new UnitComboLib.Models.ListItem(Itemkey.ScreenPercent, Edi.Util.Local.Strings.STR_SCALE_VIEW_PERCENT, Edi.Util.Local.Strings.STR_SCALE_VIEW_PERCENT_SHORT, percentDefaults));
-            unitList.Add(new UnitComboLib.Models.ListItem(Itemkey.ScreenFontPoints, Edi.Util.Local.Strings.STR_SCALE_VIEW_POINT, Edi.Util.Local.Strings.STR_SCALE_VIEW_POINT_SHORT, pointsDefaults));
-
-            return unitList;
-        }
-
         /// <summary>
         /// Check whether the <paramref name="hlThemeName"/> is configured
         /// with a highlighting theme and return it if that is the case.
@@ -401,14 +355,14 @@
         /// <returns>List of highlighting themes that should be applied for this WPF theme</returns>
         public HighlightingThemes FindHighlightingTheme(string hlThemeName)
         {
-            return this.mThemesManager.GetTextEditorHighlighting(hlThemeName);
+            return this._ThemesManager.GetTextEditorHighlighting(hlThemeName);
         }
 
         /// <summary>
         /// Reset the dirty flag (e.g. after saving program options when they where edit).
         /// </summary>
         /// <param name="flag"></param>
-        internal void SetDirtyFlag(bool flag)
+        public void SetDirtyFlag(bool flag)
         {
             this.IsDirty = flag;
         }

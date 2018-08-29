@@ -10,6 +10,8 @@
 	using UnitComboLib.Models.Unit.Screen;
 	using UnitComboLib.ViewModels;
     using UnitComboLib.Models.Unit;
+    using Edi.Settings.Interfaces;
+    using Edi.Settings;
 
     public class ConfigViewModel : DialogViewModelBase
 	{
@@ -43,7 +45,7 @@
 			this.WordWrapText = false;
 
 			// Get default list of units from settings manager
-			var unitList = new ObservableCollection<UnitComboLib.Models.ListItem>(Options.GenerateScreenUnitList());
+			var unitList = new ObservableCollection<UnitComboLib.Models.ListItem>(SettingsFactory.GenerateScreenUnitList());
 			this.SizeUnitLabel =
                 UnitComboLib.UnitViewModeService.CreateInstance(
                     unitList,
@@ -53,13 +55,13 @@
 			this.EditorTextOptions = new TextEditorOptions();
 
 			// Initialize localization settings
-			this.Languages = new List<LanguageCollection>(Options.GetSupportedLanguages());
+			this.Languages = new List<LanguageCollection>(SettingsFactory.GetSupportedLanguages());
 
 			// Set default language to make sure app neutral is selected and available for sure
 			// (this is a fallback if all else fails)
 			try
 			{
-				this.LanguageSelected = this.Languages.FirstOrDefault(lang => lang.BCP47 == Options.DefaultLocal);
+				this.LanguageSelected = this.Languages.FirstOrDefault(lang => lang.BCP47 == SettingsFactory.DefaultLocal);
 			}
 			catch
 			{
@@ -366,7 +368,7 @@
 		/// Reset the view model to those options that are going to be presented for editing.
 		/// </summary>
 		/// <param name="settingData"></param>
-		public void LoadOptionsFromModel(Options settingData)
+		public void LoadOptionsFromModel(IOptions settingData)
 		{
 			this.ReloadOpenFilesOnAppStart = settingData.ReloadOpenFilesOnAppStart;
 			this.RunSingleInstance = settingData.RunSingleInstance;
@@ -376,7 +378,7 @@
 			this.EditorTextOptions = new TextEditorOptions(settingData.EditorTextOptions);
 			this.SizeUnitLabel = UnitComboLib.UnitViewModeService.CreateInstance(
                 new ObservableCollection<UnitComboLib.Models.ListItem>(
-                    Options.GenerateScreenUnitList()),
+                    SettingsFactory.GenerateScreenUnitList()),
 						new ScreenConverter(),
 					(int)settingData.DocumentZoomUnit, settingData.DocumentZoomView);
 
@@ -401,7 +403,7 @@
 		/// application and persistence in file system.
 		/// </summary>
 		/// <param name="settingData"></param>
-		public void SaveOptionsToModel(Options settingData)
+		public void SaveOptionsToModel(IOptions settingData)
 		{
 			settingData.ReloadOpenFilesOnAppStart = this.ReloadOpenFilesOnAppStart;
 			settingData.RunSingleInstance = this.RunSingleInstance;

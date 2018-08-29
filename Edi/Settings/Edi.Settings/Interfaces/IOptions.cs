@@ -90,6 +90,14 @@
 		/// </summary>
 		[XmlIgnore]
 		bool IsDirty { get; set; }
-		#endregion properties
-	}
+        #endregion properties
+
+        #region methods
+        /// <summary>
+        /// Determines per external call wether options have been changed (are dirty) or not.
+        /// </summary>
+        /// <param name="value"></param>
+        void SetDirtyFlag(bool value);
+        #endregion methods
+    }
 }

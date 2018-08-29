@@ -1,12 +1,15 @@
 ﻿namespace Edi.Settings.Interfaces
 {
-	using Edi.Settings.ProgramSettings;
-	using Edi.Settings.UserProfile;
-	using Edi.Themes.Interfaces;
+    using Edi.Settings.UserProfile;
+    using Edi.Themes.Interfaces;
+    using System.Threading.Tasks;
 
     public interface ISettingsManager
 	{
-		Options SettingData { get; }
+        /// <summary>
+        /// Gets the programm settings (preferences) for this manager instance.
+        /// </summary>
+		IOptions SettingData { get; }
 
 		Profile SessionData { get; }
 
@@ -22,26 +25,26 @@
 		/// <param name="settingsFileName"></param>
 		/// <param name="optionsModel"></param>
 		/// <returns></returns>
-		bool SaveOptions(string settingsFileName, Options optionsModel);
+		bool SaveOptions(string settingsFileName, IOptions optionsModel);
 
-		/// <summary>
-		/// Save program options into persistence.
-		/// See <seealso cref="SaveOptions"/> to save program options on program end.
-		/// </summary>
-		/// <param name="settingsFileName"></param>
-		/// <returns></returns>
-		void LoadOptions(string settingsFileName,
-						 IThemesManager themesManager,
-                         Options programSettings = null);
+        /// <summary>
+        /// Save program options into persistence.
+        /// See <seealso cref="SaveOptions"/> to save program options on program end.
+        /// </summary>
+        /// <param name="settingsFileName"></param>
+        /// <returns></returns>
+        Task LoadOptionsAsync(string settingsFileName,
+                              IThemesManager themesManager,
+                              IOptions programSettings = null);
 
-		/// <summary>
-		/// Save program options into persistence.
-		/// See <seealso cref="LoadOptions"/> to load program options on program start.
-		/// </summary>
-		/// <param name="sessionDataFileName"></param>
-		/// <param name="model"></param>
-		/// <returns></returns>
-		bool SaveSessionData(string sessionDataFileName, Profile model);
+        /// <summary>
+        /// Save program options into persistence.
+        /// See <seealso cref="LoadOptions"/> to load program options on program start.
+        /// </summary>
+        /// <param name="sessionDataFileName"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool SaveSessionData(string sessionDataFileName, Profile model);
 
 		/// <summary>
 		/// Save program options into persistence.
@@ -56,7 +59,7 @@
 		/// settings if they appear to be invalid on current system
 		/// </summary>
 		void CheckSettingsOnLoad(double SystemParameters_VirtualScreenLeft,
-														 double SystemParameters_VirtualScreenTop);
+								 double SystemParameters_VirtualScreenTop);
 		#endregion methods
 	}
 }
