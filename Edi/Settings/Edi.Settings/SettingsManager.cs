@@ -24,7 +24,7 @@
 		private IOptions _SettingData = null;
 		private Profile mSessionData = null;
 
-		private readonly IThemesManager mThemesManager = null;
+		private readonly IThemesManager _ThemesManager = null;
 		#endregion fields
 
 		#region constructor
@@ -33,10 +33,10 @@
 		/// </summary>
 		public SettingsManager(IThemesManager themesManager)
 		{
-			this.mThemesManager = themesManager;
+			_ThemesManager = themesManager;
 
-			this.SettingData = new Options(this.mThemesManager);
-			this.SessionData = new Profile();
+			SettingData = new Options(_ThemesManager);
+			SessionData = new Profile();
 		}
 		#endregion constructor
 
@@ -50,16 +50,16 @@
 		{
 			get
 			{
-				if (this._SettingData == null)
-					this._SettingData = new Options(this.mThemesManager);
+				if (_SettingData == null)
+					_SettingData = new Options(_ThemesManager);
 
-				return this._SettingData;
+				return _SettingData;
 			}
 
 			private set
 			{
-				if (this._SettingData != value)
-					this._SettingData = value;
+				if (_SettingData != value)
+					_SettingData = value;
 			}
 		}
 
@@ -104,30 +104,7 @@
 			////                                      SystemParameters_VirtualScreenTop);
 		}
 
-		#region Load Save ProgramOptions
-		/// <summary>
-		/// Load program options from persistence.
-		/// See <seealso cref="SaveOptions"/> to save program options on program end.
-		/// </summary>
-		/// <param name="settingsFileName"></param>
-		/// <param name="themesManager"></param>
-		/// <returns></returns>
-		private void LoadOptions(string settingsFileName,
-								 IThemesManager themesManager,
-                                 IOptions programSettings = null)
-		{
-			IOptions loadedModel = null;
-
-			if (programSettings != null)
-				loadedModel = programSettings;
-			else                                     // Get a fresh copy from persistence
-				loadedModel = SettingsManager.LoadOptions(settingsFileName, themesManager);
-
-            // Data has just been loaded from persistence (or default) so its not dirty for sure
-            loadedModel.SetDirtyFlag(false);
-			this.SettingData = loadedModel;
-		}
-
+        #region Load Save ProgramOptions
         /// <summary>
         /// Async method to load program options from persistence (without blocking UI thread).
         /// See <seealso cref="SaveOptions"/> to load program options on program start.
@@ -135,11 +112,11 @@
         /// <param name="settingsFileName"></param>
         /// <param name="themesManager"></param>
         /// <returns></returns>
-        public Task LoadOptionsAsync(string settingsFileName,
-                                     IThemesManager themesManager,
-                                     IOptions programSettings = null)
+        public Task<IOptions> LoadOptionsAsync(string settingsFileName,
+                                               IThemesManager themesManager,
+                                               IOptions programSettings = null)
         {
-            return Task.Run(() => { LoadOptions(settingsFileName, themesManager, programSettings); });
+            return Task.Run(() => { return LoadOptions(settingsFileName, themesManager, programSettings); });
         }
 
         /// <summary>
@@ -149,8 +126,33 @@
         /// <param name="settingsFileName"></param>
         /// <param name="themesManager"></param>
         /// <returns></returns>
-        public static IOptions LoadOptions(string settingsFileName
-                                        , IThemesManager themesManager)
+        private IOptions LoadOptions(string settingsFileName,
+								 IThemesManager themesManager,
+                                 IOptions programSettings = null)
+		{
+			IOptions loadedModel = null;
+
+			if (programSettings != null)
+				loadedModel = programSettings;
+			else                                     // Get a fresh copy from persistence
+				loadedModel = LoadOptionsImpl(settingsFileName, themesManager);
+
+            // Data has just been loaded from persistence (or default) so its not dirty for sure
+            loadedModel.SetDirtyFlag(false);
+			SettingData = loadedModel;
+
+            return loadedModel;
+        }
+
+        /// <summary>
+        /// Load program options from persistence.
+        /// See <seealso cref="SaveOptions"/> to save program options on program end.
+        /// </summary>
+        /// <param name="settingsFileName"></param>
+        /// <param name="themesManager"></param>
+        /// <returns></returns>
+        private IOptions LoadOptionsImpl(string settingsFileName
+                                       , IThemesManager themesManager)
 		{
 			Options loadedModel = null;
 
@@ -194,19 +196,6 @@
 
 			return loadedModel;
 		}
-
-        /// <summary>
-        /// Async method to load program options from persistence (avoids blocking the UI thread).
-        /// See <seealso cref="SaveOptions"/> to save program options on program end.
-        /// </summary>
-        /// <param name="settingsFileName"></param>
-        /// <param name="themesManager"></param>
-        /// <returns></returns>
-		public static async Task<IOptions> LoadOptionsAsync(string settingsFileName
-                                                         , IThemesManager themesManager)
-        {
-            return await Task.Run(() => { return LoadOptions(settingsFileName, themesManager); });
-        }
 
         /// <summary>
         /// Save program options into persistence.

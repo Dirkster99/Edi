@@ -7,7 +7,6 @@ namespace Edi
     using Core;
     using Core.Interfaces;
     using Documents.Module;
-    using Settings;
     using Settings.Interfaces;
     using Themes.Interfaces;
     using Files.Module;
@@ -29,18 +28,18 @@ namespace Edi
         #region fields
         protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private MainWindow _MainWin = null;
-        private IApplicationViewModel appVM = null;
+        private MainWindow _MainWin;
+        private IApplicationViewModel _AppVM;
 
-        private readonly StartupEventArgs mEventArgs;
-        private readonly App mApp = null;
+        private readonly StartupEventArgs _EventArgs;
+        private readonly App _App;
 
-        private readonly IMessageBoxService _MsgBox = null;
-        private readonly IMRUListViewModel _MruVM = null;
+        private readonly IMessageBoxService _MsgBox;
+        private readonly IMRUListViewModel _MruVM;
 
-        private readonly IOptions mOptions = null;
-        private readonly IThemesManager mThemes = null;
-        private readonly ISettingsManager mProgramSettingsManager = null;
+        private readonly IOptions _Options;
+        private readonly IThemesManager _Themes;
+        private readonly ISettingsManager _ProgramSettingsManager;
         #endregion fields
 
         /// <summary>
@@ -53,20 +52,32 @@ namespace Edi
         }
 
         #region constructors
+        /// <summary>
+        /// Class constructor
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="eventArgs"></param>
+        /// <param name="programSettings"></param>
+        /// <param name="themesManager"></param>
+        /// <param name="settingsManager"></param>
         public Bootstapper(App app,
                            StartupEventArgs eventArgs,
                            IOptions programSettings,
-                           IThemesManager themesManager)
+                           IThemesManager themesManager,
+                           ISettingsManager settingsManager)
             : this()
         {
-            mThemes = themesManager;
-            mProgramSettingsManager = new SettingsManager(mThemes);
+            _Themes = themesManager;
+            _ProgramSettingsManager = settingsManager;
 
-            mEventArgs = eventArgs;
-            mApp = app;
-            mOptions = programSettings;
+            _EventArgs = eventArgs;
+            _App = app;
+            _Options = programSettings;
         }
 
+        /// <summary>
+        /// Hidden class constructor
+        /// </summary>
         protected Bootstapper()
         {
             _MsgBox = new MessageBoxService();
@@ -80,7 +91,7 @@ namespace Edi
         {
             get
             {
-                return appVM;
+                return _AppVM;
             }
         }
 
@@ -108,27 +119,27 @@ namespace Edi
                 // Register imported tool window definitions with Avalondock
                 var toolWindowRegistry = Container.GetExportedValue<IToolWindowRegistry>();
 
-                MEFLoadFiles.Initialize(appVM.AdLayout,
-                                        mProgramSettingsManager,
+                MEFLoadFiles.Initialize(_AppVM.AdLayout,
+                                        _ProgramSettingsManager,
                                         toolWindowRegistry,
-                                        appVM as IFileOpenService);
+                                        _AppVM as IFileOpenService);
 
                 toolWindowRegistry.PublishTools();
 
 
                 // Show the startpage if application starts for the very first time
                 // (This requires that command binding was succesfully done before this line)
-                if (appVM.AdLayout.LayoutSoure == Core.Models.Enums.LayoutLoaded.FromDefault)
+                if (_AppVM.AdLayout.LayoutSoure == Core.Models.Enums.LayoutLoaded.FromDefault)
                     AppCommand.ShowStartPage.Execute(null, null);
 
-                if (mEventArgs != null)
-                    ProcessCmdLine(mEventArgs.Args, appVM);
+                if (_EventArgs != null)
+                    ProcessCmdLine(_EventArgs.Args, _AppVM);
 
                 // PRISM modules (and everything else) have been initialized if we got here
                 var output = Container.GetExportedValue<IMessageManager>();
                 output.Output.AppendLine("Get involved at: https://github.com/Dirkster99/Edi");
 
-                appVM.EnableMainWindowActivated(true);
+                _AppVM.EnableMainWindowActivated(true);
             }
             catch (Exception exp)
             {
@@ -162,17 +173,17 @@ namespace Edi
                 var appCore = Container.GetExportedValue<IAppCoreModel>();
 
                 // Setup localtion of config files
-                mProgramSettingsManager.AppDir = appCore.DirAppData;
-                mProgramSettingsManager.LayoutFileName = appCore.LayoutFileName;
+                _ProgramSettingsManager.AppDir = appCore.DirAppData;
+                _ProgramSettingsManager.LayoutFileName = appCore.LayoutFileName;
 
                 var avLayout = Container.GetExportedValue<IAvalonDockLayoutViewModel>();
-                appVM = Container.GetExportedValue<IApplicationViewModel>();
+                _AppVM = Container.GetExportedValue<IApplicationViewModel>();
 
                 var toolWindowRegistry = Container.GetExportedValue<IToolWindowRegistry>();
 
                 var task = Task.Run(async () => // Off Loading Load Programm Settings to non-UI thread
                 {
-                    await appVM.LoadConfigOnAppStartupAsync(mOptions, mProgramSettingsManager, mThemes);
+                    await _AppVM.LoadConfigOnAppStartupAsync(_Options, _ProgramSettingsManager, _Themes);
                 });
                 task.Wait(); // Block this to ensure that results are usable in MainWindow construction
 
@@ -184,10 +195,10 @@ namespace Edi
 
                 if (_MainWin != null)
                 {
-                    ConstructMainWindowSession(appVM, _MainWin, mProgramSettingsManager);
+                    ConstructMainWindowSession(_AppVM, _MainWin, _ProgramSettingsManager);
 
-                    if (mApp.AppIsShuttingDown == false)
-                        mApp.ShutdownMode = ShutdownMode.OnLastWindowClose;
+                    if (_App.AppIsShuttingDown == false)
+                        _App.ShutdownMode = ShutdownMode.OnLastWindowClose;
                     ////this.mMainWin.Show();
                 }
                 else
@@ -200,8 +211,8 @@ namespace Edi
                 try
                 {
                     // Cannot set shutdown mode when application is already shuttong down
-                    if (mApp.AppIsShuttingDown == false)
-                        mApp.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+                    if (_App.AppIsShuttingDown == false)
+                        _App.ShutdownMode = ShutdownMode.OnExplicitShutdown;
                 }
                 catch (Exception exp1)
                 {
@@ -228,8 +239,8 @@ namespace Edi
                 _MsgBox.Show(exp, Strings.STR_MSG_ERROR_FINDING_RESOURCE
                            , MsgBoxButtons.OKCopy, MsgBoxImage.Error);
 
-                if (mApp.AppIsShuttingDown == false)
-                    mApp.Shutdown();
+                if (_App.AppIsShuttingDown == false)
+                    _App.Shutdown();
             }
 
             return _MainWin;
@@ -279,8 +290,8 @@ namespace Edi
             //
             // http://msdn.microsoft.com/en-us/library/ff921140%28v=pandp.40%29.aspx
             //
-            Container.ComposeExportedValue<ISettingsManager>(mProgramSettingsManager);
-            Container.ComposeExportedValue<IThemesManager>(mThemes);
+            Container.ComposeExportedValue<ISettingsManager>(_ProgramSettingsManager);
+            Container.ComposeExportedValue<IThemesManager>(_Themes);
         }
         #endregion Methods
 

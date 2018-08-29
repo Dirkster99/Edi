@@ -33,9 +33,9 @@
         /// </summary>
         /// <param name="settingsFileName"></param>
         /// <returns></returns>
-        Task LoadOptionsAsync(string settingsFileName,
-                              IThemesManager themesManager,
-                              IOptions programSettings = null);
+        Task<IOptions> LoadOptionsAsync(string settingsFileName,
+                                        IThemesManager themesManager,
+                                        IOptions programSettings = null);
 
         /// <summary>
         /// Save program options into persistence.

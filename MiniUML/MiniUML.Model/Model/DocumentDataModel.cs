@@ -118,7 +118,7 @@
             get
             {
                 this.VerifyAccess();
-                return (this._HasUnsavedData);
+                return (_HasUnsavedData);
             }
         }
 
@@ -256,7 +256,7 @@
 
             this.ClearUndoRedo();
             this.mMaxId = 0;
-            this._HasUnsavedData = false;
+            _HasUnsavedData = false;
 
             this.State = ModelState.Ready;
 
@@ -284,7 +284,7 @@
                     this.SetDocRoot(newDocumentRoot, coll);
 
                 this.ClearUndoRedo();
-                this._HasUnsavedData = false;
+                _HasUnsavedData = false;
                 this.mMaxId = 0;
 
                 this.State = ModelState.Ready;
@@ -339,7 +339,7 @@
                 if (_DocRoot.Count > 0)
                     fragment = this.GetShapesAsXmlString(_DocRoot);
 
-                _RedoList.AddFirst(new UndoState(fragment, this._HasUnsavedData));
+                _RedoList.AddFirst(new UndoState(fragment, _HasUnsavedData));
                 _UndoList.RemoveFirst();
 
                 // Reload shape collection from this Xml formated (persistence) undo state
@@ -369,14 +369,14 @@
 
             if (HasRedoData)
             {
-                UndoState undoState = this._RedoList.First.Value;
+                UndoState undoState = _RedoList.First.Value;
 
                 string fragment = string.Empty;
 
                 if (_DocRoot.Count > 0)
                     fragment = this.GetShapesAsXmlString(_DocRoot);
 
-                _UndoList.AddFirst(new UndoState(fragment, this._HasUnsavedData));
+                _UndoList.AddFirst(new UndoState(fragment, _HasUnsavedData));
                 _RedoList.RemoveFirst();
 
                 // Reload shape collection from this Xml formated (persistence) undo state
@@ -432,7 +432,7 @@
 
             this.VerifyState(ModelState.Busy);
 
-            if (--this._OperationLevel == 0)
+            if (--_OperationLevel == 0)
                 this.State = ModelState.Ready;
         }
 
@@ -646,7 +646,7 @@
             if (_DocRoot.Count > 0)
                 fragment = this.GetShapesAsXmlString(_DocRoot);
 
-            this.mPendingUndoState = new UndoState(fragment, this._HasUnsavedData);
+            this.mPendingUndoState = new UndoState(fragment, _HasUnsavedData);
         }
 
         /// <summary>
@@ -662,11 +662,11 @@
             if (this.mPendingUndoState.DocumentRootXml == this.SaveDocument())
                 return;
 
-            if (this._UndoList.First == null || this._UndoList.First.Value.DocumentRootXml != this.mPendingUndoState.DocumentRootXml)
+            if (_UndoList.First == null || _UndoList.First.Value.DocumentRootXml != this.mPendingUndoState.DocumentRootXml)
             {
-                this._UndoList.AddFirst(this.mPendingUndoState);
-                this._RedoList.Clear();
-                this._HasUnsavedData = true;
+                _UndoList.AddFirst(this.mPendingUndoState);
+                _RedoList.Clear();
+                _HasUnsavedData = true;
 
                 this.SendPropertyChanged("HasUndoData", "HasRedoData", "HasUnsavedData");
             }
@@ -674,8 +674,8 @@
 
         private void ClearUndoRedo()
         {
-            this._UndoList.Clear();
-            this._RedoList.Clear();
+            _UndoList.Clear();
+            _RedoList.Clear();
         }
 
         private void SetDocRoot(PageViewModelBase newDocumentRoot,

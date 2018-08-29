@@ -22,6 +22,7 @@ namespace Edi
     using MLib.Interfaces;
     using MLib;
     using Edi.Settings.Interfaces;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Interaction logic for App.xaml
@@ -129,10 +130,15 @@ namespace Edi
 
             IOptions options = null;
             IThemesManager themesManager = Factory.CreateThemeManager();
+            ISettingsManager settingsManager = new SettingsManager(themesManager);
 
             try
             {
-                options = SettingsManager.LoadOptions(AppHelpers.DirFileAppSettingsData, themesManager);
+                var task = Task.Run(async () => // Off Loading Load Programm Settings to non-UI thread
+                {
+                    options = await settingsManager.LoadOptionsAsync(AppHelpers.DirFileAppSettingsData, themesManager);
+                });
+                task.Wait(); // Block this to ensure that results are usable in next steps of sequence
 
                 Thread.CurrentThread.CurrentCulture = new CultureInfo(options.LanguageSelected);
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(options.LanguageSelected);
@@ -161,7 +167,7 @@ namespace Edi
 
             try
             {
-                mBoot = new Bootstapper(this, e, options, themesManager);
+                mBoot = new Bootstapper(this, e, options, themesManager, settingsManager);
                 mBoot.Run();
             }
             catch (Exception exp)
