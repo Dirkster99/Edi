@@ -56,11 +56,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{2A4570
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binaries", "Binaries", "{360B7D15-E5FE-4FA5-8370-EAD96DC15107}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AvalonDock", "AvalonDock", "{0DE42A50-180D-4DD3-ABF6-BB1FFB5A3D28}"
 	ProjectSection(SolutionItems) = preProject
-		02_Libs\AvalonDock\Xceed.Wpf.AvalonDock.dll = 02_Libs\AvalonDock\Xceed.Wpf.AvalonDock.dll
-		02_Libs\AvalonDock\Xceed.Wpf.AvalonDock.Themes.VS2013.dll = 02_Libs\AvalonDock\Xceed.Wpf.AvalonDock.Themes.VS2013.dll
+		02_Libs\00_bin\YalvLib\YalvLib.dll = 02_Libs\00_bin\YalvLib\YalvLib.dll
 	EndProjectSection
 EndProject
 Global
@@ -299,10 +296,9 @@ Global
 		{8DEA0927-9BD3-442F-AD3B-5F0C9E3186F6} = {39FEC70F-8F35-4A04-B770-59F12A0CE83F}
 		{69BC833C-0FE1-4288-BB80-BB457D07E638} = {39FEC70F-8F35-4A04-B770-59F12A0CE83F}
 		{31B14E7F-36E2-464A-A90A-64A07DEB02EB} = {39FEC70F-8F35-4A04-B770-59F12A0CE83F}
-		{0DE42A50-180D-4DD3-ABF6-BB1FFB5A3D28} = {360B7D15-E5FE-4FA5-8370-EAD96DC15107}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_NeutralResourcesLanguage = en-US
 		SolutionGuid = {132D3B9F-A6CB-49D9-B1E6-F122CCC2510E}
+		RESX_NeutralResourcesLanguage = en-US
 	EndGlobalSection
 EndGlobal
