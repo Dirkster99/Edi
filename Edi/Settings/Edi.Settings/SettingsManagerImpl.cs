@@ -110,9 +110,9 @@
         /// <param name="settingsFileName"></param>
         /// <param name="themesManager"></param>
         /// <returns></returns>
-        Task<IOptions> ISettingsManager.LoadOptionsAsync(string settingsFileName,
-                                                         IThemesManager themesManager,
-                                                         IOptions programSettings = null)
+        public Task<IOptions> LoadOptionsAsync(string settingsFileName,
+                                               IThemesManager themesManager,
+                                               IOptions programSettings = null)
         {
             return Task.Run(() => { return LoadOptions(settingsFileName, themesManager, programSettings); });
         }
