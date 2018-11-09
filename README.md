@@ -2,7 +2,7 @@
 [![Release](https://img.shields.io/github/release/Dirkster99/Edi.svg)](https://github.com/Dirkster99/Edi/releases/latest)  [Continues Integration](https://github.com/Dirkster99/Edi/wiki/Testing-with-Zip-file-from-AppVeyors-Continues-Integration)
 # Edi
 
-Edi - The open source integrated development environment (IDE) based on [AvalonDock](https://github.com/Dirkster99/AvalonDock), [AvalonEdit](https://github.com/icsharpcode/AvalonEdit), and [Prism](https://github.com/PrismLibrary/Prism).
+Edi - The open source integrated development environment (IDE) based on [AvalonDock](https://github.com/Dirkster99/AvalonDock), [AvalonEdit](https://github.com/icsharpcode/AvalonEdit), and [Castle Windsor](https://github.com/castleproject/Windsor).
 
 # Screenshots
 * [File Explorer Tool Window](https://github.com/Dirkster99/Edi/wiki/File-Explorer-Tool-Window)
