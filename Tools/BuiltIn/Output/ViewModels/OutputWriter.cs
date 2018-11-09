@@ -1,10 +1,10 @@
 namespace Output.ViewModels
 {
-	using System.IO;
-	using System.Text;
-	using Edi.Core.Interfaces;
+    using System.IO;
+    using System.Text;
+    using Edi.Interfaces.MessageManager;
 
-	internal class OutputWriter : TextWriter
+    internal class OutputWriter : TextWriter
 	{
 		private readonly IOutput _output;
 

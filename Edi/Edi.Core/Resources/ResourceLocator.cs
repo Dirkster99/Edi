@@ -4,7 +4,6 @@ namespace Edi.Core.Resources
     using System.Linq;
     using System.Reflection;
     using System.Windows;
-    using CommonServiceLocator;
     using log4net;
     using MsgBox;
 
@@ -66,8 +65,8 @@ namespace Edi.Core.Resources
             {
                 Logger.Error($"Error Loading resource \'Exception:\': {exp.Message}");
 
-                var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                msgBox.Show(exp, "Error loading internal resource.", MsgBoxButtons.OK, MsgBoxImage.Error);
+/////                var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
+/////                msgBox.Show(exp, "Error loading internal resource.", MsgBoxButtons.OK, MsgBoxImage.Error);
             }
 
             return default(T);

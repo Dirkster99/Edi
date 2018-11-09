@@ -1,20 +1,19 @@
 ﻿namespace Edi.Apps.Views
 {
-	using System;
-	using System.IO;
-	using System.Windows;
-	using System.Windows.Controls;
-	using System.Windows.Input;
-	using System.Windows.Threading;
-	using Events;
-	using Xceed.Wpf.AvalonDock;
-	using Xceed.Wpf.AvalonDock.Layout;
-	using Xceed.Wpf.AvalonDock.Layout.Serialization;
+    using System;
+    using System.IO;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Threading;
+    using Edi.Interfaces.Events;
+    using Xceed.Wpf.AvalonDock;
+    using Xceed.Wpf.AvalonDock.Layout;
+    using Xceed.Wpf.AvalonDock.Layout.Serialization;
 
-	/// <summary>
-	/// Interaction logic for AvalonDockView.xaml
-	/// </summary>
-	[TemplatePartAttribute(Name = "PART_DockView", Type = typeof(DockingManager))]
+    /// <summary>
+    /// Interaction logic for AvalonDockView.xaml
+    /// </summary>
+    [TemplatePartAttribute(Name = "PART_DockView", Type = typeof(DockingManager))]
 	public partial class AvalonDockView : UserControl
 	{
 		#region fields
@@ -22,10 +21,10 @@
 
 		private DockingManager _mDockManager;
 
-		private DataTemplateSelector _mLayoutItemTemplateSelector;
-		private DataTemplate _mDocumentHeaderTemplate;
-		private StyleSelector _mLayoutItemContainerStyleSelector;
-		private ILayoutUpdateStrategy _mLayoutUpdateStrategy;
+		private DataTemplateSelector _LayoutItemTemplateSelector;
+		private DataTemplate _DocumentHeaderTemplate;
+		private StyleSelector _LayoutItemContainerStyleSelector;
+		private ILayoutUpdateStrategy _LayoutUpdateStrategy;
 
 		private string _mOnLoadXmlLayout;
 		#endregion fields
@@ -45,7 +44,6 @@
 		/// </summary>
 		public AvalonDockView()
 		{
-			//// this.InitializeComponent();
 			LayoutId = Guid.NewGuid();
 		}
 		#endregion constructor
@@ -104,29 +102,28 @@
 			_mDockManager = Template.FindName("PART_DockView", this) as DockingManager;
 
 			SetCustomLayoutItems();
-			////this.LoadXmlLayout(this.mOnLoadXmlLayout);
+            ////this.LoadXmlLayout(this.mOnLoadXmlLayout);
 		}
 
-
-		/// <summary>
-		/// Class Constructor
-		/// </summary>
-		/// <param name="paneSel"></param>
-		/// <param name="documentHeaderTemplate"></param>
-		/// <param name="panesStyleSelector"></param>
-		/// <param name="layoutInitializer"></param>
-		/// <param name="layoutId"></param>
-		public void SetTemplates(DataTemplateSelector paneSel,
-								 DataTemplate documentHeaderTemplate,
-								 StyleSelector panesStyleSelector,
-								 ILayoutUpdateStrategy layoutInitializer,
-								 Guid layoutId
+        /// <summary>
+        /// Class Constructor
+        /// </summary>
+        /// <param name="paneSel"></param>
+        /// <param name="documentHeaderTemplate"></param>
+        /// <param name="panesStyleSelector"></param>
+        /// <param name="layoutInitializer"></param>
+        /// <param name="layoutId"></param>
+        public void InitTemplates(DataTemplateSelector paneSel,
+								  DataTemplate documentHeaderTemplate,
+								  StyleSelector panesStyleSelector,
+								  ILayoutUpdateStrategy layoutInitializer,
+								  Guid layoutId
 								)
 		{
-			_mLayoutItemTemplateSelector = paneSel;
-			_mDocumentHeaderTemplate = documentHeaderTemplate;
-			_mLayoutItemContainerStyleSelector = panesStyleSelector;
-			_mLayoutUpdateStrategy = layoutInitializer;
+			_LayoutItemTemplateSelector = paneSel;
+			_DocumentHeaderTemplate = documentHeaderTemplate;
+			_LayoutItemContainerStyleSelector = panesStyleSelector;
+			_LayoutUpdateStrategy = layoutInitializer;
 			LayoutId = layoutId;
 
 			if (_mDockManager == null)
@@ -137,14 +134,13 @@
 
 		#region Workspace Layout Management
 		/// <summary>
-		/// Is executed when PRISM sends an Xml layout string notification
-		/// via a sender which could be a viewmodel that wants to receive
-		/// the load <seealso cref="LoadLayoutEvent"/>.
+		/// Is executed when subscriber (viewmodel) sends an Xml layout string
+        /// notification that wants to receive the load <seealso cref="LoadLayoutEvent"/>.
 		/// 
 		/// Save layout is triggered by the containing window onClosed event.
 		/// </summary>
 		/// <param name="args"></param>
-		public void OnLoadLayout(LoadLayoutEventArgs args)
+		public void OnLoadLayout(object sender, LoadLayoutEventArgs args)
 		{
 			if (args == null)
 				return;
@@ -233,23 +229,18 @@
 			if (_mDockManager == null)
 				return;
 
-			if (_mLayoutItemTemplateSelector != null)
-				_mDockManager.LayoutItemTemplateSelector = _mLayoutItemTemplateSelector;
+			if (_LayoutItemTemplateSelector != null)
+				_mDockManager.LayoutItemTemplateSelector = _LayoutItemTemplateSelector;
 
-			if (_mDocumentHeaderTemplate != null)
-				_mDockManager.DocumentHeaderTemplate = _mDocumentHeaderTemplate;
+			if (_DocumentHeaderTemplate != null)
+				_mDockManager.DocumentHeaderTemplate = _DocumentHeaderTemplate;
 
-			if (_mLayoutItemContainerStyleSelector != null)
-				_mDockManager.LayoutItemContainerStyleSelector = _mLayoutItemContainerStyleSelector;
+			if (_LayoutItemContainerStyleSelector != null)
+				_mDockManager.LayoutItemContainerStyleSelector = _LayoutItemContainerStyleSelector;
 
-			if (_mLayoutUpdateStrategy != null)
-				_mDockManager.LayoutUpdateStrategy = _mLayoutUpdateStrategy;
+			if (_LayoutUpdateStrategy != null)
+				_mDockManager.LayoutUpdateStrategy = _LayoutUpdateStrategy;
 		}
 		#endregion methods
-
-		protected override void OnKeyDown(KeyEventArgs e)
-		{
-			base.OnKeyDown(e);
-		}
 	}
 }

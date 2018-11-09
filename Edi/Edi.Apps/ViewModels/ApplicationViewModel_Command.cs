@@ -1,6 +1,5 @@
 ﻿namespace Edi.Apps.ViewModels
 {
-	using CommonServiceLocator;
 	using Enums;
 	using Core;
 	using Core.Interfaces;
@@ -25,7 +24,7 @@
 	{
 		private bool Closing_CanExecute()
 		{
-			return !_mShutDownInProgress;
+			return !_ShutDownInProgress;
 
 			// Check if conditions within the WorkspaceViewModel are suitable to close the application
 			// eg.: Prompt to Cancel long running background tasks such as Search - Replace in Files (if any)
@@ -146,9 +145,9 @@
 				catch (Exception exp)
 				{
 					Logger.Error(exp.Message, exp);
-					_msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-								 _mAppCore.IssueTrackerLink,
-								 _mAppCore.IssueTrackerLink,
+					_MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+								 _AppCore.IssueTrackerLink,
+								 _AppCore.IssueTrackerLink,
 								 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
 				}
 			},
@@ -181,9 +180,9 @@
                 catch (Exception exp)
 				{
 					Logger.Error(exp.Message, exp);
-					_msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-								 _mAppCore.IssueTrackerLink,
-								 _mAppCore.IssueTrackerLink,
+					_MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+								 _AppCore.IssueTrackerLink,
+								 _AppCore.IssueTrackerLink,
 								 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
 				}
 			}));
@@ -200,14 +199,9 @@
 
 			win.CommandBindings.Add(new CommandBinding(AppCommand.ShowStartPage,
 			(s, e) =>
-			{
-				StartPageViewModel spage = GetStartPage(true);
-
-				if (spage == null) return;
-				Logger.InfoFormat("TRACE Before setting startpage as ActiveDocument");
-				ActiveDocument = spage;
-				Logger.InfoFormat("TRACE After setting startpage as ActiveDocument");
-			}));
+            {
+                ShowStartPage();
+            }));
 
 			win.CommandBindings.Add(new CommandBinding(AppCommand.ToggleOptimizeWorkspace,
 			(s, e) =>
@@ -222,8 +216,8 @@
 				catch (Exception exp)
 				{
 					Logger.Error(exp.Message, exp);
-					_msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-								 _mAppCore.IssueTrackerLink, _mAppCore.IssueTrackerLink,
+					_MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+								 _AppCore.IssueTrackerLink, _AppCore.IssueTrackerLink,
 								 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
 				}
 			}));
@@ -250,8 +244,8 @@
 				catch (Exception exp)
 				{
 					Logger.Error(exp.Message, exp);
-					_msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-								 _mAppCore.IssueTrackerLink, _mAppCore.IssueTrackerLink,
+					_MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+								 _AppCore.IssueTrackerLink, _AppCore.IssueTrackerLink,
 								 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
 				}
 			}));
@@ -270,9 +264,9 @@
 				catch (Exception exp)
 				{
 					Logger.Error(exp.Message, exp);
-					_msgBox.Show(exp, Util.Local.Strings.STR_MSG_UnknownError_Caption,
+					_MsgBox.Show(exp, Util.Local.Strings.STR_MSG_UnknownError_Caption,
 								 MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-								 _mAppCore.IssueTrackerLink, _mAppCore.IssueTrackerLink,
+								 _AppCore.IssueTrackerLink, _AppCore.IssueTrackerLink,
 								 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
 				}
 			},
@@ -293,18 +287,21 @@
 					if (e != null)
 						e.Handled = true;
 
-					if (ActiveDocument == null) return;
-					if (!OnSave(ActiveDocument, true)) return;
-					var mruList = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
-					mruList.UpdateEntry(ActiveDocument.FilePath);
+					if (ActiveDocument == null)
+                        return;
+
+                    if (!OnSave(ActiveDocument, true))
+                        return;
+
+					_MruVM.UpdateEntry(ActiveDocument.FilePath);
 					_SettingsManager.SessionData.LastActiveFile = ActiveDocument.FilePath;
 				}
 				catch (Exception exp)
 				{
 					Logger.Error(exp.Message, exp);
-					_msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-								 _mAppCore.IssueTrackerLink,
-								 _mAppCore.IssueTrackerLink,
+					_MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+								 _AppCore.IssueTrackerLink,
+								 _AppCore.IssueTrackerLink,
 								 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
 				}
 			},
@@ -324,9 +321,9 @@
 				catch (Exception exp)
 				{
 					Logger.Error(exp.Message, exp);
-					_msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-								 _mAppCore.IssueTrackerLink,
-								 _mAppCore.IssueTrackerLink,
+					_MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+								 _AppCore.IssueTrackerLink,
+								 _AppCore.IssueTrackerLink,
 								 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
 				}
 			}
@@ -339,7 +336,7 @@
 				try
 				{
 					// Save all edited documents
-					if (_mFiles != null)               // Close all open files and make sure there are no unsaved edits
+					if (_Files != null)               // Close all open files and make sure there are no unsaved edits
 					{                                     // If there are any: Ask user if edits should be saved
 						IFileBaseViewModel activeDoc = ActiveDocument;
 
@@ -355,7 +352,7 @@
 						}
 						catch (Exception exp)
 						{
-							_msgBox.Show(exp.ToString(), Util.Local.Strings.STR_MSG_UnknownError_Caption, MsgBoxButtons.OK);
+							_MsgBox.Show(exp.ToString(), Util.Local.Strings.STR_MSG_UnknownError_Caption, MsgBoxButtons.OK);
 						}
 						finally
 						{
@@ -370,9 +367,9 @@
 				catch (Exception exp)
 				{
 					Logger.Error(exp.Message, exp);
-					_msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-								 _mAppCore.IssueTrackerLink,
-								 _mAppCore.IssueTrackerLink,
+					_MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+								 _AppCore.IssueTrackerLink,
+								 _AppCore.IssueTrackerLink,
 								 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
 				}
 			}));
@@ -391,9 +388,9 @@
 				catch (Exception exp)
 				{
 					Logger.Error(exp.Message, exp);
-					_msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-								 _mAppCore.IssueTrackerLink,
-								 _mAppCore.IssueTrackerLink,
+					_MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+								 _AppCore.IssueTrackerLink,
+								 _AppCore.IssueTrackerLink,
 								 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
 				}
 			},
@@ -419,9 +416,9 @@
 				catch (Exception exp)
 				{
 					Logger.Error(exp.Message, exp);
-					_msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-								 _mAppCore.IssueTrackerLink,
-								 _mAppCore.IssueTrackerLink,
+					_MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+								 _AppCore.IssueTrackerLink,
+								 _AppCore.IssueTrackerLink,
 								 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
 				}
 			},
@@ -436,7 +433,7 @@
 			win.CommandBindings.Add(new CommandBinding(AppCommand.ClearAllMruItemsCommand,
 			(s, e) =>
 			{
-				GetToolWindowVm<RecentFilesViewModel>().MruList.Clear();
+				GetToolWindowVm<RecentFilesTWViewModel>().MruList.Clear();
 			}));
 
 			// <summary>
@@ -452,7 +449,7 @@
 
 				var param = (GroupType)e.Parameter;
 
-				GetToolWindowVm<RecentFilesViewModel>().MruList.RemoveEntryOlderThanThis(param);
+				GetToolWindowVm<RecentFilesTWViewModel>().MruList.RemoveEntryOlderThanThis(param);
 			},
 			(s, e) =>
 			{
@@ -473,7 +470,7 @@
 
 				var param = (IMRUEntryViewModel)e.Parameter;
 
-				GetToolWindowVm<RecentFilesViewModel>().MruList.MovePinnedEntry(MoveMRUItem.Up, param);
+				GetToolWindowVm<RecentFilesTWViewModel>().MruList.MovePinnedEntry(MoveMRUItem.Up, param);
 			},
 			(s, e) =>
 			{
@@ -500,7 +497,7 @@
 
 				var param = (IMRUEntryViewModel)e.Parameter;
 
-				GetToolWindowVm<RecentFilesViewModel>().MruList.MovePinnedEntry(MoveMRUItem.Down, param);
+				GetToolWindowVm<RecentFilesTWViewModel>().MruList.MovePinnedEntry(MoveMRUItem.Down, param);
 			},
 			(s, e) =>
 			{
@@ -522,7 +519,7 @@
 			win.CommandBindings.Add(new CommandBinding(AppCommand.PinItemCommand,
 			(s, e) =>
 			{
-				GetToolWindowVm<RecentFilesViewModel>().MruList.PinUnpinEntry(true, e.Parameter as IMRUEntryViewModel);
+				GetToolWindowVm<RecentFilesTWViewModel>().MruList.PinUnpinEntry(true, e.Parameter as IMRUEntryViewModel);
 			},
 			(s, e) =>
 			{
@@ -547,7 +544,7 @@
 				if (e.Parameter is IMRUEntryViewModel == false)
 					return;
 
-				GetToolWindowVm<RecentFilesViewModel>().MruList.PinUnpinEntry(false, (IMRUEntryViewModel) e.Parameter);
+				GetToolWindowVm<RecentFilesTWViewModel>().MruList.PinUnpinEntry(false, (IMRUEntryViewModel) e.Parameter);
 			},
 			(s, e) =>
 			{
@@ -584,6 +581,16 @@
 				AddMRUEntry_Executed(e.Parameter, e);
 			}));
 		}
+
+        public void ShowStartPage()
+        {
+            StartPageViewModel spage = GetStartPage(true);
+
+            if (spage == null) return;
+            Logger.InfoFormat("TRACE Before setting startpage as ActiveDocument");
+            ActiveDocument = spage;
+            Logger.InfoFormat("TRACE After setting startpage as ActiveDocument");
+        }
 
         /// <summary>
         /// This procedure changes the current WPF Application Theme into another theme
@@ -631,9 +638,9 @@
                         catch (Exception exp)
                         {
                             Logger.Error(exp.Message, exp);
-                            _msgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                                         _mAppCore.IssueTrackerLink,
-                                         _mAppCore.IssueTrackerLink,
+                            _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                                         _AppCore.IssueTrackerLink,
+                                         _AppCore.IssueTrackerLink,
                                          Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
                         }
                     }));
@@ -649,9 +656,9 @@
                 _SettingsManager.SettingData.CurrentTheme = oldTheme;
 
                 Logger.Error(exp.Message, exp);
-                _msgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-                             _mAppCore.IssueTrackerLink,
-                             _mAppCore.IssueTrackerLink,
+                _MsgBox.Show(exp, Edi.Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+                             _AppCore.IssueTrackerLink,
+                             _AppCore.IssueTrackerLink,
                              Edi.Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
             }
         }
@@ -676,9 +683,9 @@
 				catch (Exception exp)
 				{
 					Logger.Error(exp.Message, exp);
-					_msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-								 _mAppCore.IssueTrackerLink,
-								 _mAppCore.IssueTrackerLink,
+					_MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+								 _AppCore.IssueTrackerLink,
+								 _AppCore.IssueTrackerLink,
 								 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
 				}
 			},
@@ -708,9 +715,9 @@
 				catch (Exception exp)
 				{
 					Logger.Error(exp.Message, exp);
-					_msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-								 _mAppCore.IssueTrackerLink,
-								 _mAppCore.IssueTrackerLink,
+					_MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+								 _AppCore.IssueTrackerLink,
+								 _AppCore.IssueTrackerLink,
 								 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
 				}
 			},
@@ -728,9 +735,9 @@
 				catch (Exception exp)
 				{
 					Logger.Error(exp.Message, exp);
-					_msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-								 _mAppCore.IssueTrackerLink,
-								 _mAppCore.IssueTrackerLink,
+					_MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+								 _AppCore.IssueTrackerLink,
+								 _AppCore.IssueTrackerLink,
 								 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
 				}
 			},
@@ -757,9 +764,9 @@
 				catch (Exception exp)
 				{
 					Logger.Error(exp.Message, exp);
-					_msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-								 _mAppCore.IssueTrackerLink,
-								 _mAppCore.IssueTrackerLink,
+					_MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+								 _AppCore.IssueTrackerLink,
+								 _AppCore.IssueTrackerLink,
 								 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
 				}
 			},
@@ -787,9 +794,9 @@
 				catch (Exception exp)
 				{
 					Logger.Error(exp.Message, exp);
-					_msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-								 _mAppCore.IssueTrackerLink,
-								 _mAppCore.IssueTrackerLink,
+					_MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+								 _AppCore.IssueTrackerLink,
+								 _AppCore.IssueTrackerLink,
 								 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
 				}
 			},
@@ -807,9 +814,9 @@
 				catch (Exception exp)
 				{
 					Logger.Error(exp.Message, exp);
-					_msgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
-								 _mAppCore.IssueTrackerLink,
-								 _mAppCore.IssueTrackerLink,
+					_MsgBox.Show(exp, Util.Local.Strings.STR_MSG_IssueTrackerTitle, MsgBoxButtons.OK, MsgBoxImage.Error, MsgBoxResult.NoDefaultButton,
+								 _AppCore.IssueTrackerLink,
+								 _AppCore.IssueTrackerLink,
 								 Util.Local.Strings.STR_MSG_IssueTrackerText, null, true);
 				}
 			},

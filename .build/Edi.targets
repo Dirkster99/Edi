@@ -11,7 +11,7 @@
 
     <!-- Determines if project is a plugin and it needs to be deployed to the solution application plugins folder -->
     <DeployPlugin Condition=" '$(DeployPlugin)' == '' ">false</DeployPlugin>
-    
+
     <!-- Determines if project is the main application and it needs to be deployed to the solution application folder -->
     <DeployApplication Condition=" '$(DeployApplication)' == '' ">false</DeployApplication>
   </PropertyGroup>
@@ -28,13 +28,32 @@
       $(BuildDependsOn);
       DeployApplication;
     </BuildDependsOn>
+
+    <!-- Deploy MiniUML.View -->
+    <BuildDependsOn Condition="$(DeployApplication) == 'true'">
+      $(BuildDependsOn);
+      DeployMiniUMLView;
+    </BuildDependsOn>
+
+    <!-- Deploy Output toolwindow -->
+    <BuildDependsOn Condition="$(DeployApplication) == 'true'">
+      $(BuildDependsOn);
+      DeployOutput;
+    </BuildDependsOn>
+
+    <!-- Deploy Files toolwindow -->
+    <BuildDependsOn Condition="$(DeployApplication) == 'true'">
+      $(BuildDependsOn);
+      DeployFiles;
+    </BuildDependsOn>
   </PropertyGroup>
 
   <Target Name="DeployPlugin">
     <ItemGroup>
       <PluginFiles Include="$(TargetDir)**\*.*"/>
     </ItemGroup>
-    <Copy SourceFiles="@(PluginFiles)" DestinationFolder="$(PluginsTargetDir)$(TargetName)\%(RecursiveDir)"/>
+    <Copy SourceFiles="@(PluginFiles)"
+          DestinationFolder="$(PluginsTargetDir)$(TargetName)\%(RecursiveDir)"/>
     <!-- <Message Text=" %(PluginFiles.Identity)" Importance="High"/> -->
   </Target>
 
@@ -42,7 +61,54 @@
     <ItemGroup>
       <ApplicationFiles Include="$(TargetDir)**\*.*"/>
     </ItemGroup>
-    <Copy SourceFiles="@(ApplicationFiles)" DestinationFolder="$(ApplicationTargetDir)%(RecursiveDir)"/>
+    <Copy SourceFiles="@(ApplicationFiles)"
+          DestinationFolder="$(ApplicationTargetDir)%(RecursiveDir)"
+          ContinueOnError="false"
+          SkipUnchangedFiles="false"
+          />
     <!-- <Message Text=" %(ApplicationFiles.Identity)" Importance="High"/> -->
   </Target>
+
+  <Target Name="DeployMiniUMLView">
+    <!-- Deploy MiniUML.View assembly since its otherwise missing
+         because Edi's main project requires no additional reference -->
+    <ItemGroup>
+      <MiniUMLViewModul Include="$(SolutionDir)\MiniUML\MiniUML.View\bin\$(Configuration)\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(MiniUMLViewModul)"
+          DestinationFolder="$(ApplicationTargetDir)%(RecursiveDir)"
+          ContinueOnError="false"
+          SkipUnchangedFiles="false"
+          />
+    <!-- <Message Text=" %(MiniUMLViewModul.Identity)" Importance="High"/> -->
+  </Target>
+
+  <Target Name="DeployOutput">
+    <!-- Deploy Output assembly since its otherwise missing
+         because Edi's main project requires no additional reference -->
+    <ItemGroup>
+      <OutputModul Include="$(SolutionDir)\Tools\BuiltIn\Output\bin\$(Configuration)\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(OutputModul)"
+          DestinationFolder="$(ApplicationTargetDir)%(RecursiveDir)"
+          ContinueOnError="false"
+          SkipUnchangedFiles="false"
+        />
+    <!-- Message Text=" %(OutputModul.Identity)" Importance="High"/-->
+  </Target>
+
+  <Target Name="DeployFiles">
+    <!-- Deploy Files assembly since its otherwise missing
+         because Edi's main project requires no additional reference -->
+    <ItemGroup>
+      <FilesModul Include="$(SolutionDir)\Tools\BuiltIn\Files\bin\$(Configuration)\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(FilesModul)"
+          DestinationFolder="$(ApplicationTargetDir)%(RecursiveDir)"
+          ContinueOnError="false"
+          SkipUnchangedFiles="false"
+          />
+    <!-- Message Text=" %(FilesModul.Identity)" Importance="High"/-->
+  </Target>
+
 </Project>

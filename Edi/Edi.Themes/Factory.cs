@@ -1,6 +1,6 @@
 ﻿namespace Edi.Themes
 {
-    using Edi.Themes.Interfaces;
+    using Edi.Interfaces.Themes;
 
     /// <summary>
     /// Implements a <seealso cref="ThemesManager"/> factory.
@@ -23,11 +23,11 @@
         /// <summary>
         /// Gets the name of the default theme of this themes manager.
         /// </summary>
-        public  static string DefaultThemeName
+        public static string DefaultThemeName
         {
             get
             {
-                return ThemesManager.DefaultThemeName;
+                return ThemesManager.DefaultThemeNameString;
             }
         }
     }

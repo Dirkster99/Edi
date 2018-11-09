@@ -7,20 +7,25 @@ namespace Edi.Documents.ViewModels.StartPage
     using Core.ViewModels.Command;
     using MsgBox;
     using MRULib.MRU.Interfaces;
-    using CommonServiceLocator;
 
     public class StartPageViewModel : Core.ViewModels.FileBaseViewModel
     {
         #region fields
         public const string StartPageContentId = ">StartPage<";
+
+        private ICommand _closeCommand;
+        private ICommand _copyFullPathtoClipboard;
+        private ICommand _openContainingFolderCommand;
+        private readonly IMRUListViewModel _MruList;
         #endregion fields
 
         #region constructor
         /// <summary>
         /// Default constructor
         /// </summary>
-        public StartPageViewModel()
+        public StartPageViewModel(IMRUListViewModel MruList)
         {
+            _MruList = MruList;
             Title = Util.Local.Strings.STR_STARTPAGE_TITLE;
             StartPageTip = Util.Local.Strings.STR_STARTPAGE_WELCOME_TT;
             ContentId = StartPageContentId;
@@ -28,21 +33,15 @@ namespace Edi.Documents.ViewModels.StartPage
         #endregion constructor
 
         #region properties
-        #region CloseCommand
-
-        private RelayCommand<object> _closeCommand;
         public override ICommand CloseCommand
         {
             get
             {
-                return _closeCommand ?? (_closeCommand = new RelayCommand<object>((p) => OnClose(),
-                           (p) => CanClose()));
+                return _closeCommand ?? (_closeCommand = new RelayCommand<object>(
+                    (p) => OnClose(),
+                    (p) => CanClose()));
             }
         }
-        #endregion
-
-        #region OpenContainingFolder
-        private RelayCommand<object> _openContainingFolderCommand;
 
         /// <summary>
         /// Get open containing folder command which will open
@@ -58,28 +57,6 @@ namespace Edi.Documents.ViewModels.StartPage
             }
         }
 
-        private void OnOpenContainingFolderCommand()
-        {
-            try
-            {
-                // combine the arguments together it doesn't matter if there is a space after ','
-                string argument = @"/select, " + GetAlternativePath();
-
-                System.Diagnostics.Process.Start("explorer.exe", argument);
-            }
-            catch (Exception ex)
-            {
-                var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                msgBox.Show(string.Format(CultureInfo.CurrentCulture, "{0}\n'{1}'.", ex.Message, (FilePath == null ? string.Empty : FilePath)),
-                                            Util.Local.Strings.STR_FILE_FINDING_CAPTION,
-                                            MsgBoxButtons.OK, MsgBoxImage.Error);
-            }
-        }
-        #endregion OpenContainingFolder
-
-        #region CopyFullPathtoClipboard
-        private RelayCommand<object> _copyFullPathtoClipboard;
-
         /// <summary>
         /// Get CopyFullPathtoClipboard command which will copy
         /// the path of the executable into the windows clipboard.
@@ -93,25 +70,30 @@ namespace Edi.Documents.ViewModels.StartPage
             }
         }
 
-        private void OnCopyFullPathtoClipboardCommand()
+        /// <summary>
+        /// Gets the Uri of the Icon that AvalonDock should display for the StartPage document.
+        /// </summary>
+        public override Uri IconSource
         {
-            try
+            get
             {
-                System.Windows.Clipboard.SetText(GetAlternativePath());
-            }
-            catch
-            {
-                // ignored
+                return new Uri("pack://application:,,,/Edi.Themes;component/Images/Documents/document.png", UriKind.RelativeOrAbsolute);
             }
         }
-        #endregion CopyFullPathtoClipboard
 
-        public override Uri IconSource => new Uri("pack://application:,,,/Edi.Themes;component/Images/Documents/document.png", UriKind.RelativeOrAbsolute);
+        /// <summary>
+        /// Gets the MRU List viewmodel for display and editing within the Startpage.
+        /// </summary>
+        public IMRUListViewModel MruList { get { return _MruList; } }
 
-        public IMRUListViewModel MruList => ServiceLocator.Current.GetInstance<IMRUListViewModel>();
-
+        /// <summary>
+        /// Gets a tool tip describing the startpage in a short textual form to the user.
+        /// </summary>
         public string StartPageTip { get; set; }
 
+        /// <summary>
+        /// Gets whether the StartPage is Dirty (has changed data that needs persistence) or not.
+        /// </summary>
         public override bool IsDirty
         {
             get { return false; }
@@ -123,13 +105,17 @@ namespace Edi.Documents.ViewModels.StartPage
         }
 
         /// <summary>
-        /// Get whether edited data can be saved or not.
+        /// Gets whether edited data can be saved or not.
+        /// 
         /// This type of document does not have a save
         /// data implementation if this property returns false.
         /// (this is document specific and should always be overriden by descendents)
         /// </summary>
-        public override bool CanSaveData => false;
+        public override bool CanSaveData { get { return false; } }
 
+        /// <summary>
+        /// Gets a ContentId or actual path into the file system of this document.
+        /// </summary>
         public override string FilePath
         {
             get { return ContentId; }
@@ -137,8 +123,11 @@ namespace Edi.Documents.ViewModels.StartPage
             protected set { throw new NotSupportedException(); }
         }
 
-        public override string FileName => string.Empty;
-
+        /// <summary>
+        /// Gets the file name (document can be persisted) or
+        /// an empty string (document cannot be saved in file system).
+        /// </summary>
+        public override string FileName { get { return string.Empty; } }
         #endregion properties
 
         #region methods
@@ -164,6 +153,42 @@ namespace Edi.Documents.ViewModels.StartPage
         public override string GetFilePath()
         {
             throw new NotSupportedException("Start Page does not have a valid file path.");
+        }
+
+        /// <summary>
+        /// Implements the <see cref="OpenContainingFolderCommand"/> which starts the Windows Explorer
+        /// and highlights the current document within its folder.
+        /// </summary>
+        private void OnOpenContainingFolderCommand()
+        {
+            try
+            {
+                // combine the arguments together it doesn't matter if there is a space after ','
+                string argument = @"/select, " + GetAlternativePath();
+
+                System.Diagnostics.Process.Start("explorer.exe", argument);
+            }
+            catch (Exception ex)
+            {
+                _MsgBox.Show(string.Format(CultureInfo.CurrentCulture, "{0}\n'{1}'.", ex.Message, (FilePath == null ? string.Empty : FilePath)),
+                                           Util.Local.Strings.STR_FILE_FINDING_CAPTION,
+                                           MsgBoxButtons.OK, MsgBoxImage.Error);
+            }
+        }
+
+        /// <summary>
+        /// Implements the <see cref="CopyFullPathtoClipboard"/> command.
+        /// </summary>
+        private void OnCopyFullPathtoClipboardCommand()
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(GetAlternativePath());
+            }
+            catch
+            {
+                // ignored
+            }
         }
         #endregion methods
     }

@@ -4,10 +4,10 @@ namespace MiniUML.View.Windows
     using System.Globalization;
     using System.Windows;
     using System.Windows.Markup;
+    using Edi.Core;
     using MiniUML.Framework;
     using MiniUML.Model.ViewModels.Document;
     using MsgBox;
-    using CommonServiceLocator;
 
     /// <summary>
     /// Interaction logic for ExportDocumentWindow.xaml
@@ -31,10 +31,9 @@ namespace MiniUML.View.Windows
 
                 if (resolution <= 0)
                 {
-                    var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                    msgBox.Show(MiniUML.Framework.Local.Strings.STR_MSG_INVALID_RESOLUTION,
-                                MiniUML.Framework.Local.Strings.STR_MSG_Warning_Caption,
-                                MsgBoxButtons.OK, MsgBoxImage.Warning);
+                    StaticServices.MsgBox.Show(MiniUML.Framework.Local.Strings.STR_MSG_INVALID_RESOLUTION,
+                                               MiniUML.Framework.Local.Strings.STR_MSG_Warning_Caption,
+                                               MsgBoxButtons.OK, MsgBoxImage.Warning);
                     return;
                 }
 
@@ -46,17 +45,16 @@ namespace MiniUML.View.Windows
             }
             catch (SystemException)
             {
-                var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                msgBox.Show(MiniUML.Framework.Local.Strings.STR_MSG_PAGE_DEFINITION_FIELD_INVALID,
-                            MiniUML.Framework.Local.Strings.STR_MSG_Warning_Caption,
-                            MsgBoxButtons.OK, MsgBoxImage.Warning);
+                StaticServices.MsgBox.Show(MiniUML.Framework.Local.Strings.STR_MSG_PAGE_DEFINITION_FIELD_INVALID,
+                                           MiniUML.Framework.Local.Strings.STR_MSG_Warning_Caption,
+                                           MsgBoxButtons.OK, MsgBoxImage.Warning);
             }
         }
     }
 
     public class ExportDocumentWindowFactory : IFactory
     {
-        public object CreateObject()
+        public object CreateObject(IMessageBoxService msgBox)
         {
             return new ExportDocumentWindow();
         }

@@ -70,8 +70,11 @@
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CommonServiceLocator.2.0.4\lib\net45\CommonServiceLocator.dll</HintPath>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Castle.Core.4.3.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Castle.Windsor.4.1.1\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="FileSystemModels, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.FileSystemModels.3.1.0\lib\net452\FileSystemModels.dll</HintPath>
@@ -84,24 +87,12 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Prism, Version=7.0.0.396, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Prism.Core.7.0.0.396\lib\net45\Prism.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism.Mef.Wpf, Version=7.0.0.269, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Prism.Mef.7.0.0.269-pre\lib\net45\Prism.Mef.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism.Wpf, Version=7.0.0.336, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Prism.Wpf.7.0.0.336-pre\lib\net45\Prism.Wpf.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Prism.Wpf.7.0.0.336-pre\lib\net45\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -110,7 +101,10 @@
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="Xceed.Wpf.AvalonDock, Version=3.4.0.6, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.AvalonDock.3.4.0.6\lib\net4\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <HintPath>..\..\packages\Dirkster.AvalonDock.Themes.VS2013.3.4.0.5\lib\net4\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2013, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.AvalonDock.Themes.VS2013.3.4.0.5\lib\net4\Xceed.Wpf.AvalonDock.Themes.VS2013.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -140,7 +134,6 @@
     <Compile Include="Interfaces\DocumentTypes\IFileFilterEntry.cs" />
     <Compile Include="Interfaces\Enums\DocumentState.cs" />
     <Compile Include="Interfaces\Enums\PaneLocation.cs" />
-    <Compile Include="Interfaces\IAppCoreModel.cs" />
     <Compile Include="Interfaces\IAvalonDockLayoutViewModel.cs" />
     <Compile Include="Interfaces\IDocumentFileWatcher.cs" />
     <Compile Include="Interfaces\IDocumentViewModel.cs" />
@@ -149,12 +142,11 @@
     <Compile Include="Interfaces\IFileOpenService.cs" />
     <Compile Include="Interfaces\ILayoutableWindow.cs" />
     <Compile Include="Interfaces\ILayoutItem.cs" />
-    <Compile Include="Interfaces\MessageManager\IMessageManager.cs" />
-    <Compile Include="Interfaces\MessageManager\IOutput.cs" />
     <Compile Include="Interfaces\IRegisterableToolWindow.cs" />
     <Compile Include="Interfaces\IToolWindowRegistry.cs" />
     <Compile Include="Interfaces\IViewModelResolver.cs" />
-    <Compile Include="Models\AppCoreModel.cs" />
+    <Compile Include="Module\Installer.cs" />
+    <Compile Include="StaticServices.cs" />
     <Compile Include="Utillities\FileSystem\DirectoryName.cs" />
     <Compile Include="Utillities\FileSystem\DirectoryNameConverter.cs" />
     <Compile Include="Utillities\FileSystem\FileChangeWatcher.cs" />
@@ -166,12 +158,11 @@
     <Compile Include="Models\DocumentTypes\FileFilterEntry.cs" />
     <Compile Include="Models\Documents\DocumentModel.cs" />
     <Compile Include="Models\Enums\LayoutLoaded.cs" />
-    <Compile Include="Models\Events\RegisterToolWindowEvent.cs" />
     <Compile Include="Models\Events\RegisterToolWindowEventArgs.cs" />
     <Compile Include="Models\DocumentTypes\DocumentTypeManager.cs" />
     <Compile Include="Models\DocumentTypes\DocumentType.cs" />
     <Compile Include="Models\MessageManager.cs" />
-    <Compile Include="Models\StaticsHelpers.cs" />
+    <Compile Include="Models\AppCore.cs" />
     <Compile Include="Models\ToolWindowRegistry.cs" />
     <Compile Include="Msg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -199,6 +190,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Edi.Interfaces\Edi.Interfaces.csproj">
+      <Project>{C43530B2-96D6-4335-8097-4218EB69023B}</Project>
+      <Name>Edi.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Edi.Util\Edi.Util.csproj">
       <Project>{8dea0927-9bd3-442f-ad3b-5f0c9e3186f6}</Project>
       <Name>Edi.Util</Name>

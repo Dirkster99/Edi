@@ -10,6 +10,7 @@ namespace Edi.Themes
     using System;
     using System.Windows.Media;
     using System.Windows;
+    using Edi.Interfaces.Themes;
 
     /// <summary>
     /// This class manages a list of WPF themes (Aero, Metro etc) which
@@ -114,13 +115,13 @@ namespace Edi.Themes
         const string EditorThemeDeepBlackLocation = @"AvalonEdit\HighLighting_Themes\DeepBlack.xshd";
         #endregion Text Editor Themes
 
-        public const string DefaultThemeName = ThemesManager.MetroLightThemeName;
+        public const string DefaultThemeNameString = ThemesManager.MetroLightThemeName;
 
         protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly IAppearanceManager _AppearanceManager;
-        private readonly SortedDictionary<string, ThemeBase> _TextEditorThemes;
-        private readonly ObservableCollection<ThemeBase> _ListOfAllThemes;
+        private readonly SortedDictionary<string, IThemeBase> _TextEditorThemes;
+        private readonly ObservableCollection<IThemeBase> _ListOfAllThemes;
         private string _SelectedThemeName = string.Empty;
         #endregion fields
 
@@ -130,15 +131,17 @@ namespace Edi.Themes
         /// </summary>
         public ThemesManager()
         {
-            _SelectedThemeName = ThemesManager.DefaultThemeName;
+            _SelectedThemeName = ThemesManager.DefaultThemeNameString;
 
             _AppearanceManager = MLib.AppearanceManager.GetInstance();
-            _TextEditorThemes = new SortedDictionary<string, ThemeBase>();
-            _ListOfAllThemes = new ObservableCollection<ThemeBase>();
+            _TextEditorThemes = new SortedDictionary<string, IThemeBase>();
+            _ListOfAllThemes = new ObservableCollection<IThemeBase>();
         }
         #endregion constructor
 
         #region properties
+        public string DefaultThemeName { get { return DefaultThemeNameString; } }
+
         /// <summary>
         /// Get the name of the currently seelcted theme.
         /// </summary>
@@ -153,7 +156,7 @@ namespace Edi.Themes
         /// <summary>
         /// Get the object that has links to all resources for the currently selected WPF theme.
         /// </summary>
-        public ThemeBase SelectedTheme
+        public IThemeBase SelectedTheme
         {
             get
             {
@@ -161,13 +164,13 @@ namespace Edi.Themes
                 if (_TextEditorThemes.Count == 0 || _ListOfAllThemes.Count == 0)
                     BuildThemeCollections();
 
-                ThemeBase theme;
+                IThemeBase theme;
                 _TextEditorThemes.TryGetValue(_SelectedThemeName, out theme);
 
                 // Fall back to default if all else fails
                 if (theme == null)
                 {
-                    _TextEditorThemes.TryGetValue(ThemesManager.DefaultThemeName, out theme);
+                    _TextEditorThemes.TryGetValue(ThemesManager.DefaultThemeNameString, out theme);
                     _SelectedThemeName = theme.HlThemeName;
                 }
 
@@ -179,7 +182,7 @@ namespace Edi.Themes
         /// Get a list of all available themes (This property can typically be used to bind
         /// menuitems or other resources to let the user select a theme in the user interface).
         /// </summary>
-        public ObservableCollection<ThemeBase> ListAllThemes
+        public ObservableCollection<IThemeBase> ListAllThemes
         {
             get
             {
@@ -206,7 +209,7 @@ namespace Edi.Themes
 
 
             // Lets try to get the requested theme
-            ThemeBase theme;
+            IThemeBase theme;
             _TextEditorThemes.TryGetValue(themeName, out theme);
 
             // Fall back to default if all else fails
@@ -252,10 +255,10 @@ namespace Edi.Themes
         /// </summary>
         /// <param name="themeName"></param>
         /// <returns></returns>
-        public HighlightingThemes GetTextEditorHighlighting(string themeName)
+        public IHighlightingThemes GetTextEditorHighlighting(string themeName)
         {
             // Is this WPF theme configured with a highlighting theme???
-            ThemeBase cfg = null;
+            IThemeBase cfg = null;
 
             _TextEditorThemes.TryGetValue(themeName, out cfg);
 
@@ -306,7 +309,7 @@ namespace Edi.Themes
             foreach (var item in BuildThemeDictionary())
                 _TextEditorThemes.Add(item.Key, item.Value);
 
-            foreach (KeyValuePair<string, ThemeBase> t in _TextEditorThemes)
+            foreach (KeyValuePair<string, IThemeBase> t in _TextEditorThemes)
                 _ListOfAllThemes.Add(t.Value);
         }
 

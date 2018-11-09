@@ -1,6 +1,8 @@
 ﻿namespace Edi.Core.Interfaces
 {
+    using System;
     using System.Collections.ObjectModel;
+    using Edi.Core.Models;
     using Edi.Core.ViewModels;
 
     /// <summary>
@@ -9,7 +11,9 @@
     /// </summary>
     public interface IToolWindowRegistry
 	{
-		ObservableCollection<ToolViewModel> Tools { get; }
+        event EventHandler<RegisterToolWindowEventArgs> RegisterToolWindowEvent;
+
+        ObservableCollection<ToolViewModel> Tools { get; }
 
 		void RegisterTool(ToolViewModel newTool);
 		void PublishTools();

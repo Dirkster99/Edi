@@ -27,13 +27,13 @@
 		/// <param name="classType"></param>
 		/// <param name="sortPriority"></param>
 		public DocumentType(string key,
-										 string description,
-										 string fileFilterName,
-										 string defaultFilter,
-										 FileOpenDelegate fileOpenMethod,
-										 CreateNewDocumentDelegate createDocumentMethod,
-										 Type classType,
-										 int sortPriority = 0)
+							string description,
+							string fileFilterName,
+							string defaultFilter,
+							FileOpenDelegate fileOpenMethod,
+							CreateNewDocumentDelegate createDocumentMethod,
+							Type classType,
+							int sortPriority = 0)
 		{
 			Key = key;
 			Description = description;

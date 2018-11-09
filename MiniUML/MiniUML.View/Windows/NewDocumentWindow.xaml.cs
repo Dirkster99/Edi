@@ -8,7 +8,6 @@ namespace MiniUML.View.Windows
     using MiniUML.Model.ViewModels.Document;
     using MiniUML.View.Converter;
     using MsgBox;
-    using CommonServiceLocator;
 
     /// <summary>
     /// Interaction logic for NewDocumentWindow.xaml
@@ -17,13 +16,13 @@ namespace MiniUML.View.Windows
     {
         private IMessageBoxService _MsgBox = null;
 
-        public NewDocumentWindow()
+        public NewDocumentWindow(IMessageBoxService msgBox)
         {
+            _MsgBox = msgBox;
+
             this.InitializeComponent();
             this.Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag);
             this.Title = (string)Application.Current.Resources["ApplicationName"];
-
-            _MsgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
         }
 
         private bool getValues(out Size pageSize, out Thickness pageMargins)
@@ -119,9 +118,9 @@ namespace MiniUML.View.Windows
 
     public class NewDocumentWindowFactory : IFactory
     {
-        public object CreateObject()
+        public object CreateObject(IMessageBoxService msgBox)
         {
-            return new NewDocumentWindow();
+            return new NewDocumentWindow(msgBox);
         }
     }
 }

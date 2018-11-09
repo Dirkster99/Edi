@@ -1,18 +1,18 @@
 namespace Edi.Apps.ViewModels
 {
-	using System;
-	using System.ComponentModel.Composition;
-	using System.IO;
-	using System.Text;
-	using System.Threading.Tasks;
-	using System.Windows.Input;
-	using Core.Interfaces;
-	using Core.Models.Enums;
-	using Core.ViewModels;
-	using Core.ViewModels.Command;
-	using Events;
-	using Settings.Interfaces;
-	using Xceed.Wpf.AvalonDock;
+    using System;
+    using System.IO;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Windows.Input;
+    using Core.Interfaces;
+    using Core.Models.Enums;
+    using Core.ViewModels;
+    using Core.ViewModels.Command;
+    using Edi.Interfaces.Events;
+    using Edi.Interfaces.MessageManager;
+    using Settings.Interfaces;
+    using Xceed.Wpf.AvalonDock;
 
     /// <summary>
     /// Class implements a viewmodel to support the
@@ -20,41 +20,57 @@ namespace Edi.Apps.ViewModels
     /// attached behavior which is used to implement
     /// load/save of layout information on application
     /// start and shut-down.
+    /// 
+    /// Installs in Edi's main project installer
     /// </summary>
-    [Export(typeof(IAvalonDockLayoutViewModel))]
     public class AvalonDockLayoutViewModel : IAvalonDockLayoutViewModel
     {
         #region fields
-        private RelayCommand<object> _mLoadLayoutCommand;
-        private RelayCommand<object> _mSaveLayoutCommand;
+        protected static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        private ICommand _LoadLayoutCommand;
+        private ICommand _mSaveLayoutCommand;
 
 	    private readonly string _mLayoutFileName;
         private readonly string _mAppDir;
-
-	    private readonly IMessageManager _mMessageManager;
+        private readonly IToolWindowRegistry _ToolWindowRegistry;
+        private readonly IMessageManager _MessageManager;
         #endregion fields
 
         #region constructors
         /// <summary>
         /// Class constructor
         /// </summary>
-        [ImportingConstructor]
         public AvalonDockLayoutViewModel(ISettingsManager programSettings,
-                                         IMessageManager messageManager)
+                                         IMessageManager messageManager,
+                                         IToolWindowRegistry toolWindowRegistry)
+            : this()
         {
-	        LayoutSoure = LayoutLoaded.FromDefault;
+            _ToolWindowRegistry = toolWindowRegistry;
+            _MessageManager = messageManager;
 
-            var mProgramSettings = programSettings;
-            _mMessageManager = messageManager;
-
-            _mAppDir = mProgramSettings.AppDir;
-            _mLayoutFileName = mProgramSettings.LayoutFileName;
+            _mAppDir = programSettings.AppDir;
+            _mLayoutFileName = programSettings.LayoutFileName;
 
             LayoutId = Guid.NewGuid();
-            ViewProperties = new AvalonDockViewProperties();
             ViewProperties.InitialzeInstance();
         }
+
+        /// <summary>
+        /// Hidden standard constructor
+        /// </summary>
+        protected AvalonDockLayoutViewModel()
+        {
+            LayoutSource = LayoutLoaded.FromDefault;
+            ViewProperties = new AvalonDockViewProperties();
+        }
         #endregion constructors
+
+        /// <summary>
+        /// Defines an event that is send from the viewmodel to the view to have the
+        /// view load a new layout when it is available on start-up.
+        /// </summary>
+        public event EventHandler<LoadLayoutEventArgs> LoadLayout;
 
         #region properties
         /// <summary>
@@ -64,9 +80,16 @@ namespace Edi.Apps.ViewModels
         /// </summary>
         public Guid LayoutId { get; }
 
-	    public AvalonDockViewProperties ViewProperties { get; set; }
+        /// <summary>
+        /// Gets properties that are relevant to viewing, styling and templating
+        /// of document and tool winodw items managed by AvalonDock.
+        /// </summary>
+        public AvalonDockViewProperties ViewProperties { get; }
 
-        public LayoutLoaded LayoutSoure { get; private set; }
+        /// <summary>
+        /// Determines the source of the layout (e.g. from storage or from default).
+        /// </summary>
+        public LayoutLoaded LayoutSource { get; private set; }
 
         #region command properties
         /// <summary>
@@ -82,9 +105,9 @@ namespace Edi.Apps.ViewModels
         {
             get
             {
-                if (_mLoadLayoutCommand == null)
+                if (_LoadLayoutCommand == null)
                 {
-                    _mLoadLayoutCommand = new RelayCommand<object>((p) =>
+                    _LoadLayoutCommand = new RelayCommand<object>((p) =>
                     {
                         try
                         {
@@ -93,19 +116,17 @@ namespace Edi.Apps.ViewModels
                             if (docManager == null)
                                 return;
 
-                            _mMessageManager.Output.AppendLine("Loading document and tool window layout...");
-                            LoadDockingManagerLayout();
+                            _MessageManager.Output.AppendLine("Loading document and tool window layout...");
+                            LoadDockingManagerLayout(LayoutId);
                         }
                         catch (Exception exp)
                         {
-                            var wrt = _mMessageManager.Output.Writer;
-                            wrt.WriteLine("Error when loading layout in AvalonDockLayoutViewModel:");
-                            wrt.WriteLine(exp.Message);
+                            Logger.Error("Error when loading layout", exp);
                         }
                     });
                 }
 
-                return _mLoadLayoutCommand;
+                return _LoadLayoutCommand;
             }
         }
 
@@ -147,17 +168,6 @@ namespace Edi.Apps.ViewModels
 
         #region methods
         #region LoadLayout
-
-	    /// <summary>
-	    /// Loads the layout of a particular docking manager instance from persistence
-	    /// and checks whether a file should really be reloaded (some files may no longer
-	    /// be available).
-	    /// </summary>
-	    private void LoadDockingManagerLayout()
-        {
-            LoadDockingManagerLayout(LayoutId);
-        }
-
         /// <summary>
         /// Loads the layout of a particular docking manager instance from persistence
         /// and checks whether a file should really be reloaded (some files may no longer
@@ -167,10 +177,12 @@ namespace Edi.Apps.ViewModels
         {
             try
             {
-	            Task.Factory.StartNew((stateObj) =>
+                _ToolWindowRegistry.PublishTools();
+
+                Task.Factory.StartNew((stateObj) =>
                 {
-	                // Begin Aysnc Task
-	                string layoutFileName = Path.Combine(_mAppDir, _mLayoutFileName);
+                    // Begin Aysnc Task
+                    string layoutFileName = Path.Combine(_mAppDir, _mLayoutFileName);
 	                string xmlWorkspaces = string.Empty;
 
 	                try
@@ -179,7 +191,7 @@ namespace Edi.Apps.ViewModels
 		                {
 			                if (File.Exists(layoutFileName))
 			                {
-				                _mMessageManager.Output.AppendLine($" from file: '{layoutFileName}'");
+				                _MessageManager.Output.AppendLine($" from file: '{layoutFileName}'");
 
 				                using (FileStream fs = new FileStream(layoutFileName, FileMode.Open, FileAccess.Read, FileShare.Read))
 				                {
@@ -197,21 +209,22 @@ namespace Edi.Apps.ViewModels
 
 		                if (string.IsNullOrEmpty(xmlWorkspaces) == false)
 		                {
-			                LayoutSoure = LayoutLoaded.FromStorage;
-			                LoadLayoutEvent.Instance.Publish(new LoadLayoutEventArgs(xmlWorkspaces, layoutId));
+			                LayoutSource = LayoutLoaded.FromStorage;
+
+                            LoadLayout?.Invoke(this, new LoadLayoutEventArgs(xmlWorkspaces, layoutId));
 		                }
 	                }
 	                catch (OperationCanceledException exp)
 	                {
-		                throw exp;
-	                }
-	                catch (Exception except)
+                        _MessageManager._MsgBox.Show(exp);
+                    }
+                    catch (Exception exp)
 	                {
-		                throw except;
+                        _MessageManager._MsgBox.Show(exp);
 	                }
 	                finally
 	                {
-		                _mMessageManager.Output.AppendLine("Loading layout done.\n");
+		                _MessageManager.Output.AppendLine("Loading layout done.\n");
 	                }
 
 	                return xmlWorkspaces;                     // End of async task
@@ -220,31 +233,8 @@ namespace Edi.Apps.ViewModels
             }
             catch (Exception exp)
             {
-                throw exp;
+                _MessageManager._MsgBox.Show(exp);
             }
-        }
-
-	    /// <summary>
-	    /// Source: http://stackoverflow.com/questions/2820384/reading-embedded-xml-file-c-sharps
-	    /// </summary>
-	    /// <param name="assemblyNameSpace"></param>
-	    /// <param name="filename"></param>
-	    /// <returns></returns>
-	    public string GetResourceTextFile(string assemblyNameSpace, string filename)
-        {
-            string result = string.Empty;
-            _mMessageManager.Output.AppendLine($"Layout from Resource '{assemblyNameSpace}', '{filename}'");
-
-            ////using (Stream stream = this.GetType().Assembly.
-            ////			 GetManifestResourceStream(assemblyNameSpace + filename))
-            ////{
-            ////	using (StreamReader sr = new StreamReader(stream))
-            ////	{
-            ////		result = sr.ReadToEnd();
-            ////	}
-            ////}
-
-            return result;
         }
         #endregion LoadLayout
 

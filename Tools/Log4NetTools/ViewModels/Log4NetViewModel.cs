@@ -7,7 +7,6 @@ namespace Log4NetTools.ViewModels
     using Edi.Core.Interfaces.Documents;
     using Edi.Core.ViewModels.Command;
     using MsgBox;
-    using CommonServiceLocator;
 
     public class Log4NetViewModel : Edi.Core.ViewModels.FileBaseViewModel
     {
@@ -28,8 +27,8 @@ namespace Log4NetTools.ViewModels
         /// <summary>
         /// ViewModel Class Constructor
         /// </summary>
-        public Log4NetViewModel()
-            : base(Log4NetViewModel.DocumentKey)
+        public Log4NetViewModel(IMessageBoxService msgBox)
+            : base(Log4NetViewModel.DocumentKey, msgBox)
         {
             this.ScreenTip = Edi.Util.Local.Strings.STR_LOG4NET_DOCUMENTTAB_TT;
             this.ContentId = string.Empty;
@@ -214,9 +213,11 @@ namespace Log4NetTools.ViewModels
             return string.Empty;
         }
 
-        public static Log4NetViewModel LoadFile(IDocumentModel dm, object o)
+        public static Log4NetViewModel LoadFile(IDocumentModel dm,
+                                                object o,
+                                                IMessageBoxService msgBox)
         {
-            return Log4NetViewModel.LoadFile(dm.FileNamePath);
+            return Log4NetViewModel.LoadFile(dm.FileNamePath, msgBox);
         }
 
         /// <summary>
@@ -224,7 +225,7 @@ namespace Log4NetTools.ViewModels
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        private static Log4NetViewModel LoadFile(string filePath)
+        private static Log4NetViewModel LoadFile(string filePath, IMessageBoxService msgBox)
         {
             bool IsFilePathReal = false;
 
@@ -239,7 +240,7 @@ namespace Log4NetTools.ViewModels
             if (IsFilePathReal == false)
                 return null;
 
-            Log4NetViewModel vm = new Log4NetViewModel();
+            Log4NetViewModel vm = new Log4NetViewModel(msgBox);
 
             if (vm.OpenFile(filePath) == true)
                 return vm;
@@ -273,8 +274,7 @@ namespace Log4NetTools.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                        msgBox.Show(ex.Message, Edi.Util.Local.Strings.STR_FILE_OPEN_ERROR_MSG_CAPTION, MsgBoxButtons.OK);
+                        _MsgBox.Show(ex.Message, Edi.Util.Local.Strings.STR_FILE_OPEN_ERROR_MSG_CAPTION, MsgBoxButtons.OK);
 
                         return false;
                     }
@@ -284,8 +284,7 @@ namespace Log4NetTools.ViewModels
             }
             catch (Exception exp)
             {
-                var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                msgBox.Show(exp.Message, Edi.Util.Local.Strings.STR_FILE_OPEN_ERROR_MSG_CAPTION, MsgBoxButtons.OK);
+                _MsgBox.Show(exp.Message, Edi.Util.Local.Strings.STR_FILE_OPEN_ERROR_MSG_CAPTION, MsgBoxButtons.OK);
 
                 return false;
             }
@@ -307,8 +306,7 @@ namespace Log4NetTools.ViewModels
             }
             catch (Exception exp)
             {
-                var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                msgBox.Show(exp.Message, Edi.Util.Local.Strings.STR_FILE_OPEN_ERROR_MSG_CAPTION, MsgBoxButtons.OK);
+                _MsgBox.Show(exp.Message, Edi.Util.Local.Strings.STR_FILE_OPEN_ERROR_MSG_CAPTION, MsgBoxButtons.OK);
             }
         }
         #endregion

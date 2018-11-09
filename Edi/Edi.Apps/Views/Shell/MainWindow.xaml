@@ -1,8 +1,8 @@
-<mWinlib:SimpleMetroWindow x:Class="Edi.Apps.Views.Shell.MainWindow"
+<MWinlib:SimpleMetroWindow x:Class="Edi.Apps.Views.Shell.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   
-        xmlns:mWinlib="clr-namespace:MWindowLib;assembly=MWindowLib"
+        xmlns:MWinlib="clr-namespace:MWindowLib;assembly=MWindowLib"
           
         xmlns:view="clr-namespace:Edi.Apps.Views.Shell"
 
@@ -34,4 +34,4 @@
         <view:StatusBar Grid.Row="3" />
     </Grid>
 
-</mWinlib:SimpleMetroWindow>
+</MWinlib:SimpleMetroWindow>

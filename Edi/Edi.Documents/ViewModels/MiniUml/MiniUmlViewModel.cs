@@ -5,7 +5,6 @@ namespace Edi.Documents.ViewModels.MiniUml
     using System.Globalization;
     using System.IO;
     using System.Windows.Input;
-    using CommonServiceLocator;
     using Core.Interfaces;
     using Core.Interfaces.Documents;
     using Core.Models.Documents;
@@ -27,16 +26,16 @@ namespace Edi.Documents.ViewModels.MiniUml
 		private static int _iNewFileCounter = 1;
 		private string _defaultFileType = "uml";
 		private static readonly string DefaultFileName = Util.Local.Strings.STR_FILE_DEFAULTNAME;
+        private string _FilePath;
+        #endregion Fields
 
-	    #endregion Fields
-
-		#region constructor
-		/// <summary>
-		/// Class constructor from <seealso cref="IDocumentModel"/> parameter.
-		/// </summary>
-		/// <param name="documentModel"></param>
-		public MiniUmlViewModel(IDocumentModel documentModel)
-		: this ()
+        #region constructor
+        /// <summary>
+        /// Class constructor from <seealso cref="IDocumentModel"/> parameter.
+        /// </summary>
+        /// <param name="documentModel"></param>
+        public MiniUmlViewModel(IDocumentModel documentModel, IMessageBoxService IMsgBox)
+		: this (IMsgBox)
 		{
 			MDocumentModel = documentModel;
 			MDocumentModel.SetFileNamePath(FilePath, IsFilePathReal);
@@ -46,13 +45,13 @@ namespace Edi.Documents.ViewModels.MiniUml
 		/// Standard constructor. See also static <seealso cref="LoadFile"/> method
 		/// for construction from file saved on disk.
 		/// </summary>
-		protected MiniUmlViewModel()
-			: base(DocumentKey)
+		protected MiniUmlViewModel(IMessageBoxService IMsgBox)
+			: base(DocumentKey, IMsgBox)
 		{
 			FilePath = string.Format(CultureInfo.InvariantCulture, "{0} {1}.{2}",
-																		DefaultFileName,
-																		_iNewFileCounter++,
-																		_defaultFileType);
+									DefaultFileName,
+									_iNewFileCounter++,
+									_defaultFileType);
 
 			_mRibbonViewModel = new RibbonViewModel();
 
@@ -61,7 +60,7 @@ namespace Edi.Documents.ViewModels.MiniUml
 			//
 			// MiniUML.Plugins.UmlClassDiagram.PluginModel.ModelName
 			//
-			_mDocumentMiniUml = new DocumentViewModel("UMLClassDiagram");
+			_mDocumentMiniUml = new DocumentViewModel("UMLClassDiagram", IMsgBox);
 
 			_mDocumentMiniUml.dm_DocumentDataModel.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e)
 			{
@@ -71,6 +70,11 @@ namespace Edi.Documents.ViewModels.MiniUml
 
 			IsDirty = false;
 		}
+
+        protected MiniUmlViewModel()
+        {
+
+        }
 		#endregion constructor
 
 		#region properties
@@ -109,28 +113,26 @@ namespace Edi.Documents.ViewModels.MiniUml
 		#endregion MiniUML RibbonViewModel
 
 		#region FilePath
-		private string _mFilePath;
-
-		/// <summary>
-		/// Get/set complete path including file name to where this stored.
-		/// This string is never null or empty.
-		/// </summary>
-		public sealed override string FilePath
+        /// <summary>
+        /// Get/set complete path including file name to where this stored.
+        /// This string is never null or empty.
+        /// </summary>
+        public sealed override string FilePath
 		{
 			get
 			{
-				if (string.IsNullOrEmpty(_mFilePath))
+				if (string.IsNullOrEmpty(_FilePath))
 					return string.Format(CultureInfo.CurrentCulture, "{0}.{1}",
 															 DefaultFileName, _defaultFileType);
 
-				return _mFilePath;
+				return _FilePath;
 			}
 
 			protected set
 			{
-				if (_mFilePath != value)
+				if (_FilePath != value)
 				{
-					_mFilePath = value;
+					_FilePath = value;
 
 					RaisePropertyChanged(() => FilePath);
 					RaisePropertyChanged(() => FileName);
@@ -300,9 +302,10 @@ namespace Edi.Documents.ViewModels.MiniUml
 		/// </summary>
 		/// <param name="documentModel"></param>
 		/// <returns></returns>
-		public static IFileBaseViewModel CreateNewDocument(IDocumentModel documentModel)
+		public static IFileBaseViewModel CreateNewDocument(IDocumentModel documentModel,
+                                                           IMessageBoxService msgBox)
 		{
-			return new MiniUmlViewModel(documentModel);
+			return new MiniUmlViewModel(documentModel, msgBox);
 		}
 
 		#region LoadFile
@@ -313,7 +316,8 @@ namespace Edi.Documents.ViewModels.MiniUml
 		/// <param name="dm"></param>
 		/// <param name="o">Should point to a <seealso cref="ISettingsManager"/> instance.</param>
 		/// <returns></returns>
-		public static MiniUmlViewModel LoadFile(IDocumentModel dm, object o)
+		public static MiniUmlViewModel LoadFile(IDocumentModel dm, object o,
+                                                IMessageBoxService msgBox)
 		{
 			return LoadFile(dm.FileNamePath);
 		}
@@ -353,7 +357,7 @@ namespace Edi.Documents.ViewModels.MiniUml
 					MDocumentModel.SetFileNamePath(filePath, isReal);
 
 					FilePath = filePath;
-					ContentId = _mFilePath;
+					ContentId = _FilePath;
 
 					// Mark document loaded from persistence as unedited copy (display without dirty mark '*' in name)
 					IsDirty = false;
@@ -361,12 +365,11 @@ namespace Edi.Documents.ViewModels.MiniUml
 					try
 					{
 						// XXX TODO Extend log4net FileOpen method to support base.FireFileProcessingResultEvent(...);
-						_mDocumentMiniUml.LoadFile(_mFilePath);
+						_mDocumentMiniUml.LoadFile(_FilePath);
 					}
 					catch (Exception ex)
 					{
-                        var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                        msgBox.Show(ex, ex.Message, "An error has occurred", MsgBoxButtons.OK);
+                        _MsgBox.Show(ex, ex.Message, "An error has occurred", MsgBoxButtons.OK);
 
 						return false;
 					}
@@ -376,8 +379,7 @@ namespace Edi.Documents.ViewModels.MiniUml
 			}
 			catch (Exception exp)
 			{
-                var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                msgBox.Show(exp, exp.Message, "An error has occurred", MsgBoxButtons.OK);
+                _MsgBox.Show(exp, exp.Message, "An error has occurred", MsgBoxButtons.OK);
 
 				return false;
 			}

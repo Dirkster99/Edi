@@ -9,26 +9,28 @@ namespace MiniUML.Model.ViewModels.Document
     using MiniUML.Model.Model;
     using MiniUML.Model.ViewModels.Shapes;
     using MsgBox;
-    using CommonServiceLocator;
 
     public partial class DocumentViewModel : AbstractDocumentViewModel
     {
         #region fields
-        private readonly DocumentDataModel _DataModel;
-
         private string _FileName = MiniUML.Framework.Local.Strings.STR_Default_FileName;
         private string _FilePath = null;
         private FrameworkElement _DesignSurface;
         private CanvasViewModel _CanvasViewModel = null;
         private CommandUtility _CommandUtility;
+
+        private readonly DocumentDataModel _DataModel;
+        private readonly IMessageBoxService _MsgBox;
         #endregion fields
 
         #region constructor
         /// <summary>
         /// Class constructor
         /// </summary>
-        public DocumentViewModel(string pluginModelName)
+        public DocumentViewModel(string pluginModelName, IMessageBoxService msgBox)
         {
+            _MsgBox = msgBox;
+
             // Create and initialize the data model.
             _DataModel = new DocumentDataModel(pluginModelName);
 
@@ -43,10 +45,10 @@ namespace MiniUML.Model.ViewModels.Document
             };
 
             // Create the commands in this view model.
-            _CommandUtility = new CommandUtility(this);
+            _CommandUtility = new CommandUtility(this, msgBox);
 
             // Create the view models.
-            _CanvasViewModel = new CanvasViewModel(this);
+            _CanvasViewModel = new CanvasViewModel(this, msgBox);
             this.vm_XmlViewModel = new XmlViewModel(this);
         }
         #endregion constructor
@@ -224,8 +226,7 @@ namespace MiniUML.Model.ViewModels.Document
             }
             catch (Exception ex)
             {
-                var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                msgBox.Show(ex, string.Format(MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG, filePath),
+                _MsgBox.Show(ex, string.Format(MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG, filePath),
                             MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG_CAPTION);
             }
 

@@ -3,6 +3,7 @@
     using System;
     using System.Collections.ObjectModel;
     using Edi.Core.Interfaces.Documents;
+    using MsgBox;
 
     /// <summary>
     /// Delegates the file open method to a method that can be registered in a module.
@@ -12,7 +13,9 @@
     /// <param name="fileModel"></param>
     /// <param name="settingsManager"></param>
     /// <returns></returns>
-    public delegate IFileBaseViewModel FileOpenDelegate(IDocumentModel fileModel, object settingsManager);
+    public delegate IFileBaseViewModel FileOpenDelegate(IDocumentModel fileModel,
+                                                        object settingsManager,
+                                                        IMessageBoxService msgBox);
 
 	/// <summary>
 	/// Delegates the file new method to a method that can be registered in a module.
@@ -23,7 +26,8 @@
 	/// </summary>
 	/// <param name="documentModel"></param>
 	/// <returns></returns>
-	public delegate IFileBaseViewModel CreateNewDocumentDelegate(IDocumentModel documentModel);
+	public delegate IFileBaseViewModel CreateNewDocumentDelegate(IDocumentModel documentModel,
+                                                                 IMessageBoxService IMsgBox);
 
 	/// <summary>
 	/// Interface specification for the document management service that drives

@@ -1,5 +1,3 @@
-using Edi.Settings.Interfaces;
-
 namespace Edi.Dialogs.FindReplace.ViewModel
 {
 	using System;
@@ -8,8 +6,8 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 	using System.Windows.Input;
 	using Core.ViewModels.Base;
 	using Core.ViewModels.Command;
-	using MsgBox;
-	using CommonServiceLocator;
+    using Edi.Settings.Interfaces;
+    using MsgBox;
 
 	public class FindReplaceViewModel : DialogViewModelBase
 	{
@@ -39,19 +37,23 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 		private SearchScope _mSearchIn = SearchScope.CurrentDocument;
 		private bool _mShowSearchIn = true;
 
-		#endregion fields
+        private readonly IMessageBoxService _MsgBox;
+        #endregion fields
 
-		#region constructor
-		/// <summary>
-		/// Class constructor from <seealso cref="ISettingsManager"/> manager instance to reade & write
-		/// strings that were searched and replaced during user session.
-		/// </summary>
-		/// <param name="settingsManager"></param>
-		public FindReplaceViewModel(Settings.Interfaces.ISettingsManager settingsManager)
+        #region constructor
+        /// <summary>
+        /// Class constructor from <seealso cref="ISettingsManager"/> manager instance to reade & write
+        /// strings that were searched and replaced during user session.
+        /// </summary>
+        /// <param name="settingsManager"></param>
+        public FindReplaceViewModel(ISettingsManager settingsManager,
+            IMessageBoxService msgBox)
 			: this()
 		{
-			// load the find/replace history from user profile
-			FindHistory = settingsManager.SessionData.FindHistoryList;
+            _MsgBox = msgBox;
+
+            // load the find/replace history from user profile
+            FindHistory = settingsManager.SessionData.FindHistoryList;
 			ReplaceHistory = settingsManager.SessionData.ReplaceHistoryList;
 		}
 
@@ -73,7 +75,7 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 		/// Get the title string of the view - to be displayed in the associated view
 		/// (e.g. as dialog title)
 		/// </summary>
-		public string WindowTitle => Util.Local.Strings.STR_FIND_REPLACE_CAPTION;
+		public string WindowTitle { get { return Util.Local.Strings.STR_FIND_REPLACE_CAPTION; } }
 
 		/// <summary>
 		/// Get/set text to find via find/replace
@@ -395,7 +397,7 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 			}
 		}
 
-		public List<string> FindHistory { get; }
+        public List<string> FindHistory { get; }
 
 		public List<string> ReplaceHistory { get; }
 
@@ -415,7 +417,6 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 				}
 			}
 		}
-
 		#endregion properties
 
 		#region methods
@@ -484,13 +485,12 @@ namespace Edi.Dialogs.FindReplace.ViewModel
 			IEditor ce = GetCurrentEditor();
 			if (ce == null) return;
 
-			var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-
-			if (!askBefore || msgBox.Show(string.Format(Util.Local.Strings.STR_FINDREPLACE_ASK_REALLY_REPLACEEVERYTHING, TextToFind, ReplacementText),
-										  Util.Local.Strings.STR_FINDREPLACE_ReplaceAll_Caption,
-										  MsgBoxButtons.YesNoCancel, MsgBoxImage.Alert) == MsgBoxResult.Yes)
+			if (!askBefore || _MsgBox.Show(string.Format(Util.Local.Strings.STR_FINDREPLACE_ASK_REALLY_REPLACEEVERYTHING, TextToFind, ReplacementText),
+										   Util.Local.Strings.STR_FINDREPLACE_ReplaceAll_Caption,
+										   MsgBoxButtons.YesNoCancel, MsgBoxImage.Alert) == MsgBoxResult.Yes)
 			{
 				object initialEditor = CurrentEditor;
+
 				// loop through all editors, until we are back at the starting editor                
 				do
 				{

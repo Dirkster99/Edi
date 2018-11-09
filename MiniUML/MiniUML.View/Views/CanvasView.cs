@@ -18,8 +18,8 @@
     using MiniUML.View.Controls;
     using MiniUML.View.Views.RubberBand;
     using MsgBox;
-    using CommonServiceLocator;
     using MiniUML.Model.ViewModels.Interfaces;
+    using Edi.Core;
 
     public delegate void LayoutUpdatedHandler();
 
@@ -602,9 +602,8 @@
                 }
                 catch (Exception ex)
                 {
-                    var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                    msgBox.Show(ex, "Drag & Drop operation aborted on error",
-                                    "An erro occurred", MsgBoxButtons.OK);
+                    StaticServices.MsgBox.Show(ex, "Drag & Drop operation aborted on error",
+                                                   "An erro occurred", MsgBoxButtons.OK);
                 }
             }
 
@@ -628,9 +627,8 @@
                 }
                 catch (Exception ex)
                 {
-                    var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                    msgBox.Show(ex, string.Format(MiniUML.Framework.Local.Strings.STR_OpenFILE_MSG, fileName),
-                                MiniUML.Framework.Local.Strings.STR_OpenFILE_MSG_CAPTION, MsgBoxButtons.OK);
+                    StaticServices.MsgBox.Show(ex, string.Format(MiniUML.Framework.Local.Strings.STR_OpenFILE_MSG, fileName),
+                                               MiniUML.Framework.Local.Strings.STR_OpenFILE_MSG_CAPTION, MsgBoxButtons.OK);
                 }
 
                 return;

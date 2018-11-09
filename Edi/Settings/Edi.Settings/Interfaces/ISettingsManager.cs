@@ -1,6 +1,6 @@
 ﻿namespace Edi.Settings.Interfaces
 {
-    using Edi.Themes.Interfaces;
+    using Edi.Interfaces.Themes;
     using System.Threading.Tasks;
 
     public interface ISettingsManager

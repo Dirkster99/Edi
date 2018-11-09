@@ -1,23 +1,16 @@
 ﻿namespace Output.ViewModels
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Collections.ObjectModel;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
-	using System.Windows;
-	using Edi.Core.Interfaces;
-	using Edi.Core.ViewModels;
-	using Edi.Core.ViewModels.Command;
-	using ICSharpCode.AvalonEdit.Document;
-	using ICSharpCode.AvalonEdit.Edi.TextBoxControl;
-	using ICSharpCode.AvalonEdit.Highlighting;
-	using UnitComboLib.Models.Unit;
-	using UnitComboLib.Models.Unit.Screen;
-	using UnitComboLib.ViewModels;
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Windows;
+    using ICSharpCode.AvalonEdit.Document;
+    using ICSharpCode.AvalonEdit.Edi.TextBoxControl;
+    using ICSharpCode.AvalonEdit.Highlighting;
+    using UnitComboLib.Models.Unit;
+    using UnitComboLib.Models.Unit.Screen;
+    using UnitComboLib.ViewModels;
 
-	public class TextViewModel : BaseViewModel
+    public class TextViewModel : BaseViewModel
 	{
 		#region fields
 		private TextDocument mDocument;

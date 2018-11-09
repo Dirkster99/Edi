@@ -3,34 +3,58 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.ComponentModel.Composition;
     using Edi.Core.Interfaces;
     using Edi.Core.ViewModels;
-    using EdiApp.Events;
+    using Edi.Interfaces.MessageManager;
 
     /// <summary>
     /// Class to register and manage all tool windows in one common place.
     /// </summary>
-    [Export(typeof(IToolWindowRegistry))]
-	public class ToolWindowRegistry : IToolWindowRegistry
-	{
-		#region fields
+    public class ToolWindowRegistry : IToolWindowRegistry
+    {
+        #region fields
+        private readonly List<ToolViewModel> _mTodoTools;
+        #endregion fields
 
-		private readonly List<ToolViewModel> _mTodoTools;
-		#endregion fields
+        #region contructors
+        /// <summary>
+        /// Class constructor from <paramref name="messageManager"/> parameter
+        /// to output progress registration of tool windows.
+        /// </summary>
+        public ToolWindowRegistry(IMessageManager messageManager)
+            :this()
+        {
+            this.Messaging = messageManager;
+        }
 
-		#region contructors
-		public ToolWindowRegistry()
-		{
-			Tools = new ObservableCollection<ToolViewModel>();
-			_mTodoTools = new List<ToolViewModel>();
-		}
-		#endregion contructors
+        /// <summary>
+        /// Class constructor.
+        /// </summary>
+        public ToolWindowRegistry()
+        {
+            Tools = new ObservableCollection<ToolViewModel>();
+            _mTodoTools = new List<ToolViewModel>();
+        }
+        #endregion contructors
 
-		#region properties
-		public ObservableCollection<ToolViewModel> Tools { get; }
+        /// <summary>
+        /// Implements an event that is raised when a new tool window is registered.
+        /// </summary>
+        public event EventHandler<RegisterToolWindowEventArgs> RegisterToolWindowEvent;
 
-		public IOutput Output { get; set; }
+        #region properties
+        /// <summary>
+        /// Gets an observable collection of the available tool window viewmodels
+        /// in this application.
+        /// </summary>
+        public ObservableCollection<ToolViewModel> Tools { get; }
+
+        /// <summary>
+        /// Gets a reference to the <see cref="IMessageManager"/> service which
+        /// can be used to output information about the progress of the
+        /// tool window registration.
+        /// </summary>
+        protected IMessageManager Messaging { get; }
 		#endregion properties
 
 		#region methods
@@ -56,16 +80,25 @@
 		{
 			try
 			{
-				_mTodoTools.Add(newTool);
+                Messaging.Output.Append(string.Format("{0} Registering tool window: {1} ...",
+                    DateTime.Now.ToLongTimeString(), newTool.Name));
 
-				// Publish the fact that we have registered a new tool window instance
-				RegisterToolWindowEvent.Instance.Publish(new RegisterToolWindowEventArgs(newTool));
-			}
-			catch (Exception exp)
+                _mTodoTools.Add(newTool);
+
+                // Publish the fact that we have registered a new tool window instance
+                RegisterToolWindowEvent?.Invoke(this, new RegisterToolWindowEventArgs(newTool));
+            }
+            catch (Exception exp)
 			{
-				throw new Exception("Tool window registration failed in ToolWindowRegistry.", exp);
+                Messaging.Output.AppendLine(exp.Message);
+                Messaging.Output.AppendLine(exp.StackTrace);
+                throw new Exception("Tool window registration failed in ToolWindowRegistry.", exp);
 			}
-		}
+            finally
+            {
+                Messaging.Output.AppendLine("Done.");
+            }
+        }
 		#endregion methods
 	}
 }

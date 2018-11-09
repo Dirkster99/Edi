@@ -6,7 +6,6 @@ namespace Edi.Core.ViewModels
     using System.IO;
     using System.Windows;
     using System.Windows.Input;
-    using CommonServiceLocator;
     using Edi.Core.Interfaces;
     using Edi.Core.Interfaces.Documents;
     using Edi.Core.Interfaces.Enums;
@@ -32,8 +31,8 @@ namespace Edi.Core.ViewModels
         private RelayCommand<object> _CopyFullPathtoClipboard;
         private RelayCommand<object> _CommandLineHereCommand;
         private RelayCommand<object> _SyncPathToExplorerCommand;
-
-	    protected IDocumentModel MDocumentModel;
+        protected readonly IMessageBoxService _MsgBox;
+        protected IDocumentModel MDocumentModel;
         #endregion Fields
 
         #region Constructors
@@ -41,9 +40,10 @@ namespace Edi.Core.ViewModels
         /// Class constructor.
         /// </summary>
         /// <param name="documentTypeKey"></param>
-        public FileBaseViewModel(string documentTypeKey)
+        public FileBaseViewModel(string documentTypeKey, IMessageBoxService IMsgBox)
             : this()
         {
+            _MsgBox = IMsgBox;
             MDocumentModel = new DocumentModel();
             DocumentTypeKey = documentTypeKey;
         }
@@ -322,15 +322,7 @@ namespace Edi.Core.ViewModels
         }
 
         /// <summary>
-        /// This method is executed to tell the surrounding framework to close the document.
-        /// </summary>
-        protected virtual void OnClose()
-        {
-            DocumentEvent?.Invoke(this, new FileBaseEvent(FileEventType.CloseDocument));
-        }
-
-        /// <summary>
-        /// Indicate whether document can be closed or not.
+        /// Indicates whether the <see cref="CloseCommand"/> for this document can be executed or not.
         /// </summary>
         /// <returns></returns>
         public virtual bool CanClose()
@@ -338,6 +330,19 @@ namespace Edi.Core.ViewModels
             return (DocumentEvent != null);
         }
 
+        /// <summary>
+        /// Implements the <see cref="CloseCommand"/> for this document by
+        /// telling the surrounding framework to close the document.
+        /// </summary>
+        protected virtual void OnClose()
+        {
+            DocumentEvent?.Invoke(this, new FileBaseEvent(FileEventType.CloseDocument));
+        }
+
+        /// <summary>
+        /// Implements the <see cref="CopyFullPathtoClipboard"/> command to copy the path of this
+        /// document into the Windows Clipboard.
+        /// </summary>
         private void OnCopyFullPathtoClipboardCommand()
         {
             try
@@ -368,14 +373,11 @@ namespace Edi.Core.ViewModels
             }
         }
 
-
         /// <summary>
         /// Opens the folder in which this document is stored in the Windows Explorer.
         /// </summary>
         private void OnOpenContainingFolderCommand()
         {
-            var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-
             try
             {
                 if (File.Exists(FilePath))
@@ -390,9 +392,11 @@ namespace Edi.Core.ViewModels
                     string parentDir = Directory.GetParent(FilePath).FullName;
 
                     if (Directory.Exists(parentDir) == false)
-                        msgBox.Show(string.Format(CultureInfo.CurrentCulture, Strings.STR_ACCESS_DIRECTORY_ERROR, parentDir),
+                    {
+                        _MsgBox.Show(string.Format(CultureInfo.CurrentCulture, Strings.STR_ACCESS_DIRECTORY_ERROR, parentDir),
                                     Strings.STR_FILE_FINDING_CAPTION,
                                     MsgBoxButtons.OK, MsgBoxImage.Error);
+                    }
                     else
                     {
                         string argument = @"/select, " + parentDir;
@@ -403,9 +407,9 @@ namespace Edi.Core.ViewModels
             }
             catch (Exception ex)
             {
-                msgBox.Show(string.Format(CultureInfo.CurrentCulture, "{0}\n'{1}'.", ex.Message, (FilePath ?? string.Empty)),
-                            Strings.STR_FILE_FINDING_CAPTION,
-                            MsgBoxButtons.OK, MsgBoxImage.Error);
+                _MsgBox.Show(string.Format(CultureInfo.CurrentCulture, "{0}\n'{1}'.", ex.Message, (FilePath ?? string.Empty)),
+                              Strings.STR_FILE_FINDING_CAPTION,
+                              MsgBoxButtons.OK, MsgBoxImage.Error);
             }
         }
 

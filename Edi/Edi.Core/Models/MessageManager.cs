@@ -1,7 +1,6 @@
 ﻿namespace Edi.Core.Models
 {
-    using System.ComponentModel.Composition;
-    using Edi.Core.Interfaces;
+    using Edi.Interfaces.MessageManager;
     using MsgBox;
 
     /// <summary>
@@ -10,7 +9,6 @@
     /// - Ouptput text service
     /// - (Todo) Classified (error, warning, information) message output service.
     /// </summary>
-    [Export(typeof(IMessageManager))]
 	public class MessageManager : IMessageManager
 	{
 		#region fields
@@ -21,10 +19,15 @@
 		/// <summary>
 		/// Class constructor
 		/// </summary>
-		public MessageManager()
+		public MessageManager(IMessageBoxService msgBox)
+            : this()
 		{
-            MessageBox = new MessageBoxService();
+            _MsgBox = msgBox;
 		}
+
+        protected MessageManager()
+        {
+        }
 		#endregion constructors
 
 		#region properties
@@ -33,7 +36,7 @@
         /// This service should be used if user interaction is required
         /// (e.g. user is requested to click ok or yes, no etc...).
         /// </summary>
-		public IMessageBoxService MessageBox { get; }
+		public IMessageBoxService _MsgBox { get; }
 
 		/// <summary>
         /// Gets a reference to the output message servive implementation.
