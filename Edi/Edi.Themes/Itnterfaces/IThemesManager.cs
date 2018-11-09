@@ -1,5 +1,6 @@
 ﻿namespace Edi.Themes.Interfaces
 {
+/***
 	using System.Collections.ObjectModel;
 	using ICSharpCode.AvalonEdit.Highlighting.Themes;
 	using Edi.Themes.Definition;
@@ -40,4 +41,5 @@
         HighlightingThemes GetTextEditorHighlighting(string themeName);
 		#endregion methods
 	}
+***/
 }

@@ -11,6 +11,7 @@ ECHO Edi.Apps
 ECHO Edi.Core
 ECHO Edi.Dialogs
 ECHO Edi.Documents
+ECHO Edi.Interfaces
 ECHO Edi.Themes
 ECHO Edi.Settings
 ECHO Edi.SettingsView
@@ -64,6 +65,9 @@ RMDIR /S /Q Edi\Edi.Dialogs\obj
 
 RMDIR /S /Q Edi\Edi.Documents\bin
 RMDIR /S /Q Edi\Edi.Documents\obj
+
+RMDIR /S /Q Edi\Edi.Interfaces\bin
+RMDIR /S /Q Edi\Edi.Interfaces\obj
 
 RMDIR /S /Q Edi\Edi.Themes\bin
 RMDIR /S /Q Edi\Edi.Themes\obj

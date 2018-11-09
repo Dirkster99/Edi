@@ -1,27 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A02BE1B0-4071-4FCE-AF68-EA3A0A679DA1}</ProjectGuid>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2FC27F19-6128-4A21-8C52-1E6AB6618E78}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Edi</RootNamespace>
     <AssemblyName>Edi</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
     <DeployApplication>true</DeployApplication>
+    <TargetFrameworkProfile />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -31,8 +28,8 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,75 +38,21 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
-    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
-    <Prefer32Bit>false</Prefer32Bit>
-    <LangVersion>default</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
-    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
-    <UseVSHostingProcess>true</UseVSHostingProcess>
-    <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Team Tools\Static Analysis Tools\Rule Sets\ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>EdiLogo.ico</ApplicationIcon>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CommonServiceLocator.2.0.4\lib\net45\CommonServiceLocator.dll</HintPath>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Castle.Core.4.3.1\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DropDownButtonLib, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.DropDownButtonLib.1.0.4\lib\net4\DropDownButtonLib.dll</HintPath>
+    <Reference Include="Castle.Facilities.FactorySupport, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Castle.FactorySupportFacility.4.1.1\lib\net45\Castle.Facilities.FactorySupport.dll</HintPath>
     </Reference>
-    <Reference Include="HistoryControlLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.HistoryControlLib.1.0.0\lib\net4\HistoryControlLib.dll</HintPath>
-    </Reference>
-    <Reference Include="InplaceEditBoxLib, Version=1.1.2.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.InplaceEditBoxLib.1.1.2.1\lib\net4\InplaceEditBoxLib.dll</HintPath>
+    <Reference Include="Castle.Windsor, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Castle.Windsor.4.1.1\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.MWindowLib.1.0.4.2\lib\net452\Microsoft.Expression.Interactions.dll</HintPath>
-    </Reference>
-    <Reference Include="MLib, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.MLib.1.0.6\lib\net4\MLib.dll</HintPath>
     </Reference>
     <Reference Include="MRULib, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.MRULib.1.0.2\lib\net451\MRULib.dll</HintPath>
@@ -117,30 +60,12 @@
     <Reference Include="MsgBox, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.MsgBox.1.4.2\lib\net451\MsgBox.dll</HintPath>
     </Reference>
-    <Reference Include="MWindowInterfacesLib, Version=1.0.4.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.MWindowLib.1.0.4.2\lib\net452\MWindowInterfacesLib.dll</HintPath>
-    </Reference>
-    <Reference Include="MWindowLib, Version=1.0.4.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.MWindowLib.1.0.4.2\lib\net452\MWindowLib.dll</HintPath>
-    </Reference>
     <Reference Include="NumericUpDownLib, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.NumericUpDownLib.2.1.1\lib\net4\NumericUpDownLib.dll</HintPath>
     </Reference>
-    <Reference Include="Prism, Version=7.0.0.396, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Prism.Core.7.0.0.396\lib\net45\Prism.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism.Mef.Wpf, Version=7.0.0.269, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Prism.Mef.7.0.0.269-pre\lib\net45\Prism.Mef.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism.Wpf, Version=7.0.0.336, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Prism.Wpf.7.0.0.336-pre\lib\net45\Prism.Wpf.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.MWindowLib.1.0.4.2\lib\net452\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -148,8 +73,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="UserNotification, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.InplaceEditBoxLib.1.1.2.1\lib\net4\UserNotification.dll</HintPath>
+    <Reference Include="UserNotification, Version=1.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.UserNotifications.1.4.1\lib\net4\UserNotification.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -161,15 +86,21 @@
       <HintPath>..\..\packages\Dirkster.AvalonDock.Themes.VS2013.3.4.0.5\lib\net4\Xceed.Wpf.AvalonDock.Themes.VS2013.dll</HintPath>
     </Reference>
     <Reference Include="YalvLib">
-      <HintPath>..\..\02_Libs\00_bin\YalvLib\YalvLib.dll</HintPath>
+      <HintPath>..\..\02_Libs\YalvLib\YalvLib.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bootstapper.cs" />
-    <Compile Include="PluginModuleCatalog.cs" />
+    <Compile Include="Installers.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -187,41 +118,35 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
+    <None Include="AvalonEdit\Highlighting\00_XmlDoc.xshd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="AvalonEdit\Highlighting\01_XML-Mode.xshd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="AvalonEdit\Highlighting\02_CSharp-Mode.xshd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="AvalonEdit\Highlighting\03_JavaScript-Mode.xshd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="AvalonEdit\Highlighting\04_HTML-Mode.xshd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="AvalonEdit\Highlighting\AS3.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="AvalonEdit\Highlighting\ASPX.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </None>
     <None Include="AvalonEdit\Highlighting\Boo.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="AvalonEdit\Highlighting\Coco-Mode.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="AvalonEdit\Highlighting\HLSL.xshd">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="AvalonEdit\Highlighting\Log.xshd">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="AvalonEdit\Highlighting\MarkDown-Mode.xshd">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="AvalonEdit\Highlighting\PLSQL.xshd">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="AvalonEdit\Highlighting\CPP-Mode.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="AvalonEdit\Highlighting\02_CSharp-Mode.xshd">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </None>
     <None Include="AvalonEdit\Highlighting\CSS-Mode.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -232,7 +157,7 @@
     <None Include="AvalonEdit\Highlighting\FSharp-Mode.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="AvalonEdit\Highlighting\04_HTML-Mode.xshd">
+    <None Include="AvalonEdit\Highlighting\HLSL.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="AvalonEdit\Highlighting\INI.xshd">
@@ -241,10 +166,13 @@
     <None Include="AvalonEdit\Highlighting\Java-Mode.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="AvalonEdit\Highlighting\03_JavaScript-Mode.xshd">
+    <None Include="AvalonEdit\Highlighting\lisp.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="AvalonEdit\Highlighting\lisp.xshd">
+    <None Include="AvalonEdit\Highlighting\Log.xshd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="AvalonEdit\Highlighting\MarkDown-Mode.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="AvalonEdit\Highlighting\Pascal.xshd">
@@ -256,13 +184,14 @@
     <None Include="AvalonEdit\Highlighting\PHP-Mode.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="AvalonEdit\Highlighting\PLSQL.xshd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="AvalonEdit\Highlighting\PowerShell.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </None>
     <None Include="AvalonEdit\Highlighting\Python.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </None>
     <None Include="AvalonEdit\Highlighting\Ruby.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -278,11 +207,9 @@
     </None>
     <None Include="AvalonEdit\Highlighting\Tex.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </None>
     <None Include="AvalonEdit\Highlighting\TXT.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </None>
     <None Include="AvalonEdit\Highlighting\VBNET-Mode.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -290,92 +217,60 @@
     <None Include="AvalonEdit\Highlighting\vtl.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="AvalonEdit\Highlighting\01_XML-Mode.xshd">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="AvalonEdit\Highlighting\00_XmlDoc.xshd">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="AvalonEdit\HighLighting_Themes\BrightStandard.xshd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="AvalonEdit\HighLighting_Themes\DeepBlack.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="AvalonEdit\HighLighting_Themes\TrueBlue.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="AvalonEdit\HighLighting_Themes\DeepBlack.xshd">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Tools\BuiltIn\Files\Files.csproj">
-      <Project>{ef9b7e8d-b722-48e0-a941-e21f4f7cc2df}</Project>
-      <Name>Files</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Tools\BuiltIn\Output\Output.csproj">
-      <Project>{d14d8609-693c-475d-a4a4-5a7f6188d633}</Project>
-      <Name>Output</Name>
+    <ProjectReference Include="..\..\MiniUML\MiniUML.Model\MiniUML.Model.csproj">
+      <Project>{4654F58A-400C-4D47-9DC9-9FCA153554D3}</Project>
+      <Name>MiniUML.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\Edi.Apps\Edi.Apps.csproj">
-      <Project>{4df91f4b-878a-4ab3-a5ec-16bce3d6e99d}</Project>
+      <Project>{4DF91F4B-878A-4AB3-A5EC-16BCE3D6E99D}</Project>
       <Name>Edi.Apps</Name>
     </ProjectReference>
     <ProjectReference Include="..\Edi.Core\Edi.Core.csproj">
-      <Project>{f17e5e06-f28c-4e91-964f-cdb9f8589bb7}</Project>
+      <Project>{F17E5E06-F28C-4E91-964F-CDB9F8589BB7}</Project>
       <Name>Edi.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Edi.Documents\Edi.Documents.csproj">
-      <Project>{1fb5ac73-b203-4d42-b22a-af2690de3709}</Project>
-      <Name>Edi.Documents</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
-      <Project>{6c55b776-26d4-4db3-a6ab-87e783b2f3d1}</Project>
-      <Name>ICSharpCode.AvalonEdit</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MiniUML\MiniUML.Framework\MiniUML.Framework.csproj">
-      <Project>{99941efe-69b0-4618-b130-6d6fc1b43eb3}</Project>
-      <Name>MiniUML.Framework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MiniUML\MiniUML.Model\MiniUML.Model.csproj">
-      <Project>{4654f58a-400c-4d47-9dc9-9fca153554d3}</Project>
-      <Name>MiniUML.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MiniUML\MiniUML.View\MiniUML.View.csproj">
-      <Project>{aad6b1d6-f529-40f8-9786-dc8e2fdf0ad6}</Project>
-      <Name>MiniUML.View</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Settings\Edi.Settings\Edi.Settings.csproj">
-      <Project>{2807b493-cc2e-402e-901a-eb138698fedc}</Project>
-      <Name>Edi.Settings</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SimpleControls\SimpleControls.csproj">
-      <Project>{0E69BE38-78C0-4662-A0E1-56C5913B5C3A}</Project>
-      <Name>SimpleControls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Edi.Dialogs\Edi.Dialogs.csproj">
-      <Project>{c4bbc94f-aca4-4b4a-8558-248e2e684b05}</Project>
-      <Name>Edi.Dialogs</Name>
+    <ProjectReference Include="..\Edi.Interfaces\Edi.Interfaces.csproj">
+      <Project>{c43530b2-96d6-4335-8097-4218eb69023b}</Project>
+      <Name>Edi.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\Edi.Themes\Edi.Themes.csproj">
       <Project>{69bc833c-0fe1-4288-bb80-bb457d07e638}</Project>
       <Name>Edi.Themes</Name>
     </ProjectReference>
     <ProjectReference Include="..\Edi.Util\Edi.Util.csproj">
-      <Project>{8dea0927-9bd3-442f-ad3b-5f0c9e3186f6}</Project>
+      <Project>{8DEA0927-9BD3-442F-AD3B-5F0C9E3186F6}</Project>
       <Name>Edi.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
+      <Project>{6c55b776-26d4-4db3-a6ab-87e783b2f3d1}</Project>
+      <Name>ICSharpCode.AvalonEdit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Settings\Edi.Settings\Edi.Settings.csproj">
+      <Project>{2807B493-CC2E-402E-901A-EB138698FEDC}</Project>
+      <Name>Edi.Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SimpleControls\SimpleControls.csproj">
+      <Project>{0e69be38-78c0-4662-a0e1-56c5913b5c3a}</Project>
+      <Name>SimpleControls</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -388,20 +283,9 @@
     <None Include="AvalonEdit\Intellisense\Keywords\options.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="EdiAppWindowLogo.ico" />
     <Resource Include="EdiLogo.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="EdiAppWindowLogo.ico" />
-    <!-- Content Include="Plugins\Log4NetTools.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content -->
-    <!--Content Include="Plugins\UML\MiniUML.Plugins.UmlClassDiagram.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content -->
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir).build\Edi.targets" />
   <PropertyGroup>
@@ -413,43 +297,8 @@
     <ItemGroup>
       <!-- Specify locally dependent binaries -->
       <!-- EdiProjectFiles Include="$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Expression.dll" / -->
-      <!-- EdiProjectFiles Include="$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Metro.dll" / -->
-      <!-- Specify Plugin files -->
-      <!--<EdiPluginUMLFiles Include="$(SolutionDir)MiniUML\Plugins\src\MiniUML.Plugins.UmlClassDiagram\$(OutDir)MiniUML.Plugins.UmlClassDiagram.dll" />-->
-      <!-- EdiPluginFiles Include="$(SolutionDir)Tools\BuiltIn\Files\$(OutDir)Files.dll" / -->
-      <!--<EdiPluginFiles Include="$(SolutionDir)Tools\Log4NetTools\$(OutDir)Log4NetTools.dll" />-->
-      <!--<EdiPluginFiles Include="$(SolutionDir)Edi\Edi.Documents\$(OutDir)Edi.Documents.dll" />-->
     </ItemGroup>
     <!-- Copy binaries not yet avalabile as nuget but as local binary only -->
     <Copy SourceFiles="@(EdiProjectFiles)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="false" />
-    <!-- Copy binaries from build into their respective Plugins Folder (UML Plugins is seperate) -->
-    <!--<Copy SourceFiles="@(EdiPluginUMLFiles)" DestinationFolder="$(ProjectDir)$(OutDir)\Plugins\UML\" SkipUnchangedFiles="false" />-->
-    <!--<Copy SourceFiles="@(EdiPluginFiles)" DestinationFolder="$(ProjectDir)$(OutDir)\Plugins\" SkipUnchangedFiles="false" />-->
   </Target>
-  <PropertyGroup>
-    <!--
-<PostBuildEvent>
-Copy /Y "$(SolutionDir)02_Libs\00_bin\NumericUpDownLib.dll" "$(TargetDir)"
-Copy /Y "$(SolutionDir)02_Libs\00_bin\DropDownButtonLib.dll" "$(TargetDir)"
-Copy /Y "$(SolutionDir)02_Libs\00_bin\InplaceEditBoxLib.dlll" "$(TargetDir)"
-
-XCopy /S /Y "$(SolutionDir)MiniUML\Plugins\src\MiniUML.Plugins.UmlClassDiagram\$(OutDir)MiniUML.Plugins.UmlClassDiagram.dll" "$(ProjectDir)$(OutDir)\Plugins\UML\"
-XCopy /S /Y "$(SolutionDir)Tools\Log4NetTools\$(OutDir)Log4NetTools.dll" "$(ProjectDir)$(OutDir)\Plugins\"
-
-Copy /Y "$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Expression.dll" "$(TargetDir)"
-Copy /Y "$(SolutionDir)02_Libs\00_bin\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.Themes.Metro.dll" "$(TargetDir)"
-</PostBuildEvent>
--->
-  </PropertyGroup>
-  <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
-  </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

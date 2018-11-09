@@ -1,12 +1,11 @@
 ﻿namespace MiniUML.Plugins.UmlClassDiagram
 {
-  using MiniUML.Framework;
-  using MiniUML.Model.ViewModels;
-  using MiniUML.Model.ViewModels.Document;
-  using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements;
-  using MiniUML.Plugins.UmlClassDiagram.ToolBox.ViewModel;
+    using MiniUML.Framework;
+    using MiniUML.Model.ViewModels.Document;
+    using MiniUML.Plugins.UmlClassDiagram.Controls.ViewModel.UmlElements;
+    using MiniUML.Plugins.UmlClassDiagram.ToolBox.ViewModel;
 
-  public partial class PluginViewModel : BaseViewModel
+    public partial class PluginViewModel : BaseViewModel
   {
     #region fields
     private ToolBoxControlViewModel mClassShapeBox = null;

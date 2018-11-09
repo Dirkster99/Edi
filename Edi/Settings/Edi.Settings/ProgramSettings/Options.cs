@@ -4,9 +4,8 @@
     using System.Xml.Serialization;
     using FileSystemModels.Models;
     using ICSharpCode.AvalonEdit;
-    using ICSharpCode.AvalonEdit.Highlighting.Themes;
     using Edi.Settings.Interfaces;
-    using Edi.Themes.Interfaces;
+    using Edi.Interfaces.Themes;
 
     /// <summary>
     /// Determine whether Zoom units of the text editor
@@ -59,6 +58,7 @@
             : this()
         {
             this._ThemesManager = themesManager;
+            this._CurrentTheme = themesManager.DefaultThemeName;
         }
 
         /// <summary>
@@ -76,7 +76,7 @@
 
             this._ReloadOpenFilesOnAppStart = true;
             this._RunSingleInstance = true;
-            this._CurrentTheme = Edi.Themes.Factory.DefaultThemeName;
+            this._CurrentTheme = null;
             this._LanguageSelected = SettingsFactory.DefaultLocal;
 
             this.HighlightOnFileNew = true;
@@ -353,7 +353,7 @@
         /// </summary>
         /// <param name="hlThemeName"></param>
         /// <returns>List of highlighting themes that should be applied for this WPF theme</returns>
-        public HighlightingThemes FindHighlightingTheme(string hlThemeName)
+        public IHighlightingThemes FindHighlightingTheme(string hlThemeName)
         {
             return this._ThemesManager.GetTextEditorHighlighting(hlThemeName);
         }

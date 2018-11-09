@@ -1,7 +1,9 @@
 ﻿namespace MiniUML.Framework
 {
+    using MsgBox;
+
     public interface IFactory
     {
-        object CreateObject();
+        object CreateObject(IMessageBoxService msgBox);
     }
 }

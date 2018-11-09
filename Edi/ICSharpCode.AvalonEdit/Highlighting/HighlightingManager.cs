@@ -24,6 +24,7 @@ using System.IO;
 using System.Xml;
 using ICSharpCode.AvalonEdit.Utils;
 using ICSharpCode.AvalonEdit.Highlighting.Themes;
+using Edi.Interfaces.Themes;
 
 namespace ICSharpCode.AvalonEdit.Highlighting
 {
@@ -166,7 +167,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
         SortedList<string, IHighlightingDefinition> sortedHighlightingsByName;
         ObservableCollection<IHighlightingDefinition> listHighlightingsByName;
 
-        HighlightingThemes mHlThemes;
+        IHighlightingThemes mHlThemes;
 
         Dictionary<string, IHighlightingDefinition> highlightingsByName = new Dictionary<string, IHighlightingDefinition>();
         SortedDictionary<string, IHighlightingDefinition> highlightingsByExtension = new SortedDictionary<string, IHighlightingDefinition>(StringComparer.OrdinalIgnoreCase);
@@ -243,7 +244,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
         /// Get property to style standard highlighting definitions with
         /// custom colors (foreground, background) and styles (italic, bold)
         /// </summary>
-        public HighlightingThemes HlThemes
+        public IHighlightingThemes HlThemes
         {
             get
             {
@@ -294,7 +295,7 @@ namespace ICSharpCode.AvalonEdit.Highlighting
         /// Dirkster99
         /// Initialize the highlighting definitions to force re-load of definitions
         /// </summary>
-        public void InitializeDefinitions(HighlightingThemes hlThemes = null)
+        public void InitializeDefinitions(IHighlightingThemes hlThemes = null)
         {
             lock (lockObj)
             {

@@ -12,7 +12,6 @@ namespace MiniUML.Model.ViewModels.Document
     using MiniUML.Model.ViewModels.Shapes;
     using MiniUML.View.Views.RubberBand;
     using MsgBox;
-    using CommonServiceLocator;
     using MiniUML.Model.ViewModels.Interfaces;
 
     public class CanvasViewModel : BaseViewModel, IShapeParent
@@ -32,6 +31,7 @@ namespace MiniUML.Model.ViewModels.Document
         private ICanvasViewMouseHandler _ICanvasViewMouseHandler = null;
 
         private RubberBandViewModel _RubberBand = null;
+        private readonly IMessageBoxService _MsgBox;
         #endregion fields
 
         #region constructor
@@ -39,9 +39,11 @@ namespace MiniUML.Model.ViewModels.Document
         /// Class constructor
         /// </summary>
         /// <param name="documentViewModel"></param>
-        public CanvasViewModel(DocumentViewModel documentViewModel)
+        public CanvasViewModel(DocumentViewModel documentViewModel, IMessageBoxService msgBox)
             : this()
         {
+            _MsgBox = msgBox;
+
             // Store a reference to the parent view model
             // (necessary to implement begin and end operation around undo).
             DocumentViewModel = documentViewModel;
@@ -672,9 +674,7 @@ namespace MiniUML.Model.ViewModels.Document
             }
             catch
             {
-                var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-
-                msgBox.Show(MiniUML.Framework.Local.Strings.STR_MSG_NoShapeInClipboard,
+                _MsgBox.Show(MiniUML.Framework.Local.Strings.STR_MSG_NoShapeInClipboard,
                             MiniUML.Framework.Local.Strings.STR_UnexpectedErrorCaption,
                             MsgBoxButtons.OK, MsgBoxImage.Warning);
             }

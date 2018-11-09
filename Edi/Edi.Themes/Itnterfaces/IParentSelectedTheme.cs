@@ -1,5 +1,6 @@
 ﻿namespace Edi.Themes.Interfaces
 {
+/***
 	/// <summary>
 	/// This interface specifies a property which is required to determine
 	/// whether a theme is selected ot not (the answer is determined per
@@ -11,4 +12,5 @@
 	{
 		string SelectedThemeName { get; }
 	}
+***/
 }

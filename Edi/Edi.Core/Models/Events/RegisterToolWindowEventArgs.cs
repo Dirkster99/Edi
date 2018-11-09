@@ -1,9 +1,9 @@
-namespace EdiApp.Events
+namespace Edi.Core.Models
 {
     using Edi.Core.ViewModels;
 
     /// <summary>
-    /// Class implements ...
+    /// Class implements 
     /// </summary>
     public class RegisterToolWindowEventArgs
 	{
@@ -28,6 +28,9 @@ namespace EdiApp.Events
 		#endregion constructor
 
 		#region properties
+        /// <summary>
+        /// Gets the 
+        /// </summary>
 		public ToolViewModel Tool { get; }
 		#endregion properties
 	}

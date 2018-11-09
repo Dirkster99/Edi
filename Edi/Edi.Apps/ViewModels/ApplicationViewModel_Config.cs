@@ -7,12 +7,11 @@
     using MsgBox;
     using Settings.Interfaces;
     using Settings.UserProfile;
-    using Themes.Interfaces;
     using MRULib.MRU.Interfaces;
     using MRULib.MRU.Models.Persist;
-    using CommonServiceLocator;
     using System.Threading.Tasks;
     using Edi.Settings;
+    using Edi.Interfaces.Themes;
 
     public partial class ApplicationViewModel
     {
@@ -23,7 +22,7 @@
         {
             try
             {
-                _mAppCore.CreateAppDataFolder();
+                _AppCore.CreateAppDataFolder();
 
                 // Save current explorer settings and user profile data
                 // Query for an explorer tool window and return it
@@ -38,18 +37,17 @@
                 // but should normally not occur as often as saving session data
                 if (_SettingsManager.SettingData.IsDirty)
                 {
-                    _SettingsManager.SaveOptions(_mAppCore.DirFileAppSettingsData, _SettingsManager.SettingData);
+                    _SettingsManager.SaveOptions(_AppCore.DirFileAppSettingsData, _SettingsManager.SettingData);
                 }
 
                 // Convert viewmodel data into model for persistance layer...
-                var mruVm = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
-                MRUEntrySerializer.ConvertToModel(mruVm, _SettingsManager.SessionData.MruList);
+                MRUEntrySerializer.ConvertToModel(_MruVM, _SettingsManager.SessionData.MruList);
 
-                _SettingsManager.SaveSessionData(_mAppCore.DirFileAppSessionData, _SettingsManager.SessionData);
+                _SettingsManager.SaveSessionData(_AppCore.DirFileAppSessionData, _SettingsManager.SessionData);
             }
             catch (Exception exp)
             {
-                _msgBox.Show(exp, "Unhandled Exception", MsgBoxButtons.OK, MsgBoxImage.Error);
+                _MsgBox.Show(exp, "Unhandled Exception", MsgBoxButtons.OK, MsgBoxImage.Error);
             }
         }
 
@@ -64,8 +62,8 @@
                                                                 IThemesManager themes)
         {
             // Re/Load program options and user profile session data to control global behaviour of program
-            await settings.LoadOptionsAsync(_mAppCore.DirFileAppSettingsData, themes, programSettings);
-            settings.LoadSessionData(_mAppCore.DirFileAppSessionData);
+            await settings.LoadOptionsAsync(_AppCore.DirFileAppSettingsData, themes, programSettings);
+            settings.LoadSessionData(_AppCore.DirFileAppSessionData);
 
             settings.CheckSettingsOnLoad(SystemParameters.VirtualScreenLeft, SystemParameters.VirtualScreenTop);
 
@@ -76,8 +74,7 @@
             ResetTheme();                       // Initialize theme in process
 
             // Convert Session model into viewmodel instance
-            var mruVm = ServiceLocator.Current.GetInstance<IMRUListViewModel>();
-            MRUEntrySerializer.ConvertToViewModel(settings.SessionData.MruList, mruVm);
+            MRUEntrySerializer.ConvertToViewModel(settings.SessionData.MruList, _MruVM);
 
             return programSettings;
         }
@@ -133,7 +130,7 @@
             catch (Exception exp)
             {
                 Logger.Error(exp);
-                _msgBox.Show(exp.ToString(),
+                _MsgBox.Show(exp.ToString(),
                              Util.Local.Strings.STR_MSG_UnknownError_InShutDownProcess,
                              MsgBoxButtons.OK, MsgBoxImage.Error);
             }

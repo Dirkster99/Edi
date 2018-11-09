@@ -12,12 +12,11 @@
     using System.Windows.Media.Imaging;
     using System.Windows.Shapes;
     using System.Windows.Xps.Packaging;
+    using Edi.Core;
     using Microsoft.Win32;
     using MiniUML.Framework;
     using MiniUML.Model.ViewModels.Shapes;
     using MsgBox;
-    using CommonServiceLocator;
-    using System.Reflection;
 
     public partial class DocumentViewModel : AbstractDocumentViewModel
     {
@@ -31,16 +30,16 @@
             private DocumentViewModel mViewModel;
             #endregion fields
 
-            public CommandUtility(DocumentViewModel viewModel)
+            public CommandUtility(DocumentViewModel viewModel, IMessageBoxService msgBox)
             {
                 this.mViewModel = viewModel;
 
                 // Initialize commands.
-                viewModel.cmd_New = new NewCommandModel(viewModel);
-                viewModel.cmd_Open = new OpenCommandModel(viewModel);
-                viewModel.cmd_Save = new SaveCommandModel(viewModel);
-                viewModel.cmd_SaveAs = new SaveAsCommandModel(viewModel);
-                viewModel.cmd_Export = new ExportCommandModel(viewModel);
+                viewModel.cmd_New = new NewCommandModel(viewModel, msgBox);
+                viewModel.cmd_Open = new OpenCommandModel(viewModel, msgBox);
+                viewModel.cmd_Save = new SaveCommandModel(viewModel, msgBox);
+                viewModel.cmd_SaveAs = new SaveAsCommandModel(viewModel, msgBox);
+                viewModel.cmd_Export = new ExportCommandModel(viewModel, msgBox);
                 viewModel.cmd_Print = new PrintCommandModel(viewModel);
                 viewModel.cmd_Undo = new UndoCommandModel(viewModel);
                 viewModel.cmd_Redo = new RedoCommandModel(viewModel);
@@ -110,11 +109,15 @@
         /// </summary>
         private class SaveCommandModel : CommandModel
         {
+            #region fields
             private DocumentViewModel mViewModel;
+            private readonly IMessageBoxService _MsgBox;
+            #endregion fields
 
-            public SaveCommandModel(DocumentViewModel viewModel)
+            public SaveCommandModel(DocumentViewModel viewModel, IMessageBoxService msgBox)
                 : base(ApplicationCommands.Save)
             {
+                _MsgBox = msgBox;
                 this.mViewModel = viewModel;
                 this.Description = MiniUML.Framework.Local.Strings.STR_CMD_SAVE_DOCUMENT;
                 this.Image = (BitmapImage)Application.Current.Resources["Style.Images.Commands.Save"];
@@ -151,8 +154,7 @@
                 }
                 catch (Exception ex)
                 {
-                    var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                    msgBox.Show(ex, string.Format(MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG, file),
+                    _MsgBox.Show(ex, string.Format(MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG, file),
                                 MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG_CAPTION);
                 }
 
@@ -165,11 +167,15 @@
         /// </summary>
         private class SaveAsCommandModel : CommandModel
         {
+            #region fields
             private DocumentViewModel mViewModel;
+            private readonly IMessageBoxService _MsgBox;
+            #endregion fields
 
-            public SaveAsCommandModel(DocumentViewModel viewModel)
+            public SaveAsCommandModel(DocumentViewModel viewModel, IMessageBoxService msgBox)
                 : base(ApplicationCommands.SaveAs)
             {
+                _MsgBox = msgBox;
                 this.mViewModel = viewModel;
                 this.Description = MiniUML.Framework.Local.Strings.STR_CMD_SAVEAS_DOCUMENT;
                 this.Image = (BitmapImage)Application.Current.Resources["Style.Images.Commands.SaveAs"];
@@ -210,8 +216,7 @@
                 }
                 catch (Exception ex)
                 {
-                    var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                    msgBox.Show(ex, string.Format(MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG, dlg.FileName),
+                    _MsgBox.Show(ex, string.Format(MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG, dlg.FileName),
                                 MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG_CAPTION);
                 }
 
@@ -224,10 +229,14 @@
         /// </summary>
         private class ExportCommandModel : CommandModel
         {
+            #region fields
             private DocumentViewModel mViewModel;
+            private readonly IMessageBoxService _MsgBox;
+            #endregion fields
 
-            public ExportCommandModel(DocumentViewModel viewModel)
+            public ExportCommandModel(DocumentViewModel viewModel, IMessageBoxService msgBox)
             {
+                _MsgBox = msgBox;
                 this.mViewModel = viewModel;
                 this.Name = MiniUML.Framework.Local.Strings.STR_CMD_Export_Command;
                 this.Description = MiniUML.Framework.Local.Strings.STR_CMD_Export_Command_DESCR;
@@ -239,7 +248,8 @@
             /// </summary>
             /// <param name="viewModel"></param>
             /// <param name="defaultFileName"></param>
-            public static void ExportUMLToImage(DocumentViewModel viewModel, string defaultFileName = "")
+            public static void ExportUMLToImage(DocumentViewModel viewModel,
+                                                string defaultFileName = "")
             {
                 // Create and configure SaveFileDialog.
                 FileDialog dlg = new SaveFileDialog()
@@ -278,9 +288,8 @@
                 }
                 catch (Exception ex)
                 {
-                    var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                    msgBox.Show(ex, string.Format(MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG, dlg.FileName),
-                                MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG_CAPTION);
+                    StaticServices.MsgBox.Show(ex, string.Format(MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG, dlg.FileName),
+                                               MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG_CAPTION);
                 }
             }
 
@@ -508,11 +517,13 @@
         /// </summary>
         private class NewCommandModel : CommandModel
         {
+            private readonly IMessageBoxService _MsgBox;
             private DocumentViewModel mViewModel;
 
-            public NewCommandModel(DocumentViewModel viewModel)
+            public NewCommandModel(DocumentViewModel viewModel, IMessageBoxService msgBox)
                 : base(ApplicationCommands.New)
             {
+                _MsgBox = msgBox;
                 this.mViewModel = viewModel;
                 this.Name = MiniUML.Framework.Local.Strings.STR_CMD_CreateNew;
                 this.Description = MiniUML.Framework.Local.Strings.STR_CMD_CreateNewDocument;
@@ -539,7 +550,7 @@
 
                 // Create NewDocumentWindow 
                 IFactory newDocumentWindowFactory = Application.Current.Resources["NewDocumentWindowFactory"] as IFactory;
-                Window newDocumentWindow = newDocumentWindowFactory.CreateObject() as Window;
+                Window newDocumentWindow = newDocumentWindowFactory.CreateObject(_MsgBox) as Window;
 
                 // Configure window.
                 PageViewModelBase newDocumentWindowViewModel = new PageViewModelBase()
@@ -567,11 +578,15 @@
         /// </summary>
         private class OpenCommandModel : CommandModel
         {
+            #region fields
             private DocumentViewModel mViewModel;
+            private readonly IMessageBoxService _MsgBox;
+            #endregion fields
 
-            public OpenCommandModel(DocumentViewModel viewModel)
+            public OpenCommandModel(DocumentViewModel viewModel, IMessageBoxService msgBox)
                 : base(ApplicationCommands.Open)
             {
+                _MsgBox = msgBox;
                 this.mViewModel = viewModel;
                 this.Description = MiniUML.Framework.Local.Strings.STR_CMD_OpenDocument;
                 this.Image = (BitmapImage)Application.Current.Resources["Style.Images.Commands.Open"];
@@ -611,9 +626,8 @@
                 }
                 catch (Exception ex)
                 {
-                    var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
-                    msgBox.Show(ex, string.Format(MiniUML.Framework.Local.Strings.STR_OpenFILE_MSG, dlg.FileName),
-                                MiniUML.Framework.Local.Strings.STR_OpenFILE_MSG_CAPTION);
+                    _MsgBox.Show(ex, string.Format(MiniUML.Framework.Local.Strings.STR_OpenFILE_MSG, dlg.FileName),
+                                 MiniUML.Framework.Local.Strings.STR_OpenFILE_MSG_CAPTION);
                 }
             }
         }

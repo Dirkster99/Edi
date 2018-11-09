@@ -24,7 +24,9 @@
         /// <param name="anchorableToShow"></param>
         /// <param name="destinationContainer"></param>
         /// <returns></returns>
-        public bool BeforeInsertAnchorable(LayoutRoot layout, LayoutAnchorable anchorableToShow, ILayoutContainer destinationContainer)
+        public bool BeforeInsertAnchorable(LayoutRoot layout,
+                                           LayoutAnchorable anchorableToShow,
+                                           ILayoutContainer destinationContainer)
         {
             if (anchorableToShow.Content is IToolWindow)
             {

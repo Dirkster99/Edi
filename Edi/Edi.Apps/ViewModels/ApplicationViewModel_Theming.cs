@@ -7,6 +7,7 @@ namespace Edi.Apps.ViewModels
     using System.Windows;
     using System.Windows.Media;
     using Documents.ViewModels.EdiDoc;
+    using Edi.Interfaces.Themes;
     using ICSharpCode.AvalonEdit.Edi;
     using ICSharpCode.AvalonEdit.Highlighting;
     using ICSharpCode.AvalonEdit.Highlighting.Themes;
@@ -48,7 +49,7 @@ namespace Edi.Apps.ViewModels
             }
 
             // Get WPF Theme definition from Themes Assembly
-            ThemeBase nextThemeToSwitchTo = ApplicationThemes.SelectedTheme;
+            IThemeBase nextThemeToSwitchTo = ApplicationThemes.SelectedTheme;
             SwitchToSelectedTheme(nextThemeToSwitchTo);
 
             // Backup highlighting names (if any) and restore highlighting associations after reloading highlighting definitions
@@ -64,7 +65,7 @@ namespace Edi.Apps.ViewModels
 
             // Is the current theme configured with a highlighting theme???
             ////this.Config.FindHighlightingTheme(
-            HighlightingThemes hlThemes = nextThemeToSwitchTo.HighlightingStyles;
+            IHighlightingThemes hlThemes = nextThemeToSwitchTo.HighlightingStyles;
 
             // Re-load all highlighting patterns and re-apply highlightings
             HighlightingExtension.RegisterCustomHighlightingPatterns(hlThemes);
@@ -175,17 +176,17 @@ namespace Edi.Apps.ViewModels
 	    /// The given name must map into the <seealso cref="Edi.Themes.ThemesVM.EnTheme"/> enumeration.
 	    /// </summary>
 	    /// <param name="nextThemeToSwitchTo"></param>
-	    private void SwitchToSelectedTheme(ThemeBase nextThemeToSwitchTo)
+	    private void SwitchToSelectedTheme(IThemeBase nextThemeToSwitchTo)
         {
             const string themesModul = "Edi.Themes.dll";
 
             try
             {
                 // set the style of the message box display in back-end system.
-                _msgBox.Style = MsgBoxStyle.System;
+                _MsgBox.Style = MsgBoxStyle.System;
 
                 // Get WPF Theme definition from Themes Assembly
-                ThemeBase theme = ApplicationThemes.SelectedTheme;
+                IThemeBase theme = ApplicationThemes.SelectedTheme;
 
                 if (theme != null)
                 {
@@ -199,7 +200,7 @@ namespace Edi.Apps.ViewModels
 
                     if (System.IO.File.Exists(themesPathFileName) == false)
                     {
-	                    _msgBox.Show(string.Format(CultureInfo.CurrentCulture,
+	                    _MsgBox.Show(string.Format(CultureInfo.CurrentCulture,
                                         Util.Local.Strings.STR_THEMING_MSG_CANNOT_FIND_PATH, themesModul),
                                         Util.Local.Strings.STR_THEMING_CAPTION,
                                         MsgBoxButtons.OK, MsgBoxImage.Error);
@@ -212,8 +213,7 @@ namespace Edi.Apps.ViewModels
                         try
                         {
                             var res = new Uri(item, UriKind.Relative);
-
-
+                            
                             if (Application.LoadComponent(res) is ResourceDictionary)
                             {
                                 ResourceDictionary dictionary = Application.LoadComponent(res) as ResourceDictionary;
@@ -223,21 +223,21 @@ namespace Edi.Apps.ViewModels
                         }
                         catch (Exception exp)
                         {
-                            _msgBox.Show(exp, string.Format(CultureInfo.CurrentCulture, "'{0}'", item), MsgBoxButtons.OK, MsgBoxImage.Error);
+                            _MsgBox.Show(exp, string.Format(CultureInfo.CurrentCulture, "'{0}'", item), MsgBoxButtons.OK, MsgBoxImage.Error);
                         }
                     }
                 }
             }
             catch (Exception exp)
             {
-	            _msgBox.Show(exp, Util.Local.Strings.STR_THEMING_CAPTION,
+	            _MsgBox.Show(exp, Util.Local.Strings.STR_THEMING_CAPTION,
                              MsgBoxButtons.OK, MsgBoxImage.Error);
             }
             finally
             {
                 // set the style of the message box display in back-end system.
                 if (nextThemeToSwitchTo.WPFThemeName != "Generic")
-                    _msgBox.Style = MsgBoxStyle.WPFThemed;
+                    _MsgBox.Style = MsgBoxStyle.WPFThemed;
             }
         }
     }

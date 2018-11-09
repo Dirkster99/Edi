@@ -1,37 +1,39 @@
-using Edi.Apps.Interfaces;
-
 namespace Edi.Apps.Views.Shell
 {
     using System;
-    using System.ComponentModel.Composition;
     using Core.Interfaces;
-    using Events;
-    using Prism.Events;
     using MWindowLib;
+    using Edi.Apps.Interfaces;
+    using System.ComponentModel;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    [Export]
     public partial class MainWindow : SimpleMetroWindow, ILayoutableWindow
     {
         #region constructors
-        [ImportingConstructor]
+        /// <summary>
+        /// Class constructor
+        /// </summary>
+        /// <param name="av"></param>
+        /// <param name="appVm"></param>
         public MainWindow(IAvalonDockLayoutViewModel av,
-                          IApplicationViewModel appVm)
+                          IApplicationViewModel appVm
+                          )
+            : this()
         {
-            InitializeComponent();
+            if (DesignerProperties.GetIsInDesignMode(this))
+                return;
 
-            dockView.SetTemplates(av.ViewProperties.SelectPanesTemplate,
-                                        av.ViewProperties.DocumentHeaderTemplate,
-                                        av.ViewProperties.SelectPanesStyle,
-                                        av.ViewProperties.LayoutInitializer,
-                                        av.LayoutId);
+            dockView.InitTemplates(av.ViewProperties.SelectPanesTemplate,
+                                   av.ViewProperties.DocumentHeaderTemplate,
+                                   av.ViewProperties.SelectPanesStyle,
+                                   av.ViewProperties.LayoutInitializer,
+                                   av.LayoutId);
 
-            // Register these methods to receive PRISM event notifications about load and save of avalondock layouts
-            LoadLayoutEvent.Instance.Subscribe(dockView.OnLoadLayout, ThreadOption.PublisherThread,
-                                               true,
-                                         s => s.LayoutId == av.LayoutId);
+            // Register this methods to receive event notifications about
+            // load and save of avalondock layouts
+            av.LoadLayout += dockView.OnLoadLayout;
 
             // subscribe to close event messing to application viewmodel
             Closing += appVm.OnClosing;
@@ -44,6 +46,11 @@ namespace Edi.Apps.Views.Shell
                 appVm.OnClosed(this);
             };
         }
+
+        protected MainWindow()
+        {
+            InitializeComponent();
+        }
         #endregion constructors
 
         #region properties
@@ -52,13 +59,24 @@ namespace Edi.Apps.Views.Shell
         /// the positions and layout of documents and tool windows within the AvalonDock
         /// view.
         /// </summary>
-        public Guid LayoutId => (dockView != null ? dockView.LayoutId : Guid.Empty);
+        public Guid LayoutId
+        {
+            get
+            {
+                return (dockView != null ? dockView.LayoutId : Guid.Empty);
+            }
+        }
 
-	    /// <summary>
+        /// <summary>
         /// Gets the current AvalonDockManager Xml layout and returns it as a string.
         /// </summary>
-        public string CurrentAdLayout => (dockView != null ? dockView.CurrentAdLayout : string.Empty);
-
-	    #endregion properties
+        public string CurrentAdLayout
+        {
+            get
+            {
+                return (dockView != null ? dockView.CurrentAdLayout : string.Empty);
+            }
+        }
+        #endregion properties
     }
 }

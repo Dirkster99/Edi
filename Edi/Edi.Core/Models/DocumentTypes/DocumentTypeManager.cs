@@ -4,71 +4,107 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.ComponentModel.Composition;
     using System.Linq;
     using Edi.Core.Interfaces.DocumentTypes;
     using Edi.Core.Utillities;
+    using Edi.Interfaces.MessageManager;
 
     /// <summary>
+    /// Class manages a list of document types (text, UML, Log4Net etc)
+    /// and their associated methods and properties in the framework.
     /// </summary>
-    [Export(typeof(IDocumentTypeManager))]
-	public class DocumentTypeManager : IDocumentTypeManager
+    public class DocumentTypeManager : IDocumentTypeManager
 	{
 		#region fields
-		private readonly SortableObservableCollection<IDocumentType> _mDocumentTypes;
+		private readonly SortableObservableCollection<IDocumentType> _DocumentTypes;
 		#endregion fields
 
 		#region constructors
 		/// <summary>
 		/// Class constructor
 		/// </summary>
-		public DocumentTypeManager()
+		public DocumentTypeManager(IMessageManager messageManager)
+            : this()
 		{
-			_mDocumentTypes = new SortableObservableCollection<IDocumentType>(new List<IDocumentType>());
+            this.Messaging = messageManager;
 		}
-		#endregion constructors
 
-		#region properties
-		/// <summary>
-		/// Gets a collection of document types that are supported by this application.
-		/// </summary>
-		public ObservableCollection<IDocumentType> DocumentTypes => _mDocumentTypes;
+        /// <summary>
+        /// Class constructor.
+        /// </summary>
+        protected DocumentTypeManager()
+        {
+            _DocumentTypes = new SortableObservableCollection<IDocumentType>(new List<IDocumentType>());
+        }
+        #endregion constructors
 
-		#endregion properties
+        #region properties
+        /// <summary>
+        /// Gets a collection of document types that are supported by this application.
+        /// </summary>
+        public ObservableCollection<IDocumentType> DocumentTypes
+        {
+            get { return _DocumentTypes; }
+        }
 
-		#region Methods
-		/// <summary>
-		/// Method can be invoked in PRISM MEF module registration to register a new document (viewmodel)
-		/// type and its default file extension. The result of this call is an <seealso cref="IDocumentType"/>
-		/// object and a <seealso cref="RegisterDocumentTypeEvent"/> event to inform listers about the new
-		/// arrival of the new document type.
-		/// </summary>
-		/// <param name="key"></param>
-		/// <param name="description"></param>
-		/// <param name="fileFilterName"></param>
-		/// <param name="defaultFilter"></param>
-		/// <param name="fileOpenMethod"></param>
-		/// <param name="createDocumentMethod"></param>
-		/// <param name="t"></param>
-		/// <param name="sortPriority"></param>
-		/// <returns></returns>
-		public IDocumentType RegisterDocumentType(string key,
-																							 string description,
-																							 string fileFilterName,
-																							 string defaultFilter,
-																							 FileOpenDelegate fileOpenMethod,
-																							 CreateNewDocumentDelegate createDocumentMethod,
-																							 Type t,
-																							 int sortPriority = 0)
+        /// <summary>
+        /// Gets a reference to the <see cref="IMessageManager"/> service which
+        /// can be used to output information about the progress of the
+        /// tool window registration.
+        /// </summary>
+        protected IMessageManager Messaging { get; }
+        #endregion properties
+
+        #region Methods
+        /// <summary>
+        /// Method can be invoked in PRISM MEF module registration to register a new document (viewmodel)
+        /// type and its default file extension. The result of this call is an <seealso cref="IDocumentType"/>
+        /// object and a <seealso cref="RegisterDocumentTypeEvent"/> event to inform listers about the new
+        /// arrival of the new document type.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="description"></param>
+        /// <param name="fileFilterName"></param>
+        /// <param name="defaultFilter"></param>
+        /// <param name="fileOpenMethod"></param>
+        /// <param name="createDocumentMethod"></param>
+        /// <param name="t"></param>
+        /// <param name="sortPriority"></param>
+        /// <returns></returns>
+        public IDocumentType RegisterDocumentType(string key,
+												  string description,
+												  string fileFilterName,
+												  string defaultFilter,
+												  FileOpenDelegate fileOpenMethod,
+												  CreateNewDocumentDelegate createDocumentMethod,
+												  Type t,
+												  int sortPriority = 0)
 		{
-			var newFileType = new DocumentType(key, description, fileFilterName, defaultFilter,
-																				 fileOpenMethod, createDocumentMethod,
-																				 t, sortPriority);
+            try
+            {
+                Messaging.Output.Append(string.Format("{0} Registering document type: {1} ...",
+                    DateTime.Now.ToLongTimeString(), description));
 
-			_mDocumentTypes.Add(newFileType);
-			_mDocumentTypes.Sort(i => i.SortPriority, ListSortDirection.Ascending );
+                var newFileType = new DocumentType(key, description, fileFilterName, defaultFilter,
+                                                                                     fileOpenMethod, createDocumentMethod,
+                                                                                     t, sortPriority);
 
-			return newFileType;
+                _DocumentTypes.Add(newFileType);
+                _DocumentTypes.Sort(i => i.SortPriority, ListSortDirection.Ascending);
+
+                return newFileType;
+            }
+            catch (Exception exp)
+            {
+                Messaging.Output.AppendLine(exp.Message);
+                Messaging.Output.AppendLine(exp.StackTrace);
+            }
+            finally
+            {
+                Messaging.Output.AppendLine("Done.");
+            }
+
+            return null;
 		}
 
 		/// <summary>
@@ -99,7 +135,7 @@
 			if (string.IsNullOrEmpty(fileExtension))
 				return null;
 
-			var ret = _mDocumentTypes.FirstOrDefault(d => d.DefaultFilter == fileExtension);
+			var ret = _DocumentTypes.FirstOrDefault(d => d.DefaultFilter == fileExtension);
 
 			return ret;
 		}
@@ -114,7 +150,7 @@
 			if (string.IsNullOrEmpty(typeOfDoc))
 				return null;
 
-			return _mDocumentTypes.FirstOrDefault(d => d.Key == typeOfDoc);
+			return _DocumentTypes.FirstOrDefault(d => d.Key == typeOfDoc);
 		}
 
 		/// <summary>
@@ -128,9 +164,9 @@
 		{
 			SortedList<int, IFileFilterEntry> ret = new SortedList<int,IFileFilterEntry>();
 
-			if (_mDocumentTypes != null)
+			if (_DocumentTypes != null)
 			{
-				foreach (var item in _mDocumentTypes)
+				foreach (var item in _DocumentTypes)
 				{
 					if (key == string.Empty || key == item.Key)
 					{

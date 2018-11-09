@@ -161,7 +161,7 @@ namespace Edi.Apps.ViewModels
 			{
 				if (f.SearchIn == Dialogs.FindReplace.SearchScope.CurrentDocument)
 				{
-					_msgBox.Show(Util.Local.Strings.STR_MSG_FIND_NO_MORE_ITEMS_FOUND);
+					_MsgBox.Show(Util.Local.Strings.STR_MSG_FIND_NO_MORE_ITEMS_FOUND);
 
 					return false;
 				}
@@ -192,7 +192,7 @@ namespace Edi.Apps.ViewModels
 					}
 					else
 					{
-						_msgBox.Show(Util.Local.Strings.STR_MSG_FIND_NO_MORE_ITEMS_FOUND2,
+						_MsgBox.Show(Util.Local.Strings.STR_MSG_FIND_NO_MORE_ITEMS_FOUND2,
 									 Util.Local.Strings.STR_MSG_FIND_Caption);
 					}
 				} while (f.CurrentEditor != oldEditor);
@@ -259,7 +259,7 @@ namespace Edi.Apps.ViewModels
 				}
 				catch (Exception exc)
 				{
-					_msgBox.Show(exc, Util.Local.Strings.STR_MSG_FIND_UNEXPECTED_ERROR,
+					_MsgBox.Show(exc, Util.Local.Strings.STR_MSG_FIND_UNEXPECTED_ERROR,
 								 MsgBoxButtons.OK, MsgBoxImage.Error);
 				}
 				finally
@@ -285,7 +285,7 @@ namespace Edi.Apps.ViewModels
 				{
 					if (FindReplaceVm == null)
 					{
-						FindReplaceVm = new FindReplaceViewModel(_SettingsManager);
+						FindReplaceVm = new FindReplaceViewModel(_SettingsManager, _MsgBox);
 					}
 
 					FindReplaceVm.FindNext = FindNext;
@@ -312,7 +312,7 @@ namespace Edi.Apps.ViewModels
 				}
 				catch (Exception exc)
 				{
-					_msgBox.Show(exc, Util.Local.Strings.STR_MSG_FIND_UNEXPECTED_ERROR,
+					_MsgBox.Show(exc, Util.Local.Strings.STR_MSG_FIND_UNEXPECTED_ERROR,
 								 MsgBoxButtons.OK, MsgBoxImage.Error);
 				}
 				finally

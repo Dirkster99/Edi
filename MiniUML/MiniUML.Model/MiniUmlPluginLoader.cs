@@ -6,7 +6,6 @@ namespace MiniUML.Model
     using System.Windows;
     using MiniUML.Model.ViewModels.Document;
     using MsgBox;
-    using CommonServiceLocator;
 
     /// <summary>
     /// This class load MiniUML Plug-Ins at run-time from the specified folder.
@@ -15,10 +14,10 @@ namespace MiniUML.Model
     {
         #region methods
         public static void LoadPlugins(string pluginDirectory,
-                                       IMiniUMLDocument windowViewModel)
+                                       IMiniUMLDocument windowViewModel,
+                                       IMessageBoxService msgBox)
         {
             string[] assemblyFiles = { };
-            var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
 
             try
             {
@@ -48,7 +47,7 @@ namespace MiniUML.Model
 
             // Try to load plugins from each assembly.
             foreach (string assemblyFile in assemblyFiles)
-                loadPluginAssembly(assemblyFile, windowViewModel);
+                loadPluginAssembly(assemblyFile, windowViewModel, msgBox);
 
             if (PluginManager.PluginModels.Count != assemblyFiles.Length)
                 msgBox.Show(Edi.Util.Local.Strings.STR_MSG_UML_PLugin_NOTALL_Loaded,
@@ -57,10 +56,10 @@ namespace MiniUML.Model
         }
 
         private static void loadPluginAssembly(string assemblyFile,
-                                               IMiniUMLDocument windowViewModel)
+                                               IMiniUMLDocument windowViewModel,
+                                               IMessageBoxService msgBox)
         {
             Assembly assembly;
-            var msgBox = ServiceLocator.Current.GetInstance<IMessageBoxService>();
 
             try
             {
