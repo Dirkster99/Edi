@@ -1450,14 +1450,16 @@ namespace Edi.Apps.ViewModels
         /// <returns></returns>
         private T GetToolWindowVm<T>() where T : class
         {
+            if (_ToolRegistry == null)
+                return null;
+
             // Query for a RecentFiles tool window and return it
-            return Tools.FirstOrDefault(d => d is T) as T;
+            return _ToolRegistry.Tools.FirstOrDefault(d => d is T) as T;
         }
 
         /// <summary>
         /// Method executes when tool window registration publishers
-        /// relay the fact that a new tool window has been registered
-        /// via PRISM event aggregator notification.
+        /// relay the fact that a new tool window has been registered.
         /// </summary>
         /// <param name="args"></param>
         private void OnRegisterToolWindow(object sender, RegisterToolWindowEventArgs args)
@@ -1466,7 +1468,9 @@ namespace Edi.Apps.ViewModels
 	        // property is otherwise without content since it may be queried
 	        // for the menu entry - before the tool window is registered
 	        if (args?.Tool is RecentFilesTWViewModel)
-		        RaisePropertyChanged(() => RecentFiles);
+            {
+                RaisePropertyChanged(() => RecentFiles);
+            }
         }
 
 /////        /// <summary>

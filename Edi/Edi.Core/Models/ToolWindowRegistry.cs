@@ -67,9 +67,12 @@
 			foreach (var item in _mTodoTools)
 			{
 				Tools.Add(item);
-			}
 
-			_mTodoTools.Clear();
+                // Publish the fact that we have registered a new tool window instance
+                RegisterToolWindowEvent?.Invoke(this, new RegisterToolWindowEventArgs(item));
+            }
+
+            _mTodoTools.Clear();
 		}
 
 		/// <summary>
@@ -84,9 +87,6 @@
                     DateTime.Now.ToLongTimeString(), newTool.Name));
 
                 _mTodoTools.Add(newTool);
-
-                // Publish the fact that we have registered a new tool window instance
-                RegisterToolWindowEvent?.Invoke(this, new RegisterToolWindowEventArgs(newTool));
             }
             catch (Exception exp)
 			{
