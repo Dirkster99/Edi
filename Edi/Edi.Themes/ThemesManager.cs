@@ -3,9 +3,7 @@ namespace Edi.Themes
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Reflection;
-    using ICSharpCode.AvalonEdit.Highlighting.Themes;
     using Edi.Themes.Definition;
-    using Edi.Themes.Interfaces;
     using MLib.Interfaces;
     using System;
     using System.Windows.Media;

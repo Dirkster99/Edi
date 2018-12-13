@@ -12,7 +12,6 @@ namespace Edi.Apps.ViewModels
     using ICSharpCode.AvalonEdit.Highlighting;
     using ICSharpCode.AvalonEdit.Highlighting.Themes;
     using MsgBox;
-    using Themes.Definition;
 
     public partial class ApplicationViewModel
     {
