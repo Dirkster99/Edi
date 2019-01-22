@@ -102,8 +102,8 @@
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Dirkster.FolderBrowser.3.1.1\lib\net452\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="MLib, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Dirkster.MLib.1.0.7\lib\net4\MLib.dll</HintPath>
+    <Reference Include="MLib, Version=1.0.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Dirkster.MLib.1.0.10\lib\net4\MLib.dll</HintPath>
     </Reference>
     <Reference Include="MRULib, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Dirkster.MRULib.1.0.2\lib\net451\MRULib.dll</HintPath>
@@ -129,8 +129,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="UserNotification, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Dirkster.InplaceEditBoxLib.1.1.2.1\lib\net4\UserNotification.dll</HintPath>
+    <Reference Include="UserNotification, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Dirkster.UserNotifications.1.5.0\lib\net40\UserNotification.dll</HintPath>
     </Reference>
     <Reference Include="WatermarkControlsLib, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Dirkster.WatermarkControlsLib.1.0.1\lib\net4\WatermarkControlsLib.dll</HintPath>
