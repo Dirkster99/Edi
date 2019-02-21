@@ -102,8 +102,8 @@
       <HintPath>..\..\packages\Dirkster.UserNotifications.1.5.0\lib\net40\UserNotification.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
-    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.4.0.11, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.AvalonDock.3.4.0.11\lib\net4\Xceed.Wpf.AvalonDock.dll</HintPath>
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.5.2.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.AvalonDock.3.5.0.2\lib\net4\Xceed.Wpf.AvalonDock.dll</HintPath>
     </Reference>
     <Reference Include="YalvLib">
       <HintPath>..\..\02_Libs\YalvLib\YalvLib.dll</HintPath>
