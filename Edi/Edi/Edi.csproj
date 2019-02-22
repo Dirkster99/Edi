@@ -61,7 +61,7 @@
       <HintPath>..\..\packages\Dirkster.MsgBox.1.4.2\lib\net451\MsgBox.dll</HintPath>
     </Reference>
     <Reference Include="NumericUpDownLib, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.NumericUpDownLib.2.2.0\lib\net4\NumericUpDownLib.dll</HintPath>
+      <HintPath>..\..\packages\Dirkster.NumericUpDownLib.2.2.2\lib\net4\NumericUpDownLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
