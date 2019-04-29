@@ -1,13 +1,12 @@
 ﻿namespace ICSharpCode.AvalonEdit.Edi
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Windows;
+    using System;
+    using System.Collections.Generic;
+    using System.Windows;
 
-  using ICSharpCode.AvalonEdit;
-  using ICSharpCode.AvalonEdit.Document;
-  using TextBoxControl;
-  using System.Windows.Controls;
+    using ICSharpCode.AvalonEdit;
+    using ICSharpCode.AvalonEdit.Document;
+    using TextBoxControl;
 
   public partial class EdiTextEditor : TextEditor
   {

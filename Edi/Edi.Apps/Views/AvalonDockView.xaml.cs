@@ -13,13 +13,18 @@
     /// <summary>
     /// Interaction logic for AvalonDockView.xaml
     /// </summary>
-    [TemplatePartAttribute(Name = "PART_DockView", Type = typeof(DockingManager))]
+    [TemplatePartAttribute(Name = PART_DockView, Type = typeof(DockingManager))]
 	public partial class AvalonDockView : UserControl
 	{
-		#region fields
-		protected static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        #region fields
+        /// <summary>
+        /// defines the nme of the required <see cref="DockingManager"/> control in the attached control XAML
+        /// </summary>
+        const string PART_DockView = "PART_DockView";
 
-		private DockingManager _mDockManager;
+        protected static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+		private DockingManager _PART_DockView;
 
 		private DataTemplateSelector _LayoutItemTemplateSelector;
 		private DataTemplate _DocumentHeaderTemplate;
@@ -67,7 +72,7 @@
 		{
 			get
 			{
-				if (_mDockManager == null)
+				if (_PART_DockView == null)
 					return String.Empty;
 
 				string xmlLayoutString = string.Empty;
@@ -75,7 +80,7 @@
 				{
 					using (StringWriter fs = new StringWriter())
 					{
-						XmlLayoutSerializer xmlLayout = new XmlLayoutSerializer(_mDockManager);
+						XmlLayoutSerializer xmlLayout = new XmlLayoutSerializer(_PART_DockView);
 
 						xmlLayout.Serialize(fs);
 
@@ -99,10 +104,7 @@
 		{
 			base.OnApplyTemplate();
 
-			_mDockManager = Template.FindName("PART_DockView", this) as DockingManager;
-
-			SetCustomLayoutItems();
-            ////this.LoadXmlLayout(this.mOnLoadXmlLayout);
+            Loaded += AvalonDockView_Loaded;
 		}
 
         /// <summary>
@@ -126,7 +128,7 @@
 			_LayoutUpdateStrategy = layoutInitializer;
 			LayoutId = layoutId;
 
-			if (_mDockManager == null)
+			if (_PART_DockView == null)
 				return;
 
 			SetCustomLayoutItems();
@@ -150,7 +152,7 @@
 
 			_mOnLoadXmlLayout = args.XmlLayout;
 
-			if (_mDockManager == null)
+			if (_PART_DockView == null)
 				return;
 
 			LoadXmlLayout(_mOnLoadXmlLayout);
@@ -168,7 +170,7 @@
 				{
 					try
 					{
-						layoutSerializer = new XmlLayoutSerializer(_mDockManager);
+						layoutSerializer = new XmlLayoutSerializer(_PART_DockView);
 						layoutSerializer.LayoutSerializationCallback += UpdateLayout;
 						layoutSerializer.Deserialize(sr);
 					}
@@ -219,27 +221,40 @@
 				Console.WriteLine(exp.Message);
 			}
 		}
-		#endregion Workspace Layout Management
+        #endregion Workspace Layout Management
 
-		/// <summary>
-		/// Assigns the currently assigned custom layout controls to the AvalonDock DockingManager.
-		/// </summary>
-		private void SetCustomLayoutItems()
+        /// <summary>
+        /// Method invokes when control is loaded (is visible in UI)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AvalonDockView_Loaded(object sender, RoutedEventArgs e)
+        {
+            _PART_DockView = Template.FindName("PART_DockView", this) as DockingManager;
+
+            SetCustomLayoutItems();
+            ////this.LoadXmlLayout(this.mOnLoadXmlLayout);
+        }
+
+        /// <summary>
+        /// Assigns the currently assigned custom layout controls to the AvalonDock DockingManager.
+        /// </summary>
+        private void SetCustomLayoutItems()
 		{
-			if (_mDockManager == null)
+			if (_PART_DockView == null)
 				return;
 
 			if (_LayoutItemTemplateSelector != null)
-				_mDockManager.LayoutItemTemplateSelector = _LayoutItemTemplateSelector;
+				_PART_DockView.LayoutItemTemplateSelector = _LayoutItemTemplateSelector;
 
 			if (_DocumentHeaderTemplate != null)
-				_mDockManager.DocumentHeaderTemplate = _DocumentHeaderTemplate;
+				_PART_DockView.DocumentHeaderTemplate = _DocumentHeaderTemplate;
 
 			if (_LayoutItemContainerStyleSelector != null)
-				_mDockManager.LayoutItemContainerStyleSelector = _LayoutItemContainerStyleSelector;
+				_PART_DockView.LayoutItemContainerStyleSelector = _LayoutItemContainerStyleSelector;
 
 			if (_LayoutUpdateStrategy != null)
-				_mDockManager.LayoutUpdateStrategy = _LayoutUpdateStrategy;
+				_PART_DockView.LayoutUpdateStrategy = _LayoutUpdateStrategy;
 		}
 		#endregion methods
 	}
