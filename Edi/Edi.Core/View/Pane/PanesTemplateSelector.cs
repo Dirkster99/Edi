@@ -43,6 +43,7 @@ namespace Edi.Core.View.Pane
             DataTemplate o;
             _templateDirectory.TryGetValue(item.GetType(), out o);
 
+
             return o ?? base.SelectTemplate(item, container);
         }
 

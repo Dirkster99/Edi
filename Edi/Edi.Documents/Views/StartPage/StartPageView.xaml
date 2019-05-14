@@ -20,9 +20,7 @@
              Focusable="True"
              KeyboardNavigation.IsTabStop="True"
              Name="StartPageViewObject"
-             behav:KeyboardFocus.On="{Binding ElementName=StartPageViewObject}"
              >
-    <!-- The KeyboardFocus attached property is necessary to support CTRL+TAB in AvalonDock -->
     <UserControl.Resources>
         <BitmapImage UriSource="pack://application:,,,/Edi.Themes;component/Images/App/StartPage/Edi100.png" x:Key="Logo" />
         <BitmapImage UriSource="pack://application:,,,/Edi.Themes;component/Images/App/StartPage/File_Open64.png" x:Key="FileOpenImage" />

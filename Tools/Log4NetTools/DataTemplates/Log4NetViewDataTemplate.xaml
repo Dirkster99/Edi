@@ -17,7 +17,6 @@
                                    Focusable="True"
                                    KeyboardNavigation.IsTabStop="True"
                                    Name="ValvView"
-                                   behav:KeyboardFocus.On="{Binding ElementName=ValvView}"
               />
     </Grid>
   </DataTemplate>

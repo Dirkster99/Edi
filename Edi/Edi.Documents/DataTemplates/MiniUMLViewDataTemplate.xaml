@@ -9,7 +9,6 @@
         <Grid Focusable="True"
                     KeyboardNavigation.IsTabStop="True"
                     Name="MiniUmlView"
-                    behav:KeyboardFocus.On="{Binding ElementName=MiniUmlView}"
                     >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
