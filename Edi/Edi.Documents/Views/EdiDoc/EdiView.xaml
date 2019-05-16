@@ -21,7 +21,7 @@
         <!-- Known problem: Options must be bound or the control will show a gray bar otherwise -->
         <ae:EdiTextEditor Document="{Binding Document}"
                       Options="{Binding TextOptions}"
-                      SyntaxHighlighting="{Binding HighlightingDefinition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      SyntaxHighlighting="{Binding HighlightingDefinition, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                        
                       EditorCaretOffset="{Binding TextEditorCaretOffset, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       EditorSelectionLength="{Binding TextEditorSelectionLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

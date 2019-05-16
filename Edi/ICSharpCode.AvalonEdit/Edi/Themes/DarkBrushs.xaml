@@ -15,7 +15,7 @@
     <SolidColorBrush x:Key="EditorSelectionBrush"      Color="#30FFFFFF"  options:Freeze="true" />
     <SolidColorBrush x:Key="EditorSelectionBorder"     Color="#50ffffff"  options:Freeze="true" />
     
-    <SolidColorBrush x:Key="NonPrintableCharacterBrush}" Color="#2FFFFFFF"  options:Freeze="true" />
+    <SolidColorBrush x:Key="NonPrintableCharacterBrush" Color="#2FFFFFFF"  options:Freeze="true" />
 
     <SolidColorBrush x:Key="LinkTextForegroundBrush"    Color="#FFAAAAFF"  options:Freeze="true" />
     
