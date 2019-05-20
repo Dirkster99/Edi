@@ -92,7 +92,7 @@
       <HintPath>..\..\..\packages\Dirkster.MLib.1.0.10\lib\net4\MLib.dll</HintPath>
     </Reference>
     <Reference Include="MRULib, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Dirkster.MRULib.1.2.0\lib\net451\MRULib.dll</HintPath>
+      <HintPath>..\..\..\packages\Dirkster.MRULib.1.2.1\lib\net451\MRULib.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
