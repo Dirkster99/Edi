@@ -1,5 +1,6 @@
-﻿namespace Edi.Interfaces.Themes
+﻿namespace Edi.Themes.Interfaces
 {
+    using ICSharpCode.AvalonEdit.Edi.Interfaces;
     using System.Collections.Generic;
 
     public interface IThemeBase

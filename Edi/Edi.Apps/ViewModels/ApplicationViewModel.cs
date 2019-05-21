@@ -15,7 +15,6 @@ namespace Edi.Apps.ViewModels
     using Documents.ViewModels.StartPage;
     using Settings.Interfaces;
     using SettingsView.Config.ViewModels;
-    using Edi.Interfaces.Themes;
     using Files.ViewModels.RecentFiles;
     using Microsoft.Win32;
     using MRULib.MRU.Interfaces;
@@ -34,6 +33,7 @@ namespace Edi.Apps.ViewModels
     using Edi.Core.Models;
     using Edi.Interfaces.MessageManager;
     using Edi.Interfaces.App;
+    using Edi.Themes.Interfaces;
 
     /// <summary>
     /// This class manages the complete application life cyle from start to end.

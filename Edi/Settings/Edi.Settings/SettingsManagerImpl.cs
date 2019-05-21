@@ -9,7 +9,7 @@
     using Edi.Settings.ProgramSettings;
     using Edi.Settings.UserProfile;
     using Edi.Interfaces.App;
-    using Edi.Interfaces.Themes;
+    using Edi.Themes.Interfaces;
 
     /// <summary>
     /// This class keeps track of program options and user profile (session) data.

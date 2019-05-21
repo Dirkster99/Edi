@@ -8,7 +8,8 @@ namespace Edi.Themes
     using System;
     using System.Windows.Media;
     using System.Windows;
-    using Edi.Interfaces.Themes;
+    using Edi.Themes.Interfaces;
+    using ICSharpCode.AvalonEdit.Edi.Interfaces;
 
     /// <summary>
     /// This class manages a list of WPF themes (Aero, Metro etc) which

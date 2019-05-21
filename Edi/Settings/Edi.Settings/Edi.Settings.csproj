@@ -136,6 +136,10 @@
       <Project>{c43530b2-96d6-4335-8097-4218eb69023b}</Project>
       <Name>Edi.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Edi.Themes\Edi.Themes.csproj">
+      <Project>{69bc833c-0fe1-4288-bb80-bb457d07e638}</Project>
+      <Name>Edi.Themes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Edi.Util\Edi.Util.csproj">
       <Project>{8dea0927-9bd3-442f-ad3b-5f0c9e3186f6}</Project>
       <Name>Edi.Util</Name>

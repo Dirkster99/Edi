@@ -6,12 +6,10 @@
     using Edi.Apps.Interfaces;
     using Edi.Apps.ViewModels;
     using Edi.Apps.Views.Shell;
-    using Edi.Core;
-    using Edi.Core.Interfaces;
     using Edi.Interfaces.App;
     using Edi.Interfaces.MessageManager;
-    using Edi.Interfaces.Themes;
     using Edi.Settings.Interfaces;
+    using Edi.Themes.Interfaces;
     using Edi.Util;
     using Edi.Util.ActivateWindow;
     using log4net;

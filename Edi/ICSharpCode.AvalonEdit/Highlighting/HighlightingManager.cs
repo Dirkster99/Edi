@@ -19,12 +19,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using ICSharpCode.AvalonEdit.Utils;
 using ICSharpCode.AvalonEdit.Highlighting.Themes;
-using Edi.Interfaces.Themes;
+using ICSharpCode.AvalonEdit.Edi.Interfaces;
 
 namespace ICSharpCode.AvalonEdit.Highlighting
 {

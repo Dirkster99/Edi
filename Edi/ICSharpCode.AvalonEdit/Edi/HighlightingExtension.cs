@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Windows;
     using System.Xml;
-    using global::Edi.Interfaces.Themes;
+    using ICSharpCode.AvalonEdit.Edi.Interfaces;
     using ICSharpCode.AvalonEdit.Highlighting;
     using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 

@@ -222,6 +222,10 @@
     <Compile Include="Edi\Folding\VBNETFoldingStrategy.cs" />
     <Compile Include="Edi\HighlightCurrentLineBackgroundRenderer.cs" />
     <Compile Include="Edi\HighlightingExtension.cs" />
+    <Compile Include="Edi\Highlighting\IHighlightingTheme.cs" />
+    <Compile Include="Edi\Highlighting\IHighlightingThemes.cs" />
+    <Compile Include="Edi\Highlighting\IWidgetStyle.cs" />
+    <Compile Include="Edi\Highlighting\IWordsStyle.cs" />
     <Compile Include="Edi\Intellisense\CompletionWindowResolver.cs" />
     <Compile Include="Edi\Intellisense\FileCompletionDataProvider.cs" />
     <Compile Include="Edi\Intellisense\ICompletionDataProvider.cs" />

@@ -1,6 +1,6 @@
 ﻿namespace ICSharpCode.AvalonEdit.Highlighting.Themes
 {
-    using global::Edi.Interfaces.Themes;
+    using ICSharpCode.AvalonEdit.Edi.Interfaces;
     using System.Collections.Generic;
     using System.Windows.Media;
 

@@ -5,8 +5,8 @@
     using System.Windows;
     using Edi.Apps.Enums;
     using Edi.Core.Interfaces;
-    using Edi.Interfaces.Themes;
     using Edi.Settings.Interfaces;
+    using Edi.Themes.Interfaces;
     using MiniUML.Model.ViewModels.Document;
 
     /// <summary>

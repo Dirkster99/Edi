@@ -1,8 +1,8 @@
 ﻿namespace ICSharpCode.AvalonEdit.Highlighting.Themes
 {
+    using ICSharpCode.AvalonEdit.Edi.Interfaces;
     using System.Windows;
     using System.Windows.Media;
-    using global::Edi.Interfaces.Themes;
 
     /// <summary>
     /// Class to manage a highlighting style 

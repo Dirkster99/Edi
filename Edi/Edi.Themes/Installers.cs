@@ -3,7 +3,7 @@
     using Castle.MicroKernel.Registration;
     using Castle.MicroKernel.SubSystems.Configuration;
     using Castle.Windsor;
-    using Edi.Interfaces.Themes;
+    using Edi.Themes.Interfaces;
 
     /// <summary>
     /// This class gets picked up by from Castle.Windsor because

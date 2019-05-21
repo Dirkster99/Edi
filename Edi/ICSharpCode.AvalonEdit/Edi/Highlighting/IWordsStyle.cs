@@ -1,4 +1,4 @@
-﻿namespace Edi.Interfaces.Themes
+﻿namespace ICSharpCode.AvalonEdit.Edi.Interfaces
 {
     using System.Windows;
     using System.Windows.Media;

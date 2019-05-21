@@ -3,7 +3,8 @@
     using System.Collections.Generic;
     using System.Reflection;
     using ICSharpCode.AvalonEdit.Highlighting.Themes;
-    using Edi.Interfaces.Themes;
+    using Edi.Themes.Interfaces;
+    using ICSharpCode.AvalonEdit.Edi.Interfaces;
 
     public class ThemeBase : IThemeBase
     {

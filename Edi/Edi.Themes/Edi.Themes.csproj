@@ -152,8 +152,9 @@
     <Compile Include="Converters\BoolToVisibilityConverter1.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="Installers.cs" />
-    <Compile Include="Itnterfaces\IParentSelectedTheme.cs" />
-    <Compile Include="Itnterfaces\IThemesManager.cs" />
+    <Compile Include="Interfaces\IParentSelectedTheme.cs" />
+    <Compile Include="Interfaces\IThemeBase.cs" />
+    <Compile Include="Interfaces\IThemesManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Definition\ThemeBase.cs" />
     <Compile Include="ThemesManager.cs" />

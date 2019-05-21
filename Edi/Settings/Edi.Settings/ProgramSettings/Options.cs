@@ -5,7 +5,8 @@
     using FileSystemModels.Models;
     using ICSharpCode.AvalonEdit;
     using Edi.Settings.Interfaces;
-    using Edi.Interfaces.Themes;
+    using Edi.Themes.Interfaces;
+    using ICSharpCode.AvalonEdit.Edi.Interfaces;
 
     /// <summary>
     /// Determine whether Zoom units of the text editor

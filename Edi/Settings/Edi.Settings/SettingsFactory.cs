@@ -4,10 +4,10 @@
     using Edi.Settings.ProgramSettings;
     using Edi.Settings.UserProfile;
     using Edi.Interfaces.App;
-    using Edi.Interfaces.Themes;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using UnitComboLib.Models.Unit;
+    using Edi.Themes.Interfaces;
 
     public sealed class SettingsFactory
     {

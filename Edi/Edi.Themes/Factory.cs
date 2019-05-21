@@ -1,6 +1,6 @@
 ﻿namespace Edi.Themes
 {
-    using Edi.Interfaces.Themes;
+    using Edi.Themes.Interfaces;
 
     /// <summary>
     /// Implements a <seealso cref="ThemesManager"/> factory.

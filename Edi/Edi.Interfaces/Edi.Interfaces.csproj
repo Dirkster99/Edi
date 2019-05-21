@@ -55,16 +55,12 @@
     <Compile Include="MessageManager\IMessageManager.cs" />
     <Compile Include="MessageManager\IOutput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Themes\IHighlightingTheme.cs" />
-    <Compile Include="Themes\IHighlightingThemes.cs" />
-    <Compile Include="Themes\IThemeBase.cs" />
-    <Compile Include="Themes\IParentSelectedTheme.cs" />
-    <Compile Include="Themes\IThemesManager.cs" />
-    <Compile Include="Themes\IWidgetStyle.cs" />
-    <Compile Include="Themes\IWordsStyle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Themes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

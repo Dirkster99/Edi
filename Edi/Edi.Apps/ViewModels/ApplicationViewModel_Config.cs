@@ -6,12 +6,10 @@
     using Files.ViewModels.FileExplorer;
     using MsgBox;
     using Settings.Interfaces;
-    using Settings.UserProfile;
-    using MRULib.MRU.Interfaces;
     using MRULib.MRU.Models.Persist;
     using System.Threading.Tasks;
     using Edi.Settings;
-    using Edi.Interfaces.Themes;
+    using Edi.Themes.Interfaces;
 
     public partial class ApplicationViewModel
     {

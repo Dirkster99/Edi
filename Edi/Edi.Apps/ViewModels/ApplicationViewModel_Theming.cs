@@ -7,8 +7,9 @@ namespace Edi.Apps.ViewModels
     using System.Windows;
     using System.Windows.Media;
     using Documents.ViewModels.EdiDoc;
-    using Edi.Interfaces.Themes;
+    using Edi.Themes.Interfaces;
     using ICSharpCode.AvalonEdit.Edi;
+    using ICSharpCode.AvalonEdit.Edi.Interfaces;
     using ICSharpCode.AvalonEdit.Highlighting;
     using ICSharpCode.AvalonEdit.Highlighting.Themes;
     using MsgBox;

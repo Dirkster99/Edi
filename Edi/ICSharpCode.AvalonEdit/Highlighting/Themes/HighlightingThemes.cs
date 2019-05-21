@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System;
-    using global::Edi.Interfaces.Themes;
+    using ICSharpCode.AvalonEdit.Edi.Interfaces;
 
     /// <summary>
     /// This class manages a list highlighting themes that
