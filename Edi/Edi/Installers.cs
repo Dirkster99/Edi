@@ -28,41 +28,16 @@
         protected static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         #endregion fields
 
+        /// <summary>
+        /// Implements the <see cref="IWindsorInstaller"/> interface to
+        /// performs the installation in the <see cref="IWindsorContainer"/>
+        /// (performed automatically when Castle scans the containing assembly).
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="store"></param>
         public void Install(IWindsorContainer container,
                             IConfigurationStore store)
         {
-            // Register Messagebox service to help castle satisfy dependencies on it
-            container
-                .Register(Component.For<IMessageBoxService>()
-                .ImplementedBy<MessageBoxService>().LifestyleSingleton());
-
-            container.Register(Component.For<IMRUListViewModel>().Instance(MRULib.MRU_Service.Create_List()).LifestyleSingleton());
-
-            try
-            {
-                string fullPath = System.Reflection.Assembly.GetAssembly(typeof(Installers)).Location;
-                string dir = System.IO.Path.GetDirectoryName(fullPath);
-
-                container.Install(FromAssembly.Named(System.IO.Path.Combine(dir, "Edi.Core.dll")));
-                container.Install(FromAssembly.Named(System.IO.Path.Combine(dir, "Edi.Themes.dll")));
-                container.Install(FromAssembly.Named(System.IO.Path.Combine(dir, "Edi.Settings.dll")));
-            }
-            catch (Exception exp)
-            {
-                Logger.Error(exp);
-            }
-
-            container
-                .Register(Component.For<IAvalonDockLayoutViewModel>()
-                .ImplementedBy<AvalonDockLayoutViewModel>().LifestyleSingleton());
-
-            container
-                .Register(Component.For<IDocumentTypeManager>()
-                .ImplementedBy<DocumentTypeManager>().LifestyleSingleton());
-
-            container
-                .Register(Component.For<IFileOpenService, IApplicationViewModel>()
-                .ImplementedBy<ApplicationViewModel>().LifestyleSingleton());
 
             try
             {
@@ -79,7 +54,6 @@
                 Logger.Error(exp);
             }
 
-
             // Register shell to have a MainWindow to start up with
             container
                 .Register(Component.For<Edi.Apps.IShell<MainWindow>>()
@@ -87,6 +61,47 @@
 
             // Register MainWindow to help castle satisfy Shell dependencies on it
             container.Register(Component.For<MainWindow>().LifestyleTransient());
+        }
+
+        /// <summary>
+        /// Installs the core modules of this application into <see cref="IWindsorContainer"/>
+        /// and returns it to continue initialization/start-up using the core modules.
+        /// </summary>
+        /// <param name="container"></param>
+        internal static void InstallWindsorCore(IWindsorContainer container)
+        {
+            // Register Messagebox service to help castle satisfy dependencies on it
+            container
+                .Register(Component.For<IMessageBoxService>()
+                .ImplementedBy<MessageBoxService>().LifestyleSingleton());
+
+            try
+            {
+                string fullPath = System.Reflection.Assembly.GetAssembly(typeof(Installers)).Location;
+                string dir = System.IO.Path.GetDirectoryName(fullPath);
+
+                container.Install(FromAssembly.Named(System.IO.Path.Combine(dir, "Edi.Core.dll")));
+                container.Install(FromAssembly.Named(System.IO.Path.Combine(dir, "Edi.Themes.dll")));
+                container.Install(FromAssembly.Named(System.IO.Path.Combine(dir, "Edi.Settings.dll")));
+            }
+            catch (Exception exp)
+            {
+                Logger.Error(exp);
+            }
+
+            container.Register(Component.For<IMRUListViewModel>().Instance(MRULib.MRU_Service.Create_List()).LifestyleSingleton());
+
+            container
+                .Register(Component.For<IAvalonDockLayoutViewModel>()
+                .ImplementedBy<AvalonDockLayoutViewModel>().LifestyleSingleton());
+
+            container
+                .Register(Component.For<IDocumentTypeManager>()
+                .ImplementedBy<DocumentTypeManager>().LifestyleSingleton());
+
+            container
+                .Register(Component.For<IFileOpenService, IApplicationViewModel>()
+                .ImplementedBy<ApplicationViewModel>().LifestyleSingleton());
         }
     }
 }

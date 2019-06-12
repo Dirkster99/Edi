@@ -145,13 +145,14 @@
             IOptions options = null;
             ISettingsManager settingsManager = null;
             IThemesManager themesManager = null;
+            IApplicationViewModel AppViewModel = null;
             try
             {
+                // Install core components and add optionals after load of session data
+                // since some of them require setup parameters in constructor
+                // (TODO FIXME Add Initializesession method in registerted ExplorerViewModel tool)
                 _Container = new WindsorContainer();
-
-                // This allows castle to look at the current assembly and look for implementations
-                // of the IWindsorInstaller interface
-                _Container.Install(FromAssembly.This());                         // Register
+                Installers.InstallWindsorCore(_Container);
 
                 // Resolve SettingsManager to retrieve app settings/session data
                 // and start with correct parameters from last session (theme, window pos etc...)
@@ -164,6 +165,17 @@
                     options = await settingsManager.LoadOptionsAsync(_AppCore.DirFileAppSettingsData, themesManager);
                 });
                 task.Wait(); // Block this to ensure that results are usable in next steps of sequence
+
+                AppViewModel = _Container.Resolve<IApplicationViewModel>();
+                var task1 = Task.Run(async () => // Off Loading Load Programm Settings to non-UI thread
+                {
+                    await AppViewModel.LoadConfigOnAppStartupAsync(options, settingsManager, themesManager);
+                });
+                task1.Wait(); // Block this to ensure that results are usable in next steps of sequence
+
+                // This allows castle to look at the current assembly and look for implementations
+                // of the IWindsorInstaller interface
+                _Container.Install(FromAssembly.This());                         // Register
 
                 Thread.CurrentThread.CurrentCulture = new CultureInfo(options.LanguageSelected);
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(options.LanguageSelected);
@@ -190,18 +202,14 @@
                 Console.WriteLine("");
             }
 
-            var AppViewModel = _Container.Resolve<IApplicationViewModel>();
-            var task1 = Task.Run(async () => // Off Loading Load Programm Settings to non-UI thread
-            {
-                await AppViewModel.LoadConfigOnAppStartupAsync(options, settingsManager, themesManager);
-            });
-            task1.Wait(); // Block this to ensure that results are usable in next steps of sequence
-
             var start = _Container.Resolve<IShell<MainWindow>>();     // Resolve
 
             //resolve our shell to start the application.
             if (start != null)
             {
+                // Configure Explorer Settings from last session
+
+
                 start.ConfigureSession(AppViewModel, settingsManager);
                 AppViewModel.EnableMainWindowActivated(true);
 
@@ -238,7 +246,7 @@
 
             _AppCore.CreateAppDataFolder();
 
-            // Cannot set shutdown mode when application is already shuttong down
+// Cannot set shutdown mode when application is already shuttong down
 //            try
 //            {
 //                if (AppIsShuttingDown == false)

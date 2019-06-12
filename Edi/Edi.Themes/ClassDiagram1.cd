@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Edi.Themes.Definition.ThemeBase" BaseTypeListCollapsed="true">
+    <Position X="3.5" Y="0.75" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIEAAUAEAECAAAAAAAAAQCAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Definition\ThemeBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Edi.Themes.ThemesManager" BaseTypeListCollapsed="true">
+    <Position X="0.75" Y="0.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ECAAAkEQIEQAEBgCIAAEQkBAIAAAQAAAIAFAIAAAIAQ=</HashCode>
+      <FileName>ThemesManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Edi.Themes.Interfaces.IParentSelectedTheme">
+    <Position X="9.25" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Interfaces\IParentSelectedTheme.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Edi.Themes.Interfaces.IThemeBase">
+    <Position X="9.25" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAUAEAACAAAAAAAAAACAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IThemeBase.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Edi.Themes.Interfaces.IThemesManager">
+    <Position X="6.75" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAIAAAAAAAIAAAAAAAIAAAAAAAIAAAIAAAAAA=</HashCode>
+      <FileName>Interfaces\IThemesManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

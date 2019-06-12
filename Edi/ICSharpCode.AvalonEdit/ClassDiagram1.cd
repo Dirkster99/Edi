@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.Themes.XML.Read">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAQAAAACABAAAAAAACAAAgCAAAAAAAAAAAA=</HashCode>
+      <FileName>Highlighting\Themes\XML\Read.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.Themes.XML.ReadLexerStyles">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAACAFAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Highlighting\Themes\XML\Read.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.Themes.XML.ReadLexerType">
+    <Position X="12" Y="2.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>EIAAAAAAAAQAAAACAFAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Highlighting\Themes\XML\Read.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.Themes.XML.ReadWordsStyle">
+    <Position X="4.25" Y="2.5" Width="1.75" />
+    <Members>
+      <Method Name="ReadNode" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAQAAAACAFAAACAAACAAAAAAgAQAAAAAAAA=</HashCode>
+      <FileName>Highlighting\Themes\XML\Read.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.Themes.XML.ReadGlobalStyles">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAACAFAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Highlighting\Themes\XML\Read.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.Themes.XML.ReadWidgetStyle">
+    <Position X="6.25" Y="2.5" Width="2" />
+    <Members>
+      <Method Name="ReadCurrentLineBackgroundNode" Hidden="true" />
+      <Method Name="ReadForegroundBackgroundColorNode" Hidden="true" />
+      <Method Name="ReadForegroundColorNode" Hidden="true" />
+      <Method Name="ReadSelectionNode" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AIAAgAAAAAgAAAADABAABAJIIAAAAAIAgAAIAAAAAAE=</HashCode>
+      <FileName>Highlighting\Themes\XML\Read.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.Themes.XML.ReadStyle">
+    <Position X="5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAgAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Highlighting\Themes\XML\Read.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

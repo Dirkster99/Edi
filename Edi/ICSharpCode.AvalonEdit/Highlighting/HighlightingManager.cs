@@ -24,6 +24,7 @@ using System.Xml;
 using ICSharpCode.AvalonEdit.Utils;
 using ICSharpCode.AvalonEdit.Highlighting.Themes;
 using ICSharpCode.AvalonEdit.Edi.Interfaces;
+using System.Diagnostics;
 
 namespace ICSharpCode.AvalonEdit.Highlighting
 {
