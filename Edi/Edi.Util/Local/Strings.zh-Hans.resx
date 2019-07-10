@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CMD_APP_About_Description" xml:space="preserve">
-    <value>显示有关电子数据交换的信息</value>
+    <value>关于Edi</value>
   </data>
   <data name="CMD_APP_CloseDoc_Description" xml:space="preserve">
     <value>关闭文档</value>
@@ -133,7 +133,7 @@
     <value>打开文件...</value>
   </data>
   <data name="CMD_APP_SaveAll_Description" xml:space="preserve">
-    <value>保存所有......</value>
+    <value>全部保存</value>
   </data>
   <data name="CMD_APP_ShowStartPage_Description" xml:space="preserve">
     <value>显示起始页</value>
@@ -229,7 +229,7 @@
     <value>复制所选的项目</value>
   </data>
   <data name="STR_CmdName_Cut" xml:space="preserve">
-    <value>切</value>
+    <value>剪切</value>
   </data>
   <data name="STR_CmdName_Cut_TT" xml:space="preserve">
     <value>剪切所选的项目</value>
@@ -247,7 +247,7 @@
     <value>退出</value>
   </data>
   <data name="STR_CmdName_Find" xml:space="preserve">
-    <value>找到</value>
+    <value>查找</value>
   </data>
   <data name="STR_CmdName_GotoLine" xml:space="preserve">
     <value>转到行......</value>
@@ -325,7 +325,7 @@
     <value>撤消上一个编辑位置</value>
   </data>
   <data name="STR_CmdName_View" xml:space="preserve">
-    <value>_View</value>
+    <value>视图</value>
   </data>
   <data name="STR_CmdName_View_Start_Page" xml:space="preserve">
     <value>起始页</value>
@@ -385,7 +385,7 @@
     <value>在当前文档中游标的行</value>
   </data>
   <data name="STR_MSG_IssueTrackerText" xml:space="preserve">
-    <value>请点击下面的链接来检查是否这是一个已知的问题。请报告这个问题如果它还不知道。问题报告应包含下面的错误消息 （您可以使用复制按钮）和一个声明关于您在使用工作流功能。如果适用，将附加截图或示例文件。</value>
+    <value>请点击下面的链接来检查是否是一个已知的问题。如有疑问请向开发者报告这个问题。报告问题时请添加错误消息 （您可以使用复制按钮）和您在遇到问题前的操作步骤。附加截图或补充其他说明文件将更有助于帮助我们定位和解决问题。</value>
   </data>
   <data name="STR_MSG_IssueTrackerTitle" xml:space="preserve">
     <value>未处理的错误</value>
@@ -421,31 +421,31 @@
     <value>打开包含此文档在 Windows 资源管理器中的文件夹</value>
   </data>
   <data name="STR_MSG_ErrorLoadingPlugin" xml:space="preserve">
-    <value>初始化在大会 '{0}' 中找到一个插件时出现错误。</value>
+    <value>初始化插件 '{0}' 时出现错误。</value>
   </data>
   <data name="STR_MSG_ErrorRegisteringHighlighting" xml:space="preserve">
-    <value>注册突出显示错误： '{0}'</value>
+    <value>注册时发生错误： '{0}'</value>
   </data>
   <data name="STR_MSG_ErrorSavingFile" xml:space="preserve">
-    <value>保存文件时发生了一个意想不到的问题。</value>
+    <value>保存文件时发生错误。</value>
   </data>
   <data name="STR_MSG_ErrorWhileLoadingPlugin" xml:space="preserve">
-    <value>加载插件程序集 '{0}' 时出错。</value>
+    <value>加载插件 '{0}' 时出错。</value>
   </data>
   <data name="STR_MSG_ErrorWhileSavingAFile" xml:space="preserve">
-    <value>错误 '{0}'在保存文件时出现。</value>
+    <value>错误'{0}'。保存文件时发生错误。</value>
   </data>
   <data name="STR_MSG_ErrorWhileSavingFileX" xml:space="preserve">
-    <value>错误 '{0}'已保存文件时出现：'{1}'</value>
+    <value>错误'{0}'。保存文件'{1}'时发生错误。</value>
   </data>
   <data name="STR_MSG_PluginNotLoaded" xml:space="preserve">
     <value>不加载的插件。</value>
   </data>
   <data name="STR_MSG_SaveChangesForFile" xml:space="preserve">
-    <value>保存为文件"{0}"的更改吗？</value>
+    <value>保存文件"{0}"的更改吗？</value>
   </data>
   <data name="STR_MSG_Unexpected_Error" xml:space="preserve">
-    <value>意外的错误</value>
+    <value>未知的错误</value>
   </data>
   <data name="STR_MSG_UnknownDocumentType" xml:space="preserve">
     <value>未知的文件类型</value>
@@ -583,7 +583,7 @@
     <value>代码完成功能：</value>
   </data>
   <data name="STR_ABOUT_OK_BUTTON" xml:space="preserve">
-    <value>_OK</value>
+    <value>确定</value>
   </data>
   <data name="STR_EDIT_MODE_INSERT" xml:space="preserve">
     <value>外接程序</value>
@@ -601,7 +601,7 @@
     <value>文件大小</value>
   </data>
   <data name="STR_FILESTATES_LASTMODIFICATION" xml:space="preserve">
-    <value>日期和时间的最后一次修改。</value>
+    <value>最后一次修改的时间。</value>
   </data>
   <data name="STR_FINDREPLACE_FINDLABEL" xml:space="preserve">
     <value>查找到的文本：</value>
@@ -652,7 +652,7 @@
     <value>全部替换</value>
   </data>
   <data name="STR_GOTOLINE_OK_BUTTON" xml:space="preserve">
-    <value>还行</value>
+    <value>确定</value>
   </data>
   <data name="STR_GOTOLINE_CANCEL_BUTTON" xml:space="preserve">
     <value>取消</value>
@@ -697,7 +697,7 @@
     <value>致命错误</value>
   </data>
   <data name="STR_LOG4NET_DELTATIME" xml:space="preserve">
-    <value>三角洲 t:</value>
+    <value>增量时间:</value>
   </data>
   <data name="STR_LOG4NET_FILTERRESULT_TT" xml:space="preserve">
     <value>其实显示的项 （后应用筛选器） 的总和。</value>
@@ -727,7 +727,7 @@
     <value>起始页</value>
   </data>
   <data name="STR_STARTPAGE_WELCOME_TT" xml:space="preserve">
-    <value>欢迎使用电子数据交换。查看此页后，可以开始使用此编辑器应用程序。</value>
+    <value>欢迎使用Edi。请阅读此页，并开始使用此编辑器吧。</value>
   </data>
   <data name="STR_STARTPAGE_VISITPROJECTHOMEPAGE_TT" xml:space="preserve">
     <value>请访问此应用程序的互联网主页</value>
@@ -736,7 +736,7 @@
     <value>打开文件...</value>
   </data>
   <data name="STR_DIALOG_INPUT_PROBLEM_CAPTION" xml:space="preserve">
-    <value>您的输入是不够的。更正了以下问题，或单击取消。</value>
+    <value>您的输入长度不符合要求。请修正一下错误后重新尝试，或单击取消。</value>
   </data>
   <data name="STR_ACCESS_DIRECTORY_ERROR" xml:space="preserve">
     <value>目录"{0}"不存在或无法访问。</value>
@@ -748,10 +748,10 @@
     <value>无题</value>
   </data>
   <data name="STR_FILE_READONLY_REASON_NO_WRITE_PERMISSION" xml:space="preserve">
-    <value>不能编辑此文件，因为您没有写访问权限。更改文件的访问权限，或者将文件保存在不同的位置，如果你想要对其进行编辑。</value>
+    <value>不能编辑此文件，因为您没有写访问权限。请更改文件的访问权限，或者将文件保存在不同的位置。</value>
   </data>
   <data name="STR_FILE_READONLY_REASON_USED_BY_OTHER_PROCESS" xml:space="preserve">
-    <value>不能编辑此文件，因为另一个进程正在写入，那么。结束其他进程和重新打开该文件或将文件保存在不同的位置，如果你想要对其进行编辑。</value>
+    <value>不能编辑此文件，因为另一个进程正在对其进行读写操作。请结束其他进程后重新打开该文件或将文件保存在不同的位置。</value>
   </data>
   <data name="STR_FILE_OPEN_ERROR_MSG_CAPTION" xml:space="preserve">
     <value>发生了一个错误</value>
@@ -769,7 +769,7 @@
     <value>pt</value>
   </data>
   <data name="CMD_APP_ExportUMLToImage_Description" xml:space="preserve">
-    <value>UML 到图像</value>
+    <value>UML导出图像</value>
   </data>
   <data name="STR_ERROR_LOADING_FILE_MSG" xml:space="preserve">
     <value>该文件：'{0}'不存在或无法加载。你想要从最近使用的文件列表中删除此文件吗？</value>
@@ -793,10 +793,10 @@
     <value>应用程序的行为</value>
   </data>
   <data name="STR_ProgramSettings_Caption" xml:space="preserve">
-    <value>抓好设置...</value>
+    <value>设置...</value>
   </data>
   <data name="STR_Settings_RestoreUserSession" xml:space="preserve">
-    <value>还原应用程序启动时的最后一个用户会话</value>
+    <value>还原应用程序退出前的最后一个会话</value>
   </data>
   <data name="STR_Settings_RunEdiOnlyOnce" xml:space="preserve">
     <value>Edi 只运行一次</value>
@@ -835,13 +835,13 @@
     <value>以下文档滚动</value>
   </data>
   <data name="STR_Settings_Editor_InheritWordWrapIndentation" xml:space="preserve">
-    <value>继承单词换行缩进</value>
+    <value>首行缩进跟随系统</value>
   </data>
   <data name="STR_Settings_Editor_EnableRectangularSelection" xml:space="preserve">
     <value>矩形选择 (ALT + Shift 或 ALT + 鼠标选择)</value>
   </data>
   <data name="STR_Settings_Editor_EnableTextDragDrop" xml:space="preserve">
-    <value>文本拖 &amp; 滴</value>
+    <value>文本拖动 &amp; 释放</value>
   </data>
   <data name="STR_Settings_Editor_EnableVirtualSpace" xml:space="preserve">
     <value>虚拟空间</value>
@@ -865,7 +865,7 @@
     <value>显示列标尺</value>
   </data>
   <data name="STR_Settings_Editor_ShowHyperlinks" xml:space="preserve">
-    <value>显示 WWW 超链接</value>
+    <value>显示超链接</value>
   </data>
   <data name="STR_Settings_Editor_EnableFileHyperlinks" xml:space="preserve">
     <value>显示文件的超链接</value>
@@ -877,7 +877,7 @@
     <value>超链接，请点击需要控制密钥</value>
   </data>
   <data name="STR_CmdName_Export" xml:space="preserve">
-    <value>出口</value>
+    <value>导出</value>
   </data>
   <data name="STR_CmdName_Export_TT" xml:space="preserve">
     <value>将数据转换为适合于其他应用程序的文件格式。</value>
@@ -889,7 +889,7 @@
     <value>版本信息</value>
   </data>
   <data name="STR_Contributors_Label" xml:space="preserve">
-    <value>派遣国</value>
+    <value>参与开发人员</value>
   </data>
   <data name="STR_Settings_Editor_Hyperlink_Section" xml:space="preserve">
     <value>超链接</value>
