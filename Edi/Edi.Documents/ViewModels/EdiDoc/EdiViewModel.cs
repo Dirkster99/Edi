@@ -547,7 +547,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
                 if (!Equals(_FileEncoding, value))
                 {
                     _FileEncoding = value;
-                    RaisePropertyChanged(() => _FileEncoding);
+                    RaisePropertyChanged(() => FileEncoding);
                 }
             }
         }
@@ -866,7 +866,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
                     {
                         using (FileStream fs = new FileStream(_FilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
                         {
-                            using (StreamReader reader = FileReader.OpenStream(fs, Encoding.UTF8))
+                            using (StreamReader reader = FileReader.OpenStream(fs, Encoding.Default))
                             {
                                 TextDocument doc = new TextDocument(reader.ReadToEnd());
                                 doc.SetOwnerThread(Application.Current.Dispatcher.Thread);
@@ -896,7 +896,7 @@ namespace Edi.Documents.ViewModels.EdiDoc
 
                             using (FileStream fs = new FileStream(_FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                             {
-                                using (StreamReader reader = FileReader.OpenStream(fs, Encoding.UTF8))
+                                using (StreamReader reader = FileReader.OpenStream(fs, Encoding.Default))
                                 {
                                     TextDocument doc = new TextDocument(reader.ReadToEnd());
                                     doc.SetOwnerThread(Application.Current.Dispatcher.Thread);
