@@ -1,5 +1,8 @@
 namespace MiniUML.View.Windows
 {
+/***
+   Dirkster 2019/08 deactivated this since function causes compiler error and
+                 this window appears not to be used right now
     using System;
     using System.Globalization;
     using System.Windows;
@@ -59,4 +62,5 @@ namespace MiniUML.View.Windows
             return new ExportDocumentWindow();
         }
     }
+***/
 }

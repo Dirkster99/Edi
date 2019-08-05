@@ -61,10 +61,12 @@
                 BorderBrush="#FFDFDFDF"
                 Background="#FFF0F0F0">
 
-            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
+            <!-- Dirkster 2019/08 deactivated this since function causes compiler error and
+                 this window appears not to be used right now
+            StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
                 <Button x:Name="_cancelButton" Margin="8" Padding="15,0,15,0" IsCancel="True" Content="Cancel" Width="80"/>
                 <Button x:Name="_okButton" Margin="8" Padding="15,0,15,0" IsDefault="True" Content="OK" Width="80" Click="okButton_Click"/>
-            </StackPanel>
+            </StackPanel-->
 
         </Border>
 

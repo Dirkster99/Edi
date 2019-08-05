@@ -12,7 +12,9 @@
     </ResourceDictionary.MergedDictionaries>
     
     <!-- Window factories -->
-    <windows:NewDocumentWindowFactory x:Key="NewDocumentWindowFactory"/>
-    <windows:ExportDocumentWindowFactory x:Key="ExportDocumentWindowFactory"/>
+    <!--Dirkster 2019/08 deactivated this since function causes compiler error and
+                 this window appears not to be used right now
+    windows:NewDocumentWindowFactory x:Key="NewDocumentWindowFactory"/>
+    <windows:ExportDocumentWindowFactory x:Key="ExportDocumentWindowFactory"/-->
     
 </ResourceDictionary>
