@@ -365,7 +365,8 @@ namespace Edi.Documents.ViewModels.MiniUml
 					try
 					{
 						// XXX TODO Extend log4net FileOpen method to support base.FireFileProcessingResultEvent(...);
-						_mDocumentMiniUml.LoadFile(_FilePath);
+                        _mDocumentMiniUml = new DocumentViewModel("UMLClassDiagram", _MsgBox);
+                        _mDocumentMiniUml.LoadFile(_FilePath);
 					}
 					catch (Exception ex)
 					{

@@ -286,10 +286,9 @@
                             break;
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    StaticServices.MsgBox.Show(ex, string.Format(MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG, dlg.FileName),
-                                               MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG_CAPTION);
+                    throw new Exception(string.Format(MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG, dlg.FileName));
                 }
             }
 
@@ -301,7 +300,14 @@
 
             public override void OnExecute(object sender, ExecutedRoutedEventArgs e)
             {
-                ExportUMLToImage(this.mViewModel);
+                try
+                {
+                    ExportUMLToImage(this.mViewModel);
+                }
+                catch (Exception ex)
+                {
+                    _MsgBox.Show(ex, ex.Message, MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG_CAPTION);
+                }
             }
 
             private static void saveAsXPS(string file, DocumentViewModel viewModel)

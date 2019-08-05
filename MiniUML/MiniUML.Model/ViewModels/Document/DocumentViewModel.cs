@@ -240,7 +240,14 @@ namespace MiniUML.Model.ViewModels.Document
         /// <returns></returns>
         public override bool ExecuteExport(object sender, ExecutedRoutedEventArgs e, string defaultFileName)
         {
-            ExportCommandModel.ExportUMLToImage(this, defaultFileName);
+            try
+            {
+                ExportCommandModel.ExportUMLToImage(this, defaultFileName);
+            }
+            catch (Exception ex)
+            {
+                _MsgBox.Show(ex, ex.Message, MiniUML.Framework.Local.Strings.STR_SaveFILE_MSG_CAPTION);
+            }
 
             return true;
         }
