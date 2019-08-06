@@ -13,7 +13,7 @@
     public class ToolWindowRegistry : IToolWindowRegistry
     {
         #region fields
-        private readonly List<ToolViewModel> _mTodoTools;
+        private readonly List<ToolViewModel> _TodoTools;
         #endregion fields
 
         #region contructors
@@ -33,14 +33,14 @@
         public ToolWindowRegistry()
         {
             Tools = new ObservableCollection<ToolViewModel>();
-            _mTodoTools = new List<ToolViewModel>();
+            _TodoTools = new List<ToolViewModel>();
         }
         #endregion contructors
 
         /// <summary>
         /// Implements an event that is raised when a new tool window is registered.
         /// </summary>
-        public event EventHandler<RegisterToolWindowEventArgs> RegisterToolWindowEvent;
+        public event EventHandler<PublishToolWindowEventArgs> PublishToolWindows;
 
         #region properties
         /// <summary>
@@ -60,19 +60,20 @@
 		#region methods
 		/// <summary>
 		/// Publishs all registered tool window definitions into an observable collection.
-		/// (Which in turn will execute the LayoutInitializer that takes care of default positions etc).
+		/// (Which in turn will execute AvalonDock's LayoutInitializer that takes care of
+        /// default positions etc).
 		/// </summary>
 		public void PublishTools()
 		{
-			foreach (var item in _mTodoTools)
+			foreach (var item in _TodoTools)
 			{
 				Tools.Add(item);
 
                 // Publish the fact that we have registered a new tool window instance
-                RegisterToolWindowEvent?.Invoke(this, new RegisterToolWindowEventArgs(item));
+                PublishToolWindows?.Invoke(this, new PublishToolWindowEventArgs(item));
             }
 
-            _mTodoTools.Clear();
+            _TodoTools.Clear();
 		}
 
 		/// <summary>
@@ -86,7 +87,7 @@
                 Messaging.Output.Append(string.Format("{0} Registering tool window: {1} ...",
                     DateTime.Now.ToLongTimeString(), newTool.Name));
 
-                _mTodoTools.Add(newTool);
+                _TodoTools.Add(newTool);
             }
             catch (Exception exp)
 			{

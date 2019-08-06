@@ -11,11 +11,18 @@
     /// </summary>
     public interface IToolWindowRegistry
 	{
-        event EventHandler<RegisterToolWindowEventArgs> RegisterToolWindowEvent;
+        event EventHandler<PublishToolWindowEventArgs> PublishToolWindows;
 
         ObservableCollection<ToolViewModel> Tools { get; }
 
 		void RegisterTool(ToolViewModel newTool);
-		void PublishTools();
+
+        /// <summary>
+        /// Publishs all registered tool window definitions via  <see cref="PublishToolWindows"/> 
+        /// (into an observable collection).
+        /// (Which in turn will execute AvalonDock's LayoutInitializer that takes care of
+        /// default positions etc).
+        /// </summary>
+        void PublishTools();
 	}
 }

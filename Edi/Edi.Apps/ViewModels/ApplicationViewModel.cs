@@ -120,8 +120,8 @@ namespace Edi.Apps.ViewModels
             _ToolRegistry = toolRegistry;
 
             // Subscribe to tool window manager who will relay the fact
-            // that a new tool window has been registered
-            _ToolRegistry.RegisterToolWindowEvent += OnRegisterToolWindow;
+            // that a tool windows have been registered and can now be published
+            _ToolRegistry.PublishToolWindows += OnPublisToolWindows;
 
             _SettingsManager = programSettings;
             ApplicationThemes = themesManager;
@@ -1462,7 +1462,7 @@ namespace Edi.Apps.ViewModels
         /// relay the fact that a new tool window has been registered.
         /// </summary>
         /// <param name="args"></param>
-        private void OnRegisterToolWindow(object sender, RegisterToolWindowEventArgs args)
+        private void OnPublisToolWindows(object sender, PublishToolWindowEventArgs args)
         {
 	        // This particular event is needed since the build in RecentFiles
 	        // property is otherwise without content since it may be queried
@@ -1472,21 +1472,6 @@ namespace Edi.Apps.ViewModels
                 RaisePropertyChanged(() => RecentFiles);
             }
         }
-
-/////        /// <summary>
-/////        /// Is invoked when PRISM registers a module.
-/////        /// The output should be visible in the output tool window.
-/////        /// </summary>
-/////        /// <param name="sender"></param>
-/////        /// <param name="e"></param>
-/////        private void ModuleManager_LoadModuleCompleted(object sender, LoadModuleCompletedEventArgs e)
-/////        {
-/////	        _mMessageManager.Output?.AppendLine(
-/////		        $"Loading MEF Module: {e.ModuleInfo.ModuleName},\n" +
-/////		        $"                    Type: {e.ModuleInfo.ModuleType},\n" +
-/////		        $"     Initialization Mode: {e.ModuleInfo.InitializationMode},\n" +
-/////		        $"                   State: {e.ModuleInfo.State}, Ref: '{e.ModuleInfo.Ref}'\n");
-/////        }
         #endregion methods
     }
 }

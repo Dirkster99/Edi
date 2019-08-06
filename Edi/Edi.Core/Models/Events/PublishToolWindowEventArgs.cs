@@ -5,14 +5,14 @@ namespace Edi.Core.Models
     /// <summary>
     /// Class implements 
     /// </summary>
-    public class RegisterToolWindowEventArgs
+    public class PublishToolWindowEventArgs
 	{
 		#region constructor
 		/// <summary>
 		/// Class constructor from default parameters.
 		/// </summary>
 		/// <param name="tool"></param>
-		public RegisterToolWindowEventArgs(ToolViewModel tool)
+		public PublishToolWindowEventArgs(ToolViewModel tool)
 			: this()
 		{
 			Tool = tool;
@@ -21,7 +21,7 @@ namespace Edi.Core.Models
 		/// <summary>
 		/// Class constructor
 		/// </summary>
-		public RegisterToolWindowEventArgs()
+		public PublishToolWindowEventArgs()
 		{
 			Tool = null;
 		}

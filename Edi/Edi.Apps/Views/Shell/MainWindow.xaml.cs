@@ -11,6 +11,10 @@ namespace Edi.Apps.Views.Shell
     /// </summary>
     public partial class MainWindow : SimpleMetroWindow, ILayoutableWindow
     {
+        #region fields
+        private readonly IAvalonDockLayoutViewModel _av;
+        #endregion fields
+
         #region constructors
         /// <summary>
         /// Class constructor
@@ -25,15 +29,17 @@ namespace Edi.Apps.Views.Shell
             if (DesignerProperties.GetIsInDesignMode(this))
                 return;
 
-            dockView.InitTemplates(av.ViewProperties.SelectPanesTemplate,
-                                   av.ViewProperties.DocumentHeaderTemplate,
-                                   av.ViewProperties.SelectPanesStyle,
-                                   av.ViewProperties.LayoutInitializer,
-                                   av.LayoutId);
+            _av = av;
+
+            dockView.InitTemplates(_av.ViewProperties.SelectPanesTemplate,
+                                   _av.ViewProperties.DocumentHeaderTemplate,
+                                   _av.ViewProperties.SelectPanesStyle,
+                                   _av.ViewProperties.LayoutInitializer,
+                                   _av.LayoutId);
 
             // Register this methods to receive event notifications about
             // load and save of avalondock layouts
-            av.LoadLayout += dockView.OnLoadLayout;
+            _av.LoadLayout += dockView.OnLoadLayout;
 
             // subscribe to close event messing to application viewmodel
             Closing += appVm.OnClosing;
@@ -52,6 +58,17 @@ namespace Edi.Apps.Views.Shell
             InitializeComponent();
         }
         #endregion constructors
+
+        #region methods
+        /// <summary>
+        /// Call this method to clean-up resource references on exit.
+        /// </summary>
+        public void ReleaseResources()
+        {
+            // Remove event notifications about load and save of avalondock layouts
+            _av.LoadLayout -= dockView.OnLoadLayout;
+        }
+        #endregion methods
 
         #region properties
         /// <summary>

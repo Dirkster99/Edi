@@ -65,7 +65,7 @@
 		/// Execute closing function and persist session data to be reloaded on next restart
 		/// </summary>
 		/// <param name="win"></param>
-		void OnClosed(Window win);
+		void OnClosed(ILayoutableWindow win);
 
 		/// <summary>
 		/// Check if pre-requisites for closing application are available.

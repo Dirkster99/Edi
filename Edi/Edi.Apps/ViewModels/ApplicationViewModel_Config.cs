@@ -107,7 +107,7 @@
 	    /// Execute closing function and persist session data to be reloaded on next restart
 	    /// </summary>
 	    /// <param name="win"></param>
-	    public void OnClosed(Window win)
+	    public void OnClosed(ILayoutableWindow win)
         {
             try
             {
@@ -123,6 +123,7 @@
                 // Save/initialize program options that determine global programm behaviour
                 SaveConfigOnAppClosed();
 
+                win.ReleaseResources();
                 DisposeResources();
             }
             catch (Exception exp)
@@ -139,6 +140,9 @@
         /// </summary>
         private void DisposeResources()
         {
+            if (_ToolRegistry != null)
+                _ToolRegistry.PublishToolWindows -= OnPublisToolWindows;
+
             try
             {
                 foreach (var item in Files)
