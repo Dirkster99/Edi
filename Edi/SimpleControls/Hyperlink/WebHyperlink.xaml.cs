@@ -175,9 +175,7 @@ namespace SimpleControls.Hyperlink
             }
             catch (System.Exception ex)
             {
-                StaticServices.MsgBox.Show(string.Format(CultureInfo.CurrentCulture, "{0}.", ex.Message),
-                                           Local.Strings.STR_MSG_ERROR_FINDING_RESOURCE,
-                                           MsgBoxButtons.OK, MsgBoxImage.Error);
+                Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "{0} -> {1}.", ex.Message, ex.StackTrace));
             }
         }
         #endregion

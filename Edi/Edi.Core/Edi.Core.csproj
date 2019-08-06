@@ -146,7 +146,6 @@
     <Compile Include="Interfaces\IToolWindowRegistry.cs" />
     <Compile Include="Interfaces\IViewModelResolver.cs" />
     <Compile Include="Module\Installer.cs" />
-    <Compile Include="StaticServices.cs" />
     <Compile Include="Utillities\FileSystem\DirectoryName.cs" />
     <Compile Include="Utillities\FileSystem\DirectoryNameConverter.cs" />
     <Compile Include="Utillities\FileSystem\FileChangeWatcher.cs" />

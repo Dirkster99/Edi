@@ -20,6 +20,7 @@
     using MsgBox;
     using MiniUML.Model.ViewModels.Interfaces;
     using Edi.Core;
+    using System.Diagnostics;
 
     public delegate void LayoutUpdatedHandler();
 
@@ -602,8 +603,7 @@
                 }
                 catch (Exception ex)
                 {
-                    StaticServices.MsgBox.Show(ex, "Drag & Drop operation aborted on error",
-                                                   "An erro occurred", MsgBoxButtons.OK);
+                    Debug.WriteLine("Drag & Drop operation aborted on error {0} -> {1}", ex.Message, ex.StackTrace);
                 }
             }
 
@@ -627,8 +627,8 @@
                 }
                 catch (Exception ex)
                 {
-                    StaticServices.MsgBox.Show(ex, string.Format(MiniUML.Framework.Local.Strings.STR_OpenFILE_MSG, fileName),
-                                               MiniUML.Framework.Local.Strings.STR_OpenFILE_MSG_CAPTION, MsgBoxButtons.OK);
+                    Debug.WriteLine(string.Format(MiniUML.Framework.Local.Strings.STR_OpenFILE_MSG, fileName));
+                    Debug.WriteLine("{0} -> {1}", ex.Message, ex.StackTrace);
                 }
 
                 return;

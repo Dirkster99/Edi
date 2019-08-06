@@ -34,7 +34,7 @@
                                                              WindowLister.ActivateMainWindow, "Edi");
 
         protected static ILog Logger;
-        private IWindsorContainer _Container;
+        private readonly IWindsorContainer _Container;
         private static IAppCore _AppCore;
         #endregion fields
 
@@ -58,6 +58,9 @@
 
             SessionEnding += App_SessionEnding;
             DispatcherUnhandledException += App_DispatcherUnhandledException;
+
+            _Container = new WindsorContainer();
+            ConfigureContainer();
         }
         #endregion constructors
 
@@ -148,12 +151,6 @@
             IApplicationViewModel AppViewModel = null;
             try
             {
-                // Install core components and add optionals after load of session data
-                // since some of them require setup parameters in constructor
-                // (TODO FIXME Add Initializesession method in registerted ExplorerViewModel tool)
-                _Container = new WindsorContainer();
-                Installers.InstallWindsorCore(_Container);
-
                 // Resolve SettingsManager to retrieve app settings/session data
                 // and start with correct parameters from last session (theme, window pos etc...)
                 settingsManager = _Container.Resolve<ISettingsManager>();
@@ -315,7 +312,7 @@
             try
             {
                 _Container.Dispose();
-                _Container = null;
+                //_Container = null;
             }
             catch (Exception exp)
             {
@@ -434,6 +431,14 @@
         private void App_SessionEnding(object sender, SessionEndingCancelEventArgs e)
         {
             AppIsShuttingDown = true;
+        }
+
+        private void ConfigureContainer()
+        {
+            // Install core components and add optionals after load of session data
+            // since some of them require setup parameters in constructor
+            // (TODO FIXME Add Initializesession method in registerted ExplorerViewModel tool)
+            Installers.InstallWindsorCore(_Container);
         }
         #endregion methods
     }
