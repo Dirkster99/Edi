@@ -145,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Module\Installer.cs" />
+    <Compile Include="Module\InstallModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\FileExplorer\ControllerBaseViewModel.cs" />
     <Compile Include="ViewModels\FileExplorer\FileExplorerViewModel.cs" />
