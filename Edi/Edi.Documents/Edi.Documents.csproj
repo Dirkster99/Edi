@@ -115,6 +115,7 @@
     <Compile Include="Converter\ActiveDocumentToVisibilityConverter.cs" />
     <Compile Include="Converter\DocumentStateToVisibilityConverter.cs" />
     <Compile Include="Module\Installer.cs" />
+    <Compile Include="Module\InstallModule.cs" />
     <Compile Include="Process\FileLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\EdiDoc\EdiViewModel.cs" />
