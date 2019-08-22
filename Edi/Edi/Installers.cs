@@ -13,6 +13,7 @@
     using MRULib.MRU.Interfaces;
     using MsgBox;
     using System;
+    using System.Diagnostics;
 
     /// <summary>
     /// This class gets picked up by from Castle.Windsor because
@@ -44,6 +45,12 @@
                 string fullPath = System.Reflection.Assembly.GetAssembly(typeof(Installers)).Location;
                 string dir = System.IO.Path.GetDirectoryName(fullPath);
 
+                // Do a Build Solution/Rebuild Solution to ensure that all modules have been build
+                // if you are running into this assertion being raised. You should do:
+                // Solution > Clean Solution
+                // Solution > Rebuild Solution to fix this issue
+                Debug.Assert(System.IO.File.Exists(System.IO.Path.Combine(dir, "Output.dll")));
+
                 container.Install(FromAssembly.Named(System.IO.Path.Combine(dir, "Output.dll")));
                 container.Install(FromAssembly.Named(System.IO.Path.Combine(dir, "Files.dll")));
                 container.Install(FromAssembly.Named(System.IO.Path.Combine(dir, "Edi.Documents.dll")));
@@ -51,6 +58,8 @@
             }
             catch (Exception exp)
             {
+                Debug.WriteLine("A Core loader error occurred {0}", exp.Message);
+                Debug.WriteLine("Stacktrace {0}", exp.StackTrace);
                 Logger.Error(exp);
             }
 
