@@ -6,7 +6,7 @@
     using Edi.Core.Interfaces.Enums;
     using Edi.Core.ViewModels;
     using log4net;
-    using Xceed.Wpf.AvalonDock.Layout;
+    using AvalonDock.Layout;
 
     /// <summary>
     /// Initialize the AvalonDock Layout. Methods in this class

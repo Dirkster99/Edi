@@ -32,7 +32,7 @@ namespace Edi.Themes
           "/MWindowLib;component/Themes/DarkTheme.xaml",
 
           "/Edi.Themes;component/MetroDark/Theme.xaml",
-          "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/DarkTheme.xaml",
+          "/AvalonDock.Themes.VS2013;component/DarkTheme.xaml",
 
           "/DropDownButtonLib;component/Themes/MetroDark.xaml",  // DropDownButtonLib theming
           "/MsgBox;component/Themes/DarkBrushes.xaml",
@@ -76,7 +76,7 @@ namespace Edi.Themes
 
           // This is required to style the dropdown button and frame of the control
           "/Edi.Themes;component/MetroLight/Theme.xaml",
-          "/Xceed.Wpf.AvalonDock.Themes.VS2013;component/LightTheme.xaml",
+          "/AvalonDock.Themes.VS2013;component/LightTheme.xaml",
 
           "/DropDownButtonLib;component/Themes/MetroLight.xaml",  // DropDownButtonLib theming
           "/MsgBox;component/Themes/LightBrushes.xaml",

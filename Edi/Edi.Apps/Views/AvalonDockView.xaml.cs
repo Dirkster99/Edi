@@ -6,9 +6,9 @@
     using System.Windows.Controls;
     using System.Windows.Threading;
     using Edi.Interfaces.Events;
-    using Xceed.Wpf.AvalonDock;
-    using Xceed.Wpf.AvalonDock.Layout;
-    using Xceed.Wpf.AvalonDock.Layout.Serialization;
+    using AvalonDock;
+    using AvalonDock.Layout;
+    using AvalonDock.Layout.Serialization;
 
     /// <summary>
     /// Interaction logic for AvalonDockView.xaml

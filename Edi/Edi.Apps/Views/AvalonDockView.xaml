@@ -5,9 +5,9 @@
                     xmlns:behav="clr-namespace:Edi.Apps.Behaviors"
                     xmlns:conv="clr-namespace:Edi.Apps.Converters"
 
-                    xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
-                    xmlns:avalonDockLayout="clr-namespace:Xceed.Wpf.AvalonDock.Layout;assembly=Xceed.Wpf.AvalonDock"
-                    xmlns:avalonDockProperties="clr-namespace:Xceed.Wpf.AvalonDock.Properties;assembly=Xceed.Wpf.AvalonDock"
+                    xmlns:avalonDock="https://github.com/Dirkster99/AvalonDock"
+                    xmlns:avalonDockLayout="clr-namespace:AvalonDock.Layout;assembly=AvalonDock"
+                    xmlns:avalonDockProperties="clr-namespace:AvalonDock.Properties;assembly=AvalonDock"
                     xmlns:layoutinit="clr-namespace:Edi.Core.View.Pane;assembly=Edi.Core"
                     
                     xmlns:cmdLabel="clr-namespace:Edi.Util.Local;assembly=Edi.Util"
@@ -32,7 +32,7 @@
                         AllowDrop="True"
                         >
                         <avalonDock:DockingManager.DocumentContextMenu>
-                            <ContextMenu xmlns:AvalondockConv="clr-namespace:Xceed.Wpf.AvalonDock.Converters;assembly=Xceed.Wpf.AvalonDock"
+                            <ContextMenu xmlns:AvalondockConv="clr-namespace:AvalonDock.Converters;assembly=AvalonDock"
                             >
                             <ContextMenu.Resources>
                                 <AvalondockConv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
@@ -85,7 +85,7 @@
                             Visibility="{Binding Path=IsEnabled, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
                         >
                                 <!-- MenuItem.Icon>
-                                    <Image Source="/Xceed.Wpf.AvalonDock.Themes.Aero;component/Images/HTabGroup.png" Stretch="Uniform" Width="14"/>
+                                    <Image Source="/AvalonDock.Themes.Aero;component/Images/HTabGroup.png" Stretch="Uniform" Width="14"/>
                                 </MenuItem.Icon -->
                                 </MenuItem>
                             </ContextMenu>

@@ -12,7 +12,7 @@ namespace Edi.Apps.ViewModels
     using Edi.Interfaces.Events;
     using Edi.Interfaces.MessageManager;
     using Settings.Interfaces;
-    using Xceed.Wpf.AvalonDock;
+    using AvalonDock;
 
     /// <summary>
     /// Class implements a viewmodel to support the
