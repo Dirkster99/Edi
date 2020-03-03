@@ -87,8 +87,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MsgBox, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.MsgBox.1.4.2\lib\net451\MsgBox.dll</HintPath>
+    <Reference Include="MsgBox, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.MsgBox.1.5.0\lib\net451\MsgBox.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -111,8 +111,8 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="UnitComboLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.UnitComboLib.1.0.1\lib\net4\UnitComboLib.dll</HintPath>
+    <Reference Include="UnitComboLib, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.UnitComboLib.1.1.0\lib\net40\UnitComboLib.dll</HintPath>
     </Reference>
     <Reference Include="UserNotification, Version=1.5.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.UserNotifications.1.5.1\lib\net40\UserNotification.dll</HintPath>
@@ -175,6 +175,21 @@
     <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\Metro\SVG\appbar.cancel.svg" />
+    <Content Include="Images\Metro\SVG\appbar.check.svg" />
+    <Content Include="Images\Metro\SVG\appbar.information.svg" />
+    <Content Include="Images\Metro\SVG\appbar.lightbulb.hue.on.svg" />
+    <Content Include="Images\Metro\SVG\appbar.lightbulb.hue.svg" />
+    <Content Include="Images\Metro\SVG\appbar.lightbulb.svg" />
+    <Content Include="Images\Metro\SVG\appbar.lightning.svg" />
+    <Content Include="Images\Metro\SVG\appbar.noentry.svg" />
+    <Content Include="Images\Metro\SVG\appbar.question.svg" />
+    <Content Include="Images\Metro\SVG\appbar.sign.stop.svg" />
+    <Content Include="Images\Metro\SVG\appbar.stop.svg" />
+    <Content Include="Images\Metro\SVG\appbar.warning.circle.svg" />
+    <Content Include="Images\Metro\SVG\appbar.warning.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- Import Project="$(ProgramFiles)\MSBuild\StyleCop\v4.7\StyleCop.Targets" / -->
