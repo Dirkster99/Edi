@@ -79,11 +79,11 @@
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="MLib, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.MLib.1.2.0\lib\net4\MLib.dll</HintPath>
+    <Reference Include="MLib, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.MLib.1.3.0.1\lib\net40\MLib.dll</HintPath>
     </Reference>
-    <Reference Include="MRULib, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.MRULib.1.2.1\lib\net451\MRULib.dll</HintPath>
+    <Reference Include="MRULib, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.MRULib.1.3.0\lib\net451\MRULib.dll</HintPath>
     </Reference>
     <Reference Include="MsgBox, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.MsgBox.1.5.0\lib\net451\MsgBox.dll</HintPath>
