@@ -102,8 +102,8 @@
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Dirkster.FileSystemModels.3.1.1\lib\net452\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Dirkster.MWindowLib.1.3.1.2\lib\net452\Microsoft.Xaml.Behaviors.dll</HintPath>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=0.0.0.0, Culture=neutral, PublicKeyToken=189c7f39020fabe0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Dirkster.MWindowLib.1.3.0.2\lib\net452\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
     <Reference Include="MLib, Version=1.3.1.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Dirkster.MLib.1.3.1.2\lib\net40\MLib.dll</HintPath>
@@ -114,11 +114,11 @@
     <Reference Include="MsgBox, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Dirkster.MsgBox.1.5.0\lib\net451\MsgBox.dll</HintPath>
     </Reference>
-    <Reference Include="MWindowInterfacesLib, Version=1.3.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Dirkster.MWindowLib.1.3.1.2\lib\net452\MWindowInterfacesLib.dll</HintPath>
+    <Reference Include="MWindowInterfacesLib, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Dirkster.MWindowLib.1.3.0.2\lib\net452\MWindowInterfacesLib.dll</HintPath>
     </Reference>
-    <Reference Include="MWindowLib, Version=1.3.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Dirkster.MWindowLib.1.3.1.2\lib\net452\MWindowLib.dll</HintPath>
+    <Reference Include="MWindowLib, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Dirkster.MWindowLib.1.3.0.2\lib\net452\MWindowLib.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
