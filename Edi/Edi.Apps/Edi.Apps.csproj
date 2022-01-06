@@ -68,11 +68,11 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AvalonDock, Version=4.50.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.AvalonDock.4.50.0\lib\net40\AvalonDock.dll</HintPath>
+    <Reference Include="AvalonDock, Version=4.60.1.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.AvalonDock.4.60.1\lib\net40\AvalonDock.dll</HintPath>
     </Reference>
-    <Reference Include="AvalonDock.Themes.VS2013, Version=4.50.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.AvalonDock.Themes.VS2013.4.50.0\lib\net40\AvalonDock.Themes.VS2013.dll</HintPath>
+    <Reference Include="AvalonDock.Themes.VS2013, Version=4.60.1.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.AvalonDock.Themes.VS2013.4.60.1\lib\net40\AvalonDock.Themes.VS2013.dll</HintPath>
     </Reference>
     <Reference Include="DropDownButtonLib, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dirkster.DropDownButtonLib.1.1.0\lib\net40\DropDownButtonLib.dll</HintPath>
